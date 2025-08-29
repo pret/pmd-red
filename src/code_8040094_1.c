@@ -48,7 +48,6 @@ extern bool8 sub_803F428(DungeonPos *pos);
 extern void sub_800EEE0(u16 a0);
 extern s32 sub_800EBC8(struct UnkStruct_8040094 *a0);
 extern bool8 sub_800E7D0(struct UnkStruct_8040094 *a0);
-extern s32 sub_800ED20(u16 param_1);
 extern u8 sub_800EC84(s32 param_1);
 extern bool8 MoveMatchesBideClassStatus(Entity *pokemon, Move *move);
 extern bool8 IsSleeping(Entity *pokemon);

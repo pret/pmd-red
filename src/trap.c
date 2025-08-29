@@ -34,9 +34,7 @@
 #include "blow_away.h"
 #include "explosion.h"
 #include "dungeon_mon_spawn.h"
-
-extern u32 gUnknown_8106A4C;
-extern u32 gUnknown_8106A50;
+#include "move_orb_actions_1.h"
 
 void sub_80421EC(DungeonPos *, u32);
 u8 GetFloorType(void);
@@ -417,16 +415,16 @@ void HandleMudTrap(Entity *pokemon, Entity *target)
     rand = DungeonRandInt(100);
     randDef = rand;
     if (rand < 25) {
-        LowerAttackStageTarget(pokemon,target,gUnknown_8106A4C,1,1,1);
+        LowerAttackStageTarget(pokemon,target,gUnknown_8106A4C[0],1,1,1);
     }
     else if (rand < 50) {
-        LowerAttackStageTarget(pokemon,target,gUnknown_8106A50,1,1,1);
+        LowerAttackStageTarget(pokemon,target,gUnknown_8106A50[0],1,1,1);
     }
     else if (randDef < 75) {
-        LowerDefenseStageTarget(pokemon,target,gUnknown_8106A4C,1,1,1);
+        LowerDefenseStageTarget(pokemon,target,gUnknown_8106A4C[0],1,1,1);
     }
     else {
-        LowerDefenseStageTarget(pokemon,target,gUnknown_8106A50,1,1,1);
+        LowerDefenseStageTarget(pokemon,target,gUnknown_8106A50[0],1,1,1);
     }
 }
 

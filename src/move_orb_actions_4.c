@@ -2,6 +2,7 @@
 #include "globaldata.h"
 #include "move_orb_actions_4.h"
 #include "move_orb_actions_2.h"
+#include "move_orb_actions_1.h"
 #include "dungeon_ai.h"
 #include "dungeon_move_util.h"
 #include "dungeon_message.h"
@@ -47,9 +48,6 @@
 #include "switcher_orb.h"
 #include "trawl_orb.h"
 
-extern u32 gUnknown_8106A50;
-extern u32 gUnknown_8106A4C;
-
 bool8 ProtectMoveAction(Entity * pokemon,Entity * target,Move *move, s32 param_4)
 {
     ProtectStatusTarget(pokemon, target);
@@ -58,7 +56,7 @@ bool8 ProtectMoveAction(Entity * pokemon,Entity * target,Move *move, s32 param_4
 
 bool8 DefenseCurlMoveAction(Entity * pokemon,Entity * target,Move *move, s32 param_4)
 {
-    RaiseDefenseStageTarget(pokemon,target,gUnknown_8106A4C,1);
+    RaiseDefenseStageTarget(pokemon,target,gUnknown_8106A4C[0],1);
     return TRUE;
 }
 
@@ -76,7 +74,7 @@ bool8 MistBallMoveAction(Entity * pokemon,Entity * target,Move *move, s32 param_
     if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),param_4) != 0) {
         flag = TRUE;
         if (sub_805727C(pokemon,target,gMistBallSecondaryChance) != 0) {
-            LowerAttackStageTarget(pokemon,target,gUnknown_8106A50,1,1,0);
+            LowerAttackStageTarget(pokemon,target,gUnknown_8106A50[0],1,1,0);
         }
     }
     return flag;
@@ -101,7 +99,7 @@ bool8 MirrorCoatMoveAction(Entity * pokemon,Entity * target,Move *move, s32 para
 
 bool8 CalmMindMoveAction(Entity * pokemon,Entity * target,Move *move, s32 param_4)
 {
-    u32 stat = gUnknown_8106A50;
+    u32 stat = gUnknown_8106A50[0];
     RaiseAttackStageTarget(pokemon,target,stat,1);
     RaiseDefenseStageTarget(pokemon,target,stat,1);
     return TRUE;
@@ -305,7 +303,7 @@ bool8 DragonRageMoveAction(Entity * pokemon, Entity * target, Move *move, s32 pa
 
 bool8 DragonDanceMoveAction( Entity * pokemon, Entity * target, Move *move, s32 param_4)
 {
-    RaiseAttackStageTarget(pokemon, target, gUnknown_8106A4C, 1);
+    RaiseAttackStageTarget(pokemon, target, gUnknown_8106A4C[0], 1);
     RaiseMovementSpeedTarget(pokemon, target, 0, TRUE);
     return TRUE;
 }
@@ -334,7 +332,7 @@ bool8 LusterPurgeMoveAction(Entity * pokemon, Entity * target, Move * move, s32 
         flag = TRUE;
         if(sub_805727C(pokemon, target, gLusterPurgeSecondaryChance))
         {
-            LowerDefenseStageTarget(pokemon, target, gUnknown_8106A50, 1, 1, 0);
+            LowerDefenseStageTarget(pokemon, target, gUnknown_8106A50[0], 1, 1, 0);
         }
     }
     return flag;

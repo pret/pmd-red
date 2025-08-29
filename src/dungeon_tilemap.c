@@ -33,12 +33,7 @@
 #include "run_dungeon.h"
 #include "effect_main.h"
 
-
 extern void sub_8041888(u8 param_1);
-extern void UpdateMinimap();
-
-void sub_803EC94(void);
-s32 sub_803EF90(s32 a0, u8 a1);
 
 static void sub_803F38C(void);
 static void sub_803F7BC(void);

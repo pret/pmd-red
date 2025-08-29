@@ -59,14 +59,10 @@ extern void sub_800E3AC(s32 a0, DungeonPos *pos, s32 a2);
 extern void sub_8041168(Entity *entity, Entity *entity2, Move *,DungeonPos *);
 extern Entity *sub_80696A8(Entity *a0);
 extern Entity *GetMonsterAtPos(DungeonPos *pos);
-extern s32 sub_800ED20(u16 param_1);
 extern void sub_8042930(Entity *r0);
 extern void sub_8041B48(Entity *pokemon);
 extern void sub_8041BA8(Entity *pokemon);
 extern void sub_8042950(Entity *r0);
-
-extern const s32 gUnknown_8106A50;
-extern const s32 gUnknown_8106A4C;
 
 static s32 TryHitTarget(Entity *attacker, Entity *target, Move *move, struct DamageStruct *dmgStruct, s16 unk_);
 
@@ -496,16 +492,16 @@ void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move *move, 
                         moveHadEffect = PoisonStingMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_PSYCHIC:
-                        moveHadEffect = sub_8058C98(attacker, currTarget, move, gUnknown_8106A50, itemId);
+                        moveHadEffect = sub_8058C98(attacker, currTarget, move, gUnknown_8106A50[0], itemId);
                         break;
                     case MOVE_ACID:
-                        moveHadEffect = sub_8058C98(attacker, currTarget, move, gUnknown_8106A4C, itemId);
+                        moveHadEffect = sub_8058C98(attacker, currTarget, move, gUnknown_8106A4C[0], itemId);
                         break;
                     case MOVE_METAL_CLAW:
-                        moveHadEffect = MetalClawMoveAction(attacker, currTarget, move, gUnknown_8106A4C, itemId);
+                        moveHadEffect = MetalClawMoveAction(attacker, currTarget, move, gUnknown_8106A4C[0], itemId);
                         break;
                     case MOVE_STEEL_WING:
-                        moveHadEffect = SteelWingMoveAction(attacker, currTarget, move, gUnknown_8106A4C, itemId);
+                        moveHadEffect = SteelWingMoveAction(attacker, currTarget, move, gUnknown_8106A4C[0], itemId);
                         break;
                     case MOVE_POISON_TAIL:
                         moveHadEffect = PoisonTailMoveAction(attacker, currTarget, move, itemId);
@@ -1346,7 +1342,7 @@ void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move *move, 
         }
         if (EntityIsValid(attacker) && GetEntInfo(attacker)->unk155 != 0) {
             GetEntInfo(attacker)->unk155 = 0;
-            LowerAttackStageTarget(attacker, attacker, gUnknown_8106A50, 2, 0, FALSE);
+            LowerAttackStageTarget(attacker, attacker, gUnknown_8106A50[0], 2, 0, FALSE);
         }
     }
 }

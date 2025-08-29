@@ -36,9 +36,7 @@
 #include "dungeon_move.h"
 #include "dungeon_leveling.h"
 #include "warp_target.h"
-
-extern u32 gUnknown_8106A4C;
-extern u32 gUnknown_8106A50;
+#include "move_orb_actions_1.h"
 
 extern void sub_8078B5C(Entity *, Entity *, u32, u32, u32);
 extern void sub_8051E7C(Entity *pokemon);
@@ -949,8 +947,8 @@ static void GrimyFoodItemAction(Entity *pokemon, Entity * target)
             ParalyzeStatusTarget(pokemon, target, TRUE);
             break;
         case 4:
-            LowerAttackStageTarget(pokemon, target, gUnknown_8106A4C, 3, 1, TRUE);
-            LowerAttackStageTarget(pokemon, target, gUnknown_8106A50, 3, 1, TRUE);
+            LowerAttackStageTarget(pokemon, target, gUnknown_8106A4C[0], 3, 1, TRUE);
+            LowerAttackStageTarget(pokemon, target, gUnknown_8106A50[0], 3, 1, TRUE);
             break;
     }
 }
