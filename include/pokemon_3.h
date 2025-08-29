@@ -8,6 +8,7 @@ bool8 HasRecruitedMon(s32 species_);
 s16 GetBaseSpecies(s16 index);
 s16 GetBaseSpeciesNoUnown(s16 index);
 bool8 TacticsTargetLeader(u8 tactic);
+void GetUnlockedTacticFlags(u8 *tacticsBuffer, s32 pokeLevel);
 bool8 HasIQForSkill(s32 pokeIQ, u8 IQSkillIndex);
 s32 GetNumAvailableIQSkills(u8 *iqSkillBuffer, s32 pokeIQ);
 void CopyTacticsNameToBuffer(char *buffer, u8 tactic);

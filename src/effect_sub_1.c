@@ -7,7 +7,7 @@
 #include "graphics_memory.h"
 #include "code_800C9CC.h"
 #include "effect_data.h"
-#include "code_803E724.h"
+#include "dungeon_vram.h"
 #include "dungeon_message.h"
 #include "file_system.h"
 #include "main_loops.h"

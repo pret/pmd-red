@@ -2,13 +2,13 @@
 #include "globaldata.h"
 #include "move_orb_actions_4.h"
 #include "move_orb_actions_2.h"
+#include "move_orb_actions_1.h"
 #include "dungeon_ai.h"
 #include "dungeon_move_util.h"
 #include "dungeon_message.h"
 #include "dungeon_move.h"
 #include "code_806CD90.h"
 #include "code_8077274_1.h"
-#include "code_807CD9C.h"
 #include "dungeon_random.h"
 #include "constants/ability.h"
 #include "constants/move_id.h"
@@ -36,21 +36,17 @@
 #include "dungeon_config.h"
 #include "dungeon_strings.h"
 #include "dungeon_damage.h"
-
-extern void sub_807F43C(Entity *, Entity *);
-extern void HandleOneRoomOrb(Entity *, Entity *);
-extern void UpdateMinimap(void);
-extern void HandleDroughtOrbAction(Entity *);
-extern void HandleLuminousOrbAction(Entity *pokemon);
-extern void HandleTrawlOrbAction(Entity *, Entity *);
-extern void HandlePounceOrbAction(Entity *, Entity *, s32);
-extern s16 GetRandomFloorMonsterId(u32);
-extern bool8 sub_806AA0C(s32, u32);
-extern void sub_806BB6C(Entity *, s32);
-extern void HandleSwitcherOrb(Entity *, Entity *, u32);
-
-extern u32 gUnknown_8106A50;
-extern u32 gUnknown_8106A4C;
+#include "dungeon_tilemap.h"
+#include "dungeon_floor_spawns.h"
+#include "dungeon_mon_spawn.h"
+#include "dungeon_map.h"
+#include "warp_target.h"
+#include "expose_trap.h"
+#include "one_room_orb.h"
+#include "pounce_orb.h"
+#include "drought_orb.h"
+#include "switcher_orb.h"
+#include "trawl_orb.h"
 
 bool8 ProtectMoveAction(Entity * pokemon,Entity * target,Move *move, s32 param_4)
 {
@@ -60,7 +56,7 @@ bool8 ProtectMoveAction(Entity * pokemon,Entity * target,Move *move, s32 param_4
 
 bool8 DefenseCurlMoveAction(Entity * pokemon,Entity * target,Move *move, s32 param_4)
 {
-    RaiseDefenseStageTarget(pokemon,target,gUnknown_8106A4C,1);
+    RaiseDefenseStageTarget(pokemon,target,gStatIndexAtkDef,1);
     return TRUE;
 }
 
@@ -78,7 +74,7 @@ bool8 MistBallMoveAction(Entity * pokemon,Entity * target,Move *move, s32 param_
     if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),param_4) != 0) {
         flag = TRUE;
         if (sub_805727C(pokemon,target,gMistBallSecondaryChance) != 0) {
-            LowerAttackStageTarget(pokemon,target,gUnknown_8106A50,1,1,0);
+            LowerAttackStageTarget(pokemon,target,gStatIndexSpecial,1,1,0);
         }
     }
     return flag;
@@ -103,7 +99,7 @@ bool8 MirrorCoatMoveAction(Entity * pokemon,Entity * target,Move *move, s32 para
 
 bool8 CalmMindMoveAction(Entity * pokemon,Entity * target,Move *move, s32 param_4)
 {
-    u32 stat = gUnknown_8106A50;
+    u32 stat = gStatIndexSpecial;
     RaiseAttackStageTarget(pokemon,target,stat,1);
     RaiseDefenseStageTarget(pokemon,target,stat,1);
     return TRUE;
@@ -307,7 +303,7 @@ bool8 DragonRageMoveAction(Entity * pokemon, Entity * target, Move *move, s32 pa
 
 bool8 DragonDanceMoveAction( Entity * pokemon, Entity * target, Move *move, s32 param_4)
 {
-    RaiseAttackStageTarget(pokemon, target, gUnknown_8106A4C, 1);
+    RaiseAttackStageTarget(pokemon, target, gStatIndexAtkDef, 1);
     RaiseMovementSpeedTarget(pokemon, target, 0, TRUE);
     return TRUE;
 }
@@ -336,7 +332,7 @@ bool8 LusterPurgeMoveAction(Entity * pokemon, Entity * target, Move * move, s32 
         flag = TRUE;
         if(sub_805727C(pokemon, target, gLusterPurgeSecondaryChance))
         {
-            LowerDefenseStageTarget(pokemon, target, gUnknown_8106A50, 1, 1, 0);
+            LowerDefenseStageTarget(pokemon, target, gStatIndexSpecial, 1, 1, 0);
         }
     }
     return flag;
@@ -453,7 +449,7 @@ bool8 ReboundOrbAction(Entity * pokemon, Entity * target, Move *move, s32 param_
 bool8 SwitcherOrbAction(Entity * pokemon, Entity * target, Move *move, s32 param_4)
 {
     SetExpMultplier(GetEntInfo(pokemon));
-    HandleSwitcherOrb(pokemon, target, 1);
+    HandleSwitcherOrb(pokemon, target, TRUE);
     return TRUE;
 }
 
@@ -590,7 +586,7 @@ bool8 TransferOrbAction(Entity *pokemon, Entity * target, Move *move, s32 param_
             else {
                 CopyCyanMonsterNametoBuffer(gFormatBuffer_Monsters[1], targetID);
                 TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FD434);
-                sub_806BB6C(target, targetID);
+                UpdateEntitySpecies(target, targetID);
                 didTransfer = TRUE;
             }
         }
@@ -622,13 +618,13 @@ bool8 PetrifyOrbAction(Entity * pokemon, Entity * target, Move *move, s32 param_
 
 bool8 PounceOrbAction(Entity * pokemon, Entity * target, Move *move, s32 param_4)
 {
-    HandlePounceOrbAction(pokemon, target, 8);
+    HandlePounceOrb(pokemon, target, 8);
     return TRUE;
 }
 
 bool8 TrawlOrbAction(Entity * pokemon, Entity * target, Move *move, s32 param_4)
 {
-    HandleTrawlOrbAction(pokemon, target);
+    HandleTrawlOrb(pokemon, target);
     return TRUE;
 }
 
@@ -648,7 +644,7 @@ bool8 EscapeOrbAction(Entity * pokemon, Entity * target, Move *move, s32 param_4
 
 bool8 DroughtOrbAction(Entity * pokemon, Entity * target, Move *move, s32 param_4)
 {
-    HandleDroughtOrbAction(pokemon);
+    HandleDroughtOrb(pokemon, target);
     return TRUE;
 }
 

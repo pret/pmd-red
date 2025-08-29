@@ -23,7 +23,6 @@
 #include "structs/dungeon_entity.h"
 #include "structs/str_dungeon.h"
 #include "dungeon_map_access.h"
-#include "structs/str_806B7F8.h"
 #include "dungeon_config.h"
 #include "dungeon_strings.h"
 #include "dungeon_pos_data.h"

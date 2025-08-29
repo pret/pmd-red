@@ -8,7 +8,7 @@
 #include "code_806CD90.h"
 #include "dungeon_items.h"
 #include "dungeon_map_access.h"
-#include "code_803E724.h"
+#include "dungeon_tilemap.h"
 #include "dungeon_range.h"
 #include "pokemon.h"
 #include "code_805D8C8.h"
@@ -17,20 +17,17 @@
 #include "dungeon_logic.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
-#include "dungeon_leader.h"
+#include "dungeon_range.h"
 #include "dungeon_message.h"
 #include "dungeon_pokemon_sprites.h"
+#include "dungeon_misc.h"
 #include "dungeon_music.h"
 #include "dungeon_map.h"
 #include "string_format.h"
 #include "items.h"
 #include "trap.h"
-
-extern const u8 *gUnknown_80FE6F4[];
-
-extern void sub_8045ACC(void);
-extern s32 GetMonsterApparentID(Entity *pokemon, s32 id);
-extern void sub_8045BF8(u8 *, Item *);
+#include "dungeon_data.h"
+#include "dungeon_strings.h"
 
 EWRAM_DATA u8 gUnknown_202EE70[MAX_TEAM_BODY_SIZE] = {0};
 EWRAM_DATA u8 gUnknown_202EE76[DUNGEON_MAX_WILD_POKEMON_BODY_SIZE] = {0};
@@ -618,7 +615,7 @@ void SubstitutePlaceholderStringTags(u8 *buffer, Entity *entity, u32 param_3)
         GetTrapName(buffer, GetTrapData_1(entity)->id);
         break;
     default:
-        strcpy(buffer, *gUnknown_80FE6F4);
+        strcpy(buffer, gUnknown_80FE6F4);
         break;
   }
 }

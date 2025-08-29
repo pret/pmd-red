@@ -9,11 +9,11 @@
 #include "dungeon_util.h"
 #include "dungeon_items.h"
 #include "dungeon_message.h"
-#include "dungeon_spawns.h"
-#include "structs/str_806B7F8.h"
+#include "dungeon_floor_spawns.h"
 #include "constants/monster.h"
 #include "constants/trap.h"
 #include "constants/item.h"
+#include "dungeon_mon_spawn.h"
 
 extern void sub_80429FC(DungeonPos *r0);
 
@@ -42,7 +42,7 @@ static void SpawnItemAtPos(u8 itemId, s32 x, s32 y, s32 quantity, u32 itemFlags)
 // s16 species memes strike again. Will the fix ever be discovered?
 static void SpawnSpeciesAtPos(s16 species_, s32 x, s32 y, u32 monsterBehav_, u32 UNUSED unused)
 {
-    struct unkStruct_806B7F8 unkStruct;
+    struct MonSpawnInfo unkStruct;
     s32 species = SpeciesId(species_);
     u8 monsterBehav = monsterBehav_;
 
@@ -54,7 +54,7 @@ static void SpawnSpeciesAtPos(s16 species_, s32 x, s32 y, u32 monsterBehav_, u32
         unkStruct.unk10 = 0;
         unkStruct.pos.x = x;
         unkStruct.pos.y = y;
-        sub_806B7F8(&unkStruct, TRUE);
+        SpawnWildMon(&unkStruct, TRUE);
     }
     else if (species != MONSTER_NONE) {
         unkStruct.species = species;
@@ -64,7 +64,7 @@ static void SpawnSpeciesAtPos(s16 species_, s32 x, s32 y, u32 monsterBehav_, u32
         unkStruct.unk10 = 0;
         unkStruct.pos.x = x;
         unkStruct.pos.y = y;
-        sub_806B7F8(&unkStruct, TRUE);
+        SpawnWildMon(&unkStruct, TRUE);
     }
 }
 

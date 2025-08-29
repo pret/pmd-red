@@ -10,16 +10,15 @@
 #include "dungeon_config.h"
 #include "dungeon_pos_data.h"
 #include "code_8077274_1.h"
-#include "code_803E724.h"
+#include "dungeon_tilemap.h"
 #include "code_806CD90.h"
 #include "dungeon_message.h"
 #include "move_util.h"
 #include "dungeon_strings.h"
+#include "dungeon_range.h"
+#include "dungeon_item_action.h"
 #include "structs/dungeon_entity.h"
 #include "constants/move_id.h"
-
-extern bool8 sub_8083568(s32 inX, s32 inY, u8 index);
-extern void sub_80479B8(char param_1, char param_2, u8 param_3, Entity *pokemon, Entity *target, Item *item);
 
 static bool8 CanProjectileHitTarget(Entity *thrower, Entity *target);
 

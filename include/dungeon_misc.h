@@ -70,8 +70,7 @@ void sub_806A898(Entity *entity, bool8 r7, bool8 showRunAwayEffect);
 void sub_806A914(bool8 a0, bool8 a1, bool8 showRunAwayEffect);
 void sub_806A974(void);
 void sub_806A9B4(Entity *entity, s32 moveIndex);
-// s16 memes
-//bool8 sub_806AA0C(s16 _species, bool32 _a1);
+bool8 sub_806AA0C(s32 _species, bool32 _a1);
 void sub_806AA70(void);
 void sub_806AB2C(void);
 void EndAbilityImmuneStatus(Entity *attacker, Entity *target);

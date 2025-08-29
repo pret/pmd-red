@@ -2,12 +2,13 @@
 #include "globaldata.h"
 #include "code_800D090.h"
 #include "dungeon_vram.h"
-#include "code_803E724.h"
+#include "dungeon_tilemap.h"
 #include "dungeon_info.h"
 #include "dungeon_menu_recruitment.h"
 #include "dungeon_message.h"
 #include "dungeon_message_log.h"
 #include "dungeon_music.h"
+#include "dungeon_strings.h"
 #include "exclusive_pokemon.h"
 #include "input.h"
 #include "menu_input.h"
@@ -17,17 +18,13 @@
 #include "text_1.h"
 #include "text_2.h"
 #include "text_3.h"
+#include "dungeon_engine.h"
+#include "dungeon_cutscene.h"
 
-extern void PlayDungeonCancelSE(void);
-extern void PlayDungeonConfirmationSE(void);
-extern bool8 CanSubMenuItemBeChosen(s32 param_1);
 extern u16 GetLeaderActionId(void);
 extern u8 sub_806F9BC(s32);
-extern bool8 sub_80860A8(u8 id);
 extern bool8 sub_806A564(s32 r0);
 
-extern MenuInputStruct gDungeonMenu;
-extern s32 gDungeonFramesCounter;
 
 struct MonRecruitList
 {
@@ -41,12 +38,6 @@ static bool8 TryScrollUp(struct MonRecruitList *tabData, s32 a1);
 static bool8 TryScrollDown(struct MonRecruitList *tabData, s32 a1);
 static void CreateScrollingArrow(bool8 upArrow, s32 y);
 static void SetRecruitableMons(struct MonRecruitList *tabsData);
-
-extern const u8 *const gUnknown_80FA61C;
-extern const u8 *const gUnknown_80FA5F4;
-extern const u8 *const gUnknown_80FEA68;
-extern const u8 *const gUnknown_80FEA80;
-extern const u8 *const gUnknown_80FEA8C;
 
 EWRAM_DATA static s32 sScrollId = 0;
 EWRAM_DATA static u8 sScrollFlags = 0;

@@ -27,7 +27,6 @@
 #include "world_map.h"
 
 extern void WaitForNextFrameAndAdvanceRNG(void);
-extern void CopyDungeonName1toBuffer(u8 *buffer, DungeonLocation *dungeonLocation);
 
 static EWRAM_INIT struct WorldMap *sWorldMapPtr = NULL;
 static EWRAM_INIT WindowTemplates sWorldMapWindows = {

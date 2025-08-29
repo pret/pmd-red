@@ -1,11 +1,11 @@
 #include "global.h"
 #include "globaldata.h"
+#include "explosion.h"
 #include "constants/ability.h"
 #include "constants/weather.h"
 #include "dungeon_vram.h"
 #include "dungeon_message.h"
 #include "code_806CD90.h"
-#include "code_807CD9C.h"
 #include "structs/str_dungeon.h"
 #include "code_8077274_1.h"
 #include "dungeon_ai.h"
@@ -32,8 +32,6 @@ extern void sub_804216C(Entity *pokemon, Entity *target, u32 r2);
 extern void sub_804218C(Entity *pokemon, Entity *target);
 
 static EWRAM_INIT u32 gUnknown_203B444[3] = {0x28, 0x28, 0x50};
-
-void sub_807E1A0(Entity *pokemon,Entity *target,u8 moveType,s32 param_4,s32 param_5);
 
 static const DungeonPos gUnknown_81070E8[] = {
     {0, 0},
@@ -82,6 +80,8 @@ static const DungeonPos *const gUnknown_8107178[3] = {
     gUnknown_81070E8,
     gUnknown_8107110
 };
+
+static void sub_807E1A0(Entity *pokemon,Entity *target,u8 moveType,s32 param_4,s32 param_5);
 
 void HandleExplosion(Entity *pokemon,Entity *target,DungeonPos *param_3,s32 param_4,u8 moveType,s16 param_6)
 {
@@ -171,7 +171,7 @@ void HandleExplosion(Entity *pokemon,Entity *target,DungeonPos *param_3,s32 para
     }
 }
 
-void sub_807E1A0(Entity *pokemon,Entity *target,u8 moveType,s32 param_4,s32 param_5)
+static void sub_807E1A0(Entity *pokemon,Entity *target,u8 moveType,s32 param_4,s32 param_5)
 {
   EntityInfo *targetInfo;
   u8 flag;

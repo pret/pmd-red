@@ -1,11 +1,12 @@
 #include "global.h"
 #include "globaldata.h"
+#include "dungeon_kecleon_shop.h"
 #include "weather.h"
 #include "code_804267C.h"
 #include "dungeon_vram.h"
 #include "dungeon_info.h"
 #include "dungeon_config.h"
-#include "dungeon_leader.h"
+#include "dungeon_range.h"
 #include "dungeon_music.h"
 #include "dungeon_util.h"
 #include "pokemon.h"
@@ -17,7 +18,6 @@
 #include "position_util.h"
 #include "dungeon_ai.h"
 #include "code_806CD90.h"
-#include "code_807CD9C.h"
 #include "dungeon_random.h"
 #include "code_805D8C8.h"
 #include "dungeon_items.h"
@@ -31,11 +31,11 @@
 #include "sprite.h"
 #include "dungeon_strings.h"
 #include "dungeon_engine.h"
+#include "warp_target.h"
 
-bool8 sub_807EF48(void);
-void sub_807EFFC(bool8 arg0);
-s32 sub_807F19C(bool8 arg0);
-void sub_807F33C(void);
+static void sub_807EFFC(bool8 arg0);
+static s32 sub_807F19C(bool8 arg0);
+static void sub_807F33C(void);
 
 void sub_807EC28(bool8 arg0)
 {
@@ -201,7 +201,7 @@ void sub_807EF84(void)
     }
 }
 
-void sub_807EFFC(bool8 arg0)
+static void sub_807EFFC(bool8 arg0)
 {
     struct MonDialogueSpriteInfo dialogueInfo;
 
@@ -248,7 +248,7 @@ void sub_807EFFC(bool8 arg0)
     }
 }
 
-s32 sub_807F19C(bool8 arg0)
+static s32 sub_807F19C(bool8 arg0)
 {
     s32 diff;
     struct MonDialogueSpriteInfo dialogueInfo;
@@ -309,7 +309,7 @@ s32 sub_807F19C(bool8 arg0)
     return 0;
 }
 
-void sub_807F33C(void)
+static void sub_807F33C(void)
 {
     s32 i, x, y;
 

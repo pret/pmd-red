@@ -1,14 +1,13 @@
 #include "global.h"
 #include "globaldata.h"
+#include "dungeon_music.h"
 #include "constants/bg_music.h"
 #include "structs/menu.h"
 #include "music_util.h"
 #include "dungeon_info.h"
-#include "dungeon_music.h"
 #include "music.h"
 #include "run_dungeon.h"
-
-extern MenuInputStruct gDungeonMenu;
+#include "dungeon_engine.h"
 
 // Dungeon Music Player adds in this flag to tell
 // the system to fade in rather than immediately playing
@@ -128,7 +127,7 @@ void DungeonStopBGM(void)
     StopBGMusic();
 }
 
-u16 DungeonGetCurrentBGSong(void)
+UNUSED static u16 DungeonGetCurrentBGSong(void)
 {
     return GetCurrentBGSong();
 }

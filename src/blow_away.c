@@ -1,11 +1,11 @@
 #include "global.h"
 #include "globaldata.h"
+#include "blow_away.h"
 #include "constants/ability.h"
 #include "constants/weather.h"
 #include "dungeon_vram.h"
 #include "dungeon_message.h"
 #include "code_806CD90.h"
-#include "code_807CD9C.h"
 #include "structs/str_dungeon.h"
 #include "code_8077274_1.h"
 #include "dungeon_ai.h"
@@ -27,20 +27,14 @@
 #include "dungeon_strings.h"
 #include "dungeon_pos_data.h"
 #include "dungeon_damage.h"
+#include "dungeon_kecleon_shop.h"
+#include "dungeon_engine.h"
+#include "warp_target.h"
 
-void sub_804EB30();
-bool8 ExposeTrap(s32 x, s32 y);
-void sub_807EC28(u32);
-u8 IsFloorOver(void);
-void sub_80421AC(Entity * pokemon, Entity * target);
-void sub_807BB78(Entity *pokemon);
-extern void UpdateCamera(u32);
-bool8 sub_808384C(DungeonPos *, DungeonPos *);
-u8 sub_8083660(DungeonPos *);
-
-extern u32 gDungeonFramesCounter;
-
-void sub_807D068(Entity *pokemon, DungeonPos *pos);
+extern void sub_804EB30();
+extern bool8 ExposeTrap(s32 x, s32 y);
+extern void sub_80421AC(Entity * pokemon, Entity * target);
+extern void sub_807BB78(Entity *pokemon);
 
 void BlowAwayTarget(Entity *pokemon, Entity *target, u32 direction)
 {

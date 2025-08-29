@@ -18,10 +18,12 @@
 #include "status.h"
 #include "dungeon_random.h"
 #include "dungeon_items.h"
+#include "dungeon_info.h"
 #include "dungeon_util.h"
 #include "dungeon_config.h"
 #include "dungeon_strings.h"
 #include "dungeon_misc.h"
+#include "dungeon_leveling.h"
 #include "weather.h"
 #include "game_options.h"
 #include "code_8077274_1.h"
@@ -33,14 +35,17 @@
 #include "code_804267C.h"
 #include "code_805D8C8.h"
 #include "dungeon_map_access.h"
+#include "dungeon_data.h"
 #include "move_effects_target.h"
 #include "pokemon.h"
 #include "position_util.h"
 #include "random.h"
 #include "sprite.h"
 #include "exclusive_pokemon.h"
+#include "hurl_orb.h"
+#include "dungeon_mon_spawn.h"
+#include "move_orb_actions_1.h"
 
-extern void sub_807F43C(Entity *, Entity *);
 extern void sub_8041B18(Entity *pokemon);
 extern void sub_8041B90(Entity *pokemon);
 extern void sub_8041D00(Entity *pokemon, Entity *target);
@@ -49,13 +54,11 @@ extern void sub_803ED30(s32, Entity *r0, u8, s32);
 extern bool8 sub_806A458(Entity *);
 extern bool8 sub_806F660(Entity *, Entity *);
 extern bool8 sub_806A58C(s16 a0);
-extern void sub_8071D4C(Entity *pokemon, Entity *target, s32 exp);
 extern void sub_8042148(Entity *pokemon);
 extern void sub_8042A24(Entity *r0);
 extern void sub_806A390(Entity *r0);
 extern void sub_8078084(Entity * pokemon);
 extern void sub_800DBBC(void);
-extern bool8 DoEnemiesEvolveWhenKOed(u8 dungeon);
 extern bool8 sub_806FA5C(Entity *, Entity *, struct unkStruct_8069D4C *);
 extern void EntityUpdateStatusSprites(Entity *);
 extern void PointCameraToMonster(Entity *);
@@ -68,18 +71,6 @@ extern void sub_80428D8(Entity *);
 extern void sub_8042978(Entity *);
 extern void sub_804298C(Entity *);
 extern void sub_80428EC(Entity *);
-extern void ResetMonEntityData(EntityInfo *, u32);
-
-extern const s32 gUnknown_8106A4C;
-extern const u8 *const gUnknown_8100548;
-extern const u8 *const gUnknown_80FD46C;
-extern const u8 *const gUnknown_810056C;
-extern const s16 gUnknown_810AC60;
-extern const s16 gUnknown_810AC68;
-extern const s16 gUnknown_810AC64;
-extern const s16 gUnknown_810AC66;
-extern const s16 gUnknown_810AC68;
-extern const s16 gUnknown_810AC62;
 
 static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struct DamageStruct *r5, bool32 isFalseSwipe, bool32 giveExp, s16 arg4_, s32 arg8);
 static bool8 sub_806E100(s48_16 *param_1, Entity *pokemon, Entity *target, u8 type, DamageStruct *dmgStruct);
@@ -124,11 +115,11 @@ void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *
         && GetEntInfo(target)->reflectClassStatus.status == STATUS_VITAL_THROW)
     {
         sub_8042730(target, attacker);
-        sub_807F43C(target, attacker);
+        HandleHurlOrb(target, attacker);
     }
 
     if (GetEntInfo(target)->bideClassStatus.status == STATUS_ENRAGED) {
-        RaiseAttackStageTarget(attacker, target, gUnknown_8106A4C, 1);
+        RaiseAttackStageTarget(attacker, target, gStatIndexAtkDef, 1);
     }
 
     if (!EntityIsValid(attacker) || !EntityIsValid(target))
@@ -455,7 +446,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
             sub_806CE68(target, 8);
         }
         if (HasHeldItem(target, ITEM_JOY_RIBBON) && hpChange > 0 && dmgStruct->dmg != 9999) {
-            sub_8071D4C(attacker, target, hpChange);
+            AddExpPoints(attacker, target, hpChange);
         }
 
         if (unkTile != NULL)
@@ -718,11 +709,11 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
                 if (targetData->isNotTeamMember) {
                     s32 i;
 
-                    sub_8071D4C(attacker, attacker, exp);
+                    AddExpPoints(attacker, attacker, exp);
                     for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
                         Entity *teamMember = gDungeon->teamPokemon[i];
                         if (EntityIsValid(teamMember) && teamMember != attacker) {
-                            sub_8071D4C(attacker, teamMember, exp);
+                            AddExpPoints(attacker, teamMember, exp);
                         }
                     }
                     r10 = TRUE;

@@ -27,6 +27,8 @@ struct DungeonDialogueStruct
     const u8 *str;
 };
 
+extern bool8 gUnknown_203B434;
+
 void sub_80521D0(void);
 void sub_8052210(bool8 a0);
 

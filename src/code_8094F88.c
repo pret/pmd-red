@@ -22,8 +22,6 @@ EWRAM_DATA UNUSED static u32 fill0 = {0}; // 203B484 is size 0x5C and I need to 
 EWRAM_DATA u32 gUnknown_20392E8[0x36] = {0};
 EWRAM_DATA unkStruct_203B48C gUnknown_20393C0 = {0};
 
-extern void WriteDungeonLocationBits(DataSerializer*, DungeonLocation*);
-extern void ReadDungeonLocationBits(DataSerializer*, DungeonLocation*);
 extern void WritePoke1LevelBits(DataSerializer* a1, struct unkPokeSubStruct_C* unkC);
 extern void ReadPoke1LevelBits(DataSerializer*, struct unkPokeSubStruct_C*);
 

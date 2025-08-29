@@ -1,6 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
-#include "code_80869E4.h"
+#include "dungeon_cutscene.h"
 #include "dungeon_boss_dialogue.h"
 
 void sub_808CD9C(void)

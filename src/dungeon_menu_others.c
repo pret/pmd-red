@@ -2,13 +2,13 @@
 #include "globaldata.h"
 #include "code_803D110.h"
 #include "dungeon_vram.h"
-#include "code_803E724.h"
+#include "dungeon_tilemap.h"
 #include "dungeon_action.h"
 #include "code_8097DD0.h"
 #include "dungeon_info.h"
 #include "dungeon_8083AB0.h"
 #include "dungeon_action.h"
-#include "dungeon_leader.h"
+#include "dungeon_range.h"
 #include "dungeon_main.h"
 #include "dungeon_map.h"
 #include "dungeon_map_access.h"
@@ -19,6 +19,7 @@
 #include "dungeon_music.h"
 #include "dungeon_strings.h"
 #include "dungeon_submenu.h"
+#include "dungeon_engine.h"
 #include "dungeon_util.h"
 #include "game_options.h"
 #include "input.h"
@@ -29,14 +30,9 @@
 #include "text_3.h"
 #include "run_dungeon.h"
 
-extern void PlayDungeonCancelSE(void);
-extern void PlayDungeonConfirmationSE(void);
-extern bool8 CanSubMenuItemBeChosen(s32 param_1);
-extern void sub_8045064(void);
 extern bool8 IsBossFight(void);
 extern u16 GetLeaderActionId(void);
 
-extern MenuInputStruct gDungeonMenu;
 
 static void PrintOthersMenuOptions(void);
 static void ShowGameOptionsMenu(void);

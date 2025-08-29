@@ -1,5 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
+#include "dungeon_turn_effects.h"
 #include "dungeon_util.h"
 #include "items.h"
 #include "status.h"
@@ -32,30 +33,17 @@
 #include "dungeon_strings.h"
 #include "dungeon_engine.h"
 #include "dungeon_damage.h"
+#include "dungeon_range.h"
+#include "dungeon_move_util.h"
+#include "warp_target.h"
 
 extern void sub_805229C(void);
-extern void sub_807E8F0(Entity *);
-extern void sub_80444F4(Entity *pokemon);
-extern void WarpTarget(Entity *pokemon, Entity *r1, u32 r2, DungeonPos *r3);
 extern void sub_80420B8(Entity *pokemon);
 extern void sub_8041C4C(Entity *pokemon, u32 r1);
 extern void sub_805E804(void);
-extern void sub_80838EC(u8 *a);
-extern bool8 TryUseChosenMove(struct Entity *, u32, u32, u32, u32, struct Move *);
-extern void nullsub_97(Entity *entity);
-extern void sub_805EE30(void);
-extern void sub_8086AC0(void);
-extern void sub_8085140(void);
-extern void sub_8075708(Entity *entity);
-extern void sub_8043ED0(u32);
-extern void EnemyEvolution(Entity *);
-extern void sub_8075900(Entity *pokemon, u8 r1);
-extern void sub_806A5B8(Entity *);
-extern void sub_807EC28(bool8);
+extern bool8 DisplayActions(Entity *a0);
 
-bool8 DisplayActions(Entity *a0);
-
-void sub_8074094(Entity *entity)
+void ApplyEndOfTurnEffects(Entity *entity)
 {
     s32 rand;
     EntityInfo *entityInfo;

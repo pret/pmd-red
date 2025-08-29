@@ -6,7 +6,7 @@
 #include "dungeon_ai_leader.h"
 #include "structs/dungeon_entity.h"
 #include "structs/str_dungeon.h"
-#include "dungeon_leader.h"
+#include "dungeon_range.h"
 #include "dungeon_logic.h"
 #include "dungeon_generation.h"
 #include "dungeon_util.h"
@@ -20,10 +20,7 @@
 #include "dungeon_engine.h"
 #include "run_dungeon.h"
 
-extern void sub_8086AC0(void);
 extern void DisplayActions(u32);
-extern void TryActivateArtificialWeatherAbilities(void);
-extern void EnemyEvolution(Entity *);
 extern void TickStatusAndHealthRegen(Entity *);
 
 EWRAM_DATA SubMenuAction gDungeonSubMenu[10] = {0};

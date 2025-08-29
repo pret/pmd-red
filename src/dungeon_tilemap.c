@@ -1,8 +1,8 @@
 #include "global.h"
 #include "globaldata.h"
+#include "dungeon_tilemap.h"
 #include "constants/item.h"
 #include "constants/status.h"
-#include "structs/str_202EDE8.h"
 #include "bg_control.h"
 #include "bg_palette_buffer.h"
 #include "code_8004AA0.h"
@@ -11,7 +11,6 @@
 #include "effect_data.h"
 #include "code_801602C.h"
 #include "dungeon_vram.h"
-#include "code_803E724.h"
 #include "code_806CD90.h"
 #include "dungeon_info.h"
 #include "dungeon_items.h"
@@ -34,22 +33,14 @@
 #include "run_dungeon.h"
 #include "effect_main.h"
 
-extern s32 gDungeonFramesCounter;
-
-extern void UpdateMinimap(void);
-extern void sub_80400D4(void);
 extern void sub_8041888(u8 param_1);
-extern void sub_803F7BC(void);
-extern void UpdateMinimap();
 
-void sub_803EC94(void);
-s32 sub_803EF90(s32 a0, u8 a1);
-void UpdateCamera(u8 a0);
-void sub_803F7BC(void);
-void sub_803F38C(void);
-void sub_803FB74(void);
-void sub_803FE30(s32 a0, u16 *a1, bool8 a2, bool8 a3);
-void sub_803FF18(s32 a0, u16 *a1, bool8 a2);
+static void sub_803F38C(void);
+static void sub_803F7BC(void);
+static void sub_803FB74(void);
+static void sub_803FE30(s32 a0, u16 *a1, bool8 a2, bool8 a3);
+static void sub_803FF18(s32 a0, u16 *a1, bool8 a2);
+static void sub_80400D4(void);
 
 static EWRAM_DATA u32 gUnknown_202EDFC = 0;
 
@@ -104,7 +95,7 @@ void sub_803F27C(bool8 a0)
     }
 }
 
-void sub_803F38C(void)
+static void sub_803F38C(void)
 {
     s32 palId;
     UnkDungeonGlobal_unk181E8_sub *strPtr = &gDungeon->unk181e8;
@@ -306,7 +297,7 @@ void UpdateCamera(u8 a0)
     sub_803F7BC();
 }
 
-void sub_803F7BC(void)
+static void sub_803F7BC(void)
 {
     UnkDungeonGlobal_unk181E8_sub *strPtr = &gDungeon->unk181e8;
     const Tile *tile = GetTile(strPtr->cameraPos.x, strPtr->cameraPos.y);
@@ -414,7 +405,7 @@ void sub_803F9CC(void)
 
 IWRAM_DATA static u32 gUnknown_3001018[96] = {0};
 
-void sub_803FA4C(s32 a0, s32 a1, bool8 a2)
+static void sub_803FA4C(s32 a0, s32 a1, bool8 a2)
 {
     s32 i;
     s32 r5;
@@ -477,7 +468,7 @@ void sub_803FA4C(s32 a0, s32 a1, bool8 a2)
     ScheduleMemCopy((void *) VRAM + 0x5980, gUnknown_3001018, sizeof(gUnknown_3001018));
 }
 
-void sub_803FB74(void)
+static void sub_803FB74(void)
 {
     s32 i;
     u16 *arrPtr;
@@ -603,7 +594,7 @@ static const u16 gUnknown_80F64D8[][9] = {
     [1] = {0xF2C8, 0xF2C7, 0xF2C6, 0xF2C5, 0xF2C4, 0xF2C3, 0xF2C2, 0xF2C1, 0xF2C0},
 };
 
-void sub_803FE30(s32 a0, u16 *a1, bool8 a2, bool8 a3)
+static void sub_803FE30(s32 a0, u16 *a1, bool8 a2, bool8 a3)
 {
     s32 var = (a2) ? 0 : 55;
 
@@ -658,7 +649,7 @@ static const u16 gUnknown_80F6544[][9] = {
     [1] = {0xF2C8, 0xF2C7, 0xF2C6, 0xF2C5, 0xF2C4, 0xF2C3, 0xF2C2, 0xF2C1, 0xF2C0},
 };
 
-void sub_803FF18(s32 a0, u16 *a1, bool8 a2)
+static void sub_803FF18(s32 a0, u16 *a1, bool8 a2)
 {
     s32 arrId = (!a2) ? 1 : 0;
     s32 var = (a2) ? 0 : 55;
@@ -739,7 +730,7 @@ static const s32 gUnknown_80F6568[] = {
     0, -1, 1, -1, 1, -1, 1, -2, 1, -2, 2, -2, 2, -2, 2, -3, 3, -3, 3, -3, 4, -4, 4, -4, 4, -5, 4, -5, 4, -5, 4, -5
 };
 
-void sub_80400D4(void)
+static void sub_80400D4(void)
 {
     s32 temp;
     temp = gDungeon->unk181e8.unk18200;

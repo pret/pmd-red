@@ -38,8 +38,6 @@ struct CanMoveInDirectionInfo
     s32 direction;
 };
 
-extern const s32 gFaceDirectionIncrements[];
-
 void AIMovement(Entity *pokemon, bool8 showRunAwayEffect)
 {
     EntityInfo *pokemonInfo = GetEntInfo(pokemon);

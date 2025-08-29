@@ -10,14 +10,14 @@
 #include "code_801602C.h"
 #include "code_801B3C0.h"
 #include "dungeon_vram.h"
-#include "code_803E724.h"
+#include "dungeon_tilemap.h"
 #include "dungeon_action.h"
 #include "code_806CD90.h"
 #include "code_8097DD0.h"
 #include "dungeon_action.h"
 #include "dungeon_ai_movement.h"
 #include "dungeon_items.h"
-#include "dungeon_leader.h"
+#include "dungeon_range.h"
 #include "dungeon_main.h"
 #include "dungeon_map_access.h"
 #include "dungeon_menu_moves.h"
@@ -29,6 +29,9 @@
 #include "dungeon_random.h"
 #include "dungeon_submenu.h"
 #include "dungeon_util.h"
+#include "dungeon_strings.h"
+#include "dungeon_info.h"
+#include "dungeon_engine.h"
 #include "input.h"
 #include "items.h"
 #include "menu_input.h"
@@ -43,16 +46,7 @@
 #include "text_2.h"
 #include "weather.h"
 
-extern bool8 sub_8048A68(Entity *param_1,Item *item);
-extern bool8 sub_8048950(Entity *param_1,Item *item);
-extern bool8 sub_8048B9C(Entity *param_1,Item *item);
-extern Item *sub_8044D90(Entity *, s32, u32);
-extern void PlayDungeonCancelSE(void);
-extern void PlayDungeonConfirmationSE(void);
-extern void sub_806A6E8(Entity *);
 extern void TryTriggerTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4);
-bool8 sub_807EF48(void);
-void TryPointCameraToMonster(Entity *a0, u8 a1);
 bool8 sub_805E874(void);
 bool8 sub_80701A4(Entity *a0);
 void sub_805E738(Entity *a0);
@@ -63,15 +57,11 @@ void sub_8075680(u32);
 void sub_8094C88(void);
 void sub_8040A84(void);
 void sub_806A914(u8 a0, u8 a1, u8 a2);
-void SetLeaderActionToNothing(u8 a0);
 u16 GetLeaderActionId(void);
 void sub_80978C8(s16 a0);
 bool8 sub_8094C48(void);
 bool8 sub_805EC4C(Entity *a0, u8 a1);
-void sub_803E724(s32 a0);
 void HandleTalkFieldAction(Entity *);
-bool8 IsFloorOver(void);
-bool8 IsNotAttacking(Entity *param_1, bool8 param_2);
 void ShowMainMenu(bool8 fromBPress, bool8 a1);
 bool8 sub_805EF60(Entity *a0, EntityInfo *a1);
 bool8 sub_8070F80(Entity * pokemon, s32 direction);
@@ -92,40 +82,17 @@ extern bool8 ShowDungeonMovesMenu(Entity * entity, u8 a1, u8 a2, s32 a3, s32 a4)
 extern bool8 sub_8070F14(Entity * pokemon, s32 direction);
 bool8 sub_805EC2C(Entity *a0, s32 x, s32 y);
 extern Entity *sub_80696A8(Entity *a0);
-extern void PointCameraToMonster(Entity *);
 extern void sub_8041AD0(Entity *pokemon);
 extern void sub_8041AE0(Entity *pokemon);
-extern void sub_807EC28(bool8);
-extern u8 *GetDungeonSubMenuItemString(s32 param_1);
-extern bool8 CanSubMenuItemBeChosen(s32 param_1);
-extern s32 gDungeonSubMenuItemsCount;
-extern const u8 gUnknown_8106B50[];
-extern Item * sub_8044CC8(Entity *param_1, ActionParameter *param_2, UNUSED s32 a3);
-extern u16 sub_8044DC8(Item *param_1);
 extern bool8 sub_8046F00(Item *item);
-extern void sub_8045064(void);
 extern void sub_8070968(u8 *buffer, EntityInfo *entityInfo, s32 colorNum);
-extern bool8 CanLeaderSwitch(u8 dungeon);
 extern void GetAvailTacticsforLvl(u8 *tacticsBuffer, s32 pokeLevel);
 extern char* sub_808E4FC(s32 a1);
 extern char* sub_808E51C(s32 a1);
 extern void sub_8045C18(u8 *buffer, Item *item);
 
 extern u8 gUnknown_202EE00;
-extern Entity *gLeaderPointer;
-extern MenuInputStruct gDungeonMenu;
-extern s32 gDungeonFramesCounter;
 extern u8 gUnknown_202EE39;
-
-extern const u8 *gUnknown_80FE940;
-extern const u8 *const gUnknown_80FE954;
-extern const u8 gUnknown_8106BEC[];
-extern const u8 gUnknown_8106BF4[];
-extern const u8 *const gUnknown_80FE95C;
-extern const u8 *const gUnknown_80FE960;
-extern const u8 *const gUnknown_80FE964;
-extern const u8 *const gUnknown_80FE978;
-extern const u8 *const gWhichTextPtr2;
 
 EWRAM_DATA s32 gTeamMenuChosenId = 0;
 static UNUSED EWRAM_DATA u8 sUnused[4] = {0};

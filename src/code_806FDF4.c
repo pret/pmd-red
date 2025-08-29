@@ -20,17 +20,14 @@
 #include "pokemon_3.h"
 #include "position_util.h"
 #include "text_util.h"
-#include "dungeon_util_1.h"
 #include "math.h"
 #include "dungeon_config.h"
 #include "dungeon_strings.h"
+#include "dungeon_music.h"
+#include "dungeon_cutscene.h"
 #include "string_format.h"
+#include "dungeon_mon_spawn.h"
 
-extern u8 gUnknown_202EE70[MAX_TEAM_BODY_SIZE];
-
-u8 sub_806B8CC();
-void sub_8083D88();
-u8 sub_808529C(s32);
 void nullsub_96(Entity *pokemon,Entity *target);
 u8 sub_8097900(s16);
 void sub_806F910(void);
@@ -194,7 +191,7 @@ bool8 sub_806F9BC(s16 species)
     if (!gDungeon->unk644.canRecruit) {
         return FALSE;
     }
-    else if (sub_808529C(id) == 0) {
+    else if (!sub_808529C(id)) {
         return FALSE;
     }
     else if (id == MONSTER_MEW && gDungeon->unk644.unk34 == 1) {
@@ -306,7 +303,7 @@ bool8 sub_806FA5C(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *pa
 
             IncrementAdventureNumJoined();
 
-            if (sub_806B8CC(param_3->id,param_3->pos.x,param_3->pos.y,pokeStruct2,&local_2c,0,1) == 0) {
+            if (SpawnTeamMember(param_3->id,param_3->pos.x,param_3->pos.y,pokeStruct2,&local_2c,0,1) == 0) {
                 LogMessageByIdWithPopupCheckUser(entity1,gUnknown_80FA058);
                 pokeStruct2->flags = 0;
             }
@@ -321,7 +318,7 @@ bool8 sub_806FA5C(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *pa
                 sub_808D9DC(gFormatBuffer_Monsters[0],pokeStruct2,0);
                 LogMessageByIdWithPopupCheckUser(entity1,gUnknown_80FA0F0);
                 if (flag) {
-                    leader = xxx_call_GetLeader();
+                    leader = CutsceneGetLeader();
                     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],leader,0);
                     sub_8092558(gFormatBuffer_FriendArea,friendArea);
                     PlaySound(0xce);
@@ -442,7 +439,7 @@ bool8 sub_806FDF4(Entity *entity1,Entity *entity2,Entity **entityPtr)
     }
     IncrementAdventureNumJoined();
     HandleFaint(entity2,500,entity1);
-    if (sub_806B8CC(local_74.id,local_74.pos.x,local_74.pos.y,pokeStruct2,&local_2c,0,0) == 0) {
+    if (SpawnTeamMember(local_74.id,local_74.pos.x,local_74.pos.y,pokeStruct2,&local_2c,0,0) == 0) {
       pokeStruct2->flags = 0;
     }
     else {
@@ -452,7 +449,7 @@ bool8 sub_806FDF4(Entity *entity1,Entity *entity2,Entity **entityPtr)
         }
       }
       if (flag) {
-        leader = xxx_call_GetLeader();
+        leader = CutsceneGetLeader();
         SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],leader,0);
         sub_8092558(gFormatBuffer_FriendArea,friendArea);
         PlaySound(0xce);
