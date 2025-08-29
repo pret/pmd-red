@@ -28,13 +28,13 @@
 #include "dungeon_tilemap.h"
 #include "pokemon_3.h"
 #include "move_orb_actions_1.h"
+#include "run_dungeon.h"
 
 extern void sub_8041D84(Entity *);
 extern void sub_804178C(u32);
 extern void sub_8041D5C(Entity *);
 extern void sub_8041D48(Entity *);
 extern void sub_8041D38(Entity * pokemon);
-extern u8 GetFloorType(void);
 extern void sub_8041CDC(Entity *pokemon);
 extern void sub_8041CEC(Entity *pokemon);
 extern void nullsub_73(Entity *);
@@ -53,7 +53,6 @@ extern void nullsub_85(Entity *);
 extern void UpdateMinimap();
 extern void EntityUpdateStatusSprites(Entity *);
 extern void sub_8042A74(Entity *r0);
-extern void sub_807EC28(bool8);
 extern void DealDamageToEntity(Entity *, s16, u32, u32);
 extern void sub_80420C8(Entity *r0);
 extern void nullsub_68(Entity *);

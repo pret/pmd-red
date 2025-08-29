@@ -58,19 +58,17 @@
 #include "dungeon_kecleon_shop.h"
 #include "dungeon_engine.h"
 #include "dungeon_item_action.h"
+#include "dungeon_strings.h"
 
 extern void HandleUnsetItemAction(Entity *,bool8);
 extern void TryTriggerTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4);
 void TryPointCameraToMonster(Entity *a0, u8 a1);
 bool8 sub_80701A4(Entity *a0);
 void sub_8075680(u32);
-void sub_8094C88(void);
 void ClearUnpaidFlagFromAllItems(void);
 void sub_806A914(u8 a0, u8 a1, u8 a2);
 u16 GetLeaderActionId(void);
 void sub_80978C8(s16 a0);
-static void TryCreateModeArrows(Entity *leader);
-bool8 sub_8094C48(void);
 void HandleTalkFieldAction(Entity *);
 s32 GetTeamMemberEntityIndex(Entity *pokemon);
 bool8 sub_8070F80(Entity * pokemon, s32 direction);
@@ -82,41 +80,6 @@ extern bool8 sub_8070F14(Entity * pokemon, s32 direction);
 extern Entity *sub_80696A8(Entity *a0);
 extern void sub_8041AD0(Entity *pokemon);
 extern void sub_8041AE0(Entity *pokemon);
-extern void sub_807EC28(bool8);
-extern const u8 *GetCurrentDungeonName(void);
-
-
-extern const u8 *gUnknown_80F8A84;
-extern const u8 *gUnknown_80F8A6C;
-extern const u8 *gUnknown_80F8ADC;
-extern const u8 *gUnknown_80F8AB0;
-extern const u8 *gUnknown_80F8B0C;
-extern const u8 *gUnknown_80FD4B0;
-extern const u8 *gUnknown_80F8A4C;
-extern const u8 *gUnknown_80F8A28;
-extern const u8 *gUnknown_8100208;
-extern const u8 *gUnknown_80F9BD8;
-extern const u8 *gUnknown_80F9C08;
-extern const u8 *gUnknown_80F9C2C;
-extern const u8 *gUnknown_80F9BB0;
-extern const u8 *gUnknown_80FDE18;
-extern const u8 *gUnknown_80F8B24;
-extern const u8 *gTeamToolboxAPtr;
-extern const u8 *gTeamToolboxBPtr;
-extern const u8 *gFieldItemMenuGroundTextPtr;
-extern const u8 *gUnknown_80FE940;
-extern const u8 *gWhichTextPtr1;
-extern const u8 *const gFieldMenuMovesPtr;
-extern const u8 *const gFieldMenuItemsPtr;
-extern const u8 *const gFieldMenuTeamPtr;
-extern const u8 *const gFieldMenuOthersPtr;
-extern const u8 *const gFieldMenuGroundPtr;
-extern const u8 *const gUnknown_80F9174;
-extern const u8 *const gUnknown_80F9190;
-extern const u8 *const gUnknown_80F91C8;
-extern const u8 *const gUnknown_80F91E0;
-extern const u8 *const gUnknown_80F91A8;
-extern const u8 *const gUnknown_80FE954;
 
 extern s32 gTeamMenuChosenId;
 
@@ -128,6 +91,7 @@ static EWRAM_DATA s16 sArrowsFrames = 0;
 static EWRAM_DATA bool8 sShowThreeArrows1 = 0;
 static EWRAM_DATA bool8 sShowThreeArrows2 = 0;
 
+static void TryCreateModeArrows(Entity *leader);
 static void sub_805E738(Entity *a0);
 static bool8 sub_805E874(void);
 static bool8 sub_805EC2C(Entity *a0, s32 x, s32 y);
@@ -414,8 +378,8 @@ void DungeonHandlePlayerInput(void)
                 s32 prevMapOption = gGameOptionsRef->mapOption;
                 gShowMonsterDotsInDungeonMap = TRUE;
                 gDungeon->unk181e8.inFloorMapMode = TRUE;
-                if (!sub_8094C48()) {
-                    sub_8094C88();
+                if (!GameOptions_ShowMiniMap()) {
+                    GameOptions_SetTransparentMiniMap();
                 }
                 sub_8052210(1);
                 UpdateMinimap();

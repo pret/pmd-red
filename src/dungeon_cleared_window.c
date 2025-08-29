@@ -9,8 +9,7 @@
 #include "run_dungeon.h"
 #include "dungeon_run_end.h"
 #include "dungeon_music.h"
-
-extern u8 sub_8094D14(void);
+#include "game_options.h"
 
 void ShowDungeonClearedWindow(void)
 {

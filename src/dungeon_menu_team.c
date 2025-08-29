@@ -46,20 +46,16 @@
 #include "text_2.h"
 #include "weather.h"
 
-extern void TryTriggerTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4);
 bool8 sub_805E874(void);
 bool8 sub_80701A4(Entity *a0);
 void sub_805E738(Entity *a0);
 void sub_8040A78(void);
 void sub_805E804(void);
-void ShowDungeonOthersMenu(void);
 void sub_8075680(u32);
-void sub_8094C88(void);
 void sub_8040A84(void);
 void sub_806A914(u8 a0, u8 a1, u8 a2);
 u16 GetLeaderActionId(void);
 void sub_80978C8(s16 a0);
-bool8 sub_8094C48(void);
 bool8 sub_805EC4C(Entity *a0, u8 a1);
 void HandleTalkFieldAction(Entity *);
 void ShowMainMenu(bool8 fromBPress, bool8 a1);

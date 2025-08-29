@@ -46,7 +46,6 @@ extern void sub_806A1B0(Entity *);
 extern void sub_8045BF8(u8 *, struct Item *);
 extern void EnemyEvolution(struct Entity *);
 extern void DiscoverMinimap(DungeonPos *);
-extern void sub_807EC28(bool8);
 
 void ChooseAIMove(Entity *pokemon)
 {

@@ -52,10 +52,7 @@ extern void sub_800EF40(u8 r0, u8 r1);
 extern s32 sub_800E6D8(s32);
 extern void sub_800EB24(s32 param_1, DungeonPos *param_2, DungeonPos *param_3, s32 param_4, s32 param_5);
 
-u32 sub_8041764(unkStruct_80416E0 *param_1, bool8 param_2);
 s32 sub_80416E0(PixelPos *pos, u32 param_2, bool8 param_3);
-s32 sub_8041550(Entity *entity, s32 a1, u8 a2, u8 a3, s32 a4, u8 a5);
-s32 sub_804151C(Entity *entity, s32 r1, u8 r2);
 void sub_804178C(u8 param_1);
 
 struct UnkStruct_80F6624
@@ -191,13 +188,16 @@ static const u32 sStatusSpriteMasks_MuzzledStatus[] = {
     /*STATUS_MUZZLED not defined*/[1] = STATUS_SPRITE_MUZZLED,
 };
 
-s32 sub_804151C(Entity *entity, s32 r1, u8 r2)
+static s32 sub_8041550(Entity *entity, s32 a1, u8 a2, u8 a3, s32 a4, u8 a5);
+static u32 sub_8041764(unkStruct_80416E0 *param_1, bool8 param_2);
+
+static s32 sub_804151C(Entity *entity, s32 r1, u8 r2)
 {
     u8 r3 = sub_800DC9C(r1);
     return sub_8041550(entity, r1, r2, r3, 2, 0);
 }
 
-s32 sub_8041550(Entity *entity, s32 a1, u8 a2, u8 a3, s32 a4, u8 a5)
+static s32 sub_8041550(Entity *entity, s32 a1, u8 a2, u8 a3, s32 a4, u8 a5)
 {
     s32 i;
     EntityInfo *entInfo;
@@ -258,7 +258,7 @@ s32 sub_8041550(Entity *entity, s32 a1, u8 a2, u8 a3, s32 a4, u8 a5)
     return r4;
 }
 
-s32 sub_80416A4(DungeonPos *pos_1, u32 param_2, bool8 param_3)
+static s32 sub_80416A4(DungeonPos *pos_1, u32 param_2, bool8 param_3)
 {
   PixelPos pos;
 
@@ -297,7 +297,7 @@ s32 sub_80416E0(PixelPos *pos, u32 param_2, bool8 param_3)
   return ret;
 }
 
-u32 sub_8041764(unkStruct_80416E0 *param_1, bool8 param_2)
+static u32 sub_8041764(unkStruct_80416E0 *param_1, bool8 param_2)
 {
     sub_800EE5C(param_1->unk0);
     sub_800EF64();

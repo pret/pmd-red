@@ -46,6 +46,7 @@
 #include "wigglytuff_shop3.h"
 #include "wonder_mail.h"
 #include "naming_screen.h"
+#include "game_options.h"
 #include "script_item.h"
 #include "structs/menu.h"
 #include "structs/str_file_system.h"
@@ -130,7 +131,6 @@ void sub_8096BD0(void);
 bool8 DrawCredits(s32 creditsCategoryIndex, s32);
 u32 sub_8035574();
 void sub_803565C(void);
-u8 sub_8094D14(void);
 void GroundMap_ExecuteEvent(s16, u32);
 bool8 sub_8015080(u8 *buffer, const MenuItem *menuItems);
 s32 sub_801516C();

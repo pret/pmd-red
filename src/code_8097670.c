@@ -7,14 +7,13 @@
 #include "moves.h"
 #include "strings.h"
 #include "dungeon_info.h"
+#include "game_options.h"
 
 static EWRAM_DATA struct unkStruct_203B494 sUnknown_2039778 = {0};
 
 EWRAM_INIT struct unkStruct_203B494 *gUnknown_203B494 = { NULL }; // NDS=20EB98C
 
-void ReadGameOptionsBits(DataSerializer *param_1);
 void ReadPlayTimeBits(DataSerializer *r0);
-void WriteGameOptionsBits(DataSerializer *param_1);
 void WritePlayTimeBits(DataSerializer *r0);
 
 void sub_8097670(void)

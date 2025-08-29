@@ -61,7 +61,6 @@ extern void CheckLeaderTile(void);
 extern void sub_8075708(Entity *entity);
 extern void TryForcedLoss(u32);
 extern void sub_8075900(Entity *pokemon, u8 r1);
-extern void sub_807EC28(bool8);
 extern void sub_8075050(EntityInfo *info, Unk_Entity_x184 *strPtr);
 extern bool8 sub_803F428(DungeonPos *pos);
 
