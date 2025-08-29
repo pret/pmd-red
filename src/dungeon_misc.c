@@ -48,11 +48,11 @@
 #include "dungeon_engine.h"
 #include "dungeon_cutscene.h"
 #include "dungeon_mon_spawn.h"
+#include "dungeon_info.h"
 
 static void EnsureCastformLoaded(void);
 static void EnsureDeoxysLoaded(void);
 
-extern bool8 IsLevelResetDungeon(u8 dungeon);
 extern bool8 sub_806A58C(s16 r0);
 extern void sub_8078084(Entity * pokemon);
 extern void sub_808DFDC(s32 a1, DungeonMon* a2);
@@ -61,7 +61,6 @@ extern bool8 sub_8070F80(Entity * pokemon, s32 direction);
 extern s32 sub_806A4DC(EntityInfo *info);
 extern void sub_8042900(Entity *r0);
 extern void sub_8042968(Entity *r0);
-extern void EndAbilityImmuneStatus(Entity *, Entity *);
 extern void sub_8041BBC(Entity *r0);
 extern void sub_804178C(u32);
 extern void sub_8042B20(Entity *entity);

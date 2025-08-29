@@ -46,7 +46,6 @@
 #include "text_2.h"
 #include "weather.h"
 
-extern void sub_806A6E8(Entity *);
 extern void TryTriggerTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4);
 bool8 sub_805E874(void);
 bool8 sub_80701A4(Entity *a0);

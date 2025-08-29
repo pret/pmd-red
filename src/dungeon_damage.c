@@ -35,6 +35,7 @@
 #include "code_804267C.h"
 #include "code_805D8C8.h"
 #include "dungeon_map_access.h"
+#include "dungeon_data.h"
 #include "move_effects_target.h"
 #include "pokemon.h"
 #include "position_util.h"
@@ -43,6 +44,7 @@
 #include "exclusive_pokemon.h"
 #include "hurl_orb.h"
 #include "dungeon_mon_spawn.h"
+#include "move_orb_actions_1.h"
 
 extern void sub_8041B18(Entity *pokemon);
 extern void sub_8041B90(Entity *pokemon);
@@ -69,17 +71,6 @@ extern void sub_80428D8(Entity *);
 extern void sub_8042978(Entity *);
 extern void sub_804298C(Entity *);
 extern void sub_80428EC(Entity *);
-
-extern const s32 gUnknown_8106A4C;
-extern const u8 *const gUnknown_8100548;
-extern const u8 *const gUnknown_80FD46C;
-extern const u8 *const gUnknown_810056C;
-extern const s16 gUnknown_810AC60;
-extern const s16 gUnknown_810AC68;
-extern const s16 gUnknown_810AC64;
-extern const s16 gUnknown_810AC66;
-extern const s16 gUnknown_810AC68;
-extern const s16 gUnknown_810AC62;
 
 static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struct DamageStruct *r5, bool32 isFalseSwipe, bool32 giveExp, s16 arg4_, s32 arg8);
 static bool8 sub_806E100(s48_16 *param_1, Entity *pokemon, Entity *target, u8 type, DamageStruct *dmgStruct);
@@ -128,7 +119,7 @@ void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *
     }
 
     if (GetEntInfo(target)->bideClassStatus.status == STATUS_ENRAGED) {
-        RaiseAttackStageTarget(attacker, target, gUnknown_8106A4C, 1);
+        RaiseAttackStageTarget(attacker, target, gStatIndexAtkDef, 1);
     }
 
     if (!EntityIsValid(attacker) || !EntityIsValid(target))

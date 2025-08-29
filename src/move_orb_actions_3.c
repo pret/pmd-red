@@ -46,7 +46,6 @@
 #include "warp_target.h"
 
 static void sub_805A7D4(Entity *, Entity *, Item *, DungeonPos *);
-extern void sub_806A6E8(Entity *);
 
 bool8 PoisonStingMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 {
@@ -257,7 +256,7 @@ bool8 MudSlapMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4
     flag = TRUE;
     if(sub_805727C(pokemon, target, 0))
     {
-        LowerAccuracyStageTarget(pokemon, target, gUnknown_8106A4C[0], FALSE);
+        LowerAccuracyStageTarget(pokemon, target, gStatIndexAtkDef, FALSE);
     }
   }
   return flag;
@@ -270,13 +269,13 @@ bool8 ThiefMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 
 bool8 AmnesiaMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 {
-    RaiseDefenseStageTarget(pokemon, target, gUnknown_8106A50[0], 2);
+    RaiseDefenseStageTarget(pokemon, target, gStatIndexSpecial, 2);
     return TRUE;
 }
 
 bool8 GrowlMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 {
-    LowerAttackStageTarget(pokemon, target, gUnknown_8106A4C[0], 1, 1, TRUE);
+    LowerAttackStageTarget(pokemon, target, gStatIndexAtkDef, 1, 1, TRUE);
     return TRUE;
 }
 
@@ -333,7 +332,7 @@ bool8 SunnyDayMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_
 
 bool8 LeerMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 {
-    LowerDefenseStageTarget(pokemon, target, gUnknown_8106A4C[0], 1, 1, TRUE);
+    LowerDefenseStageTarget(pokemon, target, gStatIndexAtkDef, 1, 1, TRUE);
     return TRUE;
 }
 
@@ -441,7 +440,7 @@ bool8 SuperpowerMoveAction(Entity *pokemon, Entity *target, Move *move, s32 para
   if (HandleDamagingMove(pokemon, target, move, IntToF248_2(1), param_4) != 0) {
     flag = TRUE;
     if (sub_805727C(pokemon,pokemon,0) != 0) {
-      stat = gUnknown_8106A4C[0];
+      stat = gStatIndexAtkDef;
       LowerAttackStageTarget(pokemon,pokemon,stat,1,0,FALSE);
       LowerDefenseStageTarget(pokemon,pokemon,stat,1,0,FALSE);
     }
@@ -672,7 +671,7 @@ bool8 BellyDrumMoveAction(Entity * pokemon,Entity * target, Move *move, s32 para
   info = GetEntInfo(pokemon);
   flag = FALSE;
   if (FixedPointToInt(info->belly) > 1) {
-    RaiseAttackStageTarget(pokemon,target,gUnknown_8106A4C[0],99);
+    RaiseAttackStageTarget(pokemon,target,gStatIndexAtkDef,99);
     info->belly = IntToFixedPoint(1);
     flag = TRUE;
   }
@@ -708,13 +707,13 @@ bool8 SecretPowerMoveAction(Entity * pokemon, Entity * target, Move *move, s32 p
                 LowerMovementSpeedTarget(pokemon,target,1,FALSE);
                 break;
             case 3:
-                LowerAttackStageTarget(pokemon,target,gUnknown_8106A4C[0],1,1,FALSE);
+                LowerAttackStageTarget(pokemon,target,gStatIndexAtkDef,1,1,FALSE);
                 break;
             case 4:
-                LowerDefenseStageTarget(pokemon,target,gUnknown_8106A4C[0],1,1,FALSE);
+                LowerDefenseStageTarget(pokemon,target,gStatIndexAtkDef,1,1,FALSE);
                 break;
             case 5:
-                LowerAccuracyStageTarget(pokemon,target,gUnknown_8106A4C[0],FALSE);
+                LowerAccuracyStageTarget(pokemon,target,gStatIndexAtkDef,FALSE);
                 break;
             case 6:
                 ConfuseStatusTarget(pokemon,target,FALSE);
@@ -748,7 +747,7 @@ bool8 sub_805AC90(Entity * pokemon, Entity * target, Move *move, s32 param_4)
 
 bool8 BulkUpMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 {
-    s32 stat = gUnknown_8106A4C[0];
+    s32 stat = gStatIndexAtkDef;
     RaiseAttackStageTarget(pokemon, target, stat, 1);
     RaiseDefenseStageTarget(pokemon, target, stat, 1);
     return TRUE;
@@ -762,7 +761,7 @@ bool8 ObserverOrbAction(Entity *pokemon, Entity *target, Move *move, s32 param_4
 
 bool8 FeatherDanceMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 {
-    LowerAttackStageTarget(pokemon, target, gUnknown_8106A4C[0], 2, 1, TRUE);
+    LowerAttackStageTarget(pokemon, target, gStatIndexAtkDef, 2, 1, TRUE);
     return TRUE;
 }
 
@@ -821,7 +820,7 @@ bool8 CrushClawMoveAction(Entity * pokemon, Entity * target, Move *move, s32 par
     if ( HandleDamagingMove(pokemon, target, move, IntToF248_2(1), param_4) != 0) {
         flag = TRUE;
         if (sub_805727C(pokemon,target,gCrushClawSecondaryChance) != 0) {
-            LowerDefenseStageTarget(pokemon, target, gUnknown_8106A4C[0], 1, 1, FALSE);
+            LowerDefenseStageTarget(pokemon, target, gStatIndexAtkDef, 1, 1, FALSE);
         }
     }
     return flag;
@@ -961,7 +960,7 @@ bool8 HandleColorChange(Entity * pokemon, Entity * target, Move *move, s32 param
 
 bool8 TailGlowMoveAction(Entity * pokemon, Entity * target, Move *move, s32 param_4)
 {
-    RaiseAttackStageTarget(pokemon,target,gUnknown_8106A50[0], 2);
+    RaiseAttackStageTarget(pokemon,target,gStatIndexSpecial, 2);
     return TRUE;
 }
 

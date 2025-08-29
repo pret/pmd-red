@@ -40,7 +40,6 @@
 
 extern void sub_8042900(Entity *r0);
 extern void sub_8042968(Entity *r0);
-extern void EndAbilityImmuneStatus(Entity *, Entity *);
 void sub_8041BBC(Entity *r0);
 extern void sub_804178C(u32);
 extern void sub_8042B20(Entity *entity);

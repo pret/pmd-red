@@ -56,7 +56,7 @@ bool8 ProtectMoveAction(Entity * pokemon,Entity * target,Move *move, s32 param_4
 
 bool8 DefenseCurlMoveAction(Entity * pokemon,Entity * target,Move *move, s32 param_4)
 {
-    RaiseDefenseStageTarget(pokemon,target,gUnknown_8106A4C[0],1);
+    RaiseDefenseStageTarget(pokemon,target,gStatIndexAtkDef,1);
     return TRUE;
 }
 
@@ -74,7 +74,7 @@ bool8 MistBallMoveAction(Entity * pokemon,Entity * target,Move *move, s32 param_
     if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),param_4) != 0) {
         flag = TRUE;
         if (sub_805727C(pokemon,target,gMistBallSecondaryChance) != 0) {
-            LowerAttackStageTarget(pokemon,target,gUnknown_8106A50[0],1,1,0);
+            LowerAttackStageTarget(pokemon,target,gStatIndexSpecial,1,1,0);
         }
     }
     return flag;
@@ -99,7 +99,7 @@ bool8 MirrorCoatMoveAction(Entity * pokemon,Entity * target,Move *move, s32 para
 
 bool8 CalmMindMoveAction(Entity * pokemon,Entity * target,Move *move, s32 param_4)
 {
-    u32 stat = gUnknown_8106A50[0];
+    u32 stat = gStatIndexSpecial;
     RaiseAttackStageTarget(pokemon,target,stat,1);
     RaiseDefenseStageTarget(pokemon,target,stat,1);
     return TRUE;
@@ -303,7 +303,7 @@ bool8 DragonRageMoveAction(Entity * pokemon, Entity * target, Move *move, s32 pa
 
 bool8 DragonDanceMoveAction( Entity * pokemon, Entity * target, Move *move, s32 param_4)
 {
-    RaiseAttackStageTarget(pokemon, target, gUnknown_8106A4C[0], 1);
+    RaiseAttackStageTarget(pokemon, target, gStatIndexAtkDef, 1);
     RaiseMovementSpeedTarget(pokemon, target, 0, TRUE);
     return TRUE;
 }
@@ -332,7 +332,7 @@ bool8 LusterPurgeMoveAction(Entity * pokemon, Entity * target, Move * move, s32 
         flag = TRUE;
         if(sub_805727C(pokemon, target, gLusterPurgeSecondaryChance))
         {
-            LowerDefenseStageTarget(pokemon, target, gUnknown_8106A50[0], 1, 1, 0);
+            LowerDefenseStageTarget(pokemon, target, gStatIndexSpecial, 1, 1, 0);
         }
     }
     return flag;

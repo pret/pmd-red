@@ -492,16 +492,16 @@ void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move *move, 
                         moveHadEffect = PoisonStingMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_PSYCHIC:
-                        moveHadEffect = sub_8058C98(attacker, currTarget, move, gUnknown_8106A50[0], itemId);
+                        moveHadEffect = sub_8058C98(attacker, currTarget, move, gStatIndexSpecial, itemId);
                         break;
                     case MOVE_ACID:
-                        moveHadEffect = sub_8058C98(attacker, currTarget, move, gUnknown_8106A4C[0], itemId);
+                        moveHadEffect = sub_8058C98(attacker, currTarget, move, gStatIndexAtkDef, itemId);
                         break;
                     case MOVE_METAL_CLAW:
-                        moveHadEffect = MetalClawMoveAction(attacker, currTarget, move, gUnknown_8106A4C[0], itemId);
+                        moveHadEffect = MetalClawMoveAction(attacker, currTarget, move, gStatIndexAtkDef, itemId);
                         break;
                     case MOVE_STEEL_WING:
-                        moveHadEffect = SteelWingMoveAction(attacker, currTarget, move, gUnknown_8106A4C[0], itemId);
+                        moveHadEffect = SteelWingMoveAction(attacker, currTarget, move, gStatIndexAtkDef, itemId);
                         break;
                     case MOVE_POISON_TAIL:
                         moveHadEffect = PoisonTailMoveAction(attacker, currTarget, move, itemId);
@@ -1342,7 +1342,7 @@ void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move *move, 
         }
         if (EntityIsValid(attacker) && GetEntInfo(attacker)->unk155 != 0) {
             GetEntInfo(attacker)->unk155 = 0;
-            LowerAttackStageTarget(attacker, attacker, gUnknown_8106A50[0], 2, 0, FALSE);
+            LowerAttackStageTarget(attacker, attacker, gStatIndexSpecial, 2, 0, FALSE);
         }
     }
 }

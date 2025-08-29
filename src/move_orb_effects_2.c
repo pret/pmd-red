@@ -27,8 +27,7 @@
 #include "dungeon_floor_spawns.h"
 #include "dungeon_tilemap.h"
 #include "pokemon_3.h"
-
-extern u32 gUnknown_8106A4C;
+#include "move_orb_actions_1.h"
 
 extern void sub_8041D84(Entity *);
 extern void sub_804178C(u32);
@@ -557,7 +556,6 @@ void sub_80783C4(Entity * pokemon, Entity * target, bool8 param_3)
 
 void CurseStatusTarget(Entity *pokemon, Entity * target)
 {
-  u32 statStage;
   s32 HP;
   EntityInfo * pokemonEntityData;
   EntityInfo * targetEntityInfo;
@@ -586,9 +584,8 @@ void CurseStatusTarget(Entity *pokemon, Entity * target)
       TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB004);
     }
     else {
-      statStage = gUnknown_8106A4C;
-      RaiseAttackStageTarget(pokemon,pokemon,statStage,1);
-      RaiseDefenseStageTarget(pokemon,pokemon,statStage,1);
+      RaiseAttackStageTarget(pokemon,pokemon,gStatIndexAtkDef,1);
+      RaiseDefenseStageTarget(pokemon,pokemon,gStatIndexAtkDef,1);
       LowerMovementSpeedTarget(pokemon,pokemon,1,TRUE);
     }
     EntityUpdateStatusSprites(target);

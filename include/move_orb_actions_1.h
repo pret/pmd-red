@@ -79,7 +79,7 @@ bool8 RapidSpinMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param
 bool8 SureShotMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 bool8 CosmicPowerMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 
-extern const s32 gUnknown_8106A4C[1];
-extern const s32 gUnknown_8106A50[1];
+extern const s32 gStatIndexAtkDef;
+extern const s32 gStatIndexSpecial;
 
 #endif /* ifndef GUARD_MOVE_ORB_ACTIONS_1_H */

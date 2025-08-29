@@ -60,7 +60,6 @@
 #include "dungeon_item_action.h"
 
 extern void HandleUnsetItemAction(Entity *,bool8);
-extern void sub_806A6E8(Entity *);
 extern void TryTriggerTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4);
 void TryPointCameraToMonster(Entity *a0, u8 a1);
 bool8 sub_80701A4(Entity *a0);
