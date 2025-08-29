@@ -30,12 +30,8 @@
 #include "dungeon_engine.h"
 #include "dungeon_strings.h"
 
-extern bool8 sub_8070F14(Entity * pokemon, s32 direction);
-bool8 sub_805EC2C(Entity *a0, s32 x, s32 y);
 extern void sub_8041AD0(Entity *pokemon);
 extern void sub_8041AE0(Entity *pokemon);
-extern bool8 sub_8046F00(Item *item);
-
 
 static EWRAM_DATA ActionParameter sUnknownActionUnk4 = {0};
 static EWRAM_DATA s32 sUnknown_202F240 = 0;

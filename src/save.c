@@ -9,7 +9,7 @@
 #include "friend_area.h"
 #include "game_options.h"
 #include "memory.h"
-#include "pokemon.h"
+#include "pokemon_3.h"
 #include "random.h"
 #include "save.h"
 
@@ -38,10 +38,6 @@ ALIGNED(4) static const char fill_save2[] = _("pksdir0");
 extern bool8 sub_800DAB0(u16, u8*, s32);
 extern bool8 sub_800DAB4(u16, u8*, s32);
 extern bool8 sub_800DAB8(void);
-extern u32 SaveRecruitedPokemon(u8 *, u32);
-extern u32 RestoreRecruitedPokemon(void* a, s32 b);
-extern u32 SavePoke2s(u8 *, u32);
-extern u32 RestorePoke2s(void* a, s32 b);
 extern u32 sub_80954CC(void* a, s32 b);
 extern u32 sub_8095624(u8 *, u32);
 extern u32 RestoreMailInfo(void* a, s32 b);

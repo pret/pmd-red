@@ -31,14 +31,8 @@ struct UnusedOffenseStruct
     u8 spDefBoost;
 };
 
-extern SpriteOAM gShadowSprites[3]; // Shadow sprites of some kind
-
-extern void WritePoke1LevelBits(DataSerializer*, struct unkPokeSubStruct_C*);
-void ReadPoke1LevelBits(DataSerializer*, struct unkPokeSubStruct_C*);
-
-extern void WriteHiddenPowerBits(DataSerializer*, HiddenPower*);
-extern void ReadHiddenPowerBits(DataSerializer*, HiddenPower*);
-s16 GetPokemonEvolveConditions(s16 index, unkEvolve *r1);
+static void ReadHiddenPowerBits(DataSerializer* a1, HiddenPower* a2);
+static void WriteHiddenPowerBits(DataSerializer* a1, HiddenPower* a2);
 
 // arm9.bin::02059FDC
 void GenerateHiddenPower(HiddenPower* a1)
@@ -780,14 +774,14 @@ void WritePoke1LevelBits(DataSerializer* a1, struct unkPokeSubStruct_C* unkC)
 }
 
 // arm9.bin::0205C414
-void ReadHiddenPowerBits(DataSerializer* a1, HiddenPower* a2)
+static void ReadHiddenPowerBits(DataSerializer* a1, HiddenPower* a2)
 {
     ReadBits(a1, &a2->hiddenPowerBasePower, 10);
     ReadBits(a1, &a2->hiddenPowerType, 5);
 }
 
 // arm9.bin::0205C3E4
-void WriteHiddenPowerBits(DataSerializer* a1, HiddenPower* a2)
+static void WriteHiddenPowerBits(DataSerializer* a1, HiddenPower* a2)
 {
     WriteBits(a1, &a2->hiddenPowerBasePower, 10);
     WriteBits(a1, &a2->hiddenPowerType, 5);

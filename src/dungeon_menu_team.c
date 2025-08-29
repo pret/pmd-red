@@ -46,43 +46,8 @@
 #include "text_2.h"
 #include "weather.h"
 
-bool8 sub_805E874(void);
-bool8 sub_80701A4(Entity *a0);
-void sub_805E738(Entity *a0);
-void sub_8040A78(void);
-void sub_805E804(void);
-void sub_8075680(u32);
-void sub_8040A84(void);
-void sub_806A914(u8 a0, u8 a1, u8 a2);
-u16 GetLeaderActionId(void);
-void sub_80978C8(s16 a0);
-bool8 sub_805EC4C(Entity *a0, u8 a1);
-void HandleTalkFieldAction(Entity *);
-void ShowMainMenu(bool8 fromBPress, bool8 a1);
-bool8 sub_805EF60(Entity *a0, EntityInfo *a1);
-bool8 sub_8070F80(Entity * pokemon, s32 direction);
-void PrintOnMainMenu(bool8 printAll);
-bool8 ShowDungeonItemsMenu(Entity * a0, struct UnkMenuBitsStruct *a1);
-void DungeonShowItemDescription(UNUSED ActionContainer *a0);
-bool8 ShowDungeonTeamMenu(Entity *a0);
-void ActionShowMoveInfo(ActionContainer *a0);
-void ActionToggleMoveUsableForAi(ActionContainer *a0);
-void ActionLinkMoves(ActionContainer *a0);
-void sub_806752C(ActionContainer *a0);
-void ActionSetOrUnsetMove(ActionContainer *a0, bool8 a1);
-void ActionDelinkMoves(ActionContainer *a0, bool8 a1);
-void sub_8067768(ActionContainer *a0);
-extern void sub_80643AC(Entity *pokemon);
-extern bool8 sub_8070F14(Entity * pokemon, s32 direction);
-bool8 sub_805EC2C(Entity *a0, s32 x, s32 y);
-extern void sub_8041AD0(Entity *pokemon);
-extern void sub_8041AE0(Entity *pokemon);
-extern bool8 sub_8046F00(Item *item);
-extern void sub_8070968(u8 *buffer, EntityInfo *entityInfo, s32 colorNum);
-extern void GetAvailTacticsforLvl(u8 *tacticsBuffer, s32 pokeLevel);
 extern char* sub_808E4FC(s32 a1);
 extern char* sub_808E51C(s32 a1);
-extern void sub_8045C18(u8 *buffer, Item *item);
 
 EWRAM_DATA s32 gTeamMenuChosenId = 0;
 static UNUSED EWRAM_DATA u8 sUnused[4] = {0};
