@@ -1,5 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
+#include "dungeon_action_execution.h"
 #include "dungeon_ai_leader.h"
 #include "dungeon_move_util.h"
 #include "dungeon_vram.h"
@@ -35,11 +36,8 @@
 #include "dungeon_turn_effects.h"
 #include "dungeon_leveling.h"
 #include "dungeon_cutscene.h"
+#include "dungeon_move.h"
 #include "warp_target.h"
-
-extern u8 gUnknown_202F221;
-extern u8 gUnknown_202F222;
-extern u8 gUnknown_203B434;
 
 void sub_8075BA4(Entity *param_1, u8 param_2);
 void sub_804178C(u8 param_1);
@@ -48,15 +46,11 @@ extern void sub_80671A0(Entity *);
 extern void sub_8067110(Entity *);
 void HandleUseMoveAIAction(Entity *target);
 void sub_8041888(u8 param_1);
-void sub_807360C(void);
 void sub_805EFB4(Entity *, u8);
 void sub_8074FB0(Entity *, u8, DungeonPos *);
-
 void HandlePlaceItemAction(Entity *);
 void HandlePickUpPlayerAction(Entity *);
 void sub_8066E14(Entity * );
-void sub_807348C(void);
-void sub_80732F0(void);
 void sub_8066BD4(Entity*);
 void HandleTalkFieldAction(Entity *);
 void HandleUseMovePlayerAction(Entity *);
@@ -73,14 +67,16 @@ bool8 sub_804AE08(DungeonPos *pos);
 void HandlePickUpAIAction(Entity *pokemon);
 void HandleThrowItemAIAction(Entity *pokemon);
 void HandleEatAIAction(Entity *pokemon);
-u32 sub_8075818(Entity *entity);
-extern void MarkLastUsedMonMove(Entity *entity, Move *move);
-bool8 TryUseChosenMove(struct Entity *attacker, u32 r6, s32 itemId, u32 var_30, bool32 isLinkedMove, struct Move *move);
+u32 sub_8075818(Entity *entity);;
 
 EWRAM_DATA u8 gUnknown_202F32C = 0;
 EWRAM_DATA u8 gUnknown_202F32D = 0;
 
-bool8 sub_8072CF4(Entity *entity)
+static void HandleSleepTalk(void);
+static void HandleSnore(void);
+static void HandleFlashFire(void);
+
+bool8 ExecuteEntityDungeonAction(Entity *entity)
 {
     bool8 bVar4;
     bool8 bVar5;
@@ -92,7 +88,7 @@ bool8 sub_8072CF4(Entity *entity)
     DungeonPos pos1;
 
     sub_804178C(1);
-    gUnknown_203B434 = 1;
+    gUnknown_203B434 = TRUE;
     info = GetEntInfo(entity);
     info->useHeldItem = FALSE;
     info->unkF3 = FALSE;
@@ -316,10 +312,10 @@ bool8 sub_8072CF4(Entity *entity)
                     LogMessageByIdWithPopupCheckUser(entity,gUnknown_80FD2CC);
                 }
             }
-            sub_807360C();
+            HandleFlashFire();
             if (!sub_8044B84()) {
-                sub_807348C();
-                sub_80732F0();
+                HandleSnore();
+                HandleSleepTalk();
                 if (!EntityIsValid(entity)) {
                     return FALSE;
                 }
@@ -345,7 +341,7 @@ bool8 sub_8072CF4(Entity *entity)
     return FALSE;
 }
 
-void sub_80732F0(void)
+static void HandleSleepTalk(void)
 {
     s32 index;
     Entity *entity;
@@ -425,7 +421,7 @@ _increase:
     }
 }
 
-void sub_807348C(void)
+static void HandleSnore(void)
 {
     int index;
     s32 moveIndex;
@@ -478,18 +474,14 @@ void sub_807348C(void)
     }
 }
 
-void sub_807360C(void)
+static void HandleFlashFire(void)
 {
     s32 index;
-    Entity *entity;
 
-    for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
-    {
-        entity = gDungeon->activePokemon[index];
-        if(EntityIsValid(entity))
-        {
-            if(GetEntInfo(entity)->unk152 != 0)
-            {
+    for (index = 0; index < DUNGEON_MAX_POKEMON; index++) {
+        Entity *entity = gDungeon->activePokemon[index];
+        if (EntityIsValid(entity)) {
+            if (GetEntInfo(entity)->unk152 != 0) {
                GetEntInfo(entity)->unk152 = 0;
                UpdateFlashFireBoost(entity, entity);
             }

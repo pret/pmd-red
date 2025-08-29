@@ -51,10 +51,6 @@ extern void sub_80429E8(Entity *r0);
 extern Entity *sub_804550C(s16 a);
 extern Entity *sub_80453AC(s16 id);
 extern void EntityUpdateStatusSprites(Entity *);
-extern Entity *sub_80696A8(Entity *a0);
-extern void sub_806A898(Entity *entity, bool8 r7, bool8 showRunAwayEffect);
-extern void sub_806A6E8(Entity *entity);
-void sub_806C264(s32 teamIndex, EntityInfo *entInfo);
 
 static s32 CalcSpeciesHPAtLevel(s32 species, s32 level);
 static s32 CalcSpeciesAtkAtLevel(s32 species, s32 level, s32 categoryIndex);

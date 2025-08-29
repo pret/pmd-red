@@ -5,7 +5,7 @@
 #include "dungeon_vram.h"
 #include "dungeon_main.h"
 #include "constants/dungeon.h"
-#include "dungeon_ai_leader.h"
+#include "dungeon_action_execution.h"
 #include "dungeon_ai.h"
 #include "dungeon_range.h"
 #include "dungeon_misc.h"
@@ -109,7 +109,7 @@ static bool8 RunLeaderTurn(bool8 param_1)
         gDungeon->noActionInProgress = FALSE;
         if (IsFloorOver())
             break;
-        sub_8072CF4(entity);
+        ExecuteEntityDungeonAction(entity);
         sub_8086AC0();
         TryForcedLoss(0);
         if (IsFloorOver())
@@ -157,7 +157,7 @@ static void sub_8044454(void)
         if (EntityIsValid(entity)) {
           EnemyEvolution(entity);
           RunMonsterAI(entity, 0);
-          sub_8072CF4(entity);
+          ExecuteEntityDungeonAction(entity);
           sub_8086AC0();
           TryForcedLoss(0);
           entityInfo->flags = (entityInfo->flags & ~(MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY)) | MOVEMENT_FLAG_UNK_14;
@@ -182,7 +182,7 @@ void sub_80444F4(Entity *pokemon)
       if ((EntityIsValid(entity)) && (pokemon != entity) && (entityInfo = GetEntInfo(entity), (entityInfo->flags & MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY))) {
         if (IsFloorOver()) break;
         RunMonsterAI(entity, 0);
-        sub_8072CF4(entity);
+        ExecuteEntityDungeonAction(entity);
         sub_8086AC0();
         TryForcedLoss(0);
       }
@@ -233,7 +233,7 @@ static void sub_8044574(void)
                             EnemyEvolution(teamMon);
                             for (j = 0; j < 3; j++) {
                                 RunMonsterAI(teamMon, 0);
-                                if (IsFloorOver() || !sub_8072CF4(teamMon))
+                                if (IsFloorOver() || !ExecuteEntityDungeonAction(teamMon))
                                     break;
                                 sub_8086AC0();
                                 TryForcedLoss(0);
@@ -290,7 +290,7 @@ static void sub_8044574(void)
                 info->recalculateFollow = TRUE;
                 info->aiAllySkip = FALSE;
                 RunMonsterAI(entity,1);
-                sub_8072CF4(entity);
+                ExecuteEntityDungeonAction(entity);
                 sub_8086AC0();
                 TryForcedLoss(0);
                 EntityIsValid(entity); // Does nothing
@@ -349,7 +349,7 @@ static void sub_8044820(void)
                 EnemyEvolution(entity);
                 RunMonsterAI(entity, 0);
                 if (IsFloorOver()) break;
-                sub_8072CF4(entity);
+                ExecuteEntityDungeonAction(entity);
                 sub_8086AC0();
                 TryForcedLoss(0);
                 if (IsFloorOver()) break;

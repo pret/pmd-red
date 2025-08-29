@@ -32,7 +32,7 @@
 static EWRAM_DATA Entity *sLastLogMsgEntity = NULL;
 static UNUSED EWRAM_DATA u8 sUnused = 0;
 static EWRAM_DATA SpriteOAM sUnknown_202F1F0 = {0};
-EWRAM_INIT u8 gUnknown_203B434 = 1;
+EWRAM_INIT bool8 gUnknown_203B434 = TRUE;
 
 static bool8 sub_8052DC0(Entity *);
 static void DisplayMessageAddToLog(Entity *pokemon, const u8 *str, bool8 r2);
@@ -45,7 +45,7 @@ void sub_80521D0(void)
         gDungeon->unk1BDD4.unk1C054[i] = 0;
     }
     sLastLogMsgEntity = NULL;
-    gUnknown_203B434 = 1;
+    gUnknown_203B434 = TRUE;
     sub_8052210(FALSE);
 }
 
@@ -143,11 +143,11 @@ void DisplayDungeonLoggableMessageTrue(Entity *pokemon, const u8 *str)
 static void DisplayMessageAddToLog(Entity *pokemon, const u8 *str, bool8 r2)
 {
     u8 txt[64];
-    u32 r7;
+    bool8 r7;
     bool32 r8, r9;
 
     if (sLastLogMsgEntity != pokemon) {
-        r7 = 1;
+        r7 = TRUE;
     }
     else {
         r7 = gUnknown_203B434;
@@ -155,7 +155,7 @@ static void DisplayMessageAddToLog(Entity *pokemon, const u8 *str, bool8 r2)
 
     r8 = 1;
     sLastLogMsgEntity = pokemon;
-    gUnknown_203B434 = 0;
+    gUnknown_203B434 = FALSE;
     r9 = FALSE;
     while (1) {
         while (1) {
