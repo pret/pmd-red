@@ -34,6 +34,7 @@
 #include "dungeon_action.h"
 #include "dungeon_turn_effects.h"
 #include "dungeon_leveling.h"
+#include "dungeon_cutscene.h"
 #include "warp_target.h"
 
 extern u8 gUnknown_202F221;
@@ -47,7 +48,6 @@ extern void sub_80671A0(Entity *);
 extern void sub_8067110(Entity *);
 void HandleUseMoveAIAction(Entity *target);
 void sub_8041888(u8 param_1);
-void sub_8085140(void);
 void sub_807360C(void);
 void sub_805EFB4(Entity *, u8);
 void sub_8074FB0(Entity *, u8, DungeonPos *);

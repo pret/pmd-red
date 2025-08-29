@@ -1,5 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
+#include "dungeon_cutscene.h"
 #include "constants/weather.h"
 #include "constants/dungeon.h"
 #include "constants/direction.h"
@@ -10,7 +11,6 @@
 #include "dungeon_cutscenes.h"
 #include "dungeon_music.h"
 #include "dungeon_logic.h"
-#include "dungeon_util_1.h"
 #include "exclusive_pokemon.h"
 #include "weather.h"
 #include "pokemon.h"
@@ -19,8 +19,6 @@
 #include "dungeon_misc.h"
 #include "dungeon_vram.h"
 #include "code_806CD90.h"
-#include "code_80861A8.h"
-#include "code_8085E98.h"
 #include "dungeon_range.h"
 #include "random.h"
 #include "math.h"
@@ -49,19 +47,14 @@ struct RgbS16
 extern OpenedFile *gDungeonPaletteFile;
 extern RGB gUnknown_202ECA4[];
 
-extern const u8 gUnknown_8107358[25];
-
 extern bool8 sub_8004C00(unkStruct_202EE8C *a0, s32 a1, s32 a2, s32 brightness, const RGB *ramp, struct RgbS16 *a5);
 extern void sub_803F878(s32, s32);
-extern void sub_8085F44(s32);
 extern bool8 sub_800E90C(DungeonPos *);
 extern void sub_8088EE8(void);
 extern void sub_8088848(void);
 extern void sub_808A718(void);
 extern s32 sub_800E700(s32);
-extern void sub_8085F44(s32);
 extern void sub_8052FB8(const u8 *);
-extern void sub_8085EB0(void);
 extern void sub_8086A54(Entity *);
 extern void sub_8086A3C(Entity *);
 extern u32 sub_8002A70(u32, s32, u8);
@@ -78,6 +71,8 @@ struct unkData_8107234
 };
 
 static void sub_8084854(const struct unkData_8107234 *);
+static void sub_8085764(void);
+static void sub_80857B8(void);
 static void sub_80861EC(Entity *);
 
 static const struct unkData_8107234 gUnknown_8107234[28] = {
@@ -141,7 +136,7 @@ void sub_80847D4(void)
     sub_8097FF8();
 }
 
-void sub_8084854(const struct unkData_8107234 *param_1)
+static void sub_8084854(const struct unkData_8107234 *param_1)
 {
     if (gDungeon->unk644.unk34 != 0) {
         gDungeon->unk3A0D = param_1->unk5;
@@ -163,9 +158,9 @@ void sub_8084854(const struct unkData_8107234 *param_1)
     sub_807E5E4(WEATHER_CLEAR);
 }
 
-u32 sub_80848EC(void)
+bool8 ShouldShowDungeonBanner(void)
 {
-    return 1;
+    return TRUE;
 }
 
 void sub_80848F0(void)
@@ -664,7 +659,7 @@ void sub_8085140(void)
   }
 }
 
-u8 sub_808529C(s32 speciesId_)
+bool8 sub_808529C(s32 speciesId_)
 {
     s32 r3;
     s32 speciesId = 0;
@@ -783,12 +778,12 @@ void sub_8085374(void)
     }
 }
 
-Entity *xxx_call_GetLeader(void)
+Entity *CutsceneGetLeader(void)
 {
     return GetLeader();
 }
 
-Entity *GetPartnerEntity(void)
+Entity *CutsceneGetPartner(void)
 {
     s32 counter;
     Entity *entity;
@@ -889,7 +884,7 @@ void sub_80855E4(DungeonCallback func)
             func(entity);
         }
     }
-    if ((!flag) && (partnerEntity = GetPartnerEntity(), partnerEntity != NULL)) {
+    if ((!flag) && (partnerEntity = CutsceneGetPartner(), partnerEntity != NULL)) {
         func(partnerEntity);
     }
 }
@@ -910,13 +905,12 @@ void sub_808563C(DungeonCallback func)
 
 Entity *GetEntityFromMonsterBehavior(u8 entityType)
 {
-    Entity * entity;
     s32 index;
 
-    for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
-    {
-        entity = gDungeon->activePokemon[index];
-        if ((EntityIsValid(entity)) && (GetEntInfo(entity)->monsterBehavior == entityType)) return entity;
+    for (index = 0; index < DUNGEON_MAX_POKEMON; index++) {
+        Entity *entity = gDungeon->activePokemon[index];
+        if (EntityIsValid(entity) && GetEntInfo(entity)->monsterBehavior == entityType)
+            return entity;
     }
     return NULL;
 }
@@ -952,7 +946,7 @@ void sub_80856E0(Entity * pokemon, s32 direction)
     DungeonRunFrameActions(0x46);
 }
 
-void sub_8085764(void)
+static void sub_8085764(void)
 {
     Entity *entity;
     s32 index;
@@ -968,19 +962,16 @@ void sub_8085764(void)
     }
 }
 
-void sub_80857B8(void)
+static void sub_80857B8(void)
 {
     u8 *direction;
-    EntityInfo *entityInfo;
-    Entity *entity;
     int index;
 
-    for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
-    {
-        entity = gDungeon->activePokemon[index];
+    for (index = 0; index < DUNGEON_MAX_POKEMON; index++) {
+        Entity *entity = gDungeon->activePokemon[index];
         if (EntityIsValid(entity)) {
-            entityInfo = GetEntInfo(entity);
-            if ((gDungeon->unk4 == 0) && (gDungeon->unk2 == 0)) {
+            EntityInfo *entityInfo = GetEntInfo(entity);
+            if (gDungeon->unk4 == 0 && gDungeon->unk2 == 0) {
                 UpdateEntityPixelPos(entity, 0);
                 entityInfo->unk15C = 0;
                 entityInfo->unkFE = 99;
@@ -1077,7 +1068,7 @@ void sub_8085930(s32 direction)
     }
 }
 
-void sub_80859F0(s32 direction)
+static void sub_80859F0(s32 direction)
 {
     s32 index;
     Entity *entity;
@@ -1379,7 +1370,6 @@ void sub_8085F78(void)
         case 0x2A:
             sub_808A718();
             break;
-
         case 0:
         case 0x3C:
         default:
@@ -1454,7 +1444,7 @@ void sub_80861D4(Entity *a0, u8 r1, s32 direction)
     sub_80861EC(a0);
 }
 
-void sub_80861EC(Entity *a0)
+static void sub_80861EC(Entity *a0)
 {
     GetEntInfo(a0)->unkFE = 0x63;
 }
@@ -1759,7 +1749,7 @@ void sub_8086690(void)
 
 void sub_80866C4(const struct DungeonDialogueStruct *dialogue)
 {
-    SpriteLookAroundEffect(xxx_call_GetLeader());
+    SpriteLookAroundEffect(CutsceneGetLeader());
     sub_803E708(10, 70);
     DisplayDungeonDialogue(dialogue);
     sub_803E708(10, 70);

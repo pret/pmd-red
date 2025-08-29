@@ -54,6 +54,7 @@
 #include "dungeon_jobs.h"
 #include "dungeon_tilemap.h"
 #include "dungeon_cleared_window.h"
+#include "dungeon_cutscene.h"
 
 EWRAM_INIT struct UnkStruct_203B414 *gUnknown_203B414 = NULL;
 EWRAM_INIT Dungeon *gDungeon = NULL;
@@ -66,14 +67,10 @@ extern void sub_804513C(void);
 extern void sub_8068F28(void);
 extern void sub_806C1D8(void);
 extern void IncrementThievingSuccesses(void);
-extern void sub_8086130(void);
-extern void sub_80847D4(void);
 extern void sub_8043D60(void);
 extern void sub_80840A4(void);
-extern void sub_80848F0(void);
 extern void IncrementAdventureFloorsExplored(void);
 extern void sub_806AB2C(void);
-extern void DisplayPreFightDialogue(void);
 extern void sub_807E5AC(void);
 extern void nullsub_16(void);
 extern void sub_80521D0(void);

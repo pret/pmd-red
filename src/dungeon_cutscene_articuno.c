@@ -1,10 +1,10 @@
 #include "global.h"
 #include "globaldata.h"
+#include "dungeon_cutscene.h"
 #include "effect_main.h"
 #include "dungeon_vram.h"
 #include "code_8041AD0.h"
 #include "code_804267C.h"
-#include "code_80861A8.h"
 #include "code_806CD90.h"
 #include "code_80869E4.h"
 #include "constants/bg_music.h"
@@ -19,7 +19,6 @@
 #include "dungeon_misc.h"
 #include "dungeon_logic.h"
 #include "dungeon_random.h"
-#include "dungeon_util_1.h"
 #include "dungeon_util.h"
 #include "exclusive_pokemon.h"
 #include "friend_area.h"
@@ -37,20 +36,13 @@
 extern void sub_8042B0C(Entity *);
 extern u8 sub_806FD18(Entity *);
 extern void sub_806FDF4(Entity *, Entity *, Entity **);
-extern void sub_8085EB0(void);
 extern void sub_8049884(void);
 extern void sub_8049B8C(void);
 extern void sub_8086A54(Entity *);
 extern void ResetMonEntityData(EntityInfo *, u32);
 extern void sub_8041888(u32);
 extern u32 sub_80861F8(u32, Entity *, u32);
-extern u8 sub_80860A8(u32);
 extern void sub_8052D44(s16 *, Entity *, Entity *);
-extern void SpawnDroppedItemWrapper(Entity *, DungeonPos *, Item *);
-extern void SetDungeonBGColorRGB(u32, u32, u32, u32, u32);
-extern u32 sub_8085EC8(u32, u32, u32, DungeonPos *, u32);
-extern void sub_8085374(void);
-extern bool8 sub_8085B80(struct_8085B80 *);
 extern void sub_8086A3C(Entity *pokemon);
 extern void SetupBossFightHP(Entity *pokemon, s32 newHP, u16 songIndex);
 extern u8 sub_8086AE4(s16 _index);
@@ -64,7 +56,7 @@ void sub_8087F54(void)
   Entity  *leaderEntity;
   Entity *articunoEntity;
 
-  leaderEntity = xxx_call_GetLeader();
+  leaderEntity = CutsceneGetLeader();
   articunoEntity = GetEntityFromMonsterBehavior(BEHAVIOR_ARTICUNO);
   DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
   sub_8085374();
@@ -96,7 +88,7 @@ void sub_8087FF8(void)
   Entity  *leaderEntity;
   Entity *articunoEntity;
 
-  leaderEntity = xxx_call_GetLeader();
+  leaderEntity = CutsceneGetLeader();
   articunoEntity = GetEntityFromMonsterBehavior(BEHAVIOR_ARTICUNO);
   sub_8085374();
   sub_80854D4();
@@ -128,8 +120,8 @@ void ArticunoPreFightDialogue(void)
   Entity *partnerEntity;
   Entity *articunoEntity;
 
-  leaderEntity = xxx_call_GetLeader();
-  partnerEntity = GetPartnerEntity();
+  leaderEntity = CutsceneGetLeader();
+  partnerEntity = CutsceneGetPartner();
   articunoEntity = GetEntityFromMonsterBehavior(BEHAVIOR_ARTICUNO);
   sub_8086448();
   SpriteLookAroundEffect(partnerEntity);
@@ -205,7 +197,7 @@ void ArticunoReFightDialogue(void)
   Entity *leaderEntity;
   Entity *articunoEntity;
 
-  leaderEntity = xxx_call_GetLeader();
+  leaderEntity = CutsceneGetLeader();
   articunoEntity = GetEntityFromMonsterBehavior(BEHAVIOR_ARTICUNO);
   gDungeon->weather.unkE265 = WEATHER_SNOW;
   sub_807EAA0(0,1);
@@ -227,7 +219,7 @@ void ArticunoPostStoryPreFightDialogue(void)
   Entity *leaderEntity;
   Entity *articunoEntity;
 
-  leaderEntity = xxx_call_GetLeader();
+  leaderEntity = CutsceneGetLeader();
   articunoEntity = GetEntityFromMonsterBehavior(BEHAVIOR_ARTICUNO);
   sub_8086448();
   if (sub_8086AE4(MONSTER_ARTICUNO)) {

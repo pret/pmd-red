@@ -19,10 +19,10 @@
 #include "text_2.h"
 #include "text_3.h"
 #include "dungeon_engine.h"
+#include "dungeon_cutscene.h"
 
 extern u16 GetLeaderActionId(void);
 extern u8 sub_806F9BC(s32);
-extern bool8 sub_80860A8(u8 id);
 extern bool8 sub_806A564(s32 r0);
 
 

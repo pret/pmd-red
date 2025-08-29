@@ -8,13 +8,12 @@
 #include "cpu.h"
 #include "def_filearchives.h"
 #include "dungeon_info.h"
+#include "dungeon_cutscene.h"
 #include "file_system.h"
 #include "pokemon.h"
 #include "pokemon_3.h"
 #include "text_1.h"
 #include "text_3.h"
-
-extern bool8 sub_80848EC(void);
 
 EWRAM_DATA OpenedFile *gDungeonNameBannerPalette = NULL;
 static EWRAM_DATA OpenedFile *gDungeonNameBannerFontFile = NULL;
@@ -59,7 +58,7 @@ void ShowDungeonNameBanner_Async(void)
         SetBGPaletteBufferColorArray(i + 224, &((struct DungeonNamePaletteFileData *)(gDungeonNameBannerPalette->data))->pal[i]);
     }
     CpuClear((void *)(VRAM + 0x140), 0x1C00);
-    if (sub_80848EC()) {
+    if (ShouldShowDungeonBanner()) {
         s32 currFloor = gDungeon->unk644.dungeonLocation.floor + gDungeon->startFloorId;
         const u8 *dungName = GetDungeonName2(gDungeon->unk644.dungeonLocation.id);
         s32 r5 = 10;

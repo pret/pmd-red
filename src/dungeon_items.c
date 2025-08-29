@@ -2,7 +2,6 @@
 #include "globaldata.h"
 #include "dungeon_items.h"
 #include "code_8041AD0.h"
-#include "code_80861A8.h"
 #include "code_80869E4.h"
 #include "dungeon_range.h"
 #include "dungeon_random.h"
@@ -19,6 +18,7 @@
 #include "dungeon_data.h"
 #include "dungeon_pos_data.h"
 #include "dungeon_spawns.h"
+#include "dungeon_cutscene.h"
 #include "dungeon_boss_dialogue.h"
 #include "string_format.h"
 #include "items.h"
@@ -30,7 +30,6 @@
 #include "sprite.h"
 
 extern void sub_80416E0(PixelPos *r0, u32, bool8);
-extern void sub_80855E4(void *);
 extern void sub_804178C(u32);
 extern void sub_804219C(PixelPos *pos);
 

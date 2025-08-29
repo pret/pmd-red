@@ -4,7 +4,6 @@
 #include "dungeon_music.h"
 #include "structs/str_dungeon.h"
 #include "dungeon_util.h"
-#include "dungeon_util_1.h"
 #include "file_system.h"
 #include "pokemon.h"
 #include "pokemon_3.h"
@@ -47,6 +46,7 @@
 #include "dungeon_data.h"
 #include "dungeon_tilemap.h"
 #include "dungeon_engine.h"
+#include "dungeon_cutscene.h"
 
 static void EnsureCastformLoaded(void);
 static void EnsureDeoxysLoaded(void);
@@ -54,7 +54,6 @@ static void EnsureDeoxysLoaded(void);
 extern bool8 IsLevelResetDungeon(u8 dungeon);
 extern void sub_806C264(s32 teamIndex, EntityInfo *entInfo);
 extern bool8 sub_806A58C(s16 r0);
-extern void sub_8084E00(Entity *entity, u8 param_2, u8 param_3);
 extern void sub_8078084(Entity * pokemon);
 extern void sub_808DFDC(s32 a1, DungeonMon* a2);
 extern void sub_8067A80(u8 a0, s32 a1, s32 a2, Pokemon **a3);

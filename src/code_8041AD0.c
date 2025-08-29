@@ -28,7 +28,7 @@
 #include "dungeon_music.h"
 #include "memory.h"
 #include "random.h"
-#include "dungeon_util_1.h"
+#include "dungeon_cutscene.h"
 #include "effect_data.h"
 #include "dungeon_pos_data.h"
 #include "dungeon_damage.h"
@@ -1554,7 +1554,7 @@ void sub_8042B34(s32 a0, s32 a1, s32 a2)
     unkStruct_80416E0 spStruct;
     s32 i;
     s32 r8 = 0;
-    Entity *leader = xxx_call_GetLeader();
+    Entity *leader = CutsceneGetLeader();
     gUnknown_203B414 = MemoryAlloc(sizeof(*gUnknown_203B414), 7);
 
     gUnknown_203B414->unk0 = a0;

@@ -15,7 +15,6 @@
 #include "dungeon_main.h"
 #include "dungeon_music.h"
 #include "dungeon_util.h"
-#include "dungeon_util_1.h"
 #include "exclusive_pokemon.h"
 #include "file_system.h"
 #include "input.h"
@@ -27,6 +26,7 @@
 #include "text_2.h"
 #include "text_3.h"
 #include "dungeon_strings.h"
+#include "dungeon_cutscene.h"
 #include "dungeon_portrait_placement.h"
 
 static EWRAM_DATA Entity *sLastLogMsgEntity = NULL;
@@ -375,8 +375,8 @@ void DisplayDungeonDialogue(const struct DungeonDialogueStruct *dialogueInfo)
     MonPortraitMsg monPortrait;
     s32 leaderId, partnerId, dialogueMonId;
     s32 chosenMenuIndex;
-    Entity *leader = xxx_call_GetLeader();
-    Entity *partner = GetPartnerEntity();
+    Entity *leader = CutsceneGetLeader();
+    Entity *partner = CutsceneGetPartner();
     MonPortraitMsg *monPortraitPtr = NULL;
 
     if (leader != NULL) {

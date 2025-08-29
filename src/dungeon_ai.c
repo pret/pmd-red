@@ -22,15 +22,14 @@
 #include "dungeon_map_access.h"
 #include "dungeon_logic.h"
 #include "dungeon_random.h"
-#include "dungeon_util_1.h"
 #include "dungeon_util.h"
 #include "pokemon.h"
 #include "status_checks.h"
 #include "structs/map.h"
 #include "structs/str_dungeon.h"
 #include "dungeon_misc.h"
-
-extern char *gPtrCouldntBeUsedMessage;
+#include "dungeon_cutscene.h"
+#include "dungeon_strings.h"
 
 void RunMonsterAI(Entity *pokemon, u32 unused)
 {

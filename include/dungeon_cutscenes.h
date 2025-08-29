@@ -1,5 +1,7 @@
-#ifndef GUARD_DUNGEON_CUTSCENE_H 
-#define GUARD_DUNGEON_CUTSCENE_H
+#ifndef GUARD_DUNGEON_CUTSCENES_H
+#define GUARD_DUNGEON_CUTSCENES_H
+
+// TODO: Remove this file
 
 #include "structs/dungeon_entity.h"
 
@@ -139,4 +141,4 @@ void sub_808CBB0(void);
 void sub_808CD44(void);
 void sub_808CD9C(void);
 
-#endif /* ifndef GUARD_DUNGEON_CUTSCENE_H */
+#endif /* ifndef GUARD_DUNGEON_CUTSCENES_H */

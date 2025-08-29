@@ -278,7 +278,7 @@ SECTIONS {
         src/dungeon_random.o(.text);
         src/dungeon_cleared_window.o(.text);
         src/dungeon_jobs.o(.text);
-        src/code_80848F0.o(.text);
+        src/dungeon_cutscene.o(.text);
         src/dungeon_cutscene_skarmory.o(.text);
         src/dungeon_cutscene_meanies.o(.text);
         src/dungeon_cutscene_zapdos.o(.text);
@@ -666,7 +666,7 @@ SECTIONS {
         src/dungeon_random.o(.rodata);
         src/dungeon_cleared_window.o(.rodata);
         src/dungeon_jobs.o(.rodata);
-        src/code_80848F0.o(.rodata);
+        src/dungeon_cutscene.o(.rodata);
         src/dungeon_cutscene_skarmory.o(.rodata);
         src/dungeon_cutscene_meanies.o(.rodata);
         src/dungeon_cutscene_zapdos.o(.rodata);

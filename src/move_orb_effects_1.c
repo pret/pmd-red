@@ -22,7 +22,6 @@
 #include "dungeon_map_access.h"
 #include "dungeon_logic.h"
 #include "dungeon_random.h"
-#include "dungeon_util_1.h"
 #include "dungeon_util.h"
 #include "pokemon.h"
 #include "status_checks.h"
