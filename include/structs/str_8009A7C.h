@@ -4,8 +4,10 @@
 struct Struct_8009A7C
 {
     s32 unk0;
-    u16 **unk4;
-    u8 fill8[0x14-0x8];
+    const u16 *const *unk4;
+    s32 unk8;
+    const void *unkC;
+    const void *unk10;
 };
 
 #endif // GUARD_STR_8009A7C_H

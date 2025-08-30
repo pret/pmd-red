@@ -258,7 +258,7 @@ bool8 sub_8009A7C(struct Struct_8009A7C *a0, s32 a1, s32 a2, s32 a3, bool8 a4, s
     s32 jStart;
     s32 countX;
     s32 r6;
-    u16 *r5;
+    const u16 *r5;
 
     if (gUnknown_202D2A0 == 0) {
         jStart = 1;
