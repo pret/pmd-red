@@ -3,11 +3,12 @@
     .align 2
 
 .string "pksdir0\0"
+
 .global gUnknown_9740950
 gUnknown_9740950:
 .string "SIRO"
 .4byte gUnknown_974BE40
-.incbin "baserom.gba", 0x1740958, 0x8
+.4byte 0, 0
 .global gUnknown_9740960
 gUnknown_9740960:
 .incbin "baserom.gba", 0x1740960, 0x70A
@@ -82,11 +83,14 @@ gUnknown_9747E40:
 .incbin "baserom.gba", 0x1747E40, 0x4000
 .global gUnknown_974BE40
 gUnknown_974BE40:
-.incbin "baserom.gba", 0x174BE40, 0x4
+.4byte 16
 .4byte gUnknown_9747A00
-.incbin "baserom.gba", 0x174BE48, 0x4
+.4byte 511
 .4byte gUnknown_9747E40
 .4byte gUnknown_9747A40
+
+@ new SIRO
+
 .global gUnknown_974BE54
 gUnknown_974BE54:
 .string "SIRO"
