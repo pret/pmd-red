@@ -34,8 +34,6 @@ static EWRAM_DATA s32 sNewDefStats[2] = {0, 0};
 
 void sub_8042A44(Entity *r0);
 
-extern s32 GetMovesLearnedAtLevel(u16* dst, s16 species, s32 level, s32 IQPoints);
-
 static const u8 gUnknown_8107010[8] = {0, 1, 1, 2, 1, 1, 0, 0};
 static const u8 * const gUnknown_8107018[3] = {
     _(""),

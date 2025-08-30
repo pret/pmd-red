@@ -514,7 +514,7 @@ s32 sub_808D6A4(s32 *ptr)
     return count;
 }
 
-bool8 sub_808D6E8()
+UNUSED static bool8 sub_808D6E8(void)
 {
     s32 i;
     s32 count = 0;
@@ -532,48 +532,51 @@ bool8 sub_808D6E8()
     return 0;
 }
 
- bool8 sub_808D750(s32 index_)
- {
-     Pokemon* pokemon;
-     s32 i;
-     s32 index = (s16) index_;
-     s32 count = 0;
-     s32 size_count = 0;
+bool8 sub_808D750(s32 index_)
+{
+ Pokemon* pokemon;
+ s32 i;
+ s32 index = (s16) index_;
+ s32 count = 0;
+ s32 size_count = 0;
 
-     for (i = 0; i < NUM_MONSTERS; i++) {
-         pokemon = &gRecruitedPokemonRef->pokemon[i];
-         if (PokemonExists(pokemon) && PokemonFlag2(pokemon)) {
-             size_count += GetBodySize(pokemon->speciesNum);
-             count++;
-         }
-     }
-
-     if (count < 4) {
-         pokemon = &gRecruitedPokemonRef->pokemon[index];
+ for (i = 0; i < NUM_MONSTERS; i++) {
+     pokemon = &gRecruitedPokemonRef->pokemon[i];
+     if (PokemonExists(pokemon) && PokemonFlag2(pokemon)) {
          size_count += GetBodySize(pokemon->speciesNum);
-         if (size_count < 7) {
-             return TRUE;
-         }
+         count++;
      }
-
-     return FALSE;
  }
 
-void PeekPokemonItem(s16 index_, BulkItem* item) {
+ if (count < 4) {
+     pokemon = &gRecruitedPokemonRef->pokemon[index];
+     size_count += GetBodySize(pokemon->speciesNum);
+     if (size_count < 7) {
+         return TRUE;
+     }
+ }
+
+ return FALSE;
+}
+
+void PeekPokemonItem(s16 index_, BulkItem* item)
+{
     s32 index = index_;
     Pokemon* pokemon = &gRecruitedPokemonRef->pokemon[index];
     item->id = pokemon->heldItem.id;
     item->quantity = pokemon->heldItem.quantity;
 }
 
-void GivePokemonItem(s16 index_, BulkItem* item) {
+void GivePokemonItem(s16 index_, BulkItem* item)
+{
     s32 index = index_;
     Pokemon* pokemon = &gRecruitedPokemonRef->pokemon[index];
     pokemon->heldItem.id = item->id;
     pokemon->heldItem.quantity = item->quantity;
 }
 
-bool8 IsPokemonRenamed(Pokemon* pokemon) {
+bool8 IsPokemonRenamed(Pokemon* pokemon)
+{
     char species_name[20];
     char* species = GetMonSpecies(pokemon->speciesNum);
     s32 i;
@@ -833,7 +836,6 @@ s16 GetAlphabetParentNo(s16 index, s32 r1)
 {
     return sMonsterParameters[index].alphabetParent[r1];
 }
-
 
 s16 GetInternalNo(s16 index)
 {
@@ -1117,7 +1119,6 @@ bool8 CanMonLearnMove(u16 moveID, s16 _species)
   return FALSE;
 }
 
-
 s32 sub_808E218(unkStruct_808E218_arg* a1, Pokemon* pokemon)
 {
   s32 i;
@@ -1177,7 +1178,7 @@ s32 sub_808E218(unkStruct_808E218_arg* a1, Pokemon* pokemon)
   return count;
 }
 
-s32 GetEvolutionSequence(Pokemon* pokemon, struct EvolveStage* a2)
+s32 GetEvolutionSequence(Pokemon* pokemon, EvolveStage* a2)
 {
     s32 count;
     s32 species;
@@ -1338,17 +1339,18 @@ void InitShadowSprites(s32 param_1, s32 param_2)
     }
 }
 
-static const s32 gUnknown_81076C4[6] = {-4, -8, -16, -4, -8, -16}; // x-coord positioning for shadow sprites
+static const s32 sShadowXPosOffsets[6] = {-4, -8, -16, -4, -8, -16};
 
-bool8 AddShadowSprite(s16 species, s16* a2, s16* a3)
+bool8 AddShadowSprite(s32 species_, DungeonPos *shadowPos, axdata *axData)
 {
+    s16 species = (s16) (species_);
     if (species != MONSTER_DIGLETT && species != MONSTER_DUGTRIO) {
         s32 shadowSize = GetShadowSize(species);
         s32 x, y;
 
-        x = a2[0] + a3[8];
-        y = a2[1] + a3[9];
-        x += gUnknown_81076C4[shadowSize];
+        x = shadowPos->x + axData->sub1.shadow.x;
+        y = shadowPos->y + axData->sub1.shadow.y;
+        x += sShadowXPosOffsets[shadowSize];
         y -= 4;
 
         SpriteSetX(&sShadowSprites[shadowSize], x);

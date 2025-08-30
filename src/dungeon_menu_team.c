@@ -46,9 +46,6 @@
 #include "text_2.h"
 #include "weather.h"
 
-extern char* sub_808E4FC(s32 a1);
-extern char* sub_808E51C(s32 a1);
-
 EWRAM_DATA s32 gTeamMenuChosenId = 0;
 static UNUSED EWRAM_DATA u8 sUnused[4] = {0};
 EWRAM_DATA static SpriteOAM sOAMStatusDescriptionArrow = {0};

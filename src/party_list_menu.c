@@ -34,14 +34,12 @@ static EWRAM_INIT unkStruct_203B2B8 *sUnknown_203B2B8 = {NULL};
 
 extern u32 sub_8026F04(Pokemon *);
 bool8 CanTakePokemonHeldItem(Pokemon *r0);
-extern bool8 sub_808D750(s16 index_);
 bool8 sub_8026E88(Pokemon *r0);
 bool8 sub_8026EB8(Pokemon *r0);
 void sub_8026E08(u32 r0);
 void sub_8026DAC(u32 r0, BulkItem *item);
 void sub_8026FA4(void);
 void PartyListMenu_BuildYesNoMenu(void);
-extern void sub_808D31C(Pokemon *);
 
 void PartyListMenu_CreateMenu2(void);
 void PartyListMenu_CreateMenu1(void);

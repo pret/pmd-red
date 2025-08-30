@@ -86,7 +86,6 @@ extern void sub_8068F80(void);
 extern void sub_8042E98(void);
 extern bool8 TryForcedLoss(bool8);
 extern void sub_806A914(bool8 a0, bool8 a1, bool8 showRunAwayEffect);
-extern s32 GetMovesLearnedAtLevel(u16* dst, s16 species, s32 level, s32 IQPoints);
 extern void sub_8042B0C(Entity *);
 
 extern u8 gUnknown_202F32C;
