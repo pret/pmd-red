@@ -1027,6 +1027,7 @@ SECTIONS {
     {
         src/effect_sbin.o(.rodata);
         src/effect_files_table.o(.rodata);
+        src/data/effects/pksdir_1.o(.rodata);
         src/data/effects/efbg000.o(.rodata);
         src/data/effects/efbg001.o(.rodata);
         src/data/effects/efbg002.o(.rodata);
@@ -1087,6 +1088,7 @@ SECTIONS {
         src/data/effects/efob049.o(.rodata);
         src/data/effects/efob050.o(.rodata);
         src/data/effects/efob051.o(.rodata);
+        src/data/effects/pksdir_2.o(.rodata);
         src/data/effects/efob052.o(.rodata);
         src/data/effects/efob053.o(.rodata);
         src/data/effects/efob054.o(.rodata);
@@ -1147,6 +1149,7 @@ SECTIONS {
         src/data/effects/efob109.o(.rodata);
         src/data/effects/efob110.o(.rodata);
         src/data/effects/efob111.o(.rodata);
+        src/data/effects/pksdir_3.o(.rodata);
         src/data/effects/efob112.o(.rodata);
         src/data/effects/efob113.o(.rodata);
         src/data/effects/efob114.o(.rodata);

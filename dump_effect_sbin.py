@@ -111,20 +111,26 @@ def dump_efbg(
         offset: siro_header,
         siro_header.data_p: effect_header,
         effect_header.frames: [],
+        effect_header.pal: None,
+        effect_header.tiles: None,
     }
     addrs.pop(0, None)
     if effect_header.frameCount != 0 and effect_header.frames != 0:
-        for i in range(effect_header.frameCount):
-            baserom.seek(effect_header.frames + 4 * i - ROM_VADDR)
-            ptr = int.from_bytes(baserom.read(4), "little")
-            addrs[effect_header.frames].append(ptr)
+        baserom.seek(effect_header.frames - ROM_VADDR)
+        frame_ptrs = [
+            int.from_bytes(baserom.read(4), "little")
+            for _ in range(effect_header.frameCount)
+        ]
+        addrs[effect_header.frames] = frame_ptrs
+        for i, ptr in sorted(enumerate(frame_ptrs), key=lambda t: t[1], reverse=True):
             if ptr == 0:
                 continue
+            array_end = next(x for x in sorted(addrs) if x > ptr)
             baserom.seek(ptr - ROM_VADDR)
             values = [int.from_bytes(baserom.read(2), "little") for _ in range(10)]
             binfilename = f"{dir}/{prefix}_{i:03d}.bin"
             with open(binfilename, "wb") as ofp:
-                ofp.write(baserom.read(values[2] * values[3] * 2))
+                ofp.write(baserom.read(array_end - ptr - 20))
             values.append(binfilename)
             addrs[ptr] = values
 
@@ -225,6 +231,7 @@ def dump_efob(
     # Animations always consist of 8 cels
     # Strategy: work back to front
     if efo_file_data.animations != 0 and efo_file_data.animCount != 0:
+        all_anims = set()
         for i in range(efo_file_data.animCount):
             baserom.seek(efo_file_data.animations + 4 * i - ROM_VADDR)
             anim_ptr = int.from_bytes(baserom.read(4), "little")
@@ -234,14 +241,15 @@ def dump_efob(
             baserom.seek(anim_ptr - ROM_VADDR)
             anim_block = [int.from_bytes(baserom.read(4), "little") for _ in range(8)]
             addrs[anim_ptr] = anim_block
-            for ptr in sorted(anim_block, reverse=True):
-                if ptr == 0:
-                    break
-                if ptr in addrs:
-                    continue
-                baserom.seek(ptr - ROM_VADDR)
-                array_end = next(x for x in sorted(addrs) if x > ptr)
-                addrs[ptr] = list(ax_anim.iter_io(baserom, array_end - ptr))
+            all_anims |= set(anim_block)
+        for ptr in sorted(all_anims, reverse=True):
+            if ptr == 0:
+                break
+            if ptr in addrs:
+                continue
+            baserom.seek(ptr - ROM_VADDR)
+            array_end = next(x for x in sorted(addrs) if x > ptr)
+            addrs[ptr] = list(ax_anim.iter_io(baserom, array_end - ptr))
     if efo_file_data.poses != 0:
         baserom.seek(efo_file_data.poses - ROM_VADDR)
         array_end = next(x for x in sorted(addrs) if x > efo_file_data.poses)
