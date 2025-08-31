@@ -21,7 +21,7 @@
 
 struct unkStruct_203B0CC_x94
 {
-    struct Struct_8009A7C sub;
+    struct EfbFileData sub;
     s32 unk14;
     s32 unk18;
     s32 fill1C;
@@ -614,7 +614,7 @@ static void sub_800E0B4(struct unkStruct_203B0CC_sub *r5)
             AxResInitUnorientedFile(&r5->unk58, r5->unkB8, r5->unk40, 0x370, 0, r5->unk55);
             break;
         case 4:
-            r5->unk94.sub = (*(struct Struct_8009A7C*)(r5->unkB8->data));
+            r5->unk94.sub = (*(struct EfbFileData*)(r5->unkB8->data));
             r5->unk94.unk20 = 0;
             break;
     }

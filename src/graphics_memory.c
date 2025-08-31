@@ -250,7 +250,7 @@ void sub_8009A1C(const EfoFileData *r0, u32 palId, u32 vramDstOffset, u32 r3)
     }
 }
 
-bool8 sub_8009A7C(struct Struct_8009A7C *a0, s32 a1, s32 a2, s32 a3, bool8 a4, s32 *a5, s16 *a6)
+bool8 sub_8009A7C(struct EfbFileData *a0, s32 a1, s32 a2, s32 a3, bool8 a4, s32 *a5, s16 *a6)
 {
     s32 countY;
     s32 yId;
@@ -267,7 +267,7 @@ bool8 sub_8009A7C(struct Struct_8009A7C *a0, s32 a1, s32 a2, s32 a3, bool8 a4, s
         jStart = 0;
     }
 
-    if (a1 >= a0->unk0)
+    if (a1 >= a0->frameCount)
         return FALSE;
 
     if (a4) {
@@ -278,7 +278,7 @@ bool8 sub_8009A7C(struct Struct_8009A7C *a0, s32 a1, s32 a2, s32 a3, bool8 a4, s
         }
     }
 
-    r5 = a0->unk4[a1];
+    r5 = a0->frames[a1];
     countX = r5[2];
     countY = r5[3];
     if (a5 != NULL) {

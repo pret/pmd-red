@@ -1,7 +1,7 @@
 #include "global.h"
 #include "decompress_sir.h"
-#include "structs/str_8009A7C.h"
-const struct Struct_8009A7C gUnknown_9766A64;
+#include "structs/axdata.h"
+const struct EfbFileData gUnknown_9766A64;
 const SiroArchive gUnknown_9756674 = { "SIRO", &gUnknown_9766A64 };
 const u16 gUnknown_9756684[] = {
     0, 0, 33, 27, 1, 1, 2, 0, 0, 0,
@@ -165,12 +165,12 @@ const u16 *gUnknown_97647C4[] = {
     gUnknown_97639B0,
     gUnknown_97640BA,
 };
-const Palette256 gUnknown_9764844[] = INCBIN_U8("data/effects/efbg003.pmdpal");
-const Palette256 gUnknown_9764C44[] = INCBIN_U8("data/effects/efbg003.4bpp");
-const struct Struct_8009A7C gUnknown_9766A64 = {
+const RGB gUnknown_9764844[] = INCBIN_U8("data/effects/efbg003.pmdpal");
+const u32 gUnknown_9764C44[] = INCBIN_U32("data/effects/efbg003.4bpp");
+const struct EfbFileData gUnknown_9766A64 = {
     ARRAY_COUNT(gUnknown_97647C4), // 32
     gUnknown_97647C4,
-    ARRAY_COUNT(gUnknown_9764C44) / 16 - 1, // 240
+    sizeof(gUnknown_9764C44) / 32 - 1, // 240
     gUnknown_9764C44,
     gUnknown_9764844,
 };

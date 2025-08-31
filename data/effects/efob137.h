@@ -1,6 +1,6 @@
 #include "global.h"
 #include "decompress_sir.h"
-#include "structs/str_8009A7C.h"
+#include "structs/axdata.h"
 const struct EfoFileData gUnknown_9854CF0;
 const SiroArchive gUnknown_98549B8 = { "SIRO", &gUnknown_9854CF0 };
 const ax_pose gUnknown_98549C8[] = {
@@ -112,5 +112,5 @@ const EfoFileData gUnknown_9854CF0 = {
     NULL,
     gUnknown_9854B48,
     gUnknown_9854C48,
-    ARRAY_COUNT(gUnknown_9854B48) / 16, // 8
+    sizeof(gUnknown_9854B48) / 32, // 8
 };

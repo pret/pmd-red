@@ -34,12 +34,12 @@ class SiroHeader(FromStruct, spec="<4sLLL"):
 
 
 @dataclasses.dataclass
-class Struct_8009A7C(FromStruct, spec="<lLlLL"):
-    unk0: int
-    unk4: int
-    unk8: int
-    unkC: int
-    unk10: int
+class EfbFileData(FromStruct, spec="<lLlLL"):
+    frameCount: int
+    frames: int
+    tileCount: int
+    tiles: int
+    pal: int
 
 
 @dataclasses.dataclass
@@ -105,19 +105,19 @@ def dump_efbg(
     dir: str,
     prefix: str,
 ):
-    siro_header, effect_header = get_siro_data(baserom, offset, Struct_8009A7C)
+    siro_header, effect_header = get_siro_data(baserom, offset, EfbFileData)
 
     addrs = {
         offset: siro_header,
         siro_header.data_p: effect_header,
-        effect_header.unk4: [],
+        effect_header.frames: [],
     }
     addrs.pop(0, None)
-    if effect_header.unk0 != 0 and effect_header.unk4 != 0:
-        for i in range(effect_header.unk0):
-            baserom.seek(effect_header.unk4 + 4 * i - ROM_VADDR)
+    if effect_header.frameCount != 0 and effect_header.frames != 0:
+        for i in range(effect_header.frameCount):
+            baserom.seek(effect_header.frames + 4 * i - ROM_VADDR)
             ptr = int.from_bytes(baserom.read(4), "little")
-            addrs[effect_header.unk4].append(ptr)
+            addrs[effect_header.frames].append(ptr)
             if ptr == 0:
                 continue
             baserom.seek(ptr - ROM_VADDR)
@@ -128,25 +128,25 @@ def dump_efbg(
             values.append(binfilename)
             addrs[ptr] = values
 
-    if effect_header.unk8 != 0 and effect_header.unkC != 0:
-        baserom.seek(effect_header.unkC - ROM_VADDR)
+    if effect_header.tileCount != 0 and effect_header.tiles != 0:
+        baserom.seek(effect_header.tiles - ROM_VADDR)
         binfilename = f"{dir}/{prefix}.4bpp"
         with open(binfilename, "wb") as ofp:
-            ofp.write(baserom.read(32 * (effect_header.unk8 + 1)))
-        addrs[effect_header.unkC] = binfilename
+            ofp.write(baserom.read(32 * (effect_header.tileCount + 1)))
+        addrs[effect_header.tiles] = binfilename
 
-    if effect_header.unk10 != 0:
-        baserom.seek(effect_header.unk10 - ROM_VADDR)
+    if effect_header.pal != 0:
+        baserom.seek(effect_header.pal - ROM_VADDR)
         binfilename = f"{dir}/{prefix}.pmdpal"
         with open(binfilename, "wb") as ofp:
             ofp.write(baserom.read(0x400))
-        addrs[effect_header.unk10] = binfilename
+        addrs[effect_header.pal] = binfilename
 
     print('#include "global.h"', file=outfile)
     print('#include "decompress_sir.h"', file=outfile)
-    print('#include "structs/str_8009A7C.h"', file=outfile)
+    print('#include "structs/axdata.h"', file=outfile)
     print(
-        f"const struct Struct_8009A7C gUnknown_{siro_header.data_p:X};",
+        f"const struct EfbFileData gUnknown_{siro_header.data_p:X};",
         file=outfile,
     )
     for offset, value in sorted(addrs.items()):
@@ -156,22 +156,22 @@ def dump_efbg(
                 f'const SiroArchive {label} = {{ "{value.magic.decode()}", &gUnknown_{value.data_p:X} }};',
                 file=outfile,
             )
-        elif isinstance(value, Struct_8009A7C):
-            print(f"const struct Struct_8009A7C {label} = {{", file=outfile)
+        elif isinstance(value, EfbFileData):
+            print(f"const struct EfbFileData {label} = {{", file=outfile)
             # print(f"    {value.unk0},", file=outfile)
             print(
-                f"    ARRAY_COUNT(gUnknown_{value.unk4:X}), // {value.unk0}",
+                f"    ARRAY_COUNT(gUnknown_{value.frames:X}), // {value.frameCount}",
                 file=outfile,
             )
-            print(f"    gUnknown_{value.unk4:X},", file=outfile)
+            print(f"    gUnknown_{value.frames:X},", file=outfile)
             print(
-                f"    ARRAY_COUNT(gUnknown_{value.unkC:X}) / 16 - 1, // {value.unk8}",
+                f"    sizeof(gUnknown_{value.tiles:X}) / 32 - 1, // {value.tileCount}",
                 file=outfile,
             )
-            print(f"    gUnknown_{value.unkC:X},", file=outfile)
-            print(f"    gUnknown_{value.unk10:X},", file=outfile)
+            print(f"    gUnknown_{value.tiles:X},", file=outfile)
+            print(f"    gUnknown_{value.pal:X},", file=outfile)
             print("};", file=outfile)
-        elif offset == effect_header.unk4:
+        elif offset == effect_header.frames:
             print(f"const u16 *{label}[] = {{", file=outfile)
             for ptr in value:
                 print(f"    gUnknown_{ptr:X},", file=outfile)
@@ -181,8 +181,18 @@ def dump_efbg(
             print(f'    {", ".join(str(x) for x in value[:10])},', file=outfile)
             print(f'    INCBIN_U16("{value[10]}"),', file=outfile)
             print("};", file=outfile)
+        elif isinstance(value, str):
+            if offset == effect_header.tiles:
+                incbin = "INCBIN_U32"
+                typ = "const u32"
+            elif offset == effect_header.pal:
+                incbin = "INCBIN_U8"
+                typ = "const RGB"
+            else:
+                raise ValueError("unrecognized data type")
+            print(f'{typ} {label}[] = {incbin}("{value}");', file=outfile)
         else:
-            print(f'const Palette256 {label}[] = INCBIN_U8("{value}");', file=outfile)
+            raise ValueError("unrecognized data type")
 
 
 def dump_efob(
@@ -271,7 +281,7 @@ def dump_efob(
 
     print('#include "global.h"', file=outfile)
     print('#include "decompress_sir.h"', file=outfile)
-    print('#include "structs/str_8009A7C.h"', file=outfile)
+    print('#include "structs/axdata.h"', file=outfile)
     print(
         f"const struct EfoFileData gUnknown_{siro_header.data_p:X};",
         file=outfile,
@@ -296,7 +306,7 @@ def dump_efob(
             print(f"    gUnknown_{value.charData:X},", file=outfile)
             print(f"    gUnknown_{value.plttData:X},", file=outfile)
             print(
-                f"    ARRAY_COUNT(gUnknown_{value.charData:X}) / 16, // {value.charCount}",
+                f"    sizeof(gUnknown_{value.charData:X}) / 32, // {value.charCount}",
                 file=outfile,
             )
             print("};", file=outfile)
