@@ -3,6 +3,8 @@ import dataclasses
 import os
 import re
 import struct
+import subprocess
+import tempfile
 import typing
 
 ROM_VADDR = 0x08000000
@@ -128,14 +130,14 @@ def dump_efbg(
 
     if effect_header.unk8 != 0 and effect_header.unkC != 0:
         baserom.seek(effect_header.unkC - ROM_VADDR)
-        binfilename = f"{dir}/{prefix}_unkC.4bpp"
+        binfilename = f"{dir}/{prefix}.4bpp"
         with open(binfilename, "wb") as ofp:
             ofp.write(baserom.read(32 * (effect_header.unk8 + 1)))
         addrs[effect_header.unkC] = binfilename
 
     if effect_header.unk10 != 0:
         baserom.seek(effect_header.unk10 - ROM_VADDR)
-        binfilename = f"{dir}/{prefix}_unk10.pmdpal"
+        binfilename = f"{dir}/{prefix}.pmdpal"
         with open(binfilename, "wb") as ofp:
             ofp.write(baserom.read(0x400))
         addrs[effect_header.unk10] = binfilename
@@ -377,6 +379,30 @@ def dump_effect_sbin(
                 dump_efob(baserom, offset, outfile, dir, prefix)
     except Exception as e:
         raise ValueError(f"failed to process {prefix}") from e
+
+    subprocess.check_call(
+        [
+            "tools/gbagfx/gbagfx",
+            f"{dir}/{prefix}.pmdpal",
+            f"{dir}/{prefix}.pal",
+        ]
+    )
+    with tempfile.NamedTemporaryFile(suffix=".gbapal") as gbapal:
+        subprocess.check_call(
+            ["tools/gbagfx/gbagfx", f"{dir}/{prefix}.pal", gbapal.name]
+        )
+        png_args = [
+            "tools/gbagfx/gbagfx",
+            f"{dir}/{prefix}.4bpp",
+            f"{dir}/{prefix}.png",
+            "-palette",
+            gbapal.name,
+        ]
+        if prefix.startswith("efob"):
+            png_args.append("-object")
+        else:
+            assert gbapal.truncate(32) == 32
+        subprocess.check_call(png_args)
 
 
 def main():
