@@ -172,15 +172,18 @@ def dump_efbg(
             print(f"    gUnknown_{value.pal:X},", file=outfile)
             print("};", file=outfile)
         elif offset == effect_header.frames:
-            print(f"const u16 *{label}[] = {{", file=outfile)
+            print(f"const u16 *const {label}[] = {{", file=outfile)
             for ptr in value:
                 print(f"    gUnknown_{ptr:X},", file=outfile)
             print("};", file=outfile)
         elif isinstance(value, list):
             print(f"const u16 {label}[] = {{", file=outfile)
             print(f'    {", ".join(str(x) for x in value[:10])},', file=outfile)
-            print(f'    INCBIN_U16("{value[10]}"),', file=outfile)
             print("};", file=outfile)
+            print(
+                f'const u16 {label}_tilemap[] = INCBIN_U16("{value[10]}");',
+                file=outfile,
+            )
         elif isinstance(value, str):
             if offset == effect_header.tiles:
                 incbin = "INCBIN_U32"
@@ -340,19 +343,19 @@ def dump_efob(
             elif isinstance(value[0], int) and value[0] in addrs:
                 redirect = addrs[value[0]]
                 if isinstance(redirect[0], ax_pose):
-                    typ = "const ax_pose *"
+                    typ = "const ax_pose *const"
                 elif isinstance(redirect[0], ax_anim):
-                    typ = "const ax_anim *"
+                    typ = "const ax_anim *const"
                 elif isinstance(redirect[0], int):
                     assert (
                         redirect[0] in addrs
                         and isinstance(addrs[redirect[0]], list)
                         and isinstance(addrs[redirect[0]][0], ax_anim)
                     )
-                    typ = "const ax_anim *const *"
+                    typ = "const ax_anim *const *const"
                 else:
                     raise ValueError("unrecognized data type")
-                print(f"{typ}{label}[] = {{", file=outfile)
+                print(f"{typ} {label}[] = {{", file=outfile)
                 for x in value:
                     print(f"    gUnknown_{x:X},", file=outfile)
                 print("};", file=outfile)
@@ -379,14 +382,16 @@ def dump_effect_sbin(
     prefix: str,
 ):
     os.makedirs(dir, exist_ok=True)
+    os.makedirs(f"src/{dir}", exist_ok=True)
 
     try:
         if prefix.startswith("efbg"):
-            with open(f"{dir}/{prefix}.h", "w") as outfile:
+            with open(f"src/{dir}/{prefix}.c", "w") as outfile:
                 dump_efbg(baserom, offset, outfile, dir, prefix)
         elif prefix.startswith("efob"):
-            with open(f"{dir}/{prefix}.h", "w") as outfile:
+            with open(f"src/{dir}/{prefix}.c", "w") as outfile:
                 dump_efob(baserom, offset, outfile, dir, prefix)
+        print(f"        src/data/effects/{prefix}.o(.rodata);")
     except Exception as e:
         raise ValueError(f"failed to process {prefix}") from e
 
@@ -425,8 +430,6 @@ def main():
             assert ROM_VADDR <= offset < ROM_VADDR + ROM_SIZE
             dump_effect_sbin(baserom, offset, "data/effects", prefix)
             addrs[offset] = f"data/effects/{prefix}.h"
-    for offset, header in sorted(addrs.items()):
-        print(f'#include "{header}"')
 
 
 if __name__ == "__main__":

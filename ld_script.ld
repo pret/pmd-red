@@ -1027,7 +1027,153 @@ SECTIONS {
     {
         src/effect_sbin.o(.rodata);
         src/effect_files_table.o(.rodata);
-        data/effect_sbin.o(.rodata);
+        src/data/effects/efbg000.o(.rodata);
+        src/data/effects/efbg001.o(.rodata);
+        src/data/effects/efbg002.o(.rodata);
+        src/data/effects/efbg003.o(.rodata);
+        src/data/effects/efbg004.o(.rodata);
+        src/data/effects/efbg005.o(.rodata);
+        src/data/effects/efbg006.o(.rodata);
+        src/data/effects/efbg007.o(.rodata);
+        src/data/effects/efob000.o(.rodata);
+        src/data/effects/efob001.o(.rodata);
+        src/data/effects/efob002.o(.rodata);
+        src/data/effects/efob003.o(.rodata);
+        src/data/effects/efob004.o(.rodata);
+        src/data/effects/efob005.o(.rodata);
+        src/data/effects/efob006.o(.rodata);
+        src/data/effects/efob007.o(.rodata);
+        src/data/effects/efob008.o(.rodata);
+        src/data/effects/efob009.o(.rodata);
+        src/data/effects/efob010.o(.rodata);
+        src/data/effects/efob011.o(.rodata);
+        src/data/effects/efob012.o(.rodata);
+        src/data/effects/efob013.o(.rodata);
+        src/data/effects/efob014.o(.rodata);
+        src/data/effects/efob015.o(.rodata);
+        src/data/effects/efob016.o(.rodata);
+        src/data/effects/efob017.o(.rodata);
+        src/data/effects/efob018.o(.rodata);
+        src/data/effects/efob019.o(.rodata);
+        src/data/effects/efob020.o(.rodata);
+        src/data/effects/efob021.o(.rodata);
+        src/data/effects/efob022.o(.rodata);
+        src/data/effects/efob023.o(.rodata);
+        src/data/effects/efob024.o(.rodata);
+        src/data/effects/efob025.o(.rodata);
+        src/data/effects/efob026.o(.rodata);
+        src/data/effects/efob027.o(.rodata);
+        src/data/effects/efob028.o(.rodata);
+        src/data/effects/efob029.o(.rodata);
+        src/data/effects/efob030.o(.rodata);
+        src/data/effects/efob031.o(.rodata);
+        src/data/effects/efob032.o(.rodata);
+        src/data/effects/efob033.o(.rodata);
+        src/data/effects/efob034.o(.rodata);
+        src/data/effects/efob035.o(.rodata);
+        src/data/effects/efob036.o(.rodata);
+        src/data/effects/efob037.o(.rodata);
+        src/data/effects/efob038.o(.rodata);
+        src/data/effects/efob039.o(.rodata);
+        src/data/effects/efob040.o(.rodata);
+        src/data/effects/efob041.o(.rodata);
+        src/data/effects/efob042.o(.rodata);
+        src/data/effects/efob043.o(.rodata);
+        src/data/effects/efob044.o(.rodata);
+        src/data/effects/efob045.o(.rodata);
+        src/data/effects/efob046.o(.rodata);
+        src/data/effects/efob047.o(.rodata);
+        src/data/effects/efob048.o(.rodata);
+        src/data/effects/efob049.o(.rodata);
+        src/data/effects/efob050.o(.rodata);
+        src/data/effects/efob051.o(.rodata);
+        src/data/effects/efob052.o(.rodata);
+        src/data/effects/efob053.o(.rodata);
+        src/data/effects/efob054.o(.rodata);
+        src/data/effects/efob055.o(.rodata);
+        src/data/effects/efob056.o(.rodata);
+        src/data/effects/efob057.o(.rodata);
+        src/data/effects/efob058.o(.rodata);
+        src/data/effects/efob059.o(.rodata);
+        src/data/effects/efob060.o(.rodata);
+        src/data/effects/efob061.o(.rodata);
+        src/data/effects/efob062.o(.rodata);
+        src/data/effects/efob063.o(.rodata);
+        src/data/effects/efob064.o(.rodata);
+        src/data/effects/efob065.o(.rodata);
+        src/data/effects/efob066.o(.rodata);
+        src/data/effects/efob067.o(.rodata);
+        src/data/effects/efob068.o(.rodata);
+        src/data/effects/efob069.o(.rodata);
+        src/data/effects/efob070.o(.rodata);
+        src/data/effects/efob071.o(.rodata);
+        src/data/effects/efob072.o(.rodata);
+        src/data/effects/efob073.o(.rodata);
+        src/data/effects/efob074.o(.rodata);
+        src/data/effects/efob075.o(.rodata);
+        src/data/effects/efob076.o(.rodata);
+        src/data/effects/efob077.o(.rodata);
+        src/data/effects/efob078.o(.rodata);
+        src/data/effects/efob079.o(.rodata);
+        src/data/effects/efob080.o(.rodata);
+        src/data/effects/efob081.o(.rodata);
+        src/data/effects/efob082.o(.rodata);
+        src/data/effects/efob083.o(.rodata);
+        src/data/effects/efob084.o(.rodata);
+        src/data/effects/efob085.o(.rodata);
+        src/data/effects/efob086.o(.rodata);
+        src/data/effects/efob087.o(.rodata);
+        src/data/effects/efob088.o(.rodata);
+        src/data/effects/efob089.o(.rodata);
+        src/data/effects/efob090.o(.rodata);
+        src/data/effects/efob091.o(.rodata);
+        src/data/effects/efob092.o(.rodata);
+        src/data/effects/efob093.o(.rodata);
+        src/data/effects/efob094.o(.rodata);
+        src/data/effects/efob095.o(.rodata);
+        src/data/effects/efob096.o(.rodata);
+        src/data/effects/efob097.o(.rodata);
+        src/data/effects/efob098.o(.rodata);
+        src/data/effects/efob099.o(.rodata);
+        src/data/effects/efob100.o(.rodata);
+        src/data/effects/efob101.o(.rodata);
+        src/data/effects/efob102.o(.rodata);
+        src/data/effects/efob103.o(.rodata);
+        src/data/effects/efob104.o(.rodata);
+        src/data/effects/efob105.o(.rodata);
+        src/data/effects/efob106.o(.rodata);
+        src/data/effects/efob107.o(.rodata);
+        src/data/effects/efob108.o(.rodata);
+        src/data/effects/efob109.o(.rodata);
+        src/data/effects/efob110.o(.rodata);
+        src/data/effects/efob111.o(.rodata);
+        src/data/effects/efob112.o(.rodata);
+        src/data/effects/efob113.o(.rodata);
+        src/data/effects/efob114.o(.rodata);
+        src/data/effects/efob115.o(.rodata);
+        src/data/effects/efob116.o(.rodata);
+        src/data/effects/efob117.o(.rodata);
+        src/data/effects/efob118.o(.rodata);
+        src/data/effects/efob119.o(.rodata);
+        src/data/effects/efob120.o(.rodata);
+        src/data/effects/efob121.o(.rodata);
+        src/data/effects/efob122.o(.rodata);
+        src/data/effects/efob123.o(.rodata);
+        src/data/effects/efob124.o(.rodata);
+        src/data/effects/efob125.o(.rodata);
+        src/data/effects/efob126.o(.rodata);
+        src/data/effects/efob127.o(.rodata);
+        src/data/effects/efob128.o(.rodata);
+        src/data/effects/efob129.o(.rodata);
+        src/data/effects/efob130.o(.rodata);
+        src/data/effects/efob131.o(.rodata);
+        src/data/effects/efob132.o(.rodata);
+        src/data/effects/efob133.o(.rodata);
+        src/data/effects/efob134.o(.rodata);
+        src/data/effects/efob135.o(.rodata);
+        src/data/effects/efob136.o(.rodata);
+        src/data/effects/efob137.o(.rodata);
+        src/data/effects/efob138.o(.rodata);
     } > ROM =0
 
     ground_sbin_section :
@@ -1046,7 +1192,7 @@ SECTIONS {
         src/ground_map_files_9.o(.rodata);
         src/ground_map_files_10.o(.rodata);
     } > ROM =0
-    
+
     unk_9D02950_section :
     ALIGN(4)
     {
@@ -1064,7 +1210,7 @@ SECTIONS {
         src/ornament_gfx4.o(.rodata);
         src/ornament_gfx5.o(.rodata);
     } > ROM =0
-    
+
     unk_9E7EB08_section :
     ALIGN(4)
     {
