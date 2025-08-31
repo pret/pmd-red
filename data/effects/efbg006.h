@@ -165,8 +165,8 @@ const u16 *gUnknown_9781C50[] = {
     gUnknown_9780E3C,
     gUnknown_9781546,
 };
-const Palette256 gUnknown_9781CD0[] = INCBIN_U8("data/effects/efbg006_unk10.pmdpal");
-const Palette256 gUnknown_97820D0[] = INCBIN_U8("data/effects/efbg006_unkC.4bpp");
+const Palette256 gUnknown_9781CD0[] = INCBIN_U8("data/effects/efbg006.pmdpal");
+const Palette256 gUnknown_97820D0[] = INCBIN_U8("data/effects/efbg006.4bpp");
 const struct Struct_8009A7C gUnknown_9783EF0 = {
     ARRAY_COUNT(gUnknown_9781C50), // 32
     gUnknown_9781C50,
