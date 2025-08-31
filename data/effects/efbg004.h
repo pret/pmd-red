@@ -320,12 +320,12 @@ const u16 *gUnknown_97688F8[] = {
     gUnknown_97688CC,
     gUnknown_97688E2,
 };
-const u16 gUnknown_97689F4[] = INCBIN_U16("data/effects/efbg004_unk10.bin");
-const u16 gUnknown_9768DF4[] = INCBIN_U16("data/effects/efbg004_unkC.bin");
+const Palette256 gUnknown_97689F4[] = INCBIN_U8("data/effects/efbg004_unk10.pmdpal");
+const Palette256 gUnknown_9768DF4[] = INCBIN_U8("data/effects/efbg004_unkC.4bpp");
 const struct Struct_8009A7C gUnknown_9769074 = {
-    ARRAY_COUNT(gUnknown_97688F8),
+    ARRAY_COUNT(gUnknown_97688F8), // 63
     gUnknown_97688F8,
-    ARRAY_COUNT(gUnknown_9768DF4),
+    ARRAY_COUNT(gUnknown_9768DF4) / 16 - 1, // 19
     gUnknown_9768DF4,
     gUnknown_97689F4,
 };

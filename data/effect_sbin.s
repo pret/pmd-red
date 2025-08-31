@@ -95,7 +95,8 @@ gUnknown_974BE40:
 gUnknown_974BE54:
 .string "SIRO"
 .4byte gUnknown_97547C4
-.incbin "baserom.gba", 0x174BE5C, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_974BE64
 gUnknown_974BE64:
 .incbin "baserom.gba", 0x174BE64, 0x70A
@@ -179,7 +180,8 @@ gUnknown_97547C4:
 gUnknown_97547D8:
 .string "SIRO"
 .4byte gUnknown_9756660
-.incbin "baserom.gba", 0x17547E0, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97547E8
 gUnknown_97547E8:
 .incbin "baserom.gba", 0x17547E8, 0x1A
@@ -475,7 +477,8 @@ gUnknown_9756660:
 gUnknown_9756674:
 .string "SIRO"
 .4byte gUnknown_9766A64
-.incbin "baserom.gba", 0x175667C, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_9756684
 gUnknown_9756684:
 .incbin "baserom.gba", 0x1756684, 0x70A
@@ -623,7 +626,8 @@ gUnknown_9766A64:
 gUnknown_9766A78:
 .string "SIRO"
 .4byte gUnknown_9769074
-.incbin "baserom.gba", 0x1766A80, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_9766A88
 gUnknown_9766A88:
 .incbin "baserom.gba", 0x1766A88, 0x1E
@@ -895,7 +899,8 @@ gUnknown_9769074:
 gUnknown_9769088:
 .string "SIRO"
 .4byte gUnknown_9773AEC
-.incbin "baserom.gba", 0x1769090, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_9769098
 gUnknown_9769098:
 .incbin "baserom.gba", 0x1769098, 0x70A
@@ -1003,7 +1008,8 @@ gUnknown_9773AEC:
 gUnknown_9773B00:
 .string "SIRO"
 .4byte gUnknown_9783EF0
-.incbin "baserom.gba", 0x1773B08, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_9773B10
 gUnknown_9773B10:
 .incbin "baserom.gba", 0x1773B10, 0x70A
@@ -1151,7 +1157,8 @@ gUnknown_9783EF0:
 gUnknown_9783F04:
 .string "SIRO"
 .4byte gUnknown_978C7AC
-.incbin "baserom.gba", 0x1783F0C, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_9783F14
 gUnknown_9783F14:
 .incbin "baserom.gba", 0x1783F14, 0x2B0
@@ -1299,7 +1306,8 @@ gUnknown_978C7AC:
 gUnknown_978C7C0:
 .string "SIRO"
 .4byte gUnknown_979B710
-.incbin "baserom.gba", 0x178C7C8, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_978C7D0
 gUnknown_978C7D0:
 .incbin "baserom.gba", 0x178C7D0, 0x32
@@ -4442,15 +4450,18 @@ gUnknown_979B658:
 gUnknown_979B710:
 .4byte gUnknown_979A6E4
 .4byte gUnknown_979B658
-.incbin "baserom.gba", 0x179B718, 0xC
+.4byte 46
+.4byte 0
+.4byte 0
 .4byte gUnknown_9798B44
 .4byte gUnknown_979A6A4
-.incbin "baserom.gba", 0x179B72C, 0x4
+.4byte 219
 .global gUnknown_979B730
 gUnknown_979B730:
 .string "SIRO"
 .4byte gUnknown_979DCD4
-.incbin "baserom.gba", 0x179B738, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_979B740
 gUnknown_979B740:
 .incbin "baserom.gba", 0x179B740, 0x14
@@ -4793,15 +4804,17 @@ gUnknown_979DCA4:
 gUnknown_979DCD4:
 .4byte gUnknown_979DA84
 .4byte gUnknown_979DCA4
-.incbin "baserom.gba", 0x179DCDC, 0xC
+.4byte 12
+.4byte 0, 0
 .4byte gUnknown_979C084
 .4byte gUnknown_979DA44
-.incbin "baserom.gba", 0x179DCF0, 0x4
+.4byte 206
 .global gUnknown_979DCF4
 gUnknown_979DCF4:
 .string "SIRO"
 .4byte gUnknown_979ECA4
-.incbin "baserom.gba", 0x179DCFC, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_979DD04
 gUnknown_979DD04:
 .incbin "baserom.gba", 0x179DD04, 0x1E
@@ -4874,7 +4887,8 @@ gUnknown_979ECA4:
 gUnknown_979ECC4:
 .string "SIRO"
 .4byte gUnknown_97A0F14
-.incbin "baserom.gba", 0x179ECCC, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_979ECD4
 gUnknown_979ECD4:
 .incbin "baserom.gba", 0x179ECD4, 0x14
@@ -5129,7 +5143,8 @@ gUnknown_97A0F14:
 gUnknown_97A0F34:
 .string "SIRO"
 .4byte gUnknown_97A20A4
-.incbin "baserom.gba", 0x17A0F3C, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97A0F44
 gUnknown_97A0F44:
 .incbin "baserom.gba", 0x17A0F44, 0x14
@@ -5290,7 +5305,8 @@ gUnknown_97A20A4:
 gUnknown_97A20C4:
 .string "SIRO"
 .4byte gUnknown_97A3968
-.incbin "baserom.gba", 0x17A20CC, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97A20D4
 gUnknown_97A20D4:
 .incbin "baserom.gba", 0x17A20D4, 0x1E
@@ -5547,7 +5563,8 @@ gUnknown_97A3968:
 gUnknown_97A3988:
 .string "SIRO"
 .4byte gUnknown_97A4F8C
-.incbin "baserom.gba", 0x17A3990, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97A3998
 gUnknown_97A3998:
 .incbin "baserom.gba", 0x17A3998, 0x3C
@@ -5674,7 +5691,8 @@ gUnknown_97A4F8C:
 gUnknown_97A4FAC:
 .string "SIRO"
 .4byte gUnknown_97A8C18
-.incbin "baserom.gba", 0x17A4FB4, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97A4FBC
 gUnknown_97A4FBC:
 .incbin "baserom.gba", 0x17A4FBC, 0x14
@@ -6423,7 +6441,8 @@ gUnknown_97A8C18:
 gUnknown_97A8C38:
 .string "SIRO"
 .4byte gUnknown_97AA090
-.incbin "baserom.gba", 0x17A8C40, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97A8C48
 gUnknown_97A8C48:
 .incbin "baserom.gba", 0x17A8C48, 0x14
@@ -6540,7 +6559,8 @@ gUnknown_97AA090:
 gUnknown_97AA0B0:
 .string "SIRO"
 .4byte gUnknown_97AAB88
-.incbin "baserom.gba", 0x17AA0B8, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97AA0C0
 gUnknown_97AA0C0:
 .incbin "baserom.gba", 0x17AA0C0, 0x5A
@@ -6641,7 +6661,8 @@ gUnknown_97AAB88:
 gUnknown_97AABA8:
 .string "SIRO"
 .4byte gUnknown_97AF1F4
-.incbin "baserom.gba", 0x17AABB0, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97AABB8
 gUnknown_97AABB8:
 .incbin "baserom.gba", 0x17AABB8, 0x14
@@ -7010,7 +7031,8 @@ gUnknown_97AF1F4:
 gUnknown_97AF214:
 .string "SIRO"
 .4byte gUnknown_97AFE34
-.incbin "baserom.gba", 0x17AF21C, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97AF224
 gUnknown_97AF224:
 .incbin "baserom.gba", 0x17AF224, 0x14
@@ -7117,7 +7139,8 @@ gUnknown_97AFE34:
 gUnknown_97AFE54:
 .string "SIRO"
 .4byte gUnknown_97B08E0
-.incbin "baserom.gba", 0x17AFE5C, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97AFE64
 gUnknown_97AFE64:
 .incbin "baserom.gba", 0x17AFE64, 0x14
@@ -7198,7 +7221,8 @@ gUnknown_97B08E0:
 gUnknown_97B0900:
 .string "SIRO"
 .4byte gUnknown_97B566C
-.incbin "baserom.gba", 0x17B0908, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97B0910
 gUnknown_97B0910:
 .incbin "baserom.gba", 0x17B0910, 0x46
@@ -8631,7 +8655,8 @@ gUnknown_97B566C:
 gUnknown_97B568C:
 .string "SIRO"
 .4byte gUnknown_97B6904
-.incbin "baserom.gba", 0x17B5694, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97B569C
 gUnknown_97B569C:
 .incbin "baserom.gba", 0x17B569C, 0x14
@@ -8716,7 +8741,8 @@ gUnknown_97B6904:
 gUnknown_97B6924:
 .string "SIRO"
 .4byte gUnknown_97B6F0C
-.incbin "baserom.gba", 0x17B692C, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97B6934
 gUnknown_97B6934:
 .incbin "baserom.gba", 0x17B6934, 0x14
@@ -8799,7 +8825,8 @@ gUnknown_97B6F0C:
 gUnknown_97B6F2C:
 .string "SIRO"
 .4byte gUnknown_97B8B48
-.incbin "baserom.gba", 0x17B6F34, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97B6F3C
 gUnknown_97B6F3C:
 .incbin "baserom.gba", 0x17B6F3C, 0x14A
@@ -8884,7 +8911,8 @@ gUnknown_97B8B48:
 gUnknown_97B8B68:
 .string "SIRO"
 .4byte gUnknown_97B9054
-.incbin "baserom.gba", 0x17B8B70, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97B8B78
 gUnknown_97B8B78:
 .incbin "baserom.gba", 0x17B8B78, 0x32
@@ -8929,7 +8957,8 @@ gUnknown_97B9054:
 gUnknown_97B9074:
 .string "SIRO"
 .4byte gUnknown_97BA938
-.incbin "baserom.gba", 0x17B907C, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97B9084
 gUnknown_97B9084:
 .incbin "baserom.gba", 0x17B9084, 0x14
@@ -9082,7 +9111,8 @@ gUnknown_97BA938:
 gUnknown_97BA958:
 .string "SIRO"
 .4byte gUnknown_97BACA4
-.incbin "baserom.gba", 0x17BA960, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97BA968
 gUnknown_97BA968:
 .incbin "baserom.gba", 0x17BA968, 0x14
@@ -9135,7 +9165,8 @@ gUnknown_97BACA4:
 gUnknown_97BACC4:
 .string "SIRO"
 .4byte gUnknown_97BD43C
-.incbin "baserom.gba", 0x17BACCC, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97BACD4
 gUnknown_97BACD4:
 .incbin "baserom.gba", 0x17BACD4, 0x32
@@ -9460,7 +9491,8 @@ gUnknown_97BD43C:
 gUnknown_97BD45C:
 .string "SIRO"
 .4byte gUnknown_97BE5EC
-.incbin "baserom.gba", 0x17BD464, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97BD46C
 gUnknown_97BD46C:
 .incbin "baserom.gba", 0x17BD46C, 0x1E
@@ -9547,7 +9579,8 @@ gUnknown_97BE5EC:
 gUnknown_97BE614:
 .string "SIRO"
 .4byte gUnknown_97BF06C
-.incbin "baserom.gba", 0x17BE61C, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97BE624
 gUnknown_97BE624:
 .incbin "baserom.gba", 0x17BE624, 0x14
@@ -9750,7 +9783,8 @@ gUnknown_97BF06C:
 gUnknown_97BF08C:
 .string "SIRO"
 .4byte gUnknown_97C1788
-.incbin "baserom.gba", 0x17BF094, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97BF09C
 gUnknown_97BF09C:
 .incbin "baserom.gba", 0x17BF09C, 0x14
@@ -10345,7 +10379,8 @@ gUnknown_97C1788:
 gUnknown_97C17A8:
 .string "SIRO"
 .4byte gUnknown_97C2764
-.incbin "baserom.gba", 0x17C17B0, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97C17B8
 gUnknown_97C17B8:
 .incbin "baserom.gba", 0x17C17B8, 0x14
@@ -10410,7 +10445,8 @@ gUnknown_97C2764:
 gUnknown_97C2784:
 .string "SIRO"
 .4byte gUnknown_97C3DFC
-.incbin "baserom.gba", 0x17C278C, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97C2794
 gUnknown_97C2794:
 .incbin "baserom.gba", 0x17C2794, 0x14
@@ -10547,7 +10583,8 @@ gUnknown_97C3DFC:
 gUnknown_97C3E1C:
 .string "SIRO"
 .4byte gUnknown_97C6AE8
-.incbin "baserom.gba", 0x17C3E24, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97C3E2C
 gUnknown_97C3E2C:
 .incbin "baserom.gba", 0x17C3E2C, 0x1E
@@ -11030,7 +11067,8 @@ gUnknown_97C6AE8:
 gUnknown_97C6B08:
 .string "SIRO"
 .4byte gUnknown_97C7688
-.incbin "baserom.gba", 0x17C6B10, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97C6B18
 gUnknown_97C6B18:
 .incbin "baserom.gba", 0x17C6B18, 0x1E
@@ -11139,7 +11177,8 @@ gUnknown_97C7688:
 gUnknown_97C76A8:
 .string "SIRO"
 .4byte gUnknown_97CA270
-.incbin "baserom.gba", 0x17C76B0, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97C76B8
 gUnknown_97C76B8:
 .incbin "baserom.gba", 0x17C76B8, 0x1E
@@ -11602,7 +11641,8 @@ gUnknown_97CA270:
 gUnknown_97CA290:
 .string "SIRO"
 .4byte gUnknown_97CBD38
-.incbin "baserom.gba", 0x17CA298, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97CA2A0
 gUnknown_97CA2A0:
 .incbin "baserom.gba", 0x17CA2A0, 0xAA
@@ -11755,7 +11795,8 @@ gUnknown_97CBD38:
 gUnknown_97CBD58:
 .string "SIRO"
 .4byte gUnknown_97CD45C
-.incbin "baserom.gba", 0x17CBD60, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97CBD68
 gUnknown_97CBD68:
 .incbin "baserom.gba", 0x17CBD68, 0x28
@@ -11914,7 +11955,8 @@ gUnknown_97CD45C:
 gUnknown_97CD47C:
 .string "SIRO"
 .4byte gUnknown_97CE604
-.incbin "baserom.gba", 0x17CD484, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97CD48C
 gUnknown_97CD48C:
 .incbin "baserom.gba", 0x17CD48C, 0x1E
@@ -11979,7 +12021,8 @@ gUnknown_97CE604:
 gUnknown_97CE624:
 .string "SIRO"
 .4byte gUnknown_97D0674
-.incbin "baserom.gba", 0x17CE62C, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97CE634
 gUnknown_97CE634:
 .incbin "baserom.gba", 0x17CE634, 0x14
@@ -12142,7 +12185,8 @@ gUnknown_97D0674:
 gUnknown_97D0694:
 .string "SIRO"
 .4byte gUnknown_97D2DD8
-.incbin "baserom.gba", 0x17D069C, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97D06A4
 gUnknown_97D06A4:
 .incbin "baserom.gba", 0x17D06A4, 0x32
@@ -12597,7 +12641,8 @@ gUnknown_97D2DD8:
 gUnknown_97D2DF8:
 .string "SIRO"
 .4byte gUnknown_97D339C
-.incbin "baserom.gba", 0x17D2E00, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97D2E08
 gUnknown_97D2E08:
 .incbin "baserom.gba", 0x17D2E08, 0x14
@@ -12666,7 +12711,8 @@ gUnknown_97D339C:
 gUnknown_97D33BC:
 .string "SIRO"
 .4byte gUnknown_97D48CC
-.incbin "baserom.gba", 0x17D33C4, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97D33CC
 gUnknown_97D33CC:
 .incbin "baserom.gba", 0x17D33CC, 0x64
@@ -12813,7 +12859,8 @@ gUnknown_97D48CC:
 gUnknown_97D48EC:
 .string "SIRO"
 .4byte gUnknown_97D68F8
-.incbin "baserom.gba", 0x17D48F4, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97D48FC
 gUnknown_97D48FC:
 .incbin "baserom.gba", 0x17D48FC, 0x14
@@ -13014,7 +13061,8 @@ gUnknown_97D68F8:
 gUnknown_97D6918:
 .string "SIRO"
 .4byte gUnknown_97DB4C0
-.incbin "baserom.gba", 0x17D6920, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97D6928
 gUnknown_97D6928:
 .incbin "baserom.gba", 0x17D6928, 0x3C
@@ -14087,7 +14135,8 @@ gUnknown_97DB4C0:
 gUnknown_97DB4E0:
 .string "SIRO"
 .4byte gUnknown_97DE2A0
-.incbin "baserom.gba", 0x17DB4E8, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97DB4F0
 gUnknown_97DB4F0:
 .incbin "baserom.gba", 0x17DB4F0, 0x1E
@@ -14660,7 +14709,8 @@ gUnknown_97DE2A0:
 gUnknown_97DE2C0:
 .string "SIRO"
 .4byte gUnknown_97DFFB8
-.incbin "baserom.gba", 0x17DE2C8, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97DE2D0
 gUnknown_97DE2D0:
 .incbin "baserom.gba", 0x17DE2D0, 0x32
@@ -14853,7 +14903,8 @@ gUnknown_97DFFB8:
 gUnknown_97DFFD8:
 .string "SIRO"
 .4byte gUnknown_97E0AF8
-.incbin "baserom.gba", 0x17DFFE0, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97DFFE8
 gUnknown_97DFFE8:
 .incbin "baserom.gba", 0x17DFFE8, 0x32
@@ -14946,7 +14997,8 @@ gUnknown_97E0AF8:
 gUnknown_97E0B18:
 .string "SIRO"
 .4byte gUnknown_97E3DF0
-.incbin "baserom.gba", 0x17E0B20, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97E0B28
 gUnknown_97E0B28:
 .incbin "baserom.gba", 0x17E0B28, 0x14
@@ -15795,7 +15847,8 @@ gUnknown_97E3DF0:
 gUnknown_97E3E10:
 .string "SIRO"
 .4byte gUnknown_97E5528
-.incbin "baserom.gba", 0x17E3E18, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97E3E20
 gUnknown_97E3E20:
 .incbin "baserom.gba", 0x17E3E20, 0x46
@@ -15964,7 +16017,8 @@ gUnknown_97E5528:
 gUnknown_97E5548:
 .string "SIRO"
 .4byte gUnknown_97EAC14
-.incbin "baserom.gba", 0x17E5550, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97E5558
 gUnknown_97E5558:
 .incbin "baserom.gba", 0x17E5558, 0x32
@@ -17273,7 +17327,8 @@ gUnknown_97EAC14:
 gUnknown_97EAC34:
 .string "SIRO"
 .4byte gUnknown_97EB438
-.incbin "baserom.gba", 0x17EAC3C, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97EAC44
 gUnknown_97EAC44:
 .incbin "baserom.gba", 0x17EAC44, 0x32
@@ -17374,7 +17429,8 @@ gUnknown_97EB438:
 gUnknown_97EB458:
 .string "SIRO"
 .4byte gUnknown_97EC8C4
-.incbin "baserom.gba", 0x17EB460, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97EB468
 gUnknown_97EB468:
 .incbin "baserom.gba", 0x17EB468, 0x5A
@@ -17545,7 +17601,8 @@ gUnknown_97EC8C4:
 gUnknown_97EC8E4:
 .string "SIRO"
 .4byte gUnknown_97EDE54
-.incbin "baserom.gba", 0x17EC8EC, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97EC8F4
 gUnknown_97EC8F4:
 .incbin "baserom.gba", 0x17EC8F4, 0x1E
@@ -17654,7 +17711,8 @@ gUnknown_97EDE54:
 gUnknown_97EDE74:
 .string "SIRO"
 .4byte gUnknown_97EE14C
-.incbin "baserom.gba", 0x17EDE7C, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97EDE84
 gUnknown_97EDE84:
 .incbin "baserom.gba", 0x17EDE84, 0x5A
@@ -17711,7 +17769,8 @@ gUnknown_97EE14C:
 gUnknown_97EE16C:
 .string "SIRO"
 .4byte gUnknown_97F06B8
-.incbin "baserom.gba", 0x17EE174, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97EE17C
 gUnknown_97EE17C:
 .incbin "baserom.gba", 0x17EE17C, 0x14
@@ -17990,7 +18049,8 @@ gUnknown_97F06B8:
 gUnknown_97F06D8:
 .string "SIRO"
 .4byte gUnknown_97F2098
-.incbin "baserom.gba", 0x17F06E0, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97F06E8
 gUnknown_97F06E8:
 .incbin "baserom.gba", 0x17F06E8, 0x1E
@@ -18169,7 +18229,8 @@ gUnknown_97F2098:
 gUnknown_97F20B8:
 .string "SIRO"
 .4byte gUnknown_97F2BF0
-.incbin "baserom.gba", 0x17F20C0, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97F20C8
 gUnknown_97F20C8:
 .incbin "baserom.gba", 0x17F20C8, 0x14
@@ -18226,7 +18287,8 @@ gUnknown_97F2BF0:
 gUnknown_97F2C10:
 .string "SIRO"
 .4byte gUnknown_97F5010
-.incbin "baserom.gba", 0x17F2C18, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97F2C20
 gUnknown_97F2C20:
 .incbin "baserom.gba", 0x17F2C20, 0x14
@@ -18726,7 +18788,8 @@ gUnknown_97F5010:
 gUnknown_97F5038:
 .string "SIRO"
 .4byte gUnknown_97F568C
-.incbin "baserom.gba", 0x17F5040, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97F5048
 gUnknown_97F5048:
 .incbin "baserom.gba", 0x17F5048, 0x28
@@ -18925,7 +18988,8 @@ gUnknown_97F568C:
 gUnknown_97F56AC:
 .string "SIRO"
 .4byte gUnknown_97F770C
-.incbin "baserom.gba", 0x17F56B4, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97F56BC
 gUnknown_97F56BC:
 .incbin "baserom.gba", 0x17F56BC, 0x14
@@ -19324,7 +19388,8 @@ gUnknown_97F770C:
 gUnknown_97F772C:
 .string "SIRO"
 .4byte gUnknown_97F80EC
-.incbin "baserom.gba", 0x17F7734, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97F773C
 gUnknown_97F773C:
 .incbin "baserom.gba", 0x17F773C, 0x14
@@ -19389,7 +19454,8 @@ gUnknown_97F80EC:
 gUnknown_97F810C:
 .string "SIRO"
 .4byte gUnknown_97F8FD4
-.incbin "baserom.gba", 0x17F8114, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97F811C
 gUnknown_97F811C:
 .incbin "baserom.gba", 0x17F811C, 0xAA
@@ -19474,7 +19540,8 @@ gUnknown_97F8FD4:
 gUnknown_97F8FF4:
 .string "SIRO"
 .4byte gUnknown_97FA0D0
-.incbin "baserom.gba", 0x17F8FFC, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97F9004
 gUnknown_97F9004:
 .incbin "baserom.gba", 0x17F9004, 0x32
@@ -19619,7 +19686,8 @@ gUnknown_97FA0D0:
 gUnknown_97FA0F0:
 .string "SIRO"
 .4byte gUnknown_97FBEFC
-.incbin "baserom.gba", 0x17FA0F8, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97FA100
 gUnknown_97FA100:
 .incbin "baserom.gba", 0x17FA100, 0x14
@@ -19880,7 +19948,8 @@ gUnknown_97FBEFC:
 gUnknown_97FBF1C:
 .string "SIRO"
 .4byte gUnknown_97FCE8C
-.incbin "baserom.gba", 0x17FBF24, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97FBF2C
 gUnknown_97FBF2C:
 .incbin "baserom.gba", 0x17FBF2C, 0x14
@@ -19969,7 +20038,8 @@ gUnknown_97FCE8C:
 gUnknown_97FCEAC:
 .string "SIRO"
 .4byte gUnknown_97FDED4
-.incbin "baserom.gba", 0x17FCEB4, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97FCEBC
 gUnknown_97FCEBC:
 .incbin "baserom.gba", 0x17FCEBC, 0x14
@@ -20198,7 +20268,8 @@ gUnknown_97FDED4:
 gUnknown_97FDEF4:
 .string "SIRO"
 .4byte gUnknown_9800AE0
-.incbin "baserom.gba", 0x17FDEFC, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_97FDF04
 gUnknown_97FDF04:
 .incbin "baserom.gba", 0x17FDF04, 0x14
@@ -20813,7 +20884,8 @@ gUnknown_9800AE0:
 gUnknown_9800B00:
 .string "SIRO"
 .4byte gUnknown_9801060
-.incbin "baserom.gba", 0x1800B08, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_9800B10
 gUnknown_9800B10:
 .incbin "baserom.gba", 0x1800B10, 0x14
@@ -20924,7 +20996,8 @@ gUnknown_9801060:
 gUnknown_9801080:
 .string "SIRO"
 .4byte gUnknown_98015DC
-.incbin "baserom.gba", 0x1801088, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_9801090
 gUnknown_9801090:
 .incbin "baserom.gba", 0x1801090, 0x32
@@ -21095,7 +21168,8 @@ gUnknown_98015DC:
 gUnknown_98015FC:
 .string "SIRO"
 .4byte gUnknown_9802418
-.incbin "baserom.gba", 0x1801604, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_980160C
 gUnknown_980160C:
 .incbin "baserom.gba", 0x180160C, 0x14
@@ -21222,7 +21296,8 @@ gUnknown_9802418:
 gUnknown_9802438:
 .string "SIRO"
 .4byte gUnknown_9803164
-.incbin "baserom.gba", 0x1802440, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_9802448
 gUnknown_9802448:
 .incbin "baserom.gba", 0x1802448, 0x14
@@ -21317,7 +21392,8 @@ gUnknown_9803164:
 gUnknown_9803184:
 .string "SIRO"
 .4byte gUnknown_98045C8
-.incbin "baserom.gba", 0x180318C, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_9803194
 gUnknown_9803194:
 .incbin "baserom.gba", 0x1803194, 0x14
@@ -21410,7 +21486,8 @@ gUnknown_98045C8:
 gUnknown_98045E8:
 .string "SIRO"
 .4byte gUnknown_980517C
-.incbin "baserom.gba", 0x18045F0, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_98045F8
 gUnknown_98045F8:
 .incbin "baserom.gba", 0x18045F8, 0x14
@@ -21579,7 +21656,8 @@ gUnknown_980517C:
 gUnknown_980519C:
 .string "SIRO"
 .4byte gUnknown_9805FD4
-.incbin "baserom.gba", 0x18051A4, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_98051AC
 gUnknown_98051AC:
 .incbin "baserom.gba", 0x18051AC, 0x32
@@ -21632,7 +21710,8 @@ gUnknown_9805FD4:
 gUnknown_9805FF4:
 .string "SIRO"
 .4byte gUnknown_98067BC
-.incbin "baserom.gba", 0x1805FFC, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_9806004
 gUnknown_9806004:
 .incbin "baserom.gba", 0x1806004, 0x28
@@ -21701,7 +21780,8 @@ gUnknown_98067BC:
 gUnknown_98067DC:
 .string "SIRO"
 .4byte gUnknown_9806E40
-.incbin "baserom.gba", 0x18067E4, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_98067EC
 gUnknown_98067EC:
 .incbin "baserom.gba", 0x18067EC, 0x1E
@@ -21900,7 +21980,8 @@ gUnknown_9806E40:
 gUnknown_9806E60:
 .string "SIRO"
 .4byte gUnknown_9807484
-.incbin "baserom.gba", 0x1806E68, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_9806E70
 gUnknown_9806E70:
 .incbin "baserom.gba", 0x1806E70, 0x14
@@ -21969,7 +22050,8 @@ gUnknown_9807484:
 gUnknown_98074A4:
 .string "SIRO"
 .4byte gUnknown_9807880
-.incbin "baserom.gba", 0x18074AC, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_98074B4
 gUnknown_98074B4:
 .incbin "baserom.gba", 0x18074B4, 0x14
@@ -22014,7 +22096,8 @@ gUnknown_9807880:
 gUnknown_98078A0:
 .string "SIRO"
 .4byte gUnknown_9807BBC
-.incbin "baserom.gba", 0x18078A8, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_98078B0
 gUnknown_98078B0:
 .incbin "baserom.gba", 0x18078B0, 0x14
@@ -22059,7 +22142,8 @@ gUnknown_9807BBC:
 gUnknown_9807BDC:
 .string "SIRO"
 .4byte gUnknown_9808870
-.incbin "baserom.gba", 0x1807BE4, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_9807BEC
 gUnknown_9807BEC:
 .incbin "baserom.gba", 0x1807BEC, 0x14
@@ -22144,7 +22228,8 @@ gUnknown_9808870:
 gUnknown_9808890:
 .string "SIRO"
 .4byte gUnknown_980A330
-.incbin "baserom.gba", 0x1808898, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_98088A0
 gUnknown_98088A0:
 .incbin "baserom.gba", 0x18088A0, 0x28
@@ -22253,7 +22338,8 @@ gUnknown_980A330:
 gUnknown_980A350:
 .string "SIRO"
 .4byte gUnknown_980B560
-.incbin "baserom.gba", 0x180A358, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_980A360
 gUnknown_980A360:
 .incbin "baserom.gba", 0x180A360, 0x96
@@ -22302,7 +22388,8 @@ gUnknown_980B560:
 gUnknown_980B580:
 .string "SIRO"
 .4byte gUnknown_980C2E8
-.incbin "baserom.gba", 0x180B588, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_980B590
 gUnknown_980B590:
 .incbin "baserom.gba", 0x180B590, 0x1E
@@ -22489,7 +22576,8 @@ gUnknown_980C2E8:
 gUnknown_980C308:
 .string "SIRO"
 .4byte gUnknown_980C810
-.incbin "baserom.gba", 0x180C310, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_980C318
 gUnknown_980C318:
 .incbin "baserom.gba", 0x180C318, 0x14
@@ -22586,7 +22674,8 @@ gUnknown_980C810:
 gUnknown_980C830:
 .string "SIRO"
 .4byte gUnknown_980DB1C
-.incbin "baserom.gba", 0x180C838, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_980C840
 gUnknown_980C840:
 .incbin "baserom.gba", 0x180C840, 0x28
@@ -22789,7 +22878,8 @@ gUnknown_980DB1C:
 gUnknown_980DB3C:
 .string "SIRO"
 .4byte gUnknown_980E06C
-.incbin "baserom.gba", 0x180DB44, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_980DB4C
 gUnknown_980DB4C:
 .incbin "baserom.gba", 0x180DB4C, 0x14
@@ -22842,7 +22932,8 @@ gUnknown_980E06C:
 gUnknown_980E08C:
 .string "SIRO"
 .4byte gUnknown_980EBCC
-.incbin "baserom.gba", 0x180E094, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_980E09C
 gUnknown_980E09C:
 .incbin "baserom.gba", 0x180E09C, 0x14
@@ -23013,7 +23104,8 @@ gUnknown_980EBCC:
 gUnknown_980EBEC:
 .string "SIRO"
 .4byte gUnknown_9812F2C
-.incbin "baserom.gba", 0x180EBF4, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_980EBFC
 gUnknown_980EBFC:
 .incbin "baserom.gba", 0x180EBFC, 0x14
@@ -24204,7 +24296,8 @@ gUnknown_9812F2C:
 gUnknown_9812F54:
 .string "SIRO"
 .4byte gUnknown_98136F0
-.incbin "baserom.gba", 0x1812F5C, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_9812F64
 gUnknown_9812F64:
 .incbin "baserom.gba", 0x1812F64, 0x14
@@ -24329,7 +24422,8 @@ gUnknown_98136F0:
 gUnknown_9813710:
 .string "SIRO"
 .4byte gUnknown_981445C
-.incbin "baserom.gba", 0x1813718, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_9813720
 gUnknown_9813720:
 .incbin "baserom.gba", 0x1813720, 0x14
@@ -24420,7 +24514,8 @@ gUnknown_981445C:
 gUnknown_981447C:
 .string "SIRO"
 .4byte gUnknown_9814C7C
-.incbin "baserom.gba", 0x1814484, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_981448C
 gUnknown_981448C:
 .incbin "baserom.gba", 0x181448C, 0x3C
@@ -24509,7 +24604,8 @@ gUnknown_9814C7C:
 gUnknown_9814C9C:
 .string "SIRO"
 .4byte gUnknown_9815BEC
-.incbin "baserom.gba", 0x1814CA4, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_9814CAC
 gUnknown_9814CAC:
 .incbin "baserom.gba", 0x1814CAC, 0x1E
@@ -24594,7 +24690,8 @@ gUnknown_9815BEC:
 gUnknown_9815C0C:
 .string "SIRO"
 .4byte gUnknown_9815E7C
-.incbin "baserom.gba", 0x1815C14, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_9815C1C
 gUnknown_9815C1C:
 .incbin "baserom.gba", 0x1815C1C, 0x14
@@ -24643,7 +24740,8 @@ gUnknown_9815E7C:
 gUnknown_9815E9C:
 .string "SIRO"
 .4byte gUnknown_9817094
-.incbin "baserom.gba", 0x1815EA4, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_9815EAC
 gUnknown_9815EAC:
 .incbin "baserom.gba", 0x1815EAC, 0x32
@@ -24742,7 +24840,8 @@ gUnknown_9817094:
 gUnknown_98170B4:
 .string "SIRO"
 .4byte gUnknown_9817530
-.incbin "baserom.gba", 0x18170BC, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_98170C4
 gUnknown_98170C4:
 .incbin "baserom.gba", 0x18170C4, 0x14
@@ -24803,7 +24902,8 @@ gUnknown_9817530:
 gUnknown_9817550:
 .string "SIRO"
 .4byte gUnknown_9817B1C
-.incbin "baserom.gba", 0x1817558, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_9817560
 gUnknown_9817560:
 .incbin "baserom.gba", 0x1817560, 0xAA
@@ -24886,7 +24986,8 @@ gUnknown_9817B1C:
 gUnknown_9817B3C:
 .string "SIRO"
 .4byte gUnknown_981969C
-.incbin "baserom.gba", 0x1817B44, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_9817B4C
 gUnknown_9817B4C:
 .incbin "baserom.gba", 0x1817B4C, 0x32
@@ -25129,7 +25230,8 @@ gUnknown_981969C:
 gUnknown_98196BC:
 .string "SIRO"
 .4byte gUnknown_981AC40
-.incbin "baserom.gba", 0x18196C4, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_98196CC
 gUnknown_98196CC:
 .incbin "baserom.gba", 0x18196CC, 0x14
@@ -25254,7 +25356,8 @@ gUnknown_981AC40:
 gUnknown_981AC60:
 .string "SIRO"
 .4byte gUnknown_981AFA8
-.incbin "baserom.gba", 0x181AC68, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_981AC70
 gUnknown_981AC70:
 .incbin "baserom.gba", 0x181AC70, 0x32
@@ -25299,7 +25402,8 @@ gUnknown_981AFA8:
 gUnknown_981AFC8:
 .string "SIRO"
 .4byte gUnknown_981CC00
-.incbin "baserom.gba", 0x181AFD0, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_981AFD8
 gUnknown_981AFD8:
 .incbin "baserom.gba", 0x181AFD8, 0x14
@@ -25628,7 +25732,8 @@ gUnknown_981CC00:
 gUnknown_981CC20:
 .string "SIRO"
 .4byte gUnknown_981D95C
-.incbin "baserom.gba", 0x181CC28, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_981CC30
 gUnknown_981CC30:
 .incbin "baserom.gba", 0x181CC30, 0x1E
@@ -25937,7 +26042,8 @@ gUnknown_981D95C:
 gUnknown_981D97C:
 .string "SIRO"
 .4byte gUnknown_981E430
-.incbin "baserom.gba", 0x181D984, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_981D98C
 gUnknown_981D98C:
 .incbin "baserom.gba", 0x181D98C, 0x14
@@ -26042,7 +26148,8 @@ gUnknown_981E430:
 gUnknown_981E450:
 .string "SIRO"
 .4byte gUnknown_981FDBC
-.incbin "baserom.gba", 0x181E458, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_981E460
 gUnknown_981E460:
 .incbin "baserom.gba", 0x181E460, 0x14
@@ -26257,7 +26364,8 @@ gUnknown_981FDBC:
 gUnknown_981FDDC:
 .string "SIRO"
 .4byte gUnknown_98216CC
-.incbin "baserom.gba", 0x181FDE4, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_981FDEC
 gUnknown_981FDEC:
 .incbin "baserom.gba", 0x181FDEC, 0x14
@@ -26450,7 +26558,8 @@ gUnknown_98216CC:
 gUnknown_98216EC:
 .string "SIRO"
 .4byte gUnknown_98219FC
-.incbin "baserom.gba", 0x18216F4, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_98216FC
 gUnknown_98216FC:
 .incbin "baserom.gba", 0x18216FC, 0x1E
@@ -26507,7 +26616,8 @@ gUnknown_98219FC:
 gUnknown_9821A1C:
 .string "SIRO"
 .4byte gUnknown_9823BF0
-.incbin "baserom.gba", 0x1821A24, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_9821A2C
 gUnknown_9821A2C:
 .incbin "baserom.gba", 0x1821A2C, 0x14
@@ -26870,7 +26980,8 @@ gUnknown_9823BF0:
 gUnknown_9823C10:
 .string "SIRO"
 .4byte gUnknown_9824E0C
-.incbin "baserom.gba", 0x1823C18, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_9823C20
 gUnknown_9823C20:
 .incbin "baserom.gba", 0x1823C20, 0x1E
@@ -27181,7 +27292,8 @@ gUnknown_9824E0C:
 gUnknown_9824E2C:
 .string "SIRO"
 .4byte gUnknown_98254E8
-.incbin "baserom.gba", 0x1824E34, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_9824E3C
 gUnknown_9824E3C:
 .incbin "baserom.gba", 0x1824E3C, 0x14
@@ -27306,7 +27418,8 @@ gUnknown_98254E8:
 gUnknown_9825508:
 .string "SIRO"
 .4byte gUnknown_98278B8
-.incbin "baserom.gba", 0x1825510, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_9825518
 gUnknown_9825518:
 .incbin "baserom.gba", 0x1825518, 0x14
@@ -27693,7 +27806,8 @@ gUnknown_98278B8:
 gUnknown_98278D8:
 .string "SIRO"
 .4byte gUnknown_9828EB8
-.incbin "baserom.gba", 0x18278E0, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_98278E8
 gUnknown_98278E8:
 .incbin "baserom.gba", 0x18278E8, 0x14
@@ -27850,7 +27964,8 @@ gUnknown_9828EB8:
 gUnknown_9828ED8:
 .string "SIRO"
 .4byte gUnknown_9829B4C
-.incbin "baserom.gba", 0x1828EE0, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_9828EE8
 gUnknown_9828EE8:
 .incbin "baserom.gba", 0x1828EE8, 0x14
@@ -28001,7 +28116,8 @@ gUnknown_9829B4C:
 gUnknown_9829B6C:
 .string "SIRO"
 .4byte gUnknown_982A940
-.incbin "baserom.gba", 0x1829B74, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_9829B7C
 gUnknown_9829B7C:
 .incbin "baserom.gba", 0x1829B7C, 0x64
@@ -28104,7 +28220,8 @@ gUnknown_982A940:
 gUnknown_982A960:
 .string "SIRO"
 .4byte gUnknown_982AEBC
-.incbin "baserom.gba", 0x182A968, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_982A970
 gUnknown_982A970:
 .incbin "baserom.gba", 0x182A970, 0x1E
@@ -28303,7 +28420,8 @@ gUnknown_982AEBC:
 gUnknown_982AEDC:
 .string "SIRO"
 .4byte gUnknown_982B0A8
-.incbin "baserom.gba", 0x182AEE4, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_982AEEC
 gUnknown_982AEEC:
 .incbin "baserom.gba", 0x182AEEC, 0x14
@@ -28348,7 +28466,8 @@ gUnknown_982B0A8:
 gUnknown_982B0C8:
 .string "SIRO"
 .4byte gUnknown_98344A8
-.incbin "baserom.gba", 0x182B0D0, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_982B0D8
 gUnknown_982B0D8:
 .incbin "baserom.gba", 0x182B0D8, 0x46
@@ -30251,7 +30370,8 @@ gUnknown_98344A8:
 gUnknown_98344C8:
 .string "SIRO"
 .4byte gUnknown_98367B4
-.incbin "baserom.gba", 0x18344D0, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_98344D8
 gUnknown_98344D8:
 .incbin "baserom.gba", 0x18344D8, 0x50
@@ -30546,7 +30666,8 @@ gUnknown_98367B4:
 gUnknown_98367D4:
 .string "SIRO"
 .4byte gUnknown_9837A14
-.incbin "baserom.gba", 0x18367DC, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_98367E4
 gUnknown_98367E4:
 .incbin "baserom.gba", 0x18367E4, 0x50
@@ -30771,7 +30892,8 @@ gUnknown_9837A14:
 gUnknown_9837A34:
 .string "SIRO"
 .4byte gUnknown_9838650
-.incbin "baserom.gba", 0x1837A3C, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_9837A44
 gUnknown_9837A44:
 .incbin "baserom.gba", 0x1837A44, 0x14
@@ -30845,7 +30967,8 @@ gUnknown_9838650:
 gUnknown_9838678:
 .string "SIRO"
 .4byte gUnknown_9838A94
-.incbin "baserom.gba", 0x1838680, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_9838688
 gUnknown_9838688:
 .incbin "baserom.gba", 0x1838688, 0x14
@@ -30902,7 +31025,8 @@ gUnknown_9838A94:
 gUnknown_9838AB4:
 .string "SIRO"
 .4byte gUnknown_983A788
-.incbin "baserom.gba", 0x1838ABC, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_9838AC4
 gUnknown_9838AC4:
 .incbin "baserom.gba", 0x1838AC4, 0xD2
@@ -31041,7 +31165,8 @@ gUnknown_983A788:
 gUnknown_983A7A8:
 .string "SIRO"
 .4byte gUnknown_983BEB4
-.incbin "baserom.gba", 0x183A7B0, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_983A7B8
 gUnknown_983A7B8:
 .incbin "baserom.gba", 0x183A7B8, 0x14
@@ -31340,7 +31465,8 @@ gUnknown_983BEB4:
 gUnknown_983BED4:
 .string "SIRO"
 .4byte gUnknown_983C228
-.incbin "baserom.gba", 0x183BEDC, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_983BEE4
 gUnknown_983BEE4:
 .incbin "baserom.gba", 0x183BEE4, 0x14
@@ -31393,7 +31519,8 @@ gUnknown_983C228:
 gUnknown_983C248:
 .string "SIRO"
 .4byte gUnknown_983D3F0
-.incbin "baserom.gba", 0x183C250, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_983C258
 gUnknown_983C258:
 .incbin "baserom.gba", 0x183C258, 0x14
@@ -31494,7 +31621,8 @@ gUnknown_983D3F0:
 gUnknown_983D410:
 .string "SIRO"
 .4byte gUnknown_983D5DC
-.incbin "baserom.gba", 0x183D418, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_983D420
 gUnknown_983D420:
 .incbin "baserom.gba", 0x183D420, 0x14
@@ -31539,7 +31667,8 @@ gUnknown_983D5DC:
 gUnknown_983D5FC:
 .string "SIRO"
 .4byte gUnknown_983DFD0
-.incbin "baserom.gba", 0x183D604, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_983D60C
 gUnknown_983D60C:
 .incbin "baserom.gba", 0x183D60C, 0x28
@@ -31802,7 +31931,8 @@ gUnknown_983DFD0:
 gUnknown_983DFF0:
 .string "SIRO"
 .4byte gUnknown_983F040
-.incbin "baserom.gba", 0x183DFF8, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_983E000
 gUnknown_983E000:
 .incbin "baserom.gba", 0x183E000, 0x14
@@ -31935,7 +32065,8 @@ gUnknown_983F040:
 gUnknown_983F060:
 .string "SIRO"
 .4byte gUnknown_983F384
-.incbin "baserom.gba", 0x183F068, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_983F070
 gUnknown_983F070:
 .incbin "baserom.gba", 0x183F070, 0x14
@@ -31998,7 +32129,8 @@ gUnknown_983F384:
 gUnknown_983F3A4:
 .string "SIRO"
 .4byte gUnknown_9842478
-.incbin "baserom.gba", 0x183F3AC, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_983F3B4
 gUnknown_983F3B4:
 .incbin "baserom.gba", 0x183F3B4, 0x28
@@ -33077,7 +33209,8 @@ gUnknown_9842478:
 gUnknown_9842498:
 .string "SIRO"
 .4byte gUnknown_9844EBC
-.incbin "baserom.gba", 0x18424A0, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_98424A8
 gUnknown_98424A8:
 .incbin "baserom.gba", 0x18424A8, 0x32
@@ -33820,7 +33953,8 @@ gUnknown_9844EBC:
 gUnknown_9844EDC:
 .string "SIRO"
 .4byte gUnknown_98452C0
-.incbin "baserom.gba", 0x1844EE4, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_9844EEC
 gUnknown_9844EEC:
 .incbin "baserom.gba", 0x1844EEC, 0x32
@@ -33865,7 +33999,8 @@ gUnknown_98452C0:
 gUnknown_98452E0:
 .string "SIRO"
 .4byte gUnknown_9846AA8
-.incbin "baserom.gba", 0x18452E8, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_98452F0
 gUnknown_98452F0:
 .incbin "baserom.gba", 0x18452F0, 0x1E
@@ -33996,7 +34131,8 @@ gUnknown_9846AA8:
 gUnknown_9846AC8:
 .string "SIRO"
 .4byte gUnknown_9847CFC
-.incbin "baserom.gba", 0x1846AD0, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_9846AD8
 gUnknown_9846AD8:
 .incbin "baserom.gba", 0x1846AD8, 0x50
@@ -34205,7 +34341,8 @@ gUnknown_9847CFC:
 gUnknown_9847D1C:
 .string "SIRO"
 .4byte gUnknown_98482B0
-.incbin "baserom.gba", 0x1847D24, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_9847D2C
 gUnknown_9847D2C:
 .incbin "baserom.gba", 0x1847D2C, 0x14
@@ -34372,7 +34509,8 @@ gUnknown_98482B0:
 gUnknown_98482D0:
 .string "SIRO"
 .4byte gUnknown_98489C4
-.incbin "baserom.gba", 0x18482D8, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_98482E0
 gUnknown_98482E0:
 .incbin "baserom.gba", 0x18482E0, 0x14
@@ -34539,7 +34677,8 @@ gUnknown_98489C4:
 gUnknown_98489E4:
 .string "SIRO"
 .4byte gUnknown_9849188
-.incbin "baserom.gba", 0x18489EC, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_98489F4
 gUnknown_98489F4:
 .incbin "baserom.gba", 0x18489F4, 0x14
@@ -34612,7 +34751,8 @@ gUnknown_9849188:
 gUnknown_98491A8:
 .string "SIRO"
 .4byte gUnknown_984AE54
-.incbin "baserom.gba", 0x18491B0, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_98491B8
 gUnknown_98491B8:
 .incbin "baserom.gba", 0x18491B8, 0x14
@@ -35159,7 +35299,8 @@ gUnknown_984AE54:
 gUnknown_984AE74:
 .string "SIRO"
 .4byte gUnknown_984BDD8
-.incbin "baserom.gba", 0x184AE7C, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_984AE84
 gUnknown_984AE84:
 .incbin "baserom.gba", 0x184AE84, 0x1E
@@ -35224,7 +35365,8 @@ gUnknown_984BDD8:
 gUnknown_984BDF8:
 .string "SIRO"
 .4byte gUnknown_984CCCC
-.incbin "baserom.gba", 0x184BE00, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_984BE08
 gUnknown_984BE08:
 .incbin "baserom.gba", 0x184BE08, 0x14
@@ -35315,7 +35457,8 @@ gUnknown_984CCCC:
 gUnknown_984CCEC:
 .string "SIRO"
 .4byte gUnknown_984E43C
-.incbin "baserom.gba", 0x184CCF4, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_984CCFC
 gUnknown_984CCFC:
 .incbin "baserom.gba", 0x184CCFC, 0x14
@@ -35432,7 +35575,8 @@ gUnknown_984E43C:
 gUnknown_984E45C:
 .string "SIRO"
 .4byte gUnknown_984EB80
-.incbin "baserom.gba", 0x184E464, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_984E46C
 gUnknown_984E46C:
 .incbin "baserom.gba", 0x184E46C, 0x14
@@ -35561,7 +35705,8 @@ gUnknown_984EB80:
 gUnknown_984EBA0:
 .string "SIRO"
 .4byte gUnknown_984FC20
-.incbin "baserom.gba", 0x184EBA8, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_984EBB0
 gUnknown_984EBB0:
 .incbin "baserom.gba", 0x184EBB0, 0x14
@@ -35706,7 +35851,8 @@ gUnknown_984FC20:
 gUnknown_984FC40:
 .string "SIRO"
 .4byte gUnknown_9853424
-.incbin "baserom.gba", 0x184FC48, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_984FC50
 gUnknown_984FC50:
 .incbin "baserom.gba", 0x184FC50, 0x1E
@@ -36193,7 +36339,8 @@ gUnknown_9853424:
 gUnknown_9853444:
 .string "SIRO"
 .4byte gUnknown_9854998
-.incbin "baserom.gba", 0x185344C, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_9853454
 gUnknown_9853454:
 .incbin "baserom.gba", 0x1853454, 0x1E
@@ -36920,7 +37067,8 @@ gUnknown_9854998:
 gUnknown_98549B8:
 .string "SIRO"
 .4byte gUnknown_9854CF0
-.incbin "baserom.gba", 0x18549C0, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_98549C8
 gUnknown_98549C8:
 .incbin "baserom.gba", 0x18549C8, 0x14
@@ -37003,7 +37151,8 @@ gUnknown_9854CF0:
 gUnknown_9854D10:
 .string "SIRO"
 .4byte gUnknown_9858984
-.incbin "baserom.gba", 0x1854D18, 0x8
+.4byte 0
+.4byte 0
 .global gUnknown_9854D20
 gUnknown_9854D20:
 .incbin "baserom.gba", 0x1854D20, 0x14

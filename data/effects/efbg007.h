@@ -165,12 +165,12 @@ const u16 *gUnknown_978BC8C[] = {
     gUnknown_978B2F4,
     gUnknown_978B830,
 };
-const u16 gUnknown_978BD0C[] = INCBIN_U16("data/effects/efbg007_unk10.bin");
-const u16 gUnknown_978C10C[] = INCBIN_U16("data/effects/efbg007_unkC.bin");
+const Palette256 gUnknown_978BD0C[] = INCBIN_U8("data/effects/efbg007_unk10.pmdpal");
+const Palette256 gUnknown_978C10C[] = INCBIN_U8("data/effects/efbg007_unkC.4bpp");
 const struct Struct_8009A7C gUnknown_978C7AC = {
-    ARRAY_COUNT(gUnknown_978BC8C),
+    ARRAY_COUNT(gUnknown_978BC8C), // 32
     gUnknown_978BC8C,
-    ARRAY_COUNT(gUnknown_978C10C),
+    ARRAY_COUNT(gUnknown_978C10C) / 16 - 1, // 52
     gUnknown_978C10C,
     gUnknown_978BD0C,
 };

@@ -115,12 +115,12 @@ const u16 *gUnknown_9772B74[] = {
     gUnknown_9771D60,
     gUnknown_977246A,
 };
-const u16 gUnknown_9772BCC[] = INCBIN_U16("data/effects/efbg005_unk10.bin");
-const u16 gUnknown_9772FCC[] = INCBIN_U16("data/effects/efbg005_unkC.bin");
+const Palette256 gUnknown_9772BCC[] = INCBIN_U8("data/effects/efbg005_unk10.pmdpal");
+const Palette256 gUnknown_9772FCC[] = INCBIN_U8("data/effects/efbg005_unkC.4bpp");
 const struct Struct_8009A7C gUnknown_9773AEC = {
-    ARRAY_COUNT(gUnknown_9772B74),
+    ARRAY_COUNT(gUnknown_9772B74), // 22
     gUnknown_9772B74,
-    ARRAY_COUNT(gUnknown_9772FCC),
+    ARRAY_COUNT(gUnknown_9772FCC) / 16 - 1, // 88
     gUnknown_9772FCC,
     gUnknown_9772BCC,
 };

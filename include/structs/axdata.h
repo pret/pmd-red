@@ -1,6 +1,7 @@
 #ifndef GUARD_AXDATA_H
 #define GUARD_AXDATA_H
 
+#include "gba/gba.h"
 #include "structs/rgb.h"
 #include "structs/str_file_system.h"
 #include "structs/str_position.h"
@@ -133,7 +134,7 @@ typedef struct Palette256
 // size: 0x20
 typedef struct EfoFileData
 {
-    /* 0x0 */ ax_pose **poses; // TODO: Verify if these fields' names are actually valid
+    /* 0x0 */ const ax_pose *const *poses; // TODO: Verify if these fields' names are actually valid
     /* 0x4 */ ax_anim ***animations;
     /* 0x8 */ s32 animCount;
     /* 0xC */ void *spriteData; // ?
