@@ -1179,7 +1179,12 @@ SECTIONS {
         src/data/effects/efob136.o(.rodata);
         src/data/effects/efob137.o(.rodata);
         src/data/effects/efob138.o(.rodata);
-        data/effect_sbin.o(.rodata);
+    } > ROM =0
+
+    unk_98589A4_section :
+    ALIGN(4)
+    {
+        data/unk_98589A4.o(.rodata);
     } > ROM =0
 
     ground_sbin_section :
