@@ -1058,6 +1058,7 @@ SECTIONS {
         src/data/effects/efob019.o(.rodata);
         src/data/effects/efob020.o(.rodata);
         src/data/effects/efob021.o(.rodata);
+        src/data/effects/pksdir_2.o(.rodata);
         src/data/effects/efob022.o(.rodata);
         src/data/effects/efob023.o(.rodata);
         src/data/effects/efob024.o(.rodata);
@@ -1088,7 +1089,7 @@ SECTIONS {
         src/data/effects/efob049.o(.rodata);
         src/data/effects/efob050.o(.rodata);
         src/data/effects/efob051.o(.rodata);
-        src/data/effects/pksdir_2.o(.rodata);
+        src/data/effects/pksdir_3.o(.rodata);
         src/data/effects/efob052.o(.rodata);
         src/data/effects/efob053.o(.rodata);
         src/data/effects/efob054.o(.rodata);
@@ -1119,6 +1120,7 @@ SECTIONS {
         src/data/effects/efob079.o(.rodata);
         src/data/effects/efob080.o(.rodata);
         src/data/effects/efob081.o(.rodata);
+        src/data/effects/pksdir_4.o(.rodata)
         src/data/effects/efob082.o(.rodata);
         src/data/effects/efob083.o(.rodata);
         src/data/effects/efob084.o(.rodata);
@@ -1149,7 +1151,7 @@ SECTIONS {
         src/data/effects/efob109.o(.rodata);
         src/data/effects/efob110.o(.rodata);
         src/data/effects/efob111.o(.rodata);
-        src/data/effects/pksdir_3.o(.rodata);
+        src/data/effects/pksdir_5.o(.rodata);
         src/data/effects/efob112.o(.rodata);
         src/data/effects/efob113.o(.rodata);
         src/data/effects/efob114.o(.rodata);
@@ -1177,6 +1179,7 @@ SECTIONS {
         src/data/effects/efob136.o(.rodata);
         src/data/effects/efob137.o(.rodata);
         src/data/effects/efob138.o(.rodata);
+        data/effect_sbin.o(.rodata);
     } > ROM =0
 
     ground_sbin_section :
