@@ -548,10 +548,10 @@ bool8 sub_808D750(s32 index_)
      }
  }
 
- if (count < 4) {
+ if (count < MAX_TEAM_MEMBERS) {
      pokemon = &gRecruitedPokemonRef->pokemon[index];
      size_count += GetBodySize(pokemon->speciesNum);
-     if (size_count < 7) {
+     if (size_count <= MAX_TEAM_BODY_SIZE) {
          return TRUE;
      }
  }
