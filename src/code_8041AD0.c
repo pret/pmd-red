@@ -10,7 +10,7 @@
 #include "effect_main.h"
 #include "effect_sub_1.h"
 #include "dungeon_vram.h"
-#include "code_803E724.h"
+#include "dungeon_tilemap.h"
 #include "code_8041AD0.h"
 #include "code_804267C.h"
 #include "code_806CD90.h"
@@ -22,30 +22,25 @@
 #include "sprite.h"
 #include "dungeon_info.h"
 #include "run_dungeon.h"
-#include "dungeon_leader.h"
+#include "dungeon_range.h"
 #include "dungeon_map.h"
 #include "dungeon_message.h"
 #include "dungeon_music.h"
 #include "memory.h"
 #include "random.h"
-#include "dungeon_util_1.h"
+#include "dungeon_cutscene.h"
 #include "effect_data.h"
 #include "dungeon_pos_data.h"
 #include "dungeon_damage.h"
+#include "dungeon_strings.h"
 
 // Unknown dungeon file. File split is correct.
 
-extern const u8 *gPtrFeralFoundItemMessage[];
-
-extern void sub_803ED30(u8, Entity *pokemon, u8, u8);
-extern void PlaySoundEffect(u32);
 
 void EntityUpdateStatusSprites(Entity *entity);
 
-extern s32 gDungeonBrightness;
 
 extern void sub_800DBBC(void);
-extern void sub_803EA10(void);
 extern void sub_8042E98(void);
 extern void sub_800EF28(u8);
 extern void sub_80429A0(Entity *);
@@ -57,10 +52,7 @@ extern void sub_800EF40(u8 r0, u8 r1);
 extern s32 sub_800E6D8(s32);
 extern void sub_800EB24(s32 param_1, DungeonPos *param_2, DungeonPos *param_3, s32 param_4, s32 param_5);
 
-u32 sub_8041764(unkStruct_80416E0 *param_1, bool8 param_2);
 s32 sub_80416E0(PixelPos *pos, u32 param_2, bool8 param_3);
-s32 sub_8041550(Entity *entity, s32 a1, u8 a2, u8 a3, s32 a4, u8 a5);
-s32 sub_804151C(Entity *entity, s32 r1, u8 r2);
 void sub_804178C(u8 param_1);
 
 struct UnkStruct_80F6624
@@ -196,13 +188,16 @@ static const u32 sStatusSpriteMasks_MuzzledStatus[] = {
     /*STATUS_MUZZLED not defined*/[1] = STATUS_SPRITE_MUZZLED,
 };
 
-s32 sub_804151C(Entity *entity, s32 r1, u8 r2)
+static s32 sub_8041550(Entity *entity, s32 a1, u8 a2, u8 a3, s32 a4, u8 a5);
+static u32 sub_8041764(unkStruct_80416E0 *param_1, bool8 param_2);
+
+static s32 sub_804151C(Entity *entity, s32 r1, u8 r2)
 {
     u8 r3 = sub_800DC9C(r1);
     return sub_8041550(entity, r1, r2, r3, 2, 0);
 }
 
-s32 sub_8041550(Entity *entity, s32 a1, u8 a2, u8 a3, s32 a4, u8 a5)
+static s32 sub_8041550(Entity *entity, s32 a1, u8 a2, u8 a3, s32 a4, u8 a5)
 {
     s32 i;
     EntityInfo *entInfo;
@@ -263,7 +258,7 @@ s32 sub_8041550(Entity *entity, s32 a1, u8 a2, u8 a3, s32 a4, u8 a5)
     return r4;
 }
 
-s32 sub_80416A4(DungeonPos *pos_1, u32 param_2, bool8 param_3)
+static s32 sub_80416A4(DungeonPos *pos_1, u32 param_2, bool8 param_3)
 {
   PixelPos pos;
 
@@ -302,7 +297,7 @@ s32 sub_80416E0(PixelPos *pos, u32 param_2, bool8 param_3)
   return ret;
 }
 
-u32 sub_8041764(unkStruct_80416E0 *param_1, bool8 param_2)
+static u32 sub_8041764(unkStruct_80416E0 *param_1, bool8 param_2)
 {
     sub_800EE5C(param_1->unk0);
     sub_800EF64();
@@ -1344,7 +1339,7 @@ void sub_80427AC(void)
                 sub_80429A0(entity);
                 if (!enInfo->isNotTeamMember) {
                     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], entity, 0);
-                    DisplayDungeonLoggableMessageTrue(entity, *gPtrFeralFoundItemMessage);
+                    DisplayDungeonLoggableMessageTrue(entity, gPtrFeralFoundItemMessage);
                 }
             }
         }
@@ -1559,7 +1554,7 @@ void sub_8042B34(s32 a0, s32 a1, s32 a2)
     unkStruct_80416E0 spStruct;
     s32 i;
     s32 r8 = 0;
-    Entity *leader = xxx_call_GetLeader();
+    Entity *leader = CutsceneGetLeader();
     gUnknown_203B414 = MemoryAlloc(sizeof(*gUnknown_203B414), 7);
 
     gUnknown_203B414->unk0 = a0;

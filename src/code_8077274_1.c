@@ -22,13 +22,13 @@
 #include "structs/dungeon_entity.h"
 #include "structs/str_dungeon.h"
 #include "dungeon_map_access.h"
-#include "structs/str_806B7F8.h"
 #include "dungeon_config.h"
 #include "dungeon_logic.h"
 #include "dungeon_strings.h"
+#include "dungeon_floor_spawns.h"
+#include "dungeon_misc.h"
+#include "dungeon_mon_spawn.h"
 
-extern bool8 sub_806AA0C(s32, u32);
-extern s16 GetRandomFloorMonsterId(u32);
 extern void sub_804178C(u32);
 
 void sub_807AA30(void)
@@ -167,7 +167,7 @@ void sub_807AB38(Entity *entity, bool8 forcedMonsterHouse)
         }
         else
         {
-            struct unkStruct_806B7F8 spawnStruct;
+            struct MonSpawnInfo spawnStruct;
 
             spawnStruct.species = GetRandomFloorMonsterId(1);
             spawnStruct.level = 0;
@@ -177,7 +177,7 @@ void sub_807AB38(Entity *entity, bool8 forcedMonsterHouse)
             spawnStruct.pos.x = positions[rndId].x;
             spawnStruct.pos.y = positions[rndId].y;
             if (sub_806AA0C(spawnStruct.species, 1)) {
-                Entity *newMonster = sub_806B7F8(&spawnStruct, FALSE);
+                Entity *newMonster = SpawnWildMon(&spawnStruct, FALSE);
                 if (EntityIsValid(newMonster)) {
                     newMonster->unk1C = IntToF248_2(200);
                     for (j = 0; j < 100; j++) {

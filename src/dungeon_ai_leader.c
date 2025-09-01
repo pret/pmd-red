@@ -4,7 +4,7 @@
 #include "constants/status.h"
 #include "constants/targeting.h"
 #include "dungeon_logic.h"
-#include "dungeon_leader.h"
+#include "dungeon_range.h"
 #include "dungeon_util.h"
 #include "pokemon_3.h"
 

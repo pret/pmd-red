@@ -4,17 +4,16 @@
 #include "constants/item.h"
 #include "constants/move_id.h"
 #include "dungeon_vram.h"
-#include "code_803E724.h"
+#include "dungeon_tilemap.h"
 #include "code_8041AD0.h"
 #include "dungeon_action.h"
 #include "code_8066D04.h"
 #include "code_806CD90.h"
 #include "code_8077274_1.h"
-#include "code_807CD9C.h"
 #include "dungeon_jobs.h"
 #include "run_dungeon.h"
 #include "dungeon_items.h"
-#include "dungeon_leader.h"
+#include "dungeon_range.h"
 #include "dungeon_map_access.h"
 #include "dungeon_message.h"
 #include "dungeon_misc.h"
@@ -40,23 +39,17 @@
 #include "dungeon_pos_data.h"
 #include "dungeon_projectile_throw.h"
 #include "dungeon_engine.h"
+#include "dungeon_kecleon_shop.h"
+#include "dungeon_item_action.h"
+#include "dungeon_leveling.h"
+#include "warp_target.h"
 
-extern void EnemyEvolution(Entity *);
 extern void sub_8057588(Entity * pokemon, u8 param_2);
-extern Item *sub_8044D90(Entity *, s32, u32);
-u8 sub_8048D50();
 void sub_8042208(Entity *pokemon, u8 r1);
-void sub_803E708();
-void sub_80479B8();
 extern void sub_807AB38(Entity *, u32);
-extern Entity * sub_8044DA4(Entity *param_1,int param_2);
-extern void sub_8044DF0(Entity *, u32, u32);
 Entity *sub_806773C(Entity *entity);
 void sub_8067558(Entity *entity, Entity *targetEntity, s32 a2);
 void sub_8067794(Entity *entity, Entity *targetEntity, s32 a2);
-extern void sub_807EF84(void);
-extern void sub_80845E0(Entity *entity);
-extern void sub_8084448(Entity *entity);
 
 void HandlePickUpPlayerAction(Entity *entity)
 {
@@ -464,8 +457,6 @@ void sub_8067110(Entity *entity)
         sub_807AB38(entity,gDungeon->forceMonsterHouse);
     }
 }
-
-extern void sub_8083904(DungeonPos *pos, Entity *entity);
 
 void sub_80671A0(Entity *entity)
 {

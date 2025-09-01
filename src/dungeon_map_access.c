@@ -8,7 +8,7 @@
 #include "graphics_memory.h"
 #include "decompress_at.h"
 #include "def_filearchives.h"
-#include "dungeon_leader.h"
+#include "dungeon_range.h"
 #include "dungeon_map.h"
 #include "dungeon_logic.h"
 #include "dungeon_info.h"
@@ -18,6 +18,7 @@
 #include "text_1.h"
 #include "code_806CD90.h"
 #include "dungeon_pos_data.h"
+#include "dungeon_data.h"
 
 extern void sub_8042A14(DungeonPos *);
 

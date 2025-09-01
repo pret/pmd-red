@@ -4,16 +4,15 @@
 #include "constants/item.h"
 #include "constants/move_id.h"
 #include "dungeon_vram.h"
-#include "code_803E724.h"
+#include "dungeon_tilemap.h"
 #include "code_8041AD0.h"
 #include "dungeon_action.h"
 #include "code_8066D04.h"
 #include "code_806CD90.h"
 #include "code_8077274_1.h"
-#include "code_807CD9C.h"
 #include "run_dungeon.h"
 #include "dungeon_items.h"
-#include "dungeon_leader.h"
+#include "dungeon_range.h"
 #include "dungeon_map_access.h"
 #include "dungeon_message.h"
 #include "dungeon_misc.h"
@@ -36,23 +35,15 @@
 #include "string_format.h"
 #include "text_1.h"
 #include "trap.h"
+#include "dungeon_submenu.h"
+#include "dungeon_engine.h"
 
 extern void sub_80684C4(void);
-void sub_8045064(void);
 extern void sub_8068344(void);
-bool8 CanSubMenuItemBeChosen(s32 param_1);
 void sub_8068310(s32 n, Pokemon **monPtrs);
 void sub_8067F00(u8 a0, Pokemon **a1, s32 a2, s32 a3, s32 a4);
-void sub_8083D1C(void);
-void PlayDungeonConfirmationSE(void);
-void PlayDungeonCancelSE(void);
 void sub_806806C(Pokemon *a0);
-void CreateDungeonMenuSubWindow(WindowTemplates *a0, s32 a1);
 
-extern const s32 gUnknown_8106E80[];
-extern MenuInputStruct gDungeonMenu;
-extern u32 gDungeonFramesCounter;
-extern s32 gDungeonSubMenuItemsCount;
 
 static EWRAM_DATA WindowHeader gUnknown_202F308 = {0};
 static EWRAM_DATA s32 gUnknown_202F30C = 0;
@@ -280,7 +271,7 @@ void sub_8067A80(u8 a0, s32 a1, s32 a2, Pokemon **a3)
                 }
 
                 sub_8045064();
-                CreateDungeonMenuSubWindow(&spTxtStruct, 0x15);
+                CreateDungeonMenuSubWindow(&spTxtStruct.id[0], 0x15);
 
                 while (1) {
                     AddMenuCursorSprite(&gDungeonMenu);

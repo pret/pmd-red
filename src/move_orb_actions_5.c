@@ -14,9 +14,9 @@
 #include "code_806CD90.h"
 #include "status.h"
 #include "dungeon_pos_data.h"
+#include "dungeon_floor_spawns.h"
+#include "hurl_orb.h"
 
-extern void sub_807F43C(Entity *, Entity *);
-extern u32 GetRandomFloorItem(u32);
 extern void sub_807FC3C(DungeonPos *, u32, u32);
 extern void sub_8042A54(DungeonPos *);
 extern void sub_8042A64(DungeonPos *);
@@ -101,7 +101,7 @@ bool8 ItemizeOrbAction(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 
 bool8 HurlOrbAction(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 {
-    sub_807F43C(pokemon, target);
+    HandleHurlOrb(pokemon, target);
     return TRUE;
 }
 

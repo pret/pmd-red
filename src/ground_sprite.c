@@ -11,6 +11,7 @@
 #include "memory.h"
 #include "sprite.h"
 #include "effect_sub_1.h"
+#include "pokemon.h"
 
 static IWRAM_INIT unkStruct_3001B7C *gUnknown_3001B7C = {NULL};
 
@@ -28,9 +29,6 @@ static EWRAM_INIT OpenedFile *gUnknown_203B4B4 = {NULL};
 // code_8098BDC.s
 extern void sub_809971C(u16, const u8 *, s16);
 extern void sub_80997F4(u16, u16);
-// pokemon_2.s
-extern void InitShadowSprites(u32, u32);
-
 extern void sub_80ABA7C(void);
 extern void sub_80ACAD4(void);
 extern void sub_80AD7AC(void);

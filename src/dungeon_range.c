@@ -1,16 +1,15 @@
 #include "global.h"
 #include "globaldata.h"
 #include "dungeon_range.h"
-#include "dungeon_leader.h"
 #include "dungeon_random.h"
 #include "dungeon_logic.h"
 #include "dungeon_pos_data.h"
 #include "dungeon_util.h"
+#include "dungeon_vram.h"
 #include "sprite.h"
 #include "structs/str_dungeon.h"
 #include "dungeon_map_access.h"
 #include "structs/map.h"
-#include "structs/str_202ED28.h"
 
 EWRAM_INIT Entity *gLeaderPointer = NULL;
 

@@ -17,14 +17,15 @@
 #include "dungeon_config.h"
 #include "dungeon_generation_fixed.h"
 #include "dungeon_pos_data.h"
+#include "dungeon_data.h"
+#include "dungeon_mon_spawn.h"
+#include "run_dungeon.h"
 
 extern s32 sub_803DA20(s16 species);
 extern void sub_8049840(void);
 extern void sub_80429FC(DungeonPos *r0);
 extern void sub_80498A8(s32, s32);
 extern void sub_8049B8C(void);
-extern u8 GetFloorType();
-extern void sub_806C330(s32 a0, s32 a1, s16 a2, u8 a3);
 
 enum CardinalDirection
 {

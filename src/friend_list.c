@@ -17,8 +17,6 @@
 #include "ground_map.h"
 #include "constants/input.h"
 
-extern bool8 sub_808D750(s32 index_);
-
 static IWRAM_INIT struct unkStruct_3001B60 *sFriendList = {NULL};
 
 static void SortbyAlphabetNo(s32, s32);

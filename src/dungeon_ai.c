@@ -1,7 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "dungeon_ai.h"
-#include "code_803E724.h"
+#include "dungeon_tilemap.h"
 #include "dungeon_message.h"
 #include "code_8077274_1.h"
 #include "dungeon_random.h"
@@ -18,19 +18,18 @@
 #include "dungeon_ai_items.h"
 #include "dungeon_ai_movement.h"
 #include "dungeon_items.h"
-#include "dungeon_leader.h"
+#include "dungeon_range.h"
 #include "dungeon_map_access.h"
 #include "dungeon_logic.h"
 #include "dungeon_random.h"
-#include "dungeon_util_1.h"
 #include "dungeon_util.h"
 #include "pokemon.h"
 #include "status_checks.h"
 #include "structs/map.h"
 #include "structs/str_dungeon.h"
 #include "dungeon_misc.h"
-
-extern char *gPtrCouldntBeUsedMessage;
+#include "dungeon_cutscene.h"
+#include "dungeon_strings.h"
 
 void RunMonsterAI(Entity *pokemon, u32 unused)
 {

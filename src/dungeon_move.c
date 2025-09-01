@@ -10,11 +10,10 @@
 #include "effect_main.h"
 #include "effect_data.h"
 #include "dungeon_vram.h"
-#include "code_803E724.h"
+#include "dungeon_tilemap.h"
 #include "code_8041AD0.h"
 #include "code_806CD90.h"
 #include "code_8077274_1.h"
-#include "code_807CD9C.h"
 #include "dungeon_random.h"
 #include "dungeon_logic.h"
 #include "dungeon_config.h"
@@ -44,14 +43,13 @@
 #include "text_util.h"
 #include "dungeon_pos_data.h"
 #include "dungeon_engine.h"
+#include "warp_target.h"
 
 extern void sub_80429C8(Entity *r0);
 extern s16 sub_8057600(Move *move, s32 itemID);
-extern void sub_803ED30(s32, Entity *r0, u8, s32);
 extern void sub_8042238(Entity *pokemon, Entity *target);
 extern void sub_806A1E8(Entity *pokemon);
 extern void sub_804178C(u32);
-extern void EnemyEvolution(Entity *);
 extern void sub_80428A0(Entity *r0);
 extern bool8 sub_8040BB0(Entity *entity, Move *move, bool8);
 extern void sub_8040DA0(Entity *entity, Move *move);
@@ -59,16 +57,10 @@ extern u16 sub_80412E0(u16 moveId, u8 weather, u8 a2);
 extern void sub_800EF10(u16 r0);
 extern void sub_800E3AC(s32 a0, DungeonPos *pos, s32 a2);
 extern void sub_8041168(Entity *entity, Entity *entity2, Move *,DungeonPos *);
-extern Entity *sub_80696A8(Entity *a0);
-extern Entity *GetMonsterAtPos(DungeonPos *pos);
-extern s32 sub_800ED20(u16 param_1);
 extern void sub_8042930(Entity *r0);
 extern void sub_8041B48(Entity *pokemon);
 extern void sub_8041BA8(Entity *pokemon);
 extern void sub_8042950(Entity *r0);
-
-extern const s32 gUnknown_8106A50;
-extern const s32 gUnknown_8106A4C;
 
 static s32 TryHitTarget(Entity *attacker, Entity *target, Move *move, struct DamageStruct *dmgStruct, s16 unk_);
 
@@ -498,16 +490,16 @@ void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move *move, 
                         moveHadEffect = PoisonStingMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_PSYCHIC:
-                        moveHadEffect = sub_8058C98(attacker, currTarget, move, gUnknown_8106A50, itemId);
+                        moveHadEffect = sub_8058C98(attacker, currTarget, move, gStatIndexSpecial, itemId);
                         break;
                     case MOVE_ACID:
-                        moveHadEffect = sub_8058C98(attacker, currTarget, move, gUnknown_8106A4C, itemId);
+                        moveHadEffect = sub_8058C98(attacker, currTarget, move, gStatIndexAtkDef, itemId);
                         break;
                     case MOVE_METAL_CLAW:
-                        moveHadEffect = MetalClawMoveAction(attacker, currTarget, move, gUnknown_8106A4C, itemId);
+                        moveHadEffect = MetalClawMoveAction(attacker, currTarget, move, gStatIndexAtkDef, itemId);
                         break;
                     case MOVE_STEEL_WING:
-                        moveHadEffect = SteelWingMoveAction(attacker, currTarget, move, gUnknown_8106A4C, itemId);
+                        moveHadEffect = SteelWingMoveAction(attacker, currTarget, move, gStatIndexAtkDef, itemId);
                         break;
                     case MOVE_POISON_TAIL:
                         moveHadEffect = PoisonTailMoveAction(attacker, currTarget, move, itemId);
@@ -1348,7 +1340,7 @@ void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move *move, 
         }
         if (EntityIsValid(attacker) && GetEntInfo(attacker)->unk155 != 0) {
             GetEntInfo(attacker)->unk155 = 0;
-            LowerAttackStageTarget(attacker, attacker, gUnknown_8106A50, 2, 0, FALSE);
+            LowerAttackStageTarget(attacker, attacker, gStatIndexSpecial, 2, 0, FALSE);
         }
     }
 }

@@ -22,21 +22,20 @@
 #include "structs/dungeon_entity.h"
 #include "structs/str_dungeon.h"
 #include "dungeon_map_access.h"
-#include "structs/str_806B7F8.h"
 #include "dungeon_config.h"
 #include "dungeon_logic.h"
 #include "dungeon_strings.h"
 #include "dungeon_pos_data.h"
 #include "dungeon_damage.h"
+#include "dungeon_mon_spawn.h"
+#include "dungeon_kecleon_shop.h"
 
 extern void UpdateMinimap();
 extern void EntityUpdateStatusSprites(Entity *);
 extern void sub_8042A74(Entity *r0);
-extern void sub_807EC28(bool8);
 extern s32 GetMonsterApparentID(Entity *param_1, s16 param_2);
 extern void sub_806A898(Entity *, u32, u32);
 extern void HealTargetHP(Entity *pokemon, Entity *r1, s16, s16, u32);
-extern void ResetMonEntityData(EntityInfo *, u32);
 extern void sub_80420C8(Entity *r0);
 extern void nullsub_68(Entity *);
 extern void nullsub_67(Entity *);
@@ -60,14 +59,12 @@ extern void sub_8041E74(Entity *);
 extern void sub_8041E60(Entity *);
 extern void sub_8041E4C(Entity *);
 extern void sub_8041E3C(Entity *);
-extern void UpdateCamera(u32);
 extern void sub_8041E1C(Entity *);
 extern void nullsub_89(Entity *);
 extern void nullsub_88(Entity *);
 extern void nullsub_87(Entity *);
 extern void nullsub_86(Entity *);
 extern void sub_8041E0C(Entity *);
-extern bool8 sub_806AA0C(s32, u32);
 
 void sub_8079F20(Entity * pokemon, Entity * target, u8 param_3, u8 param_4)
 {

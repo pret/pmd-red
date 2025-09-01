@@ -130,8 +130,6 @@ extern bool8 GroundScriptNotify(Action *param_1, s32 param_2);
 extern bool8 GroundScript_Cancel(Action *r0);
 extern Pokemon *sub_80A8D54(s32);
 extern void sub_80A6688(struct UnkGroundSpriteStruct *ptr, s32 a0);
-extern s32 sub_808D6A4(s32 *ptr);
-extern s32 sub_808D654(s32 *ptr);
 extern bool8 GetCurrentDungeonBounds(PixelPos *a0, PixelPos *a1);
 extern void sub_80A7428(struct UnkGroundSpriteStruct *ptr, s32 a1_, s32 monsterId_, s32 a3);
 extern void SetPredefinedScript(Action *param_1, s16 index, const ScriptCommand *param_3);

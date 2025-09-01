@@ -16,7 +16,7 @@
 #include "code_801602C.h"
 #include "code_801B3C0.h"
 #include "dungeon_vram.h"
-#include "code_803E724.h"
+#include "dungeon_tilemap.h"
 #include "dungeon_action.h"
 #include "code_8066D04.h"
 #include "code_806CD90.h"
@@ -24,7 +24,7 @@
 #include "dungeon_ai_movement.h"
 #include "dungeon_logic.h"
 #include "dungeon_items.h"
-#include "dungeon_leader.h"
+#include "dungeon_range.h"
 #include "dungeon_main.h"
 #include "dungeon_map.h"
 #include "dungeon_map_access.h"
@@ -55,83 +55,28 @@
 #include "trap.h"
 #include "weather.h"
 #include "dungeon_pos_data.h"
+#include "dungeon_kecleon_shop.h"
+#include "dungeon_engine.h"
+#include "dungeon_item_action.h"
+#include "dungeon_strings.h"
 
 extern void HandleUnsetItemAction(Entity *,bool8);
-extern bool8 sub_8048A68(Entity *param_1,Item *item);
-extern bool8 sub_8048950(Entity *param_1,Item *item);
-extern bool8 sub_8048B9C(Entity *param_1,Item *item);
-extern Item *sub_8044D90(Entity *, s32, u32);
-extern void PlayDungeonCancelSE(void);
-extern void PlayDungeonConfirmationSE(void);
-extern void sub_806A6E8(Entity *);
 extern void TryTriggerTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4);
-bool8 sub_807EF48(void);
 void TryPointCameraToMonster(Entity *a0, u8 a1);
 bool8 sub_80701A4(Entity *a0);
 void sub_8075680(u32);
-void sub_8094C88(void);
 void ClearUnpaidFlagFromAllItems(void);
 void sub_806A914(u8 a0, u8 a1, u8 a2);
-void SetLeaderActionToNothing(u8 a0);
 u16 GetLeaderActionId(void);
 void sub_80978C8(s16 a0);
-static void TryCreateModeArrows(Entity *leader);
-bool8 sub_8094C48(void);
-void sub_803E724(s32 a0);
 void HandleTalkFieldAction(Entity *);
-bool8 IsFloorOver(void);
-bool8 IsNotAttacking(Entity *param_1, bool8 param_2);
 s32 GetTeamMemberEntityIndex(Entity *pokemon);
 bool8 sub_8070F80(Entity * pokemon, s32 direction);
 void sub_806752C(ActionContainer *a0);
 void sub_8067768(ActionContainer *a0);
-void ChangeDungeonCameraPos(DungeonPos *pos, s32 a1, u8 a2, u8 a3);
 extern bool8 sub_8071A8C(Entity *pokemon);
-extern void GetWeatherName(u8 *dst, u8 weatherId);
-extern bool8 sub_8070F14(Entity * pokemon, s32 direction);
-extern Entity *sub_80696A8(Entity *a0);
-extern void PointCameraToMonster(Entity *);
 extern void sub_8041AD0(Entity *pokemon);
 extern void sub_8041AE0(Entity *pokemon);
-extern void sub_807EC28(bool8);
-extern const u8 *GetCurrentDungeonName(void);
-
-extern Entity *gLeaderPointer;
-
-extern const u8 *gUnknown_80F8A84;
-extern const u8 *gUnknown_80F8A6C;
-extern const u8 *gUnknown_80F8ADC;
-extern const u8 *gUnknown_80F8AB0;
-extern const u8 *gUnknown_80F8B0C;
-extern const u8 *gUnknown_80FD4B0;
-extern const u8 *gUnknown_80F8A4C;
-extern const u8 *gUnknown_80F8A28;
-extern const u8 *gUnknown_8100208;
-extern const u8 *gUnknown_80F9BD8;
-extern const u8 *gUnknown_80F9C08;
-extern const u8 *gUnknown_80F9C2C;
-extern const u8 *gUnknown_80F9BB0;
-extern const u8 *gUnknown_80FDE18;
-extern const u8 *gUnknown_80F8B24;
-extern const u8 *gTeamToolboxAPtr;
-extern const u8 *gTeamToolboxBPtr;
-extern const u8 *gFieldItemMenuGroundTextPtr;
-extern const u8 *gUnknown_80FE940;
-extern const u8 *gWhichTextPtr1;
-extern const u8 *const gFieldMenuMovesPtr;
-extern const u8 *const gFieldMenuItemsPtr;
-extern const u8 *const gFieldMenuTeamPtr;
-extern const u8 *const gFieldMenuOthersPtr;
-extern const u8 *const gFieldMenuGroundPtr;
-extern const u8 *const gUnknown_80F9174;
-extern const u8 *const gUnknown_80F9190;
-extern const u8 *const gUnknown_80F91C8;
-extern const u8 *const gUnknown_80F91E0;
-extern const u8 *const gUnknown_80F91A8;
-extern const u8 *const gUnknown_80FE954;
-
-extern MenuInputStruct gDungeonMenu;
-extern s32 gTeamMenuChosenId;
 
 static EWRAM_DATA bool8 sInDiagonalMode = 0;
 static EWRAM_DATA bool8 sInRotateMode = 0;
@@ -141,6 +86,7 @@ static EWRAM_DATA s16 sArrowsFrames = 0;
 static EWRAM_DATA bool8 sShowThreeArrows1 = 0;
 static EWRAM_DATA bool8 sShowThreeArrows2 = 0;
 
+static void TryCreateModeArrows(Entity *leader);
 static void sub_805E738(Entity *a0);
 static bool8 sub_805E874(void);
 static bool8 sub_805EC2C(Entity *a0, s32 x, s32 y);
@@ -427,8 +373,8 @@ void DungeonHandlePlayerInput(void)
                 s32 prevMapOption = gGameOptionsRef->mapOption;
                 gShowMonsterDotsInDungeonMap = TRUE;
                 gDungeon->unk181e8.inFloorMapMode = TRUE;
-                if (!sub_8094C48()) {
-                    sub_8094C88();
+                if (!GameOptions_ShowMiniMap()) {
+                    GameOptions_SetTransparentMiniMap();
                 }
                 sub_8052210(1);
                 UpdateMinimap();

@@ -1,5 +1,5 @@
-#ifndef GUARD_DUNGEON_SPAWNS_H
-#define GUARD_DUNGEON_SPAWNS_H
+#ifndef GUARD_DUNGEON_FLOOR_SPAWNS_H
+#define GUARD_DUNGEON_FLOOR_SPAWNS_H
 
 #include "structs/str_spawn_pokemon_data.h"
 
@@ -14,4 +14,4 @@ bool8 CanMonsterBeSpawnedHere(s16 speciesToFind);
 s16 GetRandomFloorMonsterId(s32 arrId);
 s32 GetSpawnedMonsterLevel(s32 species);
 
-#endif // GUARD_DUNGEON_SPAWNS_H
+#endif // GUARD_DUNGEON_FLOOR_SPAWNS_H

@@ -24,17 +24,17 @@
 #include "dungeon_strings.h"
 #include "dungeon_random.h"
 #include "dungeon_misc.h"
-#include "dungeon_spawns.h"
+#include "dungeon_floor_spawns.h"
+#include "dungeon_tilemap.h"
 #include "pokemon_3.h"
-
-extern u32 gUnknown_8106A4C;
+#include "move_orb_actions_1.h"
+#include "run_dungeon.h"
 
 extern void sub_8041D84(Entity *);
 extern void sub_804178C(u32);
 extern void sub_8041D5C(Entity *);
 extern void sub_8041D48(Entity *);
 extern void sub_8041D38(Entity * pokemon);
-extern u8 GetFloorType(void);
 extern void sub_8041CDC(Entity *pokemon);
 extern void sub_8041CEC(Entity *pokemon);
 extern void nullsub_73(Entity *);
@@ -53,9 +53,7 @@ extern void nullsub_85(Entity *);
 extern void UpdateMinimap();
 extern void EntityUpdateStatusSprites(Entity *);
 extern void sub_8042A74(Entity *r0);
-extern void sub_807EC28(bool8);
 extern void DealDamageToEntity(Entity *, s16, u32, u32);
-extern void ResetMonEntityData(EntityInfo *, u32);
 extern void sub_80420C8(Entity *r0);
 extern void nullsub_68(Entity *);
 extern void nullsub_67(Entity *);
@@ -79,7 +77,6 @@ extern void sub_8041E74(Entity *);
 extern void sub_8041E60(Entity *);
 extern void sub_8041E4C(Entity *);
 extern void sub_8041E3C(Entity *);
-extern void UpdateCamera(u32);
 extern void sub_8041E1C(Entity *);
 extern void nullsub_89(Entity *);
 extern void nullsub_88(Entity *);
@@ -87,14 +84,10 @@ extern void nullsub_87(Entity *);
 extern void nullsub_86(Entity *);
 extern void sub_8041E0C(Entity *);
 extern void sub_8041DD8(Entity *r0, s32 r1); // NOTE: is s16 in another file
-extern bool8 sub_806AA0C(s32, u32);
-extern void UpdateCamera(u32);
-extern void UpdateMinimap(void);
 extern void sub_8041D9C(Entity *);
 extern void sub_8041DB0(Entity *pokemon);
 extern void sub_8041CA8(Entity *);
 extern void sub_8041C94(Entity *);
-extern void sub_803ED30(s32, Entity *r0, u8, s32);
 extern void sub_8041BF8(Entity *);
 extern void sub_8041BE8(Entity *);
 extern void EntityUpdateStatusSprites(Entity *);
@@ -562,7 +555,6 @@ void sub_80783C4(Entity * pokemon, Entity * target, bool8 param_3)
 
 void CurseStatusTarget(Entity *pokemon, Entity * target)
 {
-  u32 statStage;
   s32 HP;
   EntityInfo * pokemonEntityData;
   EntityInfo * targetEntityInfo;
@@ -591,9 +583,8 @@ void CurseStatusTarget(Entity *pokemon, Entity * target)
       TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB004);
     }
     else {
-      statStage = gUnknown_8106A4C;
-      RaiseAttackStageTarget(pokemon,pokemon,statStage,1);
-      RaiseDefenseStageTarget(pokemon,pokemon,statStage,1);
+      RaiseAttackStageTarget(pokemon,pokemon,gStatIndexAtkDef,1);
+      RaiseDefenseStageTarget(pokemon,pokemon,gStatIndexAtkDef,1);
       LowerMovementSpeedTarget(pokemon,pokemon,1,TRUE);
     }
     EntityUpdateStatusSprites(target);

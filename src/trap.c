@@ -1,11 +1,10 @@
 #include "global.h"
 #include "globaldata.h"
 #include "trap.h"
-#include "code_803E724.h"
+#include "dungeon_tilemap.h"
 #include "code_8041AD0.h"
 #include "dungeon_message.h"
 #include "code_8077274_1.h"
-#include "code_807CD9C.h"
 #include "dungeon_random.h"
 #include "code_806CD90.h"
 #include "constants/trap.h"
@@ -18,26 +17,25 @@
 #include "dungeon_random.h"
 #include "dungeon_util.h"
 #include "dungeon_vram.h"
-#include "dungeon_spawns.h"
+#include "dungeon_floor_spawns.h"
 #include "items.h"
 #include "move_effects_target.h"
 #include "moves.h"
 #include "status.h"
 #include "structs/map.h"
 #include "structs/str_dungeon.h"
-#include "structs/str_806B7F8.h"
 #include "dungeon_config.h"
 #include "dungeon_misc.h"
 #include "dungeon_strings.h"
 #include "sprite.h"
 #include "dungeon_pos_data.h"
 #include "dungeon_damage.h"
+#include "warp_target.h"
+#include "blow_away.h"
+#include "explosion.h"
+#include "dungeon_mon_spawn.h"
+#include "move_orb_actions_1.h"
 
-extern u32 gUnknown_8106A4C;
-extern u32 gUnknown_8106A50;
-extern SpriteOAM gUnknown_202EDC0;
-
-bool8 sub_806AA0C(s32, s32);
 void sub_80421EC(DungeonPos *, u32);
 u8 GetFloorType(void);
 void sub_8045BF8(u8 *, Item *);
@@ -45,7 +43,6 @@ void sub_804225C(Entity *, DungeonPos *, u8);
 void EnemyEvolution(Entity *);
 void sub_806A1E8(Entity *pokemon);
 Entity *sub_8045684(u8, DungeonPos *, u8);
-extern void HandleExplosion(Entity *pokemon, Entity *target, DungeonPos *pos, u32, u8 moveType, s16);
 
 void sub_807FA18(void)
 {
@@ -418,16 +415,16 @@ void HandleMudTrap(Entity *pokemon, Entity *target)
     rand = DungeonRandInt(100);
     randDef = rand;
     if (rand < 25) {
-        LowerAttackStageTarget(pokemon,target,gUnknown_8106A4C,1,1,1);
+        LowerAttackStageTarget(pokemon,target,gStatIndexAtkDef,1,1,1);
     }
     else if (rand < 50) {
-        LowerAttackStageTarget(pokemon,target,gUnknown_8106A50,1,1,1);
+        LowerAttackStageTarget(pokemon,target,gStatIndexSpecial,1,1,1);
     }
     else if (randDef < 75) {
-        LowerDefenseStageTarget(pokemon,target,gUnknown_8106A4C,1,1,1);
+        LowerDefenseStageTarget(pokemon,target,gStatIndexAtkDef,1,1,1);
     }
     else {
-        LowerDefenseStageTarget(pokemon,target,gUnknown_8106A50,1,1,1);
+        LowerDefenseStageTarget(pokemon,target,gStatIndexSpecial,1,1,1);
     }
 }
 
@@ -623,7 +620,7 @@ void HandleSummonTrap(Entity *pokemon,DungeonPos *pos)
   u32 direction;
   int pokemonSummonCount;
   s16 species;
-  struct unkStruct_806B7F8 stack;
+  struct MonSpawnInfo stack;
   s32 i;
 
 
@@ -648,7 +645,7 @@ void HandleSummonTrap(Entity *pokemon,DungeonPos *pos)
               stack.pos.y = pos->y + gAdjacentTileOffsets[direction].y;
               stack.unk4 = 0;
               stack.unk10 = 0;
-              if (sub_806B7F8(&stack, TRUE) != NULL) {
+              if (SpawnWildMon(&stack, TRUE) != NULL) {
                 pokemonSummonCount++;
               }
             }
@@ -757,7 +754,7 @@ void HandlePokemonTrap(Entity *param_1,DungeonPos *pos)
 {
     s32 x, y, roomId;
     s32 maxX;
-    struct unkStruct_806B7F8 local_50;
+    struct MonSpawnInfo local_50;
     s32 bottomX;
     s32 maxY;
     s32 bottomY;
@@ -816,7 +813,7 @@ void HandlePokemonTrap(Entity *param_1,DungeonPos *pos)
                     local_50.pos.y = y;
                     local_50.unk4 = 0;
                     local_50.unk10 = 0;
-                    if (sub_806B7F8(&local_50, TRUE) != 0) {
+                    if (SpawnWildMon(&local_50, TRUE) != 0) {
                         RemoveGroundItem(&local_50.pos,0);
                         counter++;
                     }

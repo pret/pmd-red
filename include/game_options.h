@@ -1,6 +1,8 @@
 #ifndef GUARD_GAME_OPTIONS_H
 #define GUARD_GAME_OPTIONS_H
 
+#include "data_serializer.h"
+
 enum DungeonSpeed
 {
     DUNGEON_SPEED_SLOW,
@@ -66,10 +68,16 @@ typedef struct GameOptions
 
 extern GameOptions *gGameOptionsRef;
 
-GameOptions *GetGameOptions(void);
-bool8 GameOptionsNotChange(GameOptions *newOptions);
-void InitializeGameOptions(bool8 initializeGender);
 void LoadGameOptions(void);
+GameOptions *GetGameOptions(void);
+void InitializeGameOptions(bool8 initializeGender);
+bool8 GameOptionsNotChange(GameOptions *newOptions);
+void WriteGameOptionsBits(DataSerializer *param_1);
+void ReadGameOptionsBits(DataSerializer *param_1);
 void SetWindowBGColor(void);
+bool8 GameOptions_ShowMiniMap(void);
+bool8 GameOptions_IsTransparentMiniMap(void);
+void GameOptions_SetTransparentMiniMap(void);
+bool8 sub_8094D14(void);
 
 #endif // GUARD_GAME_OPTIONS_H

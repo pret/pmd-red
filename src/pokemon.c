@@ -1,5 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
+#include "pokemon.h"
 #include "constants/colors.h"
 #include "constants/monster.h"
 #include "constants/tactic.h"
@@ -12,18 +13,19 @@
 #include "file_system.h"
 #include "friend_area.h"
 #include "moves.h"
-#include "pokemon.h"
 #include "pokemon_3.h"
 #include "sprite.h"
 #include "text_util.h"
+#include "dungeon_data.h"
+#include "strings.h"
 
-static EWRAM_DATA MonsterDataEntry *gMonsterParameters = {NULL}; // B=02135090
-static EWRAM_DATA OpenedFile *gMonsterParametersFile = {NULL};
-static EWRAM_DATA SpriteOAM gShadowSprites[3] = {0};
-static EWRAM_DATA RecruitedMon gRecruitedPokemon = {0}; // B=02135560
-static EWRAM_DATA u16 gLevelCurrentPokeId = {0};
+static EWRAM_DATA MonsterDataEntry *sMonsterParameters = {NULL}; // B=02135090
+static EWRAM_DATA OpenedFile *sMonsterParametersFile = {NULL};
+static EWRAM_DATA SpriteOAM sShadowSprites[3] = {0};
+static EWRAM_DATA RecruitedMon sRecruitedPokemon = {0}; // B=02135560
+static EWRAM_DATA s16 sLevelCurrentPokeId = {0};
 UNUSED static EWRAM_DATA u16 unused_data[3] = {0};
-static EWRAM_DATA LevelData gLevelCurrentData[0x64] = {0};
+static EWRAM_DATA LevelData sLevelCurrentData[0x64] = {0}; // TODO: Add MAX_LEVEL define
 
 EWRAM_INIT RecruitedMon *gRecruitedPokemonRef = {NULL}; // B=020EAF94
 
@@ -33,28 +35,20 @@ struct unkStruct_8107654
     s32 unk4;
 };
 
-extern s16 gFrenzyPlantIQReq;  // 0x14d
-extern s16 gHydroCannonIQReq;  // 0x14d
-extern s16 gBlastBurnIQReq;  // 0x14d
-extern s16 gVoltTackleIQReq;  // 0x14d
-extern char* gFormattedStatusNames[];
-
-extern void DungeonMonToPokemon(Pokemon*, DungeonMon*);
-
 // arm9.bin::0205C34C
 void LoadMonsterParameters(void)
 {
-    gRecruitedPokemonRef = &gRecruitedPokemon;
-    gMonsterParametersFile = OpenFileAndGetFileDataPtr("monspara", &gSystemFileArchive);
-    gMonsterParameters = (MonsterDataEntry *)gMonsterParametersFile->data;
-    gLevelCurrentPokeId = 0;
+    gRecruitedPokemonRef = &sRecruitedPokemon;
+    sMonsterParametersFile = OpenFileAndGetFileDataPtr("monspara", &gSystemFileArchive);
+    sMonsterParameters = (MonsterDataEntry *)sMonsterParametersFile->data;
+    sLevelCurrentPokeId = 0;
     // More in blue
 }
 
 // arm9.bin::0205C340
 RecruitedMon *GetRecruitedPokemon(void)
 {
-    return &gRecruitedPokemon;
+    return &sRecruitedPokemon;
 }
 
 // arm9.bin::0205C2A4
@@ -120,7 +114,7 @@ void sub_808CE74(s16 _species, bool32 _isLeader, u8* name)
              pokemon.name[j] = name[j];
          }
      }
-     friendArea = gMonsterParameters[species].friendArea;
+     friendArea = sMonsterParameters[species].friendArea;
      for (i = 0; i < NUM_MONSTERS; i++) {
          if (!PokemonExists(&gRecruitedPokemonRef->pokemon[i])) {
              u8 speciesFriendArea = sub_80923D4(i);
@@ -241,7 +235,7 @@ Pokemon *TryAddPokemonToRecruited(Pokemon *pokemon)
 {
     s32 i;
     s32 species = pokemon->speciesNum;
-    u32 friendArea = gMonsterParameters[species].friendArea;
+    u32 friendArea = sMonsterParameters[species].friendArea;
 
     if (!gFriendAreas[friendArea])
         return NULL;
@@ -263,7 +257,7 @@ Pokemon *sub_808D278(s32 species)
 {
     s32 i;
     s16 species_s16 = (s16)species;
-    u32 friendArea = gMonsterParameters[species_s16].friendArea;
+    u32 friendArea = sMonsterParameters[species_s16].friendArea;
 
     if (!gFriendAreas[friendArea])
         return NULL;
@@ -520,7 +514,7 @@ s32 sub_808D6A4(s32 *ptr)
     return count;
 }
 
-bool8 sub_808D6E8()
+UNUSED static bool8 sub_808D6E8(void)
 {
     s32 i;
     s32 count = 0;
@@ -538,48 +532,51 @@ bool8 sub_808D6E8()
     return 0;
 }
 
- bool8 sub_808D750(s32 index_)
- {
-     Pokemon* pokemon;
-     s32 i;
-     s32 index = (s16) index_;
-     s32 count = 0;
-     s32 size_count = 0;
+bool8 sub_808D750(s32 index_)
+{
+ Pokemon* pokemon;
+ s32 i;
+ s32 index = (s16) index_;
+ s32 count = 0;
+ s32 size_count = 0;
 
-     for (i = 0; i < NUM_MONSTERS; i++) {
-         pokemon = &gRecruitedPokemonRef->pokemon[i];
-         if (PokemonExists(pokemon) && PokemonFlag2(pokemon)) {
-             size_count += GetBodySize(pokemon->speciesNum);
-             count++;
-         }
-     }
-
-     if (count < 4) {
-         pokemon = &gRecruitedPokemonRef->pokemon[index];
+ for (i = 0; i < NUM_MONSTERS; i++) {
+     pokemon = &gRecruitedPokemonRef->pokemon[i];
+     if (PokemonExists(pokemon) && PokemonFlag2(pokemon)) {
          size_count += GetBodySize(pokemon->speciesNum);
-         if (size_count < 7) {
-             return TRUE;
-         }
+         count++;
      }
-
-     return FALSE;
  }
 
-void PeekPokemonItem(s16 index_, BulkItem* item) {
+ if (count < MAX_TEAM_MEMBERS) {
+     pokemon = &gRecruitedPokemonRef->pokemon[index];
+     size_count += GetBodySize(pokemon->speciesNum);
+     if (size_count <= MAX_TEAM_BODY_SIZE) {
+         return TRUE;
+     }
+ }
+
+ return FALSE;
+}
+
+void PeekPokemonItem(s16 index_, BulkItem* item)
+{
     s32 index = index_;
     Pokemon* pokemon = &gRecruitedPokemonRef->pokemon[index];
     item->id = pokemon->heldItem.id;
     item->quantity = pokemon->heldItem.quantity;
 }
 
-void GivePokemonItem(s16 index_, BulkItem* item) {
+void GivePokemonItem(s16 index_, BulkItem* item)
+{
     s32 index = index_;
     Pokemon* pokemon = &gRecruitedPokemonRef->pokemon[index];
     pokemon->heldItem.id = item->id;
     pokemon->heldItem.quantity = item->quantity;
 }
 
-bool8 IsPokemonRenamed(Pokemon* pokemon) {
+bool8 IsPokemonRenamed(Pokemon* pokemon)
+{
     char species_name[20];
     char* species = GetMonSpecies(pokemon->speciesNum);
     s32 i;
@@ -621,20 +618,20 @@ bool8 ComparePokemonNames(s16 a1, s16 a2)
 void CopyMonsterNameToBuffer(u8 * buffer, s32 index)
 {
     s16 index_s16 = index;
-    strncpy(buffer, gMonsterParameters[index_s16].species, 0x14);
+    strncpy(buffer, sMonsterParameters[index_s16].species, 0x14);
 }
 
 // arm9.bin::0205B274
 void CopyYellowMonsterNametoBuffer(u8 *buffer, s16 index)
 {
     s32 new_index = index;
-    sprintfStatic(buffer, _("{color YELLOW_RAW}%s{reset}"), gMonsterParameters[new_index].species);
+    sprintfStatic(buffer, _("{color YELLOW_RAW}%s{reset}"), sMonsterParameters[new_index].species);
 }
 
 void CopyCyanMonsterNametoBuffer(u8 *buffer, s32 index_)
 {
     s32 index = (s16) index_;
-    sprintfStatic(buffer, _("{color CYAN_RAW}%s{reset}"), gMonsterParameters[index].species);
+    sprintfStatic(buffer, _("{color CYAN_RAW}%s{reset}"), sMonsterParameters[index].species);
 }
 
 void sub_808D930(u8 *buffer, s32 index)
@@ -646,13 +643,13 @@ void sub_808D930(u8 *buffer, s32 index)
     sprintfStatic(buffer,"%s%c",GetMonSpecies(MONSTER_UNOWN),unownLetters[GetUnownIndex(index_s16)]);
   }
   else {
-    sprintfStatic(buffer,"%s", gMonsterParameters[index_s16].species);
+    sprintfStatic(buffer,"%s", sMonsterParameters[index_s16].species);
   }
 }
 
 char * GetMonSpecies(s16 index)
 {
-    return gMonsterParameters[index].species;
+    return sMonsterParameters[index].species;
 }
 
 void PrintColoredPokeNameToBuffer(u8 *buffer, Pokemon *pokemon, s32 colorNum)
@@ -723,132 +720,131 @@ bool8 sub_808DA44(s32 _species, u32 a2_)
 
 u8 *GetCategoryString(s16 index)
 {
-    return gMonsterParameters[index].category;
+    return sMonsterParameters[index].category;
 }
 
 u8 GetBodySize(s32 index)
 {
     s16 index_s16 = index;
-    return gMonsterParameters[index_s16].bodySize;
+    return sMonsterParameters[index_s16].bodySize;
 }
 
 u8 GetShadowSize(s16 index)
 {
-    return gMonsterParameters[index].shadowSize;
+    return sMonsterParameters[index].shadowSize;
 }
 
 s32 GetMovementSpeed(s16 index)
 {
-    return gMonsterParameters[index].movementSpeed;
+    return sMonsterParameters[index].movementSpeed;
 }
 
 u8 GetMovementType(s16 index)
 {
-    return gMonsterParameters[index].movementType;
+    return sMonsterParameters[index].movementType;
 }
 
 u8 GetRegenSpeed(s16 index)
 {
-    return ((u8)(gMonsterParameters[index].regenSpeed) << 25) >> 24;
+    return ((u8)(sMonsterParameters[index].regenSpeed) << 25) >> 24;
 }
 
 bool8 GetCanMoveFlag(s16 index)
 {
-    return gMonsterParameters[index].canMove;
+    return sMonsterParameters[index].canMove;
 }
 
 u8 GetChanceAsleep(s16 index)
 {
-    return gMonsterParameters[index].chanceAsleep;
+    return sMonsterParameters[index].chanceAsleep;
 }
 
 u32 GetWeight(s16 index)
 {
-    return gMonsterParameters[index].weight;
+    return sMonsterParameters[index].weight;
 }
 
 u32 GetSize(s16 index)
 {
-    return gMonsterParameters[index].size;
+    return sMonsterParameters[index].size;
 }
 
 u8 GetFriendArea(s32 index)
 {
     s16 index_s32 = index;
-    return gMonsterParameters[index_s32].friendArea;
+    return sMonsterParameters[index_s32].friendArea;
 }
 
 s32 GetBaseHP(s32 index)
 {
     s16 index_s32 = index;
-    return gMonsterParameters[index_s32].baseHP;
+    return sMonsterParameters[index_s32].baseHP;
 }
 
 bool8 MonsterIDCanThrowItems(s16 index)
 {
-    return gMonsterParameters[index].canThrowItems;
+    return sMonsterParameters[index].canThrowItems;
 }
 
 u8 GetUnk12(s16 index)
 {
-    return gMonsterParameters[index].unk12;
+    return sMonsterParameters[index].unk12;
 }
 
 s32 GetPokemonEvolveFrom(s32 index)
 {
     s16 index_s16 = index;
-    return gMonsterParameters[index_s16].preEvolution.evolveFrom;
+    return sMonsterParameters[index_s16].preEvolution.evolveFrom;
 }
 
 s32 GetBaseOffensiveStat(s32 index, u32 r1)
 {
     s16 index_s16 = index;
-    return gMonsterParameters[index_s16].baseAtkSpAtk[r1];
+    return sMonsterParameters[index_s16].baseAtkSpAtk[r1];
 }
 
 s32 GetBaseDefensiveStat(s32 index, u32 r1)
 {
     s16 index_s16 = index;
-    return gMonsterParameters[index_s16].baseDefSpDef[r1];
+    return sMonsterParameters[index_s16].baseDefSpDef[r1];
 }
 
 // arm9.bin::0205AE2C
 u8 GetPokemonType(s32 index, u32 typeIndex)
 {
     s16 newIndex = index;
-    return gMonsterParameters[newIndex].types[typeIndex];
+    return sMonsterParameters[newIndex].types[typeIndex];
 }
 
 u8 GetPokemonAbility(s16 index, u32 abilityIndex)
 {
-    return gMonsterParameters[index].abilities[abilityIndex];
+    return sMonsterParameters[index].abilities[abilityIndex];
 }
 
 s16 GetDexInternalNo(s32 index, u32 r1)
 {
     s16 index_s16 = index;
-    return gMonsterParameters[index_s16].dexInternal[r1];
+    return sMonsterParameters[index_s16].dexInternal[r1];
 }
 
 s16 GetRecruitRate(s16 index)
 {
-    return gMonsterParameters[index].recruitRate;
+    return sMonsterParameters[index].recruitRate;
 }
 
 s16 GetAlphabetParentNo(s16 index, s32 r1)
 {
-    return gMonsterParameters[index].alphabetParent[r1];
+    return sMonsterParameters[index].alphabetParent[r1];
 }
-
 
 s16 GetInternalNo(s16 index)
 {
-    return gMonsterParameters[index].dexInternal[1];
+    return sMonsterParameters[index].dexInternal[1];
 }
 
 s32 CalculateEXPGain(s16 index, s32 level)
 {
-    s32 expYield = gMonsterParameters[index].expYield;
+    s32 expYield = sMonsterParameters[index].expYield;
     return expYield + (expYield * (level - 1)) / 10;
 }
 
@@ -856,8 +852,8 @@ s16 GetPokemonEvolveConditions(s16 index, unkEvolve *r1)
 {
     PreEvolution temp2;
     EvolutionRequirements temp1;
-    temp1 = gMonsterParameters[index].evolutionRequirements;
-    temp2 = gMonsterParameters[index].preEvolution;
+    temp1 = sMonsterParameters[index].evolutionRequirements;
+    temp2 = sMonsterParameters[index].preEvolution;
     r1->preEvolution = temp2;
     r1->evolutionRequirements = temp1;
     // The return value is not used anywhere, but necessary for the function to match.
@@ -873,7 +869,7 @@ u8 GetPokemonOverworldPalette(s16 index, bool32 recolorShopKecleon)
     }
     else
     {
-        return gMonsterParameters[id].overworldPalette;
+        return sMonsterParameters[id].overworldPalette;
     }
 }
 
@@ -882,7 +878,7 @@ OpenedFile *OpenPokemonDialogueSpriteFile(s16 index)
     // Looks like this loads the dialogue sprite for the pokemon
 
     char buffer[0xC];
-    if(gMonsterParameters[index].dialogueSprites == 0)
+    if(sMonsterParameters[index].dialogueSprites == 0)
     {
         return NULL;
     }
@@ -897,7 +893,7 @@ OpenedFile *GetDialogueSpriteDataPtr(s32 index)
     char buffer[0xC];
     s16 id = SpeciesId(index);
 
-    if(gMonsterParameters[id].dialogueSprites == 0)
+    if(sMonsterParameters[id].dialogueSprites == 0)
     {
         return NULL;
     }
@@ -908,7 +904,7 @@ OpenedFile *GetDialogueSpriteDataPtr(s32 index)
 bool8 IsPokemonDialogueSpriteAvail(s16 index, s32 spriteId)
 {
     // checking to see if dialogue sprite is available??
-    return (gMonsterParameters[index].dialogueSprites >> spriteId) & 1;
+    return (sMonsterParameters[index].dialogueSprites >> spriteId) & 1;
 }
 
 void RecruitedPokemonToDungeonMon(DungeonMon *dst, u32 recruitedPokemonId)
@@ -1012,21 +1008,21 @@ void GetLvlUpEntry(LevelData* a1, s32 _id, s32 level)
   u8 buffer[12];
   s32 id = SpeciesId(_id);
 
-  if ((s16)gLevelCurrentPokeId != id)
+  if (sLevelCurrentPokeId != id)
   {
     OpenedFile *file;
 
-    gLevelCurrentPokeId = id;
+    sLevelCurrentPokeId = id;
     sprintf(buffer, "lvmp%03d", id);
     file = OpenFileAndGetFileDataPtr(buffer, &gSystemFileArchive);
-    DecompressATFile(gLevelCurrentData, 0, file);
+    DecompressATFile(sLevelCurrentData, 0, file);
     CloseFile(file);
   }
   level -= 1;
   if ( level < 0 )
     level = 0;
 
-   *a1 = gLevelCurrentData[level];
+   *a1 = sLevelCurrentData[level];
 }
 
 const u8* DecompressMoveID(const u8* src, u16* moveID)
@@ -1123,7 +1119,6 @@ bool8 CanMonLearnMove(u16 moveID, s16 _species)
   return FALSE;
 }
 
-
 s32 sub_808E218(unkStruct_808E218_arg* a1, Pokemon* pokemon)
 {
   s32 i;
@@ -1183,7 +1178,7 @@ s32 sub_808E218(unkStruct_808E218_arg* a1, Pokemon* pokemon)
   return count;
 }
 
-s32 GetEvolutionSequence(Pokemon* pokemon, struct EvolveStage* a2)
+s32 GetEvolutionSequence(Pokemon* pokemon, EvolveStage* a2)
 {
     s32 count;
     s32 species;
@@ -1326,7 +1321,7 @@ void InitShadowSprites(s32 param_1, s32 param_2)
     CloseFile(file);
 
     for (spriteIndex = 0; spriteIndex < 3; spriteIndex++) {
-        SpriteOAM *sprite = &gShadowSprites[spriteIndex];
+        SpriteOAM *sprite = &sShadowSprites[spriteIndex];
 
         SpriteSetAffine1(sprite, 0);
         SpriteSetAffine2(sprite, 0);
@@ -1344,23 +1339,24 @@ void InitShadowSprites(s32 param_1, s32 param_2)
     }
 }
 
-static const s32 gUnknown_81076C4[6] = {-4, -8, -16, -4, -8, -16}; // x-coord positioning for shadow sprites
+static const s32 sShadowXPosOffsets[6] = {-4, -8, -16, -4, -8, -16};
 
-bool8 AddShadowSprite(s16 species, s16* a2, s16* a3)
+bool8 AddShadowSprite(s32 species_, DungeonPos *shadowPos, axdata *axData)
 {
+    s16 species = (s16) (species_);
     if (species != MONSTER_DIGLETT && species != MONSTER_DUGTRIO) {
         s32 shadowSize = GetShadowSize(species);
         s32 x, y;
 
-        x = a2[0] + a3[8];
-        y = a2[1] + a3[9];
-        x += gUnknown_81076C4[shadowSize];
+        x = shadowPos->x + axData->sub1.shadow.x;
+        y = shadowPos->y + axData->sub1.shadow.y;
+        x += sShadowXPosOffsets[shadowSize];
         y -= 4;
 
-        SpriteSetX(&gShadowSprites[shadowSize], x);
-        SpriteSetY(&gShadowSprites[shadowSize], y);
+        SpriteSetX(&sShadowSprites[shadowSize], x);
+        SpriteSetY(&sShadowSprites[shadowSize], y);
 
-        AddSprite(&gShadowSprites[shadowSize], 0, NULL, NULL);
+        AddSprite(&sShadowSprites[shadowSize], 0, NULL, NULL);
     }
 
     return TRUE;

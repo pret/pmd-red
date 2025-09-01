@@ -6,7 +6,7 @@
 #include "dungeon_message.h"
 #include "dungeon_misc.h"
 #include "dungeon_logic.h"
-#include "dungeon_leader.h"
+#include "dungeon_range.h"
 #include "string_format.h"
 #include "code_80958E8.h"
 #include "mailbox.h"

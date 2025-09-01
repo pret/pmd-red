@@ -1,5 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
+#include "dungeon_cleared_window.h"
 #include "dungeon_info.h"
 #include "dungeon_strings.h"
 #include "dungeon_vram.h"
@@ -7,12 +8,8 @@
 #include "text_1.h"
 #include "run_dungeon.h"
 #include "dungeon_run_end.h"
-
-extern void PlayDungeonCompleteBGM(void);
-extern void PlayDungeonFailBGM(void);
-extern void PlayDungeonConfirmationSE(void);
-extern void UpdateDungeonMusic(void);
-extern u8 sub_8094D14(void);
+#include "dungeon_music.h"
+#include "game_options.h"
 
 void ShowDungeonClearedWindow(void)
 {

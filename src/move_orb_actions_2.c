@@ -3,10 +3,9 @@
 #include "move_orb_actions_2.h"
 #include "dungeon_move_util.h"
 #include "dungeon_vram.h"
-#include "code_803E724.h"
+#include "dungeon_tilemap.h"
 #include "code_806CD90.h"
 #include "code_8077274_1.h"
-#include "code_807CD9C.h"
 #include "dungeon_random.h"
 #include "constants/ability.h"
 #include "constants/status.h"
@@ -20,11 +19,12 @@
 #include "dungeon_random.h"
 #include "dungeon_util.h"
 #include "dungeon_move.h"
+#include "dungeon_misc.h"
 #include "move_effects_target.h"
 #include "moves.h"
 #include "number_util.h"
 #include "pokemon.h"
-#include "move_orb_actions_4.h"
+#include "move_orb_actions_1.h"
 #include "status.h"
 #include "structs/dungeon_entity.h"
 #include "structs/map.h"
@@ -34,14 +34,10 @@
 #include "dungeon_misc.h"
 #include "dungeon_strings.h"
 #include "dungeon_damage.h"
+#include "warp_target.h"
+#include "explosion.h"
 
-extern void EndAbilityImmuneStatus(Entity *, Entity *);
-extern void HandleExplosion(Entity *pokemon, Entity *target, DungeonPos *pos, u32, u8 moveType, s16);
 extern void nullsub_92(Entity *);
-extern u8 sub_807EAA0(u32, u32);
-
-extern u32 gUnknown_8106A4C;
-extern u32 gUnknown_8106A50;
 
 bool8 SkyAttackMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 {
@@ -90,7 +86,7 @@ bool8 MeteorMashMoveAction(Entity *pokemon, Entity *target, Move *move, s32 para
     if(sub_805727C(pokemon, pokemon, gMeteorMashSecondaryChance))
     {
         entityInfo = GetEntInfo(pokemon);
-        RaiseAttackStageTarget(pokemon, pokemon, gUnknown_8106A4C, 1);
+        RaiseAttackStageTarget(pokemon, pokemon, gStatIndexAtkDef, 1);
         SetExpMultplier(entityInfo);
     }
   }
@@ -164,7 +160,7 @@ bool8 PsychoBoostMoveAction(Entity *pokemon, Entity *target, Move *move, s32 par
         flag = TRUE;
         if(RollSecondaryEffect(pokemon, 0))
         {
-            LowerAttackStageTarget(pokemon, pokemon, gUnknown_8106A50, 2, 0, FALSE);
+            LowerAttackStageTarget(pokemon, pokemon, gStatIndexSpecial, 2, 0, FALSE);
         }
     }
     return flag;
@@ -542,7 +538,7 @@ bool8 SandstormMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param
 
 bool8 sub_8059528(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 {
-    LowerAccuracyStageTarget(pokemon, target, gUnknown_8106A4C, TRUE);
+    LowerAccuracyStageTarget(pokemon, target, gStatIndexAtkDef, TRUE);
     return TRUE;
 }
 
@@ -563,7 +559,7 @@ bool8 SmogMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 
 bool8 GrowthMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 {
-    RaiseAttackStageTarget(pokemon, target, gUnknown_8106A50, 1);
+    RaiseAttackStageTarget(pokemon, target, gStatIndexSpecial, 1);
     return TRUE;
 }
 
@@ -682,7 +678,7 @@ bool8 MuddyWaterMoveAction(Entity *pokemon, Entity *target, Move *move, s32 para
     flag = TRUE;
     if(sub_805727C(pokemon, target, gMuddyWaterAccLowerChance))
     {
-        LowerAccuracyStageTarget(pokemon, target, gUnknown_8106A4C, FALSE);
+        LowerAccuracyStageTarget(pokemon, target, gStatIndexAtkDef, FALSE);
     }
   }
   return flag;
@@ -742,7 +738,7 @@ bool8 sub_80599EC(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 
 bool8 MinimizeMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 {
-    RaiseAccuracyStageTarget(pokemon, target, gUnknown_8106A50);
+    RaiseAccuracyStageTarget(pokemon, target, gStatIndexSpecial);
     return TRUE;
 }
 
@@ -794,7 +790,7 @@ bool8 HornDrillMoveAction(Entity * pokemon,Entity * target,Move * move,s32 param
 
 bool8 SwordsDanceMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 {
-    RaiseAttackStageTarget(pokemon, target, gUnknown_8106A4C, 2);
+    RaiseAttackStageTarget(pokemon, target, gStatIndexAtkDef, 2);
     return TRUE;
 }
 
@@ -857,8 +853,8 @@ bool8 HelpingHandMoveAction(Entity *pokemon, Entity *target, Move *move, s32 par
         TryDisplayDungeonLoggableMessage3(target, target, gUnknown_80FEB60);
     }
     else {
-        RaiseAttackStageTarget(pokemon, target, gUnknown_8106A4C, 1);
-        RaiseAttackStageTarget(pokemon, target, gUnknown_8106A50, 1);
+        RaiseAttackStageTarget(pokemon, target, gStatIndexAtkDef, 1);
+        RaiseAttackStageTarget(pokemon, target, gStatIndexSpecial, 1);
         flag = TRUE;
     }
     return flag;
@@ -866,7 +862,7 @@ bool8 HelpingHandMoveAction(Entity *pokemon, Entity *target, Move *move, s32 par
 
 bool8 sub_8059CD8(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 {
-    RaiseDefenseStageTarget(pokemon, target, gUnknown_8106A4C, 2);
+    RaiseDefenseStageTarget(pokemon, target, gStatIndexAtkDef, 2);
     return TRUE;
 }
 

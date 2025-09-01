@@ -60,18 +60,4 @@ enum DungeonAction
     NUM_DUNGEON_ACTIONS
 };
 
-// size: 0x4
-typedef struct SubMenuAction
-{
-    u16 actionId;
-    u8 unk2;
-    bool8 canBeChosen;
-} SubMenuAction;
-
-extern SubMenuAction gDungeonSubMenu[10];
-extern s32 gDungeonSubMenuItemsCount;
-
-void AddActionToDungeonSubMenu(u16 actionId, u8 param_2);
-void SetActionUnusableInDungeonSubMenu(u16 actionId);
-
 #endif

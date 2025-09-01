@@ -14,7 +14,7 @@
 #include "effect_data.h"
 #include "code_803D110.h"
 #include "dungeon_vram.h"
-#include "code_803E724.h"
+#include "dungeon_tilemap.h"
 #include "code_805D8C8.h"
 #include "code_8094F88.h"
 #include "code_8099360.h"
@@ -26,7 +26,8 @@
 #include "dungeon_engine.h"
 #include "dungeon_generation.h"
 #include "dungeon_items.h"
-#include "dungeon_leader.h"
+#include "dungeon_leveling.h"
+#include "dungeon_range.h"
 #include "dungeon_map.h"
 #include "dungeon_map_access.h"
 #include "dungeon_message.h"
@@ -34,7 +35,7 @@
 #include "dungeon_misc.h"
 #include "dungeon_music.h"
 #include "dungeon_name_banner.h"
-#include "dungeon_spawns.h"
+#include "dungeon_floor_spawns.h"
 #include "dungeon_pokemon_sprites.h"
 #include "dungeon_random.h"
 #include "dungeon_strings.h"
@@ -49,57 +50,33 @@
 #include "text_1.h"
 #include "text_3.h"
 #include "weather.h"
+#include "dungeon_data.h"
+#include "dungeon_jobs.h"
+#include "dungeon_tilemap.h"
+#include "dungeon_cleared_window.h"
+#include "dungeon_cutscene.h"
+#include "dungeon_mon_spawn.h"
 
 EWRAM_INIT struct UnkStruct_203B414 *gUnknown_203B414 = NULL;
 EWRAM_INIT Dungeon *gDungeon = NULL;
 static EWRAM_INIT u8 *gSerializedData_203B41C = NULL;
 
-extern u8 gUnknown_203B40C;
-
-extern void sub_8040094(u8 r0);
 extern void sub_8068BDC(u8 r0);
-extern s16 GetTurnLimit(u8 dungeon);
 extern void sub_8041888(u8 param_1);
 extern void sub_803D4AC(void);
 extern void sub_804513C(void);
-extern void sub_803E830(void);
 extern void sub_8068F28(void);
-extern void sub_806C1D8(void);
 extern void IncrementThievingSuccesses(void);
-extern void ShowDungeonClearedWindow(void);
-extern void sub_8084424(void);
-extern void sub_8086130(void);
-extern void sub_80847D4(void);
 extern void sub_8043D60(void);
 extern void sub_80840A4(void);
-extern void sub_80848F0(void);
 extern void IncrementAdventureFloorsExplored(void);
 extern void sub_806AB2C(void);
-extern void DisplayPreFightDialogue(void);
-extern void EnemyEvolution(Entity *);
-extern void sub_803E748(void);
-extern void sub_8083D68(void);
-extern void sub_803E7C8(void);
-extern void UpdateMinimap(void);
 extern void sub_807E5AC(void);
-extern void TryActivateArtificialWeatherAbilities(void);
-extern void sub_807E88C(void);
 extern void nullsub_16(void);
 extern void sub_80521D0(void);
-extern void sub_803F27C(u8);
-extern void sub_807E7FC(u8);
 extern void sub_8068A84(Pokemon *pokemon);
-extern void sub_807EAA0(u32, u32);
-extern void SetFloorItemMonsterSpawns(void);
-extern void sub_80842F0(void);
 extern void sub_80427AC(void);
 extern void sub_806AA70(void);
-extern void sub_806AD3C(void);
-extern void sub_806C42C(void);
-extern void sub_806B678(void);
-extern void sub_806C3C0(void);
-extern void sub_806B168(void);
-extern void sub_806B6C4(void);
 extern void ReevaluateSnatchMonster(void);
 extern void sub_8051E3C(void);
 extern void sub_807FA18(void);
@@ -109,19 +86,13 @@ extern void sub_8068F80(void);
 extern void sub_8042E98(void);
 extern bool8 TryForcedLoss(bool8);
 extern void sub_806A914(bool8 a0, bool8 a1, bool8 showRunAwayEffect);
-extern void sub_803F4A0(Entity *a0);
-extern void ResetMonEntityData(EntityInfo *, u32);
-extern s32 GetMovesLearnedAtLevel(u16* dst, s16 species, s32 level, s32 IQPoints);
 extern void sub_8042B0C(Entity *);
 
 extern u8 gUnknown_202F32C;
 extern u8 gUnknown_202F1A8;
-extern s32 gDungeonBrightness;
-extern Entity *gLeaderPointer;
 
 void EnforceMaxItemsAndMoney(void);
 static void sub_8043FD0(void);
-void sub_806B404(void);
 
 extern OpenedFile *gDungeonNameBannerPalette;
 
@@ -379,7 +350,7 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
         if (!r6) {
             sub_806B168();
             sub_806C3C0();
-            sub_806B6C4();
+            SpawnWildMonsOnFloor();
         }
         else {
             sub_806B678();

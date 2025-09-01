@@ -1,12 +1,12 @@
 #include "global.h"
 #include "globaldata.h"
+#include "hurl_orb.h"
 #include "dungeon_vram.h"
 #include "code_8041AD0.h"
 #include "code_804267C.h"
 #include "code_805D8C8.h"
 #include "code_806CD90.h"
 #include "code_8077274_1.h"
-#include "code_807CD9C.h"
 #include "constants/ability.h"
 #include "constants/monster.h"
 #include "constants/type.h"
@@ -16,7 +16,7 @@
 #include "dungeon_config.h"
 #include "dungeon_generation.h"
 #include "dungeon_items.h"
-#include "dungeon_leader.h"
+#include "dungeon_range.h"
 #include "dungeon_logic.h"
 #include "dungeon_map.h"
 #include "dungeon_map_access.h"
@@ -40,15 +40,13 @@
 #include "weather.h"
 #include "dungeon_pos_data.h"
 #include "dungeon_damage.h"
+#include "dungeon_kecleon_shop.h"
+#include "blow_away.h"
+#include "warp_target.h"
 
-extern void sub_80833E8(DungeonPos *param_1, s32 *param_2);
-extern void sub_806A5B8(Entity *);
-extern void sub_807D068(Entity *, DungeonPos *);
-extern void sub_807EC28(bool8 arg0);
+static void sub_807F9BC(Entity *entity);
 
-void sub_807F9BC(Entity *entity);
-
-void sub_807F43C(Entity *target, Entity *attacker)
+void HandleHurlOrb(Entity *target, Entity *attacker)
 {
     s32 attackerDirection;
     s32 var_3C;
@@ -233,7 +231,7 @@ void sub_807F43C(Entity *target, Entity *attacker)
     }
 }
 
-void sub_807F9BC(Entity *entity)
+static void sub_807F9BC(Entity *entity)
 {
     if (EntityIsValid(entity)) {
         EntityInfo *entInfo = GetEntInfo(entity);

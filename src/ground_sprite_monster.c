@@ -7,7 +7,6 @@
 #include "pokemon.h"
 
 extern s32 sub_800E700(s32);
-extern bool8 AddShadowSprite(s32 species, DungeonPos* a2, axdata* a3);
 
 void sub_80A7428(struct UnkGroundSpriteStruct *ptr, s32 a1_, s32 monsterId_, s32 a3)
 {

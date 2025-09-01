@@ -3,10 +3,10 @@
 #include "structs/map.h"
 #include "structs/str_dungeon.h"
 #include "dungeon_vram.h"
-#include "code_803E724.h"
+#include "dungeon_tilemap.h"
 #include "dungeon_action.h"
-#include "dungeon_action.h"
-#include "dungeon_leader.h"
+#include "dungeon_misc.h"
+#include "dungeon_range.h"
 #include "dungeon_main.h"
 #include "dungeon_menu_moves.h"
 #include "dungeon_menu_team.h"
@@ -17,6 +17,8 @@
 #include "dungeon_submenu.h"
 #include "dungeon_strings.h"
 #include "dungeon_util.h"
+#include "dungeon_engine.h"
+#include "dungeon_map_access.h"
 #include "input.h"
 #include "moves.h"
 #include "menu_input.h"
@@ -28,24 +30,12 @@
 #include "text_2.h"
 #include "text_3.h"
 
-extern void PlayDungeonCancelSE(void);
-extern void PlayDungeonConfirmationSE(void);
-extern u8 *GetDungeonSubMenuItemString(s32 param_1);
-extern bool8 CanSubMenuItemBeChosen(s32 param_1);
-extern void sub_8045064(void);
 extern s32 GetTeamMemberEntityIndex(Entity *pokemon);
-extern void ChangeDungeonCameraPos(DungeonPos *pos, s32 a1, u8 a2, u8 a3);
-extern void SetLeaderActionToNothing(u8 a0);
 extern void sub_806752C(ActionContainer *a0);
 extern void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 a1);
 extern void sub_8067768(ActionContainer *a0);
-extern void TryPointCameraToMonster(Entity *a0, u8 a1);
 extern bool8 sub_8071A8C(Entity *pokemon);
-extern void sub_8083D1C(void);
-extern s32 ActionToDungeonSubMenuId(u16 param_1);
 
-extern s32 gDungeonSubMenuItemsCount;
-extern MenuInputStruct gDungeonMenu;
 
 static void ShowMovesMenuWindows(Entity *entity, EntityInfo *entInfo, bool8 redColorForChargingMoves, WindowTemplates *windows, WindowHeader *header, u8 *arg5, s32 arg6, s32 arg7);
 static void AddMovesSubMenuOptions(Entity *entity, bool8 addLinkOptions, bool8 addUseMove);

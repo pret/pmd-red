@@ -15,18 +15,15 @@
 #include "dungeon_map_access.h"
 #include "dungeon_music.h"
 #include "dungeon_util.h"
+#include "dungeon_vram.h"
 #include "file_system.h"
 #include "game_options.h"
 #include "sprite.h"
 #include "text_1.h"
 #include "trap.h"
+#include "run_dungeon.h"
 
-extern s32 gUnknown_202EDD0;
-
-extern u8 GetFloorType(void);
-extern bool8 sub_8094C48(void);
 extern bool8 ShouldMinimapDisplayEntity(Entity *ent);
-extern bool8 DoesNotHaveShadedMap(void);
 
 struct UnkStruct1
 {
@@ -236,7 +233,7 @@ void DrawMinimapTile(s32 x, s32 y)
         }
     }
 
-    if (sub_8094C48() && !gDungeon->unk1356C) {
+    if (GameOptions_ShowMiniMap() && !gDungeon->unk1356C) {
         mapGfxType = MAP_GFX_NOTHING;
         if (!blinded) {
             Entity *entity = tile->monster;
@@ -384,7 +381,7 @@ void DrawMinimapTile(s32 x, s32 y)
         if (gGameOptionsRef->mapOption == TOP_MAP_AND_TEAM_NO_BOTTOM) {
             mapGfxType = (s16) (mapGfxType + 128);
         }
-        else if (DoesNotHaveShadedMap() == TRUE) {
+        else if (GameOptions_IsTransparentMiniMap() == TRUE) {
             mapGfxType = (s16) (mapGfxType + 64);
         }
     }

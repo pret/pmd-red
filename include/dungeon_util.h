@@ -5,6 +5,7 @@
 #include "structs/dungeon_entity.h"
 #include "structs/str_position.h"
 #include "structs/str_traps.h"
+#include "structs/str_dungeon.h"
 #include "structs/map.h"
 
 static inline EntityInfo *GetEntInfo(Entity *entity)
@@ -34,5 +35,8 @@ bool8 sub_8045AAC(Entity *entity, DungeonPos *pos);
 bool8 CanTargetPosition(Entity *entity, DungeonPos *pos);
 void SubstitutePlaceholderStringTags(u8 *buffer, Entity *entity, u32 param_3);
 void sub_8045ACC(void);
+
+extern u8 gUnknown_202EE70[MAX_TEAM_BODY_SIZE];
+extern u8 gUnknown_202EE76[DUNGEON_MAX_WILD_POKEMON_BODY_SIZE];
 
 #endif // GUARD_DUNGEON_UTIL_H

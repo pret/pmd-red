@@ -3,37 +3,36 @@
 #include "dungeon_engine.h"
 #include "run_dungeon.h"
 #include "dungeon_vram.h"
+#include "dungeon_main.h"
 #include "constants/dungeon.h"
-#include "dungeon_ai_leader.h"
+#include "dungeon_action_execution.h"
 #include "dungeon_ai.h"
-#include "dungeon_leader.h"
+#include "dungeon_range.h"
+#include "dungeon_misc.h"
 #include "dungeon_util.h"
+#include "dungeon_leveling.h"
+#include "dungeon_turn_effects.h"
 #include "structs/dungeon_entity.h"
 #include "structs/str_dungeon.h"
 #include "constants/ability.h"
 #include "dungeon_logic.h"
+#include "dungeon_cutscene.h"
 #include "menu_input.h"
+#include "weather.h"
 
-extern void TrySpawnMonsterAndActivatePlusMinus(void);
 extern void sub_807E378(void);
-extern void sub_8044574(void);
-extern void sub_8044820(void);
-extern void sub_8044AB4(void);
 extern u8 DisplayActions(u32);
-extern void TickStatusAndHealthRegen(Entity *);
-extern void sub_8086AC0(void);
-extern void EnemyEvolution(Entity *);
-extern void TryActivateArtificialWeatherAbilities(void);
-extern void DungeonHandlePlayerInput(void);
 extern void sub_805F02C(void);
-extern void sub_8074094(Entity *);
 extern void sub_8071B48(void);
-extern void sub_807EAA0(u32, u32);
 
 static void sub_8044454(void);
 static bool8 RunLeaderTurn(bool8);
+static void sub_8044574(void);
+static void sub_8044820(void);
+static void TrySpawnMonsterAndActivatePlusMinus(void);
+static void sub_8044AB4(void);
 
-EWRAM_DATA DungeonPos gUnknown_202EE0C = {0};
+EWRAM_DATA DungeonPos gLeaderPosition = {0};
 EWRAM_DATA MenuInputStruct gDungeonMenu = {0};
 
 const s16 gSpeedTurns[NUM_SPEED_COUNTERS][25] = {
@@ -110,7 +109,7 @@ static bool8 RunLeaderTurn(bool8 param_1)
         gDungeon->noActionInProgress = FALSE;
         if (IsFloorOver())
             break;
-        sub_8072CF4(entity);
+        ExecuteEntityDungeonAction(entity);
         sub_8086AC0();
         TryForcedLoss(0);
         if (IsFloorOver())
@@ -158,7 +157,7 @@ static void sub_8044454(void)
         if (EntityIsValid(entity)) {
           EnemyEvolution(entity);
           RunMonsterAI(entity, 0);
-          sub_8072CF4(entity);
+          ExecuteEntityDungeonAction(entity);
           sub_8086AC0();
           TryForcedLoss(0);
           entityInfo->flags = (entityInfo->flags & ~(MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY)) | MOVEMENT_FLAG_UNK_14;
@@ -183,7 +182,7 @@ void sub_80444F4(Entity *pokemon)
       if ((EntityIsValid(entity)) && (pokemon != entity) && (entityInfo = GetEntInfo(entity), (entityInfo->flags & MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY))) {
         if (IsFloorOver()) break;
         RunMonsterAI(entity, 0);
-        sub_8072CF4(entity);
+        ExecuteEntityDungeonAction(entity);
         sub_8086AC0();
         TryForcedLoss(0);
       }
@@ -197,7 +196,7 @@ struct Struct_8044574
     struct Struct_8044574 *next;
 };
 
-void sub_8044574(void)
+static void sub_8044574(void)
 {
     s32 i, id;
     struct Struct_8044574 sp0[4];
@@ -234,7 +233,7 @@ void sub_8044574(void)
                             EnemyEvolution(teamMon);
                             for (j = 0; j < 3; j++) {
                                 RunMonsterAI(teamMon, 0);
-                                if (IsFloorOver() || !sub_8072CF4(teamMon))
+                                if (IsFloorOver() || !ExecuteEntityDungeonAction(teamMon))
                                     break;
                                 sub_8086AC0();
                                 TryForcedLoss(0);
@@ -291,7 +290,7 @@ void sub_8044574(void)
                 info->recalculateFollow = TRUE;
                 info->aiAllySkip = FALSE;
                 RunMonsterAI(entity,1);
-                sub_8072CF4(entity);
+                ExecuteEntityDungeonAction(entity);
                 sub_8086AC0();
                 TryForcedLoss(0);
                 EntityIsValid(entity); // Does nothing
@@ -306,7 +305,7 @@ void sub_8044574(void)
             if (EntityIsValid(teamMon)) {
                 EntityInfo *teamMonInfo = GetEntInfo(teamMon);
                 if (teamMonInfo->aiAllySkip) {
-                    sub_8074094(teamMon);
+                    ApplyEndOfTurnEffects(teamMon);
                     if (EntityIsValid(teamMon)) {
                         EnemyEvolution(teamMon);
                         teamMonInfo->aiAllySkip = FALSE;
@@ -317,7 +316,7 @@ void sub_8044574(void)
     }
 }
 
-void sub_8044820(void)
+static void sub_8044820(void)
 {
   s32 movSpeed;
   EntityInfo *entityInfo;
@@ -350,7 +349,7 @@ void sub_8044820(void)
                 EnemyEvolution(entity);
                 RunMonsterAI(entity, 0);
                 if (IsFloorOver()) break;
-                sub_8072CF4(entity);
+                ExecuteEntityDungeonAction(entity);
                 sub_8086AC0();
                 TryForcedLoss(0);
                 if (IsFloorOver()) break;
@@ -367,7 +366,7 @@ void sub_8044820(void)
       entity2 = gDungeon->wildPokemon[index];
       if ((EntityIsValid(entity2)) && (entityInfo2 = GetEntInfo(entity2), entityInfo2->aiAllySkip))
       {
-        sub_8074094(entity2);
+        ApplyEndOfTurnEffects(entity2);
         if (EntityIsValid(entity2)) {
           EnemyEvolution(entity2);
           entityInfo2->aiAllySkip = FALSE;
@@ -377,7 +376,7 @@ void sub_8044820(void)
   }
 }
 
-void TrySpawnMonsterAndActivatePlusMinus(void)
+static void TrySpawnMonsterAndActivatePlusMinus(void)
 {
   EntityInfo * entityInfo;
   Entity *entity;
@@ -424,7 +423,7 @@ void TrySpawnMonsterAndActivatePlusMinus(void)
   }
 }
 
-void sub_8044AB4(void)
+static void sub_8044AB4(void)
 {
   s32 index;
 

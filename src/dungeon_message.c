@@ -8,13 +8,13 @@
 #include "code_800D090.h"
 #include "effect_main.h"
 #include "dungeon_vram.h"
-#include "code_803E724.h"
+#include "dungeon_tilemap.h"
 #include "dungeon_info.h"
-#include "dungeon_leader.h"
+#include "dungeon_range.h"
 #include "dungeon_map.h"
+#include "dungeon_main.h"
 #include "dungeon_music.h"
 #include "dungeon_util.h"
-#include "dungeon_util_1.h"
 #include "exclusive_pokemon.h"
 #include "file_system.h"
 #include "input.h"
@@ -26,26 +26,16 @@
 #include "text_2.h"
 #include "text_3.h"
 #include "dungeon_strings.h"
+#include "dungeon_cutscene.h"
 #include "dungeon_portrait_placement.h"
-
-void sub_80526D0(s32 r0);
-static bool8 sub_8052DC0(Entity *);
-static void DisplayMessageAddToLog(Entity *pokemon, const u8 *str, bool8 r2);
-
-extern void sub_805E804(void);
-extern void sub_8083E28(void);
-extern void PlayDungeonCancelSE(void);
-extern void PlayDungeonConfirmationSE(void);
-
-extern u32 gUnknown_202EDD0;
-extern u8 gUnknown_203B40C;
-extern u8 gUnknown_202EE01;
-extern s32 gDungeonFramesCounter;
 
 static EWRAM_DATA Entity *sLastLogMsgEntity = NULL;
 static UNUSED EWRAM_DATA u8 sUnused = 0;
 static EWRAM_DATA SpriteOAM sUnknown_202F1F0 = {0};
-EWRAM_INIT u8 gUnknown_203B434 = 1;
+EWRAM_INIT bool8 gUnknown_203B434 = TRUE;
+
+static bool8 sub_8052DC0(Entity *);
+static void DisplayMessageAddToLog(Entity *pokemon, const u8 *str, bool8 r2);
 
 void sub_80521D0(void)
 {
@@ -55,7 +45,7 @@ void sub_80521D0(void)
         gDungeon->unk1BDD4.unk1C054[i] = 0;
     }
     sLastLogMsgEntity = NULL;
-    gUnknown_203B434 = 1;
+    gUnknown_203B434 = TRUE;
     sub_8052210(FALSE);
 }
 
@@ -131,8 +121,7 @@ void TryDisplayDungeonLoggableMessage4(Entity *attacker, Entity *target, const u
     }
 }
 
-void LogMessageByIdWithPopupCheckUserUnknown(Entity *pokemon, DungeonPos *pos,
-                                       const u8 *str)
+void LogMessageByIdWithPopupCheckUserUnknown(Entity *pokemon, DungeonPos *pos, const u8 *str)
 {
     u8 flag;
     flag = ShouldDisplayEntity(pokemon) ? TRUE : FALSE;
@@ -154,11 +143,11 @@ void DisplayDungeonLoggableMessageTrue(Entity *pokemon, const u8 *str)
 static void DisplayMessageAddToLog(Entity *pokemon, const u8 *str, bool8 r2)
 {
     u8 txt[64];
-    u32 r7;
+    bool8 r7;
     bool32 r8, r9;
 
     if (sLastLogMsgEntity != pokemon) {
-        r7 = 1;
+        r7 = TRUE;
     }
     else {
         r7 = gUnknown_203B434;
@@ -166,7 +155,7 @@ static void DisplayMessageAddToLog(Entity *pokemon, const u8 *str, bool8 r2)
 
     r8 = 1;
     sLastLogMsgEntity = pokemon;
-    gUnknown_203B434 = 0;
+    gUnknown_203B434 = FALSE;
     r9 = FALSE;
     while (1) {
         while (1) {
@@ -386,8 +375,8 @@ void DisplayDungeonDialogue(const struct DungeonDialogueStruct *dialogueInfo)
     MonPortraitMsg monPortrait;
     s32 leaderId, partnerId, dialogueMonId;
     s32 chosenMenuIndex;
-    Entity *leader = xxx_call_GetLeader();
-    Entity *partner = GetPartnerEntity();
+    Entity *leader = CutsceneGetLeader();
+    Entity *partner = CutsceneGetPartner();
     MonPortraitMsg *monPortraitPtr = NULL;
 
     if (leader != NULL) {

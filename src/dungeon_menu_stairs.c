@@ -1,7 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "dungeon_vram.h"
-#include "code_803E724.h"
+#include "dungeon_tilemap.h"
 #include "dungeon_action.h"
 #include "code_8097DD0.h"
 #include "dungeon_info.h"
@@ -14,25 +14,13 @@
 #include "dungeon_music.h"
 #include "dungeon_submenu.h"
 #include "dungeon_util.h"
+#include "dungeon_strings.h"
+#include "dungeon_engine.h"
+#include "run_dungeon.h"
 #include "input.h"
 #include "menu_input.h"
 #include "text_1.h"
 #include "text_3.h"
-
-extern void PlayDungeonCancelSE(void);
-extern void PlayDungeonConfirmationSE(void);
-extern bool8 CanSubMenuItemBeChosen(s32 param_1);
-extern void sub_8045064(void);
-extern u8 GetFloorType(void);
-
-extern MenuInputStruct gDungeonMenu;
-extern s32 gDungeonSubMenuItemsCount;
-
-extern const u8 *const gUnknown_80FE70C;
-extern const u8 *const gUnknown_80FE720;
-extern const u8 *const gUnknown_80FE724;
-extern const u8 *const gUnknown_80F8104[];
-extern const u8 *const gUnknown_80F7F70[];
 
 static void ShowAndPrintOnStairsMenu(DungeonPos *pos, WindowTemplates *windows, WindowHeader *header);
 static void AddStairsSubMenuOptions(Entity *mon);

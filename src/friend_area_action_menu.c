@@ -50,8 +50,6 @@ bool8 sub_8027D9C(Pokemon *pokeStruct);
 extern u8 sub_8027DCC(Pokemon *);
 extern void SetFriendAreaActionMenuState(u32);
 extern void PlaySound(u32);
-extern void sub_808D31C(Pokemon *);
-extern bool8 sub_808D750(s16 index_);
 
 u32 sub_8027E18(Pokemon *);
 u8 sub_8027E4C(Pokemon *r0);

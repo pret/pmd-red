@@ -7,7 +7,7 @@
 #include "constants/type.h"
 #include "code_806CD90.h"
 #include "dungeon_items.h"
-#include "dungeon_leader.h"
+#include "dungeon_range.h"
 #include "dungeon_map_access.h"
 #include "dungeon_logic.h"
 #include "dungeon_util.h"
@@ -41,35 +41,30 @@
 #include "math.h"
 #include "dungeon_config.h"
 #include "dungeon_engine.h"
+#include "dungeon_kecleon_shop.h"
+#include "dungeon_misc.h"
+#include "dungeon_pos_data.h"
+#include "dungeon_turn_effects.h"
+#include "dungeon_leveling.h"
+#include "dungeon_cutscene.h"
+#include "warp_target.h"
 
 extern void sub_8073D14(Entity *);
 extern void sub_8075708(Entity *entity);
 extern void sub_805229C(void);
-extern void sub_807E8F0(Entity *);
-extern void sub_80444F4(Entity *pokemon);
-extern void WarpTarget(Entity *pokemon, Entity *r1, u32 r2, DungeonPos *r3);
 extern void sub_80420B8(Entity *pokemon);
 extern void sub_8041C4C(Entity *pokemon, u32 r1);
 extern void sub_805E804(void);
-extern void sub_80838EC(u8 *a);
 extern bool8 TryUseChosenMove(struct Entity *, u32, u32, u32, u32, struct Move *);
 extern void nullsub_97(Entity *entity);
 extern void CheckLeaderTile(void);
-extern void sub_8086AC0(void);
-extern void sub_8085140(void);
 extern void sub_8075708(Entity *entity);
 extern void TryForcedLoss(u32);
-extern void EnemyEvolution(Entity *);
 extern void sub_8075900(Entity *pokemon, u8 r1);
-extern void sub_806A5B8(Entity *);
-extern void sub_807EC28(bool8);
 extern void sub_8075050(EntityInfo *info, Unk_Entity_x184 *strPtr);
-extern void sub_8074094(Entity *entity);
 extern bool8 sub_803F428(DungeonPos *pos);
 
 extern u8 gUnknown_202F32D;
-
-extern const DungeonPos gUnknown_80F4D44[];
 
 static EWRAM_DATA s32 gUnknown_202F378 = 0;
 
@@ -287,7 +282,7 @@ bool8 DisplayActions(Entity *a0)
                     break;
 
                 TryForcedLoss(0);
-                sub_8074094(mon);
+                ApplyEndOfTurnEffects(mon);
                 if (!EntityIsValid(mon))
                     continue;
                 if (IsFloorOver())

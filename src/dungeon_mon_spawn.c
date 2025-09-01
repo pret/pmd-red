@@ -1,5 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
+#include "dungeon_mon_spawn.h"
 #include "constants/ability.h"
 #include "constants/iq_skill.h"
 #include "constants/move_id.h"
@@ -7,7 +8,6 @@
 #include "constants/type.h"
 #include "constants/weather.h"
 #include "structs/dungeon_entity.h"
-#include "structs/str_806B7F8.h"
 #include "structs/str_dungeon.h"
 #include "dungeon_vram.h"
 #include "code_805D8C8.h"
@@ -15,7 +15,7 @@
 #include "code_8077274_1.h"
 #include "dungeon_config.h"
 #include "run_dungeon.h"
-#include "dungeon_leader.h"
+#include "dungeon_range.h"
 #include "dungeon_map_access.h"
 #include "dungeon_misc.h"
 #include "dungeon_logic.h"
@@ -32,46 +32,29 @@
 #include "pokemon_3.h"
 #include "position_util.h"
 #include "weather.h"
-#include "dungeon_spawns.h"
+#include "dungeon_floor_spawns.h"
 #include "dungeon_pos_data.h"
+#include "dungeon_tilemap.h"
+#include "dungeon_engine.h"
+#include "dungeon_leveling.h"
 
 extern void sub_8042900(Entity *r0);
 extern void sub_8042968(Entity *r0);
-extern void EndAbilityImmuneStatus(Entity *, Entity *);
 void sub_8041BBC(Entity *r0);
-extern void TryPointCameraToMonster(Entity *, u8);
 extern void sub_804178C(u32);
-extern void PointCameraToMonster(Entity *);
 extern void sub_8042B20(Entity *entity);
 extern void sub_8042B0C(Entity *entity);
-extern void sub_8072AC8(u16 *param_1, s32 species, s32 param_3);
-extern bool8 sub_8083660(const DungeonPos *param_1);
-extern Entity *gLeaderPointer;
-extern DungeonPos gUnknown_202EE0C;
-extern void sub_803F4A0(Entity *a0);
 extern bool8 sub_80860A8(u8 id);
 extern u8 gUnknown_202F32C;
-extern u8 GetRandomFloorItem(s32 a0);
 extern void sub_80429E8(Entity *r0);
 extern Entity *sub_804550C(s16 a);
 extern Entity *sub_80453AC(s16 id);
-extern void UpdateCamera(s32);
-extern void UpdateMinimap(void);
-extern void sub_806B678(void);
 extern void EntityUpdateStatusSprites(Entity *);
-extern Entity *sub_80696A8(Entity *a0);
-extern s32 GetMonsterApparentID(Entity *pokemon, s32 _id);
-extern void sub_806A898(Entity *entity, bool8 r7, bool8 showRunAwayEffect);
-extern bool8 sub_806AA0C(s16 _species, bool32 _a1);
-extern void sub_806A6E8(Entity *entity);
 
-s32 sub_806C444(s32 species, s32 level);
-s32 sub_806C488(s32 species, s32 level, s32 categoryIndex);
-s32 sub_806C4D4(s32 species, s32 level, s32 categoryIndex);
-bool8 sub_806B8CC(s16 _species, s32 x, s32 y, DungeonMon *monPtr, Entity **a4, bool32 _a5, u32 _a6);
-void sub_806BC68(bool8 a0, Entity *entity, struct unkStruct_806B7F8 *structPtr, DungeonPos *pos);
-void ResetMonEntityData(EntityInfo *, bool8 a1);
-void sub_806C264(s32 teamIndex, EntityInfo *entInfo);
+static s32 CalcSpeciesHPAtLevel(s32 species, s32 level);
+static s32 CalcSpeciesAtkAtLevel(s32 species, s32 level, s32 categoryIndex);
+static s32 CalcSpeciesDefAtLevel(s32 species, s32 level, s32 categoryIndex);
+static void InitEntityFromSpawnInfo(bool8 a0, Entity *entity, struct MonSpawnInfo *monSpawnInfo, DungeonPos *pos);
 
 void sub_806AD3C(void)
 {
@@ -88,11 +71,11 @@ void sub_806AD3C(void)
         if (structPtr->moves[0] == MOVE_NOTHING) {
             structPtr->moves[0] = MOVE_BLOWBACK;
         }
-        structPtr->unkC = sub_806C444(structPtr->species, structPtr->level);
+        structPtr->unkC = CalcSpeciesHPAtLevel(structPtr->species, structPtr->level);
 
         for (j = 0; j < 2; j++) {
-            structPtr->unkE[j]  = sub_806C488(structPtr->species, structPtr->level, j);
-            structPtr->unk10[j] = sub_806C4D4(structPtr->species, structPtr->level, j);
+            structPtr->unkE[j]  = CalcSpeciesAtkAtLevel(structPtr->species, structPtr->level, j);
+            structPtr->unk10[j] = CalcSpeciesDefAtLevel(structPtr->species, structPtr->level, j);
         }
     }
 
@@ -136,7 +119,7 @@ void sub_806AD3C(void)
     }
 }
 
-void sub_806AED8(Moves *moves, s16 *maxHPStat, u8 *atk, u8 *def, s16 _species, s32 level)
+static void sub_806AED8(Moves *moves, s16 *maxHPStat, u8 *atk, u8 *def, s16 _species, s32 level)
 {
     s32 i;
     s32 moveCategory;
@@ -176,10 +159,10 @@ void sub_806AED8(Moves *moves, s16 *maxHPStat, u8 *atk, u8 *def, s16 _species, s
         for (moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++) {
             InitPokemonMoveOrNullObject(&moves->moves[moveIndex], spMoves[moveIndex]);
         }
-        *maxHPStat = sub_806C444(species, level);
+        *maxHPStat = CalcSpeciesHPAtLevel(species, level);
         for (moveCategory = 0; moveCategory < 2; moveCategory++) {
-            atk[moveCategory] = sub_806C488(species, level, moveCategory);
-            def[moveCategory] = sub_806C4D4(species, level, moveCategory);
+            atk[moveCategory] = CalcSpeciesAtkAtLevel(species, level, moveCategory);
+            def[moveCategory] = CalcSpeciesDefAtLevel(species, level, moveCategory);
         }
 
 
@@ -190,10 +173,10 @@ void sub_806AED8(Moves *moves, s16 *maxHPStat, u8 *atk, u8 *def, s16 _species, s
         structPtr->species = species;
         structPtr->level = level;
         sub_8072AC8(structPtr->moves, species, level);
-        structPtr->unkC = sub_806C444(structPtr->species, structPtr->level);
+        structPtr->unkC = CalcSpeciesHPAtLevel(structPtr->species, structPtr->level);
         for (moveCategory = 0; moveCategory < 2; moveCategory++) {
-            structPtr->unkE[moveCategory]  = sub_806C488(structPtr->species, structPtr->level, moveCategory);
-            structPtr->unk10[moveCategory] = sub_806C4D4(structPtr->species, structPtr->level, moveCategory);
+            structPtr->unkE[moveCategory]  = CalcSpeciesAtkAtLevel(structPtr->species, structPtr->level, moveCategory);
+            structPtr->unk10[moveCategory] = CalcSpeciesDefAtLevel(structPtr->species, structPtr->level, moveCategory);
         }
         for (moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++) {
             InitPokemonMoveOrNullObject(&moves->moves[moveIndex], structPtr->moves[moveIndex]);
@@ -247,8 +230,6 @@ UNUSED static s32 sub_806B09C(SpawnPokemonData *unkPtr, bool8 a1)
 
     return count;
 }
-
-extern const DungeonPos gUnknown_80F4598[];
 
 void sub_806B168(void)
 {
@@ -329,7 +310,7 @@ void sub_806B168(void)
 
                 tile = GetTile(unkPosition.x + gDungeon->playerSpawn.x, unkPosition.y + gDungeon->playerSpawn.y);
                 if (tile->room == playerSpawnRoomId && !sub_807034C(currMonPtr->speciesNum, tile)) {
-                    sub_806B8CC(currMonPtr->speciesNum, unkPosition.x + gDungeon->playerSpawn.x, unkPosition.y + gDungeon->playerSpawn.y, currMonPtr, NULL, TRUE, 0);
+                    SpawnTeamMember(currMonPtr->speciesNum, unkPosition.x + gDungeon->playerSpawn.x, unkPosition.y + gDungeon->playerSpawn.y, currMonPtr, NULL, TRUE, 0);
                     skipSecondLoop = TRUE;
                     break;
                 }
@@ -347,7 +328,7 @@ void sub_806B168(void)
 
                 tile = GetTile(unkPosition.x + gDungeon->playerSpawn.x, unkPosition.y + gDungeon->playerSpawn.y);
                 if (!sub_807034C(currMonPtr->speciesNum, tile)) {
-                    sub_806B8CC(currMonPtr->speciesNum, unkPosition.x + gDungeon->playerSpawn.x, unkPosition.y + gDungeon->playerSpawn.y, currMonPtr, NULL, TRUE, 0);
+                    SpawnTeamMember(currMonPtr->speciesNum, unkPosition.x + gDungeon->playerSpawn.x, unkPosition.y + gDungeon->playerSpawn.y, currMonPtr, NULL, TRUE, 0);
                     break;
                 }
                 j++;
@@ -408,7 +389,7 @@ void sub_806B404(void)
 
                 tile = GetTile(unkPosition.x + pos.x, unkPosition.y + pos.y);
                 if (tile->room == roomId && !sub_807034C(currMonPtr->speciesNum, tile)) {
-                    sub_806B8CC(currMonPtr->speciesNum, unkPosition.x + pos.x, unkPosition.y + pos.y, currMonPtr, NULL, TRUE, 0);
+                    SpawnTeamMember(currMonPtr->speciesNum, unkPosition.x + pos.x, unkPosition.y + pos.y, currMonPtr, NULL, TRUE, 0);
                     skipNextLoop = TRUE;
                     break;
                 }
@@ -427,7 +408,7 @@ void sub_806B404(void)
 
                 tile = GetTile(unkPosition.x + pos.x, unkPosition.y + pos.y);
                 if (!sub_807034C(currMonPtr->speciesNum, tile)) {
-                    sub_806B8CC(currMonPtr->speciesNum, unkPosition.x + pos.x, unkPosition.y + pos.y, currMonPtr, NULL, TRUE, 0);
+                    SpawnTeamMember(currMonPtr->speciesNum, unkPosition.x + pos.x, unkPosition.y + pos.y, currMonPtr, NULL, TRUE, 0);
                     skipNextLoop = TRUE;
                     break;
                 }
@@ -441,7 +422,7 @@ void sub_806B404(void)
                 if (sub_8083660(&unkPosition)) {
                     const Tile *tile = GetTile(unkPosition.x, unkPosition.y);
                     if (!sub_807034C(currMonPtr->speciesNum, tile)) {
-                        sub_806B8CC(currMonPtr->speciesNum, unkPosition.x, unkPosition.y, currMonPtr, NULL, TRUE, 0);
+                        SpawnTeamMember(currMonPtr->speciesNum, unkPosition.x, unkPosition.y, currMonPtr, NULL, TRUE, 0);
                         break;
                     }
                 }
@@ -460,22 +441,16 @@ void sub_806B678(void)
             EntityInfo *monInfo = GetEntInfo(mon);
             if (monInfo->isTeamLeader) {
                 sub_803F4A0(mon);
-                gUnknown_202EE0C = mon->pos;
+                gLeaderPosition = mon->pos;
                 break;
             }
         }
     }
 }
-/*    s16 species;
-    u8 unk2;
-    u32 unk4;
-    u16 level;
-    DungeonPos pos;
-    u8 unk10;*/
 
-void sub_806B6C4(void)
+void SpawnWildMonsOnFloor(void)
 {
-    struct unkStruct_806B7F8 spStruct;
+    struct MonSpawnInfo monSpawnInfo;
     s32 i, j;
     s32 x, y;
     bool8 r8 = (gDungeon->unk644.unk44 != 0);
@@ -502,23 +477,23 @@ void sub_806B6C4(void)
                 bool8 r6 = FALSE;
 
                 if (r8) {
-                    spStruct.species = gDungeon->unk644.unk44;
-                    spStruct.level = 1;
-                    spStruct.unk2 = 1;
+                    monSpawnInfo.species = gDungeon->unk644.unk44;
+                    monSpawnInfo.level = 1;
+                    monSpawnInfo.unk2 = 1;
                     r6 = TRUE;
                 }
                 else {
-                    spStruct.species = GetRandomFloorMonsterId(0);
-                    spStruct.level = 0;
-                    spStruct.unk2 = 0;
+                    monSpawnInfo.species = GetRandomFloorMonsterId(0);
+                    monSpawnInfo.level = 0;
+                    monSpawnInfo.unk2 = 0;
                 }
 
-                spStruct.unk4 = 0;
-                spStruct.unk10 = 0;
-                spStruct.pos.x = x;
-                spStruct.pos.y = y;
-                if (r6 || sub_806AA0C(spStruct.species, TRUE)) {
-                    if (sub_806B7F8(&spStruct, FALSE)) {
+                monSpawnInfo.unk4 = 0;
+                monSpawnInfo.unk10 = 0;
+                monSpawnInfo.pos.x = x;
+                monSpawnInfo.pos.y = y;
+                if (r6 || sub_806AA0C(monSpawnInfo.species, TRUE)) {
+                    if (SpawnWildMon(&monSpawnInfo, FALSE)) {
                         r8 = FALSE;
                     }
                 }
@@ -531,28 +506,28 @@ void sub_806B6C4(void)
     }
 }
 
-Entity* sub_806B7F8(struct unkStruct_806B7F8 *structPtr, bool8 a1)
+Entity* SpawnWildMon(struct MonSpawnInfo *monSpawnInfo, bool8 a1)
 {
     Entity *entity;
     EntityInfo *entityInfo;
-    const Tile *tile = GetTile(structPtr->pos.x, structPtr->pos.y);
+    const Tile *tile = GetTile(monSpawnInfo->pos.x, monSpawnInfo->pos.y);
 
-    if (sub_807034C(structPtr->species, tile))
+    if (sub_807034C(monSpawnInfo->species, tile))
         return FALSE;
 
-    entity = sub_804550C(structPtr->species);
+    entity = sub_804550C(monSpawnInfo->species);
     if (entity == NULL)
         return FALSE;
 
-    sub_806BC68(FALSE, entity, structPtr, &gUnknown_202EE0C);
+    InitEntityFromSpawnInfo(FALSE, entity, monSpawnInfo, &gLeaderPosition);
     entityInfo = GetEntInfo(entity);
     entityInfo->isNotTeamMember = TRUE;
     sub_806AED8(&entityInfo->moves, &entityInfo->maxHPStat, entityInfo->atk, entityInfo->def, entityInfo->id, entityInfo->level);
     entityInfo->HP = entityInfo->maxHPStat;
-    entityInfo->moveRandomly = structPtr->unk4;
-    if (!structPtr->unk2 && !a1 && !structPtr->unk10) {
+    entityInfo->moveRandomly = monSpawnInfo->unk4;
+    if (!monSpawnInfo->unk2 && !a1 && !monSpawnInfo->unk10) {
         s32 rand = DungeonRandInt(100);
-        if (GetChanceAsleep(structPtr->species) > rand) {
+        if (GetChanceAsleep(monSpawnInfo->species) > rand) {
             sub_8075BF4(entity, 0x7F);
             sub_806CE68(entity, NUM_DIRECTIONS);
         }
@@ -561,11 +536,11 @@ Entity* sub_806B7F8(struct unkStruct_806B7F8 *structPtr, bool8 a1)
     return entity;
 }
 
-bool8 sub_806B8CC(s16 _species, s32 x, s32 y, DungeonMon *monPtr, Entity **a4, bool32 _a5, u32 _a6)
+bool8 SpawnTeamMember(s16 _species, s32 x, s32 y, DungeonMon *monPtr, Entity **a4, bool32 _a5, u32 _a6)
 {
     s32 i;
     DungeonPos unkPosition;
-    struct unkStruct_806B7F8 spStruct;
+    struct MonSpawnInfo monSpawnInfo;
     // s16 memes
     s32 species = SpeciesId(_species);
     bool8 a5 = _a5;
@@ -595,17 +570,17 @@ bool8 sub_806B8CC(s16 _species, s32 x, s32 y, DungeonMon *monPtr, Entity **a4, b
     if (entity == NULL)
         return FALSE;
 
-    spStruct.pos.x = x;
-    spStruct.pos.y = y;
-    spStruct.species = species;
-    spStruct.level = monPtr->level;
-    spStruct.unk2 = 0;
-    spStruct.unk4 = 0;
-    spStruct.unk10 = 0;
+    monSpawnInfo.pos.x = x;
+    monSpawnInfo.pos.y = y;
+    monSpawnInfo.species = species;
+    monSpawnInfo.level = monPtr->level;
+    monSpawnInfo.unk2 = 0;
+    monSpawnInfo.unk4 = 0;
+    monSpawnInfo.unk10 = 0;
 
     unkPosition.x = gAdjacentTileOffsets[gUnknown_202F32C].x + x;
     unkPosition.y = gAdjacentTileOffsets[gUnknown_202F32C].y + y;
-    sub_806BC68(TRUE, entity, &spStruct, (isTeamLeader ? &unkPosition : &gUnknown_202EE0C));
+    InitEntityFromSpawnInfo(TRUE, entity, &monSpawnInfo, (isTeamLeader ? &unkPosition : &gLeaderPosition));
 
     entityInfo = GetEntInfo(entity);
     entityInfo->isNotTeamMember = FALSE;
@@ -615,8 +590,8 @@ bool8 sub_806B8CC(s16 _species, s32 x, s32 y, DungeonMon *monPtr, Entity **a4, b
 
     gLeaderPointer = NULL;
     if (isTeamLeader) {
-        gUnknown_202EE0C.x = x;
-        gUnknown_202EE0C.y = y;
+        gLeaderPosition.x = x;
+        gLeaderPosition.y = y;
     }
 
     entityInfo->HP = monPtr->unk10;
@@ -674,24 +649,24 @@ bool8 sub_806B8CC(s16 _species, s32 x, s32 y, DungeonMon *monPtr, Entity **a4, b
     return TRUE;
 }
 
-void sub_806BB6C(Entity *entity, s32 _species)
+void UpdateEntitySpecies(Entity *entity, s32 _species)
 {
     s32 species = (s16) _species;
     s16 speciesMatch;
-    struct unkStruct_806B7F8 spStruct;
+    struct MonSpawnInfo monSpawnInfo;
     EntityInfo *entInfo = GetEntInfo(entity);
 
     DeletePokemonDungeonSprite(entInfo->dungeonSpriteId);
     // s16 memes...
-    spStruct.species = 0;
+    monSpawnInfo.species = 0;
     speciesMatch = species;
     ASM_MATCH_TRICK(species);
-    spStruct.species = speciesMatch;
+    monSpawnInfo.species = speciesMatch;
 
-    spStruct.level = 0;
-    spStruct.unk2 = 0;
-    spStruct.pos = entity->pos;
-    spStruct.unk4 = 0;
+    monSpawnInfo.level = 0;
+    monSpawnInfo.unk2 = 0;
+    monSpawnInfo.pos = entity->pos;
+    monSpawnInfo.unk4 = 0;
 {
     s16 apparentSpeciesMatch;
     s32 apparentSpecies = (s16) (GetMonsterApparentID(NULL, species));
@@ -716,7 +691,7 @@ void sub_806BB6C(Entity *entity, s32 _species)
         sub_8076CB4(entInfo->unk9C);
     }
 
-    sub_806BC68((entInfo->isNotTeamMember == FALSE), entity, &spStruct, NULL);
+    InitEntityFromSpawnInfo((entInfo->isNotTeamMember == FALSE), entity, &monSpawnInfo, NULL);
     sub_806AED8(&entInfo->moves, &entInfo->maxHPStat, entInfo->atk, entInfo->def, entInfo->id, entInfo->level);
     entInfo->HP = entInfo->maxHPStat;
     entInfo->shopkeeper = 0;
@@ -724,7 +699,7 @@ void sub_806BB6C(Entity *entity, s32 _species)
     EntityUpdateStatusSprites(entity);
 }
 
-void sub_806BC68(bool8 a0, Entity *entity, struct unkStruct_806B7F8 *structPtr, DungeonPos *pos)
+static void InitEntityFromSpawnInfo(bool8 a0, Entity *entity, struct MonSpawnInfo *monSpawnInfo, DungeonPos *pos)
 {
     DungeonPos entityPos;
     EntityInfo *entInfo;
@@ -732,7 +707,7 @@ void sub_806BC68(bool8 a0, Entity *entity, struct unkStruct_806B7F8 *structPtr, 
     gDungeon->unkC = 1;
     entInfo = GetEntInfo(entity);
     ResetMonEntityData(entInfo, TRUE);
-    entInfo->monsterBehavior = structPtr->unk2;
+    entInfo->monsterBehavior = monSpawnInfo->unk2;
     entity->isVisible = TRUE;
     entity->unk22 = 0;
     entity->prevPos.x = -1;
@@ -740,14 +715,14 @@ void sub_806BC68(bool8 a0, Entity *entity, struct unkStruct_806B7F8 *structPtr, 
     entity->pos.x = -2;
     entity->pos.y = -2;
 
-    sub_80694C0(entity, structPtr->pos.x, structPtr->pos.y, 1);
+    sub_80694C0(entity, monSpawnInfo->pos.x, monSpawnInfo->pos.y, 1);
     UpdateEntityPixelPos(entity, NULL);
 
     if (!a0) {
-        if (structPtr->species == MONSTER_KECLEON
+        if (monSpawnInfo->species == MONSTER_KECLEON
             && !gDungeon->unk644.unk2A
             && gDungeon->unk3A0A
-            && !structPtr->unk2)
+            && !monSpawnInfo->unk2)
         {
             entInfo->shopkeeper = 1;
         }
@@ -766,14 +741,14 @@ void sub_806BC68(bool8 a0, Entity *entity, struct unkStruct_806B7F8 *structPtr, 
     entInfo->dungeonSpriteId = gDungeon->unk37F0;
     gDungeon->unk37F0++;
     entInfo->unk9C = 0;
-    if (structPtr->level == 0) {
-        entInfo->level = GetSpawnedMonsterLevel(structPtr->species);
+    if (monSpawnInfo->level == 0) {
+        entInfo->level = GetSpawnedMonsterLevel(monSpawnInfo->species);
     }
     else {
-        entInfo->level = structPtr->level;
+        entInfo->level = monSpawnInfo->level;
     }
 
-    entInfo->moveRandomly = structPtr->unk4;
+    entInfo->moveRandomly = monSpawnInfo->unk4;
     entInfo->IQ = 1;
     SetDefaultIQSkills(&entInfo->IQSkillMenuFlags, FALSE);
     GenerateHiddenPower(&entInfo->hiddenPower);
@@ -1025,7 +1000,7 @@ void sub_806C330(s32 _x, s32 _y, s16 _species, u32 _a3)
 void sub_806C3C0(void)
 {
     s32 i;
-    struct unkStruct_806B7F8 spStruct;
+    struct MonSpawnInfo spStruct;
     unkDungeon57C *strPtr = &gDungeon->unk57C;
 
     for (i = 0; i < strPtr->unk40; i++) {
@@ -1037,7 +1012,7 @@ void sub_806C3C0(void)
             spStruct.unk2 = strPtr->unkArray[i].unk2;
             spStruct.unk4 = 0;
             spStruct.unk10 = 0;
-            sub_806B7F8(&spStruct, TRUE);
+            SpawnWildMon(&spStruct, TRUE);
         }
     }
 }
@@ -1048,7 +1023,7 @@ void sub_806C42C(void)
     strPtr->unk40 = 0;
 }
 
-s32 sub_806C444(s32 _species, s32 level)
+static s32 CalcSpeciesHPAtLevel(s32 _species, s32 level)
 {
     LevelData levelData;
     s32 i;
@@ -1063,7 +1038,7 @@ s32 sub_806C444(s32 _species, s32 level)
     return hpCount;
 }
 
-s32 sub_806C488(s32 _species, s32 level, s32 categoryIndex)
+static s32 CalcSpeciesAtkAtLevel(s32 _species, s32 level, s32 categoryIndex)
 {
     LevelData levelData;
     s32 i;
@@ -1078,7 +1053,7 @@ s32 sub_806C488(s32 _species, s32 level, s32 categoryIndex)
     return offensiveCount;
 }
 
-s32 sub_806C4D4(s32 _species, s32 level, s32 categoryIndex)
+static s32 CalcSpeciesDefAtLevel(s32 _species, s32 level, s32 categoryIndex)
 {
     LevelData levelData;
     s32 i;
