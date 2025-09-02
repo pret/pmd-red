@@ -150,7 +150,7 @@ void sub_80898E4(void)
 
 static void sub_80898F8(Entity *r0)
 {
-    HandleFaint(r0, 0x21C, 0);
+    HandleFaint(r0, DUNGEON_EXIT_DELETED_FOR_EVENT, 0);
 }
 
 static void sub_8089908(Entity *r0)

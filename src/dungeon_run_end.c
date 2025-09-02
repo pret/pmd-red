@@ -1,5 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
+#include "dungeon_misc.h"
 #include "dungeon_run_end.h"
 #include "structs/str_dungeon.h"
 #include "data_serializer.h"
@@ -132,14 +133,14 @@ void PrintOnDungeonFinishedWindow(u32 windowId, const u8 *headerText, UnkDungeon
     sub_80073E0(windowId);
 }
 
-s16 sub_8094828(u16 moveID, u8 id)
+s16 GetDungeonExitReasonFromMoveOrItemID(u16 moveID, u8 id)
 {
     if(id != 0)
     {
         if(GetItemCategory(id) == CATEGORY_ORBS)
-            return 0x223;
+            return DUNGEON_EXIT_FAINTED_FROM_WONDER_ORB;
         else
-            return 0x224;
+            return DUNGEON_EXIT_FAINTED_FROM_ITEM;
     }
     else
     {

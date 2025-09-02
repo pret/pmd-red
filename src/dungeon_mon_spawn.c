@@ -786,7 +786,7 @@ static void InitEntityFromSpawnInfo(bool8 a0, Entity *entity, struct MonSpawnInf
     entInfo->unk165 = 0xFF;
     entInfo->expGainedInTurn = 0;
     entInfo->waiting = 0;
-    entInfo->unk146 = 0;
+    entInfo->bellyEmpty = FALSE;
     entInfo->unk166 = 0;
     entInfo->unk1F8 = 0;
     entInfo->mobileTurnTimer = 0;
@@ -800,7 +800,7 @@ static void InitEntityFromSpawnInfo(bool8 a0, Entity *entity, struct MonSpawnInf
     entInfo->visualFlags = 0;
     entInfo->previousVisualFlags = 0;
     entInfo->unk152 = 0;
-    entInfo->unk153 = 0;
+    entInfo->usedLinkedMovesCounter = 0;
     entInfo->unk154 = 0;
     entInfo->unk155 = 0;
     entInfo->turnsSinceWarpScarfActivation = 0;

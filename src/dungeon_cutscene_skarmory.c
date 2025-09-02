@@ -71,8 +71,8 @@ void sub_8086B94(void)
   diglettEntity = GetEntityFromMonsterBehavior(BEHAVIOR_DIGLETT);
   skarmoryEntity = GetEntityFromMonsterBehavior(BEHAVIOR_SKARMORY);
 
-  HandleFaint(skarmoryEntity,0x21c,0);
-  HandleFaint(diglettEntity,0x21c,0);
+  HandleFaint(skarmoryEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
+  HandleFaint(diglettEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y);

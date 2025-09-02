@@ -82,7 +82,7 @@ void sub_8089F8C(void)
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
   if (HasRecruitedMon(MONSTER_RAIKOU)) {
-      HandleFaint(RaikouEntity,0x21c,0);
+      HandleFaint(RaikouEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
   }
   else {
       SetFacingDirection(RaikouEntity, DIRECTION_SOUTH);

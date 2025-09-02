@@ -72,7 +72,7 @@ void sub_8089328(void)
   sub_8085930(DIRECTION_NORTH);
   sub_80855E4(sub_8086A3C);
   if (sub_8086AE4(MONSTER_RAYQUAZA)) {
-    HandleFaint(rayquazaEntity,0x21c,0);
+    HandleFaint(rayquazaEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
   }
   else {
     LevelUpTarget(rayquazaEntity,rayquazaEntity,gRayquazaConfigLevel,0,0);

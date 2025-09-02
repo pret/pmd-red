@@ -9,7 +9,7 @@
 #include "dungeon_strings.h"
 #include "run_dungeon.h"
 
-void sub_8083AB0(s16 param_0, Entity *target, Entity *entity)
+void sub_8083AB0(s16 dungeonExitReason_, Entity *target, Entity *entity)
 {
   u8 *defPtr;
   u8 *attackPtr;
@@ -20,7 +20,7 @@ void sub_8083AB0(s16 param_0, Entity *target, Entity *entity)
   u8 buffer [0x14];
   UnkDungeonGlobal_unk1CE98_sub *temp;
   u8 *id;
-  s32 param_0_s32 = param_0;
+  s32 dungeonExitReason = dungeonExitReason_;
 
   temp = &gDungeon->unk1CE98;
   targetEntityInfo = NULL;
@@ -37,7 +37,7 @@ void sub_8083AB0(s16 param_0, Entity *target, Entity *entity)
   }
   sub_80709C8(buffer,entityInfo);
   CopyStringtoBuffer(temp->buffer2, buffer);
-  temp->moveID = param_0_s32;
+  temp->moveID = dungeonExitReason;
   temp->heldItem = entityInfo->heldItem;
   temp->exp = entityInfo->exp;
   temp->level = entityInfo->level;

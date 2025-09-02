@@ -85,7 +85,7 @@ void sub_80886C4(void)
   sub_8085374();
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
-  HandleFaint(alakazamEntity,0x21c,0);
+  HandleFaint(alakazamEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
   SetFacingDirection(groudonEntity, DIRECTION_SOUTH);
   sub_8086A3C(groudonEntity);
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y);
@@ -109,9 +109,9 @@ void sub_808875C(void)
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
   sub_80855E4(sub_8086A3C);
-  HandleFaint(alakazamEntity,0x21c,0);
+  HandleFaint(alakazamEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
   if (sub_8086AE4(MONSTER_GROUDON)) {
-    HandleFaint(groudonEntity,0x21c,0);
+    HandleFaint(groudonEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
   }
   else {
     LevelUpTarget(groudonEntity,groudonEntity,gGroudonConfigLevel,0,0);
@@ -179,7 +179,7 @@ void GroudonPreFightDialogue(void)
   sub_80861B8(alakazamEntity,6,DIRECTION_NORTH);
   PlaySoundEffect(0x205);
   sub_8086738();
-  HandleFaint(alakazamEntity,0x21c,0);
+  HandleFaint(alakazamEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
   DisplayDungeonDialogue(&GroudonPreFightDialogue_8);
   sub_803E708(10,0x46);
   DisplayDungeonDialogue(&GroudonPreFightDialogue_9);

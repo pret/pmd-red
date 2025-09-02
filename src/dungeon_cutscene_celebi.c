@@ -79,7 +79,7 @@ void CelebiJoinDialogue(void)
     celebiEntity = GetEntityFromMonsterBehavior(BEHAVIOR_CELEBI);
     if ((HasRecruitedMon(MONSTER_CELEBI)) || (!sub_806FD18(celebiEntity)))
     {
-        HandleFaint(celebiEntity,0x21c,0);
+        HandleFaint(celebiEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
         SpriteLookAroundEffect(leaderEntity);
         sub_803E708(10,0x46);
         // .........

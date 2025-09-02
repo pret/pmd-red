@@ -21,7 +21,7 @@ extern void sub_807FC3C(DungeonPos *, u32, u32);
 extern void sub_8042A54(DungeonPos *);
 extern void sub_8042A64(DungeonPos *);
 
-bool8 FillInOrbAction(Entity *pokemon,Entity *target, Move *move, s32 param_4)
+bool8 FillInOrbAction(Entity *pokemon,Entity *target, Move *move, s32 itemId)
 {
     Tile *tileToFill;
     EntityInfo *targetInfo;
@@ -71,7 +71,7 @@ bool8 FillInOrbAction(Entity *pokemon,Entity *target, Move *move, s32 param_4)
     }
 }
 
-bool8 TrapperOrbAction(Entity *pokemon, Entity *target, Move *move, s32 param_4)
+bool8 TrapperOrbAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 {
     u32 var;
     var = (GetEntInfo(target)->isNotTeamMember ? 2 : 1);
@@ -79,7 +79,7 @@ bool8 TrapperOrbAction(Entity *pokemon, Entity *target, Move *move, s32 param_4)
     return TRUE;
 }
 
-bool8 ItemizeOrbAction(Entity *pokemon, Entity *target, Move *move, s32 param_4)
+bool8 ItemizeOrbAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 {
     Item stack;
     DungeonPos posStruct = target->pos;
@@ -94,36 +94,36 @@ bool8 ItemizeOrbAction(Entity *pokemon, Entity *target, Move *move, s32 param_4)
         target->isVisible = FALSE;
         CreateItemWithStickyChance(&stack, GetRandomFloorItem(0), 0);
         SpawnDroppedItemWrapper(pokemon, &posStruct, &stack);
-        HandleFaint(target, 0x218, pokemon);
+        HandleFaint(target, DUNGEON_EXIT_TRANSFORMED_INTO_ITEM, pokemon);
         return TRUE;
     }
 }
 
-bool8 HurlOrbAction(Entity *pokemon, Entity *target, Move *move, s32 param_4)
+bool8 HurlOrbAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 {
     HandleHurlOrb(pokemon, target);
     return TRUE;
 }
 
-bool8 MobileOrbAction(Entity *pokemon, Entity *target, Move *move, s32 param_4)
+bool8 MobileOrbAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 {
     MobileStatusTarget(pokemon, target);
     return TRUE;
 }
 
-bool8 StairsOrbAction(Entity *pokemon, Entity *target, Move *move, s32 param_4)
+bool8 StairsOrbAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 {
     HandleStairsOrb(pokemon, target);
     return TRUE;
 }
 
-bool8 LongtossOrbAction(Entity *pokemon, Entity *target, Move *move, s32 param_4)
+bool8 LongtossOrbAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 {
     LongTossStatusTarget(pokemon, target);
     return TRUE;
 }
 
-bool8 PierceOrbAction(Entity *pokemon, Entity *target, Move *move, s32 param_4)
+bool8 PierceOrbAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 {
     PierceStatusTarget(pokemon, target);
     return TRUE;

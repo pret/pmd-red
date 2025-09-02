@@ -275,7 +275,7 @@ void sub_803E724(s32 r0)
     do
     {
         DungeonRunFrameActions(r0);
-    } while (gRealInputs.held & 0xF0);
+    } while (gRealInputs.held & DPAD_ANY);
 }
 
 void sub_803E748(void)

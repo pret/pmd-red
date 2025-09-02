@@ -109,7 +109,7 @@ void BlowAwayTarget(Entity *pokemon, Entity *target, u32 direction)
             _0807CF26:
 
                 sub_807D068(target,&target->pos);
-                sub_806F370(pokemon,target,gBlowAwayDmgValue,0,0,0,0x219,0,0,0);
+                sub_806F370(pokemon,target,gBlowAwayDmgValue,0,0,0,DUNGEON_EXIT_FAINTED_FROM_BEING_KNOCKED,RESIDUAL_DAMAGE_REGULAR,0,0);
             }
             if (IsFloorOver()) {
                 return;
@@ -118,7 +118,7 @@ void BlowAwayTarget(Entity *pokemon, Entity *target, u32 direction)
                 InitPokemonMove(&move,0x163);
                 if (!sub_80571F0(entity,&move)) {
                     TrySendImmobilizeSleepEndMsg(pokemon,entity);
-                    sub_806F370(pokemon,entity,gBlowAwayDmgValue,0,0,0,0x21a,0,0,0);
+                    sub_806F370(pokemon,entity,gBlowAwayDmgValue,0,0,0,DUNGEON_EXIT_FELLED_BY_POKEMON_FLYING,RESIDUAL_DAMAGE_REGULAR,0,0);
                 }
             }
             if (IsFloorOver()) {

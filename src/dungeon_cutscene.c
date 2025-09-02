@@ -533,7 +533,7 @@ void DisplayPreFightDialogue(void)
   sub_8097FF8();
 }
 
-void sub_8084E00(Entity *entity, u8 param_2, u8 param_3)
+void sub_8084E00(Entity *entity, u8 param_2, bool8 param_3)
 {
   if (param_2 != 0) {
     switch(gDungeon->unk3A0D) {
@@ -965,7 +965,7 @@ static void sub_8085764(void)
     {
         entity = gDungeon->wildPokemon[index];
         if ((EntityIsValid(entity)) && (GetEntInfo(entity)->monsterBehavior == BEHAVIOR_ALLY)) {
-            HandleFaint(entity,0x207,&stackEntity);
+            HandleFaint(entity,DUNGEON_EXIT_DEBUG_DAMAGE,&stackEntity);
         }
     }
 }

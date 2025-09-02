@@ -58,7 +58,7 @@ void sub_808C10C(void)
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
   if (HasRecruitedMon(MONSTER_KYOGRE)) {
-    HandleFaint(kyogreEntity,0x21c,0);
+    HandleFaint(kyogreEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
   }
   else {
     gDungeon->unk7 = 1;

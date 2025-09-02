@@ -107,7 +107,7 @@ void SmeargleRescueDialogue(void)
     sub_806CE68(smeargleEntity, DIRECTION_SOUTH);
     sub_803E708(0x20, 0x46);
     sub_8042B0C(smeargleEntity);
-    HandleFaint(smeargleEntity, 0x21C, 0);
+    HandleFaint(smeargleEntity, DUNGEON_EXIT_DELETED_FOR_EVENT, 0);
     gDungeon->unk4 = 1;
     gDungeon->unk11 = 4;
 }
@@ -123,7 +123,7 @@ void sub_808CD44(void)
     sub_80854D4();
     sub_8085930(DIRECTION_NORTH);
     sub_80855E4(sub_8086A3C);
-    HandleFaint(smeargleEntity, 540, 0);
+    HandleFaint(smeargleEntity, DUNGEON_EXIT_DELETED_FOR_EVENT, 0);
     sub_8085860(leaderEntity->pos.x, leaderEntity->pos.y - 3);
     CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_SMEARGLE);
 }

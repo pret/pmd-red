@@ -382,7 +382,7 @@ void TryTriggerTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4)
             break;
         case TRAP_CHESTNUT_TRAP:
             if (target != NULL) {
-                DealDamageToEntity(target,gChestnutTrapDmgValue,0xf,0x213);
+                DealDamageToEntity(target,gChestnutTrapDmgValue,RESIDUAL_DAMAGE_CHESTNUT_TRAP,DUNGEON_EXIT_TRIPPED_CHESTNUT_TRAP);
             }
             break;
         case TRAP_WONDER_TILE:
@@ -394,7 +394,7 @@ void TryTriggerTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4)
             break;
         case TRAP_SPIKE_TRAP:
             if (target != NULL) {
-                DealDamageToEntity(target,gSpikeTrapDmgValue,10,0x206);
+                DealDamageToEntity(target,gSpikeTrapDmgValue,RESIDUAL_DAMAGE_SPIKES,DUNGEON_EXIT_FAINTED_FROM_SPIKES);
             }
     }
     if (EntityIsValid(target)) {
@@ -509,12 +509,12 @@ void HandlePoisonTrap(Entity *pokemon, Entity *target)
 
 void HandleSelfdestructTrap(Entity *pokemon, Entity *target)
 {
-    HandleExplosion(pokemon, target, &target->pos, 1, TYPE_NONE, 0x212);
+    HandleExplosion(pokemon, target, &target->pos, 1, TYPE_NONE, DUNGEON_EXIT_DISAPPEARED_IN_EXPLOSION);
 }
 
 void HandleExplosionTrap(Entity *pokemon, Entity *target)
 {
-    HandleExplosion(pokemon, target, &target->pos, 2, TYPE_NONE, 0x212);
+    HandleExplosion(pokemon, target, &target->pos, 2, TYPE_NONE, DUNGEON_EXIT_DISAPPEARED_IN_EXPLOSION);
 }
 
 void HandleGrimyTrap(Entity *pokemon, Entity *target)
@@ -590,7 +590,7 @@ void HandlePitfallTrap(Entity *pokemon, Entity *target, Tile *tile)
                     info->unk15C = 1;
                     info->unk15E = 1;
                     sub_803E708(0x28,0x4b);
-                    DealDamageToEntity(target,gPitfallTrapDmgValue,0x11,0x215);
+                    DealDamageToEntity(target,gPitfallTrapDmgValue,RESIDUAL_DAMAGE_PITFALL,DUNGEON_EXIT_FELL_INTO_PITFALL);
                     gDungeon->unk2 = 2;
                     return;
                 }
@@ -605,7 +605,7 @@ void HandlePitfallTrap(Entity *pokemon, Entity *target, Tile *tile)
                 else {
                     DisplayDungeonLoggableMessageTrue(pokemon,gUnknown_80F970C); // $m0 fell into the pitfall!
                 }
-                HandleFaint(target,0x215,pokemon);
+                HandleFaint(target,DUNGEON_EXIT_FELL_INTO_PITFALL,pokemon);
             }
             if (flag) {
                 SetTrap(tile, TRAP_PITFALL_TRAP);

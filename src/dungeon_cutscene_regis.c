@@ -51,7 +51,7 @@ void sub_808ACC0(void)
 
   if (HasRecruitedMon(MONSTER_REGIROCK)) {
     entity = GetEntityFromMonsterBehavior(BEHAVIOR_REGIROCK);
-    HandleFaint(entity,0x21c,0);
+    HandleFaint(entity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
     sub_8097FA8(0x22);
     sub_8097FA8(0x1d);
     sub_808B1CC(ITEM_ROCK_PART);
@@ -78,7 +78,7 @@ void sub_808AD48(void)
 
   if (HasRecruitedMon(MONSTER_REGICE)) {
     entity = GetEntityFromMonsterBehavior(BEHAVIOR_REGICE);
-    HandleFaint(entity,0x21c,0);
+    HandleFaint(entity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
     sub_8097FA8(0x22);
     sub_8097FA8(0x1d);
     sub_808B1CC(ITEM_ICE_PART);
@@ -106,7 +106,7 @@ void sub_808ADCC(void)
 
   if (HasRecruitedMon(MONSTER_REGISTEEL)) {
     entity = GetEntityFromMonsterBehavior(BEHAVIOR_REGISTEEL);
-    HandleFaint(entity,0x21c,0);
+    HandleFaint(entity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
     sub_8097FA8(0x22);
     sub_8097FA8(0x1d);
     sub_808B1CC(ITEM_STEEL_PART);

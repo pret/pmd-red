@@ -56,7 +56,7 @@ void sub_808BDEC(void)
   sub_80855E4(sub_8086A3C);
   if (HasRecruitedMon(MONSTER_LUGIA)) {
     DungeonStartNewBGM(MUS_FRIEND_AREA_CRYPTIC_CAVE);
-    HandleFaint(lugiaEntity,0x21c,0);
+    HandleFaint(lugiaEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
   }
   else {
     gDungeon->unk7 = 1;

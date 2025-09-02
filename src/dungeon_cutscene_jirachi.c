@@ -84,7 +84,7 @@ void sub_808B35C(void)
   sub_8085930(DIRECTION_NORTH);
   sub_80855E4(sub_8086A3C);
   if (HasRecruitedMon(MONSTER_JIRACHI)) {
-    HandleFaint(jirachiEntity,0x21c,0);
+    HandleFaint(jirachiEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
   }
   else {
     SetFacingDirection(jirachiEntity, DIRECTION_SOUTH);

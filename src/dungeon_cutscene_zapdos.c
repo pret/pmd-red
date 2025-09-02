@@ -82,7 +82,7 @@ void sub_808729C(void)
   sub_8085930(4);
   sub_80855E4(sub_8086A3C);
   if (sub_8086AE4(0x91) != 0) {
-    HandleFaint(zapdosEntity,0x21c,0);
+    HandleFaint(zapdosEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
   }
   else {
     LevelUpTarget(zapdosEntity,zapdosEntity,gZapdosConfigLevel,0,0);

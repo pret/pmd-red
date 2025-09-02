@@ -271,7 +271,7 @@ typedef struct unkDungeon644
     /* 0x32 */ bool8 itemHoldersIdentified;
     /* 0x33 */ u8 unk33;
     /* 0x34 */ u8 unk34;
-    /* 0x35 */ u8 unk35;
+    /* 0x35 */ u8 emptyBellyAlert; // which alert message to show when belly gets empty.
     /* 0x36 */ u8 unk36;
     /* 0x37 */ s8 unk37;
     /* 0x38 */ u32 unk38;

@@ -428,29 +428,28 @@ const s32 gEffectivenessChart[NUM_EFFECTIVENESS][NUM_EFFECTIVENESS] = {
     },
 };
 
-// Todo: change to readable format
 const s48_16 gBellyGoDownValues[BELLY_GO_DOWN_VALUES_COUNT] =
 {
-    {0, 0},
-    {0, 0},
-    {0, 0},
-    {0, 0},
-    {0, 0},
-    {0, 0},
-    {0, 0x199A},
-    {0, 0x4000},
-    {0, 0x8000},
-    {0, 0xC000},
-    {0, 0x10000},
-    {0, 0x20000},
-    {0, 0x40000},
-    {0, 0x80000},
-    {0, 0x100000},
-    {0, 0x200000},
-    {0, 0x400000},
-    {0, 0x800000},
-    {0, 0x800000},
-    {0, 0x800000},
+    S48_16(0.0),
+    S48_16(0.0),
+    S48_16(0.0),
+    S48_16(0.0),
+    S48_16(0.0),
+    S48_16(0.0),
+    S48_16(0.10001),
+    S48_16(0.25),
+    S48_16(0.5),
+    S48_16(0.75),
+    S48_16(1.0),
+    S48_16(2.0),
+    S48_16(4.0),
+    S48_16(8.0),
+    S48_16(16.0),
+    S48_16(32.0),
+    S48_16(64.0),
+    S48_16(128.0),
+    S48_16(128.0),
+    S48_16(128.0)
 };
 
 const s16 gWarpScarfActivationChances[WARP_SCARF_ACTIVATION_CHANCES_COUNT] = {0, 6, 12, 30, 50, 70, 90, 110, 130, 150, 170, 190, 210, 230, 250, 270, 290, 310, 999, 0};
@@ -1036,4 +1035,12 @@ const s32 gUnknown_80F5FAC[76] = {
     1, 1, 2, 1, 1, 4, 4, 1
 };
 
-const s32 gUnknown_80F60DC[5] = {1, 1, 1, 2, 4};
+// belly will go down by this amount after using linked moves
+// value depends on number of moves that are linked
+const s32 gLinkedMovesBellyGoDownValues[5] = {
+    1, // 0 moves
+    1, // 1 move
+    1, // 2 moves
+    2, // 3 moves
+    4  // 4 moves
+};

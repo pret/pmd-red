@@ -84,7 +84,7 @@ void sub_808A308(void)
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
   if (HasRecruitedMon(MONSTER_SUICUNE)) {
-     HandleFaint(SuicuneEntity,0x21c,0);
+     HandleFaint(SuicuneEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
   }
   else {
      SetFacingDirection(SuicuneEntity, DIRECTION_SOUTH);

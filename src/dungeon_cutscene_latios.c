@@ -84,7 +84,7 @@ void sub_808AA94(void)
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
   sub_80855E4(sub_8086A3C);
-  HandleFaint(LatiosEntity,0x21c,0);
+  HandleFaint(LatiosEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y - 3);
   CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_LATIOS);
 }

@@ -733,7 +733,7 @@ void sub_8067794(Entity *entity, Entity *targetEntity, s32 a2)
         u8 tempText[64];
 
         strncpy(tempText, gFormatBuffer_Monsters[0], sizeof(tempText));
-        HandleFaint(targetEntity, 0x21D, 0);
+        HandleFaint(targetEntity, DUNGEON_EXIT_WENT_AWAY, 0);
         strncpy(gFormatBuffer_Monsters[0], tempText, sizeof(tempText));
         DisplayDungeonMessage(NULL, stringPtr2, TRUE);
     }

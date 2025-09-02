@@ -290,7 +290,7 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
         gDungeon->unkE = 0;
         gDungeon->unk1BDD4.unk1C05E = 0;
         if (!r6) {
-            gDungeon->unk644.unk35 = 0;
+            gDungeon->unk644.emptyBellyAlert = 0;
             gDungeon->unk644.unk48 = 0;
             gDungeon->unk644.unk4C = 0;
             gDungeon->unk644.unk50 = 0;
@@ -517,7 +517,7 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
             leader = GetLeader();
             DisplayDungeonMessage(0, gPtrClientFaintedMessage, 1);
             gDungeon->unk6 = 0;
-            sub_8083AB0(0x222, leader, leader);
+            sub_8083AB0(DUNGEON_EXIT_FAILED_TO_PROTECT_CLIENT, leader, leader);
         }
         CloseAllSpriteFiles();
         sub_8049820();
@@ -550,30 +550,30 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
                 check = TRUE;
             }
             else if (gDungeon->unk11 == 1) {
-                sub_8083AB0(0x226, NULL, GetLeader());
+                sub_8083AB0(DUNGEON_EXIT_ESCAPED_MIDDLE_OF_EXPLORATION, NULL, GetLeader());
                 check = TRUE;
             }
             else if (gDungeon->unk11 == 2) {
-                sub_8083AB0(0x229, NULL, GetLeader());
+                sub_8083AB0(DUNGEON_EXIT_IMPRESSIVELY_COMPLETED_MISSION, NULL, GetLeader());
                 if (gDungeon->unk644.unk2A != 0) {
                     IncrementThievingSuccesses();
                 }
                 check = TRUE;
             }
             else if (gDungeon->unk11 == 3) {
-                sub_8083AB0(0x22A, NULL, GetLeader());
+                sub_8083AB0(DUNGEON_EXIT_BEFRIENDED_MEW, NULL, GetLeader());
                 if (gDungeon->unk644.unk2A != 0) {
                     IncrementThievingSuccesses();
                 }
                 check = TRUE;
             }
             else if (gDungeon->unk11 == 4) {
-                var = 0x227;
+                var = DUNGEON_EXIT_CLEARED_DUNGEON;
                 sub_8083AB0(var, NULL, GetLeader());
                 check = TRUE;
             }
             else if (gDungeon->unk644.unk34 == 1 && GetFloorType() == FLOOR_TYPE_RESCUE && gDungeon->unk644.unk10 == 2) {
-                sub_8083AB0(0x228, NULL, GetLeader());
+                sub_8083AB0(DUNGEON_EXIT_SUCCEEDED_IN_RESCUE_MISSION, NULL, GetLeader());
                 if (gDungeon->unk644.unk2A != 0) {
                     IncrementThievingSuccesses();
                 }
@@ -597,7 +597,7 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
                     continue;
                 }
                 else {
-                    var = 0x227;
+                    var = DUNGEON_EXIT_CLEARED_DUNGEON;
                     sub_8083AB0(var, NULL, GetLeader());
                     check = TRUE;
                     // This goto is a fakematch I had to create in order to generate matching code.
@@ -728,7 +728,7 @@ void sub_8043D60(void)
                 unk = FALSE;
 
             if (unk) {
-                HandleFaint(mon, 0x207, mon);
+                HandleFaint(mon, DUNGEON_EXIT_DEBUG_DAMAGE, mon);
             }
         }
     }
@@ -787,7 +787,7 @@ bool8 TryForcedLoss(bool8 a0)
                 DisplayDungeonMessage(0, gUnknown_80F89B4, 1);
             }
             sub_8042B0C(leader);
-            HandleFaint(leader, 0x21F, leader);
+            HandleFaint(leader, DUNGEON_EXIT_RETURNED_WITH_FALLEN_PARTNER, leader);
             ret = TRUE;
         }
     }
@@ -799,7 +799,7 @@ bool8 TryForcedLoss(bool8 a0)
                 DisplayDungeonMessage(0, gUnknown_80F89D4, 1);
             }
             sub_8042B0C(leader);
-            HandleFaint(leader, 0x222, leader);
+            HandleFaint(leader, DUNGEON_EXIT_FAILED_TO_PROTECT_CLIENT, leader);
             ret = TRUE;
         }
     }
@@ -811,7 +811,7 @@ bool8 TryForcedLoss(bool8 a0)
                 DisplayDungeonMessage(0, gUnknown_80F89D8, 1);
             }
             sub_8042B0C(leader);
-            HandleFaint(leader, 0x222, leader);
+            HandleFaint(leader, DUNGEON_EXIT_FAILED_TO_PROTECT_CLIENT, leader);
             ret = TRUE;
         }
     }

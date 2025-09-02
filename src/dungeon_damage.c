@@ -72,7 +72,7 @@ extern void sub_8042978(Entity *);
 extern void sub_804298C(Entity *);
 extern void sub_80428EC(Entity *);
 
-static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struct DamageStruct *r5, bool32 isFalseSwipe, bool32 giveExp, s16 arg4_, s32 arg8);
+static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struct DamageStruct *r5, bool32 isFalseSwipe, bool32 giveExp, s16 dungeonExitReason_, s32 arg8);
 static bool8 sub_806E100(s48_16 *param_1, Entity *pokemon, Entity *target, u8 type, DamageStruct *dmgStruct);
 static void sub_806F500(void);
 static void sub_806F63C(Entity *param_1);
@@ -89,14 +89,14 @@ static const s48_16 gUnknown_8106F3C = {0x0, 0x8000};
 static const s48_16 gUnknown_8106F44 = {0x0, 0xE666};
 static const s48_16 gUnknown_8106F4C = {0x0, 0x18000};
 
-void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *dmgStruct, bool32 isFalseSwipe, bool32 giveExp, s16 arg4, bool32 arg8, s32 argC)
+void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *dmgStruct, bool32 isFalseSwipe, bool32 giveExp, s16 dungeonExitReason_, bool32 arg8, s32 argC)
 {
     bool32 r9;
-    // Some compiler weirdness, because it won't match without creating arg4 again
-    s32 r10 = arg4;
+    // Some compiler weirdness, because it won't match without creating dungeonExitReason_ again
+    s32 dungeonExitReason = dungeonExitReason_;
     s32 returnDmg = 0;
 
-    if (HandleDealingDamageInternal(attacker, target, dmgStruct, isFalseSwipe, giveExp, r10, argC))
+    if (HandleDealingDamageInternal(attacker, target, dmgStruct, isFalseSwipe, giveExp, dungeonExitReason, argC))
         return;
     if (dmgStruct->tookNoDamage)
         return;
@@ -152,12 +152,12 @@ void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *
             TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80FCFA4);
             sp.dmg = (dmgStruct->dmg * returnDmg) / 4;
             sp.type = dmgStruct->type;
-            sp.residualDmgType = 6;
+            sp.residualDmgType = RESIDUAL_DAMAGE_COUNTERATTACK;
             sp.typeEffectiveness = 2;
             sp.isCrit = FALSE;
             sp.unkE = 0;
             sp.tookNoDamage = FALSE;
-            HandleDealingDamageInternal(target, attacker, &sp, FALSE, giveExp, r10, argC);
+            HandleDealingDamageInternal(target, attacker, &sp, FALSE, giveExp, dungeonExitReason, argC);
         }
     }
     if (!EntityIsValid(attacker) || !EntityIsValid(target))
@@ -246,7 +246,7 @@ void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *
             }
             else {
                 sub_8041D00(destBondTarget, target);
-                DealDamageToEntity(destBondTarget, dmgStruct->dmg, 0xC, 0x1F9);
+                DealDamageToEntity(destBondTarget, dmgStruct->dmg, RESIDUAL_DAMAGE_DESTINY_BOND, DUNGEON_EXIT_FAINTED_FROM_DESTINY_BOND);
             }
         }
     }
@@ -257,11 +257,11 @@ static inline u32 ItemId(Item *item)
     return item->id;
 }
 
-static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struct DamageStruct *dmgStruct, bool32 isFalseSwipe, bool32 giveExp, s16 arg4_, s32 arg8)
+static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struct DamageStruct *dmgStruct, bool32 isFalseSwipe, bool32 giveExp, s16 dungeonExitReason_, s32 arg8)
 {
     s32 hpBefore, hpChange;
     EntityInfo *targetData;
-    s32 arg4 = arg4_;
+    s32 dungeonExitReason = dungeonExitReason_;
     bool32 var_24 = FALSE;
     bool32 r10 = FALSE;
     s32 r8  = 0;
@@ -283,7 +283,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
         dmgStruct->dmg = gSetDamageDmgValue;
     }
 
-    if (arg4 != 0x20E && AbilityIsActive(target, ABILITY_STURDY) && dmgStruct->dmg == 9999) {
+    if (dungeonExitReason != DUNGEON_EXIT_FAINTED_FROM_PERISH_SONG && AbilityIsActive(target, ABILITY_STURDY) && dmgStruct->dmg == 9999) {
         SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], target, 0);
         TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80FCA90);
         sub_8042238(attacker, target);
@@ -375,7 +375,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
             targetData->unkA0 = 999;
 
         if (ShouldDisplayEntity(target)) {
-            if (dmgStruct->residualDmgType != 14) {
+            if (dmgStruct->residualDmgType != RESIDUAL_DAMAGE_HUNGER) {
                 sub_803ED30(-dmgStruct->dmg, target, 1, -1);
             }
             if (targetData->unk152 == 0 && str != NULL) {
@@ -389,7 +389,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
         }
     }
 
-    if ((dmgStruct->residualDmgType != 14 || targetData->HP <= 1) && unkTile == NULL && ShouldDisplayEntity(target)) {
+    if ((dmgStruct->residualDmgType != RESIDUAL_DAMAGE_HUNGER || targetData->HP <= 1) && unkTile == NULL && ShouldDisplayEntity(target)) {
         if ((attacker->pos.x != target->pos.x || attacker->pos.y != target->pos.y) && GetEntityType(attacker) == ENTITY_MONSTER) {
             bool32 unkBool = FALSE;
             if (targetData->isTeamLeader) {
@@ -481,7 +481,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
     targetData->unk14C = 0;
     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], attacker, 0);
     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], target, 0);
-    if (dmgStruct->residualDmgType == 19 || dmgStruct->residualDmgType == 20) {
+    if (dmgStruct->residualDmgType == RESIDUAL_DAMAGE_MOVE_FAIL || dmgStruct->residualDmgType == RESIDUAL_DAMAGE_RECOIL) {
         if (targetData->isNotTeamMember) {
             TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80F9E44);
         }
@@ -539,7 +539,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
                 targetData->unk14C = 1;
                 targetData->belly = targetData->maxBelly;
                 if (targetData->isTeamLeader) {
-                    gDungeon->unk644.unk35 = 0;
+                    gDungeon->unk644.emptyBellyAlert = 0;
                     gDungeon->unk644.itemHoldersIdentified = 0;
                 }
                 ZeroOutItem(&targetData->heldItem);
@@ -586,7 +586,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
                 sub_8042148(target);
 
                 monPos = teamMember->pos;
-                HandleFaint(teamMember, 0x221, target);
+                HandleFaint(teamMember, DUNGEON_EXIT_WAS_POSSESSED, target);
                 sub_80694C0(target, monPos.x, monPos.y, 1);
                 UpdateEntityPixelPos(target, NULL);
                 target->unk22 = 0;
@@ -596,7 +596,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
                 targetData->unk14C = 1;
                 targetData->belly = targetData->maxBelly;
                 if (targetData->isTeamLeader) {
-                    gDungeon->unk644.unk35 = 0;
+                    gDungeon->unk644.emptyBellyAlert = 0;
                     gDungeon->unk644.itemHoldersIdentified = 0;
                 }
                 ZeroOutItem(heldItem);
@@ -651,7 +651,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
             targetData->unk14C = 1;
             targetData->belly = targetData->maxBelly;
             if (targetData->isTeamLeader) {
-                gDungeon->unk644.unk35 = 0;
+                gDungeon->unk644.emptyBellyAlert = 0;
                 gDungeon->unk644.itemHoldersIdentified = 0;
             }
             if (targetData->curseClassStatus.status == STATUS_SNATCH) {
@@ -737,18 +737,18 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
         sub_8069D4C(&sp, target);
         if (sub_806F660(attacker, target)) {
             if (!sub_806FA5C(attacker, target, &sp)) {
-                HandleFaint(target, 0x1F5, attacker);
+                HandleFaint(target, DUNGEON_EXIT_LEFT_WITHOUT_BEING_BEFRIENDED, attacker);
             }
             else {
                 gUnknown_202F221 = 1;
             }
         }
         else {
-            HandleFaint(target, arg4, attacker);
+            HandleFaint(target, dungeonExitReason, attacker);
         }
     }
     else {
-        HandleFaint(target, arg4, attacker);
+        HandleFaint(target, dungeonExitReason, attacker);
     }
 
     return TRUE;
@@ -994,7 +994,7 @@ s32 WeightWeakTypePicker(Entity *user, Entity *target, u8 moveType)
         weight /= 2;
         if (weight == 0)
         {
-            // BUG: If the Pokémon's first type resists the move, the second type is ignored.
+            // BUG: If the PokÃ©mon's first type resists the move, the second type is ignored.
             // This calculates type effectiveness incorrectly if the first type resists the move and the second type is weak to the move.
             // For example, a Fire-type move is considered not very effective against a Rock/Bug-type like Anorith.
             return 2;
@@ -1184,7 +1184,7 @@ static void ApplyAtkDefStatBoosts(Entity *attacker, Entity *target, u8 moveType,
 static inline void SetDamageOne(struct DamageStruct *dmgStruct, u8 moveType)
 {
     dmgStruct->dmg = 1;
-    dmgStruct->residualDmgType = 0;
+    dmgStruct->residualDmgType = RESIDUAL_DAMAGE_REGULAR;
     dmgStruct->typeEffectiveness = EFFECTIVENESS_NEUTRAL;
     dmgStruct->type = moveType;
     dmgStruct->isCrit = FALSE;
@@ -1448,7 +1448,7 @@ void CalcDamage(Entity *attacker, Entity *target, u8 moveType, s32 movePower, s3
         gDungeon->unk134.unk158 = FP48_16_ToS32(&unkSp9);
 
         dmgStruct->dmg = FP48_16_ToS32(&unkSp8);
-        dmgStruct->residualDmgType = 0;
+        dmgStruct->residualDmgType = RESIDUAL_DAMAGE_REGULAR;
         if (dmgStruct->dmg == 0) {
             dmgStruct->isCrit = FALSE;
         }
@@ -1469,31 +1469,31 @@ void sub_806F2BC(Entity *attacker, Entity *target, u8 moveType, s32 a2, struct D
     FP48_16_FromS32(&unkSp2, a2New);
     F48_16_SMul(&unkSp2, &unkSp2, &unkSp1);
     dmgStruct->dmg = FP48_16_ToS32(&unkSp2);
-    dmgStruct->residualDmgType = 0;
+    dmgStruct->residualDmgType = RESIDUAL_DAMAGE_REGULAR;
 }
 
-void DealDamageToEntity(Entity *entity, s32 dmg, s32 r6, s32 r4)
+void DealDamageToEntity(Entity *entity, s32 dmg, s32 residualDmgType, s32 dungeonExitReason_)
 {
     Entity spEntity;
     struct DamageStruct dmgStruct;
-    s32 r4_ = (s16) r4;
+    s32 dungeonExitReason = (s16) dungeonExitReason_;
 
     sub_80457DC(&spEntity);
     dmgStruct.dmg = dmg;
     dmgStruct.typeEffectiveness = EFFECTIVENESS_NEUTRAL;
     dmgStruct.type = TYPE_NONE;
-    dmgStruct.residualDmgType = r6;
+    dmgStruct.residualDmgType = residualDmgType;
     dmgStruct.isCrit = FALSE;
     dmgStruct.unkE = 0;
     dmgStruct.tookNoDamage = FALSE;
-    HandleDealingDamage(&spEntity, entity, &dmgStruct, FALSE, FALSE, r4_, FALSE, 0);
+    HandleDealingDamage(&spEntity, entity, &dmgStruct, FALSE, FALSE, dungeonExitReason, FALSE, 0);
 }
 
-void sub_806F370(Entity *pokemon, Entity *target, s32 dmg, s32 giveExp, bool8 *tookNoDamage, u8 moveType, s16 arg_8, s32 residualDmgType, s32 arg_10, s32 arg_14)
+void sub_806F370(Entity *pokemon, Entity *target, s32 dmg, s32 giveExp, bool8 *tookNoDamage, u8 moveType, s16 dungeonExitReason_, s32 residualDmgType, s32 arg_10, s32 arg_14)
 {
     s32 i;
     struct DamageStruct dmgStruct;
-    s32 arg_8_ = arg_8;
+    s32 dungeonExitReason = dungeonExitReason_;
     s32 dmgNew = dmg;
 
     dmgStruct.typeEffectiveness = EFFECTIVENESS_NEUTRAL;
@@ -1524,7 +1524,7 @@ void sub_806F370(Entity *pokemon, Entity *target, s32 dmg, s32 giveExp, bool8 *t
         dmgStruct.tookNoDamage = FALSE;
     }
 
-    HandleDealingDamage(pokemon, target, &dmgStruct, FALSE, giveExp, arg_8_, arg_10, arg_14);
+    HandleDealingDamage(pokemon, target, &dmgStruct, FALSE, giveExp, dungeonExitReason, arg_10, arg_14);
     if (tookNoDamage != NULL) {
         *tookNoDamage = dmgStruct.tookNoDamage;
     }

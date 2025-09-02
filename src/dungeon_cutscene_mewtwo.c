@@ -72,7 +72,7 @@ void sub_8089978(void)
   sub_80855E4(sub_8086A3C);
   if(HasRecruitedMon(MONSTER_MEWTWO)){
     DungeonStartNewBGM(MUS_FRIEND_AREA_CRYPTIC_CAVE);
-    HandleFaint(MewtwoEntity,0x21c,0);
+    HandleFaint(MewtwoEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
   }
   else {
     gDungeon->unk7 = 1;

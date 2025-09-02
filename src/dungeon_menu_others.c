@@ -16,6 +16,7 @@
 #include "dungeon_menu_recruitment.h"
 #include "dungeon_message.h"
 #include "dungeon_message_log.h"
+#include "dungeon_misc.h"
 #include "dungeon_music.h"
 #include "dungeon_strings.h"
 #include "dungeon_submenu.h"
@@ -441,7 +442,7 @@ static bool8 AskToGiveUp(void)
         return TRUE;
     }
     SetMonsterActionFields(GetLeaderActionContainer(), ACTION_GIVE_UP);
-    sub_8083AB0(0x21B, NULL, GetLeader());
+    sub_8083AB0(DUNGEON_EXIT_GAVE_UP_EXPLORATION, NULL, GetLeader());
     gDungeon->unk644.unk10 = 1;
     return FALSE;
 }

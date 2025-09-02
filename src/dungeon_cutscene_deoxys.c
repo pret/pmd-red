@@ -134,7 +134,7 @@ static void sub_808C550(void)
 
 static void sub_808C590(Entity *r0)
 {
-    HandleFaint(r0, 0x21C, 0);
+    HandleFaint(r0, DUNGEON_EXIT_DELETED_FOR_EVENT, 0);
 }
 
 static void SetupDeoxysFacingDirection(Entity *deoxysEntity)
