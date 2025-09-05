@@ -1,6 +1,6 @@
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -Wno-sign-compare -std=c11 -O2 -DPNG_SKIP_SETJMP_CHECK
+CFLAGS = -Wall -Wextra -Werror -Wno-sign-compare -std=c11 -DPNG_SKIP_SETJMP_CHECK
 CFLAGS += $(shell pkg-config --cflags libpng)
 
 LIBS = -lpng -lz
@@ -19,11 +19,13 @@ endif
 all: gbagfx$(EXE)
 	@:
 
+gbagfx-debug$(EXE): CFLAGS += -Og -g -DDEBUG
 gbagfx-debug$(EXE): $(SRCS) convert_png.h gfx.h global.h jasc_pal.h lz.h rl.h util.h font.h
-	$(CC) $(CFLAGS) -DDEBUG $(SRCS) -o $@ $(LDFLAGS) $(LIBS)
+	$(CC) $(CFLAGS) $(SRCS) -o $@ $(LDFLAGS) $(LIBS)
 
+gbagfx$(EXE): CFLAGS += -O2
 gbagfx$(EXE): $(SRCS) convert_png.h gfx.h global.h jasc_pal.h lz.h rl.h util.h font.h
 	$(CC) $(CFLAGS) $(SRCS) -o $@ $(LDFLAGS) $(LIBS)
 
 clean:
-	$(RM) gbagfx gbagfx.exe
+	$(RM) gbagfx gbagfx.exe gbagfx-debug gbagfx-debug.exe

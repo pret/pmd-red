@@ -26,7 +26,7 @@ UNUSED EWRAM_DATA static u32 sUnused3 = {0}; // R=2026E34
 
 EWRAM_INIT static unkStruct_20266B0 *sUnknown_203B074 = {0};
 
-static void AxResInitUnoriented(axdata *, axmain *, u32, u32, u32, bool8);
+static void AxResInitUnoriented(axdata *, EfoFileData *, u32, u32, u32, bool8);
 static void RegisterSpriteParts_80052BC(const ax_sprite *spritesPtr);
 static void sub_800561C(const EfoFileData *, s32 vramIdx, s32 brightness, const RGB *ramp);
 
@@ -505,11 +505,11 @@ void AxResInit(axdata *a0, axmain *a1, u32 a2, u32 direction, u32 a4, u32 sprite
 // arm9.bin::02001C9C
 void AxResInitUnorientedFile(axdata *a0, OpenedFile *a1, u32 a2, u32 a3, u32 spriteAnimIndex, bool8 a5)
 {
-    AxResInitUnoriented(a0, (axmain *)a1->data, a2, a3, spriteAnimIndex, a5);
+    AxResInitUnoriented(a0, (EfoFileData *)a1->data, a2, a3, spriteAnimIndex, a5);
 }
 
 // arm9.bin::02001C18
-static void AxResInitUnoriented(axdata *a0, axmain *a1, u32 a2, u32 a3, u32 spriteAnimIndex, bool8 a5)
+static void AxResInitUnoriented(axdata *a0, EfoFileData *a1, u32 a2, u32 a3, u32 spriteAnimIndex, bool8 a5)
 {
     a0->flags = 0x8000;
     if (a5)
