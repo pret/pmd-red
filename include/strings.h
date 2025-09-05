@@ -20,7 +20,7 @@ typedef struct DungeonName
 
 struct unkStruct_8113080
 {
-    u8 unk0;
+    bool8 defeatedByPrefix;
     const u8 *text;
 };
 

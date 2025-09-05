@@ -16,32 +16,34 @@
 
 #define TEXT_BUFFER_LEN 200
 
-static void WriteDeathText(s16 moveID, u8 *buffer)
+static void WriteDeathText(s16 dungeonExitReason, u8 *buffer)
 {
-    u16 moveID_u16;
-    s32 moveID_s32 = moveID;
+    u16 dungeonExitReason_u16;
+    s32 dungeonExitReason_s32 = dungeonExitReason;
     Move move;
 
-    if (moveID_s32 < DUNGEON_EXIT_REASON_START) {
+    if (dungeonExitReason_s32 < DUNGEON_EXIT_REASON_START) {
         // Needed this cast/variable to match
-        moveID_u16 = moveID_s32;
-        InitPokemonMoveOrNullObject(&move, moveID_u16);
+        dungeonExitReason_u16 = dungeonExitReason_s32;
+        InitPokemonMoveOrNullObject(&move, dungeonExitReason_u16);
         BufferMoveName(gFormatBuffer_Items[0], &move, NULL);
         FormatString(gText_DeathToMove, buffer, buffer + TEXT_BUFFER_LEN, 0); // $m0's $i0
     } else {
-        strncpy(buffer, gDungeonExitReasonTexts[moveID - DUNGEON_EXIT_REASON_START].text, TEXT_BUFFER_LEN);
+        strncpy(buffer, gDungeonExitReasonTexts[dungeonExitReason - DUNGEON_EXIT_REASON_START].text, TEXT_BUFFER_LEN);
     }
 }
 
-static bool8 WasDefeatedByMove(s16 moveID)
+static bool8 HasDefeatedByPrefix(s16 dungeonExitReason)
 {
-    if (moveID < DUNGEON_EXIT_REASON_START)
+    if (dungeonExitReason < DUNGEON_EXIT_REASON_START)
     {
+        // all moves are prefixed by "was defeated by..."
         return TRUE;
     }
     else
     {
-        return gDungeonExitReasonTexts[moveID  - DUNGEON_EXIT_REASON_START].unk0;
+        // some exit reason texts are to be put after "was defeated by..."
+        return gDungeonExitReasonTexts[dungeonExitReason  - DUNGEON_EXIT_REASON_START].defeatedByPrefix;
     }
 }
 
@@ -58,7 +60,7 @@ void PrintOnDungeonFinishedWindow(u32 windowId, const u8 *headerText, DungeonExi
     y = 26;
     StrncpyCustom(gFormatBuffer_Monsters[0], exitSummary->buffer1, POKEMON_NAME_LENGTH);
     StrncpyCustom(gFormatBuffer_Monsters[1], exitSummary->buffer2, POKEMON_NAME_LENGTH);
-    if (WasDefeatedByMove(exitSummary->exitReason) != 0) {
+    if (HasDefeatedByPrefix(exitSummary->exitReason)) {
         // $m1 was defeated by
         FormatString(gText_Pokemon1WasDefeatedBy,buffer, buffer + sizeof(buffer),0);
     }
