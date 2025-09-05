@@ -3,7 +3,7 @@
 
 #include "structs/str_dungeon.h"
 
-void PrintOnDungeonFinishedWindow(u32 windowId, const u8 *headerText, UnkDungeonGlobal_unk1CE98_sub *param_3);
+void PrintOnDungeonFinishedWindow(u32 windowId, const u8 *headerText, DungeonExitSummary *param_3);
 s16 GetDungeonExitReasonFromMoveOrItemID(u16 moveID, u8 id);
 
 #endif

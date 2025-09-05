@@ -23,6 +23,7 @@
 #include "constants/friend_area.h"
 #include "constants/status.h"
 #include "constants/ability.h"
+#include "constants/dungeon_exit.h"
 #include "constants/iq_skill.h"
 #include "constants/type.h"
 #include "constants/weather.h"

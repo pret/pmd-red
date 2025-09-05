@@ -4,6 +4,7 @@
 #include "code_804267C.h"
 #include "dungeon_message.h"
 #include "constants/ability.h"
+#include "constants/dungeon_exit.h"
 #include "constants/type.h"
 #include "dungeon_ai.h"
 #include "dungeon_range.h"

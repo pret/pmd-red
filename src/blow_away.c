@@ -2,6 +2,8 @@
 #include "globaldata.h"
 #include "blow_away.h"
 #include "constants/ability.h"
+#include "constants/dungeon_exit.h"
+#include "constants/residual_damage.h"
 #include "constants/weather.h"
 #include "dungeon_vram.h"
 #include "dungeon_message.h"

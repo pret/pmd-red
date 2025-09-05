@@ -7,6 +7,8 @@
 #include "code_8077274_1.h"
 #include "dungeon_random.h"
 #include "code_806CD90.h"
+#include "constants/dungeon_exit.h"
+#include "constants/residual_damage.h"
 #include "constants/trap.h"
 #include "constants/type.h"
 #include "run_dungeon.h"

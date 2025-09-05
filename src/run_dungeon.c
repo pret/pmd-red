@@ -2,6 +2,7 @@
 #include "globaldata.h"
 #include "run_dungeon.h"
 #include "constants/dungeon.h"
+#include "constants/dungeon_exit.h"
 #include "constants/monster.h"
 #include "constants/trap.h"
 #include "structs/rgb.h"
@@ -623,7 +624,7 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
             ShowDungeonClearedWindow();
         }
 
-        if (sub_8083C24()) {
+        if (IsUnsuccessfulDungeonExit()) {
             if (gDungeon->unk6 != 0) {
                 setupPtr->info.unk7C = -2;
                 memset(&setupPtr->info.unk84, 0, sizeof(setupPtr->info.unk84));

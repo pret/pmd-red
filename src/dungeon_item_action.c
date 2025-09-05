@@ -7,6 +7,8 @@
 #include "dungeon_random.h"
 #include "constants/dungeon_action.h"
 #include "constants/dungeon.h"
+#include "constants/dungeon_exit.h"
+#include "constants/residual_damage.h"
 #include "constants/iq_skill.h"
 #include "constants/status.h"
 #include "constants/type.h"

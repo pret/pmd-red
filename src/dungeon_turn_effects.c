@@ -18,7 +18,9 @@
 #include "moves.h"
 #include "dungeon_random.h"
 #include "constants/dungeon.h"
+#include "constants/dungeon_exit.h"
 #include "constants/iq_skill.h"
+#include "constants/residual_damage.h"
 #include "constants/status.h"
 #include "constants/ability.h"
 #include "constants/type.h"
@@ -103,7 +105,7 @@ void ApplyEndOfTurnEffects(Entity *entity)
 
         baseBellyDecrementValue.hi = 0;
         baseBellyDecrementValue.lo = 6554;
-        // baseBellyDecrementValue = 0.1;
+        // here baseBellyDecrementValue is 0.1
         F48_16_SMul(&modifiedBellyDecrementValue, &baseBellyDecrementValue, &gBellyGoDownValues[arrIndex]);
         if (entityInfo->usedLinkedMovesCounter > 1)
             modifiedBellyDecrementValue.lo += (gLinkedMovesBellyGoDownValues[entityInfo->usedLinkedMovesCounter] << 0x10);
@@ -128,7 +130,7 @@ void ApplyEndOfTurnEffects(Entity *entity)
             DisplayActions(NULL);
             if (!EntityIsValid(entity) || IsFloorOver())
                 return;
-            if (gDungeon->unk644.emptyBellyAlert < 10)
+            if (gDungeon->unk644.emptyBellyAlert < MAX_EMPTY_BELLY_ALERT_STEPS)
                 gDungeon->unk644.emptyBellyAlert++;
             if (gDungeon->unk644.emptyBellyAlert == EMPTY_BELLY_ALERT_YOUR_BELLYS_EMPTY)
                 str = gUnknown_80FD5DC; // "Oh, no! Your Belly's empty!"

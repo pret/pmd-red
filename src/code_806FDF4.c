@@ -1,5 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
+#include "constants/dungeon_exit.h"
 #include "constants/type.h"
 #include "structs/str_pokemon.h"
 #include "dungeon_main.h"

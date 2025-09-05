@@ -6,6 +6,7 @@
 #include "constants/type.h"
 #include "constants/ability.h"
 #include "constants/dungeon.h"
+#include "constants/dungeon_exit.h"
 #include "constants/iq_skill.h"
 #include "constants/tactic.h"
 #include "constants/friend_area.h"
@@ -77,7 +78,7 @@ extern const u8 *const gIQSkillNames[NUM_IQ_SKILLS];
 extern const u8 *const gIQSkillDescriptions[NUM_IQ_SKILLS];
 extern const u8 *const gTacticsNames[NUM_TACTICS];
 extern const u8 *const gTacticsDescriptions[NUM_TACTICS + 12];
-extern const struct unkStruct_8113080 gSpecialDeathTexts[55];
+extern const struct unkStruct_8113080 gDungeonExitReasonTexts[NUM_DUNGEON_EXIT_REASONS];
 extern const u8 *const gText_DeathToMove;
 extern const u8 *const gText_AlignPlaceX;
 extern const u8 *const gText_Pokemon1WasDefeatedBy;

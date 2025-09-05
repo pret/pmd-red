@@ -5,6 +5,7 @@
 #include "constants/dungeon.h"
 #include "constants/direction.h"
 #include "constants/dungeon.h"
+#include "constants/dungeon_exit.h"
 #include "structs/str_dungeon.h"
 #include "structs/sprite_oam.h"
 #include "dungeon_cutscenes.h"

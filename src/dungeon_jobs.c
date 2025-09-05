@@ -14,6 +14,7 @@
 #include "pokemon.h"
 #include "structs/str_dungeon.h"
 #include "constants/dungeon.h"
+#include "constants/dungeon_exit.h"
 
 extern void sub_8042A34(DungeonPos *r0);
 extern void sub_804178C(u32);

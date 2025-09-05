@@ -1,6 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "code_803D110.h"
+#include "constants/dungeon_exit.h"
 #include "dungeon_vram.h"
 #include "dungeon_tilemap.h"
 #include "dungeon_action.h"

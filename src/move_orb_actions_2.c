@@ -8,6 +8,8 @@
 #include "code_8077274_1.h"
 #include "dungeon_random.h"
 #include "constants/ability.h"
+#include "constants/dungeon_exit.h"
+#include "constants/residual_damage.h"
 #include "constants/status.h"
 #include "constants/targeting.h"
 #include "constants/type.h"

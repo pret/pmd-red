@@ -8,8 +8,10 @@
 #include "pokemon_types.h"
 #include "dungeon_message.h"
 #include "string_format.h"
+#include "constants/dungeon_exit.h"
 #include "constants/move_id.h"
 #include "constants/monster.h"
+#include "constants/residual_damage.h"
 #include "constants/status.h"
 #include "constants/type.h"
 #include "constants/iq_skill.h"
@@ -366,7 +368,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
         const u8 *str;
 
         gFormatArgs[0] = dmgStruct->dmg;
-        str = gUnknown_80F9764[dmgStruct->residualDmgType];
+        str = gResidualDamageMessages[dmgStruct->residualDmgType];
 
         ASM_MATCH_TRICK(dmgStruct);
 

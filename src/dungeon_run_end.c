@@ -2,6 +2,7 @@
 #include "globaldata.h"
 #include "dungeon_misc.h"
 #include "dungeon_run_end.h"
+#include "constants/dungeon_exit.h"
 #include "structs/str_dungeon.h"
 #include "data_serializer.h"
 #include "dungeon_info.h"
@@ -21,30 +22,30 @@ static void WriteDeathText(s16 moveID, u8 *buffer)
     s32 moveID_s32 = moveID;
     Move move;
 
-    if (moveID_s32 < 0x1F4) {
+    if (moveID_s32 < DUNGEON_EXIT_REASON_START) {
         // Needed this cast/variable to match
         moveID_u16 = moveID_s32;
         InitPokemonMoveOrNullObject(&move, moveID_u16);
         BufferMoveName(gFormatBuffer_Items[0], &move, NULL);
         FormatString(gText_DeathToMove, buffer, buffer + TEXT_BUFFER_LEN, 0); // $m0's $i0
     } else {
-        strncpy(buffer, gSpecialDeathTexts[moveID - 0x1F4].text, TEXT_BUFFER_LEN);
+        strncpy(buffer, gDungeonExitReasonTexts[moveID - DUNGEON_EXIT_REASON_START].text, TEXT_BUFFER_LEN);
     }
 }
 
 static bool8 WasDefeatedByMove(s16 moveID)
 {
-    if(moveID < 0x1F4)
+    if (moveID < DUNGEON_EXIT_REASON_START)
     {
         return TRUE;
     }
     else
     {
-        return gSpecialDeathTexts[moveID  - 0x1F4].unk0;
+        return gDungeonExitReasonTexts[moveID  - DUNGEON_EXIT_REASON_START].unk0;
     }
 }
 
-void PrintOnDungeonFinishedWindow(u32 windowId, const u8 *headerText, UnkDungeonGlobal_unk1CE98_sub *param_3)
+void PrintOnDungeonFinishedWindow(u32 windowId, const u8 *headerText, DungeonExitSummary *exitSummary)
 {
     u8 buffer[TEXT_BUFFER_LEN];
     s32 x, y;
@@ -52,12 +53,12 @@ void PrintOnDungeonFinishedWindow(u32 windowId, const u8 *headerText, UnkDungeon
 
     sub_80073B8(windowId);
     PrintFormattedStringOnWindow(16,0,headerText,windowId,0);
-    PrintYellowDungeonNametoBuffer(gFormatBuffer_Monsters[0], &param_3->dungeonLocation);
+    PrintYellowDungeonNametoBuffer(gFormatBuffer_Monsters[0], &exitSummary->dungeonLocation);
     PrintFormattedStringOnWindow(4,16,gText_AlignPlaceX,windowId,0); // #+Place: $m0
     y = 26;
-    StrncpyCustom(gFormatBuffer_Monsters[0], param_3->buffer1, POKEMON_NAME_LENGTH);
-    StrncpyCustom(gFormatBuffer_Monsters[1], param_3->buffer2, POKEMON_NAME_LENGTH);
-    if (WasDefeatedByMove(param_3->moveID) != 0) {
+    StrncpyCustom(gFormatBuffer_Monsters[0], exitSummary->buffer1, POKEMON_NAME_LENGTH);
+    StrncpyCustom(gFormatBuffer_Monsters[1], exitSummary->buffer2, POKEMON_NAME_LENGTH);
+    if (WasDefeatedByMove(exitSummary->exitReason) != 0) {
         // $m1 was defeated by
         FormatString(gText_Pokemon1WasDefeatedBy,buffer, buffer + sizeof(buffer),0);
     }
@@ -70,14 +71,14 @@ void PrintOnDungeonFinishedWindow(u32 windowId, const u8 *headerText, UnkDungeon
     PrintFormattedStringOnWindow(x,y,buffer,windowId,0);
 
     y += 10;
-    WriteDeathText(param_3->moveID, buffer);
+    WriteDeathText(exitSummary->exitReason, buffer);
 
     x = (176 - GetStringLineWidth(buffer)) / 2;
     PrintFormattedStringOnWindow(x,y,buffer,windowId,0);
 
     y += 16;
-    gFormatArgs[0] = param_3->exp;
-    gFormatArgs[1] = param_3->level;
+    gFormatArgs[0] = exitSummary->exp;
+    gFormatArgs[1] = exitSummary->level;
     if (gFormatArgs[1] >= 100) {
         PrintFormattedStringOnWindow(4,y,gUnknown_81138C0,windowId,0);
     }
@@ -85,45 +86,45 @@ void PrintOnDungeonFinishedWindow(u32 windowId, const u8 *headerText, UnkDungeon
         PrintFormattedStringOnWindow(4,y,gUnknown_8113898,windowId,0);
     }
     y += 10;
-    gFormatArgs[0] = param_3->maxHPStat;
+    gFormatArgs[0] = exitSummary->maxHPStat;
     PrintFormattedStringOnWindow(4,y,gUnknown_81138D0,windowId,0);
     y += 10;
-    gFormatArgs[0] = param_3->atk;
-    gFormatArgs[1] = param_3->def;
-    if (param_3->attBoost) {
-        gFormatArgs[0] = gFormatArgs[0] + param_3->attBoost;
+    gFormatArgs[0] = exitSummary->atk;
+    gFormatArgs[1] = exitSummary->def;
+    if (exitSummary->attBoost) {
+        gFormatArgs[0] = gFormatArgs[0] + exitSummary->attBoost;
         PrintFormattedStringOnWindow(4,y,gUnknown_8113950,windowId,0);
     }
     else {
         PrintFormattedStringOnWindow(4,y,gUnknown_81138E4,windowId,0);
     }
-    if (param_3->defBoost) {
-        gFormatArgs[1] = gFormatArgs[1] + param_3->defBoost;
+    if (exitSummary->defBoost) {
+        gFormatArgs[1] = gFormatArgs[1] + exitSummary->defBoost;
         PrintFormattedStringOnWindow(4,y,gUnknown_8113974,windowId,0);
     }
     else {
         PrintFormattedStringOnWindow(4,y,gUnknown_8113900,windowId,0);
     }
     y += 10;
-    gFormatArgs[0] = param_3->spAtk;
-    gFormatArgs[1] = param_3->spDef;
-    if (param_3->spAttBoost) {
-        gFormatArgs[0] = gFormatArgs[0] + param_3->spAttBoost;
+    gFormatArgs[0] = exitSummary->spAtk;
+    gFormatArgs[1] = exitSummary->spDef;
+    if (exitSummary->spAttBoost) {
+        gFormatArgs[0] = gFormatArgs[0] + exitSummary->spAttBoost;
         PrintFormattedStringOnWindow(4,y,gUnknown_8113990,windowId,0);
     }
     else {
         PrintFormattedStringOnWindow(4,y,gUnknown_8113918,windowId,0);
     }
-    if (param_3->spDefBoost) {
-        gFormatArgs[1] = gFormatArgs[1] + param_3->spDefBoost;
+    if (exitSummary->spDefBoost) {
+        gFormatArgs[1] = gFormatArgs[1] + exitSummary->spDefBoost;
         PrintFormattedStringOnWindow(4,y,gUnknown_81139B4,windowId,0);
     }
     else {
         PrintFormattedStringOnWindow(4,y,gUnknown_8113934,windowId,0);
     }
     y += 16;
-    item = &(param_3->heldItem);
-    if ((param_3->heldItem.flags & ITEM_FLAG_EXISTS)) {
+    item = &(exitSummary->heldItem);
+    if ((exitSummary->heldItem.flags & ITEM_FLAG_EXISTS)) {
         sub_8090E14(gFormatBuffer_Items[0],item,0);
     }
     else {

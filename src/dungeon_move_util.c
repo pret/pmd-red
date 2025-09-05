@@ -394,7 +394,7 @@ bool8 TryUseChosenMove(struct Entity *attacker, u32 r6, s32 itemId, u32 var_30, 
     gUnknown_202F21A = 0;
     gUnknown_202F21C = 0;
     gUnknown_202F220 = 0;
-    if (isLinkedMove && GetEntInfo(attacker)->usedLinkedMovesCounter <= 3) {
+    if (isLinkedMove && GetEntInfo(attacker)->usedLinkedMovesCounter < MAX_MON_MOVES) {
         GetEntInfo(attacker)->usedLinkedMovesCounter++;
     }
 

@@ -8,6 +8,7 @@
 #include "code_806CD90.h"
 #include "constants/bg_music.h"
 #include "constants/direction.h"
+#include "constants/dungeon_exit.h"
 #include "constants/friend_area.h"
 #include "constants/weather.h"
 #include "dungeon_items.h"

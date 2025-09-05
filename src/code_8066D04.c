@@ -1,6 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "constants/dungeon.h"
+#include "constants/dungeon_exit.h"
 #include "constants/item.h"
 #include "constants/move_id.h"
 #include "dungeon_vram.h"
