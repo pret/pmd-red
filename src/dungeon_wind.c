@@ -4,6 +4,7 @@
 #include "code_804267C.h"
 #include "dungeon_message.h"
 #include "constants/ability.h"
+#include "constants/dungeon_exit.h"
 #include "constants/type.h"
 #include "dungeon_ai.h"
 #include "dungeon_range.h"
@@ -79,7 +80,7 @@ void sub_807E378(void)
         LogMessageByIdWithPopupCheckUser(leader,gUnknown_80F9CBC);
         sub_80426C8(gUnknown_80F5FAC[gDungeon->tileset],3);
         gDungeon->unk644.unk36 = 4;
-        HandleFaint(leader,0x21e,leader);
+        HandleFaint(leader,DUNGEON_EXIT_BLOWN_OUT_UNSEEN_FORCE,leader);
       }
     }
   }

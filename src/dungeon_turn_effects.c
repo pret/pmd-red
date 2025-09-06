@@ -18,7 +18,9 @@
 #include "moves.h"
 #include "dungeon_random.h"
 #include "constants/dungeon.h"
+#include "constants/dungeon_exit.h"
 #include "constants/iq_skill.h"
+#include "constants/residual_damage.h"
 #include "constants/status.h"
 #include "constants/ability.h"
 #include "constants/type.h"
@@ -33,6 +35,7 @@
 #include "dungeon_strings.h"
 #include "dungeon_engine.h"
 #include "dungeon_damage.h"
+#include "dungeon_misc.h"
 #include "dungeon_range.h"
 #include "dungeon_move_util.h"
 #include "warp_target.h"
@@ -54,7 +57,7 @@ void ApplyEndOfTurnEffects(Entity *entity)
         return;
 
     entityInfo = GetEntInfo(entity);
-    entityInfo->unk146 = 0;
+    entityInfo->bellyEmpty = FALSE;
     sub_805229C();
     sub_807E8F0(entity);
     if (HasHeldItem(entity, ITEM_WARP_SCARF)) {
@@ -74,9 +77,9 @@ void ApplyEndOfTurnEffects(Entity *entity)
         }
     }
 
+    // handle belly decrease
     if (entityInfo->isTeamLeader) {
-        s48_16 sp8, sp10;
-        FixedPoint var_38;
+        s48_16 baseBellyDecrementValue, modifiedBellyDecrementValue;
         FixedPoint bellyBefore;
         bool8 sound;
 
@@ -100,16 +103,16 @@ void ApplyEndOfTurnEffects(Entity *entity)
         if (arrIndex >= BELLY_GO_DOWN_VALUES_COUNT)
             arrIndex = BELLY_GO_DOWN_VALUES_COUNT - 1;
 
-        sp8.hi = 0;
-        sp8.lo = 6554;
-        F48_16_SMul(&sp10, &sp8, &gBellyGoDownValues[arrIndex]);
-        if (entityInfo->unk153 > 1)
-            sp10.lo += (gUnknown_80F60DC[entityInfo->unk153] << 0x10);
-        entityInfo->unk153 = 0;
+        baseBellyDecrementValue.hi = 0;
+        baseBellyDecrementValue.lo = 6554;
+        // here baseBellyDecrementValue is 0.1
+        F48_16_SMul(&modifiedBellyDecrementValue, &baseBellyDecrementValue, &gBellyGoDownValues[arrIndex]);
+        if (entityInfo->usedLinkedMovesCounter > 1)
+            modifiedBellyDecrementValue.lo += (gLinkedMovesBellyGoDownValues[entityInfo->usedLinkedMovesCounter] << 0x10);
+        entityInfo->usedLinkedMovesCounter = 0;
 
         bellyBefore = entityInfo->belly;
-        var_38 = FixedPoint_SetFromUnk(&sp10);
-        entityInfo->belly = FixedPoint_Subtract(bellyBefore, var_38);
+        entityInfo->belly = FixedPoint_Subtract(bellyBefore, FixedPoint_SetFromS48_16(&modifiedBellyDecrementValue));
         sound = TRUE;
         if (FixedPointToInt(bellyBefore) > 19 && FixedPointToInt(entityInfo->belly) <= 19)
             str = gUnknown_80FD594;
@@ -127,30 +130,36 @@ void ApplyEndOfTurnEffects(Entity *entity)
             DisplayActions(NULL);
             if (!EntityIsValid(entity) || IsFloorOver())
                 return;
-            if (gDungeon->unk644.unk35 < 10)
-                gDungeon->unk644.unk35++;
-            if (gDungeon->unk644.unk35 == 1)
-                str = gUnknown_80FD5DC;
-            if (gDungeon->unk644.unk35 == 2)
-                str = gUnknown_80FD608, sound = FALSE;
-            if (gDungeon->unk644.unk35 == 3)
-                str = gUnknown_80FD628, sound = FALSE;
+            if (gDungeon->unk644.emptyBellyAlert < MAX_EMPTY_BELLY_ALERT_STEPS)
+                gDungeon->unk644.emptyBellyAlert++;
+            if (gDungeon->unk644.emptyBellyAlert == EMPTY_BELLY_ALERT_YOUR_BELLYS_EMPTY)
+                str = gUnknown_80FD5DC; // "Oh, no! Your Belly's empty!"
+            if (gDungeon->unk644.emptyBellyAlert == EMPTY_BELLY_ALERT_HURRY_EAT_SOMETHING)
+            {
+                str = gUnknown_80FD608; // "Hurry! You've got to eat something!"
+                sound = FALSE;
+            }
+            if (gDungeon->unk644.emptyBellyAlert == EMPTY_BELLY_ALERT_YOULL_FAINT)
+            {
+                str = gUnknown_80FD628; // "You'll faint from hunger!"
+                sound = FALSE;
+            }
 
             TrySendImmobilizeSleepEndMsg(entity, entity);
-            DealDamageToEntity(entity, 1, 0xE, 0x211);
-            entityInfo->unk146 = 1;
+            DealDamageToEntity(entity, 1, RESIDUAL_DAMAGE_HUNGER, DUNGEON_EXIT_FAINTED_FROM_HUNGER);
+            entityInfo->bellyEmpty = TRUE;
             if (FixedPointToInt(entityInfo->belly) != 0)
                 str = NULL;
         }
         else {
-            gDungeon->unk644.unk35 = 0;
+            gDungeon->unk644.emptyBellyAlert = 0;
         }
 
         if (str != NULL) {
             if (sound)
                 PlaySoundEffect(0x153);
             LogMessageByIdWithPopupCheckUser(entity, str);
-            sub_803E708(0x1E, 0x32);
+            sub_803E708(30, 0x32);
         }
     }
 
@@ -159,12 +168,12 @@ void ApplyEndOfTurnEffects(Entity *entity)
     if (gDungeon->weather.weatherDamageCounter == 0) {
         if (GetApparentWeather(entity) == WEATHER_HAIL) {
             if (!MonsterIsType(entity, TYPE_ICE)) {
-                DealDamageToEntity(entity, gHailSandstormDmgValue, 0x12, 0x220);
+                DealDamageToEntity(entity, gHailSandstormDmgValue, RESIDUAL_DAMAGE_BAD_WEATHER, DUNGEON_EXIT_FAINTED_DUE_TO_WEATHER);
             }
         }
         else if (GetApparentWeather(entity) == WEATHER_SANDSTORM) {
             if (!MonsterIsType(entity, TYPE_GROUND) && !MonsterIsType(entity, TYPE_ROCK) && !MonsterIsType(entity, TYPE_STEEL)) {
-                DealDamageToEntity(entity, gHailSandstormDmgValue, 0x12, 0x220);
+                DealDamageToEntity(entity, gHailSandstormDmgValue, RESIDUAL_DAMAGE_BAD_WEATHER, DUNGEON_EXIT_FAINTED_DUE_TO_WEATHER);
             }
         }
         if (!EntityIsValid(entity) || IsFloorOver())
@@ -202,7 +211,7 @@ void ApplyEndOfTurnEffects(Entity *entity)
                 return;
             entityInfo->burnClassStatus.damageCountdown = gBurnDmgCountdown;
             TrySendImmobilizeSleepEndMsg(entity, entity);
-            DealDamageToEntity(entity, gBurnDmgValue, 1, 0x208);
+            DealDamageToEntity(entity, gBurnDmgValue, RESIDUAL_DAMAGE_BURN, DUNGEON_EXIT_FAINTED_FROM_BURN);
         }
         if (!EntityIsValid(entity) || IsFloorOver())
             return;
@@ -215,7 +224,7 @@ void ApplyEndOfTurnEffects(Entity *entity)
                 return;
             entityInfo->burnClassStatus.damageCountdown = gPoisonDmgCountdown;
             TrySendImmobilizeSleepEndMsg(entity, entity);
-            DealDamageToEntity(entity, gPoisonDmgValue, 3, 0x20A);
+            DealDamageToEntity(entity, gPoisonDmgValue, RESIDUAL_DAMAGE_POISON, DUNGEON_EXIT_FAINTED_FROM_POISON);
         }
         if (!EntityIsValid(entity) || IsFloorOver())
             return;
@@ -234,7 +243,7 @@ void ApplyEndOfTurnEffects(Entity *entity)
                 return;
 
             TrySendImmobilizeSleepEndMsg(entity, entity);
-            DealDamageToEntity(entity, gBadPoisonDmgValuesByTurn[turns], 3, 0x20A);
+            DealDamageToEntity(entity, gBadPoisonDmgValuesByTurn[turns], RESIDUAL_DAMAGE_POISON, DUNGEON_EXIT_FAINTED_FROM_POISON);
         }
         if (!EntityIsValid(entity) || IsFloorOver())
             return;
@@ -248,7 +257,7 @@ void ApplyEndOfTurnEffects(Entity *entity)
             entityInfo->frozenClassStatus.damageCountdown = gConstrictionDmgCountdown;
             TrySendImmobilizeSleepEndMsg(entity, entity);
             sub_8041C4C(entity, entityInfo->frozenClassStatus.unk4);
-            DealDamageToEntity(entity, gConstrictionDmgValue, 2, 0x209);
+            DealDamageToEntity(entity, gConstrictionDmgValue, RESIDUAL_DAMAGE_CONSTRICT, DUNGEON_EXIT_FAINTED_FROM_CONSTRICTION);
         }
         if (!EntityIsValid(entity) || IsFloorOver())
             return;
@@ -260,7 +269,7 @@ void ApplyEndOfTurnEffects(Entity *entity)
                 return;
             entityInfo->frozenClassStatus.damageCountdown = gWrapDmgCountdown;
             TrySendImmobilizeSleepEndMsg(entity, entity);
-            DealDamageToEntity(entity, gWrapDmgValue, 5, 0x20B);
+            DealDamageToEntity(entity, gWrapDmgValue, RESIDUAL_DAMAGE_WRAP, DUNGEON_EXIT_FAINTED_FROM_WRAP);
         }
         if (!EntityIsValid(entity) || IsFloorOver())
             return;
@@ -286,7 +295,7 @@ void ApplyEndOfTurnEffects(Entity *entity)
                 return;
 
             TrySendImmobilizeSleepEndMsg(entity, entity);
-            DealDamageToEntity(entity, dmg, 7, 0x20C);
+            DealDamageToEntity(entity, dmg, RESIDUAL_DAMAGE_CURSE, DUNGEON_EXIT_FELLED_BY_CURSE);
         }
         if (!EntityIsValid(entity) || IsFloorOver())
             return;
@@ -315,10 +324,10 @@ void ApplyEndOfTurnEffects(Entity *entity)
 
                     if (entityInfo->frozenClassStatus.status != STATUS_FROZEN) {
                         TrySendImmobilizeSleepEndMsg(entity, entity);
-                        DealDamageToEntity(entity, hp, 9, 0x20D);
+                        DealDamageToEntity(entity, hp, RESIDUAL_DAMAGE_LEECH_SEED, DUNGEON_EXIT_DRAINED_BY_LEECH_SEED);
                         if (dmgUser) {
                             TrySendImmobilizeSleepEndMsg(target, target);
-                            DealDamageToEntity(target, hp, 0xD, 0x1FA);
+                            DealDamageToEntity(target, hp, RESIDUAL_DAMAGE_LIQUID_OOZE, DUNGEON_EXIT_FAINTED_COVERED_IN_SLUDGE);
                         }
                         else {
                             HealTargetHP(target, target, hp, 0, TRUE);
@@ -344,7 +353,7 @@ void ApplyEndOfTurnEffects(Entity *entity)
                 LogMessageByIdWithPopupCheckUser(entity, gPtrProtectSavedItMessage);
             }
             else {
-                DealDamageToEntity(entity, 0x270F, 0xB, 0x20E);
+                DealDamageToEntity(entity, 9999, RESIDUAL_DAMAGE_PERISH_SONG, DUNGEON_EXIT_FAINTED_FROM_PERISH_SONG);
             }
             if (!EntityIsValid(entity) || IsFloorOver())
                 return;
@@ -401,7 +410,7 @@ void TickStatusAndHealthRegen(Entity *entity)
     entityInfo = GetEntInfo(entity);
 
     // HP heal
-    if (entityInfo->unk146 == 0 && entityInfo->burnClassStatus.status != STATUS_POISONED && entityInfo->burnClassStatus.status != STATUS_BADLY_POISONED) {
+    if (!entityInfo->bellyEmpty && entityInfo->burnClassStatus.status != STATUS_POISONED && entityInfo->burnClassStatus.status != STATUS_BADLY_POISONED) {
         s32 regenSpeed = 0;
 
         if (!entityInfo->isNotTeamMember)

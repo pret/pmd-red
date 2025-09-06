@@ -17,7 +17,7 @@ void sub_80847D4(void);
 bool8 ShouldShowDungeonBanner(void);
 void sub_80848F0(void);
 void DisplayPreFightDialogue(void);
-void sub_8084E00(Entity *entity, u8 param_2, u8 param_3);
+void sub_8084E00(Entity *entity, u8 param_2, bool8 param_3);
 void sub_8085140(void);
 bool8 sub_808529C(s32 speciesId_);
 void sub_8085374(void);

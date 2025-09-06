@@ -8,7 +8,9 @@
 #include "code_8077274_1.h"
 #include "dungeon_random.h"
 #include "constants/ability.h"
+#include "constants/dungeon_exit.h"
 #include "constants/item.h"
+#include "constants/residual_damage.h"
 #include "constants/status.h"
 #include "constants/type.h"
 #include "dungeon_items.h"
@@ -27,14 +29,13 @@
 #include "dungeon_strings.h"
 #include "dungeon_pos_data.h"
 #include "dungeon_damage.h"
+#include "dungeon_misc.h"
 #include "dungeon_mon_spawn.h"
 #include "dungeon_kecleon_shop.h"
 
 extern void UpdateMinimap();
 extern void EntityUpdateStatusSprites(Entity *);
 extern void sub_8042A74(Entity *r0);
-extern s32 GetMonsterApparentID(Entity *param_1, s16 param_2);
-extern void sub_806A898(Entity *, u32, u32);
 extern void HealTargetHP(Entity *pokemon, Entity *r1, s16, s16, u32);
 extern void sub_80420C8(Entity *r0);
 extern void nullsub_68(Entity *);
@@ -188,7 +189,7 @@ void EndSleepClassStatus(Entity * pokemon, Entity * target, bool8 param_3, bool8
             isAsleep = TRUE;
             TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FA70C);
             if (param_4) {
-                DealDamageToEntity(target,gNightmareDmgValue,8,0x20f);
+                DealDamageToEntity(target,gNightmareDmgValue,RESIDUAL_DAMAGE_NIGHTMARE,DUNGEON_EXIT_FAINTED_WHILE_IN_NIGHTMARE);
             }
             break;
         case STATUS_NAPPING:

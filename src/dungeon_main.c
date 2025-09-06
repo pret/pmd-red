@@ -1056,7 +1056,7 @@ void sub_805F02C(void)
         DisplayDungeonLoggableMessageTrue(r7, gUnknown_80F9C2C);
     }
     else {
-        gDungeon->unk644.unk35 = 0;
+        gDungeon->unk644.emptyBellyAlert = 0;
         r8->isTeamLeader = TRUE;
         leaderInfo->isTeamLeader = FALSE;
         for (i = 0; i < 4; i++) {

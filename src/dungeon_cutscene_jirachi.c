@@ -8,6 +8,7 @@
 #include "code_806CD90.h"
 #include "constants/bg_music.h"
 #include "constants/direction.h"
+#include "constants/dungeon_exit.h"
 #include "constants/friend_area.h"
 #include "constants/weather.h"
 #include "dungeon_items.h"
@@ -84,7 +85,7 @@ void sub_808B35C(void)
   sub_8085930(DIRECTION_NORTH);
   sub_80855E4(sub_8086A3C);
   if (HasRecruitedMon(MONSTER_JIRACHI)) {
-    HandleFaint(jirachiEntity,0x21c,0);
+    HandleFaint(jirachiEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
   }
   else {
     SetFacingDirection(jirachiEntity, DIRECTION_SOUTH);

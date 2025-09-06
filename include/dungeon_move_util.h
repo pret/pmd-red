@@ -27,6 +27,6 @@ bool8 sub_805744C(Entity * pokemon, Move *move, bool8 param_3);
 void SortTargets(Entity **targetsArray, Entity *attacker);
 bool8 MoveRequiresCharging(Entity* pokemon, u16 moveID);
 void sub_8057588(Entity * pokemon, u8 param_2);
-s16 sub_8057600(Move *move, s32 itemID);
+s16 GetDungeonExitReasonFromMoveOrItem(Move *move, s32 itemID);
 
 #endif

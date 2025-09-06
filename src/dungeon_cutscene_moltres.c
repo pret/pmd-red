@@ -8,6 +8,7 @@
 #include "code_806CD90.h"
 #include "constants/bg_music.h"
 #include "constants/direction.h"
+#include "constants/dungeon_exit.h"
 #include "constants/friend_area.h"
 #include "constants/weather.h"
 #include "dungeon_items.h"
@@ -79,7 +80,7 @@ void sub_8087848(void)
   sub_8085930(DIRECTION_WEST);
   sub_80855E4(sub_8086A3C);
   if (sub_8086AE4(MONSTER_MOLTRES)) {
-    HandleFaint(moltresEntity,0x21c,0);
+    HandleFaint(moltresEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
   }
   else {
     LevelUpTarget(moltresEntity,moltresEntity,gMoltresConfigLevel,0,0);

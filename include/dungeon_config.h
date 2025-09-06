@@ -248,6 +248,12 @@ extern const s32 gEffectivenessChart[NUM_EFFECTIVENESS][NUM_EFFECTIVENESS];
 #define BELLY_GO_DOWN_VALUES_COUNT 20
 extern const s48_16 gBellyGoDownValues[BELLY_GO_DOWN_VALUES_COUNT];
 
+#define EMPTY_BELLY_ALERT_YOUR_BELLYS_EMPTY 1
+#define EMPTY_BELLY_ALERT_HURRY_EAT_SOMETHING 2
+#define EMPTY_BELLY_ALERT_YOULL_FAINT 3
+
+#define MAX_EMPTY_BELLY_ALERT_STEPS 10
+
 #define WARP_SCARF_ACTIVATION_CHANCES_COUNT 20
 extern const s16 gWarpScarfActivationChances[WARP_SCARF_ACTIVATION_CHANCES_COUNT];
 
@@ -291,6 +297,6 @@ extern const struct CalledMove gNaturePowerCalledMoves[];
 
 extern const u16 gUnknown_80F5F70[UNK12A18_ARR_COUNT];
 extern const s32 gUnknown_80F5FAC[76];
-extern const s32 gUnknown_80F60DC[5];
+extern const s32 gLinkedMovesBellyGoDownValues[5];
 
 #endif

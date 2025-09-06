@@ -35,7 +35,7 @@ void sub_8068A84(Pokemon *pokemon);
 void sub_8068BDC(bool8 a0);
 void sub_8068F28(void);
 void sub_8068F80(void);
-void HandleFaint(Entity *entity, s32 param_2, Entity *param_3);
+void HandleFaint(Entity *entity, s32 dungeonExitReason, Entity *param_3);
 void sub_80694C0(Entity *target,s32 x,s32 y,u8 param_4);
 void sub_80695EC(Entity *param_1,int x,int y);
 Entity * sub_8069660(Entity *target);

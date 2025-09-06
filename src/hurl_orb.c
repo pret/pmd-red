@@ -8,7 +8,9 @@
 #include "code_806CD90.h"
 #include "code_8077274_1.h"
 #include "constants/ability.h"
+#include "constants/dungeon_exit.h"
 #include "constants/monster.h"
+#include "constants/residual_damage.h"
 #include "constants/type.h"
 #include "constants/weather.h"
 #include "dungeon_info.h"
@@ -215,14 +217,14 @@ void HandleHurlOrb(Entity *target, Entity *attacker)
 
             InitPokemonMove(&move, MOVE_REGULAR_ATTACK);
             if (!sub_80571F0(tileEntity, &move)) {
-                sub_806F370(target, tileEntity, gHurlOrbDmgValue, FALSE, NULL, TYPE_NONE, 0x21A, 0, 0, 0);
+                sub_806F370(target, tileEntity, gHurlOrbDmgValue, FALSE, NULL, TYPE_NONE, DUNGEON_EXIT_FELLED_BY_POKEMON_FLYING, RESIDUAL_DAMAGE_REGULAR, 0, 0);
             }
             if (EntityIsValid(tileEntity)) {
                 sub_806CE68(tileEntity, GetEntInfo(tileEntity)->action.direction);
             }
         }
 
-        sub_806F370(target, attacker, gHurlOrbDmgValue, FALSE, NULL, TYPE_NONE, 0x219, 0, 0, 0);
+        sub_806F370(target, attacker, gHurlOrbDmgValue, FALSE, NULL, TYPE_NONE, DUNGEON_EXIT_FAINTED_FROM_BEING_KNOCKED, RESIDUAL_DAMAGE_REGULAR, 0, 0);
         if (EntityIsValid(attacker)) {
             sub_806CE68(attacker, GetEntInfo(attacker)->action.direction);
         }

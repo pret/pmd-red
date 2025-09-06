@@ -8,6 +8,7 @@
 #include "code_806CD90.h"
 #include "constants/bg_music.h"
 #include "constants/direction.h"
+#include "constants/dungeon_exit.h"
 #include "constants/friend_area.h"
 #include "constants/weather.h"
 #include "dungeon_items.h"
@@ -58,7 +59,7 @@ void sub_808C10C(void)
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
   if (HasRecruitedMon(MONSTER_KYOGRE)) {
-    HandleFaint(kyogreEntity,0x21c,0);
+    HandleFaint(kyogreEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
   }
   else {
     gDungeon->unk7 = 1;

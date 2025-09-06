@@ -46,7 +46,7 @@
 #include "warp_target.h"
 
 extern void sub_80429C8(Entity *r0);
-extern s16 sub_8057600(Move *move, s32 itemID);
+extern s16 GetDungeonExitReasonFromMoveOrItem(Move *move, s32 itemID);
 extern void sub_8042238(Entity *pokemon, Entity *target);
 extern void sub_806A1E8(Entity *pokemon);
 extern void sub_804178C(u32);
@@ -1353,31 +1353,31 @@ bool8 HandleRegularDamagingMove(Entity *attacker, Entity *target, Move *move, s3
 s32 HandleDamagingMove(Entity *attacker, Entity *target, Move *move, s24_8 modifier, s32 itemId)
 {
     struct DamageStruct dmgStruct;
-    s16 unk;
+    s16 dungeonExitReason;
     s32 moveType = GetMoveTypeForMonster(attacker, move);
     s32 movePower = GetMovePower(attacker, move);
     s32 critChance = GetMoveCritChance(move);
 
     CalcDamage(attacker, target, moveType, movePower, critChance, &dmgStruct, modifier, move->id, 1);
-    unk = sub_8057600(move, itemId);
-    return TryHitTarget(attacker, target, move, &dmgStruct, unk);
+    dungeonExitReason = GetDungeonExitReasonFromMoveOrItem(move, itemId);
+    return TryHitTarget(attacker, target, move, &dmgStruct, dungeonExitReason);
 }
 
 s32 sub_80556BC(Entity *attacker, Entity *target, u8 moveType, Move *move, s24_8 modifier, s32 itemId)
 {
     struct DamageStruct dmgStruct;
-    s16 unk;
+    s16 dungeonExitReason;
     s32 movePower = GetMovePower(attacker, move);
     s32 critChance = GetMoveCritChance(move);
 
     CalcDamage(attacker, target, moveType, movePower, critChance, &dmgStruct, modifier, move->id, 1);
-    unk = sub_8057600(move, itemId);
-    return TryHitTarget(attacker, target, move, &dmgStruct, unk);
+    dungeonExitReason = GetDungeonExitReasonFromMoveOrItem(move, itemId);
+    return TryHitTarget(attacker, target, move, &dmgStruct, dungeonExitReason);
 }
 
-static s32 TryHitTarget(Entity *attacker, Entity *target, Move *move, struct DamageStruct *dmgStruct, s16 unk_)
+static s32 TryHitTarget(Entity *attacker, Entity *target, Move *move, struct DamageStruct *dmgStruct, s16 dungeonExitReason_)
 {
-    s32 unk = unk_; // It's happening again...
+    s32 dungeonExitReason = dungeonExitReason_; // It's happening again...
     if (AccuracyCalc(attacker, target, move, ACCURACY_2, TRUE)) { // Move hits
         bool32 isFalseSwipe = (move->id == MOVE_FALSE_SWIPE);
 
@@ -1387,7 +1387,7 @@ static s32 TryHitTarget(Entity *attacker, Entity *target, Move *move, struct Dam
             gDungeon->unk17B40 = target->spawnGenID;
         }
 
-        HandleDealingDamage(attacker, target, dmgStruct, isFalseSwipe, TRUE, unk, TRUE, 0);
+        HandleDealingDamage(attacker, target, dmgStruct, isFalseSwipe, TRUE, dungeonExitReason, TRUE, 0);
     }
     else {
         SetMessageArgument_2(gFormatBuffer_Monsters[1], GetEntInfo(target), 0);
@@ -1419,7 +1419,7 @@ s32 sub_8055864(Entity *attacker, Entity *target, Move *move, s32 param_4, s32 i
     s32 moveType = GetMoveTypeForMonster(attacker, move);
 
     sub_806F2BC(attacker, target, moveType, param_4, &dmgStruct);
-    HandleDealingDamage(attacker, target, &dmgStruct, FALSE, TRUE, sub_8057600(move, itemId), TRUE, 0);
+    HandleDealingDamage(attacker, target, &dmgStruct, FALSE, TRUE, GetDungeonExitReasonFromMoveOrItem(move, itemId), TRUE, 0);
     if (dmgStruct.tookNoDamage) {
         return 0;
     }

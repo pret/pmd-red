@@ -23,6 +23,7 @@
 #include "constants/friend_area.h"
 #include "constants/status.h"
 #include "constants/ability.h"
+#include "constants/dungeon_exit.h"
 #include "constants/iq_skill.h"
 #include "constants/type.h"
 #include "constants/weather.h"
@@ -466,12 +467,12 @@ static inline void ClearMonItemId(Pokemon *mon)
     mon->heldItem.id = ITEM_NOTHING;
 }
 
-void HandleFaint(Entity *entity, s32 param_2, Entity *param_3)
+void HandleFaint(Entity *entity, s32 dungeonExitReason_, Entity *param_3)
 {
     u16 joinId;
     Entity EStack_a4;
     s32 i;
-    s32 unkArg = (s16) param_2;
+    s32 dungeonExitReason = (s16) dungeonExitReason_;
     EntityInfo *entInfo = GetEntInfo(entity);
     Tile *tile = GetTileAtEntitySafe(entity);
     if (param_3 == NULL) {
@@ -521,9 +522,9 @@ void HandleFaint(Entity *entity, s32 param_2, Entity *param_3)
         DisplayMessageLog();
         if (gDungeon->unk6 == 0) {
             if (gDungeon->unk644.unk2A == 0
-                && unkArg != 0x21c
-                && unkArg != 0x222
-                && unkArg != 0x21e
+                && dungeonExitReason != DUNGEON_EXIT_DELETED_FOR_EVENT
+                && dungeonExitReason != DUNGEON_EXIT_FAILED_TO_PROTECT_CLIENT
+                && dungeonExitReason != DUNGEON_EXIT_BLOWN_OUT_UNSEEN_FORCE
                 && gDungeon->unk3A0D == 0
                 && gDungeon->unk644.unk37 >= 0
                 && gDungeon->unk644.unk34 != TRUE)
@@ -550,8 +551,8 @@ void HandleFaint(Entity *entity, s32 param_2, Entity *param_3)
             return;
         }
 
-        sub_8083AB0(unkArg,param_3,entity);
-        if (unkArg == 0x21f) {
+        sub_8083AB0(dungeonExitReason,param_3,entity);
+        if (dungeonExitReason == DUNGEON_EXIT_RETURNED_WITH_FALLEN_PARTNER) {
             EntityInfo *partnerInfo = NULL;
             for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
                 Entity *teamMon = gDungeon->teamPokemon[i];
@@ -597,8 +598,8 @@ void HandleFaint(Entity *entity, s32 param_2, Entity *param_3)
         SubstitutePlaceholderStringTags(gDungeon->faintStringBuffer,entity,0);
     }
 
-    if (GetLeader() != NULL && unkArg != 0x21c && !entInfo->isTeamLeader && !gDungeon->unk10) {
-        sub_8084E00(entity,entInfo->monsterBehavior, unkArg == 500);
+    if (GetLeader() != NULL && dungeonExitReason != DUNGEON_EXIT_DELETED_FOR_EVENT && !entInfo->isTeamLeader && !gDungeon->unk10) {
+        sub_8084E00(entity,entInfo->monsterBehavior, dungeonExitReason == DUNGEON_EXIT_TRANSFORMED_INTO_FRIEND);
         if (IS_DEOXYS_FORM_MONSTER(entInfo->apparentID) && !IsBossFight() && entInfo->isNotTeamMember) {
             gDungeon->deoxysDefeat = 1;
             DisplayDungeonLoggableMessageTrue(entity,gUnknown_80FA580);

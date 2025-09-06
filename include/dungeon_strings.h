@@ -2,6 +2,7 @@
 #define GUARD_DUNGEON_STRINGS_H
 
 #include "structs/str_item_text.h"
+#include "constants/residual_damage.h"
 #include "constants/trap.h"
 #include "constants/weather.h"
 
@@ -134,7 +135,7 @@ extern const u8 *const gUnknown_80F970C;
 extern const u8 *const gUnknown_80F9728;
 extern const u8 *const gUnknown_80F9740;
 extern const u8 *const gUnknown_80F9760;
-extern const u8 *const gUnknown_80F9764[];
+extern const u8 *const gResidualDamageMessages[NUM_RESIDUAL_DAMAGE_TYPES];
 extern const u8 *const gWeatherNames[WEATHER_COUNT];
 extern const u8 *const gUnknown_80F9ACC;
 extern const u8 *const gUnknown_80F9AEC;

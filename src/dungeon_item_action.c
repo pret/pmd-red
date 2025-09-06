@@ -7,6 +7,8 @@
 #include "dungeon_random.h"
 #include "constants/dungeon_action.h"
 #include "constants/dungeon.h"
+#include "constants/dungeon_exit.h"
+#include "constants/residual_damage.h"
 #include "constants/iq_skill.h"
 #include "constants/status.h"
 #include "constants/type.h"
@@ -135,7 +137,7 @@ void sub_80479B8(char param_1, char param_2, u8 param_3, Entity *pokemon, Entity
     sub_8045BF8(gFormatBuffer_Items[0],item);
     TryDisplayDungeonLoggableMessage3(pokemon,target,gItemStickyDoesntWorkText);
     if (param_1 != '\0') {
-      sub_806F370(pokemon,target,gUnknown_80F4FAE,1,&uStack_24,0,0x217,0,0,0);
+      sub_806F370(pokemon,target,gUnknown_80F4FAE,1,&uStack_24,0,DUNGEON_EXIT_FELLED_BY_THROWN_ITEM,RESIDUAL_DAMAGE_REGULAR,0,0);
       EnemyEvolution(pokemon);
       return;
     }
@@ -151,7 +153,7 @@ _jump:
   }
   if ((GetItemCategory(item->id) == CATEGORY_TMS_HMS) || (GetItemCategory(item->id) == CATEGORY_LINK_BOX)) {
     if (param_1 != '\0') {
-        sub_806F370(pokemon,target,gUnknown_80F4FAC,1,&uStack_23,0,0x217,0,0,0);
+        sub_806F370(pokemon,target,gUnknown_80F4FAC,1,&uStack_23,0,DUNGEON_EXIT_FELLED_BY_THROWN_ITEM,RESIDUAL_DAMAGE_REGULAR,0,0);
         goto _080482B4;
     }
     else
@@ -356,7 +358,7 @@ _jump:
         break;
       default:
         if (param_1 != '\0') {
-            sub_806F370(pokemon,target,gUnknown_80F4FAC,1,&auStack_22,0,0x217,0,0,0);
+            sub_806F370(pokemon,target,gUnknown_80F4FAC,1,&auStack_22,0,DUNGEON_EXIT_FELLED_BY_THROWN_ITEM,RESIDUAL_DAMAGE_REGULAR,0,0);
         }
         else
         {
@@ -386,7 +388,7 @@ static void sub_80482FC(Entity *pokemon, Entity *target, u32 pp, u8 param_4)
 
 static void sub_8048340(Entity *pokemon, Entity *target, u32 r2)
 {
-    sub_806F370(pokemon, target, r2, 1, 0, 0, 528, 0, 0, 0);
+    sub_806F370(pokemon, target, r2, 1, 0, 0, DUNGEON_EXIT_FELLED_BY_THROWN_ROCK, RESIDUAL_DAMAGE_REGULAR, 0, 0);
 }
 
 static void HealSeedItemAction(Entity *pokemon, Entity *target, u8 r2)
@@ -590,7 +592,7 @@ static void BlastSeedItemAction(Entity *pokemon, Entity * target, u8 param_3)
     if (entityInfo_1->frozenClassStatus.status == STATUS_FROZEN) {
       EndFrozenClassStatus(pokemon, target);
     }
-    sub_806F370(pokemon, target, dmg, 1, auStack28, 0, 0x216, 0, 0, 0);
+    sub_806F370(pokemon, target, dmg, 1, auStack28, 0, DUNGEON_EXIT_DEFEATED_BLAST_SEED, RESIDUAL_DAMAGE_REGULAR, 0, 0);
   }
   else
   {
@@ -613,7 +615,7 @@ static void BlastSeedItemAction(Entity *pokemon, Entity * target, u8 param_3)
       if (entityInfo->frozenClassStatus.status == STATUS_FROZEN) {
         EndFrozenClassStatus(pokemon, entity);
       }
-      sub_806F370(pokemon, entity, dmg, 1, auStack28, 0, 0x216, 0, 0, 0);
+      sub_806F370(pokemon, entity, dmg, 1, auStack28, 0, DUNGEON_EXIT_DEFEATED_BLAST_SEED, RESIDUAL_DAMAGE_REGULAR, 0, 0);
     }
   }
 }
@@ -924,7 +926,7 @@ static void KeyItemAction(Entity *pokemon, Entity *target, u8 r2)
 {
     u8 temp;
     if(r2 != 0)
-        sub_806F370(pokemon, target, gUnknown_80F4FAC, 1, &temp, 0, 0x217, 0, 0, 0);
+        sub_806F370(pokemon, target, gUnknown_80F4FAC, 1, &temp, 0, DUNGEON_EXIT_FELLED_BY_THROWN_ITEM, RESIDUAL_DAMAGE_REGULAR, 0, 0);
     else
         sub_8051E7C(pokemon);
 }

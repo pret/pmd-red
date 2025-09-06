@@ -2,6 +2,7 @@
 #include "globaldata.h"
 #include "explosion.h"
 #include "constants/ability.h"
+#include "constants/residual_damage.h"
 #include "constants/weather.h"
 #include "dungeon_vram.h"
 #include "dungeon_message.h"
@@ -81,9 +82,9 @@ static const DungeonPos *const gUnknown_8107178[3] = {
     gUnknown_8107110
 };
 
-static void sub_807E1A0(Entity *pokemon,Entity *target,u8 moveType,s32 param_4,s32 param_5);
+static void sub_807E1A0(Entity *pokemon,Entity *target,u8 moveType,s32 dungeonExitReason,s32 param_5);
 
-void HandleExplosion(Entity *pokemon,Entity *target,DungeonPos *param_3,s32 param_4,u8 moveType,s16 param_6)
+void HandleExplosion(Entity *pokemon,Entity *target,DungeonPos *param_3,s32 param_4,u8 moveType,s16 dungeonExitReason_)
 {
     bool8 flag;
     const DungeonPos *posPtr;
@@ -95,9 +96,9 @@ void HandleExplosion(Entity *pokemon,Entity *target,DungeonPos *param_3,s32 para
     int index;
     DungeonPos pos;
 
-    u32 uStack_2c;
+    u32 dungeonExitReason;
 
-    uStack_2c = param_6;
+    dungeonExitReason = dungeonExitReason_;
     for (index = 0; index < DUNGEON_MAX_POKEMON; index++) {
         entity1 = gDungeon->activePokemon[index];
         if ((EntityIsValid(entity1)) && (AbilityIsActive(entity1, ABILITY_DAMP))) break;
@@ -143,7 +144,7 @@ void HandleExplosion(Entity *pokemon,Entity *target,DungeonPos *param_3,s32 para
                     }
                     entity2 = tile->monster;
                     if (((entity2 != NULL) && (entity2 != target)) && (GetEntityType(entity2) == ENTITY_MONSTER)) {
-                        sub_807E1A0(pokemon,entity2,moveType,uStack_2c,gUnknown_203B444[param_4]);
+                        sub_807E1A0(pokemon,entity2,moveType,dungeonExitReason,gUnknown_203B444[param_4]);
                         if (IsFloorOver()) break;
                     }
                 }
@@ -154,7 +155,7 @@ void HandleExplosion(Entity *pokemon,Entity *target,DungeonPos *param_3,s32 para
             return;
         }
         if (GetEntityType(target) == ENTITY_MONSTER) {
-            sub_807E1A0(pokemon,target,moveType,uStack_2c,gUnknown_203B444[param_4]);
+            sub_807E1A0(pokemon,target,moveType,dungeonExitReason,gUnknown_203B444[param_4]);
         }
         if (!flag) {
             return;
@@ -171,15 +172,15 @@ void HandleExplosion(Entity *pokemon,Entity *target,DungeonPos *param_3,s32 para
     }
 }
 
-static void sub_807E1A0(Entity *pokemon,Entity *target,u8 moveType,s32 param_4,s32 param_5)
+static void sub_807E1A0(Entity *pokemon,Entity *target,u8 moveType,s32 dungeonExitReason_,s32 param_5)
 {
   EntityInfo *targetInfo;
   u8 flag;
   Move move;
   s32 newHP;
-  s32 param_4_s32;
+  s32 dungeonExitReason;
 
-  param_4_s32 = (s16) param_4;
+  dungeonExitReason = (s16) dungeonExitReason_;
 
   if (EntityIsValid(target)) {
     targetInfo = GetEntInfo(target);
@@ -201,7 +202,7 @@ static void sub_807E1A0(Entity *pokemon,Entity *target,u8 moveType,s32 param_4,s
            newHP /= 2;
         }
       }
-      sub_806F370(pokemon,target,newHP,0,&flag,moveType,param_4_s32,0,0,0);
+      sub_806F370(pokemon,target,newHP,0,&flag,moveType,dungeonExitReason,RESIDUAL_DAMAGE_REGULAR,0,0);
     }
   }
 }

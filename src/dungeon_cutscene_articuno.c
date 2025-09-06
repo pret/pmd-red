@@ -8,6 +8,7 @@
 #include "code_806CD90.h"
 #include "constants/bg_music.h"
 #include "constants/direction.h"
+#include "constants/dungeon_exit.h"
 #include "constants/friend_area.h"
 #include "constants/weather.h"
 #include "dungeon_items.h"
@@ -88,7 +89,7 @@ void sub_8087FF8(void)
   sub_8085930(DIRECTION_NORTH);
   sub_80855E4(sub_8086A3C);
   if (sub_8086AE4(MONSTER_ARTICUNO)) {
-    HandleFaint(articunoEntity,0x21c,0);
+    HandleFaint(articunoEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
   }
   else {
     LevelUpTarget(articunoEntity,articunoEntity,gArticunoConfigLevel,0,0);

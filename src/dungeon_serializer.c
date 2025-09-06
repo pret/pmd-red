@@ -363,7 +363,7 @@ static void WriteMonster(DataSerializer *seri, Entity *src)
     WriteBool8(seri, info->aiAllySkip);
     WriteBool8(seri, info->recalculateFollow);
     WriteBool8(seri, info->waiting);
-    WriteBool8(seri, info->unk146);
+    WriteBool8(seri, info->bellyEmpty);
     WriteBool8(seri, info->attacking);
     WriteBool8(seri, info->unk149);
     WriteBool8(seri, info->unk14A);
@@ -372,7 +372,7 @@ static void WriteMonster(DataSerializer *seri, Entity *src)
     WriteU16(seri, info->visualFlags);
     WriteU16(seri, info->previousVisualFlags);
     WriteBool8(seri, info->unk152);
-    WriteU8(seri, info->unk153);
+    WriteU8(seri, info->usedLinkedMovesCounter);
     WriteBool8(seri, info->unk154);
     WriteBool8(seri, info->unk155);
     WriteBool8(seri, info->unk156);
@@ -1047,7 +1047,7 @@ static void ReadMonster(DataSerializer *seri, bool8 isTeamMember, s32 index)
     entInfo.aiAllySkip = ReadBool8(seri);
     entInfo.recalculateFollow = ReadBool8(seri);
     entInfo.waiting = ReadBool8(seri);
-    entInfo.unk146 = ReadBool8(seri);
+    entInfo.bellyEmpty = ReadBool8(seri);
     entInfo.attacking = ReadBool8(seri);
     entInfo.unk149 = ReadBool8(seri);
     entInfo.unk14A = ReadBool8(seri);
@@ -1056,7 +1056,7 @@ static void ReadMonster(DataSerializer *seri, bool8 isTeamMember, s32 index)
     entInfo.visualFlags = ReadU16(seri);
     entInfo.previousVisualFlags = ReadU16(seri);
     entInfo.unk152 = ReadBool8(seri);
-    entInfo.unk153 = ReadU8(seri);
+    entInfo.usedLinkedMovesCounter = ReadU8(seri);
     entInfo.unk154 = ReadBool8(seri);
     entInfo.unk155 = ReadBool8(seri);
     entInfo.unk156 = ReadBool8(seri);

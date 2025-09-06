@@ -8,6 +8,7 @@
 #include "code_806CD90.h"
 #include "constants/bg_music.h"
 #include "constants/direction.h"
+#include "constants/dungeon_exit.h"
 #include "constants/friend_area.h"
 #include "constants/weather.h"
 #include "dungeon_items.h"
@@ -134,7 +135,7 @@ static void sub_808C550(void)
 
 static void sub_808C590(Entity *r0)
 {
-    HandleFaint(r0, 0x21C, 0);
+    HandleFaint(r0, DUNGEON_EXIT_DELETED_FOR_EVENT, 0);
 }
 
 static void SetupDeoxysFacingDirection(Entity *deoxysEntity)

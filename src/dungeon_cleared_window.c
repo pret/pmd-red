@@ -37,13 +37,13 @@ void ShowDungeonClearedWindow(void)
     header.f3 = 0;
     windows.id[0].pos.y = 20;
     DungeonShowWindows(&windows, TRUE);
-    if (gDungeon->unk1CE98.moveID > 549) {
+    if (gDungeon->exitSummary.exitReason > 549) {
         PlayDungeonCompleteBGM();
     }
     else {
         PlayDungeonFailBGM();
     }
-    PrintOnDungeonFinishedWindow(0, gText_TheLastOuting,&gDungeon->unk1CE98);
+    PrintOnDungeonFinishedWindow(0, gText_TheLastOuting,&gDungeon->exitSummary);
     while(1) {
         sub_803E668(0x36);
         UpdateDungeonMusic();

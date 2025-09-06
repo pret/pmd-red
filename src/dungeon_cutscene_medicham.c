@@ -8,6 +8,7 @@
 #include "code_806CD90.h"
 #include "constants/bg_music.h"
 #include "constants/direction.h"
+#include "constants/dungeon_exit.h"
 #include "constants/friend_area.h"
 #include "constants/weather.h"
 #include "dungeon_items.h"
@@ -101,7 +102,7 @@ void MedichamRescueDialogue(void)
     sub_806CE68(medichamEntity, DIRECTION_SOUTH);
     sub_803E708(0x20, 0x46);
     sub_8042B0C(medichamEntity);
-    HandleFaint(medichamEntity, 0x21C, 0);
+    HandleFaint(medichamEntity, DUNGEON_EXIT_DELETED_FOR_EVENT, 0);
     gDungeon->unk4 = 1;
     gDungeon->unk11 = 4;
 }
@@ -116,7 +117,7 @@ void sub_808CB5C(void)
     DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
     sub_80854D4();
     sub_8085930(DIRECTION_NORTH);
-    HandleFaint(medichamEntity, 0x21C, 0);
+    HandleFaint(medichamEntity, DUNGEON_EXIT_DELETED_FOR_EVENT, 0);
     sub_8085860(leaderEntity->pos.x, leaderEntity->pos.y);
     CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_MEDICHAM);
 }

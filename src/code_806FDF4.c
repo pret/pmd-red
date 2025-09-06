@@ -1,5 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
+#include "constants/dungeon_exit.h"
 #include "constants/type.h"
 #include "structs/str_pokemon.h"
 #include "dungeon_main.h"
@@ -271,7 +272,7 @@ bool8 sub_806FA5C(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *pa
                 UnlockFriendArea(friendArea);
                 flag = TRUE;
             }
-            HandleFaint(entity2,500,entity1);
+            HandleFaint(entity2,DUNGEON_EXIT_TRANSFORMED_INTO_FRIEND,entity1);
             pokeStruct2 = &gRecruitedPokemonRef->dungeonTeam[pokeIndex];
             pokeStruct2->flags = 3;
             pokeStruct2->isTeamLeader = FALSE;
@@ -438,7 +439,7 @@ bool8 sub_806FDF4(Entity *entity1,Entity *entity2,Entity **entityPtr)
       flag = TRUE;
     }
     IncrementAdventureNumJoined();
-    HandleFaint(entity2,500,entity1);
+    HandleFaint(entity2,DUNGEON_EXIT_TRANSFORMED_INTO_FRIEND,entity1);
     if (SpawnTeamMember(local_74.id,local_74.pos.x,local_74.pos.y,pokeStruct2,&local_2c,0,0) == 0) {
       pokeStruct2->flags = 0;
     }

@@ -35,11 +35,11 @@ typedef struct Weather // 0xE264
 } Weather;
 
 // size: 0x30
-typedef struct UnkDungeonGlobal_unk1CE98_sub
+typedef struct DungeonExitSummary
 {
     /* 0x0 */ u8 buffer1[10];
     /* 0xA */ u8 buffer2[10];
-    /* 0x14 */ s16 moveID;
+    /* 0x14 */ s16 exitReason; // which move knocked out player, or reason to exit dungeon
     /* 0x16 */ u8 fill16[0x2];
     /* 0x18 */ DungeonLocation dungeonLocation;
     /* 0x1C */ Item heldItem;
@@ -55,7 +55,7 @@ typedef struct UnkDungeonGlobal_unk1CE98_sub
     /* 0x2D */ u8 defBoost;
     /* 0x2E */ u8 spDefBoost;
     u8 unk2F; // speedBoost?
-} UnkDungeonGlobal_unk1CE98_sub;
+} DungeonExitSummary;
 
 // size: 0x10
 typedef struct DungeonMusicPlayer
@@ -271,7 +271,7 @@ typedef struct unkDungeon644
     /* 0x32 */ bool8 itemHoldersIdentified;
     /* 0x33 */ u8 unk33;
     /* 0x34 */ u8 unk34;
-    /* 0x35 */ u8 unk35;
+    /* 0x35 */ u8 emptyBellyAlert; // which alert message to show when belly gets empty.
     /* 0x36 */ u8 unk36;
     /* 0x37 */ s8 unk37;
     /* 0x38 */ u32 unk38;
@@ -482,7 +482,7 @@ typedef struct Dungeon
     /* 0x1C590 */ ItemSpawns itemSpawns[ITEM_SPAWN_TYPES_COUNT];
     /* 0x1CD70 */ u16 trapSpawnChances[NUM_TRAPS];
     SpawnPokemonData fileMonsterSpawns[MONSTER_SPAWNS_ARR_COUNT]; // Taken directly from "mapparam" which corresponds to available monsters on given dungeon's floor.
-    UnkDungeonGlobal_unk1CE98_sub unk1CE98; // TODO: not sure how large this is
+    DungeonExitSummary exitSummary; // TODO: not sure how large this is
     u8 unk1CEC8;
     /* 0x1CECC */ DungeonMusicPlayer musPlayer;
 } Dungeon;

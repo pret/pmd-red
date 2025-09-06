@@ -1,5 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
+#include "constants/dungeon_exit.h"
 #include "dungeon_8083AB0.h"
 #include "dungeon_info.h"
 #include "dungeon_util.h"
@@ -9,7 +10,7 @@
 #include "dungeon_strings.h"
 #include "run_dungeon.h"
 
-void sub_8083AB0(s16 param_0, Entity *target, Entity *entity)
+void sub_8083AB0(s16 dungeonExitReason_, Entity *target, Entity *entity)
 {
   u8 *defPtr;
   u8 *attackPtr;
@@ -18,11 +19,11 @@ void sub_8083AB0(s16 param_0, Entity *target, Entity *entity)
   EntityInfo * targetEntityInfo;
   u8 *spAttPtr;
   u8 buffer [0x14];
-  UnkDungeonGlobal_unk1CE98_sub *temp;
+  DungeonExitSummary *exitSummary;
   u8 *id;
-  s32 param_0_s32 = param_0;
+  s32 dungeonExitReason = dungeonExitReason_;
 
-  temp = &gDungeon->unk1CE98;
+  exitSummary = &gDungeon->exitSummary;
   targetEntityInfo = NULL;
   if ((EntityIsValid(target)) && (GetEntityType(target) == ENTITY_MONSTER)) {
     targetEntityInfo = GetEntInfo(target);
@@ -30,30 +31,30 @@ void sub_8083AB0(s16 param_0, Entity *target, Entity *entity)
   entityInfo = GetEntInfo(entity);
   if (targetEntityInfo != NULL) {
     sub_80709C8(buffer, targetEntityInfo);
-    CopyStringtoBuffer(temp->buffer1, buffer);
+    CopyStringtoBuffer(exitSummary->buffer1, buffer);
   }
   else {
-    CopyStringtoBuffer(temp->buffer1, gUnknown_80FE6F4); // Someone
+    CopyStringtoBuffer(exitSummary->buffer1, gUnknown_80FE6F4); // Someone
   }
   sub_80709C8(buffer,entityInfo);
-  CopyStringtoBuffer(temp->buffer2, buffer);
-  temp->moveID = param_0_s32;
-  temp->heldItem = entityInfo->heldItem;
-  temp->exp = entityInfo->exp;
-  temp->level = entityInfo->level;
-  temp->maxHPStat = entityInfo->maxHPStat;
-  temp->atk = entityInfo->atk[0];
-  temp->spAtk = entityInfo->atk[1];
-  temp->def = entityInfo->def[0];
-  temp->spDef = entityInfo->def[1];
-  temp->dungeonLocation = gDungeon->unk644.dungeonLocation;
-  attackPtr = &temp->attBoost;
+  CopyStringtoBuffer(exitSummary->buffer2, buffer);
+  exitSummary->exitReason = dungeonExitReason;
+  exitSummary->heldItem = entityInfo->heldItem;
+  exitSummary->exp = entityInfo->exp;
+  exitSummary->level = entityInfo->level;
+  exitSummary->maxHPStat = entityInfo->maxHPStat;
+  exitSummary->atk = entityInfo->atk[0];
+  exitSummary->spAtk = entityInfo->atk[1];
+  exitSummary->def = entityInfo->def[0];
+  exitSummary->spDef = entityInfo->def[1];
+  exitSummary->dungeonLocation = gDungeon->unk644.dungeonLocation;
+  attackPtr = &exitSummary->attBoost;
   *attackPtr = 0;
-  spAttPtr = &temp->spAttBoost;
+  spAttPtr = &exitSummary->spAttBoost;
   *spAttPtr = 0;
-  defPtr = &temp->defBoost;
+  defPtr = &exitSummary->defBoost;
   *defPtr = 0;
-  spDefPtr = &temp->spDefBoost;
+  spDefPtr = &exitSummary->spDefBoost;
   *spDefPtr = 0;
   if ((entityInfo->heldItem.flags & ITEM_FLAG_EXISTS) && !(entityInfo->heldItem.flags & ITEM_FLAG_STICKY)) {
     id = &entityInfo->heldItem.id;
@@ -78,11 +79,11 @@ void sub_8083AB0(s16 param_0, Entity *target, Entity *entity)
   }
 }
 
-bool8 sub_8083C24(void)
+bool8 IsUnsuccessfulDungeonExit(void)
 {
-    UnkDungeonGlobal_unk1CE98_sub *temp = &gDungeon->unk1CE98;
+    DungeonExitSummary *exitSummary = &gDungeon->exitSummary;
 
-    if (temp->moveID < 0x226)
+    if (exitSummary->exitReason < DUNGEON_EXIT_REASON_SUCCESS)
         return TRUE;
 
     return FALSE;
@@ -90,9 +91,11 @@ bool8 sub_8083C24(void)
 
 bool8 sub_8083C50(void)
 {
-    UnkDungeonGlobal_unk1CE98_sub *temp = &gDungeon->unk1CE98;
+    DungeonExitSummary *exitSummary = &gDungeon->exitSummary;
 
-    if (temp->moveID == 0x227 || temp->moveID == 0x22A || temp->moveID == 0x228)
+    if (exitSummary->exitReason == DUNGEON_EXIT_CLEARED_DUNGEON
+     || exitSummary->exitReason == DUNGEON_EXIT_BEFRIENDED_MEW
+     || exitSummary->exitReason == DUNGEON_EXIT_SUCCEEDED_IN_RESCUE_MISSION)
         return TRUE;
 
     return FALSE;
@@ -100,10 +103,10 @@ bool8 sub_8083C50(void)
 
 bool8 sub_8083C88(u8 param_1)
 {
-    UnkDungeonGlobal_unk1CE98_sub *temp = &gDungeon->unk1CE98;
+    DungeonExitSummary *exitSummary = &gDungeon->exitSummary;
 
     if ((!HasCheckpoint(gDungeon->unk644.dungeonLocation.id) && (gDungeon->unk644.unk18 != 0 || param_1 != 0))
-        || temp->moveID != 0x227) {
+        || exitSummary->exitReason != DUNGEON_EXIT_CLEARED_DUNGEON) {
         return TRUE;
     }
 

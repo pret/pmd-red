@@ -394,8 +394,8 @@ bool8 TryUseChosenMove(struct Entity *attacker, u32 r6, s32 itemId, u32 var_30, 
     gUnknown_202F21A = 0;
     gUnknown_202F21C = 0;
     gUnknown_202F220 = 0;
-    if (isLinkedMove && GetEntInfo(attacker)->unk153 <= 3) {
-        GetEntInfo(attacker)->unk153++;
+    if (isLinkedMove && GetEntInfo(attacker)->usedLinkedMovesCounter < MAX_MON_MOVES) {
+        GetEntInfo(attacker)->usedLinkedMovesCounter++;
     }
 
     var_2C = sub_8057070(move);
@@ -1398,9 +1398,9 @@ void sub_8057588(Entity * pokemon, u8 param_2)
     }
 }
 
-s16 sub_8057600(Move *move, s32 itemID)
+s16 GetDungeonExitReasonFromMoveOrItem(Move *move, s32 itemID)
 {
-    return sub_8094828(move->id, ToItemID(itemID));
+    return GetDungeonExitReasonFromMoveOrItemID(move->id, ToItemID(itemID));
 }
 
 static u8 ToItemID(u32 itemID)

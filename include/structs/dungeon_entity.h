@@ -292,7 +292,7 @@ typedef struct EntityInfo
     /* 0x140 */ FixedPoint maxBelly;
     /* 0x144 */ bool8 aiAllySkip; // True if an AI Pokémon is following another Pokémon and is already adjacent to them.
     /* 0x145 */ bool8 recalculateFollow; // Used by the AI to defer a movement decision until after all other Pokémon have moved.
-    /* 0x146 */ u8 unk146;
+    /* 0x146 */ bool8 bellyEmpty;
     /* 0x147 */ bool8 waiting; // True if an AI Pokémon decided to do nothing this turn.
     /* 0x148 */ bool8 attacking;
     /* 0x149 */ u8 unk149;
@@ -303,7 +303,7 @@ typedef struct EntityInfo
     /* 0x14E */ u16 visualFlags;
     /* 0x150 */ u16 previousVisualFlags;
     /* 0x152 */ u8 unk152;
-    u8 unk153;
+    /* 0x153 */ u8 usedLinkedMovesCounter; // how many linked moves were used this turn.
     u8 unk154;
     u8 unk155;
     u8 unk156;

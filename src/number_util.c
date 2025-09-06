@@ -83,7 +83,7 @@ FixedPoint IntToFixedPoint(s32 a)
     return p;
 }
 
-FixedPoint FixedPoint_SetFromUnk(s48_16* param_1)
+FixedPoint FixedPoint_SetFromS48_16(s48_16* param_1)
 {
     FixedPoint s;
 
