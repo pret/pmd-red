@@ -34,12 +34,12 @@ u8 sub_8097900(s16);
 void sub_806F910(void);
 u8 sub_806F9BC(s16);
 
-bool8 sub_806F660(Entity *pokemon, Entity *target)
+bool8 TryRecruitMonster(Entity *attacker, Entity *target)
 {
     s32 i;
     s32 rand;
     s32 recruitRate;
-    EntityInfo *pokemonInfo = GetEntInfo(pokemon);
+    EntityInfo *attackerInfo = GetEntInfo(attacker);
     EntityInfo *targetInfo = GetEntInfo(target);
     s32 foundIndex = -1;
     s32 size = GetBodySize(targetInfo->apparentID);
@@ -85,13 +85,13 @@ bool8 sub_806F660(Entity *pokemon, Entity *target)
 
     if (!sub_806F9BC(targetInfo->id))
         return FALSE;
-    if (abs((pokemon->pos).x - (target->pos).x) >= 2 || abs((pokemon->pos).y - (target->pos).y) >= 2)
+    if (abs((attacker->pos).x - (target->pos).x) >= 2 || abs((attacker->pos).y - (target->pos).y) >= 2)
         return FALSE;
     if (targetInfo->joinedAt.id == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON)
         return FALSE;
     if (targetInfo->monsterBehavior == 1)
         return FALSE;
-    if (!CanSeeTarget(target,pokemon))
+    if (!CanSeeTarget(target,attacker))
         return FALSE;
 
     sub_806F910();
@@ -100,10 +100,10 @@ bool8 sub_806F660(Entity *pokemon, Entity *target)
     if (recruitRate == -999)
         return FALSE;
 
-    if (HasHeldItem(pokemon, ITEM_FRIEND_BOW)) {
+    if (HasHeldItem(attacker, ITEM_FRIEND_BOW)) {
         recruitRate += gFriendBowRecruitRateUpValue;
     }
-    recruitRate += gRecruitRateByLevel[pokemonInfo->level];
+    recruitRate += gRecruitRateByLevel[attackerInfo->level];
     if (rand >= recruitRate)
         return FALSE;
 
@@ -120,7 +120,7 @@ bool8 sub_806F660(Entity *pokemon, Entity *target)
         }
     }
     if (foundIndex == -1) {
-        nullsub_96(pokemon, target);
+        nullsub_96(attacker, target);
         return FALSE;
     }
 
@@ -129,7 +129,7 @@ bool8 sub_806F660(Entity *pokemon, Entity *target)
             break;
     }
     if (i == 4) {
-        nullsub_96(pokemon, target);
+        nullsub_96(attacker, target);
         return FALSE;
     }
 
@@ -138,7 +138,7 @@ bool8 sub_806F660(Entity *pokemon, Entity *target)
             break;
     }
     if (i == 4) {
-        nullsub_96(pokemon, target);
+        nullsub_96(attacker, target);
         return FALSE;
     }
 
