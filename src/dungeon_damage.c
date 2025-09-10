@@ -54,7 +54,7 @@ extern void sub_8041D00(Entity *pokemon, Entity *target);
 extern void sub_8042238(Entity *pokemon, Entity *target);
 extern void sub_803ED30(s32, Entity *r0, u8, s32);
 extern bool8 sub_806A458(Entity *);
-extern bool8 sub_806F660(Entity *, Entity *);
+extern bool8 TryRecruitMonster(Entity *attacker, Entity *target);
 extern bool8 sub_806A58C(s16 a0);
 extern void sub_8042148(Entity *pokemon);
 extern void sub_8042A24(Entity *r0);
@@ -737,7 +737,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
         struct unkStruct_8069D4C sp;
 
         sub_8069D4C(&sp, target);
-        if (sub_806F660(attacker, target)) {
+        if (TryRecruitMonster(attacker, target)) {
             if (!sub_806FA5C(attacker, target, &sp)) {
                 HandleFaint(target, DUNGEON_EXIT_LEFT_WITHOUT_BEING_BEFRIENDED, attacker);
             }
