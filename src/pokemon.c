@@ -674,11 +674,11 @@ void sub_808D9DC(u8 *buffer, DungeonMon *param_2, s32 colorNum)
   sprintfStatic(buffer,_("{color}%c%s{reset}"),colorNum,nameBuffer);
 }
 
-void sub_808DA0C(u8 *buffer, DungeonMon *param_2)
+void sub_808DA0C(u8 *buffer, DungeonMon *mon)
 {
   u8 nameBuffer [20];
 
-  StrncpyCustom(nameBuffer, param_2->name, POKEMON_NAME_LENGTH);
+  StrncpyCustom(nameBuffer, mon->name, POKEMON_NAME_LENGTH);
   sprintfStatic(buffer,"%s",nameBuffer);
 }
 
@@ -687,7 +687,20 @@ void PrintPokeNameToBuffer(u8 *buffer, Pokemon *pokemon)
   StrncpyCustom(buffer, pokemon->name, POKEMON_NAME_LENGTH);
 }
 
-static const u8 gUnknown_8107645[12] = {0x00, 0x01, 0x01, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+static const u8 gUnknown_8107645[12] = {
+    FALSE,
+    TRUE,
+    TRUE,
+    TRUE,
+    TRUE,
+    FALSE,
+    FALSE,
+    FALSE,
+    FALSE,
+    FALSE,
+    FALSE,
+    FALSE
+};
 
 bool8 sub_808DA44(s32 _species, u32 a2_)
 {
@@ -708,10 +721,10 @@ bool8 sub_808DA44(s32 _species, u32 a2_)
 
     for (i = 0; i < 10 && data[i].species != MONSTER_NONE; i++) {
       if (data[i].species == species && data[i].unk4 == a2) {
-        return 1;
+        return TRUE;
       }
     }
-    return 0;
+    return FALSE;
   }
   else {
     return gUnknown_8107645[a2];
