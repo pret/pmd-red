@@ -687,7 +687,7 @@ void PrintPokeNameToBuffer(u8 *buffer, Pokemon *pokemon)
   StrncpyCustom(buffer, pokemon->name, POKEMON_NAME_LENGTH);
 }
 
-static const u8 gUnknown_8107645[12] = {
+static const bool8 gUnknown_8107645[12] = {
     FALSE,
     TRUE,
     TRUE,
