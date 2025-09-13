@@ -18,7 +18,7 @@ s32 CalcSpeedStage(Entity *pokemon);
 s32 sub_8070828(Entity *pokemon, bool8 displayMessage);
 void SetMessageArgument_2(u8 *buffer, EntityInfo *param_2, s32 colorNum);
 void sub_8070968(u8 *buffer, EntityInfo *entityInfo, s32 colorNum);
-void sub_80709C8(u8 *buffer, EntityInfo *entityInfo);
+void CopyEntityNameForDungeonExitSummary(u8 *buffer, EntityInfo *entityInfo);
 bool8 HasNegativeStatus(Entity *pokemon);
 bool8 IsSleeping(Entity *pokemon);
 bool8 HasLowHealth(Entity *pokemon);

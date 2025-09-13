@@ -30,13 +30,13 @@ void sub_8083AB0(s16 dungeonExitReason_, Entity *target, Entity *entity)
   }
   entityInfo = GetEntInfo(entity);
   if (targetEntityInfo != NULL) {
-    sub_80709C8(buffer, targetEntityInfo);
+    CopyEntityNameForDungeonExitSummary(buffer, targetEntityInfo);
     CopyStringtoBuffer(exitSummary->buffer1, buffer);
   }
   else {
     CopyStringtoBuffer(exitSummary->buffer1, gUnknown_80FE6F4); // Someone
   }
-  sub_80709C8(buffer,entityInfo);
+  CopyEntityNameForDungeonExitSummary(buffer,entityInfo);
   CopyStringtoBuffer(exitSummary->buffer2, buffer);
   exitSummary->exitReason = dungeonExitReason;
   exitSummary->heldItem = entityInfo->heldItem;

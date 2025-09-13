@@ -45,7 +45,7 @@ s32 sub_800E49C(u8 a0, DungeonPos *pos, DungeonPos posArray[4], bool8 a3, s32 a4
 s32 sub_800E52C(struct UnkStruct_8040094 *a0);
 s32 sub_800E6D8(s32 a0);
 s32 sub_800E700(s32 a0);
-s32 sub_800E710(s32 a0_, s32 a1);
+s32 sub_800E710(s32 species, s32 moveId);
 s32 sub_800E790(s32 a0_, s32 a1);
 bool8 sub_800E7D0(u16 *param_1);
 bool8 sub_800E838(u16 *param_1, s32 param_2);
@@ -61,7 +61,7 @@ s32 sub_800EA84(struct UnkStruct_8040094 *a0);
 void sub_800EB24(s32 param_1, DungeonPos *param_2, DungeonPos *param_3, s32 r5, s32 r4);
 s32 sub_800EBC8(struct UnkStruct_8040094 *a0);
 u8 sub_800EC74(void);
-u8 sub_800EC84(s32 param_1);
+bool8 sub_800EC84(s32 moveId);
 u8 sub_800EC94(s32 param_1);
 
 

@@ -439,27 +439,31 @@ void sub_8070968(u8 *buffer, EntityInfo *entityInfo, s32 colorNum)
     }
 }
 
-void sub_80709C8(u8 *buffer, EntityInfo *entityInfo)
+void CopyEntityNameForDungeonExitSummary(u8 *buffer, EntityInfo *entityInfo)
 {
     if (((gDungeon->unk181e8.blinded ||
           gDungeon->unk181e8.hallucinating) ||
           (entityInfo->invisibleClassStatus.status == STATUS_INVISIBLE)) &&
           (entityInfo->isNotTeamMember))
     {
+        // "Pokémon"
         strcpy(buffer, gUnknown_80F8994);
     }
     else
     {
         if (entityInfo->curseClassStatus.status == STATUS_DECOY) {
+            // "Decoy"
             strcpy(buffer, gUnknown_80F8974);
         }
         else
         {
             if (entityInfo->isNotTeamMember) {
+                // use apparent ID for entity name
                 CopyMonsterNameToBuffer(buffer, entityInfo->apparentID);
             }
             else
             {
+                // copy team member's name
                 sub_808DA0C(buffer, &gRecruitedPokemonRef->dungeonTeam[entityInfo->teamIndex]);
             }
         }

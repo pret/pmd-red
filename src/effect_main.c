@@ -878,15 +878,15 @@ s32 sub_800E700(s32 a0)
     return sub_800E900((s16) a0);
 }
 
-s32 sub_800E710(s32 a0_, s32 a1)
+s32 sub_800E710(s32 species_, s32 moveId)
 {
     s32 i;
-    s32 a0 = (s16) (a0_);
-    const unkStruct_80BDBC4 *unkPtr1 = sub_800ECB8(a1);
+    s32 species = (s16) (species_);
+    const unkStruct_80BDBC4 *unkPtr1 = sub_800ECB8(moveId);
     const unkStruct_80C183C *unkPtr2 = sub_800ECD0(unkPtr1->unk20);
 
     for (i = 0; i < unkPtr1->unk1C; i++, unkPtr2++) {
-        if (unkPtr2->unk0 == a0) {
+        if (unkPtr2->species == species) {
             return unkPtr2->unk4;
         }
     }
@@ -894,15 +894,15 @@ s32 sub_800E710(s32 a0_, s32 a1)
 }
 
 // Literally the same as the func above.
-static s32 sub_800E750(s32 a0_, s32 a1)
+static s32 sub_800E750(s32 species_, s32 moveId)
 {
     s32 i;
-    s32 a0 = (s16) (a0_);
-    const unkStruct_80BDBC4 *unkPtr1 = sub_800ECB8(a1);
+    s32 species = (s16) (species_);
+    const unkStruct_80BDBC4 *unkPtr1 = sub_800ECB8(moveId);
     const unkStruct_80C183C *unkPtr2 = sub_800ECD0(unkPtr1->unk20);
 
     for (i = 0; i < unkPtr1->unk1C; i++, unkPtr2++) {
-        if (unkPtr2->unk0 == a0) {
+        if (unkPtr2->species == species) {
             return unkPtr2->unk4;
         }
     }
@@ -910,19 +910,19 @@ static s32 sub_800E750(s32 a0_, s32 a1)
 }
 
 // Almost the same as the two funcs above, but returns different fields.
-s32 sub_800E790(s32 a0_, s32 a1)
+s32 sub_800E790(s32 species_, s32 moveId)
 {
     s32 i;
-    s32 a0 = (s16) (a0_);
-    const unkStruct_80BDBC4 *unkPtr1 = sub_800ECB8(a1);
+    s32 species = (s16) (species_);
+    const unkStruct_80BDBC4 *unkPtr1 = sub_800ECB8(moveId);
     const unkStruct_80C183C *unkPtr2 = sub_800ECD0(unkPtr1->unk20);
 
     for (i = 0; i < unkPtr1->unk1C; i++, unkPtr2++) {
-        if (unkPtr2->unk0 == a0) {
-            return unkPtr2->unk8;
+        if (unkPtr2->species == species) {
+            return unkPtr2->soundEffectId;
         }
     }
-    return unkPtr1->unk18;
+    return unkPtr1->soundEffectId;
 }
 
 bool8 sub_800E7D0(u16 *param_1)
@@ -1073,7 +1073,7 @@ u8 sub_800EA44(unkStruct_800EA44 param_1, s32 param_2)
     const unkStruct_80C183C *unkStruct2 = sub_800ECD0(ret->unk20);
 
     for (i = 0; i < ret->unk1C; i++, unkStruct2++) {
-        if (unkStruct2->unk0 == a) {
+        if (unkStruct2->species == a) {
             return unkStruct2->unk2;
         }
     }
@@ -1191,10 +1191,9 @@ u8 sub_800EC74(void)
     return sub_800F19C(1);
 }
 
-u8 sub_800EC84(s32 param_1)
+bool8 sub_800EC84(s32 moveId)
 {
-    const unkStruct_80BDBC4 *ret = sub_800ECB8(param_1);
-    return ret->unk8;
+    return sub_800ECB8(moveId)->unk8;
 }
 
 u8 sub_800EC94(s32 param_1)

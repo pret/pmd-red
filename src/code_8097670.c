@@ -314,7 +314,7 @@ void UpdateAdventureAchievements(void)
         SetAdventureAchievement(AA_ALL_POKEMON_LEADERS);
 
     moveCount = 0;
-    for (i = 0; i < NUM_MOVE_IDS; i++) {
+    for (i = 0; i < NUM_REGULAR_MOVE_IDS; i++) {
         if (i == MOVE_NOTHING || i == MOVE_REGULAR_ATTACK || i == MOVE_IS_WATCHING || i == MOVE_BIDE_2)
             continue;
 
