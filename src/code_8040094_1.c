@@ -55,8 +55,8 @@ extern void sub_80421C0(Entity *pokemon, u16);
 
 extern const s32 gUnknown_8106A8C[];
 
-u16 getEffectiveMoveId(u16 moveId, u8 weather, bool32 hasSpecialEffect);
-static bool32 moveHasSpecialEffect(Entity *entity, Move *move);
+u16 GetEffectiveMoveId(u16 moveId, u8 weather, bool32 hasSpecialEffect);
+static bool32 MoveHasSpecialEffect(Entity *entity, Move *move);
 static bool8 sub_80414C0(Entity *entity, Move *move);
 static bool8 sub_804141C(u16 moveId, u8 weather, bool32 hasSpecialEffect);
 static void sub_8040C4C(Entity *entity, Move *move, bool32 a2);
@@ -66,9 +66,9 @@ static void sub_8041500(struct UnkStruct_8040094 *a0);
 
 bool8 sub_8040BB0(Entity *entity, Move *move, bool8 a2)
 {
-    bool32 hasSpecialEffect = moveHasSpecialEffect(entity, move);
+    bool32 hasSpecialEffect = MoveHasSpecialEffect(entity, move);
     bool8 r9 = sub_804141C(move->id, GetApparentWeather(entity), hasSpecialEffect);
-    s32 r4 = sub_800ECB8(getEffectiveMoveId(move->id, GetApparentWeather(entity), hasSpecialEffect))->unk0;
+    s32 r4 = sub_800ECB8(GetEffectiveMoveId(move->id, GetApparentWeather(entity), hasSpecialEffect))->unk0;
 
     if (!sub_8042768(entity))
         return r9;
@@ -88,11 +88,11 @@ static void sub_8040C4C(Entity *entity, Move *move, bool32 hasSpecialEffect)
     u8 savedUnkVar;
     s32 r4;
     struct UnkStruct_8040094 sp;
-    u16 r9 = getEffectiveMoveId(move->id, GetApparentWeather(entity), hasSpecialEffect);
+    u16 r9 = GetEffectiveMoveId(move->id, GetApparentWeather(entity), hasSpecialEffect);
     EntityInfo *entInfo = GetEntInfo(entity);
     bool8 r8 = sub_800EC94(move->id);
     s32 apparentId = entInfo->apparentID;
-    s32 r2 = sub_800E710(apparentId, getEffectiveMoveId(move->id, GetApparentWeather(entity), TRUE));
+    s32 r2 = sub_800E710(apparentId, GetEffectiveMoveId(move->id, GetApparentWeather(entity), TRUE));
 
     if (r2 != -1) {
         sub_800569C(&sp.unk8, &entity->axObj.axdata, r2);
@@ -144,10 +144,10 @@ void sub_8040DA0(Entity *entity, Move *move)
     s32 soundEffectId;
     Entity *anotherEntity;
     struct UnkStruct_8040094 sp;
-    bool32 hasSpecialEffect = moveHasSpecialEffect(entity, move);
+    bool32 hasSpecialEffect = MoveHasSpecialEffect(entity, move);
     bool8 var_28 = FALSE;
     EntityInfo *entInfo = GetEntInfo(entity);
-    u8 var_24 = sub_800EA44(entInfo->apparentID, getEffectiveMoveId(move->id, GetApparentWeather(entity), hasSpecialEffect));
+    u8 var_24 = sub_800EA44(entInfo->apparentID, GetEffectiveMoveId(move->id, GetApparentWeather(entity), hasSpecialEffect));
 
     sub_8041038(&sp, entity, move, hasSpecialEffect);
     if (sub_800E838(&sp, 1)) {
@@ -184,7 +184,7 @@ void sub_8040DA0(Entity *entity, Move *move)
         sub_80421C0(anotherEntity, 0x1A4);
     }
 
-    soundEffectId = sub_800E790(entInfo->apparentID, getEffectiveMoveId(move->id, GetApparentWeather(entity), hasSpecialEffect));
+    soundEffectId = sub_800E790(entInfo->apparentID, GetEffectiveMoveId(move->id, GetApparentWeather(entity), hasSpecialEffect));
     if (soundEffectId != 0x3E5) {
         PlaySoundEffect((u16) soundEffectId);
     }
@@ -241,10 +241,10 @@ void sub_8040DA0(Entity *entity, Move *move)
 static void sub_8041038(struct UnkStruct_8040094 *a0, Entity *entity, Move *move, bool32 hasSpecialEffect)
 {
     EntityInfo *entInfo = GetEntInfo(entity);
-    u16 effectiveMoveId = getEffectiveMoveId(move->id, GetApparentWeather(entity), hasSpecialEffect);
+    u16 effectiveMoveId = GetEffectiveMoveId(move->id, GetApparentWeather(entity), hasSpecialEffect);
 
     if (sub_800ECB8(effectiveMoveId)->unk2 != 0) {
-        s32 r2 = sub_800E710(entInfo->apparentID, getEffectiveMoveId(move->id, GetApparentWeather(entity), hasSpecialEffect));
+        s32 r2 = sub_800E710(entInfo->apparentID, GetEffectiveMoveId(move->id, GetApparentWeather(entity), hasSpecialEffect));
 
         if (r2 != -1) {
             sub_800569C(&a0->unk8, &entity->axObj.axdata, r2);
@@ -267,7 +267,7 @@ static void sub_8041038(struct UnkStruct_8040094 *a0, Entity *entity, Move *move
 
 static void sub_8041108(struct UnkStruct_8040094 *a0, Entity *entity, Move *move, bool32 hasSpecialEffect)
 {
-    u16 effectiveMoveId = getEffectiveMoveId(move->id, GetApparentWeather(entity), hasSpecialEffect);
+    u16 effectiveMoveId = GetEffectiveMoveId(move->id, GetApparentWeather(entity), hasSpecialEffect);
     s32 var = sub_800ECB8(effectiveMoveId)->unk2;
 
     if (a0->unk0 != 0 && var != 0) {
@@ -284,8 +284,8 @@ void sub_8041168(Entity *entity, Entity *entity2, Move *move, DungeonPos *pos)
     s32 var2;
     s32 var3;
     struct UnkStruct_8040094 sp;
-    bool32 hasSpecialEffect = (moveHasSpecialEffect(entity, move) != FALSE);
-    u16 effectiveMoveId = getEffectiveMoveId(move->id, GetApparentWeather(entity), hasSpecialEffect);
+    bool32 hasSpecialEffect = (MoveHasSpecialEffect(entity, move) != FALSE);
+    u16 effectiveMoveId = GetEffectiveMoveId(move->id, GetApparentWeather(entity), hasSpecialEffect);
     s32 var = sub_800ECB8(effectiveMoveId)->unk4;
     EntityInfo *ent2Info = NULL;
 
@@ -349,7 +349,7 @@ void sub_8041168(Entity *entity, Entity *entity2, Move *move, DungeonPos *pos)
     }
 }
 
-u16 getEffectiveMoveId(u16 moveId, u8 weather, bool32 hasSpecialEffect)
+u16 GetEffectiveMoveId(u16 moveId, u8 weather, bool32 hasSpecialEffect)
 {
     u16 ret = moveId;
 
@@ -424,15 +424,15 @@ u16 getEffectiveMoveId(u16 moveId, u8 weather, bool32 hasSpecialEffect)
 
 UNUSED static s32 sub_8041400(u16 moveId, u8 weather, bool32 hasSpecialEffect)
 {
-    return sub_800ED20(getEffectiveMoveId(moveId, weather, hasSpecialEffect));
+    return sub_800ED20(GetEffectiveMoveId(moveId, weather, hasSpecialEffect));
 }
 
 static bool8 sub_804141C(u16 moveId, u8 weather, bool32 hasSpecialEffect)
 {
-    return sub_800EC84(getEffectiveMoveId(moveId, weather, hasSpecialEffect));
+    return sub_800EC84(GetEffectiveMoveId(moveId, weather, hasSpecialEffect));
 }
 
-static bool32 moveHasSpecialEffect(Entity *entity, Move *move)
+static bool32 MoveHasSpecialEffect(Entity *entity, Move *move)
 {
     if (move->id == MOVE_CURSE) {
         if (EntityIsValid(entity) && GetEntityType(entity) == ENTITY_MONSTER) {

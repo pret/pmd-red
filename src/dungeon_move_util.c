@@ -49,7 +49,7 @@ extern void sub_804178C(u32);
 extern void sub_80428A0(Entity *r0);
 extern bool8 sub_8040BB0(Entity *entity, Move *move, bool8);
 extern void sub_8040DA0(Entity *entity, Move *move);
-extern u16 getEffectiveMoveId(u16 moveId, u8 weather, u8 hasSpecialEffect);
+extern u16 GetEffectiveMoveId(u16 moveId, u8 weather, u8 hasSpecialEffect);
 extern void sub_800EF10(u16 r0);
 extern void sub_800E3AC(s32 a0, DungeonPos *pos, s32 a2);
 extern void sub_8041168(Entity *entity, Entity *entity2, Move *,DungeonPos *);
@@ -535,7 +535,7 @@ s32 sub_8056564(Entity *entity, DungeonPos *pos, Move *move, s32 r4)
     EntityInfo *entInfo = GetEntInfo(entity);
 
     if (!gDungeon->unk181e8.blinded && (GetBodySize(entInfo->apparentID) < 4 || r4 != 1)) {
-        s32 unk6 = sub_800ECB8(getEffectiveMoveId(move->id, GetApparentWeather(entity), TRUE))->unk6;
+        s32 unk6 = sub_800ECB8(GetEffectiveMoveId(move->id, GetApparentWeather(entity), TRUE))->unk6;
         s32 pixelPosX = X_POS_TO_PIXELPOS(pos->x);
         s32 pixelPosY = Y_POS_TO_PIXELPOS(pos->y);
 
@@ -545,17 +545,17 @@ s32 sub_8056564(Entity *entity, DungeonPos *pos, Move *move, s32 r4)
         if (unk6 != 0) {
             s32 someRetVal;
 
-            sub_800EF10(getEffectiveMoveId(move->id, GetApparentWeather(entity), TRUE));
+            sub_800EF10(GetEffectiveMoveId(move->id, GetApparentWeather(entity), TRUE));
             sub_800EF64();
             DungeonRunFrameActions(0x5E);
-            someRetVal = sub_800E710(entInfo->apparentID, getEffectiveMoveId(move->id, GetApparentWeather(entity), TRUE));
+            someRetVal = sub_800E710(entInfo->apparentID, GetEffectiveMoveId(move->id, GetApparentWeather(entity), TRUE));
             if (someRetVal != -1) {
                 sub_800569C(&unkSp1.unk8, &entity->axObj.axdata, someRetVal);
             }
             else {
                 unkSp1.unk8 = (DungeonPos) {0};
             }
-            unkSp1.unk0 = getEffectiveMoveId(move->id, GetApparentWeather(entity), TRUE);
+            unkSp1.unk0 = GetEffectiveMoveId(move->id, GetApparentWeather(entity), TRUE);
             unkSp1.unk2 = entInfo->apparentID;
             unkSp1.unk4.x = entity->pixelPos.x / 256;
             unkSp1.unk4.y = entity->pixelPos.y / 256;
