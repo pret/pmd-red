@@ -10,6 +10,7 @@
 #include "dungeon_run_end.h"
 #include "dungeon_music.h"
 #include "game_options.h"
+#include "constants/dungeon_exit.h"
 
 void ShowDungeonClearedWindow(void)
 {
@@ -37,14 +38,14 @@ void ShowDungeonClearedWindow(void)
     header.f3 = 0;
     windows.id[0].pos.y = 20;
     DungeonShowWindows(&windows, TRUE);
-    if (gDungeon->exitSummary.exitReason > 549) {
+    if (gDungeon->exitSummary.exitReason >= DUNGEON_EXIT_REASON_SUCCESS) {
         PlayDungeonCompleteBGM();
     }
     else {
         PlayDungeonFailBGM();
     }
     PrintOnDungeonFinishedWindow(0, gText_TheLastOuting,&gDungeon->exitSummary);
-    while(1) {
+    while(TRUE) {
         sub_803E668(0x36);
         UpdateDungeonMusic();
         if (windows.id[0].pos.y >= 4){

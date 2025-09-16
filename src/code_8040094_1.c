@@ -33,7 +33,7 @@ struct UnkStruct_8040094
 };
 
 extern u8 sub_800EC94(s32 param_1);
-extern s32 sub_800E710(s32 a0, u16 a1);
+extern s32 sub_800E710(s32 species, u16 moveId);
 extern void sub_800EEC8(u16 r0);
 extern void sub_8042DD4(s32 a0, Entity *a1, s32 a2);
 extern u8 sub_800EA44(s32 species, u16 a2);
@@ -48,17 +48,17 @@ extern bool8 sub_803F428(DungeonPos *pos);
 extern void sub_800EEE0(u16 a0);
 extern s32 sub_800EBC8(struct UnkStruct_8040094 *a0);
 extern bool8 sub_800E7D0(struct UnkStruct_8040094 *a0);
-extern u8 sub_800EC84(s32 param_1);
+extern bool8 sub_800EC84(s32 moveId);
 extern bool8 MoveMatchesBideClassStatus(Entity *pokemon, Move *move);
 extern bool8 IsSleeping(Entity *pokemon);
 extern void sub_80421C0(Entity *pokemon, u16);
 
 extern const s32 gUnknown_8106A8C[];
 
-u16 sub_80412E0(u16 moveId, u8 weather, bool32 a2);
-static bool32 sub_804143C(Entity *entity, Move *move);
+u16 GetEffectiveMoveId(u16 moveId, u8 weather, bool32 hasSpecialEffect);
+static bool32 MoveHasSpecialEffect(Entity *entity, Move *move);
 static bool8 sub_80414C0(Entity *entity, Move *move);
-static bool8 sub_804141C(u16 moveId, u8 weather, bool32 a2);
+static bool8 sub_804141C(u16 moveId, u8 weather, bool32 hasSpecialEffect);
 static void sub_8040C4C(Entity *entity, Move *move, bool32 a2);
 static void sub_8041038(struct UnkStruct_8040094 *a0, Entity *entity, Move *move, bool32 a2);
 static void sub_8041108(struct UnkStruct_8040094 *a0, Entity *entity, Move *move, bool32 a2);
@@ -66,9 +66,9 @@ static void sub_8041500(struct UnkStruct_8040094 *a0);
 
 bool8 sub_8040BB0(Entity *entity, Move *move, bool8 a2)
 {
-    bool32 r8 = sub_804143C(entity, move);
-    bool8 r9 = sub_804141C(move->id, GetApparentWeather(entity), r8);
-    s32 r4 = sub_800ECB8(sub_80412E0(move->id, GetApparentWeather(entity), r8))->unk0;
+    bool32 hasSpecialEffect = MoveHasSpecialEffect(entity, move);
+    bool8 r9 = sub_804141C(move->id, GetApparentWeather(entity), hasSpecialEffect);
+    s32 r4 = sub_800ECB8(GetEffectiveMoveId(move->id, GetApparentWeather(entity), hasSpecialEffect))->unk0;
 
     if (!sub_8042768(entity))
         return r9;
@@ -78,21 +78,21 @@ bool8 sub_8040BB0(Entity *entity, Move *move, bool8 a2)
         return r9;
 
     if (r4 != 0) {
-        sub_8040C4C(entity, move, r8);
+        sub_8040C4C(entity, move, hasSpecialEffect);
     }
     return r9;
 }
 
-static void sub_8040C4C(Entity *entity, Move *move, bool32 a2)
+static void sub_8040C4C(Entity *entity, Move *move, bool32 hasSpecialEffect)
 {
     u8 savedUnkVar;
     s32 r4;
     struct UnkStruct_8040094 sp;
-    u16 r9 = sub_80412E0(move->id, GetApparentWeather(entity), a2);
+    u16 r9 = GetEffectiveMoveId(move->id, GetApparentWeather(entity), hasSpecialEffect);
     EntityInfo *entInfo = GetEntInfo(entity);
     bool8 r8 = sub_800EC94(move->id);
     s32 apparentId = entInfo->apparentID;
-    s32 r2 = sub_800E710(apparentId, sub_80412E0(move->id, GetApparentWeather(entity), TRUE));
+    s32 r2 = sub_800E710(apparentId, GetEffectiveMoveId(move->id, GetApparentWeather(entity), TRUE));
 
     if (r2 != -1) {
         sub_800569C(&sp.unk8, &entity->axObj.axdata, r2);
@@ -144,12 +144,12 @@ void sub_8040DA0(Entity *entity, Move *move)
     s32 soundEffectId;
     Entity *anotherEntity;
     struct UnkStruct_8040094 sp;
-    bool32 r9 = sub_804143C(entity, move);
+    bool32 hasSpecialEffect = MoveHasSpecialEffect(entity, move);
     bool8 var_28 = FALSE;
     EntityInfo *entInfo = GetEntInfo(entity);
-    u8 var_24 = sub_800EA44(entInfo->apparentID, sub_80412E0(move->id, GetApparentWeather(entity), r9));
+    u8 var_24 = sub_800EA44(entInfo->apparentID, GetEffectiveMoveId(move->id, GetApparentWeather(entity), hasSpecialEffect));
 
-    sub_8041038(&sp, entity, move, r9);
+    sub_8041038(&sp, entity, move, hasSpecialEffect);
     if (sub_800E838(&sp, 1)) {
         anotherEntity = gDungeon->unk181e8.cameraTarget;
     }
@@ -184,7 +184,7 @@ void sub_8040DA0(Entity *entity, Move *move)
         sub_80421C0(anotherEntity, 0x1A4);
     }
 
-    soundEffectId = sub_800E790(entInfo->apparentID, sub_80412E0(move->id, GetApparentWeather(entity), r9));
+    soundEffectId = sub_800E790(entInfo->apparentID, GetEffectiveMoveId(move->id, GetApparentWeather(entity), hasSpecialEffect));
     if (soundEffectId != 0x3E5) {
         PlaySoundEffect((u16) soundEffectId);
     }
@@ -192,7 +192,7 @@ void sub_8040DA0(Entity *entity, Move *move)
     if (var_24 == 99) {
         if (sub_8042768(anotherEntity)) {
             s32 direction = entInfo->action.direction;
-            sub_8041108(&sp, entity, move, r9);
+            sub_8041108(&sp, entity, move, hasSpecialEffect);
             for (i = 0; i < NUM_DIRECTIONS; i++) {
                 direction--;
                 direction &= DIRECTION_MASK;
@@ -204,7 +204,7 @@ void sub_8040DA0(Entity *entity, Move *move)
     else if (var_24 == 98) {
         if (sub_8042768(anotherEntity)) {
             s32 direction = entInfo->action.direction;
-            sub_8041108(&sp, entity, move, r9);
+            sub_8041108(&sp, entity, move, hasSpecialEffect);
             for (i = 0; i < NUM_DIRECTIONS + 1; i++) {
                 direction &= DIRECTION_MASK;
                 sub_806CDD4(entity, 0, direction);
@@ -226,7 +226,7 @@ void sub_8040DA0(Entity *entity, Move *move)
             }
 
             if ((unk & 2) && !var_28) {
-                sub_8041108(&sp, entity, move, r9);
+                sub_8041108(&sp, entity, move, hasSpecialEffect);
                 var_28 = TRUE;
             }
             if (unk & 1)
@@ -238,13 +238,13 @@ void sub_8040DA0(Entity *entity, Move *move)
     }
 }
 
-static void sub_8041038(struct UnkStruct_8040094 *a0, Entity *entity, Move *move, bool32 a2)
+static void sub_8041038(struct UnkStruct_8040094 *a0, Entity *entity, Move *move, bool32 hasSpecialEffect)
 {
     EntityInfo *entInfo = GetEntInfo(entity);
-    u16 var_24 = sub_80412E0(move->id, GetApparentWeather(entity), a2);
+    u16 effectiveMoveId = GetEffectiveMoveId(move->id, GetApparentWeather(entity), hasSpecialEffect);
 
-    if (sub_800ECB8(var_24)->unk2 != 0) {
-        s32 r2 = sub_800E710(entInfo->apparentID, sub_80412E0(move->id, GetApparentWeather(entity), a2));
+    if (sub_800ECB8(effectiveMoveId)->unk2 != 0) {
+        s32 r2 = sub_800E710(entInfo->apparentID, GetEffectiveMoveId(move->id, GetApparentWeather(entity), hasSpecialEffect));
 
         if (r2 != -1) {
             sub_800569C(&a0->unk8, &entity->axObj.axdata, r2);
@@ -253,7 +253,7 @@ static void sub_8041038(struct UnkStruct_8040094 *a0, Entity *entity, Move *move
             a0->unk8 = (DungeonPos) {0};
         }
 
-        a0->unk0 = var_24;
+        a0->unk0 = effectiveMoveId;
         a0->unk2 = entInfo->apparentID;
         a0->unk4.x = entity->pixelPos.x / 256;
         a0->unk4.y = entity->pixelPos.y / 256;
@@ -265,14 +265,14 @@ static void sub_8041038(struct UnkStruct_8040094 *a0, Entity *entity, Move *move
     }
 }
 
-static void sub_8041108(struct UnkStruct_8040094 *a0, Entity *entity, Move *move, bool32 a2)
+static void sub_8041108(struct UnkStruct_8040094 *a0, Entity *entity, Move *move, bool32 hasSpecialEffect)
 {
-    u16 r4 = sub_80412E0(move->id, GetApparentWeather(entity), a2);
-    s32 var = sub_800ECB8(r4)->unk2;
+    u16 effectiveMoveId = GetEffectiveMoveId(move->id, GetApparentWeather(entity), hasSpecialEffect);
+    s32 var = sub_800ECB8(effectiveMoveId)->unk2;
 
     if (a0->unk0 != 0 && var != 0) {
         sub_8041500(a0);
-        sub_800EEF8(r4);
+        sub_800EEF8(effectiveMoveId);
         sub_800EF64();
         DungeonRunFrameActions(0x5A);
         sub_8042DD4(sub_800E52C(a0), entity, 1);
@@ -284,9 +284,9 @@ void sub_8041168(Entity *entity, Entity *entity2, Move *move, DungeonPos *pos)
     s32 var2;
     s32 var3;
     struct UnkStruct_8040094 sp;
-    bool32 r5 = (sub_804143C(entity, move) != 0);
-    u16 r10 = sub_80412E0(move->id, GetApparentWeather(entity), r5);
-    s32 var = sub_800ECB8(r10)->unk4;
+    bool32 hasSpecialEffect = (MoveHasSpecialEffect(entity, move) != FALSE);
+    u16 effectiveMoveId = GetEffectiveMoveId(move->id, GetApparentWeather(entity), hasSpecialEffect);
+    s32 var = sub_800ECB8(effectiveMoveId)->unk4;
     EntityInfo *ent2Info = NULL;
 
     if (EntityIsValid(entity2)) {
@@ -317,7 +317,7 @@ void sub_8041168(Entity *entity, Entity *entity2, Move *move, DungeonPos *pos)
         sp.unk8 = (DungeonPos) {0};
     }
 
-    sp.unk0 = r10;
+    sp.unk0 = effectiveMoveId;
     if (ent2Info != NULL) {
         sp.unk2 = ent2Info->apparentID;
         sp.unk4.x = entity2->pixelPos.x / 256;
@@ -337,7 +337,7 @@ void sub_8041168(Entity *entity, Entity *entity2, Move *move, DungeonPos *pos)
 
     sp.unk10 = 0;
     sub_8041500(&sp);
-    sub_800EEE0(r10);
+    sub_800EEE0(effectiveMoveId);
     sub_800EF64();
     var3 = sub_800EBC8(&sp);
     DungeonRunFrameActions(0x5B);
@@ -349,7 +349,7 @@ void sub_8041168(Entity *entity, Entity *entity2, Move *move, DungeonPos *pos)
     }
 }
 
-u16 sub_80412E0(u16 moveId, u8 weather, bool32 a2)
+u16 GetEffectiveMoveId(u16 moveId, u8 weather, bool32 hasSpecialEffect)
 {
     u16 ret = moveId;
 
@@ -361,57 +361,57 @@ u16 sub_80412E0(u16 moveId, u8 weather, bool32 a2)
                 ret = moveId;
                 break;
             case WEATHER_SUNNY:
-                ret = 0x19E;
+                ret = MOVE_WEATHER_BALL_SUNNY;
                 break;
             case WEATHER_SANDSTORM:
-                ret = 0x1A1;
+                ret = MOVE_WEATHER_BALL_SANDSTORM;
                 break;
             case WEATHER_RAIN:
-                ret = 0x1A0;
+                ret = MOVE_WEATHER_BALL_RAIN;
                 break;
             case WEATHER_HAIL:
             case WEATHER_SNOW:
-                ret = 0x19F;
+                ret = MOVE_WEATHER_BALL_HAIL;
                 break;
         }
     }
-    else if (a2) {
+    else if (hasSpecialEffect) {
         switch (moveId) {
             case MOVE_DIG:
-                ret = 0x1A2;
+                ret = MOVE_DIG_2ND_TURN;
                 break;
             case MOVE_RAZOR_WIND:
-                ret = 0x1A3;
+                ret = MOVE_RAZOR_WIND_2ND_TURN;
                 break;
             case MOVE_FOCUS_PUNCH:
-                ret = 0x1A4;
+                ret = MOVE_FOCUS_PUNCH_2ND_TURN;
                 break;
             case MOVE_SKY_ATTACK:
-                ret = 0x1A5;
+                ret = MOVE_SKY_ATTACK_2ND_TURN;
                 break;
             case MOVE_SOLARBEAM:
-                ret = 0x1A6;
+                ret = MOVE_SOLARBEAM_2ND_TURN;
                 break;
             case MOVE_FLY:
-                ret = 0x1A7;
+                ret = MOVE_FLY_2ND_TURN;
                 break;
             case MOVE_DIVE:
-                ret = 0x1A8;
+                ret = MOVE_DIVE_2ND_TURN;
                 break;
             case MOVE_BOUNCE:
-                ret = 0x1A9;
+                ret = MOVE_BOUNCE_2ND_TURN;
                 break;
             case MOVE_SKULL_BASH:
-                ret = 0x1AA;
+                ret = MOVE_SKULL_BASH_2ND_TURN;
                 break;
             case MOVE_CURSE:
-                ret = 0x1AB;
+                ret = MOVE_CURSE_GHOST;
                 break;
             case MOVE_SNORE:
-                ret = 0x1AC;
+                ret = MOVE_SNORE_ATTACK;
                 break;
             case MOVE_SLEEP_TALK:
-                ret = 0x1AD;
+                ret = MOVE_SLEEP_TALK_ATTACK;
                 break;
             default:
                 ret = moveId;
@@ -422,17 +422,17 @@ u16 sub_80412E0(u16 moveId, u8 weather, bool32 a2)
     return ret;
 }
 
-UNUSED static s32 sub_8041400(u16 moveId, u8 weather, bool32 a2)
+UNUSED static s32 sub_8041400(u16 moveId, u8 weather, bool32 hasSpecialEffect)
 {
-    return sub_800ED20(sub_80412E0(moveId, weather, a2));
+    return sub_800ED20(GetEffectiveMoveId(moveId, weather, hasSpecialEffect));
 }
 
-static bool8 sub_804141C(u16 moveId, u8 weather, bool32 a2)
+static bool8 sub_804141C(u16 moveId, u8 weather, bool32 hasSpecialEffect)
 {
-    return sub_800EC84(sub_80412E0(moveId, weather, a2));
+    return sub_800EC84(GetEffectiveMoveId(moveId, weather, hasSpecialEffect));
 }
 
-static bool32 sub_804143C(Entity *entity, Move *move)
+static bool32 MoveHasSpecialEffect(Entity *entity, Move *move)
 {
     if (move->id == MOVE_CURSE) {
         if (EntityIsValid(entity) && GetEntityType(entity) == ENTITY_MONSTER) {

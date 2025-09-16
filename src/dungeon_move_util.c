@@ -49,7 +49,7 @@ extern void sub_804178C(u32);
 extern void sub_80428A0(Entity *r0);
 extern bool8 sub_8040BB0(Entity *entity, Move *move, bool8);
 extern void sub_8040DA0(Entity *entity, Move *move);
-extern u16 sub_80412E0(u16 moveId, u8 weather, u8 a2);
+extern u16 GetEffectiveMoveId(u16 moveId, u8 weather, u8 hasSpecialEffect);
 extern void sub_800EF10(u16 r0);
 extern void sub_800E3AC(s32 a0, DungeonPos *pos, s32 a2);
 extern void sub_8041168(Entity *entity, Entity *entity2, Move *,DungeonPos *);
@@ -477,24 +477,24 @@ bool8 TryUseChosenMove(struct Entity *attacker, u32 r6, s32 itemId, u32 var_30, 
     return TRUE;
 }
 
-bool8 sub_8056468(Entity *entity, Move *move, const u8 *str, Entity **unkArray, bool32 itemId, bool8 arg_4, bool32 unused)
+bool8 sub_8056468(Entity *entity, Move *move, const u8 *str, Entity **targetsArray, bool32 itemId, bool8 arg_4, bool32 unused)
 {
     s32 i;
     bool8 ret = FALSE;
-    bool32 r7 = (ShouldDisplayEntity(entity) != FALSE);
+    bool32 entityIsDisplayed = (ShouldDisplayEntity(entity) != FALSE);
 
     if (str != NULL) {
         for (i = 0; i < 65; i++) {
-            if (unkArray[i] == NULL) {
+            if (targetsArray[i] == NULL) {
                 break;
             }
-            if (ShouldDisplayEntity(unkArray[i])) {
-                r7 = TRUE;
+            if (ShouldDisplayEntity(targetsArray[i])) {
+                entityIsDisplayed = TRUE;
                 break;
             }
         }
 
-        if (r7) {
+        if (entityIsDisplayed) {
             SetMessageArgument_2(gFormatBuffer_Monsters[0], GetEntInfo(entity), 0);
             if (itemId == 0) {
                 BufferMoveName(gFormatBuffer_Items[0], move, NULL);
@@ -512,7 +512,7 @@ bool8 sub_8056468(Entity *entity, Move *move, const u8 *str, Entity **unkArray, 
         }
     }
 
-    if (r7) {
+    if (entityIsDisplayed) {
         if (arg_4) {
             ret = sub_8040BB0(entity, move, TRUE);
         }
@@ -535,7 +535,7 @@ s32 sub_8056564(Entity *entity, DungeonPos *pos, Move *move, s32 r4)
     EntityInfo *entInfo = GetEntInfo(entity);
 
     if (!gDungeon->unk181e8.blinded && (GetBodySize(entInfo->apparentID) < 4 || r4 != 1)) {
-        s32 unk6 = sub_800ECB8(sub_80412E0(move->id, GetApparentWeather(entity), 1))->unk6;
+        s32 unk6 = sub_800ECB8(GetEffectiveMoveId(move->id, GetApparentWeather(entity), TRUE))->unk6;
         s32 pixelPosX = X_POS_TO_PIXELPOS(pos->x);
         s32 pixelPosY = Y_POS_TO_PIXELPOS(pos->y);
 
@@ -545,17 +545,17 @@ s32 sub_8056564(Entity *entity, DungeonPos *pos, Move *move, s32 r4)
         if (unk6 != 0) {
             s32 someRetVal;
 
-            sub_800EF10(sub_80412E0(move->id, GetApparentWeather(entity), 1));
+            sub_800EF10(GetEffectiveMoveId(move->id, GetApparentWeather(entity), TRUE));
             sub_800EF64();
             DungeonRunFrameActions(0x5E);
-            someRetVal = sub_800E710(entInfo->apparentID, sub_80412E0(move->id, GetApparentWeather(entity), 1));
+            someRetVal = sub_800E710(entInfo->apparentID, GetEffectiveMoveId(move->id, GetApparentWeather(entity), TRUE));
             if (someRetVal != -1) {
                 sub_800569C(&unkSp1.unk8, &entity->axObj.axdata, someRetVal);
             }
             else {
                 unkSp1.unk8 = (DungeonPos) {0};
             }
-            unkSp1.unk0 = sub_80412E0(move->id, GetApparentWeather(entity), 1);
+            unkSp1.unk0 = GetEffectiveMoveId(move->id, GetApparentWeather(entity), TRUE);
             unkSp1.unk2 = entInfo->apparentID;
             unkSp1.unk4.x = entity->pixelPos.x / 256;
             unkSp1.unk4.y = entity->pixelPos.y / 256;
