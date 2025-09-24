@@ -147,7 +147,7 @@ void sub_8040DA0(Entity *entity, Move *move)
     bool32 hasSpecialEffect = MoveHasSpecialEffect(entity, move);
     bool8 var_28 = FALSE;
     EntityInfo *entInfo = GetEntInfo(entity);
-    u8 var_24 = sub_800EA44(entInfo->apparentID, GetEffectiveMoveId(move->id, GetApparentWeather(entity), hasSpecialEffect));
+    u8 animId = sub_800EA44(entInfo->apparentID, GetEffectiveMoveId(move->id, GetApparentWeather(entity), hasSpecialEffect));
 
     sub_8041038(&sp, entity, move, hasSpecialEffect);
     if (sub_800E838(&sp, 1)) {
@@ -189,7 +189,7 @@ void sub_8040DA0(Entity *entity, Move *move)
         PlaySoundEffect((u16) soundEffectId);
     }
 
-    if (var_24 == 99) {
+    if (animId == 99) {
         if (sub_8042768(anotherEntity)) {
             s32 direction = entInfo->action.direction;
             sub_8041108(&sp, entity, move, hasSpecialEffect);
@@ -201,7 +201,7 @@ void sub_8040DA0(Entity *entity, Move *move)
             }
         }
     }
-    else if (var_24 == 98) {
+    else if (animId == 98) {
         if (sub_8042768(anotherEntity)) {
             s32 direction = entInfo->action.direction;
             sub_8041108(&sp, entity, move, hasSpecialEffect);
@@ -214,14 +214,14 @@ void sub_8040DA0(Entity *entity, Move *move)
         }
     }
     else {
-        sub_806CDD4(entity, var_24, entInfo->action.direction);
+        sub_806CDD4(entity, animId, entInfo->action.direction);
         entity->unk21 = 0;
         for (i = 0; i < 120; i++) {
             u32 unk;
 
             DungeonRunFrameActions(0x59);
             unk = entity->axObj.axdata.sub1.unk10;
-            if (var_24 == 9) {
+            if (animId == 9) {
                 unk |= 2;
             }
 
