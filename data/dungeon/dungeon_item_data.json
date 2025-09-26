@@ -1,6 +1,7 @@
 [
     {
         "name": "items_found_out0",
+        "description": "Lost Woods B1F",
         "categories": [
             {
                 "category": "CATEGORY_POKE",
@@ -16,6 +17,7 @@
     },
     {
         "name": "items_found_out1",
+        "description": "Kecleon Shop Set A",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -103,6 +105,7 @@
     },
     {
         "name": "items_found_out2",
+        "description": "Monster House Set A",
         "categories": [
             {
                 "category": "CATEGORY_TMS_HMS",
@@ -306,6 +309,7 @@
     },
     {
         "name": "items_found_out3",
+        "description": "Buried Items Set A",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -655,6 +659,7 @@
     },
     {
         "name": "items_found_out4",
+        "description": "Tiny Woods B2F",
         "categories": [
             {
                 "category": "CATEGORY_POKE",
@@ -670,6 +675,7 @@
     },
     {
         "name": "items_found_out5",
+        "description": "Tiny Woods B3F",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -689,6 +695,7 @@
     },
     {
         "name": "items_found_out6",
+        "description": "Thunderwave Cave B1F-B3F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_ARC",
@@ -750,6 +757,7 @@
     },
     {
         "name": "items_found_out7",
+        "description": "Thunderwave Cave B4F-B5F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_ARC",
@@ -811,6 +819,7 @@
     },
     {
         "name": "items_found_out8",
+        "description": "Mt. Steel 1F-3F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_ARC",
@@ -906,6 +915,7 @@
     },
     {
         "name": "items_found_out9",
+        "description": "Mt. Steel 4F-6F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_ARC",
@@ -1001,6 +1011,7 @@
     },
     {
         "name": "items_found_out10",
+        "description": "Mt. Steel 7F-9F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_ARC",
@@ -1096,6 +1107,7 @@
     },
     {
         "name": "items_found_out11",
+        "description": "Sinister Woods 1F-3F",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -1237,6 +1249,7 @@
     },
     {
         "name": "items_found_out12",
+        "description": "Sinister Woods 4F-13F",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -1378,6 +1391,7 @@
     },
     {
         "name": "items_found_out13",
+        "description": "Silent Chasm B1F-B3F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_ARC",
@@ -1531,6 +1545,7 @@
     },
     {
         "name": "items_found_out14",
+        "description": "Silent Chasm B4F-B9F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_ARC",
@@ -1684,6 +1699,7 @@
     },
     {
         "name": "items_found_out15",
+        "description": "Mt. Thunder 1F-3F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_ARC",
@@ -1907,6 +1923,7 @@
     },
     {
         "name": "items_found_out16",
+        "description": "Mt. Thunder 4F-10F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_ARC",
@@ -2130,6 +2147,7 @@
     },
     {
         "name": "items_found_out17",
+        "description": "Mt. Thunder Peak 1F-3F",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -2213,6 +2231,7 @@
     },
     {
         "name": "items_found_out18",
+        "description": "Great Canyon 1F-3F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_ARC",
@@ -2432,6 +2451,7 @@
     },
     {
         "name": "items_found_out19",
+        "description": "Kecleon Shop Set B",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -2649,6 +2669,7 @@
     },
     {
         "name": "items_found_out20",
+        "description": "Great Canyon 4F-12F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_ARC",
@@ -2868,6 +2889,7 @@
     },
     {
         "name": "items_found_out21",
+        "description": "Lapis Cave B1F-B4F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_ARC",
@@ -3073,6 +3095,7 @@
     },
     {
         "name": "items_found_out22",
+        "description": "Lapis Cave B5F-B6F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_ARC",
@@ -3278,6 +3301,7 @@
     },
     {
         "name": "items_found_out23",
+        "description": "Lapis Cave B7F-B14F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_ARC",
@@ -3505,6 +3529,7 @@
     },
     {
         "name": "items_found_out24",
+        "description": "Mt. Blaze 1F-3F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_ARC",
@@ -3674,6 +3699,7 @@
     },
     {
         "name": "items_found_out25",
+        "description": "Mt. Blaze 4F-12F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_ARC",
@@ -3843,6 +3869,7 @@
     },
     {
         "name": "items_found_out26",
+        "description": "Mt. Blaze Peak 1F-3F",
         "categories": [
             {
                 "category": "CATEGORY_FOOD_GUMMIES",
@@ -3868,6 +3895,7 @@
     },
     {
         "name": "items_found_out27",
+        "description": "Frosty Forest 1F-3F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_ARC",
@@ -4091,6 +4119,7 @@
     },
     {
         "name": "items_found_out28",
+        "description": "Kecleon Shop Set C",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -4188,6 +4217,7 @@
     },
     {
         "name": "items_found_out29",
+        "description": "Frosty Forest 4F-9F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_ARC",
@@ -4411,6 +4441,7 @@
     },
     {
         "name": "items_found_out30",
+        "description": "Frosty Grotto 1F-3F",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -4462,6 +4493,7 @@
     },
     {
         "name": "items_found_out31",
+        "description": "Frosty Grotto 4F-5F",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -4513,6 +4545,7 @@
     },
     {
         "name": "items_found_out32",
+        "description": "Mt. Freeze 1F-3F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -4766,6 +4799,7 @@
     },
     {
         "name": "items_found_out33",
+        "description": "Mt. Freeze 4F-15F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -5031,6 +5065,7 @@
     },
     {
         "name": "items_found_out34",
+        "description": "Mt. Freeze Peak 1F-3F",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -5118,6 +5153,7 @@
     },
     {
         "name": "items_found_out35",
+        "description": "Mt. Freeze Peak 4F-5F",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -5205,6 +5241,7 @@
     },
     {
         "name": "items_found_out36",
+        "description": "Magma Cavern B1F-B3F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -5444,6 +5481,7 @@
     },
     {
         "name": "items_found_out37",
+        "description": "Kecleon Shop Set D",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -5585,6 +5623,7 @@
     },
     {
         "name": "items_found_out38",
+        "description": "Magma Cavern B4F-B9F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -5824,6 +5863,7 @@
     },
     {
         "name": "items_found_out39",
+        "description": "Magma Cavern B10F-B23F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -6063,6 +6103,7 @@
     },
     {
         "name": "items_found_out40",
+        "description": "Magma Cavern Pit B1F-B3F",
         "categories": [
             {
                 "category": "CATEGORY_POKE",
@@ -6078,6 +6119,7 @@
     },
     {
         "name": "items_found_out41",
+        "description": "Sky Tower 1F-3F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -6335,6 +6377,7 @@
     },
     {
         "name": "items_found_out42",
+        "description": "Sky Tower 4F-25F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -6592,6 +6635,7 @@
     },
     {
         "name": "items_found_out43",
+        "description": "Sky Tower Summit 1F-3F",
         "categories": [
             {
                 "category": "CATEGORY_HELD_ITEMS",
@@ -6795,6 +6839,7 @@
     },
     {
         "name": "items_found_out44",
+        "description": "Sky Tower Summit 4F-9F",
         "categories": [
             {
                 "category": "CATEGORY_HELD_ITEMS",
@@ -6998,6 +7043,7 @@
     },
     {
         "name": "items_found_out45",
+        "description": "Stormy Sea B1F-B9F",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -7391,6 +7437,7 @@
     },
     {
         "name": "items_found_out46",
+        "description": "Monster House Set B",
         "categories": [
             {
                 "category": "CATEGORY_TMS_HMS",
@@ -7598,6 +7645,7 @@
     },
     {
         "name": "items_found_out47",
+        "description": "Stormy Sea B10F-B20F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_ARC",
@@ -8001,6 +8049,7 @@
     },
     {
         "name": "items_found_out48",
+        "description": "Stormy Sea B21F-B30F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_ARC",
@@ -8354,6 +8403,7 @@
     },
     {
         "name": "items_found_out49",
+        "description": "Stormy Sea B31F-B40F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_ARC",
@@ -8707,6 +8757,7 @@
     },
     {
         "name": "items_found_out50",
+        "description": "Silver Trench B1F-B9F",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -9032,6 +9083,7 @@
     },
     {
         "name": "items_found_out51",
+        "description": "Silver Trench B10F-B20F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_ARC",
@@ -9367,6 +9419,7 @@
     },
     {
         "name": "items_found_out52",
+        "description": "Silver Trench B21F-B30F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_ARC",
@@ -9660,6 +9713,7 @@
     },
     {
         "name": "items_found_out53",
+        "description": "Silver Trench B31F-B40F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_ARC",
@@ -9939,6 +9993,7 @@
     },
     {
         "name": "items_found_out54",
+        "description": "Silver Trench B41F-B70F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -10232,6 +10287,7 @@
     },
     {
         "name": "items_found_out55",
+        "description": "Silver Trench B71F-B99F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -10515,6 +10571,7 @@
     },
     {
         "name": "items_found_out56",
+        "description": "Meteor Cave B1F-B3F",
         "categories": [
             {
                 "category": "CATEGORY_POKE",
@@ -10530,6 +10587,7 @@
     },
     {
         "name": "items_found_out57",
+        "description": "Buried Items Set B",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -10887,6 +10945,7 @@
     },
     {
         "name": "items_found_out58",
+        "description": "Meteor Cave B4F-B6F",
         "categories": [
             {
                 "category": "CATEGORY_POKE",
@@ -10902,6 +10961,7 @@
     },
     {
         "name": "items_found_out59",
+        "description": "Meteor Cave B7F-B20F",
         "categories": [
             {
                 "category": "CATEGORY_POKE",
@@ -10917,6 +10977,7 @@
     },
     {
         "name": "items_found_out60",
+        "description": "Western Cave B1F-B9F",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -10988,6 +11049,7 @@
     },
     {
         "name": "items_found_out61",
+        "description": "Kecleon Shop Western Cave",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -11097,6 +11159,7 @@
     },
     {
         "name": "items_found_out62",
+        "description": "Buried Items Set C",
         "categories": [
             {
                 "category": "CATEGORY_HELD_ITEMS",
@@ -11160,6 +11223,7 @@
     },
     {
         "name": "items_found_out63",
+        "description": "Western Cave B10F-B25F",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -11247,6 +11311,7 @@
     },
     {
         "name": "items_found_out64",
+        "description": "Western Cave B26F-B99F",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -11334,6 +11399,7 @@
     },
     {
         "name": "items_found_out65",
+        "description": "Boss3 B1F-B3F",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -11471,6 +11537,7 @@
     },
     {
         "name": "items_found_out66",
+        "description": "Buried Items Set D",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -11828,6 +11895,7 @@
     },
     {
         "name": "items_found_out67",
+        "description": "Boss3 B4F-B6F",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -11965,6 +12033,7 @@
     },
     {
         "name": "items_found_out68",
+        "description": "Boss3 B7F-B9F",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -12102,6 +12171,7 @@
     },
     {
         "name": "items_found_out69",
+        "description": "Boss3 B10F-B20F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -12231,6 +12301,7 @@
     },
     {
         "name": "items_found_out70",
+        "description": "Boss4 B1F-B3F",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -12368,6 +12439,7 @@
     },
     {
         "name": "items_found_out71",
+        "description": "Boss4 B4F-B6F",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -12505,6 +12577,7 @@
     },
     {
         "name": "items_found_out72",
+        "description": "Boss4 B7F-B9F",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -12642,6 +12715,7 @@
     },
     {
         "name": "items_found_out73",
+        "description": "Boss4 B10F-B11F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -12771,6 +12845,7 @@
     },
     {
         "name": "items_found_out74",
+        "description": "Wish Cave B1F-B3F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -13310,6 +13385,7 @@
     },
     {
         "name": "items_found_out75",
+        "description": "Kecleon Shop Wish Cave Generic",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -13655,6 +13731,7 @@
     },
     {
         "name": "items_found_out76",
+        "description": "Wish Cave B4F-B98F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -14194,6 +14271,7 @@
     },
     {
         "name": "items_found_out77",
+        "description": "Kecleon Shop Wish Cave B13F, B26F, B33F, B41F, B49F, B59F, B65F, B71F, B78F, B83F",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -14305,6 +14383,7 @@
     },
     {
         "name": "items_found_out78",
+        "description": "Kecleon Shop Wish Cave B88F, B93F",
         "categories": [
             {
                 "category": "CATEGORY_OTHER",
@@ -14332,6 +14411,7 @@
     },
     {
         "name": "items_found_out79",
+        "description": "Wish Cave B99F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -14861,6 +14941,7 @@
     },
     {
         "name": "items_found_out80",
+        "description": "Buried Relic B1F-B3F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -15396,6 +15477,7 @@
     },
     {
         "name": "items_found_out81",
+        "description": "Buried Items Buried Relic",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -15623,6 +15705,7 @@
     },
     {
         "name": "items_found_out82",
+        "description": "Buried Relic B4F-B99F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -16158,6 +16241,7 @@
     },
     {
         "name": "items_found_out83",
+        "description": "Kecleon Shop Buried Relic B26F, B36F",
         "categories": [
             {
                 "category": "CATEGORY_TMS_HMS",
@@ -16353,6 +16437,7 @@
     },
     {
         "name": "items_found_out84",
+        "description": "Pitfall Valley B1F-B3F, Northern Range 1F-3F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -16692,6 +16777,7 @@
     },
     {
         "name": "items_found_out85",
+        "description": "Pitfall Valley B4F-B22F, Northern Range 4F-22F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -17031,6 +17117,7 @@
     },
     {
         "name": "items_found_out86",
+        "description": "Pitfall Valley B23F-B25F, Northern Range 23F-25F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -17380,6 +17467,7 @@
     },
     {
         "name": "items_found_out87",
+        "description": "Multiple unused dungeons",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -17847,6 +17935,7 @@
     },
     {
         "name": "items_found_out88",
+        "description": "Multiple unused dungeons",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -18314,6 +18403,7 @@
     },
     {
         "name": "items_found_out89",
+        "description": "Desert Region 1F-18F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_ARC",
@@ -18565,6 +18655,7 @@
     },
     {
         "name": "items_found_out90",
+        "description": "Kecleon Shop Desert Region",
         "categories": [
             {
                 "category": "CATEGORY_FOOD_GUMMIES",
@@ -18588,6 +18679,7 @@
     },
     {
         "name": "items_found_out91",
+        "description": "Buried Items Desert Region",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -18949,6 +19041,7 @@
     },
     {
         "name": "items_found_out92",
+        "description": "Desert Region 19F-20F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_ARC",
@@ -19210,6 +19303,7 @@
     },
     {
         "name": "items_found_out93",
+        "description": "Southern Cavern B1F-B48F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_ARC",
@@ -19513,6 +19607,7 @@
     },
     {
         "name": "items_found_out94",
+        "description": "Kecleon Shop Set E",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -19674,6 +19769,7 @@
     },
     {
         "name": "items_found_out95",
+        "description": "Southern Cavern B49F-B50F",
         "categories": [
             {
                 "category": "CATEGORY_TMS_HMS",
@@ -19819,6 +19915,7 @@
     },
     {
         "name": "items_found_out96",
+        "description": "Wyvern Hill 1F-28F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -20204,6 +20301,7 @@
     },
     {
         "name": "items_found_out97",
+        "description": "Wyvern Hill 29F-30F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -20599,6 +20697,7 @@
     },
     {
         "name": "items_found_out98",
+        "description": "Fiery Field 1F-28F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -20992,6 +21091,7 @@
     },
     {
         "name": "items_found_out99",
+        "description": "Fiery Field 29F-30F",
         "categories": [
             {
                 "category": "CATEGORY_TMS_HMS",
@@ -21137,6 +21237,7 @@
     },
     {
         "name": "items_found_out100",
+        "description": "Northwind Field 1F-28F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -21530,6 +21631,7 @@
     },
     {
         "name": "items_found_out101",
+        "description": "Northwind Field 29F-30F",
         "categories": [
             {
                 "category": "CATEGORY_OTHER",
@@ -21545,6 +21647,7 @@
     },
     {
         "name": "items_found_out102",
+        "description": "Solar Cave B1F-B9F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -21882,6 +21985,7 @@
     },
     {
         "name": "items_found_out103",
+        "description": "Solar Cave B10F-B15F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -22185,6 +22289,7 @@
     },
     {
         "name": "items_found_out104",
+        "description": "Solar Cave B16F-B20F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -22498,6 +22603,7 @@
     },
     {
         "name": "items_found_out105",
+        "description": "Lightning Field 1F-28F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -22891,6 +22997,7 @@
     },
     {
         "name": "items_found_out106",
+        "description": "Lightning Field 29F-30F",
         "categories": [
             {
                 "category": "CATEGORY_OTHER",
@@ -22906,6 +23013,7 @@
     },
     {
         "name": "items_found_out107",
+        "description": "Darknight Relic B1F-B3F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -23261,6 +23369,7 @@
     },
     {
         "name": "items_found_out108",
+        "description": "Kecleon Shop Darknight Relic",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -23316,6 +23425,7 @@
     },
     {
         "name": "items_found_out109",
+        "description": "Buried Items Set E",
         "categories": [
             {
                 "category": "CATEGORY_TMS_HMS",
@@ -23613,6 +23723,7 @@
     },
     {
         "name": "items_found_out110",
+        "description": "Darknight Relic B4F-B15F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -23960,6 +24071,7 @@
     },
     {
         "name": "items_found_out111",
+        "description": "Murky Cave B1F-B3F",
         "categories": [
             {
                 "category": "CATEGORY_POKE",
@@ -23975,6 +24087,7 @@
     },
     {
         "name": "items_found_out112",
+        "description": "Murky Cave B4F-B19F",
         "categories": [
             {
                 "category": "CATEGORY_POKE",
@@ -23990,6 +24103,7 @@
     },
     {
         "name": "items_found_out113",
+        "description": "Grand Sea B1F-B3F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_ARC",
@@ -24323,6 +24437,7 @@
     },
     {
         "name": "items_found_out114",
+        "description": "Grand Sea B4F-B30F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_ARC",
@@ -24656,6 +24771,7 @@
     },
     {
         "name": "items_found_out115",
+        "description": "Uproar Forest B1F-B3F",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -24715,6 +24831,7 @@
     },
     {
         "name": "items_found_out116",
+        "description": "Uproar Forest B4F-B8F",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -24774,6 +24891,7 @@
     },
     {
         "name": "items_found_out117",
+        "description": "Uproar Forest B9F",
         "categories": [
             {
                 "category": "CATEGORY_FOOD_GUMMIES",
@@ -24789,6 +24907,7 @@
     },
     {
         "name": "items_found_out118",
+        "description": "Uproar Forest B10F",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -24830,6 +24949,7 @@
     },
     {
         "name": "items_found_out119",
+        "description": "Oddity Cave B1F-B3F, Remains Island B1F-B3F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_ARC",
@@ -25027,6 +25147,7 @@
     },
     {
         "name": "items_found_out120",
+        "description": "Oddity Cave B4F-B15F, Remains Island B4F-B20F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_ARC",
@@ -25224,6 +25345,7 @@
     },
     {
         "name": "items_found_out121",
+        "description": "Marvelous Sea B1F-B3F, Fantasy Strait B1F-B3F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_ARC",
@@ -25435,6 +25557,7 @@
     },
     {
         "name": "items_found_out122",
+        "description": "Marvelous Sea B4F-B20F, Fantasy Strait B4F-B30F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_ARC",
@@ -25646,6 +25769,7 @@
     },
     {
         "name": "items_found_out123",
+        "description": "Rock Path B1F-B4F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_ARC",
@@ -25781,6 +25905,7 @@
     },
     {
         "name": "items_found_out124",
+        "description": "Snow Path B1F-B3F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_ARC",
@@ -25916,6 +26041,7 @@
     },
     {
         "name": "items_found_out125",
+        "description": "Snow Path B4F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_ARC",
@@ -26051,6 +26177,7 @@
     },
     {
         "name": "items_found_out126",
+        "description": "Autopilot B1F-B3F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -26260,6 +26387,7 @@
     },
     {
         "name": "items_found_out127",
+        "description": "Autopilot B4F-B10F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -26469,6 +26597,7 @@
     },
     {
         "name": "items_found_out128",
+        "description": "D51 B1F-B3F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -26840,6 +26969,7 @@
     },
     {
         "name": "items_found_out129",
+        "description": "D51 B4F-B50F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -27211,6 +27341,7 @@
     },
     {
         "name": "items_found_out130",
+        "description": "Normal Maze B1F-B3F",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -27264,6 +27395,7 @@
     },
     {
         "name": "items_found_out131",
+        "description": "Fire Maze B1F-B3F",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -27317,6 +27449,7 @@
     },
     {
         "name": "items_found_out132",
+        "description": "Water Maze B1F-B3F",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -27370,6 +27503,7 @@
     },
     {
         "name": "items_found_out133",
+        "description": "Grass Maze B1F-B3F",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -27423,6 +27557,7 @@
     },
     {
         "name": "items_found_out134",
+        "description": "Electric Maze B1F-B3F",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -27476,6 +27611,7 @@
     },
     {
         "name": "items_found_out135",
+        "description": "Ice Maze B1F-B3F",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -27529,6 +27665,7 @@
     },
     {
         "name": "items_found_out136",
+        "description": "Fighting Maze B1F-B3F",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -27582,6 +27719,7 @@
     },
     {
         "name": "items_found_out137",
+        "description": "Ground Maze B1F-B3F",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -27635,6 +27773,7 @@
     },
     {
         "name": "items_found_out138",
+        "description": "Flying Maze B1F-B3F",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -27688,6 +27827,7 @@
     },
     {
         "name": "items_found_out139",
+        "description": "Psychic Maze B1F-B3F",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -27741,6 +27881,7 @@
     },
     {
         "name": "items_found_out140",
+        "description": "Poison Maze B1F-B3F",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -27794,6 +27935,7 @@
     },
     {
         "name": "items_found_out141",
+        "description": "Bug Maze B1F-B3F",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -27839,6 +27981,7 @@
     },
     {
         "name": "items_found_out142",
+        "description": "Rock Maze B1F-B3F",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -27884,6 +28027,7 @@
     },
     {
         "name": "items_found_out143",
+        "description": "Ghost Maze B1F-B3F",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -27929,6 +28073,7 @@
     },
     {
         "name": "items_found_out144",
+        "description": "Dragon Maze B1F-B3F",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -27974,6 +28119,7 @@
     },
     {
         "name": "items_found_out145",
+        "description": "Dark Maze B1F-B3F",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -28019,6 +28165,7 @@
     },
     {
         "name": "items_found_out146",
+        "description": "Steel Maze B1F-B3F",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -28064,6 +28211,7 @@
     },
     {
         "name": "items_found_out147",
+        "description": "Team Mazes",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -28109,6 +28257,7 @@
     },
     {
         "name": "items_found_out148",
+        "description": "Howling Forest 1F-3F",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -28414,6 +28563,7 @@
     },
     {
         "name": "items_found_out149",
+        "description": "Howling Forest 4F-6F",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -28719,6 +28869,7 @@
     },
     {
         "name": "items_found_out150",
+        "description": "Howling Forest 7F-15F",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -29024,6 +29175,7 @@
     },
     {
         "name": "items_found_out151",
+        "description": "Waterfall Pond B1F-B3F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_ARC",
@@ -29083,6 +29235,7 @@
     },
     {
         "name": "items_found_out152",
+        "description": "Waterfall Pond B4F-B17F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_ARC",
@@ -29142,6 +29295,7 @@
     },
     {
         "name": "items_found_out153",
+        "description": "Waterfall Pond B18F-B19F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_ARC",
@@ -29201,6 +29355,7 @@
     },
     {
         "name": "items_found_out154",
+        "description": "Unown Relic B1F-B3F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_ARC",
@@ -29330,6 +29485,7 @@
     },
     {
         "name": "items_found_out155",
+        "description": "Buried Items Unown Relic",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -29803,6 +29959,7 @@
     },
     {
         "name": "items_found_out156",
+        "description": "Unown Relic B4F-B11F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_ARC",
@@ -29932,6 +30089,7 @@
     },
     {
         "name": "items_found_out157",
+        "description": "Joyous Tower 1F-3F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -30491,6 +30649,7 @@
     },
     {
         "name": "items_found_out158",
+        "description": "Kecleon Shop Joyous Tower",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -30998,6 +31157,7 @@
     },
     {
         "name": "items_found_out159",
+        "description": "Joyous Tower 4F-25F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -31557,6 +31717,7 @@
     },
     {
         "name": "items_found_out160",
+        "description": "Joyous Tower 26F-59F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -32116,6 +32277,7 @@
     },
     {
         "name": "items_found_out161",
+        "description": "Joyous Tower 60F-77F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -32675,6 +32837,7 @@
     },
     {
         "name": "items_found_out162",
+        "description": "Joyous Tower 78F-90F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -33224,6 +33387,7 @@
     },
     {
         "name": "items_found_out163",
+        "description": "Joyous Tower 91F-99F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -33773,6 +33937,7 @@
     },
     {
         "name": "items_found_out164",
+        "description": "Far-off Sea B1F-B50F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_ARC",
@@ -34106,6 +34271,7 @@
     },
     {
         "name": "items_found_out165",
+        "description": "Far-off Sea B51F-B75F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_ARC",
@@ -34457,6 +34623,7 @@
     },
     {
         "name": "items_found_out166",
+        "description": "Mt. Faraway 1F-3F",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -34506,6 +34673,7 @@
     },
     {
         "name": "items_found_out167",
+        "description": "Mt. Faraway 4F-40F",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -34555,6 +34723,7 @@
     },
     {
         "name": "items_found_out168",
+        "description": "Purity Forest 1F-3F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -35186,6 +35355,7 @@
     },
     {
         "name": "items_found_out169",
+        "description": "Kecleon Shop Purity Forest 1F-89F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -35737,6 +35907,7 @@
     },
     {
         "name": "items_found_out170",
+        "description": "Monster House Purity Forest",
         "categories": [
             {
                 "category": "CATEGORY_TMS_HMS",
@@ -35940,6 +36111,7 @@
     },
     {
         "name": "items_found_out171",
+        "description": "Purity Forest 4F-19F, 21F-49F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -36571,6 +36743,7 @@
     },
     {
         "name": "items_found_out172",
+        "description": "Purity Forest 20F",
         "categories": [
             {
                 "category": "CATEGORY_HELD_ITEMS",
@@ -36868,6 +37041,7 @@
     },
     {
         "name": "items_found_out173",
+        "description": "Purity Forest 50F-59F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -37503,6 +37677,7 @@
     },
     {
         "name": "items_found_out174",
+        "description": "Purity Forest 60F-99F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -38138,6 +38313,7 @@
     },
     {
         "name": "items_found_out175",
+        "description": "Kecleon Shop Purity Forest 90F-99F",
         "categories": [
             {
                 "category": "CATEGORY_BERRIES_SEEDS_VITAMINS",
@@ -38191,6 +38367,7 @@
     },
     {
         "name": "items_found_out176",
+        "description": "D63 B1F",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
@@ -38692,6 +38869,7 @@
     },
     {
         "name": "items_found_out177",
+        "description": "Monster House D63",
         "categories": [
             {
                 "category": "CATEGORY_THROWN_LINE",
