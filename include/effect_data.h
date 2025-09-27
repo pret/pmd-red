@@ -25,7 +25,8 @@ typedef struct unkStruct_80BDBC4
     s16 unk2;
     s16 unk4;
     s16 unk6;
-    u8 unk8;
+    // When true, apply a sine wobble to traveling effects (arcing look)
+    u8 useSineWobble;
     u8 unk9;
     s32 unkC;
     s32 unk10;

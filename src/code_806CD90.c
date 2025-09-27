@@ -387,10 +387,10 @@ void sub_806CD90(void)
     }
 }
 
-void sub_806CDD4(Entity *entity, u8 a1, u32 direction)
+void sub_806CDD4(Entity *entity, u8 animId, u32 direction)
 {
     if (GetEntityType(entity) == ENTITY_MONSTER) {
-        entity->axObj.unk42_animId1 = a1;
+        entity->axObj.unk42_animId1 = animId;
 
         if (direction < NUM_DIRECTIONS)
             entity->axObj.unk44_direction1 = direction;

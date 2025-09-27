@@ -1191,9 +1191,9 @@ u8 sub_800EC74(void)
     return sub_800F19C(1);
 }
 
-bool8 sub_800EC84(s32 moveId)
+bool8 EffectiveMoveHasSineWobble(s32 moveId)
 {
-    return sub_800ECB8(moveId)->unk8;
+    return sub_800ECB8(moveId)->useSineWobble;
 }
 
 u8 sub_800EC94(s32 param_1)
