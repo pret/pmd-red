@@ -223,7 +223,7 @@ If this works, then proceed to [Installation](#installation). Otherwise, ask for
 
 <details>
 <summary>Note for macOS and getting <code>Could not find a binutils installation!</code> ...</summary>
-You can fix this by installing it via homebrew: `brew install arm-none-eabi-binutils`.
+You can fix this by installing it via homebrew: <code>brew install arm-none-eabi-binutils</code>.
 </details>
 
 
