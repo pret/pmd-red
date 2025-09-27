@@ -443,7 +443,7 @@ static const struct FixedRoomEntitiesInfo sFixedRoomEntities[204] = {
         .roomId = 0,
     },
     [62] = {
-        .itemId = ITEM_VACUUM_CUT,
+        .itemId = ITEM_TM_VACUUM_CUT,
         .itemQuantity = 0,
         .trapId = NUM_TRAPS,
         .roomId = 0,

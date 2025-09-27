@@ -221,6 +221,12 @@ If this works, then proceed to [Installation](#installation). Otherwise, ask for
     ./install.sh ../pmd-red
     ```
 
+<details>
+<summary>Note for macOS and getting <code>Could not find a binutils installation!</code> ...</summary>
+You can fix this by installing it via homebrew: <code>brew install arm-none-eabi-binutils</code>.
+</details>
+
+
 - **Otherwise**, if agbcc has been built before (e.g. if the git clone above fails), but was **last built on a different terminal** than the one currently used (only relevant to Windows, e.g. switching from msys2 to WSL1), then run the following commands to build and install it into pmd-red:
 
     ```bash
@@ -264,6 +270,11 @@ If an OK is returned, then the installation went smoothly.
 <summary>Note for Windows...</summary>
 > If you switched terminals since the last build (e.g. from msys2 to WSL1), you must run `make clean-tools` once before any subsequent `make` commands.
 </details>
+<details>
+<summary>If you are on macOS and get <code>/bin/bash: arm-none-eabi-cpp: command not found</code>...</summary>
+You can fix this by installing it via homebrew: `brew install arm-none-eabi-gcc`.
+</details>
+
 
 To build **pmd-red.gba** with your changes:
 ```bash

@@ -48,7 +48,7 @@ extern bool8 sub_803F428(DungeonPos *pos);
 extern void sub_800EEE0(u16 a0);
 extern s32 sub_800EBC8(struct UnkStruct_8040094 *a0);
 extern bool8 sub_800E7D0(struct UnkStruct_8040094 *a0);
-extern bool8 sub_800EC84(s32 moveId);
+extern bool8 EffectiveMoveHasSineWobble(s32 moveId);
 extern bool8 MoveMatchesBideClassStatus(Entity *pokemon, Move *move);
 extern bool8 IsSleeping(Entity *pokemon);
 extern void sub_80421C0(Entity *pokemon, u16);
@@ -58,7 +58,7 @@ extern const s32 gUnknown_8106A8C[];
 u16 GetEffectiveMoveId(u16 moveId, u8 weather, bool32 hasSpecialEffect);
 static bool32 MoveHasSpecialEffect(Entity *entity, Move *move);
 static bool8 sub_80414C0(Entity *entity, Move *move);
-static bool8 sub_804141C(u16 moveId, u8 weather, bool32 hasSpecialEffect);
+static bool8 MoveHasSineWobble(u16 moveId, u8 weather, bool32 hasSpecialEffect);
 static void sub_8040C4C(Entity *entity, Move *move, bool32 a2);
 static void sub_8041038(struct UnkStruct_8040094 *a0, Entity *entity, Move *move, bool32 a2);
 static void sub_8041108(struct UnkStruct_8040094 *a0, Entity *entity, Move *move, bool32 a2);
@@ -67,20 +67,20 @@ static void sub_8041500(struct UnkStruct_8040094 *a0);
 bool8 sub_8040BB0(Entity *entity, Move *move, bool8 a2)
 {
     bool32 hasSpecialEffect = MoveHasSpecialEffect(entity, move);
-    bool8 r9 = sub_804141C(move->id, GetApparentWeather(entity), hasSpecialEffect);
+    bool8 hasSineWobble = MoveHasSineWobble(move->id, GetApparentWeather(entity), hasSpecialEffect);
     s32 r4 = sub_800ECB8(GetEffectiveMoveId(move->id, GetApparentWeather(entity), hasSpecialEffect))->unk0;
 
     if (!sub_8042768(entity))
-        return r9;
+        return hasSineWobble;
     if (sub_80414C0(entity, move))
-        return r9;
+        return hasSineWobble;
     if (!a2)
-        return r9;
+        return hasSineWobble;
 
     if (r4 != 0) {
         sub_8040C4C(entity, move, hasSpecialEffect);
     }
-    return r9;
+    return hasSineWobble;
 }
 
 static void sub_8040C4C(Entity *entity, Move *move, bool32 hasSpecialEffect)
@@ -427,9 +427,9 @@ UNUSED static s32 sub_8041400(u16 moveId, u8 weather, bool32 hasSpecialEffect)
     return sub_800ED20(GetEffectiveMoveId(moveId, weather, hasSpecialEffect));
 }
 
-static bool8 sub_804141C(u16 moveId, u8 weather, bool32 hasSpecialEffect)
+static bool8 MoveHasSineWobble(u16 moveId, u8 weather, bool32 hasSpecialEffect)
 {
-    return sub_800EC84(GetEffectiveMoveId(moveId, weather, hasSpecialEffect));
+    return EffectiveMoveHasSineWobble(GetEffectiveMoveId(moveId, weather, hasSpecialEffect));
 }
 
 static bool32 MoveHasSpecialEffect(Entity *entity, Move *move)
