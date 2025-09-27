@@ -222,7 +222,7 @@ If this works, then proceed to [Installation](#installation). Otherwise, ask for
     ```
 
 <details>
-<summary>Note for macOS and getting `Could not find a binutils installation!` ...</summary>
+<summary>Note for macOS and getting <code>Could not find a binutils installation!</code> ...</summary>
 You can fix this by installing it via homebrew: `brew install arm-none-eabi-binutils`.
 </details>
 
@@ -271,7 +271,7 @@ If an OK is returned, then the installation went smoothly.
 > If you switched terminals since the last build (e.g. from msys2 to WSL1), you must run `make clean-tools` once before any subsequent `make` commands.
 </details>
 <details>
-<summary>If you are on macOS and get `/bin/bash: arm-none-eabi-cpp: command not found`...</summary>
+<summary>If you are on macOS and get <code>/bin/bash: arm-none-eabi-cpp: command not found</code>...</summary>
 You can fix this by installing it via homebrew: `brew install arm-none-eabi-gcc`.
 </details>
 
