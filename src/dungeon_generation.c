@@ -6097,7 +6097,7 @@ static void sub_8051654(FloorProperties *floorProps)
             if ((tile->terrainFlags & TERRAIN_TYPE_NATURAL_JUNCTION))
                 continue;
 
-            if (sKecleonShopItemSpawnChances[floorProps->unk18][yIndex][xIndex] > DungeonRandInt(100)) {
+            if (sKecleonShopItemSpawnChances[floorProps->kecleonShopLayout][yIndex][xIndex] > DungeonRandInt(100)) {
                 tile->spawnOrVisibilityFlags.spawn |= SPAWN_FLAG_ITEM;
             }
         }

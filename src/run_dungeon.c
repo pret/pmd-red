@@ -309,9 +309,9 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
             gDungeon->unk644.unk40 = 99;
             gDungeon->unk644.unk42 = 99;
             gDungeon->weather.weather = 0;
-            gDungeon->tileset = gDungeon->floorProperties.unk2;
-            gDungeon->unk3A10 = gDungeon->floorProperties.unk3;
-            gDungeon->fixedRoomNumber = gDungeon->floorProperties.unk12;
+            gDungeon->tileset = gDungeon->floorProperties.tileset;
+            gDungeon->unk3A10 = gDungeon->floorProperties.bgMusic;
+            gDungeon->fixedRoomNumber = gDungeon->floorProperties.fixedRoomNumber;
             sub_807E5E4(0);
             sub_80842F0();
         }

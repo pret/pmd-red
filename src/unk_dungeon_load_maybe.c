@@ -42,7 +42,7 @@ void sub_80ADD9C(OpenedFile **a0, OpenedFile **a1, u32 *a2, void *a3, u16 *a4, c
     }
 
     strPtr = &((struct DungeonMapParam2 *)(mapParamFile->data))->unk0[dungId][dungFloor];
-    r8 = ((struct DungeonMapParam2 *)(mapParamFile->data))->floorProperties[strPtr->unk0].unk2;
+    r8 = ((struct DungeonMapParam2 *)(mapParamFile->data))->floorProperties[strPtr->unk0].tileset;
 
     CloseFile(mapParamFile);
 

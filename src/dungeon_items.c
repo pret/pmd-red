@@ -83,7 +83,7 @@ void CreateItemWithStickyChance(Item *item, u8 itemID, u32 forceSticky)
     }
 
     if (GetItemCategory(itemID) == CATEGORY_POKE) {
-        sub_8046CE4(item, gDungeon->floorProperties.unk17 * 40);
+        sub_8046CE4(item, gDungeon->floorProperties.moneyUpperBound * 40);
     }
 }
 

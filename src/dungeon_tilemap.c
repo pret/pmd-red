@@ -88,7 +88,7 @@ void sub_803F27C(bool8 a0)
 
     gUnknown_202EDFC = 0xFFFF;
     if (!a0) {
-        strPtr->visibilityRange = gDungeon->floorProperties.unk16 & 3;
+        strPtr->visibilityRange = gDungeon->floorProperties.visibilityRange & 3;
         if (strPtr->visibilityRange == 0) {
             strPtr->unk1820C = 1;
         }
