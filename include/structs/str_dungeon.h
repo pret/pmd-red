@@ -25,7 +25,7 @@
 typedef struct Weather // 0xE264
 {
     /* 0x0 */ u8 weather; // Uses the weather constants in weather.h.
-    /* 0x1 */ u8 unkE265; // Uses the weather constants in weather.h
+    /* 0x1 */ u8 unkE265; // Uses the weather constants in weather.h.
     /* 0x2 */ u8 weatherDamageCounter; // Timer for applying sandstorm/hail damage periodically.
     /* 0x3 */ u8 unkE267[8];
     /* 0xB */ u8 naturalWeather[8]; // The weather at the start of the floor. If the weather changes, then expires, revert back to the starting weather.
@@ -123,7 +123,7 @@ typedef struct FloorProperties
     s8 roomDensity;
     u8 tileset;
     u8 bgMusic;
-    u8 weather; // See include/constants/weather.h
+    u8 weather; // Uses the weather constants in weather.h.
     u8 floorConnectivity;
     u8 enemyDensity;
     u8 kecleonShopChance; // Percentage chance 0-100%
