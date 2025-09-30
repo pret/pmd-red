@@ -120,12 +120,12 @@ typedef struct UnkDungeonGlobal_unk181E8_sub
 typedef struct FloorProperties
 {
     u8 layout;
-    s8 roomDensity;
+    s8 roomDensity; // If positive, allow variance. If negative, use exact value of abs(roomDensity).
     u8 tileset;
     u8 bgMusic;
     u8 weather; // Uses the weather constants in weather.h.
     u8 floorConnectivity;
-    u8 enemyDensity;
+    u8 enemyDensity; // Game treats this as signed. See SpawnEnemies in src/dungeon_generation.asm for details.
     u8 kecleonShopChance; // Percentage chance 0-100%
     u8 monsterHouseChance; // Percentage chance 0-100%
     u8 mazeRoomChance; // Percentage chance 0-100%
