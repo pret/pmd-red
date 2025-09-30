@@ -4600,7 +4600,7 @@ static const s32 sNumToGenTable[8] = {1, 1, 1, 2, 2, 2, 3, 3};
  * when a lake is generated.
  *
  * Lakes are a large collection of secondary terrain generated around a central point.
- * Standalone lakes are generated based on secondary_terrain_density
+ * Standalone lakes are generated based on floorProps->standaloneLakeDensity
  *
  * The formations will never cut into room tiles, but can pass through to the other side.
  */
@@ -4779,8 +4779,8 @@ static void GenerateSecondaryTerrainFormations(u32 flag, FloorProperties *floorP
 		}
     }
 
-	// Generate standalone lakes secondary_terrain_density # of times
-	for (densityN = 0; densityN < floorProps->unk15; densityN++) {
+	// Generate standalone lakes floorProps->standaloneLakeDensity # of times
+	for (densityN = 0; densityN < floorProps->standaloneLakeDensity; densityN++) {
         s32 x, y;
         bool8 table[10][10];
 		// Try to pick a random tile in the interior to seed the "lake"

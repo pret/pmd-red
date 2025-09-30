@@ -140,7 +140,7 @@ typedef struct FloorProperties
     u8 fixedRoomNumber;
     u8 numExtraHallways;
     u8 buriedItemDensity; // Density of buried items (in walls)
-    u8 unk15; // Unreferenced
+    u8 standaloneLakeDensity; // Density of a mass of secondary tiles replacing a wall (i.e. a lake)
     u8 visibilityRange;
     u8 moneyUpperBound; // Generated money stacks cannot exceed this amount (multiplied by 40)
     u8 kecleonShopLayout;
