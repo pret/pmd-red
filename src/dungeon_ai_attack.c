@@ -964,7 +964,7 @@ void HandleUseOrbAction(Entity *pokemon)
 
     act = entityInfo->action;
 
-    if (IsBossFight()) {
+    if (IsFloorwideFixedRoom()) {
         LogMessageByIdWithPopupCheckUser(pokemon, gPtrMysteriousPowerPreventedUseMessage);
         r4 = TRUE;
     }

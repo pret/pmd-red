@@ -3,6 +3,7 @@
 #include "run_dungeon.h"
 #include "constants/dungeon.h"
 #include "constants/dungeon_exit.h"
+#include "constants/fixed_rooms.h"
 #include "constants/monster.h"
 #include "constants/trap.h"
 #include "structs/rgb.h"
@@ -699,7 +700,7 @@ u8 GetFloorType(void)
 {
     if (gDungeon->unk644.unk34 == 1 && gDungeon->unk644.dungeonSeed.location.floor == gDungeon->unk644.dungeonLocation.floor)
         return FLOOR_TYPE_RESCUE;
-    else if (IsBossFight())
+    else if (IsFloorwideFixedRoom())
         return FLOOR_TYPE_FIXED;
     else
         return FLOOR_TYPE_NORMAL;
@@ -905,9 +906,9 @@ void EnforceMaxItemsAndMoney(void)
     }
 }
 
-bool8 IsBossFight(void)
+bool8 IsFloorwideFixedRoom(void)
 {
-    if (gDungeon->fixedRoomNumber != 0 && gDungeon->fixedRoomNumber <= 0x31)
+    if (gDungeon->fixedRoomNumber != 0 && gDungeon->fixedRoomNumber <= LAST_FLOORWIDE_FIXED_ROOM)
     {
         return TRUE;
     }

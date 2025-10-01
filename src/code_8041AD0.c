@@ -1370,7 +1370,7 @@ void sub_8042818(u8 a0, bool8 a1)
     if (gUnknown_80F67EC[a0] < 0)
         return;
 
-    if (a1 && !IsBossFight())
+    if (a1 && !IsFloorwideFixedRoom())
         sub_804151C(en, gUnknown_80F67EC[a0], 0);
     else
         sub_804151C(en, gUnknown_80F680C[a0], 0);

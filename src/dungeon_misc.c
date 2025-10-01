@@ -19,12 +19,13 @@
 #include "dungeon_message.h"
 #include "dungeon_message_log.h"
 #include "dungeon_logic.h"
-#include "constants/dungeon.h"
-#include "constants/friend_area.h"
-#include "constants/status.h"
 #include "constants/ability.h"
+#include "constants/dungeon.h"
 #include "constants/dungeon_exit.h"
+#include "constants/fixed_rooms.h"
+#include "constants/friend_area.h"
 #include "constants/iq_skill.h"
+#include "constants/status.h"
 #include "constants/type.h"
 #include "constants/weather.h"
 #include "code_806CD90.h"
@@ -115,7 +116,7 @@ void LoadDungeonPokemonSprites(void)
             if(PokemonFlag2Struct2(ptr))
                 LoadPokemonSprite(ptr->speciesNum, FALSE);
     }
-    if(gDungeon->fixedRoomNumber == 0x31)
+    if(gDungeon->fixedRoomNumber == FIXED_ROOM_RESCUE_TEAM_MAZE_BOSS)
     {
         for(index = 0; index < MAX_TEAM_MEMBERS; index++)
         {
@@ -600,7 +601,7 @@ void HandleFaint(Entity *entity, s32 dungeonExitReason_, Entity *param_3)
 
     if (GetLeader() != NULL && dungeonExitReason != DUNGEON_EXIT_DELETED_FOR_EVENT && !entInfo->isTeamLeader && !gDungeon->unk10) {
         sub_8084E00(entity,entInfo->monsterBehavior, dungeonExitReason == DUNGEON_EXIT_TRANSFORMED_INTO_FRIEND);
-        if (IS_DEOXYS_FORM_MONSTER(entInfo->apparentID) && !IsBossFight() && entInfo->isNotTeamMember) {
+        if (IS_DEOXYS_FORM_MONSTER(entInfo->apparentID) && !IsFloorwideFixedRoom() && entInfo->isNotTeamMember) {
             gDungeon->deoxysDefeat = 1;
             DisplayDungeonLoggableMessageTrue(entity,gUnknown_80FA580);
             sub_803E178();

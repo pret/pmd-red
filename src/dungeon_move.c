@@ -142,7 +142,7 @@ void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move *move, 
                 {
                     s32 direction1 = targetInfo->action.direction;
                     s32 direction2 = targetInfo->action.direction;
-                    if (IsBossFight()) {
+                    if (IsFloorwideFixedRoom()) {
                         TryDisplayDungeonLoggableMessage3(attacker, currTarget, gUnknown_80FDD88); // A mysterious force prevents moves from being passed off!
                     }
                     else {

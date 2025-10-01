@@ -33,7 +33,7 @@ bool8 FillInOrbAction(Entity *pokemon,Entity *target, Move *move, s32 itemId)
 
     filledInTile = FALSE;
     targetInfo = GetEntInfo(target);
-    if (IsBossFight()) {
+    if (IsFloorwideFixedRoom()) {
         LogMessageByIdWithPopupCheckUser(pokemon,gUnknown_80FD0B8);
         return FALSE;
     }
