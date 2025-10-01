@@ -25,7 +25,7 @@
 typedef struct Weather // 0xE264
 {
     /* 0x0 */ u8 weather; // Uses the weather constants in weather.h.
-    /* 0x1 */ u8 unkE265; // Uses the weather constants in weather.h
+    /* 0x1 */ u8 unkE265; // Uses the weather constants in weather.h.
     /* 0x2 */ u8 weatherDamageCounter; // Timer for applying sandstorm/hail damage periodically.
     /* 0x3 */ u8 unkE267[8];
     /* 0xB */ u8 naturalWeather[8]; // The weather at the start of the floor. If the weather changes, then expires, revert back to the starting weather.
@@ -120,12 +120,12 @@ typedef struct UnkDungeonGlobal_unk181E8_sub
 typedef struct FloorProperties
 {
     u8 layout;
-    s8 roomDensity;
-    u8 unk2;
-    u8 unk3;
-    u8 unk4;
+    s8 roomDensity; // If positive, allow variance. If negative, use exact value of abs(roomDensity).
+    u8 tileset;
+    u8 bgMusic;
+    u8 weather; // Uses the weather constants in weather.h.
     u8 floorConnectivity;
-    u8 enemyDensity;
+    u8 enemyDensity; // Game treats this as signed. See SpawnEnemies in src/dungeon_generation.asm for details.
     u8 kecleonShopChance; // Percentage chance 0-100%
     u8 monsterHouseChance; // Percentage chance 0-100%
     u8 mazeRoomChance; // Percentage chance 0-100%
@@ -133,19 +133,20 @@ typedef struct FloorProperties
     bool8 allowDeadEnds;
     u8 secondaryStructuresBudget; // Maximum number of secondary structures that can be generated
     u8 roomFlags; // See ROOM_FLAG_
-    u8 unkE;
+    bool8 unkE; // Unreferenced flag
     u8 itemDensity;
     u8 trapDensity;
-    u8 unk11;
-    u8 unk12;
+    u8 floorNumber; // Unreferenced
+    u8 fixedRoomNumber;
     u8 numExtraHallways;
     u8 buriedItemDensity; // Density of buried items (in walls)
-    u8 unk15;
-    u8 unk16;
-    u8 unk17;
-    u8 unk18;
-    u8 itemlessMonsterHouseChance; // Chance that a monster house will be itemless
-    u8 unk1A;
+    u8 standaloneLakeDensity; // Density of a mass of secondary tiles replacing a wall (i.e. a lake)
+    u8 visibilityRange;
+    u8 moneyUpperBound; // Generated money stacks cannot exceed this amount (multiplied by 40)
+    u8 kecleonShopLayout;
+    u8 itemlessMonsterHouseChance; // Chance that a monster house will be itemless (always 0)
+    u8 unk1A; // Unreferenced (always 0)
+    u8 unk1B; // Unreferenced (always 0)
 } FloorProperties;
 
 enum {

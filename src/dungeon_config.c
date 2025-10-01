@@ -597,7 +597,7 @@ const s16 gMoltresConfigLevel = 20;
 const s16 gArticunoConfigLevel = 20;
 const s16 gGroudonConfigLevel = 10;
 
-// Dimensions are [floorProperty unk18][y][x] See sub_8051654
+// Dimensions are [floorProperty kecleonShopLayout][y][x] See sub_8051654
 const s16 sKecleonShopItemSpawnChances[16][3][3] = {
     [0] = {
         {57, 57, 57},

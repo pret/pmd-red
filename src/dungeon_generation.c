@@ -4423,6 +4423,9 @@ static void SpawnEnemies(FloorProperties *floorProps, bool8 isEmptyMonsterHouse)
     s32 numEnemies, numMonsterHouseEnemies;
     s32 enemyDensity = floorProps->enemyDensity;
 
+    // BUG: Game assumes floorProps->enemyDensity is a signed byte, but in reality it's unsigned.
+    // Attempting to use a negative density will instead produce a very large positive density up to 255. 
+    // This only matters for unused dungeons, as Deoxys has its own logic despite Meteor Cave having an effective enemy density of 255.
 	if (enemyDensity > 0) {
 		// Positive means value with variance
 		numEnemies = DungeonRandRange(enemyDensity / 2, enemyDensity);
@@ -4600,7 +4603,7 @@ static const s32 sNumToGenTable[8] = {1, 1, 1, 2, 2, 2, 3, 3};
  * when a lake is generated.
  *
  * Lakes are a large collection of secondary terrain generated around a central point.
- * Standalone lakes are generated based on secondary_terrain_density
+ * Standalone lakes are generated based on floorProps->standaloneLakeDensity
  *
  * The formations will never cut into room tiles, but can pass through to the other side.
  */
@@ -4779,8 +4782,8 @@ static void GenerateSecondaryTerrainFormations(u32 flag, FloorProperties *floorP
 		}
     }
 
-	// Generate standalone lakes secondary_terrain_density # of times
-	for (densityN = 0; densityN < floorProps->unk15; densityN++) {
+	// Generate standalone lakes floorProps->standaloneLakeDensity # of times
+	for (densityN = 0; densityN < floorProps->standaloneLakeDensity; densityN++) {
         s32 x, y;
         bool8 table[10][10];
 		// Try to pick a random tile in the interior to seed the "lake"
@@ -6097,7 +6100,7 @@ static void sub_8051654(FloorProperties *floorProps)
             if ((tile->terrainFlags & TERRAIN_TYPE_NATURAL_JUNCTION))
                 continue;
 
-            if (sKecleonShopItemSpawnChances[floorProps->unk18][yIndex][xIndex] > DungeonRandInt(100)) {
+            if (sKecleonShopItemSpawnChances[floorProps->kecleonShopLayout][yIndex][xIndex] > DungeonRandInt(100)) {
                 tile->spawnOrVisibilityFlags.spawn |= SPAWN_FLAG_ITEM;
             }
         }
