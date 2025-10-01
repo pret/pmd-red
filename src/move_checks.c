@@ -386,7 +386,7 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
         case MOVE_VITAL_THROW:
         case MOVE_WARP:
         case MOVE_WHIRLWIND:
-            if (IsBossFight())
+            if (IsFloorwideFixedRoom())
             {
                 return FALSE;
             }

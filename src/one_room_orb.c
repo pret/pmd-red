@@ -47,7 +47,7 @@ void HandleOneRoomOrb(Entity *pokemon, Entity *target)
 		return;
 	}
 
-	if (IsBossFight()) {
+	if (IsFloorwideFixedRoom()) {
 		LogMessageByIdWithPopupCheckUser(pokemon,gUnknown_80FD3D0);
 		return;
 	}

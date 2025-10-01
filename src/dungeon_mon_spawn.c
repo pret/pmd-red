@@ -629,7 +629,7 @@ bool8 SpawnTeamMember(s16 _species, s32 x, s32 y, DungeonMon *monPtr, Entity **a
 
     // Pickup Check
     if (gDungeon->unk644.dungeonLocation.id != DUNGEON_TINY_WOODS
-        && !IsBossFight()
+        && !IsFloorwideFixedRoom()
         && (entityInfo->abilities[0] == ABILITY_PICKUP || entityInfo->abilities[1] == ABILITY_PICKUP)
         && !ItemExists(&entityInfo->heldItem))
     {

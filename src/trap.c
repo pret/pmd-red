@@ -575,7 +575,7 @@ void HandlePitfallTrap(Entity *pokemon, Entity *target, Tile *tile)
 
     flag = FALSE;
     if (target != NULL) {
-        if (IsBossFight()) {
+        if (IsFloorwideFixedRoom()) {
             LogMessageByIdWithPopupCheckUser(pokemon,gUnknown_80FED0C); // But nothing happened...
         }
         else
@@ -628,7 +628,7 @@ void HandleSummonTrap(Entity *pokemon,DungeonPos *pos)
 
   r4 = DungeonRandInt(3) + 2;
   direction = DungeonRandInt(NUM_DIRECTIONS);
-  if (IsBossFight()) {
+  if (IsFloorwideFixedRoom()) {
       goto _ret;
   }
   else
@@ -763,7 +763,7 @@ void HandlePokemonTrap(Entity *param_1,DungeonPos *pos)
     s32 counter = 0;
     s32 range = gDungeon->unk181e8.visibilityRange;
 
-    if (IsBossFight()) {
+    if (IsFloorwideFixedRoom()) {
         LogMessageByIdWithPopupCheckUser(param_1,gUnknown_80FED08);
         return;
     }

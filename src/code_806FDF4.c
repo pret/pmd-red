@@ -1,6 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "constants/dungeon_exit.h"
+#include "constants/fixed_rooms.h"
 #include "constants/type.h"
 #include "structs/str_pokemon.h"
 #include "dungeon_main.h"
@@ -44,12 +45,18 @@ bool8 TryRecruitMonster(Entity *attacker, Entity *target)
     s32 foundIndex = -1;
     s32 size = GetBodySize(targetInfo->apparentID);
 
-    if (gDungeon->fixedRoomNumber != 5 && gDungeon->fixedRoomNumber != 4 && gDungeon->fixedRoomNumber != 9 && gDungeon->fixedRoomNumber != 0xf) {
-        if ((gDungeon->fixedRoomNumber >= 0x2c && gDungeon->fixedRoomNumber <= 0x30)) {
+    if (gDungeon->fixedRoomNumber != FIXED_ROOM_FROSTY_GROTTO_ARTICUNO
+        && gDungeon->fixedRoomNumber != FIXED_ROOM_MT_BLAZE_PEAK_MOLTRES
+        && gDungeon->fixedRoomNumber != FIXED_ROOM_WESTERN_CAVE_MEWTWO
+        && gDungeon->fixedRoomNumber != FIXED_ROOM_MT_FARAWAY_HO_OH
+    ) {
+        if (gDungeon->fixedRoomNumber >= FIXED_ROOM_TEAM_SHIFTY_BOSS
+            && gDungeon->fixedRoomNumber <= FIXED_ROOM_RESCUE_TEAM_2_BOSS
+        ) {
             if (gDungeon->unk644.unk18 == 0)
                 return FALSE;
         }
-        else if (gDungeon->fixedRoomNumber == 0x31) {
+        else if (gDungeon->fixedRoomNumber == FIXED_ROOM_RESCUE_TEAM_MAZE_BOSS) {
             if (gDungeon->unk644.unk15 == 0)
                 return FALSE;
             if (!sub_8097900(MONSTER_DEOXYS_NORMAL))
