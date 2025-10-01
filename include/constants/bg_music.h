@@ -118,8 +118,8 @@ enum DungeonMusicID
     DUNGEON_MUS_MAKUHITA_DOJO,
     DUNGEON_MUS_SNOW_PATH, // same as Makuhita Dojo
     DUNGEON_MUS_INDEX_53 = 53, // same as Tiny Woods
-    DUNGEON_MUS_SILVER_TRENCH_LUGIA = 73, // same as Tiny Woods
-    DUNGEON_MUS_STORMY_SEA_KYOGRE // same as Tiny Woods
+    DUNGEON_MUS_SILVER_TRENCH_B99F = 73, // same as Tiny Woods
+    DUNGEON_MUS_STORMY_SEA_B40F // same as Tiny Woods
 };
 
 #endif //GUARD_CONSTANTS_BG_MUSIC_H
