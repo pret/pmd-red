@@ -10,6 +10,7 @@
 #include "items.h"
 #include "pokemon.h"
 #include "constants/direction.h"
+#include "constants/fixed_rooms.h"
 #include "constants/item.h"
 #include "constants/monster.h"
 #include "structs/str_dungeon.h"
@@ -1038,7 +1039,7 @@ static bool8 ProcessFixedRoom(s32 fixedRoomNumber, FloorProperties *floorProps)
         GenerateOneRoomMonsterHouseFloor();
         return FALSE;
     }
-    else if (fixedRoomNumber < 50) {
+    else if (fixedRoomNumber < FIRST_NON_FLOORWIDE_FIXED_ROOM) {
         sub_8051288(fixedRoomNumber);
         return TRUE;
     }
@@ -5925,7 +5926,7 @@ static void sub_8051288(s32 fixedRoomNumber)
         }
     }
 
-    if (fixedRoomNumber == 4) {
+    if (fixedRoomNumber == FIXED_ROOM_MT_BLAZE_PEAK_MOLTRES) {
         for (y = 5; y < 17; y++) {
             for (x = 2; x < 5; x++) {
                 Tile *tile = GetTileMut(x, y);

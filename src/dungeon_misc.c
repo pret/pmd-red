@@ -19,12 +19,13 @@
 #include "dungeon_message.h"
 #include "dungeon_message_log.h"
 #include "dungeon_logic.h"
-#include "constants/dungeon.h"
-#include "constants/friend_area.h"
-#include "constants/status.h"
 #include "constants/ability.h"
+#include "constants/dungeon.h"
 #include "constants/dungeon_exit.h"
+#include "constants/fixed_rooms.h"
+#include "constants/friend_area.h"
 #include "constants/iq_skill.h"
+#include "constants/status.h"
 #include "constants/type.h"
 #include "constants/weather.h"
 #include "code_806CD90.h"
@@ -115,7 +116,7 @@ void LoadDungeonPokemonSprites(void)
             if(PokemonFlag2Struct2(ptr))
                 LoadPokemonSprite(ptr->speciesNum, FALSE);
     }
-    if(gDungeon->fixedRoomNumber == 0x31)
+    if(gDungeon->fixedRoomNumber == FIXED_ROOM_RESCUE_TEAM_MAZE_BOSS)
     {
         for(index = 0; index < MAX_TEAM_MEMBERS; index++)
         {

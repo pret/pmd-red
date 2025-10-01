@@ -3,6 +3,7 @@
 #include "run_dungeon.h"
 #include "constants/dungeon.h"
 #include "constants/dungeon_exit.h"
+#include "constants/fixed_rooms.h"
 #include "constants/monster.h"
 #include "constants/trap.h"
 #include "structs/rgb.h"
@@ -907,7 +908,7 @@ void EnforceMaxItemsAndMoney(void)
 
 bool8 IsBossFight(void)
 {
-    if (gDungeon->fixedRoomNumber != 0 && gDungeon->fixedRoomNumber <= 0x31)
+    if (gDungeon->fixedRoomNumber != 0 && gDungeon->fixedRoomNumber <= LAST_FLOORWIDE_FIXED_ROOM)
     {
         return TRUE;
     }

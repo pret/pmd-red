@@ -1,11 +1,12 @@
 #include "global.h"
 #include "globaldata.h"
 #include "dungeon_cutscene.h"
-#include "constants/weather.h"
 #include "constants/dungeon.h"
 #include "constants/direction.h"
 #include "constants/dungeon.h"
 #include "constants/dungeon_exit.h"
+#include "constants/fixed_rooms.h"
+#include "constants/weather.h"
 #include "structs/str_dungeon.h"
 #include "structs/sprite_oam.h"
 #include "dungeon_cutscenes.h"
@@ -133,8 +134,9 @@ void sub_80847D4(void)
     UpdateMinimap();
     for(index = 0; index < 0x3e7 && gUnknown_8107234[index].unk0 != 0;  index++) {
         fixedRoomNumber = gDungeon->fixedRoomNumber;
-        if (fixedRoomNumber - 0x1c < 0x16) {
-            fixedRoomNumber = 0x1b;
+        // Dojo maze bosses all use the same cutscene data
+        if (fixedRoomNumber - (FIRST_DOJO_MAZE_BOSS_ROOM+1) < NUM_MAZE_BOSS_ROOMS) {
+            fixedRoomNumber = FIRST_DOJO_MAZE_BOSS_ROOM;
         }
         if (fixedRoomNumber == gUnknown_8107234[index].unk0)
         {
