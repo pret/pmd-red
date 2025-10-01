@@ -52,7 +52,7 @@ void sub_807E5AC(void)
 {
     u8 weather;
     weather = gDungeon->floorProperties.unk4;
-    if(weather == WEATHER_COUNT)
+    if(weather == WEATHER_RANDOM)
         weather = DungeonRandInt(WEATHER_COUNT);
     sub_807E5E4(weather);
     TryActivateArtificialWeatherAbilities();
