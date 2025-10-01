@@ -101,9 +101,9 @@ enum DungeonMusicID
     DUNGEON_MUS_MT_FREEZE,
     DUNGEON_MUS_MAGMA_CAVERN,
     DUNGEON_MUS_SKY_TOWER,
-    DUNGEON_MUS_UNUSED_14, // same as Tiny Woods
-    DUNGEON_MUS_UNUSED_15, // same as Tiny Woods
-    DUNGEON_MUS_UNUSED_17 = 17, // same as Tiny Woods
+    DUNGEON_MUS_INDEX_14, // same as Tiny Woods
+    DUNGEON_MUS_INDEX_15, // same as Tiny Woods
+    DUNGEON_MUS_INDEX_17 = 17, // same as Tiny Woods
     DUNGEON_MUS_A_NEW_ADVENTURE,
     DUNGEON_MUS_STORMY_SEA,
     DUNGEON_MUS_MT_THUNDER_PEAK = 21,
@@ -112,12 +112,12 @@ enum DungeonMusicID
     DUNGEON_MUS_MT_FREEZE_PEAK,
     DUNGEON_MUS_MAGMA_CAVERN_PIT,
     DUNGEON_MUS_SKY_TOWER_SUMMIT,
-    DUNGEON_MUS_UNUSED_32 = 32, // same as Tiny Woods
-    DUNGEON_MUS_UNUSED_37 = 37, // same as Tiny Woods
-    DUNGEON_MUS_UNUSED_40 = 40, // same as Rayquaza's Domain
+    DUNGEON_MUS_INDEX_32 = 32, // same as Tiny Woods
+    DUNGEON_MUS_INDEX_37 = 37, // same as Tiny Woods
+    DUNGEON_MUS_INDEX_40 = 40, // same as Rayquaza's Domain
     DUNGEON_MUS_MAKUHITA_DOJO,
     DUNGEON_MUS_SNOW_PATH, // same as Makuhita Dojo
-    DUNGEON_MUS_UNUSED_53 = 53, // same as Tiny Woods
+    DUNGEON_MUS_INDEX_53 = 53, // same as Tiny Woods
     DUNGEON_MUS_SILVER_TRENCH_LUGIA = 73, // same as Tiny Woods
     DUNGEON_MUS_STORMY_SEA_KYOGRE // same as Tiny Woods
 };
