@@ -32,7 +32,7 @@
 #include "text_3.h"
 #include "run_dungeon.h"
 
-extern bool8 IsBossFight(void);
+extern bool8 IsFloorwideFixedRoom(void);
 extern u16 GetLeaderActionId(void);
 
 
@@ -96,7 +96,7 @@ void ShowDungeonOthersMenu(void)
             }
 
             if ((gRealInputs.pressed & A_BUTTON) || gDungeonMenu.touchScreen.a_button) {
-                if (gDungeonMenu.menuIndex != OTHERS_RECRUITMENT_SEARCH || (gDungeon->unk644.canRecruit && !IsBossFight())) {
+                if (gDungeonMenu.menuIndex != OTHERS_RECRUITMENT_SEARCH || (gDungeon->unk644.canRecruit && !IsFloorwideFixedRoom())) {
                     PlayDungeonConfirmationSE();
                 }
                 else {
@@ -131,7 +131,7 @@ void ShowDungeonOthersMenu(void)
         if (sOthersCursorId == OTHERS_MISSION_OBJECTIVES) {
             ShowMissionObjectivesMenu();
         }
-        if (gDungeon->unk644.canRecruit && !IsBossFight() && sOthersCursorId == OTHERS_RECRUITMENT_SEARCH) {
+        if (gDungeon->unk644.canRecruit && !IsFloorwideFixedRoom() && sOthersCursorId == OTHERS_RECRUITMENT_SEARCH) {
             ShowRecruitmentSearchMenu();
         }
         if (sOthersCursorId == hintsMenuId) {
@@ -499,7 +499,7 @@ static void PrintOthersMenuOptions(void)
     PrintFormattedStringOnWindow(8, GetMenuEntryYCoord(&gDungeonMenu, currOptionId++), gUnknown_80FE9F8, 0, '\0');
     PrintFormattedStringOnWindow(8, GetMenuEntryYCoord(&gDungeonMenu, currOptionId++), gUnknown_80FEA10, 0, '\0');
     if (gDungeon->unk644.canRecruit) {
-        if (!IsBossFight()) {
+        if (!IsFloorwideFixedRoom()) {
             PrintFormattedStringOnWindow(8, GetMenuEntryYCoord(&gDungeonMenu, currOptionId++), gUnknown_80FEA28, 0, '\0');
         }
         else {

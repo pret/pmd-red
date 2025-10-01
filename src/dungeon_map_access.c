@@ -319,7 +319,7 @@ void sub_80498A8(s32 x,s32 y)
     if (r4 == 3) {
       r4 = 0;
     }
-    if (IsBossFight()) {
+    if (IsFloorwideFixedRoom()) {
       r4 = 0;
     }
     GetTileMut(x,y)->unk8 = gDungeon->unk12C24[r4 + r7 * 3];

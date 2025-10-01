@@ -905,7 +905,7 @@ bool8 GlareMoveAction(Entity * pokemon,Entity * target,Move *move,s32 itemId)
 
 bool8 TransformMoveAction(Entity * pokemon, Entity * target, Move *move, s32 itemId)
 {
-  if (IsBossFight()) {
+  if (IsFloorwideFixedRoom()) {
     TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FEFF4);
     return FALSE;
   }

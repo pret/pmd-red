@@ -662,7 +662,7 @@ bool8 TrapbustOrbAction(Entity * pokemon,Entity * target, Move *move, s32 itemId
     DungeonPos pos;
     bool8 foundTrap = FALSE;
     tile = GetTileAtEntitySafe(target);
-    if (IsBossFight()) {
+    if (IsFloorwideFixedRoom()) {
         LogMessageByIdWithPopupCheckUser(pokemon,gUnknown_80FD1EC);
         return FALSE;
     }
