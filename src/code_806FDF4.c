@@ -281,7 +281,7 @@ bool8 sub_806FA5C(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *pa
             }
             HandleFaint(entity2,DUNGEON_EXIT_TRANSFORMED_INTO_FRIEND,entity1);
             pokeStruct2 = &gRecruitedPokemonRef->dungeonTeam[pokeIndex];
-            pokeStruct2->flags = 3;
+            pokeStruct2->flags = POKEMON_FLAG_EXISTS | POKEMON_FLAG_ON_TEAM;
             pokeStruct2->isTeamLeader = FALSE;
             pokeStruct2->level = param_3->level;
             pokeStruct2->IQ = 1;
@@ -413,7 +413,7 @@ bool8 sub_806FDF4(Entity *entity1,Entity *entity2,Entity **entityPtr)
   else {
     friendArea = GetFriendArea(local_74.id);
     pokeStruct2 = &gRecruitedPokemonRef->dungeonTeam[index];
-    pokeStruct2->flags = 3;
+    pokeStruct2->flags = POKEMON_FLAG_EXISTS | POKEMON_FLAG_ON_TEAM;
     pokeStruct2->isTeamLeader = FALSE;
     pokeStruct2->level = local_74.level;
     pokeStruct2->IQ = 1;
