@@ -961,13 +961,13 @@ static void LoadAndRunQuickSaveDungeon_Async(DungeonSetupStruct *setupStr)
 }
 
 // arm9.bin::0200CFF4
-void sub_8001024(PersonalityRelated *dst)
+void ReadTeamBasicInfo(PersonalityRelated *dst)
 {
     *dst = sPersonalityRelated_203B040;
 }
 
 // arm9.bin::0200CFA4
-void sub_8001044(PersonalityRelated *src)
+void WriteTeamBasicInfo(PersonalityRelated *src)
 {
     sPersonalityRelated_203B040 = *src;
 }
