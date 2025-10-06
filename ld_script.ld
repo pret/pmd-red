@@ -254,7 +254,7 @@ SECTIONS {
         src/move_orb_effects_3.o(.text);
         src/move_orb_effects_4.o(.text);
         src/move_orb_effects_5.o(.text);
-        src/code_8077274_1.o(.text);
+        src/dungeon_monster_house.o(.text);
         src/dungeon_ai_movement.o(.text);
         src/dungeon_ai_attack.o(.text);
         src/blow_away.o(.text);
@@ -639,7 +639,7 @@ SECTIONS {
         src/move_orb_effects_3.o(.rodata);
         src/move_orb_effects_4.o(.rodata);
         src/move_orb_effects_5.o(.rodata);
-        src/code_8077274_1.o(.rodata);
+        src/dungeon_monster_house.o(.rodata);
         src/dungeon_ai_movement.o(.rodata);
         src/dungeon_ai_attack.o(.rodata);
         src/blow_away.o(.rodata);

@@ -51,6 +51,7 @@
 #include "dungeon_cutscene.h"
 #include "dungeon_mon_spawn.h"
 #include "dungeon_info.h"
+#include "dungeon_monster_house.h"
 
 static void EnsureCastformLoaded(void);
 static void EnsureDeoxysLoaded(void);
@@ -1508,7 +1509,7 @@ void sub_806A6E8(Entity *entity)
                 UpdateMinimap();
             }
         }
-        sub_807AA30();
+        TryWakeSleepingWildPokemon();
     }
 
     if (ItemExists(&info->heldItem)) {

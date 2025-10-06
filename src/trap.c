@@ -32,6 +32,7 @@
 #include "sprite.h"
 #include "dungeon_pos_data.h"
 #include "dungeon_damage.h"
+#include "dungeon_leveling.h"
 #include "warp_target.h"
 #include "blow_away.h"
 #include "explosion.h"
@@ -39,10 +40,7 @@
 #include "move_orb_actions_1.h"
 
 void sub_80421EC(DungeonPos *, u32);
-u8 GetFloorType(void);
-void sub_8045BF8(u8 *, Item *);
 void sub_804225C(Entity *, DungeonPos *, u8);
-void EnemyEvolution(Entity *);
 void sub_806A1E8(Entity *pokemon);
 Entity *sub_8045684(u8, DungeonPos *, u8);
 

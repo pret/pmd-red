@@ -49,7 +49,6 @@ void SendMuzzledEndMessage(Entity * pokemon, Entity * target);
 bool8 TrySendImmobilizeSleepEndMsg(Entity *pokemon, Entity *target);
 void WakeUpPokemon(Entity * pokemon);
 void SendThawedMessage(Entity *pokemon, Entity *target);
-void sub_807AA30(void);
 void sub_8079E34(Entity * pokemon, Entity * target, bool8 param_3);
 
 #endif // !GUARD_CODE_8077274_1_H

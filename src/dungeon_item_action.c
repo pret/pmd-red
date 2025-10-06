@@ -35,16 +35,13 @@
 #include "dungeon_logic.h"
 #include "dungeon_damage.h"
 #include "dungeon_strings.h"
+#include "dungeon_generation_fixed.h"
 #include "dungeon_move.h"
 #include "dungeon_leveling.h"
 #include "warp_target.h"
 #include "move_orb_actions_1.h"
 
 extern void sub_8078B5C(Entity *, Entity *, u32, u32, u32);
-extern void sub_8051E7C(Entity *pokemon);
-extern void sub_8045BF8(u8 *, Item *);
-extern void ActionShowMoveInfo(ActionContainer *);
-extern void ActionLinkMoves(ActionContainer *);
 extern void sub_804245C(Entity *, Item *);
 extern s32 sub_8042520(Entity *);
 extern void sub_8042390(Entity *, Item *);

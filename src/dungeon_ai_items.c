@@ -26,7 +26,6 @@
 #include "constants/dungeon.h"
 #include "dungeon_engine.h"
 
-extern void sub_8045BF8(u8 *, Item *);
 extern void sub_8067110(Entity *);
 extern void sub_80671A0(Entity *);
 

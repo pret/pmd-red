@@ -32,6 +32,8 @@
 #include "dungeon_pos_data.h"
 #include "dungeon_engine.h"
 #include "dungeon_damage.h"
+#include "dungeon_leveling.h"
+#include "dungeon_items.h"
 #include "dungeon_kecleon_shop.h"
 #include "dungeon_strings.h"
 
@@ -43,9 +45,6 @@ EWRAM_DATA s32 gPotentialAttackTargetWeights[NUM_DIRECTIONS] = {0};
 EWRAM_DATA Entity *gPotentialTargets[NUM_DIRECTIONS] = {0};
 
 extern void sub_806A1B0(Entity *);
-extern void sub_8045BF8(u8 *, struct Item *);
-extern void EnemyEvolution(struct Entity *);
-extern void DiscoverMinimap(DungeonPos *);
 
 void ChooseAIMove(Entity *pokemon)
 {
