@@ -10,7 +10,6 @@
 #include "dungeon_action.h"
 #include "code_8066D04.h"
 #include "code_806CD90.h"
-#include "code_8077274_1.h"
 #include "dungeon_jobs.h"
 #include "run_dungeon.h"
 #include "dungeon_items.h"
@@ -45,6 +44,7 @@
 #include "dungeon_leveling.h"
 #include "dungeon_monster_house.h"
 #include "warp_target.h"
+#include "move_orb_effects_5.h"
 
 extern void sub_8042208(Entity *pokemon, u8 r1);
 

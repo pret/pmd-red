@@ -36,7 +36,6 @@
 #include "constants/weather.h"
 #include "number_util.h"
 #include "dungeon_message.h"
-#include "code_8077274_1.h"
 #include "math.h"
 #include "dungeon_config.h"
 #include "dungeon_engine.h"

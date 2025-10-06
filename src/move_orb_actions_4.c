@@ -9,7 +9,6 @@
 #include "dungeon_message.h"
 #include "dungeon_move.h"
 #include "code_806CD90.h"
-#include "code_8077274_1.h"
 #include "dungeon_random.h"
 #include "constants/ability.h"
 #include "constants/dungeon_exit.h"
@@ -50,6 +49,7 @@
 #include "switcher_orb.h"
 #include "trawl_orb.h"
 #include "move_orb_effects_3.h"
+#include "move_orb_effects_4.h"
 
 bool8 ProtectMoveAction(Entity * pokemon,Entity * target,Move *move, s32 itemId)
 {

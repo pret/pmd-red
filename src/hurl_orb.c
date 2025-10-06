@@ -6,7 +6,6 @@
 #include "code_804267C.h"
 #include "code_805D8C8.h"
 #include "code_806CD90.h"
-#include "code_8077274_1.h"
 #include "constants/ability.h"
 #include "constants/dungeon_exit.h"
 #include "constants/monster.h"

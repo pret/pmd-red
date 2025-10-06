@@ -1,25 +1,8 @@
-#ifndef GUARD_CODE_8077274_1_H
-#define GUARD_CODE_8077274_1_H
+#ifndef GUARD_MOVE_ORB_EFFECTS_5_H
+#define GUARD_MOVE_ORB_EFFECTS_5_H
 
 #include "structs/dungeon_entity.h"
 
-// TODO: Remove this file
-
-
-
-void CounterStatusTarget(Entity * pokemon, Entity * target, u8 newStatus);
-void SafeguardStatusTarget(Entity * pokemon, Entity * target);
-void MistStatusTarget(Entity * pokemon, Entity * target);
-void WishStatusTarget(Entity * pokemon, Entity * target);
-void MagicCoatStatusTarget(Entity * pokemon, Entity * target);
-void LightScreenStatusTarget(Entity * pokemon, Entity * target);
-void ReflectStatusTarget(Entity * pokemon, Entity * target);
-void ProtectStatusTarget(Entity * pokemon, Entity * target);
-void MirrorCoatStatusTarget(Entity * pokemon, Entity * target);
-void EndureStatusTarget(Entity * pokemon, Entity * target);
-void MirrorMoveStatusTarget(Entity * pokemon, Entity * target);
-void Conversion2StatusTarget(Entity * pokemon, Entity * target);
-void VitalThrowStatusTarget(Entity * pokemon, Entity * target);
 void sub_8079F20(Entity * pokemon, Entity * target, u8 param_3, u8 param_4);
 void sub_807A0CC(Entity * pokemon, Entity * target);
 void EndSleepClassStatus(Entity * pokemon, Entity * target, bool8 param_3, bool8 param_4);
@@ -36,6 +19,6 @@ void SendMuzzledEndMessage(Entity * pokemon, Entity * target);
 bool8 TrySendImmobilizeSleepEndMsg(Entity *pokemon, Entity *target);
 void WakeUpPokemon(Entity * pokemon);
 void SendThawedMessage(Entity *pokemon, Entity *target);
-void sub_8079E34(Entity * pokemon, Entity * target, bool8 param_3);
 
-#endif // !GUARD_CODE_8077274_1_H
+#endif
+

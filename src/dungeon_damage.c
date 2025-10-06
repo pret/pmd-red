@@ -27,7 +27,6 @@
 #include "dungeon_leveling.h"
 #include "weather.h"
 #include "game_options.h"
-#include "code_8077274_1.h"
 #include "code_806CD90.h"
 #include "constants/direction.h"
 #include "constants/dungeon.h"
@@ -47,6 +46,7 @@
 #include "dungeon_mon_spawn.h"
 #include "move_orb_actions_1.h"
 #include "move_orb_effects_2.h"
+#include "move_orb_effects_5.h"
 
 extern void sub_8041B18(Entity *pokemon);
 extern void sub_8041B90(Entity *pokemon);

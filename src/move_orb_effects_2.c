@@ -3,7 +3,6 @@
 #include "move_orb_effects_2.h"
 #include "dungeon_vram.h"
 #include "code_806CD90.h"
-#include "code_8077274_1.h"
 #include "dungeon_random.h"
 #include "constants/ability.h"
 #include "constants/status.h"
@@ -29,6 +28,7 @@
 #include "dungeon_tilemap.h"
 #include "pokemon_3.h"
 #include "move_orb_actions_1.h"
+#include "move_orb_effects_5.h"
 #include "run_dungeon.h"
 
 extern void sub_8041D84(Entity *);

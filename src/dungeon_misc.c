@@ -29,7 +29,6 @@
 #include "constants/type.h"
 #include "constants/weather.h"
 #include "code_806CD90.h"
-#include "code_8077274_1.h"
 #include "dungeon_util.h"
 #include "exclusive_pokemon.h"
 #include "dungeon_config.h"
@@ -53,6 +52,7 @@
 #include "dungeon_info.h"
 #include "dungeon_monster_house.h"
 #include "move_orb_effects_2.h"
+#include "move_orb_effects_5.h"
 
 static void EnsureCastformLoaded(void);
 static void EnsureDeoxysLoaded(void);

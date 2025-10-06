@@ -8,7 +8,6 @@
 #include "code_804267C.h"
 #include "code_8066D04.h"
 #include "dungeon_message.h"
-#include "code_8077274_1.h"
 #include "constants/dungeon_action.h"
 #include "constants/dungeon.h"
 #include "constants/iq_skill.h"

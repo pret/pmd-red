@@ -12,7 +12,6 @@
 #include "dungeon_vram.h"
 #include "code_805D8C8.h"
 #include "code_806CD90.h"
-#include "code_8077274_1.h"
 #include "dungeon_config.h"
 #include "run_dungeon.h"
 #include "dungeon_range.h"

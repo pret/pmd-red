@@ -4,7 +4,6 @@
 #include "dungeon_tilemap.h"
 #include "code_8041AD0.h"
 #include "dungeon_message.h"
-#include "code_8077274_1.h"
 #include "dungeon_random.h"
 #include "code_806CD90.h"
 #include "constants/dungeon_exit.h"
@@ -38,6 +37,7 @@
 #include "dungeon_mon_spawn.h"
 #include "move_orb_actions_1.h"
 #include "move_orb_effects_2.h"
+#include "move_orb_effects_4.h"
 
 void sub_80421EC(DungeonPos *, u32);
 void sub_804225C(Entity *, DungeonPos *, u8);

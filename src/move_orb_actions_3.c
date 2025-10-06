@@ -4,7 +4,6 @@
 #include "move_orb_actions_3.h"
 #include "dungeon_tilemap.h"
 #include "code_806CD90.h"
-#include "code_8077274_1.h"
 #include "dungeon_random.h"
 #include "constants/ability.h"
 #include "constants/dungeon_exit.h"
@@ -47,6 +46,8 @@
 #include "blow_away.h"
 #include "warp_target.h"
 #include "move_orb_effects_3.h"
+#include "move_orb_effects_4.h"
+#include "move_orb_effects_5.h"
 
 static void sub_805A7D4(Entity *, Entity *, Item *, DungeonPos *);
 

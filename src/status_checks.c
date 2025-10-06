@@ -4,7 +4,6 @@
 #include "dungeon_util.h"
 #include "dungeon_move_util.h"
 #include "dungeon_message.h"
-#include "code_8077274_1.h"
 #include "constants/direction.h"
 #include "constants/dungeon_action.h"
 #include "constants/status.h"

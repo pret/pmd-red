@@ -3,7 +3,6 @@
 #include "dungeon_ai.h"
 #include "dungeon_tilemap.h"
 #include "dungeon_message.h"
-#include "code_8077274_1.h"
 #include "dungeon_random.h"
 #include "constants/ability.h"
 #include "constants/direction.h"
@@ -30,6 +29,7 @@
 #include "dungeon_misc.h"
 #include "dungeon_cutscene.h"
 #include "dungeon_strings.h"
+#include "move_orb_effects_5.h"
 
 void RunMonsterAI(Entity *pokemon, u32 unused)
 {

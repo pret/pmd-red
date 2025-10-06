@@ -3,7 +3,6 @@
 #include "dungeon_item_action.h"
 #include "code_8041AD0.h"
 #include "dungeon_message.h"
-#include "code_8077274_1.h"
 #include "dungeon_random.h"
 #include "constants/dungeon_action.h"
 #include "constants/dungeon.h"
@@ -40,6 +39,7 @@
 #include "warp_target.h"
 #include "move_orb_actions_1.h"
 #include "move_orb_effects_2.h"
+#include "move_orb_effects_5.h"
 
 extern void sub_804245C(Entity *, Item *);
 extern s32 sub_8042520(Entity *);
