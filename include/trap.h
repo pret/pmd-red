@@ -6,6 +6,7 @@
 #include "structs/str_position.h"
 
 void sub_807FA9C(void);
+void sub_807FC3C(DungeonPos *pos, u32 trapID, u32 param_3);
 bool8 CanLayTrap(DungeonPos *pos);
 bool8 LayTrap(DungeonPos *pos, u8 trapID, u8 param_3);
 bool8 sub_807FD84(Entity *entity);

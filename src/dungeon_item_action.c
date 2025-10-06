@@ -40,8 +40,8 @@
 #include "dungeon_leveling.h"
 #include "warp_target.h"
 #include "move_orb_actions_1.h"
+#include "move_orb_effects_2.h"
 
-extern void sub_8078B5C(Entity *, Entity *, u32, u32, u32);
 extern void sub_804245C(Entity *, Item *);
 extern s32 sub_8042520(Entity *);
 extern void sub_8042390(Entity *, Item *);

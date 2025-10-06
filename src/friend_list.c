@@ -17,8 +17,6 @@
 #include "ground_map.h"
 #include "constants/input.h"
 
-static IWRAM_INIT struct unkStruct_3001B60 *sFriendList = {NULL};
-
 static void SortbyAlphabetNo(s32, s32);
 static void SortbyInternalNo(s32, s32);
 static void SortbyName(s32, s32);
@@ -28,10 +26,12 @@ static void SetUpWindowHeader(void);
 static s32 sub_8023BD8(void);
 static s32 sub_8023F8C(void);
 
-extern s32 gUnknown_203B2A0;
-extern s32 gUnknown_203B2A4;
-extern u16 gUnknown_203B2A8;
-extern u16 gUnknown_203B2AA;
+static IWRAM_INIT struct unkStruct_3001B60 *sFriendList = {NULL};
+
+static EWRAM_INIT s32 gUnknown_203B2A0 = 2;
+static EWRAM_INIT s32 gUnknown_203B2A4 = 1;
+static EWRAM_INIT u16 gUnknown_203B2A8 = 0;
+static EWRAM_INIT u16 gUnknown_203B2AA = 0;
 
 static const WindowTemplate sDummyWinTemplate = WIN_TEMPLATE_DUMMY;
 

@@ -46,8 +46,8 @@
 #include "dungeon_monster_house.h"
 #include "warp_target.h"
 
-extern void sub_8057588(Entity * pokemon, u8 param_2);
-void sub_8042208(Entity *pokemon, u8 r1);
+extern void sub_8042208(Entity *pokemon, u8 r1);
+
 Entity *sub_806773C(Entity *entity);
 void sub_8067558(Entity *entity, Entity *targetEntity, s32 a2);
 void sub_8067794(Entity *entity, Entity *targetEntity, s32 a2);

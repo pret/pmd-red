@@ -3,21 +3,10 @@
 
 #include "structs/dungeon_entity.h"
 
-void MuzzleTarget(Entity *pokemon, Entity *target);
-void TransformStatusTarget(Entity * pokemon, Entity * target);
-void MobileStatusTarget(Entity * pokemon, Entity * target);
-void ExposeStatusTarget(Entity * pokemon, Entity * target, s16 param_3);
-void IdentityItemHolders(Entity *pokemon, Entity *target);
-void BlindTarget(Entity *pokemon, Entity *target);
-void CrossEyeVisionTarget(Entity *pokemon, Entity *target);
-void RestoreVisionTarget(Entity *pokemon, Entity *target);
-void RestorePPTarget(Entity * pokemon,Entity * target, s32 param_3);
-void RaiseAtkStatTarget(Entity * pokemon,Entity * target, s32 increment);
-void RaiseSpAtkStatTarget(Entity * pokemon,Entity * target, s32 increment);
-void RaiseDefStatTarget(Entity * pokemon,Entity * target, s32 increment);
-void RaiseSpDefStatTarget(Entity * pokemon,Entity * target, s32 increment);
-void LongTossStatusTarget(Entity * pokemon,Entity * target);
-void PierceStatusTarget(Entity * pokemon,Entity * target);
+// TODO: Remove this file
+
+
+
 void SetChargeStatusTarget(Entity *pokemon, Entity *target, u8 newStatus, Move *move, const u8 *message);
 void sub_8079764(Entity * pokemon);
 void CounterStatusTarget(Entity * pokemon, Entity * target, u8 newStatus);

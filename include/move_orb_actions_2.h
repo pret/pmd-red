@@ -49,7 +49,6 @@ bool8 ExplosionMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemI
 bool8 ChargeMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId);
 bool8 WaterSpoutMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId);
 bool8 StockpileMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId);
-void sub_80783C4(Entity * pokemon, Entity * target, bool8 param_3);
 bool8 StunSporeMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId);
 bool8 sub_8058C00(Entity *pokemon, Entity *target, Move *move, s32 itemId);
 bool8 sub_8059CD8(Entity *pokemon, Entity *target, Move *move, s32 itemId);

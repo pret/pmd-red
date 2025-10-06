@@ -47,6 +47,7 @@
 #include "hurl_orb.h"
 #include "dungeon_mon_spawn.h"
 #include "move_orb_actions_1.h"
+#include "move_orb_effects_2.h"
 
 extern void sub_8041B18(Entity *pokemon);
 extern void sub_8041B90(Entity *pokemon);
@@ -59,7 +60,6 @@ extern bool8 sub_806A58C(s16 a0);
 extern void sub_8042148(Entity *pokemon);
 extern void sub_8042A24(Entity *r0);
 extern void sub_806A390(Entity *r0);
-extern void sub_8078084(Entity * pokemon);
 extern void sub_800DBBC(void);
 extern bool8 sub_806FA5C(Entity *, Entity *, struct unkStruct_8069D4C *);
 extern void EntityUpdateStatusSprites(Entity *);

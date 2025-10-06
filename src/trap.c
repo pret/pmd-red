@@ -38,6 +38,7 @@
 #include "explosion.h"
 #include "dungeon_mon_spawn.h"
 #include "move_orb_actions_1.h"
+#include "move_orb_effects_2.h"
 
 void sub_80421EC(DungeonPos *, u32);
 void sub_804225C(Entity *, DungeonPos *, u8);

@@ -18,25 +18,5 @@ void CringeStatusTarget(Entity * pokemon,Entity * target, bool8 displayMessage);
 void ParalyzeStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessage);
 void RaiseMovementSpeedTarget(Entity * pokemon, Entity * target, s32 turns, bool8 diplayMessage);
 void LowerMovementSpeedTarget(Entity * pokemon, Entity * target, s32 levels, bool8 displayMessage);
-void ConfuseStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessage);
-void CowerStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessage);
-void HealTargetHP(Entity *pokemon, Entity *target, s32 param_3, s32 param_4, bool32 displayMessage);
-void HandleScannerOrb(Entity* pokemon, Entity* target);
-void HandleStairsOrb(Entity* pokemon, Entity* target);
-void HandleRadarOrb(Entity* pokemon, Entity* target);
-void HandleLeechSeed(Entity * pokemon, Entity * target, bool8 displayMessage);
-void DestinyBondStatusTarget(Entity * pokemon, Entity * target);
-void SureShotStatusTarget(Entity *pokemon, Entity * target, s32 turns);
-void WhifferStatusTarget(Entity *pokemon, Entity * target, s32 turns);
-void FixedDamageStatusTarget(Entity *pokemon, Entity * target);
-void FocusEnergyStatusTarget(Entity *pokemon, Entity * target);
-void CurseStatusTarget(Entity *pokemon, Entity * target);
-void SnatchStatusTarget(Entity * pokemon, Entity * target);
-void TauntStatusTarget(Entity * pokemon, Entity * target);
-void HandleStockpile(Entity * pokemon, Entity * target);
-void InvisibleStatusTarget(Entity * pokemon, Entity * target);
-void PerishSongTarget(Entity * pokemon, Entity * target);
-void EncoreStatusTarget(Entity * pokemon, Entity * target);
-void sub_8078A58(struct Entity *pokemon, struct Entity *target, s32 param_3, s32 param_4);
 
 #endif

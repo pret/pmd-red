@@ -52,12 +52,12 @@
 #include "dungeon_mon_spawn.h"
 #include "dungeon_info.h"
 #include "dungeon_monster_house.h"
+#include "move_orb_effects_2.h"
 
 static void EnsureCastformLoaded(void);
 static void EnsureDeoxysLoaded(void);
 
 extern bool8 sub_806A58C(s16 r0);
-extern void sub_8078084(Entity * pokemon);
 extern void sub_8067A80(u8 a0, s32 a1, s32 a2, Pokemon **a3);
 extern bool8 sub_8070F80(Entity * pokemon, s32 direction);
 extern s32 sub_806A4DC(EntityInfo *info);

@@ -32,11 +32,11 @@
 #include "dungeon_misc.h"
 #include "dungeon_mon_spawn.h"
 #include "dungeon_kecleon_shop.h"
+#include "dungeon_map.h"
+#include "move_orb_effects_2.h"
 
-extern void UpdateMinimap();
 extern void EntityUpdateStatusSprites(Entity *);
 extern void sub_8042A74(Entity *r0);
-extern void HealTargetHP(Entity *pokemon, Entity *r1, s16, s16, u32);
 extern void sub_80420C8(Entity *r0);
 extern void nullsub_68(Entity *);
 extern void nullsub_67(Entity *);

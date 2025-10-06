@@ -1,6 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "move_orb_actions_2.h"
+#include "move_orb_effects_2.h"
 #include "dungeon_move_util.h"
 #include "dungeon_vram.h"
 #include "dungeon_tilemap.h"

@@ -38,6 +38,7 @@
 #include "dungeon_misc.h"
 #include "dungeon_range.h"
 #include "dungeon_move_util.h"
+#include "move_orb_effects_2.h"
 #include "warp_target.h"
 
 extern void sub_805229C(void);

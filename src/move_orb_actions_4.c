@@ -3,6 +3,7 @@
 #include "move_orb_actions_4.h"
 #include "move_orb_actions_2.h"
 #include "move_orb_actions_1.h"
+#include "move_orb_effects_2.h"
 #include "dungeon_ai.h"
 #include "dungeon_move_util.h"
 #include "dungeon_message.h"

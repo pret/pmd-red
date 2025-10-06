@@ -1,5 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
+#include "move_orb_effects_2.h"
 #include "status.h"
 #include "dungeon_vram.h"
 #include "code_806CD90.h"
@@ -14,6 +15,7 @@
 #include "dungeon_map_access.h"
 #include "dungeon_message.h"
 #include "dungeon_util.h"
+#include "dungeon_map.h"
 #include "math.h"
 #include "move_effects_target.h"
 #include "number_util.h"
@@ -50,10 +52,8 @@ extern void nullsub_82(Entity *);
 extern void nullsub_83(Entity *);
 extern void nullsub_84(Entity *);
 extern void nullsub_85(Entity *);
-extern void UpdateMinimap();
 extern void EntityUpdateStatusSprites(Entity *);
 extern void sub_8042A74(Entity *r0);
-extern void DealDamageToEntity(Entity *, s16, u32, u32);
 extern void sub_80420C8(Entity *r0);
 extern void nullsub_68(Entity *);
 extern void nullsub_67(Entity *);
@@ -90,7 +90,6 @@ extern void sub_8041CA8(Entity *);
 extern void sub_8041C94(Entity *);
 extern void sub_8041BF8(Entity *);
 extern void sub_8041BE8(Entity *);
-extern void EntityUpdateStatusSprites(Entity *);
 
 void ConfuseStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessage)
 {
@@ -1308,4 +1307,3 @@ void PierceStatusTarget(Entity * pokemon, Entity * target)
     }
     EntityUpdateStatusSprites(target);
 }
-

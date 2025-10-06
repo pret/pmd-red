@@ -34,6 +34,7 @@
 #include "sprite.h"
 #include "status.h"
 #include "move_orb_actions_4.h"
+#include "move_orb_effects_2.h"
 #include "weather.h"
 #include "targeting_flags.h"
 #include "pokemon_types.h"

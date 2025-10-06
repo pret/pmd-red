@@ -17,8 +17,9 @@
 #include "dungeon_pos_data.h"
 #include "dungeon_floor_spawns.h"
 #include "hurl_orb.h"
+#include "trap.h"
+#include "move_orb_effects_2.h"
 
-extern void sub_807FC3C(DungeonPos *, u32, u32);
 extern void sub_8042A54(DungeonPos *);
 extern void sub_8042A64(DungeonPos *);
 

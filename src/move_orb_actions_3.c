@@ -35,6 +35,7 @@
 #include "status.h"
 #include "move_orb_actions_4.h"
 #include "move_orb_actions_1.h"
+#include "move_orb_effects_2.h"
 #include "structs/dungeon_entity.h"
 #include "structs/map.h"
 #include "dungeon_damage.h"
