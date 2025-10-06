@@ -16,7 +16,7 @@
 #include "dungeon_items.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
-#include "move_effects_target.h"
+#include "move_orb_effects_1.h"
 #include "moves.h"
 #include "math.h"
 #include "pokemon.h"

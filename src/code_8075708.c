@@ -15,7 +15,6 @@
 #include "position_util.h"
 #include "trap.h"
 #include "items.h"
-#include "status.h"
 #include "weather.h"
 #include "structs/dungeon_entity.h"
 #include "structs/map.h"

@@ -1,6 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
-#include "move_effects_target.h"
+#include "move_orb_effects_1.h"
 #include "dungeon_message.h"
 #include "code_806CD90.h"
 #include "code_8077274_1.h"
@@ -30,7 +30,6 @@
 #include "dungeon_misc.h"
 #include "dungeon_config.h"
 #include "dungeon_strings.h"
-#include "status.h"
 #include "dungeon_vram.h"
 #include "dungeon_pos_data.h"
 #include "dungeon_data.h"
@@ -1080,33 +1079,23 @@ u8 GetFlashFireStatus(Entity *pokemon)
     return FLASH_FIRE_STATUS_NOT_MAXED;
 }
 
-static inline s32 UpdateFlashFireBoost_sub(EntityInfo * entityInfo)
+void UpdateFlashFireBoost(Entity * pokemon, Entity *target)
 {
     s32 flashFireBoost;
 
-    flashFireBoost = entityInfo->flashFireBoost;
-    flashFireBoost++;
-    if (FLASH_FIRE_STATUS_MAXED < flashFireBoost) {
-      flashFireBoost = FLASH_FIRE_STATUS_NOT_MAXED;
+    if (EntityIsValid(target)) {
+        EntityInfo * entityInfo = GetEntInfo(target);
+        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
+        flashFireBoost = entityInfo->flashFireBoost;
+        if (++flashFireBoost >= 2) {
+            flashFireBoost = 2;
+        }
+        if (entityInfo->flashFireBoost != flashFireBoost) {
+            entityInfo->flashFireBoost = flashFireBoost;
+            sub_8041C58(target);
+        }
+        EntityUpdateStatusSprites(target);
     }
-    return flashFireBoost;
-}
-
-void UpdateFlashFireBoost(Entity * pokemon, Entity *target)
-{
-  EntityInfo * entityInfo;
-  s32 flashFireBoost;
-
-  if (EntityIsValid(target)) {
-    entityInfo = GetEntInfo(target);
-    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
-    flashFireBoost = UpdateFlashFireBoost_sub(entityInfo);
-    if (entityInfo->flashFireBoost != flashFireBoost) {
-      entityInfo->flashFireBoost = flashFireBoost;
-      sub_8041C58(target);
-    }
-    EntityUpdateStatusSprites(target);
-  }
 }
 
 void ChangeAttackMultiplierTarget(Entity *pokemon, Entity *target, u32 statStage, s24_8 param_4, bool8 displayMessage)

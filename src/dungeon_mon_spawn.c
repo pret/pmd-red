@@ -25,7 +25,7 @@
 #include "dungeon_util.h"
 #include "exclusive_pokemon.h"
 #include "file_system.h"
-#include "move_effects_target.h"
+#include "move_orb_effects_1.h"
 #include "moves.h"
 #include "number_util.h"
 #include "pokemon.h"

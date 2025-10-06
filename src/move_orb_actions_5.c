@@ -13,7 +13,6 @@
 #include "dungeon_misc.h"
 #include "code_8077274_1.h"
 #include "code_806CD90.h"
-#include "status.h"
 #include "dungeon_pos_data.h"
 #include "dungeon_floor_spawns.h"
 #include "hurl_orb.h"

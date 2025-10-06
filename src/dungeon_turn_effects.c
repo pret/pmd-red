@@ -3,7 +3,6 @@
 #include "dungeon_turn_effects.h"
 #include "dungeon_util.h"
 #include "items.h"
-#include "status.h"
 #include "weather.h"
 #include "structs/dungeon_entity.h"
 #include "structs/map.h"
@@ -39,6 +38,7 @@
 #include "dungeon_range.h"
 #include "dungeon_move_util.h"
 #include "move_orb_effects_2.h"
+#include "move_orb_effects_1.h"
 #include "warp_target.h"
 
 extern void sub_805229C(void);

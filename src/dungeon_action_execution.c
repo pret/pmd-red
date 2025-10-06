@@ -25,7 +25,6 @@
 #include "moves.h"
 #include "pokemon_3.h"
 #include "pokemon.h"
-#include "status.h"
 #include "trap.h"
 #include "dungeon_config.h"
 #include "dungeon_misc.h"
@@ -39,6 +38,7 @@
 #include "dungeon_move.h"
 #include "dungeon_map_access.h"
 #include "warp_target.h"
+#include "move_orb_effects_1.h"
 
 void sub_8075BA4(Entity *param_1, u8 param_2);
 void sub_804178C(u8 param_1);

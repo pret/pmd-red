@@ -17,7 +17,7 @@
 #include "dungeon_map_access.h"
 #include "dungeon_util.h"
 #include "math.h"
-#include "move_effects_target.h"
+#include "move_orb_effects_1.h"
 #include "moves.h"
 #include "move_util.h"
 #include "code_8041AD0.h"

@@ -30,7 +30,7 @@
 #include "dungeon_util.h"
 #include "math.h"
 #include "moves.h"
-#include "move_effects_target.h"
+#include "move_orb_effects_1.h"
 #include "move_util.h"
 #include "pokemon.h"
 #include "position_util.h"
