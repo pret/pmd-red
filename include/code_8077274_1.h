@@ -7,8 +7,6 @@
 
 
 
-void SetChargeStatusTarget(Entity *pokemon, Entity *target, u8 newStatus, Move *move, const u8 *message);
-void sub_8079764(Entity * pokemon);
 void CounterStatusTarget(Entity * pokemon, Entity * target, u8 newStatus);
 void SafeguardStatusTarget(Entity * pokemon, Entity * target);
 void MistStatusTarget(Entity * pokemon, Entity * target);

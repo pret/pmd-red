@@ -38,6 +38,7 @@
 #include "dungeon_damage.h"
 #include "warp_target.h"
 #include "explosion.h"
+#include "move_orb_effects_3.h"
 
 extern void nullsub_92(Entity *);
 

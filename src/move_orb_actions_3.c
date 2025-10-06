@@ -46,6 +46,7 @@
 #include "dungeon_kecleon_shop.h"
 #include "blow_away.h"
 #include "warp_target.h"
+#include "move_orb_effects_3.h"
 
 static void sub_805A7D4(Entity *, Entity *, Item *, DungeonPos *);
 

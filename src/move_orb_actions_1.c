@@ -35,6 +35,7 @@
 #include "dungeon_strings.h"
 #include "dungeon_damage.h"
 #include "move_util.h"
+#include "move_orb_effects_3.h"
 
 bool8 IronTailMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 {

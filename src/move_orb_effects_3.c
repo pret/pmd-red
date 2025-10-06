@@ -1,5 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
+#include "move_orb_effects_3.h"
 #include "dungeon_vram.h"
 #include "dungeon_map_access.h"
 #include "dungeon_message.h"

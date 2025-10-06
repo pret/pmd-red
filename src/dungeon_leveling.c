@@ -28,6 +28,7 @@
 #include "dungeon_pos_data.h"
 #include "dungeon_music.h"
 #include "dungeon_mon_spawn.h"
+#include "move_orb_effects_3.h"
 
 static EWRAM_DATA s32 sNewAtkStats[2] = {0, 0};
 static EWRAM_DATA s32 sNewDefStats[2] = {0, 0};
