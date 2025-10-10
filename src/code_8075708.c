@@ -15,7 +15,6 @@
 #include "position_util.h"
 #include "trap.h"
 #include "items.h"
-#include "status.h"
 #include "weather.h"
 #include "structs/dungeon_entity.h"
 #include "structs/map.h"
@@ -37,7 +36,6 @@
 #include "constants/weather.h"
 #include "number_util.h"
 #include "dungeon_message.h"
-#include "code_8077274_1.h"
 #include "math.h"
 #include "dungeon_config.h"
 #include "dungeon_engine.h"
@@ -47,6 +45,8 @@
 #include "dungeon_turn_effects.h"
 #include "dungeon_leveling.h"
 #include "dungeon_cutscene.h"
+#include "dungeon_monster_house.h"
+#include "dungeon_strings.h"
 #include "warp_target.h"
 
 extern void sub_8073D14(Entity *);
@@ -245,7 +245,7 @@ bool8 DisplayActions(Entity *a0)
         }
     }
 
-    sub_807AA30();
+    TryWakeSleepingWildPokemon();
     for (j = 0; j < 2; j++) {
         for (loop = 0; loop < DUNGEON_MAX_POKEMON; loop++) {
             DungeonPos monPosBefore;
@@ -508,9 +508,6 @@ error:
     return 0;
 }
 
-extern char *gPtrItsaMonsterHouseMessage;
-
-extern void sub_807AB38(Entity *, u32);
 extern void sub_8041888(u32);
 
 void sub_8075900(Entity *pokemon, u8 r1)
@@ -528,7 +525,7 @@ void sub_8075900(Entity *pokemon, u8 r1)
                         // It's a monster house!
                         LogMessageByIdWithPopupCheckUser(GetLeader(), gPtrItsaMonsterHouseMessage);
                         gDungeon->unk644.monsterHouseTriggeredEvent = TRUE;
-                        sub_807AB38(pokemon, r1);
+                        TriggerMonsterHouse(pokemon, r1);
                         sub_8041888(0);
                         if(sub_803F428(&pokemon->pos))
                             sub_803E708(0x78, 0x39);

@@ -9,7 +9,6 @@
 #include "music_util.h"
 #include "dungeon_message.h"
 #include "code_806CD90.h"
-#include "code_8077274_1.h"
 #include "code_8097670.h"
 #include "dungeon_info.h"
 #include "dungeon_items.h"
@@ -29,6 +28,7 @@
 #include "dungeon_cutscene.h"
 #include "string_format.h"
 #include "dungeon_mon_spawn.h"
+#include "move_orb_effects_5.h"
 
 void nullsub_96(Entity *pokemon,Entity *target);
 u8 sub_8097900(s16);

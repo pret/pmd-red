@@ -12,7 +12,7 @@
 #include "string_format.h"
 #include "friend_area.h"
 #include "run_dungeon.h"
-#include "move_effects_target.h"
+#include "move_orb_effects_1.h"
 #include "dungeon_map_access.h"
 #include "dungeon_map.h"
 #include "dungeon_range.h"
@@ -29,7 +29,6 @@
 #include "constants/type.h"
 #include "constants/weather.h"
 #include "code_806CD90.h"
-#include "code_8077274_1.h"
 #include "dungeon_util.h"
 #include "exclusive_pokemon.h"
 #include "dungeon_config.h"
@@ -51,12 +50,14 @@
 #include "dungeon_cutscene.h"
 #include "dungeon_mon_spawn.h"
 #include "dungeon_info.h"
+#include "dungeon_monster_house.h"
+#include "move_orb_effects_2.h"
+#include "move_orb_effects_5.h"
 
 static void EnsureCastformLoaded(void);
 static void EnsureDeoxysLoaded(void);
 
 extern bool8 sub_806A58C(s16 r0);
-extern void sub_8078084(Entity * pokemon);
 extern void sub_8067A80(u8 a0, s32 a1, s32 a2, Pokemon **a3);
 extern bool8 sub_8070F80(Entity * pokemon, s32 direction);
 extern s32 sub_806A4DC(EntityInfo *info);
@@ -1508,7 +1509,7 @@ void sub_806A6E8(Entity *entity)
                 UpdateMinimap();
             }
         }
-        sub_807AA30();
+        TryWakeSleepingWildPokemon();
     }
 
     if (ItemExists(&info->heldItem)) {

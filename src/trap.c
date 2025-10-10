@@ -4,7 +4,6 @@
 #include "dungeon_tilemap.h"
 #include "code_8041AD0.h"
 #include "dungeon_message.h"
-#include "code_8077274_1.h"
 #include "dungeon_random.h"
 #include "code_806CD90.h"
 #include "constants/dungeon_exit.h"
@@ -21,9 +20,8 @@
 #include "dungeon_vram.h"
 #include "dungeon_floor_spawns.h"
 #include "items.h"
-#include "move_effects_target.h"
+#include "move_orb_effects_1.h"
 #include "moves.h"
-#include "status.h"
 #include "structs/map.h"
 #include "structs/str_dungeon.h"
 #include "dungeon_config.h"
@@ -32,17 +30,17 @@
 #include "sprite.h"
 #include "dungeon_pos_data.h"
 #include "dungeon_damage.h"
+#include "dungeon_leveling.h"
 #include "warp_target.h"
 #include "blow_away.h"
 #include "explosion.h"
 #include "dungeon_mon_spawn.h"
 #include "move_orb_actions_1.h"
+#include "move_orb_effects_2.h"
+#include "move_orb_effects_4.h"
 
 void sub_80421EC(DungeonPos *, u32);
-u8 GetFloorType(void);
-void sub_8045BF8(u8 *, Item *);
 void sub_804225C(Entity *, DungeonPos *, u8);
-void EnemyEvolution(Entity *);
 void sub_806A1E8(Entity *pokemon);
 Entity *sub_8045684(u8, DungeonPos *, u8);
 

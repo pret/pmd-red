@@ -3,7 +3,6 @@
 #include "dungeon_turn_effects.h"
 #include "dungeon_util.h"
 #include "items.h"
-#include "status.h"
 #include "weather.h"
 #include "structs/dungeon_entity.h"
 #include "structs/map.h"
@@ -28,7 +27,6 @@
 #include "constants/weather.h"
 #include "number_util.h"
 #include "dungeon_message.h"
-#include "code_8077274_1.h"
 #include "dungeon_logic.h"
 #include "math.h"
 #include "dungeon_config.h"
@@ -38,7 +36,10 @@
 #include "dungeon_misc.h"
 #include "dungeon_range.h"
 #include "dungeon_move_util.h"
+#include "move_orb_effects_2.h"
+#include "move_orb_effects_1.h"
 #include "warp_target.h"
+#include "move_orb_effects_5.h"
 
 extern void sub_805229C(void);
 extern void sub_80420B8(Entity *pokemon);

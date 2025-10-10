@@ -4,7 +4,6 @@
 #include "move_orb_actions_3.h"
 #include "dungeon_tilemap.h"
 #include "code_806CD90.h"
-#include "code_8077274_1.h"
 #include "dungeon_random.h"
 #include "constants/ability.h"
 #include "constants/dungeon_exit.h"
@@ -28,13 +27,13 @@
 #include "dungeon_strings.h"
 #include "dungeon_util.h"
 #include "moves.h"
-#include "move_effects_target.h"
+#include "move_orb_effects_1.h"
 #include "move_util.h"
 #include "number_util.h"
 #include "pokemon.h"
-#include "status.h"
 #include "move_orb_actions_4.h"
 #include "move_orb_actions_1.h"
+#include "move_orb_effects_2.h"
 #include "structs/dungeon_entity.h"
 #include "structs/map.h"
 #include "dungeon_damage.h"
@@ -46,6 +45,9 @@
 #include "dungeon_kecleon_shop.h"
 #include "blow_away.h"
 #include "warp_target.h"
+#include "move_orb_effects_3.h"
+#include "move_orb_effects_4.h"
+#include "move_orb_effects_5.h"
 
 static void sub_805A7D4(Entity *, Entity *, Item *, DungeonPos *);
 

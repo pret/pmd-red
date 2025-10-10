@@ -3,7 +3,6 @@
 #include "dungeon_item_action.h"
 #include "code_8041AD0.h"
 #include "dungeon_message.h"
-#include "code_8077274_1.h"
 #include "dungeon_random.h"
 #include "constants/dungeon_action.h"
 #include "constants/dungeon.h"
@@ -18,11 +17,10 @@
 #include "dungeon_random.h"
 #include "dungeon_vram.h"
 #include "dungeon_util.h"
-#include "move_effects_target.h"
+#include "move_orb_effects_1.h"
 #include "moves.h"
 #include "number_util.h"
 #include "pokemon.h"
-#include "status.h"
 #include "structs/dungeon_entity.h"
 #include "structs/str_dungeon.h"
 #include "structs/str_position.h"
@@ -35,16 +33,14 @@
 #include "dungeon_logic.h"
 #include "dungeon_damage.h"
 #include "dungeon_strings.h"
+#include "dungeon_generation_fixed.h"
 #include "dungeon_move.h"
 #include "dungeon_leveling.h"
 #include "warp_target.h"
 #include "move_orb_actions_1.h"
+#include "move_orb_effects_2.h"
+#include "move_orb_effects_5.h"
 
-extern void sub_8078B5C(Entity *, Entity *, u32, u32, u32);
-extern void sub_8051E7C(Entity *pokemon);
-extern void sub_8045BF8(u8 *, Item *);
-extern void ActionShowMoveInfo(ActionContainer *);
-extern void ActionLinkMoves(ActionContainer *);
 extern void sub_804245C(Entity *, Item *);
 extern s32 sub_8042520(Entity *);
 extern void sub_8042390(Entity *, Item *);

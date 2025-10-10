@@ -10,7 +10,6 @@
 #include "dungeon_action.h"
 #include "code_8066D04.h"
 #include "code_806CD90.h"
-#include "code_8077274_1.h"
 #include "dungeon_jobs.h"
 #include "run_dungeon.h"
 #include "dungeon_items.h"
@@ -43,11 +42,12 @@
 #include "dungeon_kecleon_shop.h"
 #include "dungeon_item_action.h"
 #include "dungeon_leveling.h"
+#include "dungeon_monster_house.h"
 #include "warp_target.h"
+#include "move_orb_effects_5.h"
 
-extern void sub_8057588(Entity * pokemon, u8 param_2);
-void sub_8042208(Entity *pokemon, u8 r1);
-extern void sub_807AB38(Entity *, u32);
+extern void sub_8042208(Entity *pokemon, u8 r1);
+
 Entity *sub_806773C(Entity *entity);
 void sub_8067558(Entity *entity, Entity *targetEntity, s32 a2);
 void sub_8067794(Entity *entity, Entity *targetEntity, s32 a2);
@@ -197,7 +197,7 @@ void HandleGiveItemAction(Entity *param_1)
     if (!info2->isTeamLeader) {
       info2->flags = info2->flags | MOVEMENT_FLAG_UNK_14;
     }
-    sub_807AB38(param_1,gDungeon->forceMonsterHouse);
+    TriggerMonsterHouse(param_1,gDungeon->forceMonsterHouse);
   }
 }
 
@@ -237,7 +237,7 @@ void HandleTakeItemAction(Entity *param_1)
       if (!info->isTeamLeader) {
         info->flags |= MOVEMENT_FLAG_UNK_14;
       }
-      sub_807AB38(param_1,gDungeon->forceMonsterHouse);
+      TriggerMonsterHouse(param_1,gDungeon->forceMonsterHouse);
     }
   }
 }
@@ -281,7 +281,7 @@ void sub_8066BD4(Entity *param_1)
     if (!info->isTeamLeader) {
       info->flags = info->flags | MOVEMENT_FLAG_UNK_14;
     }
-    sub_807AB38(param_1,gDungeon->forceMonsterHouse);
+    TriggerMonsterHouse(param_1,gDungeon->forceMonsterHouse);
   }
 }
 
@@ -331,7 +331,7 @@ void HandlePlaceItemAction(Entity *entity)
                 PlaySoundEffect(0x14d);
                 SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],entity,0);
                 LogMessageByIdWithPopupCheckUser(entity,gUnknown_80F8E28);
-                sub_807AB38(entity,gDungeon->forceMonsterHouse);
+                TriggerMonsterHouse(entity,gDungeon->forceMonsterHouse);
             }
         }
     }
@@ -386,7 +386,7 @@ void sub_8066E14(Entity *entity)
                 sub_8045BF8(gFormatBuffer_Items[1],&newItems[0]);
                 PlaySoundEffect(0x14d);
                 LogMessageByIdWithPopupCheckUser(entity,gSwappedGroundItem);
-                sub_807AB38(entity,gDungeon->forceMonsterHouse);
+                TriggerMonsterHouse(entity,gDungeon->forceMonsterHouse);
             }
         }
     }
@@ -435,7 +435,7 @@ void sub_8066FA4(Entity *entity)
             FillInventoryGaps();
             PlaySoundEffect(0x14d);
             LogMessageByIdWithPopupCheckUser(entity,gSwappedGroundItem);
-            sub_807AB38(entity,gDungeon->forceMonsterHouse);
+            TriggerMonsterHouse(entity,gDungeon->forceMonsterHouse);
         }
     }
 }
@@ -455,7 +455,7 @@ void sub_8067110(Entity *entity)
         sub_8044DF0(entity,0,0x66);
         sub_803E708(0x1e,0x11);
         sub_80479B8(0,0,0,entity,entity,&item2);
-        sub_807AB38(entity,gDungeon->forceMonsterHouse);
+        TriggerMonsterHouse(entity,gDungeon->forceMonsterHouse);
     }
 }
 
@@ -582,7 +582,7 @@ void sub_80671A0(Entity *entity)
 
         if (EntityIsValid(entity)) {
             sub_806CE68(entity, info->action.direction);
-            sub_807AB38(entity,gDungeon->forceMonsterHouse);
+            TriggerMonsterHouse(entity,gDungeon->forceMonsterHouse);
         }
     }
 }

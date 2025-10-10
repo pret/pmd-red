@@ -7,7 +7,6 @@
 #include "dungeon_message.h"
 #include "code_806CD90.h"
 #include "structs/str_dungeon.h"
-#include "code_8077274_1.h"
 #include "dungeon_ai.h"
 #include "run_dungeon.h"
 #include "dungeon_generation.h"
@@ -16,7 +15,7 @@
 #include "dungeon_map_access.h"
 #include "dungeon_util.h"
 #include "math.h"
-#include "move_effects_target.h"
+#include "move_orb_effects_1.h"
 #include "moves.h"
 #include "move_util.h"
 #include "code_8041AD0.h"
@@ -28,6 +27,7 @@
 #include "dungeon_strings.h"
 #include "dungeon_kecleon_shop.h"
 #include "dungeon_range.h"
+#include "move_orb_effects_5.h"
 
 void sub_80421AC(Entity * pokemon, Entity * target);
 void sub_807BB78(Entity *pokemon);

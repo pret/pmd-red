@@ -1,7 +1,12 @@
-#ifndef GUARD_MOVE_EFFECTS_TARGET_H
-#define GUARD_MOVE_EFFECTS_TARGET_H
+#ifndef GUARD_MOVE_ORB_EFFECTS_1_H
+#define GUARD_MOVE_ORB_EFFECTS_1_H
 
 #include "structs/dungeon_entity.h"
+#include "number_util.h"
+
+#define FLASH_FIRE_STATUS_NONE 0
+#define FLASH_FIRE_STATUS_MAXED 1
+#define FLASH_FIRE_STATUS_NOT_MAXED 2
 
 u8 sub_8075BF4(Entity * pokemon, s32 sleepClassStatusTurns);
 void SleepStatusTarget(Entity * pokemon, Entity * target, s32 turns, bool8 displayMessage);
@@ -26,5 +31,16 @@ void LowerAttackStageTarget(Entity * pokemon, Entity * target, s32 index, s32 de
 void LowerDefenseStageTarget(Entity * pokemon, Entity * target, s32 index, s32 decrement, u8 param_5, bool8 displayMessage);
 void RaiseAttackStageTarget(Entity * pokemon, Entity * target, s32 index, s32 increment);
 void RaiseDefenseStageTarget(Entity * pokemon, Entity * target, s32 index, s32 increment);
+u8 GetFlashFireStatus(Entity *pokemon);
+void UpdateFlashFireBoost(Entity * pokemon, Entity *target);
+void ChangeAttackMultiplierTarget(Entity *pokemon, Entity *target, u32 statStage, s24_8 param_4, bool8 displayMessage);
+void ChangeDefenseMultiplierTarget(Entity *pokemon, Entity *target, u32 statStage, s24_8 param_4, bool8 displayMessage);
+void RaiseAccuracyStageTarget(Entity * pokemon, Entity * target, s32 statStage);
+void LowerAccuracyStageTarget(Entity * pokemon, Entity * target, s32 statStage, bool8 displayMessage);
+void CringeStatusTarget(Entity * pokemon,Entity * target, bool8 displayMessage);
+void ParalyzeStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessage);
+void RaiseMovementSpeedTarget(Entity * pokemon, Entity * target, s32 turns, bool8 diplayMessage);
+void LowerMovementSpeedTarget(Entity * pokemon, Entity * target, s32 levels, bool8 displayMessage);
 
 #endif
+

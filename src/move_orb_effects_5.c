@@ -1,11 +1,11 @@
 #include "global.h"
 #include "globaldata.h"
+#include "move_orb_effects_5.h"
 #include "dungeon_vram.h"
 #include "dungeon_map_access.h"
 #include "dungeon_message.h"
 #include "code_805D8C8.h"
 #include "code_806CD90.h"
-#include "code_8077274_1.h"
 #include "dungeon_random.h"
 #include "constants/ability.h"
 #include "constants/dungeon_exit.h"
@@ -16,7 +16,7 @@
 #include "dungeon_items.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
-#include "move_effects_target.h"
+#include "move_orb_effects_1.h"
 #include "moves.h"
 #include "math.h"
 #include "pokemon.h"
@@ -32,11 +32,11 @@
 #include "dungeon_misc.h"
 #include "dungeon_mon_spawn.h"
 #include "dungeon_kecleon_shop.h"
+#include "dungeon_map.h"
+#include "move_orb_effects_2.h"
 
-extern void UpdateMinimap();
 extern void EntityUpdateStatusSprites(Entity *);
 extern void sub_8042A74(Entity *r0);
-extern void HealTargetHP(Entity *pokemon, Entity *r1, s16, s16, u32);
 extern void sub_80420C8(Entity *r0);
 extern void nullsub_68(Entity *);
 extern void nullsub_67(Entity *);

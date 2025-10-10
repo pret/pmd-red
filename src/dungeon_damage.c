@@ -17,7 +17,6 @@
 #include "constants/iq_skill.h"
 #include "math.h"
 #include "number_util.h"
-#include "status.h"
 #include "dungeon_random.h"
 #include "dungeon_items.h"
 #include "dungeon_info.h"
@@ -28,7 +27,6 @@
 #include "dungeon_leveling.h"
 #include "weather.h"
 #include "game_options.h"
-#include "code_8077274_1.h"
 #include "code_806CD90.h"
 #include "constants/direction.h"
 #include "constants/dungeon.h"
@@ -38,7 +36,7 @@
 #include "code_805D8C8.h"
 #include "dungeon_map_access.h"
 #include "dungeon_data.h"
-#include "move_effects_target.h"
+#include "move_orb_effects_1.h"
 #include "pokemon.h"
 #include "position_util.h"
 #include "random.h"
@@ -47,6 +45,8 @@
 #include "hurl_orb.h"
 #include "dungeon_mon_spawn.h"
 #include "move_orb_actions_1.h"
+#include "move_orb_effects_2.h"
+#include "move_orb_effects_5.h"
 
 extern void sub_8041B18(Entity *pokemon);
 extern void sub_8041B90(Entity *pokemon);
@@ -59,7 +59,6 @@ extern bool8 sub_806A58C(s16 a0);
 extern void sub_8042148(Entity *pokemon);
 extern void sub_8042A24(Entity *r0);
 extern void sub_806A390(Entity *r0);
-extern void sub_8078084(Entity * pokemon);
 extern void sub_800DBBC(void);
 extern bool8 sub_806FA5C(Entity *, Entity *, struct unkStruct_8069D4C *);
 extern void EntityUpdateStatusSprites(Entity *);

@@ -1,11 +1,11 @@
 #include "global.h"
 #include "globaldata.h"
+#include "dungeon_monster_house.h"
 #include "dungeon_vram.h"
 #include "dungeon_map_access.h"
 #include "dungeon_message.h"
 #include "code_805D8C8.h"
 #include "code_806CD90.h"
-#include "code_8077274_1.h"
 #include "dungeon_random.h"
 #include "constants/ability.h"
 #include "constants/item.h"
@@ -14,7 +14,7 @@
 #include "dungeon_items.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
-#include "move_effects_target.h"
+#include "move_orb_effects_1.h"
 #include "moves.h"
 #include "math.h"
 #include "pokemon.h"
@@ -28,69 +28,55 @@
 #include "dungeon_floor_spawns.h"
 #include "dungeon_misc.h"
 #include "dungeon_mon_spawn.h"
+#include "move_orb_effects_5.h"
 
 extern void sub_804178C(u32);
 
-void sub_807AA30(void)
+void TryWakeSleepingWildPokemon(void)
 {
-  bool32 adjacentCheck;
-  bool32 forceWakeup;
-  u8 room;
-  s32 xDiff;
-  s32 wildIndex;
-  s32 yDiff;
-  Entity *teamEntity;
-  Entity *wildEntity;
-  EntityInfo *entityInfo;
-  s32 teamIndex;
+    s32 wildIndex, teamIndex;
 
-  for(wildIndex = 0; wildIndex < DUNGEON_MAX_WILD_POKEMON; wildIndex++)
-  {
-    wildEntity = gDungeon->wildPokemon[wildIndex];
-    if (EntityIsValid(wildEntity) &&
-        (entityInfo = GetEntInfo(wildEntity), entityInfo->sleepClassStatus.status == STATUS_SLEEP) &&
-        (entityInfo->sleepClassStatus.turns == 0x7F)) {
-      adjacentCheck = FALSE;
-      forceWakeup = FALSE;
-      room = GetEntityRoom(wildEntity);
+    for (wildIndex = 0; wildIndex < DUNGEON_MAX_WILD_POKEMON; wildIndex++) {
+        Entity *wildEntity = gDungeon->wildPokemon[wildIndex];
+        if (EntityIsValid(wildEntity)) {
+            EntityInfo *entityInfo = GetEntInfo(wildEntity);
+            if (entityInfo->sleepClassStatus.status != STATUS_SLEEP)
+                continue;
+            if (entityInfo->sleepClassStatus.turns == 0x7F) {
+                bool8 adjacentCheck = FALSE;
+                bool8 wakeUp = FALSE;
+                u8 room = GetEntityRoom(wildEntity);
 
-      for(teamIndex = 0; teamIndex < MAX_TEAM_MEMBERS; teamIndex++)
-      {
-        teamEntity = gDungeon->teamPokemon[teamIndex];
-        if (EntityIsValid(teamEntity) && !HasHeldItem(teamEntity, ITEM_SNEAK_SCARF)) {
-          xDiff = teamEntity->pos.x - wildEntity->pos.x;
-          if (xDiff < 0) {
-            xDiff = -xDiff;
-          }
-          if (xDiff < 2) {
-            yDiff = teamEntity->pos.y- wildEntity->pos.y;
-            if (yDiff < 0) {
-              yDiff = -yDiff;
+                for (teamIndex = 0; teamIndex < MAX_TEAM_MEMBERS; teamIndex++) {
+                    Entity *teamEntity = gDungeon->teamPokemon[teamIndex];
+                    if (EntityIsValid(teamEntity) && !HasHeldItem(teamEntity, ITEM_SNEAK_SCARF)) {
+                        if (abs(teamEntity->pos.x - wildEntity->pos.x) <= 1
+                           && abs(teamEntity->pos.y- wildEntity->pos.y) <= 1)
+                        {
+                            adjacentCheck = TRUE;
+                            break;
+                        }
+                        else if (HasHeldItem(teamEntity, ITEM_RACKET_BAND) && room == GetEntityRoom(teamEntity)) {
+                            wakeUp = TRUE;
+                            break;
+                        }
+                    }
+                }
+
+                if (!wakeUp) {
+                    if (adjacentCheck)
+                        wakeUp = TRUE;
+                }
+
+                if (wakeUp) {
+                    WakeUpPokemon(wildEntity);
+                }
             }
-            if (yDiff < 2) {
-              adjacentCheck = TRUE;
-              break;
-            }
-          }
-          if (HasHeldItem(teamEntity, ITEM_RACKET_BAND) && (room == GetEntityRoom(teamEntity)))
-            goto _WakeUp;
         }
-      }
-
-      if(forceWakeup)
-        goto _WakeUp;
-      else if(adjacentCheck)
-        forceWakeup = TRUE;
-
-      if (forceWakeup) {
-_WakeUp:
-        WakeUpPokemon(wildEntity);
-      }
     }
-  }
 }
 
-void sub_807AB38(Entity *entity, bool8 forcedMonsterHouse)
+void TriggerMonsterHouse(Entity *entity, bool8 forcedMonsterHouse)
 {
     u8 monsterHouseRoomId;
     DungeonPos positions[100];

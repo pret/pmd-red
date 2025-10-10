@@ -6,7 +6,6 @@
 #include "dungeon_range.h"
 #include "dungeon_message.h"
 #include "code_8041AD0.h"
-#include "code_8077274_1.h"
 #include "constants/dungeon.h"
 #include "dungeon_map_access.h"
 #include "dungeon_misc.h"
@@ -28,6 +27,7 @@
 #include "dungeon_pos_data.h"
 #include "dungeon_music.h"
 #include "dungeon_mon_spawn.h"
+#include "move_orb_effects_3.h"
 
 static EWRAM_DATA s32 sNewAtkStats[2] = {0, 0};
 static EWRAM_DATA s32 sNewDefStats[2] = {0, 0};

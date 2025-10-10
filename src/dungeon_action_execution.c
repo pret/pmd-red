@@ -8,7 +8,6 @@
 #include "code_804267C.h"
 #include "code_8066D04.h"
 #include "dungeon_message.h"
-#include "code_8077274_1.h"
 #include "constants/dungeon_action.h"
 #include "constants/dungeon.h"
 #include "constants/iq_skill.h"
@@ -25,7 +24,6 @@
 #include "moves.h"
 #include "pokemon_3.h"
 #include "pokemon.h"
-#include "status.h"
 #include "trap.h"
 #include "dungeon_config.h"
 #include "dungeon_misc.h"
@@ -39,6 +37,8 @@
 #include "dungeon_move.h"
 #include "dungeon_map_access.h"
 #include "warp_target.h"
+#include "move_orb_effects_1.h"
+#include "move_orb_effects_3.h"
 
 void sub_8075BA4(Entity *param_1, u8 param_2);
 void sub_804178C(u8 param_1);

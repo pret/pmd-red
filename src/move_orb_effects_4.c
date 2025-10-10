@@ -1,11 +1,11 @@
 #include "global.h"
 #include "globaldata.h"
+#include "move_orb_effects_4.h"
 #include "dungeon_vram.h"
 #include "dungeon_map_access.h"
 #include "dungeon_message.h"
 #include "code_805D8C8.h"
 #include "code_806CD90.h"
-#include "code_8077274_1.h"
 #include "dungeon_random.h"
 #include "constants/ability.h"
 #include "constants/item.h"
@@ -15,7 +15,7 @@
 #include "dungeon_logic.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
-#include "move_effects_target.h"
+#include "move_orb_effects_1.h"
 #include "moves.h"
 #include "math.h"
 #include "pokemon.h"
@@ -25,14 +25,9 @@
 #include "dungeon_map_access.h"
 #include "dungeon_config.h"
 #include "dungeon_strings.h"
+#include "dungeon_misc.h"
 
-extern void UpdateMinimap();
 extern void EntityUpdateStatusSprites(Entity *);
-extern void sub_8042A74(Entity *r0);
-extern s32 GetMonsterApparentID(Entity *param_1, s16 param_2);
-extern void sub_806A898(Entity *, u32, u32);
-extern void HealTargetHP(Entity *pokemon, Entity *r1, s16, s16, u32);
-extern void sub_80420C8(Entity *r0);
 extern void nullsub_68(Entity *);
 extern void nullsub_67(Entity *);
 extern void nullsub_66(Entity *);
@@ -45,22 +40,8 @@ extern void nullsub_60(Entity *);
 extern void nullsub_59(Entity *);
 extern void nullsub_58(Entity *);
 extern void nullsub_57(Entity *);
-extern void sub_8041B34(Entity *);
-void sub_8041BD0(Entity *r0, u8 r1);
-void sub_8041EB4(Entity *);
-void sub_8041EA4(Entity *);
-extern void sub_8041E84(Entity *);
-extern void sub_8041E94(Entity *);
-extern void sub_8041E74(Entity *);
-extern void sub_8041E60(Entity *);
-extern void sub_8041E4C(Entity *);
-extern void sub_8041E3C(Entity *);
-extern void sub_8041E1C(Entity *);
-extern void nullsub_89(Entity *);
-extern void nullsub_88(Entity *);
-extern void nullsub_87(Entity *);
-extern void nullsub_86(Entity *);
-extern void sub_8041E0C(Entity *);
+extern void sub_8041B34(Entity *pokemon);
+extern void sub_80420C8(Entity *pokemon);
 
 void CounterStatusTarget(Entity * pokemon, Entity * target, u8 newStatus)
 {
