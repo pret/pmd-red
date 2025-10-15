@@ -1,6 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
-#include "dungeon_ai.h"
+#include "dungeon_entity_movement.h"
 #include "constants/iq_skill.h"
 #include "constants/item.h"
 #include "constants/status.h"
@@ -47,26 +47,28 @@
 #include "dungeon_cutscene.h"
 #include "dungeon_monster_house.h"
 #include "dungeon_strings.h"
+#include "dungeon_main.h"
 #include "warp_target.h"
+#include "dungeon_action_execution.h"
+#include "dungeon_tilemap.h"
+#include "run_dungeon.h"
 
-extern void sub_8073D14(Entity *);
-extern void sub_8075708(Entity *entity);
-extern void sub_805229C(void);
-extern void sub_80420B8(Entity *pokemon);
-extern void sub_8041C4C(Entity *pokemon, u32 r1);
-extern void sub_805E804(void);
-extern bool8 TryUseChosenMove(struct Entity *, u32, u32, u32, u32, struct Move *);
-extern void nullsub_97(Entity *entity);
-extern void CheckLeaderTile(void);
-extern void sub_8075708(Entity *entity);
-extern void TryForcedLoss(u32);
-extern void sub_8075900(Entity *pokemon, u8 r1);
-extern void sub_8075050(EntityInfo *info, Unk_Entity_x184 *strPtr);
-extern bool8 sub_803F428(DungeonPos *pos);
+static EWRAM_DATA s32 sSpeedMultiplier = 0;
 
-extern u8 gUnknown_202F32D;
+static void sub_8075050(EntityInfo *info, Unk_Entity_x184 *strPtr);
+static void nullsub_97(Entity *entity);
+static void TryInteractWithTile(Entity *entity);
 
-static EWRAM_DATA s32 gUnknown_202F378 = 0;
+extern void sub_8041888(u32);
+extern void sub_8073D14(Entity *entity);
+
+static inline void SetSpeedMultiplier(void)
+{
+    if (gGameOptionsRef->dungeonSpeed != 0)
+        sSpeedMultiplier = 2;
+    else
+        sSpeedMultiplier = 1;
+}
 
 void sub_8074FB0(Entity *entity, s32 a1, DungeonPos *pos)
 {
@@ -77,11 +79,7 @@ void sub_8074FB0(Entity *entity, s32 a1, DungeonPos *pos)
         entityInfo->action.action = 0;
         return;
     }
-
-    if (gGameOptionsRef->dungeonSpeed != 0)
-        gUnknown_202F378 = 2;
-    else
-        gUnknown_202F378 = 1;
+    SetSpeedMultiplier();
 
     strPtr = &entityInfo->unk184[entityInfo->numMoveTiles];
     strPtr->unk1A = 0;
@@ -90,26 +88,22 @@ void sub_8074FB0(Entity *entity, s32 a1, DungeonPos *pos)
     strPtr->previousTargetMovePosition1.y = entity->pos.y;
     strPtr->previousTargetMovePosition2.x = pos->x;
     strPtr->previousTargetMovePosition2.y = pos->y;
-    strPtr->lastMoveIncrement.x = gUnknown_80F4D44[a1].x * gUnknown_202F378;
-    strPtr->lastMoveIncrement.y = gUnknown_80F4D44[a1].y * gUnknown_202F378;
+    strPtr->lastMoveIncrement.x = gUnknown_80F4D44[a1].x * sSpeedMultiplier;
+    strPtr->lastMoveIncrement.y = gUnknown_80F4D44[a1].y * sSpeedMultiplier;
     sub_8075050(entityInfo, strPtr);
 }
 
-void sub_8075050(EntityInfo *info, Unk_Entity_x184 *strPtr)
+static void sub_8075050(EntityInfo *info, Unk_Entity_x184 *strPtr)
 {
     s32 savedX, savedY;
 
-    if (gGameOptionsRef->dungeonSpeed != 0)
-        gUnknown_202F378 = 2;
-    else
-        gUnknown_202F378 = 1;
-
+    SetSpeedMultiplier();
     info->numMoveTiles++;
     if (info->numMoveTiles == 2) {
-        info->unk184[0].walkAnimFramesLeft = 24 / (gUnknown_202F378 * 2);
+        info->unk184[0].walkAnimFramesLeft = 24 / (sSpeedMultiplier * 2);
         info->unk184[0].lastMoveIncrement.x *= 2;
         info->unk184[0].lastMoveIncrement.y *= 2;
-        strPtr->walkAnimFramesLeft = 24 / (gUnknown_202F378 * 2);
+        strPtr->walkAnimFramesLeft = 24 / (sSpeedMultiplier * 2);
         strPtr->lastMoveIncrement.x *= 2;
         strPtr->lastMoveIncrement.y *= 2;
     }
@@ -119,13 +113,13 @@ void sub_8075050(EntityInfo *info, Unk_Entity_x184 *strPtr)
         savedX = strPtr->lastMoveIncrement.x;
         savedY = strPtr->lastMoveIncrement.y;
         for (i = 0; i < 2; i++) {
-            info->unk184[i].walkAnimFramesLeft = 24 / (gUnknown_202F378 * 3);
+            info->unk184[i].walkAnimFramesLeft = 24 / (sSpeedMultiplier * 3);
             info->unk184[i].lastMoveIncrement.x *= 3;
             info->unk184[i].lastMoveIncrement.y *= 3;
             info->unk184[i].lastMoveIncrement.x /= 2;
             info->unk184[i].lastMoveIncrement.y /= 2;
         }
-        strPtr->walkAnimFramesLeft = 24 / (gUnknown_202F378 * 3);
+        strPtr->walkAnimFramesLeft = 24 / (sSpeedMultiplier * 3);
         strPtr->lastMoveIncrement.x = savedX * 3;
         strPtr->lastMoveIncrement.y = savedY * 3;
     }
@@ -135,18 +129,18 @@ void sub_8075050(EntityInfo *info, Unk_Entity_x184 *strPtr)
         savedX = strPtr->lastMoveIncrement.x;
         savedY = strPtr->lastMoveIncrement.y;
         for (i = 0; i < 3; i++) {
-            info->unk184[i].walkAnimFramesLeft = 24 / (gUnknown_202F378 * 4);
+            info->unk184[i].walkAnimFramesLeft = 24 / (sSpeedMultiplier * 4);
             info->unk184[i].lastMoveIncrement.x *= 4;
             info->unk184[i].lastMoveIncrement.y *= 4;
             info->unk184[i].lastMoveIncrement.x /= 3;
             info->unk184[i].lastMoveIncrement.y /= 3;
         }
-        strPtr->walkAnimFramesLeft = 24 / (gUnknown_202F378 * 4);
+        strPtr->walkAnimFramesLeft = 24 / (sSpeedMultiplier * 4);
         strPtr->lastMoveIncrement.x = savedX * 4;
         strPtr->lastMoveIncrement.y = savedY * 4;
     }
     else {
-        strPtr->walkAnimFramesLeft = 24 / gUnknown_202F378;
+        strPtr->walkAnimFramesLeft = 24 / sSpeedMultiplier;
     }
 }
 
@@ -159,9 +153,9 @@ bool8 DisplayActions(Entity *a0)
 
     gUnknown_202F32D = 0;
     if (gGameOptionsRef->dungeonSpeed != 0)
-        gUnknown_202F378 = 2;
+        sSpeedMultiplier = 2;
     else
-        gUnknown_202F378 = 1;
+        sSpeedMultiplier = 1;
 
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
         Entity *mon = gDungeon->activePokemon[i];
@@ -203,7 +197,7 @@ bool8 DisplayActions(Entity *a0)
     gDungeon->unkB8 = a0;
     if (gDungeon->unk644.unk28 == 0 && r9) {
         sub_80526D0(0x35);
-        for (loop = 0; loop < 24 / gUnknown_202F378; loop++) {
+        for (loop = 0; loop < 24 / sSpeedMultiplier; loop++) {
             DungeonRunFrameActions(7);
             for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
                 Entity *mon = gDungeon->activePokemon[i];
@@ -274,7 +268,7 @@ bool8 DisplayActions(Entity *a0)
                     CheckLeaderTile();
                 }
                 else {
-                    sub_8075708(mon);
+                    TryInteractWithTile(mon);
                 }
                 if (!EntityIsValid(mon))
                     continue;
@@ -290,7 +284,7 @@ bool8 DisplayActions(Entity *a0)
 
                 EnemyEvolution(mon);
                 sub_8046D20();
-                sub_8075900(mon, gDungeon->forceMonsterHouse);
+                TryTriggerMonsterHouseWithMsg(mon, gDungeon->forceMonsterHouse);
             }
             if (!EntityIsValid(mon))
                 continue;
@@ -319,95 +313,84 @@ bool8 DisplayActions(Entity *a0)
     return TRUE;
 }
 
-void sub_8075680(void)
+void sub_8075680(bool8 unused)
 {
     u32 direction;
-    DungeonPos *targetPos;
-    Entity *entity;
-    EntityInfo *info;
-    int index;
+    int i;
 
-    for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
-    {
-        entity = gDungeon->activePokemon[index];
-        if ((EntityIsValid(entity)) && (info = GetEntInfo(entity), !info->isTeamLeader)) {
-            targetPos = &(info->targetPos);
+    for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
+        Entity *entity = gDungeon->activePokemon[i];
+        if (EntityIsValid(entity)) {
+            EntityInfo *info = GetEntInfo(entity);
+            if (!info->isTeamLeader) {
+                DungeonPos *targetPos = &info->targetPos;
 
-            if (targetPos->x == 0 && targetPos->y == 0)
-                continue;
+                if (targetPos->x == 0 && targetPos->y == 0)
+                    continue;
+                if (targetPos->x == entity->pos.x && targetPos->y == entity->pos.y)
+                    continue;
+                if (CheckVariousStatuses2(entity, TRUE))
+                    continue;
 
-            if (targetPos->x == entity->pos.x && targetPos->y == entity->pos.y)
-                continue;
-
-            if (CheckVariousStatuses2(entity, TRUE))
-                continue;
-
-            direction = GetDirectionTowardsPosition(&entity->pos, targetPos);
-            info->action.direction = direction & DIRECTION_MASK;
-            sub_806CDD4(entity, sub_806CEBC(entity), direction);
+                direction = GetDirectionTowardsPosition(&entity->pos, targetPos);
+                info->action.direction = direction & DIRECTION_MASK;
+                sub_806CDD4(entity, sub_806CEBC(entity), direction);
+            }
         }
     }
 }
 
-void nullsub_97(Entity *entity)
+static void nullsub_97(Entity *entity)
 {}
 
-void sub_8075708(Entity *entity)
+static void TryInteractWithTile(Entity *entity)
 {
-    bool8 bVar1;
-    bool8 bVar2;
     const Tile *tile;
-    Trap *trapData;
-    Entity *trap;
-    EntityInfo *info;
-
-    info = GetEntInfo(entity);
-    if (!EntityIsValid(entity)) {
+    Entity *tileEntity;
+    EntityInfo *info = GetEntInfo(entity);
+    if (!EntityIsValid(entity))
         return;
-    }
+
     tile = GetTileAtEntitySafe(entity);
-    if (((IQSkillIsEnabled(entity, IQ_SUPER_MOBILE)) && (info->invisibleClassStatus.status != STATUS_MOBILE)) &&
-        (!HasHeldItem(entity, ITEM_MOBILE_SCARF))) {
+    if (IQSkillIsEnabled(entity, IQ_SUPER_MOBILE)
+        && info->invisibleClassStatus.status != STATUS_MOBILE
+        && !(HasHeldItem(entity, ITEM_MOBILE_SCARF)))
+    {
         sub_804AE84(&entity->pos);
     }
-    trap = tile->object;
-    if (trap == NULL) {
+    tileEntity = tile->object;
+    if (tileEntity == NULL)
         return;
-    }
 
-    switch(GetEntityType(trap)) {
-        case ENTITY_TRAP:
-            trapData = GetTrapInfo(trap);
-            bVar1 = FALSE;
-            bVar2 = FALSE;
-            if ((IQSkillIsEnabled(entity, IQ_TRAP_SEER)) && (!trap->isVisible)) {
-                trap->isVisible = TRUE;
+    switch (GetEntityType(tileEntity)) {
+        case ENTITY_TRAP: {
+            Trap *trapData = GetTrapInfo(tileEntity);
+            bool8 trigger = FALSE;
+            bool8 onlyMakeVisible = FALSE;
+            if (IQSkillIsEnabled(entity, IQ_TRAP_SEER) && !tileEntity->isVisible) {
+                tileEntity->isVisible = TRUE;
                 UpdateTrapsVisibility();
-                bVar2 = TRUE;
+                onlyMakeVisible = TRUE;
             }
 
             if (trapData->unk1 == 0) {
-                if (!trap->isVisible) goto _080757EC;
-                if (info->isNotTeamMember) goto _080757EC;
+                if (tileEntity->isVisible && !info->isNotTeamMember)
+                    trigger = TRUE;
             }
-            else {
-                if (trapData->unk1 == 1) {
-                    if (!info->isNotTeamMember) goto _080757EC;
-                    goto _ret;
-                }
-                if ((trapData->unk1 == 2) && (!info->isNotTeamMember)) {
-                    bVar1 = TRUE;
-                }
-            _080757EC:
-                if (!bVar1) {
-                    return;
-                }
+            else if (trapData->unk1 == 1) {
+                if (info->isNotTeamMember)
+                    trigger = TRUE;
             }
-        _ret:
-            if (!bVar2) {
+            else if (trapData->unk1 == 2) {
+                if (!info->isNotTeamMember)
+                    trigger = TRUE;
+            }
+
+            if (trigger && !onlyMakeVisible) {
                 TryTriggerTrap(entity, &entity->pos, 0, 1);
             }
             break;
+        }
         case ENTITY_ITEM:
             sub_8073D14(entity);
             break;
@@ -419,119 +402,85 @@ void sub_8075708(Entity *entity)
     }
 }
 
-u32 sub_8075818(Entity *entity)
+bool8 CheckEntityTileForInteraction(Entity *entity)
 {
-    const Tile *tile;
-    EntityInfo *entityInfo;
     Entity *subEntity;
-    Item *item;
-    Trap *trapData;
-    u8 r1;
+    const Tile *tile;
+    EntityInfo *entityInfo = GetEntInfo(entity);
+    if (!EntityIsValid(entity))
+        return FALSE;
 
-    entityInfo = GetEntInfo(entity);
-    if(EntityIsValid(entity))
-    {
-        tile = GetTileAtEntitySafe(entity);
-        if(IQSkillIsEnabled(entity, IQ_SUPER_MOBILE))
-            if(!(tile->terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)))
-                return 1;
-        subEntity = tile->object;
-        if(subEntity != NULL)
-        {
-            switch(GetEntityType(subEntity))
-            {
-                case ENTITY_NOTHING:
-                case ENTITY_MONSTER:
-                case ENTITY_UNK_4:
-                case ENTITY_UNK_5:
-                    break;
-                case ENTITY_TRAP:
-                    trapData = GetTrapInfo(subEntity);
-                    r1 = 0;
-                    if(trapData->unk1 == 0)
-                    {
-                        if(!subEntity->isVisible || entityInfo->isNotTeamMember)
-                            goto flag_check;
-                        else
-                            goto error;
-                    }
-                    else if(trapData->unk1 == 1)
-                    {
-                        if(!entityInfo->isNotTeamMember)
-                            goto flag_check;
-                        else
-                            goto error;
-                    }
-                    else if(trapData->unk1 == 2)
-                    {
-                        if(!entityInfo->isNotTeamMember)
-                            r1 = 1;
-                    }
-flag_check:
-                    if(r1 == 0)
-                        break;
-                    else
-                        goto error;
-                case ENTITY_ITEM:
-                    if(!entityInfo->isTeamLeader)
-                    {
-                        if(!(entityInfo->heldItem.flags & ITEM_FLAG_EXISTS))
-                        {
-                            if(!(tile->terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)))
-                            {
-                                if(entityInfo->isNotTeamMember)
-                                    break;
-                                else
-                                {
-                                    item = GetItemInfo(subEntity);
-                                    if(!(item->flags & ITEM_FLAG_IN_SHOP))
-                                    {
-                                        return 1;
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                item = GetItemInfo(subEntity);
-                                if(!(item->flags & ITEM_FLAG_IN_SHOP))
-                                {
-error:
-                                    return 1;
-                                }
-                            }
-                        }
-                    }
-                    break;
+    tile = GetTileAtEntitySafe(entity);
+    if (IQSkillIsEnabled(entity, IQ_SUPER_MOBILE) && GetTerrainType(tile) == TERRAIN_TYPE_WALL)
+        return TRUE;
+    subEntity = tile->object;
+    if (subEntity == NULL)
+        return FALSE;
+
+    switch (GetEntityType(subEntity)) {
+        case ENTITY_TRAP: {
+            Trap *trapData = GetTrapInfo(subEntity);
+            bool8 flag = FALSE;
+
+            if (trapData->unk1 == 0) {
+                if (subEntity->isVisible && !entityInfo->isNotTeamMember)
+                    flag = TRUE;
             }
+            else if (trapData->unk1 == 1) {
+                if (entityInfo->isNotTeamMember)
+                    flag = TRUE;
+            }
+            else if (trapData->unk1 == 2) {
+                if (!entityInfo->isNotTeamMember)
+                    flag = TRUE;
+            }
+
+            if (flag)
+                return TRUE;
+
+            break;
         }
-    }
-    return 0;
-}
-
-extern void sub_8041888(u32);
-
-void sub_8075900(Entity *pokemon, u8 r1)
-{
-    if(EntityIsValid(pokemon))
-    {
-        if(!GetEntInfo(pokemon)->isNotTeamMember)
-        {
-            if(!IsFloorOver())
-            {
-                if(!gDungeon->unk644.monsterHouseTriggered)
-                {
-                    if((GetTileAtEntitySafe(pokemon)->terrainFlags & TERRAIN_TYPE_IN_MONSTER_HOUSE))
-                    {
-                        // It's a monster house!
-                        LogMessageByIdWithPopupCheckUser(GetLeader(), gPtrItsaMonsterHouseMessage);
-                        gDungeon->unk644.monsterHouseTriggeredEvent = TRUE;
-                        TriggerMonsterHouse(pokemon, r1);
-                        sub_8041888(0);
-                        if(sub_803F428(&pokemon->pos))
-                            sub_803E708(0x78, 0x39);
+        case ENTITY_ITEM:
+            if (!entityInfo->isTeamLeader && !ItemExists(&entityInfo->heldItem)) {
+                if (GetTerrainType(tile) == TERRAIN_TYPE_WALL) {
+                    if (!entityInfo->isNotTeamMember) {
+                        Item *item = GetItemInfo(subEntity);
+                        if (!(item->flags & ITEM_FLAG_IN_SHOP))
+                            return TRUE;
                     }
                 }
+                else {
+                    Item *item = GetItemInfo(subEntity);
+                    if (!(item->flags & ITEM_FLAG_IN_SHOP))
+                        return TRUE;
+                }
+
             }
-        }
+            break;
+        case ENTITY_NOTHING:
+        case ENTITY_MONSTER:
+        case ENTITY_UNK_4:
+        case ENTITY_UNK_5:
+            break;
+    }
+
+    return FALSE;
+}
+
+void TryTriggerMonsterHouseWithMsg(Entity *pokemon, bool8 forcedMonsterHouse)
+{
+    if (EntityIsValid(pokemon)
+        && !GetEntInfo(pokemon)->isNotTeamMember
+        && !IsFloorOver()
+        && !gDungeon->unk644.monsterHouseTriggered
+        && (GetTileAtEntitySafe(pokemon)->terrainFlags & TERRAIN_TYPE_IN_MONSTER_HOUSE))
+    {
+        // It's a monster house!
+        LogMessageByIdWithPopupCheckUser(GetLeader(), gPtrItsaMonsterHouseMessage);
+        gDungeon->unk644.monsterHouseTriggeredEvent = TRUE;
+        TriggerMonsterHouse(pokemon, forcedMonsterHouse);
+        sub_8041888(0);
+        if (sub_803F428(&pokemon->pos))
+            sub_803E708(0x78, 0x39);
     }
 }

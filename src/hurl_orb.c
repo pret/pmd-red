@@ -13,7 +13,7 @@
 #include "constants/type.h"
 #include "constants/weather.h"
 #include "dungeon_info.h"
-#include "dungeon_ai.h"
+#include "dungeon_entity_movement.h"
 #include "dungeon_config.h"
 #include "dungeon_generation.h"
 #include "dungeon_items.h"
@@ -243,6 +243,6 @@ static void sub_807F9BC(Entity *entity)
             sub_807EC28(FALSE);
         }
         sub_806A5B8(entity);
-        sub_8075900(entity, gDungeon->forceMonsterHouse);
+        TryTriggerMonsterHouseWithMsg(entity, gDungeon->forceMonsterHouse);
     }
 }

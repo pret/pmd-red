@@ -39,6 +39,7 @@
 #include "warp_target.h"
 #include "move_orb_effects_1.h"
 #include "move_orb_effects_3.h"
+#include "dungeon_entity_movement.h"
 
 void sub_8075BA4(Entity *param_1, u8 param_2);
 void sub_804178C(u8 param_1);
@@ -48,7 +49,6 @@ extern void sub_8067110(Entity *);
 void HandleUseMoveAIAction(Entity *target);
 void sub_8041888(u8 param_1);
 void sub_805EFB4(Entity *, u8);
-void sub_8074FB0(Entity *, u8, DungeonPos *);
 void HandlePlaceItemAction(Entity *);
 void HandlePickUpPlayerAction(Entity *);
 void sub_8066E14(Entity * );
@@ -67,7 +67,6 @@ void sub_806A1E8(Entity *pokemon);
 void HandlePickUpAIAction(Entity *pokemon);
 void HandleThrowItemAIAction(Entity *pokemon);
 void HandleEatAIAction(Entity *pokemon);
-u32 sub_8075818(Entity *entity);;
 
 EWRAM_DATA u8 gUnknown_202F32C = 0;
 EWRAM_DATA u8 gUnknown_202F32D = 0;
@@ -321,7 +320,9 @@ bool8 ExecuteEntityDungeonAction(Entity *entity)
                 }
             }
             if (bVar14) {
-                sub_8075818(entity);
+                if (CheckEntityTileForInteraction(entity)) {
+                    // Some missing DS/Debug checks there?
+                }
             }
             if (EntityIsValid(entity)) {
                 if (!sub_8044B84()) {

@@ -7,7 +7,7 @@
 #include "dungeon_message.h"
 #include "code_806CD90.h"
 #include "structs/str_dungeon.h"
-#include "dungeon_ai.h"
+#include "dungeon_entity_movement.h"
 #include "run_dungeon.h"
 #include "dungeon_generation.h"
 #include "dungeon_logic.h"
@@ -132,7 +132,7 @@ void HandleOneRoomOrb(Entity *pokemon, Entity *target)
 	UpdateTrapsVisibility();
 	LogMessageByIdWithPopupCheckUser(pokemon,gUnknown_80FD3A0);
 	sub_803E708(0x28,0x2b);
-	sub_8075900(pokemon,1);
+	TryTriggerMonsterHouseWithMsg(pokemon,1);
 	for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
 	{
 		entity = gDungeon->activePokemon[index];

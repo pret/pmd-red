@@ -7,7 +7,7 @@
 #include "dungeon_message.h"
 #include "code_806CD90.h"
 #include "structs/str_dungeon.h"
-#include "dungeon_ai.h"
+#include "dungeon_entity_movement.h"
 #include "run_dungeon.h"
 #include "dungeon_generation.h"
 #include "dungeon_logic.h"
@@ -138,5 +138,5 @@ void WarpTarget(Entity *pokemon, Entity *target, u32 param_3, DungeonPos *pos)
         sub_807EC28(0);
     }
     sub_806A5B8(target);
-    sub_8075900(target,gDungeon->forceMonsterHouse);
+    TryTriggerMonsterHouseWithMsg(target,gDungeon->forceMonsterHouse);
 }

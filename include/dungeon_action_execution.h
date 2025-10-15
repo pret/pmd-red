@@ -3,6 +3,9 @@
 
 #include "structs/dungeon_entity.h"
 
+extern u8 gUnknown_202F32C;
+extern u8 gUnknown_202F32D;
+
 bool8 ExecuteEntityDungeonAction(Entity *entity);
 
 #endif

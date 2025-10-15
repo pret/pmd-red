@@ -36,6 +36,7 @@
 #include "dungeon_items.h"
 #include "dungeon_kecleon_shop.h"
 #include "dungeon_strings.h"
+#include "dungeon_entity_movement.h"
 
 #define REGULAR_ATTACK_INDEX 4
 
@@ -1034,7 +1035,7 @@ void HandleUseOrbAction(Entity *pokemon)
         }
 
         sub_806A5B8(pokemon);
-        sub_8075900(pokemon, gDungeon->forceMonsterHouse);
+        TryTriggerMonsterHouseWithMsg(pokemon, gDungeon->forceMonsterHouse);
     }
     else if (r4)
         sub_8044D40(&act, 0);
