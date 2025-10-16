@@ -7,7 +7,7 @@
 #include "dungeon_message.h"
 #include "code_806CD90.h"
 #include "structs/str_dungeon.h"
-#include "dungeon_ai.h"
+#include "dungeon_entity_movement.h"
 #include "run_dungeon.h"
 #include "dungeon_generation.h"
 #include "dungeon_logic.h"
@@ -83,6 +83,6 @@ void HandlePounceOrb(Entity *pokemon, Entity *target, u8 r2)
         }
         sub_806A5B8(target);
 
-        sub_8075900(target, gDungeon->forceMonsterHouse);
+        TryTriggerMonsterHouseWithMsg(target, gDungeon->forceMonsterHouse);
     }
 }

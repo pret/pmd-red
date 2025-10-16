@@ -59,12 +59,12 @@
 #include "dungeon_engine.h"
 #include "dungeon_item_action.h"
 #include "dungeon_strings.h"
+#include "dungeon_entity_movement.h"
 
 extern void HandleUnsetItemAction(Entity *,bool8);
 extern void TryTriggerTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4);
 void TryPointCameraToMonster(Entity *a0, u8 a1);
 bool8 sub_80701A4(Entity *a0);
-void sub_8075680(u32);
 void ClearUnpaidFlagFromAllItems(void);
 void sub_806A914(u8 a0, u8 a1, u8 a2);
 u16 GetLeaderActionId(void);
@@ -175,7 +175,7 @@ void DungeonHandlePlayerInput(void)
             }
 
             if (var_38 != 0 && --var_38 == 0) {
-                sub_8075680(0);
+                sub_8075680(FALSE);
             }
 
             TryCreateModeArrows(leader);

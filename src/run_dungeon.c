@@ -23,7 +23,7 @@
 #include "cpu.h"
 #include "dungeon_8083AB0.h"
 #include "dungeon_info.h"
-#include "dungeon_ai.h"
+#include "dungeon_entity_movement.h"
 #include "dungeon_config.h"
 #include "dungeon_engine.h"
 #include "dungeon_generation.h"
@@ -58,6 +58,7 @@
 #include "dungeon_cleared_window.h"
 #include "dungeon_cutscene.h"
 #include "dungeon_mon_spawn.h"
+#include "dungeon_action_execution.h"
 
 EWRAM_INIT struct UnkStruct_203B414 *gUnknown_203B414 = NULL;
 EWRAM_INIT Dungeon *gDungeon = NULL;
@@ -90,7 +91,6 @@ extern bool8 TryForcedLoss(bool8);
 extern void sub_806A914(bool8 a0, bool8 a1, bool8 showRunAwayEffect);
 extern void sub_8042B0C(Entity *);
 
-extern u8 gUnknown_202F32C;
 extern u8 gUnknown_202F1A8;
 
 void EnforceMaxItemsAndMoney(void);
@@ -453,7 +453,7 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
         }
         else {
             sub_80427AC();
-            sub_8075900(GetLeader(), gDungeon->forceMonsterHouse);
+            TryTriggerMonsterHouseWithMsg(GetLeader(), gDungeon->forceMonsterHouse);
             sub_807EAA0(1, 0);
         }
 

@@ -247,7 +247,7 @@ SECTIONS {
         src/dungeon_action_execution.o(.text);
         src/dungeon_ai_items.o(.text);
         src/dungeon_turn_effects.o(.text);
-        src/code_8075708.o(.text);
+        src/dungeon_entity_movement.o(.text);
         src/dungeon_ai.o(.text);
         src/move_orb_effects_1.o(.text);
         src/move_orb_effects_2.o(.text);
@@ -632,7 +632,7 @@ SECTIONS {
         src/dungeon_action_execution.o(.rodata);
         src/dungeon_ai_items.o(.rodata);
         src/dungeon_turn_effects.o(.rodata);
-        src/code_8075708.o(.rodata);
+        src/dungeon_entity_movement.o(.rodata);
         src/dungeon_ai.o(.rodata);
         src/move_orb_effects_1.o(.rodata);
         src/move_orb_effects_2.o(.rodata);

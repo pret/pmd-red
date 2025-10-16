@@ -13,7 +13,7 @@
 #include "constants/targeting.h"
 #include "constants/type.h"
 #include "constants/weather.h"
-#include "dungeon_ai.h"
+#include "dungeon_entity_movement.h"
 #include "dungeon_logic.h"
 #include "dungeon_config.h"
 #include "run_dungeon.h"
@@ -655,7 +655,7 @@ _0805AA5E:
         sub_807EC28(FALSE);
       }
       sub_806A5B8(target);
-      sub_8075900(target,gDungeon->forceMonsterHouse);
+      TryTriggerMonsterHouseWithMsg(target,gDungeon->forceMonsterHouse);
     }
   }
   return TRUE;

@@ -55,7 +55,7 @@
     .include "src/dungeon_leveling.o"
     .include "src/dungeon_action_execution.o"
     .include "src/dungeon_ai_items.o"
-    .include "src/code_8075708.o"
+    .include "src/dungeon_entity_movement.o"
 	.space 4
     .include "src/dungeon_ai_attack.o"
     .include "src/dungeon_cutscene.o"
