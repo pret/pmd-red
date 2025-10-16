@@ -76,7 +76,7 @@ static void InitializeTestStats(void)
 {
     s32 i;
 
-    sub_8001024(&sPersonalityTestTracker->unk4);
+    ReadTeamBasicInfo(&sPersonalityTestTracker->TeamBasicInfo);
     sPersonalityTestTracker->FrameCounter = 0;
     sPersonalityTestTracker->TestState = 0;
     sPersonalityTestTracker->QuestionCounter = 0;
@@ -167,7 +167,7 @@ u32 HandleTestTrackerState(void)
 
 void DeleteTestTracker(void)
 {
-    sub_8001044(&sPersonalityTestTracker->unk4);
+    WriteTeamBasicInfo(&sPersonalityTestTracker->TeamBasicInfo);
     MemoryFree(sPersonalityTestTracker);
     sPersonalityTestTracker = NULL;
 }
@@ -273,7 +273,7 @@ static void RevealPersonality(void)
             sPersonalityTestTracker->playerNature = currentNature;
     }
 
-    sPersonalityTestTracker->unk4.StarterID = gStarters[sPersonalityTestTracker->playerNature][sPersonalityTestTracker->playerGender];
+    sPersonalityTestTracker->TeamBasicInfo.StarterID = gStarters[sPersonalityTestTracker->playerNature][sPersonalityTestTracker->playerGender];
     PrintPersonalityTypeDescription();
     sPersonalityTestTracker->TestState = PERSONALITY_STARTER_REVEAL;
 }
@@ -313,7 +313,7 @@ static void AdvanceToPartnerSelection(void)
 
 static void CallCreatePartnerSelectionMenu(void)
 {
-    CreatePartnerSelectionMenu(sPersonalityTestTracker->unk4.StarterID);
+    CreatePartnerSelectionMenu(sPersonalityTestTracker->TeamBasicInfo.StarterID);
     sPersonalityTestTracker->TestState = PERSONALITY_ADVANCE_TO_PARTNER_NICKNAME_1;
 }
 
@@ -326,7 +326,7 @@ static void PromptForPartnerNickname(void)
     if (selectedPartner != 0xFFFF) {
         if (selectedPartner != 0xFFFE) {
             sub_803CE6C();
-            sPersonalityTestTracker->unk4.PartnerID = selectedPartner;
+            sPersonalityTestTracker->TeamBasicInfo.PartnerID = selectedPartner;
             CreateDialogueBoxAndPortrait(gPartnerNickPrompt, 0, 0, 0x301);
             sPersonalityTestTracker->TestState = PERSONALITY_ADVANCE_TO_PARTNER_NICKNAME_2;
         }
@@ -343,8 +343,8 @@ static void AdvanceToPartnerNicknameScreen(void)
 
 static void NicknamePartner(void)
 {
-    CopyStringtoBuffer(sPersonalityTestTracker->unk4.PartnerNick, GetMonSpecies(sPersonalityTestTracker->unk4.PartnerID));
-    CreateConfirmNameMenu(3, sPersonalityTestTracker->unk4.PartnerNick);
+    CopyStringtoBuffer(sPersonalityTestTracker->TeamBasicInfo.PartnerNick, GetMonSpecies(sPersonalityTestTracker->TeamBasicInfo.PartnerID));
+    CreateConfirmNameMenu(3, sPersonalityTestTracker->TeamBasicInfo.PartnerNick);
     sPersonalityTestTracker->TestState = PERSONALITY_END_INTRO;
 }
 
@@ -375,7 +375,7 @@ static void PromptNewQuestion(void)
 
 static void PrintPersonalityTypeDescription(void)
 {
-    CopyMonsterNameToBuffer(gFormatBuffer_Monsters[0], sPersonalityTestTracker->unk4.StarterID);
+    CopyMonsterNameToBuffer(gFormatBuffer_Monsters[0], sPersonalityTestTracker->TeamBasicInfo.StarterID);
     CreateDialogueBoxAndPortrait(sPersonalityTypeDescriptionTable[sPersonalityTestTracker->playerNature], 0, 0, 0x101);
 }
 
@@ -388,7 +388,7 @@ static void PersonalityTest_DisplayStarterSprite(void)
     const u8 *gfx;
     WindowTemplates stackArray;
 
-    starterID = sPersonalityTestTracker->unk4.StarterID;
+    starterID = sPersonalityTestTracker->TeamBasicInfo.StarterID;
     RestoreSavedWindows(&stackArray);
     stackArray.id[1] = sUnknown_80F4244;
     ResetUnusedInputStruct();
