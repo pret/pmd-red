@@ -11,7 +11,7 @@
 #include "dungeon_strings.h"
 #include "dungeon_util.h"
 #include "dungeon_misc.h"
-#include "code_806CD90.h"
+#include "dungeon_mon_sprite_render.h"
 #include "dungeon_pos_data.h"
 #include "dungeon_floor_spawns.h"
 #include "hurl_orb.h"

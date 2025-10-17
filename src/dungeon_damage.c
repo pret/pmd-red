@@ -27,7 +27,7 @@
 #include "dungeon_leveling.h"
 #include "weather.h"
 #include "game_options.h"
-#include "code_806CD90.h"
+#include "dungeon_mon_sprite_render.h"
 #include "constants/direction.h"
 #include "constants/dungeon.h"
 #include "dungeon_vram.h"
@@ -44,6 +44,7 @@
 #include "exclusive_pokemon.h"
 #include "hurl_orb.h"
 #include "dungeon_mon_spawn.h"
+#include "dungeon_mon_recruit.h"
 #include "move_orb_actions_1.h"
 #include "move_orb_effects_2.h"
 #include "move_orb_effects_5.h"
@@ -54,13 +55,11 @@ extern void sub_8041D00(Entity *pokemon, Entity *target);
 extern void sub_8042238(Entity *pokemon, Entity *target);
 extern void sub_803ED30(s32, Entity *r0, u8, s32);
 extern bool8 sub_806A458(Entity *);
-extern bool8 TryRecruitMonster(Entity *attacker, Entity *target);
 extern bool8 sub_806A58C(s16 a0);
 extern void sub_8042148(Entity *pokemon);
 extern void sub_8042A24(Entity *r0);
 extern void sub_806A390(Entity *r0);
 extern void sub_800DBBC(void);
-extern bool8 sub_806FA5C(Entity *, Entity *, struct unkStruct_8069D4C *);
 extern void EntityUpdateStatusSprites(Entity *);
 extern void PointCameraToMonster(Entity *);
 extern void sub_8041B74(Entity *pokemon);
@@ -737,7 +736,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
 
         sub_8069D4C(&sp, target);
         if (TryRecruitMonster(attacker, target)) {
-            if (!sub_806FA5C(attacker, target, &sp)) {
+            if (!HandleMonsterJoinSequence(attacker, target, &sp)) {
                 HandleFaint(target, DUNGEON_EXIT_LEFT_WITHOUT_BEING_BEFRIENDED, attacker);
             }
             else {

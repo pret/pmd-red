@@ -5,7 +5,7 @@
 #include "code_8041AD0.h"
 #include "dungeon_message.h"
 #include "dungeon_random.h"
-#include "code_806CD90.h"
+#include "dungeon_mon_sprite_render.h"
 #include "constants/dungeon_exit.h"
 #include "constants/residual_damage.h"
 #include "constants/trap.h"

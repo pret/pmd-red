@@ -11,7 +11,7 @@
 #include "structs/str_dungeon.h"
 #include "dungeon_vram.h"
 #include "code_805D8C8.h"
-#include "code_806CD90.h"
+#include "dungeon_mon_sprite_render.h"
 #include "dungeon_config.h"
 #include "run_dungeon.h"
 #include "dungeon_range.h"

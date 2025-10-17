@@ -19,7 +19,7 @@
 #include "dungeon_logic.h"
 #include "dungeon_strings.h"
 #include "dungeon_menu_moves.h"
-#include "code_806CD90.h"
+#include "dungeon_mon_sprite_render.h"
 #include "moves.h"
 #include "structs/dungeon_entity.h"
 #include "structs/map.h"

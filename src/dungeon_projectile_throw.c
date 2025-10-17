@@ -10,7 +10,7 @@
 #include "dungeon_config.h"
 #include "dungeon_pos_data.h"
 #include "dungeon_tilemap.h"
-#include "code_806CD90.h"
+#include "dungeon_mon_sprite_render.h"
 #include "dungeon_message.h"
 #include "move_util.h"
 #include "move_orb_effects_5.h"

@@ -20,9 +20,9 @@
 #include "menu_input.h"
 #include "weather.h"
 #include "dungeon_wild_mon_spawn.h"
+#include "dungeon_entity_movement.h"
+#include "dungeon_wind.h"
 
-extern void sub_807E378(void);
-extern u8 DisplayActions(u32);
 extern void sub_805F02C(void);
 
 static void sub_8044454(void);
@@ -53,7 +53,7 @@ void RunFractionalTurn(bool8 param_1)
     cVar2 = RunLeaderTurn(param_1);
     if (IsFloorOver()) return;
     if (cVar2) {
-        sub_807E378();
+        UpdateWindTurns();
         if (IsFloorOver()) return;
     }
     if (IsFloorOver()) return;

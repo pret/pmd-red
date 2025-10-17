@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "move_orb_effects_2.h"
 #include "dungeon_vram.h"
-#include "code_806CD90.h"
+#include "dungeon_mon_sprite_render.h"
 #include "dungeon_random.h"
 #include "constants/ability.h"
 #include "constants/status.h"

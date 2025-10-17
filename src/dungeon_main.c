@@ -19,7 +19,7 @@
 #include "dungeon_tilemap.h"
 #include "dungeon_action.h"
 #include "code_8066D04.h"
-#include "code_806CD90.h"
+#include "dungeon_mon_sprite_render.h"
 #include "dungeon_action.h"
 #include "dungeon_ai_movement.h"
 #include "dungeon_logic.h"

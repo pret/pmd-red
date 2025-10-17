@@ -5,7 +5,7 @@
 #include "code_8041AD0.h"
 #include "code_804267C.h"
 #include "code_805D8C8.h"
-#include "code_806CD90.h"
+#include "dungeon_mon_sprite_render.h"
 #include "constants/ability.h"
 #include "constants/dungeon_exit.h"
 #include "constants/monster.h"

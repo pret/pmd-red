@@ -11,7 +11,7 @@
 #include "dungeon_music.h"
 #include "dungeon_map_access.h"
 #include "dungeon_vram.h"
-#include "code_806CD90.h"
+#include "dungeon_mon_sprite_render.h"
 #include "game_options.h"
 #include "dungeon_items.h"
 #include "moves.h"

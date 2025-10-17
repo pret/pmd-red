@@ -17,7 +17,7 @@
 #include "dungeon_map_access.h"
 #include "position_util.h"
 #include "dungeon_ai.h"
-#include "code_806CD90.h"
+#include "dungeon_mon_sprite_render.h"
 #include "dungeon_random.h"
 #include "code_805D8C8.h"
 #include "dungeon_items.h"

@@ -144,7 +144,7 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
         gDungeon->unk644.unk34 = setupPtr->info.sub0.unkB;
         gDungeon->unk644.dungeonSeed = setupPtr->info.dungeonSeed;
         gDungeon->unk644.windTurns = GetTurnLimit(setupPtr->info.sub0.unk0.id);
-        gDungeon->unk644.unk36 = 0;
+        gDungeon->unk644.windPhase = 0;
         gDungeon->unk644.unk37 = GetRescuesAllowed(setupPtr->info.sub0.unk0.id);
     }
     gDungeon->unk644.unk54 = 0;
@@ -344,7 +344,7 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
         if (!r6) {
             GenerateFloor();
             gDungeon->unk644.windTurns = GetTurnLimit(gDungeon->unk644.dungeonLocation.id);
-            gDungeon->unk644.unk36 = 0;
+            gDungeon->unk644.windPhase = 0;
         }
         sub_804AAD4();
         sub_8049B8C();

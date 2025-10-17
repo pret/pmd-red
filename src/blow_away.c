@@ -7,7 +7,7 @@
 #include "constants/weather.h"
 #include "dungeon_vram.h"
 #include "dungeon_message.h"
-#include "code_806CD90.h"
+#include "dungeon_mon_sprite_render.h"
 #include "structs/str_dungeon.h"
 #include "dungeon_entity_movement.h"
 #include "run_dungeon.h"

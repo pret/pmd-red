@@ -16,7 +16,7 @@
 #include "game_options.h"
 #include "random.h"
 #include "text_1.h"
-#include "code_806CD90.h"
+#include "dungeon_mon_sprite_render.h"
 #include "dungeon_pos_data.h"
 #include "dungeon_data.h"
 

@@ -28,7 +28,7 @@
 #include "constants/status.h"
 #include "constants/type.h"
 #include "constants/weather.h"
-#include "code_806CD90.h"
+#include "dungeon_mon_sprite_render.h"
 #include "dungeon_util.h"
 #include "exclusive_pokemon.h"
 #include "dungeon_config.h"

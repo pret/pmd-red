@@ -8,7 +8,7 @@
 #include "dungeon_move_util.h"
 #include "dungeon_message.h"
 #include "dungeon_move.h"
-#include "code_806CD90.h"
+#include "dungeon_mon_sprite_render.h"
 #include "dungeon_random.h"
 #include "constants/ability.h"
 #include "constants/dungeon_exit.h"

@@ -1,5 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
+#include "dungeon_mon_sprite_render.h"
 #include "constants/direction.h"
 #include "constants/status.h"
 #include "constants/ability.h"
@@ -11,7 +12,6 @@
 #include "code_8041AD0.h"
 #include "code_804267C.h"
 #include "code_805D8C8.h"
-#include "code_806CD90.h"
 #include "dungeon_config.h"
 #include "dungeon_items.h"
 #include "dungeon_map_access.h"
@@ -32,18 +32,19 @@
 #include "sprite.h"
 #include "random.h"
 
-const u8 gUnknown_8106EC8[][13] = {
+extern void sub_8042EC8(Entity *a0, s32 a1);
+
+static const u8 gUnknown_8106EC8[][13] = {
     {0, 1, 7, 7, 7, 5, 6, 7, 7, 7, 7, 7, 7},
     {7, 7, 7, 7, 7, 5, 6, 7, 7, 7, 7, 7, 7},
     {7, 7, 7, 7, 7, 5, 6, 7, 7, 7, 7, 11, 7},
 };
 
-const u8 gUnknown_8106EEF[] = {0x03, 0x04, 0x05, 0x0};
+static const u8 gUnknown_8106EEF[] = {0x03, 0x04, 0x05, 0x0};
 
+static u8 GetEntityShadowIndex(Entity *entity);
 
-extern void sub_8042EC8(Entity *a0, s32 a1);
-
-void sub_806C51C(Entity *entity)
+void UpdateMonsterSprite(Entity *entity)
 {
     s32 x, y, y2;
     bool8 var_3C;
@@ -53,7 +54,7 @@ void sub_806C51C(Entity *entity)
     DungeonPos posArray[4];
     u32 statusSprites;
     bool8 r4;
-    u8 r7;
+    u8 shadowIndex;
     unkStruct_2039DB0 spriteMasks;
     s32 xSprite, ySprite;
 
@@ -240,7 +241,7 @@ void sub_806C51C(Entity *entity)
         return;
 
     r4 = FALSE;
-    r7 = sub_806CF54(entity);
+    shadowIndex = GetEntityShadowIndex(entity);
 
     spriteMasks.unk0 = 0xF3FF;
     spriteMasks.unk2 = 0xFFFF;
@@ -294,8 +295,8 @@ void sub_806C51C(Entity *entity)
 
     xSprite = entInfo->pixelPos.x - gDungeon->unk181e8.cameraPixelPos.x;
     ySprite = entInfo->pixelPos.y - gDungeon->unk181e8.cameraPixelPos.y;
-    if (xSprite >= -32 && ySprite >= -32 && xSprite <= 271 && ySprite <= 191 && r7 != 6 && entity->unk22 == 0) {
-        struct unkStruct_202ED28 *spriteStructPtr = &gUnknown_202ED28[var_34][r7];
+    if (xSprite >= -32 && ySprite >= -32 && xSprite <= 271 && ySprite <= 191 && shadowIndex != 6 && entity->unk22 == 0) {
+        struct unkStruct_202ED28 *spriteStructPtr = &gUnknown_202ED28[var_34][shadowIndex];
         if (entInfo->unk156 != 0) {
             SpriteSetX(&spriteStructPtr->sprite, xSprite + spriteStructPtr->pos.x);
             SpriteSetY(&spriteStructPtr->sprite, ySprite + spriteStructPtr->pos.y);
@@ -307,15 +308,13 @@ void sub_806C51C(Entity *entity)
 
 void sub_806CC10(void)
 {
-    EntityInfo *entityInfo;
-    Entity *entity;
     s32 i;
 
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
-        entity = gDungeon->activePokemon[i];
+        Entity *entity = gDungeon->activePokemon[i];
 
         if (EntityIsValid(entity)) {
-            entityInfo = GetEntInfo(entity);
+            EntityInfo *entityInfo = GetEntInfo(entity);
 
             if (entityInfo->unk166 != 0) {
                 entityInfo->unk166--;
@@ -479,18 +478,17 @@ void sub_806CF18(Entity *entity)
     }
 }
 
-u8 sub_806CF54(Entity *entity)
+static u8 GetEntityShadowIndex(Entity *entity)
 {
-    return GetEntInfo(entity)->unk204;
+    return GetEntInfo(entity)->shadowIndex;
 }
 
 void DetermineAllMonsterShadow(void)
 {
-    Entity *entity;
     s32 i;
 
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
-        entity = gDungeon->activePokemon[i];
+        Entity *entity = gDungeon->activePokemon[i];
 
         if (EntityIsValid(entity))
             DetermineMonsterShadow(entity);
@@ -514,6 +512,6 @@ u32 DetermineMonsterShadow(Entity *entity)
     else if (terrainType == TERRAIN_TYPE_SECONDARY && gDungeonWaterType[gDungeon->tileset] != DUNGEON_WATER_TYPE_LAVA)
         shadowSize = gUnknown_8106EEF[shadowSize];
 
-    entityInfo->unk204 = shadowSize;
+    entityInfo->shadowIndex = shadowSize;
     return shadowSize;
 }

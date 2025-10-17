@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "structs/str_dungeon.h"
 #include "code_805D8C8.h"
-#include "code_806CD90.h"
+#include "dungeon_mon_sprite_render.h"
 #include "dungeon_items.h"
 #include "dungeon_map.h"
 #include "dungeon_map_access.h"

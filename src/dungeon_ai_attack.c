@@ -3,7 +3,7 @@
 #include "dungeon_ai_attack.h"
 #include "dungeon_move_util.h"
 #include "dungeon_message.h"
-#include "code_806CD90.h"
+#include "dungeon_mon_sprite_render.h"
 #include "constants/direction.h"
 #include "constants/dungeon_action.h"
 #include "constants/iq_skill.h"

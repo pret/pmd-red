@@ -5,7 +5,7 @@
 #include "dungeon_vram.h"
 #include "code_8041AD0.h"
 #include "code_804267C.h"
-#include "code_806CD90.h"
+#include "dungeon_mon_sprite_render.h"
 #include "constants/bg_music.h"
 #include "constants/direction.h"
 #include "constants/friend_area.h"
