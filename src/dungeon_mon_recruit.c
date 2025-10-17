@@ -115,7 +115,7 @@ bool8 TryRecruitMonster(Entity *attacker, Entity *target)
     if (rand >= recruitRate)
         return FALSE;
 
-    for (i = 0; i <= (6 - size); i++) {
+    for (i = 0; i <= (MAX_TEAM_BODY_SIZE - size); i++) {
         s32 j;
         for (j = 0; j < size; j++) {
             if (gUnknown_202EE70[i + j] != 0)
