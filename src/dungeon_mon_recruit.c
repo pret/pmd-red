@@ -335,7 +335,7 @@ bool8 CanEntityBeRecruited(Entity *param_1)
         return FALSE;
 
     sub_806F910();
-    for (i = 0; i <= (6 - size); i++) {
+    for (i = 0; i <= (MAX_TEAM_BODY_SIZE - size); i++) {
         for (j = 0; j < size; j++){
             if (gUnknown_202EE70[i + j] != 0)
                 break;
