@@ -42,7 +42,7 @@
 #include "def_filearchives.h"
 #include "code_803D110.h"
 #include "dungeon_strings.h"
-#include "dungeon_8083AB0.h"
+#include "dungeon_exit.h"
 #include "dungeon_pos_data.h"
 #include "dungeon_data.h"
 #include "dungeon_tilemap.h"
@@ -523,7 +523,7 @@ void HandleFaint(Entity *entity, s32 dungeonExitReason_, Entity *param_3)
         sub_803E708(0x3c,0x49);
         DisplayMessageLog();
         if (gDungeon->unk6 == 0) {
-            if (gDungeon->unk644.unk2A == 0
+            if (gDungeon->unk644.stoleFromKecleon == 0
                 && dungeonExitReason != DUNGEON_EXIT_DELETED_FOR_EVENT
                 && dungeonExitReason != DUNGEON_EXIT_FAILED_TO_PROTECT_CLIENT
                 && dungeonExitReason != DUNGEON_EXIT_BLOWN_OUT_UNSEEN_FORCE
@@ -553,7 +553,7 @@ void HandleFaint(Entity *entity, s32 dungeonExitReason_, Entity *param_3)
             return;
         }
 
-        sub_8083AB0(dungeonExitReason,param_3,entity);
+        SetUpDungeonExitData(dungeonExitReason,param_3,entity);
         if (dungeonExitReason == DUNGEON_EXIT_RETURNED_WITH_FALLEN_PARTNER) {
             EntityInfo *partnerInfo = NULL;
             for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
@@ -843,22 +843,22 @@ void SetMonSummaryInfoFromEntity(struct MonSummaryInfo *param_1, Entity *target)
     *spDefBoost = 0;
     if ((info->heldItem.flags & ITEM_FLAG_EXISTS) && ((info->heldItem.flags & ITEM_FLAG_STICKY) == 0)) {
         if (info->heldItem.id == ITEM_POWER_BAND) {
-            *atkPtr += gUnknown_810AC60;
+            *atkPtr += gPowerBandBoost;
         }
         if (info->heldItem.id == ITEM_MUNCH_BELT) {
-            *atkPtr += gUnknown_810AC68;
+            *atkPtr += gMunchBeltBoost;
         }
         if (info->heldItem.id == ITEM_SPECIAL_BAND) {
-            *spAtkPtr += gUnknown_810AC62;
+            *spAtkPtr += gSpecialBandBoost;
         }
         if (info->heldItem.id == ITEM_MUNCH_BELT) {
-            *spAtkPtr += gUnknown_810AC68;
+            *spAtkPtr += gMunchBeltBoost;
         }
         if (info->heldItem.id == ITEM_DEF_SCARF) {
-            *defPtr += gUnknown_810AC64;
+            *defPtr += gDefScarfBoost;
         }
         if (info->heldItem.id == ITEM_ZINC_BAND) {
-            *spDefBoost += gUnknown_810AC66;
+            *spDefBoost += gZincBandBoost;
         }
     }
     param_1->tactic = info->tactic;

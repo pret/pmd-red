@@ -1,0 +1,6 @@
+#ifndef GUARD_DUNGEON_WILD_MON_SPAWN_H
+#define GUARD_DUNGEON_WILD_MON_SPAWN_H
+
+void TrySpawnWildMonster(void);
+
+#endif // GUARD_DUNGEON_WILD_MON_SPAWN_H

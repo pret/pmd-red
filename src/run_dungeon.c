@@ -21,7 +21,7 @@
 #include "code_8094F88.h"
 #include "code_8099360.h"
 #include "cpu.h"
-#include "dungeon_8083AB0.h"
+#include "dungeon_exit.h"
 #include "dungeon_info.h"
 #include "dungeon_entity_movement.h"
 #include "dungeon_config.h"
@@ -297,8 +297,8 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
             gDungeon->unk644.unk4C = 0;
             gDungeon->unk644.unk50 = 0;
             gDungeon->unk644.fractionalTurn = 0;
-            gDungeon->unk644.unk1E = 0;
-            gDungeon->unk644.unk2A = 0;
+            gDungeon->unk644.wildMonSpawnFrames = 0;
+            gDungeon->unk644.stoleFromKecleon = 0;
             gDungeon->unk644.unk2B = 0;
             gDungeon->unk644.unk2C = 0;
             gDungeon->unk644.itemHoldersIdentified = 0;
@@ -362,8 +362,8 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
         gDungeon->unk17B38 = 0;
         gDungeon->snatchPokemon = NULL;
         gDungeon->unk17B3C = 0;
-        gDungeon->unk17B34 = NULL;
-        gDungeon->unk17B40 = 0;
+        gDungeon->illuminatePokemon = NULL;
+        gDungeon->illuminateMonSpawnGenID = 0;
         if (!r6) {
             sub_807FA18();
             CreateFloorItems();
@@ -519,7 +519,7 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
             leader = GetLeader();
             DisplayDungeonMessage(0, gPtrClientFaintedMessage, 1);
             gDungeon->unk6 = 0;
-            sub_8083AB0(DUNGEON_EXIT_FAILED_TO_PROTECT_CLIENT, leader, leader);
+            SetUpDungeonExitData(DUNGEON_EXIT_FAILED_TO_PROTECT_CLIENT, leader, leader);
         }
         CloseAllSpriteFiles();
         sub_8049820();
@@ -546,43 +546,43 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
             sub_806C1D8();
 
             if (gDungeon->unk644.unk10 == 1) {
-                if (gDungeon->unk644.unk2A != 0) {
+                if (gDungeon->unk644.stoleFromKecleon != 0) {
                     AllItemsToPlainSeed();
                 }
                 check = TRUE;
             }
             else if (gDungeon->unk11 == 1) {
-                sub_8083AB0(DUNGEON_EXIT_ESCAPED_MIDDLE_OF_EXPLORATION, NULL, GetLeader());
+                SetUpDungeonExitData(DUNGEON_EXIT_ESCAPED_MIDDLE_OF_EXPLORATION, NULL, GetLeader());
                 check = TRUE;
             }
             else if (gDungeon->unk11 == 2) {
-                sub_8083AB0(DUNGEON_EXIT_IMPRESSIVELY_COMPLETED_MISSION, NULL, GetLeader());
-                if (gDungeon->unk644.unk2A != 0) {
+                SetUpDungeonExitData(DUNGEON_EXIT_IMPRESSIVELY_COMPLETED_MISSION, NULL, GetLeader());
+                if (gDungeon->unk644.stoleFromKecleon != 0) {
                     IncrementThievingSuccesses();
                 }
                 check = TRUE;
             }
             else if (gDungeon->unk11 == 3) {
-                sub_8083AB0(DUNGEON_EXIT_BEFRIENDED_MEW, NULL, GetLeader());
-                if (gDungeon->unk644.unk2A != 0) {
+                SetUpDungeonExitData(DUNGEON_EXIT_BEFRIENDED_MEW, NULL, GetLeader());
+                if (gDungeon->unk644.stoleFromKecleon != 0) {
                     IncrementThievingSuccesses();
                 }
                 check = TRUE;
             }
             else if (gDungeon->unk11 == 4) {
                 var = DUNGEON_EXIT_CLEARED_DUNGEON;
-                sub_8083AB0(var, NULL, GetLeader());
+                SetUpDungeonExitData(var, NULL, GetLeader());
                 check = TRUE;
             }
             else if (gDungeon->unk644.unk34 == 1 && GetFloorType() == FLOOR_TYPE_RESCUE && gDungeon->unk644.unk10 == 2) {
-                sub_8083AB0(DUNGEON_EXIT_SUCCEEDED_IN_RESCUE_MISSION, NULL, GetLeader());
-                if (gDungeon->unk644.unk2A != 0) {
+                SetUpDungeonExitData(DUNGEON_EXIT_SUCCEEDED_IN_RESCUE_MISSION, NULL, GetLeader());
+                if (gDungeon->unk644.stoleFromKecleon != 0) {
                     IncrementThievingSuccesses();
                 }
                 check = TRUE;
             }
             else {
-                if (gDungeon->unk644.unk2A != 0) {
+                if (gDungeon->unk644.stoleFromKecleon != 0) {
                     IncrementThievingSuccesses();
                 }
                 if (gDungeon->unk644.dungeonLocation.floor + 1 < gDungeon->unk1CEC8) {
@@ -600,7 +600,7 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
                 }
                 else {
                     var = DUNGEON_EXIT_CLEARED_DUNGEON;
-                    sub_8083AB0(var, NULL, GetLeader());
+                    SetUpDungeonExitData(var, NULL, GetLeader());
                     check = TRUE;
                     // This goto is a fakematch I had to create in order to generate matching code.
                     // It has no real effect, because the control flow is the same without it(since check is TRUE). Unfortunately agbcc is blind and goto is needed.

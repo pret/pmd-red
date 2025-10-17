@@ -354,7 +354,7 @@ s32 CalcSpeedStage(Entity *pokemon)
     speed++;
   }
   if ((entityInfo->id == MONSTER_KECLEON) && entityInfo->isNotTeamMember &&
-     gDungeon->unk644.unk2A) {
+     gDungeon->unk644.stoleFromKecleon) {
     speed++;
   }
   if (speed < 0) {

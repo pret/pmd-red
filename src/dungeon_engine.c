@@ -19,11 +19,11 @@
 #include "dungeon_cutscene.h"
 #include "menu_input.h"
 #include "weather.h"
+#include "dungeon_wild_mon_spawn.h"
 
 extern void sub_807E378(void);
 extern u8 DisplayActions(u32);
 extern void sub_805F02C(void);
-extern void sub_8071B48(void);
 
 static void sub_8044454(void);
 static bool8 RunLeaderTurn(bool8);
@@ -384,7 +384,7 @@ static void TrySpawnMonsterAndActivatePlusMinus(void)
   s32 index;
 
   if (gSpeedTurns[1][gDungeon->unk644.fractionalTurn] != 0) {
-    sub_8071B48();
+    TrySpawnWildMonster();
     gDungeon->plusIsActive[0] = FALSE;
     gDungeon->plusIsActive[1] = FALSE;
     gDungeon->minusIsActive[0] = FALSE;

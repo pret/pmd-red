@@ -634,7 +634,7 @@ bool8 TrawlOrbAction(Entity * pokemon, Entity * target, Move *move, s32 itemId)
 bool8 EscapeOrbAction(Entity * pokemon, Entity * target, Move *move, s32 itemId)
 {
     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],pokemon,0);
-    if (gDungeon->unk644.unk2A != 0) {
+    if (gDungeon->unk644.stoleFromKecleon != 0) {
         TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FD4DC); // $m0 can't escape!
     }
     else {

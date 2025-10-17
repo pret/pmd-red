@@ -636,7 +636,7 @@ void sub_8067558(Entity *entity, Entity *targetEntity, s32 a2)
         }
 
         if (info2->monsterBehavior == 1) {
-            if (gDungeon->unk644.unk2A != 0) {
+            if (gDungeon->unk644.stoleFromKecleon != 0) {
                 DisplayDungeonMessage(NULL, gUnknown_80FF674, TRUE);
             }
             else if (gDungeon->unk644.unk33) {

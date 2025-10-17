@@ -719,7 +719,7 @@ static void InitEntityFromSpawnInfo(bool8 a0, Entity *entity, struct MonSpawnInf
 
     if (!a0) {
         if (monSpawnInfo->species == MONSTER_KECLEON
-            && !gDungeon->unk644.unk2A
+            && !gDungeon->unk644.stoleFromKecleon
             && gDungeon->unk3A0A
             && !monSpawnInfo->unk2)
         {

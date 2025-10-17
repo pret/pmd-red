@@ -1280,30 +1280,30 @@ void CalcDamage(Entity *attacker, Entity *target, u8 moveType, s32 movePower, s3
         rand = DungeonRandInt(100);
         if (splitIndex == 0) {
             if (HasHeldItem(attacker, ITEM_POWER_BAND)) {
-                atkStat += gUnknown_810AC60;
-                gDungeon->unk134.unk160 += gUnknown_810AC60;
+                atkStat += gPowerBandBoost;
+                gDungeon->unk134.unk160 += gPowerBandBoost;
             }
             if (HasHeldItem(attacker, ITEM_MUNCH_BELT)) {
-                atkStat += gUnknown_810AC68;
-                gDungeon->unk134.unk160 += gUnknown_810AC68;
+                atkStat += gMunchBeltBoost;
+                gDungeon->unk134.unk160 += gMunchBeltBoost;
             }
             if (arg_10 && HasHeldItem(target, ITEM_DEF_SCARF)) {
-                defStat += gUnknown_810AC64;
-                gDungeon->unk134.unk162 += gUnknown_810AC64;
+                defStat += gDefScarfBoost;
+                gDungeon->unk134.unk162 += gDefScarfBoost;
             }
         }
         else {
             if (arg_10 && HasHeldItem(target, ITEM_ZINC_BAND)) {
-                defStat += gUnknown_810AC66;
-                gDungeon->unk134.unk163 += gUnknown_810AC66;
+                defStat += gZincBandBoost;
+                gDungeon->unk134.unk163 += gZincBandBoost;
             }
             if (HasHeldItem(attacker, ITEM_SPECIAL_BAND)) {
-                atkStat += gUnknown_810AC62;
-                gDungeon->unk134.unk161 += gUnknown_810AC62;
+                atkStat += gSpecialBandBoost;
+                gDungeon->unk134.unk161 += gSpecialBandBoost;
             }
             if (HasHeldItem(attacker, ITEM_MUNCH_BELT)) {
-                atkStat += gUnknown_810AC68;
-                gDungeon->unk134.unk161 += gUnknown_810AC68;
+                atkStat += gMunchBeltBoost;
+                gDungeon->unk134.unk161 += gMunchBeltBoost;
             }
         }
 

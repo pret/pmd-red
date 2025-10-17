@@ -259,22 +259,22 @@ void SetMonSummaryInfo(struct MonSummaryInfo *dst, struct Pokemon *pokemon, bool
 
     if (pokemon->heldItem.id != 0) {
         if (pokemon->heldItem.id == ITEM_POWER_BAND) {
-            dst->atkBoost += gUnknown_810AC60;
+            dst->atkBoost += gPowerBandBoost;
         }
         if (pokemon->heldItem.id == ITEM_SPECIAL_BAND) {
-            dst->spAtkBoost+= gUnknown_810AC62;
+            dst->spAtkBoost+= gSpecialBandBoost;
         }
         if (pokemon->heldItem.id == ITEM_MUNCH_BELT) {
-            dst->atkBoost += gUnknown_810AC68;
+            dst->atkBoost += gMunchBeltBoost;
         }
         if (pokemon->heldItem.id == ITEM_MUNCH_BELT) {
-            dst->spAtkBoost+= gUnknown_810AC68;
+            dst->spAtkBoost+= gMunchBeltBoost;
         }
         if (pokemon->heldItem.id == ITEM_DEF_SCARF) {
-            dst->defBoost += gUnknown_810AC64;
+            dst->defBoost += gDefScarfBoost;
         }
         if (pokemon->heldItem.id == ITEM_ZINC_BAND) {
-            dst->spDefBoost += gUnknown_810AC66;
+            dst->spDefBoost += gZincBandBoost;
         }
     }
     dst->tactic = pokemon->tacticIndex;

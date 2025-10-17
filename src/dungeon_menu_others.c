@@ -7,7 +7,7 @@
 #include "dungeon_action.h"
 #include "code_8097DD0.h"
 #include "dungeon_info.h"
-#include "dungeon_8083AB0.h"
+#include "dungeon_exit.h"
 #include "dungeon_action.h"
 #include "dungeon_range.h"
 #include "dungeon_main.h"
@@ -443,7 +443,7 @@ static bool8 AskToGiveUp(void)
         return TRUE;
     }
     SetMonsterActionFields(GetLeaderActionContainer(), ACTION_GIVE_UP);
-    sub_8083AB0(DUNGEON_EXIT_GAVE_UP_EXPLORATION, NULL, GetLeader());
+    SetUpDungeonExitData(DUNGEON_EXIT_GAVE_UP_EXPLORATION, NULL, GetLeader());
     gDungeon->unk644.unk10 = 1;
     return FALSE;
 }

@@ -296,7 +296,7 @@ static void SetRecruitableMons(struct MonRecruitList *tabsData)
         spArray[ExtractSpeciesIndex(&gDungeon->monsterSpawns[id])] = byte;
     }
 
-    if (gDungeon->unk644.unk2A) {
+    if (gDungeon->unk644.stoleFromKecleon) {
         spArray[MONSTER_KECLEON] = 1;
     }
 

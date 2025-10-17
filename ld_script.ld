@@ -241,7 +241,7 @@ SECTIONS {
         src/code_806FDF4.o(.text);
         src/status_checks.o(.text);
         src/dungeon_logic.o(.text);
-        src/dungeon_8071B48.o(.text);
+        src/dungeon_wild_mon_spawn.o(.text);
         src/dungeon_leveling.o(.text);
         src/dungeon_ai_leader.o(.text);
         src/dungeon_action_execution.o(.text);
@@ -273,7 +273,7 @@ SECTIONS {
         src/trap.o(.text);
         src/dungeon_serializer.o(.text);
         src/dungeon_range.o(.text);
-        src/dungeon_8083AB0.o(.text);
+        src/dungeon_exit.o(.text);
         src/dungeon_music.o(.text);
         src/dungeon_random.o(.text);
         src/dungeon_cleared_window.o(.text);
@@ -626,7 +626,7 @@ SECTIONS {
         src/code_806FDF4.o(.rodata);
         src/status_checks.o(.rodata);
         src/dungeon_logic.o(.rodata);
-        src/dungeon_8071B48.o(.rodata);
+        src/dungeon_wild_mon_spawn.o(.rodata);
         src/dungeon_leveling.o(.rodata);
         src/dungeon_ai_leader.o(.rodata);
         src/dungeon_action_execution.o(.rodata);
@@ -661,7 +661,7 @@ SECTIONS {
         src/dungeon_serializer.o(.rodata);
         data/pksdir_4.o(.rodata);
         src/dungeon_range.o(.rodata);
-        src/dungeon_8083AB0.o(.rodata);
+        src/dungeon_exit.o(.rodata);
         src/dungeon_music.o(.rodata);
         src/dungeon_random.o(.rodata);
         src/dungeon_cleared_window.o(.rodata);

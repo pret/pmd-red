@@ -615,7 +615,7 @@ void SubstitutePlaceholderStringTags(u8 *buffer, Entity *entity, u32 param_3)
         GetTrapName(buffer, GetTrapData_1(entity)->id);
         break;
     default:
-        strcpy(buffer, gUnknown_80FE6F4);
+        strcpy(buffer, gText_Someone);
         break;
   }
 }

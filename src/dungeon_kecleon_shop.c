@@ -53,7 +53,7 @@ void sub_807EC28(bool8 arg0)
     isShopTile = (GetTileAtEntitySafe(leader)->terrainFlags & TERRAIN_TYPE_SHOP) != 0;
     gDungeon->unk644.unk54 = isShopTile;
     gDungeon->unk644.unk55 = isShopTile;
-    if (gDungeon->unk644.unk2A || gDungeon->unk644.unk50 == 0)
+    if (gDungeon->unk644.stoleFromKecleon || gDungeon->unk644.unk50 == 0)
         return;
 
     if (leaderInfo->invisibleClassStatus.status == STATUS_INVISIBLE) {
@@ -313,7 +313,7 @@ static void sub_807F33C(void)
 {
     s32 i, x, y;
 
-    gDungeon->unk644.unk2A = 1;
+    gDungeon->unk644.stoleFromKecleon = 1;
     gDungeon->unk644.unk2B = 1;
     LogMessageByIdWithPopupCheckUser(GetLeader(), gUnknown_80FE4B8); // Help! Thief! I've been robbed! Help me catch the thief.
     for (x = 0; x < DUNGEON_MAX_SIZE_X; x++) {

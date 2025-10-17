@@ -793,7 +793,7 @@ void HandlePokemonTrap(Entity *param_1,DungeonPos *pos)
 
                 local_50.species = MONSTER_KECLEON;
                 for (i = 0; i < 100; i++) {
-                    if (gDungeon->unk644.unk2A != 0) {
+                    if (gDungeon->unk644.stoleFromKecleon != 0) {
                         species = MONSTER_KECLEON;
                     }
                     else {

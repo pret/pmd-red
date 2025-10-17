@@ -20,11 +20,10 @@
 const s16 gMonsterHouseMaxItemsTraps = 7; // Items and traps are included together
 const s16 gMonsterHouseMinMons = 8;
 const s16 gMonsterHouseMaxMons = 12;
-// ? See sub_8071B48
-const s16 gUnknown_80F4DA6 = 10;
-const s16 gUnknown_80F4DA8 = 4;
-const s16 gUnknown_80F4DAA = 36;
-const s16 gUnknown_80F4DAC = 5;
+const s16 gMaxWildMonsInMonsterHouse = 10;
+const s16 gMaxWildMonsInRoom = 4;
+const s16 gWildSpawnIntervalFrames = 36;
+const s16 gKecleonSpawnIntervalFrames = 5;
 const s16 gCritOddsScopeLensPatsyBand = 40;
 const s16 gCritOddsIqAdvantageMaster = 40;
 

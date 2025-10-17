@@ -1052,7 +1052,7 @@ void sub_805F02C(void)
     else if (PlayerHasItemWithFlag(ITEM_FLAG_IN_SHOP) || sub_807EF48()) {
         DisplayDungeonLoggableMessageTrue(r7, gUnknown_80F9C08);
     }
-    else if (gDungeon->unk644.unk2A) {
+    else if (gDungeon->unk644.stoleFromKecleon) {
         DisplayDungeonLoggableMessageTrue(r7, gUnknown_80F9C2C);
     }
     else {

@@ -1381,9 +1381,9 @@ static s32 TryHitTarget(Entity *attacker, Entity *target, Move *move, struct Dam
         bool32 isFalseSwipe = (move->id == MOVE_FALSE_SWIPE);
 
         if (AbilityIsActive(target, ABILITY_ILLUMINATE)) {
-            gDungeon->unk644.unk1E = 999;
-            gDungeon->unk17B34 = target;
-            gDungeon->unk17B40 = target->spawnGenID;
+            gDungeon->unk644.wildMonSpawnFrames = 999;
+            gDungeon->illuminatePokemon = target;
+            gDungeon->illuminateMonSpawnGenID = target->spawnGenID;
         }
 
         HandleDealingDamage(attacker, target, dmgStruct, isFalseSwipe, TRUE, dungeonExitReason, TRUE, 0);
