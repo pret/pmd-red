@@ -60,6 +60,7 @@
 #include "dungeon_item_action.h"
 #include "dungeon_strings.h"
 #include "dungeon_entity_movement.h"
+#include "dungeon_8041AD0.h"
 
 extern void HandleUnsetItemAction(Entity *,bool8);
 extern void TryTriggerTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4);
@@ -75,8 +76,6 @@ bool8 sub_8070F80(Entity * pokemon, s32 direction);
 void sub_806752C(ActionContainer *a0);
 void sub_8067768(ActionContainer *a0);
 extern bool8 sub_8071A8C(Entity *pokemon);
-extern void sub_8041AD0(Entity *pokemon);
-extern void sub_8041AE0(Entity *pokemon);
 
 static EWRAM_DATA bool8 sInDiagonalMode = 0;
 static EWRAM_DATA bool8 sInRotateMode = 0;

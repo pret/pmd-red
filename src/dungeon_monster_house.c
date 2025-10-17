@@ -29,8 +29,7 @@
 #include "dungeon_misc.h"
 #include "dungeon_mon_spawn.h"
 #include "move_orb_effects_5.h"
-
-extern void sub_804178C(u32);
+#include "dungeon_8041AD0.h"
 
 void TryWakeSleepingWildPokemon(void)
 {

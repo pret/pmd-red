@@ -20,7 +20,7 @@
 #include "move_orb_effects_1.h"
 #include "moves.h"
 #include "move_util.h"
-#include "code_8041AD0.h"
+#include "dungeon_8041AD0.h"
 #include "weather.h"
 #include "dungeon_config.h"
 #include "dungeon_misc.h"
@@ -35,7 +35,6 @@
 #include "expose_trap.h"
 
 extern void sub_804EB30();
-extern void sub_80421AC(Entity * pokemon, Entity * target);
 extern void sub_807BB78(Entity *pokemon);
 
 void BlowAwayTarget(Entity *pokemon, Entity *target, u32 direction)

@@ -2,7 +2,6 @@
 #include "globaldata.h"
 #include "dungeon_kecleon_shop.h"
 #include "weather.h"
-#include "code_804267C.h"
 #include "dungeon_vram.h"
 #include "dungeon_info.h"
 #include "dungeon_config.h"

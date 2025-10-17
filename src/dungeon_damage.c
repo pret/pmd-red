@@ -31,8 +31,7 @@
 #include "constants/direction.h"
 #include "constants/dungeon.h"
 #include "dungeon_vram.h"
-#include "code_8041AD0.h"
-#include "code_804267C.h"
+#include "dungeon_8041AD0.h"
 #include "code_805D8C8.h"
 #include "dungeon_map_access.h"
 #include "dungeon_data.h"
@@ -49,28 +48,12 @@
 #include "move_orb_effects_2.h"
 #include "move_orb_effects_5.h"
 
-extern void sub_8041B18(Entity *pokemon);
-extern void sub_8041B90(Entity *pokemon);
-extern void sub_8041D00(Entity *pokemon, Entity *target);
-extern void sub_8042238(Entity *pokemon, Entity *target);
 extern void sub_803ED30(s32, Entity *r0, u8, s32);
 extern bool8 sub_806A458(Entity *);
 extern bool8 sub_806A58C(s16 a0);
-extern void sub_8042148(Entity *pokemon);
-extern void sub_8042A24(Entity *r0);
 extern void sub_806A390(Entity *r0);
 extern void sub_800DBBC(void);
-extern void EntityUpdateStatusSprites(Entity *);
 extern void PointCameraToMonster(Entity *);
-extern void sub_8041B74(Entity *pokemon);
-extern void sub_8041B5C(Entity *pokemon);
-extern void sub_8042940(Entity *r0);
-extern void sub_80428B0(Entity *r0);
-extern void sub_80428C4(Entity *r0);
-extern void sub_80428D8(Entity *);
-extern void sub_8042978(Entity *);
-extern void sub_804298C(Entity *);
-extern void sub_80428EC(Entity *);
 
 static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struct DamageStruct *r5, bool32 isFalseSwipe, bool32 giveExp, s16 dungeonExitReason_, s32 arg8);
 static bool8 sub_806E100(s48_16 *param_1, Entity *pokemon, Entity *target, u8 type, DamageStruct *dmgStruct);

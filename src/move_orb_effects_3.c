@@ -26,9 +26,7 @@
 #include "dungeon_config.h"
 #include "dungeon_strings.h"
 #include "dungeon_pos_data.h"
-
-extern void sub_8041BD0(Entity *r0, u8 r1);
-extern void EntityUpdateStatusSprites(Entity *);
+#include "dungeon_8041AD0.h"
 
 void SetChargeStatusTarget(Entity *pokemon, Entity *target, u8 newStatus, Move *move, const u8 *message)
 {

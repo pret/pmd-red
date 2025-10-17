@@ -4,7 +4,7 @@
 #include "structs/str_dungeon.h"
 #include "structs/str_traps.h"
 #include "structs/map.h"
-#include "code_8041AD0.h"
+#include "dungeon_8041AD0.h"
 #include "dungeon_mon_sprite_render.h"
 #include "dungeon_items.h"
 #include "dungeon_map_access.h"

@@ -34,38 +34,7 @@
 #include "dungeon_kecleon_shop.h"
 #include "dungeon_map.h"
 #include "move_orb_effects_2.h"
-
-extern void EntityUpdateStatusSprites(Entity *);
-extern void sub_8042A74(Entity *r0);
-extern void sub_80420C8(Entity *r0);
-extern void nullsub_68(Entity *);
-extern void nullsub_67(Entity *);
-extern void nullsub_66(Entity *);
-extern void nullsub_65(Entity *);
-extern void nullsub_64(Entity *);
-extern void nullsub_63(Entity *);
-extern void nullsub_62(Entity *);
-extern void nullsub_61(Entity *);
-extern void nullsub_60(Entity *);
-extern void nullsub_59(Entity *);
-extern void nullsub_58(Entity *);
-extern void nullsub_57(Entity *);
-extern void sub_8041B34(Entity *);
-void sub_8041BD0(Entity *r0, u8 r1);
-void sub_8041EB4(Entity *);
-void sub_8041EA4(Entity *);
-extern void sub_8041E84(Entity *);
-extern void sub_8041E94(Entity *);
-extern void sub_8041E74(Entity *);
-extern void sub_8041E60(Entity *);
-extern void sub_8041E4C(Entity *);
-extern void sub_8041E3C(Entity *);
-extern void sub_8041E1C(Entity *);
-extern void nullsub_89(Entity *);
-extern void nullsub_88(Entity *);
-extern void nullsub_87(Entity *);
-extern void nullsub_86(Entity *);
-extern void sub_8041E0C(Entity *);
+#include "dungeon_8041AD0.h"
 
 void sub_8079F20(Entity * pokemon, Entity * target, u8 param_3, u8 param_4)
 {

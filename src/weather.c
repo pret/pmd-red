@@ -5,7 +5,6 @@
 #include "constants/move_id.h"
 #include "constants/weather.h"
 #include "structs/str_dungeon.h"
-#include "code_804267C.h"
 #include "dungeon_vram.h"
 #include "dungeon_info.h"
 #include "dungeon_config.h"
@@ -33,9 +32,7 @@
 #include "dungeon_misc.h"
 #include "sprite.h"
 #include "dungeon_strings.h"
-
-extern void sub_804178C(u32);
-extern void sub_80429D8(Entity *r0);
+#include "dungeon_8041AD0.h"
 
 extern OpenedFile *gUnknown_202ECA0;
 

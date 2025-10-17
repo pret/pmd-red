@@ -36,19 +36,12 @@
 #include "dungeon_tilemap.h"
 #include "dungeon_engine.h"
 #include "dungeon_leveling.h"
+#include "dungeon_8041AD0.h"
 
-extern void sub_8042900(Entity *r0);
-extern void sub_8042968(Entity *r0);
-void sub_8041BBC(Entity *r0);
-extern void sub_804178C(u32);
-extern void sub_8042B20(Entity *entity);
-extern void sub_8042B0C(Entity *entity);
 extern bool8 sub_80860A8(u8 id);
 extern u8 gUnknown_202F32C;
-extern void sub_80429E8(Entity *r0);
 extern Entity *sub_804550C(s16 a);
 extern Entity *sub_80453AC(s16 id);
-extern void EntityUpdateStatusSprites(Entity *);
 
 static s32 CalcSpeciesHPAtLevel(s32 species, s32 level);
 static s32 CalcSpeciesAtkAtLevel(s32 species, s32 level, s32 categoryIndex);

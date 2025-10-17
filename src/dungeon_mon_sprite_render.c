@@ -9,8 +9,7 @@
 #include "constants/iq_skill.h"
 #include "structs/str_dungeon.h"
 #include "dungeon_vram.h"
-#include "code_8041AD0.h"
-#include "code_804267C.h"
+#include "dungeon_8041AD0.h"
 #include "code_805D8C8.h"
 #include "dungeon_config.h"
 #include "dungeon_items.h"
@@ -31,8 +30,6 @@
 #include "text_util.h"
 #include "sprite.h"
 #include "random.h"
-
-extern void sub_8042EC8(Entity *a0, s32 a1);
 
 static const u8 gUnknown_8106EC8[][13] = {
     {0, 1, 7, 7, 7, 5, 6, 7, 7, 7, 7, 7, 7},

@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "trap.h"
 #include "dungeon_tilemap.h"
-#include "code_8041AD0.h"
+#include "dungeon_8041AD0.h"
 #include "dungeon_message.h"
 #include "dungeon_random.h"
 #include "dungeon_mon_sprite_render.h"
@@ -39,8 +39,6 @@
 #include "move_orb_effects_2.h"
 #include "move_orb_effects_4.h"
 
-void sub_80421EC(DungeonPos *, u32);
-void sub_804225C(Entity *, DungeonPos *, u8);
 void sub_806A1E8(Entity *pokemon);
 Entity *sub_8045684(u8, DungeonPos *, u8);
 

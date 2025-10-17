@@ -3,8 +3,7 @@
 #include "dungeon_cutscene.h"
 #include "effect_main.h"
 #include "dungeon_vram.h"
-#include "code_8041AD0.h"
-#include "code_804267C.h"
+#include "dungeon_8041AD0.h"
 #include "dungeon_mon_sprite_render.h"
 #include "constants/bg_music.h"
 #include "constants/direction.h"
@@ -31,10 +30,8 @@
 #include "dungeon_config.h"
 #include "dungeon_boss_dialogue.h"
 
-extern void sub_8042B0C(Entity *);
 extern void sub_8049884(void);
 extern void sub_8049B8C(void);
-extern void sub_8041888(u32);
 extern void sub_8052D44(s16 *, Entity *, Entity *);
 
 static void sub_808A528(Entity * param_1);

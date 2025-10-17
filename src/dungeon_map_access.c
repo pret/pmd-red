@@ -19,8 +19,7 @@
 #include "dungeon_mon_sprite_render.h"
 #include "dungeon_pos_data.h"
 #include "dungeon_data.h"
-
-extern void sub_8042A14(DungeonPos *);
+#include "dungeon_8041AD0.h"
 
 EWRAM_DATA OpenedFile *gDungeonPaletteFile = {0};
 EWRAM_DATA unkStruct_202EE8C gUnknown_202EE8C[32] = {0};

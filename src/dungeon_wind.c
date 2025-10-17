@@ -2,7 +2,6 @@
 #include "globaldata.h"
 #include "dungeon_wind.h"
 #include "dungeon_misc.h"
-#include "code_804267C.h"
 #include "dungeon_message.h"
 #include "constants/ability.h"
 #include "constants/dungeon_exit.h"
@@ -21,6 +20,7 @@
 #include "structs/str_dungeon.h"
 #include "dungeon_engine.h"
 #include "dungeon_entity_movement.h"
+#include "dungeon_8041AD0.h"
 
 void UpdateWindTurns(void)
 {

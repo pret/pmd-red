@@ -5,7 +5,7 @@
 #include "constants/move_id.h"
 #include "dungeon_vram.h"
 #include "dungeon_tilemap.h"
-#include "code_8041AD0.h"
+#include "dungeon_8041AD0.h"
 #include "dungeon_action.h"
 #include "code_8066D04.h"
 #include "dungeon_mon_sprite_render.h"
@@ -37,23 +37,22 @@
 #include "dungeon_submenu.h"
 #include "dungeon_engine.h"
 
-extern void sub_80684C4(void);
-extern void sub_8068344(void);
-void sub_8068310(s32 n, Pokemon **monPtrs);
-void sub_8067F00(u8 a0, Pokemon **a1, s32 a2, s32 a3, s32 a4);
-void sub_806806C(Pokemon *a0);
-
-
-static EWRAM_DATA WindowHeader gUnknown_202F308 = {0};
+static EWRAM_DATA WindowHeader sReleaseMenuWinHeader = {0};
 static EWRAM_DATA s32 gUnknown_202F30C = 0;
 static EWRAM_DATA s32 gUnknown_202F310 = 0;
+
+static void sub_8067F00(u8 a0, Pokemon **a1, s32 a2_, s32 a3, s32 a4);
+static void ShowPokemonSummary(Pokemon *a0);
+static void sub_8068310(s32 n, Pokemon **monPtrs);
+static void ShowUpArrowSprite(void);
+static void ShowDownArrowSprite(void);
 
 // It's likely a struct only used in Blue version. Touchpad maybe?
 static const u8 sTouchScreenArrowPressData[] = {
     0x01, 0, 0x38, 0, 0, 0, 0x18, 0, 0x18, 0, 0, 0, 0x02, 0, 0x38, 0, 0x68, 0, 0x18, 0, 0x18, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 };
 
-static const WindowTemplates gUnknown_8106DC8 = {
+static const WindowTemplates sReleaseMenuWindowTemplates = {
     .id = {
         [0] =
         {
@@ -64,7 +63,7 @@ static const WindowTemplates gUnknown_8106DC8 = {
             .height = 0x0E,
             .unk10 = 0x12,
             .unk12 = 0x02,
-            .header = &gUnknown_202F308
+            .header = &sReleaseMenuWinHeader
         },
         [1] =
         {
@@ -82,11 +81,11 @@ static const WindowTemplates gUnknown_8106DC8 = {
     }
 };
 
-void sub_8067A80(u8 a0, s32 a1, s32 a2, Pokemon **a3)
+void ShowRecruitReleaseMenu(u8 a0, s32 a1, s32 a2, Pokemon **a3)
 {
     s32 i;
     s32 r10;
-    WindowTemplates spTxtStruct = gUnknown_8106DC8;
+    WindowTemplates winTemplates = sReleaseMenuWindowTemplates;
 
     gUnknown_202F30C = 0;
     r10 = 0;
@@ -101,14 +100,14 @@ void sub_8067A80(u8 a0, s32 a1, s32 a2, Pokemon **a3)
         while (1) {
             s32 r7 = 0, r5 = 0;
 
-            gUnknown_202F308.count = 1;
-            gUnknown_202F308.currId = 0;
-            gUnknown_202F308.width = 0xE;
-            gUnknown_202F308.f3 = 0;
+            sReleaseMenuWinHeader.count = 1;
+            sReleaseMenuWinHeader.currId = 0;
+            sReleaseMenuWinHeader.width = 0xE;
+            sReleaseMenuWinHeader.f3 = 0;
 
             ASM_MATCH_TRICK(r7);
 
-            DungeonShowWindows(&spTxtStruct, 1);
+            DungeonShowWindows(&winTemplates, 1);
             sub_8067F00(a0, a3, gUnknown_202F30C, a2, a1);
             gDungeonMenu.currPageEntries = min(a2, 8);
             gDungeonMenu.menuIndex = r10;
@@ -131,11 +130,11 @@ void sub_8067A80(u8 a0, s32 a1, s32 a2, Pokemon **a3)
                 r7 = 0;
                 if (a2 - gUnknown_202F30C > 8) {
                     r5 = 1;
-                    sub_80684C4();
+                    ShowDownArrowSprite();
                 }
                 if (gUnknown_202F30C != 0) {
                     r7 = 1;
-                    sub_8068344();
+                    ShowUpArrowSprite();
                 }
 
                 touchScreenArrow = GetTouchScreenArrowPress(0, sTouchScreenArrowPressData);
@@ -243,7 +242,7 @@ void sub_8067A80(u8 a0, s32 a1, s32 a2, Pokemon **a3)
             }
             else if (r7 == 3) {
                 r10 = gDungeonMenu.menuIndex;
-                sub_806806C(a3[gUnknown_202F30C + r10]);
+                ShowPokemonSummary(a3[gUnknown_202F30C + r10]);
                 continue;
             }
             else {
@@ -270,7 +269,7 @@ void sub_8067A80(u8 a0, s32 a1, s32 a2, Pokemon **a3)
                 }
 
                 sub_8045064();
-                CreateDungeonMenuSubWindow(&spTxtStruct.id[0], 0x15);
+                CreateDungeonMenuSubWindow(&winTemplates.id[0], 0x15);
 
                 while (1) {
                     AddMenuCursorSprite(&gDungeonMenu);
@@ -312,7 +311,7 @@ void sub_8067A80(u8 a0, s32 a1, s32 a2, Pokemon **a3)
                         sub_8068310(a2, a3);
                     }
                     else {
-                        sub_806806C(a3[arrId]);
+                        ShowPokemonSummary(a3[arrId]);
                     }
                 }
                 continue;
@@ -321,7 +320,7 @@ void sub_8067A80(u8 a0, s32 a1, s32 a2, Pokemon **a3)
     }
 }
 
-void sub_8067F00(u8 a0, Pokemon **a1, s32 a2_, s32 a3, s32 a4)
+static void sub_8067F00(u8 a0, Pokemon **a1, s32 a2_, s32 a3, s32 a4)
 {
     s32 i, y;
     s32 a2;
@@ -375,24 +374,24 @@ void sub_8067F00(u8 a0, Pokemon **a1, s32 a2_, s32 a3, s32 a4)
     sub_80073E0(1);
 }
 
-void sub_806806C(Pokemon *a0)
+static void ShowPokemonSummary(Pokemon *a0)
 {
     struct MonSummaryInfo unkStruct;
     struct UnkInfoTabStruct var_C8;
-    WindowTemplates spTxtStruct = {0};
+    WindowTemplates winTemplates = {0};
     s32 r7;
 
-    spTxtStruct.id[0].type = WINDOW_TYPE_WITH_HEADER;
-    spTxtStruct.id[0].pos.x = 2;
-    spTxtStruct.id[0].pos.y = 2;
-    spTxtStruct.id[0].width = 0x12;
-    spTxtStruct.id[0].height = 0xE;
-    spTxtStruct.id[0].unk10 = 0x12;
-    spTxtStruct.id[0].unk12 = 2;
-    spTxtStruct.id[0].header = &gUnknown_202F308;
-    spTxtStruct.id[1].type = WINDOW_TYPE_NORMAL;
-    spTxtStruct.id[2].type = WINDOW_TYPE_NORMAL;
-    spTxtStruct.id[3].type = WINDOW_TYPE_NORMAL;
+    winTemplates.id[0].type = WINDOW_TYPE_WITH_HEADER;
+    winTemplates.id[0].pos.x = 2;
+    winTemplates.id[0].pos.y = 2;
+    winTemplates.id[0].width = 0x12;
+    winTemplates.id[0].height = 0xE;
+    winTemplates.id[0].unk10 = 0x12;
+    winTemplates.id[0].unk12 = 2;
+    winTemplates.id[0].header = &sReleaseMenuWinHeader;
+    winTemplates.id[1].type = WINDOW_TYPE_NORMAL;
+    winTemplates.id[2].type = WINDOW_TYPE_NORMAL;
+    winTemplates.id[3].type = WINDOW_TYPE_NORMAL;
 
     r7 = 0;
     unkStruct.unk40 = 0;
@@ -403,10 +402,10 @@ void sub_806806C(Pokemon *a0)
         bool32 loopBreak = FALSE;
         s32 spF8[4] = {2, 3, 4, 5};
 
-        gUnknown_202F308.count = 4;
-        gUnknown_202F308.currId = r7;
-        gUnknown_202F308.width = 10;
-        gUnknown_202F308.f3 = 0;
+        sReleaseMenuWinHeader.count = 4;
+        sReleaseMenuWinHeader.currId = r7;
+        sReleaseMenuWinHeader.width = 10;
+        sReleaseMenuWinHeader.f3 = 0;
 
         gDungeonMenu.currPage = r7;
         gDungeonMenu.pagesCount = 4;
@@ -419,7 +418,7 @@ void sub_806806C(Pokemon *a0)
         gDungeonMenu.windowId = 0;
 
         ResetTouchScreenMenuInput(&gDungeonMenu.touchScreen);
-        DungeonShowWindows(&spTxtStruct, 1);
+        DungeonShowWindows(&winTemplates, 1);
         SetMonSummaryInfo(&unkStruct, a0, gDungeon->unk644.unk16);
         ShowPokemonSummaryWindow(spF8[r7], r7, &unkStruct, &var_C8, 0);
 
@@ -432,10 +431,10 @@ void sub_806806C(Pokemon *a0)
             AddMenuCursorSprite(&gDungeonMenu);
             if (spF8[r7] == 4) {
                 if (var_C8.unk0[8] != 0) {
-                    sub_80684C4();
+                    ShowDownArrowSprite();
                 }
                 if (unkStruct.unk40 != 0) {
-                    sub_8068344();
+                    ShowUpArrowSprite();
                 }
             }
 
@@ -506,7 +505,7 @@ void sub_806806C(Pokemon *a0)
     sub_803EAF0(0, NULL);
 }
 
-void sub_8068310(s32 n, Pokemon **monPtrs)
+static void sub_8068310(s32 n, Pokemon **monPtrs)
 {
     s32 i;
     s32 counter = 0;
@@ -519,7 +518,8 @@ void sub_8068310(s32 n, Pokemon **monPtrs)
     gUnknown_202F310 = counter;
 }
 
-void sub_8068344(void)
+// Identical to the functions in dungeon_menu_team.c
+static void ShowUpArrowSprite(void)
 {
     if ((gDungeonFramesCounter & 8) != 0) {
         Window *window = &gWindows[0];
@@ -542,8 +542,7 @@ void sub_8068344(void)
     }
 }
 
-// The same as sub_80623B0
-void sub_80684C4(void)
+static void ShowDownArrowSprite(void)
 {
     if ((gDungeonFramesCounter & 8) != 0) {
         Window *window = &gWindows[0];

@@ -32,8 +32,7 @@
 #include "dungeon_strings.h"
 #include "run_dungeon.h"
 #include "effect_main.h"
-
-extern void sub_8041888(u8 param_1);
+#include "dungeon_8041AD0.h"
 
 static void sub_803F38C(void);
 static void sub_803F7BC(void);

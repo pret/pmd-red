@@ -19,7 +19,7 @@
 #include "move_orb_effects_1.h"
 #include "moves.h"
 #include "move_util.h"
-#include "code_8041AD0.h"
+#include "dungeon_8041AD0.h"
 #include "weather.h"
 #include "dungeon_config.h"
 #include "dungeon_misc.h"
@@ -27,9 +27,6 @@
 #include "dungeon_strings.h"
 #include "dungeon_engine.h"
 #include "dungeon_damage.h"
-
-extern void sub_804216C(Entity *pokemon, Entity *target, u32 r2);
-extern void sub_804218C(Entity *pokemon, Entity *target);
 
 static EWRAM_INIT u32 gUnknown_203B444[3] = {0x28, 0x28, 0x50};
 

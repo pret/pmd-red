@@ -53,30 +53,22 @@
 #include "dungeon_monster_house.h"
 #include "move_orb_effects_2.h"
 #include "move_orb_effects_5.h"
+#include "dungeon_recruit_release_menu.h"
+#include "dungeon_8041AD0.h"
 
 static void EnsureCastformLoaded(void);
 static void EnsureDeoxysLoaded(void);
 
 extern bool8 sub_806A58C(s16 r0);
-extern void sub_8067A80(u8 a0, s32 a1, s32 a2, Pokemon **a3);
 extern bool8 sub_8070F80(Entity * pokemon, s32 direction);
 extern s32 sub_806A4DC(EntityInfo *info);
-extern void sub_8042900(Entity *r0);
-extern void sub_8042968(Entity *r0);
-extern void sub_8041BBC(Entity *r0);
-extern void sub_804178C(u32);
-extern void sub_8042B20(Entity *entity);
-extern void sub_8042B0C(Entity *entity);
 extern s16 sub_803D970(u32);
 extern bool8 sub_80860A8(u8 id);
 extern u8 sub_803D73C(s32 a0);
 extern void DeletePokemonDungeonSprite(s32 id);
-extern void sub_80429E8(Entity *r0);
 extern s32 sub_803DA20(s32 param_1);
-extern void sub_8042EC8(Entity *a0, s32 a1);
 extern Entity *sub_804550C(s16 a);
 extern Entity *sub_80453AC(s16 id);
-extern void EntityUpdateStatusSprites(Entity *);
 
 extern u8 gUnknown_202F32C;
 
@@ -394,7 +386,7 @@ void sub_8068BDC(bool8 a0)
             WriteFriendAreaName(gFormatBuffer_Items[0], friendAreaId, FALSE);
             DisplayDungeonMessage(NULL, gUnknown_80FE1A4, TRUE); // The Friend Area is full, a friend must be released.
             while (1) {
-                sub_8067A80(friendAreaId, j - areaCapacity.maxPokemon, j, monPointers);
+                ShowRecruitReleaseMenu(friendAreaId, j - areaCapacity.maxPokemon, j, monPointers);
                 for (id = 0; id < j; id++) {
                     Pokemon *monPtr = monPointers[id];
                     if (PokemonExists(monPtr) && (monPtr->flags & POKEMON_FLAG_x8000)) {

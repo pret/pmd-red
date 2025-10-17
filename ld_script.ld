@@ -201,7 +201,7 @@ SECTIONS {
         src/dungeon_tilemap.o(.text);
         src/dungeon_map.o(.text);
         src/code_8040094_1.o(.text);
-        src/code_8041AD0.o(.text);
+        src/dungeon_8041AD0.o(.text);
         src/run_dungeon.o(.text);
         src/dungeon_engine.o(.text);
         src/dungeon_action.o(.text);
@@ -233,7 +233,7 @@ SECTIONS {
         src/dungeon_menu_others.o(.text);
         src/dungeon_menu_recruitment.o(.text);
         src/code_8066D04.o(.text);
-        src/dungeon_8067A80.o(.text);
+        src/dungeon_recruit_release_menu.o(.text);
         src/dungeon_misc.o(.text);
         src/dungeon_mon_spawn.o(.text);
         src/dungeon_mon_sprite_render.o(.text);
@@ -583,7 +583,7 @@ SECTIONS {
         src/dungeon_map.o(.rodata);
         src/code_8040094_1.o(.rodata);
         data/pksdir_0.o(.rodata);
-        src/code_8041AD0.o(.rodata);
+        src/dungeon_8041AD0.o(.rodata);
         src/run_dungeon.o(.rodata);
         src/dungeon_engine.o(.rodata);
         src/dungeon_action.o(.rodata);
@@ -618,7 +618,7 @@ SECTIONS {
         src/dungeon_menu_others.o(.rodata);
         src/dungeon_menu_recruitment.o(.rodata);
         src/code_8066D04.o(.rodata);
-        src/dungeon_8067A80.o(.rodata);
+        src/dungeon_recruit_release_menu.o(.rodata);
         src/dungeon_misc.o(.rodata);
         src/dungeon_mon_spawn.o(.rodata);
         src/dungeon_mon_sprite_render.o(.rodata);

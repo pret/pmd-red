@@ -29,9 +29,7 @@
 #include "code_801B3C0.h"
 #include "dungeon_engine.h"
 #include "dungeon_strings.h"
-
-extern void sub_8041AD0(Entity *pokemon);
-extern void sub_8041AE0(Entity *pokemon);
+#include "dungeon_8041AD0.h"
 
 static EWRAM_DATA ActionParameter sUnknownActionUnk4 = {0};
 static EWRAM_DATA s32 sUnknown_202F240 = 0;

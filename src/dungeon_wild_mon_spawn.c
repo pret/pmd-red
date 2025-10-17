@@ -5,7 +5,7 @@
 #include "dungeon_config.h"
 #include "dungeon_range.h"
 #include "dungeon_message.h"
-#include "code_8041AD0.h"
+#include "dungeon_8041AD0.h"
 #include "constants/dungeon.h"
 #include "dungeon_map_access.h"
 #include "dungeon_random.h"
@@ -18,8 +18,6 @@
 #include "dungeon_strings.h"
 #include "dungeon_misc.h"
 #include "dungeon_mon_spawn.h"
-
-extern void sub_8042920(struct Entity *r0);
 
 void TrySpawnWildMonster(void)
 {

@@ -1,7 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "dungeon_items.h"
-#include "code_8041AD0.h"
+#include "dungeon_8041AD0.h"
 #include "dungeon_range.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
@@ -27,10 +27,6 @@
 #include "structs/str_item_text.h"
 #include "dungeon_vram.h"
 #include "sprite.h"
-
-extern void sub_80416E0(PixelPos *r0, u32, bool8);
-extern void sub_804178C(u32);
-extern void sub_804219C(PixelPos *pos);
 
 static void MusicBoxCreation(void);
 static u8 sub_8046D70(void);
