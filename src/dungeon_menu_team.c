@@ -13,7 +13,7 @@
 #include "dungeon_vram.h"
 #include "dungeon_tilemap.h"
 #include "dungeon_action.h"
-#include "code_806CD90.h"
+#include "dungeon_mon_sprite_render.h"
 #include "code_8097DD0.h"
 #include "dungeon_action.h"
 #include "dungeon_ai_movement.h"

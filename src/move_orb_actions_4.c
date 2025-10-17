@@ -8,7 +8,7 @@
 #include "dungeon_move_util.h"
 #include "dungeon_message.h"
 #include "dungeon_move.h"
-#include "code_806CD90.h"
+#include "dungeon_mon_sprite_render.h"
 #include "dungeon_random.h"
 #include "constants/ability.h"
 #include "constants/dungeon_exit.h"
@@ -634,7 +634,7 @@ bool8 TrawlOrbAction(Entity * pokemon, Entity * target, Move *move, s32 itemId)
 bool8 EscapeOrbAction(Entity * pokemon, Entity * target, Move *move, s32 itemId)
 {
     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],pokemon,0);
-    if (gDungeon->unk644.unk2A != 0) {
+    if (gDungeon->unk644.stoleFromKecleon != 0) {
         TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FD4DC); // $m0 can't escape!
     }
     else {

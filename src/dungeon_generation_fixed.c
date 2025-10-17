@@ -14,8 +14,7 @@
 #include "constants/trap.h"
 #include "constants/item.h"
 #include "dungeon_mon_spawn.h"
-
-extern void sub_80429FC(DungeonPos *r0);
+#include "dungeon_8041AD0.h"
 
 static bool8 sub_805210C(u8 itemId);
 

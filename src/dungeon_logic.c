@@ -30,11 +30,9 @@
 #include "dungeon_config.h"
 #include "dungeon_pos_data.h"
 #include "dungeon_data.h"
+#include "dungeon_8041AD0.h"
 
 // This file deals with things like controlling movement, walkable tiles, ai targeting, status checks and pokemon attributes.
-
-extern void sub_80429B4(Entity *r0);
-extern void ShowVisualFlags(Entity *r0);
 
 EWRAM_DATA u8 gWalkableTileToCrossableTerrain[8] = {0};
 
@@ -354,7 +352,7 @@ s32 CalcSpeedStage(Entity *pokemon)
     speed++;
   }
   if ((entityInfo->id == MONSTER_KECLEON) && entityInfo->isNotTeamMember &&
-     gDungeon->unk644.unk2A) {
+     gDungeon->unk644.stoleFromKecleon) {
     speed++;
   }
   if (speed < 0) {

@@ -1,5 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
+#include "dungeon_8041AD0.h"
 #include "constants/direction.h"
 #include "constants/status.h"
 #include "constants/type.h"
@@ -11,9 +12,7 @@
 #include "effect_sub_1.h"
 #include "dungeon_vram.h"
 #include "dungeon_tilemap.h"
-#include "code_8041AD0.h"
-#include "code_804267C.h"
-#include "code_806CD90.h"
+#include "dungeon_mon_sprite_render.h"
 #include "dungeon_config.h"
 #include "dungeon_logic.h"
 #include "dungeon_util.h"
@@ -36,24 +35,12 @@
 
 // Unknown dungeon file. File split is correct.
 
-
-void EntityUpdateStatusSprites(Entity *entity);
-
-
 extern void sub_800DBBC(void);
-extern void sub_8042E98(void);
 extern void sub_800EF28(u8);
-extern void sub_80429A0(Entity *);
-void sub_8042B34(s32 a0, s32 a1, s32 a2);
-extern bool8 sub_8042CC0(void);
-extern void sub_8042D7C(void);
 extern void sub_800F15C(s32);
 extern void sub_800EF40(u8 r0, u8 r1);
 extern s32 sub_800E6D8(s32);
 extern void sub_800EB24(s32 param_1, DungeonPos *param_2, DungeonPos *param_3, s32 param_4, s32 param_5);
-
-s32 sub_80416E0(PixelPos *pos, u32 param_2, bool8 param_3);
-void sub_804178C(u8 param_1);
 
 struct UnkStruct_80F6624
 {
@@ -190,6 +177,9 @@ static const u32 sStatusSpriteMasks_MuzzledStatus[] = {
 
 static s32 sub_8041550(Entity *entity, s32 a1, u8 a2, u8 a3, s32 a4, u8 a5);
 static u32 sub_8041764(unkStruct_80416E0 *param_1, bool8 param_2);
+static void sub_8042B34(s32 a0, s32 a1, s32 a2);
+static bool8 sub_8042CC0(void);
+static void sub_8042D7C(void);
 
 static s32 sub_804151C(Entity *entity, s32 r1, u8 r2)
 {
@@ -461,7 +451,7 @@ void sub_8041AF4(Entity *pokemon)
     sub_80421C0(pokemon, 407);
 }
 
-void nullsub_57(void)
+void nullsub_57(Entity *pokemon)
 {
 }
 
@@ -470,11 +460,11 @@ void sub_8041B18(Entity *pokemon)
     sub_804151C(pokemon, 321, 1);
 }
 
-void nullsub_58(void)
+void nullsub_58(Entity *pokemon)
 {
 }
 
-void nullsub_59(void)
+void nullsub_59(Entity *pokemon)
 {
 }
 
@@ -483,7 +473,7 @@ void sub_8041B34(Entity *pokemon)
     sub_804151C(pokemon, 7, 1);
 }
 
-void nullsub_60(void)
+void nullsub_60(Entity *pokemon)
 {
 }
 
@@ -492,7 +482,7 @@ void sub_8041B48(Entity *pokemon)
     sub_804151C(pokemon, 4, 0);
 }
 
-void nullsub_61(void)
+void nullsub_61(Entity *pokemon)
 {
 }
 
@@ -510,11 +500,11 @@ void sub_8041B74(Entity *pokemon)
     sub_804151C(pokemon, 369, 0);
 }
 
-void nullsub_63(void)
+void nullsub_63(Entity *pokemon)
 {
 }
 
-void nullsub_64(void)
+void nullsub_64(Entity *pokemon)
 {
 }
 
@@ -523,11 +513,11 @@ void sub_8041B90(Entity *pokemon)
     sub_804151C(pokemon, 428, 0);
 }
 
-void nullsub_65(void)
+void nullsub_65(Entity *pokemon)
 {
 }
 
-void nullsub_66(void)
+void nullsub_66(Entity *pokemon)
 {
 }
 
@@ -536,7 +526,7 @@ void sub_8041BA8(Entity *pokemon)
     sub_804151C(pokemon, 4, 1);
 }
 
-void nullsub_67(void)
+void nullsub_67(Entity *pokemon)
 {
 }
 
@@ -545,7 +535,7 @@ void sub_8041BBC(Entity *pokemon)
     sub_804151C(pokemon, 424, 1);
 }
 
-void nullsub_68(void)
+void nullsub_68(Entity *pokemon)
 {
 }
 
@@ -578,7 +568,7 @@ void sub_8041C1C(Entity *pokemon)
     sub_804151C(pokemon, 423, 1);
 }
 
-void nullsub_69(void)
+void nullsub_69(Entity *pokemon, Entity *target)
 {
 }
 
@@ -587,11 +577,11 @@ void sub_8041C34(Entity *pokemon)
     sub_804151C(pokemon, 0x4C, 1);
 }
 
-void nullsub_70(void)
+void nullsub_70(Entity *pokemon)
 {
 }
 
-void nullsub_71(void)
+void nullsub_71(Entity *pokemon)
 {
 }
 
@@ -615,11 +605,11 @@ void sub_8041C7C(Entity *pokemon)
     sub_804151C(pokemon, 0x9D << 1, 1);
 }
 
-void nullsub_72(void)
+void nullsub_72(Entity *pokemon)
 {
 }
 
-void nullsub_73(void)
+void nullsub_73(Entity *pokemon)
 {
 }
 
@@ -653,7 +643,7 @@ void sub_8041CEC(Entity *pokemon)
     sub_80421C0(pokemon, 0x19d);
 }
 
-void nullsub_74(void)
+void nullsub_74(Entity *pokemon)
 {
 }
 
@@ -697,7 +687,7 @@ void sub_8041D48(Entity * pokemon)
     sub_80421C0(pokemon, 0x191);
 }
 
-void nullsub_81(void)
+void nullsub_81(Entity *pokemon)
 {
 }
 
@@ -714,11 +704,11 @@ void sub_8041D84(Entity *pokemon)
     sub_80421C0(pokemon, 0x19f);
 }
 
-void nullsub_82(void)
+void nullsub_82(Entity *pokemon)
 {
 }
 
-void nullsub_83(void)
+void nullsub_83(Entity *pokemon)
 {
 }
 
@@ -732,42 +722,41 @@ void sub_8041DB0(Entity *pokemon)
     sub_804151C(pokemon, 0x30, 1);
 }
 
-void nullsub_84(void)
+void nullsub_84(Entity *pokemon)
 {
 }
 
-void nullsub_85(void)
+void nullsub_85(Entity *pokemon)
 {
 }
 
-void nullsub_204(void)
+UNUSED static void nullsub_204(void)
 {
 }
 
-void nullsub_86(void)
+void nullsub_86(Entity *pokemon)
 {
 }
 
-void nullsub_87(void)
+void nullsub_87(Entity *pokemon)
 {
 }
 
-void nullsub_88(void)
+void nullsub_88(Entity *pokemon)
 {
 }
 
-void sub_8041DD8(Entity *pokemon, s16 r1)
+void sub_8041DD8(Entity *pokemon, s32 r1)
 {
-    u32 temp;
-    temp = r1;
+    s32 temp = (s16) r1;
 
-    if(MonsterIsType(pokemon, TYPE_GHOST) != 0)
+    if (MonsterIsType(pokemon, TYPE_GHOST))
         sub_804151C(pokemon, temp, 1);
     else
         sub_804151C(pokemon, TYPE_GHOST, 1);
 }
 
-void nullsub_89(void)
+void nullsub_89(Entity *pokemon)
 {
 }
 
@@ -847,7 +836,7 @@ void sub_8041F08(Entity *pokemon)
     sub_8041550(pokemon, 0x15, 1, 3, 2, 0);
 }
 
-void nullsub_90(void)
+void nullsub_90(Entity *pokemon)
 {
 }
 
@@ -983,16 +972,16 @@ void sub_8042080(Entity *pokemon, u32 r1)
     }
 }
 
-void sub_80420A0(Entity *pokemon, u32 r1)
+void sub_80420A0(Entity *pokemon)
 {
     sub_804151C(pokemon, 0x143, 1);
 }
 
-void nullsub_91(void)
+void nullsub_91(Entity *pokemon)
 {
 }
 
-void sub_80420B8(Entity *pokemon, u32 r1)
+void sub_80420B8(Entity *pokemon)
 {
     sub_804151C(pokemon, 0x19, 1);
 }
@@ -1038,7 +1027,7 @@ void sub_8042148(Entity *pokemon)
     sub_804151C(pokemon, 0x9F << 1, 1);
 }
 
-void nullsub_93()
+void nullsub_93(DungeonPos *pos)
 {
 }
 
@@ -1299,7 +1288,7 @@ void sub_80426C8(u32 a0, u32 a1)
     sub_8052210(1);
 }
 
-void sub_8042730(Entity *a0, void *unused)
+void sub_8042730(Entity *a0, Entity *unused)
 {
     s32 i;
 
@@ -1513,7 +1502,7 @@ void sub_8042A74(Entity *r0)
     sub_804151C(r0, 0x18, 1);
 }
 
-void sub_8042A84(s16 param_1, Entity *entity, u32 param_3)
+static void sub_8042A84(s16 param_1, Entity *entity, u32 param_3)
 {
   s32 iVar3;
   s32 r6;
@@ -1549,7 +1538,7 @@ void sub_8042B20(Entity *entity)
 
 static const unkStruct_2039DB0 gUnknown_80F683C = DEFAULT_UNK_2039DB0_MASKS;
 
-void sub_8042B34(s32 a0, s32 a1, s32 a2)
+static void sub_8042B34(s32 a0, s32 a1, s32 a2)
 {
     unkStruct_80416E0 spStruct;
     s32 i;
@@ -1593,7 +1582,7 @@ void sub_8042B34(s32 a0, s32 a1, s32 a2)
     }
 }
 
-bool8 sub_8042CC0(void)
+static bool8 sub_8042CC0(void)
 {
     s32 i;
     bool8 ret = FALSE;
@@ -1623,7 +1612,7 @@ bool8 sub_8042CC0(void)
     return ret;
 }
 
-void sub_8042D7C(void)
+static void sub_8042D7C(void)
 {
     s32 i;
 

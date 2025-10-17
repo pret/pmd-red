@@ -6,10 +6,10 @@
 #include "constants/move_id.h"
 #include "dungeon_vram.h"
 #include "dungeon_tilemap.h"
-#include "code_8041AD0.h"
+#include "dungeon_8041AD0.h"
 #include "dungeon_action.h"
 #include "code_8066D04.h"
-#include "code_806CD90.h"
+#include "dungeon_mon_sprite_render.h"
 #include "dungeon_jobs.h"
 #include "run_dungeon.h"
 #include "dungeon_items.h"
@@ -45,8 +45,6 @@
 #include "dungeon_monster_house.h"
 #include "warp_target.h"
 #include "move_orb_effects_5.h"
-
-extern void sub_8042208(Entity *pokemon, u8 r1);
 
 Entity *sub_806773C(Entity *entity);
 void sub_8067558(Entity *entity, Entity *targetEntity, s32 a2);
@@ -636,7 +634,7 @@ void sub_8067558(Entity *entity, Entity *targetEntity, s32 a2)
         }
 
         if (info2->monsterBehavior == 1) {
-            if (gDungeon->unk644.unk2A != 0) {
+            if (gDungeon->unk644.stoleFromKecleon != 0) {
                 DisplayDungeonMessage(NULL, gUnknown_80FF674, TRUE);
             }
             else if (gDungeon->unk644.unk33) {

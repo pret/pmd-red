@@ -4,8 +4,7 @@
 #include "dungeon_ai_leader.h"
 #include "dungeon_move_util.h"
 #include "dungeon_vram.h"
-#include "code_8041AD0.h"
-#include "code_804267C.h"
+#include "dungeon_8041AD0.h"
 #include "code_8066D04.h"
 #include "dungeon_message.h"
 #include "constants/dungeon_action.h"
@@ -42,7 +41,6 @@
 #include "dungeon_entity_movement.h"
 
 void sub_8075BA4(Entity *param_1, u8 param_2);
-void sub_804178C(u8 param_1);
 void nullsub_95(Entity *);
 extern void sub_80671A0(Entity *);
 extern void sub_8067110(Entity *);

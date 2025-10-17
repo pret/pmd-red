@@ -19,7 +19,7 @@
 #include "dungeon_map_access.h"
 #include "dungeon_misc.h"
 #include "dungeon_vram.h"
-#include "code_806CD90.h"
+#include "dungeon_mon_sprite_render.h"
 #include "dungeon_range.h"
 #include "random.h"
 #include "math.h"

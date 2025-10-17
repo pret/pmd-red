@@ -3,7 +3,7 @@
 #include "dungeon_vram.h"
 #include "move_orb_actions_3.h"
 #include "dungeon_tilemap.h"
-#include "code_806CD90.h"
+#include "dungeon_mon_sprite_render.h"
 #include "dungeon_random.h"
 #include "constants/ability.h"
 #include "constants/dungeon_exit.h"

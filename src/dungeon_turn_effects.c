@@ -11,7 +11,7 @@
 #include "dungeon_music.h"
 #include "dungeon_map_access.h"
 #include "dungeon_vram.h"
-#include "code_806CD90.h"
+#include "dungeon_mon_sprite_render.h"
 #include "game_options.h"
 #include "dungeon_items.h"
 #include "moves.h"
@@ -40,12 +40,11 @@
 #include "move_orb_effects_1.h"
 #include "warp_target.h"
 #include "move_orb_effects_5.h"
+#include "dungeon_8041AD0.h"
+#include "dungeon_entity_movement.h"
 
 extern void sub_805229C(void);
-extern void sub_80420B8(Entity *pokemon);
-extern void sub_8041C4C(Entity *pokemon, u32 r1);
 extern void sub_805E804(void);
-extern bool8 DisplayActions(Entity *a0);
 
 void ApplyEndOfTurnEffects(Entity *entity)
 {

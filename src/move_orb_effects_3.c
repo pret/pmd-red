@@ -5,7 +5,7 @@
 #include "dungeon_map_access.h"
 #include "dungeon_message.h"
 #include "code_805D8C8.h"
-#include "code_806CD90.h"
+#include "dungeon_mon_sprite_render.h"
 #include "dungeon_random.h"
 #include "constants/ability.h"
 #include "constants/item.h"
@@ -26,9 +26,7 @@
 #include "dungeon_config.h"
 #include "dungeon_strings.h"
 #include "dungeon_pos_data.h"
-
-extern void sub_8041BD0(Entity *r0, u8 r1);
-extern void EntityUpdateStatusSprites(Entity *);
+#include "dungeon_8041AD0.h"
 
 void SetChargeStatusTarget(Entity *pokemon, Entity *target, u8 newStatus, Move *move, const u8 *message)
 {

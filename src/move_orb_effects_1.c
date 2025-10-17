@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "move_orb_effects_1.h"
 #include "dungeon_message.h"
-#include "code_806CD90.h"
+#include "dungeon_mon_sprite_render.h"
 #include "dungeon_random.h"
 #include "constants/ability.h"
 #include "constants/direction.h"
@@ -32,40 +32,7 @@
 #include "dungeon_vram.h"
 #include "dungeon_pos_data.h"
 #include "dungeon_data.h"
-
-extern void sub_80420A0(Entity *);
-extern void sub_8041C58(Entity *r0);
-extern void sub_8041F28(Entity *, s32);
-extern void sub_8041F4C(Entity *, s32);
-extern void sub_8041F70(Entity *, s32);
-extern void sub_8041F94(Entity *, s32);
-extern void sub_8041C08(Entity *);
-extern void sub_8076CB4(s32);
-extern void sub_8041F08(Entity *);
-extern void sub_8041C7C(Entity *);
-extern void sub_8041C6C(Entity *);
-extern void sub_8041C34(Entity *);
-extern void sub_8041EF8(Entity *);
-extern void sub_8041EE8(Entity *);
-extern void sub_8041EC8(Entity *);
-extern void sub_8041ED8(Entity *);
-extern void EntityUpdateStatusSprites(Entity *);
-extern void sub_8041AF4(Entity *);
-extern void nullsub_91(Entity *);
-extern void nullsub_90(Entity *);
-extern void nullsub_72(Entity *);
-extern void nullsub_71(Entity *);
-extern void nullsub_70(Entity *);
-extern void nullsub_69(Entity *, Entity *);
-extern void sub_8041CB8(Entity *r0);
-extern void sub_8041C1C(Entity *r0);
-extern void sub_8042060(Entity *, s32);
-extern void sub_8041FB4(Entity *r0, u32 r1);
-extern void sub_8041FD8(Entity *r0, u32 r1);
-extern void sub_804201C(Entity *r0, u32 r1);
-extern void sub_8041FFC(Entity *r0, u32 r1);
-extern void sub_8041CCC(Entity *);
-extern void sub_8042040(Entity *, s32);
+#include "dungeon_8041AD0.h"
 
 u8 sub_8075BF4(Entity * pokemon, s32 sleepClassStatusTurns)
 {

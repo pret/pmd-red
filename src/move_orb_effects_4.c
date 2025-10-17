@@ -5,7 +5,7 @@
 #include "dungeon_map_access.h"
 #include "dungeon_message.h"
 #include "code_805D8C8.h"
-#include "code_806CD90.h"
+#include "dungeon_mon_sprite_render.h"
 #include "dungeon_random.h"
 #include "constants/ability.h"
 #include "constants/item.h"
@@ -26,22 +26,7 @@
 #include "dungeon_config.h"
 #include "dungeon_strings.h"
 #include "dungeon_misc.h"
-
-extern void EntityUpdateStatusSprites(Entity *);
-extern void nullsub_68(Entity *);
-extern void nullsub_67(Entity *);
-extern void nullsub_66(Entity *);
-extern void nullsub_65(Entity *);
-extern void nullsub_64(Entity *);
-extern void nullsub_63(Entity *);
-extern void nullsub_62(Entity *);
-extern void nullsub_61(Entity *);
-extern void nullsub_60(Entity *);
-extern void nullsub_59(Entity *);
-extern void nullsub_58(Entity *);
-extern void nullsub_57(Entity *);
-extern void sub_8041B34(Entity *pokemon);
-extern void sub_80420C8(Entity *pokemon);
+#include "dungeon_8041AD0.h"
 
 void CounterStatusTarget(Entity * pokemon, Entity * target, u8 newStatus)
 {

@@ -273,26 +273,26 @@ UNUSED static void GetMonOffenseStats(Pokemon *mon, struct UnusedOffenseStruct *
     if (mon->heldItem.id != ITEM_NOTHING) {
         u16 itemId = mon->heldItem.id;
         if (itemId == ITEM_POWER_BAND) {
-            dst->atkBoost += gUnknown_810AC60;
-            dst->att[0] += gUnknown_810AC60;
+            dst->atkBoost += gPowerBandBoost;
+            dst->att[0] += gPowerBandBoost;
         }
         if (itemId == ITEM_SPECIAL_BAND) {
-            dst->spAtkBoost += gUnknown_810AC62;
-            dst->att[1] += gUnknown_810AC62;
+            dst->spAtkBoost += gSpecialBandBoost;
+            dst->att[1] += gSpecialBandBoost;
         }
         if (itemId == ITEM_MUNCH_BELT) {
-            dst->atkBoost += gUnknown_810AC68;
-            dst->spAtkBoost += gUnknown_810AC68;
-            dst->att[0] += gUnknown_810AC68;
-            dst->att[1] += gUnknown_810AC68;
+            dst->atkBoost += gMunchBeltBoost;
+            dst->spAtkBoost += gMunchBeltBoost;
+            dst->att[0] += gMunchBeltBoost;
+            dst->att[1] += gMunchBeltBoost;
         }
         if (itemId == ITEM_DEF_SCARF) {
-            dst->defBoost += gUnknown_810AC64;
-            dst->def[0] += gUnknown_810AC64;
+            dst->defBoost += gDefScarfBoost;
+            dst->def[0] += gDefScarfBoost;
         }
         if (itemId == ITEM_ZINC_BAND) {
-            dst->spDefBoost += gUnknown_810AC66;
-            dst->def[1] += gUnknown_810AC66;
+            dst->spDefBoost += gZincBandBoost;
+            dst->def[1] += gZincBandBoost;
         }
     }
 }

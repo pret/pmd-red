@@ -2,7 +2,6 @@
 #include "globaldata.h"
 #include "dungeon_kecleon_shop.h"
 #include "weather.h"
-#include "code_804267C.h"
 #include "dungeon_vram.h"
 #include "dungeon_info.h"
 #include "dungeon_config.h"
@@ -17,7 +16,7 @@
 #include "dungeon_map_access.h"
 #include "position_util.h"
 #include "dungeon_ai.h"
-#include "code_806CD90.h"
+#include "dungeon_mon_sprite_render.h"
 #include "dungeon_random.h"
 #include "code_805D8C8.h"
 #include "dungeon_items.h"
@@ -53,7 +52,7 @@ void sub_807EC28(bool8 arg0)
     isShopTile = (GetTileAtEntitySafe(leader)->terrainFlags & TERRAIN_TYPE_SHOP) != 0;
     gDungeon->unk644.unk54 = isShopTile;
     gDungeon->unk644.unk55 = isShopTile;
-    if (gDungeon->unk644.unk2A || gDungeon->unk644.unk50 == 0)
+    if (gDungeon->unk644.stoleFromKecleon || gDungeon->unk644.unk50 == 0)
         return;
 
     if (leaderInfo->invisibleClassStatus.status == STATUS_INVISIBLE) {
@@ -313,7 +312,7 @@ static void sub_807F33C(void)
 {
     s32 i, x, y;
 
-    gDungeon->unk644.unk2A = 1;
+    gDungeon->unk644.stoleFromKecleon = 1;
     gDungeon->unk644.unk2B = 1;
     LogMessageByIdWithPopupCheckUser(GetLeader(), gUnknown_80FE4B8); // Help! Thief! I've been robbed! Help me catch the thief.
     for (x = 0; x < DUNGEON_MAX_SIZE_X; x++) {

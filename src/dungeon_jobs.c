@@ -9,15 +9,13 @@
 #include "dungeon_range.h"
 #include "string_format.h"
 #include "code_80958E8.h"
+#include "dungeon_8041AD0.h"
 #include "mailbox.h"
 #include "items.h"
 #include "pokemon.h"
 #include "structs/str_dungeon.h"
 #include "constants/dungeon.h"
 #include "constants/dungeon_exit.h"
-
-extern void sub_8042A34(DungeonPos *r0);
-extern void sub_804178C(u32);
 
 void sub_80842F0(void)
 {

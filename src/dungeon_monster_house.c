@@ -5,7 +5,7 @@
 #include "dungeon_map_access.h"
 #include "dungeon_message.h"
 #include "code_805D8C8.h"
-#include "code_806CD90.h"
+#include "dungeon_mon_sprite_render.h"
 #include "dungeon_random.h"
 #include "constants/ability.h"
 #include "constants/item.h"
@@ -29,8 +29,7 @@
 #include "dungeon_misc.h"
 #include "dungeon_mon_spawn.h"
 #include "move_orb_effects_5.h"
-
-extern void sub_804178C(u32);
+#include "dungeon_8041AD0.h"
 
 void TryWakeSleepingWildPokemon(void)
 {

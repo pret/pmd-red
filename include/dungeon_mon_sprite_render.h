@@ -1,9 +1,9 @@
-#ifndef GUARD_CODE_806CD90_H
-#define GUARD_CODE_806CD90_H
+#ifndef GUARD_DUNGEON_MON_SPRITE_RENDER_H
+#define GUARD_DUNGEON_MON_SPRITE_RENDER_H
 
 #include "structs/dungeon_entity.h"
 
-void sub_806C51C(Entity *entity);
+void UpdateMonsterSprite(Entity *entity);
 void sub_806CC10(void);
 void sub_806CC70(void);
 void sub_806CCB4(Entity *entity, u8);
@@ -16,8 +16,7 @@ void sub_806CE94(Entity *entity, u32 newDir);
 u8 sub_806CEBC(Entity *entity);
 void sub_806CEFC(Entity *entity, u32 newDir);
 void sub_806CF18(Entity *entity);
-u8 sub_806CF54(Entity *entity);
 void DetermineAllMonsterShadow(void);
 u32 DetermineMonsterShadow(Entity *entity);
 
-#endif // GUARD_CODE_806CD90_H
+#endif // GUARD_DUNGEON_MON_SPRITE_RENDER_H
