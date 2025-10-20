@@ -3,9 +3,8 @@
 #include "dungeon_cutscene.h"
 #include "effect_main.h"
 #include "dungeon_vram.h"
-#include "code_8041AD0.h"
-#include "code_804267C.h"
-#include "code_806CD90.h"
+#include "dungeon_8041AD0.h"
+#include "dungeon_mon_sprite_render.h"
 #include "constants/bg_music.h"
 #include "constants/direction.h"
 #include "constants/dungeon_exit.h"
@@ -32,13 +31,10 @@
 #include "dungeon_boss_dialogue.h"
 #include "dungeon_tilemap.h"
 #include "weather.h"
+#include "dungeon_mon_recruit.h"
 
-extern void sub_8042B0C(Entity *);
-extern u8 sub_806FD18(Entity *);
-extern void sub_806FDF4(Entity *, Entity *, Entity **);
 extern void sub_8049884(void);
 extern void sub_8049B8C(void);
-extern void sub_8041888(u32);
 extern void sub_8052D44(s16 *, Entity *, Entity *);
 
 static void sub_808C8E0(Entity *entity);
@@ -78,7 +74,7 @@ void CelebiJoinDialogue(void)
 
     leaderEntity = CutsceneGetLeader();
     celebiEntity = GetEntityFromMonsterBehavior(BEHAVIOR_CELEBI);
-    if ((HasRecruitedMon(MONSTER_CELEBI)) || (!sub_806FD18(celebiEntity)))
+    if ((HasRecruitedMon(MONSTER_CELEBI)) || (!CanEntityBeRecruited(celebiEntity)))
     {
         HandleFaint(celebiEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
         SpriteLookAroundEffect(leaderEntity);
@@ -141,7 +137,7 @@ void CelebiJoinDialogue(void)
                     sub_803E708(0x1c,0x46);
                     DisplayDungeonDialogue(&gCelebiJoinDialogue_4);
                     sub_803E708(10,0x46);
-                    sub_806FDF4(leaderEntity,celebiEntity,&celebiEntity);
+                    HandleSpecialEntityJoinSequence(leaderEntity,celebiEntity,&celebiEntity);
                     DungeonStartNewBGM(MUS_FRIEND_AREA_HEALING_FOREST);
                     DisplayDungeonDialogue(&gCelebiJoinDialogue_5);
                     sub_803E708(10,0x46);

@@ -455,11 +455,11 @@ const FriendAreaSettings gFriendAreaSettings[NUM_FRIEND_AREAS] =
     },
 };
 
-const s16 gUnknown_810AC60 = 12;
-const s16 gUnknown_810AC62 = 12;
-const s16 gUnknown_810AC64 = 8;
-const s16 gUnknown_810AC66 = 8;
-const s16 gUnknown_810AC68 = 8;
+const s16 gPowerBandBoost = 12;
+const s16 gSpecialBandBoost = 12;
+const s16 gDefScarfBoost = 8;
+const s16 gZincBandBoost = 8;
+const s16 gMunchBeltBoost = 8;
 
 const u8 gBestResistTypeTable[NUM_TYPES] =
 {

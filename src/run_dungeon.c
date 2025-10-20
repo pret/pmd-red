@@ -21,7 +21,7 @@
 #include "code_8094F88.h"
 #include "code_8099360.h"
 #include "cpu.h"
-#include "dungeon_8083AB0.h"
+#include "dungeon_exit.h"
 #include "dungeon_info.h"
 #include "dungeon_entity_movement.h"
 #include "dungeon_config.h"
@@ -59,13 +59,13 @@
 #include "dungeon_cutscene.h"
 #include "dungeon_mon_spawn.h"
 #include "dungeon_action_execution.h"
+#include "dungeon_8041AD0.h"
 
 EWRAM_INIT struct UnkStruct_203B414 *gUnknown_203B414 = NULL;
 EWRAM_INIT Dungeon *gDungeon = NULL;
 static EWRAM_INIT u8 *gSerializedData_203B41C = NULL;
 
 extern void sub_8068BDC(u8 r0);
-extern void sub_8041888(u8 param_1);
 extern void sub_803D4AC(void);
 extern void sub_804513C(void);
 extern void sub_8068F28(void);
@@ -78,7 +78,6 @@ extern void sub_807E5AC(void);
 extern void nullsub_16(void);
 extern void sub_80521D0(void);
 extern void sub_8068A84(Pokemon *pokemon);
-extern void sub_80427AC(void);
 extern void sub_806AA70(void);
 extern void ReevaluateSnatchMonster(void);
 extern void sub_8051E3C(void);
@@ -86,10 +85,8 @@ extern void sub_807FA18(void);
 extern void sub_806A974(void);
 extern void DetermineAllMonsterShadow(void);
 extern void sub_8068F80(void);
-extern void sub_8042E98(void);
 extern bool8 TryForcedLoss(bool8);
 extern void sub_806A914(bool8 a0, bool8 a1, bool8 showRunAwayEffect);
-extern void sub_8042B0C(Entity *);
 
 extern u8 gUnknown_202F1A8;
 
@@ -144,7 +141,7 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
         gDungeon->unk644.unk34 = setupPtr->info.sub0.unkB;
         gDungeon->unk644.dungeonSeed = setupPtr->info.dungeonSeed;
         gDungeon->unk644.windTurns = GetTurnLimit(setupPtr->info.sub0.unk0.id);
-        gDungeon->unk644.unk36 = 0;
+        gDungeon->unk644.windPhase = 0;
         gDungeon->unk644.unk37 = GetRescuesAllowed(setupPtr->info.sub0.unk0.id);
     }
     gDungeon->unk644.unk54 = 0;
@@ -297,8 +294,8 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
             gDungeon->unk644.unk4C = 0;
             gDungeon->unk644.unk50 = 0;
             gDungeon->unk644.fractionalTurn = 0;
-            gDungeon->unk644.unk1E = 0;
-            gDungeon->unk644.unk2A = 0;
+            gDungeon->unk644.wildMonSpawnFrames = 0;
+            gDungeon->unk644.stoleFromKecleon = 0;
             gDungeon->unk644.unk2B = 0;
             gDungeon->unk644.unk2C = 0;
             gDungeon->unk644.itemHoldersIdentified = 0;
@@ -344,7 +341,7 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
         if (!r6) {
             GenerateFloor();
             gDungeon->unk644.windTurns = GetTurnLimit(gDungeon->unk644.dungeonLocation.id);
-            gDungeon->unk644.unk36 = 0;
+            gDungeon->unk644.windPhase = 0;
         }
         sub_804AAD4();
         sub_8049B8C();
@@ -362,8 +359,8 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
         gDungeon->unk17B38 = 0;
         gDungeon->snatchPokemon = NULL;
         gDungeon->unk17B3C = 0;
-        gDungeon->unk17B34 = NULL;
-        gDungeon->unk17B40 = 0;
+        gDungeon->illuminatePokemon = NULL;
+        gDungeon->illuminateMonSpawnGenID = 0;
         if (!r6) {
             sub_807FA18();
             CreateFloorItems();
@@ -519,7 +516,7 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
             leader = GetLeader();
             DisplayDungeonMessage(0, gPtrClientFaintedMessage, 1);
             gDungeon->unk6 = 0;
-            sub_8083AB0(DUNGEON_EXIT_FAILED_TO_PROTECT_CLIENT, leader, leader);
+            SetUpDungeonExitData(DUNGEON_EXIT_FAILED_TO_PROTECT_CLIENT, leader, leader);
         }
         CloseAllSpriteFiles();
         sub_8049820();
@@ -546,43 +543,43 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
             sub_806C1D8();
 
             if (gDungeon->unk644.unk10 == 1) {
-                if (gDungeon->unk644.unk2A != 0) {
+                if (gDungeon->unk644.stoleFromKecleon != 0) {
                     AllItemsToPlainSeed();
                 }
                 check = TRUE;
             }
             else if (gDungeon->unk11 == 1) {
-                sub_8083AB0(DUNGEON_EXIT_ESCAPED_MIDDLE_OF_EXPLORATION, NULL, GetLeader());
+                SetUpDungeonExitData(DUNGEON_EXIT_ESCAPED_MIDDLE_OF_EXPLORATION, NULL, GetLeader());
                 check = TRUE;
             }
             else if (gDungeon->unk11 == 2) {
-                sub_8083AB0(DUNGEON_EXIT_IMPRESSIVELY_COMPLETED_MISSION, NULL, GetLeader());
-                if (gDungeon->unk644.unk2A != 0) {
+                SetUpDungeonExitData(DUNGEON_EXIT_IMPRESSIVELY_COMPLETED_MISSION, NULL, GetLeader());
+                if (gDungeon->unk644.stoleFromKecleon != 0) {
                     IncrementThievingSuccesses();
                 }
                 check = TRUE;
             }
             else if (gDungeon->unk11 == 3) {
-                sub_8083AB0(DUNGEON_EXIT_BEFRIENDED_MEW, NULL, GetLeader());
-                if (gDungeon->unk644.unk2A != 0) {
+                SetUpDungeonExitData(DUNGEON_EXIT_BEFRIENDED_MEW, NULL, GetLeader());
+                if (gDungeon->unk644.stoleFromKecleon != 0) {
                     IncrementThievingSuccesses();
                 }
                 check = TRUE;
             }
             else if (gDungeon->unk11 == 4) {
                 var = DUNGEON_EXIT_CLEARED_DUNGEON;
-                sub_8083AB0(var, NULL, GetLeader());
+                SetUpDungeonExitData(var, NULL, GetLeader());
                 check = TRUE;
             }
             else if (gDungeon->unk644.unk34 == 1 && GetFloorType() == FLOOR_TYPE_RESCUE && gDungeon->unk644.unk10 == 2) {
-                sub_8083AB0(DUNGEON_EXIT_SUCCEEDED_IN_RESCUE_MISSION, NULL, GetLeader());
-                if (gDungeon->unk644.unk2A != 0) {
+                SetUpDungeonExitData(DUNGEON_EXIT_SUCCEEDED_IN_RESCUE_MISSION, NULL, GetLeader());
+                if (gDungeon->unk644.stoleFromKecleon != 0) {
                     IncrementThievingSuccesses();
                 }
                 check = TRUE;
             }
             else {
-                if (gDungeon->unk644.unk2A != 0) {
+                if (gDungeon->unk644.stoleFromKecleon != 0) {
                     IncrementThievingSuccesses();
                 }
                 if (gDungeon->unk644.dungeonLocation.floor + 1 < gDungeon->unk1CEC8) {
@@ -600,7 +597,7 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
                 }
                 else {
                     var = DUNGEON_EXIT_CLEARED_DUNGEON;
-                    sub_8083AB0(var, NULL, GetLeader());
+                    SetUpDungeonExitData(var, NULL, GetLeader());
                     check = TRUE;
                     // This goto is a fakematch I had to create in order to generate matching code.
                     // It has no real effect, because the control flow is the same without it(since check is TRUE). Unfortunately agbcc is blind and goto is needed.

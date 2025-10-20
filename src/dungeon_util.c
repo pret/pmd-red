@@ -4,8 +4,8 @@
 #include "structs/str_dungeon.h"
 #include "structs/str_traps.h"
 #include "structs/map.h"
-#include "code_8041AD0.h"
-#include "code_806CD90.h"
+#include "dungeon_8041AD0.h"
+#include "dungeon_mon_sprite_render.h"
 #include "dungeon_items.h"
 #include "dungeon_map_access.h"
 #include "dungeon_tilemap.h"
@@ -144,7 +144,7 @@ void sub_804522C(void)
             {
                 if(entity == gDungeon->unk181e8.cameraTarget)
                 {
-                    sub_806C51C(entity);
+                    UpdateMonsterSprite(entity);
                 }
                 else
                 {
@@ -162,7 +162,7 @@ void sub_804522C(void)
             entity2 = gDungeon->teamPokemon[index];
             if(EntityIsValid(entity2))
             {
-                sub_806C51C(entity2);
+                UpdateMonsterSprite(entity2);
             }
         }
         for(index = 0; index < DUNGEON_MAX_WILD_POKEMON; index++)
@@ -170,7 +170,7 @@ void sub_804522C(void)
             entity2 = gDungeon->wildPokemon[index];
             if(EntityIsValid(entity2))
             {
-                sub_806C51C(entity2);
+                UpdateMonsterSprite(entity2);
             }
         }
 
@@ -615,7 +615,7 @@ void SubstitutePlaceholderStringTags(u8 *buffer, Entity *entity, u32 param_3)
         GetTrapName(buffer, GetTrapData_1(entity)->id);
         break;
     default:
-        strcpy(buffer, gUnknown_80FE6F4);
+        strcpy(buffer, gText_Someone);
         break;
   }
 }

@@ -11,15 +11,13 @@
 #include "dungeon_strings.h"
 #include "dungeon_util.h"
 #include "dungeon_misc.h"
-#include "code_806CD90.h"
+#include "dungeon_mon_sprite_render.h"
 #include "dungeon_pos_data.h"
 #include "dungeon_floor_spawns.h"
 #include "hurl_orb.h"
 #include "trap.h"
 #include "move_orb_effects_2.h"
-
-extern void sub_8042A54(DungeonPos *);
-extern void sub_8042A64(DungeonPos *);
+#include "dungeon_8041AD0.h"
 
 bool8 FillInOrbAction(Entity *pokemon,Entity *target, Move *move, s32 itemId)
 {

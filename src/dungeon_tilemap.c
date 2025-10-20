@@ -11,7 +11,7 @@
 #include "effect_data.h"
 #include "code_801602C.h"
 #include "dungeon_vram.h"
-#include "code_806CD90.h"
+#include "dungeon_mon_sprite_render.h"
 #include "dungeon_info.h"
 #include "dungeon_items.h"
 #include "dungeon_map.h"
@@ -32,8 +32,7 @@
 #include "dungeon_strings.h"
 #include "run_dungeon.h"
 #include "effect_main.h"
-
-extern void sub_8041888(u8 param_1);
+#include "dungeon_8041AD0.h"
 
 static void sub_803F38C(void);
 static void sub_803F7BC(void);

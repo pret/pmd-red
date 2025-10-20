@@ -2,10 +2,10 @@
 #include "globaldata.h"
 #include "trap.h"
 #include "dungeon_tilemap.h"
-#include "code_8041AD0.h"
+#include "dungeon_8041AD0.h"
 #include "dungeon_message.h"
 #include "dungeon_random.h"
-#include "code_806CD90.h"
+#include "dungeon_mon_sprite_render.h"
 #include "constants/dungeon_exit.h"
 #include "constants/residual_damage.h"
 #include "constants/trap.h"
@@ -39,8 +39,6 @@
 #include "move_orb_effects_2.h"
 #include "move_orb_effects_4.h"
 
-void sub_80421EC(DungeonPos *, u32);
-void sub_804225C(Entity *, DungeonPos *, u8);
 void sub_806A1E8(Entity *pokemon);
 Entity *sub_8045684(u8, DungeonPos *, u8);
 
@@ -793,7 +791,7 @@ void HandlePokemonTrap(Entity *param_1,DungeonPos *pos)
 
                 local_50.species = MONSTER_KECLEON;
                 for (i = 0; i < 100; i++) {
-                    if (gDungeon->unk644.unk2A != 0) {
+                    if (gDungeon->unk644.stoleFromKecleon != 0) {
                         species = MONSTER_KECLEON;
                     }
                     else {

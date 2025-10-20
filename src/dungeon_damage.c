@@ -27,12 +27,11 @@
 #include "dungeon_leveling.h"
 #include "weather.h"
 #include "game_options.h"
-#include "code_806CD90.h"
+#include "dungeon_mon_sprite_render.h"
 #include "constants/direction.h"
 #include "constants/dungeon.h"
 #include "dungeon_vram.h"
-#include "code_8041AD0.h"
-#include "code_804267C.h"
+#include "dungeon_8041AD0.h"
 #include "code_805D8C8.h"
 #include "dungeon_map_access.h"
 #include "dungeon_data.h"
@@ -44,34 +43,17 @@
 #include "exclusive_pokemon.h"
 #include "hurl_orb.h"
 #include "dungeon_mon_spawn.h"
+#include "dungeon_mon_recruit.h"
 #include "move_orb_actions_1.h"
 #include "move_orb_effects_2.h"
 #include "move_orb_effects_5.h"
 
-extern void sub_8041B18(Entity *pokemon);
-extern void sub_8041B90(Entity *pokemon);
-extern void sub_8041D00(Entity *pokemon, Entity *target);
-extern void sub_8042238(Entity *pokemon, Entity *target);
 extern void sub_803ED30(s32, Entity *r0, u8, s32);
 extern bool8 sub_806A458(Entity *);
-extern bool8 TryRecruitMonster(Entity *attacker, Entity *target);
 extern bool8 sub_806A58C(s16 a0);
-extern void sub_8042148(Entity *pokemon);
-extern void sub_8042A24(Entity *r0);
 extern void sub_806A390(Entity *r0);
 extern void sub_800DBBC(void);
-extern bool8 sub_806FA5C(Entity *, Entity *, struct unkStruct_8069D4C *);
-extern void EntityUpdateStatusSprites(Entity *);
 extern void PointCameraToMonster(Entity *);
-extern void sub_8041B74(Entity *pokemon);
-extern void sub_8041B5C(Entity *pokemon);
-extern void sub_8042940(Entity *r0);
-extern void sub_80428B0(Entity *r0);
-extern void sub_80428C4(Entity *r0);
-extern void sub_80428D8(Entity *);
-extern void sub_8042978(Entity *);
-extern void sub_804298C(Entity *);
-extern void sub_80428EC(Entity *);
 
 static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struct DamageStruct *r5, bool32 isFalseSwipe, bool32 giveExp, s16 dungeonExitReason_, s32 arg8);
 static bool8 sub_806E100(s48_16 *param_1, Entity *pokemon, Entity *target, u8 type, DamageStruct *dmgStruct);
@@ -737,7 +719,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
 
         sub_8069D4C(&sp, target);
         if (TryRecruitMonster(attacker, target)) {
-            if (!sub_806FA5C(attacker, target, &sp)) {
+            if (!HandleMonsterJoinSequence(attacker, target, &sp)) {
                 HandleFaint(target, DUNGEON_EXIT_LEFT_WITHOUT_BEING_BEFRIENDED, attacker);
             }
             else {
@@ -1225,30 +1207,30 @@ void CalcDamage(Entity *attacker, Entity *target, u8 moveType, s32 movePower, s3
         rand = DungeonRandInt(100);
         if (splitIndex == 0) {
             if (HasHeldItem(attacker, ITEM_POWER_BAND)) {
-                atkStat += gUnknown_810AC60;
-                gDungeon->unk134.unk160 += gUnknown_810AC60;
+                atkStat += gPowerBandBoost;
+                gDungeon->unk134.unk160 += gPowerBandBoost;
             }
             if (HasHeldItem(attacker, ITEM_MUNCH_BELT)) {
-                atkStat += gUnknown_810AC68;
-                gDungeon->unk134.unk160 += gUnknown_810AC68;
+                atkStat += gMunchBeltBoost;
+                gDungeon->unk134.unk160 += gMunchBeltBoost;
             }
             if (arg_10 && HasHeldItem(target, ITEM_DEF_SCARF)) {
-                defStat += gUnknown_810AC64;
-                gDungeon->unk134.unk162 += gUnknown_810AC64;
+                defStat += gDefScarfBoost;
+                gDungeon->unk134.unk162 += gDefScarfBoost;
             }
         }
         else {
             if (arg_10 && HasHeldItem(target, ITEM_ZINC_BAND)) {
-                defStat += gUnknown_810AC66;
-                gDungeon->unk134.unk163 += gUnknown_810AC66;
+                defStat += gZincBandBoost;
+                gDungeon->unk134.unk163 += gZincBandBoost;
             }
             if (HasHeldItem(attacker, ITEM_SPECIAL_BAND)) {
-                atkStat += gUnknown_810AC62;
-                gDungeon->unk134.unk161 += gUnknown_810AC62;
+                atkStat += gSpecialBandBoost;
+                gDungeon->unk134.unk161 += gSpecialBandBoost;
             }
             if (HasHeldItem(attacker, ITEM_MUNCH_BELT)) {
-                atkStat += gUnknown_810AC68;
-                gDungeon->unk134.unk161 += gUnknown_810AC68;
+                atkStat += gMunchBeltBoost;
+                gDungeon->unk134.unk161 += gMunchBeltBoost;
             }
         }
 

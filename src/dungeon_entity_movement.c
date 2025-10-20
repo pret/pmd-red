@@ -5,7 +5,7 @@
 #include "constants/item.h"
 #include "constants/status.h"
 #include "constants/type.h"
-#include "code_806CD90.h"
+#include "dungeon_mon_sprite_render.h"
 #include "dungeon_items.h"
 #include "dungeon_range.h"
 #include "dungeon_map_access.h"
@@ -23,7 +23,7 @@
 #include "dungeon_music.h"
 #include "dungeon_map_access.h"
 #include "dungeon_vram.h"
-#include "code_806CD90.h"
+#include "dungeon_mon_sprite_render.h"
 #include "game_options.h"
 #include "dungeon_items.h"
 #include "moves.h"
@@ -52,6 +52,7 @@
 #include "dungeon_action_execution.h"
 #include "dungeon_tilemap.h"
 #include "run_dungeon.h"
+#include "dungeon_8041AD0.h"
 
 static EWRAM_DATA s32 sSpeedMultiplier = 0;
 
@@ -59,7 +60,6 @@ static void sub_8075050(EntityInfo *info, Unk_Entity_x184 *strPtr);
 static void nullsub_97(Entity *entity);
 static void TryInteractWithTile(Entity *entity);
 
-extern void sub_8041888(u32);
 extern void sub_8073D14(Entity *entity);
 
 static inline void SetSpeedMultiplier(void)

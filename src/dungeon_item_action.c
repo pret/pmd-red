@@ -1,7 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "dungeon_item_action.h"
-#include "code_8041AD0.h"
+#include "dungeon_8041AD0.h"
 #include "dungeon_message.h"
 #include "dungeon_random.h"
 #include "constants/dungeon_action.h"
@@ -40,10 +40,6 @@
 #include "move_orb_actions_1.h"
 #include "move_orb_effects_2.h"
 #include "move_orb_effects_5.h"
-
-extern void sub_804245C(Entity *, Item *);
-extern s32 sub_8042520(Entity *);
-extern void sub_8042390(Entity *, Item *);
 
 static void StunSeedItemAction(Entity *, Entity *);
 static void MaxElixirAction(Entity *, Entity *);

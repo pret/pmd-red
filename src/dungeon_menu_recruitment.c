@@ -20,11 +20,7 @@
 #include "text_3.h"
 #include "dungeon_engine.h"
 #include "dungeon_cutscene.h"
-
-extern u16 GetLeaderActionId(void);
-extern u8 sub_806F9BC(s32);
-extern bool8 sub_806A564(s32 r0);
-
+#include "dungeon_mon_recruit.h"
 
 struct MonRecruitList
 {
@@ -296,7 +292,7 @@ static void SetRecruitableMons(struct MonRecruitList *tabsData)
         spArray[ExtractSpeciesIndex(&gDungeon->monsterSpawns[id])] = byte;
     }
 
-    if (gDungeon->unk644.unk2A) {
+    if (gDungeon->unk644.stoleFromKecleon) {
         spArray[MONSTER_KECLEON] = 1;
     }
 
@@ -320,7 +316,7 @@ static void SetRecruitableMons(struct MonRecruitList *tabsData)
 
             if (i == TAB_POTENTIAL_RECRUITS) {
                 u32 recruitRate, unrecruitableRate;
-                if (!sub_806F9BC(speciesId))
+                if (!IsMonsterRecruitable(speciesId))
                     continue;
                 if (!IsExclusivePokemonUnlocked(speciesId))
                     continue;

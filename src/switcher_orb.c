@@ -5,7 +5,7 @@
 #include "constants/weather.h"
 #include "dungeon_vram.h"
 #include "dungeon_message.h"
-#include "code_806CD90.h"
+#include "dungeon_mon_sprite_render.h"
 #include "structs/str_dungeon.h"
 #include "dungeon_entity_movement.h"
 #include "run_dungeon.h"
@@ -18,15 +18,13 @@
 #include "move_orb_effects_1.h"
 #include "moves.h"
 #include "move_util.h"
-#include "code_8041AD0.h"
+#include "dungeon_8041AD0.h"
 #include "weather.h"
 #include "dungeon_config.h"
 #include "dungeon_misc.h"
 #include "dungeon_items.h"
 #include "dungeon_strings.h"
 #include "dungeon_kecleon_shop.h"
-
-extern void nullsub_93(DungeonPos *);
 
 void HandleSwitcherOrb(Entity *pokemon, Entity *target, bool8 unused)
 {

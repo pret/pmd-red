@@ -254,14 +254,14 @@ typedef struct unkDungeon644
     /* 0x19 */ u8 unk19;
     /* 0x1A */ u8 fill1A[2];
     /* 0x1C */ s16 fractionalTurn; // Handles turn order when Pokémon have different movement speeds.
-    /* 0x1E */ s16 unk1E;
-    /* 0x20 */ s16 unk20;
+    /* 0x1E */ s16 wildMonSpawnFrames;
+    /* 0x20 */ s16 enemyDensity; // Taken directly from FloorProperties. Checked only once, if 0 there will be no wild Pokemon in dungeon.
     /* 0x22 */ s16 windTurns; // Turns remaining before getting swept out of the dungeon.
     /* 0x24 */ u16 unk24;
     /* 0x26 */ u16 bossSongIndex;
     /* 0x28 */ u8 unk28;
     /* 0x29 */ u8 unk29;
-    /* 0x2A */ u8 unk2A;
+    /* 0x2A */ bool8 stoleFromKecleon;
     /* 0x2B */ u8 unk2B;
     /* 0x2C */ u8 unk2C;
     /* 0x2D */ bool8 monsterHouseTriggered;
@@ -273,7 +273,7 @@ typedef struct unkDungeon644
     /* 0x33 */ u8 unk33;
     /* 0x34 */ u8 unk34;
     /* 0x35 */ u8 emptyBellyAlert; // which alert message to show when belly gets empty.
-    /* 0x36 */ u8 unk36;
+    /* 0x36 */ u8 windPhase;
     /* 0x37 */ s8 unk37;
     /* 0x38 */ u32 unk38;
     /* 0x3C */ u32 unk3C;
@@ -468,10 +468,10 @@ typedef struct Dungeon
     /* 0x15E2C */ Entity trapEntites[DUNGEON_MAX_TRAPS];
     /* 0x17B2C */ Entity *lightningRodPokemon;
     /* 0x17B30 */ Entity *snatchPokemon;
-    /* 0x17B34 */ Entity *unk17B34;
+    /* 0x17B34 */ Entity *illuminatePokemon;
     /* 0x17B38 */ u32 unk17B38;
     /* 0x17B3C */ u32 unk17B3C;
-    /* 0x17B3C */ u32 unk17B40;
+    /* 0x17B3C */ u32 illuminateMonSpawnGenID;
     /* 0x17B44 */ OpenedFile *sprites[MONSTER_MAX];
     /* 0x181E4 */ OpenedFile *paletFile;
     /* 0x181E8 */ UnkDungeonGlobal_unk181E8_sub unk181e8;
