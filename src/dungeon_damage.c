@@ -937,159 +937,104 @@ static bool8 sub_806E100(s48_16 *param_1, Entity *pokemon, Entity *target, u8 ty
 s32 WeightWeakTypePicker(Entity *user, Entity *target, u8 moveType)
 {
     s32 weight = 1;
+    s32 i;
     bool8 checkExposed = FALSE;
     EntityInfo *userData;
     EntityInfo *targetData;
-    u8 *targetTypes;
-    u8 *targetType;
-    u32 moveTypeOffset;
+
     if (!EntityIsValid(target))
-    {
         return 1;
-    }
+
     if (moveType == TYPE_NORMAL || moveType == TYPE_FIGHTING)
-    {
         checkExposed = TRUE;
-    }
+
     userData = GetEntInfo(user);
     targetData = GetEntInfo(target);
+
     if (moveType == TYPE_FIRE && GetFlashFireStatus(target) != FLASH_FIRE_STATUS_NONE)
-    {
         return 0;
-    }
     if (moveType == TYPE_ELECTRIC && AbilityIsActive(target, ABILITY_VOLT_ABSORB))
-    {
         return 0;
-    }
     if (moveType == TYPE_WATER && AbilityIsActive(target, ABILITY_WATER_ABSORB))
-    {
         return 0;
-    }
     if (moveType == TYPE_GROUND && AbilityIsActive(target, ABILITY_LEVITATE))
-    {
         return 1;
-    }
-    targetTypes = targetData->types;
-    moveTypeOffset = moveType * NUM_TYPES * sizeof(s16);
-    targetType = targetData->types;
-    do
-    {
+
+    for (i = 0; i < 2; i++) {
         s32 effectiveness;
         u32 typeEffectivenessMultipliers[NUM_EFFECTIVENESS] = {0, 1, 2, 4};
-        if (checkExposed && *targetType == TYPE_GHOST && !targetData->exposed)
-        {
+        if (checkExposed && targetData->types[i] == TYPE_GHOST && !targetData->exposed) {
             effectiveness = 0;
             gDungeon->unk134.pokemonExposed = TRUE;
         }
-        else
-        {
-            effectiveness = gTypeEffectivenessChart[moveType][*targetType];
-            // Used to swap variable initialization order at the loop start.
-            effectiveness = *(s16*)(((s8*) gTypeEffectivenessChart) + moveTypeOffset + *targetType * 2);
+        else {
+            effectiveness = gTypeEffectivenessChart[moveType][targetData->types[i]];
         }
+
         if (weight == 0)
-        {
-            goto breakLoop;
-        }
+            break;
+
         weight *= typeEffectivenessMultipliers[effectiveness];
         weight /= 2;
         if (weight == 0)
-        {
             // BUG: If the Pokémon's first type resists the move, the second type is ignored.
             // This calculates type effectiveness incorrectly if the first type resists the move and the second type is weak to the move.
             // For example, a Fire-type move is considered not very effective against a Rock/Bug-type like Anorith.
             return 2;
-        }
-    } while ((s32)(++targetType) <= (s32)(targetTypes + 1));
-    breakLoop:
+    }
+
     if ((moveType == TYPE_FIRE || moveType == TYPE_ICE) && AbilityIsActive(target, ABILITY_THICK_FAT))
-    {
         return 2;
-    }
-    if (moveType == TYPE_WATER && AbilityIsActive(user, ABILITY_TORRENT))
-    {
+
+    if (moveType == TYPE_WATER && AbilityIsActive(user, ABILITY_TORRENT)) {
         s32 maxHPStat = userData->maxHPStat;
-        if (maxHPStat < 0)
-        {
-            maxHPStat += 3;
-        }
-        if (maxHPStat >> 2 >= userData->HP)
-        {
+        if (maxHPStat / 4 >= userData->HP)
             weight *= 2;
-        }
     }
-    if (moveType == TYPE_GRASS && AbilityIsActive(user, ABILITY_OVERGROW))
-    {
+
+    if (moveType == TYPE_GRASS && AbilityIsActive(user, ABILITY_OVERGROW)) {
         s32 maxHPStat = userData->maxHPStat;
-        if (maxHPStat < 0)
-        {
-            maxHPStat += 3;
-        }
-        if (maxHPStat >> 2 >= userData->HP)
-        {
+        if (maxHPStat / 4 >= userData->HP)
             weight *= 2;
-        }
     }
-    if (moveType == TYPE_BUG && AbilityIsActive(user, ABILITY_SWARM))
-    {
+
+    if (moveType == TYPE_BUG && AbilityIsActive(user, ABILITY_SWARM)) {
         s32 maxHPStat = userData->maxHPStat;
-        if (maxHPStat < 0)
-        {
-            maxHPStat += 3;
-        }
-        if (maxHPStat >> 2 >= userData->HP)
-        {
+        if (maxHPStat / 4 >= userData->HP)
             weight *= 2;
-        }
     }
-    if (moveType == TYPE_FIRE && AbilityIsActive(user, ABILITY_BLAZE))
-    {
+
+    if (moveType == TYPE_FIRE && AbilityIsActive(user, ABILITY_BLAZE)) {
         s32 maxHPStat = userData->maxHPStat;
-        if (maxHPStat < 0)
-        {
-            maxHPStat += 3;
-        }
-        if (maxHPStat >> 2 >= userData->HP)
-        {
+        if (maxHPStat / 4 >= userData->HP)
             weight *= 2;
-        }
     }
+
     if (weight == 0)
-    {
         return 2;
-    }
+
     if (MonsterIsType(user, moveType))
-    {
         weight *= 2;
-    }
-    targetTypes = targetData->types;
-    if (GetApparentWeather(user) == WEATHER_SUNNY)
-    {
+
+    if (GetApparentWeather(user) == WEATHER_SUNNY) {
         if (moveType == TYPE_FIRE)
-        {
             weight *= 2;
-        }
         else if (moveType == TYPE_WATER)
-        {
             return 2;
-        }
     }
+
     if (gDungeon->weather.mudSportTurns != 0 && moveType == TYPE_ELECTRIC)
-    {
         return 2;
-    }
+
     if (gDungeon->weather.waterSportTurns != 0 && moveType == TYPE_FIRE)
-    {
         return 2;
-    }
+
     if (moveType == TYPE_ELECTRIC && userData->bideClassStatus.status == STATUS_CHARGING)
-    {
         weight *= 2;
-    }
-    if (weight > 2)
-    {
+
+    if (weight >= 3)
         weight = 3;
-    }
+
     return weight + 2;
 }
 
