@@ -18,6 +18,7 @@
 #include "friend_area_dialogue.h"
 #include "ground_lives_helper.h"
 #include "ground_sprite_monster.h"
+#include "ground_object.h"
 
 struct GroundLivesMeta_Sub1
 {
@@ -107,20 +108,14 @@ extern u8 sub_809D248(PixelPos *r0);
 extern s16 HandleAction(Action *action, const DebugLocation *debug);
 extern bool8 sub_80A66F8(struct UnkGroundSpriteStruct *ptr);
 extern bool8 sub_80A671C(struct UnkGroundSpriteStruct *ptr);
-extern s32 sub_80AC554(u32 a0, PixelPos *pixelPosArg1, PixelPos *pixelPosArg2);
-extern s32 sub_80AC448(s32 id_, PixelPos *pixelPos);
 extern bool8 sub_80A595C(u32 a0, PixelPos *pixelPosArg1, PixelPos *pixelPosArg2);
-extern void GroundObject_GetFlags(s32 id, s32 *a1);
 extern PixelPos SetVecFromDirectionSpeed(s32 r1, u32 r2);
 extern u8 sub_80A5934(s32 param_1, PixelPos *, PixelPos *);
 extern bool8 CheckMapCollision_80A585C(PixelPos *, PixelPos *);
 extern bool8 sub_80A58C8(PixelPos *, PixelPos *);
-extern s32 sub_80AC4C8(u32 a0, PixelPos *, PixelPos *);
 extern bool8 sub_809B1C0(s32 a0, u32 kind, Pokemon *a2);
 extern bool8 GetPredefinedScript(Action *param_1, ScriptInfoSmall *script, s32 _index);
 extern bool8 sub_809D678(Action *action);
-extern bool8 GroundObject_GetScript(s32 a0, ScriptInfoSmall *scriptInfo, s32 a2);
-extern void GroundObject_ExecuteScript(s32, void *, ScriptInfoSmall *);
 extern bool8 GroundScriptNotify(Action *param_1, s32 param_2);
 extern bool8 GroundScript_Cancel(Action *r0);
 extern Pokemon *sub_80A8D54(s32);

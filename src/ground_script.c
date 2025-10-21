@@ -52,16 +52,12 @@
 #include "textbox.h"
 #include "ground_event.h"
 #include "ground_effect.h"
+#include "ground_object.h"
 
 void GroundMap_Select(s16);
 void GroundMap_SelectDungeon(s32, DungeonLocation*, u32);
 void GroundMap_GetStationScript(ScriptInfoSmall *out, s16, s32, s32);
-void GroundObject_ExecuteScript(s32, ActionUnkIds *, ScriptInfoSmall *);
-void GroundObject_Select(s32, s32 group, s32 sector);
-void GroundObject_Cancel(s32 group, s32 sector);
-void GroundObject_CancelBlank(void);
 void GroundWeather_Select(s16);
-s16 GroundObject_Add(s16 id, GroundObjectData*, s16 group, s8 sector);
 
 // Beware of the declarations without specified arguments, returning u32 or s32, these were quickly hacked in to get the code to compile and link
 // The return values are almost certainly NOT correct and will need to be rechecked when moving to header files
@@ -90,9 +86,6 @@ void sub_809D1E4(s32, s32, s32);
 void sub_809D208(s32, PixelPos*, s32);
 void sub_809D220(s32, s32, s32);
 void GroundScriptLockJumpZero(s16);
-s16 sub_80AC448(s16, PixelPos*);
-s32 sub_80AC49C(s16, PixelPos*);
-void DeleteGroundObjects(void);
 s32 ExecuteScriptCommand(Action *action);
 bool8 sub_8099B94(void);
 PixelPos SetVecFromDirectionSpeed(s8, s32);
@@ -106,14 +99,10 @@ bool8 sub_809D234(void);
 s32 sub_80A14E8(Action *, u8, u32, s32);
 u8 sub_80990EC(struct DungeonSetupInfo *param_1, s32 param_2);
 
-extern u8 GroundObjectsCancelAll(void);
 extern u8 IsTextboxOpen_809A750(void);
-extern Action *GroundObject_GetAction(s32);
 extern void sub_809AB4C(s32, s32);
 extern void sub_809ABB4(s32, s32);
 extern void sub_809AC18(s32, s32);
-
-bool8 GroundObjectsNotifyAll(s16);
 
 void sub_8098C58(void);
 void sub_8098CC8(void);
@@ -127,7 +116,6 @@ u8 sub_80964E4();
 void sub_80A56A0(s32, s32);
 void sub_80A56F0(PixelPos *);
 void sub_80A5704(PixelPos *);
-void sub_80AC1B0(s16, s32);
 s32 sub_80A5984();
 void sub_80A59A0(s32, s32 *, u16);
 extern bool8 sub_80A579C(PixelPos *a0, PixelPos *a1);

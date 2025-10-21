@@ -1,5 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
+#include "ground_object.h"
 #include "structs/str_ground_script.h"
 #include "debug.h"
 #include "data_script.h"
@@ -48,20 +49,24 @@ struct GroundObjectTypeData
 extern struct GroundObjectTypeData gGroundObjectTypes[];
 
 void DeleteGroundObjects(void);
-void GroundObject_Delete(s32);
 
 const struct GroundScriptHeader *GetGroundScript(s16 a0, DebugLocation *);
 void sub_80A7658(struct UnkGroundSpriteStruct *);
 extern bool8 GroundScriptNotify(Action*, s32);
 extern bool8 GroundScript_Cancel(Action *r0);
+extern bool8 GetPredefinedScript(Action *param_1, ScriptInfoSmall *script, s32 _index);
 void SetPredefinedScript(Action *param_1, s16 index, const ScriptCommand *param_3);
+extern bool8 sub_80A66F8(struct UnkGroundSpriteStruct *ptr);
+extern bool8 sub_80A671C(struct UnkGroundSpriteStruct *ptr);
+extern bool8 CheckMapCollision_80A585C(PixelPos *, PixelPos *);
+extern s16 HandleAction(Action *action, DebugLocation *debug);
+extern void sub_80A7664(struct UnkGroundSpriteStruct *ptr, PixelPos *pixelPos, s32 a2);
 
 extern bool8 GetCurrentDungeonBounds(PixelPos *a0, PixelPos *a1);
 void sub_80A75CC(void *, s32, s32, s32);
 
-
-s32 GroundObject_Add(s32 id_,const GroundObjectData *objectData,s32 group_,s32 sector_);
-
+static void GroundObject_Delete(s32 index_);
+static s32 TryMoveObjectRelative_80AC6AC(GroundObject *param_1, PixelPos *param_2);
 static s16 CallbackObjectGetIndex(void *ptr);
 static void CallbackObjectGetSize(void *objectPtr_, PixelPos *out);
 static void CallbackObjectSetHitboxPos(void *objectPtr_, PixelPos *posOrNull);
@@ -150,11 +155,6 @@ const u8 gGroundObjectFileName[];
 
 
 
-
-
-
-
-
 static const struct ScriptCommand gUnknown_81182F4[] = {
     DEBUGINFO, // Needs to be line 159
     LABEL(0),
@@ -170,7 +170,7 @@ static const struct ScriptCommand gUnknown_8118350[] = {
     JUMP_LABEL(0),
 };
 
-const s16 gUnknown_81183A0[] = {
+static const s16 gUnknown_81183A0[] = {
 -1,
 0x800,
 0x801,
@@ -198,15 +198,13 @@ const s16 gUnknown_81183A0[] = {
 
 void AllocGroundObjects(void)
 {
-
     GroundObject *ptr;
     s32 index;
 
     gGroundObjects = MemoryAlloc(sizeof(GroundObject) * NUM_GROUND_OBJECTS, 6);
 
-    for(index = 0,  ptr = &gGroundObjects[index]; index < NUM_GROUND_OBJECTS; index = (s16)(index + 1), ptr++)
-    {
-        ptr->kind |= -1;
+    for (index = 0,  ptr = &gGroundObjects[index]; index < NUM_GROUND_OBJECTS; index = (s16)(index + 1), ptr++) {
+        ptr->kind = -1;
     }
     DeleteGroundObjects();
 }
@@ -217,9 +215,8 @@ void DeleteGroundObjects(void)
     s32 index;
 
     ptr = &gGroundObjects[0];
-    for(index = 0; index < NUM_GROUND_OBJECTS; index = (s16)(index + 1), ptr++)
-    {
-        if(ptr->kind != -1)
+    for (index = 0; index < NUM_GROUND_OBJECTS; index = (s16)(index + 1), ptr++) {
+        if (ptr->kind != -1)
             GroundObject_Delete(index);
     }
 }
@@ -323,7 +320,7 @@ static s32 GroundObject_Find(s32 kind)
     return -1;
 }
 
-s32 GroundObject_Add(s32 id_,const GroundObjectData *objectData,s32 group_,s32 sector_)
+s32 GroundObject_Add(s32 id_, const GroundObjectData *objectData, s32 group_, s32 sector_)
 {
       s32 sVar3;
       s32 sVar4;
@@ -490,7 +487,7 @@ s32 GroundObject_Add(s32 id_,const GroundObjectData *objectData,s32 group_,s32 s
       return id;
 }
 
-void GroundObject_Delete(s32 index_)
+static void GroundObject_Delete(s32 index_)
 {
     s32 index = (s16)index_;
     GroundObject *parent = &gGroundObjects[index];
@@ -506,20 +503,18 @@ void sub_80AC1B0(s32 index_, s32 flag)
     s32 index = (s16)index_;
     GroundObject *parent = &gGroundObjects[index];
 
-    if(parent->kind != -1)
-    {
+    if (parent->kind != -1) {
         parent->flags |= flag;
         sub_80A6688(&parent->unk144, parent->flags);
     }
 }
 
-void sub_80AC1F4(s32 index_, s32 flag)
+static void sub_80AC1F4(s32 index_, s32 flag)
 {
     s32 index = (s16)index_;
     GroundObject *parent = &gGroundObjects[index];
 
-    if(parent->kind != -1)
-    {
+    if (parent->kind != -1) {
         parent->flags &= (0x337fffff ^ flag);
         sub_80A6688(&parent->unk144, parent->flags);
     }
@@ -530,14 +525,11 @@ Action *GroundObject_GetAction(s32 index_)
     s32 index = (s16)index_;
     GroundObject *parent = &gGroundObjects[index];
 
-    if(parent->kind != -1)
+    if (parent->kind != -1)
         return &parent->action;
     else
         return NULL;
 }
-
-extern bool8 GetPredefinedScript(Action *param_1, ScriptInfoSmall *script, s32 _index);
-
 
 bool8 GroundObject_GetScript(s32 index_, ScriptInfoSmall *scriptInfo, s32 a2_)
 {
@@ -551,7 +543,7 @@ bool8 GroundObject_GetScript(s32 index_, ScriptInfoSmall *scriptInfo, s32 a2_)
         return FALSE;
 }
 
-bool8 GroundObject_ExecuteScript(s32 index_, void *a1, ScriptInfoSmall *script)
+bool8 GroundObject_ExecuteScript(s32 index_, ActionUnkIds *a1, ScriptInfoSmall *script)
 {
     s32 index = (s16)index_;
     GroundObject *parent = &gGroundObjects[index];
@@ -649,9 +641,6 @@ s16 sub_80AC448(s32 index_, PixelPos *pos)
     return parent->kind;
 }
 
-extern s32 TryMoveObjectRelative_80AC6AC(GroundObject *, PixelPos *);
-
-
 s16 sub_80AC49C(s32 index_, PixelPos *pos)
 {
     s32 index = (s16)index_;
@@ -662,7 +651,8 @@ s16 sub_80AC49C(s32 index_, PixelPos *pos)
     return parent->kind;
 }
 
-s32 sub_80AC4C8(s32 index, PixelPos *a0, PixelPos *a1) {
+s32 sub_80AC4C8(s32 index, PixelPos *a0, PixelPos *a1)
+{
     GroundObject *parent = &gGroundObjects[0];
     s32 counter;
 
@@ -706,9 +696,7 @@ s32 sub_80AC554(s32 flag, PixelPos *param_2,PixelPos *param_3)
     return -1;
 }
 
-bool8 CheckMapCollision_80A585C(PixelPos *, PixelPos *);
-
-s32 GetObjectCollision_80AC5F4(GroundObject *param_1, PixelPos *param_2, PixelPos *param_3)
+static s32 GetObjectCollision_80AC5F4(GroundObject *param_1, PixelPos *param_2, PixelPos *param_3)
 {
     PixelPos local_28 = { param_2->x / 2048 , param_2->y / 2048 };
     PixelPos iVar1 = { (param_3->x - 1) / 2048, (param_3->y - 1) / 2048 };
@@ -725,7 +713,7 @@ s32 GetObjectCollision_80AC5F4(GroundObject *param_1, PixelPos *param_2, PixelPo
     return 0;
 }
 
-s32 TryMoveObjectRelative_80AC6AC(GroundObject *param_1,PixelPos *param_2)
+static s32 TryMoveObjectRelative_80AC6AC(GroundObject *param_1, PixelPos *param_2)
 {
     PixelPos local_1c;
     PixelPos local_14;
@@ -749,7 +737,7 @@ s32 TryMoveObjectRelative_80AC6AC(GroundObject *param_1,PixelPos *param_2)
     }
 }
 
-s32 TryMoveRelative_80AC720(GroundObject *param_1,PixelPos *param_2)
+static s32 TryMoveRelative_80AC720(GroundObject *param_1,PixelPos *param_2)
 {
     s32 ret;
     bool8 bVar1;
@@ -893,7 +881,8 @@ static void CallbackObjectSetDirection(void *livesPtr_, s32 direction)
     }
 }
 
-static void CallbackObjectSetEventIndex(void *livesPtr_, u16 a1) {
+static void CallbackObjectSetEventIndex(void *livesPtr_, u16 a1)
+{
     struct GroundObject *livesPtr = livesPtr_;
 
     u32 r1;
@@ -917,8 +906,8 @@ static void CallbackObjectSetEventIndex(void *livesPtr_, u16 a1) {
         livesPtr->directionRelated = 1;
 }
 
-
-static void CallbackObjectSetUnk_80AC998(void *objectPtr_, s32 a1_, s32 a2) {
+static void CallbackObjectSetUnk_80AC998(void *objectPtr_, s32 a1_, s32 a2)
+{
     struct GroundObject *livesPtr = objectPtr_;
 
     s32 a1Match = (s16) a1_;
@@ -934,9 +923,6 @@ static void CallbackObjectSetUnk_80AC998(void *objectPtr_, s32 a1_, s32 a2) {
 
     livesPtr->unk140 = a1;
 }
-
-extern bool8 sub_80A66F8(struct UnkGroundSpriteStruct *ptr);
-extern bool8 sub_80A671C(struct UnkGroundSpriteStruct *ptr);
 
 static bool8 CallbackObjectSpriteRelatedCheck_80AC9B8(void *objectPtr_)
 {
@@ -990,8 +976,6 @@ static s32 CallbackObjectMoveRelative(void *livesPtr_, PixelPos *pos)
     return TryMoveRelative_80AC720(livesPtr, pos);
 }
 
-extern s16 HandleAction(Action *action, DebugLocation *debug);
-
 void GroundObject_Action(void)
 {
     GroundObject *objectPtr;
@@ -1019,8 +1003,6 @@ void GroundObject_Action(void)
         }
     }
 }
-
-void sub_80A7664(struct UnkGroundSpriteStruct *ptr, PixelPos *pixelPos, s32 a2);
 
 void sub_80ACAD4(void)
 {

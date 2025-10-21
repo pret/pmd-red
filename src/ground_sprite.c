@@ -14,6 +14,7 @@
 #include "effect_sub_1.h"
 #include "pokemon.h"
 #include "ground_effect.h"
+#include "ground_object.h"
 
 static IWRAM_INIT unkStruct_3001B7C *gUnknown_3001B7C = {NULL};
 
@@ -31,7 +32,6 @@ static EWRAM_INIT OpenedFile *gUnknown_203B4B4 = {NULL};
 // code_8098BDC.s
 extern void sub_809971C(u16, const u8 *, s16);
 extern void sub_80997F4(u16, u16);
-extern void sub_80ACAD4(void);
 extern void sub_800E970(void);
 extern u8 sub_809D248(PixelPos *r0);
 
