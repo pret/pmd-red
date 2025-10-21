@@ -86,7 +86,6 @@ void sub_809D1E4(s32, s32, s32);
 void sub_809D208(s32, PixelPos*, s32);
 void sub_809D220(s32, s32, s32);
 void GroundScriptLockJumpZero(s16);
-s32 ExecuteScriptCommand(Action *action);
 bool8 sub_8099B94(void);
 PixelPos SetVecFromDirectionSpeed(s8, s32);
 bool8 sub_8098DCC(u32 speed);
@@ -96,7 +95,6 @@ bool8 sub_809B260(void *dst);
 bool8 sub_809B18C(s32 *sp);
 bool8 sub_809AFFC(u8 *);
 bool8 sub_809D234(void);
-s32 sub_80A14E8(Action *, u8, u32, s32);
 u8 sub_80990EC(struct DungeonSetupInfo *param_1, s32 param_2);
 
 extern u8 IsTextboxOpen_809A750(void);
@@ -170,6 +168,8 @@ static const ScriptCommand gUnknown_81164E4[] = {
     {0xEF, 0, 0,    0, 0, NULL},
 };
 
+static s32 ExecuteScriptCommand(Action *action);
+static s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3);
 static const ScriptCommand *FindLabel(Action *action, s32 r1);
 static const ScriptCommand *ResolveJump(Action *action, s32 r1);
 static void sub_80A2500(s32 param_1, ActionUnkIds *param_2);
@@ -222,7 +222,7 @@ static Action *sub_809D52C(ActionUnkIds *a0)
     return NULL;
 }
 
-void InitScriptData(ScriptData *a0)
+static void InitScriptData(ScriptData *a0)
 {
     s32 i;
 
@@ -246,7 +246,7 @@ void InitScriptData(ScriptData *a0)
     }
 }
 
-void InitAction(Action *a0)
+static void InitAction(Action *a0)
 {
     s32 i;
 
@@ -277,7 +277,7 @@ void InitActionWithParams(Action *action, const CallbackData *callbacks, void *p
     action->sector = sector_s32;
     action->unk8.unk0 = callbacks->maybeId;
 
-    if(callbacks->getIndex)
+    if (callbacks->getIndex)
         action->unk8.unk2 = callbacks->getIndex(parent);
     else
         action->unk8.unk2 = 0;
@@ -333,15 +333,15 @@ bool8 sub_809D684(Action *action, ScriptInfoSmall *scriptInfo)
     return 0;
 }
 
-void SetPredefinedScript(Action *param_1, s16 index, ScriptCommand *param_3)
+void SetPredefinedScript(Action *param_1, s16 index, const ScriptCommand *param_3)
 {
     param_1->predefinedScripts[index] = param_3;
 }
 
-bool8 GetPredefinedScript(Action *param_1, ScriptInfoSmall *script, s16 _index)
+bool8 GetPredefinedScript(Action *param_1, ScriptInfoSmall *script, s32 _index)
 {
     const ScriptCommand *scriptPtr;
-    s32 index = _index;
+    s32 index = (s16) _index;
 
     scriptPtr = param_1->predefinedScripts[index];
     script->ptr = scriptPtr;
@@ -373,7 +373,7 @@ bool8 ActionResetScriptData(Action *param_1, const DebugLocation *unused)
     return TRUE;
 }
 
-bool8 ActionResetScriptDataForDeletion(Action *param_1, DebugLocation *unused)
+static bool8 ActionResetScriptDataForDeletion(Action *param_1, const DebugLocation *unused)
 {
     InitScriptData(&param_1->scriptData);
     InitScriptData(&param_1->scriptData2);
@@ -442,7 +442,7 @@ bool8 GroundScript_ExecutePP(Action *action, ActionUnkIds *param_2, ScriptInfoSm
     return TRUE;
 }
 
-bool8 ExecutePredefinedScript(Action *param_1, ActionUnkIds *param_2, s16 index, DebugLocation *debug)
+bool8 ExecutePredefinedScript(Action *param_1, ActionUnkIds *param_2, s16 index, const DebugLocation *debug)
 {
     ScriptInfoSmall auStack28;
 
@@ -450,7 +450,7 @@ bool8 ExecutePredefinedScript(Action *param_1, ActionUnkIds *param_2, s16 index,
     return GroundScript_ExecutePP(param_1, param_2, &auStack28, debug);
 }
 
-u8 GroundScriptCheckLockCondition(Action *param_1, s16 param_2)
+static u8 GroundScriptCheckLockCondition(Action *param_1, s16 param_2)
 {
     s32 param_2_s32;
 
@@ -474,7 +474,7 @@ bool8 GroundScript_Cancel(Action *r0)
     return ActionResetScriptDataForDeletion(r0, DEBUG_LOC_PTR("../ground/ground_script.c", 821, "GroundScript_Cancel"));
 }
 
-u8 GroundCancelAllEntities(void)
+static u8 GroundCancelAllEntities(void)
 {
     u8 ret;
 
@@ -484,13 +484,13 @@ u8 GroundCancelAllEntities(void)
     return ret;
 }
 
-bool8 GroundScriptNotify(Action *param_1, s16 param_2)
+bool8 GroundScriptNotify(Action *param_1, s32 param_2)
 {
     s16 sVar1;
     s16 sVar2;
     bool8 ret;
 
-    s32 param_2_s16 = param_2;
+    s32 param_2_s16 = (s16) param_2;
 
     ret = FALSE;
     sVar1 = param_1->scriptData.unk22;
@@ -522,7 +522,7 @@ void GroundScriptLock(s16 index, s32 r1)
     gAnyScriptLocked = 1;
 }
 
-bool8 GroundScriptLockCond(Action *param_1, s16 index, s32 param_3)
+static bool8 GroundScriptLockCond(Action *param_1, s16 index, s32 param_3)
 {
     s32 index_s32 = index;
     gUnlockBranchLabels[index_s32] = param_3;
@@ -542,7 +542,7 @@ bool8 GroundScriptLockCond(Action *param_1, s16 index, s32 param_3)
     return TRUE;
 }
 
-s16 HandleAction(Action *action, DebugLocation *debug)
+s16 HandleAction(Action *action, const DebugLocation *debug)
 {
     ScriptCommand cmd;
 
@@ -1353,7 +1353,7 @@ s16 HandleAction(Action *action, DebugLocation *debug)
 //     This is the only return value that does not return to the script engine caller
 // - Value 3 returns to the caller, but will give control back to ExecuteScriptCommand when reentering the script ("script not finished")
 // - Value 4 is some kind of fatal error state, no further scripting progress will happen. This code is always returned to the caller from now on.
-s32 ExecuteScriptCommand(Action *action)
+static s32 ExecuteScriptCommand(Action *action)
 {
     ScriptCommand curCmd;
     ScriptData *scriptData = &action->scriptData;
@@ -3031,7 +3031,7 @@ UNUSED static bool8 GroundScript_ExecuteTrigger(s16 r0)
         return FALSE;
 }
 
-s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
+static s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
 {
     switch(idx)
     {

@@ -105,7 +105,6 @@ extern const struct GroundLiveTypeData gGroundLivesTypeData_811E63C[];
 
 extern s32 sub_8002984(s32 _direction1, u32 caseID);
 extern u8 sub_809D248(PixelPos *r0);
-extern s16 HandleAction(Action *action, const DebugLocation *debug);
 extern bool8 sub_80A66F8(struct UnkGroundSpriteStruct *ptr);
 extern bool8 sub_80A671C(struct UnkGroundSpriteStruct *ptr);
 extern bool8 sub_80A595C(u32 a0, PixelPos *pixelPosArg1, PixelPos *pixelPosArg2);
@@ -114,13 +113,8 @@ extern u8 sub_80A5934(s32 param_1, PixelPos *, PixelPos *);
 extern bool8 CheckMapCollision_80A585C(PixelPos *, PixelPos *);
 extern bool8 sub_80A58C8(PixelPos *, PixelPos *);
 extern bool8 sub_809B1C0(s32 a0, u32 kind, Pokemon *a2);
-extern bool8 GetPredefinedScript(Action *param_1, ScriptInfoSmall *script, s32 _index);
-extern bool8 sub_809D678(Action *action);
-extern bool8 GroundScriptNotify(Action *param_1, s32 param_2);
-extern bool8 GroundScript_Cancel(Action *r0);
 extern Pokemon *sub_80A8D54(s32);
 extern bool8 GetCurrentDungeonBounds(PixelPos *a0, PixelPos *a1);
-extern void SetPredefinedScript(Action *param_1, s16 index, const ScriptCommand *param_3);
 extern void sub_809D170(s32 r0, s32 r1);
 extern const struct GroundScriptHeader *GetGroundScript(s16 a0, const DebugLocation *);
 

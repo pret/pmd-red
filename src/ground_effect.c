@@ -48,20 +48,13 @@ struct GroundEffectTypeData
 
 extern struct GroundEffectTypeData gGroundEffectTypes[];
 
-extern bool8 GetPredefinedScript(Action *param_1, ScriptInfoSmall *script, s32 _index);
-
-
 const struct GroundScriptHeader *GetGroundScript(s16 a0, DebugLocation *);
 bool8 GetCurrentDungeonBounds(PixelPos *, PixelPos *);
 void sub_80A7688(struct UnkGroundSpriteStruct *ptr, s32 unused, s32 a2_, s32 a3);
-extern void SetPredefinedScript(Action *param_1, s16 index, const ScriptCommand *param_3);
 void sub_80A7714(struct UnkGroundSpriteStruct *);
-extern bool8 GroundScriptNotify(Action*, s32);
-extern bool8 GroundScript_Cancel(Action *r0);
 extern bool8 sub_80A66F8(struct UnkGroundSpriteStruct *ptr);
 extern bool8 sub_80A671C(struct UnkGroundSpriteStruct *ptr);
 void sub_80A7720(struct UnkGroundSpriteStruct *ptr, PixelPos *pixelPos, s32 a2);
-extern s16 HandleAction(Action *action, DebugLocation *debug);
 
 
 static void GroundEffect_Delete(s32 _id);
@@ -110,6 +103,13 @@ static const CallbackData gGroundEffectCallbacks = {
 };
 extern const u8 gUnknown_81185D8[];
 #define FAKE_FILENAME gUnknown_81185D8
+
+
+
+
+
+
+
 
 
 

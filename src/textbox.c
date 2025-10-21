@@ -117,8 +117,6 @@ bool8 IsTextboxOpen_809B40C(struct TextboxText *);
 
 void sub_809B028(const MenuItem *, s32 a1_, s32 a2, s32 a3, s32 a4_, const char *text);
 bool8 sub_809B18C(s32 *sp);
-extern void GroundScriptLock(s16 index, s32 r1);
-extern void GroundScriptLockJumpZero(s16 index);
 extern u8 sub_802B2D4(void);
 extern void sub_802B3B8(void);
 extern u32 sub_802B358(void);

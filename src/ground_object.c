@@ -52,14 +52,9 @@ void DeleteGroundObjects(void);
 
 const struct GroundScriptHeader *GetGroundScript(s16 a0, DebugLocation *);
 void sub_80A7658(struct UnkGroundSpriteStruct *);
-extern bool8 GroundScriptNotify(Action*, s32);
-extern bool8 GroundScript_Cancel(Action *r0);
-extern bool8 GetPredefinedScript(Action *param_1, ScriptInfoSmall *script, s32 _index);
-void SetPredefinedScript(Action *param_1, s16 index, const ScriptCommand *param_3);
 extern bool8 sub_80A66F8(struct UnkGroundSpriteStruct *ptr);
 extern bool8 sub_80A671C(struct UnkGroundSpriteStruct *ptr);
 extern bool8 CheckMapCollision_80A585C(PixelPos *, PixelPos *);
-extern s16 HandleAction(Action *action, DebugLocation *debug);
 extern void sub_80A7664(struct UnkGroundSpriteStruct *ptr, PixelPos *pixelPos, s32 a2);
 
 extern bool8 GetCurrentDungeonBounds(PixelPos *a0, PixelPos *a1);
@@ -112,6 +107,11 @@ static const CallbackData gGroundObjectCallbacks = {
 };
 const u8 gGroundObjectFileName[];
 #define FAKE_FILENAME gGroundObjectFileName
+
+
+
+
+
 
 
 

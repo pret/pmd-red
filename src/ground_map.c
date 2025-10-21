@@ -52,13 +52,8 @@ extern const CallbackData gGroundScriptNullCallbacks;
 
 extern u8 sub_809D248(PixelPos *r0);
 
-extern bool8 sub_809D678(Action *);
-extern bool8 GroundScriptNotify(Action*, s32);
-
 extern u8 sub_80A46C0(GroundBg *, u32, s32, s32);
 extern u8 sub_80A4660(GroundBg *, u32, s32, s32);
-
-extern s16 HandleAction(Action *action, const DebugLocation *debug);
 
 void GroundMap_SelectDungeon(s32 mapId, const DungeonLocation *loc, u32 param_2);
 void sub_80A56D8(const PixelPos*);

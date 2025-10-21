@@ -29,6 +29,7 @@
 #include "ground_sprite.h"
 #include "ground_effect.h"
 #include "ground_object.h"
+#include "ground_script.h"
 
 EWRAM_DATA u32 gUnknown_20398A8 = {0};
 EWRAM_DATA s32 gUnknown_20398AC = {0};
@@ -49,7 +50,6 @@ EWRAM_INIT bool8 gUnknown_203B49C = {0};
 EWRAM_INIT u8 gUnknown_203B49D = {0};
 
 extern void sub_809B57C();
-extern void GroundScript_Unlock();
 extern void sub_809D25C();
 extern void sub_80A59DC();
 extern void sub_809B614();
@@ -74,14 +74,12 @@ extern bool8 sub_809AFAC(void);
 extern bool8 sub_80048BC(void);
 extern u8 sub_80023E4(u32);
 extern bool8 sub_8099B94(void);
-extern void sub_809D508(void);
 extern void nullsub_119(void);
 extern void sub_8099768(void);
 extern void nullsub_103(void);
 extern void sub_8099648(void);
 extern void sub_809975C(void);
 extern void sub_809D0AC(void);
-extern void sub_809D490(void);
 extern void sub_809B474(void);
 extern void GroundScript_Unlock();
 extern void sub_809D25C(void);
@@ -106,7 +104,6 @@ extern void sub_8098C58(void);
 extern void sub_8001D88(void);
 extern u32 GroundMainGameCancelRequest(u32 r0);
 extern void sub_80999D4(s32);
-extern void sub_809D4B0(void);
 extern void sub_8005838(s32, s32);
 
 u32 xxx_script_related_8098468(s32 param_1)

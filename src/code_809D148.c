@@ -32,7 +32,6 @@ struct unkStruct_20399E8
 static EWRAM_DATA struct unkStruct_20399E8 gUnknown_20399E8 = {0};
 
 void sub_809D0BC(void);
-void sub_809D4B0(void);
 void sub_809D158(s32 r0, const PixelPos *r1);
 
 void sub_809D0AC(void)
