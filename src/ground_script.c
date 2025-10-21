@@ -79,21 +79,17 @@ void sub_809B1D4(u8, s32, s32, const char*);
 void GroundScriptLockJumpZero(s16);
 bool8 sub_8099B94(void);
 PixelPos SetVecFromDirectionSpeed(s8, s32);
-bool8 sub_8098DCC(u32 speed);
 
-void sub_8099220(void *param_1, s32 param_2);
+
 bool8 sub_809B260(void *dst);
 bool8 sub_809B18C(s32 *sp);
 bool8 sub_809AFFC(u8 *);
-u8 sub_80990EC(struct DungeonSetupInfo *param_1, s32 param_2);
 
 extern u8 IsTextboxOpen_809A750(void);
 extern void sub_809AB4C(s32, s32);
 extern void sub_809ABB4(s32, s32);
 extern void sub_809AC18(s32, s32);
 
-void sub_8098C58(void);
-void sub_8098CC8(void);
 bool8 sub_80961D8(void);
 void ResetMailbox(void);
 void sub_80963FC(void);

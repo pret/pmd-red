@@ -85,10 +85,7 @@ static void LoadAndRunDungeon_Async(DungeonSetupStruct *r0);
 static u32 xxx_script_related_8001334(u32 r0);
 static void MainLoops_RunFrameActions(u32 unused);
 
-extern u8 sub_80990EC(DungeonSetupInfo *param_1, s32 param_2);
 extern bool8 sub_8096A08(u8 dungeon, Pokemon *pokemon);
-extern u8 sub_80991E0(DungeonSetupInfo *param_1,short *param_2);
-extern u32 xxx_script_related_8098468(u32);
 extern void IncrementNumAdventures(void);
 extern void sub_8096BD0(void);
 

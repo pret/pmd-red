@@ -9,8 +9,6 @@
 #include "file_system.h"
 #include "palette_fade_util.h"
 
-extern u8 gUnknown_20398B8;
-
 void sub_8099648(void)
 {
     InitPaletteFadeTable();

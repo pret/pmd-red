@@ -23,12 +23,12 @@
 #include "wonder_mail_4.h"
 #include "wonder_mail_5.h"
 #include "naming_screen.h"
+#include "ground_main.h"
 
 static EWRAM_INIT WonderMailStruct_203B2C0 *sUnknown_203B2C0 = {NULL};
 
 extern void sub_8011C28(u32);
 
-extern void sub_809927C(u8);
 extern u32 sub_8031050();
 extern void sub_80310B4();
 extern void nullsub_130(void);

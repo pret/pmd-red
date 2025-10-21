@@ -721,7 +721,6 @@ SECTIONS {
         src/strings.o(.rodata);
         data/data_810AE24_2.o(.rodata);
         src/position_util.o(.rodata);
-        data/data_8115EB8.o(.rodata);
         src/ground_main.o(.rodata);
         src/debug_field_map.o(.rodata);
         src/code_8099360.o(.rodata);

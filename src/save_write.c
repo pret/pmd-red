@@ -6,6 +6,7 @@
 #include "save_write.h"
 #include "string_format.h"
 #include "menu_input.h"
+#include "ground_main.h"
 
 // size: 0x20
 typedef struct SavePakWrite

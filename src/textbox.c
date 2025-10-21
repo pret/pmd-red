@@ -139,7 +139,6 @@ bool8 CreateHelperPelipperMenu(s16);
 u32 sub_802E90C();
 void sub_802E918();
 u32 sub_80282DC(u8 *r0);
-void sub_809927C(u8);
 void sub_80282FC(void);
 extern u8 CreateThankYouMailPelipper(void);
 extern u8 sub_802E864(void);
