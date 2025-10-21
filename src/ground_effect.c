@@ -1,5 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
+#include "ground_effect.h"
 #include "data_script.h"
 #include "ground_script.h"
 #include "ground_sprite.h"
@@ -49,9 +50,6 @@ extern struct GroundEffectTypeData gGroundEffectTypes[];
 
 extern bool8 GetPredefinedScript(Action *param_1, ScriptInfoSmall *script, s32 _index);
 
-void GroundEffect_Delete(s32);
-void DeleteGroundEffects(void);
-s32 GroundEffect_Add(s32 _id,const GroundEffectData *effectData,s32 _group,s32 _sector);
 
 const struct GroundScriptHeader *GetGroundScript(s16 a0, DebugLocation *);
 bool8 GetCurrentDungeonBounds(PixelPos *, PixelPos *);
@@ -60,12 +58,14 @@ extern void SetPredefinedScript(Action *param_1, s16 index, const ScriptCommand 
 void sub_80A7714(struct UnkGroundSpriteStruct *);
 extern bool8 GroundScriptNotify(Action*, s32);
 extern bool8 GroundScript_Cancel(Action *r0);
-s32 sub_80AD3E0(GroundEffect *, PixelPos *);
 extern bool8 sub_80A66F8(struct UnkGroundSpriteStruct *ptr);
 extern bool8 sub_80A671C(struct UnkGroundSpriteStruct *ptr);
 void sub_80A7720(struct UnkGroundSpriteStruct *ptr, PixelPos *pixelPos, s32 a2);
+extern s16 HandleAction(Action *action, DebugLocation *debug);
 
 
+static void GroundEffect_Delete(s32 _id);
+static s32 sub_80AD3E0(GroundEffect *param_1, PixelPos *param_2);
 static s16 CallbackEffectGetIndex(void *ptr);
 static void CallbackEffectGetSize(void *effectPtr_, PixelPos *out);
 static void CallbackEffectSetHitboxPos(void *effectPtr_, PixelPos *posOrNull);
@@ -174,7 +174,6 @@ void AllocGroundEffects(void)
     DeleteGroundEffects();
 }
 
-
 void DeleteGroundEffects(void)
 {
     s32 index;
@@ -271,7 +270,8 @@ void GroundEffect_CancelBlank(void)
     }
 }
 
-UNUSED s32 GroundEffect_Find(s32 a0_) {
+UNUSED static s32 GroundEffect_Find(s32 a0_)
+{
     s32 index;
     s32 a0;
     GroundEffect *ptr;
@@ -289,7 +289,7 @@ UNUSED s32 GroundEffect_Find(s32 a0_) {
     return -1;
 }
 
-s32 GroundEffect_Add(s32 _id, const GroundEffectData *effectData,s32 _group,s32 _sector)
+s32 GroundEffect_Add(s32 _id, const GroundEffectData *effectData, s32 _group, s32 _sector)
 {
     struct GroundEffectTypeData *puVar4;
     s32 group;
@@ -393,7 +393,7 @@ s32 GroundEffect_Add(s32 _id, const GroundEffectData *effectData,s32 _group,s32 
     return id;
 }
 
-void GroundEffect_Delete(s32 _id)
+static void GroundEffect_Delete(s32 _id)
 {
     s32 id = (s16)_id;
     GroundEffect *parent = &gGroundEffects[id];
@@ -452,7 +452,7 @@ UNUSED static bool8 sub_80AD18C(s32 index_, ScriptInfoSmall *scriptInfo, s32 a2_
         return FALSE;
 }
 
-bool8 GroundEffect_ExecuteScript(s32 index_, void *a1, ScriptInfoSmall *script)
+bool8 GroundEffect_ExecuteScript(s32 index_, ActionUnkIds *a1, ScriptInfoSmall *script)
 {
     s32 index = (s16)index_;
     GroundEffect *parent = &gGroundEffects[index];
@@ -560,7 +560,7 @@ s16 sub_80AD3B4(s32 index_, PixelPos *pos)
     return parent->kind;
 }
 
-s32 sub_80AD3E0(GroundEffect *param_1,PixelPos *param_2)
+static s32 sub_80AD3E0(GroundEffect *param_1, PixelPos *param_2)
 {
     PixelPos local_1c = {param_2->x - param_1->unk14.x, param_2->y - param_1->unk14.y};
     PixelPos local_14 = {param_2->x + param_1->unk14.x, param_2->y + param_1->unk14.y};
@@ -576,7 +576,7 @@ s32 sub_80AD3E0(GroundEffect *param_1,PixelPos *param_2)
     }
 }
 
-s32 sub_80AD430(GroundEffect *param_1,PixelPos *param_2)
+static s32 sub_80AD430(GroundEffect *param_1, PixelPos *param_2)
 {
     PixelPos iVar2 = {param_1->unk124.x + param_2->x, param_1->unk124.y + param_2->y};
     PixelPos uVar4 = {param_1->unk12C.x + param_2->x, param_1->unk12C.y + param_2->y};
@@ -693,7 +693,8 @@ static void CallbackEffectSetDirection(void *livesPtr_, s32 direction)
     }
 }
 
-static void CallbackEffectSetEventIndex(void *livesPtr_, u16 a1) {
+static void CallbackEffectSetEventIndex(void *livesPtr_, u16 a1)
+{
     struct GroundEffect *livesPtr = livesPtr_;
 
     u32 r1;
@@ -717,7 +718,8 @@ static void CallbackEffectSetEventIndex(void *livesPtr_, u16 a1) {
         livesPtr->directionRelated = TRUE;
 }
 
-static void CallbackEffectSetUnk_80AD670(void *objectPtr_, s32 a1_, s32 a2) {
+static void CallbackEffectSetUnk_80AD670(void *objectPtr_, s32 a1_, s32 a2)
+{
     struct GroundEffect *livesPtr = objectPtr_;
 
     s32 a1Match = (s16) a1_;
@@ -786,8 +788,6 @@ static s32 CallbackEffectMoveRelative(void *livesPtr_, PixelPos *pos)
     return sub_80AD430(livesPtr, pos);
 }
 
-extern s16 HandleAction(Action *action, DebugLocation *debug);
-
 void GroundEffect_Action(void)
 {
     GroundEffect *objectPtr;
@@ -821,7 +821,6 @@ void sub_80AD7AC(void)
     GroundEffect *objectPtr;
     s32 i;
     s32 minus1;
-
 
     for (objectPtr = &gGroundEffects[0], i = 0, minus1 = -1; i < NUM_GROUND_EFFECTS; i = (s16)(i + 1), objectPtr++)
     {

@@ -27,6 +27,7 @@
 #include "ground_lives.h"
 #include "ground_event.h"
 #include "ground_sprite.h"
+#include "ground_effect.h"
 
 EWRAM_DATA u32 gUnknown_20398A8 = {0};
 EWRAM_DATA s32 gUnknown_20398AC = {0};
@@ -73,7 +74,6 @@ extern bool8 sub_80048BC(void);
 extern u8 sub_80023E4(u32);
 extern bool8 sub_8099B94(void);
 extern void FreeGroundObjects(void);
-extern void FreeGroundEffects(void);
 extern void sub_809D508(void);
 extern void nullsub_119(void);
 extern void sub_8099768(void);
@@ -83,9 +83,7 @@ extern void sub_809975C(void);
 extern void sub_809D0AC(void);
 extern void sub_809D490(void);
 extern void AllocGroundObjects(void);
-extern void AllocGroundEffects(void);
 extern void GroundObject_Action(void);
-extern void GroundEffect_Action(void);
 extern void sub_809B474(void);
 extern void GroundScript_Unlock();
 extern void sub_809D25C(void);
@@ -101,7 +99,6 @@ extern void sub_809B638(void);
 extern void sub_8099750(void);
 extern void sub_809D0BC(void);
 extern void DeleteGroundObjects(void);
-extern void DeleteGroundEffects(void);
 extern void nullsub_16(void);
 extern void UpdateAdventureAchievements(void);
 extern void xxx_call_update_bg_sound_input(void);

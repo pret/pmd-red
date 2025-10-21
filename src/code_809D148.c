@@ -7,6 +7,7 @@
 #include "other_random.h"
 #include "ground_script.h"
 #include "ground_lives.h"
+#include "ground_effect.h"
 
 struct unkStruct_20399E8
 {
@@ -190,7 +191,6 @@ u8 sub_809D248(PixelPos *r0)
 
 // Todo: move these to appropriate header files
 extern s32 sub_80AC448(s16 a0, PixelPos *a1);
-extern s32 sub_80AD360(s16 a0, PixelPos *a1);
 extern bool8 sub_80A579C(PixelPos *a0, PixelPos *a1);
 
 void sub_809D25C(void)
@@ -215,7 +215,7 @@ void sub_809D25C(void)
             gUnknown_20399E8.unk0 = 0;
         break;
     case 3:
-        val = sub_80AD360(gUnknown_20399E8.unk4, &gUnknown_20399E8.unk1C);
+        val = sub_80AD360((s16) gUnknown_20399E8.unk4, &gUnknown_20399E8.unk1C);
         if (val == (u16) -1)
             gUnknown_20399E8.unk0 = 0;
         break;
