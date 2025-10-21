@@ -56,19 +56,15 @@ void GroundMap_SelectDungeon(s32, DungeonLocation*, u32);
 void GroundMap_GetStationScript(ScriptInfoSmall *out, s16, s32, s32);
 void GroundObject_ExecuteScript(s32, ActionUnkIds *, ScriptInfoSmall *);
 void GroundEffect_ExecuteScript(s32, ActionUnkIds *, ScriptInfoSmall *);
-void GroundLives_Select(s32, s32 group, s32 sector);
 void GroundObject_Select(s32, s32 group, s32 sector);
 void GroundEffect_Select(s32, s32 group, s32 sector);
 void GroundEvent_Select(s32, s32 group, s32 sector);
-void GroundLives_Cancel(s32 group, s32 sector);
 void GroundObject_Cancel(s32 group, s32 sector);
 void GroundEffect_Cancel(s32 group, s32 sector);
 void GroundEvent_Cancel(s32 group, s32 sector);
-void GroundLives_CancelBlank_1(void);
 void GroundObject_CancelBlank(void);
 void GroundEffect_CancelBlank(void);
 void GroundWeather_Select(s16);
-u32 GroundLives_ExecutePlayerScriptActionLives();
 s16 GroundObject_Add(s16 id, GroundObjectData*, s16 group, s8 sector);
 s16 GroundEffect_Add(s16 id, GroundEffectData*, s16 group, s8 sector);
 
@@ -99,20 +95,11 @@ void sub_809D1E4(s32, s32, s32);
 void sub_809D208(s32, PixelPos*, s32);
 void sub_809D220(s32, s32, s32);
 void GroundScriptLockJumpZero(s16);
-void sub_80A87AC(s32, s32);
-void sub_80A8BD8(s16, s32*);
-u32 sub_80A8C2C();
-u32 GroundLives_IsStarterMon();
-Pokemon *sub_80A8D54(s16);
-s16 sub_80A8F9C(s32, PixelPos*);
-u32 sub_80A9050();
-u32 sub_80A9090();
 s16 sub_80AC448(s16, PixelPos*);
 s32 sub_80AC49C(s16, PixelPos*);
 s16 sub_80AD360(s16, PixelPos*);
 s16 sub_80AD3B4(s16, PixelPos*);
 void DeleteGroundEvents(void);
-void DeleteGroundLives(void);
 void DeleteGroundObjects(void);
 void DeleteGroundEffects(void);
 s32 ExecuteScriptCommand(Action *action);
@@ -130,17 +117,13 @@ u8 sub_80990EC(struct DungeonSetupInfo *param_1, s32 param_2);
 
 extern u8 GroundObjectsCancelAll(void);
 extern u8 GroundEffectsCancelAll(void);
-extern u8 GroundLivesCancelAll(void);
 extern u8 IsTextboxOpen_809A750(void);
-extern Action *sub_80A882C(s32);
 extern Action *GroundObject_GetAction(s32);
 extern Action *sub_80AD158(s32);
 extern void sub_809AB4C(s32, s32);
 extern void sub_809ABB4(s32, s32);
 extern void sub_809AC18(s32, s32);
-extern s16 sub_80A8BBC(s32 id_);
 
-bool8 GroundLivesNotifyAll(s16);
 bool8 GroundObjectsNotifyAll(s16);
 bool8 GroundEffectsNotifyAll(s16);
 
@@ -151,18 +134,11 @@ void ResetMailbox(void);
 void sub_80963FC(void);
 void sub_8096488(void);
 bool8 sub_80964B4(void);
-s16 sub_80A8C4C();
 bool8 sub_8097640();
 u8 sub_80964E4();
-s32 sub_80A8E9C();
-u8 sub_80A8D20();
-bool8 sub_80A87E0();
-s16 sub_80A8BFC(s16);
-void sub_80A8F50(const u8 *buffer, s32, s32 size);
 void sub_80A56A0(s32, s32);
 void sub_80A56F0(PixelPos *);
 void sub_80A5704(PixelPos *);
-void sub_80A86C8(s16, s32);
 void sub_80AC1B0(s16, s32);
 void sub_80AD0C8(s16, s32);
 s32 sub_80A5984();
@@ -1172,7 +1148,7 @@ s16 HandleAction(Action *action, DebugLocation *debug)
                             if (val == 1) {
                                 s32 id = (s16)cmd.arg1;
                                 if (id != -1) {
-                                    Pokemon *mon = sub_80A8D54(id);
+                                    Pokemon *mon = sub_80A8D54((s16) id);
                                     s32 i;
                                     for (i = 0; i < POKEMON_NAME_LENGTH; i++) {
                                         mon->name[i] = sPokeNameBuffer[i];
@@ -1768,7 +1744,7 @@ s32 ExecuteScriptCommand(Action *action)
             }
             case 0x21: {
                 s32 ret;
-                s32 unk;
+                u32 unk;
                 PixelPos pos1;
                 PixelPos pos2;
                 PixelPos pos3;
@@ -1985,7 +1961,7 @@ s32 ExecuteScriptCommand(Action *action)
             case 0x3d: {
                 int i;
                 if ((s16)curCmd.arg1 != -1) {
-                    Pokemon *mon = sub_80A8D54(curCmd.arg1);
+                    Pokemon *mon = sub_80A8D54((s16) curCmd.arg1);
                     if (mon != NULL) {
                         for (i = 0; i < POKEMON_NAME_LENGTH; i++) {
                             sPokeNameBuffer[i] = mon->name[i];
@@ -2760,19 +2736,19 @@ s32 ExecuteScriptCommand(Action *action)
             }
             case 0xbd: {
                 if (sub_80026CC(curCmd.arg1)) {
-                        scriptData->script.ptr = FindLabel(action, (u8)curCmd.argByte);
+                    scriptData->script.ptr = FindLabel(action, (u8)curCmd.argByte);
                 }
                 break;
             }
             case 0xbf: {
                 if (HasItemInInventory(curCmd.argShort) > 0) {
-                        scriptData->script.ptr = FindLabel(action, (u8)curCmd.argByte);
+                    scriptData->script.ptr = FindLabel(action, (u8)curCmd.argByte);
                 }
                 break;
             }
             case 0xbe: {
                 if (action->unk8.unk0 == 1) {
-                    if ((s8)GroundLives_IsStarterMon(action->unk8.unk2)) {
+                    if (GroundLives_IsStarterMon(action->unk8.unk2)) {
                         scriptData->script.ptr = FindLabel(action, (u8)curCmd.argByte);
                     }
                 }
@@ -3129,7 +3105,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
                 {
                     u8 text[0x100];
                     DungeonLocation dungLocation;
-                    s32 ret = sub_80A8C4C(action->unkC.unk2, &dungLocation);
+                    s32 ret = (s16) sub_80A8C4C(action->unkC.unk2, &dungLocation);
                     if (ret != 0)
                     {
                         s32 dialogueId;
@@ -3188,7 +3164,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
                     }
             return 0;
         case 0x11:
-            return sub_80A8D20() == 0 ? 0 : 1;
+            return sub_80A8D20() != FALSE;
         case 0x12:
             {
                 s32 held = gRealInputs.held;
@@ -3200,10 +3176,8 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
 
         case 0x13:
             {
-                Pokemon *ptr;
-
-                ptr = sub_80A8D54(r2);
-                if(ptr)
+                Pokemon *ptr = sub_80A8D54((s16) r2);
+                if (ptr)
                     return PokemonFlag2(ptr);
             }
             return 0;
@@ -3745,17 +3719,13 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
         case 0x3C:
             {
                 s32 index;
-                index = 0;
-                for(index = 0; index < 0x18; index = (s16)(index + 1))
-                {
+                for (index = 0; index < 0x18; index = (s16)(index + 1)) {
                     sub_80A86C8(index, 0x400000);
                 }
-                for (index = 0; index < 0x10; index = (s16)(index + 1))
-                {
+                for (index = 0; index < 0x10; index = (s16)(index + 1)) {
                     sub_80AC1B0(index, 0x400000);
                 }
-                for (index = 0; index < 0x10; index = (s16)(index + 1))
-                {
+                for (index = 0; index < 0x10; index = (s16)(index + 1)) {
                     sub_80AD0C8(index, 0x400000);
                 }
             }
@@ -3912,27 +3882,28 @@ void GroundScript_Unlock(void)
     s32 index;
     bool8 cond;
 
-    if(gAnyScriptLocked == 0) return;
+    if (gAnyScriptLocked == 0) return;
 
     gAnyScriptLocked = 0;
     index = 0;
     for (index = 0; index < SCRIPT_LOCKS_ARR_COUNT; index++) {
-        if(gScriptLocks[index] != 0) {
+        if (gScriptLocks[index] != 0) {
             Log(1, "GroundScript unlock %3d", index);
-            cond  = GroundMapNotifyAll(index);
-            cond |= GroundLivesNotifyAll(index);
-            cond |= GroundObjectsNotifyAll(index);
-            cond |= GroundEffectsNotifyAll(index);
+            cond  = GroundMapNotifyAll((s16) index);
+            cond |= GroundLivesNotifyAll((s16) index);
+            cond |= GroundObjectsNotifyAll((s16) index);
+            cond |= GroundEffectsNotifyAll((s16) index);
 
-            if(gScriptLockConds[index] != 0) {
+            if (gScriptLockConds[index] != 0) {
                if (cond) {
-                    GroundMapNotifyAll(index | 0x80);
-                    GroundLivesNotifyAll(index | 0x80);
-                    GroundObjectsNotifyAll(index | 0x80);
-                    GroundEffectsNotifyAll(index | 0x80);
+                    GroundMapNotifyAll((s16) (index | 0x80));
+                    GroundLivesNotifyAll((s16) (index | 0x80));
+                    GroundObjectsNotifyAll((s16) (index | 0x80));
+                    GroundEffectsNotifyAll((s16) (index | 0x80));
                     gScriptLocks[index] = gScriptLockConds[index] = 0;
                }
-            } else {
+            }
+            else {
                gScriptLocks[index] = 0;
             }
         }
@@ -4003,21 +3974,21 @@ static const ScriptCommand *ResolveJump(Action *action, s32 r1)
 static void sub_80A2500(s32 param_1, ActionUnkIds *param_2)
 {
     if (param_2->unk0 == 1) {
-        sub_809AB4C((s16) param_1, sub_80A8BBC(param_2->unk2));
+        sub_809AB4C((s16) param_1, (s16) sub_80A8BBC(param_2->unk2));
     }
 }
 
 static void sub_80A252C(s32 param_1, ActionUnkIds *param_2)
 {
     if (param_2->unk0 == 1) {
-        sub_809ABB4((s16) param_1, sub_80A8BBC(param_2->unk2));
+        sub_809ABB4((s16) param_1, (s16) sub_80A8BBC(param_2->unk2));
     }
 }
 
 static void sub_80A2558(s32 param_1, ActionUnkIds *param_2)
 {
     if (param_2->unk0 == 1) {
-        sub_809AC18((s16) param_1, sub_80A8BBC(param_2->unk2));
+        sub_809AC18((s16) param_1, (s16) sub_80A8BBC(param_2->unk2));
     }
 }
 

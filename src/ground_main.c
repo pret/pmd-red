@@ -24,6 +24,7 @@
 #include "script_item.h"
 #include "unk_ds_only_feature.h"
 #include "textbox.h"
+#include "ground_lives.h"
 
 EWRAM_DATA u32 gUnknown_20398A8 = {0};
 EWRAM_DATA s32 gUnknown_20398AC = {0};
@@ -70,7 +71,6 @@ extern bool8 sub_809AFAC(void);
 extern bool8 sub_80048BC(void);
 extern u8 sub_80023E4(u32);
 extern bool8 sub_8099B94(void);
-extern void FreeGroundLives(void);
 extern void FreeGroundObjects(void);
 extern void FreeGroundEffects(void);
 extern void FreeGroundEvents(void);
@@ -85,7 +85,6 @@ extern void sub_809D0AC(void);
 extern void sub_809D490(void);
 extern void sub_80A62F0(void);
 extern void AllocGroundEvents(void);
-extern void AllocGroundLives(void);
 extern void AllocGroundObjects(void);
 extern void AllocGroundEffects(void);
 extern void nullsub_124(void);
@@ -109,7 +108,6 @@ extern void sub_80A73EC(void);
 extern void sub_8099750(void);
 extern void sub_809D0BC(void);
 extern void DeleteGroundEvents(void);
-extern void DeleteGroundLives(void);
 extern void DeleteGroundObjects(void);
 extern void DeleteGroundEffects(void);
 extern void nullsub_16(void);
@@ -734,8 +732,6 @@ static inline bool8 sub_80990EC_sub(struct DungeonSetupInfo *iVar1, u32 iVar2)
         flag = FALSE;
     return flag;
 }
-
-extern void sub_80A8EC0(u8 *, u32);
 
 u8 sub_80990EC(struct DungeonSetupInfo *param_1, s16 param_2)
 {

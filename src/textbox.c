@@ -115,11 +115,6 @@ static IWRAM_INIT struct Textbox *sTextbox = { NULL };
 extern bool8 sub_802FCF0(void);
 bool8 IsTextboxOpen_809B40C(struct TextboxText *);
 
-extern void sub_80A8EC0(u8 *, u32);
-Pokemon *sub_80A8D54(s16);
-void sub_80A7DDC(s16 *, s16*);
-u8 IsStarterMonster(s16);
-s16 sub_80A8BFC(s32);
 void sub_809B028(const MenuItem *, s32 a1_, s32 a2, s32 a3, s32 a4_, const char *text);
 bool8 sub_809B18C(s32 *sp);
 extern void GroundScriptLock(s16 index, s32 r1);

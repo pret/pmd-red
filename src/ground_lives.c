@@ -1,9 +1,9 @@
 #include "global.h"
 #include "globaldata.h"
+#include "ground_lives.h"
 #include "ground_script.h"
 #include "ground_sprite.h"
 #include "ground_event.h"
-#include "ground_lives.h"
 #include "ground_main.h"
 #include "memory.h"
 #include "event_flag.h"
@@ -101,7 +101,6 @@ struct GroundLiveTypeData
 
 extern const struct GroundLiveTypeData gGroundLivesTypeData_811E63C[];
 
-extern void DeleteGroundLives(void);
 extern s32 sub_8002984(s32 _direction1, u32 caseID);
 extern u8 sub_809D248(PixelPos *r0);
 extern s16 HandleAction(Action *action, const DebugLocation *debug);
@@ -137,6 +136,9 @@ extern void sub_809D170(s32 r0, s32 r1);
 extern void sub_80A74E4(struct UnkGroundSpriteStruct *ptr);
 extern const struct GroundScriptHeader *GetGroundScript(s16 a0, const DebugLocation *);
 
+static s32 sub_80A7B94(s16 *a0);
+static s32 GroundLives_Add(s32 id_, const GroundLivesData *ptr, s32 group_, s32 sector_);
+static void GroundLives_Delete(s32 id_);
 static s16 CallbackLivesGetIndex(void *livesPtr_);
 static void CallbackLivesGetSize(void *livesPtr_, PixelPos *out);
 static void CallbackLivesSetHitboxPos(void *livesPtr_, PixelPos *posOrNull);
@@ -158,15 +160,12 @@ static void CallbackLivesClearFlags(void *livesPtr_, u32 flags);
 static void CallbackLivesSpriteRelated_80AB238(void *livesPtr_, s32 a1);
 static s32 CallbackLivesMoveRelative(void *livesPtr_, PixelPos *pos);
 bool8 sub_80A9750(struct GroundLive *ptr, u16 a1);
-void GroundLives_Delete(s32);
-s32 GroundLives_Add(s32 id_, const GroundLivesData *ptr, s32 group_, s32 sector_);
 void sub_80AB5A4(void);
 s32 sub_80A9F20(struct GroundLive *livesPtr, PixelPos *pixelPos);
 bool8 sub_80AA3F8(struct GroundLive *livesPtr, s32 a1);
 void sub_80AB5D4(struct GroundLive *livesPtr);
 s32 sub_80ABA00(s32);
 void sub_80AAF68(struct GroundLive *livesPtr, u32 unused);
-s32 sub_80A7B94(s16 *a0);
 
 static const CallbackData gGroundLivesCallbacks = {
     .maybeId = 1,
@@ -404,7 +403,7 @@ UNUSED static s16 sub_80A7B40(s32 a0_)
     return -1;
 }
 
-s32 sub_80A7B94(s16 *a0)
+static s32 sub_80A7B94(s16 *a0)
 {
     s32 id = *a0;
     const struct GroundLiveTypeData *dataPtr = &gGroundLivesTypeData_811E63C[id];
@@ -706,7 +705,7 @@ s32 sub_80A7DDC(s16 *a0, s16 *speciesDst)
     return ret;
 }
 
-s32 GroundLives_Add(s32 id_, const GroundLivesData *ptr, s32 group_, s32 sector_)
+static s32 GroundLives_Add(s32 id_, const GroundLivesData *ptr, s32 group_, s32 sector_)
 {
     s32 id = (s16) id_;
     s32 group = (s16) group_;
@@ -945,7 +944,7 @@ s32 GroundLives_Add(s32 id_, const GroundLivesData *ptr, s32 group_, s32 sector_
     return id;
 }
 
-void GroundLives_Delete(s32 id_)
+static void GroundLives_Delete(s32 id_)
 {
     s32 id = (s16) id_;
     struct GroundLive *livesPtr = &gGroundLives->array[id];
@@ -982,7 +981,7 @@ void sub_80A86C8(s32 id_, u32 flags)
     }
 }
 
-void sub_80A8750(s32 id_, u32 flags)
+static void sub_80A8750(s32 id_, u32 flags)
 {
     s32 id = (s16) id_;
     struct GroundLive *livesPtr = &gGroundLives->array[id];
@@ -1121,7 +1120,7 @@ bool8 GroundLives_ExecutePlayerScriptActionLives(s32 id1_, s32 id2_)
     return FALSE;
 }
 
-bool8 sub_80A8A5C(s32 id1_, s32 id2_)
+static bool8 sub_80A8A5C(s32 id1_, s32 id2_)
 {
     s32 id1 = (s16) id1_;
     s32 id2 = (s16) id2_;
@@ -1143,7 +1142,7 @@ bool8 sub_80A8A5C(s32 id1_, s32 id2_)
     return FALSE;
 }
 
-bool8 sub_80A8ACC(s32 id1_, s32 id2_)
+static bool8 sub_80A8ACC(s32 id1_, s32 id2_)
 {
     s32 id1 = (s16) id1_;
     s32 id2 = (s16) id2_;
@@ -1363,7 +1362,7 @@ Pokemon *sub_80A8E9C(s32 id_)
     return sub_80A8D54(livesPtr->unk2);
 }
 
-void sub_80A8EC0(u8 *buffer,s32 a1)
+void sub_80A8EC0(u8 *buffer, s32 a1)
 {
     s16 sp = a1;
     s16 species;

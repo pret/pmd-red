@@ -2,6 +2,7 @@
 #include "globaldata.h"
 #include "ground_event.h"
 #include "ground_script.h"
+#include "ground_lives.h"
 #include "debug.h"
 #include "memory.h"
 
@@ -18,8 +19,6 @@ typedef struct GroundEvent
 } GroundEvent;
 
 IWRAM_INIT GroundEvent *gGroundEvents = NULL;
-
-extern void GroundLives_CancelBlank_2(void);
 
 void DeleteGroundEvents(void);
 void GroundEvent_Delete(s32);
