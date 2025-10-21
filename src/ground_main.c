@@ -30,6 +30,7 @@
 #include "ground_effect.h"
 #include "ground_object.h"
 #include "ground_script.h"
+#include "code_809D148.h"
 
 EWRAM_DATA u32 gUnknown_20398A8 = {0};
 EWRAM_DATA s32 gUnknown_20398AC = {0};
@@ -56,7 +57,6 @@ extern void sub_809B614();
 extern void sub_809CA20();
 extern void sub_80A6E80();
 extern void sub_8099BE4();
-extern void nullsub_120();
 extern void sub_809B638();
 extern void nullsub_106();
 extern void sub_80A73EC();
@@ -74,26 +74,20 @@ extern bool8 sub_809AFAC(void);
 extern bool8 sub_80048BC(void);
 extern u8 sub_80023E4(u32);
 extern bool8 sub_8099B94(void);
-extern void nullsub_119(void);
 extern void sub_8099768(void);
 extern void nullsub_103(void);
 extern void sub_8099648(void);
 extern void sub_809975C(void);
-extern void sub_809D0AC(void);
 extern void sub_809B474(void);
-extern void GroundScript_Unlock();
-extern void sub_809D25C(void);
 extern void sub_80A59DC(void);
 extern void sub_809B614(void);
 extern void sub_8099BE4(void);
 extern void sub_8099744(void);
 extern void WaitForNextFrameAndAdvanceRNG(void);
 extern void LoadBufferedInputs(void);
-extern void nullsub_120(void);
 extern void sub_80A5E70(void);
 extern void sub_809B638(void);
 extern void sub_8099750(void);
-extern void sub_809D0BC(void);
 extern void nullsub_16(void);
 extern void UpdateAdventureAchievements(void);
 extern void xxx_call_update_bg_sound_input(void);

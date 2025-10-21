@@ -53,6 +53,7 @@
 #include "ground_event.h"
 #include "ground_effect.h"
 #include "ground_object.h"
+#include "code_809D148.h"
 
 void GroundMap_Select(s16);
 void GroundMap_SelectDungeon(s32, DungeonLocation*, u32);
@@ -75,16 +76,6 @@ void sub_809AFC8(bool8, s32, s32, const char*);
 u32 sub_809B028(const MenuItem *, s32 a1_, s32 a2, s32 a3, s32 a4_, const char *text);
 bool8 sub_809B1C0(s32, s32, char[12]);
 void sub_809B1D4(u8, s32, s32, const char*);
-void sub_809D0BC(void);
-void sub_809D124(s32, s32, s32);
-void sub_809D158(s32, PixelPos*);
-void sub_809D170(s32, s32);
-void sub_809D190(s32, PixelPos*, s32);
-void sub_809D1A8(s32, s32, s32);
-void sub_809D1CC(s32, PixelPos*, s32);
-void sub_809D1E4(s32, s32, s32);
-void sub_809D208(s32, PixelPos*, s32);
-void sub_809D220(s32, s32, s32);
 void GroundScriptLockJumpZero(s16);
 bool8 sub_8099B94(void);
 PixelPos SetVecFromDirectionSpeed(s8, s32);
@@ -94,7 +85,6 @@ void sub_8099220(void *param_1, s32 param_2);
 bool8 sub_809B260(void *dst);
 bool8 sub_809B18C(s32 *sp);
 bool8 sub_809AFFC(u8 *);
-bool8 sub_809D234(void);
 u8 sub_80990EC(struct DungeonSetupInfo *param_1, s32 param_2);
 
 extern u8 IsTextboxOpen_809A750(void);

@@ -15,6 +15,7 @@
 #include "pokemon.h"
 #include "ground_effect.h"
 #include "ground_object.h"
+#include "code_809D148.h"
 
 static IWRAM_INIT unkStruct_3001B7C *gUnknown_3001B7C = {NULL};
 
@@ -33,7 +34,6 @@ static EWRAM_INIT OpenedFile *gUnknown_203B4B4 = {NULL};
 extern void sub_809971C(u16, const u8 *, s16);
 extern void sub_80997F4(u16, u16);
 extern void sub_800E970(void);
-extern u8 sub_809D248(PixelPos *r0);
 
 static bool8 sub_80A68F8(struct UnkGroundSpriteStruct *ptr, struct UnkGroundSpriteSubStructx48 *a1, s32 a2);
 static bool8 sub_80A6CF4(struct UnkGroundSpriteSubStructx48 *a0);

@@ -19,6 +19,7 @@
 #include "ground_lives_helper.h"
 #include "ground_sprite_monster.h"
 #include "ground_object.h"
+#include "code_809D148.h"
 
 struct GroundLivesMeta_Sub1
 {
@@ -104,7 +105,6 @@ struct GroundLiveTypeData
 extern const struct GroundLiveTypeData gGroundLivesTypeData_811E63C[];
 
 extern s32 sub_8002984(s32 _direction1, u32 caseID);
-extern u8 sub_809D248(PixelPos *r0);
 extern bool8 sub_80A66F8(struct UnkGroundSpriteStruct *ptr);
 extern bool8 sub_80A671C(struct UnkGroundSpriteStruct *ptr);
 extern bool8 sub_80A595C(u32 a0, PixelPos *pixelPosArg1, PixelPos *pixelPosArg2);
@@ -115,7 +115,6 @@ extern bool8 sub_80A58C8(PixelPos *, PixelPos *);
 extern bool8 sub_809B1C0(s32 a0, u32 kind, Pokemon *a2);
 extern Pokemon *sub_80A8D54(s32);
 extern bool8 GetCurrentDungeonBounds(PixelPos *a0, PixelPos *a1);
-extern void sub_809D170(s32 r0, s32 r1);
 extern const struct GroundScriptHeader *GetGroundScript(s16 a0, const DebugLocation *);
 
 static s32 sub_80A7B94(s16 *a0);

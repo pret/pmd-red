@@ -11,6 +11,7 @@
 #include "ground_map_conversion_table.h"
 #include "code_800558C.h"
 #include "constants/dungeon.h"
+#include "code_809D148.h"
 
 IWRAM_INIT GroundMapAction *gGroundMapAction = {NULL};
 IWRAM_INIT GroundBg *gGroundMapDungeon_3001B70 = {NULL};
@@ -49,8 +50,6 @@ extern const DebugLocation gUnknown_8117770;
 
 
 extern const CallbackData gGroundScriptNullCallbacks;
-
-extern u8 sub_809D248(PixelPos *r0);
 
 extern u8 sub_80A46C0(GroundBg *, u32, s32, s32);
 extern u8 sub_80A4660(GroundBg *, u32, s32, s32);

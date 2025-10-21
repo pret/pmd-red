@@ -18,18 +18,14 @@
 #include "ground_lives_helper.h"
 #include "input.h"
 #include "structs/str_position.h"
+#include "code_809D148.h"
 
-extern void sub_809D0AC(void);
 extern void sub_8012A18(s32 unused);
-extern void sub_809D0BC(void);
 extern bool8 sub_80A579C(PixelPos *a0, PixelPos *a1);
 extern void GroundMap_Select(s16);
 extern void sub_80999E8(s32 a0);
-extern void nullsub_120(void);
 extern void sub_80A59DC(void);
-extern void sub_809D25C(void);
 extern PixelPos SetVecFromDirectionSpeed(s8 r1, u32 r2);
-extern void sub_809D158(s32, PixelPos*);
 
 UNUSED static void DebugMapViewer(void)
 {
