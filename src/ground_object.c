@@ -6,6 +6,7 @@
 #include "event_flag.h"
 #include "ground_script.h"
 #include "ground_sprite.h"
+#include "ground_lives.h"
 #include "memory.h"
 
 typedef struct GroundObject {
@@ -57,7 +58,6 @@ void SetPredefinedScript(Action *param_1, s16 index, const ScriptCommand *param_
 
 extern bool8 GetCurrentDungeonBounds(PixelPos *a0, PixelPos *a1);
 void sub_80A75CC(void *, s32, s32, s32);
-bool8 SpriteHasPokemonSize_80A66A4(struct UnkGroundSpriteStruct *ptr);
 
 
 s32 GroundObject_Add(s32 id_,const GroundObjectData *objectData,s32 group_,s32 sector_);
@@ -490,10 +490,8 @@ s32 GroundObject_Add(s32 id_,const GroundObjectData *objectData,s32 group_,s32 s
       return id;
 }
 
-
-void sub_80A6688(struct UnkGroundSpriteStruct *, s32);
-
-void GroundObject_Delete(s32 index_) {
+void GroundObject_Delete(s32 index_)
+{
     s32 index = (s16)index_;
     GroundObject *parent = &gGroundObjects[index];
 
@@ -716,13 +714,12 @@ s32 GetObjectCollision_80AC5F4(GroundObject *param_1, PixelPos *param_2, PixelPo
     PixelPos iVar1 = { (param_3->x - 1) / 2048, (param_3->y - 1) / 2048 };
     PixelPos local_20 = { (iVar1.x - local_28.x) + 1, (iVar1.y - local_28.y) + 1 };
 
-    if (param_1->flags & 1)
-    {
-        if(CheckMapCollision_80A585C(&local_28,&local_20))
+    if (param_1->flags & 1) {
+        if (CheckMapCollision_80A585C(&local_28,&local_20))
             return 1;
     }
-    if (((param_1->flags & 4))) {
-        if(((s16)GetLivesCollision_80A92A0(-1,4,param_2,param_3) >= 0))
+    if (param_1->flags & 4) {
+        if ((s16) GetLivesCollision_80A92A0(-1,4,param_2,param_3) >= 0)
             return 4;
     }
     return 0;
@@ -1024,7 +1021,6 @@ void GroundObject_Action(void)
 }
 
 void sub_80A7664(struct UnkGroundSpriteStruct *ptr, PixelPos *pixelPos, s32 a2);
-extern bool8 sub_80A66D4(struct UnkGroundSpriteStruct *ptr);
 
 void sub_80ACAD4(void)
 {

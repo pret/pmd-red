@@ -1,13 +1,14 @@
 #include "global.h"
 #include "globaldata.h"
+#include "ground_sprite.h"
 #include "structs/axdata.h"
 #include "effect_main.h"
 #include "debug.h"
 #include "def_filearchives.h"
 #include "file_system.h"
 #include "ground_map.h"
-#include "ground_sprite.h"
 #include "ground_sprite_data.h"
+#include "ground_lives.h"
 #include "memory.h"
 #include "sprite.h"
 #include "effect_sub_1.h"
@@ -29,7 +30,6 @@ static EWRAM_INIT OpenedFile *gUnknown_203B4B4 = {NULL};
 // code_8098BDC.s
 extern void sub_809971C(u16, const u8 *, s16);
 extern void sub_80997F4(u16, u16);
-extern void sub_80ABA7C(void);
 extern void sub_80ACAD4(void);
 extern void sub_80AD7AC(void);
 extern void sub_800E970(void);

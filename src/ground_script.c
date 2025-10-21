@@ -50,6 +50,7 @@
 #include "ground_map_conversion_table.h"
 #include "unk_ds_only_feature.h"
 #include "textbox.h"
+#include "ground_event.h"
 
 void GroundMap_Select(s16);
 void GroundMap_SelectDungeon(s32, DungeonLocation*, u32);
@@ -58,10 +59,8 @@ void GroundObject_ExecuteScript(s32, ActionUnkIds *, ScriptInfoSmall *);
 void GroundEffect_ExecuteScript(s32, ActionUnkIds *, ScriptInfoSmall *);
 void GroundObject_Select(s32, s32 group, s32 sector);
 void GroundEffect_Select(s32, s32 group, s32 sector);
-void GroundEvent_Select(s32, s32 group, s32 sector);
 void GroundObject_Cancel(s32 group, s32 sector);
 void GroundEffect_Cancel(s32 group, s32 sector);
-void GroundEvent_Cancel(s32 group, s32 sector);
 void GroundObject_CancelBlank(void);
 void GroundEffect_CancelBlank(void);
 void GroundWeather_Select(s16);
@@ -99,7 +98,6 @@ s16 sub_80AC448(s16, PixelPos*);
 s32 sub_80AC49C(s16, PixelPos*);
 s16 sub_80AD360(s16, PixelPos*);
 s16 sub_80AD3B4(s16, PixelPos*);
-void DeleteGroundEvents(void);
 void DeleteGroundObjects(void);
 void DeleteGroundEffects(void);
 s32 ExecuteScriptCommand(Action *action);

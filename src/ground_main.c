@@ -25,6 +25,8 @@
 #include "unk_ds_only_feature.h"
 #include "textbox.h"
 #include "ground_lives.h"
+#include "ground_event.h"
+#include "ground_sprite.h"
 
 EWRAM_DATA u32 gUnknown_20398A8 = {0};
 EWRAM_DATA s32 gUnknown_20398AC = {0};
@@ -64,7 +66,6 @@ extern void sub_8095494(DungeonMailSeed *param_1, u8 index);
 extern u16 gUnknown_2026E4E;
 
 // TODO: Move these externs to headers
-extern void GroundSprite_Reset(s32);
 extern s16 sub_8098FCC(u32 unused);
 extern s16 sub_80A2654(s16 r0);
 extern bool8 sub_809AFAC(void);
@@ -73,8 +74,6 @@ extern u8 sub_80023E4(u32);
 extern bool8 sub_8099B94(void);
 extern void FreeGroundObjects(void);
 extern void FreeGroundEffects(void);
-extern void FreeGroundEvents(void);
-extern void sub_80A658C(void);
 extern void sub_809D508(void);
 extern void nullsub_119(void);
 extern void sub_8099768(void);
@@ -83,12 +82,8 @@ extern void sub_8099648(void);
 extern void sub_809975C(void);
 extern void sub_809D0AC(void);
 extern void sub_809D490(void);
-extern void sub_80A62F0(void);
-extern void AllocGroundEvents(void);
 extern void AllocGroundObjects(void);
 extern void AllocGroundEffects(void);
-extern void nullsub_124(void);
-extern void GroundLives_Action(void);
 extern void GroundObject_Action(void);
 extern void GroundEffect_Action(void);
 extern void sub_809B474(void);
@@ -96,7 +91,6 @@ extern void GroundScript_Unlock();
 extern void sub_809D25C(void);
 extern void sub_80A59DC(void);
 extern void sub_809B614(void);
-extern void sub_80A6E80(void);
 extern void sub_8099BE4(void);
 extern void sub_8099744(void);
 extern void WaitForNextFrameAndAdvanceRNG(void);
@@ -104,16 +98,13 @@ extern void LoadBufferedInputs(void);
 extern void nullsub_120(void);
 extern void sub_80A5E70(void);
 extern void sub_809B638(void);
-extern void sub_80A73EC(void);
 extern void sub_8099750(void);
 extern void sub_809D0BC(void);
-extern void DeleteGroundEvents(void);
 extern void DeleteGroundObjects(void);
 extern void DeleteGroundEffects(void);
 extern void nullsub_16(void);
 extern void UpdateAdventureAchievements(void);
 extern void xxx_call_update_bg_sound_input(void);
-extern void sub_80A6E68(void);
 extern void sub_80060EC(void);
 extern void sub_809977C(void);
 extern void UpdateFadeInTile(s32);

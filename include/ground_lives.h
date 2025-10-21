@@ -42,5 +42,7 @@ s32 sub_80A9050(s32 id_, s8 *a1);
 s32 sub_80A9090(s32 id_, s32 a1_);
 s16 GetFriendAreaDialogueId(s32 id_);
 s32 GetLivesCollision_80A92A0(s32 id_, u32 flags, PixelPos *pixelPos1, PixelPos *pixelPos2);
+void GroundLives_Action(void);
+void sub_80ABA7C(void);
 
 #endif // GUARD_GROUND_LIVES_H

@@ -17,6 +17,7 @@
 #include "code_8002774.h"
 #include "friend_area_dialogue.h"
 #include "ground_lives_helper.h"
+#include "ground_sprite_monster.h"
 
 struct GroundLivesMeta_Sub1
 {
@@ -104,12 +105,8 @@ extern const struct GroundLiveTypeData gGroundLivesTypeData_811E63C[];
 extern s32 sub_8002984(s32 _direction1, u32 caseID);
 extern u8 sub_809D248(PixelPos *r0);
 extern s16 HandleAction(Action *action, const DebugLocation *debug);
-extern void sub_80A7524(struct UnkGroundSpriteStruct *ptr, s32 monsterId_, PixelPos *pixelPosArg, s32 a3);
-extern bool8 sub_80A66D4(struct UnkGroundSpriteStruct *ptr);
-extern void sub_80A74F0(struct UnkGroundSpriteStruct *ptr, s32 a1_, s32 a2_, s32 a3);
 extern bool8 sub_80A66F8(struct UnkGroundSpriteStruct *ptr);
 extern bool8 sub_80A671C(struct UnkGroundSpriteStruct *ptr);
-extern void sub_80A6EC8(struct UnkGroundSpriteStruct *ptr, s32 a1);
 extern s32 sub_80AC554(u32 a0, PixelPos *pixelPosArg1, PixelPos *pixelPosArg2);
 extern s32 sub_80AC448(s32 id_, PixelPos *pixelPos);
 extern bool8 sub_80A595C(u32 a0, PixelPos *pixelPosArg1, PixelPos *pixelPosArg2);
@@ -124,21 +121,21 @@ extern bool8 GetPredefinedScript(Action *param_1, ScriptInfoSmall *script, s32 _
 extern bool8 sub_809D678(Action *action);
 extern bool8 GroundObject_GetScript(s32 a0, ScriptInfoSmall *scriptInfo, s32 a2);
 extern void GroundObject_ExecuteScript(s32, void *, ScriptInfoSmall *);
-extern bool8 sub_80ADC64(s32 id, ScriptInfoSmall *dst);
 extern bool8 GroundScriptNotify(Action *param_1, s32 param_2);
 extern bool8 GroundScript_Cancel(Action *r0);
 extern Pokemon *sub_80A8D54(s32);
-extern void sub_80A6688(struct UnkGroundSpriteStruct *ptr, s32 a0);
 extern bool8 GetCurrentDungeonBounds(PixelPos *a0, PixelPos *a1);
-extern void sub_80A7428(struct UnkGroundSpriteStruct *ptr, s32 a1_, s32 monsterId_, s32 a3);
 extern void SetPredefinedScript(Action *param_1, s16 index, const ScriptCommand *param_3);
 extern void sub_809D170(s32 r0, s32 r1);
-extern void sub_80A74E4(struct UnkGroundSpriteStruct *ptr);
 extern const struct GroundScriptHeader *GetGroundScript(s16 a0, const DebugLocation *);
 
 static s32 sub_80A7B94(s16 *a0);
 static s32 GroundLives_Add(s32 id_, const GroundLivesData *ptr, s32 group_, s32 sector_);
 static void GroundLives_Delete(s32 id_);
+static bool8 sub_80A9750(struct GroundLive *ptr, u16 a1);
+static s32 sub_80A9F20(struct GroundLive *livesPtr, PixelPos *pixelPosArg);
+static bool8 sub_80AA3F8(struct GroundLive *livesPtr, s32 a1_);
+static void sub_80AAF68(struct GroundLive *livesPtr, u32 unused);
 static s16 CallbackLivesGetIndex(void *livesPtr_);
 static void CallbackLivesGetSize(void *livesPtr_, PixelPos *out);
 static void CallbackLivesSetHitboxPos(void *livesPtr_, PixelPos *posOrNull);
@@ -159,13 +156,9 @@ static void CallbackLivesSetFlags(void *livesPtr_, u32 flags);
 static void CallbackLivesClearFlags(void *livesPtr_, u32 flags);
 static void CallbackLivesSpriteRelated_80AB238(void *livesPtr_, s32 a1);
 static s32 CallbackLivesMoveRelative(void *livesPtr_, PixelPos *pos);
-bool8 sub_80A9750(struct GroundLive *ptr, u16 a1);
-void sub_80AB5A4(void);
-s32 sub_80A9F20(struct GroundLive *livesPtr, PixelPos *pixelPos);
-bool8 sub_80AA3F8(struct GroundLive *livesPtr, s32 a1);
-void sub_80AB5D4(struct GroundLive *livesPtr);
-s32 sub_80ABA00(s32);
-void sub_80AAF68(struct GroundLive *livesPtr, u32 unused);
+static void sub_80AB5A4(void);
+static void sub_80AB5D4(struct GroundLive *livesPtr);
+static s32 sub_80ABA00(s32 a0);
 
 static const CallbackData gGroundLivesCallbacks = {
     .maybeId = 1,
@@ -1591,7 +1584,7 @@ s32 GetLivesCollision_80A92A0(s32 id_, u32 flags, PixelPos *pixelPos1, PixelPos 
     return -1;
 }
 
-s32 sub_80A9344(s32 id_, u32 flags, PixelPos *pixelPos1, PixelPos *pixelPos2)
+static s32 sub_80A9344(s32 id_, u32 flags, PixelPos *pixelPos1, PixelPos *pixelPos2)
 {
     s32 i;
     struct GroundLive *livesPtr;
@@ -1614,7 +1607,7 @@ s32 sub_80A9344(s32 id_, u32 flags, PixelPos *pixelPos1, PixelPos *pixelPos2)
     return -1;
 }
 
-u8 sub_80A93F0(s32 id_, s32 a1_)
+static u8 sub_80A93F0(s32 id_, s32 a1_)
 {
     s32 id = (s16) id_;
     s32 a1 = (u8) a1_;
@@ -1626,7 +1619,7 @@ u8 sub_80A93F0(s32 id_, s32 a1_)
     return sub_80A5934(a1, &pixPos1, &pixPos2);
 }
 
-s32 sub_80A9488(struct GroundLive *livesPtr, PixelPos *posArg1, PixelPos *posArg2)
+static s32 sub_80A9488(struct GroundLive *livesPtr, PixelPos *posArg1, PixelPos *posArg2)
 {
     PixelPos pixPos1 = {posArg1->x / 2048, posArg1->y / 2048};
     PixelPos posTemp = {((posArg2->x - 1) / 2048), ((posArg2->y - 1) / 2048)};
@@ -1656,7 +1649,7 @@ s32 sub_80A9488(struct GroundLive *livesPtr, PixelPos *posArg1, PixelPos *posArg
     return 0;
 }
 
-s32 sub_80A95AC(struct GroundLive *livesPtr, PixelPos *posArg1, PixelPos *posArg2)
+static s32 sub_80A95AC(struct GroundLive *livesPtr, PixelPos *posArg1, PixelPos *posArg2)
 {
     PixelPos pixPos1 = {posArg1->x / 2048, posArg1->y / 2048};
     PixelPos posTemp = {((posArg2->x - 1) / 2048), ((posArg2->y - 1) / 2048)};
@@ -1710,7 +1703,7 @@ s32 sub_80A95AC(struct GroundLive *livesPtr, PixelPos *posArg1, PixelPos *posArg
     return 0;
 }
 
-bool8 sub_80A9750(struct GroundLive *livesPtr, u16 a1)
+static bool8 sub_80A9750(struct GroundLive *livesPtr, u16 a1)
 {
     s32 r2;
     u16 f1 = a1 & 0xFF;
@@ -1817,7 +1810,7 @@ bool8 sub_80A9750(struct GroundLive *livesPtr, u16 a1)
     return FALSE;
 }
 
-s32 sub_80A9F20(struct GroundLive *livesPtr, PixelPos *pixelPosArg)
+static s32 sub_80A9F20(struct GroundLive *livesPtr, PixelPos *pixelPosArg)
 {
     s32 ret;
     PixelPos pixPos1, pixPos2;
@@ -1845,7 +1838,7 @@ s32 sub_80A9F20(struct GroundLive *livesPtr, PixelPos *pixelPosArg)
     }
 }
 
-s32 sub_80A9F94(struct GroundLive *livesPtr, PixelPos *pixelPosArg)
+static s32 sub_80A9F94(struct GroundLive *livesPtr, PixelPos *pixelPosArg)
 {
     s32 ret;
     bool8 changed;
@@ -1898,7 +1891,7 @@ s32 sub_80A9F94(struct GroundLive *livesPtr, PixelPos *pixelPosArg)
     }
 }
 
-s32 sub_80AA074(struct GroundLive *livesPtr, PixelPos *pixelPosArg)
+static s32 sub_80AA074(struct GroundLive *livesPtr, PixelPos *pixelPosArg)
 {
     s32 ret;
     PixelPos pixPos1, pixPos2;
@@ -1949,7 +1942,7 @@ s32 sub_80AA074(struct GroundLive *livesPtr, PixelPos *pixelPosArg)
     return ret;
 }
 
-s32 sub_80AA180(struct GroundLive *livesPtr, u32 flags, PixelPos *pixelPosArg1, PixelPos *pixelPosArg2)
+static s32 sub_80AA180(struct GroundLive *livesPtr, u32 flags, PixelPos *pixelPosArg1, PixelPos *pixelPosArg2)
 {
     PixelPos pixPos1, pixPos2;
 
@@ -2003,7 +1996,7 @@ s32 sub_80AA180(struct GroundLive *livesPtr, u32 flags, PixelPos *pixelPosArg1, 
     return 0;
 }
 
-s32 sub_80AA2BC(struct GroundLive *livesPtr, u32 flags, PixelPos *pixelPosArg1, PixelPos *pixelPosArg2)
+static s32 sub_80AA2BC(struct GroundLive *livesPtr, u32 flags, PixelPos *pixelPosArg1, PixelPos *pixelPosArg2)
 {
     PixelPos pixPos1, pixPos2, pixPos3;
     PixelPos posTemp;
@@ -2042,7 +2035,7 @@ s32 sub_80AA2BC(struct GroundLive *livesPtr, u32 flags, PixelPos *pixelPosArg1, 
     return 0;
 }
 
-bool8 sub_80AA3F8(struct GroundLive *livesPtr, s32 a1_)
+static bool8 sub_80AA3F8(struct GroundLive *livesPtr, s32 a1_)
 {
     s32 i;
     s32 a1 = (s8) a1_;
@@ -2131,7 +2124,7 @@ bool8 sub_80AA3F8(struct GroundLive *livesPtr, s32 a1_)
     return FALSE;
 }
 
-s32 sub_80AA660(struct GroundLive *livesPtr, PixelPos *pixelPosArg1, PixelPos *pixelPosArg2)
+static s32 sub_80AA660(struct GroundLive *livesPtr, PixelPos *pixelPosArg1, PixelPos *pixelPosArg2)
 {
     s32 id = (s16) sub_80AC4C8(0x100, pixelPosArg1, pixelPosArg2);
 
@@ -2143,7 +2136,7 @@ s32 sub_80AA660(struct GroundLive *livesPtr, PixelPos *pixelPosArg1, PixelPos *p
     return 0;
 }
 
-bool8 sub_80AA690(struct GroundLive *livesPtr, s32 a1_)
+static bool8 sub_80AA690(struct GroundLive *livesPtr, s32 a1_)
 {
     s32 i;
     s32 a1 = (s8) a1_;
@@ -2183,7 +2176,7 @@ bool8 sub_80AA690(struct GroundLive *livesPtr, s32 a1_)
     return FALSE;
 }
 
-s32 sub_80AA7B0(struct GroundLive *livesPtr, s16 *a1, u32 flags, PixelPos *pixelPosArg1, PixelPos *pixelPosArg2)
+static s32 sub_80AA7B0(struct GroundLive *livesPtr, s16 *a1, u32 flags, PixelPos *pixelPosArg1, PixelPos *pixelPosArg2)
 {
     PixelPos pixPos1 = *pixelPosArg1;
     PixelPos pixPos3 = *pixelPosArg2;
@@ -2211,7 +2204,7 @@ s32 sub_80AA7B0(struct GroundLive *livesPtr, s16 *a1, u32 flags, PixelPos *pixel
     return 0;
 }
 
-bool8 sub_80AA8BC(struct GroundLive *livesPtr, s16 *a1, s32 dir_)
+static bool8 sub_80AA8BC(struct GroundLive *livesPtr, s16 *a1, s32 dir_)
 {
     s32 i;
     s32 dir = (s8) dir_;
@@ -2288,7 +2281,7 @@ bool8 sub_80AA8BC(struct GroundLive *livesPtr, s16 *a1, s32 dir_)
     return FALSE;
 }
 
-void sub_80AAAE8(struct GroundLive *livesPtr, u32 a1, s32 dir_, s32 unused)
+static void sub_80AAAE8(struct GroundLive *livesPtr, u32 a1, s32 dir_, s32 unused)
 {
     s32 unk;
     s32 dir = (s8) dir_;
@@ -2508,7 +2501,7 @@ void sub_80AAAE8(struct GroundLive *livesPtr, u32 a1, s32 dir_, s32 unused)
     }
 }
 
-void sub_80AAF68(struct GroundLive *livesPtr, u32 unused)
+static void sub_80AAF68(struct GroundLive *livesPtr, u32 unused)
 {
     if (livesPtr->flags & 0x4000) {
         if (sub_80A93F0(livesPtr->id, 1)) {
@@ -2866,7 +2859,7 @@ void GroundLives_Action(void)
     }
 }
 
-void sub_80AB5A4(void)
+static void sub_80AB5A4(void)
 {
     struct GroundLivesMeta_Sub1 *loopPtr;
     s32 i;
@@ -2882,7 +2875,7 @@ void sub_80AB5A4(void)
     }
 }
 
-void sub_80AB5D4(struct GroundLive *livesPtr)
+static void sub_80AB5D4(struct GroundLive *livesPtr)
 {
     struct GroundLivesMeta_Sub1 *metaPtr = &gGroundLivesMeta->unk0[livesPtr->unk13C];
 
@@ -3059,7 +3052,7 @@ void sub_80AB5D4(struct GroundLive *livesPtr)
     }
 }
 
-s32 sub_80ABA00(s32 a0)
+static s32 sub_80ABA00(s32 a0)
 {
     s32 i;
     s32 ret = 0;

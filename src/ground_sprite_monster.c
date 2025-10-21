@@ -1,5 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
+#include "ground_sprite_monster.h"
 #include "def_filearchives.h"
 #include "file_system.h"
 #include "ground_sprite.h"
