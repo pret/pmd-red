@@ -1365,10 +1365,9 @@ u16 sub_80A5984(s32 param_1, PixelPos *param_2)
     return sub_80A4720(gGroundMapDungeon_3001B70, param_1, param_2);
 }
 
-void sub_80A59A0(s32 param_1, PixelPos *param_2, u32 param_3)
+void sub_80A59A0(s32 param_1, PixelPos *param_2, u16 param_3)
 {
-    u32 param_3_u32 = (u16)param_3;
-    sub_80A4740(gGroundMapDungeon_3001B70, param_1, param_2, param_3_u32);
+    sub_80A4740(gGroundMapDungeon_3001B70, param_1, param_2, param_3);
 }
 
 void GroundMap_Action(void)

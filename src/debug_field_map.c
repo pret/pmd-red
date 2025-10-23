@@ -21,7 +21,6 @@
 
 extern void sub_8012A18(s32 unused);
 extern void sub_80999E8(s32 a0);
-extern void sub_80A59DC(void);
 extern PixelPos SetVecFromDirectionSpeed(s8 r1, u32 r2);
 
 UNUSED static void DebugMapViewer(void)

@@ -52,12 +52,8 @@ EWRAM_INIT u8 gUnknown_203B49D = {0};
 
 extern void sub_809B57C();
 extern void sub_809D25C();
-extern void sub_80A59DC();
-extern void sub_809B614();
 extern void sub_809CA20();
 extern void sub_80A6E80();
-extern void sub_8099BE4();
-extern void sub_809B638();
 extern void nullsub_106();
 extern void sub_80A73EC();
 
@@ -75,13 +71,11 @@ extern bool8 sub_8099B94(void);
 extern void sub_8099768(void);
 extern void sub_809975C(void);
 extern void sub_809B474(void);
-extern void sub_80A59DC(void);
 extern void sub_809B614(void);
 extern void sub_8099BE4(void);
 extern void sub_8099744(void);
 extern void WaitForNextFrameAndAdvanceRNG(void);
 extern void LoadBufferedInputs(void);
-extern void sub_80A5E70(void);
 extern void sub_809B638(void);
 extern void sub_8099750(void);
 extern void nullsub_16(void);

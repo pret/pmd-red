@@ -29,8 +29,11 @@ bool8 sub_80A579C(PixelPos *pos1, PixelPos *pos2);
 bool8 CheckMapCollision_80A585C(PixelPos *pixPos1, PixelPos *boundary);
 bool8 sub_80A58C8(PixelPos *pixPos1, PixelPos *boundary);
 u8 sub_80A5934(u8 param_1, PixelPos *param_2, PixelPos *param_3);
-
+u8 sub_80A595C(u8 param_1, PixelPos *param_2, PixelPos *param_3);
+u16 sub_80A5984(s32 param_1, PixelPos *param_2);
+void sub_80A59A0(s32 param_1, PixelPos *param_2, u16 param_3);
 void GroundMap_Action(void);
+void sub_80A59DC(void);
 void sub_80A5E70(void);
 
 #endif // GUARD_GROUND_MAP_H

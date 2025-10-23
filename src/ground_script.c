@@ -92,8 +92,6 @@ void sub_8096488(void);
 bool8 sub_80964B4(void);
 bool8 sub_8097640();
 u8 sub_80964E4();
-s32 sub_80A5984();
-void sub_80A59A0(s32, s32 *, u16);
 
 // For gScriptLocks, gScriptLockConds, gUnlockBranchLabels
 #define SCRIPT_LOCKS_ARR_COUNT 129
@@ -3683,10 +3681,9 @@ static s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
             }
             return 0;
         case 0x3D: {
-            s32 sp_338[2];
-            sp_338[0] = r2;
-            sp_338[1] = r3;
-            sub_80A59A0(0, sp_338, sub_80A5984(1, sp_338));
+            PixelPos sp_338 = {r2, r3};
+
+            sub_80A59A0(0, &sp_338, sub_80A5984(1, &sp_338));
             return 0;
         }
         case 0x3E:
