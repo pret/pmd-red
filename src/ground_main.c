@@ -15,7 +15,6 @@
 #include "debug.h"
 #include "event_flag.h"
 #include "ground_map.h"
-#include "ground_map_1.h"
 #include "play_time.h"
 #include "pokemon.h"
 #include "text_util.h"

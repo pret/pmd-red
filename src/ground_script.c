@@ -23,7 +23,6 @@
 #include "ground_lives.h"
 #include "ground_main.h"
 #include "ground_map.h"
-#include "ground_map_1.h"
 #include "ground_script.h"
 #include "ground_sprite.h"
 #include "input.h"
@@ -53,12 +52,12 @@
 #include "ground_event.h"
 #include "ground_effect.h"
 #include "ground_object.h"
+#include "ground_weather.h"
 #include "code_809D148.h"
 
 void GroundMap_Select(s16);
 void GroundMap_SelectDungeon(s32, DungeonLocation*, u32);
 void GroundMap_GetStationScript(ScriptInfoSmall *out, s16, s32, s32);
-void GroundWeather_Select(s16);
 
 // Beware of the declarations without specified arguments, returning u32 or s32, these were quickly hacked in to get the code to compile and link
 // The return values are almost certainly NOT correct and will need to be rechecked when moving to header files

@@ -18,5 +18,6 @@ void GroundMap_ExecuteStation(s32 _map, s32 _group, s32 _sector, bool32 _setScri
 bool8 GroundMapNotifyAll(s16);
 bool8 sub_80A4D48(s16 index);
 void GroundMap_Action(void);
+void sub_80A5E70(void);
 
 #endif // GUARD_GROUND_MAP_H

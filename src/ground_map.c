@@ -4,9 +4,9 @@
 #include "ground_bg.h"
 #include "ground_main.h"
 #include "ground_map.h"
-#include "ground_map_1.h"
 #include "ground_script.h"
 #include "ground_script_file.h"
+#include "ground_weather.h"
 #include "memory.h"
 #include "ground_map_conversion_table.h"
 #include "code_800558C.h"
@@ -56,6 +56,7 @@ extern u8 sub_80A4660(GroundBg *, u32, s32, s32);
 
 void GroundMap_SelectDungeon(s32 mapId, const DungeonLocation *loc, u32 param_2);
 void sub_80A56D8(const PixelPos*);
+extern void sub_80A62D0(void);
 
 void AllocGroundMapAction(void)
 {
@@ -1217,7 +1218,7 @@ void sub_80A59A0(s32 param_1, PixelPos *param_2, u32 param_3)
 void GroundMap_Action(void)
 {
     nullsub_123();
-    HandleAction((Action *)gGroundMapAction, &gUnknown_8117770);
+    HandleAction(&gGroundMapAction->action, &gUnknown_8117770);
 }
 
 void sub_80A59DC(void)
@@ -1231,9 +1232,9 @@ void sub_80A59DC(void)
         }
 
         switch (gGroundMapAction->groundMapId) {
-            case 0xA2:
-            case 0xA3:
-            case 0xDF: {
+            case MAP_PERSONALITY_TEST_CYAN:
+            case MAP_PERSONALITY_TEST_PURPLE:
+            case MAP_PERSONALITY_TEST_MULTICOLOR: {
                 PixelPos pixPos2;
 
                 gGroundMapAction->unkF4 += 2;
@@ -1249,8 +1250,8 @@ void sub_80A59DC(void)
                 SetCameraPositionForLayer(gGroundMapDungeon_3001B70, 1, &pixPos2);
                 break;
             }
-            case 0xA8:
-            case 0xAA: {
+            case MAP_FUGITIVES_SNOW_ROAD:
+            case MAP_FUGITIVES_BLIZZARD_ROAD: {
                 PixelPos pixPos2;
 
                 gGroundMapAction->unkF0 += gGroundMapAction->unkE8.x;
@@ -1262,7 +1263,7 @@ void sub_80A59DC(void)
                 SetCameraPositionForLayer(gGroundMapDungeon_3001B70, 0, &pixPos2);
                 break;
             }
-            case 0xAE: {
+            case MAP_NIGHTMARE: {
                 PixelPos pixPos2;
 
                 gGroundMapAction->unkF0 += gGroundMapAction->unkE8.x;
@@ -1275,14 +1276,14 @@ void sub_80A59DC(void)
                 SetCameraPositionForLayer(gGroundMapDungeon_3001B70, 1, &pixPos2);
                 break;
             }
-            case 0xAB: {
+            case MAP_SUMMIT_SUNSET: {
                 PixelPos pixPos2 = pixPos;
 
                 sub_80A4580(gGroundMapDungeon_3001B70, 0, &pixPos2);
                 SetCameraPositionForLayer(gGroundMapDungeon_3001B70, 0, &pixPos2);
                 break;
             }
-            case 0xAF: {
+            case MAP_NIGHT_SKY_1: {
                 PixelPos pixPos2;
 
                 SetCameraPositionForLayer(gGroundMapDungeon_3001B70, 0, &pixPos);
@@ -1298,7 +1299,7 @@ void sub_80A59DC(void)
                 SetCameraPositionForLayer(gGroundMapDungeon_3001B70, 1, &pixPos2);
                 break;
             }
-            case 0xB0: {
+            case MAP_NIGHT_SKY_2: {
                 PixelPos pixPos2;
 
                 gGroundMapAction->unkF0 += gGroundMapAction->unkE8.x;
@@ -1313,7 +1314,7 @@ void sub_80A59DC(void)
                 SetCameraPositionForLayer(gGroundMapDungeon_3001B70, 0, &pixPos2);
                 break;
             }
-            case 0xBA: {
+            case MAP_SILENT_CHASM_ENTRY: {
                 PixelPos pixPos2;
 
                 SetCameraPositionForLayer(gGroundMapDungeon_3001B70, 1, &pixPos);
@@ -1326,7 +1327,7 @@ void sub_80A59DC(void)
                 SetCameraPositionForLayer(gGroundMapDungeon_3001B70, 0, &pixPos2);
                 break;
             }
-            case 4: {
+            case MAP_PELIPPER_POST_OFFICE: {
                 PixelPos pixPos2;
 
                 SetCameraPositionForLayer(gGroundMapDungeon_3001B70, 0, &pixPos);
@@ -1339,7 +1340,7 @@ void sub_80A59DC(void)
                 SetCameraPositionForLayer(gGroundMapDungeon_3001B70, 1, &pixPos2);
                 break;
             }
-            case 0xE0: {
+            case MAP_TITLE_SCREEN: {
                 PixelPos pixPos2;
 
                 SetCameraPositionForLayer(gGroundMapDungeon_3001B70, 0, &pixPos);
@@ -1351,7 +1352,7 @@ void sub_80A59DC(void)
                 SetCameraPositionForLayer(gGroundMapDungeon_3001B70, 1, &pixPos2);
                 break;
             }
-            case 0xA1: {
+            case MAP_FRIEND_AREA_FINAL_ISLAND: {
                 PixelPos pixPos2;
 
                 SetCameraPositionForLayer(gGroundMapDungeon_3001B70, 0, &pixPos);
@@ -1370,3 +1371,10 @@ void sub_80A59DC(void)
     sub_80A60D8();
 }
 
+void sub_80A5E70(void)
+{
+    if (gGroundMapDungeon_3001B70 != NULL)
+        sub_80A49E8(gGroundMapDungeon_3001B70);
+
+    sub_80A62D0();
+}
