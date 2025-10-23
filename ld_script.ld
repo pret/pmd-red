@@ -735,6 +735,7 @@ SECTIONS {
         src/ground_place.o(.rodata);
         src/ground_bg.o(.rodata);
         data/data_8115F5C_2_1.o(.rodata);
+        src/ground_map.o(.rodata);
         src/ground_weather.o(.rodata);
         src/ground_sprite.o(.rodata);
         src/ground_sprite_data.o(.rodata);

@@ -28,27 +28,6 @@ struct MapToDungeonStruct
 };
 
 extern const struct MapToDungeonStruct gUnknown_81173C0[];
-
-extern const DebugLocation gUnknown_8117538[];
-extern const DebugLocation gUnknown_8117560;
-extern const u8 gUnknown_811756C[];
-extern const u8 gUnknown_8117594[];
-extern const DebugLocation gUnknown_81175E0;
-extern const u8 gUnknown_81175EC[];
-extern const DebugLocation gUnknown_8117644;
-extern const u8 gUnknown_8117650[];
-extern const DebugLocation gUnknown_8117698;
-extern const u8 gUnknown_81176A4[];
-extern const DebugLocation gUnknown_81176D0;
-extern const u8 gUnknown_81176DC[];
-extern const PixelPos gUnknown_81176F8;
-extern const u8 gUnknown_8117700[];
-extern const DebugLocation gUnknown_8117734;
-extern const u8 gUnknown_8117740[];
-extern const PixelPos gUnknown_8117754;
-extern const DebugLocation gUnknown_8117770;
-
-
 extern const CallbackData gGroundScriptNullCallbacks;
 
 extern u8 sub_80A46C0(GroundBg *, u32, s32, s32);
@@ -79,7 +58,7 @@ void GroundMap_Reset(void)
 {
     ClearScriptVarArray(NULL, MAP_LOCAL);
     ClearScriptVarArray(NULL, MAP_LOCAL_DOOR);
-    ActionResetScriptData((Action *)gGroundMapAction, gUnknown_8117538);
+    ActionResetScriptData(&gGroundMapAction->action, DEBUG_LOC_PTR("../ground/ground_map.c", 0xF8, "GroundMap_Reset"));
 
     if (gGroundMapDungeon_3001B70 != NULL) {
         GroundBg_FreeAll(gGroundMapDungeon_3001B70);
@@ -113,8 +92,8 @@ void GroundMap_GetStationScript(ScriptInfoSmall *r0, s32 _groundScriptId, s32 _g
     s32 sectorId = (s8) _sectorId;
 
     ChangeScriptFile(groundScriptId);
-    scriptHeader = GetGroundScript(groundScriptId, &gUnknown_8117560);
-    Log(0, gUnknown_811756C, groundScriptId, groupId, sectorId);
+    scriptHeader = GetGroundScript(groundScriptId, DEBUG_LOC_PTR("../ground/ground_map.c", 0x138, "GroundMap_GetStationScript"));
+    Log(0, "GroundMap ExecuteStation %3d %3d %3d", groundScriptId, groupId, sectorId);
     {
         const struct GroundScriptGroup *groups = &scriptHeader->groups[groupId];
         const struct GroundScriptSector *sectors = &groups->sectors[sectorId];
@@ -141,12 +120,12 @@ void GroundMap_ExecuteEvent(s16 scriptIndex, u32 param_2)
     index_s32 = scriptIndex;
     iVar2 = param_2;
 
-    Log(0, gUnknown_8117594, index_s32, iVar2); // "GroundMap ExecuteEvent %3d %d
+    Log(0, "GroundMap ExecuteEvent %3d %d ==================", index_s32, iVar2);
     GetFunctionScript(NULL, &script, index_s32);
     if (iVar2 != 0)
         script.state = 5;
 
-    GroundScript_ExecutePP(&gGroundMapAction->action, 0, &script, &gUnknown_81175E0);
+    GroundScript_ExecutePP(&gGroundMapAction->action, 0, &script, DEBUG_LOC_PTR("../ground/ground_map.c", 0x17D, "GroundMap_ExecuteEvent"));
 }
 
 void GroundMap_ExecuteStation(s32 _map, s32 _group, s32 _sector, bool32 _setScriptState)
@@ -162,12 +141,12 @@ void GroundMap_ExecuteStation(s32 _map, s32 _group, s32 _sector, bool32 _setScri
     sector = (s8)_sector;
     setScriptState = (bool8)_setScriptState;
 
-    Log(0, gUnknown_81175EC, map, group, sector, setScriptState); // GroundMap ExecuteStation %3d %3d %3d %d
+    Log(0, "GroundMap ExecuteStation %3d %3d %3d %d ==================", map, group, sector, setScriptState);
     GroundMap_GetStationScript(&script, map, group, sector);
     if (setScriptState != 0)
         script.state = 5;
 
-    GroundScript_ExecutePP(&gGroundMapAction->action, 0, &script, &gUnknown_8117644);
+    GroundScript_ExecutePP(&gGroundMapAction->action, 0, &script, DEBUG_LOC_PTR("../ground/ground_map.c", 0x199, "GroundMap_ExecuteStation"));
 }
 
 void GroundMap_ExecuteEnter(s16 param_1)
@@ -177,12 +156,12 @@ void GroundMap_ExecuteEnter(s16 param_1)
 
     iVar1 = param_1;
 
-    Log(0, gUnknown_8117650, iVar1); // GroundMap ExecuteEnter %3d
+    Log(0, "GroundMap ExecuteEnter %3d ==================", iVar1);
     GroundMap_GetFirstStationScript(&script, iVar1);
     script.state = 2;
     script.group = 0;
     script.sector = 0;
-    GroundScript_ExecutePP(&gGroundMapAction->action, 0, &script, &gUnknown_8117698);
+    GroundScript_ExecutePP(&gGroundMapAction->action, 0, &script, DEBUG_LOC_PTR("../ground/ground_map.c", 0x1B3, "GroundMap_ExecuteEnter"));
 }
 
 UNUSED static bool8 sub_80A4D14(void)
@@ -228,7 +207,7 @@ void GroundMap_Select(s32 mapId_)
     const GroundConversionStruct *ptr;
     s32 mapId = (s16) mapId_;
 
-    Log(0, gUnknown_81176A4,mapId);
+    Log(0, "GroundMap Select %3d", mapId);
     ClearScriptVarArray(NULL, MAP_LOCAL);
     ClearScriptVarArray(NULL, MAP_LOCAL_DOOR);
     sub_80A5EDC(0);
@@ -265,7 +244,7 @@ void GroundMap_Select(s32 mapId_)
             return;
         }
         case -1:
-            FatalError(&gUnknown_81176D0,gUnknown_81176DC,mapId,ptr->unk0);
+            FatalError(DEBUG_LOC_PTR("../ground/ground_map.c", 0x249, "GroundMap_Select"),"select map type error %d %d",mapId,ptr->unk0);
             break;
         default:
             GroundBg_Init(gGroundMapDungeon_3001B70, &gUnknown_8117324);
@@ -332,7 +311,7 @@ void GroundMap_Select(s32 mapId_)
         GroundWeather_Select(ptr->unk6);
     }
 
-    sub_80A56D8(&gUnknown_81176F8);
+    sub_80A56D8(&(const PixelPos) {0});
 }
 
 void GroundMap_SelectDungeon(s32 mapId_, const DungeonLocation *loc, u32 param_2)
@@ -340,7 +319,7 @@ void GroundMap_SelectDungeon(s32 mapId_, const DungeonLocation *loc, u32 param_2
     const GroundConversionStruct *ptr;
     s32 mapId = (s16) mapId_;
 
-    Log('\0', gUnknown_8117700, mapId);
+    Log('\0', "GroundMap SelectDungeon %3d", mapId);
     ClearScriptVarArray(NULL, MAP_LOCAL);
     ClearScriptVarArray(NULL, MAP_LOCAL_DOOR);
     sub_80A5EDC('\0');
@@ -359,7 +338,7 @@ void GroundMap_SelectDungeon(s32 mapId_, const DungeonLocation *loc, u32 param_2
 
     ptr = &gGroundMapConversionTable[mapId];
     if (ptr->unk0 != 0xA && ptr->unk0 != 0xB) {
-        FatalError(&gUnknown_8117734, gUnknown_8117740, mapId);
+        FatalError(DEBUG_LOC_PTR("../ground/ground_map.c", 0x2C6, "GroundMap_SelectDungeon"), "map type error %d", mapId);
     }
 
     GroundBg_Init(gGroundMapDungeon_3001B70, &gUnknown_8117354);
@@ -373,7 +352,7 @@ void GroundMap_SelectDungeon(s32 mapId_, const DungeonLocation *loc, u32 param_2
     gGroundMapAction->unkF8.y = 0;
     gGroundMapAction->unk100 = gGroundMapAction->unk104 = gGroundMapAction->unk108 = gGroundMapAction->unk10C = 0;
 
-    sub_80A56D8(&gUnknown_8117754);
+    sub_80A56D8(&(const PixelPos) {0, 0});
 }
 
 NAKED
@@ -1218,7 +1197,7 @@ void sub_80A59A0(s32 param_1, PixelPos *param_2, u32 param_3)
 void GroundMap_Action(void)
 {
     nullsub_123();
-    HandleAction(&gGroundMapAction->action, &gUnknown_8117770);
+    HandleAction(&gGroundMapAction->action, DEBUG_LOC_PTR("../ground/ground_map.c", 0x57F, "GroundMap_Action"));
 }
 
 void sub_80A59DC(void)
