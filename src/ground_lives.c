@@ -20,6 +20,7 @@
 #include "ground_sprite_monster.h"
 #include "ground_object.h"
 #include "ground_map.h"
+#include "textbox.h"
 #include "code_809D148.h"
 
 struct GroundLivesMeta_Sub1
@@ -109,7 +110,6 @@ extern s32 sub_8002984(s32 _direction1, u32 caseID);
 extern bool8 sub_80A66F8(struct UnkGroundSpriteStruct *ptr);
 extern bool8 sub_80A671C(struct UnkGroundSpriteStruct *ptr);
 extern PixelPos SetVecFromDirectionSpeed(s32 r1, u32 r2);
-extern bool8 sub_809B1C0(s32 a0, u32 kind, Pokemon *a2);
 extern Pokemon *sub_80A8D54(s32);
 extern const struct GroundScriptHeader *GetGroundScript(s16 a0, const DebugLocation *);
 

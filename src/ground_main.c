@@ -50,7 +50,6 @@ EWRAM_DATA u8 gUnknown_2039950 = 0;
 EWRAM_INIT bool8 gUnknown_203B49C = {0};
 EWRAM_INIT u8 gUnknown_203B49D = {0};
 
-extern void sub_809B57C();
 extern void sub_809D25C();
 extern void sub_809CA20();
 extern void sub_80A6E80();
@@ -64,19 +63,15 @@ extern u16 gUnknown_2026E4E;
 
 // TODO: Move these externs to headers
 extern s16 sub_80A2654(s16 r0);
-extern bool8 sub_809AFAC(void);
 extern bool8 sub_80048BC(void);
 extern u8 sub_80023E4(u32);
 extern bool8 sub_8099B94(void);
 extern void sub_8099768(void);
 extern void sub_809975C(void);
-extern void sub_809B474(void);
-extern void sub_809B614(void);
 extern void sub_8099BE4(void);
 extern void sub_8099744(void);
 extern void WaitForNextFrameAndAdvanceRNG(void);
 extern void LoadBufferedInputs(void);
-extern void sub_809B638(void);
 extern void sub_8099750(void);
 extern void nullsub_16(void);
 extern void UpdateAdventureAchievements(void);

@@ -7,10 +7,10 @@
 #include "ground_main.h"
 #include "ground_script.h"
 #include "ground_map.h"
+#include "textbox.h"
 
 extern void nullsub_104(void);
 extern void sub_809C6CC(u16 param_1);
-extern bool8 sub_809B260(s32 *a0);
 
 void nullsub_117(void)
 {

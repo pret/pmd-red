@@ -59,32 +59,12 @@
 // The return values are almost certainly NOT correct and will need to be rechecked when moving to header files
 char sub_8002984(s32, u8);
 bool8 sub_802FCF0(void);
-
-
 void sub_809733C(s16, bool8);
 void sub_80973A8(s16, bool8);
 void sub_80975A8(s16, bool8);
-u32 sub_809A6E4();
-u32 sub_809A6F8();
-u32 sub_809A768();
-void sub_809AFC8(bool8, s32, s32, const char*);
-u32 sub_809B028(const MenuItem *, s32 a1_, s32 a2, s32 a3, s32 a4_, const char *text);
-bool8 sub_809B1C0(s32, s32, char[12]);
-void sub_809B1D4(u8, s32, s32, const char*);
 void GroundScriptLockJumpZero(s16);
 bool8 sub_8099B94(void);
 PixelPos SetVecFromDirectionSpeed(s8, s32);
-
-
-bool8 sub_809B260(void *dst);
-bool8 sub_809B18C(s32 *sp);
-bool8 sub_809AFFC(u8 *);
-
-extern u8 IsTextboxOpen_809A750(void);
-extern void sub_809AB4C(s32, s32);
-extern void sub_809ABB4(s32, s32);
-extern void sub_809AC18(s32, s32);
-
 bool8 sub_80961D8(void);
 void ResetMailbox(void);
 void sub_80963FC(void);
@@ -1372,7 +1352,7 @@ static s32 ExecuteScriptCommand(Action *action)
             }
             case 0x04: {
                 if (curCmd.arg1 == -1) {
-                    if (!(u8)sub_802FCF0() && (u8)sub_809B1C0(12,0,0)) {
+                    if (!(u8)sub_802FCF0() && sub_809B1C0(12,0,NULL)) {
                         sub_80A87AC(0, 11);
                         action->scriptData.branchDiscriminant = 0;
                     } else {
@@ -1388,7 +1368,7 @@ static s32 ExecuteScriptCommand(Action *action)
             }
             case 0x06: {
                 if (curCmd.arg1 == -1) {
-                    if ((s8)sub_809B1C0(36, 0, 0)) {
+                    if (sub_809B1C0(36, 0, NULL)) {
                         sub_80A87AC(0, 11);
                         action->scriptData.branchDiscriminant = 0;
                         return 2;
@@ -1769,7 +1749,7 @@ static s32 ExecuteScriptCommand(Action *action)
                 break;
             }
             case 0x2c: {
-                if (!(s8)sub_809A768()) break;
+                if (!sub_809A768()) break;
                 sub_80A87AC(0, 10);
                 if (GroundScriptCheckLockCondition(action, 0)) return 2;
                 break;
@@ -1900,7 +1880,7 @@ static s32 ExecuteScriptCommand(Action *action)
                 break;
             }
             case 0x3c: {
-                sub_809B1D4(curCmd.argByte, curCmd.arg1, curCmd.arg2, curCmd.argPtr);
+                sub_809B1D4(curCmd.argByte, curCmd.arg1, curCmd.arg2, (void *) curCmd.argPtr);
                 sub_80A87AC(0, 11);
                 return 2;
             }

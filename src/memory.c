@@ -130,10 +130,10 @@ UNUSED static void MemoryFill32(u32 *dest, u32 value, s32 size)
 #endif
 
 // arm9.bin::02010BB4
-void MemoryCopy8(void *dest, void *src, s32 size)
+void MemoryCopy8(void *dest, const void *src, s32 size)
 {
     u8 *dCur = dest;
-    u8 *sCur = src;
+    const u8 *sCur = src;
 
     while (size > 0) {
         size -= 1;
@@ -141,7 +141,7 @@ void MemoryCopy8(void *dest, void *src, s32 size)
     }
 }
 
-UNUSED static void MemoryCopy16(u16 *dest, u16 *src, s32 size)
+UNUSED static void MemoryCopy16(u16 *dest, const u16 *src, s32 size)
 {
     while (size > 0) {
         size -= 2;
