@@ -1,10 +1,10 @@
 #include "global.h"
 #include "globaldata.h"
+#include "ground_map.h"
 #include "debug.h"
 #include "event_flag.h"
 #include "ground_bg.h"
 #include "ground_main.h"
-#include "ground_map.h"
 #include "ground_script.h"
 #include "ground_script_file.h"
 #include "ground_weather.h"
@@ -15,16 +15,11 @@
 #include "constants/ground_map.h"
 #include "code_809D148.h"
 
-extern u8 sub_80A46C0(GroundBg *, u32, s32, s32);
-extern u8 sub_80A4660(GroundBg *, u32, s32, s32);
-
-void GroundMap_SelectDungeon(s32 mapId, const DungeonLocation *loc, u32 param_2);
-void sub_80A56D8(const PixelPos*);
-
 IWRAM_INIT GroundMapAction *gGroundMapAction = {NULL};
 IWRAM_INIT GroundBg *gGroundMapDungeon_3001B70 = {NULL};
 
 static void sub_80A5204(void *, const void *, BmaHeader *, s32);
+static void sub_80A56D8(const PixelPos *pos);
 
 static const SubStruct_52C gUnknown_8117324 = {
     .unk0 = 0,
@@ -1218,7 +1213,7 @@ void sub_80A56C0(PixelPos *pos)
     GetCameraPositionForLayer(gGroundMapDungeon_3001B70, 0, pos);
 }
 
-void sub_80A56D8(const PixelPos *pos)
+static void sub_80A56D8(const PixelPos *pos)
 {
     SetCameraPositionForLayer(gGroundMapDungeon_3001B70, 0, pos);
 }
@@ -1307,7 +1302,7 @@ bool8 sub_80A579C(PixelPos *pos1, PixelPos *pos2)
     return FALSE;
 }
 
-bool8 CheckMapCollision_80A585C(PixelPos *pixPos1,PixelPos *boundary)
+bool8 CheckMapCollision_80A585C(PixelPos *pixPos1, PixelPos *boundary)
 {
     u8 *currPtr;
     int i, j;
@@ -1331,7 +1326,7 @@ bool8 CheckMapCollision_80A585C(PixelPos *pixPos1,PixelPos *boundary)
     return FALSE;
 }
 
-bool8 sub_80A58C8(PixelPos *pixPos1,PixelPos *boundary)
+bool8 sub_80A58C8(PixelPos *pixPos1, PixelPos *boundary)
 {
     u8 *currPtr;
     int i, j;
@@ -1355,16 +1350,14 @@ bool8 sub_80A58C8(PixelPos *pixPos1,PixelPos *boundary)
     return FALSE;
 }
 
-u8 sub_80A5934(s32 param_1, s32 param_2, s32 param_3)
+u8 sub_80A5934(u8 param_1, PixelPos *param_2, PixelPos *param_3)
 {
-    u32 param_1_u32 = (u8)param_1;
-    return sub_80A4660(gGroundMapDungeon_3001B70, param_1_u32, param_2, param_3);
+    return sub_80A4660(gGroundMapDungeon_3001B70, param_1, param_2, param_3);
 }
 
-u8 sub_80A595C(s32 param_1, s32 param_2, s32 param_3)
+u8 sub_80A595C(u8 param_1, PixelPos *param_2, PixelPos *param_3)
 {
-    u32 param_1_u32 = (u8)param_1;
-    return sub_80A46C0(gGroundMapDungeon_3001B70, param_1_u32, param_2, param_3);
+    return sub_80A46C0(gGroundMapDungeon_3001B70, param_1, param_2, param_3);
 }
 
 u16 sub_80A5984(s32 param_1, PixelPos *param_2)

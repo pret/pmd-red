@@ -19,6 +19,7 @@
 #include "ground_lives_helper.h"
 #include "ground_sprite_monster.h"
 #include "ground_object.h"
+#include "ground_map.h"
 #include "code_809D148.h"
 
 struct GroundLivesMeta_Sub1
@@ -110,11 +111,8 @@ extern bool8 sub_80A671C(struct UnkGroundSpriteStruct *ptr);
 extern bool8 sub_80A595C(u32 a0, PixelPos *pixelPosArg1, PixelPos *pixelPosArg2);
 extern PixelPos SetVecFromDirectionSpeed(s32 r1, u32 r2);
 extern u8 sub_80A5934(s32 param_1, PixelPos *, PixelPos *);
-extern bool8 CheckMapCollision_80A585C(PixelPos *, PixelPos *);
-extern bool8 sub_80A58C8(PixelPos *, PixelPos *);
 extern bool8 sub_809B1C0(s32 a0, u32 kind, Pokemon *a2);
 extern Pokemon *sub_80A8D54(s32);
-extern bool8 GetCurrentDungeonBounds(PixelPos *a0, PixelPos *a1);
 extern const struct GroundScriptHeader *GetGroundScript(s16 a0, const DebugLocation *);
 
 static s32 sub_80A7B94(s16 *a0);

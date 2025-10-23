@@ -4,6 +4,7 @@
 #include "data_script.h"
 #include "ground_script.h"
 #include "ground_sprite.h"
+#include "ground_map.h"
 #include "debug.h"
 #include "memory.h"
 
@@ -49,7 +50,6 @@ struct GroundEffectTypeData
 extern struct GroundEffectTypeData gGroundEffectTypes[];
 
 const struct GroundScriptHeader *GetGroundScript(s16 a0, DebugLocation *);
-bool8 GetCurrentDungeonBounds(PixelPos *, PixelPos *);
 void sub_80A7688(struct UnkGroundSpriteStruct *ptr, s32 unused, s32 a2_, s32 a3);
 void sub_80A7714(struct UnkGroundSpriteStruct *);
 extern bool8 sub_80A66F8(struct UnkGroundSpriteStruct *ptr);

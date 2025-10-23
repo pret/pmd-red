@@ -93,8 +93,6 @@ extern void UpdateFadeInTile(s32);
 extern void sub_8001D88(void);
 extern void sub_80999D4(s32);
 extern void sub_8005838(s32, s32);
-extern void sub_80A4B38(void);
-extern void sub_80A4B54(void);
 
 static s16 sub_8098FCC(u32 unused);
 

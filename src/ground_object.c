@@ -8,6 +8,7 @@
 #include "ground_script.h"
 #include "ground_sprite.h"
 #include "ground_lives.h"
+#include "ground_map.h"
 #include "memory.h"
 
 typedef struct GroundObject {
@@ -54,10 +55,8 @@ const struct GroundScriptHeader *GetGroundScript(s16 a0, DebugLocation *);
 void sub_80A7658(struct UnkGroundSpriteStruct *);
 extern bool8 sub_80A66F8(struct UnkGroundSpriteStruct *ptr);
 extern bool8 sub_80A671C(struct UnkGroundSpriteStruct *ptr);
-extern bool8 CheckMapCollision_80A585C(PixelPos *, PixelPos *);
 extern void sub_80A7664(struct UnkGroundSpriteStruct *ptr, PixelPos *pixelPos, s32 a2);
 
-extern bool8 GetCurrentDungeonBounds(PixelPos *a0, PixelPos *a1);
 void sub_80A75CC(void *, s32, s32, s32);
 
 static void GroundObject_Delete(s32 index_);
@@ -107,6 +106,7 @@ static const CallbackData gGroundObjectCallbacks = {
 };
 const u8 gGroundObjectFileName[];
 #define FAKE_FILENAME gGroundObjectFileName
+
 
 
 

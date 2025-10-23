@@ -55,10 +55,6 @@
 #include "ground_weather.h"
 #include "code_809D148.h"
 
-void GroundMap_Select(s16);
-void GroundMap_SelectDungeon(s32, DungeonLocation*, u32);
-void GroundMap_GetStationScript(ScriptInfoSmall *out, s16, s32, s32);
-
 // Beware of the declarations without specified arguments, returning u32 or s32, these were quickly hacked in to get the code to compile and link
 // The return values are almost certainly NOT correct and will need to be rechecked when moving to header files
 char sub_8002984(s32, u8);
@@ -96,12 +92,8 @@ void sub_8096488(void);
 bool8 sub_80964B4(void);
 bool8 sub_8097640();
 u8 sub_80964E4();
-void sub_80A56A0(s32, s32);
-void sub_80A56F0(PixelPos *);
-void sub_80A5704(PixelPos *);
 s32 sub_80A5984();
 void sub_80A59A0(s32, s32 *, u16);
-extern bool8 sub_80A579C(PixelPos *a0, PixelPos *a1);
 
 // For gScriptLocks, gScriptLockConds, gUnlockBranchLabels
 #define SCRIPT_LOCKS_ARR_COUNT 129

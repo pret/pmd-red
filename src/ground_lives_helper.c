@@ -6,11 +6,11 @@
 #include "game_options.h"
 #include "ground_main.h"
 #include "ground_script.h"
+#include "ground_map.h"
 
 extern void nullsub_104(void);
 extern void sub_809C6CC(u16 param_1);
 extern bool8 sub_809B260(s32 *a0);
-extern void GroundMap_ExecuteEvent(s32, s32);
 
 void nullsub_117(void)
 {

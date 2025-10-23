@@ -23,6 +23,7 @@
 #include "flash.h"
 #include "friend_list_menu.h"
 #include "ground_lives.h"
+#include "ground_map.h"
 #include "ground_main.h"
 #include "ground_script.h"
 #include "gulpin_shop_801FB50.h"
@@ -124,7 +125,6 @@ void sub_8096BD0(void);
 bool8 DrawCredits(s32 creditsCategoryIndex, s32);
 u32 sub_8035574();
 void sub_803565C(void);
-void GroundMap_ExecuteEvent(s16, u32);
 bool8 sub_8015080(u8 *buffer, const MenuItem *menuItems);
 s32 sub_801516C();
 void sub_80151A4();

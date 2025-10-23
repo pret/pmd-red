@@ -10,6 +10,7 @@
 #include "ground_lives.h"
 #include "ground_effect.h"
 #include "ground_object.h"
+#include "ground_map.h"
 
 struct unkStruct_20399E8
 {
@@ -183,9 +184,6 @@ u8 sub_809D248(PixelPos *r0)
     *r0 = sUnknown_20399E8.unk3C;
     return sUnknown_20399E8.unk44;
 }
-
-// Todo: move these to appropriate header files
-extern bool8 sub_80A579C(PixelPos *a0, PixelPos *a1);
 
 void sub_809D25C(void)
 {
