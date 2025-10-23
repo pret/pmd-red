@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "debug.h"
 #include "event_flag.h"
 #include "ground_bg.h"
@@ -11,14 +12,63 @@
 #include "ground_map_conversion_table.h"
 #include "code_800558C.h"
 #include "constants/dungeon.h"
+#include "constants/ground_map.h"
 #include "code_809D148.h"
+
+extern u8 sub_80A46C0(GroundBg *, u32, s32, s32);
+extern u8 sub_80A4660(GroundBg *, u32, s32, s32);
+
+void GroundMap_SelectDungeon(s32 mapId, const DungeonLocation *loc, u32 param_2);
+void sub_80A56D8(const PixelPos*);
 
 IWRAM_INIT GroundMapAction *gGroundMapAction = {NULL};
 IWRAM_INIT GroundBg *gGroundMapDungeon_3001B70 = {NULL};
 
-extern const SubStruct_52C gUnknown_8117324;
-extern const SubStruct_52C gUnknown_811733C;
-extern const SubStruct_52C gUnknown_8117354;
+static void sub_80A5204(void *, const void *, BmaHeader *, s32);
+
+static const SubStruct_52C gUnknown_8117324 = {
+    .unk0 = 0,
+    .unk2 = 13,
+    .unk4 = 0,
+    .unk6 = 0x380,
+    .unk8 = 0x4B0,
+    .unkA = 1,
+    .numLayers = 1,
+    .unkE = 0xbc,
+    .unk10 = 0x5e,
+    .unk12 = 0,
+    .unk14 = sub_80A5204,
+};
+
+static const SubStruct_52C gUnknown_811733C = {
+    .unk0 = 0,
+    .unk2 = 14,
+    .unk4 = 0,
+    .unk6 = 0x400,
+    .unk8 = 0x4B0,
+    .unkA = 0,
+    .numLayers = 2,
+    .unkE = 0xbc,
+    .unk10 = 0x5e,
+    .unk12 = 0,
+    .unk14 = sub_80A5204,
+};
+
+static const SubStruct_52C gUnknown_8117354 = {
+    .unk0 = 0,
+    .unk2 = 12,
+    .unk4 = 0,
+    .unk6 = 0x200,
+    .unk8 = 0x4B0,
+    .unkA = 1,
+    .numLayers = 1,
+    .unkE = 0xbc,
+    .unk10 = 0x5e,
+    .unk12 = 0,
+    .unk14 = sub_80A5204,
+};
+
+static const CallbackData sGroundScriptNullCallbacks = {0};
 
 struct MapToDungeonStruct
 {
@@ -27,21 +77,155 @@ struct MapToDungeonStruct
     u32 unk8;
 };
 
-extern const struct MapToDungeonStruct gUnknown_81173C0[];
-extern const CallbackData gGroundScriptNullCallbacks;
-
-extern u8 sub_80A46C0(GroundBg *, u32, s32, s32);
-extern u8 sub_80A4660(GroundBg *, u32, s32, s32);
-
-void GroundMap_SelectDungeon(s32 mapId, const DungeonLocation *loc, u32 param_2);
-void sub_80A56D8(const PixelPos*);
-extern void sub_80A62D0(void);
+static const struct MapToDungeonStruct sMapToDungeonTable[] = {
+    {
+        .id = MAP_TINY_WOODS_END,
+        .loc = { .id = DUNGEON_TINY_WOODS, .floor = 100 },
+        .unk8 = 0,
+    },
+    {
+        .id = MAP_THUNDERWAVE_CAVE_END,
+        .loc = { .id = DUNGEON_THUNDERWAVE_CAVE, .floor = 100 },
+        .unk8 = 0,
+    },
+    {
+        .id = MAP_MT_STEEL_END,
+        .loc = { .id = DUNGEON_MT_STEEL, .floor = 100 },
+        .unk8 = 0,
+    },
+    {
+        .id = MAP_SINISTER_WOODS_END,
+        .loc = { .id = DUNGEON_SINISTER_WOODS, .floor = 100 },
+        .unk8 = 0,
+    },
+    {
+        .id = MAP_SILENT_CHASM_END,
+        .loc = { .id = DUNGEON_SILENT_CHASM, .floor = 100 },
+        .unk8 = 0,
+    },
+    {
+        .id = MAP_MT_THUNDER_MID,
+        .loc = { .id = DUNGEON_MT_THUNDER, .floor = 100 },
+        .unk8 = 0,
+    },
+    {
+        .id = MAP_MT_THUNDER_END,
+        .loc = { .id = DUNGEON_MT_THUNDER_PEAK, .floor = 100 },
+        .unk8 = 0,
+    },
+    {
+        .id = MAP_MT_BLAZE_MID,
+        .loc = { .id = DUNGEON_MT_BLAZE, .floor = 100 },
+        .unk8 = 0,
+    },
+    {
+        .id = MAP_MT_BLAZE_END,
+        .loc = { .id = DUNGEON_MT_BLAZE_PEAK, .floor = 100 },
+        .unk8 = 0,
+    },
+    {
+        .id = MAP_FROSTY_FOREST_MID,
+        .loc = { .id = DUNGEON_FROSTY_FOREST, .floor = 100 },
+        .unk8 = 0,
+    },
+    {
+        .id = MAP_FROSTY_FOREST_END,
+        .loc = { .id = DUNGEON_FROSTY_GROTTO, .floor = 100 },
+        .unk8 = 0,
+    },
+    {
+        .id = MAP_MT_FREEZE_MID,
+        .loc = { .id = DUNGEON_MT_FREEZE, .floor = 100 },
+        .unk8 = 0,
+    },
+    {
+        .id = MAP_MT_FREEZE_END,
+        .loc = { .id = DUNGEON_MT_FREEZE_PEAK, .floor = 100 },
+        .unk8 = 0,
+    },
+    {
+        .id = MAP_MAGMA_CAVERN_MID,
+        .loc = { .id = DUNGEON_MAGMA_CAVERN, .floor = 100 },
+        .unk8 = 0,
+    },
+    {
+        .id = MAP_MAGMA_CAVERN_END,
+        .loc = { .id = DUNGEON_MAGMA_CAVERN_PIT, .floor = 100 },
+        .unk8 = 0,
+    },
+    {
+        .id = MAP_SKY_TOWER_MID,
+        .loc = { .id = DUNGEON_SKY_TOWER, .floor = 100 },
+        .unk8 = 0,
+    },
+    {
+        .id = MAP_SKY_TOWER_END,
+        .loc = { .id = DUNGEON_SKY_TOWER_SUMMIT, .floor = 100 },
+        .unk8 = 0,
+    },
+    {
+        .id = MAP_D14,
+        .loc = { .id = DUNGEON_STORMY_SEA, .floor = 100 },
+        .unk8 = 0,
+    },
+    {
+        .id = MAP_D15,
+        .loc = { .id = DUNGEON_SILVER_TRENCH, .floor = 100 },
+        .unk8 = 0,
+    },
+    {
+        .id = MAP_D16,
+        .loc = { .id = DUNGEON_FIERY_FIELD, .floor = 100 },
+        .unk8 = 0,
+    },
+    {
+        .id = MAP_D17,
+        .loc = { .id = DUNGEON_LIGHTNING_FIELD, .floor = 100 },
+        .unk8 = 0,
+    },
+    {
+        .id = MAP_D18,
+        .loc = { .id = DUNGEON_NORTHWIND_FIELD, .floor = 100 },
+        .unk8 = 0,
+    },
+    {
+        .id = MAP_D19,
+        .loc = { .id = DUNGEON_MT_FARAWAY, .floor = 100 },
+        .unk8 = 0,
+    },
+    {
+        .id = MAP_D20,
+        .loc = { .id = DUNGEON_WESTERN_CAVE, .floor = 100 },
+        .unk8 = 0,
+    },
+    {
+        .id = MAP_D21,
+        .loc = { .id = DUNGEON_NORTHERN_RANGE, .floor = 100 },
+        .unk8 = 0,
+    },
+    {
+        .id = MAP_D23,
+        .loc = { .id = DUNGEON_WISH_CAVE, .floor = 20 },
+        .unk8 = 0,
+    },
+    {
+        .id = MAP_D25,
+        .loc = { .id = DUNGEON_HOWLING_FOREST, .floor = 100 },
+        .unk8 = 0,
+    },
+    // -1 = table's end
+    {
+        .id = -1,
+        .loc = { .id = DUNGEON_TINY_WOODS, .floor = 100 },
+        .unk8 = 0,
+    },
+};
 
 void AllocGroundMapAction(void)
 {
     gGroundMapAction = MemoryAlloc(sizeof(GroundMapAction), 6);
     gGroundMapAction->groundMapId = -1;
-    InitActionWithParams(&gGroundMapAction->action, &gGroundScriptNullCallbacks, 0, -1, -1);
+    InitActionWithParams(&gGroundMapAction->action, &sGroundScriptNullCallbacks, 0, -1, -1);
     sub_80A5E8C(0);
     GroundMap_Reset();
 }
@@ -235,7 +419,7 @@ void GroundMap_Select(s32 mapId_)
         break;
         case 0xA:
         case 0xB: {
-            const struct MapToDungeonStruct *mapToDungPtr = &gUnknown_81173C0[0];
+            const struct MapToDungeonStruct *mapToDungPtr = sMapToDungeonTable;
             while (mapToDungPtr->id != -1 && mapToDungPtr->id != mapId) {
                 mapToDungPtr++;
             }
@@ -356,7 +540,7 @@ void GroundMap_SelectDungeon(s32 mapId_, const DungeonLocation *loc, u32 param_2
 }
 
 NAKED
-void sub_80A5204(void)
+static void sub_80A5204(void *a, const void *b, BmaHeader *c, s32 d)
 {
     asm_unified(
 "	push {r4-r7,lr}     \n"
