@@ -39,7 +39,7 @@ bool8 ShouldMonsterRunAway(Entity *pokemon);
 bool8 ShouldMonsterRunAwayAndShowEffect(Entity *pokemon, bool8 showRunAwayEffect);
 void CheckRunAwayVisualFlag(Entity *pokemon, bool8 showRunAwayEffect);
 u8 GetTreatmentBetweenMonsters(Entity *pokemon, Entity *targetPokemon, bool8 ignoreInvisible, bool8 checkPetrified);
-u8 sub_807167C(Entity * pokemon, Entity * target);
+u8 GetTreatmentBetweenMonstersIgnoreStatus(Entity * pokemon, Entity * target);
 bool8 HasSafeguardStatus(Entity * pokemon, Entity * target, bool8 displayMessage);
 bool8 sub_8071728(Entity * pokemon, Entity * target, bool8 displayMessage);
 bool8 sub_80717A4(Entity *pokemon, u16 moveID);

@@ -20,15 +20,14 @@ bool8 HasStatusThatPreventsActing(Entity *pokemon)
     EntityInfo *pokemonInfo = GetEntInfo(pokemon);
     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], pokemon, 0);
     SetMonsterActionFields(&pokemonInfo->action, ACTION_PASS_TURN);
-    switch (pokemonInfo->sleepClassStatus.status)
-    {
+    switch (pokemonInfo->sleepClassStatus.status) {
         case STATUS_NIGHTMARE:
         case STATUS_SLEEP:
         case STATUS_NAPPING:
             return TRUE;
     }
-    switch (pokemonInfo->frozenClassStatus.status)
-    {
+
+    switch (pokemonInfo->frozenClassStatus.status) {
         case STATUS_FROZEN:
             LogMessageByIdWithPopupCheckUser(pokemon, gPtrFrozenMessage);
             return TRUE;
@@ -41,8 +40,8 @@ bool8 HasStatusThatPreventsActing(Entity *pokemon)
         case STATUS_PETRIFIED:
             return TRUE;
     }
-    switch (pokemonInfo->cringeClassStatus.status)
-    {
+
+    switch (pokemonInfo->cringeClassStatus.status) {
         case STATUS_PAUSED:
             LogMessageByIdWithPopupCheckUser(pokemon, gPtrPausedMessage);
             return TRUE;
@@ -50,45 +49,37 @@ bool8 HasStatusThatPreventsActing(Entity *pokemon)
             LogMessageByIdWithPopupCheckUser(pokemon, gPtrInfatuatedMessage);
             return TRUE;
     }
-    if (pokemonInfo->bideClassStatus.status == STATUS_BIDE)
-    {
+
+    if (pokemonInfo->bideClassStatus.status == STATUS_BIDE) {
         LogMessageByIdWithPopupCheckUser(pokemon, gPtrBideMessage);
         return TRUE;
     }
-    if (pokemonInfo->curseClassStatus.status == STATUS_DECOY)
-    {
+    if (pokemonInfo->curseClassStatus.status == STATUS_DECOY) {
         SetActionPassTurnOrWalk(&pokemonInfo->action, pokemonInfo->id);
         pokemonInfo->action.direction = DungeonRandInt(NUM_DIRECTIONS);
         pokemonInfo->targetPos.x = pokemon->pos.x;
         pokemonInfo->targetPos.y = pokemon->pos.y - 1;
         return TRUE;
     }
-    if (pokemonInfo->shopkeeper == SHOPKEEPER_MODE_SHOPKEEPER)
-    {
+    if (pokemonInfo->shopkeeper == SHOPKEEPER_MODE_SHOPKEEPER) {
         return TRUE;
     }
-    if (pokemonInfo->blinkerClassStatus.status == STATUS_BLINKER)
-    {
-        if (!CanMoveInDirection(pokemon, pokemonInfo->action.direction))
-        {
-            if (DungeonRandInt(2) != 0)
-            {
-                pokemonInfo->action.direction = DungeonRandInt(NUM_DIRECTIONS);
-                pokemonInfo->action.direction = pokemonInfo->action.direction & DIRECTION_MASK;
-                goto walk;
-            }
-        }
-        else
-        {
-            walk:
+    if (pokemonInfo->blinkerClassStatus.status == STATUS_BLINKER) {
+        if (CanMoveInDirection(pokemon, pokemonInfo->action.direction)) {
             SetActionPassTurnOrWalk(&pokemonInfo->action, pokemonInfo->id);
-            return TRUE;
         }
-        ChooseAIMove(pokemon);
+        else if (DungeonRandInt(2) != 0) {
+            pokemonInfo->action.direction = DungeonRandInt(NUM_DIRECTIONS);
+            pokemonInfo->action.direction = pokemonInfo->action.direction & DIRECTION_MASK;
+            SetActionPassTurnOrWalk(&pokemonInfo->action, pokemonInfo->id);
+        }
+        else {
+            ChooseAIMove(pokemon);
+        }
+
         return TRUE;
     }
-    if (pokemonInfo->blinkerClassStatus.status == STATUS_CROSS_EYED)
-    {
+    if (pokemonInfo->blinkerClassStatus.status == STATUS_CROSS_EYED) {
         SetActionPassTurnOrWalk(&pokemonInfo->action, pokemonInfo->id);
         pokemonInfo->action.direction = DungeonRandInt(NUM_DIRECTIONS);
         return TRUE;
@@ -137,7 +128,7 @@ bool8 sub_80701A4(Entity *pokemon)
   switch(pokemonInfo->cringeClassStatus.status) {
     case STATUS_CONFUSED:
         flag = TRUE;
-        goto _0807026C;
+        goto CRINGE_STATUS;
     case STATUS_PAUSED:
         LogMessageByIdWithPopupCheckUser(pokemon,gPtrPausedMessage);
         return TRUE;
@@ -148,7 +139,7 @@ bool8 sub_80701A4(Entity *pokemon)
     case STATUS_NONE:
     case STATUS_CRINGE:
     case 8:
-    _0807026C:
+    CRINGE_STATUS:
         if (pokemonInfo->bideClassStatus.status == STATUS_BIDE) {
              LogMessageByIdWithPopupCheckUser(pokemon,gPtrBideMessage);
              return TRUE;
