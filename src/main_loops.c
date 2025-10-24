@@ -64,7 +64,7 @@ static EWRAM_DATA s32 sTitleBrightness = 0; // NDS=210FAC0
 
 static EWRAM_INIT OpenedFile *sTitlePaletteFile = NULL;
 static EWRAM_INIT u32 sUnknown_203B03C = 0;
-static EWRAM_INIT PersonalityRelated sPersonalityRelated_203B040 = {
+static EWRAM_INIT TeamBasicInfo sTeamBasicInfo_203B040 = {
     .unk0 = 0,
     .StarterID = MONSTER_CHARMANDER,
     .PartnerID = MONSTER_SQUIRTLE,
@@ -961,15 +961,15 @@ static void LoadAndRunQuickSaveDungeon_Async(DungeonSetupStruct *setupStr)
 }
 
 // arm9.bin::0200CFF4
-void ReadTeamBasicInfo(PersonalityRelated *dst)
+void ReadTeamBasicInfo(TeamBasicInfo *dst)
 {
-    *dst = sPersonalityRelated_203B040;
+    *dst = sTeamBasicInfo_203B040;
 }
 
 // arm9.bin::0200CFA4
-void WriteTeamBasicInfo(PersonalityRelated *src)
+void WriteTeamBasicInfo(TeamBasicInfo *src)
 {
-    sPersonalityRelated_203B040 = *src;
+    sTeamBasicInfo_203B040 = *src;
 }
 
 // arm9.bin::0200CE48
@@ -980,36 +980,36 @@ void sub_8001064(void)
     u8 buffer1 [20];
 
     if (GetPlayerPokemonStruct() == NULL) {
-        if (sPersonalityRelated_203B040.StarterName[0] == '\0') {
-            CopyMonsterNameToBuffer(buffer1, sPersonalityRelated_203B040.StarterID);
+        if (sTeamBasicInfo_203B040.StarterName[0] == '\0') {
+            CopyMonsterNameToBuffer(buffer1, sTeamBasicInfo_203B040.StarterID);
             CopyStringtoBuffer(buffer2, buffer1);
-            sub_808CE74(sPersonalityRelated_203B040.StarterID, TRUE, buffer2);
+            sub_808CE74(sTeamBasicInfo_203B040.StarterID, TRUE, buffer2);
         }
         else
-            sub_808CE74(sPersonalityRelated_203B040.StarterID, TRUE, sPersonalityRelated_203B040.StarterName);
+            sub_808CE74(sTeamBasicInfo_203B040.StarterID, TRUE, sTeamBasicInfo_203B040.StarterName);
     }
 
     if (sub_808D378() == NULL) {
-        if (sPersonalityRelated_203B040.PartnerNick[0] == '\0') {
-            CopyMonsterNameToBuffer(buffer1, sPersonalityRelated_203B040.PartnerID);
+        if (sTeamBasicInfo_203B040.PartnerNick[0] == '\0') {
+            CopyMonsterNameToBuffer(buffer1, sTeamBasicInfo_203B040.PartnerID);
             CopyStringtoBuffer(buffer2, buffer1);
-            sub_808CE74(sPersonalityRelated_203B040.PartnerID, FALSE, buffer2);
+            sub_808CE74(sTeamBasicInfo_203B040.PartnerID, FALSE, buffer2);
         }
         else
-            sub_808CE74(sPersonalityRelated_203B040.PartnerID, FALSE, sPersonalityRelated_203B040.PartnerNick);
+            sub_808CE74(sTeamBasicInfo_203B040.PartnerID, FALSE, sTeamBasicInfo_203B040.PartnerNick);
     }
 
-    if (sPersonalityRelated_203B040.StarterID != MONSTER_NONE) {
+    if (sTeamBasicInfo_203B040.StarterID != MONSTER_NONE) {
         psVar2 = &sBaseKindTable[0];
-        while (psVar2->species != MONSTER_NONE && sPersonalityRelated_203B040.StarterID != psVar2->species) {
+        while (psVar2->species != MONSTER_NONE && sTeamBasicInfo_203B040.StarterID != psVar2->species) {
             psVar2++;
         }
         SetScriptVarValue(NULL, BASE_KIND, psVar2->unk0);
     }
 
-    if (sPersonalityRelated_203B040.PartnerID != MONSTER_NONE) {
+    if (sTeamBasicInfo_203B040.PartnerID != MONSTER_NONE) {
         psVar2 = &sTalkKindTable[0];
-        while (psVar2->species != MONSTER_NONE && sPersonalityRelated_203B040.PartnerID != psVar2->species) {
+        while (psVar2->species != MONSTER_NONE && sTeamBasicInfo_203B040.PartnerID != psVar2->species) {
             psVar2++;
         }
         SetScriptVarValue(NULL, PARTNER_TALK_KIND, psVar2->unk0);

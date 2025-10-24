@@ -15,20 +15,20 @@ typedef struct PersonalityQuestion
 } PersonalityQuestion;
 
 // size: 0x30
-typedef struct PersonalityRelated
+typedef struct TeamBasicInfo
 {
     /* 0x0 */ u32 unk0;
     /* 0x4 */ s16 StarterID;
     /* 0x6 */ s16 PartnerID;
     /* 0x8 */ u8 StarterName[20];
     /* 0x1C */ u8 PartnerNick[20];
-} PersonalityRelated;
+} TeamBasicInfo;
 
 // size: 0xC0
 typedef struct PersonalityTestTracker
 {
     /* 0x0 */ s32 FrameCounter;
-    /* 0x4 */ PersonalityRelated TeamBasicInfo;
+    /* 0x4 */ TeamBasicInfo TeamBasicInfo;
     /* 0x34 */ u32 TestState;
     /* 0x38 */ s32 QuestionCounter;
     /* 0x3C */ u32 currQuestionIndex;
