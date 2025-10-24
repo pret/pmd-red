@@ -1,23 +1,69 @@
 #include "global.h"
+#include "globaldata.h"
+#include "ground_map.h"
 #include "debug.h"
 #include "event_flag.h"
 #include "ground_bg.h"
 #include "ground_main.h"
-#include "ground_map.h"
-#include "ground_map_1.h"
 #include "ground_script.h"
 #include "ground_script_file.h"
+#include "ground_weather.h"
 #include "memory.h"
 #include "ground_map_conversion_table.h"
 #include "code_800558C.h"
 #include "constants/dungeon.h"
+#include "constants/ground_map.h"
+#include "code_809D148.h"
 
 IWRAM_INIT GroundMapAction *gGroundMapAction = {NULL};
 IWRAM_INIT GroundBg *gGroundMapDungeon_3001B70 = {NULL};
 
-extern const SubStruct_52C gUnknown_8117324;
-extern const SubStruct_52C gUnknown_811733C;
-extern const SubStruct_52C gUnknown_8117354;
+static void sub_80A5204(void *, const void *, BmaHeader *, s32);
+static void sub_80A56D8(const PixelPos *pos);
+
+static const SubStruct_52C gUnknown_8117324 = {
+    .unk0 = 0,
+    .unk2 = 13,
+    .unk4 = 0,
+    .unk6 = 0x380,
+    .unk8 = 0x4B0,
+    .unkA = 1,
+    .numLayers = 1,
+    .unkE = 0xbc,
+    .unk10 = 0x5e,
+    .unk12 = 0,
+    .unk14 = sub_80A5204,
+};
+
+static const SubStruct_52C gUnknown_811733C = {
+    .unk0 = 0,
+    .unk2 = 14,
+    .unk4 = 0,
+    .unk6 = 0x400,
+    .unk8 = 0x4B0,
+    .unkA = 0,
+    .numLayers = 2,
+    .unkE = 0xbc,
+    .unk10 = 0x5e,
+    .unk12 = 0,
+    .unk14 = sub_80A5204,
+};
+
+static const SubStruct_52C gUnknown_8117354 = {
+    .unk0 = 0,
+    .unk2 = 12,
+    .unk4 = 0,
+    .unk6 = 0x200,
+    .unk8 = 0x4B0,
+    .unkA = 1,
+    .numLayers = 1,
+    .unkE = 0xbc,
+    .unk10 = 0x5e,
+    .unk12 = 0,
+    .unk14 = sub_80A5204,
+};
+
+static const CallbackData sGroundScriptNullCallbacks = {0};
 
 struct MapToDungeonStruct
 {
@@ -26,48 +72,155 @@ struct MapToDungeonStruct
     u32 unk8;
 };
 
-extern const struct MapToDungeonStruct gUnknown_81173C0[];
-
-extern const DebugLocation gUnknown_8117538[];
-extern const DebugLocation gUnknown_8117560;
-extern const u8 gUnknown_811756C[];
-extern const u8 gUnknown_8117594[];
-extern const DebugLocation gUnknown_81175E0;
-extern const u8 gUnknown_81175EC[];
-extern const DebugLocation gUnknown_8117644;
-extern const u8 gUnknown_8117650[];
-extern const DebugLocation gUnknown_8117698;
-extern const u8 gUnknown_81176A4[];
-extern const DebugLocation gUnknown_81176D0;
-extern const u8 gUnknown_81176DC[];
-extern const PixelPos gUnknown_81176F8;
-extern const u8 gUnknown_8117700[];
-extern const DebugLocation gUnknown_8117734;
-extern const u8 gUnknown_8117740[];
-extern const PixelPos gUnknown_8117754;
-extern const DebugLocation gUnknown_8117770;
-
-
-extern const CallbackData gGroundScriptNullCallbacks;
-
-extern u8 sub_809D248(PixelPos *r0);
-
-extern bool8 sub_809D678(Action *);
-extern bool8 GroundScriptNotify(Action*, s32);
-
-extern u8 sub_80A46C0(GroundBg *, u32, s32, s32);
-extern u8 sub_80A4660(GroundBg *, u32, s32, s32);
-
-extern s16 HandleAction(Action *action, const DebugLocation *debug);
-
-void GroundMap_SelectDungeon(s32 mapId, const DungeonLocation *loc, u32 param_2);
-void sub_80A56D8(const PixelPos*);
+static const struct MapToDungeonStruct sMapToDungeonTable[] = {
+    {
+        .id = MAP_TINY_WOODS_END,
+        .loc = { .id = DUNGEON_TINY_WOODS, .floor = 100 },
+        .unk8 = 0,
+    },
+    {
+        .id = MAP_THUNDERWAVE_CAVE_END,
+        .loc = { .id = DUNGEON_THUNDERWAVE_CAVE, .floor = 100 },
+        .unk8 = 0,
+    },
+    {
+        .id = MAP_MT_STEEL_END,
+        .loc = { .id = DUNGEON_MT_STEEL, .floor = 100 },
+        .unk8 = 0,
+    },
+    {
+        .id = MAP_SINISTER_WOODS_END,
+        .loc = { .id = DUNGEON_SINISTER_WOODS, .floor = 100 },
+        .unk8 = 0,
+    },
+    {
+        .id = MAP_SILENT_CHASM_END,
+        .loc = { .id = DUNGEON_SILENT_CHASM, .floor = 100 },
+        .unk8 = 0,
+    },
+    {
+        .id = MAP_MT_THUNDER_MID,
+        .loc = { .id = DUNGEON_MT_THUNDER, .floor = 100 },
+        .unk8 = 0,
+    },
+    {
+        .id = MAP_MT_THUNDER_END,
+        .loc = { .id = DUNGEON_MT_THUNDER_PEAK, .floor = 100 },
+        .unk8 = 0,
+    },
+    {
+        .id = MAP_MT_BLAZE_MID,
+        .loc = { .id = DUNGEON_MT_BLAZE, .floor = 100 },
+        .unk8 = 0,
+    },
+    {
+        .id = MAP_MT_BLAZE_END,
+        .loc = { .id = DUNGEON_MT_BLAZE_PEAK, .floor = 100 },
+        .unk8 = 0,
+    },
+    {
+        .id = MAP_FROSTY_FOREST_MID,
+        .loc = { .id = DUNGEON_FROSTY_FOREST, .floor = 100 },
+        .unk8 = 0,
+    },
+    {
+        .id = MAP_FROSTY_FOREST_END,
+        .loc = { .id = DUNGEON_FROSTY_GROTTO, .floor = 100 },
+        .unk8 = 0,
+    },
+    {
+        .id = MAP_MT_FREEZE_MID,
+        .loc = { .id = DUNGEON_MT_FREEZE, .floor = 100 },
+        .unk8 = 0,
+    },
+    {
+        .id = MAP_MT_FREEZE_END,
+        .loc = { .id = DUNGEON_MT_FREEZE_PEAK, .floor = 100 },
+        .unk8 = 0,
+    },
+    {
+        .id = MAP_MAGMA_CAVERN_MID,
+        .loc = { .id = DUNGEON_MAGMA_CAVERN, .floor = 100 },
+        .unk8 = 0,
+    },
+    {
+        .id = MAP_MAGMA_CAVERN_END,
+        .loc = { .id = DUNGEON_MAGMA_CAVERN_PIT, .floor = 100 },
+        .unk8 = 0,
+    },
+    {
+        .id = MAP_SKY_TOWER_MID,
+        .loc = { .id = DUNGEON_SKY_TOWER, .floor = 100 },
+        .unk8 = 0,
+    },
+    {
+        .id = MAP_SKY_TOWER_END,
+        .loc = { .id = DUNGEON_SKY_TOWER_SUMMIT, .floor = 100 },
+        .unk8 = 0,
+    },
+    {
+        .id = MAP_D14,
+        .loc = { .id = DUNGEON_STORMY_SEA, .floor = 100 },
+        .unk8 = 0,
+    },
+    {
+        .id = MAP_D15,
+        .loc = { .id = DUNGEON_SILVER_TRENCH, .floor = 100 },
+        .unk8 = 0,
+    },
+    {
+        .id = MAP_D16,
+        .loc = { .id = DUNGEON_FIERY_FIELD, .floor = 100 },
+        .unk8 = 0,
+    },
+    {
+        .id = MAP_D17,
+        .loc = { .id = DUNGEON_LIGHTNING_FIELD, .floor = 100 },
+        .unk8 = 0,
+    },
+    {
+        .id = MAP_D18,
+        .loc = { .id = DUNGEON_NORTHWIND_FIELD, .floor = 100 },
+        .unk8 = 0,
+    },
+    {
+        .id = MAP_D19,
+        .loc = { .id = DUNGEON_MT_FARAWAY, .floor = 100 },
+        .unk8 = 0,
+    },
+    {
+        .id = MAP_D20,
+        .loc = { .id = DUNGEON_WESTERN_CAVE, .floor = 100 },
+        .unk8 = 0,
+    },
+    {
+        .id = MAP_D21,
+        .loc = { .id = DUNGEON_NORTHERN_RANGE, .floor = 100 },
+        .unk8 = 0,
+    },
+    {
+        .id = MAP_D23,
+        .loc = { .id = DUNGEON_WISH_CAVE, .floor = 20 },
+        .unk8 = 0,
+    },
+    {
+        .id = MAP_D25,
+        .loc = { .id = DUNGEON_HOWLING_FOREST, .floor = 100 },
+        .unk8 = 0,
+    },
+    // -1 = table's end
+    {
+        .id = -1,
+        .loc = { .id = DUNGEON_TINY_WOODS, .floor = 100 },
+        .unk8 = 0,
+    },
+};
 
 void AllocGroundMapAction(void)
 {
     gGroundMapAction = MemoryAlloc(sizeof(GroundMapAction), 6);
     gGroundMapAction->groundMapId = -1;
-    InitActionWithParams(&gGroundMapAction->action, &gGroundScriptNullCallbacks, 0, -1, -1);
+    InitActionWithParams(&gGroundMapAction->action, &sGroundScriptNullCallbacks, 0, -1, -1);
     sub_80A5E8C(0);
     GroundMap_Reset();
 }
@@ -84,7 +237,7 @@ void GroundMap_Reset(void)
 {
     ClearScriptVarArray(NULL, MAP_LOCAL);
     ClearScriptVarArray(NULL, MAP_LOCAL_DOOR);
-    ActionResetScriptData((Action *)gGroundMapAction, gUnknown_8117538);
+    ActionResetScriptData(&gGroundMapAction->action, DEBUG_LOC_PTR("../ground/ground_map.c", 0xF8, "GroundMap_Reset"));
 
     if (gGroundMapDungeon_3001B70 != NULL) {
         GroundBg_FreeAll(gGroundMapDungeon_3001B70);
@@ -118,8 +271,8 @@ void GroundMap_GetStationScript(ScriptInfoSmall *r0, s32 _groundScriptId, s32 _g
     s32 sectorId = (s8) _sectorId;
 
     ChangeScriptFile(groundScriptId);
-    scriptHeader = GetGroundScript(groundScriptId, &gUnknown_8117560);
-    Log(0, gUnknown_811756C, groundScriptId, groupId, sectorId);
+    scriptHeader = GetGroundScript(groundScriptId, DEBUG_LOC_PTR("../ground/ground_map.c", 0x138, "GroundMap_GetStationScript"));
+    Log(0, "GroundMap ExecuteStation %3d %3d %3d", groundScriptId, groupId, sectorId);
     {
         const struct GroundScriptGroup *groups = &scriptHeader->groups[groupId];
         const struct GroundScriptSector *sectors = &groups->sectors[sectorId];
@@ -146,12 +299,12 @@ void GroundMap_ExecuteEvent(s16 scriptIndex, u32 param_2)
     index_s32 = scriptIndex;
     iVar2 = param_2;
 
-    Log(0, gUnknown_8117594, index_s32, iVar2); // "GroundMap ExecuteEvent %3d %d
+    Log(0, "GroundMap ExecuteEvent %3d %d ==================", index_s32, iVar2);
     GetFunctionScript(NULL, &script, index_s32);
     if (iVar2 != 0)
         script.state = 5;
 
-    GroundScript_ExecutePP(&gGroundMapAction->action, 0, &script, &gUnknown_81175E0);
+    GroundScript_ExecutePP(&gGroundMapAction->action, 0, &script, DEBUG_LOC_PTR("../ground/ground_map.c", 0x17D, "GroundMap_ExecuteEvent"));
 }
 
 void GroundMap_ExecuteStation(s32 _map, s32 _group, s32 _sector, bool32 _setScriptState)
@@ -167,12 +320,12 @@ void GroundMap_ExecuteStation(s32 _map, s32 _group, s32 _sector, bool32 _setScri
     sector = (s8)_sector;
     setScriptState = (bool8)_setScriptState;
 
-    Log(0, gUnknown_81175EC, map, group, sector, setScriptState); // GroundMap ExecuteStation %3d %3d %3d %d
+    Log(0, "GroundMap ExecuteStation %3d %3d %3d %d ==================", map, group, sector, setScriptState);
     GroundMap_GetStationScript(&script, map, group, sector);
     if (setScriptState != 0)
         script.state = 5;
 
-    GroundScript_ExecutePP(&gGroundMapAction->action, 0, &script, &gUnknown_8117644);
+    GroundScript_ExecutePP(&gGroundMapAction->action, 0, &script, DEBUG_LOC_PTR("../ground/ground_map.c", 0x199, "GroundMap_ExecuteStation"));
 }
 
 void GroundMap_ExecuteEnter(s16 param_1)
@@ -182,12 +335,12 @@ void GroundMap_ExecuteEnter(s16 param_1)
 
     iVar1 = param_1;
 
-    Log(0, gUnknown_8117650, iVar1); // GroundMap ExecuteEnter %3d
+    Log(0, "GroundMap ExecuteEnter %3d ==================", iVar1);
     GroundMap_GetFirstStationScript(&script, iVar1);
     script.state = 2;
     script.group = 0;
     script.sector = 0;
-    GroundScript_ExecutePP(&gGroundMapAction->action, 0, &script, &gUnknown_8117698);
+    GroundScript_ExecutePP(&gGroundMapAction->action, 0, &script, DEBUG_LOC_PTR("../ground/ground_map.c", 0x1B3, "GroundMap_ExecuteEnter"));
 }
 
 UNUSED static bool8 sub_80A4D14(void)
@@ -233,7 +386,7 @@ void GroundMap_Select(s32 mapId_)
     const GroundConversionStruct *ptr;
     s32 mapId = (s16) mapId_;
 
-    Log(0, gUnknown_81176A4,mapId);
+    Log(0, "GroundMap Select %3d", mapId);
     ClearScriptVarArray(NULL, MAP_LOCAL);
     ClearScriptVarArray(NULL, MAP_LOCAL_DOOR);
     sub_80A5EDC(0);
@@ -261,7 +414,7 @@ void GroundMap_Select(s32 mapId_)
         break;
         case 0xA:
         case 0xB: {
-            const struct MapToDungeonStruct *mapToDungPtr = &gUnknown_81173C0[0];
+            const struct MapToDungeonStruct *mapToDungPtr = sMapToDungeonTable;
             while (mapToDungPtr->id != -1 && mapToDungPtr->id != mapId) {
                 mapToDungPtr++;
             }
@@ -270,7 +423,7 @@ void GroundMap_Select(s32 mapId_)
             return;
         }
         case -1:
-            FatalError(&gUnknown_81176D0,gUnknown_81176DC,mapId,ptr->unk0);
+            FatalError(DEBUG_LOC_PTR("../ground/ground_map.c", 0x249, "GroundMap_Select"),"select map type error %d %d",mapId,ptr->unk0);
             break;
         default:
             GroundBg_Init(gGroundMapDungeon_3001B70, &gUnknown_8117324);
@@ -337,7 +490,7 @@ void GroundMap_Select(s32 mapId_)
         GroundWeather_Select(ptr->unk6);
     }
 
-    sub_80A56D8(&gUnknown_81176F8);
+    sub_80A56D8(&(const PixelPos) {0});
 }
 
 void GroundMap_SelectDungeon(s32 mapId_, const DungeonLocation *loc, u32 param_2)
@@ -345,7 +498,7 @@ void GroundMap_SelectDungeon(s32 mapId_, const DungeonLocation *loc, u32 param_2
     const GroundConversionStruct *ptr;
     s32 mapId = (s16) mapId_;
 
-    Log('\0', gUnknown_8117700, mapId);
+    Log('\0', "GroundMap SelectDungeon %3d", mapId);
     ClearScriptVarArray(NULL, MAP_LOCAL);
     ClearScriptVarArray(NULL, MAP_LOCAL_DOOR);
     sub_80A5EDC('\0');
@@ -364,7 +517,7 @@ void GroundMap_SelectDungeon(s32 mapId_, const DungeonLocation *loc, u32 param_2
 
     ptr = &gGroundMapConversionTable[mapId];
     if (ptr->unk0 != 0xA && ptr->unk0 != 0xB) {
-        FatalError(&gUnknown_8117734, gUnknown_8117740, mapId);
+        FatalError(DEBUG_LOC_PTR("../ground/ground_map.c", 0x2C6, "GroundMap_SelectDungeon"), "map type error %d", mapId);
     }
 
     GroundBg_Init(gGroundMapDungeon_3001B70, &gUnknown_8117354);
@@ -378,11 +531,11 @@ void GroundMap_SelectDungeon(s32 mapId_, const DungeonLocation *loc, u32 param_2
     gGroundMapAction->unkF8.y = 0;
     gGroundMapAction->unk100 = gGroundMapAction->unk104 = gGroundMapAction->unk108 = gGroundMapAction->unk10C = 0;
 
-    sub_80A56D8(&gUnknown_8117754);
+    sub_80A56D8(&(const PixelPos) {0, 0});
 }
 
 NAKED
-void sub_80A5204(void)
+static void sub_80A5204(void *a, const void *b, BmaHeader *c, s32 d)
 {
     asm_unified(
 "	push {r4-r7,lr}     \n"
@@ -1060,7 +1213,7 @@ void sub_80A56C0(PixelPos *pos)
     GetCameraPositionForLayer(gGroundMapDungeon_3001B70, 0, pos);
 }
 
-void sub_80A56D8(const PixelPos *pos)
+static void sub_80A56D8(const PixelPos *pos)
 {
     SetCameraPositionForLayer(gGroundMapDungeon_3001B70, 0, pos);
 }
@@ -1149,7 +1302,7 @@ bool8 sub_80A579C(PixelPos *pos1, PixelPos *pos2)
     return FALSE;
 }
 
-bool8 CheckMapCollision_80A585C(PixelPos *pixPos1,PixelPos *boundary)
+bool8 CheckMapCollision_80A585C(PixelPos *pixPos1, PixelPos *boundary)
 {
     u8 *currPtr;
     int i, j;
@@ -1173,7 +1326,7 @@ bool8 CheckMapCollision_80A585C(PixelPos *pixPos1,PixelPos *boundary)
     return FALSE;
 }
 
-bool8 sub_80A58C8(PixelPos *pixPos1,PixelPos *boundary)
+bool8 sub_80A58C8(PixelPos *pixPos1, PixelPos *boundary)
 {
     u8 *currPtr;
     int i, j;
@@ -1197,16 +1350,14 @@ bool8 sub_80A58C8(PixelPos *pixPos1,PixelPos *boundary)
     return FALSE;
 }
 
-u8 sub_80A5934(s32 param_1, s32 param_2, s32 param_3)
+u8 sub_80A5934(u8 param_1, PixelPos *param_2, PixelPos *param_3)
 {
-    u32 param_1_u32 = (u8)param_1;
-    return sub_80A4660(gGroundMapDungeon_3001B70, param_1_u32, param_2, param_3);
+    return sub_80A4660(gGroundMapDungeon_3001B70, param_1, param_2, param_3);
 }
 
-u8 sub_80A595C(s32 param_1, s32 param_2, s32 param_3)
+u8 sub_80A595C(u8 param_1, PixelPos *param_2, PixelPos *param_3)
 {
-    u32 param_1_u32 = (u8)param_1;
-    return sub_80A46C0(gGroundMapDungeon_3001B70, param_1_u32, param_2, param_3);
+    return sub_80A46C0(gGroundMapDungeon_3001B70, param_1, param_2, param_3);
 }
 
 u16 sub_80A5984(s32 param_1, PixelPos *param_2)
@@ -1214,16 +1365,15 @@ u16 sub_80A5984(s32 param_1, PixelPos *param_2)
     return sub_80A4720(gGroundMapDungeon_3001B70, param_1, param_2);
 }
 
-void sub_80A59A0(s32 param_1, PixelPos *param_2, u32 param_3)
+void sub_80A59A0(s32 param_1, PixelPos *param_2, u16 param_3)
 {
-    u32 param_3_u32 = (u16)param_3;
-    sub_80A4740(gGroundMapDungeon_3001B70, param_1, param_2, param_3_u32);
+    sub_80A4740(gGroundMapDungeon_3001B70, param_1, param_2, param_3);
 }
 
 void GroundMap_Action(void)
 {
     nullsub_123();
-    HandleAction((Action *)gGroundMapAction, &gUnknown_8117770);
+    HandleAction(&gGroundMapAction->action, DEBUG_LOC_PTR("../ground/ground_map.c", 0x57F, "GroundMap_Action"));
 }
 
 void sub_80A59DC(void)
@@ -1237,9 +1387,9 @@ void sub_80A59DC(void)
         }
 
         switch (gGroundMapAction->groundMapId) {
-            case 0xA2:
-            case 0xA3:
-            case 0xDF: {
+            case MAP_PERSONALITY_TEST_CYAN:
+            case MAP_PERSONALITY_TEST_PURPLE:
+            case MAP_PERSONALITY_TEST_MULTICOLOR: {
                 PixelPos pixPos2;
 
                 gGroundMapAction->unkF4 += 2;
@@ -1255,8 +1405,8 @@ void sub_80A59DC(void)
                 SetCameraPositionForLayer(gGroundMapDungeon_3001B70, 1, &pixPos2);
                 break;
             }
-            case 0xA8:
-            case 0xAA: {
+            case MAP_FUGITIVES_SNOW_ROAD:
+            case MAP_FUGITIVES_BLIZZARD_ROAD: {
                 PixelPos pixPos2;
 
                 gGroundMapAction->unkF0 += gGroundMapAction->unkE8.x;
@@ -1268,7 +1418,7 @@ void sub_80A59DC(void)
                 SetCameraPositionForLayer(gGroundMapDungeon_3001B70, 0, &pixPos2);
                 break;
             }
-            case 0xAE: {
+            case MAP_NIGHTMARE: {
                 PixelPos pixPos2;
 
                 gGroundMapAction->unkF0 += gGroundMapAction->unkE8.x;
@@ -1281,14 +1431,14 @@ void sub_80A59DC(void)
                 SetCameraPositionForLayer(gGroundMapDungeon_3001B70, 1, &pixPos2);
                 break;
             }
-            case 0xAB: {
+            case MAP_SUMMIT_SUNSET: {
                 PixelPos pixPos2 = pixPos;
 
                 sub_80A4580(gGroundMapDungeon_3001B70, 0, &pixPos2);
                 SetCameraPositionForLayer(gGroundMapDungeon_3001B70, 0, &pixPos2);
                 break;
             }
-            case 0xAF: {
+            case MAP_NIGHT_SKY_1: {
                 PixelPos pixPos2;
 
                 SetCameraPositionForLayer(gGroundMapDungeon_3001B70, 0, &pixPos);
@@ -1304,7 +1454,7 @@ void sub_80A59DC(void)
                 SetCameraPositionForLayer(gGroundMapDungeon_3001B70, 1, &pixPos2);
                 break;
             }
-            case 0xB0: {
+            case MAP_NIGHT_SKY_2: {
                 PixelPos pixPos2;
 
                 gGroundMapAction->unkF0 += gGroundMapAction->unkE8.x;
@@ -1319,7 +1469,7 @@ void sub_80A59DC(void)
                 SetCameraPositionForLayer(gGroundMapDungeon_3001B70, 0, &pixPos2);
                 break;
             }
-            case 0xBA: {
+            case MAP_SILENT_CHASM_ENTRY: {
                 PixelPos pixPos2;
 
                 SetCameraPositionForLayer(gGroundMapDungeon_3001B70, 1, &pixPos);
@@ -1332,7 +1482,7 @@ void sub_80A59DC(void)
                 SetCameraPositionForLayer(gGroundMapDungeon_3001B70, 0, &pixPos2);
                 break;
             }
-            case 4: {
+            case MAP_PELIPPER_POST_OFFICE: {
                 PixelPos pixPos2;
 
                 SetCameraPositionForLayer(gGroundMapDungeon_3001B70, 0, &pixPos);
@@ -1345,7 +1495,7 @@ void sub_80A59DC(void)
                 SetCameraPositionForLayer(gGroundMapDungeon_3001B70, 1, &pixPos2);
                 break;
             }
-            case 0xE0: {
+            case MAP_TITLE_SCREEN: {
                 PixelPos pixPos2;
 
                 SetCameraPositionForLayer(gGroundMapDungeon_3001B70, 0, &pixPos);
@@ -1357,7 +1507,7 @@ void sub_80A59DC(void)
                 SetCameraPositionForLayer(gGroundMapDungeon_3001B70, 1, &pixPos2);
                 break;
             }
-            case 0xA1: {
+            case MAP_FRIEND_AREA_FINAL_ISLAND: {
                 PixelPos pixPos2;
 
                 SetCameraPositionForLayer(gGroundMapDungeon_3001B70, 0, &pixPos);
@@ -1376,3 +1526,10 @@ void sub_80A59DC(void)
     sub_80A60D8();
 }
 
+void sub_80A5E70(void)
+{
+    if (gGroundMapDungeon_3001B70 != NULL)
+        sub_80A49E8(gGroundMapDungeon_3001B70);
+
+    sub_80A62D0();
+}

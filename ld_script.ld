@@ -346,7 +346,7 @@ SECTIONS {
         src/ground_place.o(.text);
         src/ground_bg.o(.text);
         src/ground_map.o(.text);
-        src/ground_map_1.o(.text);
+        src/ground_weather.o(.text);
         src/ground_sprite.o(.text);
         src/ground_sprite_data.o(.text);
         src/ground_sprite_monster.o(.text);
@@ -721,7 +721,6 @@ SECTIONS {
         src/strings.o(.rodata);
         data/data_810AE24_2.o(.rodata);
         src/position_util.o(.rodata);
-        data/data_8115EB8.o(.rodata);
         src/ground_main.o(.rodata);
         src/debug_field_map.o(.rodata);
         src/code_8099360.o(.rodata);
@@ -735,7 +734,8 @@ SECTIONS {
         src/code_80A26CC.o(.rodata);
         src/ground_place.o(.rodata);
         src/ground_bg.o(.rodata);
-        data/data_8115F5C_2_1.o(.rodata);
+        src/ground_map.o(.rodata);
+        src/ground_weather.o(.rodata);
         src/ground_sprite.o(.rodata);
         src/ground_sprite_data.o(.rodata);
         src/ground_sprite_monster.o(.rodata);

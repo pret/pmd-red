@@ -23,6 +23,7 @@
 #include "flash.h"
 #include "friend_list_menu.h"
 #include "ground_lives.h"
+#include "ground_map.h"
 #include "ground_main.h"
 #include "ground_script.h"
 #include "gulpin_shop_801FB50.h"
@@ -89,6 +90,12 @@ enum {
     TEXTBOX_TYPE_ON_BG_AUTO, // Prints text on a bg, waits 32 frames and then fades out the text
 };
 
+union MonOrStringPtr
+{
+    u8 *str;
+    Pokemon *mon;
+};
+
 struct Textbox
 {
     // size: 0x5A8
@@ -102,7 +109,7 @@ struct Textbox
     u32 unk420;
     u32 unk424;
     u32 unk428;
-    u8 *unk42C;
+    union MonOrStringPtr unk42C;
     s32 unk430;
     s32 unk434;
     u32 fill438;
@@ -113,17 +120,9 @@ struct Textbox
 static IWRAM_INIT struct Textbox *sTextbox = { NULL };
 
 extern bool8 sub_802FCF0(void);
-bool8 IsTextboxOpen_809B40C(struct TextboxText *);
 
-extern void sub_80A8EC0(u8 *, u32);
-Pokemon *sub_80A8D54(s16);
-void sub_80A7DDC(s16 *, s16*);
-u8 IsStarterMonster(s16);
-s16 sub_80A8BFC(s32);
 void sub_809B028(const MenuItem *, s32 a1_, s32 a2, s32 a3, s32 a4_, const char *text);
 bool8 sub_809B18C(s32 *sp);
-extern void GroundScriptLock(s16 index, s32 r1);
-extern void GroundScriptLockJumpZero(s16 index);
 extern u8 sub_802B2D4(void);
 extern void sub_802B3B8(void);
 extern u32 sub_802B358(void);
@@ -131,7 +130,6 @@ void sub_8096BD0(void);
 bool8 DrawCredits(s32 creditsCategoryIndex, s32);
 u32 sub_8035574();
 void sub_803565C(void);
-void GroundMap_ExecuteEvent(s16, u32);
 bool8 sub_8015080(u8 *buffer, const MenuItem *menuItems);
 s32 sub_801516C();
 void sub_80151A4();
@@ -146,7 +144,6 @@ bool8 CreateHelperPelipperMenu(s16);
 u32 sub_802E90C();
 void sub_802E918();
 u32 sub_80282DC(u8 *r0);
-void sub_809927C(u8);
 void sub_80282FC(void);
 extern u8 CreateThankYouMailPelipper(void);
 extern u8 sub_802E864(void);
@@ -158,11 +155,6 @@ extern u32 ThankYouMailPelipperCallback(void);
 extern u32 HelperPelipperCallback(void);
 extern u32 sub_802E890(void);
 extern u32 sub_802DFD8(void);
-void sub_809B57C(void);
-bool8 sub_809B1D4(s32 a0, u32 kind, s32 a2, u8 *a3);
-
-u8 *sub_809B428(u8 *a0, s32 a1, u8 *a2);
-bool8 sub_809B648(void);
 
 #define TEXTBOX_FLAG_UNUSED_x2 0x2 // Unused, but set for almost all flag sets
 #define TEXTBOX_FLAG_INSTANT_TEXT 0x20
@@ -249,6 +241,9 @@ static void ResetAllTextboxPortraits(void);
 static bool8 ScriptPrintTextInternal(struct TextboxText *ptr, u32 flags_, s32 a2_, const char *text);
 static u32 SetTextboxType(u32 textboxType, bool8 unused);
 static void ResetTextbox(void);
+static bool8 IsTextboxOpen_809B40C(struct TextboxText *a0);
+static u8 *sub_809B428(u8 *a0, s32 a1, u8 *a2);
+static bool8 sub_809B648(void);
 static void sub_809C39C(void);
 static void sub_809C3D8(void);
 static void sub_809C504(void);
@@ -277,7 +272,7 @@ void TextboxInit(void)
     sTextbox->unk420 = 0;
     sTextbox->unk424 = 0;
     sTextbox->unk428 = 0;
-    sTextbox->unk42C = NULL;
+    sTextbox->unk42C.str = NULL;
     sTextbox->unk430 = -1;
     sTextbox->unk434 = -1;
     ResetAllTextboxPortraits();
@@ -344,7 +339,7 @@ void sub_809A6F8(u16 r0)
     gUnknown_20399DC &= ~r0;
 }
 
-u16 sub_809A70C(u16 r0)
+UNUSED static u16 sub_809A70C(u16 r0)
 {
     return gUnknown_20399DC;
 }
@@ -367,14 +362,14 @@ void SetAutoPressTextboxMidEndMsgFrames(s32 endMsgFrames, s32 midMsgFrames)
     SetDialogueBoxAutoPressFrames(endMsgFrames, midMsgFrames);
 }
 
-u8 IsTextboxOpen_809A750(void)
+bool8 IsTextboxOpen_809A750(void)
 {
     return IsTextboxOpen_809B40C(&sTextbox->text);
 }
 
-u32 sub_809A768(void)
+bool8 sub_809A768(void)
 {
-    return 0;
+    return FALSE;
 }
 
 // I think these two functions are functionally equivalent.
@@ -868,12 +863,12 @@ bool8 sub_809B18C(s32 *sp)
     return (sTextbox->unk420 == 3);
 }
 
-bool8 sub_809B1C0(s32 a0, u32 kind, u8 *a2)
+bool8 sub_809B1C0(s32 a0, u32 kind, void *a2)
 {
     return sub_809B1D4(a0, kind, 0, a2);
 }
 
-bool8 sub_809B1D4(s32 a0, u32 kind, s32 a2, u8 *a3)
+bool8 sub_809B1D4(s32 a0, u32 kind, s32 a2, void *a3)
 {
     switch (a0) {
         case 0xB:
@@ -896,7 +891,7 @@ bool8 sub_809B1D4(s32 a0, u32 kind, s32 a2, u8 *a3)
     sTextbox->unk420 = 1;
     sTextbox->unk424 = kind;
     sTextbox->unk428 = a2;
-    sTextbox->unk42C = a3;
+    sTextbox->unk42C.str = a3;
     sTextbox->unk430 = -1;
     return TRUE;
 }
@@ -967,7 +962,7 @@ static bool8 ScriptPrintTextInternal(struct TextboxText *textboxText, u32 flags_
     return TRUE;
 }
 
-bool8 IsTextboxOpen_809B40C(struct TextboxText *a0)
+static bool8 IsTextboxOpen_809B40C(struct TextboxText *a0)
 {
     switch (a0->unk4) {
         case 0:
@@ -979,7 +974,7 @@ bool8 IsTextboxOpen_809B40C(struct TextboxText *a0)
 }
 
 // It seems this function is effectively unused. It could be different in Blue however. The u8 * arguments most likely are pointers to some text drawing structures.
-u8 *sub_809B428(u8 *a0, s32 a1, u8 *a2)
+static u8 *sub_809B428(u8 *a0, s32 a1, u8 *a2)
 {
     switch (a0[2]) {
         case 0x49:
@@ -1110,7 +1105,7 @@ void sub_809B638(void)
     xxx_call_update_bg_vram();
 }
 
-void nullsub_210(void)
+UNUSED static void nullsub_210(void)
 {
 
 }
@@ -1308,7 +1303,7 @@ static const struct unkStruct_3001B64_unk418 gUnknown_8116318 =
     .unkC = sub_801B6AC,
 };
 
-bool8 sub_809B648(void)
+static bool8 sub_809B648(void)
 {
     switch (sTextbox->unk414) {
         case 2:
@@ -1347,10 +1342,10 @@ bool8 sub_809B648(void)
              if (sTextbox->unk420 == 1) {
                 ResetTextbox();
                 if (sTextbox->unk424 == 0) {
-                    CreateConfirmNameMenu(0, sTextbox->unk42C);
+                    CreateConfirmNameMenu(0, sTextbox->unk42C.str);
                 }
                 else {
-                    CreateConfirmNameMenu(2, sTextbox->unk42C);
+                    CreateConfirmNameMenu(2, sTextbox->unk42C.str);
                 }
                 return 1;
              }
@@ -1376,7 +1371,7 @@ bool8 sub_809B648(void)
           case 5:
             if (sTextbox->unk420 == 1) {
                 ResetTextbox();
-                CreateConfirmNameMenu(1, sTextbox->unk42C);
+                CreateConfirmNameMenu(1, sTextbox->unk42C.str);
             }
             else {
                 s32 var = sub_8016080();
@@ -1398,7 +1393,7 @@ bool8 sub_809B648(void)
         case 6:
             if (sTextbox->unk420 == 1) {
                 ResetTextbox();
-                NamingScreen_Init(4,sTextbox->unk42C);
+                NamingScreen_Init(4,sTextbox->unk42C.str);
             }
             else {
                 s32 var = NamingScreen_HandleInput();
@@ -1420,12 +1415,12 @@ bool8 sub_809B648(void)
             }
             return 1;
           case 7:
-            sub_801D014((void *) sTextbox->unk42C);
+            sub_801D014(sTextbox->unk42C.mon);
             sTextbox->unk418 = &gUnknown_81161A8;
             PlayMenuSoundEffect(4);
             return 1;
           case 8:
-            sub_801D014((void *) sTextbox->unk42C);
+            sub_801D014(sTextbox->unk42C.mon);
             sTextbox->unk418 = &gUnknown_81161B8;
             PlayMenuSoundEffect(4);
             return 1;
@@ -1433,7 +1428,7 @@ bool8 sub_809B648(void)
             ResetTextbox();
             if (sTextbox->unk420 == 1) {
                 ResetTextbox();
-                if (!sub_8015080(sTextbox->unk42C, gUnknown_811610C)) {
+                if (!sub_8015080(sTextbox->unk42C.str, gUnknown_811610C)) {
                     sTextbox->unk430 = -1;
                     return 0;
                 }
@@ -1457,7 +1452,7 @@ bool8 sub_809B648(void)
             ResetTextbox();
             if (sTextbox->unk420 == 1) {
                 ResetTextbox();
-                if (!sub_8015080(sTextbox->unk42C, sEmptyMenuItems)) {
+                if (!sub_8015080(sTextbox->unk42C.str, sEmptyMenuItems)) {
                     sTextbox->unk430 = -1;
                     return 0;
                 }

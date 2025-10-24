@@ -2,8 +2,10 @@
 #include "globaldata.h"
 #include "ground_event.h"
 #include "ground_script.h"
+#include "ground_lives.h"
 #include "debug.h"
 #include "memory.h"
+#include "ground_script_file.h"
 
 typedef struct GroundEvent
 {
@@ -19,12 +21,8 @@ typedef struct GroundEvent
 
 IWRAM_INIT GroundEvent *gGroundEvents = NULL;
 
-extern void GroundLives_CancelBlank_2(void);
-
-void DeleteGroundEvents(void);
-void GroundEvent_Delete(s32);
-const struct GroundScriptHeader *GetGroundScript(s16 a0, const DebugLocation *);
-s32 GroundEvent_Add(s32 id, const GroundEventData*, s32 group, s32 sector);
+static s32 GroundEvent_Add(s32 id, const GroundEventData *eventData, s32 group, s32 sector);
+static void GroundEvent_Delete(s32 id);
 
 void AllocGroundEvents(void)
 {
@@ -119,7 +117,7 @@ void GroundEvent_Cancel(s32 scriptID, s32 sector)
     }
 }
 
-s32 GroundEvent_Add(s32 id, const GroundEventData *eventData, s32 group, s32 sector)
+static s32 GroundEvent_Add(s32 id, const GroundEventData *eventData, s32 group, s32 sector)
 {
     s32 i;
     s32 scriptID_s32 = (s16) id;
@@ -180,7 +178,7 @@ s32 GroundEvent_Add(s32 id, const GroundEventData *eventData, s32 group, s32 sec
     return scriptID_s32;
 }
 
-void GroundEvent_Delete(s32 id)
+static void GroundEvent_Delete(s32 id)
 {
     s32 scriptID_s32 = (s16) id;
     GroundEvent *ptr = &gGroundEvents[scriptID_s32];

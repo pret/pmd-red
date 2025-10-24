@@ -1,4 +1,6 @@
 #include "global.h"
+#include "globaldata.h"
+#include "ground_main.h"
 #include "constants/dungeon.h"
 #include "constants/move_id.h"
 #include "structs/str_wonder_mail.h"
@@ -12,9 +14,7 @@
 #include "ground_place.h"
 #include "debug.h"
 #include "event_flag.h"
-#include "ground_main.h"
 #include "ground_map.h"
-#include "ground_map_1.h"
 #include "play_time.h"
 #include "pokemon.h"
 #include "text_util.h"
@@ -24,6 +24,13 @@
 #include "script_item.h"
 #include "unk_ds_only_feature.h"
 #include "textbox.h"
+#include "ground_lives.h"
+#include "ground_event.h"
+#include "ground_sprite.h"
+#include "ground_effect.h"
+#include "ground_object.h"
+#include "ground_script.h"
+#include "code_809D148.h"
 
 EWRAM_DATA u32 gUnknown_20398A8 = {0};
 EWRAM_DATA s32 gUnknown_20398AC = {0};
@@ -43,88 +50,48 @@ EWRAM_DATA u8 gUnknown_2039950 = 0;
 EWRAM_INIT bool8 gUnknown_203B49C = {0};
 EWRAM_INIT u8 gUnknown_203B49D = {0};
 
-extern void sub_809B57C();
-extern void GroundScript_Unlock();
 extern void sub_809D25C();
-extern void sub_80A59DC();
-extern void sub_809B614();
 extern void sub_809CA20();
 extern void sub_80A6E80();
-extern void sub_8099BE4();
-extern void nullsub_120();
-extern void sub_809B638();
 extern void nullsub_106();
 extern void sub_80A73EC();
 
-extern void sub_8098CC8();
 extern void ClearAllItems_8091FB4();
 extern void sub_8095494(DungeonMailSeed *param_1, u8 index);
 
 extern u16 gUnknown_2026E4E;
 
 // TODO: Move these externs to headers
-extern void GroundSprite_Reset(s32);
-extern s16 sub_8098FCC(u32 unused);
 extern s16 sub_80A2654(s16 r0);
-extern bool8 sub_809AFAC(void);
 extern bool8 sub_80048BC(void);
 extern u8 sub_80023E4(u32);
 extern bool8 sub_8099B94(void);
-extern void FreeGroundLives(void);
-extern void FreeGroundObjects(void);
-extern void FreeGroundEffects(void);
-extern void FreeGroundEvents(void);
-extern void sub_80A658C(void);
-extern void sub_809D508(void);
-extern void nullsub_119(void);
 extern void sub_8099768(void);
-extern void nullsub_103(void);
-extern void sub_8099648(void);
 extern void sub_809975C(void);
-extern void sub_809D0AC(void);
-extern void sub_809D490(void);
-extern void sub_80A62F0(void);
-extern void AllocGroundEvents(void);
-extern void AllocGroundLives(void);
-extern void AllocGroundObjects(void);
-extern void AllocGroundEffects(void);
-extern void nullsub_124(void);
-extern void GroundLives_Action(void);
-extern void GroundObject_Action(void);
-extern void GroundEffect_Action(void);
-extern void sub_809B474(void);
-extern void GroundScript_Unlock();
-extern void sub_809D25C(void);
-extern void sub_80A59DC(void);
-extern void sub_809B614(void);
-extern void sub_80A6E80(void);
 extern void sub_8099BE4(void);
 extern void sub_8099744(void);
 extern void WaitForNextFrameAndAdvanceRNG(void);
 extern void LoadBufferedInputs(void);
-extern void nullsub_120(void);
-extern void sub_80A5E70(void);
-extern void sub_809B638(void);
-extern void sub_80A73EC(void);
 extern void sub_8099750(void);
-extern void sub_809D0BC(void);
-extern void DeleteGroundEvents(void);
-extern void DeleteGroundLives(void);
-extern void DeleteGroundObjects(void);
-extern void DeleteGroundEffects(void);
 extern void nullsub_16(void);
 extern void UpdateAdventureAchievements(void);
 extern void xxx_call_update_bg_sound_input(void);
-extern void sub_80A6E68(void);
 extern void sub_80060EC(void);
 extern void sub_809977C(void);
 extern void UpdateFadeInTile(s32);
-extern void sub_8098C58(void);
 extern void sub_8001D88(void);
-extern u32 GroundMainGameCancelRequest(u32 r0);
 extern void sub_80999D4(s32);
-extern void sub_809D4B0(void);
 extern void sub_8005838(s32, s32);
+
+static s16 sub_8098FCC(u32 unused);
+
+UNUSED static const u8 sUnusedConstData[] = {
+    0,  0,  0,  0,  0x01,  0,  0,  0,  0x69,  0,  0,  0,  0x09,  0,  0,  0,  0x0c,  0,  0,  0,  0x01,  0,  0,  0,  0xb2,  0,  0,  0,
+    0xb4,  0,  0,  0,  0xb6,  0,  0,  0,  0xb8,  0,  0,  0,  0xba,  0,  0,  0,  0xbc,  0,  0,  0,  0xbf,  0,  0,  0,  0xc1,  0,  0,  0,  0xc3,
+    0,  0,  0,  0xc6,  0,  0,  0,  0xc9,  0,  0,  0,  0xcc,  0,  0,  0,  0xcf,  0,  0,  0,  0xa2,  0,  0,  0,  0xa2,  0,  0,  0,  0,  0,
+    0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
+    0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
+};
 
 u32 xxx_script_related_8098468(s32 param_1)
 {
@@ -452,7 +419,7 @@ u32 xxx_script_related_8098468(s32 param_1)
     }
 }
 
-void sub_8098BDC(void)
+UNUSED static void sub_8098BDC(void)
 {
     sub_809B57C();
     GroundScript_Unlock();
@@ -676,7 +643,7 @@ const char *GetCurrentGroundPlaceName(void)
     return GetGroundPlaceName(GetScriptVarValue(NULL, GROUND_PLACE));
 }
 
-s16 sub_8098FCC(u32 unused)
+static s16 sub_8098FCC(u32 unused)
 {
   s32 iVar4;
   s32 iVar5;
@@ -735,25 +702,24 @@ static inline bool8 sub_80990EC_sub(struct DungeonSetupInfo *iVar1, u32 iVar2)
     return flag;
 }
 
-extern void sub_80A8EC0(u8 *, u32);
-
-u8 sub_80990EC(struct DungeonSetupInfo *param_1, s16 param_2)
+u8 sub_80990EC(struct DungeonSetupInfo *param_1, s32 param_2)
 {
     const DungeonInfo *iVar1;
     u8 auStack_98 [24];
     u8 nameBuffer [24];
     u8 dungeonIndex;
+    s32 param2 = (s16) param_2;
 
-    iVar1 = GetDungeonInfo_80A2608(param_2);
+    iVar1 = GetDungeonInfo_80A2608(param2);
     dungeonIndex = iVar1->dungeonIndex;
 
     param_1->sub0.unk0.id = dungeonIndex;
     param_1->sub0.unk0.floor = 1;
     param_1->sub0.unkC = 0;
 
-    switch (sub_80A2750(param_2)) {
+    switch (sub_80A2750(param2)) {
         case 1:
-            if (sub_80990EC_sub(param_1, param_2)) {
+            if (sub_80990EC_sub(param_1, param2)) {
                 param_1->sub0.unkC = 1;
                 sub_80A8EC0(auStack_98, 0x5b);
                 BoundedCopyStringtoBuffer(nameBuffer, auStack_98, POKEMON_NAME_LENGTH);
@@ -789,7 +755,7 @@ u8 sub_80990EC(struct DungeonSetupInfo *param_1, s16 param_2)
     return iVar1->unk11;
 }
 
-u8 sub_80991E0(struct DungeonSetupInfo *param_1,short *param_2)
+u8 sub_80991E0(struct DungeonSetupInfo *param_1, s16 *param_2)
 {
     *param_2 = gUnknown_20398C4;
     if (gUnknown_203B49C) {
@@ -801,11 +767,10 @@ u8 sub_80991E0(struct DungeonSetupInfo *param_1,short *param_2)
     }
 }
 
-void sub_8099220(struct DungeonSetupInfo *param_1, s16 param_2)
+void sub_8099220(struct DungeonSetupInfo *param_1, s32 param_2)
 {
-    s32 param_2_s32 = (s16)param_2;
-    if (param_1 != NULL)
-    {
+    s32 param_2_s32 = (s16) param_2;
+    if (param_1 != NULL) {
         gUnknown_203B49C = TRUE;
         gUnknown_203B49D = 0;
         gUnknown_20398C4 = param_2_s32;
@@ -897,9 +862,6 @@ void sub_80993C0(bool8 param)
 {
     gUnknown_20398B8 = (param == FALSE);
 }
-
-extern void sub_80A4B38(void);
-extern void sub_80A4B54(void);
 
 void sub_80993D8(void)
 {

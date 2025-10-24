@@ -23,7 +23,6 @@
 #include "ground_lives.h"
 #include "ground_main.h"
 #include "ground_map.h"
-#include "ground_map_1.h"
 #include "ground_script.h"
 #include "ground_sprite.h"
 #include "input.h"
@@ -50,124 +49,29 @@
 #include "ground_map_conversion_table.h"
 #include "unk_ds_only_feature.h"
 #include "textbox.h"
-
-void GroundMap_Select(s16);
-void GroundMap_SelectDungeon(s32, DungeonLocation*, u32);
-void GroundMap_GetStationScript(ScriptInfoSmall *out, s16, s32, s32);
-void GroundObject_ExecuteScript(s32, ActionUnkIds *, ScriptInfoSmall *);
-void GroundEffect_ExecuteScript(s32, ActionUnkIds *, ScriptInfoSmall *);
-void GroundLives_Select(s32, s32 group, s32 sector);
-void GroundObject_Select(s32, s32 group, s32 sector);
-void GroundEffect_Select(s32, s32 group, s32 sector);
-void GroundEvent_Select(s32, s32 group, s32 sector);
-void GroundLives_Cancel(s32 group, s32 sector);
-void GroundObject_Cancel(s32 group, s32 sector);
-void GroundEffect_Cancel(s32 group, s32 sector);
-void GroundEvent_Cancel(s32 group, s32 sector);
-void GroundLives_CancelBlank_1(void);
-void GroundObject_CancelBlank(void);
-void GroundEffect_CancelBlank(void);
-void GroundWeather_Select(s16);
-u32 GroundLives_ExecutePlayerScriptActionLives();
-s16 GroundObject_Add(s16 id, GroundObjectData*, s16 group, s8 sector);
-s16 GroundEffect_Add(s16 id, GroundEffectData*, s16 group, s8 sector);
+#include "ground_event.h"
+#include "ground_effect.h"
+#include "ground_object.h"
+#include "ground_weather.h"
+#include "code_809D148.h"
 
 // Beware of the declarations without specified arguments, returning u32 or s32, these were quickly hacked in to get the code to compile and link
 // The return values are almost certainly NOT correct and will need to be rechecked when moving to header files
 char sub_8002984(s32, u8);
 bool8 sub_802FCF0(void);
-
-
 void sub_809733C(s16, bool8);
 void sub_80973A8(s16, bool8);
 void sub_80975A8(s16, bool8);
-u32 sub_809A6E4();
-u32 sub_809A6F8();
-u32 sub_809A768();
-void sub_809AFC8(bool8, s32, s32, const char*);
-u32 sub_809B028(const MenuItem *, s32 a1_, s32 a2, s32 a3, s32 a4_, const char *text);
-bool8 sub_809B1C0(s32, s32, char[12]);
-void sub_809B1D4(u8, s32, s32, const char*);
-void sub_809D0BC(void);
-void sub_809D124(s32, s32, s32);
-void sub_809D158(s32, PixelPos*);
-void sub_809D170(s32, s32);
-void sub_809D190(s32, PixelPos*, s32);
-void sub_809D1A8(s32, s32, s32);
-void sub_809D1CC(s32, PixelPos*, s32);
-void sub_809D1E4(s32, s32, s32);
-void sub_809D208(s32, PixelPos*, s32);
-void sub_809D220(s32, s32, s32);
 void GroundScriptLockJumpZero(s16);
-void sub_80A87AC(s32, s32);
-void sub_80A8BD8(s16, s32*);
-u32 sub_80A8C2C();
-u32 GroundLives_IsStarterMon();
-Pokemon *sub_80A8D54(s16);
-s16 sub_80A8F9C(s32, PixelPos*);
-u32 sub_80A9050();
-u32 sub_80A9090();
-s16 sub_80AC448(s16, PixelPos*);
-s32 sub_80AC49C(s16, PixelPos*);
-s16 sub_80AD360(s16, PixelPos*);
-s16 sub_80AD3B4(s16, PixelPos*);
-void DeleteGroundEvents(void);
-void DeleteGroundLives(void);
-void DeleteGroundObjects(void);
-void DeleteGroundEffects(void);
-s32 ExecuteScriptCommand(Action *action);
 bool8 sub_8099B94(void);
 PixelPos SetVecFromDirectionSpeed(s8, s32);
-bool8 sub_8098DCC(u32 speed);
-
-void sub_8099220(void *param_1, s32 param_2);
-bool8 sub_809B260(void *dst);
-bool8 sub_809B18C(s32 *sp);
-bool8 sub_809AFFC(u8 *);
-bool8 sub_809D234(void);
-s32 sub_80A14E8(Action *, u8, u32, s32);
-u8 sub_80990EC(struct DungeonSetupInfo *param_1, s32 param_2);
-
-extern u8 GroundObjectsCancelAll(void);
-extern u8 GroundEffectsCancelAll(void);
-extern u8 GroundLivesCancelAll(void);
-extern u8 IsTextboxOpen_809A750(void);
-extern Action *sub_80A882C(s32);
-extern Action *GroundObject_GetAction(s32);
-extern Action *sub_80AD158(s32);
-extern void sub_809AB4C(s32, s32);
-extern void sub_809ABB4(s32, s32);
-extern void sub_809AC18(s32, s32);
-extern s16 sub_80A8BBC(s32 id_);
-
-bool8 GroundLivesNotifyAll(s16);
-bool8 GroundObjectsNotifyAll(s16);
-bool8 GroundEffectsNotifyAll(s16);
-
-void sub_8098C58(void);
-void sub_8098CC8(void);
 bool8 sub_80961D8(void);
 void ResetMailbox(void);
 void sub_80963FC(void);
 void sub_8096488(void);
 bool8 sub_80964B4(void);
-s16 sub_80A8C4C();
 bool8 sub_8097640();
 u8 sub_80964E4();
-s32 sub_80A8E9C();
-u8 sub_80A8D20();
-bool8 sub_80A87E0();
-s16 sub_80A8BFC(s16);
-void sub_80A8F50(const u8 *buffer, s32, s32 size);
-void sub_80A56A0(s32, s32);
-void sub_80A56F0(PixelPos *);
-void sub_80A5704(PixelPos *);
-void sub_80A86C8(s16, s32);
-void sub_80AC1B0(s16, s32);
-void sub_80AD0C8(s16, s32);
-s32 sub_80A5984();
-void sub_80A59A0(s32, s32 *, u16);
-extern bool8 sub_80A579C(PixelPos *a0, PixelPos *a1);
 
 // For gScriptLocks, gScriptLockConds, gUnlockBranchLabels
 #define SCRIPT_LOCKS_ARR_COUNT 129
@@ -219,6 +123,8 @@ static const ScriptCommand gUnknown_81164E4[] = {
     {0xEF, 0, 0,    0, 0, NULL},
 };
 
+static s32 ExecuteScriptCommand(Action *action);
+static s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3);
 static const ScriptCommand *FindLabel(Action *action, s32 r1);
 static const ScriptCommand *ResolveJump(Action *action, s32 r1);
 static void sub_80A2500(s32 param_1, ActionUnkIds *param_2);
@@ -271,7 +177,7 @@ static Action *sub_809D52C(ActionUnkIds *a0)
     return NULL;
 }
 
-void InitScriptData(ScriptData *a0)
+static void InitScriptData(ScriptData *a0)
 {
     s32 i;
 
@@ -295,7 +201,7 @@ void InitScriptData(ScriptData *a0)
     }
 }
 
-void InitAction(Action *a0)
+static void InitAction(Action *a0)
 {
     s32 i;
 
@@ -326,7 +232,7 @@ void InitActionWithParams(Action *action, const CallbackData *callbacks, void *p
     action->sector = sector_s32;
     action->unk8.unk0 = callbacks->maybeId;
 
-    if(callbacks->getIndex)
+    if (callbacks->getIndex)
         action->unk8.unk2 = callbacks->getIndex(parent);
     else
         action->unk8.unk2 = 0;
@@ -382,15 +288,15 @@ bool8 sub_809D684(Action *action, ScriptInfoSmall *scriptInfo)
     return 0;
 }
 
-void SetPredefinedScript(Action *param_1, s16 index, ScriptCommand *param_3)
+void SetPredefinedScript(Action *param_1, s16 index, const ScriptCommand *param_3)
 {
     param_1->predefinedScripts[index] = param_3;
 }
 
-bool8 GetPredefinedScript(Action *param_1, ScriptInfoSmall *script, s16 _index)
+bool8 GetPredefinedScript(Action *param_1, ScriptInfoSmall *script, s32 _index)
 {
     const ScriptCommand *scriptPtr;
-    s32 index = _index;
+    s32 index = (s16) _index;
 
     scriptPtr = param_1->predefinedScripts[index];
     script->ptr = scriptPtr;
@@ -422,7 +328,7 @@ bool8 ActionResetScriptData(Action *param_1, const DebugLocation *unused)
     return TRUE;
 }
 
-bool8 ActionResetScriptDataForDeletion(Action *param_1, DebugLocation *unused)
+static bool8 ActionResetScriptDataForDeletion(Action *param_1, const DebugLocation *unused)
 {
     InitScriptData(&param_1->scriptData);
     InitScriptData(&param_1->scriptData2);
@@ -491,7 +397,7 @@ bool8 GroundScript_ExecutePP(Action *action, ActionUnkIds *param_2, ScriptInfoSm
     return TRUE;
 }
 
-bool8 ExecutePredefinedScript(Action *param_1, ActionUnkIds *param_2, s16 index, DebugLocation *debug)
+bool8 ExecutePredefinedScript(Action *param_1, ActionUnkIds *param_2, s16 index, const DebugLocation *debug)
 {
     ScriptInfoSmall auStack28;
 
@@ -499,7 +405,7 @@ bool8 ExecutePredefinedScript(Action *param_1, ActionUnkIds *param_2, s16 index,
     return GroundScript_ExecutePP(param_1, param_2, &auStack28, debug);
 }
 
-u8 GroundScriptCheckLockCondition(Action *param_1, s16 param_2)
+static u8 GroundScriptCheckLockCondition(Action *param_1, s16 param_2)
 {
     s32 param_2_s32;
 
@@ -523,7 +429,7 @@ bool8 GroundScript_Cancel(Action *r0)
     return ActionResetScriptDataForDeletion(r0, DEBUG_LOC_PTR("../ground/ground_script.c", 821, "GroundScript_Cancel"));
 }
 
-u8 GroundCancelAllEntities(void)
+static u8 GroundCancelAllEntities(void)
 {
     u8 ret;
 
@@ -533,13 +439,13 @@ u8 GroundCancelAllEntities(void)
     return ret;
 }
 
-bool8 GroundScriptNotify(Action *param_1, s16 param_2)
+bool8 GroundScriptNotify(Action *param_1, s32 param_2)
 {
     s16 sVar1;
     s16 sVar2;
     bool8 ret;
 
-    s32 param_2_s16 = param_2;
+    s32 param_2_s16 = (s16) param_2;
 
     ret = FALSE;
     sVar1 = param_1->scriptData.unk22;
@@ -571,7 +477,7 @@ void GroundScriptLock(s16 index, s32 r1)
     gAnyScriptLocked = 1;
 }
 
-bool8 GroundScriptLockCond(Action *param_1, s16 index, s32 param_3)
+static bool8 GroundScriptLockCond(Action *param_1, s16 index, s32 param_3)
 {
     s32 index_s32 = index;
     gUnlockBranchLabels[index_s32] = param_3;
@@ -591,7 +497,7 @@ bool8 GroundScriptLockCond(Action *param_1, s16 index, s32 param_3)
     return TRUE;
 }
 
-s16 HandleAction(Action *action, DebugLocation *debug)
+s16 HandleAction(Action *action, const DebugLocation *debug)
 {
     ScriptCommand cmd;
 
@@ -1172,7 +1078,7 @@ s16 HandleAction(Action *action, DebugLocation *debug)
                             if (val == 1) {
                                 s32 id = (s16)cmd.arg1;
                                 if (id != -1) {
-                                    Pokemon *mon = sub_80A8D54(id);
+                                    Pokemon *mon = sub_80A8D54((s16) id);
                                     s32 i;
                                     for (i = 0; i < POKEMON_NAME_LENGTH; i++) {
                                         mon->name[i] = sPokeNameBuffer[i];
@@ -1402,7 +1308,7 @@ s16 HandleAction(Action *action, DebugLocation *debug)
 //     This is the only return value that does not return to the script engine caller
 // - Value 3 returns to the caller, but will give control back to ExecuteScriptCommand when reentering the script ("script not finished")
 // - Value 4 is some kind of fatal error state, no further scripting progress will happen. This code is always returned to the caller from now on.
-s32 ExecuteScriptCommand(Action *action)
+static s32 ExecuteScriptCommand(Action *action)
 {
     ScriptCommand curCmd;
     ScriptData *scriptData = &action->scriptData;
@@ -1446,7 +1352,7 @@ s32 ExecuteScriptCommand(Action *action)
             }
             case 0x04: {
                 if (curCmd.arg1 == -1) {
-                    if (!(u8)sub_802FCF0() && (u8)sub_809B1C0(12,0,0)) {
+                    if (!(u8)sub_802FCF0() && sub_809B1C0(12,0,NULL)) {
                         sub_80A87AC(0, 11);
                         action->scriptData.branchDiscriminant = 0;
                     } else {
@@ -1462,7 +1368,7 @@ s32 ExecuteScriptCommand(Action *action)
             }
             case 0x06: {
                 if (curCmd.arg1 == -1) {
-                    if ((s8)sub_809B1C0(36, 0, 0)) {
+                    if (sub_809B1C0(36, 0, NULL)) {
                         sub_80A87AC(0, 11);
                         action->scriptData.branchDiscriminant = 0;
                         return 2;
@@ -1677,7 +1583,7 @@ s32 ExecuteScriptCommand(Action *action)
                     sector = (s8)curCmd.argByte < 0 ? scriptData->script.sector : (s8)curCmd.argByte;
                     &eff;
                 });
-                res = GroundEffect_Add(-1, eff, group, sector);
+                res = (s16) GroundEffect_Add(-1, eff, (s16) group, (s8) sector);
                 if (res >= 0) {
                     action->callbacks->getHitboxCenter(action->parentObject, &pos);
                     sub_80AD3B4(res, &pos);
@@ -1768,7 +1674,7 @@ s32 ExecuteScriptCommand(Action *action)
             }
             case 0x21: {
                 s32 ret;
-                s32 unk;
+                u32 unk;
                 PixelPos pos1;
                 PixelPos pos2;
                 PixelPos pos3;
@@ -1843,7 +1749,7 @@ s32 ExecuteScriptCommand(Action *action)
                 break;
             }
             case 0x2c: {
-                if (!(s8)sub_809A768()) break;
+                if (!sub_809A768()) break;
                 sub_80A87AC(0, 10);
                 if (GroundScriptCheckLockCondition(action, 0)) return 2;
                 break;
@@ -1974,7 +1880,7 @@ s32 ExecuteScriptCommand(Action *action)
                 break;
             }
             case 0x3c: {
-                sub_809B1D4(curCmd.argByte, curCmd.arg1, curCmd.arg2, curCmd.argPtr);
+                sub_809B1D4(curCmd.argByte, curCmd.arg1, curCmd.arg2, (void *) curCmd.argPtr);
                 sub_80A87AC(0, 11);
                 return 2;
             }
@@ -1985,7 +1891,7 @@ s32 ExecuteScriptCommand(Action *action)
             case 0x3d: {
                 int i;
                 if ((s16)curCmd.arg1 != -1) {
-                    Pokemon *mon = sub_80A8D54(curCmd.arg1);
+                    Pokemon *mon = sub_80A8D54((s16) curCmd.arg1);
                     if (mon != NULL) {
                         for (i = 0; i < POKEMON_NAME_LENGTH; i++) {
                             sPokeNameBuffer[i] = mon->name[i];
@@ -2482,7 +2388,7 @@ s32 ExecuteScriptCommand(Action *action)
             }
             case 0x98: {
                 s32 id = action->callbacks->getIndex(action->parentObject);
-                switch(action->unk8.unk0) {
+                switch (action->unk8.unk0) {
                     case 1:
                         sub_809D170(1, id);
                         break;
@@ -2498,7 +2404,7 @@ s32 ExecuteScriptCommand(Action *action)
             case 0x99: {
                 s32 id = action->callbacks->getIndex(action->parentObject);
                 PixelPos unk;
-                switch(action->unk8.unk0) {
+                switch (action->unk8.unk0) {
                     case 1:
                         sub_80A8FD8(id, &unk);
                         sub_809D158(0, &unk);
@@ -2521,7 +2427,7 @@ s32 ExecuteScriptCommand(Action *action)
             case 0x9b: {
                 s32 id = action->callbacks->getIndex(action->parentObject);
                 if (id < 0) break;
-                switch(action->unk8.unk0) {
+                switch (action->unk8.unk0) {
                     case 1:
                         sub_809D1A8(1, id, curCmd.argShort);
                         return 2;
@@ -2537,7 +2443,7 @@ s32 ExecuteScriptCommand(Action *action)
             case 0x9c: {
                 s32 id = action->callbacks->getIndex(action->parentObject);
                 PixelPos unk;
-                switch(action->unk8.unk0) {
+                switch (action->unk8.unk0) {
                     case 1:
                         sub_80A8FD8(id, &unk);
                         sub_809D190(0, &unk, curCmd.argShort);
@@ -2615,7 +2521,7 @@ s32 ExecuteScriptCommand(Action *action)
             case 0xa2: {
                 s32 id = action->callbacks->getIndex(action->parentObject);
                 PixelPos unk;
-                switch(action->unk8.unk0) {
+                switch (action->unk8.unk0) {
                     case 1:
                         sub_80A8FD8(id, &unk);
                         sub_809D208(0, &unk, curCmd.argShort);
@@ -2760,19 +2666,19 @@ s32 ExecuteScriptCommand(Action *action)
             }
             case 0xbd: {
                 if (sub_80026CC(curCmd.arg1)) {
-                        scriptData->script.ptr = FindLabel(action, (u8)curCmd.argByte);
+                    scriptData->script.ptr = FindLabel(action, (u8)curCmd.argByte);
                 }
                 break;
             }
             case 0xbf: {
                 if (HasItemInInventory(curCmd.argShort) > 0) {
-                        scriptData->script.ptr = FindLabel(action, (u8)curCmd.argByte);
+                    scriptData->script.ptr = FindLabel(action, (u8)curCmd.argByte);
                 }
                 break;
             }
             case 0xbe: {
                 if (action->unk8.unk0 == 1) {
-                    if ((s8)GroundLives_IsStarterMon(action->unk8.unk2)) {
+                    if (GroundLives_IsStarterMon(action->unk8.unk2)) {
                         scriptData->script.ptr = FindLabel(action, (u8)curCmd.argByte);
                     }
                 }
@@ -3080,7 +2986,7 @@ UNUSED static bool8 GroundScript_ExecuteTrigger(s16 r0)
         return FALSE;
 }
 
-s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
+static s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
 {
     switch(idx)
     {
@@ -3129,7 +3035,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
                 {
                     u8 text[0x100];
                     DungeonLocation dungLocation;
-                    s32 ret = sub_80A8C4C(action->unkC.unk2, &dungLocation);
+                    s32 ret = (s16) sub_80A8C4C(action->unkC.unk2, &dungLocation);
                     if (ret != 0)
                     {
                         s32 dialogueId;
@@ -3188,7 +3094,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
                     }
             return 0;
         case 0x11:
-            return sub_80A8D20() == 0 ? 0 : 1;
+            return sub_80A8D20() != FALSE;
         case 0x12:
             {
                 s32 held = gRealInputs.held;
@@ -3200,10 +3106,8 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
 
         case 0x13:
             {
-                Pokemon *ptr;
-
-                ptr = sub_80A8D54(r2);
-                if(ptr)
+                Pokemon *ptr = sub_80A8D54((s16) r2);
+                if (ptr)
                     return PokemonFlag2(ptr);
             }
             return 0;
@@ -3745,26 +3649,21 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
         case 0x3C:
             {
                 s32 index;
-                index = 0;
-                for(index = 0; index < 0x18; index = (s16)(index + 1))
-                {
+                for (index = 0; index < 0x18; index = (s16)(index + 1)) {
                     sub_80A86C8(index, 0x400000);
                 }
-                for (index = 0; index < 0x10; index = (s16)(index + 1))
-                {
+                for (index = 0; index < 0x10; index = (s16)(index + 1)) {
                     sub_80AC1B0(index, 0x400000);
                 }
-                for (index = 0; index < 0x10; index = (s16)(index + 1))
-                {
+                for (index = 0; index < 0x10; index = (s16)(index + 1)) {
                     sub_80AD0C8(index, 0x400000);
                 }
             }
             return 0;
         case 0x3D: {
-            s32 sp_338[2];
-            sp_338[0] = r2;
-            sp_338[1] = r3;
-            sub_80A59A0(0, sp_338, sub_80A5984(1, sp_338));
+            PixelPos sp_338 = {r2, r3};
+
+            sub_80A59A0(0, &sp_338, sub_80A5984(1, &sp_338));
             return 0;
         }
         case 0x3E:
@@ -3783,7 +3682,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
                 sp_308.height = 1;
                 sp_308.pos = (CompactPos) {0};
                 sp_308.script = gFunctionScriptTable[406].script; // MOVE_DEBUG_CAMERA
-                ret = GroundEffect_Add(-1, &sp_308, r2, r3);
+                ret = (s16) GroundEffect_Add(-1, &sp_308, (s16) r2, (s8) r3);
                 if(ret < 0) break;
                 r7 = sub_80AD158(ret);
                 sub_80A579C(&sp_340, &sp_348);
@@ -3912,27 +3811,28 @@ void GroundScript_Unlock(void)
     s32 index;
     bool8 cond;
 
-    if(gAnyScriptLocked == 0) return;
+    if (gAnyScriptLocked == 0) return;
 
     gAnyScriptLocked = 0;
     index = 0;
     for (index = 0; index < SCRIPT_LOCKS_ARR_COUNT; index++) {
-        if(gScriptLocks[index] != 0) {
+        if (gScriptLocks[index] != 0) {
             Log(1, "GroundScript unlock %3d", index);
-            cond  = GroundMapNotifyAll(index);
-            cond |= GroundLivesNotifyAll(index);
-            cond |= GroundObjectsNotifyAll(index);
-            cond |= GroundEffectsNotifyAll(index);
+            cond  = GroundMapNotifyAll((s16) index);
+            cond |= GroundLivesNotifyAll((s16) index);
+            cond |= GroundObjectsNotifyAll((s16) index);
+            cond |= GroundEffectsNotifyAll((s16) index);
 
-            if(gScriptLockConds[index] != 0) {
+            if (gScriptLockConds[index] != 0) {
                if (cond) {
-                    GroundMapNotifyAll(index | 0x80);
-                    GroundLivesNotifyAll(index | 0x80);
-                    GroundObjectsNotifyAll(index | 0x80);
-                    GroundEffectsNotifyAll(index | 0x80);
+                    GroundMapNotifyAll((s16) (index | 0x80));
+                    GroundLivesNotifyAll((s16) (index | 0x80));
+                    GroundObjectsNotifyAll((s16) (index | 0x80));
+                    GroundEffectsNotifyAll((s16) (index | 0x80));
                     gScriptLocks[index] = gScriptLockConds[index] = 0;
                }
-            } else {
+            }
+            else {
                gScriptLocks[index] = 0;
             }
         }
@@ -4003,21 +3903,21 @@ static const ScriptCommand *ResolveJump(Action *action, s32 r1)
 static void sub_80A2500(s32 param_1, ActionUnkIds *param_2)
 {
     if (param_2->unk0 == 1) {
-        sub_809AB4C((s16) param_1, sub_80A8BBC(param_2->unk2));
+        sub_809AB4C((s16) param_1, (s16) sub_80A8BBC(param_2->unk2));
     }
 }
 
 static void sub_80A252C(s32 param_1, ActionUnkIds *param_2)
 {
     if (param_2->unk0 == 1) {
-        sub_809ABB4((s16) param_1, sub_80A8BBC(param_2->unk2));
+        sub_809ABB4((s16) param_1, (s16) sub_80A8BBC(param_2->unk2));
     }
 }
 
 static void sub_80A2558(s32 param_1, ActionUnkIds *param_2)
 {
     if (param_2->unk0 == 1) {
-        sub_809AC18((s16) param_1, sub_80A8BBC(param_2->unk2));
+        sub_809AC18((s16) param_1, (s16) sub_80A8BBC(param_2->unk2));
     }
 }
 

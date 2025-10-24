@@ -16,10 +16,12 @@ void GetCameraPositionForLayer(GroundBg *groundBg, s32 id, PixelPos *dstPos);
 void SetCameraPositionForLayer(GroundBg *groundBg, s32 id, const PixelPos *srcPos);
 void sub_80A4580(GroundBg *groundBg, s32 id, PixelPos *pixPos);
 void sub_80A4608(GroundBg *groundBg, PixelPos *dstPos);
+void GetDungeonBounds(GroundBg *groundBg, PixelPos *dstPos1, PixelPos *dstPos2);
+u8 sub_80A4660(GroundBg *groundBg, u8 bits, PixelPos *pixPos1, PixelPos *boundary);
+u8 sub_80A46C0(GroundBg *groundBg, u8 bits, PixelPos *pixPos1, PixelPos *boundary);
 u16 sub_80A4720(GroundBg *groundBg, s32 id, PixelPos *pixPos);
 void sub_80A4740(GroundBg *groundBg, s32 id, PixelPos *pixPos, u32 dstVal);
 void sub_80A4764(GroundBg *groundBg);
 void sub_80A49E8(GroundBg *groundBg);
-void GetDungeonBounds(GroundBg *groundBg, PixelPos *dstPos1, PixelPos *dstPos2);
 
 #endif // GUARD_GROUND_BG_H

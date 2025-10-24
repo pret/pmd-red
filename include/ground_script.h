@@ -25,16 +25,24 @@ static inline void SetUnkInGroundEvent(const CompactPos *posPtr, PixelPos *dst)
 
 #include "debug.h"
 
+void sub_809D490(void);
 void sub_809D4B0(void);
-void InitScriptData(ScriptData *a0);
-u8 GroundScriptCheckLockCondition(Action *param_1, s16 param_2);
+void sub_809D508(void);
+void InitActionWithParams(Action *action, const CallbackData *callbacks, void *parent, s32 group, s32 sector);
 void InitAction2(Action *action);
-void GetFunctionScript(Action *param_1, ScriptInfoSmall *script, s16 index);
+bool8 sub_809D678(Action *action);
 bool8 sub_809D684(Action *action, ScriptInfoSmall *scriptInfo);
-bool8 GroundScriptLockCond(Action *param_1, s16 index, s32 param_3);
+void SetPredefinedScript(Action *param_1, s16 index, const ScriptCommand *param_3);
+bool8 GetPredefinedScript(Action *param_1, ScriptInfoSmall *script, s32 _index);
+void GetFunctionScript(Action *param_1, ScriptInfoSmall *script, s16 index);
 bool8 ActionResetScriptData(Action *param_1, const DebugLocation *unused);
 bool8 GroundScript_ExecutePP(Action *action, ActionUnkIds *param_2, ScriptInfoSmall *param_3, const DebugLocation *unused);
-bool8 ExecutePredefinedScript(Action *param_1, ActionUnkIds *param_2, s16 index, DebugLocation *debug);
-void InitActionWithParams(Action *action, const CallbackData *callbacks, void *parent, s32 group, s32 sector);
+bool8 ExecutePredefinedScript(Action *param_1, ActionUnkIds *param_2, s16 index, const DebugLocation *debug);
+bool8 GroundScript_Cancel(Action *r0);
+bool8 GroundScriptNotify(Action *param_1, s32 param_2);
+void GroundScriptLockJumpZero(s16 index);
+void GroundScriptLock(s16 index, s32 r1);
+s16 HandleAction(Action *action, const DebugLocation *debug);
+void GroundScript_Unlock(void);
 
 #endif // GUARD_GROUND_SCRIPT_H

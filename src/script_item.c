@@ -7,9 +7,9 @@
 #include "memory.h"
 #include "string_format.h"
 #include "code_800D090.h"
+#include "textbox.h"
 
 extern bool8 ScriptPrintText(s32 a0, s32 a1_, const char *text);
-extern u8 IsTextboxOpen_809A750(void);
 
 // These are only written to.
 struct ScriptItemsData

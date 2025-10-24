@@ -60,6 +60,7 @@
 #include "dungeon_mon_spawn.h"
 #include "dungeon_action_execution.h"
 #include "dungeon_8041AD0.h"
+#include "ground_main.h"
 
 EWRAM_INIT struct UnkStruct_203B414 *gUnknown_203B414 = NULL;
 EWRAM_INIT Dungeon *gDungeon = NULL;

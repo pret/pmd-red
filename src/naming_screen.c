@@ -873,7 +873,7 @@ static void UpdateLetterWidths(void)
     }
 }
 
-s32 GetStrWidth(u8 *buffer, s32 size)
+s32 GetStrWidth(const u8 *buffer, s32 size)
 {
     s32 i;
     s32 width = 0;
