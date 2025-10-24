@@ -28,7 +28,7 @@ typedef struct PersonalityRelated
 typedef struct PersonalityTestTracker
 {
     /* 0x0 */ s32 FrameCounter;
-    /* 0x4 */ PersonalityRelated unk4;
+    /* 0x4 */ PersonalityRelated TeamBasicInfo;
     /* 0x34 */ u32 TestState;
     /* 0x38 */ s32 QuestionCounter;
     /* 0x3C */ u32 currQuestionIndex;
