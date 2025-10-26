@@ -21,5 +21,8 @@ bool8 IsAITargetEligible(s32 targetingFlags, Entity *user, Entity *target, Move 
 s32 WeightMove(Entity *user, s32 targetingFlags, Entity *target, u32 moveType);
 bool8 TargetRegularAttack(Entity *pokemon, u32 *targetDir, bool8 checkPetrified);
 bool8 IsTargetInRange(Entity *pokemon, Entity *targetPokemon, s32 direction, s32 maxRange);
+void HandleUseMoveAIAction(Entity *target);
+void HandleUseOrbAction(Entity *pokemon);
+s16 GetMoveTargetAndRangeForPokemon(Entity *pokemon, Move *move, bool32 isAI);
 
 #endif

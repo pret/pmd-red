@@ -43,10 +43,6 @@ EWRAM_DATA u32 gAIThrownItemDirections[NUM_DIRECTIONS] = {0};
 EWRAM_DATA bool8 gAIThrownItemDirectionIsUsed[NUM_DIRECTIONS] = {0};
 EWRAM_DATA u32 gAIThrownItemProbabilities[NUM_DIRECTIONS] = {0};
 
-extern TeamInventory *gTeamInventoryRef;
-
-void sub_8073D14(Entity *);
-
 void AIDecideUseItem(Entity *pokemon)
 {
     EntityInfo *pokemonInfo = GetEntInfo(pokemon);
@@ -427,10 +423,10 @@ void HandleThrowItemAIAction(Entity *pokemon)
 
 void HandlePickUpAIAction(Entity *pokemon)
 {
-    sub_8073D14(pokemon);
+    MonTryPickUpItem(pokemon);
 }
 
-void sub_8073D14(Entity *entity)
+void MonTryPickUpItem(Entity *entity)
 {
     Item *groundItem;
     EntityInfo *_entityInfo;

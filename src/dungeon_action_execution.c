@@ -39,17 +39,14 @@
 #include "move_orb_effects_1.h"
 #include "move_orb_effects_3.h"
 #include "dungeon_entity_movement.h"
+#include "dungeon_ai_items.h"
+#include "dungeon_ai_attack.h"
 
 void sub_8075BA4(Entity *param_1, u8 param_2);
 void nullsub_95(Entity *);
-void HandleUseMoveAIAction(Entity *target);
 void sub_8041888(u8 param_1);
 void sub_805EFB4(Entity *, u8);
-void HandleUseOrbAction(Entity *);
 void sub_806A1E8(Entity *pokemon);
-void HandlePickUpAIAction(Entity *pokemon);
-void HandleThrowItemAIAction(Entity *pokemon);
-void HandleEatAIAction(Entity *pokemon);
 
 EWRAM_DATA u8 gUnknown_202F32C = 0;
 EWRAM_DATA u8 gUnknown_202F32D = 0;

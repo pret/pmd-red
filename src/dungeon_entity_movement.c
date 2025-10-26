@@ -53,14 +53,13 @@
 #include "dungeon_tilemap.h"
 #include "run_dungeon.h"
 #include "dungeon_8041AD0.h"
+#include "dungeon_ai_items.h"
 
 static EWRAM_DATA s32 sSpeedMultiplier = 0;
 
 static void sub_8075050(EntityInfo *info, Unk_Entity_x184 *strPtr);
 static void nullsub_97(Entity *entity);
 static void TryInteractWithTile(Entity *entity);
-
-extern void sub_8073D14(Entity *entity);
 
 static inline void SetSpeedMultiplier(void)
 {
@@ -392,7 +391,7 @@ static void TryInteractWithTile(Entity *entity)
             break;
         }
         case ENTITY_ITEM:
-            sub_8073D14(entity);
+            MonTryPickUpItem(entity);
             break;
         case ENTITY_NOTHING:
         case ENTITY_MONSTER:

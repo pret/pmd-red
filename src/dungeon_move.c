@@ -38,11 +38,11 @@
 #include "position_util.h"
 #include "sprite.h"
 #include "weather.h"
-#include "targeting_flags.h"
 #include "text_util.h"
 #include "dungeon_pos_data.h"
 #include "dungeon_engine.h"
 #include "warp_target.h"
+#include "dungeon_ai_attack.h"
 
 extern s16 GetDungeonExitReasonFromMoveOrItem(Move *move, s32 itemID);
 extern void sub_806A1E8(Entity *pokemon);

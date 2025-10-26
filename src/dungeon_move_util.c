@@ -36,7 +36,7 @@
 #include "move_orb_effects_3.h"
 #include "move_orb_effects_5.h"
 #include "weather.h"
-#include "targeting_flags.h"
+#include "dungeon_ai_attack.h"
 #include "pokemon_types.h"
 #include "dungeon_run_end.h"
 #include "dungeon_pos_data.h"

@@ -27,7 +27,6 @@
 #include "position_util.h"
 #include "status_checks.h"
 #include "structs/str_dungeon.h"
-#include "targeting_flags.h"
 #include "dungeon_misc.h"
 #include "dungeon_pos_data.h"
 #include "dungeon_engine.h"
@@ -44,8 +43,6 @@ EWRAM_DATA bool8 gCanAttackInDirection[NUM_DIRECTIONS] = {0};
 EWRAM_DATA u8 gPotentialAttackTargetDirections[NUM_DIRECTIONS] = {0};
 EWRAM_DATA s32 gPotentialAttackTargetWeights[NUM_DIRECTIONS] = {0};
 EWRAM_DATA Entity *gPotentialTargets[NUM_DIRECTIONS] = {0};
-
-extern void sub_806A1B0(Entity *);
 
 void ChooseAIMove(Entity *pokemon)
 {
