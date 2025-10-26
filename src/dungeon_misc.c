@@ -55,24 +55,10 @@
 #include "move_orb_effects_5.h"
 #include "dungeon_recruit_release_menu.h"
 #include "dungeon_8041AD0.h"
+#include "dungeon_pokemon_sprites.h"
 
 static void EnsureCastformLoaded(void);
 static void EnsureDeoxysLoaded(void);
-
-extern bool8 sub_806A58C(s16 r0);
-extern bool8 sub_8070F80(Entity * pokemon, s32 direction);
-extern s32 sub_806A4DC(EntityInfo *info);
-extern s16 sub_803D970(u32);
-extern bool8 sub_80860A8(u8 id);
-extern u8 sub_803D73C(s32 a0);
-extern void DeletePokemonDungeonSprite(s32 id);
-extern s32 sub_803DA20(s32 param_1);
-extern Entity *sub_804550C(s16 a);
-extern Entity *sub_80453AC(s16 id);
-
-extern u8 gUnknown_202F32C;
-
-bool8 sub_806A564(s16 r0);
 static bool8 sub_806A5A4(s16 r0);
 
 void OpenDungeonPaletteFile(void)
@@ -1282,7 +1268,7 @@ void TryPointCameraToMonster(Entity *pokemon, u8 param_2)
   }
 }
 
-void nullsub_95(void)
+void nullsub_95(Entity *pokemon)
 {}
 
 void ReevaluateSnatchMonster(void)
@@ -1511,8 +1497,6 @@ void sub_806A6E8(Entity *entity)
         info->unk64 = ITEM_NOTHING;
     }
 }
-
-void DisplayMsgIfNewIqSkillLearned(EntityInfo *info, s32 pokeIq);
 
 UNUSED static void DisplayMsgIfTeamMonsLearnedNewIqSkill(void)
 {

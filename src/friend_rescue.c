@@ -31,9 +31,6 @@
 
 extern void SetFriendRescueMenuState(u32);
 
-extern TeamInventory *gTeamInventoryRef;
-
-
 // NOTE: MenuItems and WindowTemplate defined in here..
 #include "data/friend_rescue_menus.h"
 

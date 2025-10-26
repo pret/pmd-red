@@ -61,6 +61,7 @@
 #include "dungeon_action_execution.h"
 #include "dungeon_8041AD0.h"
 #include "ground_main.h"
+#include "dungeon_mon_sprite_render.h"
 
 EWRAM_INIT struct UnkStruct_203B414 *gUnknown_203B414 = NULL;
 EWRAM_INIT Dungeon *gDungeon = NULL;
@@ -68,7 +69,6 @@ static EWRAM_INIT u8 *gSerializedData_203B41C = NULL;
 
 extern void sub_8068BDC(u8 r0);
 extern void sub_803D4AC(void);
-extern void sub_804513C(void);
 extern void sub_8068F28(void);
 extern void IncrementThievingSuccesses(void);
 extern void sub_8043D60(void);
@@ -84,15 +84,8 @@ extern void ReevaluateSnatchMonster(void);
 extern void sub_8051E3C(void);
 extern void sub_807FA18(void);
 extern void sub_806A974(void);
-extern void DetermineAllMonsterShadow(void);
 extern void sub_8068F80(void);
-extern bool8 TryForcedLoss(bool8);
 extern void sub_806A914(bool8 a0, bool8 a1, bool8 showRunAwayEffect);
-
-extern u8 gUnknown_202F1A8;
-
-void EnforceMaxItemsAndMoney(void);
-static void sub_8043FD0(void);
 
 extern OpenedFile *gDungeonNameBannerPalette;
 
@@ -101,6 +94,7 @@ extern OpenedFile *gDungeonNameBannerPalette;
 static const s16 sDeoxysForms[4] = {MONSTER_DEOXYS_NORMAL, MONSTER_DEOXYS_ATTACK, MONSTER_DEOXYS_DEFENSE, MONSTER_DEOXYS_SPEED};
 
 static void sub_8043CD8(void);
+static void sub_8043FD0(void);
 
 // Actual function in Sky. Macro instead of static inline for matching
 #define GetForcedLossReason()(gDungeon->unk10)

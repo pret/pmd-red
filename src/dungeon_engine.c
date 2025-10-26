@@ -23,8 +23,6 @@
 #include "dungeon_entity_movement.h"
 #include "dungeon_wind.h"
 
-extern void sub_805F02C(void);
-
 static void sub_8044454(void);
 static bool8 RunLeaderTurn(bool8);
 static void sub_8044574(void);

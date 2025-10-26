@@ -5,7 +5,7 @@
 #include "dungeon_move_util.h"
 #include "dungeon_vram.h"
 #include "dungeon_8041AD0.h"
-#include "code_8066D04.h"
+#include "dungeon_action_handler.h"
 #include "dungeon_message.h"
 #include "constants/dungeon_action.h"
 #include "constants/dungeon.h"
@@ -39,32 +39,10 @@
 #include "move_orb_effects_1.h"
 #include "move_orb_effects_3.h"
 #include "dungeon_entity_movement.h"
-
-void sub_8075BA4(Entity *param_1, u8 param_2);
-void nullsub_95(Entity *);
-extern void sub_80671A0(Entity *);
-extern void sub_8067110(Entity *);
-void HandleUseMoveAIAction(Entity *target);
-void sub_8041888(u8 param_1);
-void sub_805EFB4(Entity *, u8);
-void HandlePlaceItemAction(Entity *);
-void HandlePickUpPlayerAction(Entity *);
-void sub_8066E14(Entity * );
-void sub_8066BD4(Entity*);
-void HandleTalkFieldAction(Entity *);
-void HandleUseMovePlayerAction(Entity *);
-void HandleUseOrbAction(Entity *);
-void sub_8067904(Entity *, u32);
-void HandleGiveItemAction(Entity *);
-void HandleTakeItemAction(Entity *);
-void HandleUseItemAction(Entity *);
-void sub_8066FA4(Entity *);
-void HandleUnsetItemAction(Entity *,bool8);
-extern u8 DisplayActions(Entity *);
-void sub_806A1E8(Entity *pokemon);
-void HandlePickUpAIAction(Entity *pokemon);
-void HandleThrowItemAIAction(Entity *pokemon);
-void HandleEatAIAction(Entity *pokemon);
+#include "dungeon_ai_items.h"
+#include "dungeon_ai_attack.h"
+#include "dungeon_ai.h"
+#include "dungeon_main.h"
 
 EWRAM_DATA u8 gUnknown_202F32C = 0;
 EWRAM_DATA u8 gUnknown_202F32D = 0;

@@ -1,5 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
+#include "dungeon_action_handler.h"
 #include "constants/dungeon.h"
 #include "constants/dungeon_exit.h"
 #include "constants/item.h"
@@ -8,7 +9,6 @@
 #include "dungeon_tilemap.h"
 #include "dungeon_8041AD0.h"
 #include "dungeon_action.h"
-#include "code_8066D04.h"
 #include "dungeon_mon_sprite_render.h"
 #include "dungeon_jobs.h"
 #include "run_dungeon.h"
@@ -46,9 +46,9 @@
 #include "warp_target.h"
 #include "move_orb_effects_5.h"
 
-Entity *sub_806773C(Entity *entity);
-void sub_8067558(Entity *entity, Entity *targetEntity, s32 a2);
-void sub_8067794(Entity *entity, Entity *targetEntity, s32 a2);
+static void sub_8067558(Entity *entity, Entity *targetEntity, s32 a2);
+static Entity *sub_806773C(Entity *entity);
+static void sub_8067794(Entity *entity, Entity *targetEntity, s32 a2);
 
 void HandlePickUpPlayerAction(Entity *entity)
 {
@@ -98,7 +98,7 @@ void HandleSetItemAction(Entity *param_1, bool8 param_2)
   }
 }
 
-void HandleUnsetItemAction(Entity *entity,bool8 enableMessage)
+void HandleUnsetItemAction(Entity *entity, bool8 enableMessage)
 {
   Item *item;
   int index;
@@ -596,7 +596,7 @@ void sub_806752C(ActionContainer *a0)
     sub_8067558(GetLeader(), targetEntity, 0);
 }
 
-void sub_8067558(Entity *entity, Entity *targetEntity, s32 a2)
+static void sub_8067558(Entity *entity, Entity *targetEntity, s32 a2)
 {
     EntityInfo *info1 = GetEntInfo(entity);
 
@@ -679,7 +679,7 @@ void sub_8067558(Entity *entity, Entity *targetEntity, s32 a2)
     }
 }
 
-Entity *sub_806773C(Entity *entity)
+static Entity *sub_806773C(Entity *entity)
 {
     Entity *ret = sub_80696A8(entity);
     if (ret == NULL) return NULL;
@@ -695,7 +695,7 @@ void sub_8067768(ActionContainer *a0)
     sub_8067794(GetLeader(), targetEntity, 0);
 }
 
-void sub_8067794(Entity *entity, Entity *targetEntity, s32 a2)
+static void sub_8067794(Entity *entity, Entity *targetEntity, s32 a2)
 {
     const u8 *stringPtr1;
     const u8 *stringPtr2;

@@ -18,7 +18,7 @@
 #include "dungeon_vram.h"
 #include "dungeon_tilemap.h"
 #include "dungeon_action.h"
-#include "code_8066D04.h"
+#include "dungeon_action_handler.h"
 #include "dungeon_mon_sprite_render.h"
 #include "dungeon_action.h"
 #include "dungeon_ai_movement.h"
@@ -61,21 +61,9 @@
 #include "dungeon_strings.h"
 #include "dungeon_entity_movement.h"
 #include "dungeon_8041AD0.h"
+#include "status_checks.h"
 
-extern void HandleUnsetItemAction(Entity *,bool8);
-extern void TryTriggerTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4);
-void TryPointCameraToMonster(Entity *a0, u8 a1);
-bool8 sub_80701A4(Entity *a0);
-void ClearUnpaidFlagFromAllItems(void);
-void sub_806A914(u8 a0, u8 a1, u8 a2);
-u16 GetLeaderActionId(void);
 void sub_80978C8(s16 a0);
-void HandleTalkFieldAction(Entity *);
-s32 GetTeamMemberEntityIndex(Entity *pokemon);
-bool8 sub_8070F80(Entity * pokemon, s32 direction);
-void sub_806752C(ActionContainer *a0);
-void sub_8067768(ActionContainer *a0);
-extern bool8 sub_8071A8C(Entity *pokemon);
 
 static EWRAM_DATA bool8 sInDiagonalMode = 0;
 static EWRAM_DATA bool8 sInRotateMode = 0;

@@ -47,13 +47,8 @@
 #include "move_orb_actions_1.h"
 #include "move_orb_effects_2.h"
 #include "move_orb_effects_5.h"
-
-extern void sub_803ED30(s32, Entity *r0, u8, s32);
-extern bool8 sub_806A458(Entity *);
-extern bool8 sub_806A58C(s16 a0);
-extern void sub_806A390(Entity *r0);
-extern void sub_800DBBC(void);
-extern void PointCameraToMonster(Entity *);
+#include "dungeon_tilemap.h"
+#include "effect_main.h"
 
 static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struct DamageStruct *r5, bool32 isFalseSwipe, bool32 giveExp, s16 dungeonExitReason_, s32 arg8);
 static bool8 sub_806E100(s48_16 *param_1, Entity *pokemon, Entity *target, u8 type, DamageStruct *dmgStruct);

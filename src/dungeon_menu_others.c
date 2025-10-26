@@ -32,10 +32,6 @@
 #include "text_3.h"
 #include "run_dungeon.h"
 
-extern bool8 IsFloorwideFixedRoom(void);
-extern u16 GetLeaderActionId(void);
-
-
 static void PrintOthersMenuOptions(void);
 static void ShowGameOptionsMenu(void);
 static void ShowQuickSaveGiveUpMenu(void);

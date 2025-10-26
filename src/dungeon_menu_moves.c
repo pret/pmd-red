@@ -30,13 +30,6 @@
 #include "text_2.h"
 #include "text_3.h"
 
-extern s32 GetTeamMemberEntityIndex(Entity *pokemon);
-extern void sub_806752C(ActionContainer *a0);
-extern void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 a1);
-extern void sub_8067768(ActionContainer *a0);
-extern bool8 sub_8071A8C(Entity *pokemon);
-
-
 static void ShowMovesMenuWindows(Entity *entity, EntityInfo *entInfo, bool8 redColorForChargingMoves, WindowTemplates *windows, WindowHeader *header, u8 *arg5, s32 arg6, s32 arg7);
 static void AddMovesSubMenuOptions(Entity *entity, bool8 addLinkOptions, bool8 addUseMove);
 static void SetSubMenuOptionAction(ActionContainer *a0, s32 a1, s32 a2);

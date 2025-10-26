@@ -49,7 +49,6 @@
 	.space 4
     .include "src/dungeon_menu_others.o"
     .include "src/dungeon_menu_recruitment.o"
-    .include "src/code_8066D04.o"
     .include "src/dungeon_recruit_release_menu.o"
     .include "src/dungeon_logic.o"
     .include "src/dungeon_leveling.o"

@@ -8,5 +8,9 @@ void AIDecideUseItem(Entity *pokemon);
 void GetPossibleAIThrownItemDirections(Entity *pokemon, s32 thrownAIFlag, Item *item, bool8 ignoreRollChance);
 void GetPossibleAIArcItemTargets(Entity *pokemon, Item *item, DungeonPos potentialTargets[], bool8 ignoreRollChance);
 void TargetThrownItem(Entity *pokemon, Entity *targetPokemon, Item *item, s32 targetingFlags, bool8 ignoreRollChance);
+void HandleEatAIAction(Entity *pokemon);
+void HandleThrowItemAIAction(Entity *pokemon);
+void HandlePickUpAIAction(Entity *pokemon);
+void MonTryPickUpItem(Entity *entity);
 
 #endif

@@ -3,8 +3,7 @@
 
 #include "structs/dungeon_entity.h"
 
-extern const s16 gConfusedAttackChance;
-
 bool8 HasStatusThatPreventsActing(Entity *pokemon);
+bool8 sub_80701A4(Entity *pokemon);
 
 #endif

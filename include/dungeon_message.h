@@ -31,6 +31,7 @@ extern bool8 gUnknown_203B434;
 
 void sub_80521D0(void);
 void sub_8052210(bool8 a0);
+void sub_805229C(void);
 
 // These functions display the string if certain conditions are met. The conditions differ depending on the function. The string is then saved to the message log.
 void LogMessageByIdWithPopupCheckUser(Entity *pokemon, const u8 *str);

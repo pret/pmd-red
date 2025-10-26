@@ -25,9 +25,7 @@
 #include "dungeon_items.h"
 #include "constants/dungeon.h"
 #include "dungeon_engine.h"
-
-extern void sub_8067110(Entity *);
-extern void sub_80671A0(Entity *);
+#include "dungeon_action_handler.h"
 
 #define NUM_POTENTIAL_ROCK_TARGETS 20
 #define GROUND_ITEM_TOOLBOX_INDEX 0x80
@@ -44,10 +42,6 @@ EWRAM_INIT s32 gAIThrowItemActionChoiceCount = {0};
 EWRAM_DATA u32 gAIThrownItemDirections[NUM_DIRECTIONS] = {0};
 EWRAM_DATA bool8 gAIThrownItemDirectionIsUsed[NUM_DIRECTIONS] = {0};
 EWRAM_DATA u32 gAIThrownItemProbabilities[NUM_DIRECTIONS] = {0};
-
-extern TeamInventory *gTeamInventoryRef;
-
-void sub_8073D14(Entity *);
 
 void AIDecideUseItem(Entity *pokemon)
 {
@@ -429,10 +423,10 @@ void HandleThrowItemAIAction(Entity *pokemon)
 
 void HandlePickUpAIAction(Entity *pokemon)
 {
-    sub_8073D14(pokemon);
+    MonTryPickUpItem(pokemon);
 }
 
-void sub_8073D14(Entity *entity)
+void MonTryPickUpItem(Entity *entity)
 {
     Item *groundItem;
     EntityInfo *_entityInfo;

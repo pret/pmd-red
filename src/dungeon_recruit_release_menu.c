@@ -7,7 +7,6 @@
 #include "dungeon_tilemap.h"
 #include "dungeon_8041AD0.h"
 #include "dungeon_action.h"
-#include "code_8066D04.h"
 #include "dungeon_mon_sprite_render.h"
 #include "run_dungeon.h"
 #include "dungeon_items.h"

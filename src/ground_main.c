@@ -71,7 +71,6 @@ extern void sub_809975C(void);
 extern void sub_8099BE4(void);
 extern void sub_8099744(void);
 extern void WaitForNextFrameAndAdvanceRNG(void);
-extern void LoadBufferedInputs(void);
 extern void sub_8099750(void);
 extern void nullsub_16(void);
 extern void UpdateAdventureAchievements(void);

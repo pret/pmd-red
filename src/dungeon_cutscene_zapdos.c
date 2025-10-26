@@ -31,9 +31,6 @@
 #include "dungeon_boss_dialogue.h"
 #include "dungeon_leveling.h"
 
-extern void sub_8049884(void);
-extern void sub_8049B8C(void);
-extern void sub_8052D44(s16 *, Entity *, Entity *);
 
 struct Zapdos1
 {
