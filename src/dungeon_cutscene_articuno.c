@@ -32,9 +32,6 @@
 #include "dungeon_leveling.h"
 #include "weather.h"
 
-extern void sub_8049884(void);
-extern void sub_8049B8C(void);
-extern void sub_8052D44(s16 *, Entity *, Entity *);
 
 static void sub_8088484(Entity *param_1);
 static void ArticunoScreenFlash(void);

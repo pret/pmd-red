@@ -31,9 +31,7 @@
 #include "text_3.h"
 
 extern s32 GetTeamMemberEntityIndex(Entity *pokemon);
-extern void sub_806752C(ActionContainer *a0);
 extern void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 a1);
-extern void sub_8067768(ActionContainer *a0);
 extern bool8 sub_8071A8C(Entity *pokemon);
 
 

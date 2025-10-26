@@ -25,9 +25,7 @@
 #include "dungeon_items.h"
 #include "constants/dungeon.h"
 #include "dungeon_engine.h"
-
-extern void sub_8067110(Entity *);
-extern void sub_80671A0(Entity *);
+#include "dungeon_action_handler.h"
 
 #define NUM_POTENTIAL_ROCK_TARGETS 20
 #define GROUND_ITEM_TOOLBOX_INDEX 0x80

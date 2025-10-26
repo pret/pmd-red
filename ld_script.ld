@@ -232,7 +232,7 @@ SECTIONS {
         src/dungeon_menu_stairs.o(.text);
         src/dungeon_menu_others.o(.text);
         src/dungeon_menu_recruitment.o(.text);
-        src/code_8066D04.o(.text);
+        src/dungeon_action_handler.o(.text);
         src/dungeon_recruit_release_menu.o(.text);
         src/dungeon_misc.o(.text);
         src/dungeon_mon_spawn.o(.text);
@@ -617,7 +617,7 @@ SECTIONS {
         src/dungeon_menu_stairs.o(.rodata);
         src/dungeon_menu_others.o(.rodata);
         src/dungeon_menu_recruitment.o(.rodata);
-        src/code_8066D04.o(.rodata);
+        src/dungeon_action_handler.o(.rodata);
         src/dungeon_recruit_release_menu.o(.rodata);
         src/dungeon_misc.o(.rodata);
         src/dungeon_mon_spawn.o(.rodata);

@@ -30,9 +30,6 @@
 #include "dungeon_config.h"
 #include "dungeon_boss_dialogue.h"
 
-extern void sub_8049884(void);
-extern void sub_8049B8C(void);
-extern void sub_8052D44(s16 *, Entity *, Entity *);
 
 static void sub_80898F8(Entity *r0);
 static void sub_8089908(Entity *r0);

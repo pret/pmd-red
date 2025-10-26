@@ -34,9 +34,6 @@
 #include "dungeon_mon_spawn.h"
 #include "dungeon_8041AD0.h"
 
-extern void sub_8049884(void);
-extern void sub_8049B8C(void);
-extern void sub_8052D44(s16 *, Entity *, Entity *);
 
 static void sub_808B50C(void);
 static void JirachiWish(void);

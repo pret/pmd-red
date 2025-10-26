@@ -3,38 +3,37 @@
 #include "ground_link.h"
 #include "debug.h"
 #include "ground_script.h"
+#include "ground_script_file.h"
 #include "number_util.h"
 
-EWRAM_INIT const struct GroundLink *gCurrentGroundLink = NULL;
-extern DebugLocation gUnknown_8118798;
-extern const struct GroundScriptHeader *GetGroundScript(s16 r0, DebugLocation *r1);
+EWRAM_INIT static const struct GroundLink *sCurrentGroundLink = NULL;
 
-void sub_80AD868(void)
+UNUSED static void sub_80AD868(void)
 {
-    gCurrentGroundLink = NULL;
+    sCurrentGroundLink = NULL;
 }
 
-void sub_80AD874(void)
+UNUSED static void sub_80AD874(void)
 {
-    gCurrentGroundLink = NULL;
+    sCurrentGroundLink = NULL;
 }
 
 void GroundLink_Select(s16 r0)
 {
     const struct GroundScriptHeader *gs = GetGroundScript(r0, DEBUG_LOC_PTR("../ground/ground_link.c", 77, "GroundLink_Select"));
-    gCurrentGroundLink = gs->links;
+    sCurrentGroundLink = gs->links;
 }
 
-const struct GroundLink *GetCurrentGroundLink(s16 r0)
+UNUSED static const struct GroundLink *GetCurrentGroundLink(s16 r0)
 {
     u32 a = r0;
-    return &gCurrentGroundLink[a];
+    return &sCurrentGroundLink[a];
 }
 
 s32 GroundLink_GetPos(s32 _arg0, PixelPos *pos)
 {
     s32 arg0 = (s16)(_arg0);
-    const struct GroundLink *ptr = &gCurrentGroundLink[arg0];
+    const struct GroundLink *ptr = &sCurrentGroundLink[arg0];
 
     SetUnkInGroundEvent(&ptr->pos, pos);
 
@@ -44,7 +43,7 @@ s32 GroundLink_GetPos(s32 _arg0, PixelPos *pos)
 s32 GroundLink_GetArea(s32 _arg0, PixelPos *arg1, PixelPos *arg2, PixelPos *arg3)
 {
     s32 arg0 = (s16) _arg0;
-    const struct GroundLink *ptr = &gCurrentGroundLink[arg0];
+    const struct GroundLink *ptr = &sCurrentGroundLink[arg0];
 
     *arg1 = *arg3;
 

@@ -25,7 +25,6 @@
 extern s32 sub_803DA20(s16 species);
 extern void sub_8049840(void);
 extern void sub_80498A8(s32, s32);
-extern void sub_8049B8C(void);
 
 enum CardinalDirection
 {
