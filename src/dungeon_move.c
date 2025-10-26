@@ -44,13 +44,6 @@
 #include "warp_target.h"
 #include "dungeon_ai_attack.h"
 
-extern s16 GetDungeonExitReasonFromMoveOrItem(Move *move, s32 itemID);
-extern void sub_806A1E8(Entity *pokemon);
-extern bool8 sub_8040BB0(Entity *entity, Move *move, bool8);
-extern void sub_8040DA0(Entity *entity, Move *move);
-extern u16 GetEffectiveMoveId(u16 moveId, u8 weather, u8 hasSpecialEffect);
-extern void sub_800EF10(u16 r0);
-extern void sub_800E3AC(s32 a0, DungeonPos *pos, s32 a2);
 extern void sub_8041168(Entity *entity, Entity *entity2, Move *,DungeonPos *);
 
 static s32 TryHitTarget(Entity *attacker, Entity *target, Move *move, struct DamageStruct *dmgStruct, s16 unk_);

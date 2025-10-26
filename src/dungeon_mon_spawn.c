@@ -37,11 +37,8 @@
 #include "dungeon_engine.h"
 #include "dungeon_leveling.h"
 #include "dungeon_8041AD0.h"
-
-extern bool8 sub_80860A8(u8 id);
-extern u8 gUnknown_202F32C;
-extern Entity *sub_804550C(s16 a);
-extern Entity *sub_80453AC(s16 id);
+#include "dungeon_cutscene.h"
+#include "dungeon_action_execution.h"
 
 static s32 CalcSpeciesHPAtLevel(s32 species, s32 level);
 static s32 CalcSpeciesAtkAtLevel(s32 species, s32 level, s32 categoryIndex);

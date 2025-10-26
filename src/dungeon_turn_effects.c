@@ -42,9 +42,7 @@
 #include "move_orb_effects_5.h"
 #include "dungeon_8041AD0.h"
 #include "dungeon_entity_movement.h"
-
-extern void sub_805229C(void);
-extern void sub_805E804(void);
+#include "dungeon_main.h"
 
 void ApplyEndOfTurnEffects(Entity *entity)
 {

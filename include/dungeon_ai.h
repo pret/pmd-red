@@ -4,5 +4,6 @@
 #include "structs/dungeon_entity.h"
 
 void RunMonsterAI(Entity *pokemon, u32 unused);
+void sub_8075BA4(Entity *param_1, u8 param_2);
 
 #endif

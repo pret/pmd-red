@@ -39,9 +39,6 @@
 #include "move_orb_effects_2.h"
 #include "move_orb_effects_4.h"
 
-void sub_806A1E8(Entity *pokemon);
-Entity *sub_8045684(u8, DungeonPos *, u8);
-
 void sub_807FA18(void)
 {
     s32 x, y;

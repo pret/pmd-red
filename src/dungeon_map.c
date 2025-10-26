@@ -23,8 +23,6 @@
 #include "trap.h"
 #include "run_dungeon.h"
 
-extern bool8 ShouldMinimapDisplayEntity(Entity *ent);
-
 struct UnkStruct1
 {
     u32 **unk0;

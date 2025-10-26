@@ -41,12 +41,8 @@
 #include "dungeon_entity_movement.h"
 #include "dungeon_ai_items.h"
 #include "dungeon_ai_attack.h"
-
-void sub_8075BA4(Entity *param_1, u8 param_2);
-void nullsub_95(Entity *);
-void sub_8041888(u8 param_1);
-void sub_805EFB4(Entity *, u8);
-void sub_806A1E8(Entity *pokemon);
+#include "dungeon_ai.h"
+#include "dungeon_main.h"
 
 EWRAM_DATA u8 gUnknown_202F32C = 0;
 EWRAM_DATA u8 gUnknown_202F32D = 0;

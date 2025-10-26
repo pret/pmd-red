@@ -55,6 +55,7 @@ void sub_806A1B0(Entity *pokemon);
 void sub_806A1E8(Entity *pokemon);
 void sub_806A240(Entity *pokemon, Entity *target);
 void TryPointCameraToMonster(Entity *pokemon, u8 param_2);
+void nullsub_95(Entity *pokemon);
 void sub_806A338(void);
 void sub_806A390(Entity *pokemon);
 void sub_806A3D4(u8 *dst, s32 _a1, s32 id, bool32 _a3);
