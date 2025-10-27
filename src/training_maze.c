@@ -1,14 +1,25 @@
 #include "global.h"
 #include "globaldata.h"
+#include "training_maze.h"
 #include "constants/dungeon.h"
 #include "dungeon_info.h"
 #include "event_flag.h"
 #include "code_80A26CC.h"
-#include "code_80972F4.h"
+#include "rescue_scenario.h"
 
-ALIGNED(4) const char gMeetNinetalesText[] =  "Meet Ninetales.";
-ALIGNED(4) const char gAvoidCaptureText[] = "Avoid capture.";
-ALIGNED(4) const char gFinalScenarioText[] = _("Defeat the final Pokémon.");
+ALIGNED(4) static const char gMeetNinetalesText[] =  "Meet Ninetales.";
+ALIGNED(4) static const char gAvoidCaptureText[] = "Avoid capture.";
+ALIGNED(4) static const char gFinalScenarioText[] = _("Defeat the final Pokémon.");
+
+void sub_80974E8(void)
+{
+    ClearScriptVarArray(NULL, TRAINING_CONQUEST_LIST);
+    ClearScriptVarArray(NULL, TRAINING_PRESENT_LIST);
+}
+
+UNUSED static void nullsub_208(void)
+{
+}
 
 bool8 sub_8097504(s16 mazeIndex)
 {
@@ -68,15 +79,15 @@ void sub_80975A8(s16 param_1,u8 param_2)
     SetScriptVarArrayValue(NULL,TRAINING_CONQUEST_LIST,param_1_u16,param_2);
 }
 
-const u8 *sub_80975C4(s16 index)
+UNUSED static const u8 *sub_80975C4(s16 index)
 {
     return GetDungeonName1(sub_80A2728(index));
 }
 
 const u8 *sub_80975DC(s16 r0)
 {
-    if(r0 == 23 || r0 == 24) {
-        if(ScriptVarScenarioEqual(SCENARIO_MAIN, 0xE, -1))
+    if (r0 == 23 || r0 == 24) {
+        if (ScriptVarScenarioEqual(SCENARIO_MAIN, 0xE, -1))
             return gMeetNinetalesText;
         else
             return gAvoidCaptureText;
@@ -88,9 +99,8 @@ const u8 *sub_80975DC(s16 r0)
 bool8 HasCompletedAllMazes(void)
 {
     s32 index;
-    for(index = 0; index < NUM_BASIC_DUNGEON_MAZE; index++)
-    {
-        if(!(bool8)IsMazeCompleted(index))
+    for (index = 0; index < NUM_BASIC_DUNGEON_MAZE; index++) {
+        if(!IsMazeCompleted(index))
             return FALSE;
     }
     return TRUE;
@@ -98,14 +108,11 @@ bool8 HasCompletedAllMazes(void)
 
 bool8 sub_8097640(void)
 {
-    if(GetScriptVarArrayValue(NULL, TRAINING_CONQUEST_LIST, 0x1F) == 0 && HasCompletedAllMazes())
-    {
+    if (GetScriptVarArrayValue(NULL, TRAINING_CONQUEST_LIST, 0x1F) == 0 && HasCompletedAllMazes()) {
         SetScriptVarArrayValue(NULL, TRAINING_CONQUEST_LIST, 0x1F, 1);
         return TRUE;
     }
-    else
-    {
+    else {
         return FALSE;
     }
 }
-

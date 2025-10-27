@@ -4,6 +4,11 @@
 #include "dungeon_map_access.h"
 #include "constants/walkable_tile.h"
 
+bool8 IsWaterDungeon(u32 r0)
+{
+    return gDungeonWaterType[r0] == DUNGEON_WATER_TYPE_WATER;
+}
+
 // TODO: gDungeons from `dungeon/dungeon_data.inc`
 
 const u8 gInvalidDungeonIDs[11] =

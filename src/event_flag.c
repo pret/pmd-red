@@ -11,23 +11,18 @@
 #include "rescue_team_info.h"
 #include "other_random.h"
 #include "friend_area.h"
-#include "code_80972F4.h"
+#include "rescue_scenario.h"
 #include "adventure_info.h"
 #include "pokemon.h"
 #include "pokemon_3.h"
 #include "ground_place.h"
 #include "ground_main.h"
 #include "script_vars_info.h"
+#include "training_maze.h"
 
 EWRAM_DATA u8 gScriptVarBuffer[SCRIPT_VAR_BUFFER_LEN] = {0}; // NDS=020876DC
 
 #include "data/event_flag.h"
-
-extern bool8 HasCompletedAllMazes(void);
-extern void sub_809733C(u32, u32);
-extern void sub_80973A8(u32, u32);
-extern void sub_80972F4(void);
-extern void nullsub_128(void);
 
 // arm9.bin::0200FF68
 void ThoroughlyResetScriptVars(void)
@@ -556,95 +551,96 @@ bool8 ScriptVarScenarioAfter(s16 varId,u32 pMain,s32 pSub)
 // arm9.bin::0200ECE0
 void sub_8001D88(void)
 {
-  u32 local_c;
-  u32 auStack8;
+    u32 local_c;
+    u32 auStack8;
 
-  GetScriptVarScenario(3, &auStack8, &local_c);
-  if (auStack8 - 1 < 0x1b) {
+    GetScriptVarScenario(3, &auStack8, &local_c);
+    if (auStack8 < 1 || auStack8 > 0x1b)
+        return;
+
     if (ScriptVarScenarioBefore(SCENARIO_SUB1,0x1f,0) != 0) {
-      if (ScriptVarScenarioAfter(SCENARIO_MAIN,0xf,7) != 0) {
-        ScenarioCalc(SCENARIO_SUB1,0x1f,0);
-        sub_8097418(0xe,1);
-        SetScriptVarValue(NULL,BASE_LEVEL,2);
-      }
-      else {
-        if ((ScriptVarScenarioEqual(SCENARIO_SUB1,0,0)) && (ScriptVarScenarioAfter(SCENARIO_MAIN,0xf,3))) {
-          ScenarioCalc(SCENARIO_SUB1,0x1d,1);
+        if (ScriptVarScenarioAfter(SCENARIO_MAIN,0xf,7) != 0) {
+            ScenarioCalc(SCENARIO_SUB1,0x1f,0);
+            sub_8097418(0xe,1);
+            SetScriptVarValue(NULL,BASE_LEVEL,2);
         }
-      }
+        else {
+            if ((ScriptVarScenarioEqual(SCENARIO_SUB1,0,0)) && (ScriptVarScenarioAfter(SCENARIO_MAIN,0xf,3))) {
+                ScenarioCalc(SCENARIO_SUB1,0x1d,1);
+            }
+        }
     }
     if ((ScriptVarScenarioEqual(SCENARIO_SUB1,0x1f,0)) && (GetFriendAreaStatus(SKY_BLUE_PLAINS))) {
-      ScenarioCalc(SCENARIO_SUB1,0x1f,1);
-      sub_809733C(0xf,1);
+        ScenarioCalc(SCENARIO_SUB1,0x1f,1);
+        sub_809733C(0xf,1);
     }
     if (auStack8 > 0x11) {
-      sub_80973A8(0x25,1);
-      if (((FindItemInInventory(ITEM_HM_DIVE) != -1) || (gTeamInventoryRef->teamStorage[ITEM_HM_DIVE] != 0)) ||
-         (ScriptVarScenarioAfter(SCENARIO_SUB2,0x21,3) != 0)) {
-        sub_80973A8(0x22,1);
-      }
-      if (GetFriendAreaStatus(FURNACE_DESERT) != 0) {
-        sub_80973A8(0x1f,1);
-      }
-      if (GetFriendAreaStatus(BOULDER_CAVE)) {
-        sub_80973A8(0x20,1);
-      }
-      if (GetFriendAreaStatus(DRAGON_CAVE)) {
-        sub_80973A8(0x21,1);
-      }
-      if (GetFriendAreaStatus(SECRETIVE_FOREST)) {
-        sub_80973A8(0x23,1);
-      }
-      if (GetFriendAreaStatus(SERENE_SEA)) {
-        sub_80973A8(0x24,1);
-        sub_80973A8(0x28,1);
-      }
-      if ((GetFriendAreaStatus(AGED_CHAMBER_AN)) && (GetFriendAreaStatus(AGED_CHAMBER_O_EXCLAIM))) {
-        sub_80973A8(0x26,1);
-      }
-      if (ScriptVarScenarioEqual(SCENARIO_SUB2,0,0)) {
-        ScenarioCalc(SCENARIO_SUB2,0x21,1);
-      }
-      if ((FindItemInInventory(ITEM_HM_SURF) != -1) || (gTeamInventoryRef->teamStorage[ITEM_HM_SURF] != 0)) {
-        if (ScriptVarScenarioEqual(SCENARIO_SUB4,0,0)) {
-          ScenarioCalc(SCENARIO_SUB4,0x26,1);
+        sub_80973A8(0x25,1);
+        if (((FindItemInInventory(ITEM_HM_DIVE) != -1) || (gTeamInventoryRef->teamStorage[ITEM_HM_DIVE] != 0)) ||
+             (ScriptVarScenarioAfter(SCENARIO_SUB2,0x21,3) != 0)) {
+            sub_80973A8(0x22,1);
         }
-        if ((ScriptVarScenarioEqual(SCENARIO_SUB6,0,0)) && (GetFriendAreaStatus(SOUTHERN_ISLAND))) {
-          ScenarioCalc(SCENARIO_SUB6,0x2e,1);
+        if (GetFriendAreaStatus(FURNACE_DESERT) != 0) {
+            sub_80973A8(0x1f,1);
         }
-      }
-      if (!ScriptVarScenarioBefore(SCENARIO_SUB6,0x30,0)) {
-        if ((ScriptVarScenarioEqual(SCENARIO_SUB2,0x22,0)) && HasRecruitedMon(MONSTER_ARTICUNO) && HasRecruitedMon(MONSTER_ZAPDOS) && HasRecruitedMon(MONSTER_MOLTRES)) {
-          ScenarioCalc(SCENARIO_SUB2,0x22,1);
+        if (GetFriendAreaStatus(BOULDER_CAVE)) {
+            sub_80973A8(0x20,1);
         }
-        if (((ScriptVarScenarioEqual(SCENARIO_SUB8,0,0)) && (ScriptVarScenarioAfter(SCENARIO_SUB2,0x21,3) != 0)) &&
-           (GetFriendAreaStatus(SKY_BLUE_PLAINS))) {
-          ScenarioCalc(SCENARIO_SUB8,0x33,1);
+        if (GetFriendAreaStatus(DRAGON_CAVE)) {
+            sub_80973A8(0x21,1);
         }
-        if (GetFriendAreaStatus(SKY_BLUE_PLAINS)) {
-          sub_80973A8(0x27,1);
+        if (GetFriendAreaStatus(SECRETIVE_FOREST)) {
+            sub_80973A8(0x23,1);
         }
-        if (GetFriendAreaStatus(SKY_BLUE_PLAINS)) {
-          sub_80973A8(0x29,1);
+        if (GetFriendAreaStatus(SERENE_SEA)) {
+            sub_80973A8(0x24,1);
+            sub_80973A8(0x28,1);
         }
-      }
-      if (!ScriptVarScenarioBefore(SCENARIO_SUB2,0x22,0)) {
-        if (ScriptVarScenarioEqual(SCENARIO_SUB7,0,0)) {
-          ScenarioCalc(SCENARIO_SUB7,0x31,1);
-          sub_809733C(0x1b,1);
+        if ((GetFriendAreaStatus(AGED_CHAMBER_AN)) && (GetFriendAreaStatus(AGED_CHAMBER_O_EXCLAIM))) {
+            sub_80973A8(0x26,1);
         }
-        if ((ScriptVarScenarioEqual(SCENARIO_SUB9,0,0)) && (!ScriptVarScenarioBefore(SCENARIO_SUB8,0x34,0))) {
-          ScenarioCalc(SCENARIO_SUB9,0x35,1);
+        if (ScriptVarScenarioEqual(SCENARIO_SUB2,0,0)) {
+            ScenarioCalc(SCENARIO_SUB2,0x21,1);
         }
-      }
-      if ((ScriptVarScenarioEqual(SCENARIO_SUB3,0,0)) && (HasRecruitedMon(MONSTER_LUGIA))) {
-        ScenarioCalc(SCENARIO_SUB3,0x24,1);
-      }
-      if ((ScriptVarScenarioEqual(SCENARIO_SUB5,0,0)) && (HasRecruitedMon(MONSTER_HO_OH))) {
-        ScenarioCalc(SCENARIO_SUB5,0x2c,1);
-      }
+        if ((FindItemInInventory(ITEM_HM_SURF) != -1) || (gTeamInventoryRef->teamStorage[ITEM_HM_SURF] != 0)) {
+            if (ScriptVarScenarioEqual(SCENARIO_SUB4,0,0)) {
+                ScenarioCalc(SCENARIO_SUB4,0x26,1);
+            }
+            if ((ScriptVarScenarioEqual(SCENARIO_SUB6,0,0)) && (GetFriendAreaStatus(SOUTHERN_ISLAND))) {
+                ScenarioCalc(SCENARIO_SUB6,0x2e,1);
+            }
+        }
+        if (!ScriptVarScenarioBefore(SCENARIO_SUB6,0x30,0)) {
+            if ((ScriptVarScenarioEqual(SCENARIO_SUB2,0x22,0)) && HasRecruitedMon(MONSTER_ARTICUNO) && HasRecruitedMon(MONSTER_ZAPDOS) && HasRecruitedMon(MONSTER_MOLTRES)) {
+                ScenarioCalc(SCENARIO_SUB2,0x22,1);
+            }
+            if (((ScriptVarScenarioEqual(SCENARIO_SUB8,0,0)) && (ScriptVarScenarioAfter(SCENARIO_SUB2,0x21,3) != 0)) &&
+                 (GetFriendAreaStatus(SKY_BLUE_PLAINS))) {
+                ScenarioCalc(SCENARIO_SUB8,0x33,1);
+            }
+            if (GetFriendAreaStatus(SKY_BLUE_PLAINS)) {
+                sub_80973A8(0x27,1);
+            }
+            if (GetFriendAreaStatus(SKY_BLUE_PLAINS)) {
+                sub_80973A8(0x29,1);
+            }
+        }
+        if (!ScriptVarScenarioBefore(SCENARIO_SUB2,0x22,0)) {
+            if (ScriptVarScenarioEqual(SCENARIO_SUB7,0,0)) {
+                ScenarioCalc(SCENARIO_SUB7,0x31,1);
+                sub_809733C(0x1b,1);
+            }
+            if ((ScriptVarScenarioEqual(SCENARIO_SUB9,0,0)) && (!ScriptVarScenarioBefore(SCENARIO_SUB8,0x34,0))) {
+                ScenarioCalc(SCENARIO_SUB9,0x35,1);
+            }
+        }
+        if ((ScriptVarScenarioEqual(SCENARIO_SUB3,0,0)) && (HasRecruitedMon(MONSTER_LUGIA))) {
+            ScenarioCalc(SCENARIO_SUB3,0x24,1);
+        }
+        if ((ScriptVarScenarioEqual(SCENARIO_SUB5,0,0)) && (HasRecruitedMon(MONSTER_HO_OH))) {
+            ScenarioCalc(SCENARIO_SUB5,0x2c,1);
+        }
     }
-  }
 }
 
 // arm9.bin::0200EC08

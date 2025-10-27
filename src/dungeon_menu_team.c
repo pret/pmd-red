@@ -14,7 +14,7 @@
 #include "dungeon_tilemap.h"
 #include "dungeon_action.h"
 #include "dungeon_mon_sprite_render.h"
-#include "code_8097DD0.h"
+#include "status_strings.h"
 #include "dungeon_action.h"
 #include "dungeon_ai_movement.h"
 #include "dungeon_items.h"

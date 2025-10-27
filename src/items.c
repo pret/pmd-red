@@ -1,6 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
-#include "code_8097DD0.h"
+#include "status_strings.h"
 #include "constants/colors.h"
 #include "constants/type.h"
 #include "code_800D090.h"

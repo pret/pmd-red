@@ -1,4 +1,6 @@
 #include "global.h"
+#include "globaldata.h"
+#include "status_strings.h"
 #include "structs/str_status_text.h"
 #include "strings.h"
 #include "decompress_3.h"
@@ -27,7 +29,7 @@ s32 PrepareStatusStringArrays(const char *str, STATUSTEXTS(statuses))
         if (gStatusDescriptions[i].name == NULL)
             break;
 
-        for (j = 0; j < 100; j++) {
+        for (j = 0; j < ARRAY_COUNT_INT(formattedStatusString); j++) {
             if (gStatusDescriptions[i].name[j] == '#' && gStatusDescriptions[i].name[j + 1] == 'r') {
                 formattedStatusString[j++] = '#';
                 formattedStatusString[j++] = 'r';

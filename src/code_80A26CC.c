@@ -1,6 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
-#include "code_80972F4.h"
+#include "rescue_scenario.h"
 #include "code_80A26CC.h"
 #include "event_flag.h"
 #include "constants/dungeon.h"

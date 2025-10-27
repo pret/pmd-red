@@ -3,7 +3,7 @@
 #include "dungeon_vram.h"
 #include "dungeon_tilemap.h"
 #include "dungeon_action.h"
-#include "code_8097DD0.h"
+#include "status_strings.h"
 #include "dungeon_info.h"
 #include "dungeon_action.h"
 #include "dungeon_engine.h"

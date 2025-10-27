@@ -1,7 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "music_util.h"
-#include "code_8097DD0.h"
+#include "status_strings.h"
 #include "input.h"
 #include "iq_skill_info_menu.h"
 #include "memory.h"

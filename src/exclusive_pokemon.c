@@ -1,15 +1,7 @@
 #include "global.h"
+#include "globaldata.h"
 #include "exclusive_pokemon.h"
 #include "dungeon_data.h"
-
-const u8 filler_ex0[8] =
-{
-    'p', 'k', 's', 'd', 'i', 'r', '0', 0
-};
-const u8 filler_ex1[8] =
-{
-    'p', 'k', 's', 'd', 'i', 'r', '0', 0
-};
 
 EWRAM_INIT struct ExclusivePokemonData *gUnknown_203B498 = {0};
 EWRAM_DATA struct ExclusivePokemonData gExclusivePokemonInfo = {0};
@@ -169,7 +161,6 @@ void WriteExclusivePokemon(DataSerializer *r0)
 
     neg_1 = -1;
     zero = 0;
-
 
     WriteBits(r0, gUnknown_203B498, 1);
     for(index = 0; index < MONSTER_MAX; index++)
