@@ -1,7 +1,8 @@
-#ifndef GUARD_CODE_8097670_H
-#define GUARD_CODE_8097670_H
+#ifndef GUARD_ADVENTURE_INFO_H
+#define GUARD_ADVENTURE_INFO_H
 
-#include "structs/str_dungeon.h"
+#include "structs/str_dungeon_location.h"
+#include "data_serializer.h"
 
 // See gAdventureLogText
 enum AdventureAchievement
@@ -60,28 +61,32 @@ struct unkStruct_203B494
 
 extern struct unkStruct_203B494 *gUnknown_203B494;
 
-const u8 *GetAdventureLogLine(u8 index);
-DungeonLocation *GetDungeonLocationInfo(void);
-s32 GetNumAdventures(void);
-void ResetNumAdventures(void);
-
 void sub_8097670(void);
 struct unkStruct_203B494 *sub_8097680(void);
+void SetDungeonLocationInfo(DungeonLocation *dl);
+DungeonLocation *GetDungeonLocationInfo(void);
 void ResetAdventureInfo(void);
 void SetAdventureAchievement(u8);
 bool8 GetAdventureAchievement(u8);
+const u8 *GetAdventureLogLine(u8 index);
+void ResetNumAdventures(void);
+void IncrementNumAdventures(void);
+s32 GetNumAdventures(void);
 void IncrementFriendRescueSuccesses(void);
 s32 GetFriendRescueSuccesses(void);
 void IncrementNumEvolved(void);
 s32 GetAdventureNumEvolved(void);
+void IncrementThievingSuccesses(void);
 s16 GetThievingSuccesses(void);
 void IncrementAdventureNumJoined(void);
 s16 GetAdventureNumJoined(void);
 s16 GetAdventureMovesLearned(void);
+void IncrementAdventureFloorsExplored(void);
 s16 GetAdventureFloorsExplored(void);
+void sub_80978C8(s16 pokeIndex);
+bool8 sub_8097900(s16 pokeIndex);
 void UpdateAdventureAchievements(void);
-u32 SaveAdventureData(u8 *r0, u32 size);
-u32 RestoreAdventureData(u8 *r0, u32 size);
-void SetDungeonLocationInfo(DungeonLocation *dl);
+void WriteAdventureBits(DataSerializer *r0);
+void ReadAdventureBits(DataSerializer *r0);
 
-#endif // GUARD_CODE_8097670_H
+#endif // GUARD_ADVENTURE_INFO_H

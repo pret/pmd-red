@@ -1,20 +1,16 @@
 #include "global.h"
-#include "code_8097670.h"
-#include "exclusive_pokemon.h"
+#include "globaldata.h"
+#include "adventure_info.h"
 #include "pokemon.h"
 #include "pokemon_3.h"
 #include "friend_area.h"
 #include "moves.h"
 #include "strings.h"
 #include "dungeon_info.h"
-#include "game_options.h"
 
 static EWRAM_DATA struct unkStruct_203B494 sUnknown_2039778 = {0};
 
 EWRAM_INIT struct unkStruct_203B494 *gUnknown_203B494 = { NULL }; // NDS=20EB98C
-
-void ReadPlayTimeBits(DataSerializer *r0);
-void WritePlayTimeBits(DataSerializer *r0);
 
 void sub_8097670(void)
 {
@@ -180,32 +176,15 @@ s16 GetAdventureFloorsExplored(void)
 
 void sub_80978C8(s16 pokeIndex)
 {
-    s32 iVar2;
-    struct unkStruct_203B494 *preload;
-    s32 baseSpecies;
-
-    baseSpecies = GetBaseSpeciesNoUnown(pokeIndex);
-    preload = gUnknown_203B494;
-    iVar2 = baseSpecies;
-    if (baseSpecies < 0)
-        iVar2 = baseSpecies + 0x1F; // 0b11111
-
-    preload->unk54[iVar2 >> 5] |=  1 << (baseSpecies + (iVar2 >> 5) * -32);
+    s32 baseSpecies = GetBaseSpeciesNoUnown(pokeIndex);
+    gUnknown_203B494->unk54[baseSpecies / 32] |=  1 << (baseSpecies % 32);
 }
 
 bool8 sub_8097900(s16 pokeIndex)
 {
-    s32 iVar2;
-    struct unkStruct_203B494 *preload;
-    s32 baseSpecies;
+    s32 baseSpecies = GetBaseSpeciesNoUnown(pokeIndex);
 
-    baseSpecies = GetBaseSpeciesNoUnown(pokeIndex);
-    preload = gUnknown_203B494;
-    iVar2 = baseSpecies;
-    if (baseSpecies < 0)
-        iVar2 = baseSpecies + 0x1F; // 0b11111
-
-    if (preload->unk1C[iVar2 >> 5] & (1 << (baseSpecies + (iVar2 >> 5) * -32)))
+    if (gUnknown_203B494->unk1C[baseSpecies / 32] & (1 << (baseSpecies % 32)))
         return TRUE;
     return FALSE;
 }
@@ -328,7 +307,7 @@ void UpdateAdventureAchievements(void)
     }
 }
 
-static void WriteAdventureBits(DataSerializer *r0)
+void WriteAdventureBits(DataSerializer *r0)
 {
     UpdateAdventureAchievements();
     WriteBits(r0, &gUnknown_203B494->numAdventures, 17);
@@ -345,7 +324,7 @@ static void WriteAdventureBits(DataSerializer *r0)
     WriteDungeonLocationBits(r0, &gUnknown_203B494->dungeonLocation);
 }
 
-static void ReadAdventureBits(DataSerializer *r0)
+void ReadAdventureBits(DataSerializer *r0)
 {
     ReadBits(r0, &gUnknown_203B494->numAdventures, 17);
     ReadBits(r0, &gUnknown_203B494->friendRescueSuccesses, 17);
@@ -359,34 +338,4 @@ static void ReadAdventureBits(DataSerializer *r0)
     ReadBits(r0, gUnknown_203B494->unk54, 14 * 32);
     ReadBits(r0, gUnknown_203B494->learnedMoves, ARRAY_COUNT_INT(gUnknown_203B494->learnedMoves) * 32);
     ReadDungeonLocationBits(r0, &gUnknown_203B494->dungeonLocation);
-}
-
-u32 SaveAdventureData(u8 *buffer, u32 bufLen)
-{
-    DataSerializer seri;
-
-    InitBitWriter(&seri, buffer, bufLen);
-
-    WriteGameOptionsBits(&seri);
-    WritePlayTimeBits(&seri);
-    WriteAdventureBits(&seri);
-    WriteExclusivePokemon(&seri);
-
-    FinishBitSerializer(&seri);
-    return seri.count;
-}
-
-u32 RestoreAdventureData(u8 *buffer, u32 bufLen)
-{
-    DataSerializer seri;
-
-    InitBitReader(&seri, buffer, bufLen);
-
-    ReadGameOptionsBits(&seri);
-    ReadPlayTimeBits(&seri);
-    ReadAdventureBits(&seri);
-    ReadExclusivePokemon(&seri);
-
-    FinishBitSerializer(&seri);
-    return seri.count;
 }

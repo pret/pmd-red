@@ -1,9 +1,6 @@
 .section .rodata
 
-@ ???
-.string "pksdir0\0"
-@ ???
-.string "pksdir0\0"
+
 @ ???
 .string "pksdir0\0"
 @ ???.c

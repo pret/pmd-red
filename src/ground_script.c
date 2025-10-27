@@ -12,7 +12,7 @@
 #include "code_8094F88.h"
 #include "code_80958E8.h"
 #include "code_80972F4.h"
-#include "code_8097670.h"
+#include "adventure_info.h"
 #include "code_80A26CC.h"
 #include "debug.h"
 #include "dungeon_info.h"

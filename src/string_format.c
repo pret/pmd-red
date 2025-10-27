@@ -55,9 +55,6 @@ static const WindowTemplate sOnlyTextDialogueBoxWindowTemplate = {
     .header = NULL,
 };
 
-extern void DisplayMonPortraitSprite(s32 a0, const u8 *compressedData, s32 a2);
-extern void sub_80073E0(s32 a0);
-
 static void sub_8014A88(void);
 static bool8 sub_8014B94(void);
 static void nullsub_35(void);

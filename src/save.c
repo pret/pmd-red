@@ -1,8 +1,9 @@
 #include "global.h"
 #include "globaldata.h"
+#include "save.h"
 #include "music_util.h"
 #include "string_format.h"
-#include "code_8097670.h"
+#include "adventure_info.h"
 #include "event_flag.h"
 #include "exclusive_pokemon.h"
 #include "flash.h"
@@ -11,7 +12,7 @@
 #include "memory.h"
 #include "pokemon_3.h"
 #include "random.h"
-#include "save.h"
+#include "adventure_save.h"
 
 // size: 0x800
 struct unk_struct

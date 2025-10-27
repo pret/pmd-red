@@ -327,7 +327,8 @@ SECTIONS {
         src/code_80958E8.o(.text);
         src/code_80972F4.o(.text);
         src/code_8097504.o(.text);
-        src/code_8097670.o(.text);
+        src/adventure_info.o(.text);
+        src/adventure_save.o(.text);
         src/code_8097DD0.o(.text);
         src/code_8097F40.o(.text);
         src/exclusive_pokemon.o(.text);
@@ -715,6 +716,8 @@ SECTIONS {
         src/code_80958E8.o(.rodata);
         src/code_80972F4.o(.rodata);
         src/code_8097504.o(.rodata);
+        src/adventure_info.o(.rodata);
+        src/adventure_save.o(.rodata);
         data/data_8109D10.o(.rodata);
         src/dungeon_data.o(.rodata);
         src/exclusive_pokemon.o(.rodata);

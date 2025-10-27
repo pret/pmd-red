@@ -6,7 +6,7 @@
 #include "bg_palette_buffer.h"
 #include "code_800D090.h"
 #include "code_8094F88.h"
-#include "code_8097670.h"
+#include "adventure_info.h"
 #include "def_filearchives.h"
 #include "dungeon_info.h"
 #include "event_flag.h"

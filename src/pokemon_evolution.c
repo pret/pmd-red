@@ -5,7 +5,7 @@
 #include "pokemon_3.h"
 #include "text_util.h"
 #include "friend_area.h"
-#include "code_8097670.h"
+#include "adventure_info.h"
 #include "constants/evolve_type.h"
 #include "constants/evolution_status.h"
 

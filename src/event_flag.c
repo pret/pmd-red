@@ -12,7 +12,7 @@
 #include "other_random.h"
 #include "friend_area.h"
 #include "code_80972F4.h"
-#include "code_8097670.h"
+#include "adventure_info.h"
 #include "pokemon.h"
 #include "pokemon_3.h"
 #include "ground_place.h"
