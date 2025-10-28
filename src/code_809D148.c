@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "code_809D148.h"
 #include "structs/str_position.h"
-#include "code_8002774.h"
+#include "pixelpos_math.h"
 #include "math.h"
 #include "memory.h"
 #include "other_random.h"
@@ -218,7 +218,7 @@ void sub_809D25C(void)
     case 1:
         sp4.x = sUnknown_20399E8.unk1C.x - sUnknown_20399E8.unk14.x;
         sp4.y = sUnknown_20399E8.unk1C.y - sUnknown_20399E8.unk14.y;
-        sub_800290C(&sp4, sUnknown_20399E8.unkC);
+        ClampPixelPos(&sp4, sUnknown_20399E8.unkC);
         if (sp4.x == 0 && sp4.y == 0)
         {
             sUnknown_20399E8.unk8 = 0;
@@ -238,7 +238,7 @@ void sub_809D25C(void)
         sUnknown_20399E8.unk8 = 2;
     // Breakthrough
     case 2:
-        sub_8002934(&spC, &sUnknown_20399E8.unk14, &sUnknown_20399E8.unk1C, sUnknown_20399E8.unk10, 1);
+        InterpolatePixelPos(&spC, &sUnknown_20399E8.unk14, &sUnknown_20399E8.unk1C, sUnknown_20399E8.unk10, 1);
         sUnknown_20399E8.unk14 = spC;
         if (--sUnknown_20399E8.unk10 <= 0)
             sUnknown_20399E8.unk8 = 0;

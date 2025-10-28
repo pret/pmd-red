@@ -28,9 +28,7 @@
 #include "dungeon_kecleon_shop.h"
 #include "dungeon_range.h"
 #include "move_orb_effects_5.h"
-
-void sub_80421AC(Entity * pokemon, Entity * target);
-void sub_807BB78(Entity *pokemon);
+#include "dungeon_ai_movement.h"
 
 void WarpTarget(Entity *pokemon, Entity *target, u32 param_3, DungeonPos *pos)
 {

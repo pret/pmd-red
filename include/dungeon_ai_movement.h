@@ -9,5 +9,6 @@ bool8 ChooseTargetPosition(Entity *pokemon);
 void DecideMovement(Entity *pokemon, bool8 showRunAwayEffect);
 bool8 AvoidEnemies(Entity *pokemon);
 bool8 Wander(Entity *pokemon);
+void sub_807BB78(Entity *pokemon);
 
 #endif

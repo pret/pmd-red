@@ -52,7 +52,8 @@ SECTIONS {
         src/main_loops.o(.text);
         src/event_flag.o(.text);
         src/gba_color_util.o(.text);
-        src/code_8002774.o(.text);
+        src/pixelpos_math.o(.text);
+        src/direction_util.o(.text);
         src/memory.o(.text);
         src/palette_fade_util.o(.text);
         src/other_random.o(.text);
@@ -429,8 +430,8 @@ SECTIONS {
         src/event_flag.o(.rodata);
         src/script_vars_info.o(.rodata);
         src/gba_color_util.o(.rodata);
-        data/data.o(.rodata);
-        src/code_8002774.o(.rodata);
+        src/pixelpos_math.o(.rodata);
+        src/direction_util.o(.rodata);
         data/pksdir_5.o(.rodata);
         src/memory.o(.rodata);
         src/palette_fade_util.o(.rodata);

@@ -37,6 +37,7 @@
 #include "dungeon_tilemap.h"
 #include "dungeon_map.h"
 #include "dungeon_mon_spawn.h"
+#include "direction_util.h"
 
 struct RgbS16
 {
@@ -56,8 +57,6 @@ extern void sub_8088848(void);
 extern void sub_808A718(void);
 extern s32 sub_800E700(s32);
 extern void sub_8052FB8(const u8 *);
-extern u32 sub_8002A70(u32, s32, u8);
-extern s8 sub_8002984(s8, u8);
 
 struct unkData_8107234
 {
@@ -1919,25 +1918,14 @@ void sub_808692C(void)
 
 void SpriteLookAroundEffect(Entity *entity)
 {
-    s8 r4;
-    s8 r3;
+    s8 dir = sub_8002984((s8) GetEntInfo(entity)->action.direction, 4);
 
-    r4 = sub_8002984(GetEntInfo(entity)->action.direction, 4);
-
-    sub_80869E4(entity, 4, 2, r4);
-
+    sub_80869E4(entity, 4, 2, dir);
     sub_803E708(15, 70);
-
-    r4 = sub_8002984(r4, 5);
-
-    sub_80869E4(entity, 4, 1, r4);
-
+    dir = sub_8002984(dir, 5);
+    sub_80869E4(entity, 4, 1, dir);
     sub_803E708(15, 70);
-
-    r3 = sub_8002984(r4, 4);
-
-    sub_80869E4(entity, 4, 2, r3);
-
+    sub_80869E4(entity, 4, 2, (s8) sub_8002984(dir, 4));
     sub_803E708(15, 70);
 }
 

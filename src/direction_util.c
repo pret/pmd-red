@@ -1,13 +1,13 @@
 #include "global.h"
 #include "globaldata.h"
-#include "code_8002774.h"
+#include "direction_util.h"
 #include "constants/direction.h"
 #include "structs/str_position.h"
 #include "other_random.h"
 
-const u8 sUnknown_8002774[] = {0, 0, 0, 0, 0, 0, 0, 0};
+UNUSED static const u8 sUnusedZeroArray[] = {0, 0, 0, 0, 0, 0, 0, 0};
 
-const PixelPos gVectorDirections[NUM_DIRECTIONS] = {
+static const PixelPos sVectorDirections[NUM_DIRECTIONS] = {
     {0, 1}, // N
     {1, 1}, // NE
     {1, 0}, // E
@@ -18,47 +18,10 @@ const PixelPos gVectorDirections[NUM_DIRECTIONS] = {
     {-1, 1}, // NW
 };
 
+
 static s8 VecDirection4Radial(PixelPos *pixelPos);
 
-
-// TODO: File split here
-
-
-
-
-// arm9.bin::02010314
-void sub_800290C(PixelPos *param_1, s32 param_2)
-{
-    if (param_1->x > param_2)
-        param_1->x = param_2;
-    else if (param_1->x < -param_2)
-        param_1->x = -param_2;
-
-    if (param_1->y > param_2)
-        param_1->y = param_2;
-    else if(param_1->y < -param_2)
-        param_1->y = -param_2;
-}
-
-// arm9.bin::020102B8
-void sub_8002934(PixelPos *param_1, PixelPos *param_2, PixelPos *param_3, s32 param_4, s32 param_5)
-{
-    s32 r9 = (param_4 + param_5);
-    param_1->x = (param_4 * param_2->x + param_5 * param_3->x) / r9;
-    param_1->y = (param_4 * param_2->y + param_5 * param_3->y) / r9;
-}
-
-
-
-
-// TODO: File split here
-
-
-
-
-
-
-static inline s8 sub_8002984_sub(s32 direction1, s32 rand, s32 add, s32 multi)
+static inline s8 GetRandomizedDirection(s32 direction1, s32 rand, s32 add, s32 multi)
 {
     return (s8)(((direction1 + add) + OtherRandInt(rand) * multi) % NUM_DIRECTIONS);
 }
@@ -66,62 +29,59 @@ static inline s8 sub_8002984_sub(s32 direction1, s32 rand, s32 add, s32 multi)
 // arm9.bin::020109F4
 s32 sub_8002984(s32 _direction1, u32 caseID)
 {
-  s32 direction1;
-
-  direction1 = (s8)_direction1;
-  switch((u8)caseID) {
-      case 1:
-        if (direction1 >= 0) {
-            direction1 += 7;
-            direction1 &= DIRECTION_MASK;
-        }
-        break;
-      case 2:
-        if (direction1 >= 0) {
-            direction1 += 1;
-            direction1 &= DIRECTION_MASK;
-        }
-        break;
-      case 3:
-        if (direction1 >= 0) {
-            direction1 += 6;
-            direction1 &= DIRECTION_MASK;
-        }
-        break;
-      case 4:
-        if (direction1 >= 0) {
-            direction1 += 2;
-            direction1 &= DIRECTION_MASK;
-        }
-        break;
-      case 5:
-        if (direction1 >= 0) {
-            direction1 += 4;
-            direction1 &= DIRECTION_MASK;
-        }
-        break;
-      case 6:
-        if ((direction1 & 1) != 0) {
-            direction1 = sub_8002984_sub(direction1, 2, 7, 2);
-        }
-        else
-        {
-             direction1 = sub_8002984_sub(direction1, 3, 6, 2);
-        }
-        break;
-      case 7:
-        direction1 = sub_8002984_sub(direction1, 3, 7, 1);
-        break;
-      case 8:
-        direction1 =  (s8)(OtherRandInt(NUM_DIRECTIONS) & 0xfe);
-        break;
-      case 9:
-        direction1 =  (s8)OtherRandInt(NUM_DIRECTIONS);
-        break;
-      default:
-        break;
-  }
-  return direction1;
+    s32 direction1 = (s8) _direction1;
+    switch((u8)caseID) {
+        case 1:
+            if (direction1 >= 0) {
+                direction1 += 7;
+                direction1 &= DIRECTION_MASK;
+            }
+            break;
+        case 2:
+            if (direction1 >= 0) {
+                direction1 += 1;
+                direction1 &= DIRECTION_MASK;
+            }
+            break;
+        case 3:
+            if (direction1 >= 0) {
+                direction1 += 6;
+                direction1 &= DIRECTION_MASK;
+            }
+            break;
+        case 4:
+            if (direction1 >= 0) {
+                direction1 += 2;
+                direction1 &= DIRECTION_MASK;
+            }
+            break;
+        case 5:
+            if (direction1 >= 0) {
+                direction1 += 4;
+                direction1 &= DIRECTION_MASK;
+            }
+            break;
+        case 6:
+            if ((direction1 & 1) != 0) {
+                direction1 = GetRandomizedDirection(direction1, 2, 7, 2);
+            }
+            else {
+                direction1 = GetRandomizedDirection(direction1, 3, 6, 2);
+            }
+            break;
+        case 7:
+            direction1 = GetRandomizedDirection(direction1, 3, 7, 1);
+            break;
+        case 8:
+            direction1 = (s8)(OtherRandInt(NUM_DIRECTIONS) & 0xfe);
+            break;
+        case 9:
+            direction1 = (s8) OtherRandInt(NUM_DIRECTIONS);
+            break;
+        default:
+            break;
+    }
+    return direction1;
 }
 
 // arm9.bin::020108EC
@@ -219,11 +179,12 @@ UNUSED static s32 sub_8002B5C(s32 _direction1, s32 _direction2)
 #endif
 
 // arm9.bin::02010790
-PixelPos SetVecFromDirectionSpeed(s8 r1, u32 r2)
+PixelPos SetVecFromDirectionSpeed(s32 _dir, u32 speed)
 {
-    const PixelPos *vec = &gVectorDirections[r1];
+    s32 dir = (s8) _dir;
+    const PixelPos *vec = &sVectorDirections[dir];
 
-    return (PixelPos){ .x = vec->x * r2, .y = vec->y * r2 };
+    return (PixelPos){ .x = vec->x * speed, .y = vec->y * speed };
 }
 
 UNUSED static s32 VecDirection8Sign(PixelPos *param_1)
@@ -366,89 +327,83 @@ static s8 VecDirection4Radial(PixelPos *pixelPos)
 }
 
 // arm9.bin::02010478
-s8 SizedDeltaDirection4(const PixelPos *r0, const PixelPos *r1, const PixelPos *r2, const PixelPos *r3)
+s8 SizedDeltaDirection4(const PixelPos *p1, const PixelPos *p2, const PixelPos *p3, const PixelPos *p4)
 {
-    PixelPos stack;
-    s32 iVar1;
-    s32 iVar2;
-    s32 iVar3;
+    PixelPos newPos;
 
-    stack.x = r2->x  - r0->x;
-    stack.y = r2->y  - r0->y;
+    newPos.x = p3->x - p1->x;
+    newPos.y = p3->y - p1->y;
 
-    if(stack.x >= 0)
-    {
-        iVar3 = (stack.x + 1);
-        iVar3 -= ((r1->x + r3->x) / 2);
-        stack.x = iVar3;
-        if(stack.x < 0) stack.x = 0;
+    if (newPos.x >= 0) {
+        s32 x = (newPos.x + 1);
+        x -= ((p2->x + p4->x) / 2);
+        newPos.x = x;
+        if (newPos.x < 0)
+            newPos.x = 0;
     }
-    else
-    {
-        iVar1 = (stack.x - 1);
-        iVar1 += ((r1->x + r3->x) / 2);
-        stack.x = iVar1;
-        if(stack.x > 0) stack.x = 0;
+    else {
+        s32 x = (newPos.x - 1);
+        x += ((p2->x + p4->x) / 2);
+        newPos.x = x;
+        if (newPos.x > 0)
+            newPos.x = 0;
     }
 
-    if(stack.y >= 0)
-    {
-        iVar2 = (stack.y + 1);
-        iVar2 -= ((r1->y + r3->y) / 2);
-        stack.y = iVar2;
-        if(stack.y < 0) stack.y = 0;
+    if (newPos.y >= 0) {
+        s32 y = (newPos.y + 1);
+        y -= ((p2->y + p4->y) / 2);
+        newPos.y = y;
+        if (newPos.y < 0)
+            newPos.y = 0;
     }
-    else
-    {
-        iVar1 = (stack.y - 1);
-        iVar1 += ((r1->y + r3->y) / 2);
-        stack.y = iVar1;
-        if(stack.y > 0) stack.y = 0;
+    else {
+        s32 y = (newPos.y - 1);
+        y += ((p2->y + p4->y) / 2);
+        newPos.y = y;
+        if (newPos.y > 0)
+            newPos.y = 0;
     }
 
-    return VecDirection4Radial(&stack);
+    return VecDirection4Radial(&newPos);
 }
 
 // arm9.bin::02010350
-s8 SizedDeltaDirection8(const PixelPos *r0, const PixelPos *r1, const PixelPos *r2, const PixelPos *r3)
+s8 SizedDeltaDirection8(const PixelPos *p1, const PixelPos *p2, const PixelPos *p3, const PixelPos *p4)
 {
-    PixelPos stack;
-    s32 iVar1;
-    s32 iVar2;
-    s32 iVar3;
+    PixelPos newPos;
 
-    stack.x = r2->x - r0->x;
-    stack.y = r2->y - r0->y;
+    newPos.x = p3->x - p1->x;
+    newPos.y = p3->y - p1->y;
 
-    if (stack.x >= 0) {
-        iVar3 = stack.x + 1;
-        iVar3 -= (r1->x + r3->x) / 2;
-        stack.x = iVar3;
-        if (stack.x < 0)
-            stack.x = 0;
+    if (newPos.x >= 0) {
+        s32 x = newPos.x + 1;
+        x -= (p2->x + p4->x) / 2;
+        newPos.x = x;
+        if (newPos.x < 0)
+            newPos.x = 0;
     }
     else {
-        iVar1 = stack.x - 1;
-        iVar1 += (r1->x + r3->x) / 2;
-        stack.x = iVar1;
-        if (stack.x > 0)
-            stack.x = 0;
+        s32 x = newPos.x - 1;
+        x += (p2->x + p4->x) / 2;
+        newPos.x = x;
+        if (newPos.x > 0)
+            newPos.x = 0;
     }
 
-    if (stack.y >= 0) {
-        iVar2 = stack.y + 1;
-        iVar2 -= (r1->y + r3->y) / 2;
-        stack.y = iVar2;
-        if (stack.y < 0)
-            stack.y = 0;
+    if (newPos.y >= 0) {
+        s32 y = newPos.y + 1;
+        y -= (p2->y + p4->y) / 2;
+        newPos.y = y;
+        if (newPos.y < 0)
+            newPos.y = 0;
     }
     else {
-        iVar1 = stack.y - 1;
-        iVar1 += (r1->y + r3->y) / 2;
-        stack.y = iVar1;
-        if (stack.y > 0)
-            stack.y = 0;
+        s32 y = newPos.y - 1;
+        y += (p2->y + p4->y) / 2;
+        newPos.y = y;
+        if (newPos.y > 0)
+            newPos.y = 0;
     }
 
-    return (s8) VecDirection8Radial(&stack);
+    return (s8) VecDirection8Radial(&newPos);
 }
