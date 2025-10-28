@@ -5,7 +5,6 @@
 #include "text_1.h"
 #include "memory.h"
 #include "file_system.h"
-#include "code_8002774.h"
 #include "map_files_table.h"
 #include "code_8004AA0.h"
 #include "graphics_memory.h"
@@ -18,7 +17,6 @@
 
 extern const FileArchive gGroundFileArchive;
 
-void SetCameraPositionForLayer(GroundBg *groundBg, s32 id, const PixelPos *srcPos);
 static void CloseOpenedFiles(GroundBg *groundBg);
 static void CallMapTilemapRenderFunc(MapRender *mapRender);
 static const u8 *BmaLayerNrlDecompressor(u16 **dstArray, const void *bmaData, SubStruct_52C *a2, BmaHeader *bmaHeader);
