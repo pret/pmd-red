@@ -8,7 +8,7 @@
 #include "text_1.h"
 #include "text_3.h"
 #include "code_800D090.h"
-#include "code_801602C.h"
+#include "confirm_name_menu.h"
 #include "code_801B3C0.h"
 #include "dungeon_vram.h"
 #include "dungeon_tilemap.h"

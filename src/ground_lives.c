@@ -22,6 +22,7 @@
 #include "ground_map.h"
 #include "textbox.h"
 #include "code_809D148.h"
+#include "ground_script_file.h"
 
 struct GroundLivesMeta_Sub1
 {
@@ -105,12 +106,6 @@ struct GroundLiveTypeData
 };
 
 extern const struct GroundLiveTypeData gGroundLivesTypeData_811E63C[];
-
-extern s32 sub_8002984(s32 _direction1, u32 caseID);
-extern bool8 sub_80A66F8(struct UnkGroundSpriteStruct *ptr);
-extern bool8 sub_80A671C(struct UnkGroundSpriteStruct *ptr);
-extern Pokemon *sub_80A8D54(s32);
-extern const struct GroundScriptHeader *GetGroundScript(s16 a0, const DebugLocation *);
 
 static s32 sub_80A7B94(s16 *a0);
 static s32 GroundLives_Add(s32 id_, const GroundLivesData *ptr, s32 group_, s32 sector_);

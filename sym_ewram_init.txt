@@ -28,7 +28,7 @@
 .include "src/string_format.o"
 .include "src/code_8015080.o"
 .include "src/naming_screen.o"
-.include "src/code_801602C.o"
+.include "src/confirm_name_menu.o"
 .include "src/felicity_bank.o"
 .include "src/kangaskhan_storage1.o"
 .include "src/kangaskhan_storage2.o"

@@ -3,7 +3,9 @@
 #include "ground_effect.h"
 #include "data_script.h"
 #include "ground_script.h"
+#include "ground_script_file.h"
 #include "ground_sprite.h"
+#include "ground_sprite_util.h"
 #include "ground_map.h"
 #include "debug.h"
 #include "memory.h"
@@ -48,14 +50,6 @@ struct GroundEffectTypeData
 
 
 extern struct GroundEffectTypeData gGroundEffectTypes[];
-
-const struct GroundScriptHeader *GetGroundScript(s16 a0, DebugLocation *);
-void sub_80A7688(struct UnkGroundSpriteStruct *ptr, s32 unused, s32 a2_, s32 a3);
-void sub_80A7714(struct UnkGroundSpriteStruct *);
-extern bool8 sub_80A66F8(struct UnkGroundSpriteStruct *ptr);
-extern bool8 sub_80A671C(struct UnkGroundSpriteStruct *ptr);
-void sub_80A7720(struct UnkGroundSpriteStruct *ptr, PixelPos *pixelPos, s32 a2);
-
 
 static void GroundEffect_Delete(s32 _id);
 static s32 sub_80AD3E0(GroundEffect *param_1, PixelPos *param_2);
@@ -103,6 +97,12 @@ static const CallbackData gGroundEffectCallbacks = {
 };
 extern const u8 gUnknown_81185D8[];
 #define FAKE_FILENAME gUnknown_81185D8
+
+
+
+
+
+
 
 
 

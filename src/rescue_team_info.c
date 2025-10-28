@@ -4,13 +4,10 @@
 #include "data_serializer.h"
 #include "text_util.h"
 #include "event_flag.h"
+#include "strings.h"
 
 EWRAM_INIT struct RescueTeamData *gRescueTeamInfoRef = {NULL};
 EWRAM_DATA struct RescueTeamData gRescueTeamInfo = {0};
-
-extern void BoundedCopyStringtoBuffer(u8 *buffer, u8 *string, s32 size);
-
-extern const u8 *gRescueTeamRanks[];
 
 static const s32 sRescueRankMaxPoints[MAX_TEAM_RANKS] = {
     [NORMAL_RANK] = 50,
@@ -42,8 +39,7 @@ void InitializeRescueTeamInfo(void)
 void sub_80920B8(u8 *buffer)
 {
     s32 counter;
-    for(counter = 0; counter < TEAM_NAME_LENGTH; counter++)
-    {
+    for (counter = 0; counter < TEAM_NAME_LENGTH; counter++) {
         *buffer++ = gRescueTeamInfoRef->teamName[counter];
     }
 }
@@ -56,8 +52,7 @@ void sub_80920D8(u8 *buffer)
 void SetRescueTeamName(u8 *buffer)
 {
     s32 counter;
-    for(counter = 0; counter < TEAM_NAME_LENGTH; counter++)
-    {
+    for (counter = 0; counter < TEAM_NAME_LENGTH; counter++) {
         gRescueTeamInfoRef->teamName[counter] = *buffer++;
     }
 }
@@ -120,7 +115,6 @@ bool8 GetIsTeamRenamed(void)
 }
 
 u32 SaveRescueTeamInfo(u8 *param_1, u32 size)
-
 {
     DataSerializer auStack36;
     u8 neg1;

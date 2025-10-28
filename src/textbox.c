@@ -5,7 +5,7 @@
 #include "constants/monster.h"
 #include "code_800558C.h"
 #include "code_800D090.h"
-#include "code_801602C.h"
+#include "confirm_name_menu.h"
 #include "code_801B60C.h"
 #include "code_802DB28.h"
 #include "code_80958E8.h"

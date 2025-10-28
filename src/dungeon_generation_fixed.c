@@ -9,6 +9,7 @@
 #include "dungeon_util.h"
 #include "dungeon_items.h"
 #include "dungeon_message.h"
+#include "dungeon_strings.h"
 #include "dungeon_floor_spawns.h"
 #include "constants/monster.h"
 #include "constants/trap.h"
@@ -981,9 +982,6 @@ void sub_8051E3C(void)
         }
     }
 }
-
-extern const u8 *const gUnknown_80FDDF0;
-extern const u8 *const gUnknown_80FDDD0;
 
 void sub_8051E7C(Entity *pokemon)
 {

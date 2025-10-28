@@ -4,6 +4,7 @@
 #include "structs/menu.h"
 #include "structs/str_text.h"
 
+void sub_8012A18(s32 unused);
 u32 sub_8012A64(TouchScreenMenuInput *r0, s32 r1);
 s32 GetKeyPress(MenuInputStruct *r0);
 s32 GetMenuInput(void);

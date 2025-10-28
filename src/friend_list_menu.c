@@ -3,7 +3,7 @@
 #include "friend_list_menu.h"
 #include "constants/dungeon.h"
 #include "music_util.h"
-#include "code_801602C.h"
+#include "confirm_name_menu.h"
 #include "code_801B3C0.h"
 #include "code_801EE10.h"
 #include "code_801EE10_mid.h"

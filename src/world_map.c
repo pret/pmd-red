@@ -26,8 +26,6 @@
 #include "text_3.h"
 #include "world_map.h"
 
-extern void WaitForNextFrameAndAdvanceRNG(void);
-
 static EWRAM_INIT struct WorldMap *sWorldMapPtr = NULL;
 static EWRAM_INIT WindowTemplates sWorldMapWindows = {
     .id = {

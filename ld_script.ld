@@ -100,12 +100,11 @@ SECTIONS {
         src/save_write.o(.text);
         src/quick_save_read.o(.text);
         src/quick_save_write.o(.text);
-        src/code_8012A18.o(.text);
         src/menu_input.o(.text);
         src/string_format.o(.text);
         src/code_8015080.o(.text);
         src/naming_screen.o(.text);
-        src/code_801602C.o(.text);
+        src/confirm_name_menu.o(.text);
         src/felicity_bank.o(.text);
         src/kangaskhan_storage1.o(.text);
         src/kangaskhan_storage2.o(.text);
@@ -476,7 +475,7 @@ SECTIONS {
         src/common_strings.o(.rodata);
         src/code_8015080.o(.rodata);
         src/naming_screen.o(.rodata);
-        src/code_801602C.o(.rodata);
+        src/confirm_name_menu.o(.rodata);
         src/felicity_bank.o(.rodata);
         src/kangaskhan_storage1.o(.rodata);
         src/kangaskhan_storage2.o(.rodata);

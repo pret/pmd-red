@@ -11,17 +11,11 @@
 #include "string_format.h"
 #include "text_1.h"
 #include "text_2.h"
+#include "text_util.h"
 
 EWRAM_INIT unkStruct_203B270 *gUnknown_203B270 = { NULL };
 
-const WindowTemplate gUnknown_80DC240 = {
-    0x00,
-    0x03,
-    0x00, 0x00,
-    0x00, 0x00,
-    0x00, 0x00,
-    NULL
-};
+const WindowTemplate gUnknown_80DC240 = WIN_TEMPLATE_DUMMY;
 
 const WindowHeader gUnkData_80DC258 = {0x01, 0x00, 0x0F, 0x00};
 
@@ -275,8 +269,6 @@ void sub_801F214(void)
         gUnknown_203B270 = NULL;
     }
 }
-
-extern void StrncpyCustom(u8 *buffer, u8 *string, s32 size);
 
 void sub_801F280(bool8 param_1)
 {

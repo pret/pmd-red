@@ -19,9 +19,7 @@
 #include "structs/str_position.h"
 #include "code_809D148.h"
 #include "direction_util.h"
-
-extern void sub_8012A18(s32 unused);
-extern void sub_80999E8(s32 a0);
+#include "menu_input.h"
 
 UNUSED static void DebugMapViewer(void)
 {
@@ -157,4 +155,3 @@ UNUSED static void DebugMapViewer(void)
     sub_8099768();
     nullsub_103();
 }
-

@@ -9,7 +9,7 @@
 #include "code_800558C.h"
 #include "graphics_memory.h"
 #include "effect_data.h"
-#include "code_801602C.h"
+#include "confirm_name_menu.h"
 #include "dungeon_vram.h"
 #include "dungeon_mon_sprite_render.h"
 #include "dungeon_info.h"

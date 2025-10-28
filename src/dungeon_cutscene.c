@@ -37,6 +37,7 @@
 #include "dungeon_tilemap.h"
 #include "dungeon_map.h"
 #include "dungeon_mon_spawn.h"
+#include "dungeon_message.h"
 #include "direction_util.h"
 
 struct RgbS16
@@ -50,13 +51,9 @@ extern OpenedFile *gDungeonPaletteFile;
 extern RGB gUnknown_202ECA4[];
 
 extern bool8 sub_8004C00(unkStruct_202EE8C *a0, s32 a1, s32 a2, s32 brightness, const RGB *ramp, struct RgbS16 *a5);
-extern void sub_803F878(s32, s32);
-extern bool8 sub_800E90C(DungeonPos *);
 extern void sub_8088EE8(void);
 extern void sub_8088848(void);
 extern void sub_808A718(void);
-extern s32 sub_800E700(s32);
-extern void sub_8052FB8(const u8 *);
 
 struct unkData_8107234
 {
