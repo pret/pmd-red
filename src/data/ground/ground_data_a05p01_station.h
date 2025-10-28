@@ -7,7 +7,7 @@
 
 
 static const struct ScriptCommand s_gs175_g0_s0_station_sref_script[] = { /* 0x822af80 */
-    DEBUGINFO,
+    DEBUGINFO_O(10),
     SELECT_MAP(175),
     JUMP_SCRIPT(COMMON_ENTER),
 };
@@ -15,7 +15,7 @@ static const struct ScriptCommand s_gs175_g0_s0_station_sref_script[] = { /* 0x8
 static const struct ScriptRef s_gs175_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs175_g0_s0_station_sref_script }; /* 0x822afdc */
 
 static const struct ScriptCommand s_gs175_g1_s0_station_sref_script[] = { /* 0x822afe8 */
-    DEBUGINFO,
+    DEBUGINFO_O(18),
     BGM_STOP,
     WAIT(180),
     SELECT_MAP(175),
@@ -36,7 +36,7 @@ static const struct ScriptCommand s_gs175_g1_s0_station_sref_script[] = { /* 0x8
 static const struct ScriptRef s_gs175_g1_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs175_g1_s0_station_sref_script }; /* 0x822b0e8 */
 
 static const struct ScriptCommand s_gs175_g1_s0_eff1_script[] = { /* 0x822b0f4 */
-    DEBUGINFO,
+    DEBUGINFO_O(39),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(40),
     BGM_SWITCH(44),
@@ -61,7 +61,7 @@ static const struct ScriptCommand s_gs175_g1_s0_eff1_script[] = { /* 0x822b0f4 *
 
 
 static const struct ScriptCommand s_gs175_g2_s0_station_sref_script[] = { /* 0x822b2f4 */
-    DEBUGINFO,
+    DEBUGINFO_O(64),
     SELECT_MAP(175),
     SELECT_ENTITIES(-1, 0),
     { 0x3b, 0x36,  0x0000, -0x00000002,  0x00000000, NULL },
@@ -79,7 +79,7 @@ static const struct ScriptCommand s_gs175_g2_s0_station_sref_script[] = { /* 0x8
 static const struct ScriptRef s_gs175_g2_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs175_g2_s0_station_sref_script }; /* 0x822b3c4 */
 
 static const struct ScriptCommand s_gs175_g2_s0_eff1_script[] = { /* 0x822b3d0 */
-    DEBUGINFO,
+    DEBUGINFO_O(82),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     { 0xdf, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(120),

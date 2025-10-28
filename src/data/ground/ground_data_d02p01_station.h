@@ -11,7 +11,7 @@
 
 
 static const struct ScriptCommand s_gs180_g0_s0_station_sref_script[] = { /* 0x82302f8 */
-    DEBUGINFO,
+    DEBUGINFO_O(14),
     SELECT_MAP(MAP_THUNDERWAVE_CAVE_ENTRY),
     BGM_STOP,
     JUMP_SCRIPT(COMMON_ENTER),
@@ -20,7 +20,7 @@ static const struct ScriptCommand s_gs180_g0_s0_station_sref_script[] = { /* 0x8
 static const struct ScriptRef s_gs180_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs180_g0_s0_station_sref_script }; /* 0x8230364 */
 
 static const struct ScriptCommand s_gs180_g1_s0_station_sref_script[] = { /* 0x8230370 */
-    DEBUGINFO,
+    DEBUGINFO_O(23),
     SELECT_MAP(MAP_THUNDERWAVE_CAVE_ENTRY),
     SELECT_ENTITIES(-1, 0),
     BGM_SWITCH(14),
@@ -33,7 +33,7 @@ static const struct ScriptCommand s_gs180_g1_s0_station_sref_script[] = { /* 0x8
 static const struct ScriptRef s_gs180_g1_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs180_g1_s0_station_sref_script }; /* 0x82303f0 */
 
 static const struct ScriptCommand s_gs180_g1_s0_eff0_script[] = { /* 0x82303fc */
-    DEBUGINFO,
+    DEBUGINFO_O(36),
     CAMERA_END_PAN,
     WAIT(1),
     AWAIT_CUE(4),
@@ -44,7 +44,7 @@ static const struct ScriptCommand s_gs180_g1_s0_eff0_script[] = { /* 0x82303fc *
 };
 
 static const struct ScriptCommand s_gs180_g1_s0_lives0_dlg0[] = { /* 0x823047c */
-    DEBUGINFO,
+    DEBUGINFO_O(47),
     SELECT_ANIMATION(2),
     { 0x59, 0x00,  0x0000,  0x00000064,  0x00000000, NULL },
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
@@ -85,7 +85,7 @@ static const struct ScriptCommand s_gs180_g1_s0_lives0_dlg0[] = { /* 0x823047c *
 
 
 static const struct ScriptCommand s_gs180_g1_s0_lives1_dlg0[] = { /* 0x8230758 */
-    DEBUGINFO,
+    DEBUGINFO_O(88),
     SELECT_ANIMATION(2),
     { 0x59, 0x00,  0x0000,  0x00000064,  0x00000000, NULL },
     { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
@@ -109,7 +109,7 @@ static const struct ScriptCommand s_gs180_g1_s0_lives1_dlg0[] = { /* 0x8230758 *
 };
 
 static const struct ScriptCommand s_gs180_g1_s0_lives2_dlg0[] = { /* 0x82308a8 */
-    DEBUGINFO,
+    DEBUGINFO_O(112),
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(7),
@@ -122,7 +122,7 @@ static const struct ScriptCommand s_gs180_g1_s0_lives2_dlg0[] = { /* 0x82308a8 *
 };
 
 static const struct ScriptCommand s_gs180_g1_s0_lives3_dlg0[] = { /* 0x8230948 */
-    DEBUGINFO,
+    DEBUGINFO_O(125),
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0003,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(8),
@@ -134,7 +134,7 @@ static const struct ScriptCommand s_gs180_g1_s0_lives3_dlg0[] = { /* 0x8230948 *
 };
 
 static const struct ScriptCommand s_gs180_g2_s0_station_sref_script[] = { /* 0x82309d8 */
-    DEBUGINFO,
+    DEBUGINFO_O(137),
     SELECT_MAP(MAP_THUNDERWAVE_CAVE_ENTRY),
     SELECT_ENTITIES(-1, 0),
     BGM_SWITCH(14),
@@ -147,7 +147,7 @@ static const struct ScriptCommand s_gs180_g2_s0_station_sref_script[] = { /* 0x8
 static const struct ScriptRef s_gs180_g2_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs180_g2_s0_station_sref_script }; /* 0x8230a58 */
 
 static const struct ScriptCommand s_gs180_g2_s0_eff0_script[] = { /* 0x8230a64 */
-    DEBUGINFO,
+    DEBUGINFO_O(150),
     CAMERA_END_PAN,
     WAIT(1),
     AWAIT_CUE(4),
@@ -158,7 +158,7 @@ static const struct ScriptCommand s_gs180_g2_s0_eff0_script[] = { /* 0x8230a64 *
 };
 
 static const struct ScriptCommand s_gs180_g2_s0_lives0_dlg0[] = { /* 0x8230ae4 */
-    DEBUGINFO,
+    DEBUGINFO_O(161),
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     { 0x2d, 0x09,  0x0002,  0x0000003c,  0x00000000, NULL },
@@ -194,7 +194,7 @@ static const struct ScriptCommand s_gs180_g2_s0_lives0_dlg0[] = { /* 0x8230ae4 *
 
 
 static const struct ScriptCommand s_gs180_g2_s0_lives1_dlg0[] = { /* 0x8230d64 */
-    DEBUGINFO,
+    DEBUGINFO_O(197),
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
     { 0x59, 0x00,  0x0000,  0x00000064,  0x00000000, NULL },
@@ -213,7 +213,7 @@ static const struct ScriptCommand s_gs180_g2_s0_lives1_dlg0[] = { /* 0x8230d64 *
 };
 
 static const struct ScriptCommand s_gs180_g2_s0_lives2_dlg0[] = { /* 0x8230e64 */
-    DEBUGINFO,
+    DEBUGINFO_O(216),
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(7),
@@ -225,7 +225,7 @@ static const struct ScriptCommand s_gs180_g2_s0_lives2_dlg0[] = { /* 0x8230e64 *
 };
 
 static const struct ScriptCommand s_gs180_g2_s0_lives3_dlg0[] = { /* 0x8230ef4 */
-    DEBUGINFO,
+    DEBUGINFO_O(228),
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0003,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(8),
@@ -236,7 +236,7 @@ static const struct ScriptCommand s_gs180_g2_s0_lives3_dlg0[] = { /* 0x8230ef4 *
 };
 
 static const struct ScriptCommand s_gs180_g3_s0_station_sref_script[] = { /* 0x8230f74 */
-    DEBUGINFO,
+    DEBUGINFO_O(239),
     SELECT_MAP(MAP_THUNDERWAVE_CAVE_ENTRY),
     SELECT_ENTITIES(-1, 0),
     BGM_SWITCH(103),
@@ -251,7 +251,7 @@ static const struct ScriptCommand s_gs180_g3_s0_station_sref_script[] = { /* 0x8
 static const struct ScriptRef s_gs180_g3_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs180_g3_s0_station_sref_script }; /* 0x8231014 */
 
 static const struct ScriptCommand s_gs180_g3_s0_lives0_dlg0[] = { /* 0x8231020 */
-    DEBUGINFO,
+    DEBUGINFO_O(254),
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     { 0xdf, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
@@ -318,7 +318,7 @@ static const struct ScriptCommand s_gs180_g3_s0_lives0_dlg0[] = { /* 0x8231020 *
 
 
 static const struct ScriptCommand s_gs180_g3_s0_lives1_dlg0[] = { /* 0x8231478 */
-    DEBUGINFO,
+    DEBUGINFO_O(321),
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(6),
@@ -331,7 +331,7 @@ static const struct ScriptCommand s_gs180_g3_s0_lives1_dlg0[] = { /* 0x8231478 *
 };
 
 static const struct ScriptCommand s_gs180_g3_s0_lives2_dlg0[] = { /* 0x8231518 */
-    DEBUGINFO,
+    DEBUGINFO_O(334),
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
     { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
@@ -347,7 +347,7 @@ static const struct ScriptCommand s_gs180_g3_s0_lives2_dlg0[] = { /* 0x8231518 *
 };
 
 static const struct ScriptCommand s_gs180_g3_s0_lives3_dlg0[] = { /* 0x82315e8 */
-    DEBUGINFO,
+    DEBUGINFO_O(350),
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0003,  0x00000000,  0x00000000, NULL },
     { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
@@ -369,7 +369,7 @@ static const struct ScriptCommand s_gs180_g3_s0_lives3_dlg0[] = { /* 0x82315e8 *
 };
 
 static const struct ScriptCommand s_gs180_g3_s0_lives4_dlg0[] = { /* 0x8231718 */
-    DEBUGINFO,
+    DEBUGINFO_O(372),
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0004,  0x00000000,  0x00000000, NULL },
     { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
@@ -400,7 +400,7 @@ static const struct ScriptCommand s_gs180_g3_s0_lives4_dlg0[] = { /* 0x8231718 *
 };
 
 static const struct ScriptCommand s_gs180_g3_s0_lives5_dlg0[] = { /* 0x82318d8 */
-    DEBUGINFO,
+    DEBUGINFO_O(403),
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0005,  0x00000000,  0x00000000, NULL },
     { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },

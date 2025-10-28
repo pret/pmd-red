@@ -98,61 +98,8 @@ static const CallbackData gGroundEffectCallbacks = {
 extern const u8 gUnknown_81185D8[];
 #define FAKE_FILENAME gUnknown_81185D8
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 static const struct ScriptCommand gUnusedScript[] = {
-    DEBUGINFO, // Needs to be line 155
+    DEBUGINFO_O(155),
     LABEL(0),
     WAIT(0x78),
     JUMP_LABEL(0),

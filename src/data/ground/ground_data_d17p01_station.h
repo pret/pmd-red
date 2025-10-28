@@ -7,7 +7,7 @@
 
 
 static const struct ScriptCommand s_gs213_g0_s0_station_sref_script[] = { /* 0x8265640 */
-    DEBUGINFO,
+    DEBUGINFO_O(10),
     SELECT_MAP(213),
     BGM_STOP,
     JUMP_SCRIPT(COMMON_ENTER),
@@ -16,7 +16,7 @@ static const struct ScriptCommand s_gs213_g0_s0_station_sref_script[] = { /* 0x8
 static const struct ScriptRef s_gs213_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs213_g0_s0_station_sref_script }; /* 0x82656ac */
 
 static const struct ScriptCommand s_gs213_g1_s0_station_sref_script[] = { /* 0x82656b8 */
-    DEBUGINFO,
+    DEBUGINFO_O(19),
     SELECT_MAP(213),
     SELECT_ENTITIES(-1, 0),
     BGM_SWITCH(114),
@@ -31,20 +31,20 @@ static const struct ScriptCommand s_gs213_g1_s0_station_sref_script[] = { /* 0x8
 static const struct ScriptRef s_gs213_g1_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs213_g1_s0_station_sref_script }; /* 0x8265758 */
 
 static const struct ScriptCommand s_gs213_g1_s0_eff0_script[] = { /* 0x8265764 */
-    DEBUGINFO,
+    DEBUGINFO_O(34),
     AWAIT_CUE(6),
     { 0x56, 0x00,  0x0000,  0x000000ac,  0x00000000, NULL },
     HALT,
 };
 
 static const struct ScriptCommand s_gs213_g1_s0_obj0_dlg0[] = { /* 0x82657a4 */
-    DEBUGINFO,
+    DEBUGINFO_O(41),
     CAMERA_END_PAN,
     HALT,
 };
 
 static const struct ScriptCommand s_gs213_g1_s0_lives0_dlg0[] = { /* 0x82657d4 */
-    DEBUGINFO,
+    DEBUGINFO_O(47),
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     { 0xdf, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
@@ -143,7 +143,7 @@ static const struct ScriptCommand s_gs213_g1_s0_lives0_dlg0[] = { /* 0x82657d4 *
 
 
 static const struct ScriptCommand s_gs213_g1_s0_lives1_dlg0[] = { /* 0x826604c */
-    DEBUGINFO,
+    DEBUGINFO_O(146),
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(7),
@@ -180,13 +180,13 @@ static const struct ScriptCommand s_gs213_g1_s0_lives1_dlg0[] = { /* 0x826604c *
 };
 
 static const struct ScriptCommand s_gs213_g1_s1_eff0_script[] = { /* 0x826626c */
-    DEBUGINFO,
+    DEBUGINFO_O(183),
     { 0x56, 0x00,  0x0000,  0x000000ad,  0x00000000, NULL },
     HALT,
 };
 
 static const struct ScriptCommand s_gs213_g1_s1_obj0_dlg0[] = { /* 0x826629c */
-    DEBUGINFO,
+    DEBUGINFO_O(189),
     FANFARE_PLAY2(662),
     { 0x56, 0x00,  0x0000,  0x000000b1,  0x00000000, NULL },
     { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },

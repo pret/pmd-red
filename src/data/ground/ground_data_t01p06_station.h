@@ -7,7 +7,7 @@
 
 
 static const struct ScriptCommand s_gs7_g0_s0_station_sref_script[] = { /* 0x819a3d8 */
-    DEBUGINFO,
+    DEBUGINFO_O(10),
     SELECT_MAP(7),
     CJUMP_SCENARIO_0(SCENARIO_MAIN),
     COND(JUDGE_LT, 4, /* to label */ 0),
@@ -35,7 +35,7 @@ static const struct ScriptCommand s_gs7_g0_s0_station_sref_script[] = { /* 0x819
 static const struct ScriptRef s_gs7_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs7_g0_s0_station_sref_script }; /* 0x819a574 */
 
 static const struct ScriptCommand s_gs7_g0_s0_evt0_sref_script[] = { /* 0x819a580 */
-    DEBUGINFO,
+    DEBUGINFO_O(38),
     { 0x01, 0x00, -0x0001,  0x00000006,  0x00000000, NULL },
     HALT,
 };
@@ -43,14 +43,14 @@ static const struct ScriptCommand s_gs7_g0_s0_evt0_sref_script[] = { /* 0x819a58
 static const struct ScriptRef s_gs7_g0_s0_evt0_sref = { 357, 2, NULL /* GETOUT_NORMAL */, s_gs7_g0_s0_evt0_sref_script }; /* 0x819a5b0 */
 
 static const struct ScriptCommand s_gs7_g0_s1_lives0_dlg0[] = { /* 0x819a5bc */
-    DEBUGINFO,
+    DEBUGINFO_O(46),
     SELECT_ANIMATION(2),
     CALL_SCRIPT(WAIT_START_FUNC),
     RET,
 };
 
 static const struct ScriptCommand s_gs7_g0_s1_lives1_dlg0[] = { /* 0x819a5fc */
-    DEBUGINFO,
+    DEBUGINFO_O(53),
     SELECT_ANIMATION(2),
     CALL_SCRIPT(WAIT_START_FUNC),
     RET,

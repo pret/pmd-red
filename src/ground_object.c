@@ -99,71 +99,17 @@ static const CallbackData gGroundObjectCallbacks = {
 const u8 gGroundObjectFileName[];
 #define FAKE_FILENAME gGroundObjectFileName
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 static const struct ScriptCommand gUnknown_81182F4[] = {
-    DEBUGINFO, // Needs to be line 159
+    DEBUGINFO_O(159),
     LABEL(0),
     WAIT(0x78),
     JUMP_LABEL(0),
 };
+
 ALIGNED(4) const u8 gGroundObjectFileName[] = "../ground/ground_object.c";
+
 static const struct ScriptCommand gUnknown_8118350[] = {
-    DEBUGINFO, // Needs to be line 166
+    DEBUGINFO_O(166),
     { 0x54, 0, 1, 0, 0, NULL },
     LABEL(0),
     WAIT(0x78),
