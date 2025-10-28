@@ -1497,7 +1497,7 @@ static bool8 sub_809B648(void)
             if (sTextbox->unk420 == 1) {
                 s32 var = sub_80A2654(GetScriptVarValue(0,0x12));
                 ResetTextbox();
-                if (!sub_802F73C(3,0,10,1)) {
+                if (!sub_802F73C(3,0,10,TRUE)) {
                     sTextbox->unk430 = -1;
                     return 0;
                 }

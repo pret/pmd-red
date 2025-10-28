@@ -12,121 +12,106 @@
 #include "text_1.h"
 #include "text_2.h"
 
-struct unkStruct_203B314
-{
+#define MAX_SHOWN_DUNGEONS 46
+
+struct DungeonListMenu {
     // size: 0x15C
-    s16 unk0[2];
-    u8 fill4[0x5C - 0x4];
-    u8 unk5C[2];
-    u8 fill5E[0x8A - 0x5E];
-    u8 unk8A[2];
-    u8 unk8C[0xB8 - 0x8C];
-    u8 unkB8;
-    u8 unkB9;
-    u8 unkBA;
-    u8 unkBB;
-    struct MenuHeaderWindow sBC;
+    s16 rescueDungeonIds[MAX_SHOWN_DUNGEONS];
+    bool8 goButton[MAX_SHOWN_DUNGEONS];
+    bool8 jobInDungeon[MAX_SHOWN_DUNGEONS];
+    bool8 showIcons;
+    struct MenuHeaderWindow m;
 };
 
-EWRAM_INIT struct unkStruct_203B314 *gUnknown_203B314 = {NULL};
+static EWRAM_INIT struct DungeonListMenu *sDungeonListMenu = {NULL};
 
-const WindowTemplate gUnknown_80E06FC = {
-    0x00,
-    0x03,
-    0x00, 0x00,
-    0x00, 0x00,
-    0x00, 0x00,
-    NULL
+static const WindowTemplate sWinTemplateDummy = WIN_TEMPLATE_DUMMY;
+
+static const WindowTemplate sWinTemplateNarrow = {
+    .unk0 = 0,
+    .type = WINDOW_TYPE_WITH_HEADER,
+    .pos = {2, 2},
+    .width = 14,
+    .height = 14,
+    .unk10 = 14,
+    .unk12 = 0,
+    .header = NULL,
 };
 
-const WindowTemplate gUnknown_80E0714 = {
-    0x00,
-    0x06,
-    0x02, 0x02,
-    0x0E, 0x0E,
-    0x0E, 0x00,
-    NULL
-};
-const WindowTemplate gUnknown_80E072C = {
-    0x00,
-    0x06,
-    0x02, 0x02,
-    0x10, 0x10,
-    0x10, 0x00,
-    NULL
+static const WindowTemplate sWinTemplateWide = {
+    .unk0 = 0,
+    .type = WINDOW_TYPE_WITH_HEADER,
+    .pos = {2, 2},
+    .width = 16,
+    .height = 16,
+    .unk10 = 16,
+    .unk12 = 0,
+    .header = NULL,
 };
 
-ALIGNED(4) const u8 gUnknown_80E0744[] = "Dungeons";
-ALIGNED(4) const u8 gUnknown_80E0750[] =  {0x83, 0xC2};
-ALIGNED(4) const u8 gUnknown_80E0754[] = {0x83, 0xC0};
+static void ShowWindowWithHeader(void);
+static void PrintCurrentPage(void);
+static s32 CountAvailableDungeons(void);
 
-void sub_802F9C0(void);
-void sub_802FA50(void);
 extern bool8 sub_802FCF0(void);
-s32 sub_802FBF4(void);
 
-u32 sub_802F73C(u32 r0, DungeonPos *r1, u32 r2, u8 r3)
+bool8 sub_802F73C(u32 windowId, DungeonPos *winPos, s32 perPageCount, bool8 showIcons)
 {
     if (sub_802FCF0())
-        return 0;
+        return FALSE;
 
-    if (gUnknown_203B314 == NULL)
-        gUnknown_203B314 = MemoryAlloc(sizeof(struct unkStruct_203B314), 8);
+    if (sDungeonListMenu == NULL)
+        sDungeonListMenu = MemoryAlloc(sizeof(struct DungeonListMenu), 8);
 
-    gUnknown_203B314->unkB8 = r3;
-    gUnknown_203B314->sBC.m.menuWinId = r0;
-    gUnknown_203B314->sBC.m.menuWindow = &gUnknown_203B314->sBC.m.windows.id[gUnknown_203B314->sBC.m.menuWinId];
-    RestoreSavedWindows(&gUnknown_203B314->sBC.m.windows);
+    sDungeonListMenu->showIcons = showIcons;
+    sDungeonListMenu->m.m.menuWinId = windowId;
+    sDungeonListMenu->m.m.menuWindow = &sDungeonListMenu->m.m.windows.id[sDungeonListMenu->m.m.menuWinId];
+    RestoreSavedWindows(&sDungeonListMenu->m.m.windows);
 
-    if (r3 != 0)
-        gUnknown_203B314->sBC.m.windows.id[gUnknown_203B314->sBC.m.menuWinId] = gUnknown_80E072C;
+    if (showIcons)
+        sDungeonListMenu->m.m.windows.id[sDungeonListMenu->m.m.menuWinId] = sWinTemplateWide;
     else
-        gUnknown_203B314->sBC.m.windows.id[gUnknown_203B314->sBC.m.menuWinId] = gUnknown_80E0714;
+        sDungeonListMenu->m.m.windows.id[sDungeonListMenu->m.m.menuWinId] = sWinTemplateNarrow;
 
-    gUnknown_203B314->sBC.m.menuWindow->header = &gUnknown_203B314->sBC.header;
+    sDungeonListMenu->m.m.menuWindow->header = &sDungeonListMenu->m.header;
 
-    if (r1 != 0)
-        gUnknown_203B314->sBC.m.windows.id[gUnknown_203B314->sBC.m.menuWinId].pos = *r1;
+    if (winPos != NULL)
+        sDungeonListMenu->m.m.windows.id[sDungeonListMenu->m.m.menuWinId].pos = *winPos;
 
-    sub_8012D08(gUnknown_203B314->sBC.m.menuWindow, r2);
+    sub_8012D08(sDungeonListMenu->m.m.menuWindow, perPageCount);
     ResetUnusedInputStruct();
-    ShowWindows(&gUnknown_203B314->sBC.m.windows, TRUE, TRUE);
-    CreateMenuOnWindow(&gUnknown_203B314->sBC.m.input, sub_802FBF4(), r2, r0);
-    sub_802F9C0();
-    sub_802FA50();
-    return 1;
+    ShowWindows(&sDungeonListMenu->m.m.windows, TRUE, TRUE);
+    CreateMenuOnWindow(&sDungeonListMenu->m.m.input, CountAvailableDungeons(), perPageCount, windowId);
+    ShowWindowWithHeader();
+    PrintCurrentPage();
+    return TRUE;
 }
 
-u32 sub_802F848(s16 param_1)
+bool8 sub_802F848(s32 _rescueDungeonId)
 {
-    int index;
-    s32 param_1_32;
+    s32 i;
+    s32 rescueDungeonId = (s16) _rescueDungeonId; // cast needed
 
-    param_1_32 = param_1; // cast needed
-
-    for( index = 0; index < gUnknown_203B314->sBC.m.input.totalEntriesCount; index++ ) {
-        if (gUnknown_203B314->unk0[index] == param_1_32) {
-            MoveMenuToEntryId(&gUnknown_203B314->sBC.m.input,index);
-            sub_802F9C0();
-            sub_802FA50();
-            return 1;
+    for (i = 0; i < sDungeonListMenu->m.m.input.totalEntriesCount; i++) {
+        if (sDungeonListMenu->rescueDungeonIds[i] == rescueDungeonId) {
+            MoveMenuToEntryId(&sDungeonListMenu->m.m.input,i);
+            ShowWindowWithHeader();
+            PrintCurrentPage();
+            return TRUE;
         }
     }
-    MoveMenuToEntryId(&gUnknown_203B314->sBC.m.input,0);
-    return 0;
+    MoveMenuToEntryId(&sDungeonListMenu->m.m.input,0);
+    return FALSE;
 }
 
 u32 sub_802F8A0(u8 r0)
 {
-    if(r0 == 0)
-    {
-        sub_8013660(&gUnknown_203B314->sBC.m.input);
+    if (r0 == 0) {
+        sub_8013660(&sDungeonListMenu->m.m.input);
         return 0;
     }
-    else
-    {
-        switch(GetKeyPress(&gUnknown_203B314->sBC.m.input))
-        {
+    else {
+        switch (GetKeyPress(&sDungeonListMenu->m.m.input)) {
             case INPUT_B_BUTTON:
                 PlayMenuSoundEffect(1);
                 return 2;
@@ -134,14 +119,12 @@ u32 sub_802F8A0(u8 r0)
                 PlayMenuSoundEffect(0);
                 return 3;
             default:
-                if(MenuCursorUpdate(&gUnknown_203B314->sBC.m.input, 1) != 0)
-                {
-                    sub_802F9C0();
-                    sub_802FA50();
+                if (MenuCursorUpdate(&sDungeonListMenu->m.m.input, 1) != 0) {
+                    ShowWindowWithHeader();
+                    PrintCurrentPage();
                     return 1;
                 }
-                else
-                {
+                else {
                     return 0;
                 }
         }
@@ -150,79 +133,70 @@ u32 sub_802F8A0(u8 r0)
 
 s16 sub_802F90C(void)
 {
-    return gUnknown_203B314->unk0[GET_CURRENT_MENU_ENTRY(gUnknown_203B314->sBC.m.input)];
+    return sDungeonListMenu->rescueDungeonIds[GET_CURRENT_MENU_ENTRY(sDungeonListMenu->m.m.input)];
 }
 
 void sub_802F938(u8 r0)
 {
-    gUnknown_203B314->sBC.m.input.totalEntriesCount = sub_802FBF4();
-    MenuUpdatePagesData(&gUnknown_203B314->sBC.m.input);
-    sub_802F9C0();
-    sub_802FA50();
+    sDungeonListMenu->m.m.input.totalEntriesCount = CountAvailableDungeons();
+    MenuUpdatePagesData(&sDungeonListMenu->m.m.input);
+    ShowWindowWithHeader();
+    PrintCurrentPage();
 
-    if(r0 != 0)
-        AddMenuCursorSprite(&gUnknown_203B314->sBC.m.input);
+    if (r0 != 0)
+        AddMenuCursorSprite(&sDungeonListMenu->m.m.input);
 }
 
 void sub_802F974(void)
 {
-    if(gUnknown_203B314 != NULL)
-    {
-        gUnknown_203B314->sBC.m.windows.id[gUnknown_203B314->sBC.m.menuWinId] = gUnknown_80E06FC;
+    if (sDungeonListMenu != NULL) {
+        sDungeonListMenu->m.m.windows.id[sDungeonListMenu->m.m.menuWinId] = sWinTemplateDummy;
         ResetUnusedInputStruct();
-        ShowWindows(&gUnknown_203B314->sBC.m.windows, TRUE, TRUE);
-        MemoryFree(gUnknown_203B314);
-        gUnknown_203B314 = NULL;
+        ShowWindows(&sDungeonListMenu->m.m.windows, TRUE, TRUE);
+        FREE_AND_SET_NULL(sDungeonListMenu);
     }
 }
 
-void sub_802F9C0(void)
+static void ShowWindowWithHeader(void)
 {
-    gUnknown_203B314->sBC.header.count = 1;
-    gUnknown_203B314->sBC.header.currId = 0;
-    gUnknown_203B314->sBC.header.width = 8;
-    gUnknown_203B314->sBC.header.f3 = 0;
+    sDungeonListMenu->m.header.count = 1;
+    sDungeonListMenu->m.header.currId = 0;
+    sDungeonListMenu->m.header.width = 8;
+    sDungeonListMenu->m.header.f3 = 0;
 
-    UPDATE_MENU_WINDOW_HEIGHT(gUnknown_203B314->sBC.m);
+    UPDATE_MENU_WINDOW_HEIGHT(sDungeonListMenu->m.m);
 }
 
-void sub_802FA50(void)
+static void PrintCurrentPage(void)
 {
-  s32 sVar1;
-  const u8 *text;
-  u32 y;
-  u32 y2;
-  int index;
-  int counter;
+    s32 counter;
 
-  CallPrepareTextbox_8008C54(gUnknown_203B314->sBC.m.menuWinId);
-  sub_80073B8(gUnknown_203B314->sBC.m.menuWinId);
-  PrintStringOnWindow(10,0,gUnknown_80E0744,gUnknown_203B314->sBC.m.menuWinId,0);
-  PrintNumOnWindow(gUnknown_203B314->sBC.header.width * 8 + 4,0,gUnknown_203B314->sBC.m.input.currPage + 1,2,7,gUnknown_203B314->sBC.m.menuWinId);
-  if (gUnknown_203B314->unkB8 != 0) {
-    for(counter = 0; counter < gUnknown_203B314->sBC.m.input.currPageEntries; counter++)
-    {
-        y = GetMenuEntryYCoord(&gUnknown_203B314->sBC.m.input,counter);
-        index = gUnknown_203B314->sBC.m.input.currPage * gUnknown_203B314->sBC.m.input.entriesPerPage + counter;
-        sVar1 = gUnknown_203B314->unk0[index];
-        if (gUnknown_203B314->unk5C[index] != 0) {
-            PrintStringOnWindow(10,y,gUnknown_80E0750,gUnknown_203B314->sBC.m.menuWinId,0);
+    CallPrepareTextbox_8008C54(sDungeonListMenu->m.m.menuWinId);
+    sub_80073B8(sDungeonListMenu->m.m.menuWinId);
+    PrintStringOnWindow(10,0,_("Dungeons"),sDungeonListMenu->m.m.menuWinId,0);
+    PrintNumOnWindow(sDungeonListMenu->m.header.width * 8 + 4,0,sDungeonListMenu->m.m.input.currPage + 1,2,7,sDungeonListMenu->m.m.menuWinId);
+    if (sDungeonListMenu->showIcons) {
+        for (counter = 0; counter < sDungeonListMenu->m.m.input.currPageEntries; counter++) {
+            s32 y = GetMenuEntryYCoord(&sDungeonListMenu->m.m.input,counter);
+            s32 index = sDungeonListMenu->m.m.input.currPage * sDungeonListMenu->m.m.input.entriesPerPage + counter;
+            s32 rescueDungId = sDungeonListMenu->rescueDungeonIds[index];
+            if (sDungeonListMenu->goButton[index]) {
+                PrintStringOnWindow(10,y,_("{ICON_GO}"),sDungeonListMenu->m.m.menuWinId,'\0');
+            }
+            else if (sDungeonListMenu->jobInDungeon[index]) {
+                PrintStringOnWindow(10,y,_("{ENVELOPE_OPEN}"),sDungeonListMenu->m.m.menuWinId,'\0');
+            }
+            PrintStringOnWindow(24,y,sub_80974A0(rescueDungId),sDungeonListMenu->m.m.menuWinId,'\0');
         }
-        else if (gUnknown_203B314->unk8A[index] != 0) {
-            PrintStringOnWindow(10,y,gUnknown_80E0754,gUnknown_203B314->sBC.m.menuWinId,0);
+    }
+    else {
+        for (counter = 0; counter < sDungeonListMenu->m.m.input.currPageEntries; counter++) {
+            s32 y = GetMenuEntryYCoord(&sDungeonListMenu->m.m.input,counter);
+            const u8 *name = sub_80974A0(sDungeonListMenu->rescueDungeonIds[sDungeonListMenu->m.m.input.currPage * sDungeonListMenu->m.m.input.entriesPerPage + counter]);
+            PrintStringOnWindow(8,y,name,sDungeonListMenu->m.m.menuWinId,0);
         }
-        PrintStringOnWindow(0x18,y,sub_80974A0(sVar1),gUnknown_203B314->sBC.m.menuWinId,0);
     }
-  }
-  else {
-    for(counter = 0; counter < gUnknown_203B314->sBC.m.input.currPageEntries; counter++)
-    {
-        y2 = GetMenuEntryYCoord(&gUnknown_203B314->sBC.m.input,counter);
-        text = sub_80974A0(gUnknown_203B314->unk0[gUnknown_203B314->sBC.m.input.currPage * gUnknown_203B314->sBC.m.input.entriesPerPage + counter]);
-        PrintStringOnWindow(8,y2,text,gUnknown_203B314->sBC.m.menuWinId,0);
-    }
-  }
-  sub_80073E0(gUnknown_203B314->sBC.m.menuWinId);
+    sub_80073E0(sDungeonListMenu->m.m.menuWinId);
 }
 
 static inline void sub_802FBF4_sub(u8 *test, s32 counter)
@@ -230,36 +204,37 @@ static inline void sub_802FBF4_sub(u8 *test, s32 counter)
     test[counter] = 0;
 }
 
-s32 sub_802FBF4(void)
+static s32 CountAvailableDungeons(void)
 {
     bool8 bVar1;
     u32 dungeonIndex;
     s32 iVar6;
     s32 counter;
-    s32 index;
+    s32 i;
 
     counter = 0;
-    for(index = 0; index  < 0x2E; index++)
-    {
-        iVar6 = iVar6 = (s16)index; // NOTE: LOLOL
-        if (((sub_80A27CC(index) != 0) && (iVar6 != 0x13)) && (iVar6 != 0x1d)) {
-            gUnknown_203B314->unk0[counter] = iVar6;
-            sub_802FBF4_sub(gUnknown_203B314->unk5C, counter);
-            sub_802FBF4_sub(gUnknown_203B314->unk8A, counter);
-            if ((gUnknown_203B314->unkB8 != 0) && (iVar6 != 0xd)) {
-                dungeonIndex = sub_80A270C(index);
+    for (i = 0; i < MAX_SHOWN_DUNGEONS; i++) {
+        iVar6 = iVar6 = (s16)i; // NOTE: LOLOL
+        if (((sub_80A27CC(i) != 0) && (iVar6 != 0x13)) && (iVar6 != 0x1d)) {
+            bool8 a = 0;
+            bool8 b = 0;
+            sDungeonListMenu->rescueDungeonIds[counter] = iVar6;
+            sDungeonListMenu->jobInDungeon[counter] = a;
+            sDungeonListMenu->goButton[counter] = b;
+            if ((sDungeonListMenu->showIcons) && (iVar6 != 0xd)) {
+                dungeonIndex = sub_80A270C(i);
                 bVar1 = FALSE;
                 if (0x1e >= iVar6)
                 {
                     if (sub_8097384(iVar6) == 0) {
                         if (iVar6 == 6) {
                             if (sub_8097384(0x13) != 0) {
-                                gUnknown_203B314->unk0[counter] = 0x13;
+                                sDungeonListMenu->rescueDungeonIds[counter] = 0x13;
                                 bVar1 = TRUE;
                             }
                         }
                         else if ((iVar6 == 10) && (sub_8097384(0x1d) != 0)) {
-                            gUnknown_203B314->unk0[counter] = 0x1d;
+                            sDungeonListMenu->rescueDungeonIds[counter] = 0x1d;
                             bVar1 = TRUE;
                         }
                     }
@@ -267,14 +242,15 @@ s32 sub_802FBF4(void)
                         bVar1 = TRUE;
                     }
                 }
-                gUnknown_203B314->unk5C[counter] = bVar1;
+                sDungeonListMenu->goButton[counter] = bVar1;
                 if ((!bVar1) && (0 < CountJobsinDungeon(dungeonIndex))) {
-                    gUnknown_203B314->unk8A[counter] = 1;
+                    sDungeonListMenu->jobInDungeon[counter] = 1;
                 }
             }
             counter++;
         }
     }
+
     return counter;
 }
 
@@ -282,11 +258,10 @@ bool8 sub_802FCF0(void)
 {
     s32 i;
 
-    for (i = 0; i < 0x2E; i++) {
+    for (i = 0; i < MAX_SHOWN_DUNGEONS; i++) {
         if (sub_80A27CC(i))
             return FALSE;
     }
 
     return TRUE;
 }
-
