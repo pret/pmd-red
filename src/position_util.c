@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "position_util.h"
 
 #include "constants/direction.h"
@@ -11,56 +12,25 @@ static const s32 sFacingDirMapping[3][3] = {
 
 s32 GetDirectionTowardsPosition(DungeonPos *originPos, DungeonPos *targetPos)
 {
-    s32 direction;
-    s32 yDiff;
-    s32 xDiff;
+    s32 xDiff = targetPos->x - originPos->x;
+    s32 yDiff = targetPos->y - originPos->y;
 
-    xDiff = targetPos->x - originPos->x;
-    yDiff = targetPos->y - originPos->y;
     if (xDiff == 0 && yDiff == 0)
-    {
-        direction = DIRECTION_SOUTH;
-    }
-    else
-    {
-        if (xDiff > 0)
-        {
-            xDiff = 1;
-        }
-        if (yDiff > 0)
-        {
-            yDiff = 1;
-        }
-        if (xDiff <= -1)
-        {
-            xDiff = -1;
-        }
-        if (yDiff <= -1)
-        {
-            yDiff = -1;
-        }
-        direction = sFacingDirMapping[yDiff + 1][xDiff + 1];
-    }
-    return direction;
+        return DIRECTION_SOUTH;
+
+    if (xDiff >= 1)
+        xDiff = 1;
+    if (yDiff >= 1)
+        yDiff = 1;
+    if (xDiff <= -1)
+        xDiff = -1;
+    if (yDiff <= -1)
+        yDiff = -1;
+
+    return sFacingDirMapping[yDiff + 1][xDiff + 1];
 }
 
 s32 GetDistance(DungeonPos *pos1, DungeonPos *pos2)
 {
-    s32 distanceX = pos1->x - pos2->x;
-    s32 distance;
-    if (distanceX < 0)
-    {
-        distanceX = -distanceX;
-    }
-    distance = pos1->y - pos2->y;
-    if (distance < 0)
-    {
-        distance = -distance;
-    }
-    if (distance < distanceX)
-    {
-        distance = distanceX;
-    }
-    return distance;
+    return max(abs(pos1->x - pos2->x), abs(pos1->y - pos2->y));
 }
-

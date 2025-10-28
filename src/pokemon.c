@@ -5,7 +5,7 @@
 #include "constants/monster.h"
 #include "constants/tactic.h"
 #include "code_800D090.h"
-#include "code_8097DD0.h"
+#include "status_strings.h"
 #include "cpu.h"
 #include "decompress_at.h"
 #include "def_filearchives.h"

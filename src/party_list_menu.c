@@ -28,38 +28,112 @@
 #include "text_util.h"
 #include "unk_ds_only_feature.h"
 
+// size: 0x280
+typedef struct unkStruct_203B2B8
+{
+    /* 0x0 */ s32 state;
+    /* 0x4 */ s32 fallbackState;
+    bool8 unk8;
+    /* 0xA */ s16 pokeSpecies;
+    /* 0xC */ u32 id;
+    /* 0x10 */ BulkItem item1;
+    /* 0x14 */ BulkItem item2;
+    /* 0x18 */ Pokemon *pokeStruct;
+    /* 0x1C */ bool8 isTeamLeader;
+    /* 0x20 */ u32 moveIndex;
+    /* 0x24 */ u16 moveID;
+    /* 0x28 */ Move moves[8];
+    /* 0x68 */ u16 moveIDs[4]; // some list of move IDs
+    /* 0x70 */ u32 menuAction1;
+    /* 0x74 */ u32 menuAction2;
+    /* 0x78 */ u32 menuAction3; // unused
+    MenuStruct unk7C;
+    MenuStruct unkCC;
+    MenuStruct unk11C; // unused
+    MenuItem unk16C[10];
+    MenuItem unk1BC[10];
+    u16 unk20C[10];
+    WindowTemplates unk220;
+} unkStruct_203B2B8;
+
 static EWRAM_INIT unkStruct_203B2B8 *sUnknown_203B2B8 = {NULL};
 
 #include "data/party_list_menu.h"
 
-extern u32 sub_8026F04(Pokemon *);
-bool8 CanTakePokemonHeldItem(Pokemon *r0);
-bool8 sub_8026E88(Pokemon *r0);
-bool8 sub_8026EB8(Pokemon *r0);
-void sub_8026E08(u32 r0);
-void sub_8026DAC(u32 r0, BulkItem *item);
-void sub_8026FA4(void);
-void PartyListMenu_BuildYesNoMenu(void);
-
-void PartyListMenu_CreateMenu2(void);
-void PartyListMenu_CreateMenu1(void);
-void HandlePartyListMenuCallback(void);
-
-void PartyListMenu_HandleMenu1(void);
-void sub_8026A78(void);
-void sub_8026A94(void);
-void sub_8026AB0(void);
-void sub_8026B10(void);
-void sub_8026B48(void);
-void sub_8026B64(void);
-void PartyListMenu_HandleMenu2(void);
-void sub_8026CF0(void);
-void sub_8026D0C(void);
-void sub_8026D6C(void);
-void PartyListMenu_GotoFallbackState(void);
-
+static u32 sub_8026F04(Pokemon *);
+static bool8 CanTakePokemonHeldItem(Pokemon *r0);
+static bool8 sub_8026E88(Pokemon *r0);
+static bool8 sub_8026EB8(Pokemon *r0);
+static void sub_8026E08(u32 r0);
+static void sub_8026DAC(u32 r0, BulkItem *item);
+static void sub_8026FA4(void);
+static void PartyListMenu_BuildYesNoMenu(void);
+static void PartyListMenu_CreateMenu2(void);
+static void PartyListMenu_CreateMenu1(void);
+static void HandlePartyListMenuCallback(void);
+static void PartyListMenu_HandleMenu1(void);
+static void sub_8026A78(void);
+static void sub_8026A94(void);
+static void sub_8026AB0(void);
+static void sub_8026B10(void);
+static void sub_8026B48(void);
+static void sub_8026B64(void);
+static void PartyListMenu_HandleMenu2(void);
+static void sub_8026CF0(void);
+static void sub_8026D0C(void);
+static void sub_8026D6C(void);
+static void PartyListMenu_GotoFallbackState(void);
 static void SetPartyListMenuState(s32 newState);
 static void sub_802608C(void);
+
+enum PartyListMenuStates
+{
+    PARTY_LIST_STATE_INIT,
+    PARTY_LIST_STATE_MAIN_MENU,
+    PARTY_LIST_STATE_MAIN_MENU_1,
+    PARTY_LIST_STATE_SUMMARY = 3,
+    PARTY_LIST_STATE_CHECK_IQ = 4,
+    PARTY_LIST_STATE_JOIN_TEAM = 5,
+    PARTY_LIST_STATE_STANDBY = 6,
+    PARTY_LIST_STATE_MAKE_LEADER = 7,
+    PARTY_LIST_STATE_POKEMON_FAREWELL = 8,
+    // 9
+    // 0xA
+    // 0xB
+    PARTY_LIST_STATE_SAY_FAREWELL = 0xC,
+    PARTY_LIST_STATE_CONFIRM_SAY_FAREWELL = 0xD,
+    PARTY_LIST_STATE_GIVE_GUMMI = 0xe,
+    PARTY_LIST_STATE_GIVEN_ITEM = 0xF,
+    PARTY_LIST_STATE_GIVEN_ITEM_HELD_ITEM = 0x10,
+    PARTY_LIST_STATE_TAKE_ITEM = 0x11,
+    PARTY_LIST_STATE_GIVE_ITEM = 0x12,
+    PARTY_LIST_STATE_GIVE_ITEM_1 = 0x13,
+    // 0x14
+    // 0x15
+    PARTY_LIST_STATE_MOVES = 0x16,
+    // 0x17
+    // 0x18
+    PARTY_LIST_STATE_EXIT = 0x19,
+
+};
+
+enum PartyListMenuActions
+{
+    PARTY_LIST_MENU_NULL = 1,
+    PARTY_LIST_MENU_YES,
+    PARTY_LIST_MENU_NO,
+    PARTY_LIST_MENU_INFO = 4,
+    PARTY_LIST_MENU_SUMMARY = 4,
+    PARTY_LIST_MENU_CHECK_IQ,
+    PARTY_LIST_MENU_JOIN_TEAM,
+    PARTY_LIST_MENU_STANDBY,
+    PARTY_LIST_MENU_MAKE_LEADER,
+    PARTY_LIST_MENU_SAY_FAREWELL,
+    PARTY_LIST_MENU_GIVE_GUMMI,
+    PARTY_LIST_MENU_GIVE_ITEM,
+    PARTY_LIST_MENU_TAKE_ITEM,
+    PARTY_LIST_MENU_MOVES,
+};
 
 bool8 CreatePartyListMenu(Pokemon *pokeStruct)
 {
@@ -141,10 +215,7 @@ bool8 sub_802604C(void)
 
 void CleanPartyListMenu(void)
 {
-    if (sUnknown_203B2B8) {
-        MemoryFree(sUnknown_203B2B8);
-        sUnknown_203B2B8 = NULL;
-    }
+    TRY_FREE_AND_SET_NULL(sUnknown_203B2B8);
 }
 
 static void SetPartyListMenuState(s32 newState)
@@ -189,7 +260,7 @@ static void sub_802608C(void)
     ShowWindows(&sUnknown_203B2B8->unk220, TRUE, TRUE);
 }
 
-void HandlePartyListMenuCallback(void)
+static void HandlePartyListMenuCallback(void)
 {
     Item item;
 
@@ -301,7 +372,8 @@ void HandlePartyListMenuCallback(void)
     }
 }
 
-void PartyListMenu_CreateMenu1(void) {
+static void PartyListMenu_CreateMenu1(void)
+{
     Pokemon *pokeStruct;
     s32 index;
     s32 loopMax = 0;
@@ -404,7 +476,7 @@ void PartyListMenu_CreateMenu1(void) {
     }
 }
 
-void PartyListMenu_CreateMenu2(void)
+static void PartyListMenu_CreateMenu2(void)
 {
     s32 index;
     s32 loopMax = 0;
@@ -440,7 +512,8 @@ void PartyListMenu_CreateMenu2(void)
     }
 }
 
-void PartyListMenu_BuildYesNoMenu(void) {
+static void PartyListMenu_BuildYesNoMenu(void)
+{
     s32 loopMax = 0;
     sUnknown_203B2B8->unk1BC[loopMax].text = gCommonYes[0];
     sUnknown_203B2B8->unk1BC[loopMax].menuAction = PARTY_LIST_MENU_YES;
@@ -452,7 +525,7 @@ void PartyListMenu_BuildYesNoMenu(void) {
     sUnknown_203B2B8->unk1BC[loopMax].menuAction = PARTY_LIST_MENU_NULL;
 }
 
-void PartyListMenu_HandleMenu1(void)
+static void PartyListMenu_HandleMenu1(void)
 {
   Pokemon *playerPokemon;
   Pokemon *newLeader;
@@ -526,7 +599,7 @@ void PartyListMenu_HandleMenu1(void)
   }
 }
 
-void sub_8026A78(void)
+static void sub_8026A78(void)
 {
     switch(sub_80244E4())
     {
@@ -541,7 +614,7 @@ void sub_8026A78(void)
     }
 }
 
-void sub_8026A94(void)
+static void sub_8026A94(void)
 {
     switch(sub_801BF48())
     {
@@ -556,7 +629,6 @@ void sub_8026A94(void)
     }
 }
 
-
 static inline bool8 sub_8026AB0_sub(void) {
     if (sUnknown_203B2B8->pokeStruct->dungeonLocation.id == DUNGEON_HOWLING_FOREST_2 || sUnknown_203B2B8->pokeStruct->dungeonLocation.id == DUNGEON_POKEMON_SQUARE)
         return TRUE;
@@ -564,7 +636,7 @@ static inline bool8 sub_8026AB0_sub(void) {
         return FALSE;
 }
 
-void sub_8026AB0(void)
+static void sub_8026AB0(void)
 {
     s32 temp;
     if(sub_80144A4(&temp) == 0)
@@ -585,7 +657,7 @@ void sub_8026AB0(void)
     }
 }
 
-void sub_8026B10(void)
+static void sub_8026B10(void)
 {
     s32 temp;
     if(sub_80144A4(&temp) == 0)
@@ -603,8 +675,7 @@ void sub_8026B10(void)
     }
 }
 
-
-void sub_8026B48(void)
+static void sub_8026B48(void)
 {
     switch(sub_8022860())
     {
@@ -619,8 +690,7 @@ void sub_8026B48(void)
     }
 }
 
-
-void sub_8026B64(void)
+static void sub_8026B64(void)
 {
     switch(sub_801A6E8(TRUE))
     {
@@ -647,7 +717,7 @@ void sub_8026B64(void)
     }
 }
 
-void PartyListMenu_HandleMenu2(void)
+static void PartyListMenu_HandleMenu2(void)
 {
   u32 nextState;
   struct unkStruct_8090F58 temp;
@@ -691,7 +761,7 @@ void PartyListMenu_HandleMenu2(void)
   }
 }
 
-void sub_8026CF0(void)
+static void sub_8026CF0(void)
 {
     switch(sub_801B410())
     {
@@ -706,8 +776,7 @@ void sub_8026CF0(void)
     }
 }
 
-
-void sub_8026D0C(void)
+static void sub_8026D0C(void)
 {
     switch(sub_801EF38(1))
     {
@@ -727,7 +796,7 @@ void sub_8026D0C(void)
     }
 }
 
-void sub_8026D6C(void)
+static void sub_8026D6C(void)
 {
     switch(sub_801F890())
     {
@@ -742,7 +811,7 @@ void sub_8026D6C(void)
     }
 }
 
-void PartyListMenu_GotoFallbackState(void)
+static void PartyListMenu_GotoFallbackState(void)
 {
     s32 temp;
     if(sub_80144A4(&temp) == 0)
@@ -751,7 +820,7 @@ void PartyListMenu_GotoFallbackState(void)
     }
 }
 
-void sub_8026DAC(u32 r0, BulkItem *item)
+static void sub_8026DAC(u32 r0, BulkItem *item)
 {
     Item slot;
     struct unkStruct_8090F58 temp;
@@ -768,7 +837,7 @@ void sub_8026DAC(u32 r0, BulkItem *item)
     sub_80073E0(r0);
 }
 
-void sub_8026E08(u32 r0)
+static void sub_8026E08(u32 r0)
 {
     u8 buffer1[40];
     u8 buffer[20];
@@ -784,7 +853,7 @@ void sub_8026E08(u32 r0)
     sub_80073E0(r0);
 }
 
-bool8 sub_8026E88(Pokemon *r0)
+static bool8 sub_8026E88(Pokemon *r0)
 {
     bool8 flag;
     if(!r0->isTeamLeader)
@@ -799,7 +868,7 @@ bool8 sub_8026E88(Pokemon *r0)
     return TRUE;
 }
 
-bool8 sub_8026EB8(Pokemon *r0)
+static bool8 sub_8026EB8(Pokemon *r0)
 {
     bool8 flag;
     if(sub_808D3BC() != r0)
@@ -820,8 +889,7 @@ bool8 sub_8026EB8(Pokemon *r0)
     return FALSE;
 }
 
-
-u32 sub_8026F04(Pokemon *r0)
+static u32 sub_8026F04(Pokemon *r0)
 {
     if(r0->heldItem.id == ITEM_NOTHING)
         return 0;
@@ -833,7 +901,7 @@ u32 sub_8026F04(Pokemon *r0)
         return 3;
 }
 
-bool8 CanTakePokemonHeldItem(Pokemon *r0)
+static bool8 CanTakePokemonHeldItem(Pokemon *r0)
 {
     if(IsNotMoneyOrUsedTMItem(r0->heldItem.id))
     {
@@ -853,7 +921,7 @@ bool8 CanTakePokemonHeldItem(Pokemon *r0)
     return TRUE;
 }
 
-void sub_8026FA4(void)
+static void sub_8026FA4(void)
 {
     switch(sub_8026F04(sUnknown_203B2B8->pokeStruct))
     {

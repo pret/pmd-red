@@ -4,7 +4,7 @@
 #include "text_3.h"
 #include "adventure_log.h"
 #include "music_util.h"
-#include "code_8097670.h"
+#include "adventure_info.h"
 #include "input.h"
 #include "memory.h"
 #include "menu_input.h"

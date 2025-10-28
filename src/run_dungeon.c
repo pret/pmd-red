@@ -62,6 +62,7 @@
 #include "dungeon_8041AD0.h"
 #include "ground_main.h"
 #include "dungeon_mon_sprite_render.h"
+#include "adventure_info.h"
 
 EWRAM_INIT struct UnkStruct_203B414 *gUnknown_203B414 = NULL;
 EWRAM_INIT Dungeon *gDungeon = NULL;
@@ -70,10 +71,8 @@ static EWRAM_INIT u8 *gSerializedData_203B41C = NULL;
 extern void sub_8068BDC(u8 r0);
 extern void sub_803D4AC(void);
 extern void sub_8068F28(void);
-extern void IncrementThievingSuccesses(void);
 extern void sub_8043D60(void);
 extern void sub_80840A4(void);
-extern void IncrementAdventureFloorsExplored(void);
 extern void sub_806AB2C(void);
 extern void sub_807E5AC(void);
 extern void nullsub_16(void);

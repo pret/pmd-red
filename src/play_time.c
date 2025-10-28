@@ -6,7 +6,6 @@
 EWRAM_INIT struct PlayTimeStruct *gPlayTimeRef = {NULL};
 EWRAM_DATA struct PlayTimeStruct gPlayTime = {0};
 
-
 void InitializePlayTime(void)
 {
     gPlayTimeRef = &gPlayTime;

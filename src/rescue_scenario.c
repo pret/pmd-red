@@ -1,13 +1,56 @@
 #include "global.h"
 #include "globaldata.h"
+#include "rescue_scenario.h"
 #include "dungeon_info.h"
 #include "event_flag.h"
 #include "exclusive_pokemon.h"
 #include "code_80958E8.h"
-#include "code_80972F4.h"
 #include "code_80A26CC.h"
 
-#include "data/story_missions.h"
+// size: 0x8
+typedef struct MissionText
+{
+    /* 0x0 */ const u8 *text;
+    u8 unk4;
+    u8 unk5;
+    u8 unk6;
+    u8 unk7;
+} MissionText;
+
+static const MissionText sStoryMissionText[] = {
+    { _("Rescue Caterpie."), -1, -1, 0, 0 },
+    { _("Rescue Magnemite."), -1, -1, 0, 0 },
+    { _("Rescue Diglett."), 0, 1, 0, 0 },
+    { _("Rescue Metapod."), 2, 3, 0, 0 },
+    { _("Rescue Jumpluff."), -1, -1, 0, 0 },
+    { _("Rescue Shiftry."), 4, 5, 0, 0 },
+    { _("Meet Xatu."), -1, -1, 0, 0 },
+    { _("Fugitive"), -1, -1, 0, 0 },
+    { _("Fugitive"), 6, 7, 0, 0 },
+    { _("Fugitive"), 8, 9, 0, 0 },
+    { _("Meet Ninetales."), -1, 10, 0, 0 },
+    { _("Rescue Alakazam."), 11, 12, 0, 0 },
+    { _("Seek Rayquaza's help."), 14, 15, 0, 0 },
+    { _("{COLOR YELLOW_C}Scenario Progress Dummy{RESET}"), -1, -1, 0, 0 },
+    { _("Punish bad Mankey."), 16, 17, 0, 0 },
+    { _("Rescue Smeargle."), -1, 33, 0, 0 },
+    { _("Explore seafloor."), -1, -1, 0, 0 },
+    { _("Meet sea guardian."), -1, -1, 0, 0 },
+    { _("Check mystery Pokémon."), -1, -1, 0, 0 },
+    { _("Meet Xatu."), -1, -1, 0, 0 },
+    { _("Mirage Pokémon 1"), 20, 21, 0, 0 },
+    { _("Mirage Pokémon 2"), 22, 23, 0, 0 },
+    { _("Mirage Pokémon 3"), 24, 25, 0, 0 },
+    { _("Mirage Pokémon 4"), -1, 26, 0, 0 },
+    { _("Meet toughest Pokémon."), 18, 19, 0, 0 },
+    { _("Catch thief."), 27, 28, 0, 0 },
+    { _("Rescue Latias."), -1, -1, 0, 0 },
+    { _("Investigate Relic."), -1, -1, 0, 0 },
+    { _("Rescue Medicham."), -1, 32, 0, 0 },
+    { _("Meet Ninetales."), -1, -1, 0, 0 },
+    { _("Break Gardevoir's curse."), -1, -1, 0, 0 },
+    { NULL, -1, -1, 0, 0 },
+};
 
 ALIGNED(4) const u8 gDummyScenarioText[] = _("{COLOR YELLOW_C}Scenario try dummy{RESET}");
 ALIGNED(4) const u8 gBlankMission[] = _("{COLOR RED_W}???{RESET}");
@@ -23,26 +66,17 @@ void sub_80972F4(void)
 void nullsub_128(void)
 {}
 
-s32 sub_8097318(s16 param_1)
+bool8 sub_8097318(s16 param_1)
 {
-  s32 iVar1;
-  s32 param_1_s32;
+    s32 param_1_s32 = param_1;
 
-  param_1_s32 = param_1;
+    if (param_1_s32 == 0xd)
+        return FALSE;
 
-  if (param_1_s32 == 0xd) {
-    iVar1 = 0;
-  }
-  else {
-    iVar1 = GetScriptVarArrayValue(NULL,RESCUE_SCENARIO_ORDER_LIST, (u16) param_1_s32);
-    if (iVar1 != 0) {
-      iVar1 = 1;
-    }
-  }
-  return iVar1;
+    return GetScriptVarArrayValue(NULL,RESCUE_SCENARIO_ORDER_LIST, (u16) param_1_s32) != 0;
 }
 
-void sub_809733C(s16 param_1,u32 param_2)
+void sub_809733C(s16 param_1, u32 param_2)
 {
   s32 uVar2;
   u8 param_2_u8;
@@ -81,7 +115,7 @@ bool8 sub_8097384(s32 param_1)
     }
 }
 
-void sub_80973A8(s32 param_1,u32 param_2)
+void sub_80973A8(s32 param_1, u32 param_2)
 {
   s32 sVar1;
   s32 param_1_s32 = (s16)param_1;
@@ -111,7 +145,7 @@ bool8 RescueScenarioConquered(s32 param_1)
     }
 }
 
-void sub_8097418(s32 index,bool32 param_2)
+void sub_8097418(s32 index, bool32 param_2)
 {
   int index_s32 = (s16)index;
   bool8 param_2_u8 = param_2;
@@ -133,7 +167,7 @@ void sub_8097418(s32 index,bool32 param_2)
   }
 }
 
-const u8 *sub_809747C(s16 index)
+UNUSED static const u8 *sub_809747C(s16 index)
 {
     if(index == 0xD)
     {
@@ -168,14 +202,4 @@ const u8 *GetCurrentMissionText(s16 index)
     {
         return gBlankMission;
     }
-}
-
-void sub_80974E8(void)
-{
-    ClearScriptVarArray(NULL, TRAINING_CONQUEST_LIST);
-    ClearScriptVarArray(NULL, TRAINING_PRESENT_LIST);
-}
-
-void nullsub_208(void)
-{
 }

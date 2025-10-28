@@ -70,6 +70,7 @@ u8 *sub_8096DD8(void);
 u8 *sub_8096DE8(void);
 u8 sub_8096E2C(void);
 void sub_8096EEC(WonderMail *mail);
+bool8 sub_8096F50(WonderMail *mail);
 bool8 ValidateWonderMail(WonderMail *data);
 void WriteWonderMailBits(DataSerializer *a, WonderMail *b);
 

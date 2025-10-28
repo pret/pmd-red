@@ -6,7 +6,7 @@
 #include "music_util.h"
 #include "code_801602C.h"
 #include "code_801B3C0.h"
-#include "code_8097670.h"
+#include "adventure_info.h"
 #include "code_8099360.h"
 #include "common_strings.h"
 #include "input.h"

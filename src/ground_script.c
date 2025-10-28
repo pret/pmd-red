@@ -11,8 +11,8 @@
 #include "code_8099360.h"
 #include "code_8094F88.h"
 #include "code_80958E8.h"
-#include "code_80972F4.h"
-#include "code_8097670.h"
+#include "rescue_scenario.h"
+#include "adventure_info.h"
 #include "code_80A26CC.h"
 #include "debug.h"
 #include "dungeon_info.h"
@@ -54,15 +54,12 @@
 #include "ground_object.h"
 #include "ground_weather.h"
 #include "code_809D148.h"
+#include "training_maze.h"
 
 // Beware of the declarations without specified arguments, returning u32 or s32, these were quickly hacked in to get the code to compile and link
 // The return values are almost certainly NOT correct and will need to be rechecked when moving to header files
 char sub_8002984(s32, u8);
 bool8 sub_802FCF0(void);
-void sub_809733C(s16, bool8);
-void sub_80973A8(s16, bool8);
-void sub_80975A8(s16, bool8);
-void GroundScriptLockJumpZero(s16);
 bool8 sub_8099B94(void);
 PixelPos SetVecFromDirectionSpeed(s8, s32);
 bool8 sub_80961D8(void);
@@ -70,7 +67,6 @@ void ResetMailbox(void);
 void sub_80963FC(void);
 void sub_8096488(void);
 bool8 sub_80964B4(void);
-bool8 sub_8097640();
 u8 sub_80964E4();
 
 // For gScriptLocks, gScriptLockConds, gUnlockBranchLabels

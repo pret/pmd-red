@@ -4,7 +4,7 @@
 #include "code_802DE84.h"
 #include "code_803B050.h"
 #include "code_80958E8.h"
-#include "code_80972F4.h"
+#include "rescue_scenario.h"
 #include "code_8099360.h"
 #include "common_strings.h"
 #include "input.h"

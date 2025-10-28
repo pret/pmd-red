@@ -58,4 +58,6 @@ extern const s16 gVoltTackleIQReq;
 extern const u8 gDungeonWaterType[76];
 extern const struct ExclusivePokemon gExclusivePokemon[NUM_EXCLUSIVE_POKEMON];
 
+bool8 IsWaterDungeon(u32 r0);
+
 #endif // GUARD_DUNGEON_DATA_H

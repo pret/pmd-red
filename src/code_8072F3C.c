@@ -5,6 +5,7 @@
 #include "music_util.h"
 #include "code_80958E8.h"
 #include "code_80A26CC.h"
+#include "rescue_scenario.h"
 #include "input.h"
 #include "memory.h"
 #include "menu_input.h"
@@ -61,10 +62,8 @@ ALIGNED(4) const u8 gUnknown_80E0754[] = {0x83, 0xC0};
 
 void sub_802F9C0(void);
 void sub_802FA50(void);
-const u8 *sub_80974A0(s16 index);
 extern bool8 sub_802FCF0(void);
 s32 sub_802FBF4(void);
-extern u8 sub_8097384(s16);
 
 u32 sub_802F73C(u32 r0, DungeonPos *r1, u32 r2, u8 r3)
 {

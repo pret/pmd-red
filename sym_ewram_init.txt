@@ -136,7 +136,7 @@
 .include "src/play_time.o"
 .include "src/code_8094F88.o"
 .include "src/code_80958E8.o"
-.include "src/code_8097670.o"
+.include "src/adventure_info.o"
 .include "src/exclusive_pokemon.o"
 .include "src/ground_main.o"
 .include "src/script_item.o"

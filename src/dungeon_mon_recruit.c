@@ -10,7 +10,7 @@
 #include "music_util.h"
 #include "dungeon_message.h"
 #include "dungeon_mon_sprite_render.h"
-#include "code_8097670.h"
+#include "adventure_info.h"
 #include "dungeon_info.h"
 #include "dungeon_items.h"
 #include "dungeon_logic.h"
@@ -30,8 +30,7 @@
 #include "string_format.h"
 #include "dungeon_mon_spawn.h"
 #include "move_orb_effects_5.h"
-
-extern bool8 sub_8097900(s16 pokeIndex);
+#include "adventure_info.h"
 
 static void nullsub_96(Entity *pokemon,Entity *target);
 static void sub_806F910(void);

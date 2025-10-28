@@ -71,7 +71,7 @@
     .space 4
     .include "src/code_80958E8.o"
     .space 4
-    .include "src/code_8097670.o"
+    .include "src/adventure_info.o"
     .space 4
     .include "src/exclusive_pokemon.o"
     .space 4

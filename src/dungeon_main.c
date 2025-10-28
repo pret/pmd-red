@@ -62,8 +62,7 @@
 #include "dungeon_entity_movement.h"
 #include "dungeon_8041AD0.h"
 #include "status_checks.h"
-
-void sub_80978C8(s16 a0);
+#include "adventure_info.h"
 
 static EWRAM_DATA bool8 sInDiagonalMode = 0;
 static EWRAM_DATA bool8 sInRotateMode = 0;

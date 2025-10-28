@@ -4,7 +4,7 @@
 #include "constants/input.h"
 #include "code_800D090.h"
 #include "music_util.h"
-#include "code_80972F4.h"
+#include "training_maze.h"
 #include "code_80A26CC.h"
 #include "dungeon_info.h"
 #include "input.h"

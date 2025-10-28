@@ -1,5 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
+#include "friend_list_menu.h"
 #include "constants/dungeon.h"
 #include "music_util.h"
 #include "code_801602C.h"
@@ -11,7 +12,6 @@
 #include "code_8099360.h"
 #include "common_strings.h"
 #include "event_flag.h"
-#include "friend_list_menu.h"
 #include "ground_map.h"
 #include "input.h"
 #include "iq_skill_menu.h"
@@ -27,31 +27,92 @@
 #include "text_2.h"
 #include "unk_ds_only_feature.h"
 
-EWRAM_INIT unkStruct_203B2B4 *gUnknown_203B2B4 = {NULL};
+// there might be more overlap with unkStruct_203B2BC
+// I was working on the moves and put the data that seemed to correspond to that
+// into a separate struct
+typedef struct unkStruct_203B2B4
+{
+    // size: 0x178
+    s32 unk0;
+    s32 state;
+    u32 fallbackState;
+    u8 unkC; // friend Area
+    u8 unkD; // friend Area
+    s16 species;
+    u32 itemIndex;
+    BulkItem item1;
+    BulkItem item2;
+    /* 0x1C */ Pokemon *pokeStruct;
+    u32 moveIndex; // some sort of move index
+    u16 moveID;
+    Move moves[8];
+    u16 moveIDs[4]; // some list of move IDs
+    u32 menuAction1;
+    s32 menuAction2;
+    MenuStruct unk78;
+    MenuItem unkC8[8];
+    u16 unk108[8];
+    WindowTemplates unk118;
+} unkStruct_203B2B4;
+
+static EWRAM_INIT unkStruct_203B2B4 *gUnknown_203B2B4 = {NULL};
 
 #include "data/friend_list_menu.h"
 
-extern s32 sub_80144A4(s32 *);
+static void SetFriendListMenuState(s32);
+static void sub_802544C(void);
+static void sub_8025518(void);
+static void sub_8025728(void);
+static void sub_802591C(void);
+static void sub_80259F0(void);
+static void sub_8025A84(void);
+static void sub_8025BCC(void);
+static void sub_8025BE8(void);
+static void sub_8025C04(void);
+static void sub_8025CB4(void);
+static void sub_8025D90(void);
+static void sub_8025DAC(void);
+static void sub_8025E08(void);
+static void sub_8025E24(void);
+static void FriendListMenu_GotoFallbackState(void);
+static void sub_8025E68(u32 , BulkItem *);
+static bool8 FriendListMenu_isOnTeam(Pokemon *);
 
-void SetFriendListMenuState(s32);
-void sub_802544C(void);
-void sub_8025518(void);
-void sub_8025728(void);
-void sub_802591C(void);
-void sub_80259F0(void);
-void sub_8025A84(void);
-void sub_8025BCC(void);
-void sub_8025BE8(void);
-void sub_8025C04(void);
-void sub_8025CB4(void);
-void sub_8025D90(void);
-void sub_8025DAC(void);
-void sub_8025E08(void);
-void sub_8025E24(void);
-void FriendListMenu_GotoFallbackState(void);
-void sub_8025E68(u32 , BulkItem *);
-bool8 FriendListMenu_isOnTeam(Pokemon *);
+enum FriendListMenuStates {
+    // 0
+    // 1
+    // 2
+    // 3
+    FRIEND_LIST_MENU_STATE_SUMMARY = 4,
+    FRIEND_LIST_MENU_STATE_CHECK_IQ = 5,
+    FRIEND_LIST_MENU_STATE_STANDBY = 7,
+    FRIEND_LIST_MENU_STATE_ITEM_GIVEN = 8,
+    FRIEND_LIST_MENU_STATE_ITEM_EXCHANGE = 9,
+    FRIEND_LIST_MENU_STATE_TAKE = 0xA,
+    FRIEND_LIST_MENU_STATE_GIVE = 0xB,
+    // 0xC
+    // 0xD
+    FRIEND_LIST_MENU_STATE_INFO = 0xE,
+    FRIEND_LIST_MENU_STATE_MOVES = 0xF,
+    // 0x10
+    // 0x11
+    // 0x12
+    FRIEND_LIST_MENU_STATE_EXIT = 0x13
+};
 
+enum FriendListMenuActions {
+    FRIEND_LIST_MENU_NULL = 1,
+    FRIEND_LIST_MENU_INFO = 4,
+    FRIEND_LIST_MENU_SUMMARY = 4,
+    FRIEND_LIST_MENU_CHECK_IQ = 5,
+    FRIEND_LIST_MENU_MOVES,
+    FRIEND_LIST_MENU_VISIT,
+    // 8
+    FRIEND_LIST_MENU_STANDBY = 9,
+    FRIEND_LIST_MENU_GIVE = 0xA,
+    FRIEND_LIST_MENU_TAKE,
+
+};
 
 bool8 CreateFriendListMenu(s32 param_1)
 {
@@ -126,21 +187,17 @@ u8 sub_802540C(void)
 
 void CleanFriendListMenu(void)
 {
-    if(gUnknown_203B2B4 != NULL)
-    {
-        MemoryFree(gUnknown_203B2B4);
-        gUnknown_203B2B4 = NULL;
-    }
+    TRY_FREE_AND_SET_NULL(gUnknown_203B2B4);
 }
 
-void SetFriendListMenuState(s32 newState)
+static void SetFriendListMenuState(s32 newState)
 {
     gUnknown_203B2B4->state = newState;
     sub_802544C();
     sub_8025518();
 }
 
-void sub_802544C(void)
+static void sub_802544C(void)
 {
     s32 i;
 
@@ -171,7 +228,7 @@ void sub_802544C(void)
     ShowWindows(&gUnknown_203B2B4->unk118, TRUE, TRUE);
 }
 
-void sub_8025518(void)
+static void sub_8025518(void)
 {
   u32 uVar3;
   Item item;
@@ -257,7 +314,7 @@ void sub_8025518(void)
   }
 }
 
-void sub_8025728(void)
+static void sub_8025728(void)
 {
     int index;
     Pokemon *pokeStruct;
@@ -330,7 +387,7 @@ void sub_8025728(void)
     }
 }
 
-void sub_802591C(void)
+static void sub_802591C(void)
 {
   int index;
   s32 loopMax = 0;
@@ -368,7 +425,7 @@ void sub_802591C(void)
   }
 }
 
-void sub_80259F0(void)
+static void sub_80259F0(void)
 {
     switch(FriendList_HandleInput(TRUE))
     {
@@ -391,7 +448,7 @@ void sub_80259F0(void)
     }
 }
 
-void sub_8025A84(void)
+static void sub_8025A84(void)
 {
     s32 menuAction = 0;
 
@@ -452,7 +509,7 @@ void sub_8025A84(void)
     }
 }
 
-void sub_8025BCC(void)
+static void sub_8025BCC(void)
 {
     switch(sub_80244E4())
     {
@@ -467,7 +524,7 @@ void sub_8025BCC(void)
     }
 }
 
-void sub_8025BE8(void)
+static void sub_8025BE8(void)
 {
     switch(sub_801BF48())
     {
@@ -482,7 +539,7 @@ void sub_8025BE8(void)
     }
 }
 
-void sub_8025C04(void)
+static void sub_8025C04(void)
 {
     switch(sub_801A6E8(TRUE))
     {
@@ -509,7 +566,7 @@ void sub_8025C04(void)
     }
 }
 
-void sub_8025CB4(void)
+static void sub_8025CB4(void)
 {
   u32 nextState;
   s32 menuAction;
@@ -554,7 +611,7 @@ void sub_8025CB4(void)
     }
 }
 
-void sub_8025D90(void)
+static void sub_8025D90(void)
 {
     switch(sub_801B410())
     {
@@ -568,7 +625,7 @@ void sub_8025D90(void)
     }
 }
 
-void sub_8025DAC(void)
+static void sub_8025DAC(void)
 {
     switch(sub_801EF38(1))
     {
@@ -590,7 +647,7 @@ void sub_8025DAC(void)
     }
 }
 
-void sub_8025E08(void)
+static void sub_8025E08(void)
 {
     switch(sub_801F890())
     {
@@ -604,7 +661,7 @@ void sub_8025E08(void)
     }
 }
 
-void sub_8025E24(void)
+static void sub_8025E24(void)
 {
     switch(sub_8016080())
     {
@@ -617,7 +674,7 @@ void sub_8025E24(void)
     }
 }
 
-void FriendListMenu_GotoFallbackState(void)
+static void FriendListMenu_GotoFallbackState(void)
 {
     s32 local;
     if(sub_80144A4(&local) == 0)
@@ -626,7 +683,7 @@ void FriendListMenu_GotoFallbackState(void)
     }
 }
 
-void sub_8025E68(u32 r0, BulkItem *heldItem)
+static void sub_8025E68(u32 r0, BulkItem *heldItem)
 {
     Item item;
     struct unkStruct_8090F58 a3;
@@ -643,21 +700,13 @@ void sub_8025E68(u32 r0, BulkItem *heldItem)
     sub_80073E0(r0);
 }
 
-bool8 FriendListMenu_isOnTeam(Pokemon *pokeStruct)
+static bool8 FriendListMenu_isOnTeam(Pokemon *pokeStruct)
 {
-    bool32 flag;
     if (pokeStruct->isTeamLeader)
-        {
-            return FALSE;
-        }
-    else
-    {
-        flag = FALSE;
-        if(pokeStruct->dungeonLocation.id == DUNGEON_JOIN_LOCATION_PARTNER)
-            flag = TRUE;
-        if(flag && !sub_80023E4(8))
-            return FALSE;
-        else
-            return TRUE;
-    }
+        return FALSE;
+
+    if (IsMonPartner(pokeStruct) && !sub_80023E4(8))
+        return FALSE;
+
+    return TRUE;
 }

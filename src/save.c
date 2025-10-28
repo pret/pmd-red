@@ -1,8 +1,9 @@
 #include "global.h"
 #include "globaldata.h"
+#include "save.h"
 #include "music_util.h"
 #include "string_format.h"
-#include "code_8097670.h"
+#include "adventure_info.h"
 #include "event_flag.h"
 #include "exclusive_pokemon.h"
 #include "flash.h"
@@ -11,7 +12,9 @@
 #include "memory.h"
 #include "pokemon_3.h"
 #include "random.h"
-#include "save.h"
+#include "adventure_save.h"
+#include "training_maze.h"
+#include "rescue_scenario.h"
 
 // size: 0x800
 struct unk_struct
@@ -43,8 +46,6 @@ extern u32 sub_8095624(u8 *, u32);
 extern u32 RestoreMailInfo(void* a, s32 b);
 extern u32 SaveMailInfo(u8 *, u32);
 extern void sub_80958E4(u32 *a, u32 b);
-extern void sub_80972F4(void);
-extern void sub_80974E8(void);
 
 u32 sub_8011C1C(void)
 {

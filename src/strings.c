@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "strings.h"
 #include "constants/friend_area.h"
 #include "constants/tactic.h"

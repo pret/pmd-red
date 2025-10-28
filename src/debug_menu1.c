@@ -3,7 +3,7 @@
 #include "constants/friend_area.h"
 #include "constants/main_menu.h"
 #include "constants/move_id.h"
-#include "code_8097670.h"
+#include "adventure_info.h"
 #include "debug_menu1.h"
 #include "friend_area.h"
 #include "input.h"

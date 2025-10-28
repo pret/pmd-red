@@ -3,6 +3,7 @@
 #include "code_803C1D0.h"
 #include "code_80958E8.h"
 #include "code_80A26CC.h"
+#include "rescue_scenario.h"
 #include "constants/dungeon.h"
 #include "constants/friend_area.h"
 #include "constants/wonder_mail.h"
@@ -18,8 +19,6 @@
 #include "rescue_team_info.h"
 
 extern void sub_803C37C(struct DungeonLocation *, u8, u8 *);
-
-extern u8 sub_8097318(s16 param_1);
 
 bool8 sub_8095E38(WonderMail *mail, u8 dungeon, u32 floor, u8 param_4);
 u8 sub_8095F28(u8 param_1);
