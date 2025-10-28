@@ -6,7 +6,9 @@
 #include "data_script.h"
 #include "event_flag.h"
 #include "ground_script.h"
+#include "ground_script_file.h"
 #include "ground_sprite.h"
+#include "ground_sprite_util.h"
 #include "ground_lives.h"
 #include "ground_map.h"
 #include "memory.h"
@@ -48,16 +50,6 @@ struct GroundObjectTypeData
 };
 
 extern struct GroundObjectTypeData gGroundObjectTypes[];
-
-void DeleteGroundObjects(void);
-
-const struct GroundScriptHeader *GetGroundScript(s16 a0, DebugLocation *);
-void sub_80A7658(struct UnkGroundSpriteStruct *);
-extern bool8 sub_80A66F8(struct UnkGroundSpriteStruct *ptr);
-extern bool8 sub_80A671C(struct UnkGroundSpriteStruct *ptr);
-extern void sub_80A7664(struct UnkGroundSpriteStruct *ptr, PixelPos *pixelPos, s32 a2);
-
-void sub_80A75CC(void *, s32, s32, s32);
 
 static void GroundObject_Delete(s32 index_);
 static s32 TryMoveObjectRelative_80AC6AC(GroundObject *param_1, PixelPos *param_2);
@@ -106,6 +98,14 @@ static const CallbackData gGroundObjectCallbacks = {
 };
 const u8 gGroundObjectFileName[];
 #define FAKE_FILENAME gGroundObjectFileName
+
+
+
+
+
+
+
+
 
 
 
@@ -467,7 +467,7 @@ s32 GroundObject_Add(s32 id_, const GroundObjectData *objectData, s32 group_, s3
         parent->unk13E = 0x800;
         parent->directionRelated = 1;
         parent->unk140 = 0;
-        sub_80A75CC(&(parent->unk144),id,parent->kind, parent->flags);
+        sub_80A75CC(&parent->unk144,id,parent->kind, parent->flags);
       }
 
       InitActionWithParams(&parent->action,&gGroundObjectCallbacks,parent,group,sector);

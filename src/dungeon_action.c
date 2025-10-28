@@ -20,9 +20,6 @@
 #include "dungeon_engine.h"
 #include "run_dungeon.h"
 
-extern void DisplayActions(u32);
-extern void TickStatusAndHealthRegen(Entity *);
-
 EWRAM_DATA SubMenuAction gDungeonSubMenu[10] = {0};
 EWRAM_DATA s32 gDungeonSubMenuItemsCount = 0;
 

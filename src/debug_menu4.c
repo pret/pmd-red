@@ -1,6 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
-#include "code_801602C.h"
+#include "confirm_name_menu.h"
 #include "friend_list.h"
 #include "debug_menu4.h"
 #include "input.h"

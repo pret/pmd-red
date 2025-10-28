@@ -31,6 +31,8 @@
 #include "ground_object.h"
 #include "ground_script.h"
 #include "code_809D148.h"
+#include "adventure_info.h"
+#include "palette_util.h"
 
 EWRAM_DATA u32 gUnknown_20398A8 = {0};
 EWRAM_DATA s32 gUnknown_20398AC = {0};
@@ -55,8 +57,6 @@ extern void sub_809CA20();
 extern void sub_80A6E80();
 extern void nullsub_106();
 extern void sub_80A73EC();
-
-extern void ClearAllItems_8091FB4();
 extern void sub_8095494(DungeonMailSeed *param_1, u8 index);
 
 extern u16 gUnknown_2026E4E;
@@ -70,16 +70,12 @@ extern void sub_8099768(void);
 extern void sub_809975C(void);
 extern void sub_8099BE4(void);
 extern void sub_8099744(void);
-extern void WaitForNextFrameAndAdvanceRNG(void);
 extern void sub_8099750(void);
 extern void nullsub_16(void);
-extern void UpdateAdventureAchievements(void);
-extern void xxx_call_update_bg_sound_input(void);
 extern void sub_80060EC(void);
 extern void sub_809977C(void);
 extern void UpdateFadeInTile(s32);
 extern void sub_8001D88(void);
-extern void sub_80999D4(s32);
 extern void sub_8005838(s32, s32);
 
 static s16 sub_8098FCC(u32 unused);

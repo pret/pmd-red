@@ -13,6 +13,11 @@
 #include "text_1.h"
 #include "text_util.h"
 #include "util.h"
+#include "graphics_memory.h"
+#include "code_800C9CC.h"
+#include "bg_palette_buffer.h"
+#include "game_options.h"
+#include "code_800558C.h"
 
 const u32 gDefaultMenuTextColors[3] = { COLOR_WHITE_2, COLOR_RED, COLOR_RED };
 
@@ -55,6 +60,24 @@ static bool8 sub_8013DD0(unkStructFor8013AA0 *);
 static void MenuScrollLeft(MenuInputStruct *menuInput);
 static void MenuScrollRight(MenuInputStruct *menuInput);
 static s32 GetCurrMenuIndex(MenuInputStruct *menuInput);
+
+void sub_8012A18(s32 unused)
+{
+    UpdateSoundEffectCounters();
+    DrawDialogueBoxString();
+    nullsub_8(gGameOptionsRef->touchScreen);
+    sub_8005180();
+    sub_80060EC();
+    WaitForNextFrameAndAdvanceRNG();
+    LoadBufferedInputs(); // Input related
+    CopySpritesToOam();
+    sub_8005304();
+    TransferBGPaletteBuffer();
+    xxx_call_update_bg_vram();
+    DoScheduledMemCopies();
+    xxx_call_update_bg_sound_input();
+    ResetSprites(FALSE);
+}
 
 u32 sub_8012A64(TouchScreenMenuInput *touchScreen, s32 r1)
 {

@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "constants/emotions.h"
 #include "bg_palette_buffer.h"
-#include "code_801602C.h"
+#include "confirm_name_menu.h"
 #include "random_mersenne_twister.h"
 #include "code_8099360.h"
 #include "game_options.h"

@@ -96,26 +96,20 @@ s32 FindItemInInventory(u8 id);
 bool8 IsHMItem(u8 id);
 bool8 IsEdibleItem(u8 id);
 u8 xxx_bit_lut_lookup_8091E50(u8 i0, u8 i1);
-bool8 IsInvalidItemReward(u8 itemID);
 bool8 HasGummiItem(void);
 void GetGummiItemStatBoost(Pokemon* pokemon, u8 id, bool8 checkBoostFlags, Gummi *gummi);
-
 void ReadHeldItemBits(DataSerializer *, BulkItem *);
 void WriteHeldItemBits(DataSerializer *, BulkItem *);
 void ReadItemSlotBits(DataSerializer *, Item *);
 void WriteItemSlotBits(DataSerializer *, Item *);
 s32 RestoreTeamInventory(u8 *, u32 size);
 s32 SaveTeamInventory(u8 *, u32 size);
-
-
-
-
-
-
 s32 GetItemPossessionCount(u8 id);
 s32 WriteHighDecimal(s32, u8 *strbuf, u8);
 u32 sub_80913E0(Item* slot, u32 windowId, STATUSTEXTS(statuses));
 u8 GetRandomItemForSet(s32 a0, s32 a1, s32 a2);
+void ClearAllItems_8091FB4(void);
+bool8 IsInvalidItemReward(u8 itemID);
 
 static inline void ZeroOutItem(Item *item)
 {

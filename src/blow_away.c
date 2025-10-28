@@ -34,9 +34,6 @@
 #include "move_orb_effects_5.h"
 #include "expose_trap.h"
 
-extern void sub_804EB30();
-extern void sub_807BB78(Entity *pokemon);
-
 void BlowAwayTarget(Entity *pokemon, Entity *target, u32 direction)
 {
     bool8 flag;

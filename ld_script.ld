@@ -52,7 +52,8 @@ SECTIONS {
         src/main_loops.o(.text);
         src/event_flag.o(.text);
         src/gba_color_util.o(.text);
-        src/code_8002774.o(.text);
+        src/pixelpos_math.o(.text);
+        src/direction_util.o(.text);
         src/memory.o(.text);
         src/palette_fade_util.o(.text);
         src/other_random.o(.text);
@@ -99,12 +100,11 @@ SECTIONS {
         src/save_write.o(.text);
         src/quick_save_read.o(.text);
         src/quick_save_write.o(.text);
-        src/code_8012A18.o(.text);
         src/menu_input.o(.text);
         src/string_format.o(.text);
         src/code_8015080.o(.text);
         src/naming_screen.o(.text);
-        src/code_801602C.o(.text);
+        src/confirm_name_menu.o(.text);
         src/felicity_bank.o(.text);
         src/kangaskhan_storage1.o(.text);
         src/kangaskhan_storage2.o(.text);
@@ -429,8 +429,8 @@ SECTIONS {
         src/event_flag.o(.rodata);
         src/script_vars_info.o(.rodata);
         src/gba_color_util.o(.rodata);
-        data/data.o(.rodata);
-        src/code_8002774.o(.rodata);
+        src/pixelpos_math.o(.rodata);
+        src/direction_util.o(.rodata);
         data/pksdir_5.o(.rodata);
         src/memory.o(.rodata);
         src/palette_fade_util.o(.rodata);
@@ -475,7 +475,7 @@ SECTIONS {
         src/common_strings.o(.rodata);
         src/code_8015080.o(.rodata);
         src/naming_screen.o(.rodata);
-        src/code_801602C.o(.rodata);
+        src/confirm_name_menu.o(.rodata);
         src/felicity_bank.o(.rodata);
         src/kangaskhan_storage1.o(.rodata);
         src/kangaskhan_storage2.o(.rodata);

@@ -4,7 +4,7 @@
 #include "constants/colors.h"
 #include "constants/evolution_status.h"
 #include "music_util.h"
-#include "code_801602C.h"
+#include "confirm_name_menu.h"
 #include "code_801B3C0.h"
 #include "adventure_info.h"
 #include "code_8099360.h"

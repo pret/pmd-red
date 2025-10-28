@@ -6,7 +6,8 @@
 #include "constants/item.h"
 #include "constants/monster.h"
 #include "constants/move_id.h"
-#include "code_8002774.h"
+#include "direction_util.h"
+#include "pixelpos_math.h"
 #include "music_util.h"
 #include "code_8099360.h"
 #include "code_8094F88.h"
@@ -58,10 +59,8 @@
 
 // Beware of the declarations without specified arguments, returning u32 or s32, these were quickly hacked in to get the code to compile and link
 // The return values are almost certainly NOT correct and will need to be rechecked when moving to header files
-char sub_8002984(s32, u8);
 bool8 sub_802FCF0(void);
 bool8 sub_8099B94(void);
-PixelPos SetVecFromDirectionSpeed(s8, s32);
 bool8 sub_80961D8(void);
 void ResetMailbox(void);
 void sub_80963FC(void);
@@ -584,7 +583,7 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                             action->callbacks->getHitboxCenter(action->parentObject, &pos);
                             pos2.x = action->scriptData.pos2.x - pos.x;
                             pos2.y = action->scriptData.pos2.y - pos.y;
-                            sub_800290C(&pos2, action->scriptData.unk30);
+                            ClampPixelPos(&pos2, action->scriptData.unk30);
                             if (pos2.x == 0 && pos2.y == 0) {
                                 action->scriptData.savedState = 3;
                                 break;
@@ -618,7 +617,7 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                             action->callbacks->getHitboxCenter(action->parentObject, &pos);
                             pos2.x = action->scriptData.pos2.x - pos.x;
                             pos2.y = action->scriptData.pos2.y - pos.y;
-                            sub_800290C(&pos2, action->scriptData.unk30);
+                            ClampPixelPos(&pos2, action->scriptData.unk30);
                             if (pos2.x == 0 && pos2.y == 0) {
                                 action->scriptData.savedState = 3;
                                 break;
@@ -653,7 +652,7 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                         case 0x7d ... 0x82: {
                             if (action->scriptData.unk2A > 0) {
                                 PixelPos pos;
-                                sub_8002934(&pos, &action->scriptData.pos1, &action->scriptData.pos2, action->scriptData.unk2A, action->scriptData.unk2C);
+                                InterpolatePixelPos(&pos, &action->scriptData.pos1, &action->scriptData.pos2, action->scriptData.unk2A, action->scriptData.unk2C);
                                 action->callbacks->moveReal(action->parentObject, &pos);
                                 action->callbacks->setEventIndex(action->parentObject, 0x1000);
                                 action->scriptData.unk2A--;
@@ -674,7 +673,7 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                                 s8 dirS8;
 
                                 action->callbacks->getHitboxCenter(action->parentObject, &pos1);
-                                sub_8002934(&pos2, &action->scriptData.pos1, &action->scriptData.pos2, action->scriptData.unk2A, action->scriptData.unk2C);
+                                InterpolatePixelPos(&pos2, &action->scriptData.pos1, &action->scriptData.pos2, action->scriptData.unk2A, action->scriptData.unk2C);
                                 pos3.x = pos2.x - pos1.x;
                                 pos3.y = pos2.y - pos1.y;
                                 dir = (s8) VecDirection8Radial(&pos3);
@@ -2279,7 +2278,7 @@ static s32 ExecuteScriptCommand(Action *action)
             case 0x8a: {
                 s8 dir;
                 action->callbacks->getDirection(action->parentObject, &dir);
-                action->scriptData.unk26 = sub_8002984(dir, (s8)curCmd.arg1);
+                action->scriptData.unk26 = sub_8002984(dir, (u8)curCmd.arg1);
                 action->callbacks->setDirection(action->parentObject, action->scriptData.unk26);
                 scriptData->unk30 = curCmd.argShort;
                 scriptData->unk2A = (u8)curCmd.argByte;
@@ -2296,7 +2295,7 @@ static s32 ExecuteScriptCommand(Action *action)
                 s8 dir;
                 if (ret >= 0) {
                     sub_80A9050(ret, &dir);
-                    action->scriptData.unk26 = sub_8002984(dir, curCmd.argShort);
+                    action->scriptData.unk26 = sub_8002984(dir, (u8)curCmd.argShort);
                     action->callbacks->setDirection(action->parentObject, action->scriptData.unk26);
                 }
                 scriptData->unk2A = (u8)curCmd.argByte;
@@ -2305,7 +2304,7 @@ static s32 ExecuteScriptCommand(Action *action)
             case 0x8d: {
                 s8 dir;
                 action->callbacks->getDirection(action->parentObject, &dir);
-                action->scriptData.unk26 = sub_8002984(dir, curCmd.argShort);
+                action->scriptData.unk26 = sub_8002984(dir, (u8)curCmd.argShort);
                 action->callbacks->setDirection(action->parentObject, action->scriptData.unk26);
                 scriptData->unk2A = (u8)curCmd.argByte;
                 return 2;
@@ -2356,7 +2355,7 @@ static s32 ExecuteScriptCommand(Action *action)
                     if (dir == tmp) {
                         action->callbacks->getDirection(action->parentObject, &dir);
                     }
-                    action->scriptData.unk26 = sub_8002984(dir, (s8)curCmd.argShort);
+                    action->scriptData.unk26 = sub_8002984(dir, (u8)curCmd.argShort);
                     action->callbacks->setDirection(action->parentObject, action->scriptData.unk26);
                 }
                 scriptData->unk2A = (u8)curCmd.argByte;
@@ -2374,7 +2373,7 @@ static s32 ExecuteScriptCommand(Action *action)
             case 0x92: {
                 s8 unk;
                 action->callbacks->getDirection(action->parentObject, &unk);
-                action->scriptData.unk4D = sub_8002984(unk, (s8)curCmd.arg1);
+                action->scriptData.unk4D = sub_8002984(unk, (u8)curCmd.arg1);
                 scriptData->unk2A = 0;
                 return 2;
             }
@@ -3719,7 +3718,7 @@ static s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
                     if((s8)dir != -1)
                     {
                         s32 to;
-                        sp_368 = SetVecFromDirectionSpeed(dir,0x100);
+                        sp_368 = SetVecFromDirectionSpeed((s8) dir,0x100);
 
                         to = 2;
                         if(held & B_BUTTON) {

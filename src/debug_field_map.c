@@ -18,10 +18,8 @@
 #include "input.h"
 #include "structs/str_position.h"
 #include "code_809D148.h"
-
-extern void sub_8012A18(s32 unused);
-extern void sub_80999E8(s32 a0);
-extern PixelPos SetVecFromDirectionSpeed(s8 r1, u32 r2);
+#include "direction_util.h"
+#include "menu_input.h"
 
 UNUSED static void DebugMapViewer(void)
 {
@@ -157,4 +155,3 @@ UNUSED static void DebugMapViewer(void)
     sub_8099768();
     nullsub_103();
 }
-

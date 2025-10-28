@@ -17,6 +17,31 @@
 #include "ground_object.h"
 #include "code_809D148.h"
 
+// size: 0xC
+typedef struct unkStruct_3001B7C_sub0
+{
+    u32 unk0;
+    s32 unk4;
+    struct UnkGroundSpriteStruct *unk8;
+} unkStruct_3001B7C_sub0;
+
+// size: 0x4
+typedef struct unkStruct_3001B7C_sub108
+{
+    u16 unk0;
+    s16 unk2;
+} unkStruct_3001B7C_sub108;
+
+#define UNK_3001B7C_SUB0_COUNT 22
+#define UNK_3001B7C_SUB108_COUNT 2
+
+// size: 0x110
+typedef struct unkStruct_3001B7C
+{
+    unkStruct_3001B7C_sub0 unk0[UNK_3001B7C_SUB0_COUNT];
+    unkStruct_3001B7C_sub108 unk108[UNK_3001B7C_SUB108_COUNT];
+} unkStruct_3001B7C;
+
 static IWRAM_INIT unkStruct_3001B7C *gUnknown_3001B7C = {NULL};
 
 static EWRAM_DATA unkStruct_2039DB0 gUnknown_2039DB0 = {0};

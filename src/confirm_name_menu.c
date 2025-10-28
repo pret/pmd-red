@@ -1,6 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
-#include "code_801602C.h"
+#include "confirm_name_menu.h"
 #include "common_strings.h"
 #include "input.h"
 #include "memory.h"
@@ -9,42 +9,71 @@
 #include "text_1.h"
 #include "naming_screen.h"
 
-EWRAM_INIT static struct unkStruct_203B200 *sUnknown_203B200 = {NULL};
+// size: 0x50
+struct ConfirmMenuStruct
+{
+    u32 unk0;
+    u32 unk4;
+    /* 0x8 */ u8 *pokeName;
+    /* 0xC */ s32 state;
+    /* 0x10 */ MenuItem menus[8];
+};
 
-#include "data/code_801602C.h"
+EWRAM_INIT static struct ConfirmMenuStruct *sConfirmMenu = {NULL};
+
+enum
+{
+    MENU_ACTION_DEFAULT = 1,
+    MENU_ACTION_YES,
+    MENU_ACTION_NO,
+};
 
 static void BuildConfirmNameMenu(void);
 static void HandleConfirmNameMenu(void);
 static bool8 IsNameEmpty(void);
 static void nullsub_36(void);
-
 static void SetConfirmNameMenuState(u32 newState);
 static void sub_8016110(void);
 static void sub_80161F8(void);
 static void sub_8016280(void);
 static void sub_801629C(void);
 
+enum ConfirmNameMenuStates
+{
+    CONFIRM_NAME_MENU_INIT,
+    CONFIRM_NAME_MENU_PROMPT,
+    CONFIRM_NAME_MENU_TOO_LONG,
+    CONFIRM_NAME_MENU_EMPTY,
+    CONFIRM_NAME_MENU_EXIT = 4
+};
+
+UNUSED static const WindowTemplate sUnusedWinTemplate = WIN_TEMPLATE_DUMMY;
+
+ALIGNED(4) static const u8 sIsNameOKPrompt[] = _("Is the name {COLOR CYAN}{POKEMON_0}{RESET} OK?");
+ALIGNED(4) static const u8 sNameTooLong[] = _("This name is too long.");
+ALIGNED(4) static const u8 sEnterAName[] = _("Please enter a name.");
+
 u32 CreateConfirmNameMenu(u32 mode, u8 *name)
 {
     ResetUnusedInputStruct();
     ShowWindows(NULL, TRUE, TRUE);
 
-    sUnknown_203B200 = MemoryAlloc(sizeof(struct unkStruct_203B200), 8);
-    sUnknown_203B200->unk0 = mode;
-    sUnknown_203B200->pokeName = name;
+    sConfirmMenu = MemoryAlloc(sizeof(struct ConfirmMenuStruct), 8);
+    sConfirmMenu->unk0 = mode;
+    sConfirmMenu->pokeName = name;
 
     switch (mode) {
         case 0:
-            sUnknown_203B200->unk4 = 0;
+            sConfirmMenu->unk4 = 0;
             break;
         case 1:
-            sUnknown_203B200->unk4 = 1;
+            sConfirmMenu->unk4 = 1;
             break;
         case 2:
-            sUnknown_203B200->unk4 = 2;
+            sConfirmMenu->unk4 = 2;
             break;
         case 3:
-            sUnknown_203B200->unk4 = 3;
+            sConfirmMenu->unk4 = 3;
             break;
         default:
             break;
@@ -56,7 +85,7 @@ u32 CreateConfirmNameMenu(u32 mode, u8 *name)
 
 u32 sub_8016080(void)
 {
-    switch (sUnknown_203B200->state) {
+    switch (sConfirmMenu->state) {
         case CONFIRM_NAME_MENU_INIT:
             sub_80161F8();
             break;
@@ -77,15 +106,15 @@ u32 sub_8016080(void)
 
 void CleanConfirmNameMenu(void)
 {
-    if (sUnknown_203B200 != NULL) {
-        MemoryFree(sUnknown_203B200);
-        sUnknown_203B200 = NULL;
+    if (sConfirmMenu != NULL) {
+        MemoryFree(sConfirmMenu);
+        sConfirmMenu = NULL;
     }
 }
 
 static void SetConfirmNameMenuState(u32 newState)
 {
-    sUnknown_203B200->state = newState;
+    sConfirmMenu->state = newState;
     nullsub_36();
     sub_8016110();
 }
@@ -96,18 +125,18 @@ static void nullsub_36(void)
 
 static void sub_8016110(void)
 {
-    switch (sUnknown_203B200->state) {
+    switch (sConfirmMenu->state) {
         case CONFIRM_NAME_MENU_INIT:
-            NamingScreen_Init(sUnknown_203B200->unk4, sUnknown_203B200->pokeName);
+            NamingScreen_Init(sConfirmMenu->unk4, sConfirmMenu->pokeName);
             break;
         case CONFIRM_NAME_MENU_PROMPT:
             BuildConfirmNameMenu();
-            if (sUnknown_203B200->unk4 == 1)
-                StrncpyCustom(gFormatBuffer_Monsters[0], sUnknown_203B200->pokeName, POKEMON_NAME_LENGTH);
+            if (sConfirmMenu->unk4 == 1)
+                StrncpyCustom(gFormatBuffer_Monsters[0], sConfirmMenu->pokeName, POKEMON_NAME_LENGTH);
             else
-                StrncpyCustom(gFormatBuffer_Monsters[0], sUnknown_203B200->pokeName, POKEMON_NAME_LENGTH);
+                StrncpyCustom(gFormatBuffer_Monsters[0], sConfirmMenu->pokeName, POKEMON_NAME_LENGTH);
 
-            CreateMenuDialogueBoxAndPortrait(sIsNameOKPrompt, 0, 3, sUnknown_203B200->menus, 0, 4, 0, NULL, 32);
+            CreateMenuDialogueBoxAndPortrait(sIsNameOKPrompt, 0, 3, sConfirmMenu->menus, 0, 4, 0, NULL, 32);
             break;
 
         case CONFIRM_NAME_MENU_TOO_LONG:
@@ -123,14 +152,14 @@ static void sub_8016110(void)
 
 static void BuildConfirmNameMenu(void)
 {
-    sUnknown_203B200->menus[0].text = gCommonYes[0];
-    sUnknown_203B200->menus[0].menuAction = MENU_ACTION_YES;
+    sConfirmMenu->menus[0].text = gCommonYes[0];
+    sConfirmMenu->menus[0].menuAction = MENU_ACTION_YES;
 
-    sUnknown_203B200->menus[1].text = gCommonNo[0];
-    sUnknown_203B200->menus[1].menuAction = MENU_ACTION_NO;
+    sConfirmMenu->menus[1].text = gCommonNo[0];
+    sConfirmMenu->menus[1].menuAction = MENU_ACTION_NO;
 
-    sUnknown_203B200->menus[2].text = NULL;
-    sUnknown_203B200->menus[2].menuAction = MENU_ACTION_DEFAULT;
+    sConfirmMenu->menus[2].text = NULL;
+    sConfirmMenu->menus[2].menuAction = MENU_ACTION_DEFAULT;
 }
 
 static void sub_80161F8(void)
@@ -143,7 +172,7 @@ static void sub_80161F8(void)
         SetConfirmNameMenuState(CONFIRM_NAME_MENU_EMPTY);
     }
     else {
-        s32 width = GetStrWidth(sUnknown_203B200->pokeName, POKEMON_NAME_LENGTH);
+        s32 width = GetStrWidth(sConfirmMenu->pokeName, POKEMON_NAME_LENGTH);
         s32 maxWidth = GetMaxPokeNameWidth(); // returns 60
         if (width > maxWidth)
             SetConfirmNameMenuState(CONFIRM_NAME_MENU_TOO_LONG);
@@ -190,22 +219,17 @@ static void sub_801629C(void)
 
 static bool8 IsNameEmpty(void)
 {
-    u8 character;
-    s32 index;
-    s32 max;
+    s32 i;
+    s32 n = POKEMON_NAME_LENGTH;
 
-    max = POKEMON_NAME_LENGTH; // constant needed at top of loop to match
-    index = 0;
-    do {
-        character = sUnknown_203B200->pokeName[index];
+    for (i = 0; i < n; i++) {
+        u8 character = sConfirmMenu->pokeName[i];
 
         if (character == '\0')
-            break;
+            return TRUE;
         if (character != ' ')
             return FALSE;
-
-        index++;
-    } while (index < max);
+    }
 
     return TRUE;
 }

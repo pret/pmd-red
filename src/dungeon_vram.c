@@ -27,7 +27,7 @@
 #include "dungeon_util.h"
 #include "dungeon_pokemon_sprites.h"
 #include "menu_input.h"
-#include "code_801602C.h"
+#include "confirm_name_menu.h"
 #include "dungeon_tilemap.h"
 #include "dungeon_name_banner.h"
 #include "dungeon_engine.h"
