@@ -47,6 +47,7 @@
 #include "wigglytuff_shop3.h"
 #include "wonder_mail.h"
 #include "naming_screen.h"
+#include "dungeon_list_menu.h"
 #include "game_options.h"
 #include "script_item.h"
 #include "structs/menu.h"
@@ -119,8 +120,6 @@ struct Textbox
 
 static IWRAM_INIT struct Textbox *sTextbox = { NULL };
 
-extern bool8 sub_802FCF0(void);
-
 void sub_809B028(const MenuItem *, s32 a1_, s32 a2, s32 a3, s32 a4_, const char *text);
 bool8 sub_809B18C(s32 *sp);
 extern u8 sub_802B2D4(void);
@@ -134,11 +133,6 @@ bool8 sub_8015080(u8 *buffer, const MenuItem *menuItems);
 s32 sub_801516C();
 void sub_80151A4();
 s32 sub_8015198();
-u8 sub_802F73C();
-u8 sub_802F848();
-s32 sub_802F8A0();
-void sub_802F974();
-s16 sub_802F90C();
 void sub_8011C28(u32);
 bool8 CreateHelperPelipperMenu(s16);
 u32 sub_802E90C();
@@ -878,7 +872,7 @@ bool8 sub_809B1D4(s32 a0, u32 kind, s32 a2, void *a3)
             break;
         case 0xC:
             sub_8001D88();
-            if (sub_802FCF0()) {
+            if (HasZeroUnlockedDungeons()) {
                 return FALSE;
             }
             break;
@@ -1497,27 +1491,27 @@ static bool8 sub_809B648(void)
             if (sTextbox->unk420 == 1) {
                 s32 var = sub_80A2654(GetScriptVarValue(0,0x12));
                 ResetTextbox();
-                if (!sub_802F73C(3,0,10,TRUE)) {
+                if (!DungeonListMenu_Init(3,0,10,TRUE)) {
                     sTextbox->unk430 = -1;
                     return 0;
                 }
-                if ((var != -1) && (!sub_802F848(var))) {
+                if ((var != -1) && (!DungeonListMenu_MoveMenuTo(var))) {
                     SetScriptVarValue(0,0x12,-1);
                 }
                 PlayMenuSoundEffect(4);
             }
             else {
-                switch (sub_802F8A0(1)) {
+                switch (DungeonListMenu_GetInput(1)) {
                     case 3: {
-                        s32 var = sub_802F90C();
-                        SetScriptVarValue(0, 0x12, sub_80A26B8(var));
-                        sTextbox->unk430 = var;
-                        sub_802F974();
+                        s32 rescueDungeonId = DungeonListMenu_GetCurrentRescueDungeonId();
+                        SetScriptVarValue(0, 0x12, RescueDungeonToScriptDungeonId(rescueDungeonId));
+                        sTextbox->unk430 = rescueDungeonId;
+                        DungeonListMenu_Free();
                         return 0;
                     }
                     case 2:
                         sTextbox->unk430 = -1;
-                        sub_802F974();
+                        DungeonListMenu_Free();
                         return 0;
                 }
             }

@@ -62,16 +62,16 @@ u32 DebugFieldMapWindow_GetInput(void)
     switch (GetKeyPress(&sDebugWindow->m.input)) {
         case INPUT_B_BUTTON:
             PlayMenuSoundEffect(1);
-            return DEBUG_INPUT_B_PRESS;
+            return MENU_INPUT_B_PRESS;
         case INPUT_A_BUTTON:
-            return DEBUG_INPUT_A_PRESS;
+            return MENU_INPUT_A_PRESS;
         default:
             if (MenuCursorUpdate(&sDebugWindow->m.input, TRUE)) {
                 ShowWindowsWithHeader();
                 PrintCurrentPageText();
-                return DEBUG_INPUT_DPAD;
+                return MENU_INPUT_DPAD;
             }
-            return DEBUG_INPUT_NOTHING;
+            return MENU_INPUT_NOTHING;
     }
 }
 

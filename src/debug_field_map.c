@@ -20,6 +20,7 @@
 #include "code_809D148.h"
 #include "direction_util.h"
 #include "menu_input.h"
+#include "constants/input.h"
 
 UNUSED static void DebugMapViewer(void)
 {
@@ -50,10 +51,10 @@ UNUSED static void DebugMapViewer(void)
                 sub_8005838(NULL, 0);
                 sub_8012A18(0);
                 switch (DebugFieldMapWindow_GetInput()) {
-                    case DEBUG_INPUT_A_PRESS:
+                    case MENU_INPUT_A_PRESS:
                         mapId = DebugFieldMapWindow_GetCurrentIndex();
                         break;
-                    case DEBUG_INPUT_B_PRESS:
+                    case MENU_INPUT_B_PRESS:
                         mapId = -1;
                         break;
                     default:

@@ -56,10 +56,10 @@
 #include "ground_weather.h"
 #include "code_809D148.h"
 #include "training_maze.h"
+#include "dungeon_list_menu.h"
 
 // Beware of the declarations without specified arguments, returning u32 or s32, these were quickly hacked in to get the code to compile and link
 // The return values are almost certainly NOT correct and will need to be rechecked when moving to header files
-bool8 sub_802FCF0(void);
 bool8 sub_8099B94(void);
 bool8 sub_80961D8(void);
 void ResetMailbox(void);
@@ -889,7 +889,7 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                                     break;
                                 }
                                 if (val >= 0) {
-                                    SetScriptVarValue(NULL, 18, sub_80A26B8(val));
+                                    SetScriptVarValue(NULL, 18, RescueDungeonToScriptDungeonId(val));
                                     action->scriptData.branchDiscriminant = 1;
                                 } else {
                                     action->scriptData.branchDiscriminant = -1;
@@ -923,7 +923,7 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                                     break;
                                 }
                                 if (val >= 0) {
-                                    SetScriptVarValue(NULL, 19, action->scriptData.curScriptOp == 4 ? sub_80A26B8(val) : (s16)val);
+                                    SetScriptVarValue(NULL, 19, action->scriptData.curScriptOp == 4 ? RescueDungeonToScriptDungeonId(val) : (s16)val);
                                     disc = 1;
                                 } else {
                                     disc = -1;
@@ -1347,7 +1347,7 @@ static s32 ExecuteScriptCommand(Action *action)
             }
             case 0x04: {
                 if (curCmd.arg1 == -1) {
-                    if (!(u8)sub_802FCF0() && sub_809B1C0(12,0,NULL)) {
+                    if (!HasZeroUnlockedDungeons() && sub_809B1C0(12,0,NULL)) {
                         sub_80A87AC(0, 11);
                         action->scriptData.branchDiscriminant = 0;
                     } else {
@@ -1355,7 +1355,7 @@ static s32 ExecuteScriptCommand(Action *action)
                     }
                     return 2; // do action
                 } else {
-                    SetScriptVarValue(NULL, DUNGEON_SELECT, sub_80A26B8((s16)curCmd.arg1));
+                    SetScriptVarValue(NULL, DUNGEON_SELECT, RescueDungeonToScriptDungeonId((s16)curCmd.arg1));
                     action->scriptData.branchDiscriminant = 1;
                     return 2; // do action
                 }
