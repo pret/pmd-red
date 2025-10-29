@@ -222,8 +222,10 @@ void SetCharacterMask(s32 a0)
 {
     u32 retval;
     if (a0 == 0) {
-        UNUSED u32 unusedVal = sUnknown_20274B0;
-        retval = 0x88888888;
+        if (sUnknown_20274B0 == 0)
+            retval = 0x88888888;
+        else
+            retval = 0x88888888;
     }
     else {
         retval = (a0 & 0xF) | ((a0 & 0xF) << 4); // Must be one line for matching
