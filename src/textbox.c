@@ -872,7 +872,7 @@ bool8 sub_809B1D4(s32 a0, u32 kind, s32 a2, void *a3)
             break;
         case 0xC:
             sub_8001D88();
-            if (HasZeroUnlockedDungeons()) {
+            if (HasZeroAvailableDungeons()) {
                 return FALSE;
             }
             break;

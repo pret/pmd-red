@@ -1347,7 +1347,7 @@ static s32 ExecuteScriptCommand(Action *action)
             }
             case 0x04: {
                 if (curCmd.arg1 == -1) {
-                    if (!HasZeroUnlockedDungeons() && sub_809B1C0(12,0,NULL)) {
+                    if (!HasZeroAvailableDungeons() && sub_809B1C0(12,0,NULL)) {
                         sub_80A87AC(0, 11);
                         action->scriptData.branchDiscriminant = 0;
                     } else {

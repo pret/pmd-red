@@ -8,6 +8,6 @@ bool8 DungeonListMenu_MoveMenuTo(s32 _rescueDungeonId);
 u32 DungeonListMenu_GetInput(u8 arrowType);
 s16 DungeonListMenu_GetCurrentRescueDungeonId(void);
 void DungeonListMenu_Free(void);
-bool8 HasZeroUnlockedDungeons(void);
+bool8 HasZeroAvailableDungeons(void);
 
 #endif

@@ -56,7 +56,7 @@ static s32 CountAvailableDungeons(void);
 
 bool8 DungeonListMenu_Init(u32 windowId, DungeonPos *winPos, s32 perPageCount, bool8 showIcons)
 {
-    if (HasZeroUnlockedDungeons())
+    if (HasZeroAvailableDungeons())
         return FALSE;
 
     if (sDungeonListMenu == NULL)
@@ -205,8 +205,8 @@ static s32 CountAvailableDungeons(void)
 
     counter = 0;
     for (i = 0; i < RESCUE_DUNGEON_COUNT; i++) {
-        rescueDungeonId = rescueDungeonId = (s16)i; // NOTE: weirdness needing for matching s16 memes
-        if (IsRescueDungeonUnlocked(i) && rescueDungeonId != RESCUE_DUNGEON_GREAT_CANYON_2 && rescueDungeonId != RESCUE_DUNGEON_MT_FREEZE_2) {
+        rescueDungeonId = rescueDungeonId = (s16)i; // NOTE: weirdness needed for matching s16 memes
+        if (IsRescueDungeonAvailable(i) && rescueDungeonId != RESCUE_DUNGEON_GREAT_CANYON_2 && rescueDungeonId != RESCUE_DUNGEON_MT_FREEZE_2) {
             sDungeonListMenu->rescueDungeonIds[counter] = rescueDungeonId;
             sDungeonListMenu->goIcon[counter] = icons;
             sDungeonListMenu->jobInDungeon[counter] = icons;
@@ -234,7 +234,7 @@ static s32 CountAvailableDungeons(void)
                 }
                 sDungeonListMenu->goIcon[counter] = goIcon;
                 if (!goIcon && CountJobsinDungeon(dungeonIndex) > 0) {
-                    sDungeonListMenu->jobInDungeon[counter] = 1;
+                    sDungeonListMenu->jobInDungeon[counter] = TRUE;
                 }
             }
             counter++;
@@ -244,11 +244,11 @@ static s32 CountAvailableDungeons(void)
     return counter;
 }
 
-bool8 HasZeroUnlockedDungeons(void)
+bool8 HasZeroAvailableDungeons(void)
 {
     s32 i;
     for (i = 0; i < RESCUE_DUNGEON_COUNT; i++) {
-        if (IsRescueDungeonUnlocked(i))
+        if (IsRescueDungeonAvailable(i))
             return FALSE;
     }
 
