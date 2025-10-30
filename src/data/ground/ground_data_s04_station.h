@@ -10,7 +10,7 @@
 
 
 static const struct ScriptCommand s_gs226_g0_s0_station_sref_script[] = { /* 0x826f1b4 */
-    DEBUGINFO,
+    DEBUGINFO_O(13),
     SELECT_MAP(226),
     BGM_STOP,
     JUMP_SCRIPT(COMMON_ENTER),
@@ -19,7 +19,7 @@ static const struct ScriptCommand s_gs226_g0_s0_station_sref_script[] = { /* 0x8
 static const struct ScriptRef s_gs226_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs226_g0_s0_station_sref_script }; /* 0x826f220 */
 
 static const struct ScriptCommand s_gs226_g1_s0_station_sref_script[] = { /* 0x826f22c */
-    DEBUGINFO,
+    DEBUGINFO_O(22),
     BGM_STOP,
     SELECT_MAP(226),
     SELECT_ENTITIES(-1, 0),
@@ -41,7 +41,7 @@ static const struct ScriptCommand s_gs226_g1_s0_station_sref_script[] = { /* 0x8
 static const struct ScriptRef s_gs226_g1_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs226_g1_s0_station_sref_script }; /* 0x826f33c */
 
 static const struct ScriptCommand s_gs226_g1_s0_eff0_script[] = { /* 0x826f348 */
-    DEBUGINFO,
+    DEBUGINFO_O(44),
     CAMERA_INIT_PAN,
     { 0x22, 0x01,  0x0014,  0x00000000,  0x00000000, NULL },
     WAIT(60),
@@ -69,7 +69,7 @@ static const struct ScriptCommand s_gs226_g1_s0_eff0_script[] = { /* 0x826f348 *
 };
 
 static const struct ScriptCommand s_gs226_g1_s0_eff1_script[] = { /* 0x826f4d8 */
-    DEBUGINFO,
+    DEBUGINFO_O(72),
     SPECIAL_TEXT(SPECIAL_TEXT_UNK_29, 0, 0),
     END_DELETE,
 };

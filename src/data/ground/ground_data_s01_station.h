@@ -7,7 +7,7 @@
 
 
 static const struct ScriptCommand s_gs223_g0_s0_station_sref_script[] = { /* 0x826df80 */
-    DEBUGINFO,
+    DEBUGINFO_O(10),
     SELECT_MAP(223),
     BGM_STOP,
     JUMP_SCRIPT(COMMON_ENTER),
@@ -16,7 +16,7 @@ static const struct ScriptCommand s_gs223_g0_s0_station_sref_script[] = { /* 0x8
 static const struct ScriptRef s_gs223_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs223_g0_s0_station_sref_script }; /* 0x826dfec */
 
 static const struct ScriptCommand s_gs223_g1_s0_station_sref_script[] = { /* 0x826dff8 - PART 1 0:00:31-0:00:45 - New game intro to personality test */
-    DEBUGINFO,
+    DEBUGINFO_O(19),
     BGM_STOP,
     SELECT_MAP(223),
     MSG_ON_BG(_("{CENTER_ALIGN}Welcome!")),

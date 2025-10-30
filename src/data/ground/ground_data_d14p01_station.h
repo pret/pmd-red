@@ -7,7 +7,7 @@
 
 
 static const struct ScriptCommand s_gs210_g0_s0_station_sref_script[] = { /* 0x8263ee4 */
-    DEBUGINFO,
+    DEBUGINFO_O(10),
     SELECT_MAP(210),
     BGM_STOP,
     JUMP_SCRIPT(COMMON_ENTER),
@@ -16,7 +16,7 @@ static const struct ScriptCommand s_gs210_g0_s0_station_sref_script[] = { /* 0x8
 static const struct ScriptRef s_gs210_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs210_g0_s0_station_sref_script }; /* 0x8263f50 */
 
 static const struct ScriptCommand s_gs210_g1_s0_station_sref_script[] = { /* 0x8263f5c */
-    DEBUGINFO,
+    DEBUGINFO_O(19),
     SELECT_MAP(210),
     SELECT_ENTITIES(-1, 0),
     BGM_SWITCH(10),
@@ -29,7 +29,7 @@ static const struct ScriptCommand s_gs210_g1_s0_station_sref_script[] = { /* 0x8
 static const struct ScriptRef s_gs210_g1_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs210_g1_s0_station_sref_script }; /* 0x8263fdc */
 
 static const struct ScriptCommand s_gs210_g1_s0_lives0_dlg0[] = { /* 0x8263fe8 */
-    DEBUGINFO,
+    DEBUGINFO_O(32),
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     { 0xdf, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
@@ -39,7 +39,7 @@ static const struct ScriptCommand s_gs210_g1_s0_lives0_dlg0[] = { /* 0x8263fe8 *
 };
 
 static const struct ScriptCommand s_gs210_g1_s0_lives1_dlg0[] = { /* 0x8264058 */
-    DEBUGINFO,
+    DEBUGINFO_O(42),
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
     HALT,

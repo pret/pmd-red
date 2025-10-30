@@ -25,7 +25,7 @@
 
 
 static const struct ScriptCommand s_gs178_g0_s0_station_sref_script[] = { /* 0x822c248 */
-    DEBUGINFO,
+    DEBUGINFO_O(28),
     SELECT_MAP(MAP_TINY_WOODS_ENTRY),
     BGM_STOP,
     JUMP_SCRIPT(COMMON_ENTER),
@@ -34,7 +34,7 @@ static const struct ScriptCommand s_gs178_g0_s0_station_sref_script[] = { /* 0x8
 static const struct ScriptRef s_gs178_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs178_g0_s0_station_sref_script }; /* 0x822c2b4 */
 
 static const struct ScriptCommand s_gs178_g1_s0_station_sref_script[] = { /* 0x822c2c0 - PART 1 0:04:05-0:06:38 */
-    DEBUGINFO,
+    DEBUGINFO_O(37),
     { 0x3b, 0x39,  0x0001,  0x00000000,  0x00000000, NULL },
     BGM_STOP,
     { 0x23, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
@@ -73,7 +73,7 @@ static const struct ScriptRef s_gs178_g1_s0_station_sref = { 400, 7, NULL /* EVE
 
 
 static const struct ScriptCommand s_gs178_g1_s0_lives0_dlg0[] = { /* 0x822c5e4 - PART 1 0:04:23-0:06:38 - Player script - why/how is $n3 set here? */
-    DEBUGINFO,
+    DEBUGINFO_O(76),
     CALL_SCRIPT(INIT_SLEEP_FUNC),
     { 0x2d, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
     { 0xdf, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
@@ -270,7 +270,7 @@ static const struct ScriptCommand s_gs178_g1_s0_lives0_dlg0[] = { /* 0x822c5e4 -
 
 
 static const struct ScriptCommand s_gs178_g1_s0_lives1_dlg0[] = { /* 0x822d950 - PART 1 0:04:23-0:06:38 - Partner script */
-    DEBUGINFO,
+    DEBUGINFO_O(273),
     SELECT_ANIMATION(2),
     { 0x2d, 0x01,  0x0001,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(6),
@@ -325,7 +325,7 @@ static const struct ScriptCommand s_gs178_g1_s0_lives1_dlg0[] = { /* 0x822d950 -
 };
 
 static const struct ScriptCommand s_gs178_g1_s1_lives0_dlg0[] = { /* 0x822dc90 - PART 1 0:05:55-0:06:38 - Butterfree */
-    DEBUGINFO,
+    DEBUGINFO_O(328),
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
     { 0x2d, 0x09,  0x0003,  0x00000036,  0x00000000, NULL },
@@ -356,7 +356,7 @@ static const struct ScriptCommand s_gs178_g1_s1_lives0_dlg0[] = { /* 0x822dc90 -
 };
 
 static const struct ScriptCommand s_gs178_g2_s0_station_sref_script[] = { /* 0x822de50 - PART 1 0:11:37-0:12:15 - After Tiny Woods death */
-    DEBUGINFO,
+    DEBUGINFO_O(359),
     { 0x3b, 0x39,  0x0001,  0x00000000,  0x00000000, NULL },
     BGM_STOP,
     WAIT(60),
@@ -377,7 +377,7 @@ static const struct ScriptRef s_gs178_g2_s0_station_sref = { 400, 7, NULL /* EVE
 
 
 static const struct ScriptCommand s_gs178_g2_s0_lives0_dlg0[] = { /* 0x822df60 - PART 1 0:11:39-0:12:15 - Player */
-    DEBUGINFO,
+    DEBUGINFO_O(380),
     CALL_SCRIPT(INIT_SLEEP_FUNC),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     { 0x2d, 0x09,  0x0003,  0x00000036,  0x00000000, NULL },
@@ -455,7 +455,7 @@ static const struct ScriptCommand s_gs178_g2_s0_lives0_dlg0[] = { /* 0x822df60 -
 
 
 static const struct ScriptCommand s_gs178_g2_s0_lives1_dlg0[] = { /* 0x822e5fc - PART 1 0:11:39-0:12:15 - Partner */
-    DEBUGINFO,
+    DEBUGINFO_O(458),
     CALL_SCRIPT(INIT_SLEEP_FUNC),
     { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(6),
@@ -500,7 +500,7 @@ static const struct ScriptCommand s_gs178_g2_s0_lives1_dlg0[] = { /* 0x822e5fc -
 };
 
 static const struct ScriptCommand s_gs178_g2_s0_lives2_dlg0[] = { /* 0x822e89c - PART 1 0:11:39-0:12:15 - Butterfree */
-    DEBUGINFO,
+    DEBUGINFO_O(503),
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(7),
@@ -515,7 +515,7 @@ static const struct ScriptCommand s_gs178_g2_s0_lives2_dlg0[] = { /* 0x822e89c -
 };
 
 static const struct ScriptCommand s_gs178_g3_s0_station_sref_script[] = { /* 0x822e95c - PART 1 0:17:17-0:18:51 - Post-Tiny Woods cutscene */
-    DEBUGINFO,
+    DEBUGINFO_O(518),
     { 0x3b, 0x39,  0x0004,  0x00000000,  0x00000000, NULL },
     SELECT_MAP(MAP_TINY_WOODS_ENTRY),
     SELECT_ENTITIES(-1, 0),
@@ -531,7 +531,7 @@ static const struct ScriptCommand s_gs178_g3_s0_station_sref_script[] = { /* 0x8
 static const struct ScriptRef s_gs178_g3_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs178_g3_s0_station_sref_script }; /* 0x822ea0c */
 
 static const struct ScriptCommand s_gs178_g3_s0_lives0_dlg0[] = { /* 0x822ea18 - PART 1 0:17:17-0:18:51 - Player */
-    DEBUGINFO,
+    DEBUGINFO_O(534),
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     { 0xdf, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
@@ -660,7 +660,7 @@ static const struct ScriptCommand s_gs178_g3_s0_lives0_dlg0[] = { /* 0x822ea18 -
 
 
 static const struct ScriptCommand s_gs178_g3_s0_lives1_dlg0[] = { /* 0x822f68c - PART 1 0:17:17-0:18:51 - Partner */
-    DEBUGINFO,
+    DEBUGINFO_O(663),
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(6),
@@ -691,7 +691,7 @@ static const struct ScriptCommand s_gs178_g3_s0_lives1_dlg0[] = { /* 0x822f68c -
 };
 
 static const struct ScriptCommand s_gs178_g3_s0_lives2_dlg0[] = { /* 0x822f84c - PART 1 0:17:17-0:18:34 - Butterfree */
-    DEBUGINFO,
+    DEBUGINFO_O(694),
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(7),
@@ -710,7 +710,7 @@ static const struct ScriptCommand s_gs178_g3_s0_lives2_dlg0[] = { /* 0x822f84c -
 };
 
 static const struct ScriptCommand s_gs178_g3_s0_lives3_dlg0[] = { /* 0x822f94c - PART 1 0:17:17-0:18:34 - Caterpie */
-    DEBUGINFO,
+    DEBUGINFO_O(713),
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0003,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(8),
