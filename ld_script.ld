@@ -158,7 +158,7 @@ SECTIONS {
         src/pelipper_board.o(.text);
         src/wonder_mail_3_mid.o(.text);
         src/mission_reward.o(.text);
-        src/code_8072F3C.o(.text);
+        src/dungeon_list_menu.o(.text);
         src/makuhita_dojo1.o(.text);
         src/makuhita_dojo2.o(.text);
         src/wonder_mail_4.o(.text);
@@ -529,7 +529,7 @@ SECTIONS {
         src/pelipper_board.o(.rodata);
         src/wonder_mail_3_mid.o(.rodata);
         src/mission_reward.o(.rodata);
-        src/code_8072F3C.o(.rodata);
+        src/dungeon_list_menu.o(.rodata);
         src/makuhita_dojo1.o(.rodata);
         src/makuhita_dojo2.o(.rodata);
         src/wonder_mail_4.o(.rodata);

@@ -18,17 +18,16 @@ typedef struct DungeonInfo
 } DungeonInfo;
 
 const DungeonInfo *GetDungeonInfo_80A2608(s32 index);
-const DungeonInfo *sub_80A2620(s16 index);
 s16 sub_80A2654(s16 index);
 s16 sub_80A2668(s16);
 s16 sub_80A2688(u8);
-s16 sub_80A26B8(s16);
+s16 RescueDungeonToScriptDungeonId(s16);
 s16 sub_80A26CC(s16);
-u8 sub_80A270C(s16 index);
+u8 RescueDungeonToDungeonId(s16 index);
 u8 sub_80A2728(s16 index);
 u8 ScriptDungeonIdToDungeonId(s16 index);
 s16 sub_80A2750(s16);
-bool8 sub_80A27CC(s16);
+bool8 IsRescueDungeonAvailable(s16 _rescueDungeonId);
 bool8 sub_80A2824(u8 index);
 bool8 sub_80A28F0(u8 index);
 s32 sub_80A29B0(u8 *);

@@ -24,6 +24,7 @@
 #include "text_1.h"
 #include "text_2.h"
 #include "unk_ds_only_feature.h"
+#include "music_util.h"
 
 static EWRAM_INIT struct unkStruct_203B2BC *sUnknown_203B2BC = {NULL};
 
@@ -48,8 +49,6 @@ extern void CreateFriendActionMenu();
 extern void sub_80276A8();
 bool8 sub_8027D9C(Pokemon *pokeStruct);
 extern u8 sub_8027DCC(Pokemon *);
-extern void SetFriendAreaActionMenuState(u32);
-extern void PlaySound(u32);
 
 u32 sub_8027E18(Pokemon *);
 u8 sub_8027E4C(Pokemon *r0);

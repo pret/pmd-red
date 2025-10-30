@@ -11,7 +11,7 @@ bool8 sub_8097384(s32 param_1);
 void sub_80973A8(s32 param_1, u32 param_2);
 bool8 RescueScenarioConquered(s32 param_1);
 void sub_8097418(s32 index, bool32);
-const u8 *sub_80974A0(s16 index);
+const u8 *GetRescueDungeonName(s16 rescueDungeonId);
 const u8 *GetCurrentMissionText(s16 index);
 
 #endif // GUARD_RESCUE_SCENARIO_H

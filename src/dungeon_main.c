@@ -1197,7 +1197,7 @@ static void ShowMainMenu(bool8 fromBPress, bool8 a1)
             }
             else if (action == ACTION_USE_LINK_BOX) {
                 item = sub_8044D90(GetLeader(), 0, 15);
-                if (!sub_8048B9C(GetLeader(), item)) {
+                if (!HandleLinkBoxAction(GetLeader(), item)) {
                     SetLeaderActionToNothing(TRUE);
                 }
             }
@@ -1409,7 +1409,7 @@ static void ShowMainMenu(bool8 fromBPress, bool8 a1)
                     }
                     else if (action == ACTION_USE_LINK_BOX) {
                         item = sub_8044D90(GetLeader(), 0, 0x13);
-                        if (!sub_8048B9C(GetLeader(), item)) {
+                        if (!HandleLinkBoxAction(GetLeader(), item)) {
                             SetLeaderActionToNothing(TRUE);
                         }
                     }
