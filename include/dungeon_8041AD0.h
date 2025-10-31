@@ -3,6 +3,7 @@
 
 #include "structs/dungeon_entity.h"
 #include "structs/str_damage.h"
+#include "structs/str_stat_index.h"
 
 s32 sub_80416E0(PixelPos *pos, u32 param_2, bool8 param_3);
 void sub_804178C(u8 param_1);
@@ -93,15 +94,15 @@ void sub_8041EE8(Entity *pokemon);
 void sub_8041EF8(Entity *pokemon);
 void sub_8041F08(Entity *pokemon);
 void nullsub_90(Entity *pokemon);
-void sub_8041F28(Entity *pokemon, u32 r1);
-void sub_8041F4C(Entity *pokemon, u32 r1);
-void sub_8041F70(Entity *pokemon, u32 r1);
-void sub_8041F94(Entity *pokemon, u32 r1);
-void sub_8041FB4(Entity *pokemon, u32 r1);
-void sub_8041FD8(Entity *pokemon, u32 r1);
-void sub_8041FFC(Entity *pokemon, u32 r1);
-void sub_804201C(Entity *pokemon, u32 r1);
-void sub_8042040(Entity *pokemon, u32 r1);
+void sub_8041F28(Entity *pokemon, struct StatIndex stat);
+void sub_8041F4C(Entity *pokemon, struct StatIndex stat);
+void sub_8041F70(Entity *pokemon, struct StatIndex stat);
+void sub_8041F94(Entity *pokemon, struct StatIndex stat);
+void sub_8041FB4(Entity *pokemon, struct StatIndex stat);
+void sub_8041FD8(Entity *pokemon, struct StatIndex stat);
+void sub_8041FFC(Entity *pokemon, struct StatIndex stat);
+void sub_804201C(Entity *pokemon, struct StatIndex stat);
+void sub_8042040(Entity *pokemon, struct StatIndex stat);
 void sub_8042060(Entity *pokemon, u32 r1);
 void sub_8042080(Entity *pokemon, u32 r1);
 void sub_80420A0(Entity *pokemon);

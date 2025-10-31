@@ -102,9 +102,8 @@ bool8 MirrorCoatMoveAction(Entity * pokemon,Entity * target,Move *move, s32 item
 
 bool8 CalmMindMoveAction(Entity * pokemon,Entity * target,Move *move, s32 itemId)
 {
-    u32 stat = gStatIndexSpecial;
-    RaiseAttackStageTarget(pokemon,target,stat,1);
-    RaiseDefenseStageTarget(pokemon,target,stat,1);
+    RaiseAttackStageTarget(pokemon,target,gStatIndexSpecial,1);
+    RaiseDefenseStageTarget(pokemon,target,gStatIndexSpecial,1);
     return TRUE;
 }
 
@@ -114,7 +113,7 @@ bool8 HiddenPowerMoveAction(Entity * pokemon,Entity * target,Move *move, s32 ite
     return TRUE;
 }
 
-bool8 MetalClawMoveAction(Entity * pokemon,Entity * target,Move *move, s32 itemId, s32 param_5)
+bool8 MetalClawMoveAction(Entity * pokemon,Entity * target,Move *move, struct StatIndex stat, s32 param_5)
 {
     EntityInfo *entityInfo;
     bool8 flag;
@@ -124,7 +123,7 @@ bool8 MetalClawMoveAction(Entity * pokemon,Entity * target,Move *move, s32 itemI
         flag = TRUE;
         if (sub_805727C(pokemon,pokemon,gMetalClawSecondaryChance) != 0) {
             entityInfo = GetEntInfo(pokemon);
-            RaiseAttackStageTarget(pokemon,pokemon,itemId,1);
+            RaiseAttackStageTarget(pokemon,pokemon,stat,1);
             SetExpMultplier(entityInfo);
         }
     }

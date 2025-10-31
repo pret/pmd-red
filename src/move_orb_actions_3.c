@@ -437,22 +437,20 @@ bool8 sub_805A568(Entity * pokemon, Entity * target, Move *move, s32 itemId)
 
 bool8 SuperpowerMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 {
-  u32 stat;
   bool8 flag;
 
   flag = FALSE;
   if (HandleDamagingMove(pokemon, target, move, IntToF248_2(1), itemId) != 0) {
     flag = TRUE;
     if (sub_805727C(pokemon,pokemon,0) != 0) {
-      stat = gStatIndexAtkDef;
-      LowerAttackStageTarget(pokemon,pokemon,stat,1,0,FALSE);
-      LowerDefenseStageTarget(pokemon,pokemon,stat,1,0,FALSE);
+      LowerAttackStageTarget(pokemon,pokemon,gStatIndexAtkDef,1,0,FALSE);
+      LowerDefenseStageTarget(pokemon,pokemon,gStatIndexAtkDef,1,0,FALSE);
     }
   }
   return flag;
 }
 
-bool8 SteelWingMoveAction(Entity *pokemon, Entity *target, Move *move, s32 stat, u32 param_5)
+bool8 SteelWingMoveAction(Entity *pokemon, Entity *target, Move *move, struct StatIndex stat, u32 param_5)
 {
   EntityInfo *entityInfo;
   bool8 flag;
@@ -751,9 +749,8 @@ bool8 sub_805AC90(Entity * pokemon, Entity * target, Move *move, s32 itemId)
 
 bool8 BulkUpMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 {
-    s32 stat = gStatIndexAtkDef;
-    RaiseAttackStageTarget(pokemon, target, stat, 1);
-    RaiseDefenseStageTarget(pokemon, target, stat, 1);
+    RaiseAttackStageTarget(pokemon, target, gStatIndexAtkDef, 1);
+    RaiseDefenseStageTarget(pokemon, target, gStatIndexAtkDef, 1);
     return TRUE;
 }
 

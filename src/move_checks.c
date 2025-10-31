@@ -17,6 +17,7 @@
 #include "trap.h"
 #include "weather.h"
 #include "dungeon_config.h"
+#include "structs/str_stat_index.h"
 
 bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
 {
@@ -51,13 +52,13 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
         case MOVE_HOWL:
         case MOVE_MEDITATE:
         case MOVE_SHARPEN:
-            if (pokemonInfo->offensiveStages[STAT_STAGE_ATK] >= MAX_STAT_STAGE)
+            if (pokemonInfo->offensiveStages[STAT_INDEX_PHYSICAL] >= MAX_STAT_STAGE)
             {
                 return FALSE;
             }
             break;
         case MOVE_BELLY_DRUM:
-            if (pokemonInfo->offensiveStages[STAT_STAGE_ATK] >= MAX_STAT_STAGE || FixedPointToInt(pokemonInfo->belly) <= 0)
+            if (pokemonInfo->offensiveStages[STAT_INDEX_PHYSICAL] >= MAX_STAT_STAGE || FixedPointToInt(pokemonInfo->belly) <= 0)
             {
                 return FALSE;
             }
@@ -68,13 +69,13 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
         case MOVE_HARDEN:
         case MOVE_IRON_DEFENSE:
         case MOVE_WITHDRAW:
-            if (pokemonInfo->defensiveStages[STAT_STAGE_DEF] >= MAX_STAT_STAGE)
+            if (pokemonInfo->defensiveStages[STAT_INDEX_PHYSICAL] >= MAX_STAT_STAGE)
             {
                 return FALSE;
             }
             break;
         case MOVE_AMNESIA:
-            if (pokemonInfo->defensiveStages[STAT_STAGE_SP_DEF] >= MAX_STAT_STAGE)
+            if (pokemonInfo->defensiveStages[STAT_INDEX_SPECIAL] >= MAX_STAT_STAGE)
             {
                 return FALSE;
             }
@@ -100,7 +101,7 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
             }
             break;
         case MOVE_COSMIC_POWER:
-            if (pokemonInfo->defensiveStages[STAT_STAGE_DEF] >= MAX_STAT_STAGE && pokemonInfo->defensiveStages[STAT_STAGE_SP_DEF] >= MAX_STAT_STAGE)
+            if (pokemonInfo->defensiveStages[STAT_INDEX_PHYSICAL] >= MAX_STAT_STAGE && pokemonInfo->defensiveStages[STAT_INDEX_SPECIAL] >= MAX_STAT_STAGE)
             {
                 return FALSE;
             }
@@ -130,7 +131,7 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
             }
             break;
         case MOVE_MINIMIZE:
-            if (pokemonInfo->hitChanceStages[STAT_STAGE_EVASION] >= MAX_STAT_STAGE)
+            if (pokemonInfo->hitChanceStages[STAT_INDEX_EVASION] >= MAX_STAT_STAGE)
             {
                 return FALSE;
             }
@@ -161,7 +162,7 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
             }
             break;
         case MOVE_BULK_UP:
-            if (pokemonInfo->offensiveStages[STAT_STAGE_ATK] >= MAX_STAT_STAGE && pokemonInfo->defensiveStages[STAT_STAGE_DEF] >= MAX_STAT_STAGE)
+            if (pokemonInfo->offensiveStages[STAT_INDEX_PHYSICAL] >= MAX_STAT_STAGE && pokemonInfo->defensiveStages[STAT_INDEX_PHYSICAL] >= MAX_STAT_STAGE)
             {
                 return FALSE;
             }
@@ -173,7 +174,7 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
             }
             break;
         case MOVE_TAIL_GLOW:
-            if (pokemonInfo->offensiveStages[STAT_STAGE_SP_ATK] >= MAX_STAT_STAGE)
+            if (pokemonInfo->offensiveStages[STAT_INDEX_SPECIAL] >= MAX_STAT_STAGE)
             {
                 return FALSE;
             }
@@ -197,7 +198,7 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
             }
             break;
         case MOVE_DRAGON_DANCE:
-            if (pokemonInfo->offensiveStages[STAT_STAGE_ATK] >= MAX_STAT_STAGE && GetEntInfo(pokemon)->speedStage >= MAX_SPEED_STAGE)
+            if (pokemonInfo->offensiveStages[STAT_INDEX_PHYSICAL] >= MAX_STAT_STAGE && GetEntInfo(pokemon)->speedStage >= MAX_SPEED_STAGE)
             {
                 return FALSE;
             }
@@ -327,19 +328,19 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
             }
             break;
         case MOVE_DOUBLE_TEAM:
-            if (pokemonInfo->hitChanceStages[STAT_STAGE_EVASION] >= MAX_STAT_STAGE)
+            if (pokemonInfo->hitChanceStages[STAT_INDEX_EVASION] >= MAX_STAT_STAGE)
             {
                 return FALSE;
             }
             break;
         case MOVE_GROWTH:
-            if (pokemonInfo->offensiveStages[STAT_STAGE_SP_ATK] >= MAX_STAT_STAGE)
+            if (pokemonInfo->offensiveStages[STAT_INDEX_SPECIAL] >= MAX_STAT_STAGE)
             {
                 return FALSE;
             }
             break;
         case MOVE_SWORDS_DANCE:
-            if (pokemonInfo->offensiveStages[STAT_STAGE_ATK] >= MAX_STAT_STAGE)
+            if (pokemonInfo->offensiveStages[STAT_INDEX_PHYSICAL] >= MAX_STAT_STAGE)
             {
                 return FALSE;
             }
@@ -363,7 +364,7 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
             }
             break;
         case MOVE_CALM_MIND:
-            if (pokemonInfo->offensiveStages[STAT_STAGE_SP_ATK] >= MAX_STAT_STAGE && pokemonInfo->defensiveStages[STAT_STAGE_SP_DEF] >= MAX_STAT_STAGE)
+            if (pokemonInfo->offensiveStages[STAT_INDEX_SPECIAL] >= MAX_STAT_STAGE && pokemonInfo->defensiveStages[STAT_INDEX_SPECIAL] >= MAX_STAT_STAGE)
             {
                 return FALSE;
             }
@@ -405,11 +406,11 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
                     Entity *target = gDungeon->wildPokemon[i];
                     if (EntityIsValid(target) && target != pokemon && CanSeeTarget(pokemon, target))
                     {
-                        if (GetEntInfo(target)->offensiveStages[STAT_STAGE_ATK] >= MAX_STAT_STAGE)
+                        if (GetEntInfo(target)->offensiveStages[STAT_INDEX_PHYSICAL] >= MAX_STAT_STAGE)
                         {
                             continue;
                         }
-                        if (GetEntInfo(target)->offensiveStages[STAT_STAGE_SP_ATK] < MAX_STAT_STAGE)
+                        if (GetEntInfo(target)->offensiveStages[STAT_INDEX_SPECIAL] < MAX_STAT_STAGE)
                         {
                             break;
                         }
@@ -429,11 +430,11 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
                     Entity *target = gDungeon->teamPokemon[i];
                     if (EntityIsValid(target) && target != pokemon && CanSeeTarget(pokemon, target))
                     {
-                        if (GetEntInfo(target)->offensiveStages[STAT_STAGE_ATK] >= MAX_STAT_STAGE)
+                        if (GetEntInfo(target)->offensiveStages[STAT_INDEX_PHYSICAL] >= MAX_STAT_STAGE)
                         {
                             continue;
                         }
-                        if (GetEntInfo(target)->offensiveStages[STAT_STAGE_SP_ATK] < MAX_STAT_STAGE)
+                        if (GetEntInfo(target)->offensiveStages[STAT_INDEX_SPECIAL] < MAX_STAT_STAGE)
                         {
                             break;
                         }
@@ -488,13 +489,13 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
             }
             break;
         case MOVE_SWEET_SCENT:
-            if (targetData->hitChanceStages[STAT_STAGE_EVASION] <= 0)
+            if (targetData->hitChanceStages[STAT_INDEX_EVASION] <= 0)
             {
                 return FALSE;
             }
             break;
         case MOVE_CHARM:
-            if (F248LessThanFloat(targetData->offensiveMultipliers[STAT_STAGE_ATK], STAT_MULTIPLIER_THRESHOLD))
+            if (F248LessThanFloat(targetData->offensiveMultipliers[STAT_INDEX_PHYSICAL], STAT_MULTIPLIER_THRESHOLD))
             {
                 return FALSE;
             }
@@ -536,13 +537,13 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
             }
             break;
         case MOVE_SCREECH:
-            if (F248LessThanFloat(targetData->defensiveMultipliers[STAT_STAGE_DEF], STAT_MULTIPLIER_THRESHOLD))
+            if (F248LessThanFloat(targetData->defensiveMultipliers[STAT_INDEX_PHYSICAL], STAT_MULTIPLIER_THRESHOLD))
             {
                 return FALSE;
             }
             break;
         case MOVE_FAKE_TEARS:
-            if (targetData->defensiveStages[STAT_STAGE_SP_DEF] <= 0)
+            if (targetData->defensiveStages[STAT_INDEX_SPECIAL] <= 0)
             {
                 return FALSE;
             }
@@ -560,8 +561,8 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
             }
             break;
         case MOVE_MEMENTO:
-            if (F248LessThanFloat(targetData->offensiveMultipliers[STAT_STAGE_ATK], STAT_MULTIPLIER_THRESHOLD) &&
-                F248LessThanFloat(targetData->offensiveMultipliers[STAT_STAGE_SP_ATK], STAT_MULTIPLIER_THRESHOLD))
+            if (F248LessThanFloat(targetData->offensiveMultipliers[STAT_INDEX_PHYSICAL], STAT_MULTIPLIER_THRESHOLD) &&
+                F248LessThanFloat(targetData->offensiveMultipliers[STAT_INDEX_SPECIAL], STAT_MULTIPLIER_THRESHOLD))
             {
                 return FALSE;
             }
@@ -581,7 +582,7 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
                     break;
                 }
             }
-            if (targetData->hitChanceStages[STAT_STAGE_EVASION] <= DEFAULT_STAT_STAGE)
+            if (targetData->hitChanceStages[STAT_INDEX_EVASION] <= DEFAULT_STAT_STAGE)
             {
                 return FALSE;
             }
@@ -603,20 +604,20 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
             break;
         case MOVE_LEER:
         case MOVE_TAIL_WHIP:
-            if (targetData->defensiveStages[STAT_STAGE_DEF] <= 0)
+            if (targetData->defensiveStages[STAT_INDEX_PHYSICAL] <= 0)
             {
                 return FALSE;
             }
             break;
         case MOVE_METAL_SOUND:
-            if (targetData->defensiveStages[STAT_STAGE_SP_DEF] <= 0)
+            if (targetData->defensiveStages[STAT_INDEX_SPECIAL] <= 0)
             {
                 return FALSE;
             }
             break;
         case MOVE_TICKLE:
-            if (targetData->offensiveStages[STAT_STAGE_ATK] <= 0 &&
-                targetData->defensiveStages[STAT_STAGE_DEF] <= 0)
+            if (targetData->offensiveStages[STAT_INDEX_PHYSICAL] <= 0 &&
+                targetData->defensiveStages[STAT_INDEX_PHYSICAL] <= 0)
             {
                 return FALSE;
             }
@@ -676,7 +677,7 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
         case MOVE_FLASH:
         case MOVE_KINESIS:
         case MOVE_SAND_ATTACK:
-            if (targetData->hitChanceStages[STAT_STAGE_ACCURACY] <= 0)
+            if (targetData->hitChanceStages[STAT_INDEX_ACCURACY] <= 0)
             {
                 return FALSE;
             }
@@ -702,7 +703,7 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
             break;
         case MOVE_FEATHERDANCE:
         case MOVE_GROWL:
-            if (targetData->offensiveStages[STAT_STAGE_ATK] <= 0)
+            if (targetData->offensiveStages[STAT_INDEX_PHYSICAL] <= 0)
             {
                 return FALSE;
             }
@@ -724,8 +725,8 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
             }
             else
             {
-                if (userData->offensiveStages[STAT_STAGE_ATK] >= MAX_STAT_STAGE &&
-                    userData->defensiveStages[STAT_STAGE_DEF] >= MAX_STAT_STAGE)
+                if (userData->offensiveStages[STAT_INDEX_PHYSICAL] >= MAX_STAT_STAGE &&
+                    userData->defensiveStages[STAT_INDEX_PHYSICAL] >= MAX_STAT_STAGE)
                 {
                     return FALSE;
                 }

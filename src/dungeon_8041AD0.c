@@ -840,9 +840,9 @@ void nullsub_90(Entity *pokemon)
 {
 }
 
-void sub_8041F28(Entity *pokemon, u32 r1)
+void sub_8041F28(Entity *pokemon, struct StatIndex stat)
 {
-    if(r1 == 0)
+    if (stat.id == STAT_INDEX_PHYSICAL)
     {
         sub_804151C(pokemon, 0xCA << 1, 1);
     }
@@ -852,9 +852,9 @@ void sub_8041F28(Entity *pokemon, u32 r1)
     }
 }
 
-void sub_8041F4C(Entity *pokemon, u32 r1)
+void sub_8041F4C(Entity *pokemon, struct StatIndex stat)
 {
-    if(r1 == 0)
+    if(stat.id == STAT_INDEX_PHYSICAL)
     {
         sub_804151C(pokemon, 0x18f, 1);
     }
@@ -864,9 +864,9 @@ void sub_8041F4C(Entity *pokemon, u32 r1)
     }
 }
 
-void sub_8041F70(Entity *pokemon, u32 r1)
+void sub_8041F70(Entity *pokemon, struct StatIndex stat)
 {
-    if(r1 == 0)
+    if(stat.id == STAT_INDEX_PHYSICAL)
     {
         sub_804151C(pokemon, 0x1a9, 1);
     }
@@ -876,9 +876,9 @@ void sub_8041F70(Entity *pokemon, u32 r1)
     }
 }
 
-void sub_8041F94(Entity *pokemon, u32 r1)
+void sub_8041F94(Entity *pokemon, struct StatIndex stat)
 {
-    if(r1 == 0)
+    if(stat.id == STAT_INDEX_PHYSICAL)
     {
         sub_804151C(pokemon, 0xC7 << 1, 1);
     }
@@ -888,9 +888,9 @@ void sub_8041F94(Entity *pokemon, u32 r1)
     }
 }
 
-void sub_8041FB4(Entity *pokemon, u32 r1)
+void sub_8041FB4(Entity *pokemon, struct StatIndex stat)
 {
-    if(r1 == 0)
+    if(stat.id == STAT_INDEX_PHYSICAL)
     {
         sub_804151C(pokemon, 0x1a9, 1);
     }
@@ -900,9 +900,9 @@ void sub_8041FB4(Entity *pokemon, u32 r1)
     }
 }
 
-void sub_8041FD8(Entity *pokemon, u32 r1)
+void sub_8041FD8(Entity *pokemon, struct StatIndex stat)
 {
-    if(r1 == 0)
+    if (stat.id == STAT_INDEX_PHYSICAL)
     {
         sub_804151C(pokemon, 0xCA << 1, 1);
     }
@@ -912,9 +912,9 @@ void sub_8041FD8(Entity *pokemon, u32 r1)
     }
 }
 
-void sub_8041FFC(Entity *pokemon, u32 r1)
+void sub_8041FFC(Entity *pokemon, struct StatIndex stat)
 {
-    if(r1 == 0)
+    if (stat.id == STAT_INDEX_PHYSICAL)
     {
         sub_804151C(pokemon, 0xC7 << 1, 1);
     }
@@ -924,9 +924,9 @@ void sub_8041FFC(Entity *pokemon, u32 r1)
     }
 }
 
-void sub_804201C(Entity *pokemon, u32 r1)
+void sub_804201C(Entity *pokemon, struct StatIndex stat)
 {
-    if(r1 == 0)
+    if (stat.id == STAT_INDEX_PHYSICAL)
     {
         sub_804151C(pokemon, 0x18f, 1);
     }
@@ -936,9 +936,9 @@ void sub_804201C(Entity *pokemon, u32 r1)
     }
 }
 
-void sub_8042040(Entity *pokemon, u32 r1)
+void sub_8042040(Entity *pokemon, struct StatIndex stat)
 {
-    if(r1 == 0)
+    if(stat.id == STAT_INDEX_ACCURACY)
     {
         sub_804151C(pokemon, 0xC6 << 1, 1);
     }

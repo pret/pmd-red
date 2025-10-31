@@ -21,13 +21,6 @@
 #define NUM_SPEED_COUNTERS 5
 #define NUM_PREV_POS 4
 
-#define STAT_STAGE_ATK 0
-#define STAT_STAGE_SP_ATK 1
-#define STAT_STAGE_DEF 0
-#define STAT_STAGE_SP_DEF 1
-#define STAT_STAGE_ACCURACY 0
-#define STAT_STAGE_EVASION 1
-
 // size: 0x8
 typedef struct ActionParameter
 {
@@ -237,12 +230,10 @@ typedef struct EntityInfo
     /* 0x8C */ IqSkillFlags IQSkillMenuFlags; // IQ skills selected in the IQ skills menu.
     /* 0x90 */ IqSkillFlags IQSkillFlags;
     /* 0x94 */ u8 tactic;
-    u8 fill95[0x98 - 0x95];
     /* 0x98 */ u32 dungeonSpriteId;
     /* 0x9C */ u32 unk9C;
     /* 0xA0 */ s32 unkA0;
     /* 0xA4 */ u8 monsterBehavior;
-    u8 fillA5[0xA8 - 0xA5];
     // Statuses are split into groups based on which ones can't overlap.
     // See status.h for which statuses are in each group.
     /* 0xA8 */ SleepClassStatus sleepClassStatus;
@@ -299,7 +290,6 @@ typedef struct EntityInfo
     /* 0x14A */ u8 unk14A;
     /* 0x14B */ u8 unk14B;
     /* 0x14C */ u8 unk14C;
-    /* 0x14D */ u8 unk14D;
     /* 0x14E */ u16 visualFlags;
     /* 0x150 */ u16 previousVisualFlags;
     /* 0x152 */ u8 unk152;

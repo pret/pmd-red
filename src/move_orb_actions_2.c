@@ -140,7 +140,7 @@ bool8 PsywaveMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
   return flag;
 }
 
-bool8 sub_8058C98(Entity *pokemon, Entity *target, Move *move, s32 itemId, u32 param_5)
+bool8 DamageLowerDefMoveAction(Entity *pokemon, Entity *target, Move *move, struct StatIndex stat, u32 param_5)
 {
   bool8 flag;
 
@@ -149,7 +149,7 @@ bool8 sub_8058C98(Entity *pokemon, Entity *target, Move *move, s32 itemId, u32 p
     flag = TRUE;
     if(sub_805727C(pokemon, target, gPsychicSecondaryChance))
     {
-        LowerDefenseStageTarget(pokemon, target,  itemId, 1, 1, FALSE);
+        LowerDefenseStageTarget(pokemon, target,  stat, 1, 1, FALSE);
     }
   }
   return flag;
@@ -252,9 +252,8 @@ bool8 sub_8058EE0(Entity *pokemon, Entity *target, Move *move, s32 itemId)
     return TRUE;
 }
 
-bool32 EarthquakeMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
+bool8 EarthquakeMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 {
-  bool32 flag;
   EntityInfo *entityInfo;
   s32 modifierInt;
 
@@ -265,11 +264,8 @@ bool32 EarthquakeMoveAction(Entity *pokemon, Entity *target, Move *move, s32 ite
   if (entityInfo->bideClassStatus.status == STATUS_DIGGING) {
     modifierInt = 2;
   }
-  flag = HandleDamagingMove(pokemon,target,move,IntToF248_2(modifierInt),itemId);
-  if (flag != 0) {
-    flag = TRUE;
-  }
-  return flag;
+
+  return (HandleDamagingMove(pokemon,target,move,IntToF248_2(modifierInt),itemId) != 0);
 }
 
 bool8 NaturePowerMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)

@@ -38,6 +38,9 @@
 #include "move_orb_effects_4.h"
 #include "move_orb_effects_5.h"
 
+const struct StatIndex gStatIndexAtkDef = {.id = STAT_INDEX_PHYSICAL};
+const struct StatIndex gStatIndexSpecial = {.id = STAT_INDEX_SPECIAL};
+
 bool8 IronTailMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 {
     bool8 flag;
@@ -52,7 +55,9 @@ bool8 IronTailMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId
     return flag;
 }
 
-static const s24_8 sRolloutModifiers[];
+static const s24_8 sRolloutModifiers[] = {
+    IntToF248_2(1.0), IntToF248_2(1.0), IntToF248_2(1.5), IntToF248_2(2.0), IntToF248_2(2.5), IntToF248_2(3.0), IntToF248_2(3.5), IntToF248_2(4.0), IntToF248_2(4.5), IntToF248_2(5.0)
+};
 
 bool8 sub_805768C(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 {
@@ -338,18 +343,10 @@ bool8 RockSlideMoveAction(Entity *pokemon, Entity *target, Move * move, s32 item
   return flag;
 }
 
-bool32 WeatherBallMoveAction(Entity * pokemon, Entity * target, Move * move, s32 itemId)
+bool8 WeatherBallMoveAction(Entity * pokemon, Entity * target, Move * move, s32 itemId)
 {
-  u32 weather;
-  s32 flag;
-
-  weather = GetApparentWeather(pokemon);
-  flag = sub_80556BC(pokemon,target,gWeatherBallTypes[weather],move,
-                      gWeatherBallModifiers[weather],itemId);
-  if (flag) {
-    flag = TRUE;
-  }
-  return flag;
+  u32 weather = GetApparentWeather(pokemon);
+  return (sub_80556BC(pokemon,target,gWeatherBallTypes[weather],move,gWeatherBallModifiers[weather],itemId) != 0);
 }
 
 bool8 WhirlpoolMoveAction(Entity * pokemon, Entity * target, Move * move, s32 itemId)
@@ -886,9 +883,8 @@ bool8 MetalSoundMoveAction(Entity *pokemon, Entity *target, Move *move, s32 item
 
 bool8 TickleMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 {
-    s32 index = gStatIndexAtkDef;
-    LowerAttackStageTarget(pokemon, target, index, 1, 1, TRUE);
-    LowerDefenseStageTarget(pokemon, target, index, 1, 1, TRUE);
+    LowerAttackStageTarget(pokemon, target, gStatIndexAtkDef, 1, 1, TRUE);
+    LowerDefenseStageTarget(pokemon, target, gStatIndexAtkDef, 1, 1, TRUE);
     return TRUE;
 }
 
@@ -933,8 +929,6 @@ bool8 AncientPowerMoveAction(Entity *pokemon, Entity *target, Move *move, s32 it
 {
     bool8 flag = FALSE;
     EntityInfo *entityInfo;
-    s32 index1;
-    s32 index2;
     if(HandleDamagingMove(pokemon, target, move, IntToF248_2(1), itemId) != 0)
     {
         flag = TRUE;
@@ -942,12 +936,10 @@ bool8 AncientPowerMoveAction(Entity *pokemon, Entity *target, Move *move, s32 it
         {
             entityInfo = GetEntInfo(pokemon);
             RaiseMovementSpeedTarget(pokemon, pokemon, 0, TRUE);
-            index1 = gStatIndexAtkDef;
-            RaiseAttackStageTarget(pokemon, pokemon, index1, 1);
-            index2 = gStatIndexSpecial;
-            RaiseAttackStageTarget(pokemon, pokemon, index2, 1);
-            RaiseDefenseStageTarget(pokemon, pokemon, index1, 1);
-            RaiseDefenseStageTarget(pokemon, pokemon, index2, 1);
+            RaiseAttackStageTarget(pokemon, pokemon, gStatIndexAtkDef, 1);
+            RaiseAttackStageTarget(pokemon, pokemon, gStatIndexSpecial, 1);
+            RaiseDefenseStageTarget(pokemon, pokemon, gStatIndexAtkDef, 1);
+            RaiseDefenseStageTarget(pokemon, pokemon, gStatIndexSpecial, 1);
             SetExpMultplier(entityInfo);
         }
     }
@@ -992,11 +984,3 @@ bool8 CosmicPowerMoveAction(Entity *pokemon, Entity *target, Move *move, s32 ite
     RaiseDefenseStageTarget(pokemon, target, gStatIndexSpecial, 1);
     return TRUE;
 }
-
-// Put all the way below for matching.
-const s32 gStatIndexAtkDef = 0;
-const s32 gStatIndexSpecial = 1;
-
-static const s24_8 sRolloutModifiers[] = {
-    IntToF248_2(1.0), IntToF248_2(1.0), IntToF248_2(1.5), IntToF248_2(2.0), IntToF248_2(2.5), IntToF248_2(3.0), IntToF248_2(3.5), IntToF248_2(4.0), IntToF248_2(4.5), IntToF248_2(5.0)
-};

@@ -851,7 +851,7 @@ void PetrifiedStatusTarget(Entity * pokemon, Entity * target)
   }
 }
 
-void LowerAttackStageTarget(Entity * pokemon, Entity * target, s32 index, s32 decrement, u8 param_5, bool8 displayMessage)
+void LowerAttackStageTarget(Entity * pokemon, Entity * target, struct StatIndex stat, s32 decrement, u8 param_5, bool8 displayMessage)
 {
     EntityInfo *entityInfo;
     s32 attackStage = decrement;
@@ -859,7 +859,7 @@ void LowerAttackStageTarget(Entity * pokemon, Entity * target, s32 index, s32 de
     if (!EntityIsValid(target))
         return;
 
-    if (index != STAT_STAGE_ATK) {
+    if (stat.id != STAT_INDEX_PHYSICAL) {
         strcpy(gFormatBuffer_Items[0], gUnknown_80FC0C8);
     }
     else {
@@ -876,7 +876,7 @@ void LowerAttackStageTarget(Entity * pokemon, Entity * target, s32 index, s32 de
             return;
         }
 
-        if (AbilityIsActive(target, ABILITY_HYPER_CUTTER) && index == STAT_STAGE_ATK) {
+        if (AbilityIsActive(target, ABILITY_HYPER_CUTTER) && stat.id == STAT_INDEX_PHYSICAL) {
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
             TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FCA60);
             return;
@@ -885,21 +885,21 @@ void LowerAttackStageTarget(Entity * pokemon, Entity * target, s32 index, s32 de
 
     entityInfo = GetEntInfo(target);
     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
-    sub_8041F28(target,index);
+    sub_8041F28(target,stat);
     if (decrement == 1) {
         strcpy(gFormatBuffer_Items[1], gUnknown_80FC0E4);
     }
     else {
         strcpy(gFormatBuffer_Items[1], gUnknown_80FC0D4);
     }
-    attackStage = entityInfo->offensiveStages[index];
+    attackStage = entityInfo->offensiveStages[stat.id];
     attackStage -= decrement;
     if (attackStage < 0) {
         attackStage = 0;
     }
 
-    if (entityInfo->offensiveStages[index] != attackStage) {
-        entityInfo->offensiveStages[index] = attackStage;
+    if (entityInfo->offensiveStages[stat.id] != attackStage) {
+        entityInfo->offensiveStages[stat.id] = attackStage;
         TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FC15C);
     }
     else {
@@ -909,43 +909,44 @@ void LowerAttackStageTarget(Entity * pokemon, Entity * target, s32 index, s32 de
     EntityUpdateStatusSprites(target);
 }
 
-void LowerDefenseStageTarget(Entity * pokemon, Entity * target, s32 index, s32 decrement, u8 param_5, bool8 displayMessage)
+void LowerDefenseStageTarget(Entity * pokemon, Entity * target, struct StatIndex stat, s32 nStages, bool8 checkProtected, bool8 logMsgProtected)
 {
     EntityInfo *entityInfo;
-    s32 defenseStage = decrement;
+    s32 newStage;
 
     if (!EntityIsValid(target))
         return;
 
-    if (index != STAT_STAGE_DEF) {
+    if (stat.id != STAT_INDEX_PHYSICAL) {
         strcpy(gFormatBuffer_Items[0],gUnknown_80FC0AC);
     }
     else {
         strcpy(gFormatBuffer_Items[0],gUnknown_80FC09C);
     }
 
-    if (param_5) {
-        if (sub_8071728(pokemon,target,displayMessage))
+    if (checkProtected) {
+        if (sub_8071728(pokemon,target,logMsgProtected))
             return;
     }
 
     entityInfo = GetEntInfo(target);
     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
-    sub_8041F4C(target,index);
-    if (decrement == 1) {
+    sub_8041F4C(target,stat);
+    if (nStages == 1) {
         strcpy(gFormatBuffer_Items[1],gUnknown_80FC0E4);
     }
     else {
         strcpy(gFormatBuffer_Items[1],gUnknown_80FC0D4);
     }
-    defenseStage = entityInfo->defensiveStages[index];
-    defenseStage = defenseStage - decrement;
-    if (defenseStage < 0) {
-        defenseStage = 0;
+
+    newStage = entityInfo->defensiveStages[stat.id];
+    newStage -= nStages;
+    if (newStage < 0) {
+        newStage = 0;
     }
 
-    if (entityInfo->defensiveStages[index] != defenseStage) {
-        entityInfo->defensiveStages[index] = defenseStage;
+    if (entityInfo->defensiveStages[stat.id] != newStage) {
+        entityInfo->defensiveStages[stat.id] = newStage;
         TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FC158);
     }
     else {
@@ -955,7 +956,7 @@ void LowerDefenseStageTarget(Entity * pokemon, Entity * target, s32 index, s32 d
     EntityUpdateStatusSprites(target);
 }
 
-void RaiseAttackStageTarget(Entity * pokemon, Entity * target, s32 index, s32 increment)
+void RaiseAttackStageTarget(Entity * pokemon, Entity * target, struct StatIndex stat, s32 increment)
 {
     EntityInfo *entityInfo;
     s32 attackStage = increment;
@@ -965,8 +966,8 @@ void RaiseAttackStageTarget(Entity * pokemon, Entity * target, s32 index, s32 in
     }
     entityInfo = GetEntInfo(target);
     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
-    sub_8041F70(target,index);
-    if (index != STAT_STAGE_ATK) {
+    sub_8041F70(target,stat);
+    if (stat.id != STAT_INDEX_PHYSICAL) {
         strcpy(gFormatBuffer_Items[0],gUnknown_80FC0C8);
     }
     else {
@@ -980,13 +981,13 @@ void RaiseAttackStageTarget(Entity * pokemon, Entity * target, s32 index, s32 in
         strcpy(gFormatBuffer_Items[1],gUnknown_80FC0D4);
     }
 
-    attackStage = entityInfo->offensiveStages[index];
+    attackStage = entityInfo->offensiveStages[stat.id];
     attackStage = attackStage + increment;
     if (attackStage >= MAX_STAT_STAGE) {
         attackStage = MAX_STAT_STAGE;
     }
-    if (entityInfo->offensiveStages[index] != attackStage) {
-        entityInfo->offensiveStages[index] = attackStage;
+    if (entityInfo->offensiveStages[stat.id] != attackStage) {
+        entityInfo->offensiveStages[stat.id] = attackStage;
         TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FC13C);
     }
     else {
@@ -995,7 +996,7 @@ void RaiseAttackStageTarget(Entity * pokemon, Entity * target, s32 index, s32 in
     EntityUpdateStatusSprites(target);
 }
 
-void RaiseDefenseStageTarget(Entity * pokemon, Entity * target, s32 index, s32 increment)
+void RaiseDefenseStageTarget(Entity * pokemon, Entity * target, struct StatIndex stat, s32 increment)
 {
     EntityInfo *entityInfo;
     s32 defenseStage = increment;
@@ -1005,8 +1006,8 @@ void RaiseDefenseStageTarget(Entity * pokemon, Entity * target, s32 index, s32 i
     }
     entityInfo = GetEntInfo(target);
     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
-    sub_8041F94(target,index);
-    if (index != STAT_STAGE_DEF) {
+    sub_8041F94(target,stat);
+    if (stat.id != STAT_INDEX_PHYSICAL) {
         strcpy(gFormatBuffer_Items[0],gUnknown_80FC0AC);
     }
     else {
@@ -1020,13 +1021,13 @@ void RaiseDefenseStageTarget(Entity * pokemon, Entity * target, s32 index, s32 i
         strcpy(gFormatBuffer_Items[1],gUnknown_80FC0D4);
     }
 
-    defenseStage = entityInfo->defensiveStages[index];
+    defenseStage = entityInfo->defensiveStages[stat.id];
     defenseStage = defenseStage + increment;
     if (defenseStage >= MAX_STAT_STAGE) {
         defenseStage = MAX_STAT_STAGE;
     }
-    if (entityInfo->defensiveStages[index] != defenseStage) {
-        entityInfo->defensiveStages[index] = defenseStage;
+    if (entityInfo->defensiveStages[stat.id] != defenseStage) {
+        entityInfo->defensiveStages[stat.id] = defenseStage;
         TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FC138);
     }
     else {
@@ -1067,7 +1068,7 @@ void UpdateFlashFireBoost(Entity * pokemon, Entity *target)
     }
 }
 
-void ChangeAttackMultiplierTarget(Entity *pokemon, Entity *target, u32 statStage, s24_8 param_4, bool8 displayMessage)
+void ChangeAttackMultiplierTarget(Entity *pokemon, Entity *target, struct StatIndex stat, s24_8 param_4, bool8 displayMessage)
 {
   EntityInfo *entityInfo;
   s24_8 oldMulti;
@@ -1076,7 +1077,7 @@ void ChangeAttackMultiplierTarget(Entity *pokemon, Entity *target, u32 statStage
     return;
   }
 
-  if (statStage != STAT_STAGE_ATK) {
+  if (stat.id != STAT_INDEX_PHYSICAL) {
     strcpy(gFormatBuffer_Items[0],gUnknown_80FC0C8);
   }
   else {
@@ -1092,7 +1093,7 @@ void ChangeAttackMultiplierTarget(Entity *pokemon, Entity *target, u32 statStage
     return;
   }
 
-  if (AbilityIsActive(target, ABILITY_HYPER_CUTTER) && (statStage == STAT_STAGE_ATK) && F248LessThanInt(param_4, 1)) {
+  if (AbilityIsActive(target, ABILITY_HYPER_CUTTER) && (stat.id == STAT_INDEX_PHYSICAL) && F248LessThanInt(param_4, 1)) {
     if (displayMessage) {
         SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
         TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FCA60);
@@ -1102,27 +1103,27 @@ void ChangeAttackMultiplierTarget(Entity *pokemon, Entity *target, u32 statStage
 
   entityInfo = GetEntInfo(target);
   SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
-  oldMulti = entityInfo->offensiveMultipliers[statStage];
+  oldMulti = entityInfo->offensiveMultipliers[stat.id];
 
   if (F248LessThanInt(param_4, 1)) {
-    sub_8041FD8(target,statStage);
+    sub_8041FD8(target,stat);
   }
   else {
-    sub_8041FB4(target,statStage);
+    sub_8041FB4(target,stat);
   }
 
-  entityInfo->offensiveMultipliers[statStage] = s24_8_mul(entityInfo->offensiveMultipliers[statStage],param_4);
+  entityInfo->offensiveMultipliers[stat.id] = s24_8_mul(entityInfo->offensiveMultipliers[stat.id],param_4);
 
-  if (F248LessThanFloat(entityInfo->offensiveMultipliers[statStage], 0.01)) {
-    entityInfo->offensiveMultipliers[statStage] = FloatToF248(0.01);
+  if (F248LessThanFloat(entityInfo->offensiveMultipliers[stat.id], 0.01)) {
+    entityInfo->offensiveMultipliers[stat.id] = FloatToF248(0.01);
   }
-  if (FloatLessThanF248(99.99, entityInfo->offensiveMultipliers[statStage])) {
-    entityInfo->offensiveMultipliers[statStage] = FloatToF248(99.99);
+  if (FloatLessThanF248(99.99, entityInfo->offensiveMultipliers[stat.id])) {
+    entityInfo->offensiveMultipliers[stat.id] = FloatToF248(99.99);
   }
-  if (F248GreaterThan(oldMulti, entityInfo->offensiveMultipliers[statStage])) {
+  if (F248GreaterThan(oldMulti, entityInfo->offensiveMultipliers[stat.id])) {
     TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FC11C);
   }
-  else if (F248LessThan(oldMulti, entityInfo->offensiveMultipliers[statStage])) {
+  else if (F248LessThan(oldMulti, entityInfo->offensiveMultipliers[stat.id])) {
     TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FC118);
   }
   else
@@ -1132,7 +1133,7 @@ void ChangeAttackMultiplierTarget(Entity *pokemon, Entity *target, u32 statStage
   EntityUpdateStatusSprites(target);
 }
 
-void ChangeDefenseMultiplierTarget(Entity *pokemon, Entity *target, u32 statStage, s24_8 param_4, bool8 displayMessage)
+void ChangeDefenseMultiplierTarget(Entity *pokemon, Entity *target, struct StatIndex stat, s24_8 param_4, bool8 displayMessage)
 {
   EntityInfo *entityInfo;
   s24_8 oldMulti;
@@ -1141,7 +1142,7 @@ void ChangeDefenseMultiplierTarget(Entity *pokemon, Entity *target, u32 statStag
     return;
   }
 
-  if (statStage != STAT_STAGE_DEF) {
+  if (stat.id != STAT_INDEX_PHYSICAL) {
     strcpy(gFormatBuffer_Items[0],gUnknown_80FC0AC);
   }
   else {
@@ -1153,27 +1154,27 @@ void ChangeDefenseMultiplierTarget(Entity *pokemon, Entity *target, u32 statStag
 
   entityInfo = GetEntInfo(target);
   SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
-  oldMulti = entityInfo->defensiveMultipliers[statStage];
+  oldMulti = entityInfo->defensiveMultipliers[stat.id];
 
   if (F248LessThanInt(param_4, 1)) {
-    sub_804201C(target,statStage);
+    sub_804201C(target,stat);
   }
   else {
-    sub_8041FFC(target,statStage);
+    sub_8041FFC(target,stat);
   }
 
-  entityInfo->defensiveMultipliers[statStage] = s24_8_mul(entityInfo->defensiveMultipliers[statStage],param_4);
+  entityInfo->defensiveMultipliers[stat.id] = s24_8_mul(entityInfo->defensiveMultipliers[stat.id],param_4);
 
-  if (F248LessThanFloat(entityInfo->defensiveMultipliers[statStage], 0.01)) {
-    entityInfo->defensiveMultipliers[statStage] = FloatToF248(0.01);
+  if (F248LessThanFloat(entityInfo->defensiveMultipliers[stat.id], 0.01)) {
+    entityInfo->defensiveMultipliers[stat.id] = FloatToF248(0.01);
   }
-  if (FloatLessThanF248(99.99, entityInfo->defensiveMultipliers[statStage])) {
-    entityInfo->defensiveMultipliers[statStage] = FloatToF248(99.99);
+  if (FloatLessThanF248(99.99, entityInfo->defensiveMultipliers[stat.id])) {
+    entityInfo->defensiveMultipliers[stat.id] = FloatToF248(99.99);
   }
-  if (F248GreaterThan(oldMulti, entityInfo->defensiveMultipliers[statStage])) {
+  if (F248GreaterThan(oldMulti, entityInfo->defensiveMultipliers[stat.id])) {
     TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FC114);
   }
-  else if (F248LessThan(oldMulti, entityInfo->defensiveMultipliers[statStage])) {
+  else if (F248LessThan(oldMulti, entityInfo->defensiveMultipliers[stat.id])) {
     TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FC0FC);
   }
   else
@@ -1183,22 +1184,22 @@ void ChangeDefenseMultiplierTarget(Entity *pokemon, Entity *target, u32 statStag
   EntityUpdateStatusSprites(target);
 }
 
-void RaiseAccuracyStageTarget(Entity * pokemon, Entity * target, s32 statStage)
+void RaiseAccuracyStageTarget(Entity * pokemon, Entity * target, struct StatIndex stat)
 {
   EntityInfo *entityInfo;
 
   if (EntityIsValid(target)) {
     entityInfo = GetEntInfo(target);
     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
-    sub_8042040(target,statStage);
-    if (statStage != STAT_STAGE_ACCURACY) {
+    sub_8042040(target,stat);
+    if (stat.id != STAT_INDEX_ACCURACY) {
         strcpy(gFormatBuffer_Items[0],gUnknown_80FC090);
     }
     else {
         strcpy(gFormatBuffer_Items[0],gUnknown_80FC084);
     }
-    if (entityInfo->hitChanceStages[statStage] < MAX_STAT_STAGE) {
-      entityInfo->hitChanceStages[statStage]++;
+    if (entityInfo->hitChanceStages[stat.id] < MAX_STAT_STAGE) {
+      entityInfo->hitChanceStages[stat.id]++;
       TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FC1C4);
     }
     else {
@@ -1208,19 +1209,19 @@ void RaiseAccuracyStageTarget(Entity * pokemon, Entity * target, s32 statStage)
   }
 }
 
-void LowerAccuracyStageTarget(Entity * pokemon, Entity * target, s32 statStage, bool8 displayMessage)
+void LowerAccuracyStageTarget(Entity * pokemon, Entity * target, struct StatIndex stat, bool8 displayMessage)
 {
   EntityInfo *entityInfo;
 
   if (EntityIsValid(target)) {
-    if (statStage != STAT_STAGE_ACCURACY) {
+    if (stat.id != STAT_INDEX_ACCURACY) {
         strcpy(gFormatBuffer_Items[0],gUnknown_80FC090);
     }
     else {
         strcpy(gFormatBuffer_Items[0],gUnknown_80FC084);
     }
     if (!sub_8071728(pokemon,target,displayMessage)) {
-      if (AbilityIsActive(target, ABILITY_KEEN_EYE) && (statStage == STAT_STAGE_ACCURACY)){
+      if (AbilityIsActive(target, ABILITY_KEEN_EYE) && (stat.id == STAT_INDEX_ACCURACY)){
         if(displayMessage)
         {
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
@@ -1230,9 +1231,9 @@ void LowerAccuracyStageTarget(Entity * pokemon, Entity * target, s32 statStage, 
       else {
         entityInfo = GetEntInfo(target);
         SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
-        sub_8042060(target,statStage);
-        if (entityInfo->hitChanceStages[statStage] != 0) {
-          entityInfo->hitChanceStages[statStage]--;
+        sub_8042060(target,stat.id);
+        if (entityInfo->hitChanceStages[stat.id] != 0) {
+          entityInfo->hitChanceStages[stat.id]--;
           TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FC1A4);
         }
         else {

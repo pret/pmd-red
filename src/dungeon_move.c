@@ -70,9 +70,9 @@ void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move *move, 
     Entity *currTargetSaved;
     Entity *currTarget;
     EntityInfo *targetInfo;
-    bool32 moveHits;
-    bool32 lightRodRedirect;
-    bool32 moveRedirected;
+    bool8 moveHits;
+    bool8 lightRodRedirect;
+    bool8 moveRedirected;
 
     moveId = move->id;
     for (i = 0; i < MAX_MOVE_TARGETS; i++) {
@@ -86,7 +86,7 @@ void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move *move, 
         if (!EntityIsValid(attacker))
             break;
         if (EntityIsValid(currTarget)) {
-            bool32 r4;
+            bool8 r4;
             bool8 moveHadEffect;
 
             originalAttacker = attacker;
@@ -188,10 +188,7 @@ void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move *move, 
             }
             sub_806A1E8(currTarget);
             TrySendImmobilizeSleepEndMsg(attacker, currTarget);
-            r4 = FALSE;
-            if (!MoveMatchesBideClassStatus(attacker, move)) {
-                r4 = (MoveRequiresCharging(attacker, move->id) != 0);
-            }
+            r4 = (!MoveMatchesBideClassStatus(attacker, move) && MoveRequiresCharging(attacker, move->id));
 
             if (!lightRodRedirect) {
                 if (targetInfo->reflectClassStatus.status == STATUS_MAGIC_COAT) {
@@ -275,7 +272,7 @@ void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move *move, 
                 SetMessageArgument_2(gFormatBuffer_Monsters[1], GetEntInfo(currTarget), 0);
                 // Interesting that these 3 strings are the same. Curious if that's the case in Blue/Europe versions.
                 if (attacker == currTarget) {
-                    TryDisplayDungeonLoggableMessage3(attacker, attacker, gUnknown_80F9380); // The move missed
+                    TryDisplayDungeonLoggableMessage3(attacker, currTarget, gUnknown_80F9380); // The move missed
                 }
                 else if (GetTreatmentBetweenMonsters(attacker, currTarget, TRUE, FALSE) == 0) {
                     TryDisplayDungeonLoggableMessage3(attacker, currTarget, gUnknown_80F9384); // The move missed
@@ -304,9 +301,9 @@ void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move *move, 
                     break; // breaks out of the loop
             }
             else {
-                s32 expMultiplierBeforeMove = targetInfo->expMultiplier;
+                u32 expMultiplierBeforeMove = targetInfo->expMultiplier;
                 if (targetInfo->isNotTeamMember) {
-                    if (move->id != MOVE_REGULAR_ATTACK && itemId == 0 && expMultiplierBeforeMove == EXP_HALVED) {
+                    if (move->id != MOVE_REGULAR_ATTACK && itemId == 0 && expMultiplierBeforeMove < EXP_REGULAR) {
                         targetInfo->expMultiplier = EXP_REGULAR;
                     }
                     if (isLinkedMove == TRUE) {
@@ -474,10 +471,10 @@ void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move *move, 
                         moveHadEffect = PoisonStingMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_PSYCHIC:
-                        moveHadEffect = sub_8058C98(attacker, currTarget, move, gStatIndexSpecial, itemId);
+                        moveHadEffect = DamageLowerDefMoveAction(attacker, currTarget, move, gStatIndexSpecial, itemId);
                         break;
                     case MOVE_ACID:
-                        moveHadEffect = sub_8058C98(attacker, currTarget, move, gStatIndexAtkDef, itemId);
+                        moveHadEffect = DamageLowerDefMoveAction(attacker, currTarget, move, gStatIndexAtkDef, itemId);
                         break;
                     case MOVE_METAL_CLAW:
                         moveHadEffect = MetalClawMoveAction(attacker, currTarget, move, gStatIndexAtkDef, itemId);
