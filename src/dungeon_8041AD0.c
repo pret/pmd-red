@@ -840,7 +840,7 @@ void nullsub_90(Entity *pokemon)
 {
 }
 
-void sub_8041F28(Entity *pokemon, struct StatIndex stat)
+void PlayOffensiveStatDownEffect(Entity *pokemon, struct StatIndex stat)
 {
     if (stat.id == STAT_INDEX_PHYSICAL)
     {
@@ -852,7 +852,7 @@ void sub_8041F28(Entity *pokemon, struct StatIndex stat)
     }
 }
 
-void sub_8041F4C(Entity *pokemon, struct StatIndex stat)
+void PlayDefensiveStatDownEffect(Entity *pokemon, struct StatIndex stat)
 {
     if(stat.id == STAT_INDEX_PHYSICAL)
     {
@@ -864,7 +864,7 @@ void sub_8041F4C(Entity *pokemon, struct StatIndex stat)
     }
 }
 
-void sub_8041F70(Entity *pokemon, struct StatIndex stat)
+void PlayOffensiveStatUpEffect(Entity *pokemon, struct StatIndex stat)
 {
     if(stat.id == STAT_INDEX_PHYSICAL)
     {
@@ -876,7 +876,7 @@ void sub_8041F70(Entity *pokemon, struct StatIndex stat)
     }
 }
 
-void sub_8041F94(Entity *pokemon, struct StatIndex stat)
+void PlayDefensiveStatUpEffect(Entity *pokemon, struct StatIndex stat)
 {
     if(stat.id == STAT_INDEX_PHYSICAL)
     {

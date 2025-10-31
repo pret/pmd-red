@@ -885,7 +885,7 @@ void LowerOffensiveStat(Entity * user, Entity * target, struct StatIndex stat, s
 
     entityInfo = GetEntInfo(target);
     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
-    sub_8041F28(target,stat);
+    PlayOffensiveStatDownEffect(target,stat);
     if (nStages == 1) {
         strcpy(gFormatBuffer_Items[1], gUnknown_80FC0E4);
     }
@@ -932,7 +932,7 @@ void LowerDefensiveStat(Entity * user, Entity * target, struct StatIndex stat, s
 
     entityInfo = GetEntInfo(target);
     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
-    sub_8041F4C(target,stat);
+    PlayDefensiveStatDownEffect(target,stat);
     if (nStages == 1) {
         strcpy(gFormatBuffer_Items[1],gUnknown_80FC0E4);
     }
@@ -967,7 +967,7 @@ void BoostOffensiveStat(Entity * user, Entity * target, struct StatIndex stat, s
 
     entityInfo = GetEntInfo(target);
     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
-    sub_8041F70(target,stat);
+    PlayOffensiveStatUpEffect(target,stat);
     if (stat.id != STAT_INDEX_PHYSICAL) {
         strcpy(gFormatBuffer_Items[0],gUnknown_80FC0C8);
     }
@@ -1008,7 +1008,7 @@ void BoostDefensiveStat(Entity * user, Entity * target, struct StatIndex stat, s
 
     entityInfo = GetEntInfo(target);
     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
-    sub_8041F94(target,stat);
+    PlayDefensiveStatUpEffect(target,stat);
     if (stat.id != STAT_INDEX_PHYSICAL) {
         strcpy(gFormatBuffer_Items[0],gUnknown_80FC0AC);
     }
