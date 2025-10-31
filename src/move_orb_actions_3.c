@@ -273,7 +273,7 @@ bool8 ThiefMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 
 bool8 AmnesiaMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 {
-    RaiseDefenseStageTarget(pokemon, target, gStatIndexSpecial, 2);
+    BoostDefensiveStat(pokemon, target, gStatIndexSpecial, 2);
     return TRUE;
 }
 
@@ -460,7 +460,7 @@ bool8 SteelWingMoveAction(Entity *pokemon, Entity *target, Move *move, struct St
     flag = TRUE;
     if (sub_805727C(pokemon,pokemon,gSteelWingSecondaryChance) != 0) {
       entityInfo = GetEntInfo(pokemon);
-      RaiseDefenseStageTarget(pokemon,pokemon,stat,1);
+      BoostDefensiveStat(pokemon,pokemon,stat,1);
       SetExpMultplier(entityInfo);
     }
   }
@@ -673,7 +673,7 @@ bool8 BellyDrumMoveAction(Entity * pokemon,Entity * target, Move *move, s32 item
   info = GetEntInfo(pokemon);
   flag = FALSE;
   if (FixedPointToInt(info->belly) > 1) {
-    RaiseAttackStageTarget(pokemon,target,gStatIndexAtkDef,99);
+    BoostOffensiveStat(pokemon,target,gStatIndexAtkDef,99);
     info->belly = IntToFixedPoint(1);
     flag = TRUE;
   }
@@ -749,8 +749,8 @@ bool8 sub_805AC90(Entity * pokemon, Entity * target, Move *move, s32 itemId)
 
 bool8 BulkUpMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 {
-    RaiseAttackStageTarget(pokemon, target, gStatIndexAtkDef, 1);
-    RaiseDefenseStageTarget(pokemon, target, gStatIndexAtkDef, 1);
+    BoostOffensiveStat(pokemon, target, gStatIndexAtkDef, 1);
+    BoostDefensiveStat(pokemon, target, gStatIndexAtkDef, 1);
     return TRUE;
 }
 
@@ -961,7 +961,7 @@ bool8 HandleColorChange(Entity * pokemon, Entity * target, Move *move, s32 itemI
 
 bool8 TailGlowMoveAction(Entity * pokemon, Entity * target, Move *move, s32 itemId)
 {
-    RaiseAttackStageTarget(pokemon,target,gStatIndexSpecial, 2);
+    BoostOffensiveStat(pokemon,target,gStatIndexSpecial, 2);
     return TRUE;
 }
 

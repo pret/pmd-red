@@ -300,7 +300,7 @@ bool8 StringShotMoveAction(Entity *pokemon, Entity *target, Move *move, s32 item
 bool8 SwaggerMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 {
     ConfuseStatusTarget(pokemon, target, TRUE);
-    RaiseAttackStageTarget(pokemon, target, gStatIndexAtkDef, 2);
+    BoostOffensiveStat(pokemon, target, gStatIndexAtkDef, 2);
     return TRUE;
 }
 
@@ -482,7 +482,7 @@ bool8 OctazookaMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemI
 bool8 FlatterMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 {
     ConfuseStatusTarget(pokemon, target, TRUE);
-    RaiseAttackStageTarget(pokemon, target, gStatIndexSpecial, 1);
+    BoostOffensiveStat(pokemon, target, gStatIndexSpecial, 1);
     return TRUE;
 }
 
@@ -617,7 +617,7 @@ bool8 GustMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 // NOTE: Is there a better name for this?
 bool8 BasicRaiseDefenseMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 {
-    RaiseDefenseStageTarget(pokemon, target, gStatIndexAtkDef, 1);
+    BoostDefensiveStat(pokemon, target, gStatIndexAtkDef, 1);
     return TRUE;
 }
 
@@ -630,7 +630,7 @@ bool8 DisableMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 // NOTE: Is there a better name for this?
 bool8 BasicRaiseAttackMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 {
-    RaiseAttackStageTarget(pokemon, target, gStatIndexAtkDef, 1);
+    BoostOffensiveStat(pokemon, target, gStatIndexAtkDef, 1);
     return TRUE;
 }
 
@@ -936,10 +936,10 @@ bool8 AncientPowerMoveAction(Entity *pokemon, Entity *target, Move *move, s32 it
         {
             entityInfo = GetEntInfo(pokemon);
             RaiseMovementSpeedTarget(pokemon, pokemon, 0, TRUE);
-            RaiseAttackStageTarget(pokemon, pokemon, gStatIndexAtkDef, 1);
-            RaiseAttackStageTarget(pokemon, pokemon, gStatIndexSpecial, 1);
-            RaiseDefenseStageTarget(pokemon, pokemon, gStatIndexAtkDef, 1);
-            RaiseDefenseStageTarget(pokemon, pokemon, gStatIndexSpecial, 1);
+            BoostOffensiveStat(pokemon, pokemon, gStatIndexAtkDef, 1);
+            BoostOffensiveStat(pokemon, pokemon, gStatIndexSpecial, 1);
+            BoostDefensiveStat(pokemon, pokemon, gStatIndexAtkDef, 1);
+            BoostDefensiveStat(pokemon, pokemon, gStatIndexSpecial, 1);
             SetExpMultplier(entityInfo);
         }
     }
@@ -980,7 +980,7 @@ bool8 SureShotMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId
 
 bool8 CosmicPowerMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 {
-    RaiseDefenseStageTarget(pokemon, target, gStatIndexAtkDef, 1);
-    RaiseDefenseStageTarget(pokemon, target, gStatIndexSpecial, 1);
+    BoostDefensiveStat(pokemon, target, gStatIndexAtkDef, 1);
+    BoostDefensiveStat(pokemon, target, gStatIndexSpecial, 1);
     return TRUE;
 }

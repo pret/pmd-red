@@ -523,8 +523,8 @@ void CurseStatusTarget(Entity *pokemon, Entity * target)
       TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB004);
     }
     else {
-      RaiseAttackStageTarget(pokemon,pokemon,gStatIndexAtkDef,1);
-      RaiseDefenseStageTarget(pokemon,pokemon,gStatIndexAtkDef,1);
+      BoostOffensiveStat(pokemon,pokemon,gStatIndexAtkDef,1);
+      BoostDefensiveStat(pokemon,pokemon,gStatIndexAtkDef,1);
       LowerMovementSpeedTarget(pokemon,pokemon,1,TRUE);
     }
     EntityUpdateStatusSprites(target);

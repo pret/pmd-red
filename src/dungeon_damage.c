@@ -97,7 +97,7 @@ void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *
     }
 
     if (GetEntInfo(target)->bideClassStatus.status == STATUS_ENRAGED) {
-        RaiseAttackStageTarget(attacker, target, gStatIndexAtkDef, 1);
+        BoostOffensiveStat(attacker, target, gStatIndexAtkDef, 1);
     }
 
     if (!EntityIsValid(attacker) || !EntityIsValid(target))

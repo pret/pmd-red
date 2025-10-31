@@ -89,7 +89,7 @@ bool8 MeteorMashMoveAction(Entity *pokemon, Entity *target, Move *move, s32 item
     if(sub_805727C(pokemon, pokemon, gMeteorMashSecondaryChance))
     {
         entityInfo = GetEntInfo(pokemon);
-        RaiseAttackStageTarget(pokemon, pokemon, gStatIndexAtkDef, 1);
+        BoostOffensiveStat(pokemon, pokemon, gStatIndexAtkDef, 1);
         SetExpMultplier(entityInfo);
     }
   }
@@ -558,7 +558,7 @@ bool8 SmogMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 
 bool8 GrowthMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 {
-    RaiseAttackStageTarget(pokemon, target, gStatIndexSpecial, 1);
+    BoostOffensiveStat(pokemon, target, gStatIndexSpecial, 1);
     return TRUE;
 }
 
@@ -789,7 +789,7 @@ bool8 HornDrillMoveAction(Entity * pokemon,Entity * target,Move * move,s32 itemI
 
 bool8 SwordsDanceMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 {
-    RaiseAttackStageTarget(pokemon, target, gStatIndexAtkDef, 2);
+    BoostOffensiveStat(pokemon, target, gStatIndexAtkDef, 2);
     return TRUE;
 }
 
@@ -852,8 +852,8 @@ bool8 HelpingHandMoveAction(Entity *pokemon, Entity *target, Move *move, s32 ite
         TryDisplayDungeonLoggableMessage3(target, target, gUnknown_80FEB60);
     }
     else {
-        RaiseAttackStageTarget(pokemon, target, gStatIndexAtkDef, 1);
-        RaiseAttackStageTarget(pokemon, target, gStatIndexSpecial, 1);
+        BoostOffensiveStat(pokemon, target, gStatIndexAtkDef, 1);
+        BoostOffensiveStat(pokemon, target, gStatIndexSpecial, 1);
         flag = TRUE;
     }
     return flag;
@@ -861,7 +861,7 @@ bool8 HelpingHandMoveAction(Entity *pokemon, Entity *target, Move *move, s32 ite
 
 bool8 sub_8059CD8(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 {
-    RaiseDefenseStageTarget(pokemon, target, gStatIndexAtkDef, 2);
+    BoostDefensiveStat(pokemon, target, gStatIndexAtkDef, 2);
     return TRUE;
 }
 
