@@ -2,6 +2,7 @@
 #define GUARD_MOVE_ORB_ACTIONS_3_H
 
 #include "structs/dungeon_entity.h"
+#include "structs/str_stat_index.h"
 
 bool8 PoisonStingMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId);
 bool8 TriAttackMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId);
@@ -41,7 +42,7 @@ bool8 SunnyDayMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId
 bool8 BellyDrumMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId);
 bool8 HiJumpKickMoveAction(Entity * pokemon,Entity * target,Move * move,s32 itemId,u8 param_5);
 bool8 JumpKickMoveAction(Entity * pokemon,Entity * target,Move * move,s32 itemId,u8 param_5);
-bool8 SteelWingMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId, u32 param_5);
+bool8 SteelWingMoveAction(Entity *pokemon, Entity *target, Move *move, struct StatIndex stat, u32 param_5);
 bool8 BulkUpMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId);
 bool8 AmnesiaMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId);
 bool8 HandleColorChange(Entity *pokemon, Entity *target, Move *move, s32 itemId);

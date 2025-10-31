@@ -2,6 +2,7 @@
 #define GUARD_MOVE_ORB_ACTIONS_2_H
 
 #include "structs/dungeon_entity.h"
+#include "structs/str_stat_index.h"
 
 bool8 SkyAttackMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId);
 bool8 BasicIceMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId);
@@ -32,7 +33,7 @@ bool8 BlockMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId);
 bool8 PoisonGasMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId);
 bool8 ToxicMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId);
 bool8 PoisonFangMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId);
-bool32 EarthquakeMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId);
+bool8 EarthquakeMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId);
 bool8 UproarMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId);
 bool8 SandstormMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId);
 bool8 Conversion2MoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId);
@@ -42,7 +43,7 @@ bool8 SketchMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId);
 bool8 NaturePowerMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId);
 bool8 HelpingHandMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId);
 bool8 EndureMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId);
-bool8 sub_8058C98(Entity *pokemon, Entity *target, Move *move, s32 itemId, u32 param_5);
+bool8 DamageLowerDefMoveAction(Entity *pokemon, Entity *target, Move *move, struct StatIndex stat, u32 param_5);
 bool8 SonicboomMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId);
 bool8 SelfDestructMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId);
 bool8 ExplosionMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId);

@@ -2,6 +2,7 @@
 #define GUARD_MOVE_ORB_ACTIONS_4_H
 
 #include "structs/dungeon_entity.h"
+#include "structs/str_stat_index.h"
 
 bool8 DreamEaterMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId);
 bool8 sub_805B734(Entity *pokemon, Entity *target, Move *move, s32 itemId);
@@ -50,7 +51,7 @@ bool8 AttractMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 bool8 MimicMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId);
 bool8 FrustrationMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId);
 bool8 LeechSeedMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId);
-bool8 MetalClawMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId, s32 param_5);
+bool8 MetalClawMoveAction(Entity * pokemon,Entity * target,Move *move, struct StatIndex stat, s32 param_5);
 bool8 InvisifyOrbAction(Entity *pokemon, Entity *target, Move *move, s32 itemId);
 bool8 CalmMindMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId);
 bool8 DefenseCurlMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId);
