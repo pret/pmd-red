@@ -1213,7 +1213,7 @@ bool8 HasSafeguardStatus(Entity * pokemon, Entity * target, bool8 displayMessage
   return FALSE;
 }
 
-bool8 sub_8071728(Entity * pokemon, Entity * target, bool8 displayMessage)
+bool8 IsProtectedFromStatDrops(Entity * pokemon, Entity * target, bool8 displayMessage)
 {
   if (GetEntInfo(target)->reflectClassStatus.status == STATUS_MIST) {
     if (displayMessage) {

@@ -77,7 +77,7 @@ bool8 MistBallMoveAction(Entity * pokemon,Entity * target,Move *move, s32 itemId
     if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),itemId) != 0) {
         flag = TRUE;
         if (sub_805727C(pokemon,target,gMistBallSecondaryChance) != 0) {
-            LowerAttackStageTarget(pokemon,target,gStatIndexSpecial,1,1,0);
+            LowerOffensiveStat(pokemon,target,gStatIndexSpecial,1,1,0);
         }
     }
     return flag;
@@ -334,7 +334,7 @@ bool8 LusterPurgeMoveAction(Entity * pokemon, Entity * target, Move * move, s32 
         flag = TRUE;
         if(sub_805727C(pokemon, target, gLusterPurgeSecondaryChance))
         {
-            LowerDefenseStageTarget(pokemon, target, gStatIndexSpecial, 1, 1, 0);
+            LowerDefensiveStat(pokemon, target, gStatIndexSpecial, 1, 1, 0);
         }
     }
     return flag;

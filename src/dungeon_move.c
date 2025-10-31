@@ -1321,7 +1321,7 @@ void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move *move, 
         }
         if (EntityIsValid(attacker) && GetEntInfo(attacker)->unk155 != 0) {
             GetEntInfo(attacker)->unk155 = 0;
-            LowerAttackStageTarget(attacker, attacker, gStatIndexSpecial, 2, 0, FALSE);
+            LowerOffensiveStat(attacker, attacker, gStatIndexSpecial, 2, 0, FALSE);
         }
     }
 }

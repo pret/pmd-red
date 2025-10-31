@@ -410,16 +410,16 @@ void HandleMudTrap(Entity *pokemon, Entity *target)
     rand = DungeonRandInt(100);
     randDef = rand;
     if (rand < 25) {
-        LowerAttackStageTarget(pokemon,target,gStatIndexAtkDef,1,1,1);
+        LowerOffensiveStat(pokemon,target,gStatIndexAtkDef,1,1,1);
     }
     else if (rand < 50) {
-        LowerAttackStageTarget(pokemon,target,gStatIndexSpecial,1,1,1);
+        LowerOffensiveStat(pokemon,target,gStatIndexSpecial,1,1,1);
     }
     else if (randDef < 75) {
-        LowerDefenseStageTarget(pokemon,target,gStatIndexAtkDef,1,1,1);
+        LowerDefensiveStat(pokemon,target,gStatIndexAtkDef,1,1,1);
     }
     else {
-        LowerDefenseStageTarget(pokemon,target,gStatIndexSpecial,1,1,1);
+        LowerDefensiveStat(pokemon,target,gStatIndexSpecial,1,1,1);
     }
 }
 

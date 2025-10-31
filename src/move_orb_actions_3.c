@@ -279,7 +279,7 @@ bool8 AmnesiaMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 
 bool8 GrowlMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 {
-    LowerAttackStageTarget(pokemon, target, gStatIndexAtkDef, 1, 1, TRUE);
+    LowerOffensiveStat(pokemon, target, gStatIndexAtkDef, 1, 1, TRUE);
     return TRUE;
 }
 
@@ -336,7 +336,7 @@ bool8 SunnyDayMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId
 
 bool8 LeerMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 {
-    LowerDefenseStageTarget(pokemon, target, gStatIndexAtkDef, 1, 1, TRUE);
+    LowerDefensiveStat(pokemon, target, gStatIndexAtkDef, 1, 1, TRUE);
     return TRUE;
 }
 
@@ -443,8 +443,8 @@ bool8 SuperpowerMoveAction(Entity *pokemon, Entity *target, Move *move, s32 item
   if (HandleDamagingMove(pokemon, target, move, IntToF248_2(1), itemId) != 0) {
     flag = TRUE;
     if (sub_805727C(pokemon,pokemon,0) != 0) {
-      LowerAttackStageTarget(pokemon,pokemon,gStatIndexAtkDef,1,0,FALSE);
-      LowerDefenseStageTarget(pokemon,pokemon,gStatIndexAtkDef,1,0,FALSE);
+      LowerOffensiveStat(pokemon,pokemon,gStatIndexAtkDef,1,0,FALSE);
+      LowerDefensiveStat(pokemon,pokemon,gStatIndexAtkDef,1,0,FALSE);
     }
   }
   return flag;
@@ -709,10 +709,10 @@ bool8 SecretPowerMoveAction(Entity * pokemon, Entity * target, Move *move, s32 i
                 LowerMovementSpeedTarget(pokemon,target,1,FALSE);
                 break;
             case 3:
-                LowerAttackStageTarget(pokemon,target,gStatIndexAtkDef,1,1,FALSE);
+                LowerOffensiveStat(pokemon,target,gStatIndexAtkDef,1,1,FALSE);
                 break;
             case 4:
-                LowerDefenseStageTarget(pokemon,target,gStatIndexAtkDef,1,1,FALSE);
+                LowerDefensiveStat(pokemon,target,gStatIndexAtkDef,1,1,FALSE);
                 break;
             case 5:
                 LowerAccuracyStageTarget(pokemon,target,gStatIndexAtkDef,FALSE);
@@ -762,7 +762,7 @@ bool8 ObserverOrbAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 
 bool8 FeatherDanceMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 {
-    LowerAttackStageTarget(pokemon, target, gStatIndexAtkDef, 2, 1, TRUE);
+    LowerOffensiveStat(pokemon, target, gStatIndexAtkDef, 2, 1, TRUE);
     return TRUE;
 }
 
@@ -821,7 +821,7 @@ bool8 CrushClawMoveAction(Entity * pokemon, Entity * target, Move *move, s32 ite
     if ( HandleDamagingMove(pokemon, target, move, IntToF248_2(1), itemId) != 0) {
         flag = TRUE;
         if (sub_805727C(pokemon,target,gCrushClawSecondaryChance) != 0) {
-            LowerDefenseStageTarget(pokemon, target, gStatIndexAtkDef, 1, 1, FALSE);
+            LowerDefensiveStat(pokemon, target, gStatIndexAtkDef, 1, 1, FALSE);
         }
     }
     return flag;

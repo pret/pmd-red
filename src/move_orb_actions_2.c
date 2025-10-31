@@ -149,7 +149,7 @@ bool8 DamageLowerDefMoveAction(Entity *pokemon, Entity *target, Move *move, stru
     flag = TRUE;
     if(sub_805727C(pokemon, target, gPsychicSecondaryChance))
     {
-        LowerDefenseStageTarget(pokemon, target,  stat, 1, 1, FALSE);
+        LowerDefensiveStat(pokemon, target,  stat, 1, 1, FALSE);
     }
   }
   return flag;
@@ -163,7 +163,7 @@ bool8 PsychoBoostMoveAction(Entity *pokemon, Entity *target, Move *move, s32 ite
         flag = TRUE;
         if(RollSecondaryEffect(pokemon, 0))
         {
-            LowerAttackStageTarget(pokemon, pokemon, gStatIndexSpecial, 2, 0, FALSE);
+            LowerOffensiveStat(pokemon, pokemon, gStatIndexSpecial, 2, 0, FALSE);
         }
     }
     return flag;

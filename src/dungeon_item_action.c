@@ -941,8 +941,8 @@ static void GrimyFoodItemAction(Entity *pokemon, Entity * target)
             ParalyzeStatusTarget(pokemon, target, TRUE);
             break;
         case 4:
-            LowerAttackStageTarget(pokemon, target, gStatIndexAtkDef, 3, 1, TRUE);
-            LowerAttackStageTarget(pokemon, target, gStatIndexSpecial, 3, 1, TRUE);
+            LowerOffensiveStat(pokemon, target, gStatIndexAtkDef, 3, TRUE, TRUE);
+            LowerOffensiveStat(pokemon, target, gStatIndexSpecial, 3, TRUE, TRUE);
             break;
     }
 }

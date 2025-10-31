@@ -49,7 +49,7 @@ bool8 IronTailMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId
     if (HandleDamagingMove(pokemon, target, move, IntToF248_2(1), itemId) != 0) {
         flag = TRUE;
         if (sub_805727C(pokemon, target, gIronTailSecondaryChance)) {
-            LowerDefenseStageTarget(pokemon, target, gStatIndexAtkDef, 1, 1, FALSE);
+            LowerDefensiveStat(pokemon, target, gStatIndexAtkDef, 1, 1, FALSE);
         }
     }
     return flag;
@@ -372,7 +372,7 @@ bool8 WhirlpoolMoveAction(Entity * pokemon, Entity * target, Move * move, s32 it
 
 bool8 FakeTearsMoveAction(Entity * pokemon, Entity * target, Move *move, s32 itemId)
 {
-  LowerDefenseStageTarget(pokemon, target, gStatIndexSpecial, 2, 1, TRUE);
+  LowerDefensiveStat(pokemon, target, gStatIndexSpecial, 2, 1, TRUE);
   return TRUE;
 }
 
@@ -680,7 +680,7 @@ bool8 ShadowBallMoveAction(Entity *pokemon, Entity *target, Move *move, s32 item
     flag = TRUE;
     if(sub_805727C(pokemon, target, gShadowBallSecondaryChance))
     {
-        LowerDefenseStageTarget(pokemon, target, gStatIndexSpecial, 1, 1, FALSE);
+        LowerDefensiveStat(pokemon, target, gStatIndexSpecial, 1, 1, FALSE);
     }
   }
   return flag;
@@ -877,14 +877,14 @@ bool8 SmellingSaltMoveAction(Entity * pokemon, Entity * target, Move * move, s32
 
 bool8 MetalSoundMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 {
-    LowerDefenseStageTarget(pokemon, target, gStatIndexSpecial, 3, 1, TRUE);
+    LowerDefensiveStat(pokemon, target, gStatIndexSpecial, 3, 1, TRUE);
     return TRUE;
 }
 
 bool8 TickleMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 {
-    LowerAttackStageTarget(pokemon, target, gStatIndexAtkDef, 1, 1, TRUE);
-    LowerDefenseStageTarget(pokemon, target, gStatIndexAtkDef, 1, 1, TRUE);
+    LowerOffensiveStat(pokemon, target, gStatIndexAtkDef, 1, 1, TRUE);
+    LowerDefensiveStat(pokemon, target, gStatIndexAtkDef, 1, 1, TRUE);
     return TRUE;
 }
 
