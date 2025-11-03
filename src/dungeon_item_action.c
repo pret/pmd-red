@@ -375,7 +375,7 @@ static void sub_80482FC(Entity *pokemon, Entity *target, u32 pp, u8 param_4)
 
     InitPokemonMove(&move, MOVE_PROJECTILE);
     move.PP = pp;
-    HandleDamagingMove(pokemon, target, &move, IntToF248_2(1.0), param_4);
+    HandleDamagingMove(pokemon, target, &move, IntToF248(1), param_4);
 }
 
 static void sub_8048340(Entity *pokemon, Entity *target, u32 r2)

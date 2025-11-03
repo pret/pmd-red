@@ -46,7 +46,7 @@ bool8 IronTailMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId
     bool8 flag;
 
     flag = FALSE;
-    if (HandleDamagingMove(pokemon, target, move, IntToF248_2(1), itemId) != 0) {
+    if (HandleDamagingMove(pokemon, target, move, IntToF248(1), itemId) != 0) {
         flag = TRUE;
         if (sub_805727C(pokemon, target, gIronTailSecondaryChance)) {
             LowerDefensiveStat(pokemon, target, gStatIndexAtkDef, 1, 1, FALSE);
@@ -56,7 +56,7 @@ bool8 IronTailMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId
 }
 
 static const s24_8 sRolloutModifiers[] = {
-    IntToF248_2(1.0), IntToF248_2(1.0), IntToF248_2(1.5), IntToF248_2(2.0), IntToF248_2(2.5), IntToF248_2(3.0), IntToF248_2(3.5), IntToF248_2(4.0), IntToF248_2(4.5), IntToF248_2(5.0)
+    FloatToF248(1.0), FloatToF248(1.0), FloatToF248(1.5), FloatToF248(2.0), FloatToF248(2.5), FloatToF248(3.0), FloatToF248(3.5), FloatToF248(4.0), FloatToF248(4.5), FloatToF248(5.0)
 };
 
 bool8 sub_805768C(Entity *pokemon, Entity *target, Move *move, s32 itemId)
@@ -170,7 +170,7 @@ bool8 BubbleMoveAction(Entity *pokemon, Entity *target, Move * move, s32 itemId)
   bool8 flag;
 
   flag = FALSE;
-  if (HandleDamagingMove(pokemon, target, move, IntToF248_2(1), itemId) != 0) {
+  if (HandleDamagingMove(pokemon, target, move, IntToF248(1), itemId) != 0) {
     flag = TRUE;
     if (sub_805727C(pokemon,target, gBubbleSecondaryChance)) {
       LowerMovementSpeedTarget(pokemon, target, 1, FALSE);
@@ -310,7 +310,7 @@ bool8 SnoreMoveAction(Entity *pokemon, Entity *target, Move * move, s32 itemId)
 
   flag = FALSE;
   if (IsSleeping(pokemon)) {
-    if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),itemId) != 0) {
+    if (HandleDamagingMove(pokemon,target,move,IntToF248(1),itemId) != 0) {
       flag = TRUE;
       if (sub_805727C(pokemon,target,gSnoreSecondaryChance)) {
         CringeStatusTarget(pokemon,target,FALSE);
@@ -334,7 +334,7 @@ bool8 RockSlideMoveAction(Entity *pokemon, Entity *target, Move * move, s32 item
   bool8 flag;
 
   flag = FALSE;
-  if (HandleDamagingMove(pokemon, target, move, IntToF248_2(1), itemId) != 0) {
+  if (HandleDamagingMove(pokemon, target, move, IntToF248(1), itemId) != 0) {
     flag = TRUE;
     if (sub_805727C(pokemon,target,gRockSlideSecondaryChance)) {
       CringeStatusTarget(pokemon,target,FALSE);
@@ -357,9 +357,9 @@ bool8 WhirlpoolMoveAction(Entity * pokemon, Entity * target, Move * move, s32 it
 
   flag = FALSE;
   chargeStatus = GetEntInfo(target)->bideClassStatus.status;
-  modifier = IntToF248_2(1);
+  modifier = IntToF248(1);
   if (chargeStatus == STATUS_DIVING) {
-    modifier = IntToF248_2(2);
+    modifier = IntToF248(2);
   }
   if (HandleDamagingMove(pokemon,target,move,modifier,itemId) != 0) {
     flag = TRUE;
@@ -428,7 +428,7 @@ bool8 OverheatMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId
   flag = FALSE;
   entityInfo = GetEntInfo(pokemon);
   SendThawedMessage(pokemon,target);
-  if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),itemId) != 0) {
+  if (HandleDamagingMove(pokemon,target,move,IntToF248(1),itemId) != 0) {
     flag = TRUE;
     if (RollSecondaryEffect(pokemon, 0)) {
       entityInfo->unk155 = 1;
@@ -442,7 +442,7 @@ bool8 AuroraBeamMoveAction(Entity *pokemon, Entity *target, Move *move, s32 item
   bool8 flag;
 
   flag = FALSE;
-  if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),itemId) != 0) {
+  if (HandleDamagingMove(pokemon,target,move,IntToF248(1),itemId) != 0) {
     flag = TRUE;
     if(sub_805727C(pokemon, target, gAuroraBeamAtkLowerChance))
     {
@@ -469,7 +469,7 @@ bool8 OctazookaMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemI
   bool8 flag;
 
   flag = FALSE;
-  if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),itemId) != 0) {
+  if (HandleDamagingMove(pokemon,target,move,IntToF248(1),itemId) != 0) {
     flag = TRUE;
     if(sub_805727C(pokemon, target, gOctazookaAccLowerChance))
     {
@@ -559,7 +559,7 @@ bool8 FlameWheelMoveAction(Entity *pokemon, Entity *target, Move *move, s32 item
 
   flag = FALSE;
   SendThawedMessage(pokemon, target);
-  if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),itemId) != 0) {
+  if (HandleDamagingMove(pokemon,target,move,IntToF248(1),itemId) != 0) {
     flag = TRUE;
     if(sub_805727C(pokemon, target, gFlameWheelSecondaryChance))
     {
@@ -576,7 +576,7 @@ bool8 BasicFireMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemI
 
   flag = FALSE;
   SendThawedMessage(pokemon, target);
-  if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),itemId) != 0) {
+  if (HandleDamagingMove(pokemon,target,move,IntToF248(1),itemId) != 0) {
     flag = TRUE;
     if(sub_805727C(pokemon, target, gFireMoveBurnSecondaryChance))
     {
@@ -610,7 +610,7 @@ bool8 GustMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
   targetInfo = GetEntInfo(target);
   if(targetInfo->bideClassStatus.status == STATUS_FLYING || targetInfo->bideClassStatus.status == STATUS_BOUNCING)
     modifierInt = 2;
-  flag =  HandleDamagingMove(pokemon,target,move,IntToF248_2(modifierInt),itemId) ? TRUE : FALSE;
+  flag =  HandleDamagingMove(pokemon,target,move,IntToF248(modifierInt),itemId) ? TRUE : FALSE;
   return flag;
 }
 
@@ -676,7 +676,7 @@ bool8 ShadowBallMoveAction(Entity *pokemon, Entity *target, Move *move, s32 item
   bool8 flag;
 
   flag = FALSE;
-  if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),itemId) != 0) {
+  if (HandleDamagingMove(pokemon,target,move,IntToF248(1),itemId) != 0) {
     flag = TRUE;
     if(sub_805727C(pokemon, target, gShadowBallSecondaryChance))
     {
@@ -691,7 +691,7 @@ bool8 BiteMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
   bool8 flag;
 
   flag = FALSE;
-  if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),itemId) != 0) {
+  if (HandleDamagingMove(pokemon,target,move,IntToF248(1),itemId) != 0) {
     flag = TRUE;
     if(sub_805727C(pokemon, target, gBiteSecondaryChance))
     {
@@ -706,7 +706,7 @@ bool8 ThunderMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
   bool8 flag;
 
   flag = FALSE;
-  if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),itemId) != 0) {
+  if (HandleDamagingMove(pokemon,target,move,IntToF248(1),itemId) != 0) {
     flag = TRUE;
     if(sub_805727C(pokemon, target, gThunderSecondaryChance))
     {
@@ -742,7 +742,7 @@ bool8 FacadeMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
   bool8 flag;
   s24_8 modifier;
 
-  modifier = IntToF248_2(1);
+  modifier = IntToF248(1);
   if((GetEntInfo(pokemon)->burnClassStatus.status) != STATUS_NONE)
     modifier = gFacadeModifier;
   flag =  HandleDamagingMove(pokemon,target,move,modifier,itemId) ? TRUE : FALSE;
@@ -754,7 +754,7 @@ bool8 sub_8058580(Entity *pokemon, Entity *target, Move *move, s32 itemId)
   bool8 flag;
 
   flag = FALSE;
-  if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),itemId) != 0) {
+  if (HandleDamagingMove(pokemon,target,move,IntToF248(1),itemId) != 0) {
     flag = TRUE;
     if(sub_805727C(pokemon, target, gConstrictBubblebeamSecondaryChance))
     {
@@ -775,7 +775,7 @@ bool8 BrickBreakMoveAction(Entity *pokemon, Entity *target, Move *move, s32 item
     flag = TRUE;
   }
 
-  flag |= (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),itemId) != 0);
+  flag |= (HandleDamagingMove(pokemon,target,move,IntToF248(1),itemId) != 0);
   return flag;
 }
 
@@ -784,7 +784,7 @@ bool8 RockTombMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId
   bool8 flag;
 
   flag = FALSE;
-  if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),itemId) != 0) {
+  if (HandleDamagingMove(pokemon,target,move,IntToF248(1),itemId) != 0) {
     flag = TRUE;
     if(sub_805727C(pokemon, target, 0))
     {
@@ -818,7 +818,7 @@ bool8 GigaDrainMoveAction(Entity * pokemon, Entity * target, Move * move, s32 it
   EntityInfo *entityInfo;
 
   hasLiquidOoze = AbilityIsActive(target, ABILITY_LIQUID_OOZE);
-  uVar3 = HandleDamagingMove(pokemon,target,move,IntToF248_2(1),itemId);
+  uVar3 = HandleDamagingMove(pokemon,target,move,IntToF248(1),itemId);
   flag = uVar3 != 0 ? TRUE : FALSE;
   if (flag && RollSecondaryEffect(pokemon, 0)) {
     newHP = uVar3 / 2;
@@ -866,11 +866,11 @@ bool8 SmellingSaltMoveAction(Entity * pokemon, Entity * target, Move * move, s32
   bool8 flag;
 
   if (GetEntInfo(target)->burnClassStatus.status == STATUS_PARALYSIS) {
-    flag = HandleDamagingMove(pokemon,target,move,IntToF248_2(2),itemId) ? TRUE : FALSE;
+    flag = HandleDamagingMove(pokemon,target,move,IntToF248(2),itemId) ? TRUE : FALSE;
     EndBurnClassStatus(pokemon, target);
   }
   else {
-    flag = HandleDamagingMove(pokemon,target,move,IntToF248_2(1),itemId) ? TRUE : FALSE;
+    flag = HandleDamagingMove(pokemon,target,move,IntToF248(1),itemId) ? TRUE : FALSE;
   }
   return flag;
 }
@@ -903,7 +903,7 @@ bool8 HazeMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 bool8 OutrageMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 {
     bool8 flag = FALSE;
-    if(HandleDamagingMove(pokemon, target, move, IntToF248_2(1), itemId) != 0)
+    if(HandleDamagingMove(pokemon, target, move, IntToF248(1), itemId) != 0)
     {
         flag = TRUE;
         if(RollSecondaryEffect(pokemon, 0))
@@ -920,7 +920,7 @@ bool8 LowKickMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
     bool8 flag;
     EntityInfo *entityInfo = GetEntInfo(target);
 
-    weight.raw = GetWeight(entityInfo->apparentID);
+    weight = GetWeight(entityInfo->apparentID);
     flag = HandleDamagingMove(pokemon, target, move, weight, itemId) != 0 ? TRUE: FALSE;
     return flag;
 }
@@ -929,7 +929,7 @@ bool8 AncientPowerMoveAction(Entity *pokemon, Entity *target, Move *move, s32 it
 {
     bool8 flag = FALSE;
     EntityInfo *entityInfo;
-    if(HandleDamagingMove(pokemon, target, move, IntToF248_2(1), itemId) != 0)
+    if(HandleDamagingMove(pokemon, target, move, IntToF248(1), itemId) != 0)
     {
         flag = TRUE;
         if(RollSecondaryEffect(pokemon, gAncientPowerSecondaryChance))
@@ -961,7 +961,7 @@ bool8 AgilityMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 bool8 RapidSpinMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 {
     bool8 flag = FALSE;
-    if(HandleDamagingMove(pokemon, target, move, IntToF248_2(1), itemId) != 0)
+    if(HandleDamagingMove(pokemon, target, move, IntToF248(1), itemId) != 0)
     {
         flag = TRUE;
         if(RollSecondaryEffect(pokemon, 0))

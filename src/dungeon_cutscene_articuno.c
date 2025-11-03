@@ -246,7 +246,7 @@ static void sub_8088484(Entity *param_1)
   PlaySoundEffect(0x1ea);
   for(iVar1 = 250; iVar1 >= 0; iVar1 -= 5)
   {
-    GetEntInfo(param_1)->unk174 = IntToF248_2(iVar1);
+    GetEntInfo(param_1)->unk174 = IntToF248(iVar1);
     SetDungeonBGColorRGB(iVar1,iVar1,iVar1 / 2,1,0);
     DungeonRunFrameActions(0x46);
   }

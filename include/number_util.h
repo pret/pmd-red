@@ -17,14 +17,11 @@ typedef struct FixedPoint
  * significant bits are the integer part and the 8 least significant bits are
  * the fractional part.
  */
-typedef struct s24_8 {
-    // It's almost certainly not an actual struct, but keep it as one until we decomp all structures that include it
-    s32 raw;
-} s24_8;
+typedef s32 s24_8; // Does not match as a struct in Blue/Sky.
 
-#define F248_ZERO ((s24_8){})
-#define F248_ONE ((s24_8){0x100})
-#define F248_MAX ((s24_8){0x7FFFFFFF})
+#define F248_ZERO ((s24_8)0)
+#define F248_ONE ((s24_8)0x100)
+#define F248_MAX ((s24_8)0x7FFFFFFF)
 
 /**
  * This type represents a signed 48.16 fixed-point number, where the 48 most
@@ -59,19 +56,8 @@ void WriteBellyBits(DataSerializer *r0, FixedPoint *src);
 // Sometimes it's used directly as opposed to calling IntToFixedPoint
 #define IntToFixedPointMacro(x) ((FixedPoint){x, 0})
 
-#define IntToF248_2(x) ((s24_8){x * 0x100})
-#define FloatToF248_2(x) ((s24_8){(int)(x * 0x100)})
-static inline s24_8 IntToF248(s32 x) {
-    return (s24_8){x * 256};
-}
-
-static inline s24_8 FloatToF248(float x) {
-    return (s24_8){(int)(x * 256)};
-}
-
-static inline s32 F248ToInt(s24_8 x) {
-    return x.raw / 256;
-}
-
+#define IntToF248(x) (((x) << 8))
+#define FloatToF248(x) ((int)(x * 0x100))
+#define F248ToInt(x) ((s24_8)(x / 256))
 
 #endif

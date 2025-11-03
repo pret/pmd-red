@@ -74,7 +74,7 @@ bool8 MistBallMoveAction(Entity * pokemon,Entity * target,Move *move, s32 itemId
     bool8 flag;
 
     flag = FALSE;
-    if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),itemId) != 0) {
+    if (HandleDamagingMove(pokemon,target,move,IntToF248(1),itemId) != 0) {
         flag = TRUE;
         if (sub_805727C(pokemon,target,gMistBallSecondaryChance) != 0) {
             LowerOffensiveStat(pokemon,target,gStatIndexSpecial,1,1,0);
@@ -91,7 +91,7 @@ bool8 DestinyBondMoveAction(Entity * pokemon,Entity * target,Move *move, s32 ite
 
 bool8 FalseSwipeMoveAction(Entity * pokemon,Entity * target,Move *move, s32 itemId)
 {
-    return (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),itemId)) ? TRUE : FALSE;
+    return (HandleDamagingMove(pokemon,target,move,IntToF248(1),itemId)) ? TRUE : FALSE;
 }
 
 bool8 MirrorCoatMoveAction(Entity * pokemon,Entity * target,Move *move, s32 itemId)
@@ -109,7 +109,7 @@ bool8 CalmMindMoveAction(Entity * pokemon,Entity * target,Move *move, s32 itemId
 
 bool8 HiddenPowerMoveAction(Entity * pokemon,Entity * target,Move *move, s32 itemId)
 {
-    HandleDamagingMove(pokemon,target,move,IntToF248_2(1),itemId);
+    HandleDamagingMove(pokemon,target,move,IntToF248(1),itemId);
     return TRUE;
 }
 
@@ -119,7 +119,7 @@ bool8 MetalClawMoveAction(Entity * pokemon,Entity * target,Move *move, struct St
     bool8 flag;
 
     flag = FALSE;
-    if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),param_5) != 0) {
+    if (HandleDamagingMove(pokemon,target,move,IntToF248(1),param_5) != 0) {
         flag = TRUE;
         if (sub_805727C(pokemon,pokemon,gMetalClawSecondaryChance) != 0) {
             entityInfo = GetEntInfo(pokemon);
@@ -222,7 +222,7 @@ bool8 DreamEaterMoveAction(Entity * pokemon, Entity * target, Move *move, s32 it
   flag = FALSE;
   hasLiquidOoze = AbilityIsActive(target, ABILITY_LIQUID_OOZE);
   if (IsSleeping(target)) {
-    iVar3 = HandleDamagingMove(pokemon,target,move,IntToF248_2(1),itemId);
+    iVar3 = HandleDamagingMove(pokemon,target,move,IntToF248(1),itemId);
     if (iVar3 != 0) {
       flag = TRUE;
       newHP = iVar3 / 2;
@@ -330,7 +330,7 @@ bool8 LusterPurgeMoveAction(Entity * pokemon, Entity * target, Move * move, s32 
     bool8 flag;
 
     flag = FALSE;
-    if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),itemId) != 0) {
+    if (HandleDamagingMove(pokemon,target,move,IntToF248(1),itemId) != 0) {
         flag = TRUE;
         if(sub_805727C(pokemon, target, gLusterPurgeSecondaryChance))
         {
@@ -347,7 +347,7 @@ bool8 StruggleMoveAction(Entity * pokemon, Entity * target, Move * move, s32 ite
     bool8 flag;
 
     flag = FALSE;
-    if (HandleDamagingMove(pokemon, target, move, IntToF248_2(1), itemId) != 0) {
+    if (HandleDamagingMove(pokemon, target, move, IntToF248(1), itemId) != 0) {
         flag = TRUE;
         if (RollSecondaryEffect(pokemon, 0) != 0) {
             entityHP = GetEntInfo(pokemon)->maxHPStat;
@@ -401,7 +401,7 @@ bool8 ThiefAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
     Item *targetItem;
 
     flag = FALSE;
-    if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),itemId) != 0) {
+    if (HandleDamagingMove(pokemon,target,move,IntToF248(1),itemId) != 0) {
         flag = TRUE;
         if (sub_805727C(pokemon,target, 0) != 0) {
             pokemonInfo1 = GetEntInfo(pokemon);

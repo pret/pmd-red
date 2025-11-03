@@ -784,10 +784,10 @@ bool8 AccuracyCalc(Entity *attacker, Entity *target, Move *move, s32 accuracyTyp
     if (statStageAccuracy > 20) statStageAccuracy = 20;
 
     statStageMul = gAccEvsStatStageMultipliers[0][statStageAccuracy];
-    if (statStageMul.raw < 0) statStageMul.raw = 0;
-    if (statStageMul.raw > IntToF248_2(100).raw) statStageMul = IntToF248_2(100);
+    if (statStageMul < 0) statStageMul = 0;
+    if (statStageMul > IntToF248(100)) statStageMul = IntToF248(100);
 
-    accuracy *= statStageMul.raw;
+    accuracy *= statStageMul;
     accuracy /= 256;
 
     statStageEvasion = targetInfo->hitChanceStages[1];
@@ -808,10 +808,10 @@ bool8 AccuracyCalc(Entity *attacker, Entity *target, Move *move, s32 accuracyTyp
     if (statStageEvasion > 20) statStageEvasion = 20;
 
     statStageMul = gAccEvsStatStageMultipliers[1][statStageEvasion];
-    if (statStageMul.raw < 0) statStageMul.raw = 0;
-    if (statStageMul.raw > IntToF248_2(100).raw) statStageMul = IntToF248_2(100);
+    if (statStageMul < 0) statStageMul = 0;
+    if (statStageMul > IntToF248(100)) statStageMul = IntToF248(100);
 
-    accuracy *= statStageMul.raw;
+    accuracy *= statStageMul;
     accuracy /= 256;
     if (rand < accuracy)
         return TRUE;

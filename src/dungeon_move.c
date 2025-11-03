@@ -389,13 +389,13 @@ void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move *move, 
                     case MOVE_WIDE_SLASH:
                     case MOVE_SPIN_SLASH:
                     case MOVE_BLOOP_SLASH:
-                        moveHadEffect = (HandleDamagingMove(attacker, currTarget, move, IntToF248_2(1), itemId) != 0);
+                        moveHadEffect = (HandleDamagingMove(attacker, currTarget, move, IntToF248(1), itemId) != 0);
                         break;
                     case MOVE_REGULAR_ATTACK:
-                        moveHadEffect = (HandleDamagingMove(attacker, currTarget, move, IntToF248_2(0.5), itemId) != 0);
+                        moveHadEffect = (HandleDamagingMove(attacker, currTarget, move, FloatToF248(0.5), itemId) != 0);
                         break;
                     case MOVE_NOTHING:
-                        moveHadEffect = (HandleDamagingMove(attacker, currTarget, move, IntToF248_2(0), itemId) != 0);
+                        moveHadEffect = (HandleDamagingMove(attacker, currTarget, move, IntToF248(0), itemId) != 0);
                         break;
                     case MOVE_EARTHQUAKE:
                         moveHadEffect = EarthquakeMoveAction(attacker, currTarget, move, itemId);
@@ -437,7 +437,7 @@ void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move *move, 
                     case MOVE_CROSS_CHOP:
                     case MOVE_RAZOR_LEAF:
                     case MOVE_LEAF_BLADE:
-                        moveHadEffect = (HandleDamagingMove(attacker, currTarget, move, IntToF248_2(1), itemId) != 0);
+                        moveHadEffect = (HandleDamagingMove(attacker, currTarget, move, IntToF248(1), itemId) != 0);
                         break;
                     case MOVE_FISSURE:
                         moveHadEffect = FissureMoveAction(attacker, currTarget, move, itemId);
@@ -1328,7 +1328,7 @@ void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move *move, 
 
 bool8 HandleRegularDamagingMove(Entity *attacker, Entity *target, Move *move, s32 itemId)
 {
-    return (HandleDamagingMove(attacker, target, move, IntToF248_2(1), itemId) != 0);
+    return (HandleDamagingMove(attacker, target, move, IntToF248(1), itemId) != 0);
 }
 
 s32 HandleDamagingMove(Entity *attacker, Entity *target, Move *move, s24_8 modifier, s32 itemId)

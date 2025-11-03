@@ -212,11 +212,11 @@ static s32 sub_8041550(Entity *entity, s32 a1, u8 a2, u8 a3, s32 a4, u8 a5)
     sub_800569C(&pos, &entity->axObj.axdata, a3);
     if (pos.x != 99 && pos.y != 99) {
         pixelPos.x = entity->pixelPos.x + (pos.x << 8);
-        pixelPos.y = (entity->pixelPos.y + (pos.y << 8)) - entInfo->unk174.raw;
+        pixelPos.y = (entity->pixelPos.y + (pos.y << 8)) - entInfo->unk174;
     }
     else {
         pixelPos.x = entity->pixelPos.x;
-        pixelPos.y = entity->pixelPos.y - entInfo->unk174.raw;
+        pixelPos.y = entity->pixelPos.y - entInfo->unk174;
     }
 
     var = entity->pixelPos.y / 256;
@@ -1510,16 +1510,16 @@ static void sub_8042A84(s16 param_1, Entity *entity, u32 param_3)
 
   param_1_s16 = param_1;
 
-  r6 = IntToF248_2(2).raw;
+  r6 = IntToF248(2);
   if (sub_8042768(entity)) {
     sub_804151C(entity,param_1_s16,0);
     sub_803E708(param_3,0x42);
     do {
-      if (entity->unk1C.raw > IntToF248_2(199.999).raw) break;
+      if (entity->unk1C > FloatToF248(199.999)) break;
       DungeonRunFrameActions(0x42);
-      entity->unk1C.raw += + r6;
-      r6 += IntToF248_2(1).raw;
-      iVar3 = (entity->pixelPos.y - entity->unk1C.raw) / 256;
+      entity->unk1C += + r6;
+      r6 += IntToF248(1);
+      iVar3 = (entity->pixelPos.y - entity->unk1C) / 256;
     } while (-8 <= iVar3 - gDungeon->unk181e8.cameraPixelPos.y);
     entity->isVisible = 0;
     sub_804178C(0);

@@ -674,7 +674,7 @@ void UpdateEntitySpecies(Entity *entity, s32 _species)
     entity->axObj.unk43_animId2 = 0xFF;
     entity->axObj.unk45_orientation = 1;
     entity->axObj.unk47 = 1;
-    entity->unk1C = IntToF248_2(0);
+    entity->unk1C = IntToF248(0);
 
     if (entInfo->frozenClassStatus.status == STATUS_WRAP || entInfo->frozenClassStatus.status == STATUS_WRAPPED) {
         sub_8076CB4(entInfo->unk9C);
@@ -765,7 +765,7 @@ static void InitEntityFromSpawnInfo(bool8 a0, Entity *entity, struct MonSpawnInf
     entInfo->aiTarget.unkC = 0;
     entInfo->aiTarget.aiTargetSpawnGenID = 0;
     entInfo->unkFF = 0;
-    entInfo->unk174.raw = 0;
+    entInfo->unk174 = 0;
     entInfo->decoyAITracker = 0;
     ResetMonEntityData(entInfo, TRUE);
     ZeroOutItem(&entInfo->heldItem);
@@ -877,8 +877,8 @@ void ResetMonEntityData(EntityInfo *entInfo, bool8 setStatsToOne)
         entInfo->offensiveStages[i] = 10;
         entInfo->defensiveStages[i] = 10;
         entInfo->hitChanceStages[i] = 10;
-        entInfo->offensiveMultipliers[i].raw = IntToF248_2(1).raw;
-        entInfo->defensiveMultipliers[i].raw = IntToF248_2(1).raw;
+        entInfo->offensiveMultipliers[i] = IntToF248(1);
+        entInfo->defensiveMultipliers[i] = IntToF248(1);
     }
 
     if (hasForecast) {

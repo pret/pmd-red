@@ -49,7 +49,7 @@ s32 GroundLink_GetArea(s32 _arg0, PixelPos *arg1, PixelPos *arg2, PixelPos *arg3
 
     SetUnkInGroundEvent(&ptr->pos, arg1);
 
-    arg2->x = arg1->x + IntToF248(ptr->width * 8).raw;
-    arg2->y = arg1->y + IntToF248(ptr->height * 8).raw;
+    arg2->x = arg1->x + IntToF248(ptr->width * 8);
+    arg2->y = arg1->y + IntToF248(ptr->height * 8);
     return ptr->ret;
 }

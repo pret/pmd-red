@@ -181,12 +181,12 @@ static void RayquazaDropInEffect(Entity *rayquazaEntity)
   s24_8 iVar2;
 
   GetEntInfo(rayquazaEntity)->unk15E = 0;
-  iVar2 = IntToF248_2(200);
-  iVar1 = IntToF248_2(6);
+  iVar2 = IntToF248(200);
+  iVar1 = IntToF248(6);
   PlaySoundEffect(0x1f8);
   while( 1 ) {
-    iVar2.raw = iVar2.raw - iVar1.raw; // must be .raw
-    iVar1 = F248_Sub(iVar1, FloatToF248_2(3./32.));
+    iVar2 = iVar2 - iVar1; // must be 
+    iVar1 = F248_Sub(iVar1, FloatToF248(3./32.));
     if (F248LessThanFloat(iVar1, 0.08)) {
       iVar1 = FloatToF248(0.08);
     }
@@ -194,7 +194,7 @@ static void RayquazaDropInEffect(Entity *rayquazaEntity)
     GetEntInfo(rayquazaEntity)->unk174 = iVar2;
     DungeonRunFrameActions(0x46);
   }
-  GetEntInfo(rayquazaEntity)->unk174 = IntToF248_2(0);
+  GetEntInfo(rayquazaEntity)->unk174 = IntToF248(0);
 }
 
 static void RayquazaScreenFlash(void)

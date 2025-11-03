@@ -173,7 +173,7 @@ void sub_807D068(Entity *pokemon, DungeonPos *pos)
             pixelY += incrementY;
             local_34.x = pixelX;
             local_34.y = pixelY;
-            pokemon->unk1C.raw = sin_4096(iVar8) * 0xc;
+            pokemon->unk1C = sin_4096(iVar8) * 0xc;
             UpdateEntityPixelPos(pokemon, &local_34);
             if (ShouldDisplayEntity(pokemon)) {
                 DungeonRunFrameActions(0x1a);

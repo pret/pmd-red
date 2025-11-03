@@ -881,9 +881,9 @@ void SetMonSummaryInfoFromEntity(struct MonSummaryInfo *param_1, Entity *target)
         param_1->unk58[uVar15] = 40;
         uVar15++;
     }
-    if ((((((info->offensiveMultipliers[0].raw < 0x100) || (info->offensiveMultipliers[1].raw < 0x100)
-    ) || (info->defensiveMultipliers[0].raw < 0x100)) ||
-        ((info->defensiveMultipliers[1].raw < 0x100 || (info->offensiveStages[0] < 10)))) ||
+    if ((((((info->offensiveMultipliers[0] < 0x100) || (info->offensiveMultipliers[1] < 0x100)
+    ) || (info->defensiveMultipliers[0] < 0x100)) ||
+        ((info->defensiveMultipliers[1] < 0x100 || (info->offensiveStages[0] < 10)))) ||
         ((info->offensiveStages[1] < 10 ||
         ((info->defensiveStages[0] < 10 || (info->defensiveStages[1] < 10)))))) ||
         ((info->hitChanceStages[0] < 10 || (info->hitChanceStages[1] < 10)))) {

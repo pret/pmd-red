@@ -92,25 +92,25 @@ s24_8 s24_8_mul(s24_8 x, s24_8 y)
     bool8 sgn0;
     bool8 sgn1;
 
-    sgn0 = x.raw < 0;
-    sgn1 = y.raw < 0;
+    sgn0 = x < 0;
+    sgn1 = y < 0;
 
-    if (x.raw == 0)
+    if (x == 0)
         return (s24_8){0};
 
-    if (y.raw == 0)
+    if (y == 0)
         return (s24_8){0};
 
     if (sgn0)
-        x.raw = -x.raw;
+        x = -x;
 
     if (sgn1)
-        y.raw = -y.raw;
+        y = -y;
 
     ret = u24_8_mul(x, y);
 
     if (sgn0 != sgn1)
-        ret.raw = -ret.raw;
+        ret = -ret;
 
     return ret;
 }
@@ -129,25 +129,25 @@ static s24_8 s24_8_div(s24_8 x, s24_8 y)
     bool8 sgn0;
     bool8 sgn1;
 
-    sgn0 = x.raw < 0;
-    sgn1 = y.raw < 0;
+    sgn0 = x < 0;
+    sgn1 = y < 0;
 
-    if (y.raw == 0)
+    if (y == 0)
         return (s24_8){INT32_MAX};
 
-    if (x.raw == 0)
+    if (x == 0)
         return (s24_8){0};
 
     if (sgn0)
-        x.raw = -x.raw;
+        x = -x;
 
     if (sgn1)
-        y.raw = -y.raw;
+        y = -y;
 
     ret = u24_8_div(x, y);
 
     if (sgn0 != sgn1)
-        ret.raw = -ret.raw;
+        ret = -ret;
 
     return ret;
 }
@@ -171,13 +171,13 @@ static s24_8 u24_8_mul(s24_8 x, s24_8 y)
     u32 high_bit_mask;
     u32 round_up;
 
-    if (x.raw == 0 || y.raw == 0)
+    if (x == 0 || y == 0)
         return F248_ZERO;
 
     x_h = 0;
-    x_l = x.raw;
+    x_l = x;
     y_h = 0;
-    y_l = y.raw;
+    y_l = y;
     out_h = 0;
     out_l = 0;
     high_bit_mask = 0x80 << 24; // high bit of u32
@@ -240,15 +240,15 @@ static s24_8 u24_8_div(s24_8 x, s24_8 y)
     s32 sl;
     s32 temp;
 
-    if (y.raw == 0)
+    if (y == 0)
         return F248_MAX;
 
-    if (x.raw == 0)
+    if (x == 0)
         return F248_ZERO;
 
-    r7 = (u32)x.raw >> 24;
-    r6 = x.raw << 8;
-    sl = y.raw;
+    r7 = (u32)x >> 24;
+    r6 = x << 8;
+    sl = y;
     r9 = 0;
     r5 = 0;
     r4 = 0;
@@ -323,19 +323,19 @@ s24_8 FP24_8_Hypot(s24_8 x, s24_8 y)
     r5 = x;
     r6 = y;
 
-    if (r5.raw < 0)
-        r5.raw = -r5.raw;
+    if (r5 < 0)
+        r5 = -r5;
 
-    if (r6.raw < 0)
-        r6.raw = -r6.raw;
+    if (r6 < 0)
+        r6 = -r6;
 
-    if (r5.raw < r6.raw) {
+    if (r5 < r6) {
         r4 = r5;
         r5 = r6;
         r6 = r4;
     }
 
-    if (r6.raw != 0) {
+    if (r6 != 0) {
         for (i = 2; i >= 0; i--) {
             r4 = s24_8_div(r6, r5);
             r4 = s24_8_mul(r4, r4);
@@ -386,8 +386,8 @@ UNUSED s24_8 FP48_16_ToF248(s48_16 *a)
 
 void FP48_16_FromF248(s48_16 *a, s24_8 b)
 {
-    a->lo = b.raw << 8;
-    a->hi = b.raw >> 24;
+    a->lo = b << 8;
+    a->hi = b >> 24;
 
     if (a->hi & 0x80)
         a->hi |= ~0x7F;

@@ -50,7 +50,7 @@ void HandleStraightProjectileThrow(Entity *thrower, Item *item, DungeonPos *pos,
     projectile->isVisible = TRUE;
     projectile->unk22 = 0;
     projectile->axObj.info.item = item;
-    projectile->unk1C.raw = 0;
+    projectile->unk1C = 0;
     projectile->pos = *pos;
 
     SetEntityPixelPos(projectile, (pos->x * 24 + 4) << 8, (pos->y * 24 + 0) << 8);
@@ -241,7 +241,7 @@ void HandleCurvedProjectileThrow(Entity *thrower, Item *item, DungeonPos *startP
     projectile->isVisible = TRUE;
     projectile->unk22 = 0;
     projectile->axObj.info.item = item;
-    projectile->unk1C.raw = 0;
+    projectile->unk1C = 0;
     projectile->pos = *startPos;
 
     SetEntityPixelPos(projectile, (startPos->x * 24 + 4) << 8, (startPos->y * 24 + 4) << 8);
@@ -305,7 +305,7 @@ void HandleCurvedProjectileThrow(Entity *thrower, Item *item, DungeonPos *startP
             displayX = posXFixed + 0x400;
             displayY = posYFixed + 0x400;
 
-            projectile->unk1C.raw = sinVal;
+            projectile->unk1C = sinVal;
             unkX = (posXFixed / 256) + 8;
             unkY = (posYFixed / 256) + 16;
             sinePhase += sinePhaseStep;

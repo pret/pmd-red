@@ -662,8 +662,8 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
                 if (userData->offensiveStages[i] < targetData->offensiveStages[i]) break;
                 if (userData->defensiveStages[i] < targetData->defensiveStages[i] ||
                     userData->hitChanceStages[i] < targetData->hitChanceStages[i] ||
-                    userData->offensiveMultipliers[i].raw < targetData->offensiveMultipliers[i].raw ||
-                    userData->defensiveMultipliers[i].raw < targetData->defensiveMultipliers[i].raw)
+                    userData->offensiveMultipliers[i] < targetData->offensiveMultipliers[i] ||
+                    userData->defensiveMultipliers[i] < targetData->defensiveMultipliers[i])
                 {
                     break;
                 }

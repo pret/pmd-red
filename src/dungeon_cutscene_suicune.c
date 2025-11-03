@@ -171,16 +171,16 @@ static void sub_808A528(Entity * param_1)
   iVar1 = IntToF248(12);
   PlaySoundEffect(0x1f8);
   while( 1 ) {
-    iVar2.raw -= iVar1.raw;
+    iVar2 -= iVar1;
     iVar1 = F248_Sub(iVar1, FloatToF248(0.375));
     if (F248LessThanFloat(iVar1, 0.08)) {
-      iVar1 = FloatToF248_2(0.08);
+      iVar1 = FloatToF248(0.08);
     }
     if (F248LessThanInt(iVar2, 0)) break;
     GetEntInfo(param_1)->unk174 = iVar2;
     DungeonRunFrameActions(70);
   }
-  GetEntInfo(param_1)->unk174 = IntToF248_2(0);
+  GetEntInfo(param_1)->unk174 = IntToF248(0);
 }
 
 static void SuicuneScreenFlash(void)

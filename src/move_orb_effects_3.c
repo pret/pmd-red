@@ -81,7 +81,7 @@ void SetChargeStatusTarget(Entity *pokemon, Entity *target, u8 newStatus, Move *
       for (index = 0, iVar8 = 0xc7ff; index < 400; index++) {
         bVar2 = TRUE;
         if (entityInfo->unkFF == 1)
-            if(iVar7 = entityInfo->unk174.raw, bVar2 = FALSE, iVar7 > iVar8) // unk174 -> u32 to s32
+            if(iVar7 = entityInfo->unk174, bVar2 = FALSE, iVar7 > iVar8) // unk174 -> u32 to s32
             {
                 bVar2 = TRUE;
             }
