@@ -1039,20 +1039,21 @@ void BoostDefensiveStat(Entity * user, Entity * target, struct StatIndex stat, s
     EntityUpdateStatusSprites(target);
 }
 
-u8 GetFlashFireStatus(Entity *pokemon)
+u8 GetFlashFireStatus(Entity *defender)
 {
-    if (!EntityIsValid(pokemon) || !AbilityIsActive(pokemon, ABILITY_FLASH_FIRE))
-    {
+    if (!EntityIsValid(defender))
         return FLASH_FIRE_STATUS_NONE;
-    }
-    if (GetEntInfo(pokemon)->flashFireBoost > 1)
-    {
+
+    if (!AbilityIsActive(defender, ABILITY_FLASH_FIRE))
+        return FLASH_FIRE_STATUS_NONE;
+
+    if (GetEntInfo(defender)->flashFireBoost >= 2)
         return FLASH_FIRE_STATUS_MAXED;
-    }
+
     return FLASH_FIRE_STATUS_NOT_MAXED;
 }
 
-void UpdateFlashFireBoost(Entity * pokemon, Entity *target)
+void ActivateFlashFire(Entity * pokemon, Entity *target)
 {
     s32 flashFireBoost;
 
@@ -1071,120 +1072,122 @@ void UpdateFlashFireBoost(Entity * pokemon, Entity *target)
     }
 }
 
-void ChangeAttackMultiplierTarget(Entity *pokemon, Entity *target, struct StatIndex stat, s24_8 param_4, bool8 displayMessage)
+void ApplyOffensiveStatMultiplier(Entity *user, Entity *target, struct StatIndex stat, s24_8 multiplier, bool8 displayMessage)
 {
-  EntityInfo *entityInfo;
-  s24_8 oldMulti;
+    EntityInfo *entityInfo;
+    s24_8 oldMulti;
 
-  if (!EntityIsValid(target)) {
-    return;
-  }
+    if (!EntityIsValid(target))
+        return;
 
-  if (stat.id != STAT_INDEX_PHYSICAL) {
-    strcpy(gFormatBuffer_Items[0],gUnknown_80FC0C8);
-  }
-  else {
-    strcpy(gFormatBuffer_Items[0],gUnknown_80FC0B8);
-  }
-  if (F248LessThanInt(param_4, 1) && IsProtectedFromStatDrops(pokemon,target,displayMessage)) {
-    return;
-  }
-
-  if ((HasHeldItem(target,ITEM_TWIST_BAND)) && F248LessThanInt(param_4, 1)) {
-    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
-    TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FD550);
-    return;
-  }
-
-  if (AbilityIsActive(target, ABILITY_HYPER_CUTTER) && (stat.id == STAT_INDEX_PHYSICAL) && F248LessThanInt(param_4, 1)) {
-    if (displayMessage) {
-        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FCA60);
+    if (stat.id != STAT_INDEX_PHYSICAL) {
+        strcpy(gFormatBuffer_Items[0],gUnknown_80FC0C8);
     }
-    return;
-  }
+    else {
+        strcpy(gFormatBuffer_Items[0],gUnknown_80FC0B8);
+    }
 
-  entityInfo = GetEntInfo(target);
-  SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
-  oldMulti = entityInfo->offensiveMultipliers[stat.id];
+    if (F248LessThanInt(multiplier, 1) && IsProtectedFromStatDrops(user,target,displayMessage))
+        return;
 
-  if (F248LessThanInt(param_4, 1)) {
-    sub_8041FD8(target,stat);
-  }
-  else {
-    sub_8041FB4(target,stat);
-  }
+    if (HasHeldItem(target,ITEM_TWIST_BAND) && F248LessThanInt(multiplier, 1)) {
+        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
+        TryDisplayDungeonLoggableMessage3(user,target,gUnknown_80FD550);
+        return;
+    }
 
-  entityInfo->offensiveMultipliers[stat.id] = s24_8_mul(entityInfo->offensiveMultipliers[stat.id],param_4);
+    if (AbilityIsActive(target, ABILITY_HYPER_CUTTER)
+        && stat.id == STAT_INDEX_PHYSICAL
+        && F248LessThanInt(multiplier, 1))
+    {
+        if (displayMessage) {
+            SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
+            TryDisplayDungeonLoggableMessage3(user,target,gUnknown_80FCA60);
+        }
+        return;
+    }
 
-  if (F248LessThanFloat(entityInfo->offensiveMultipliers[stat.id], 0.01)) {
-    entityInfo->offensiveMultipliers[stat.id] = FloatToF248(0.01);
-  }
-  if (FloatLessThanF248(99.99, entityInfo->offensiveMultipliers[stat.id])) {
-    entityInfo->offensiveMultipliers[stat.id] = FloatToF248(99.99);
-  }
-  if (F248GreaterThan(oldMulti, entityInfo->offensiveMultipliers[stat.id])) {
-    TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FC11C);
-  }
-  else if (F248LessThan(oldMulti, entityInfo->offensiveMultipliers[stat.id])) {
-    TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FC118);
-  }
-  else
-  {
-    TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FC184);
-  }
-  EntityUpdateStatusSprites(target);
+    entityInfo = GetEntInfo(target);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
+    oldMulti = entityInfo->offensiveMultipliers[stat.id];
+
+    if (F248LessThanInt(multiplier, 1)) {
+        PlayOffensiveStatMultiplierDownEffect(target,stat);
+    }
+    else {
+        PlayOffensiveStatMultiplierUpEffect(target,stat);
+    }
+
+    entityInfo->offensiveMultipliers[stat.id] = s24_8_mul(entityInfo->offensiveMultipliers[stat.id],multiplier);
+
+    if (F248LessThanFloat(entityInfo->offensiveMultipliers[stat.id], 0.01)) {
+        entityInfo->offensiveMultipliers[stat.id] = FloatToF248(0.01);
+    }
+    if (FloatLessThanF248(99.99, entityInfo->offensiveMultipliers[stat.id])) {
+        entityInfo->offensiveMultipliers[stat.id] = FloatToF248(99.99);
+    }
+
+    if (F248GreaterThan(oldMulti, entityInfo->offensiveMultipliers[stat.id])) {
+        TryDisplayDungeonLoggableMessage3(user,target,gUnknown_80FC11C);
+    }
+    else if (F248LessThan(oldMulti, entityInfo->offensiveMultipliers[stat.id])) {
+        TryDisplayDungeonLoggableMessage3(user,target,gUnknown_80FC118);
+    }
+    else {
+        TryDisplayDungeonLoggableMessage3(user,target,gUnknown_80FC184);
+    }
+    EntityUpdateStatusSprites(target);
 }
 
-void ChangeDefenseMultiplierTarget(Entity *pokemon, Entity *target, struct StatIndex stat, s24_8 param_4, bool8 displayMessage)
+void ApplyDefensiveStatMultiplier(Entity *user, Entity *target, struct StatIndex stat, s24_8 multiplier, bool8 displayMessage)
 {
-  EntityInfo *entityInfo;
-  s24_8 oldMulti;
+    EntityInfo *entityInfo;
+    s24_8 oldMulti;
 
-  if (!EntityIsValid(target)) {
-    return;
-  }
+    if (!EntityIsValid(target))
+        return;
 
-  if (stat.id != STAT_INDEX_PHYSICAL) {
-    strcpy(gFormatBuffer_Items[0],gUnknown_80FC0AC);
-  }
-  else {
-    strcpy(gFormatBuffer_Items[0],gUnknown_80FC09C);
-  }
-  if (F248LessThanInt(param_4, 1) && IsProtectedFromStatDrops(pokemon,target,displayMessage)) {
-    return;
-  }
+    if (stat.id != STAT_INDEX_PHYSICAL) {
+        strcpy(gFormatBuffer_Items[0],gUnknown_80FC0AC);
+    }
+    else {
+        strcpy(gFormatBuffer_Items[0],gUnknown_80FC09C);
+    }
 
-  entityInfo = GetEntInfo(target);
-  SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
-  oldMulti = entityInfo->defensiveMultipliers[stat.id];
+    if (F248LessThanInt(multiplier, 1) && IsProtectedFromStatDrops(user,target,displayMessage)) {
+        return;
+    }
 
-  if (F248LessThanInt(param_4, 1)) {
-    sub_804201C(target,stat);
-  }
-  else {
-    sub_8041FFC(target,stat);
-  }
+    entityInfo = GetEntInfo(target);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
+    oldMulti = entityInfo->defensiveMultipliers[stat.id];
 
-  entityInfo->defensiveMultipliers[stat.id] = s24_8_mul(entityInfo->defensiveMultipliers[stat.id],param_4);
+    if (F248LessThanInt(multiplier, 1)) {
+        PlayDefensiveStatMultiplierDownEffect(target,stat);
+    }
+    else {
+        PlayDefensiveStatMultiplierUpEffect(target,stat);
+    }
 
-  if (F248LessThanFloat(entityInfo->defensiveMultipliers[stat.id], 0.01)) {
-    entityInfo->defensiveMultipliers[stat.id] = FloatToF248(0.01);
-  }
-  if (FloatLessThanF248(99.99, entityInfo->defensiveMultipliers[stat.id])) {
-    entityInfo->defensiveMultipliers[stat.id] = FloatToF248(99.99);
-  }
-  if (F248GreaterThan(oldMulti, entityInfo->defensiveMultipliers[stat.id])) {
-    TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FC114);
-  }
-  else if (F248LessThan(oldMulti, entityInfo->defensiveMultipliers[stat.id])) {
-    TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FC0FC);
-  }
-  else
-  {
-    TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FC180);
-  }
-  EntityUpdateStatusSprites(target);
+    entityInfo->defensiveMultipliers[stat.id] = s24_8_mul(entityInfo->defensiveMultipliers[stat.id],multiplier);
+
+    if (F248LessThanFloat(entityInfo->defensiveMultipliers[stat.id], 0.01)) {
+        entityInfo->defensiveMultipliers[stat.id] = FloatToF248(0.01);
+    }
+    if (FloatLessThanF248(99.99, entityInfo->defensiveMultipliers[stat.id])) {
+        entityInfo->defensiveMultipliers[stat.id] = FloatToF248(99.99);
+    }
+
+    if (F248GreaterThan(oldMulti, entityInfo->defensiveMultipliers[stat.id])) {
+        TryDisplayDungeonLoggableMessage3(user,target,gUnknown_80FC114);
+    }
+    else if (F248LessThan(oldMulti, entityInfo->defensiveMultipliers[stat.id])) {
+        TryDisplayDungeonLoggableMessage3(user,target,gUnknown_80FC0FC);
+    }
+    else {
+        TryDisplayDungeonLoggableMessage3(user,target,gUnknown_80FC180);
+    }
+    EntityUpdateStatusSprites(target);
 }
 
 void RaiseAccuracyStageTarget(Entity * pokemon, Entity * target, struct StatIndex stat)

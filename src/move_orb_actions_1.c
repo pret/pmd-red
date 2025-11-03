@@ -135,7 +135,7 @@ bool8 SweetScentMoveAction(Entity *pokemon, Entity *target, Move *move, s32 item
 
 bool8 CharmMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 {
-  ChangeAttackMultiplierTarget(pokemon,target,gStatIndexAtkDef,FloatToF248(0.5),TRUE);
+  ApplyOffensiveStatMultiplier(pokemon,target,gStatIndexAtkDef,FloatToF248(0.5),TRUE);
   return TRUE;
 }
 
@@ -325,7 +325,7 @@ bool8 SnoreMoveAction(Entity *pokemon, Entity *target, Move * move, s32 itemId)
 
 bool8 ScreechMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 {
-    ChangeDefenseMultiplierTarget(pokemon, target, gStatIndexAtkDef, FloatToF248(0.25), 1);
+    ApplyDefensiveStatMultiplier(pokemon, target, gStatIndexAtkDef, FloatToF248(0.25), 1);
     return TRUE;
 }
 
@@ -446,7 +446,7 @@ bool8 AuroraBeamMoveAction(Entity *pokemon, Entity *target, Move *move, s32 item
     flag = TRUE;
     if(sub_805727C(pokemon, target, gAuroraBeamAtkLowerChance))
     {
-        ChangeAttackMultiplierTarget(pokemon, target, gStatIndexAtkDef, FloatToF248(0.5), FALSE);
+        ApplyOffensiveStatMultiplier(pokemon, target, gStatIndexAtkDef, FloatToF248(0.5), FALSE);
     }
   }
   return flag;
@@ -458,8 +458,8 @@ bool8 MementoMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 
   entityInfo = GetEntInfo(pokemon);
   entityInfo->HP = 1;
-  ChangeAttackMultiplierTarget(pokemon,target,gStatIndexAtkDef,FloatToF248(0.25),TRUE);
-  ChangeAttackMultiplierTarget(pokemon,target,gStatIndexSpecial,FloatToF248(0.25),TRUE);
+  ApplyOffensiveStatMultiplier(pokemon,target,gStatIndexAtkDef,FloatToF248(0.25),TRUE);
+  ApplyOffensiveStatMultiplier(pokemon,target,gStatIndexSpecial,FloatToF248(0.25),TRUE);
   entityInfo->unk154 = 1;
   return TRUE;
 }

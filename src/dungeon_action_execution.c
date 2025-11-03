@@ -460,7 +460,7 @@ static void HandleFlashFire(void)
         if (EntityIsValid(entity)) {
             if (GetEntInfo(entity)->unk152 != 0) {
                GetEntInfo(entity)->unk152 = 0;
-               UpdateFlashFireBoost(entity, entity);
+               ActivateFlashFire(entity, entity);
             }
         }
     }

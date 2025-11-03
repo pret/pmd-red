@@ -33,9 +33,9 @@ void LowerDefensiveStat(Entity * user, Entity * target, struct StatIndex stat, s
 void BoostOffensiveStat(Entity * user, Entity * target, struct StatIndex stat, s32 increment);
 void BoostDefensiveStat(Entity * user, Entity * target, struct StatIndex stat, s32 increment);
 u8 GetFlashFireStatus(Entity *pokemon);
-void UpdateFlashFireBoost(Entity * pokemon, Entity *target);
-void ChangeAttackMultiplierTarget(Entity *pokemon, Entity *target, struct StatIndex stat, s24_8 param_4, bool8 displayMessage);
-void ChangeDefenseMultiplierTarget(Entity *pokemon, Entity *target, struct StatIndex stat, s24_8 param_4, bool8 displayMessage);
+void ActivateFlashFire(Entity * pokemon, Entity *target);
+void ApplyOffensiveStatMultiplier(Entity *user, Entity *target, struct StatIndex stat, s24_8 multiplier, bool8 displayMessage);
+void ApplyDefensiveStatMultiplier(Entity *user, Entity *target, struct StatIndex stat, s24_8 multiplier, bool8 displayMessage);
 void RaiseAccuracyStageTarget(Entity * pokemon, Entity * target, struct StatIndex stat);
 void LowerAccuracyStageTarget(Entity * pokemon, Entity * target, struct StatIndex stat, bool8 displayMessage);
 void CringeStatusTarget(Entity * pokemon,Entity * target, bool8 displayMessage);
