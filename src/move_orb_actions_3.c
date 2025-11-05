@@ -104,7 +104,7 @@ bool8 BounceMoveAction(Entity * pokemon,Entity * target,Move * move,s32 itemId)
     if (HandleDamagingMove(pokemon, target, move, gBounceModifier, itemId) != 0) {
       flag = TRUE;
       if (sub_805727C(pokemon, target, gBounceSecondaryChance) != 0) {
-        ParalyzeStatusTarget(pokemon, target, FALSE);
+        TryInflictParalysisStatus(pokemon, target, FALSE);
       }
     }
     sub_8079764(pokemon);
@@ -159,7 +159,7 @@ bool8 TriAttackMoveAction(Entity * pokemon, Entity * target, Move *move, s32 ite
             {
                 case 0:
                 default:
-                    ParalyzeStatusTarget(pokemon, target, FALSE);
+                    TryInflictParalysisStatus(pokemon, target, FALSE);
                     break;
                 case 1:
                     BurnedStatusTarget(pokemon, target, 0, FALSE);
@@ -355,7 +355,7 @@ bool8 FakeOutMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
     flag = TRUE;
     if(sub_805727C(pokemon, target, gFakeOutSecondaryChance))
     {
-        CringeStatusTarget(pokemon, target, FALSE);
+        TryInflictCringeStatus(pokemon, target, FALSE);
     }
   }
   return flag;
@@ -706,7 +706,7 @@ bool8 SecretPowerMoveAction(Entity * pokemon, Entity * target, Move *move, s32 i
                 SleepStatusTarget(pokemon,target,CalculateStatusTurns(target,gSleepTurnRange,TRUE),FALSE);
                 break;
             case 2:
-                LowerMovementSpeedTarget(pokemon,target,1,FALSE);
+                LowerSpeed(pokemon,target,1,FALSE);
                 break;
             case 3:
                 LowerOffensiveStat(pokemon,target,gStatIndexAtkDef,1,1,FALSE);
@@ -721,11 +721,11 @@ bool8 SecretPowerMoveAction(Entity * pokemon, Entity * target, Move *move, s32 i
                 ConfuseStatusTarget(pokemon,target,FALSE);
                 break;
             case 7:
-                CringeStatusTarget(pokemon,target,FALSE);
+                TryInflictCringeStatus(pokemon,target,FALSE);
                 break;
             case 8:
             default:
-                ParalyzeStatusTarget(pokemon,target,FALSE);
+                TryInflictParalysisStatus(pokemon,target,FALSE);
                 break;
         }
     }
@@ -898,7 +898,7 @@ bool8 EruptionMoveAction(Entity * pokemon, Entity * target, Move *move, s32 item
 
 bool8 GlareMoveAction(Entity * pokemon,Entity * target,Move *move,s32 itemId)
 {
-    ParalyzeStatusTarget(pokemon,target, TRUE);
+    TryInflictParalysisStatus(pokemon,target, TRUE);
     return TRUE;
 }
 

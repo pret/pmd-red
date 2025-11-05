@@ -1201,7 +1201,7 @@ u8 GetTreatmentBetweenMonstersIgnoreStatus(Entity *monster1, Entity *monster2)
         return TREATMENT_TREAT_AS_ALLY;
 }
 
-bool8 HasSafeguardStatus(Entity * pokemon, Entity * target, bool8 displayMessage)
+bool8 SafeguardIsActive(Entity * pokemon, Entity * target, bool8 displayMessage)
 {
   if (GetEntInfo(target)->reflectClassStatus.status == STATUS_SAFEGUARD) {
     if (displayMessage) {

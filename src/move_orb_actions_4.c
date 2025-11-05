@@ -306,7 +306,7 @@ bool8 DragonRageMoveAction(Entity * pokemon, Entity * target, Move *move, s32 it
 bool8 DragonDanceMoveAction( Entity * pokemon, Entity * target, Move *move, s32 itemId)
 {
     BoostOffensiveStat(pokemon, target, gStatIndexAtkDef, 1);
-    RaiseMovementSpeedTarget(pokemon, target, 0, TRUE);
+    BoostSpeed(pokemon, target, 0, TRUE);
     return TRUE;
 }
 
@@ -602,7 +602,7 @@ bool8 TransferOrbAction(Entity *pokemon, Entity * target, Move *move, s32 itemId
 
 bool8 SlowDownMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 {
-  LowerMovementSpeedTarget(pokemon, target, 1, TRUE);
+  LowerSpeed(pokemon, target, 1, TRUE);
   return TRUE;
 }
 

@@ -358,12 +358,12 @@ void sub_8041888(u8 param_1)
             {
                 entityInfo->unk14C = 1;
             }
-            EntityUpdateStatusSprites(entity);
+            UpdateStatusIconFlags(entity);
         }
     }
 }
 
-void EntityUpdateStatusSprites(Entity *entity)
+void UpdateStatusIconFlags(Entity *entity)
 {
   bool32 flag;
   s32 HP;
@@ -563,7 +563,7 @@ void sub_8041C08(Entity *pokemon)
     sub_804151C(pokemon, 423, 1);
 }
 
-void sub_8041C1C(Entity *pokemon)
+void PlayParalysisEffect(Entity *pokemon)
 {
     sub_804151C(pokemon, 423, 1);
 }
@@ -623,12 +623,12 @@ void sub_8041CA8(Entity *pokemon)
     sub_804151C(pokemon, 7, 1);
 }
 
-void sub_8041CB8(Entity *pokemon)
+void PlaySpeedUpEffect(Entity *pokemon)
 {
     sub_804151C(pokemon, 0x18b, 1);
 }
 
-void sub_8041CCC(Entity *pokemon)
+void PlaySpeedDownEffect(Entity *pokemon)
 {
     sub_804151C(pokemon, 0xC5 << 1, 1);
 }
@@ -936,7 +936,7 @@ void PlayDefensiveStatMultiplierDownEffect(Entity *pokemon, struct StatIndex sta
     }
 }
 
-void sub_8042040(Entity *pokemon, struct StatIndex stat)
+void PlayHitChanceUpEffect(Entity *pokemon, struct StatIndex stat)
 {
     if(stat.id == STAT_INDEX_ACCURACY)
     {
@@ -948,7 +948,7 @@ void sub_8042040(Entity *pokemon, struct StatIndex stat)
     }
 }
 
-void sub_8042060(Entity *pokemon, u32 r1)
+void PlayHitChanceDownEffect(Entity *pokemon, u32 r1)
 {
     if(r1 == 0)
     {
@@ -972,7 +972,7 @@ void sub_8042080(Entity *pokemon, u32 r1)
     }
 }
 
-void sub_80420A0(Entity *pokemon)
+void PlayCringeExclamationPointEffect(Entity *pokemon)
 {
     sub_804151C(pokemon, 0x143, 1);
 }

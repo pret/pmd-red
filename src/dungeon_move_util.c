@@ -241,11 +241,11 @@ void TriggerTargetAbilityEffect(Entity *attacker)
         }
         if (entInfo->abilityEffectFlags & ABILITY_FLAG_STATIC) {
             LogMessageByIdWithPopupCheckUser(attacker, gUnknown_80FEF0C); // Static caused paralysis!
-            ParalyzeStatusTarget(attacker, attacker, TRUE);
+            TryInflictParalysisStatus(attacker, attacker, TRUE);
         }
         if (entInfo->abilityEffectFlags & ABILITY_FLAG_EFFECT_SPORE_PRLZ) {
             LogMessageByIdWithPopupCheckUser(attacker, gUnknown_80FEF30); // Effect Spore scattered spores
-            ParalyzeStatusTarget(attacker, attacker, TRUE);
+            TryInflictParalysisStatus(attacker, attacker, TRUE);
         }
         if (entInfo->abilityEffectFlags & ABILITY_FLAG_POISON_POINT) {
             LogMessageByIdWithPopupCheckUser(attacker, gUnknown_80FEF4C); // Poison Point struck!

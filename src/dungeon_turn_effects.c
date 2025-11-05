@@ -190,7 +190,7 @@ void ApplyEndOfTurnEffects(Entity *entity)
         entityInfo->speedBoostFrames++;
         if (entityInfo->speedBoostFrames >= gSpeedBoostActivationFrame) {
             entityInfo->speedBoostFrames = 0;
-            RaiseMovementSpeedTarget(entity, entity, 0x7F, FALSE);
+            BoostSpeed(entity, entity, 0x7F, FALSE);
         }
     }
 

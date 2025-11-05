@@ -1478,7 +1478,7 @@ void sub_806A6E8(Entity *entity)
             }
 
             if (gDungeon->unk644.itemHoldersIdentified) {
-                EntityUpdateStatusSprites(entity);
+                UpdateStatusIconFlags(entity);
             }
         }
         else {

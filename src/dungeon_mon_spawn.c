@@ -685,7 +685,7 @@ void UpdateEntitySpecies(Entity *entity, s32 _species)
     entInfo->HP = entInfo->maxHPStat;
     entInfo->shopkeeper = 0;
     sub_80429E8(entity);
-    EntityUpdateStatusSprites(entity);
+    UpdateStatusIconFlags(entity);
 }
 
 static void InitEntityFromSpawnInfo(bool8 a0, Entity *entity, struct MonSpawnInfo *monSpawnInfo, DungeonPos *pos)

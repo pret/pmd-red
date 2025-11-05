@@ -532,7 +532,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
                 sub_800DBBC();
                 sub_806A390(target);
                 sub_806CCB4(target, sub_806CEBC(target));
-                EntityUpdateStatusSprites(target);
+                UpdateStatusIconFlags(target);
                 SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], target, 0);
                 DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80FD46C);
                 sub_806F63C(target);
@@ -589,7 +589,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
                 sub_800DBBC();
                 sub_806A390(target);
                 sub_806CCB4(target, sub_806CEBC(target));
-                EntityUpdateStatusSprites(target);
+                UpdateStatusIconFlags(target);
                 SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], target, 0);
                 SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], teamMember, 0);
                 DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80FD484);
@@ -643,7 +643,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
             sub_800DBBC();
             sub_806A390(target);
             sub_806CCB4(target, sub_806CEBC(target));
-            EntityUpdateStatusSprites(target);
+            UpdateStatusIconFlags(target);
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], target, 0);
             DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80FD46C);
             sub_806F63C(target);

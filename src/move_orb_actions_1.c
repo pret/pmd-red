@@ -173,7 +173,7 @@ bool8 BubbleMoveAction(Entity *pokemon, Entity *target, Move * move, s32 itemId)
   if (HandleDamagingMove(pokemon, target, move, IntToF248(1), itemId) != 0) {
     flag = TRUE;
     if (sub_805727C(pokemon,target, gBubbleSecondaryChance)) {
-      LowerMovementSpeedTarget(pokemon, target, 1, FALSE);
+      LowerSpeed(pokemon, target, 1, FALSE);
     }
   }
   return flag;
@@ -293,7 +293,7 @@ bool8 TormentMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 
 bool8 StringShotMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 {
-    LowerMovementSpeedTarget(pokemon, target, 1, TRUE);
+    LowerSpeed(pokemon, target, 1, TRUE);
     return TRUE;
 }
 
@@ -313,7 +313,7 @@ bool8 SnoreMoveAction(Entity *pokemon, Entity *target, Move * move, s32 itemId)
     if (HandleDamagingMove(pokemon,target,move,IntToF248(1),itemId) != 0) {
       flag = TRUE;
       if (sub_805727C(pokemon,target,gSnoreSecondaryChance)) {
-        CringeStatusTarget(pokemon,target,FALSE);
+        TryInflictCringeStatus(pokemon,target,FALSE);
       }
     }
   }
@@ -337,7 +337,7 @@ bool8 RockSlideMoveAction(Entity *pokemon, Entity *target, Move * move, s32 item
   if (HandleDamagingMove(pokemon, target, move, IntToF248(1), itemId) != 0) {
     flag = TRUE;
     if (sub_805727C(pokemon,target,gRockSlideSecondaryChance)) {
-      CringeStatusTarget(pokemon,target,FALSE);
+      TryInflictCringeStatus(pokemon,target,FALSE);
     }
   }
   return flag;
@@ -623,7 +623,7 @@ bool8 BasicRaiseDefenseMoveAction(Entity *pokemon, Entity *target, Move *move, s
 
 bool8 DisableMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 {
-    ParalyzeStatusTarget(pokemon, target, TRUE);
+    TryInflictParalysisStatus(pokemon, target, TRUE);
     return TRUE;
 }
 
@@ -695,7 +695,7 @@ bool8 BiteMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
     flag = TRUE;
     if(sub_805727C(pokemon, target, gBiteSecondaryChance))
     {
-        CringeStatusTarget(pokemon, target, FALSE);
+        TryInflictCringeStatus(pokemon, target, FALSE);
     }
   }
   return flag;
@@ -710,7 +710,7 @@ bool8 ThunderMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
     flag = TRUE;
     if(sub_805727C(pokemon, target, gThunderSecondaryChance))
     {
-        ParalyzeStatusTarget(pokemon, target, FALSE);
+        TryInflictParalysisStatus(pokemon, target, FALSE);
     }
   }
   return flag;
@@ -758,7 +758,7 @@ bool8 sub_8058580(Entity *pokemon, Entity *target, Move *move, s32 itemId)
     flag = TRUE;
     if(sub_805727C(pokemon, target, gConstrictBubblebeamSecondaryChance))
     {
-        LowerMovementSpeedTarget(pokemon, target, 1, FALSE);
+        LowerSpeed(pokemon, target, 1, FALSE);
     }
   }
   return flag;
@@ -788,7 +788,7 @@ bool8 RockTombMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId
     flag = TRUE;
     if(sub_805727C(pokemon, target, 0))
     {
-        LowerMovementSpeedTarget(pokemon, target, 1, FALSE);
+        LowerSpeed(pokemon, target, 1, FALSE);
     }
   }
   return flag;
@@ -935,7 +935,7 @@ bool8 AncientPowerMoveAction(Entity *pokemon, Entity *target, Move *move, s32 it
         if(RollSecondaryEffect(pokemon, gAncientPowerSecondaryChance))
         {
             entityInfo = GetEntInfo(pokemon);
-            RaiseMovementSpeedTarget(pokemon, pokemon, 0, TRUE);
+            BoostSpeed(pokemon, pokemon, 0, TRUE);
             BoostOffensiveStat(pokemon, pokemon, gStatIndexAtkDef, 1);
             BoostOffensiveStat(pokemon, pokemon, gStatIndexSpecial, 1);
             BoostDefensiveStat(pokemon, pokemon, gStatIndexAtkDef, 1);
@@ -954,7 +954,7 @@ bool8 SynthesisMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemI
 
 bool8 AgilityMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 {
-    RaiseMovementSpeedTarget(pokemon, target, 0, TRUE);
+    BoostSpeed(pokemon, target, 0, TRUE);
     return TRUE;
 }
 

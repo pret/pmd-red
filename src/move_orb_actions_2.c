@@ -51,7 +51,7 @@ bool8 SkyAttackMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemI
         if (HandleDamagingMove(pokemon, target, move, gSkyAttackModifier, itemId) != 0) {
            flag = TRUE;
             if(sub_805727C(pokemon, target, gSkyAttackSecondaryChance))
-                CringeStatusTarget(pokemon, target, FALSE);
+                TryInflictCringeStatus(pokemon, target, FALSE);
         }
         sub_8079764(pokemon);
     }
@@ -104,7 +104,7 @@ bool8 EndureMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 
 bool8 ScaryFaceMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 {
-    LowerMovementSpeedTarget(pokemon, target, 1, TRUE);
+    LowerSpeed(pokemon, target, 1, TRUE);
     return TRUE;
 }
 
@@ -295,7 +295,7 @@ bool8 LickMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
     flag = TRUE;
     if(sub_805727C(pokemon, target, gLickSecondaryChance))
     {
-        ParalyzeStatusTarget(pokemon, target, FALSE);
+        TryInflictParalysisStatus(pokemon, target, FALSE);
     }
   }
   return flag;
@@ -309,7 +309,7 @@ bool8 SelfDestructMoveAction(Entity *pokemon, Entity *target, Move *move, s32 it
 
 bool8 StunSporeMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 {
-    ParalyzeStatusTarget(pokemon, target, TRUE);
+    TryInflictParalysisStatus(pokemon, target, TRUE);
     return TRUE;
 }
 
@@ -328,7 +328,7 @@ bool8 ThunderboltMoveAction(Entity *pokemon, Entity *target, Move *move, s32 ite
     flag = TRUE;
     if(sub_805727C(pokemon, target, gThunderboltSecondaryChance))
     {
-        ParalyzeStatusTarget(pokemon, target, FALSE);
+        TryInflictParalysisStatus(pokemon, target, FALSE);
     }
   }
   return flag;
@@ -373,7 +373,7 @@ bool8 ExtrasensoryMoveAction(Entity *pokemon, Entity *target, Move *move, s32 it
     flag = TRUE;
     if(sub_805727C(pokemon, target, gExtrasensorySecondaryChance))
     {
-        CringeStatusTarget(pokemon, target, FALSE);
+        TryInflictCringeStatus(pokemon, target, FALSE);
     }
   }
   return flag;
@@ -496,7 +496,7 @@ bool8 HeadbuttMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId
     flag = TRUE;
     if(sub_805727C(pokemon, target, gHeadbuttSecondaryChance))
     {
-        CringeStatusTarget(pokemon, target, FALSE);
+        TryInflictCringeStatus(pokemon, target, FALSE);
     }
   }
   return flag;
@@ -702,7 +702,7 @@ bool8 TwisterMoveAction(Entity * pokemon,Entity * target,Move * move,s32 itemId)
   {
     flag = TRUE;
     if(sub_805727C(pokemon,target,gTwisterSecondaryChance) != 0) {
-        CringeStatusTarget(pokemon,target,FALSE);
+        TryInflictCringeStatus(pokemon,target,FALSE);
     }
   }
   return flag;
@@ -880,7 +880,7 @@ bool8 ThundershockMoveAction(Entity *pokemon, Entity *target, Move *move, s32 it
     flag = TRUE;
     if(sub_805727C(pokemon, target, gThundershockSecondaryChance))
     {
-        ParalyzeStatusTarget(pokemon, target, FALSE);
+        TryInflictParalysisStatus(pokemon, target, FALSE);
     }
   }
   return flag;
@@ -888,7 +888,7 @@ bool8 ThundershockMoveAction(Entity *pokemon, Entity *target, Move *move, s32 it
 
 bool8 ThunderWaveMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 {
-    ParalyzeStatusTarget(pokemon, target, TRUE);
+    TryInflictParalysisStatus(pokemon, target, TRUE);
     return TRUE;
 }
 
@@ -901,7 +901,7 @@ bool8 ZapCannonMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemI
     flag = TRUE;
     if(sub_805727C(pokemon, target, 0))
     {
-        ParalyzeStatusTarget(pokemon, target, FALSE);
+        TryInflictParalysisStatus(pokemon, target, FALSE);
     }
   }
   return flag;

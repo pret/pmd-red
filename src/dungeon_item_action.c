@@ -420,7 +420,7 @@ static void AllureSeedItemAction(Entity *pokemon, Entity *target)
 
 static void QuickSeedItemAction(Entity *pokemon, Entity *target)
 {
-    RaiseMovementSpeedTarget(pokemon, target, 0, TRUE);
+    BoostSpeed(pokemon, target, 0, TRUE);
 }
 
 static void EyedropSeedItemAction(Entity *pokemon, Entity *target)
@@ -938,7 +938,7 @@ static void GrimyFoodItemAction(Entity *pokemon, Entity * target)
             BurnedStatusTarget(pokemon, target, 1, TRUE);
             break;
         case 3:
-            ParalyzeStatusTarget(pokemon, target, TRUE);
+            TryInflictParalysisStatus(pokemon, target, TRUE);
             break;
         case 4:
             LowerOffensiveStat(pokemon, target, gStatIndexAtkDef, 3, TRUE, TRUE);
