@@ -260,7 +260,7 @@ bool8 MudSlapMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
     flag = TRUE;
     if(sub_805727C(pokemon, target, 0))
     {
-        LowerAccuracyStageTarget(pokemon, target, gStatIndexAtkDef, FALSE);
+        LowerHitChanceStat(pokemon, target, gStatIndexAtkDef, FALSE);
     }
   }
   return flag;
@@ -715,7 +715,7 @@ bool8 SecretPowerMoveAction(Entity * pokemon, Entity * target, Move *move, s32 i
                 LowerDefensiveStat(pokemon,target,gStatIndexAtkDef,1,1,FALSE);
                 break;
             case 5:
-                LowerAccuracyStageTarget(pokemon,target,gStatIndexAtkDef,FALSE);
+                LowerHitChanceStat(pokemon,target,gStatIndexAtkDef,FALSE);
                 break;
             case 6:
                 ConfuseStatusTarget(pokemon,target,FALSE);

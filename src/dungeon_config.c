@@ -173,16 +173,16 @@ UNUSED static const s16 sUnusedConfig1 = 95;
 
 const s16 gGinsengPlus3BoostChance = 12;
 // Move modifiers
-const s24_8 gSolarBeamModifier = FloatToF248(2.0);
-const s24_8 gSkyAttackModifier = FloatToF248(2.0);
-const s24_8 gRazorWindModifier = FloatToF248(2.0);
-const s24_8 gFocusPunchModifier = FloatToF248(2.0);
-const s24_8 gSkullBashModifier = FloatToF248(2.0);
-const s24_8 gFlyModifier = FloatToF248(2.0);
-const s24_8 gBounceModifier = FloatToF248(2.0);
-const s24_8 gDiveModifier = FloatToF248(2.0);
-const s24_8 gDigModifier = FloatToF248(2.0);
-const s24_8 gFacadeModifier = FloatToF248(2.0);
+const s24_8 gSolarBeamModifier = IntToF248(2.0);
+const s24_8 gSkyAttackModifier = IntToF248(2.0);
+const s24_8 gRazorWindModifier = IntToF248(2.0);
+const s24_8 gFocusPunchModifier = IntToF248(2.0);
+const s24_8 gSkullBashModifier = IntToF248(2.0);
+const s24_8 gFlyModifier = IntToF248(2.0);
+const s24_8 gBounceModifier = IntToF248(2.0);
+const s24_8 gDiveModifier = IntToF248(2.0);
+const s24_8 gDigModifier = IntToF248(2.0);
+const s24_8 gFacadeModifier = IntToF248(2.0);
 
 // Fixed damage/heal values
 const s16 gBurnDmgValue = 5;
@@ -275,42 +275,42 @@ UNUSED static const s16 sUnusedConfig3 = 0;
 // Stat stage multipliers
 const s24_8 gAtkStatStageMultipliers[21] =
 {
-    FloatToF248(0.2500), FloatToF248(0.2696), FloatToF248(0.2892), FloatToF248(0.3087), FloatToF248(0.3282), FloatToF248(0.3478),
-    FloatToF248(0.3985), FloatToF248(0.4493), FloatToF248(0.5000), FloatToF248(0.6993), FloatToF248(1.0000), FloatToF248(1.2969),
-    FloatToF248(1.5000), FloatToF248(1.5978), FloatToF248(1.6485), FloatToF248(1.6993), FloatToF248(1.7500), FloatToF248(1.7969),
-    FloatToF248(1.8478), FloatToF248(1.8985), FloatToF248(2.0000)
+    IntToF248(0.2500), IntToF248(0.2696), IntToF248(0.2892), IntToF248(0.3087), IntToF248(0.3282), IntToF248(0.3478),
+    IntToF248(0.3985), IntToF248(0.4493), IntToF248(0.5000), IntToF248(0.6993), IntToF248(1.0000), IntToF248(1.2969),
+    IntToF248(1.5000), IntToF248(1.5978), IntToF248(1.6485), IntToF248(1.6993), IntToF248(1.7500), IntToF248(1.7969),
+    IntToF248(1.8478), IntToF248(1.8985), IntToF248(2.0000)
 };
 const s24_8 gDefStatStageMultipliers[21] =
 {
-    FloatToF248(0.2500), FloatToF248(0.2696), FloatToF248(0.2892), FloatToF248(0.3087), FloatToF248(0.3282), FloatToF248(0.3478),
-    FloatToF248(0.3985), FloatToF248(0.5469), FloatToF248(0.6993), FloatToF248(0.8672), FloatToF248(1.0000), FloatToF248(1.2969),
-    FloatToF248(1.5000), FloatToF248(1.5978), FloatToF248(1.6485), FloatToF248(1.6993), FloatToF248(1.7500), FloatToF248(1.7969),
-    FloatToF248(1.8478), FloatToF248(1.8985), FloatToF248(2.0000)
+    IntToF248(0.2500), IntToF248(0.2696), IntToF248(0.2892), IntToF248(0.3087), IntToF248(0.3282), IntToF248(0.3478),
+    IntToF248(0.3985), IntToF248(0.5469), IntToF248(0.6993), IntToF248(0.8672), IntToF248(1.0000), IntToF248(1.2969),
+    IntToF248(1.5000), IntToF248(1.5978), IntToF248(1.6485), IntToF248(1.6993), IntToF248(1.7500), IntToF248(1.7969),
+    IntToF248(1.8478), IntToF248(1.8985), IntToF248(2.0000)
 };
 const s24_8 gAccEvsStatStageMultipliers[2][21] =
 {
     // Accuracy
     {
-        FloatToF248(0.3282), FloatToF248(0.3478), FloatToF248(0.3672), FloatToF248(0.3985), FloatToF248(0.4297), FloatToF248(0.4493),
-        FloatToF248(0.5469), FloatToF248(0.5977), FloatToF248(0.6993), FloatToF248(0.7969), FloatToF248(1.0000), FloatToF248(1.2500),
-        FloatToF248(1.5000), FloatToF248(1.5978), FloatToF248(1.6485), FloatToF248(1.6993), FloatToF248(1.7500), FloatToF248(1.7969),
-        FloatToF248(1.8478), FloatToF248(1.8985), FloatToF248(2.0000)
+        IntToF248(0.3282), IntToF248(0.3478), IntToF248(0.3672), IntToF248(0.3985), IntToF248(0.4297), IntToF248(0.4493),
+        IntToF248(0.5469), IntToF248(0.5977), IntToF248(0.6993), IntToF248(0.7969), IntToF248(1.0000), IntToF248(1.2500),
+        IntToF248(1.5000), IntToF248(1.5978), IntToF248(1.6485), IntToF248(1.6993), IntToF248(1.7500), IntToF248(1.7969),
+        IntToF248(1.8478), IntToF248(1.8985), IntToF248(2.0000)
     },
     // Evasion
     {
-        FloatToF248(2.0000), FloatToF248(1.8985), FloatToF248(1.8478), FloatToF248(1.7969), FloatToF248(1.7500), FloatToF248(1.6993),
-        FloatToF248(1.6485), FloatToF248(1.5978), FloatToF248(1.5000), FloatToF248(1.3515), FloatToF248(1.0000), FloatToF248(0.7969),
-        FloatToF248(0.6993), FloatToF248(0.5977), FloatToF248(0.5000), FloatToF248(0.3985), FloatToF248(0.3477), FloatToF248(0.2969),
-        FloatToF248(0.2500), FloatToF248(0.1993), FloatToF248(0.1485)
+        IntToF248(2.0000), IntToF248(1.8985), IntToF248(1.8478), IntToF248(1.7969), IntToF248(1.7500), IntToF248(1.6993),
+        IntToF248(1.6485), IntToF248(1.5978), IntToF248(1.5000), IntToF248(1.3515), IntToF248(1.0000), IntToF248(0.7969),
+        IntToF248(0.6993), IntToF248(0.5977), IntToF248(0.5000), IntToF248(0.3985), IntToF248(0.3477), IntToF248(0.2969),
+        IntToF248(0.2500), IntToF248(0.1993), IntToF248(0.1485)
     },
 };
 
 const s32 gDetectBandAccuracyDebuffValue = 30; // For attacking mon, which effectively raises target's evasion
 const s32 gIqQuickDodgerAccuracyDebuffValue = 30; // For attacking mon, which effectively raises target's evasion
 // Move modifiers again
-const s24_8 gReversalModifiers[4] = {FloatToF248(8), FloatToF248(4), FloatToF248(2), FloatToF248(1)}; // Based on hp/max HP ratio
-const s24_8 gWaterSpoutModifiers[4] = {FloatToF248(0.1), FloatToF248(0.2), FloatToF248(0.5), FloatToF248(1)}; // Based on hp/max HP ratio
-const s24_8 gEruptionModifiers[4] = {FloatToF248(0.1), FloatToF248(0.2), FloatToF248(0.5), FloatToF248(1)}; // Based on hp/max HP ratio
+const s24_8 gReversalModifiers[4] = {IntToF248(8), IntToF248(4), IntToF248(2), IntToF248(1)}; // Based on hp/max HP ratio
+const s24_8 gWaterSpoutModifiers[4] = {IntToF248(0.1), IntToF248(0.2), IntToF248(0.5), IntToF248(1)}; // Based on hp/max HP ratio
+const s24_8 gEruptionModifiers[4] = {IntToF248(0.1), IntToF248(0.2), IntToF248(0.5), IntToF248(1)}; // Based on hp/max HP ratio
 const s32 gStockpileHealHpValues[4] = {0, 20, 40, 80};
 
 // Castform related
@@ -327,14 +327,14 @@ const u8 gWeatherBallTypes[WEATHER_COUNT] =
 };
 const s24_8 gWeatherBallModifiers[WEATHER_COUNT] =
 {
-    [WEATHER_CLEAR] = FloatToF248(1.0),
-    [WEATHER_SUNNY] = FloatToF248(2.0),
-    [WEATHER_SANDSTORM] = FloatToF248(2.0),
-    [WEATHER_CLOUDY] = FloatToF248(1.0),
-    [WEATHER_RAIN] = FloatToF248(2.0),
-    [WEATHER_HAIL] = FloatToF248(2.0),
-    [WEATHER_FOG] = FloatToF248(2.0),
-    [WEATHER_SNOW] = FloatToF248(2.0),
+    [WEATHER_CLEAR] = IntToF248(1.0),
+    [WEATHER_SUNNY] = IntToF248(2.0),
+    [WEATHER_SANDSTORM] = IntToF248(2.0),
+    [WEATHER_CLOUDY] = IntToF248(1.0),
+    [WEATHER_RAIN] = IntToF248(2.0),
+    [WEATHER_HAIL] = IntToF248(2.0),
+    [WEATHER_FOG] = IntToF248(2.0),
+    [WEATHER_SNOW] = IntToF248(2.0),
 };
 
 const struct CastformWeatherData gCastformByWeather[WEATHER_COUNT] =

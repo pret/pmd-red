@@ -392,7 +392,7 @@ void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move *move, 
                         moveHadEffect = (HandleDamagingMove(attacker, currTarget, move, IntToF248(1), itemId) != 0);
                         break;
                     case MOVE_REGULAR_ATTACK:
-                        moveHadEffect = (HandleDamagingMove(attacker, currTarget, move, FloatToF248(0.5), itemId) != 0);
+                        moveHadEffect = (HandleDamagingMove(attacker, currTarget, move, IntToF248(0.5), itemId) != 0);
                         break;
                     case MOVE_NOTHING:
                         moveHadEffect = (HandleDamagingMove(attacker, currTarget, move, IntToF248(0), itemId) != 0);

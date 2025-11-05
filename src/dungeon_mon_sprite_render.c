@@ -219,7 +219,7 @@ void UpdateMonsterSprite(Entity *entity)
     sub_8042EC8(entity, y2);
     if (entInfo->unk15C == 0) {
         if (entInfo->unkFF == 1) {
-            if (entInfo->unk174 <= FloatToF248(199.999)) {
+            if (entInfo->unk174 <= IntToF248(199.999)) {
                 entInfo->unk174 += IntToF248(8);
                 if (entInfo->unk174 > IntToF248(200)) {
                     entInfo->unk174 = IntToF248(200);

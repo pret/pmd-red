@@ -1515,7 +1515,7 @@ static void sub_8042A84(s16 param_1, Entity *entity, u32 param_3)
     sub_804151C(entity,param_1_s16,0);
     sub_803E708(param_3,0x42);
     do {
-      if (entity->unk1C > FloatToF248(199.999)) break;
+      if (entity->unk1C > IntToF248(199.999)) break;
       DungeonRunFrameActions(0x42);
       entity->unk1C += + r6;
       r6 += IntToF248(1);

@@ -56,7 +56,7 @@ bool8 IronTailMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId
 }
 
 static const s24_8 sRolloutModifiers[] = {
-    FloatToF248(1.0), FloatToF248(1.0), FloatToF248(1.5), FloatToF248(2.0), FloatToF248(2.5), FloatToF248(3.0), FloatToF248(3.5), FloatToF248(4.0), FloatToF248(4.5), FloatToF248(5.0)
+    IntToF248(1.0), IntToF248(1.0), IntToF248(1.5), IntToF248(2.0), IntToF248(2.5), IntToF248(3.0), IntToF248(3.5), IntToF248(4.0), IntToF248(4.5), IntToF248(5.0)
 };
 
 bool8 sub_805768C(Entity *pokemon, Entity *target, Move *move, s32 itemId)
@@ -129,13 +129,13 @@ bool8 DigMoveAction(Entity * pokemon, Entity * target, Move *move, s32 itemId)
 
 bool8 SweetScentMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 {
-  LowerAccuracyStageTarget(pokemon,target,gStatIndexSpecial,TRUE);
+  LowerHitChanceStat(pokemon,target,gStatIndexSpecial,TRUE);
   return TRUE;
 }
 
 bool8 CharmMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 {
-  ApplyOffensiveStatMultiplier(pokemon,target,gStatIndexAtkDef,FloatToF248(0.5),TRUE);
+  ApplyOffensiveStatMultiplier(pokemon,target,gStatIndexAtkDef,IntToF248(0.5),TRUE);
   return TRUE;
 }
 
@@ -325,7 +325,7 @@ bool8 SnoreMoveAction(Entity *pokemon, Entity *target, Move * move, s32 itemId)
 
 bool8 ScreechMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 {
-    ApplyDefensiveStatMultiplier(pokemon, target, gStatIndexAtkDef, FloatToF248(0.25), 1);
+    ApplyDefensiveStatMultiplier(pokemon, target, gStatIndexAtkDef, IntToF248(0.25), 1);
     return TRUE;
 }
 
@@ -446,7 +446,7 @@ bool8 AuroraBeamMoveAction(Entity *pokemon, Entity *target, Move *move, s32 item
     flag = TRUE;
     if(sub_805727C(pokemon, target, gAuroraBeamAtkLowerChance))
     {
-        ApplyOffensiveStatMultiplier(pokemon, target, gStatIndexAtkDef, FloatToF248(0.5), FALSE);
+        ApplyOffensiveStatMultiplier(pokemon, target, gStatIndexAtkDef, IntToF248(0.5), FALSE);
     }
   }
   return flag;
@@ -458,8 +458,8 @@ bool8 MementoMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 
   entityInfo = GetEntInfo(pokemon);
   entityInfo->HP = 1;
-  ApplyOffensiveStatMultiplier(pokemon,target,gStatIndexAtkDef,FloatToF248(0.25),TRUE);
-  ApplyOffensiveStatMultiplier(pokemon,target,gStatIndexSpecial,FloatToF248(0.25),TRUE);
+  ApplyOffensiveStatMultiplier(pokemon,target,gStatIndexAtkDef,IntToF248(0.25),TRUE);
+  ApplyOffensiveStatMultiplier(pokemon,target,gStatIndexSpecial,IntToF248(0.25),TRUE);
   entityInfo->unk154 = 1;
   return TRUE;
 }
@@ -473,7 +473,7 @@ bool8 OctazookaMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemI
     flag = TRUE;
     if(sub_805727C(pokemon, target, gOctazookaAccLowerChance))
     {
-        LowerAccuracyStageTarget(pokemon, target, gStatIndexAtkDef, FALSE);
+        LowerHitChanceStat(pokemon, target, gStatIndexAtkDef, FALSE);
     }
   }
   return flag;
@@ -596,7 +596,7 @@ bool8 ExposeMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 
 bool8 DoubleTeamMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 {
-    RaiseAccuracyStageTarget(pokemon, target, gStatIndexSpecial);
+    BoostHitChanceStat(pokemon, target, gStatIndexSpecial);
     return TRUE;
 }
 

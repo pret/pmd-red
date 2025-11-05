@@ -175,9 +175,9 @@ static void HoOhDropInEffect(Entity * param_1)
   PlaySoundEffect(0x1f8);
   while( 1 ) {
     iVar2 -= iVar1;
-    iVar1 = F248_Sub(iVar1, FloatToF248(0.375));
+    iVar1 = F248_Sub(iVar1, IntToF248(0.375));
     if (F248LessThanFloat(iVar1, 0.08)) {
-      iVar1 = FloatToF248(0.08);
+      iVar1 = IntToF248(0.08);
     }
     if (F248LessThanInt(iVar2, 0)) break;
     GetEntInfo(param_1)->unk174 = iVar2;

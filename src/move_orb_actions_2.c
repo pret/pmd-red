@@ -537,7 +537,7 @@ bool8 SandstormMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemI
 
 bool8 sub_8059528(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 {
-    LowerAccuracyStageTarget(pokemon, target, gStatIndexAtkDef, TRUE);
+    LowerHitChanceStat(pokemon, target, gStatIndexAtkDef, TRUE);
     return TRUE;
 }
 
@@ -677,7 +677,7 @@ bool8 MuddyWaterMoveAction(Entity *pokemon, Entity *target, Move *move, s32 item
     flag = TRUE;
     if(sub_805727C(pokemon, target, gMuddyWaterAccLowerChance))
     {
-        LowerAccuracyStageTarget(pokemon, target, gStatIndexAtkDef, FALSE);
+        LowerHitChanceStat(pokemon, target, gStatIndexAtkDef, FALSE);
     }
   }
   return flag;
@@ -737,7 +737,7 @@ bool8 sub_80599EC(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 
 bool8 MinimizeMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 {
-    RaiseAccuracyStageTarget(pokemon, target, gStatIndexSpecial);
+    BoostHitChanceStat(pokemon, target, gStatIndexSpecial);
     return TRUE;
 }
 

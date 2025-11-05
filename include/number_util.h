@@ -56,8 +56,7 @@ void WriteBellyBits(DataSerializer *r0, FixedPoint *src);
 // Sometimes it's used directly as opposed to calling IntToFixedPoint
 #define IntToFixedPointMacro(x) ((FixedPoint){x, 0})
 
-#define IntToF248(x) (((x) << 8))
-#define FloatToF248(x) ((int)(x * 0x100))
-#define F248ToInt(x) ((s24_8)(x / 256))
+#define IntToF248(x) ((int)((x) * 0x100))
+#define F248ToInt(x) ((s24_8)((x) / 256))
 
 #endif

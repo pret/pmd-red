@@ -166,7 +166,7 @@ void TriggerMonsterHouse(Entity *entity, bool8 forcedMonsterHouse)
                 if (EntityIsValid(newMonster)) {
                     newMonster->unk1C = IntToF248(200);
                     for (j = 0; j < 100; j++) {
-                        newMonster->unk1C = s24_8_mul(newMonster->unk1C, FloatToF248(0.665));
+                        newMonster->unk1C = s24_8_mul(newMonster->unk1C, IntToF248(0.665));
                         if (newMonster->unk1C < IntToF248(1)) {
                             break;
                         }

@@ -51,17 +51,17 @@ bool8 FP48_16_SLessThan(const s48_16 *a, const s48_16 *b);
 void FP48_16_Add(s48_16 *dst, s48_16 *a, s48_16 *b);
 void FP48_16_Subtract(s48_16 *dst, s48_16 *a, s48_16 *b);
 
-#define F248LessThanInt(x, y) (x < 0x100 * y)
-#define F248LessThanFloat(x, y) (x < (int)(y * 0x100))
-#define FloatLessThanF248(x, y) ((int)(x * 0x100) < y)
-#define F248LessThan(x, y) (x < y)
-#define F248GreaterThan(x, y) (x > y)
-#define F248Equal(x, y) (x == y)
-#define F248EqualsInt(x, y) (x == 0x100 * y)
-#define F248_AddInt(x, y) ((s24_8){x + 0x100 * y})
-#define F248_SubInt(x, y) ((s24_8){x - 0x100 * y})
-#define F248_Add(x, y)(x + y)
-#define F248_Sub(x, y)(x - y)
-#define F248_MulInt(x, y)(x * y)
+#define F248LessThanInt(x, y) ((x) < 0x100 * (y))
+#define F248LessThanFloat(x, y) ((x) < (int)((y) * 0x100))
+#define FloatLessThanF248(x, y) ((int)((x) * 0x100) < (y))
+#define F248LessThan(x, y) ((x) < (y))
+#define F248GreaterThan(x, y) ((x) > (y))
+#define F248Equal(x, y) ((x) == (y))
+#define F248EqualsInt(x, y) ((x) == 0x100 * (y))
+#define F248_AddInt(x, y) ((s24_8)((x) + 0x100 * (y))
+#define F248_SubInt(x, y) ((s24_8)((x) - 0x100 * (y))
+#define F248_Add(x, y)((x) + (y))
+#define F248_Sub(x, y)((x) - (y))
+#define F248_MulInt(x, y)((x) * (y))
 
 #endif // GUARD_MATH_H
