@@ -44,6 +44,12 @@ EWRAM_DATA u8 gPotentialAttackTargetDirections[NUM_DIRECTIONS] = {0};
 EWRAM_DATA s32 gPotentialAttackTargetWeights[NUM_DIRECTIONS] = {0};
 EWRAM_DATA Entity *gPotentialTargets[NUM_DIRECTIONS] = {0};
 
+static bool8 IsTargetInLineRange(Entity *user, Entity *target, s32 range);
+static s32 TryAddTargetToAITargetList(s32 numPotentialTargets, s32 targetingFlags, Entity *user, Entity *target, Move *move, bool32 hasStatusChecker);
+static bool8 IsAITargetEligible(s32 targetingFlags, Entity *user, Entity *target, Move *move, bool32 hasStatusChecker);
+static s32 WeightMove(Entity *user, s32 targetingFlags, Entity *target, u32 moveType);
+static bool8 TargetRegularAttack(Entity *pokemon, u32 *targetDir, bool8 checkPetrified);
+
 void ChooseAIMove(Entity *pokemon)
 {
     EntityInfo *pokemonInfo = GetEntInfo(pokemon);
@@ -526,59 +532,51 @@ s32 AIConsiderMove(struct AIPossibleMove *aiPossibleMove, Entity *pokemon, Move 
     return moveWeight;
 }
 
-bool8 IsTargetInLineRange(Entity *user, Entity *target, s32 range)
+static bool8 IsTargetInLineRange(Entity *user, Entity *target, s32 range)
 {
     s32 direction;
     s32 distanceX = abs(user->pos.x - target->pos.x);
     s32 distanceY = abs(user->pos.y - target->pos.y);
     s32 distance = max(distanceX, distanceY);
 
-    if (distance > RANGED_ATTACK_RANGE || distance > range)
-    {
+    if (distance > RANGED_ATTACK_RANGE || distance > range) {
         return FALSE;
     }
     direction = -1;
-    if (distanceX == distanceY)
-    {
-        if (user->pos.x < target->pos.x &&
-            (user->pos.y < target->pos.y || user->pos.y > target->pos.y))
-        {
-            returnTrue:
-            return TRUE;
+    if (distanceX == distanceY) {
+        if (user->pos.x < target->pos.x && user->pos.y < target->pos.y) {
+            direction = DIRECTION_SOUTH;
         }
-        if (user->pos.x > target->pos.x); // Fixes register loading order.
-        direction = DIRECTION_SOUTHWEST;
-        if (user->pos.x <= target->pos.x || user->pos.y <= target->pos.y)
-        {
-            goto checkDirectionSet;
+        else if (user->pos.x < target->pos.x && user->pos.y > target->pos.y) {
+            direction = DIRECTION_EAST;
         }
-        goto returnTrue;
+        else if (user->pos.x > target->pos.x && user->pos.y > target->pos.y) {
+            direction = DIRECTION_NORTH;
+        }
+        else {
+            direction = DIRECTION_SOUTHWEST;
+        }
     }
-    else if (user->pos.x == target->pos.x && user->pos.y < target->pos.y)
-    {
-        return TRUE;
+    else if (user->pos.x == target->pos.x && user->pos.y < target->pos.y) {
+        direction = DIRECTION_SOUTH;
     }
-    else if (user->pos.x < target->pos.x && user->pos.y == target->pos.y)
-    {
-        return TRUE;
+    else if (user->pos.x < target->pos.x && user->pos.y == target->pos.y) {
+        direction = DIRECTION_SOUTHEAST;
     }
-    else if (user->pos.x == target->pos.x && user->pos.y > target->pos.y)
-    {
-        return TRUE;
+    else if (user->pos.x == target->pos.x && user->pos.y > target->pos.y) {
+        direction = DIRECTION_NORTHEAST;
     }
-    else if (user->pos.x > target->pos.x && user->pos.y == target->pos.y)
-    {
+    else if (user->pos.x > target->pos.x && user->pos.y == target->pos.y) {
         direction = DIRECTION_WEST;
     }
-    checkDirectionSet:
-    if (direction < 0)
-    {
-        return FALSE;
+
+    if (direction >= 0) {
+        return TRUE;
     }
-    return TRUE;
+    return FALSE;
 }
 
-s32 TryAddTargetToAITargetList(s32 numPotentialTargets, s32 targetingFlags, Entity *user, Entity *target, Move *move, bool32 hasStatusChecker)
+static s32 TryAddTargetToAITargetList(s32 numPotentialTargets, s32 targetingFlags, Entity *user, Entity *target, Move *move, bool32 hasStatusChecker)
 {
     s32 direction;
     s32 targetingFlags2 = (s16) targetingFlags;
@@ -607,7 +605,7 @@ s32 TryAddTargetToAITargetList(s32 numPotentialTargets, s32 targetingFlags, Enti
     return numPotentialTargets;
 }
 
-bool8 IsAITargetEligible(s32 targetingFlags, Entity *user, Entity *target, Move *move, bool32 hasStatusChecker)
+static bool8 IsAITargetEligible(s32 targetingFlags, Entity *user, Entity *target, Move *move, bool32 hasStatusChecker)
 {
     EntityInfo *targetData;
     s32 targetingFlags2 = (s16) targetingFlags;
@@ -733,7 +731,7 @@ bool8 IsAITargetEligible(s32 targetingFlags, Entity *user, Entity *target, Move 
     return hasTarget;
 }
 
-s32 WeightMove(Entity *user, s32 targetingFlags, Entity *target, u32 moveType)
+static s32 WeightMove(Entity *user, s32 targetingFlags, Entity *target, u32 moveType)
 {
     EntityInfo *targetData;
     s32 targetingFlags2 = (s16) targetingFlags;
@@ -767,7 +765,7 @@ s32 WeightMove(Entity *user, s32 targetingFlags, Entity *target, u32 moveType)
     return weight;
 }
 
-bool8 TargetRegularAttack(Entity *pokemon, u32 *targetDir, bool8 checkPetrified)
+static bool8 TargetRegularAttack(Entity *pokemon, u32 *targetDir, bool8 checkPetrified)
 {
     EntityInfo *pokemonInfo = GetEntInfo(pokemon);
     s32 numPotentialTargets = 0;

@@ -369,7 +369,7 @@ void DecideMovement(Entity *pokemon, bool8 showRunAwayEffect)
     if (ShouldAvoidFirstHit(pokemon, pokemonInfo->aiTarget.aiTargetingEnemy))
     {
         if (pokemonInfo->aiTarget.aiObjective == AI_CHASE_TARGET &&
-            IsTargetTwoTilesAway(&pokemon->pos, &pokemonInfo->aiTarget.aiTargetPos))
+            IsPositionWithinTwoTiles(&pokemon->pos, &pokemonInfo->aiTarget.aiTargetPos))
         {
             s32 distance = GetDistance(&pokemon->pos, &pokemonInfo->aiTarget.aiTargetPos);
             if (distance == 2)

@@ -13,96 +13,70 @@
 
 EWRAM_INIT Entity *gLeaderPointer = NULL;
 
-bool8 IsPositionActuallyInSight(DungeonPos *pos1, DungeonPos *pos2)
+// Actual function in Sky. TODO: Find other uses of it and sync with Sky.
+static inline s32 GetVisibilityRange(void)
 {
-    u8 pos1Room;
-    u8 visibility = gDungeon->unk181e8.visibilityRange;
-    const Tile *tile1;
-    if (visibility == 0)
-    {
-        visibility = 2;
-    }
-    tile1 = GetTile(pos1->x, pos1->y);
-    pos1Room = tile1->room;
-    if (pos1Room == CORRIDOR_ROOM)
-    {
-        s32 xDiff = pos1->x - pos2->x;
-        s32 yDiff;
-        xDiff = xDiff < 0 ? -xDiff : xDiff;
-        if (xDiff > visibility)
-        {
-            return FALSE;
-        }
+    s32 visibilityRange = gDungeon->unk181e8.visibilityRange;
+    if (visibilityRange == 0)
+        return 2;
 
-        yDiff = pos1->y - pos2->y;
-        yDiff = yDiff < 0 ? -yDiff : yDiff;
-        if (yDiff > visibility)
-        {
-            return FALSE;
-        }
-        returnTrue:
-        return TRUE;
-    }
-    else
-    {
-        struct RoomData *pos1RoomData = &gDungeon->roomData[pos1Room];
-        if (pos1RoomData->bottomRightCornerX - 1 > pos2->x || pos1RoomData->bottomRightCornerY - 1 > pos2->y ||
-            pos1RoomData->topLeftCornerX + 1 <= pos2->x || pos1RoomData->topLeftCornerY + 1 <= pos2->y)
-        {
-            return FALSE;
-        }
-        goto returnTrue;
-    }
+    return visibilityRange;
 }
 
-bool8 IsPositionInSight(DungeonPos *pos1, DungeonPos *pos2)
+bool8 IsPositionActuallyInSight(DungeonPos *origin, DungeonPos *target)
 {
-  const Tile *tile;
-  u8 pos1Room;
-  s32 xDiff;
-  s32 yDiff;
-  s32 x1;
-  s32 x2;
-  s32 y1;
-  s32 y2;
-
-  tile = GetTile(pos1->x,pos1->y);
-  pos1Room = tile->room;
-  if (pos1Room != CORRIDOR_ROOM) {
-        struct RoomData *pos1RoomData = &gDungeon->roomData[pos1Room];
-        if (pos1RoomData->bottomRightCornerX - 1 > pos2->x || pos1RoomData->bottomRightCornerY - 1 > pos2->y ||
-            pos1RoomData->topLeftCornerX + 1 <= pos2->x || pos1RoomData->topLeftCornerY + 1 <= pos2->y)
-        {
-            goto _08083394;
-        }
-  }
-  else
-  {
-_08083394:
-
-    x1 = pos1->x;
-    x2 = pos2->x;
-
-    y1 = pos1->y;
-    y2 = pos2->y;
-
-    yDiff = y1 - y2;
-    xDiff = x1 - x2;
-
-    xDiff = xDiff < 0 ? -xDiff : xDiff;
-    yDiff = yDiff < 0 ? -yDiff : yDiff;
-
-    if (yDiff < xDiff) {
-      yDiff = xDiff;
+    s32 visibility = GetVisibilityRange();
+    const Tile *tile1 = GetTile(origin->x, origin->y);
+    u8 originRoom = tile1->room;
+    if (originRoom == CORRIDOR_ROOM) {
+        if (abs(origin->x - target->x) <= visibility && abs(origin->y - target->y) <= visibility)
+            return TRUE;
     }
-    if ((2 < yDiff))
-returnFalse:
+    else {
+        struct RoomData *originRoomData  = &gDungeon->roomData[originRoom];
+        if (originRoomData->bottomRightCornerX - 1 <= target->x &&
+            originRoomData->bottomRightCornerY - 1 <= target->y &&
+            originRoomData->topLeftCornerX + 1 > target->x &&
+            originRoomData->topLeftCornerY + 1 > target->y)
+            return TRUE;
+    }
+
+    return FALSE;
+}
+
+bool8 IsPositionInSight(DungeonPos *origin, DungeonPos *target)
+{
+    s32 diff;
+    const Tile *tile = GetTile(origin->x,origin->y);
+    u8 originRoom = tile->room;
+    if (originRoom != CORRIDOR_ROOM) {
+        struct RoomData *originRoomData = &gDungeon->roomData[originRoom];
+        if (originRoomData->bottomRightCornerX - 1 <= target->x &&
+            originRoomData->bottomRightCornerY - 1 <= target->y &&
+            originRoomData->topLeftCornerX + 1 > target->x &&
+            originRoomData->topLeftCornerY + 1 > target->y)
+            return TRUE;
+    }
+
+    // This looks like a static inline / macro, but I can't get it right for both Red/Sky. See also HandleCurvedProjectileThrow
+    {
+        s32 x = origin->x - target->x;
+        s32 y = origin->y - target->y;
+        s32 absX = abs(x);
+        s32 absY = abs(y);
+        diff = max(absX, absY);
+    }
+
+    if (diff > 2)
         return FALSE;
-    else if((yDiff == 2) && (!IsTargetTwoTilesAway(pos1,pos2))) {
-      goto returnFalse;
+    else if (diff == 2) {
+        if (IsPositionWithinTwoTiles(origin, target))
+            return TRUE;
+        else
+            return FALSE;
     }
-  }
-  return TRUE;
+
+    return TRUE;
 }
 
 void sub_80833E8(DungeonPos *param_1, s32 *param_2)
@@ -133,7 +107,7 @@ void sub_80833E8(DungeonPos *param_1, s32 *param_2)
   }
 }
 
-bool8 IsTargetTwoTilesAway(DungeonPos *pos1, DungeonPos *pos2)
+bool8 IsPositionWithinTwoTiles(DungeonPos *pos1, DungeonPos *pos2)
 {
     s32 i;
     const Tile *tile;
