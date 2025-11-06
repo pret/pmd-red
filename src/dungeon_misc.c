@@ -1714,7 +1714,7 @@ void EndAbilityImmuneStatus(Entity *attacker, Entity *target)
     }
 
     if ((AbilityIsActive(target, ABILITY_INSOMNIA) || AbilityIsActive(target, ABILITY_VITAL_SPIRIT))
-        && (IsSleeping(target) || targetInfo->sleepClassStatus.status == STATUS_YAWNING))
+        && (IsMonsterSleeping(target) || targetInfo->sleepClassStatus.status == STATUS_YAWNING))
     {
         EndSleepClassStatus(attacker, target, FALSE, TRUE);
     }

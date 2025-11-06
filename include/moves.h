@@ -48,7 +48,7 @@ bool8 FailsWhileMuzzled(u16 moveID);
 const u8 *GetHMTMMoves(s16 species);
 const u8 *GetLevelUpMoves(s16 species);
 s32 GetLinkedSequence(s32 index, Move *moves, u16 *sequenceMoveIDs);
-s32 GetMoveAccuracyOrAIChance(Move *move, u32 accuracyType);
+s32 GetMoveAccuracyOrAiChance(Move *move, u32 accuracyType);
 u8 GetMoveAIWeight(Move *move);
 s32 GetMoveBasePower(Move *move);
 u32 GetMoveBasePP(Move *move);

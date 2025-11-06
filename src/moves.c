@@ -190,7 +190,7 @@ s32 GetMoveBasePower(Move *move)
     return sMovesData[move->id].basePower;
 }
 
-s32 GetMoveAccuracyOrAIChance(Move *move, u32 accuracyType)
+s32 GetMoveAccuracyOrAiChance(Move *move, u32 accuracyType)
 {
     return sMovesData[move->id].accuracy[accuracyType];
 }

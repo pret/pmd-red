@@ -936,7 +936,7 @@ void CheckLeaderTile(void)
         return;
 
     tile = GetTileAtEntitySafe(leader);
-    if (IQSkillIsEnabled(leader, IQ_SUPER_MOBILE) && GetEntInfo(leader)->invisibleClassStatus.status != STATUS_MOBILE && !HasHeldItem(leader, ITEM_MOBILE_SCARF))
+    if (IqSkillIsEnabled(leader, IQ_SUPER_MOBILE) && GetEntInfo(leader)->invisibleClassStatus.status != STATUS_MOBILE && !HasHeldItem(leader, ITEM_MOBILE_SCARF))
         sub_804AE84(&leader->pos);
     if (tile->terrainFlags & TERRAIN_TYPE_STAIRS)
         gDungeon->unk1 = 1;
@@ -950,7 +950,7 @@ void CheckLeaderTile(void)
             Trap *trap = GetTrapInfo(tileObject);
             bool32 r8 = FALSE;
             bool32 r7 = FALSE;
-            if (IQSkillIsEnabled(leader, IQ_TRAP_SEER) && !tileObject->isVisible) {
+            if (IqSkillIsEnabled(leader, IQ_TRAP_SEER) && !tileObject->isVisible) {
                 tileObject->isVisible = TRUE;
                 UpdateTrapsVisibility();
                 r7 = TRUE;

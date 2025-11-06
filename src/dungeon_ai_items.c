@@ -126,7 +126,7 @@ void AIDecideUseItem(Entity *pokemon)
             }
         }
     }
-    else if (IQSkillIsEnabled(pokemon, IQ_ITEM_MASTER))
+    else if (IqSkillIsEnabled(pokemon, IQ_ITEM_MASTER))
     {
         for (toolboxIndex = 1; toolboxIndex < INVENTORY_SIZE + 2; toolboxIndex++)
         {

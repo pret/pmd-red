@@ -351,7 +351,7 @@ static void TryInteractWithTile(Entity *entity)
         return;
 
     tile = GetTileAtEntitySafe(entity);
-    if (IQSkillIsEnabled(entity, IQ_SUPER_MOBILE)
+    if (IqSkillIsEnabled(entity, IQ_SUPER_MOBILE)
         && info->invisibleClassStatus.status != STATUS_MOBILE
         && !(HasHeldItem(entity, ITEM_MOBILE_SCARF)))
     {
@@ -366,7 +366,7 @@ static void TryInteractWithTile(Entity *entity)
             Trap *trapData = GetTrapInfo(tileEntity);
             bool8 trigger = FALSE;
             bool8 onlyMakeVisible = FALSE;
-            if (IQSkillIsEnabled(entity, IQ_TRAP_SEER) && !tileEntity->isVisible) {
+            if (IqSkillIsEnabled(entity, IQ_TRAP_SEER) && !tileEntity->isVisible) {
                 tileEntity->isVisible = TRUE;
                 UpdateTrapsVisibility();
                 onlyMakeVisible = TRUE;
@@ -410,7 +410,7 @@ bool8 CheckEntityTileForInteraction(Entity *entity)
         return FALSE;
 
     tile = GetTileAtEntitySafe(entity);
-    if (IQSkillIsEnabled(entity, IQ_SUPER_MOBILE) && GetTerrainType(tile) == TERRAIN_TYPE_WALL)
+    if (IqSkillIsEnabled(entity, IQ_SUPER_MOBILE) && GetTerrainType(tile) == TERRAIN_TYPE_WALL)
         return TRUE;
     subEntity = tile->object;
     if (subEntity == NULL)

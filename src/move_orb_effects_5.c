@@ -49,7 +49,7 @@ void sub_8079F20(Entity * pokemon, Entity * target, u8 param_3, u8 param_4)
   moveUnsealed = FALSE;
   if (EntityIsValid(target)) {
     entityInfo = GetEntInfo(target);
-    if (HasNegativeStatus(target)) {
+    if (MonsterHasNegativeStatus(target)) {
       bVar8 = TRUE;
       EndSleepClassStatus(pokemon,target,0,0);
       if (!EntityIsValid(target)) {

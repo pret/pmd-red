@@ -601,7 +601,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
 
     }
 
-    if (IQSkillIsEnabled(target, IQ_ITEM_MASTER)) {
+    if (IqSkillIsEnabled(target, IQ_ITEM_MASTER)) {
         s32 i; // r3
         Item *reviverSeed = NULL; // r4
         if (ItemExists(&targetData->heldItem) && !ItemSticky(&targetData->heldItem) && ItemId(&targetData->heldItem) == ITEM_REVIVER_SEED)
@@ -1026,7 +1026,7 @@ static void ApplyAtkDefStatBoosts(Entity *attacker, Entity *target, u8 moveType,
 
     if (AbilityIsActive(attacker, ABILITY_GUTS)) {
         EntityInfo *entInfo = GetEntInfo(attacker);
-        bool8 gutsBoost = HasNegativeStatus(attacker);
+        bool8 gutsBoost = MonsterHasNegativeStatus(attacker);
         bool8 visFlags_attacker_1 = SetVisualFlags(entInfo,1,gutsBoost);
 
         if (gutsBoost) {
@@ -1081,7 +1081,7 @@ static void ApplyAtkDefStatBoosts(Entity *attacker, Entity *target, u8 moveType,
 
     if ((AbilityIsActive(target, ABILITY_MARVEL_SCALE)) && (splitIndex == 0)) {
         EntityInfo *targetInfo = GetEntInfo(target);
-        bool8 hasNegStatus_target = HasNegativeStatus(target);
+        bool8 hasNegStatus_target = MonsterHasNegativeStatus(target);
         bool8 visFlags_target = SetVisualFlags(targetInfo, 8, hasNegStatus_target);
 
         if (hasNegStatus_target) {
@@ -1330,7 +1330,7 @@ void CalcDamage(Entity *attacker, Entity *target, u8 moveType, s32 movePower, s3
                     critOdds += gCritOddsScopeLensPatsyBand;
                     gDungeon->unk134.unk165 = 1;
                 }
-                if (r5 && IQSkillIsEnabled(attacker, IQ_TYPE_ADVANTAGE_MASTER)) {
+                if (r5 && IqSkillIsEnabled(attacker, IQ_TYPE_ADVANTAGE_MASTER)) {
                     critOdds = gCritOddsIqAdvantageMaster;
                     gDungeon->unk134.unk169 = 1;
                 }

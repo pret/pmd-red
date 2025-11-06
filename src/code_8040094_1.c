@@ -49,7 +49,7 @@ extern s32 sub_800EBC8(struct UnkStruct_8040094 *a0);
 extern bool8 sub_800E7D0(struct UnkStruct_8040094 *a0);
 extern bool8 EffectiveMoveHasSineWobble(s32 moveId);
 extern bool8 MoveMatchesBideClassStatus(Entity *pokemon, Move *move);
-extern bool8 IsSleeping(Entity *pokemon);
+extern bool8 IsMonsterSleeping(Entity *pokemon);
 
 extern const s32 gUnknown_8106A8C[];
 
@@ -441,7 +441,7 @@ static bool32 MoveHasSpecialEffect(Entity *entity, Move *move)
         }
     }
     else if (move->id == MOVE_SNORE || move->id == MOVE_SLEEP_TALK) {
-        if (!IsSleeping(entity))
+        if (!IsMonsterSleeping(entity))
             return TRUE;
         else
             return FALSE;

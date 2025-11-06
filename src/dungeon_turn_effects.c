@@ -87,7 +87,7 @@ void ApplyEndOfTurnEffects(Entity *entity)
             arrIndex = 0;
         if (HasHeldItem(entity, ITEM_STAMINA_BAND))
             arrIndex--;
-        if (IQSkillIsEnabled(entity, IQ_ENERGY_SAVER))
+        if (IqSkillIsEnabled(entity, IQ_ENERGY_SAVER))
             arrIndex--;
         if (HasHeldItem(entity, ITEM_DIET_RIBBON))
             arrIndex++;
@@ -180,7 +180,7 @@ void ApplyEndOfTurnEffects(Entity *entity)
 
 // Abilities check
     rand = DungeonRandInt(100);
-    if (AbilityIsActive(entity, ABILITY_SHED_SKIN) && rand < gShedSkinActivateChance && HasNegativeStatus(entity)) {
+    if (AbilityIsActive(entity, ABILITY_SHED_SKIN) && rand < gShedSkinActivateChance && MonsterHasNegativeStatus(entity)) {
         DisplayActions(NULL);
         if (!EntityIsValid(entity) || IsFloorOver())
             return;

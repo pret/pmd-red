@@ -221,7 +221,7 @@ bool8 DreamEaterMoveAction(Entity * pokemon, Entity * target, Move *move, s32 it
 
   flag = FALSE;
   hasLiquidOoze = AbilityIsActive(target, ABILITY_LIQUID_OOZE);
-  if (IsSleeping(target)) {
+  if (IsMonsterSleeping(target)) {
     iVar3 = HandleDamagingMove(pokemon,target,move,IntToF248(1),itemId);
     if (iVar3 != 0) {
       flag = TRUE;

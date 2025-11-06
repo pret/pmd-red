@@ -259,7 +259,7 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
             }
             break;
         case MOVE_REST:
-            if (!HasLowHealth(pokemon) && !HasNegativeStatus(pokemon))
+            if (!MonsterHasQuarterHp(pokemon) && !MonsterHasNegativeStatus(pokemon))
             {
                 return FALSE;
             }
@@ -467,7 +467,7 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
         case MOVE_SING:
         case MOVE_SLEEP_POWDER:
         case MOVE_SPORE:
-            if (IsSleeping(target))
+            if (IsMonsterSleeping(target))
             {
                 return FALSE;
             }
@@ -477,7 +477,7 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
             {
                 return FALSE;
             }
-            if (IsSleeping(target))
+            if (IsMonsterSleeping(target))
             {
                 return FALSE;
             }

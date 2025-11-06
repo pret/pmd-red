@@ -100,7 +100,7 @@ void sub_80479B8(char param_1, char param_2, u8 param_3, Entity *pokemon, Entity
       }
       else {
         if (GetItemCategory(item->id) != CATEGORY_BERRIES_SEEDS_VITAMINS) {
-          flag = IQSkillIsEnabled(target, IQ_ITEM_CATCHER);
+          flag = IqSkillIsEnabled(target, IQ_ITEM_CATCHER);
         }
       }
       if (CheckVariousConditions(target)) {
@@ -503,7 +503,7 @@ static void HungerSeedItemAction(Entity *pokemon, Entity * target)
   {
     entityInfo = GetEntInfo(target);
     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], target, 0);
-    if (IQSkillIsEnabled(target, IQ_SELF_CURER))
+    if (IqSkillIsEnabled(target, IQ_SELF_CURER))
         TryDisplayDungeonLoggableMessage3(pokemon, target, gPtrSelfHealPreventedHungerMessage);
     else
     {

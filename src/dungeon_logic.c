@@ -105,10 +105,10 @@ u8 sub_80703A0(Entity *pokemon, DungeonPos *pos)
     if ((IsCurrentFixedRoomBossFight()) || ((entityInfo->invisibleClassStatus.status != STATUS_MOBILE && (!HasHeldItem(pokemon, ITEM_MOBILE_SCARF))))) {
         crossableTerrain = GetCrossableTerrain(entityInfo->id);
         tileFlags = tile->terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
-        if (IQSkillIsEnabled(pokemon, IQ_ALL_TERRAIN_HIKER)) {
+        if (IqSkillIsEnabled(pokemon, IQ_ALL_TERRAIN_HIKER)) {
             crossableTerrain = CROSSABLE_TERRAIN_CREVICE;
         }
-        if (IQSkillIsEnabled(pokemon, IQ_SUPER_MOBILE)) {
+        if (IqSkillIsEnabled(pokemon, IQ_SUPER_MOBILE)) {
             crossableTerrain = CROSSABLE_TERRAIN_WALL;
         }
         switch(crossableTerrain)
@@ -171,10 +171,10 @@ bool8 sub_807049C(Entity *pokemon, DungeonPos *pos)
     if (IsCurrentFixedRoomBossFight() || (entityInfo->invisibleClassStatus.status != STATUS_MOBILE && !HasHeldItem(pokemon, ITEM_MOBILE_SCARF))) {
         crossableTerrain = GetCrossableTerrain(entityInfo->id);
         tileFlags = tile->terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
-        if (IQSkillIsEnabled(pokemon, IQ_ALL_TERRAIN_HIKER)) {
+        if (IqSkillIsEnabled(pokemon, IQ_ALL_TERRAIN_HIKER)) {
             crossableTerrain = CROSSABLE_TERRAIN_CREVICE;
         }
-        if (IQSkillIsEnabled(pokemon, IQ_SUPER_MOBILE)) {
+        if (IqSkillIsEnabled(pokemon, IQ_SUPER_MOBILE)) {
             crossableTerrain = CROSSABLE_TERRAIN_WALL;
         }
         switch(crossableTerrain)
@@ -255,10 +255,10 @@ bool8 sub_80705F0(Entity *pokemon, DungeonPos *pos)
         if (IsCurrentFixedRoomBossFight() || (entityInfo->invisibleClassStatus.status != STATUS_MOBILE && !HasHeldItem(pokemon, ITEM_MOBILE_SCARF))) {
             crossableTerrain = GetCrossableTerrain(entityInfo->id);
             tileFlags = tile->terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
-            if (IQSkillIsEnabled(pokemon, IQ_ALL_TERRAIN_HIKER)) {
+            if (IqSkillIsEnabled(pokemon, IQ_ALL_TERRAIN_HIKER)) {
                 crossableTerrain = CROSSABLE_TERRAIN_CREVICE;
             }
-            if (IQSkillIsEnabled(pokemon, IQ_SUPER_MOBILE)) {
+            if (IqSkillIsEnabled(pokemon, IQ_SUPER_MOBILE)) {
                 crossableTerrain = CROSSABLE_TERRAIN_WALL;
             }
 
@@ -296,10 +296,10 @@ bool8 sub_80706A4(Entity *pokemon, DungeonPos *pos)
         if (IsCurrentFixedRoomBossFight() || (entityInfo->invisibleClassStatus.status != STATUS_MOBILE && !HasHeldItem(pokemon, ITEM_MOBILE_SCARF))) {
             crossableTerrain = GetCrossableTerrain(entityInfo->id);
             tileFlags = tile->terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
-            if (IQSkillIsEnabled(pokemon, IQ_ALL_TERRAIN_HIKER)) {
+            if (IqSkillIsEnabled(pokemon, IQ_ALL_TERRAIN_HIKER)) {
                 crossableTerrain = CROSSABLE_TERRAIN_CREVICE;
             }
-            if (IQSkillIsEnabled(pokemon, IQ_SUPER_MOBILE)) {
+            if (IqSkillIsEnabled(pokemon, IQ_SUPER_MOBILE)) {
                 crossableTerrain = CROSSABLE_TERRAIN_WALL;
             }
             switch(crossableTerrain)
@@ -468,7 +468,7 @@ void CopyEntityNameForDungeonExitSummary(u8 *buffer, EntityInfo *entityInfo)
     }
 }
 
-bool8 HasNegativeStatus(Entity *pokemon)
+bool8 MonsterHasNegativeStatus(Entity *pokemon)
 {
     EntityInfo *pokemonInfo = GetEntInfo(pokemon);
     s32 i;
@@ -508,7 +508,7 @@ bool8 HasNegativeStatus(Entity *pokemon)
     return FALSE;
 }
 
-bool8 IsSleeping(Entity *pokemon)
+bool8 IsMonsterSleeping(Entity *pokemon)
 {
     if (GetEntInfo(pokemon)->sleepClassStatus.status != STATUS_SLEEP &&
         GetEntInfo(pokemon)->sleepClassStatus.status != STATUS_NAPPING &&
@@ -519,7 +519,7 @@ bool8 IsSleeping(Entity *pokemon)
     return TRUE;
 }
 
-bool8 HasLowHealth(Entity *pokemon)
+bool8 MonsterHasQuarterHp(Entity *pokemon)
 {
     EntityInfo *pokemonInfo = GetEntInfo(pokemon);
     if (pokemonInfo->HP <= pokemonInfo->maxHPStat / 4)
@@ -695,9 +695,9 @@ bool8 CanMoveInDirection(Entity *pokemon, u32 direction)
     {
         if (GetEntInfo(pokemon)->invisibleClassStatus.status == STATUS_MOBILE || HasHeldItem(pokemon, ITEM_MOBILE_SCARF))
             crossableTerrain = CROSSABLE_TERRAIN_WALL;
-        else if (IQSkillIsEnabled(pokemon, IQ_ALL_TERRAIN_HIKER))
+        else if (IqSkillIsEnabled(pokemon, IQ_ALL_TERRAIN_HIKER))
             crossableTerrain = CROSSABLE_TERRAIN_CREVICE;
-        else if (IQSkillIsEnabled(pokemon, IQ_SUPER_MOBILE)) {
+        else if (IqSkillIsEnabled(pokemon, IQ_SUPER_MOBILE)) {
             if (direction & 1)
                 // Super Mobile can't break walls diagonally.
                 crossableTerrain = CROSSABLE_TERRAIN_CREVICE;
@@ -730,13 +730,13 @@ bool8 sub_8070F3C(Entity * pokemon, DungeonPos *pos, s32 direction)
         {
             terrain = CROSSABLE_TERRAIN_WALL;
         }
-        else if (IQSkillIsEnabled(pokemon, IQ_ALL_TERRAIN_HIKER))
+        else if (IqSkillIsEnabled(pokemon, IQ_ALL_TERRAIN_HIKER))
         {
             // BUG: If the Pokémon is a Ghost type that can normally attack through walls,
             // All-Terrain Hiker/Super Mobile may make the AI think it can't attack through walls.
             terrain = CROSSABLE_TERRAIN_CREVICE;
         }
-        else if (IQSkillIsEnabled(pokemon, IQ_SUPER_MOBILE))
+        else if (IqSkillIsEnabled(pokemon, IQ_SUPER_MOBILE))
         {
             if ((direction & 1) != 0)
             {
@@ -793,13 +793,13 @@ bool8 sub_8070F80(Entity * pokemon, s32 direction)
         {
             terrain = CROSSABLE_TERRAIN_WALL;
         }
-        else if (IQSkillIsEnabled(pokemon, IQ_ALL_TERRAIN_HIKER))
+        else if (IqSkillIsEnabled(pokemon, IQ_ALL_TERRAIN_HIKER))
         {
             // BUG: If the Pokémon is a Ghost type that can normally attack through walls,
             // All-Terrain Hiker/Super Mobile may make the AI think it can't attack through walls.
             terrain = CROSSABLE_TERRAIN_CREVICE;
         }
-        else if (IQSkillIsEnabled(pokemon, IQ_SUPER_MOBILE))
+        else if (IqSkillIsEnabled(pokemon, IQ_SUPER_MOBILE))
         {
             if ((direction & 1) != 0)
             {
@@ -839,13 +839,13 @@ UNUSED static bool8 sub_8071058(Entity * pokemon, s32 direction)
         {
             terrain = CROSSABLE_TERRAIN_WALL;
         }
-        else if (IQSkillIsEnabled(pokemon, IQ_ALL_TERRAIN_HIKER))
+        else if (IqSkillIsEnabled(pokemon, IQ_ALL_TERRAIN_HIKER))
         {
             // BUG: If the Pokémon is a Ghost type that can normally attack through walls,
             // All-Terrain Hiker/Super Mobile may make the AI think it can't attack through walls.
             terrain = CROSSABLE_TERRAIN_CREVICE;
         }
-        else if (IQSkillIsEnabled(pokemon, IQ_SUPER_MOBILE))
+        else if (IqSkillIsEnabled(pokemon, IQ_SUPER_MOBILE))
         {
             if ((direction & 1) != 0)
             {
@@ -886,13 +886,13 @@ bool8 CanAttackInDirection(Entity *pokemon, s32 direction)
             {
                 crossableTerrain = CROSSABLE_TERRAIN_WALL;
             }
-            else if (IQSkillIsEnabled(pokemon, IQ_ALL_TERRAIN_HIKER))
+            else if (IqSkillIsEnabled(pokemon, IQ_ALL_TERRAIN_HIKER))
             {
                 // BUG: If the Pokémon is a Ghost type that can normally attack through walls,
                 // All-Terrain Hiker/Super Mobile may make the AI think it can't attack through walls.
                 crossableTerrain = CROSSABLE_TERRAIN_CREVICE;
             }
-            else if (IQSkillIsEnabled(pokemon, IQ_SUPER_MOBILE))
+            else if (IqSkillIsEnabled(pokemon, IQ_SUPER_MOBILE))
             {
                 if ((direction & 1) != 0)
                 {
@@ -927,12 +927,12 @@ bool8 CanAIMonsterMoveInDirection(Entity *pokemon, s32 direction, bool8 *pokemon
     }
     if (frontTile->terrainFlags & TERRAIN_TYPE_IN_MONSTER_HOUSE &&
         !gDungeon->unk644.monsterHouseTriggered &&
-        IQSkillIsEnabled(pokemon, IQ_HOUSE_AVOIDER))
+        IqSkillIsEnabled(pokemon, IQ_HOUSE_AVOIDER))
     {
         return FALSE;
     }
     if (frontTile->object != NULL &&
-        IQSkillIsEnabled(pokemon, IQ_TRAP_AVOIDER) &&
+        IqSkillIsEnabled(pokemon, IQ_TRAP_AVOIDER) &&
         GetEntityType(frontTile->object) == ENTITY_TRAP &&
         (frontTile->object->isVisible || GetEntInfo(pokemon)->blinkerClassStatus.status == STATUS_EYEDROPS))
     {
@@ -940,7 +940,7 @@ bool8 CanAIMonsterMoveInDirection(Entity *pokemon, s32 direction, bool8 *pokemon
     }
     if ((frontTile->terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == TERRAIN_TYPE_SECONDARY &&
         gDungeonWaterType[gDungeon->tileset] == DUNGEON_WATER_TYPE_LAVA &&
-        IQSkillIsEnabled(pokemon, IQ_LAVA_EVADER))
+        IqSkillIsEnabled(pokemon, IQ_LAVA_EVADER))
     {
         return FALSE;
     }
@@ -951,13 +951,13 @@ bool8 CanAIMonsterMoveInDirection(Entity *pokemon, s32 direction, bool8 *pokemon
         {
             crossableTerrain = CROSSABLE_TERRAIN_WALL;
         }
-        else if (IQSkillIsEnabled(pokemon, IQ_ALL_TERRAIN_HIKER))
+        else if (IqSkillIsEnabled(pokemon, IQ_ALL_TERRAIN_HIKER))
         {
             // BUG: If the Pokémon is a Ghost type that can normally move through walls,
             // All-Terrain Hiker/Super Mobile may make the AI think it can't move through walls.
             crossableTerrain = CROSSABLE_TERRAIN_CREVICE;
         }
-        else if (IQSkillIsEnabled(pokemon, IQ_SUPER_MOBILE))
+        else if (IqSkillIsEnabled(pokemon, IQ_SUPER_MOBILE))
         {
             if ((direction & 1) != 0)
             {
@@ -993,11 +993,11 @@ bool8 IsAtJunction(Entity *pokemon)
         {
             crossableTerrain = CROSSABLE_TERRAIN_WALL;
         }
-        else if (IQSkillIsEnabled(pokemon, IQ_ALL_TERRAIN_HIKER))
+        else if (IqSkillIsEnabled(pokemon, IQ_ALL_TERRAIN_HIKER))
         {
             crossableTerrain = CROSSABLE_TERRAIN_CREVICE;
         }
-        else if (IQSkillIsEnabled(pokemon, IQ_SUPER_MOBILE))
+        else if (IqSkillIsEnabled(pokemon, IQ_SUPER_MOBILE))
         {
             crossableTerrain = CROSSABLE_TERRAIN_WALL;
         }
@@ -1021,7 +1021,7 @@ bool8 IsAtJunction(Entity *pokemon)
         char walkableNeighborFlags;
         if (gDungeonWaterType[gDungeon->tileset] == DUNGEON_WATER_TYPE_LAVA
            && crossableTerrain == CROSSABLE_TERRAIN_LIQUID
-           && IQSkillIsEnabled(pokemon, IQ_LAVA_EVADER))
+           && IqSkillIsEnabled(pokemon, IQ_LAVA_EVADER))
         {
             crossableTerrain = CROSSABLE_TERRAIN_REGULAR;
         }
@@ -1320,7 +1320,7 @@ bool8 IsTacticSet(Entity *pokemon, u8 tactic)
     return pokemonInfo->tactic == tactic;
 }
 
-bool8 IQSkillIsEnabled(Entity *pokemon, u8 IQSkill)
+bool8 IqSkillIsEnabled(Entity *pokemon, u8 IQSkill)
 {
     return IsIQSkillSet(&GetEntInfo(pokemon)->IQSkillFlags, 1 << IQSkill);
 }

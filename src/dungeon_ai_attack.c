@@ -127,8 +127,8 @@ void ChooseAIMove(Entity *pokemon)
         }
         return;
     }
-    hasWeakTypePicker = IQSkillIsEnabled(pokemon, IQ_WEAK_TYPE_PICKER);
-    hasPPChecker = IQSkillIsEnabled(pokemon, IQ_PP_CHECKER) != FALSE;
+    hasWeakTypePicker = IqSkillIsEnabled(pokemon, IQ_WEAK_TYPE_PICKER);
+    hasPPChecker = IqSkillIsEnabled(pokemon, IQ_PP_CHECKER) != FALSE;
     total = 0;
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
@@ -220,7 +220,7 @@ void ChooseAIMove(Entity *pokemon)
         }
     }
     aiPossibleMove[REGULAR_ATTACK_INDEX].weight = 0;
-    if (!IQSkillIsEnabled(pokemon, IQ_EXCLUSIVE_MOVE_USER) && pokemonInfo->bideClassStatus.status != chargeStatus)
+    if (!IqSkillIsEnabled(pokemon, IQ_EXCLUSIVE_MOVE_USER) && pokemonInfo->bideClassStatus.status != chargeStatus)
     {
         aiPossibleMove[REGULAR_ATTACK_INDEX].canBeUsed = TRUE;
         if (pokemonInfo->bideClassStatus.status == chargeStatus)
@@ -274,7 +274,7 @@ void ChooseAIMove(Entity *pokemon)
     }
     randomWeight = DungeonRandInt(total);
     weightCounter = 0;
-    if (!IQSkillIsEnabled(pokemon, IQ_EXCLUSIVE_MOVE_USER))
+    if (!IqSkillIsEnabled(pokemon, IQ_EXCLUSIVE_MOVE_USER))
     {
         canTargetRegularAttack = TargetRegularAttack(pokemon, &regularAttackTargetDir, TRUE);
     }
@@ -353,7 +353,7 @@ s32 AIConsiderMove(struct AIPossibleMove *aiPossibleMove, Entity *pokemon, Move 
         gCanAttackInDirection[i] = FALSE;
     }
     targetingFlags = GetMoveTargetAndRangeForPokemon(pokemon, move, TRUE);
-    hasStatusChecker = IQSkillIsEnabled(pokemon, IQ_STATUS_CHECKER);
+    hasStatusChecker = IqSkillIsEnabled(pokemon, IQ_STATUS_CHECKER);
     aiPossibleMove->canBeUsed = FALSE;
     if ((pokemonInfo->cringeClassStatus.status == STATUS_TAUNTED && !MoveIgnoresTaunted(move)) ||
         (hasStatusChecker && !CanUseOnSelfWithStatusChecker(pokemon, move)))
@@ -605,127 +605,113 @@ static s32 TryAddTargetToAITargetList(s32 numPotentialTargets, s32 targetingFlag
     return numPotentialTargets;
 }
 
-static bool8 IsAITargetEligible(s32 targetingFlags, Entity *user, Entity *target, Move *move, bool32 hasStatusChecker)
+static bool8 IsAITargetEligible(s32 moveAiRange_, Entity *user, Entity *target, Move *move, bool32 checkAllConditions_)
 {
-    EntityInfo *targetData;
-    s32 targetingFlags2 = (s16) targetingFlags;
-    bool8 hasStatusChecker2 = hasStatusChecker;
+    s32 moveAiRange = (s16) moveAiRange_;
+    bool8 checkAllConditions = checkAllConditions_;
     bool8 hasTarget = FALSE;
-    u32 categoryTargetingFlags = targetingFlags2 & 0xF;
-    u32 *categoryTargetingFlags2 = &categoryTargetingFlags; // Fixes a regswap.
-    if (*categoryTargetingFlags2 == TARGETING_FLAG_TARGET_OTHER)
+    u32 moveAiTarget = moveAiRange & 0xF;
+    // Needed to fix a regswap.
+    u32 *matchMe = &moveAiTarget;
+    if (*matchMe == TARGET_ENEMIES)
     {
         if (GetTreatmentBetweenMonsters(user, target, FALSE, TRUE) == TREATMENT_TREAT_AS_ENEMY)
-        {
             hasTarget = TRUE;
-        }
     }
-    else if (categoryTargetingFlags == TARGETING_FLAG_HEAL_TEAM)
+    else if (moveAiTarget == TARGET_PARTY)
     {
-        goto checkCanTarget;
-    }
-    else if (categoryTargetingFlags == TARGETING_FLAG_LONG_RANGE)
-    {
-        targetData = GetEntInfo(target);
-        goto checkThirdParty;
-    }
-    else if (categoryTargetingFlags == TARGETING_FLAG_ATTACK_ALL)
-    {
-        targetData = GetEntInfo(target);
-        if (user == target)
-        {
-            goto returnFalse;
-        }
-        checkThirdParty:
-        hasTarget = TRUE;
-        if (targetData->shopkeeper == SHOPKEEPER_MODE_SHOPKEEPER ||
-            targetData->monsterBehavior == BEHAVIOR_DIGLETT ||
-            targetData->monsterBehavior == BEHAVIOR_RESCUE_TARGET)
-        {
-            returnFalse:
-            return FALSE;
-        }
-    }
-    else if (categoryTargetingFlags == TARGETING_FLAG_BOOST_TEAM)
-    {
-        if (user == target)
-        {
-            goto returnFalse;
-        }
-        checkCanTarget:
         if (GetTreatmentBetweenMonsters(user, target, FALSE, TRUE) == TREATMENT_TREAT_AS_ALLY)
-        {
+            hasTarget = TRUE;
+    }
+    else if (moveAiTarget == TARGET_ALL)
+    {
+        EntityInfo *targetData = targetData = GetEntInfo(target);
+        hasTarget = TRUE;
+        if (targetData->shopkeeper == SHOPKEEPER_MODE_SHOPKEEPER)
+            return FALSE;
+        if (targetData->monsterBehavior == BEHAVIOR_DIGLETT)
+            return FALSE;
+        if (targetData->monsterBehavior == BEHAVIOR_RESCUE_TARGET)
+            return FALSE;
+    }
+    else if (moveAiTarget == TARGET_ALL_EXCEPT_USER)
+    {
+        EntityInfo *targetData = targetData = GetEntInfo(target);
+        if (user == target)
+            return FALSE;
+
+        hasTarget = TRUE;
+        if (targetData->shopkeeper == SHOPKEEPER_MODE_SHOPKEEPER)
+            return FALSE;
+        if (targetData->monsterBehavior == BEHAVIOR_DIGLETT)
+            return FALSE;
+        if (targetData->monsterBehavior == BEHAVIOR_RESCUE_TARGET)
+            return FALSE;
+    }
+    else if (moveAiTarget == TARGET_TEAMMATES)
+    {
+        if (user == target)
+            return FALSE;
+
+        if (GetTreatmentBetweenMonsters(user, target, FALSE, TRUE) == TREATMENT_TREAT_AS_ALLY)
+            hasTarget = TRUE;
+    }
+    else {
+        // s16 memes
+        u16 asU16 = moveAiTarget;
+        if (asU16 == TARGET_USER || asU16 == TARGET_ENEMIES_AFTER_CHARGING) {
             hasTarget = TRUE;
         }
-    }
-    else if ((u16) (categoryTargetingFlags - 3) <= 1) // categoryTargetingFlags == TARGETING_FLAG_ITEM
-    {
-        hasTarget = TRUE;
     }
 
     if (hasTarget)
     {
-        if (hasStatusChecker2)
+        if (checkAllConditions)
         {
             if (!CanUseOnTargetWithStatusChecker(user, target, move))
+                return FALSE;
+
+            if ((moveAiRange & 0xF00) == AI_CONDITION_RANDOM)
             {
-                goto returnFalse;
+                s32 use_chance = GetMoveAccuracyOrAiChance(move, ACCURACY_AI_CONDITION_RANDOM_CHANCE);
+                if (DungeonRandInt(100) >= use_chance)
+                    return FALSE;
             }
-            if ((targetingFlags2 & 0xF00) == TARGETING_FLAG_SET_TRAP)
+            else if ((moveAiRange & 0xF00) == AI_CONDITION_HP_25)
             {
-                goto rollMoveUseChance;
+                if (!MonsterHasQuarterHp(target))
+                    return FALSE;
             }
-            else if ((targetingFlags2 & 0xF00) == TARGETING_FLAG_HEAL_HP)
+            else if ((moveAiRange & 0xF00) == AI_CONDITION_STATUS)
             {
-                if (!HasLowHealth(target))
-                {
-                    if (*categoryTargetingFlags2);
-                    goto returnFalse;
-                }
+                if (!MonsterHasNegativeStatus(target))
+                    return FALSE;
             }
-            else if ((targetingFlags2 & 0xF00) == TARGETING_FLAG_HEAL_STATUS)
+            else if ((moveAiRange & 0xF00) == AI_CONDITION_ASLEEP)
             {
-                if (!HasNegativeStatus(target))
-                {
-                    if (*categoryTargetingFlags2); // Flips the conditional.
-                    goto returnFalse;
-                }
+                if (!IsMonsterSleeping(target))
+                    return FALSE;
             }
-            else if ((targetingFlags2 & 0xF00) == TARGETING_FLAG_DREAM_EATER)
+            else if ((moveAiRange & 0xF00) == AI_CONDITION_GHOST)
             {
-                if (!IsSleeping(target))
-                {
-                    if (*categoryTargetingFlags2); // Flips the conditional.
-                    goto returnFalse;
-                }
+                EntityInfo *targetData = targetData = GetEntInfo(target);
+                if (targetData->types[0] != TYPE_GHOST && targetData->types[1] != TYPE_GHOST)
+                    return FALSE;
+
+                if (targetData->exposed)
+                    return FALSE;
             }
-            else if ((targetingFlags2 & 0xF00) == TARGETING_FLAG_EXPOSE)
+            else if ((moveAiRange & 0xF00) == AI_CONDITION_HP_25_OR_STATUS)
             {
-                targetData = GetEntInfo(target);
-                if ((targetData->types[0] != TYPE_GHOST && targetData->types[1] != TYPE_GHOST) || targetData->exposed)
-                {
-                    if (*categoryTargetingFlags2); // Flips the conditional.
-                    goto returnFalse;
-                }
-            }
-            else if ((targetingFlags2 & 0xF00) == TARGETING_FLAG_HEAL_ALL)
-            {
-                if (!HasNegativeStatus(target) && !HasLowHealth(target))
-                {
-                    if (*categoryTargetingFlags2); // Flips the conditional.
-                    goto returnFalse;
-                }
+                if (!MonsterHasNegativeStatus(target) && !MonsterHasQuarterHp(target))
+                    return FALSE;
             }
         }
-        else if ((targetingFlags2 & 0xF00) == TARGETING_FLAG_SET_TRAP)
+        else if ((moveAiRange & 0xF00) == AI_CONDITION_RANDOM)
         {
-            s32 useChance;
-            rollMoveUseChance:
-            useChance = GetMoveAccuracyOrAIChance(move, ACCURACY_AI_CONDITION_RANDOM_CHANCE);
-            if (DungeonRandInt(100) >= useChance)
-            {
-                goto returnFalse;
-            }
+            s32 use_chance = GetMoveAccuracyOrAiChance(move, ACCURACY_AI_CONDITION_RANDOM_CHANCE);
+            if (DungeonRandInt(100) >= use_chance)
+                return FALSE;
         }
     }
     return hasTarget;
@@ -743,22 +729,22 @@ static s32 WeightMove(Entity *user, s32 targetingFlags, Entity *target, u32 move
     if ((targetingFlags2 & 0xF) != TARGETING_FLAG_TARGET_OTHER)
         return 1;
 
-    if (IQSkillIsEnabled(user, IQ_EXP_GO_GETTER))
+    if (IqSkillIsEnabled(user, IQ_EXP_GO_GETTER))
     {
         // BUG: expYieldRankings has lower values as the Pokémon's experience yield increases.
         // This causes Exp. Go-Getter to prioritize Pokémon worth less experience
         // instead of Pokémon worth more experience.
         weight = gDungeon->expYieldRankings[targetData->id];
     }
-    else if (IQSkillIsEnabled(user, IQ_EFFICIENCY_EXPERT))
+    else if (IqSkillIsEnabled(user, IQ_EFFICIENCY_EXPERT))
     {
-        weight = -12 - targetData->HP;
+        weight = 500 - targetData->HP;
         if (weight == 0)
         {
             weight = 1;
         }
     }
-    else if (IQSkillIsEnabled(user, IQ_WEAK_TYPE_PICKER))
+    else if (IqSkillIsEnabled(user, IQ_WEAK_TYPE_PICKER))
     {
        weight = WeightWeakTypePicker(user, target, moveType2) + 1;
     }
@@ -774,8 +760,8 @@ static bool8 TargetRegularAttack(Entity *pokemon, u32 *targetDir, bool8 checkPet
     s32 i;
     s32 potentialAttackTargetDirections[NUM_DIRECTIONS];
     s32 potentialAttackTargetWeights[NUM_DIRECTIONS];
-    bool8 hasTargetingIQ = IQSkillIsEnabled(pokemon, IQ_EXP_GO_GETTER) || IQSkillIsEnabled(pokemon, IQ_EFFICIENCY_EXPERT);
-    bool8 hasStatusChecker = IQSkillIsEnabled(pokemon, IQ_STATUS_CHECKER);
+    bool8 hasTargetingIQ = IqSkillIsEnabled(pokemon, IQ_EXP_GO_GETTER) || IqSkillIsEnabled(pokemon, IQ_EFFICIENCY_EXPERT);
+    bool8 hasStatusChecker = IqSkillIsEnabled(pokemon, IQ_STATUS_CHECKER);
     for (i = 0; i < faceTurnLimit; i++, direction++)
     {
         Entity *target;
@@ -841,69 +827,48 @@ static bool8 TargetRegularAttack(Entity *pokemon, u32 *targetDir, bool8 checkPet
 
 }
 
-bool8 IsTargetInRange(Entity *pokemon, Entity *targetPokemon, s32 direction, s32 maxRange)
+bool8 IsTargetInRange(Entity *user, Entity *target, s32 direction, s32 nTiles)
 {
-    s32 distanceX = pokemon->pos.x - targetPokemon->pos.x;
-    s32 effectiveMaxRange;
-    if (distanceX < 0)
-    {
-        distanceX = -distanceX;
-    }
-    effectiveMaxRange = pokemon->pos.y - targetPokemon->pos.y;
-    if (effectiveMaxRange < 0)
-    {
-        effectiveMaxRange = -effectiveMaxRange;
-    }
-    if (effectiveMaxRange < distanceX)
-    {
-        effectiveMaxRange = distanceX;
-    }
-    if (effectiveMaxRange > maxRange)
-    {
-        effectiveMaxRange = maxRange;
-    }
-    if (!IQSkillIsEnabled(pokemon, IQ_COURSE_CHECKER))
-    {
-        // BUG: effectiveMaxRange is already capped at maxRange, so this condition always evaluates to TRUE.
+    s32 effectiveMaxRange = max(abs(user->pos.x - target->pos.x), abs(user->pos.y - target->pos.y));
+
+    if (effectiveMaxRange > nTiles)
+        effectiveMaxRange = nTiles;
+
+    if (!IqSkillIsEnabled(user, IQ_COURSE_CHECKER)) {
+        // BUG: effectiveMaxRange is already capped at nTiles, so this condition always evaluates to TRUE.
         // The AI also has range checks elsewhere, so this doesn't become an issue in most cases.
         // If the AI has the Long Toss or Pierce statuses and Course Checker is disabled,
         // this incorrect check causes the AI to throw items at targets further than 10 tiles away.
-        if (effectiveMaxRange <= maxRange)
-        {
+        if (effectiveMaxRange <= nTiles)
             return TRUE;
-        }
+        else
+            return FALSE;
     }
-    else
-    {
-        s32 currentPosX = pokemon->pos.x;
-        s32 currentPosY = pokemon->pos.y;
+    else {
+        s32 i;
+        s32 currentPosX = user->pos.x;
+        s32 currentPosY = user->pos.y;
         s32 adjacentTileOffsetX = gAdjacentTileOffsets[direction].x;
         s32 adjacentTileOffsetY = gAdjacentTileOffsets[direction].y;
-        s32 i;
         for (i = 0; i <= effectiveMaxRange; i++)
         {
             const Tile *mapTile;
+
             currentPosX += adjacentTileOffsetX;
             currentPosY += adjacentTileOffsetY;
-            if (currentPosX <= 0 || currentPosY <= 0 ||
+            if (currentPosX < 1 || currentPosY < 1 ||
                 currentPosX >= DUNGEON_MAX_SIZE_X - 1 || currentPosY >= DUNGEON_MAX_SIZE_Y - 1)
-            {
                 break;
-            }
-            while (0); // Extra label needed to swap branch locations in ASM.
+
             mapTile = GetTile(currentPosX, currentPosY);
-            if (!(mapTile->terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)))
-            {
-                break;
-            }
-            if (mapTile->monster == targetPokemon)
-            {
+            if (GetTerrainType(mapTile) == TERRAIN_TYPE_WALL)
+                return FALSE;
+
+            if (mapTile->monster == target)
                 return TRUE;
-            }
+
             if (mapTile->monster != NULL)
-            {
-                break;
-            }
+                return FALSE;
         }
     }
     return FALSE;
@@ -941,7 +906,7 @@ void HandleUseOrbAction(Entity *pokemon)
     bool8 r4;
     Item *item;
     Item IVar5;
-    EntityInfo *entityInfo; // r7
+    EntityInfo *entityInfo;
     ActionContainer act;
     Move move;
     struct AIPossibleMove sp28;

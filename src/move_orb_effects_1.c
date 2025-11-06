@@ -103,7 +103,7 @@ bool8 CannotSleep(Entity * pokemon, Entity * target, u8 param_3, bool8 displayMe
         (SafeguardIsActive(pokemon,target,displayMessage))))) {
         return TRUE;
     }
-    else if (IQSkillIsEnabled(target, IQ_NONSLEEPER)) {
+    else if (IqSkillIsEnabled(target, IQ_NONSLEEPER)) {
         if (displayMessage) {
             TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FCD54);
         }

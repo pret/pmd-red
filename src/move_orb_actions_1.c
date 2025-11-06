@@ -309,7 +309,7 @@ bool8 SnoreMoveAction(Entity *pokemon, Entity *target, Move * move, s32 itemId)
   bool8 flag;
 
   flag = FALSE;
-  if (IsSleeping(pokemon)) {
+  if (IsMonsterSleeping(pokemon)) {
     if (HandleDamagingMove(pokemon,target,move,IntToF248(1),itemId) != 0) {
       flag = TRUE;
       if (sub_805727C(pokemon,target,gSnoreSecondaryChance)) {
