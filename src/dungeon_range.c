@@ -13,16 +13,6 @@
 
 EWRAM_INIT Entity *gLeaderPointer = NULL;
 
-// Actual function in Sky. TODO: Find other uses of it and sync with Sky.
-static inline s32 GetVisibilityRange(void)
-{
-    s32 visibilityRange = gDungeon->unk181e8.visibilityRange;
-    if (visibilityRange == 0)
-        return 2;
-
-    return visibilityRange;
-}
-
 bool8 IsPositionActuallyInSight(DungeonPos *origin, DungeonPos *target)
 {
     s32 visibility = GetVisibilityRange();

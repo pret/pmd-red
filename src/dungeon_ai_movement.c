@@ -18,6 +18,7 @@
 #include "structs/map.h"
 #include "number_util.h"
 #include "position_util.h"
+#include "items.h"
 
 #define INFINITY 999
 #define INFINITY_2 999999
@@ -29,6 +30,12 @@
 #define TURN_LEFT_90 3
 #define TURN_RIGHT_90 4
 #define TURN_LEFT_135 5
+
+static bool8 CanTakeItem(Entity *pokemon);
+static bool8 ChooseTargetPosition(Entity *pokemon);
+static void DecideMovement(Entity *pokemon, bool8 showRunAwayEffect);
+static bool8 AvoidEnemies(Entity *pokemon);
+static bool8 Wander(Entity *pokemon);
 
 struct CanMoveInDirectionInfo
 {
@@ -96,23 +103,23 @@ void AIMovement(Entity *pokemon, bool8 showRunAwayEffect)
     }
 }
 
-bool8 CanTakeItem(Entity *pokemon)
+static bool8 CanTakeItem(Entity *pokemon)
 {
-    EntityInfo *pokemonInfo = GetEntInfo(pokemon);
-    const Tile *mapTile;
     Entity *object;
-    if (!EntityIsValid(pokemon) || CheckVariousConditions(pokemon))
-    {
+    const Tile *mapTile;
+    EntityInfo *pokemonInfo = GetEntInfo(pokemon);
+
+    if (!EntityIsValid(pokemon))
         return FALSE;
-    }
+    if (CheckVariousConditions(pokemon))
+        return FALSE;
+
     mapTile = GetTileAtEntitySafe(pokemon);
     object = mapTile->object;
     if (object == NULL)
-    {
         return FALSE;
-    }
-    switch (GetEntityType(object))
-    {
+
+    switch (GetEntityType(object)) {
         case ENTITY_NOTHING:
         case ENTITY_MONSTER:
         case ENTITY_TRAP:
@@ -121,8 +128,8 @@ bool8 CanTakeItem(Entity *pokemon)
             break;
         case ENTITY_ITEM:
             if (!pokemonInfo->isTeamLeader &&
-                !(pokemonInfo->heldItem.flags & ITEM_FLAG_EXISTS) &&
-                ((mapTile->terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) || !pokemonInfo->isNotTeamMember) &&
+                !ItemExists(&pokemonInfo->heldItem) &&
+                ((GetTerrainType(mapTile) != TERRAIN_TYPE_WALL) || !pokemonInfo->isNotTeamMember) &&
                 !(GetItemInfo(object)->flags & ITEM_FLAG_IN_SHOP))
             {
                 return TRUE;
@@ -132,17 +139,18 @@ bool8 CanTakeItem(Entity *pokemon)
     return FALSE;
 }
 
-bool8 ChooseTargetPosition(Entity *pokemon)
+static bool8 ChooseTargetPosition(Entity *pokemon)
 {
     EntityInfo *pokemonInfo = GetEntInfo(pokemon);
     if (!TargetLeader(pokemon))
     {
         Entity **possibleTargets;
+        s32 i;
         s32 maxPossibleTargets;
         s32 targetIndex;
         bool8 canCrossWalls;
         s32 targetDistance;
-        s32 i;
+
         if (gDungeon->decoyIsActive)
         {
             possibleTargets = gDungeon->activePokemon;
@@ -152,6 +160,7 @@ bool8 ChooseTargetPosition(Entity *pokemon)
         {
             possibleTargets = gDungeon->teamPokemon;
             maxPossibleTargets = MAX_TEAM_MEMBERS;
+
         }
         else
         {
@@ -161,107 +170,62 @@ bool8 ChooseTargetPosition(Entity *pokemon)
         canCrossWalls = CanCrossWalls(pokemon);
         targetIndex = -1;
         targetDistance = INFINITY;
-        for (i = 0; i < maxPossibleTargets; i++)
-        {
+
+        for (i = 0; i < maxPossibleTargets; i++) {
             Entity *target = possibleTargets[i];
-            if (EntityIsValid(target) && GetEntInfo(target)->monsterBehavior == BEHAVIOR_FIXED_ENEMY)
-            {
-                if (gDungeon->decoyIsActive)
-                {
+            if (EntityIsValid(target) && GetEntInfo(target)->monsterBehavior == BEHAVIOR_FIXED_ENEMY) {
+                if (gDungeon->decoyIsActive) {
                     if (GetTreatmentBetweenMonsters(pokemon, target, FALSE, TRUE) != TREATMENT_TREAT_AS_ENEMY)
-                    {
                         continue;
-                    }
                 }
-                else if (!pokemonInfo->isNotTeamMember && GetEntInfo(target)->frozenClassStatus.status == STATUS_PETRIFIED)
-                {
+                else if (!pokemonInfo->isNotTeamMember && GetEntInfo(target)->frozenClassStatus.status == STATUS_PETRIFIED) {
                     continue;
                 }
-                if (GetEntInfo(target)->shopkeeper != SHOPKEEPER_MODE_SHOPKEEPER)
-                {
+
+                if (GetEntInfo(target)->shopkeeper != SHOPKEEPER_MODE_SHOPKEEPER) {
                     s32 currentDistance;
-                    if (canCrossWalls)
-                    {
-                        s32 distance = pokemon->pos.x - target->pos.x;
-                        if (distance < 0)
-                        {
-                            distance = -distance;
-                        }
-                        if (distance > CHECK_VISIBILITY_DISTANCE)
-                        {
-                            goto checkCanSeeTarget;
-                        }
-                        distance = pokemon->pos.y - target->pos.y;
-                        if (distance < 0)
-                        {
-                            distance = -distance;
-                        }
-                        if (distance > CHECK_VISIBILITY_DISTANCE)
-                        {
-                            goto checkCanSeeTarget;
+                    if (canCrossWalls) {
+                        if (abs(pokemon->pos.x - target->pos.x) > CHECK_VISIBILITY_DISTANCE || abs(pokemon->pos.y - target->pos.y) > CHECK_VISIBILITY_DISTANCE) {
+                            if (!CanTargetEntity(pokemon, target))
+                                continue;
                         }
                     }
-                    else
-                    {
-                        checkCanSeeTarget:
+                    else {
                         if (!CanTargetEntity(pokemon, target))
-                        {
                             continue;
-                        }
                     }
                     currentDistance = GetDistance(&pokemon->pos, &target->pos);
-                    if (targetDistance > currentDistance)
-                    {
+                    if (targetDistance > currentDistance) {
                         targetDistance = currentDistance;
                         targetIndex = i;
                         if (targetDistance < 2)
-                        {
                             break;
-                        }
                     }
                 }
             }
         }
-        if (targetIndex > -1)
-        {
+        if (targetIndex >= 0) {
             pokemonInfo->aiTarget.aiObjective = AI_CHASE_TARGET;
             pokemonInfo->aiTarget.aiTargetPos = possibleTargets[targetIndex]->pos;
             pokemonInfo->aiTarget.aiTarget = possibleTargets[targetIndex];
-            pokemonInfo->aiTarget.aiTargetSpawnGenID = pokemonInfo->aiTarget.aiTarget->spawnGenID;
+            pokemonInfo->aiTarget.aiTargetSpawnGenID = possibleTargets[targetIndex]->spawnGenID;
             pokemonInfo->aiTarget.aiTargetingEnemy = TRUE;
             pokemonInfo->moveRandomly = FALSE;
-            if (IsTacticSet(pokemon, TACTIC_KEEP_YOUR_DISTANCE) && !CanSeeTeammate(pokemon))
-            {
-                s32 distanceX = pokemon->pos.x - possibleTargets[targetIndex]->pos.x;
-                if (distanceX < 0)
-                {
-                    distanceX = -distanceX;
-                }
-                if (distanceX < 2)
-                {
-                    s32 distanceY = pokemon->pos.y - possibleTargets[targetIndex]->pos.y;
-                    if (distanceY < 0)
-                    {
-                        distanceY = -distanceY;
-                    }
-                    if (distanceY < 2)
-                    {
-                        pokemonInfo->aiTarget.aiTurningAround = TRUE;
-                    }
+            if (IsTacticSet(pokemon, TACTIC_KEEP_YOUR_DISTANCE) && !CanSeeTeammate(pokemon)) {
+                if (abs(pokemon->pos.x - possibleTargets[targetIndex]->pos.x) <= 1 && abs(pokemon->pos.y - possibleTargets[targetIndex]->pos.y) <= 1) {
+                    pokemonInfo->aiTarget.aiTurningAround = TRUE;
                 }
             }
             return TRUE;
         }
     }
-    if (!IsTacticSet(pokemon, TACTIC_GO_THE_OTHER_WAY))
-    {
-        do
-        {
-            if (!pokemonInfo->isNotTeamMember)
-            {
+
+    if (!IsTacticSet(pokemon, TACTIC_GO_THE_OTHER_WAY)) {
+        if (!pokemonInfo->isNotTeamMember) {
+            // Do/While loop needed to match
+            do {
                 Entity *leader = GetLeaderIfVisible(pokemon);
-                if (EntityIsValid(leader))
-                {
+                if (EntityIsValid(leader)) {
                     pokemonInfo->aiTarget.aiObjective = AI_CHASE_TARGET;
                     pokemonInfo->aiTarget.aiTargetPos = leader->pos;
                     pokemonInfo->aiTarget.aiTarget = leader;
@@ -269,45 +233,35 @@ bool8 ChooseTargetPosition(Entity *pokemon)
                     pokemonInfo->moveRandomly = FALSE;
                     return TRUE;
                 }
-            }
-        } while (0);
-    }
-    else if (pokemonInfo->isTeamLeader)
-    {
-        // This item targeting code is never reached because the leader is never AI-controlled.
-        u8 room;
-        s32 minX, minY, maxX, maxY, x, y, maxY2;
-        if (gDungeon->unk181e8.visibilityRange) {
-            // Dead code.
-            u8 a = -a;
-        }
-        room = GetTile(pokemon->pos.x, pokemon->pos.y)->room;
-        if (room == CORRIDOR_ROOM)
-        {
-            do
-            {
-                minX = pokemon->pos.x - CORRIDOR_VISIBILITY;
-                minY = pokemon->pos.y - CORRIDOR_VISIBILITY;
-                maxX = pokemon->pos.x + CORRIDOR_VISIBILITY;
-                maxY = pokemon->pos.y + CORRIDOR_VISIBILITY;
             } while (0);
         }
-        else
-        {
+    }
+    else if (pokemonInfo->isTeamLeader) {
+        // This item targeting code is never reached because the leader is never AI-controlled.
+        s32 x, y;
+        s32 minX, minY, maxX, maxY;
+        UNUSED u8 visib = GetVisibilityRange(); // Unused return value
+        u8 room = GetTile(pokemon->pos.x, pokemon->pos.y)->room;
+
+        if (room == CORRIDOR_ROOM) {
+            minX = pokemon->pos.x - CORRIDOR_VISIBILITY;
+            minY = pokemon->pos.y - CORRIDOR_VISIBILITY;
+            maxX = pokemon->pos.x + CORRIDOR_VISIBILITY;
+            maxY = pokemon->pos.y + CORRIDOR_VISIBILITY;
+        }
+        else {
             struct RoomData *mapRoom = &gDungeon->roomData[room];
             minX = mapRoom->bottomRightCornerX - 1;
             minY = mapRoom->bottomRightCornerY - 1;
             maxX = mapRoom->topLeftCornerX + 1;
             maxY = mapRoom->topLeftCornerY + 1;
         }
-        maxY2 = maxY;
-        for (y = minY; y <= maxY2; y++)
-        {
-            for (x = minX; x <= maxX; x++)
-            {
+
+        ASM_MATCH_TRICK(maxX);
+        for (y = minY; y <= maxY; y++) {
+            for (x = minX; x <= maxX; x++) {
                 Entity *object = GetTileMut(x, y)->object;
-                if (object && GetEntityType(object) == ENTITY_ITEM)
-                {
+                if (object != NULL && GetEntityType(object) == ENTITY_ITEM) {
                     pokemonInfo->aiTarget.aiObjective = AI_TAKE_ITEM;
                     pokemonInfo->aiTarget.aiTargetPos.x = x;
                     pokemonInfo->aiTarget.aiTargetPos.y = y;
@@ -319,14 +273,16 @@ bool8 ChooseTargetPosition(Entity *pokemon)
             }
         }
     }
-    if ((u8) (pokemonInfo->aiTarget.aiObjective - 1) <= 1)
+
+    if (pokemonInfo->aiTarget.aiObjective == AI_CHASE_TARGET || pokemonInfo->aiTarget.aiObjective == AI_CHASE_REMEMBERED_TARGET)
     {
         if (pokemonInfo->aiTarget.aiTarget)
         {
             if (pokemonInfo->aiTarget.aiTarget->spawnGenID == pokemonInfo->aiTarget.aiTargetSpawnGenID)
             {
-                EntityInfo *targetData = GetEntInfo(pokemonInfo->aiTarget.aiTarget);
                 s32 i;
+                EntityInfo *targetData = GetEntInfo(pokemonInfo->aiTarget.aiTarget);
+
                 for (i = 0; i < NUM_PREV_POS; i++)
                 {
                     if (CanTargetPosition(pokemon, &targetData->prevPos[i]))
@@ -346,18 +302,20 @@ bool8 ChooseTargetPosition(Entity *pokemon)
             }
         }
     }
+
     Wander(pokemon);
     return TRUE;
 }
 
-void DecideMovement(Entity *pokemon, bool8 showRunAwayEffect)
+static void DecideMovement(Entity *pokemon, bool8 showRunAwayEffect)
 {
-    EntityInfo *pokemonInfo = GetEntInfo(pokemon);
+    s32 i;
     s32 direction;
     s32 turnLimit;
-    s32 i;
     struct CanMoveInDirectionInfo canMoveInDirectionInfo[6];
     bool8 pokemonInFront;
+    EntityInfo *pokemonInfo = GetEntInfo(pokemon);
+
     pokemonInfo->targetPos = pokemonInfo->aiTarget.aiTargetPos;
     if (pokemon->pos.x == pokemonInfo->aiTarget.aiTargetPos.x &&
         pokemon->pos.y == pokemonInfo->aiTarget.aiTargetPos.y)
@@ -417,17 +375,9 @@ void DecideMovement(Entity *pokemon, bool8 showRunAwayEffect)
     canMoveInDirectionInfo[TURN_LEFT_45].tryTurn = canMoveInDirectionInfo[TURN_RIGHT_45].tryTurn = canMoveInDirectionInfo[TURN_LEFT_90].tryTurn = canMoveInDirectionInfo[TURN_RIGHT_90].tryTurn = canMoveInDirectionInfo[TURN_LEFT_135].tryTurn = TRUE;
     if (!pokemonInfo->isNotTeamMember && (direction & 1) != 0)
     {
-        s32 targetDistanceX = pokemon->pos.x - pokemonInfo->aiTarget.aiTargetPos.x;
-        s32 targetDistanceY;
-        if (targetDistanceX < 0)
-        {
-            targetDistanceX = -targetDistanceX;
-        }
-        targetDistanceY = pokemon->pos.y - pokemonInfo->aiTarget.aiTargetPos.y;
-        if (targetDistanceY < 0)
-        {
-            targetDistanceY = -targetDistanceY;
-        }
+        s32 targetDistanceX = abs(pokemon->pos.x - pokemonInfo->aiTarget.aiTargetPos.x);
+        s32 targetDistanceY = abs(pokemon->pos.y - pokemonInfo->aiTarget.aiTargetPos.y);
+
         if (targetDistanceX <= 2 && targetDistanceY <= 2 && targetDistanceX != targetDistanceY)
         {
             if ((direction & 2) != 0)
@@ -465,8 +415,7 @@ void DecideMovement(Entity *pokemon, bool8 showRunAwayEffect)
         canMoveInDirectionInfo[i].canMoveInDirection = CanAIMonsterMoveInDirection(pokemon, canMoveInDirectionInfo[i].direction, &canMoveInDirectionInfo[i].pokemonInFront);
         if (!canMoveInDirectionInfo[i].canMoveInDirection && !canMoveInDirectionInfo[i].pokemonInFront)
         {
-            canMoveInDirectionInfo[TURN_RIGHT_45].tryTurn = TRUE;
-            canMoveInDirectionInfo[TURN_LEFT_45].tryTurn = TRUE;
+            canMoveInDirectionInfo[TURN_LEFT_45].tryTurn = canMoveInDirectionInfo[TURN_RIGHT_45].tryTurn = TRUE;
         }
     }
     for (i = TURN_LEFT_45; i < turnLimit; i++)
@@ -495,7 +444,7 @@ void DecideMovement(Entity *pokemon, bool8 showRunAwayEffect)
     }
 }
 
-bool8 AvoidEnemies(Entity *pokemon)
+static bool8 AvoidEnemies(Entity *pokemon)
 {
     bool8 pokemonInFront;
     u8 closestTargetRoom;
@@ -694,17 +643,18 @@ bool8 AvoidEnemies(Entity *pokemon)
     }
 }
 
-bool8 Wander(Entity *pokemon)
+static bool8 Wander(Entity *pokemon)
 {
     EntityInfo *pokemonInfo = GetEntInfo(pokemon);
     s32 room = GetEntityRoom(pokemon);
-    s32 targetFacingDir = 0;
+    s32 targetFacingDir;
+    s32 randDir;
     if (room == CORRIDOR_ROOM)
     {
+        s32 i;
         bool8 isAtJunction = FALSE;
         s32 oppositeFacingDir = (pokemonInfo->action.direction + NUM_DIRECTIONS / 2) & DIRECTION_MASK;
-        s32 targetFacingDir2;
-        s32 i;
+
         if (IsAtJunction(pokemon))
         {
             pokemonInfo->action.direction = DungeonRandInt(NUM_DIRECTIONS);
@@ -714,18 +664,17 @@ bool8 Wander(Entity *pokemon)
         {
             bool8 pokemonInFront;
             targetFacingDir = (pokemonInfo->action.direction + gFaceDirectionIncrements[i]) & DIRECTION_MASK;
-            if ((!isAtJunction || targetFacingDir != oppositeFacingDir) &&
-                CanAIMonsterMoveInDirection(pokemon, targetFacingDir, &pokemonInFront))
-            {
-                // It's possible that the goto is an ugly fakematching, but we'll never know for sure.
-                goto DEFAULT;
-            }
+
+            if (isAtJunction && targetFacingDir == oppositeFacingDir)
+                continue;
+            if (!CanAIMonsterMoveInDirection(pokemon, targetFacingDir, &pokemonInFront))
+                continue;
+
+            pokemonInfo->aiTarget.aiObjective = AI_ROAM;
+            pokemonInfo->aiTarget.aiTargetPos.x = pokemon->pos.x + gAdjacentTileOffsets[targetFacingDir].x;
+            pokemonInfo->aiTarget.aiTargetPos.y = pokemon->pos.y + gAdjacentTileOffsets[targetFacingDir].y;
+            return TRUE;
         }
-        targetFacingDir2 = DungeonRandInt(NUM_DIRECTIONS);
-        pokemonInfo->aiTarget.aiObjective = AI_STAND_STILL;
-        pokemonInfo->aiTarget.aiTargetPos.x = pokemon->pos.x + gAdjacentTileOffsets[targetFacingDir2].x;
-        pokemonInfo->aiTarget.aiTargetPos.y = pokemon->pos.y + gAdjacentTileOffsets[targetFacingDir2].y;
-        return TRUE;
     }
     else
     {
@@ -733,10 +682,10 @@ bool8 Wander(Entity *pokemon)
         DungeonPos *naturalJunctionList = gDungeon->naturalJunctionList[room];
         if (pokemonInfo->moveRandomly)
         {
-            s32 targetFacingDir = DungeonRandInt(NUM_DIRECTIONS);
+            s32 randDir = DungeonRandInt(NUM_DIRECTIONS);
             pokemonInfo->aiTarget.aiObjective = AI_STAND_STILL;
-            pokemonInfo->aiTarget.aiTargetPos.x = pokemon->pos.x + gAdjacentTileOffsets[targetFacingDir].x;
-            pokemonInfo->aiTarget.aiTargetPos.y = pokemon->pos.y + gAdjacentTileOffsets[targetFacingDir].y;
+            pokemonInfo->aiTarget.aiTargetPos.x = pokemon->pos.x + gAdjacentTileOffsets[randDir].x;
+            pokemonInfo->aiTarget.aiTargetPos.y = pokemon->pos.y + gAdjacentTileOffsets[randDir].y;
             return TRUE;
         }
         else
@@ -792,10 +741,11 @@ bool8 Wander(Entity *pokemon)
             return TRUE;
         }
     }
-DEFAULT:
-    pokemonInfo->aiTarget.aiObjective = AI_ROAM;
-    pokemonInfo->aiTarget.aiTargetPos.x = pokemon->pos.x + gAdjacentTileOffsets[targetFacingDir].x;
-    pokemonInfo->aiTarget.aiTargetPos.y = pokemon->pos.y + gAdjacentTileOffsets[targetFacingDir].y;
+
+    randDir = DungeonRandInt(NUM_DIRECTIONS);
+    pokemonInfo->aiTarget.aiObjective = AI_STAND_STILL;
+    pokemonInfo->aiTarget.aiTargetPos.x = pokemon->pos.x + gAdjacentTileOffsets[randDir].x;
+    pokemonInfo->aiTarget.aiTargetPos.y = pokemon->pos.y + gAdjacentTileOffsets[randDir].y;
     return TRUE;
 }
 

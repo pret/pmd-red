@@ -125,7 +125,7 @@ static inline bool8 ItemSticky(Item *item)
 
 static inline bool8 ItemExists(Item *item)
 {
-    return (item->flags & ITEM_FLAG_EXISTS);
+    return (item->flags & ITEM_FLAG_EXISTS) != 0; // != 0 is necessary for Blue matching
 }
 
 static inline bool8 ItemSet(Item *item)
