@@ -37,7 +37,6 @@ typedef struct MenuInputStruct
     /* 0x20 */ s16 pagesCount;
     /* 0x22 */ s16 totalEntriesCount;
     /* 0x24 */ u16 unk24;
-    /* 0x26 */ u16 unk26;
     /* 0x28 */ TouchScreenMenuInput touchScreen; // For obvious reason unused on GBA
 } MenuInputStruct;
 

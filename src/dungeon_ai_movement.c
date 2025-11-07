@@ -53,14 +53,13 @@ void AIMovement(Entity *pokemon, bool8 showRunAwayEffect)
     pokemonInfo->aiTarget.aiTurningAround = FALSE;
     if (IsTacticSet(pokemon, TACTIC_BE_PATIENT))
     {
-        u32 maxHPStat = pokemonInfo->maxHPStat;
-        maxHPStat += maxHPStat >> 0x1f;
-        if (pokemonInfo->HP <= (s16) (maxHPStat / 2))
+        if (pokemonInfo->HP <= pokemonInfo->maxHPStat / 2)
         {
             pokemonInfo->action.action = ACTION_NOTHING;
             return;
         }
     }
+
     if (IsTacticSet(pokemon, TACTIC_WAIT_THERE))
     {
         pokemonInfo->action.action = ACTION_NOTHING;
@@ -92,6 +91,7 @@ void AIMovement(Entity *pokemon, bool8 showRunAwayEffect)
         {
             hasAction = ChooseTargetPosition(pokemon);
         }
+
         if (!hasAction)
         {
             pokemonInfo->action.action = ACTION_NOTHING;
@@ -444,6 +444,8 @@ static void DecideMovement(Entity *pokemon, bool8 showRunAwayEffect)
     }
 }
 
+// This function is nowhere near close to matching in Blue https://decomp.me/scratch/QNmaT. I suspect abs macros/static inlines or s16 changing the way we need to write code for agbcc.
+// Sky's version is not matched either, but I believe it's closer to this one. To revisit later.
 static bool8 AvoidEnemies(Entity *pokemon)
 {
     bool8 pokemonInFront;
@@ -546,16 +548,8 @@ static bool8 AvoidEnemies(Entity *pokemon)
                 naturalJunctionListCounts = gDungeon->naturalJunctionListCounts[room];
                 furthestTargetToExitDistance = -INFINITY_2;
                 furthestTargetExitIndex = 0;
-                distanceX = closestTarget->pos.x - pokemon->pos.x;
-                if (distanceX < 0)
-                {
-                    distanceX = -distanceX;
-                }
-                pokemonToTargetDistance = closestTarget->pos.y - pokemon->pos.y;
-                if (pokemonToTargetDistance < 0)
-                {
-                    pokemonToTargetDistance = -pokemonToTargetDistance;
-                }
+                distanceX = abs(closestTarget->pos.x - pokemon->pos.x);
+                pokemonToTargetDistance = abs(closestTarget->pos.y - pokemon->pos.y);
                 if (pokemonToTargetDistance < distanceX)
                 {
                     pokemonToTargetDistance = distanceX;
@@ -565,48 +559,31 @@ static bool8 AvoidEnemies(Entity *pokemon)
                     s32 targetToExitDistance;
                     s32 pokemonToExitSignX, pokemonToExitSignY;
                     s32 adjacentToTargetDistanceX, adjacentToTargetDistance;
-                    s32 distanceX = closestTarget->pos.x - naturalJunctionList[i].x;
-                    if (distanceX < 0)
-                    {
-                        distanceX = -distanceX;
-                    }
-                    targetToExitDistance = closestTarget->pos.y - naturalJunctionList[i].y;
-                    if (targetToExitDistance < 0)
-                    {
-                        targetToExitDistance = -targetToExitDistance;
-                    }
+                    s32 distanceX = abs(closestTarget->pos.x - naturalJunctionList[i].x);
+
+                    targetToExitDistance = abs(closestTarget->pos.y - naturalJunctionList[i].y);
+
                     if (targetToExitDistance < distanceX)
                     {
                         targetToExitDistance = distanceX;
                     }
                     pokemonToExitSignX = naturalJunctionList[i].x - pokemon->pos.x;
                     pokemonToExitSignY = naturalJunctionList[i].y - pokemon->pos.y;
+
                     if (pokemonToExitSignX < -1)
-                    {
                         pokemonToExitSignX = -1;
-                    }
+
                     if (pokemonToExitSignY < -1)
-                    {
                         pokemonToExitSignY = -1;
-                    }
+
                     if (pokemonToExitSignX > 1)
-                    {
                         pokemonToExitSignX = 1;
-                    }
+
                     if (pokemonToExitSignY > 1)
-                    {
                         pokemonToExitSignY = 1;
-                    }
-                    adjacentToTargetDistanceX = closestTarget->pos.x - (pokemon->pos.x + pokemonToExitSignX);
-                    if (adjacentToTargetDistanceX < 0)
-                    {
-                        adjacentToTargetDistanceX = -adjacentToTargetDistanceX;
-                    }
-                    adjacentToTargetDistance = closestTarget->pos.y - (pokemon->pos.y + pokemonToExitSignY);
-                    if (adjacentToTargetDistance < 0)
-                    {
-                        adjacentToTargetDistance = -adjacentToTargetDistance;
-                    }
+
+                    adjacentToTargetDistanceX = abs(closestTarget->pos.x - (pokemon->pos.x + pokemonToExitSignX));
+                    adjacentToTargetDistance = abs(closestTarget->pos.y - (pokemon->pos.y + pokemonToExitSignY));
                     if (adjacentToTargetDistance < adjacentToTargetDistanceX)
                     {
                         adjacentToTargetDistance = adjacentToTargetDistanceX;
