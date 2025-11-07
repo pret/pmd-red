@@ -7,7 +7,7 @@
 
 
 static const struct ScriptCommand s_gs168_g0_s0_station_sref_script[] = { /* 0x821ba24 */
-    DEBUGINFO,
+    DEBUGINFO_O(10),
     SELECT_MAP(168),
     BGM_STOP,
     JUMP_SCRIPT(COMMON_ENTER),
@@ -16,7 +16,7 @@ static const struct ScriptCommand s_gs168_g0_s0_station_sref_script[] = { /* 0x8
 static const struct ScriptRef s_gs168_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs168_g0_s0_station_sref_script }; /* 0x821ba90 */
 
 static const struct ScriptCommand s_gs168_g1_s0_station_sref_script[] = { /* 0x821ba9c */
-    DEBUGINFO,
+    DEBUGINFO_O(19),
     SELECT_MAP(168),
     SELECT_WEATHER(-1),
     SELECT_ENTITIES(-1, 0),
@@ -30,7 +30,7 @@ static const struct ScriptCommand s_gs168_g1_s0_station_sref_script[] = { /* 0x8
 static const struct ScriptRef s_gs168_g1_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs168_g1_s0_station_sref_script }; /* 0x821bb2c */
 
 static const struct ScriptCommand s_gs168_g1_s0_eff0_script[] = { /* 0x821bb38 */
-    DEBUGINFO,
+    DEBUGINFO_O(33),
     CAMERA_END_PAN,
     CAMERA_INIT_PAN,
     AWAIT_CUE(4),
@@ -45,7 +45,7 @@ static const struct ScriptCommand s_gs168_g1_s0_eff0_script[] = { /* 0x821bb38 *
 };
 
 static const struct ScriptCommand s_gs168_g1_s0_lives0_dlg0[] = { /* 0x821bbf8 */
-    DEBUGINFO,
+    DEBUGINFO_O(48),
     SELECT_ANIMATION(5),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     { 0x3b, 0x36,  0x0004,  0x00000000,  0x00000000, NULL },
@@ -152,7 +152,7 @@ static const struct ScriptCommand s_gs168_g1_s0_lives0_dlg0[] = { /* 0x821bbf8 *
 
 
 static const struct ScriptCommand s_gs168_g1_s0_lives1_dlg0[] = { /* 0x821c620 */
-    DEBUGINFO,
+    DEBUGINFO_O(155),
     SELECT_ANIMATION(5),
     { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(6),
@@ -199,7 +199,7 @@ static const struct ScriptCommand s_gs168_g1_s0_lives1_dlg0[] = { /* 0x821c620 *
 };
 
 static const struct ScriptCommand s_gs168_g1_s0_lives2_dlg0[] = { /* 0x821c8e0 */
-    DEBUGINFO,
+    DEBUGINFO_O(202),
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(7),
@@ -212,7 +212,7 @@ static const struct ScriptCommand s_gs168_g1_s0_lives2_dlg0[] = { /* 0x821c8e0 *
 };
 
 static const struct ScriptCommand s_gs168_g2_s0_station_sref_script[] = { /* 0x821c980 */
-    DEBUGINFO,
+    DEBUGINFO_O(215),
     SELECT_MAP(168),
     SELECT_WEATHER(-1),
     SELECT_ENTITIES(-1, 0),
@@ -226,7 +226,7 @@ static const struct ScriptCommand s_gs168_g2_s0_station_sref_script[] = { /* 0x8
 static const struct ScriptRef s_gs168_g2_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs168_g2_s0_station_sref_script }; /* 0x821ca10 */
 
 static const struct ScriptCommand s_gs168_g2_s0_lives0_dlg0[] = { /* 0x821ca1c */
-    DEBUGINFO,
+    DEBUGINFO_O(229),
     SELECT_ANIMATION(5),
     { 0x3b, 0x36,  0x0004,  0x00000000,  0x00000000, NULL },
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
@@ -260,7 +260,7 @@ static const struct ScriptCommand s_gs168_g2_s0_lives0_dlg0[] = { /* 0x821ca1c *
 
 
 static const struct ScriptCommand s_gs168_g2_s0_lives1_dlg0[] = { /* 0x821cc58 */
-    DEBUGINFO,
+    DEBUGINFO_O(263),
     SELECT_ANIMATION(5),
     { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(6),

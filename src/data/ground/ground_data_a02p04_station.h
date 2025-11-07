@@ -12,7 +12,7 @@
 
 
 static const struct ScriptCommand s_gs167_g0_s0_station_sref_script[] = { /* 0x8219784 */
-    DEBUGINFO,
+    DEBUGINFO_O(15),
     SELECT_MAP(167),
     BGM_STOP,
     JUMP_SCRIPT(COMMON_ENTER),
@@ -21,7 +21,7 @@ static const struct ScriptCommand s_gs167_g0_s0_station_sref_script[] = { /* 0x8
 static const struct ScriptRef s_gs167_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs167_g0_s0_station_sref_script }; /* 0x82197f0 */
 
 static const struct ScriptCommand s_gs167_g1_s0_station_sref_script[] = { /* 0x82197fc */
-    DEBUGINFO,
+    DEBUGINFO_O(24),
     SELECT_MAP(167),
     SELECT_ENTITIES(-1, 0),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
@@ -33,7 +33,7 @@ static const struct ScriptCommand s_gs167_g1_s0_station_sref_script[] = { /* 0x8
 static const struct ScriptRef s_gs167_g1_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs167_g1_s0_station_sref_script }; /* 0x821986c */
 
 static const struct ScriptCommand s_gs167_g2_s0_station_sref_script[] = { /* 0x8219878 */
-    DEBUGINFO,
+    DEBUGINFO_O(36),
     SELECT_MAP(167),
     SELECT_ENTITIES(-1, 0),
     BGM_SWITCH(24),
@@ -63,7 +63,7 @@ static const struct ScriptRef s_gs167_g2_s0_station_sref = { 400, 7, NULL /* EVE
 
 
 static const struct ScriptCommand s_gs167_g2_s0_eff0_script[] = { /* 0x8219b58 */
-    DEBUGINFO,
+    DEBUGINFO_O(66),
     CAMERA_END_PAN,
     WAIT(1),
     AWAIT_CUE(4),
@@ -79,7 +79,7 @@ static const struct ScriptCommand s_gs167_g2_s0_eff0_script[] = { /* 0x8219b58 *
 };
 
 static const struct ScriptCommand s_gs167_g2_s0_lives0_dlg0[] = { /* 0x8219c28 */
-    DEBUGINFO,
+    DEBUGINFO_O(82),
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     { 0xdf, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
@@ -262,7 +262,7 @@ static const struct ScriptCommand s_gs167_g2_s0_lives0_dlg0[] = { /* 0x8219c28 *
 
 
 static const struct ScriptCommand s_gs167_g2_s0_lives1_dlg0[] = { /* 0x821b5d4 */
-    DEBUGINFO,
+    DEBUGINFO_O(265),
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(6),

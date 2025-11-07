@@ -82,7 +82,7 @@
 .include "src/pelipper_board.o"
 .include "src/wonder_mail_3_mid.o"
 .include "src/mission_reward.o"
-.include "src/code_8072F3C.o"
+.include "src/dungeon_list_menu.o"
 .include "src/makuhita_dojo1.o"
 .include "src/makuhita_dojo2.o"
 .include "src/wonder_mail_4.o"

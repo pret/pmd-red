@@ -10,7 +10,7 @@
 
 
 static const struct ScriptCommand s_gs220_g0_s0_station_sref_script[] = { /* 0x826aa0c */
-    DEBUGINFO,
+    DEBUGINFO_O(13),
     SELECT_MAP(220),
     BGM_STOP,
     JUMP_SCRIPT(COMMON_ENTER),
@@ -19,7 +19,7 @@ static const struct ScriptCommand s_gs220_g0_s0_station_sref_script[] = { /* 0x8
 static const struct ScriptRef s_gs220_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs220_g0_s0_station_sref_script }; /* 0x826aa78 */
 
 static const struct ScriptCommand s_gs220_g1_s0_station_sref_script[] = { /* 0x826aa84 */
-    DEBUGINFO,
+    DEBUGINFO_O(22),
     SELECT_MAP(220),
     SELECT_ENTITIES(-1, 0),
     BGM_SWITCH(114),
@@ -34,7 +34,7 @@ static const struct ScriptCommand s_gs220_g1_s0_station_sref_script[] = { /* 0x8
 static const struct ScriptRef s_gs220_g1_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs220_g1_s0_station_sref_script }; /* 0x826ab24 */
 
 static const struct ScriptCommand s_gs220_g1_s0_eff0_script[] = { /* 0x826ab30 */
-    DEBUGINFO,
+    DEBUGINFO_O(37),
     CAMERA_END_PAN,
     WAIT(1),
     AWAIT_CUE(4),
@@ -45,7 +45,7 @@ static const struct ScriptCommand s_gs220_g1_s0_eff0_script[] = { /* 0x826ab30 *
 };
 
 static const struct ScriptCommand s_gs220_g1_s0_lives0_dlg0[] = { /* 0x826abb0 */
-    DEBUGINFO,
+    DEBUGINFO_O(48),
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     { 0x2d, 0x09,  0x0003,  0x00000052,  0x00000000, NULL },
@@ -251,7 +251,7 @@ static const struct ScriptCommand s_gs220_g1_s0_lives0_dlg0[] = { /* 0x826abb0 *
 
 
 static const struct ScriptCommand s_gs220_g1_s0_lives1_dlg0[] = { /* 0x826be2c */
-    DEBUGINFO,
+    DEBUGINFO_O(254),
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
     { 0x89, 0x70,  0x0100,  0x00000004,  0x00000000, NULL },
@@ -310,7 +310,7 @@ static const struct ScriptCommand s_gs220_g1_s0_lives1_dlg0[] = { /* 0x826be2c *
 };
 
 static const struct ScriptCommand s_gs220_g2_s0_station_sref_script[] = { /* 0x826c1ac */
-    DEBUGINFO,
+    DEBUGINFO_O(313),
     SELECT_MAP(220),
     SELECT_ENTITIES(-1, 0),
     { 0x27, 0x01,  0x0005,  0x0000005a,  0x00ffffff, NULL },
@@ -323,14 +323,14 @@ static const struct ScriptCommand s_gs220_g2_s0_station_sref_script[] = { /* 0x8
 static const struct ScriptRef s_gs220_g2_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs220_g2_s0_station_sref_script }; /* 0x826c22c */
 
 static const struct ScriptCommand s_gs220_g2_s0_eff0_script[] = { /* 0x826c238 */
-    DEBUGINFO,
+    DEBUGINFO_O(326),
     CAMERA_INIT_PAN,
     AWAIT_CUE(4),
     HALT,
 };
 
 static const struct ScriptCommand s_gs220_g2_s0_lives0_dlg0[] = { /* 0x826c278 */
-    DEBUGINFO,
+    DEBUGINFO_O(333),
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     { 0x2d, 0x09,  0x0004,  0x00000021,  0x00000000, NULL },
@@ -484,7 +484,7 @@ static const struct ScriptCommand s_gs220_g2_s0_lives0_dlg0[] = { /* 0x826c278 *
 
 
 static const struct ScriptCommand s_gs220_g2_s0_lives1_dlg0[] = { /* 0x826d210 */
-    DEBUGINFO,
+    DEBUGINFO_O(487),
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(7),
@@ -525,7 +525,7 @@ static const struct ScriptCommand s_gs220_g2_s0_lives1_dlg0[] = { /* 0x826d210 *
 };
 
 static const struct ScriptCommand s_gs220_g2_s0_eff1_script[] = { /* 0x826d470 */
-    DEBUGINFO,
+    DEBUGINFO_O(528),
     AWAIT_CUE(11),
     { 0x56, 0x00,  0x0000,  0x000001a4,  0x00000000, NULL },
     { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
@@ -534,14 +534,14 @@ static const struct ScriptCommand s_gs220_g2_s0_eff1_script[] = { /* 0x826d470 *
 };
 
 static const struct ScriptCommand s_gs220_g2_s1_lives0_dlg0[] = { /* 0x826d4d0 */
-    DEBUGINFO,
+    DEBUGINFO_O(537),
     SELECT_ANIMATION(22),
     { 0x2d, 0x07,  0x0003,  0x00000000,  0x00000000, NULL },
     HALT,
 };
 
 static const struct ScriptCommand s_gs220_g2_s1_lives1_dlg0[] = { /* 0x826d510 */
-    DEBUGINFO,
+    DEBUGINFO_O(544),
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0005,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(10),

@@ -6,6 +6,7 @@
 #include "exclusive_pokemon.h"
 #include "code_80958E8.h"
 #include "code_80A26CC.h"
+#include "constants/rescue_dungeon_id.h"
 
 // size: 0x8
 typedef struct MissionText
@@ -107,7 +108,7 @@ bool8 sub_8097384(s32 param_1)
 {
     s32 param1 = (s16) param_1;
 
-    if (param1 == 13) {
+    if (param1 == RESCUE_DUNGEON_DUMMY) {
         return FALSE;
     }
     else {
@@ -123,7 +124,7 @@ void sub_80973A8(s32 param_1, u32 param_2)
 
   if (param_1_s32 != 0xd) {
     if (param_2_u32 != 0) {
-      sVar1 = sub_80A26B8(param_1);
+      sVar1 = RescueDungeonToScriptDungeonId(param_1);
       SetScriptVarArrayValue(NULL,RESCUE_SCENARIO_ORDER_LIST,(u16)param_1_s32,0);
       if (sVar1 != -1) {
         SetScriptVarValue(NULL,DUNGEON_SELECT,sVar1);
@@ -137,7 +138,7 @@ bool8 RescueScenarioConquered(s32 param_1)
 {
     s32 param1 = (s16) param_1;
 
-    if (param1 == 13) {
+    if (param1 == RESCUE_DUNGEON_DUMMY) {
         return FALSE;
     }
     else {
@@ -167,27 +168,24 @@ void sub_8097418(s32 index, bool32 param_2)
   }
 }
 
-UNUSED static const u8 *sub_809747C(s16 index)
+// These two are literally the same
+UNUSED static const u8 *UnusedGetRescueDungeonName(s16 index)
 {
-    if(index == 0xD)
-    {
+    if (index == RESCUE_DUNGEON_DUMMY) {
         return gDummyScenarioText;
     }
-    else
-    {
-        return GetDungeonName1(sub_80A270C(index));
+    else {
+        return GetDungeonName1(RescueDungeonToDungeonId(index));
     }
 }
 
-const u8 *sub_80974A0(s16 index)
+const u8 *GetRescueDungeonName(s16 rescueDungeonId)
 {
-    if(index == 0xD)
-    {
+    if (rescueDungeonId == RESCUE_DUNGEON_DUMMY) {
         return gDummyScenarioText;
     }
-    else
-    {
-        return GetDungeonName1(sub_80A270C(index));
+    else {
+        return GetDungeonName1(RescueDungeonToDungeonId(rescueDungeonId));
     }
 }
 

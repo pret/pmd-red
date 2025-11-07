@@ -5,6 +5,7 @@
 #include "event_flag.h"
 #include "constants/dungeon.h"
 #include "constants/script_dungeon_id.h"
+#include "constants/rescue_dungeon_id.h"
 
 static const DungeonInfo gUnknown_81168A8[SCRIPT_DUNGEON_COUNT] = {
     [SCRIPT_DUNGEON_TINY_WOODS] = {
@@ -1097,53 +1098,53 @@ static const s16 gUnknown_8116F24[] = {
     0, 0, 0, 0
 };
 
-static const s16 gUnknown_8116F9A[] = {
-    [0]                	= SCRIPT_DUNGEON_TINY_WOODS,
-    [1]          	    = SCRIPT_DUNGEON_THUNDERWAVE_CAVE,
-    [2]                 = SCRIPT_DUNGEON_MT_STEEL,
-    [3]            	    = SCRIPT_DUNGEON_SINISTER_WOODS,
-    [4]              	= SCRIPT_DUNGEON_SILENT_CHASM,
-    [5]                	= SCRIPT_DUNGEON_MT_THUNDER,
-    [6]           	    = SCRIPT_DUNGEON_GREAT_CANYON,
-    [7]              	= SCRIPT_DUNGEON_LAPIS_CAVE,
-    [8]                	= SCRIPT_DUNGEON_MT_BLAZE,
-    [9]                 = SCRIPT_DUNGEON_FROSTY_FOREST,
-    [10]             	= SCRIPT_DUNGEON_MT_FREEZE,
-    [11]             	= SCRIPT_DUNGEON_MAGMA_CAVERN,
-    [12]             	= SCRIPT_DUNGEON_SKY_TOWER,
-    [13]                = SCRIPT_DUNGEON_21,
-    [14]            	= SCRIPT_DUNGEON_UPROAR_FOREST,
-    [15]              	= SCRIPT_DUNGEON_HOWLING_FOREST,
-    [16]          	    = SCRIPT_DUNGEON_STORMY_SEA,
-    [17]                = SCRIPT_DUNGEON_SILVER_TRENCH,
-    [18]          	    = SCRIPT_DUNGEON_METEOR_CAVE,
-    [19]                = SCRIPT_DUNGEON_GREAT_CANYON_2,
-    [20]             	= SCRIPT_DUNGEON_FIERY_FIELD,
-    [21]               	= SCRIPT_DUNGEON_LIGHTNING_FIELD,
-    [22]          	    = SCRIPT_DUNGEON_NORTHWIND_FIELD,
-    [23]              	= SCRIPT_DUNGEON_MT_FARAWAY,
-    [24]                = SCRIPT_DUNGEON_WESTERN_CAVE,
-    [25]                = SCRIPT_DUNGEON_NORTHERN_RANGE,
-    [26]                = SCRIPT_DUNGEON_PITFALL_VALLEY,
-    [27]              	= SCRIPT_DUNGEON_BURIED_RELIC,
-    [28]            	= SCRIPT_DUNGEON_WISH_CAVE,
-    [29]            	= SCRIPT_DUNGEON_MT_FREEZE_2,
-    [30]                = SCRIPT_DUNGEON_MURKY_CAVE,
-    [31]             	= SCRIPT_DUNGEON_DESERT_REGION,
-    [32]           	    = SCRIPT_DUNGEON_SOUTHERN_CAVERN,
-    [33]               	= SCRIPT_DUNGEON_WYVERN_HILL,
-    [34]               	= SCRIPT_DUNGEON_SOLAR_CAVE,
-    [35]           	    = SCRIPT_DUNGEON_DARKNIGHT_RELIC,
-    [36]                = SCRIPT_DUNGEON_GRAND_SEA,
-    [37]           	    = SCRIPT_DUNGEON_WATERFALL_POND,
-    [38]           	    = SCRIPT_DUNGEON_UNOWN_RELIC,
-    [39]              	= SCRIPT_DUNGEON_JOYOUS_TOWER,
-    [40]                = SCRIPT_DUNGEON_FAR_OFF_SEA,
-    [41]                = SCRIPT_DUNGEON_PURITY_FOREST,
-    [42]             	= SCRIPT_DUNGEON_ODDITY_CAVE,
-    [43]               	= SCRIPT_DUNGEON_REMAINS_ISLAND,
-    [44]            	= SCRIPT_DUNGEON_MARVELOUS_SEA,
-    [45]             	= SCRIPT_DUNGEON_FANTASY_STRAIT,
+static const s16 sRescueToScriptDungeonIdTable[RESCUE_DUNGEON_COUNT] = {
+    [RESCUE_DUNGEON_TINY_WOODS]         = SCRIPT_DUNGEON_TINY_WOODS,
+    [RESCUE_DUNGEON_THUNDERWAVE_CAVE]   = SCRIPT_DUNGEON_THUNDERWAVE_CAVE,
+    [RESCUE_DUNGEON_MT_STEEL]           = SCRIPT_DUNGEON_MT_STEEL,
+    [RESCUE_DUNGEON_SINISTER_WOODS]     = SCRIPT_DUNGEON_SINISTER_WOODS,
+    [RESCUE_DUNGEON_SILENT_CHASM]       = SCRIPT_DUNGEON_SILENT_CHASM,
+    [RESCUE_DUNGEON_MT_THUNDER]         = SCRIPT_DUNGEON_MT_THUNDER,
+    [RESCUE_DUNGEON_GREAT_CANYON]       = SCRIPT_DUNGEON_GREAT_CANYON,
+    [RESCUE_DUNGEON_LAPIS_CAVE]         = SCRIPT_DUNGEON_LAPIS_CAVE,
+    [RESCUE_DUNGEON_MT_BLAZE]           = SCRIPT_DUNGEON_MT_BLAZE,
+    [RESCUE_DUNGEON_FROSTY_FOREST]      = SCRIPT_DUNGEON_FROSTY_FOREST,
+    [RESCUE_DUNGEON_MT_FREEZE]          = SCRIPT_DUNGEON_MT_FREEZE,
+    [RESCUE_DUNGEON_MAGMA_CAVERN]       = SCRIPT_DUNGEON_MAGMA_CAVERN,
+    [RESCUE_DUNGEON_SKY_TOWER]          = SCRIPT_DUNGEON_SKY_TOWER,
+    [RESCUE_DUNGEON_DUMMY]              = SCRIPT_DUNGEON_21,
+    [RESCUE_DUNGEON_UPROAR_FOREST]      = SCRIPT_DUNGEON_UPROAR_FOREST,
+    [RESCUE_DUNGEON_HOWLING_FOREST]     = SCRIPT_DUNGEON_HOWLING_FOREST,
+    [RESCUE_DUNGEON_STORMY_SEA]         = SCRIPT_DUNGEON_STORMY_SEA,
+    [RESCUE_DUNGEON_SILVER_TRENCH]      = SCRIPT_DUNGEON_SILVER_TRENCH,
+    [RESCUE_DUNGEON_METEOR_CAVE]        = SCRIPT_DUNGEON_METEOR_CAVE,
+    [RESCUE_DUNGEON_GREAT_CANYON_2]     = SCRIPT_DUNGEON_GREAT_CANYON_2,
+    [RESCUE_DUNGEON_FIERY_FIELD]        = SCRIPT_DUNGEON_FIERY_FIELD,
+    [RESCUE_DUNGEON_LIGHTNING_FIELD]    = SCRIPT_DUNGEON_LIGHTNING_FIELD,
+    [RESCUE_DUNGEON_NORTHWIND_FIELD]    = SCRIPT_DUNGEON_NORTHWIND_FIELD,
+    [RESCUE_DUNGEON_MT_FARAWAY]         = SCRIPT_DUNGEON_MT_FARAWAY,
+    [RESCUE_DUNGEON_WESTERN_CAVE]       = SCRIPT_DUNGEON_WESTERN_CAVE,
+    [RESCUE_DUNGEON_NORTHERN_RANGE]     = SCRIPT_DUNGEON_NORTHERN_RANGE,
+    [RESCUE_DUNGEON_PITFALL_VALLEY]     = SCRIPT_DUNGEON_PITFALL_VALLEY,
+    [RESCUE_DUNGEON_BURIED_RELIC]       = SCRIPT_DUNGEON_BURIED_RELIC,
+    [RESCUE_DUNGEON_WISH_CAVE]          = SCRIPT_DUNGEON_WISH_CAVE,
+    [RESCUE_DUNGEON_MT_FREEZE_2]        = SCRIPT_DUNGEON_MT_FREEZE_2,
+    [RESCUE_DUNGEON_MURKY_CAVE]         = SCRIPT_DUNGEON_MURKY_CAVE,
+    [RESCUE_DUNGEON_DESERT_REGION]      = SCRIPT_DUNGEON_DESERT_REGION,
+    [RESCUE_DUNGEON_SOUTHERN_CAVERN]    = SCRIPT_DUNGEON_SOUTHERN_CAVERN,
+    [RESCUE_DUNGEON_WYVERN_HILL]        = SCRIPT_DUNGEON_WYVERN_HILL,
+    [RESCUE_DUNGEON_SOLAR_CAVE]         = SCRIPT_DUNGEON_SOLAR_CAVE,
+    [RESCUE_DUNGEON_DARKNIGHT_RELIC]    = SCRIPT_DUNGEON_DARKNIGHT_RELIC,
+    [RESCUE_DUNGEON_GRAND_SEA]          = SCRIPT_DUNGEON_GRAND_SEA,
+    [RESCUE_DUNGEON_WATERFALL_POND]     = SCRIPT_DUNGEON_WATERFALL_POND,
+    [RESCUE_DUNGEON_UNOWN_RELIC]        = SCRIPT_DUNGEON_UNOWN_RELIC,
+    [RESCUE_DUNGEON_JOYOUS_TOWER]       = SCRIPT_DUNGEON_JOYOUS_TOWER,
+    [RESCUE_DUNGEON_FAR_OFF_SEA]        = SCRIPT_DUNGEON_FAR_OFF_SEA,
+    [RESCUE_DUNGEON_PURITY_FOREST]      = SCRIPT_DUNGEON_PURITY_FOREST,
+    [RESCUE_DUNGEON_ODDITY_CAVE]        = SCRIPT_DUNGEON_ODDITY_CAVE,
+    [RESCUE_DUNGEON_REMAINS_ISLAND]     = SCRIPT_DUNGEON_REMAINS_ISLAND,
+    [RESCUE_DUNGEON_MARVELOUS_SEA]      = SCRIPT_DUNGEON_MARVELOUS_SEA,
+    [RESCUE_DUNGEON_FANTASY_STRAIT]     = SCRIPT_DUNGEON_FANTASY_STRAIT,
 };
 
 const DungeonInfo *GetDungeonInfo_80A2608(s32 _index)
@@ -1152,9 +1153,9 @@ const DungeonInfo *GetDungeonInfo_80A2608(s32 _index)
     return &gUnknown_81168A8[index];
 }
 
-const DungeonInfo *sub_80A2620(s16 index)
+static const DungeonInfo *GetRescueDungeonInfo(s16 rescueDungeonId)
 {
-    return &gUnknown_81168A8[sub_80A26B8(index)];
+    return &gUnknown_81168A8[RescueDungeonToScriptDungeonId(rescueDungeonId)];
 }
 
 UNUSED static s16 sub_80A2644(u32 index)
@@ -1189,10 +1190,10 @@ s16 sub_80A2688(u8 r0)
     return -1;
 }
 
-s16 sub_80A26B8(s16 a0_)
+s16 RescueDungeonToScriptDungeonId(s16 _rescueDungId)
 {
-    s32 a0 = (s16) a0_;
-    return gUnknown_8116F9A[a0];
+    s32 rescueDungId = (s16) _rescueDungId;
+    return sRescueToScriptDungeonIdTable[rescueDungId];
 }
 
 s16 sub_80A26CC(s16 r0)
@@ -1218,14 +1219,12 @@ UNUSED static s16 sub_80A26D8(u8 index)
     return -1;
 }
 
-u8 sub_80A270C(s16 index)
+u8 RescueDungeonToDungeonId(s16 _rescueDungeonId)
 {
-    const DungeonInfo *temp;
-    s32 index_s32;
+    s32 rescueDungeonId = _rescueDungeonId; // forcing a shift before addressing
+    const DungeonInfo *info = GetDungeonInfo_80A2608(sRescueToScriptDungeonIdTable[rescueDungeonId]);
 
-    index_s32 = index; // forcing a shift before addressing
-    temp = GetDungeonInfo_80A2608(gUnknown_8116F9A[index_s32]);
-    return temp->dungeonIndex;
+    return info->dungeonIndex;
 }
 
 u8 sub_80A2728(s16 index)
@@ -1277,26 +1276,21 @@ s16 sub_80A2750(s16 r0)
     return 2;
 }
 
-bool8 sub_80A27CC(s16 r0)
+bool8 IsRescueDungeonAvailable(s16 _rescueDungeonId)
 {
-    s32 temp;
-    s32 temp2;
-    const DungeonInfo *t;
-
     // Same dumbness as above to get a match
-    temp2 = r0;
-    temp = temp2;
+    s32 _rescueDungeonIdMatch = _rescueDungeonId;
+    s32 rescueDungeonId = _rescueDungeonIdMatch;
 
-    t = sub_80A2620(r0);
-    if (t->unk0 == -1)
+    if (GetRescueDungeonInfo(_rescueDungeonId)->unk0 == -1)
         return FALSE;
     if (sub_80023E4(5))
         return FALSE;
-    if (sub_8097384(r0))
+    if (sub_8097384(_rescueDungeonId))
         return TRUE;
     if (!sub_80023E4(1))
         return FALSE;
-    if (!RescueScenarioConquered((s16) temp))
+    if (!RescueScenarioConquered((s16) rescueDungeonId))
         return FALSE;
     return TRUE;
 }
@@ -1310,8 +1304,8 @@ bool8 sub_80A2824(u8 index)
         return FALSE;
 
     if (sub_80023E4(1)) {
-        for (i = 0; i < 46; i++) {
-            temp = sub_80A2620(i);
+        for (i = 0; i < RESCUE_DUNGEON_COUNT; i++) {
+            temp = GetRescueDungeonInfo(i);
 
             if (temp->unk11 != 0) {
                 if (temp->dungeonIndex == index) {
@@ -1324,8 +1318,8 @@ bool8 sub_80A2824(u8 index)
         }
     }
     else {
-        for (i = 0; i < 46; i++) {
-            temp = sub_80A2620(i);
+        for (i = 0; i < RESCUE_DUNGEON_COUNT; i++) {
+            temp = GetRescueDungeonInfo(i);
 
             if (temp->unk11 != 0)
                 if (temp->dungeonIndex == index)
@@ -1341,7 +1335,7 @@ UNUSED static bool8 sub_80A28B4(s16 r0)
 {
     const DungeonInfo *temp;
 
-    temp = sub_80A2620(r0);
+    temp = GetRescueDungeonInfo(r0);
 
     if (temp->unk0 != -1) {
         if (!sub_8097384(r0) && !RescueScenarioConquered(r0))
@@ -1359,7 +1353,7 @@ bool8 sub_80A28F0(u8 index)
     const DungeonInfo *temp;
 
     for (counter = 0; counter < 0x2E; counter++) {
-        temp = sub_80A2620(counter);
+        temp = GetRescueDungeonInfo(counter);
 
         if (temp->unk11 != 0) {
             if (temp->dungeonIndex == index) {
@@ -1393,8 +1387,8 @@ UNUSED static s32 sub_80A293C(u8 *param_1)
     } while ((int)pcVar2 >= (int)local_68);
 
 
-    for (index = 0; index < 46; index++) {
-        iVar3 = sub_80A2620(index);
+    for (index = 0; index < RESCUE_DUNGEON_COUNT; index++) {
+        iVar3 = GetRescueDungeonInfo(index);
         if (iVar3->unk11 != 0 && sub_8097384((s16) index))
             local_68[iVar3->dungeonIndex] = 1;
     }
@@ -1437,8 +1431,8 @@ s32 sub_80A29B0(u8 *param_1)
 
 
     if (sub_80023E4(1)) {
-        for (index = 0; index < 46; index++) {
-            iVar3 = sub_80A2620(index);
+        for (index = 0; index < RESCUE_DUNGEON_COUNT; index++) {
+            iVar3 = GetRescueDungeonInfo(index);
 
             if (iVar3->unk11 != 0 && RescueScenarioConquered((s16) index))
                 local_68[iVar3->dungeonIndex] = 1;
@@ -1479,16 +1473,16 @@ UNUSED static s32 sub_80A2A5C(u8 *param_1)
     } while ((s32)pcVar2 >= (s32)local_58);
 
     if (sub_80023E4(1)) {
-        for (index = 0; index < 46; index++) {
-            iVar3 = sub_80A2620(index);
+        for (index = 0; index < RESCUE_DUNGEON_COUNT; index++) {
+            iVar3 = GetRescueDungeonInfo(index);
 
             if (iVar3->unk11 != 0 && (sub_8097384((s16) index) || RescueScenarioConquered((s16) index)))
                 local_58[iVar3->dungeonIndex] = 1;
         }
     }
     else {
-        for (index = 0; index < 46; index++) {
-            iVar3 = sub_80A2620(index);
+        for (index = 0; index < RESCUE_DUNGEON_COUNT; index++) {
+            iVar3 = GetRescueDungeonInfo(index);
 
             if (iVar3->unk11 != 0 && sub_8097384((s16) index))
                 local_58[iVar3->dungeonIndex] = 1;

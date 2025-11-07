@@ -19,4 +19,10 @@
 #define INPUT_R_DPAD_LEFT_BUTTONS 14
 #define INPUT_R_DPAD_RIGHT_BUTTONS 15
 
+// Used throughout menu functions
+#define MENU_INPUT_NOTHING 0
+#define MENU_INPUT_DPAD    1
+#define MENU_INPUT_B_PRESS 2
+#define MENU_INPUT_A_PRESS 3
+
 #endif // GUARD_CONSTANTS_INPUT_H

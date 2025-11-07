@@ -8,7 +8,7 @@
 
 
 static const struct ScriptCommand s_gs173_g0_s0_station_sref_script[] = { /* 0x8229b2c */
-    DEBUGINFO,
+    DEBUGINFO_O(11),
     SELECT_MAP(173),
     BGM_STOP,
     JUMP_SCRIPT(COMMON_ENTER),
@@ -17,7 +17,7 @@ static const struct ScriptCommand s_gs173_g0_s0_station_sref_script[] = { /* 0x8
 static const struct ScriptRef s_gs173_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs173_g0_s0_station_sref_script }; /* 0x8229b98 */
 
 static const struct ScriptCommand s_gs173_g1_s0_station_sref_script[] = { /* 0x8229ba4 */
-    DEBUGINFO,
+    DEBUGINFO_O(20),
     SELECT_MAP(173),
     SELECT_ENTITIES(-1, -1),
     WAIT(60),
@@ -35,7 +35,7 @@ static const struct ScriptCommand s_gs173_g1_s0_station_sref_script[] = { /* 0x8
 static const struct ScriptRef s_gs173_g1_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs173_g1_s0_station_sref_script }; /* 0x8229c74 */
 
 static const struct ScriptCommand s_gs173_g1_s0_eff0_script[] = { /* 0x8229c80 */
-    DEBUGINFO,
+    DEBUGINFO_O(38),
     CAMERA_INIT_PAN,
     WAIT(60),
     WALK_GRID(179, 0),
@@ -43,7 +43,7 @@ static const struct ScriptCommand s_gs173_g1_s0_eff0_script[] = { /* 0x8229c80 *
 };
 
 static const struct ScriptCommand s_gs173_g2_s0_station_sref_script[] = { /* 0x8229cd0 */
-    DEBUGINFO,
+    DEBUGINFO_O(46),
     SELECT_MAP(173),
     SELECT_ENTITIES(-1, -1),
     BGM_SWITCH(26),
@@ -60,7 +60,7 @@ static const struct ScriptCommand s_gs173_g2_s0_station_sref_script[] = { /* 0x8
 static const struct ScriptRef s_gs173_g2_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs173_g2_s0_station_sref_script }; /* 0x8229d90 */
 
 static const struct ScriptCommand s_gs173_g2_s0_eff0_script[] = { /* 0x8229d9c */
-    DEBUGINFO,
+    DEBUGINFO_O(63),
     CAMERA_END_PAN,
     WAIT(1),
     CAMERA_INIT_PAN,
@@ -71,7 +71,7 @@ static const struct ScriptCommand s_gs173_g2_s0_eff0_script[] = { /* 0x8229d9c *
 };
 
 static const struct ScriptCommand s_gs173_g3_s0_station_sref_script[] = { /* 0x8229e1c */
-    DEBUGINFO,
+    DEBUGINFO_O(74),
     SELECT_MAP(173),
     SELECT_ENTITIES(-1, -1),
     BGM_SWITCH(26),
@@ -95,7 +95,7 @@ static const struct ScriptCommand s_gs173_g3_s0_station_sref_script[] = { /* 0x8
 static const struct ScriptRef s_gs173_g3_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs173_g3_s0_station_sref_script }; /* 0x8229f4c */
 
 static const struct ScriptCommand s_gs173_g3_s0_eff0_script[] = { /* 0x8229f58 */
-    DEBUGINFO,
+    DEBUGINFO_O(98),
     CAMERA_END_PAN,
     WAIT(1),
     CAMERA_INIT_PAN,
@@ -106,7 +106,7 @@ static const struct ScriptCommand s_gs173_g3_s0_eff0_script[] = { /* 0x8229f58 *
 };
 
 static const struct ScriptCommand s_gs173_g3_s0_eff1_script[] = { /* 0x8229fd8 */
-    DEBUGINFO,
+    DEBUGINFO_O(109),
     { 0x56, 0x00,  0x0000,  0x00000135,  0x00000000, NULL },
     HALT,
 };

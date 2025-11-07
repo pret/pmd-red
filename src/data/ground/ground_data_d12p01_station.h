@@ -11,7 +11,7 @@
 
 
 static const struct ScriptCommand s_gs204_g0_s0_station_sref_script[] = { /* 0x825ce34 */
-    DEBUGINFO,
+    DEBUGINFO_O(14),
     SELECT_MAP(MAP_MAGMA_CAVERN_ENTRY),
     CJUMP_SCENARIO_0(SCENARIO_MAIN),
     COND(JUDGE_EQ, 15, /* to label */ 0),
@@ -45,47 +45,47 @@ static const struct ScriptCommand s_gs204_g0_s0_station_sref_script[] = { /* 0x8
 static const struct ScriptRef s_gs204_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs204_g0_s0_station_sref_script }; /* 0x825d030 */
 
 static const struct ScriptCommand s_gs204_g0_s1_lives0_dlg0[] = { /* 0x825d03c */
-    DEBUGINFO,
+    DEBUGINFO_O(48),
     SELECT_ANIMATION(2),
     CALL_SCRIPT(WAIT_START_FUNC),
     RET,
 };
 
 static const struct ScriptCommand s_gs204_g0_s1_lives1_dlg0[] = { /* 0x825d07c */
-    DEBUGINFO,
+    DEBUGINFO_O(55),
     SELECT_ANIMATION(2),
     CALL_SCRIPT(WAIT_START_FUNC),
     RET,
 };
 
 static const struct ScriptCommand s_gs204_g0_s3_lives0_dlg0[] = { /* 0x825d0bc */
-    DEBUGINFO,
+    DEBUGINFO_O(62),
     SELECT_ANIMATION(2),
     CALL_SCRIPT(WAIT_START_FUNC),
     RET,
 };
 
 static const struct ScriptCommand s_gs204_g0_s3_lives1_dlg0[] = { /* 0x825d0fc */
-    DEBUGINFO,
+    DEBUGINFO_O(69),
     SELECT_ANIMATION(2),
     CALL_SCRIPT(WAIT_START_FUNC),
     RET,
 };
 
 static const struct ScriptCommand s_gs204_g0_s4_lives0_dlg0[] = { /* 0x825d13c */
-    DEBUGINFO,
+    DEBUGINFO_O(76),
     CALL_SCRIPT(LIVES_WARP_ARRIVE_FUNC),
     RET,
 };
 
 static const struct ScriptCommand s_gs204_g0_s4_lives1_dlg0[] = { /* 0x825d16c */
-    DEBUGINFO,
+    DEBUGINFO_O(82),
     CALL_SCRIPT(LIVES_WARP_ARRIVE2_FUNC),
     RET,
 };
 
 static const struct ScriptCommand s_gs204_g1_s0_station_sref_script[] = { /* 0x825d19c */
-    DEBUGINFO,
+    DEBUGINFO_O(88),
     SELECT_MAP(MAP_MAGMA_CAVERN_ENTRY),
     SELECT_ENTITIES(-1, 0),
     BGM_SWITCH(108),
@@ -98,7 +98,7 @@ static const struct ScriptCommand s_gs204_g1_s0_station_sref_script[] = { /* 0x8
 static const struct ScriptRef s_gs204_g1_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs204_g1_s0_station_sref_script }; /* 0x825d21c */
 
 static const struct ScriptCommand s_gs204_g1_s0_lives0_dlg0[] = { /* 0x825d228 */
-    DEBUGINFO,
+    DEBUGINFO_O(101),
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     { 0x2d, 0x09,  0x0002,  0x00000067,  0x00000000, NULL },
@@ -139,7 +139,7 @@ static const struct ScriptCommand s_gs204_g1_s0_lives0_dlg0[] = { /* 0x825d228 *
 
 
 static const struct ScriptCommand s_gs204_g1_s0_lives1_dlg0[] = { /* 0x825d6dc */
-    DEBUGINFO,
+    DEBUGINFO_O(142),
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(6),
@@ -153,7 +153,7 @@ static const struct ScriptCommand s_gs204_g1_s0_lives1_dlg0[] = { /* 0x825d6dc *
 };
 
 static const struct ScriptCommand s_gs204_g2_s0_station_sref_script[] = { /* 0x825d78c */
-    DEBUGINFO,
+    DEBUGINFO_O(156),
     SELECT_MAP(MAP_MAGMA_CAVERN_ENTRY),
     SELECT_ENTITIES(-1, 0),
     BGM_SWITCH(108),
@@ -166,7 +166,7 @@ static const struct ScriptCommand s_gs204_g2_s0_station_sref_script[] = { /* 0x8
 static const struct ScriptRef s_gs204_g2_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs204_g2_s0_station_sref_script }; /* 0x825d80c */
 
 static const struct ScriptCommand s_gs204_g2_s0_lives0_dlg0[] = { /* 0x825d818 */
-    DEBUGINFO,
+    DEBUGINFO_O(169),
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     { 0x2d, 0x09,  0x0002,  0x00000058,  0x00000000, NULL },
@@ -188,7 +188,7 @@ static const struct ScriptCommand s_gs204_g2_s0_lives0_dlg0[] = { /* 0x825d818 *
 
 
 static const struct ScriptCommand s_gs204_g2_s0_lives1_dlg0[] = { /* 0x825d9bc */
-    DEBUGINFO,
+    DEBUGINFO_O(191),
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(6),

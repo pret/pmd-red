@@ -8,7 +8,7 @@
 
 
 static const struct ScriptCommand s_gs109_g0_s0_station_sref_script[] = { /* 0x81f07c8 */
-    DEBUGINFO,
+    DEBUGINFO_O(11),
     SELECT_MAP(109),
     CJUMP_SCENARIO_0(SCENARIO_MAIN),
     COND(JUDGE_EQ, 3, /* to label */ 0),
@@ -50,53 +50,53 @@ static const struct ScriptCommand s_gs109_g0_s0_station_sref_script[] = { /* 0x8
 static const struct ScriptRef s_gs109_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs109_g0_s0_station_sref_script }; /* 0x81f0a44 */
 
 static const struct ScriptCommand s_gs109_g0_s1_lives0_dlg0[] = { /* 0x81f0a50 */
-    DEBUGINFO,
+    DEBUGINFO_O(53),
     SELECT_ANIMATION(2),
     CALL_SCRIPT(WAIT_START_FUNC),
     RET,
 };
 
 static const struct ScriptCommand s_gs109_g0_s1_lives1_dlg0[] = { /* 0x81f0a90 */
-    DEBUGINFO,
+    DEBUGINFO_O(60),
     SELECT_ANIMATION(2),
     CALL_SCRIPT(WAIT_START_FUNC),
     RET,
 };
 
 static const struct ScriptCommand s_gs109_g0_s3_lives0_dlg0[] = { /* 0x81f0ad0 */
-    DEBUGINFO,
+    DEBUGINFO_O(67),
     SELECT_ANIMATION(2),
     CALL_SCRIPT(WAIT_START_FUNC),
     RET,
 };
 
 static const struct ScriptCommand s_gs109_g0_s3_lives1_dlg0[] = { /* 0x81f0b10 */
-    DEBUGINFO,
+    DEBUGINFO_O(74),
     SELECT_ANIMATION(2),
     CALL_SCRIPT(WAIT_START_FUNC),
     RET,
 };
 
 static const struct ScriptCommand s_gs109_g0_s4_lives0_dlg0[] = { /* 0x81f0b50 */
-    DEBUGINFO,
+    DEBUGINFO_O(81),
     CALL_SCRIPT(LIVES_WARP_ARRIVE_FUNC),
     RET,
 };
 
 static const struct ScriptCommand s_gs109_g0_s4_lives1_dlg0[] = { /* 0x81f0b80 */
-    DEBUGINFO,
+    DEBUGINFO_O(87),
     CALL_SCRIPT(LIVES_WARP_ARRIVE2_FUNC),
     RET,
 };
 
 static const struct ScriptCommand s_gs109_g1_s0_lives0_dlg1[] = { /* 0x81f0bb0 */
-    DEBUGINFO,
+    DEBUGINFO_O(93),
     { 0x51, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
     JUMP_SCRIPT(HABITAT_MOVE1),
 };
 
 static const struct ScriptCommand s_gs109_g1_s0_lives0_dlg2[] = { /* 0x81f0be0 */
-    DEBUGINFO,
+    DEBUGINFO_O(99),
     JUMP_SCRIPT(HABITAT_TALK),
 };
 

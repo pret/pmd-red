@@ -5,172 +5,174 @@
 #include "constants/script_dungeon_id.h"
 #include "portrait_placement.h"
 #include "structs/str_ground_script.h"
+
 #define LPARRAY(x) (ARRAY_COUNT(x)), x
 
 #define CPOS_HALFTILE 0x2
 #define CPOS_CURRENT  0x4
 
 // 01..07: complex map/dungeon selection/check commands
-#define NEXT_DUNGEON(u, d)      { 0x02, 0, u, d, 0, NULL } // Seems to be a general command for setting up which dungeon to enter next. First argument is unknown. The second argument is script dungeon id(not the one in dungeon/constants.h). There's a different ordering and a table with the proper dungeon id.
+#define NEXT_DUNGEON(u, d)              { 0x02, 0, u, d, 0, NULL } // Seems to be a general command for setting up which dungeon to enter next. First argument is unknown. The second argument is script dungeon id(not the one in dungeon/constants.h). There's a different ordering and a table with the proper dungeon id.
 
-#define SELECT_MAP(m)           { 0x08, 0, 0, m, 0, NULL }
-#define SELECT_GROUND(m)        { 0x09, 0, 0, m, 0, NULL }
-#define SELECT_DUNGEON(m,d,f,b) { 0x0A, b, f, d, m, NULL }
-#define SELECT_WEATHER(w)       { 0x0B, 0, 0, w, 0, NULL }
-#define SELECT_ENTITIES(g,s)    { 0x0C, s, g, 0, 0, NULL }
-#define SELECT_LIVES(g,s)       { 0x0D, s, g, 0, 0, NULL }
-#define SELECT_OBJECTS(g,s)     { 0x0E, s, g, 0, 0, NULL }
-#define SELECT_EFFECTS(g,s)     { 0x0F, s, g, 0, 0, NULL }
-#define SELECT_EVENTS(g,s)      { 0x10, s, g, 0, 0, NULL }
-#define CANCEL_ENTITIES(g,s)    { 0x11, s, g, 0, 0, NULL }
-#define CANCEL_LIVES(g,s)       { 0x12, s, g, 0, 0, NULL }
-#define CANCEL_OBJECTS(g,s)     { 0x13, s, g, 0, 0, NULL }
-#define CANCEL_EFFECTS(g,s)     { 0x14, s, g, 0, 0, NULL }
-#define CANCEL_EVENTS(g,s)      { 0x15, s, g, 0, 0, NULL }
-#define CANCEL_OFFSCREEN_LIVES  { 0x16, 0, 0, 0, 0, NULL }
-#define CANCEL_OFFSCREEN_OBJECTS {0x17, 0, 0, 0, 0, NULL }
-#define CANCEL_OFFSCREEN_EFFECTS {0x18, 0, 0, 0, 0, NULL }
-#define SPAWN_OBJECT(k,d,g,s)   { 0x19, s, g, d, k, NULL }
-#define SPAWN_EFFECT(k,d,g,s)   { 0x1A, s, g, d, k, NULL }
-#define EXECUTE_FUNCTION(f)     { 0x1B, 0, f, 0, 0, NULL }
-#define EXECUTE_SUBROUTINE(f)   { 0x1C, 0, f, 0, 0, NULL }
-#define EXECUTE_STATION(m,g,s)  { 0x1D, s, g, m, 0, NULL }
-#define EXECUTE_SUBSTATION(m,g,s){0x1E, s, g, m, 0, NULL }
-#define RESCUE_SELECT           { 0x1F, 0, 0, 0, 0, NULL }
+#define SELECT_MAP(m)                   { 0x08, 0, 0, m, 0, NULL }
+#define SELECT_GROUND(m)                { 0x09, 0, 0, m, 0, NULL }
+#define SELECT_DUNGEON(m,d,f,b)         { 0x0A, b, f, d, m, NULL }
+#define SELECT_WEATHER(w)               { 0x0B, 0, 0, w, 0, NULL }
+#define SELECT_ENTITIES(g,s)            { 0x0C, s, g, 0, 0, NULL }
+#define SELECT_LIVES(g,s)               { 0x0D, s, g, 0, 0, NULL }
+#define SELECT_OBJECTS(g,s)             { 0x0E, s, g, 0, 0, NULL }
+#define SELECT_EFFECTS(g,s)             { 0x0F, s, g, 0, 0, NULL }
+#define SELECT_EVENTS(g,s)              { 0x10, s, g, 0, 0, NULL }
+#define CANCEL_ENTITIES(g,s)            { 0x11, s, g, 0, 0, NULL }
+#define CANCEL_LIVES(g,s)               { 0x12, s, g, 0, 0, NULL }
+#define CANCEL_OBJECTS(g,s)             { 0x13, s, g, 0, 0, NULL }
+#define CANCEL_EFFECTS(g,s)             { 0x14, s, g, 0, 0, NULL }
+#define CANCEL_EVENTS(g,s)              { 0x15, s, g, 0, 0, NULL }
+#define CANCEL_OFFSCREEN_LIVES          { 0x16, 0, 0, 0, 0, NULL }
+#define CANCEL_OFFSCREEN_OBJECTS        { 0x17, 0, 0, 0, 0, NULL }
+#define CANCEL_OFFSCREEN_EFFECTS        { 0x18, 0, 0, 0, 0, NULL }
+#define SPAWN_OBJECT(k,d,g,s)           { 0x19, s, g, d, k, NULL }
+#define SPAWN_EFFECT(k,d,g,s)           { 0x1A, s, g, d, k, NULL }
+#define EXECUTE_FUNCTION(f)             { 0x1B, 0, f, 0, 0, NULL }
+#define EXECUTE_SUBROUTINE(f)           { 0x1C, 0, f, 0, 0, NULL }
+#define EXECUTE_STATION(m,g,s)          { 0x1D, s, g, m, 0, NULL }
+#define EXECUTE_SUBSTATION(m,g,s)       { 0x1E, s, g, m, 0, NULL }
+#define RESCUE_SELECT                   { 0x1F, 0, 0, 0, 0, NULL }
 // 20: execute script as parented object, maybe? Unused in ROM
 // 21: follow object/make object follow/get parented?
 // 22..2f: ???
-#define TEXTBOX_AUTO_PRESS(endF, midF) { 0x2b, 0, 0, endF, midF, NULL} // Waits specified number of frames, then automatically does a button press without waiting for player's input. -1 disables it.
+#define TEXTBOX_AUTO_PRESS(endF, midF)  { 0x2b, 0, 0, endF, midF, NULL} // Waits specified number of frames, then automatically does a button press without waiting for player's input. -1 disables it.
 
 // Note for the spriteId: first 4 bits(0xF) are the actual spriteId, but sometimes a 0x40 flag is attached to it, but it has no practical use. Could be different in Blue?
-#define PORTRAIT(place, id, sprite)    { 0x2e, place, id, sprite, 0, NULL } // Sets up portrait data for the specified speaker
-#define PORTRAIT_REP(id, sprite)       { 0x2e, PLACEMENT_COUNT, id, sprite, 0, NULL } // Same as the above, but it assumes the last used placement for the speaker. Useful in long scripts, where you don't need to remember all the placements.
+#define PORTRAIT(place, id, sprite)     { 0x2e, place, id, sprite, 0, NULL } // Sets up portrait data for the specified speaker
+#define PORTRAIT_REP(id, sprite)        { 0x2e, PLACEMENT_COUNT, id, sprite, 0, NULL } // Same as the above, but it assumes the last used placement for the speaker. Useful in long scripts, where you don't need to remember all the placements.
 
-#define PORTRAIT_POS(id, x, y)         { 0x2f, 0, id, x, y, NULL } // Sets portrait delta position, which modifies the portrait's position on the screen.
+#define PORTRAIT_POS(id, x, y)          { 0x2f, 0, id, x, y, NULL } // Sets portrait delta position, which modifies the portrait's position on the screen.
 // 30..39: various text printing
-#define TEXTBOX_CLEAR                  { 0x30, 0, 0, 0, 0, NULL }
-#define TEXTBOX_CLEAR2                 { 0x31, 0, 0, 0, 0, NULL } // Used rarely, I don't think there's a functional difference between 0x30 and 0x31.
-#define MSG_INSTANT(msg)               { 0x32, 0, -1, 0, 0, msg }
-#define MSG_NPC(id, msg)               { 0x34, 0, id, 0, 0, msg } // ID is portrait id of the npc. -1 means no portrait
-#define MSG_LETTER(msg)                { 0x35, 0, -1, 0, 0, msg }
-#define MSG_ON_BG(msg)                 { 0x37, 0, -1, 0, 0, msg } // Prints raw text on bg without any windows. Used for the intro portal messages. To advance the text player needs to press a button.
-#define MSG_ON_BG2(msg)                { 0x38, 0, -1, 0, 0, msg } // Identical to the above, used literally once for just a newline.
-#define MSG_ON_BG_AUTO(u, msg)         { 0x39, 0, u, 0, 0, msg } // Similar to the above, but the message appears and fades automatically, without any player's input. Used for narration text. The short argument isn't really used, but needs to be greater than 0.
+#define TEXTBOX_CLEAR                   { 0x30, 0, 0, 0, 0, NULL }
+#define TEXTBOX_CLEAR2                  { 0x31, 0, 0, 0, 0, NULL } // Used rarely, I don't think there's a functional difference between 0x30 and 0x31.
+#define MSG_INSTANT(msg)                { 0x32, 0, -1, 0, 0, msg }
+#define MSG_NPC(id, msg)                { 0x34, 0, id, 0, 0, msg } // ID is portrait id of the npc. -1 means no portrait
+#define MSG_LETTER(msg)                 { 0x35, 0, -1, 0, 0, msg }
+#define MSG_ON_BG(msg)                  { 0x37, 0, -1, 0, 0, msg } // Prints raw text on bg without any windows. Used for the intro portal messages. To advance the text player needs to press a button.
+#define MSG_ON_BG2(msg)                 { 0x38, 0, -1, 0, 0, msg } // Identical to the above, used literally once for just a newline.
+#define MSG_ON_BG_AUTO(u, msg)          { 0x39, 0, u, 0, 0, msg } // Similar to the above, but the message appears and fades automatically, without any player's input. Used for narration text. The short argument isn't really used, but needs to be greater than 0.
 // 3a: yes/no choice (only used for saving)
 // 3b: uber command (conditional jump)
-#define SPECIAL_TEXT(k, i, t)   { 0x3C, k, 0, i, t, NULL }
-#define RENAME_ALLY(id)         { 0x3D, 0, 0, id, 0, NULL }
-#define RENAME_TEAM             { 0x3E, 0, 0, 0, 0, NULL }
+#define SPECIAL_TEXT(k, i, t)           { 0x3C, k, 0, i, t, NULL }
+#define RENAME_ALLY(id)                 { 0x3D, 0, 0, id, 0, NULL }
+#define RENAME_TEAM                     { 0x3E, 0, 0, 0, 0, NULL }
 // 3f: input box?
 // 40: unused?
-#define REMOVE_ITEMSTACK(i)     { 0x41, 0, i, 0, 0, NULL }
-#define MUSIC_STOP_ALL          { 0x42, 0, 0, 0, 0, NULL }
-#define MUSIC_FADEOUT_ALL(f)    { 0x43, 0, f, 0, 0, NULL }
-#define BGM_SWITCH(i)           { 0x44, 0, 0, i, 0, NULL }
-#define BGM_FADEIN(f,i)         { 0x45, 0, f, i, 0, NULL }
-#define BGM_QUEUE(i)            { 0x46, 0, 0, i, 0, NULL }
-#define BGM_STOP                { 0x47, 0, 0, 0, 0, NULL }
-#define BGM_FADEOUT(f)          { 0x48, 0, f, 0, 0, NULL }
-#define FANFARE_PLAY(i)         { 0x49, 0, 0, i, 0, NULL }
-#define FANFARE_STOP(i)         { 0x4a, 0, 0, i, 0, NULL }
-#define FANFARE_FADEOUT(f,i)    { 0x4b, 0, f, i, 0, NULL }
-#define FANFARE_PLAY2(i)        { 0x4c, 0, 0, i, 0, NULL }
-#define FANFARE_STOP2(i)        { 0x4d, 0, 0, i, 0, NULL }
-#define FANFARE_FADEOUT2(f,i)   { 0x4e, 0, f, i, 0, NULL }
+#define REMOVE_ITEMSTACK(i)             { 0x41, 0, i, 0, 0, NULL }
+#define MUSIC_STOP_ALL                  { 0x42, 0, 0, 0, 0, NULL }
+#define MUSIC_FADEOUT_ALL(f)            { 0x43, 0, f, 0, 0, NULL }
+#define BGM_SWITCH(i)                   { 0x44, 0, 0, i, 0, NULL }
+#define BGM_FADEIN(f,i)                 { 0x45, 0, f, i, 0, NULL }
+#define BGM_QUEUE(i)                    { 0x46, 0, 0, i, 0, NULL }
+#define BGM_STOP                        { 0x47, 0, 0, 0, 0, NULL }
+#define BGM_FADEOUT(f)                  { 0x48, 0, f, 0, 0, NULL }
+#define FANFARE_PLAY(i)                 { 0x49, 0, 0, i, 0, NULL }
+#define FANFARE_STOP(i)                 { 0x4a, 0, 0, i, 0, NULL }
+#define FANFARE_FADEOUT(f,i)            { 0x4b, 0, f, i, 0, NULL }
+#define FANFARE_PLAY2(i)                { 0x4c, 0, 0, i, 0, NULL }
+#define FANFARE_STOP2(i)                { 0x4d, 0, 0, i, 0, NULL }
+#define FANFARE_FADEOUT2(f,i)           { 0x4e, 0, f, i, 0, NULL }
 // 4f..57: more movement/position? Some sprite stuff?
-#define SELECT_ANIMATION(id)    { 0x54, 0, id, 0, 0, NULL }
+#define SELECT_ANIMATION(id)            { 0x54, 0, id, 0, 0, NULL }
 // 58..95: position and movement-related
 // For WARP/WALK, every map has a list of predefined locations.
-#define WARP_WAYPOINT(u, w)     { 0x5B, u, 0, w, 0, NULL }
-#define WALK_RELATIVE(spd, h, v){ 0x6A, 0, spd, h, v, NULL }
-#define WALK_GRID(spd, w)       { 0x6B, 0, spd, w, 0, NULL }
-#define WALK_DIRECT(spd, w)     { 0x7A, 0, spd, w, 0, NULL }
-#define CAMERA_PAN(u1, u2)      { 0x86, 0, u1, u2, 0, NULL }
-#define ROTATE(spd, d, o)       { 0x91, spd, d, o, 0, NULL } // d=cw/ccw/shortest, o=final orientation
+#define WARP_WAYPOINT(u, w)             { 0x5B, u, 0, w, 0, NULL }
+#define WALK_RELATIVE(spd, h, v)        { 0x6A, 0, spd, h, v, NULL }
+#define WALK_GRID(spd, w)               { 0x6B, 0, spd, w, 0, NULL }
+#define WALK_DIRECT(spd, w)             { 0x7A, 0, spd, w, 0, NULL }
+#define CAMERA_PAN(u1, u2)              { 0x86, 0, u1, u2, 0, NULL }
+#define ROTATE(spd, d, o)               { 0x91, spd, d, o, 0, NULL } // d=cw/ccw/shortest, o=final orientation
 // 96: unused?
 // 97: ??? (maybe more camera?)
-#define CAMERA_INIT_PAN         { 0x98, 0, 0, 0, 0, NULL }
-#define CAMERA_END_PAN          { 0x99, 0, 0, 0, 0, NULL }
+#define CAMERA_INIT_PAN                 { 0x98, 0, 0, 0, 0, NULL }
+#define CAMERA_END_PAN                  { 0x99, 0, 0, 0, 0, NULL }
 // 9a: ??? (maybe more camera?)
 // 9b..a3: camera-related
-#define RESET_ARRAY(v)          { 0xA4, 0, v, 0, 0, NULL }
-#define CLEAR_ARRAY(v)          { 0xA5, 0, v, 0, 0, NULL }
-#define UPDATE_VARINT(o,v,i)    { 0xA6, o, v, i, 0, NULL }
-#define UPDATE_VARVAR(o,a,b)    { 0xA7, o, a, b, 0, NULL }
-#define SET_ARRAYVAL(v,i,x)     { 0xA8, 0, v, i, x, NULL }
-#define SCENARIO_CALC(v,a,b)    { 0xA9, 0, v, a, b, NULL }
-#define SCENARIO_ADVANCE(v,a)   { 0xAA, 0, v, a, 0, NULL }
-#define SET_DUNGEON_RES(r,e)    { 0xAB, 0, r, e, 0, NULL }
-#define SET_PLAYER_KIND(k)      { 0xAC, 0, k, 0, 0, NULL }
+#define RESET_ARRAY(v)                  { 0xA4, 0, v, 0, 0, NULL }
+#define CLEAR_ARRAY(v)                  { 0xA5, 0, v, 0, 0, NULL }
+#define UPDATE_VARINT(o,v,i)            { 0xA6, o, v, i, 0, NULL }
+#define UPDATE_VARVAR(o,a,b)            { 0xA7, o, a, b, 0, NULL }
+#define SET_ARRAYVAL(v,i,x)             { 0xA8, 0, v, i, x, NULL }
+#define SCENARIO_CALC(v,a,b)            { 0xA9, 0, v, a, b, NULL }
+#define SCENARIO_ADVANCE(v,a)           { 0xAA, 0, v, a, 0, NULL }
+#define SET_DUNGEON_RES(r,e)            { 0xAB, 0, r, e, 0, NULL }
+#define SET_PLAYER_KIND(k)              { 0xAC, 0, k, 0, 0, NULL }
 // ad..b2: opaque functions
-#define JUMPIF_EQUAL(v,i,l)     { 0xB3, l, v, i, 0, NULL }
-#define JUMPIF(o,v,i,l)         { 0xB4, o, l, v, i, NULL }
-#define JUMPIF_2(o,a,b,l)       { 0xB5, o, l, a, b, NULL }
-#define JUMPIF_ARRAY(v,i,l)     { 0xB6, 0, l, v, i, NULL }
-#define JUMPIF_SUM(o,v,i,l)     { 0xB7, o, l, v, i, NULL }
-#define JUMPIF_SCENE_LT(v,a,b,l){ 0xB8, l, v, a, b, NULL }
-#define JUMPIF_SCENE_EQ(v,a,b,l){ 0xB9, l, v, a, b, NULL }
-#define JUMPIF_SCENE_GT(v,a,b,l){ 0xBA, l, v, a, b, NULL }
-#define JUMPIF_SCENARIOCHECK(i,l){0xBB, l, i, 0, 0, NULL }
+#define JUMPIF_EQUAL(v,i,l)             { 0xB3, l, v, i, 0, NULL }
+#define JUMPIF(o,v,i,l)                 { 0xB4, o, l, v, i, NULL }
+#define JUMPIF_2(o,a,b,l)               { 0xB5, o, l, a, b, NULL }
+#define JUMPIF_ARRAY(v,i,l)             { 0xB6, 0, l, v, i, NULL }
+#define JUMPIF_SUM(o,v,i,l)             { 0xB7, o, l, v, i, NULL }
+#define JUMPIF_SCENE_LT(v,a,b,l)        { 0xB8, l, v, a, b, NULL }
+#define JUMPIF_SCENE_EQ(v,a,b,l)        { 0xB9, l, v, a, b, NULL }
+#define JUMPIF_SCENE_GT(v,a,b,l)        { 0xBA, l, v, a, b, NULL }
+#define JUMPIF_SCENARIOCHECK(i,l)       { 0xBB, l, i, 0, 0, NULL }
 // functions need reversing
-#define JUMPIF_UNK_BC(i,l)      { 0xBC, l, i, 0, 0, NULL }
-#define JUMPIF_UNK_BD(i,l)      { 0xBD, l, 0, i, 0, NULL }
-#define JUMPIF_UNK_BE(l)        { 0xBE, l, 0, 0, 0, NULL }
-#define JUMPIF_HASITEM(i,l)     { 0xBF, l, i, 0, 0, NULL }
-#define CJUMP_VAR(v)            { 0xC0, 0, v, 0, 0, NULL }
-#define CJUMP_CALC_VI(o,v,i)    { 0xC1, o, v, i, 0, NULL }
-#define CJUMP_CALC_VV(o,a,b)    { 0xC2, o, a, b, 0, NULL }
-#define CJUMP_RANDOM(h)         { 0xC3, 0, h, 0, 0, NULL }
-#define CJUMP_SCENARIO_0(v)     { 0xC4, 0, v, 0, 0, NULL }
-#define CJUMP_SCENARIO_1(v)     { 0xC5, 0, v, 0, 0, NULL }
+#define JUMPIF_UNK_BC(i,l)              { 0xBC, l, i, 0, 0, NULL }
+#define JUMPIF_UNK_BD(i,l)              { 0xBD, l, 0, i, 0, NULL }
+#define JUMPIF_UNK_BE(l)                { 0xBE, l, 0, 0, 0, NULL }
+#define JUMPIF_HASITEM(i,l)             { 0xBF, l, i, 0, 0, NULL }
+#define CJUMP_VAR(v)                    { 0xC0, 0, v, 0, 0, NULL }
+#define CJUMP_CALC_VI(o,v,i)            { 0xC1, o, v, i, 0, NULL }
+#define CJUMP_CALC_VV(o,a,b)            { 0xC2, o, a, b, 0, NULL }
+#define CJUMP_RANDOM(h)                 { 0xC3, 0, h, 0, 0, NULL }
+#define CJUMP_SCENARIO_0(v)             { 0xC4, 0, v, 0, 0, NULL }
+#define CJUMP_SCENARIO_1(v)             { 0xC5, 0, v, 0, 0, NULL }
 // wtf is c6
-#define CJUMP_UNK_C6(a)         { 0xC6, 0, 0, a, 0, NULL }
-#define CJUMP_DIRECTION         { 0xC7, 0, 0, 0, 0, NULL }
+#define CJUMP_UNK_C6(a)                 { 0xC6, 0, 0, a, 0, NULL }
+#define CJUMP_DIRECTION                 { 0xC7, 0, 0, 0, 0, NULL }
 // C8: distance calculation with that weird 80A7AE8
-#define CJUMP_UNK_C8(a)         { 0xC8, 0, 0, a, 0, NULL }
+#define CJUMP_UNK_C8(a)                 { 0xC8, 0, 0, a, 0, NULL }
 // C9: ditto, but with one hardcoded pos of four
-#define CJUMP_UNK_C9(a)         { 0xC9, 0, 0, a, 0, NULL }
-#define CJUMP_DIR_TO_LINK(l)    { 0xCA, 0, 0, l, 0, NULL }
+#define CJUMP_UNK_C9(a)                 { 0xC9, 0, 0, a, 0, NULL }
+#define CJUMP_DIR_TO_LINK(l)            { 0xCA, 0, 0, l, 0, NULL }
 // wtf is cb
-#define CJUMP_UNK_CB(h)         { 0xCB, 0, h, 0, 0, NULL }
-#define COND_EQUAL(v,t)         { 0xCC, 0, t, v, 0, NULL }
-#define COND(o,v,t)             { 0xCD, o, t, v, 0, NULL }
-#define COND_VAR(o,v,t)         { 0xCE, o, t, v, 0, NULL }
-#define MSG_VAR(b,v,a)          { 0xCF, b, v, a, 0, NULL }
-#define VARIANT(c,s)            { 0xD0, 0, c, 0, 0, s    }
-#define VARIANT_DEFAULT(s)      { 0xD1, 0, 0, 0, 0, s    }
-#define ASK_DEBUG(b,h,a,s)      { 0xD2, b, h, a, 0, s    }
-#define ASK1(b,h,a,s)           { 0xD3, b, h, a, 0, s    }
-#define ASK2(b,h,a,s)           { 0xD4, b, h, a, 0, s    }
-#define ASK3(b,h,a,s)           { 0xD5, b, h, a, 0, s    }
-#define ASK1_VAR(b,h,a,v)       { 0xD6, b, h, a, v, NULL }
-#define ASK2_VAR(b,h,a,v)       { 0xD7, b, h, a, v, NULL }
-#define ASK3_VAR(b,h,a,v)       { 0xD8, b, h, a, v, NULL }
-#define CHOICE(h,s)             { 0xD9, 0, h, 0, 0, s    }
-#define WAIT(f)                 { 0xDB, 0, f, 0, 0, NULL }
-#define WAIT_RANDOM(a,b)        { 0xDC, 0, a, b, 0, NULL }
+#define CJUMP_UNK_CB(h)                 { 0xCB, 0, h, 0, 0, NULL }
+#define COND_EQUAL(v,t)                 { 0xCC, 0, t, v, 0, NULL }
+#define COND(o,v,t)                     { 0xCD, o, t, v, 0, NULL }
+#define COND_VAR(o,v,t)                 { 0xCE, o, t, v, 0, NULL }
+#define MSG_VAR(b,v,a)                  { 0xCF, b, v, a, 0, NULL }
+#define VARIANT(c,s)                    { 0xD0, 0, c, 0, 0, s    }
+#define VARIANT_DEFAULT(s)              { 0xD1, 0, 0, 0, 0, s    }
+#define ASK_DEBUG(b,h,a,s)              { 0xD2, b, h, a, 0, s    }
+#define ASK1(b,h,a,s)                   { 0xD3, b, h, a, 0, s    }
+#define ASK2(b,h,a,s)                   { 0xD4, b, h, a, 0, s    }
+#define ASK3(b,h,a,s)                   { 0xD5, b, h, a, 0, s    }
+#define ASK1_VAR(b,h,a,v)               { 0xD6, b, h, a, v, NULL }
+#define ASK2_VAR(b,h,a,v)               { 0xD7, b, h, a, v, NULL }
+#define ASK3_VAR(b,h,a,v)               { 0xD8, b, h, a, v, NULL }
+#define CHOICE(h,s)                     { 0xD9, 0, h, 0, 0, s    }
+#define WAIT(f)                         { 0xDB, 0, f, 0, 0, NULL }
+#define WAIT_RANDOM(a,b)                { 0xDC, 0, a, b, 0, NULL }
 #define STOP_ANIMATION_ON_CURRENT_FRAME { 0xDD, 0, 0, 0, 0, NULL }
 // de..e2 - various HandleAction commands
 // e3..e5 - locking/condvar commands
-#define AWAIT_CUE(id)           { 0xE3, 0, id, 0, 0, NULL }
-#define ALERT_CUE(id)           { 0xE4, 0, id, 0, 0, NULL }
-#define CALL_LABEL(x)           { 0xE6, 0, x, 0, 0, NULL }
-#define JUMP_LABEL(x)           { 0xE7, 0, x, 0, 0, NULL }
-#define CALL_SCRIPT(x)          { 0xE8, 0, x, 0, 0, NULL }
-#define JUMP_SCRIPT(x)          { 0xE9, 0, x, 0, 0, NULL }
-#define CALL_STATION(g,s)       { 0xEA, s, g,-1, 0, NULL }
-#define JUMP_STATION(g,s)       { 0xEB, s, g,-1, 0, NULL }
-#define EXECUTE_MAP_VAR(v)      { 0xEC, 0, v, 0, 0, NULL }
-#define RESET_CALLER            { 0xED, 0, 0, 0, 0, NULL }
-#define RET_DIRECT              { 0xEE, 0, 0, 0, 0, NULL }
-#define RET                     { 0xEF, 0, 0, 0, 0, NULL }
-#define HALT                    { 0xF0, 0, 0, 0, 0, NULL }
-#define END_DELETE              { 0xF1, 0, 0, 0, 0, NULL }
-#define LABEL(x)                { 0xF4, 0, x, 0, 0, NULL }
+#define AWAIT_CUE(id)                   { 0xE3, 0, id, 0, 0, NULL }
+#define ALERT_CUE(id)                   { 0xE4, 0, id, 0, 0, NULL }
+#define CALL_LABEL(x)                   { 0xE6, 0, x, 0, 0, NULL }
+#define JUMP_LABEL(x)                   { 0xE7, 0, x, 0, 0, NULL }
+#define CALL_SCRIPT(x)                  { 0xE8, 0, x, 0, 0, NULL }
+#define JUMP_SCRIPT(x)                  { 0xE9, 0, x, 0, 0, NULL }
+#define CALL_STATION(g,s)               { 0xEA, s, g,-1, 0, NULL }
+#define JUMP_STATION(g,s)               { 0xEB, s, g,-1, 0, NULL }
+#define EXECUTE_MAP_VAR(v)              { 0xEC, 0, v, 0, 0, NULL }
+#define RESET_CALLER                    { 0xED, 0, 0, 0, 0, NULL }
+#define RET_DIRECT                      { 0xEE, 0, 0, 0, 0, NULL }
+#define RET                             { 0xEF, 0, 0, 0, 0, NULL }
+#define HALT                            { 0xF0, 0, 0, 0, 0, NULL }
+#define END_DELETE                      { 0xF1, 0, 0, 0, 0, NULL }
+#define LABEL(x)                        { 0xF4, 0, x, 0, 0, NULL }
 #ifdef NONMATCHING
-#define DEBUGINFO               { 0xF6, 0, __LINE__, 0, 0, __FILE__ }
+#define DEBUGINFO                       { 0xF6, 0, __LINE__, 0, 0, __FILE__ }
+#define DEBUGINFO_O(originalLineNum)    DEBUGINFO
 #else
-#define DEBUGINFO               { 0xF6, 0, __LINE__, 0, 0, FAKE_FILENAME }
+#define DEBUGINFO_O(originalLineNum)    { 0xF6, 0, originalLineNum, 0, 0, FAKE_FILENAME }
 #endif
 
 // function/trigger/script names

@@ -81,285 +81,284 @@ static void BlinkerSeedItemAction(Entity *, Entity *);
 static void DoomSeedItemAction(Entity *, Entity *);
 static void sub_80482FC(Entity *, Entity *, u32, u8);
 
-void sub_80479B8(char param_1, char param_2, u8 param_3, Entity *pokemon, Entity *target, Item *item)
+void sub_80479B8(bool8 param_1, bool8 param_2, u8 param_3, Entity *pokemon, Entity *target, Item *item)
 {
-  EntityInfo *info;
-  u32 flag;
-  u8 uStack_24;
-  u8 uStack_23;
-  u8 auStack_22;
+    if (param_1) {
+        if (!param_2) {
+            bool8 flag = FALSE;
+            EntityInfo *info = GetEntInfo(target);
+            if (info->isNotTeamMember) {
+                if (GetItemCategory(item->id) != CATEGORY_THROWN_LINE && GetItemCategory(item->id) != CATEGORY_BERRIES_SEEDS_VITAMINS) {
+                    flag = (GetItemCategory(item->id) != CATEGORY_THROWN_ARC);
+                }
+            }
+            else {
+                if (GetItemCategory(item->id) != CATEGORY_BERRIES_SEEDS_VITAMINS) {
+                    flag = IqSkillIsEnabled(target, IQ_ITEM_CATCHER);
+                }
+            }
 
-  if (param_1 != '\0') {
-    if (param_2 == '\0') {
-      flag = FALSE;
-      info = GetEntInfo(target);
-      if (info->isNotTeamMember) {
-        if ((GetItemCategory(item->id) != CATEGORY_THROWN_LINE) && (GetItemCategory(item->id) != CATEGORY_BERRIES_SEEDS_VITAMINS)) {
-          flag = GetItemCategory(item->id) == CATEGORY_THROWN_ARC ? FALSE : TRUE;
+            if (CheckVariousConditions(target)) {
+                flag = FALSE;
+            }
+
+            if (flag && !ItemExists(&info->heldItem)) {
+                if (info->shopkeeper == TRUE) {
+                    SpawnDroppedItemWrapper(pokemon,&target->pos,item);
+                }
+                else {
+                    PlaySoundEffect(0x14d);
+                    sub_8045BF8(gFormatBuffer_Items[0],item);
+                    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
+                    TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FDBB8); // $m0 caught the $i0
+                    info->heldItem = *item;
+                    sub_806A6E8(target);
+                }
+                return;
+            }
         }
-      }
-      else {
-        if (GetItemCategory(item->id) != CATEGORY_BERRIES_SEEDS_VITAMINS) {
-          flag = IqSkillIsEnabled(target, IQ_ITEM_CATCHER);
-        }
-      }
-      if (CheckVariousConditions(target)) {
-        flag = FALSE;
-      }
-      if (flag && ((info->heldItem.flags & ITEM_FLAG_EXISTS) == 0)) {
-        if (info->shopkeeper == TRUE) {
-          SpawnDroppedItemWrapper(pokemon,&target->pos,item);
-          return;
-        }
-        PlaySoundEffect(0x14d);
+    }
+
+    if (param_1) {
+        sub_8042390(target,item);
+        SetShopkeeperAggression(pokemon,target);
+    }
+
+    if (item->flags & ITEM_FLAG_STICKY) {
         sub_8045BF8(gFormatBuffer_Items[0],item);
-        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FDBB8); // $m0 caught the $i0
-        info->heldItem = *item;
-        sub_806A6E8(target);
-        return;
-      }
-    }
-    if (param_1 != '\0') {
-      sub_8042390(target,item);
-      SetShopkeeperAggression(pokemon,target);
-    }
-  }
-  if ((item->flags & ITEM_FLAG_STICKY)) {
-    sub_8045BF8(gFormatBuffer_Items[0],item);
-    TryDisplayDungeonLoggableMessage3(pokemon,target,gItemStickyDoesntWorkText);
-    if (param_1 != '\0') {
-      sub_806F370(pokemon,target,gUnknown_80F4FAE,1,&uStack_24,0,DUNGEON_EXIT_FELLED_BY_THROWN_ITEM,RESIDUAL_DAMAGE_REGULAR,0,0);
-      EnemyEvolution(pokemon);
-      return;
-    }
-    else goto _jump;
-  }
-  else {
-    if (param_1 == 0)
-_jump:
-        sub_804245C(target,item);
-  }
-  if (GetItemCategory(item->id) == CATEGORY_BERRIES_SEEDS_VITAMINS) {
-    sub_8078B5C(pokemon,target,5,0,0);
-  }
-  if ((GetItemCategory(item->id) == CATEGORY_TMS_HMS) || (GetItemCategory(item->id) == CATEGORY_LINK_BOX)) {
-    if (param_1 != '\0') {
-        sub_806F370(pokemon,target,gUnknown_80F4FAC,1,&uStack_23,0,DUNGEON_EXIT_FELLED_BY_THROWN_ITEM,RESIDUAL_DAMAGE_REGULAR,0,0);
-        goto _080482B4;
-    }
-    else
-    {
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FE458);
-        goto _080482B4;
-    }
-  }
-  switch(item->id) {
-      case ITEM_STICK:
-        sub_80482FC(pokemon,target,gStickPPValue,ITEM_STICK);
-        break;
-      case ITEM_IRON_THORN:
-        sub_80482FC(pokemon,target,gIronThornPPValue,ITEM_IRON_THORN);
-        break;
-      case ITEM_SILVER_SPIKE:
-        sub_80482FC(pokemon,target,gSilverSpikePPValue,ITEM_SILVER_SPIKE);
-        break;
-      case ITEM_GOLD_FANG:
-        sub_80482FC(pokemon,target,gGoldFangPPValue,ITEM_GOLD_FANG);
-        break;
-      case ITEM_CACNEA_SPIKE:
-        sub_80482FC(pokemon,target,gCacneaSpikePPValue,ITEM_CACNEA_SPIKE);
-        break;
-      case ITEM_CORSOLA_TWIG:
-        sub_80482FC(pokemon,target,gCorsolaTwigPPValue,ITEM_CORSOLA_TWIG);
-        break;
-      case ITEM_GEO_PEBBLE:
-        sub_8048340(pokemon,target,gGeoPebbleThrownDmgValue);
-        break;
-      case ITEM_GRAVELEROCK:
-        sub_8048340(pokemon,target,gGravelerockThrownDmgValue);
-        break;
-      case ITEM_HEAL_SEED:
-        HealSeedItemAction(pokemon,target,param_3);
-        break;
-      case ITEM_ORAN_BERRY:
-        OranBerryItemAction(pokemon,target);
-        break;
-      case ITEM_SITRUS_BERRY:
-        SitrusBerryItemAction(pokemon,target);
-        break;
-      case ITEM_LIFE_SEED:
-        LifeSeedItemAction(pokemon,target);
-        break;
-      case ITEM_BLINKER_SEED:
-        BlinkerSeedItemAction(pokemon,target);
-        break;
-      case ITEM_ALLURE_SEED:
-        AllureSeedItemAction(pokemon,target);
-        break;
-      case ITEM_QUICK_SEED:
-        QuickSeedItemAction(pokemon,target);
-        break;
-      case ITEM_EYEDROP_SEED:
-        EyedropSeedItemAction(pokemon,target);
-        break;
-      case ITEM_TOTTER_SEED:
-        TotterSeedItemAction(pokemon,target);
-        break;
-      case ITEM_CHERI_BERRY:
-        CheriBerryItemAction(pokemon,target);
-        break;
-      case ITEM_PECHA_BERRY:
-        PechaBerryItemAction(pokemon,target);
-        break;
-      case ITEM_WARP_SEED:
-        WarpSeedItemAction(pokemon,target);
-        break;
-      case ITEM_SLEEP_SEED:
-        SleepSeedItemAction(pokemon,target);
-        break;
-      case ITEM_CHESTO_BERRY:
-        ChestoBerryItemAction(pokemon,target);
-        break;
-      case ITEM_JOY_SEED:
-        JoySeedItemAction(pokemon,target);
-        break;
-      case ITEM_DOOM_SEED:
-        DoomSeedItemAction(pokemon,target);
-        break;
-       case ITEM_STUN_SEED:
-        StunSeedItemAction(pokemon,target);
-        break;
-      case ITEM_PLAIN_SEED:
-        PlainSeedItemAction(pokemon,target);
-        break;
-      case ITEM_RAWST_BERRY:
-        RawstBerryItemAction(pokemon,target);
-        break;
-      case ITEM_HUNGER_SEED:
-        HungerSeedItemAction(pokemon,target);
-        break;
-      case ITEM_GINSENG:
-        GinsengItemAction(pokemon,target);
-        break;
-      case ITEM_BLAST_SEED:
-        BlastSeedItemAction(pokemon,target,param_1);
-        break;
-      case ITEM_MAX_ELIXIR:
-        MaxElixirAction(pokemon,target);
-        break;
-      case ITEM_PROTEIN:
-        ProteinItemAction(pokemon,target);
-        break;
-      case ITEM_CALCIUM:
-        CalciumItemAction(pokemon,target);
-        break;
-      case ITEM_IRON:
-        IronItemAction(pokemon,target);
-        break;
-      case ITEM_ZINC:
-        ZincItemAction(pokemon,target);
-        break;
-      case 0xe9:
-        nullsub_94(pokemon,target,param_1);
-        break;
-      case ITEM_BIG_APPLE:
-        sub_80487CC(pokemon,target,100,10);
-        break;
-      case ITEM_HUGE_APPLE:
-        sub_80487CC(pokemon,target,999,10);
-        break;
-      case ITEM_GRIMY_FOOD:
-        GrimyFoodItemAction(pokemon,target);
-        break;
-      case ITEM_WHITE_GUMMI:
-        HandleGummiItemAction(pokemon,target,1);
-        break;
-      case ITEM_RED_GUMMI:
-        HandleGummiItemAction(pokemon,target,2);
-        break;
-      case ITEM_BLUE_GUMMI:
-        HandleGummiItemAction(pokemon,target,3);
-        break;
-      case ITEM_GRASS_GUMMI:
-        HandleGummiItemAction(pokemon,target,4);
-        break;
-      case ITEM_YELLOW_GUMMI:
-        HandleGummiItemAction(pokemon,target,5);
-        break;
-      case ITEM_CLEAR_GUMMI:
-        HandleGummiItemAction(pokemon,target,6);
-        break;
-      case ITEM_ORANGE_GUMMI:
-        HandleGummiItemAction(pokemon,target,7);
-        break;
-      case ITEM_PINK_GUMMI:
-        HandleGummiItemAction(pokemon,target,8);
-        break;
-      case ITEM_BROWN_GUMMI:
-        HandleGummiItemAction(pokemon,target,9);
-        break;
-      case ITEM_SKY_GUMMI:
-        HandleGummiItemAction(pokemon,target,10);
-        break;
-      case ITEM_GOLD_GUMMI:
-        HandleGummiItemAction(pokemon,target,0xb);
-        break;
-      case ITEM_GREEN_GUMMI:
-        HandleGummiItemAction(pokemon,target,0xc);
-        break;
-      case ITEM_GRAY_GUMMI:
-        HandleGummiItemAction(pokemon,target,0xd);
-        break;
-      case ITEM_PURPLE_GUMMI:
-        HandleGummiItemAction(pokemon,target,0xe);
-        break;
-      case ITEM_ROYAL_GUMMI:
-        HandleGummiItemAction(pokemon,target,0xf);
-        break;
-      case ITEM_BLACK_GUMMI:
-        HandleGummiItemAction(pokemon,target,0x10);
-        break;
-      case ITEM_SILVER_GUMMI:
-        HandleGummiItemAction(pokemon,target,0x11);
-        break;
-      case ITEM_APPLE:
-      case ITEM_BANANA:
-        sub_80487CC(pokemon,target,0x32,5);
-        break;
-      case ITEM_CHESTNUT:
-        sub_80487CC(pokemon,target,10,0);
-        break;
-      case ITEM_KEY:
-        KeyItemAction(pokemon,target,param_1);
-        break;
-      case ITEM_ICE_PART:
-        IcePartItemAction(pokemon,target,param_1);
-        break;
-      case ITEM_ROCK_PART:
-        RockPartItemAction(pokemon,target,param_1);
-        break;
-      case ITEM_STEEL_PART:
-        SteelPartItemAction(pokemon,target,param_1);
-        break;
-      case ITEM_WISH_STONE:
-        WishStoneItemAction(pokemon,target,param_1);
-        break;
-      case ITEM_MUSIC_BOX:
-        MusicBoxItemAction(pokemon,target,param_1);
-        break;
-      default:
-        if (param_1 != '\0') {
-            sub_806F370(pokemon,target,gUnknown_80F4FAC,1,&auStack_22,0,DUNGEON_EXIT_FELLED_BY_THROWN_ITEM,RESIDUAL_DAMAGE_REGULAR,0,0);
+        TryDisplayDungeonLoggableMessage3(pokemon,target,gItemStickyDoesntWorkText);
+        if (param_1) {
+            u8 uStack_24;
+            sub_806F370(pokemon,target,gUnknown_80F4FAE,1,&uStack_24,0,DUNGEON_EXIT_FELLED_BY_THROWN_ITEM,RESIDUAL_DAMAGE_REGULAR,0,0);
+            EnemyEvolution(pokemon);
+            return;
         }
-        else
-        {
+    }
+
+    if (!param_1)
+        sub_804245C(target,item);
+
+    if (GetItemCategory(item->id) == CATEGORY_BERRIES_SEEDS_VITAMINS) {
+        sub_8078B5C(pokemon,target,5,0,0);
+    }
+
+    if (GetItemCategory(item->id) == CATEGORY_TMS_HMS || GetItemCategory(item->id) == CATEGORY_LINK_BOX) {
+        if (param_1) {
+            u8 uStack_23;
+            sub_806F370(pokemon,target,gUnknown_80F4FAC,1,&uStack_23,0,DUNGEON_EXIT_FELLED_BY_THROWN_ITEM,RESIDUAL_DAMAGE_REGULAR,0,0);
+        }
+        else {
             TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FE458);
         }
-        break;
-  }
-_080482B4:
-  EnemyEvolution(pokemon);
+    }
+    else {
+        switch (item->id) {
+            case ITEM_STICK:
+                sub_80482FC(pokemon,target,gStickPPValue,ITEM_STICK);
+                break;
+            case ITEM_IRON_THORN:
+                sub_80482FC(pokemon,target,gIronThornPPValue,ITEM_IRON_THORN);
+                break;
+            case ITEM_SILVER_SPIKE:
+                sub_80482FC(pokemon,target,gSilverSpikePPValue,ITEM_SILVER_SPIKE);
+                break;
+            case ITEM_GOLD_FANG:
+                sub_80482FC(pokemon,target,gGoldFangPPValue,ITEM_GOLD_FANG);
+                break;
+            case ITEM_CACNEA_SPIKE:
+                sub_80482FC(pokemon,target,gCacneaSpikePPValue,ITEM_CACNEA_SPIKE);
+                break;
+            case ITEM_CORSOLA_TWIG:
+                sub_80482FC(pokemon,target,gCorsolaTwigPPValue,ITEM_CORSOLA_TWIG);
+                break;
+            case ITEM_GEO_PEBBLE:
+                sub_8048340(pokemon,target,gGeoPebbleThrownDmgValue);
+                break;
+            case ITEM_GRAVELEROCK:
+                sub_8048340(pokemon,target,gGravelerockThrownDmgValue);
+                break;
+            case ITEM_HEAL_SEED:
+                HealSeedItemAction(pokemon,target,param_3);
+                break;
+            case ITEM_ORAN_BERRY:
+                OranBerryItemAction(pokemon,target);
+                break;
+            case ITEM_SITRUS_BERRY:
+                SitrusBerryItemAction(pokemon,target);
+                break;
+            case ITEM_LIFE_SEED:
+                LifeSeedItemAction(pokemon,target);
+                break;
+            case ITEM_BLINKER_SEED:
+                BlinkerSeedItemAction(pokemon,target);
+                break;
+            case ITEM_ALLURE_SEED:
+                AllureSeedItemAction(pokemon,target);
+                break;
+            case ITEM_QUICK_SEED:
+                QuickSeedItemAction(pokemon,target);
+                break;
+            case ITEM_EYEDROP_SEED:
+                EyedropSeedItemAction(pokemon,target);
+                break;
+            case ITEM_TOTTER_SEED:
+                TotterSeedItemAction(pokemon,target);
+                break;
+            case ITEM_CHERI_BERRY:
+                CheriBerryItemAction(pokemon,target);
+                break;
+            case ITEM_PECHA_BERRY:
+                PechaBerryItemAction(pokemon,target);
+                break;
+            case ITEM_WARP_SEED:
+                WarpSeedItemAction(pokemon,target);
+                break;
+            case ITEM_SLEEP_SEED:
+                SleepSeedItemAction(pokemon,target);
+                break;
+            case ITEM_CHESTO_BERRY:
+                ChestoBerryItemAction(pokemon,target);
+                break;
+            case ITEM_JOY_SEED:
+                JoySeedItemAction(pokemon,target);
+                break;
+            case ITEM_DOOM_SEED:
+                DoomSeedItemAction(pokemon,target);
+                break;
+             case ITEM_STUN_SEED:
+                StunSeedItemAction(pokemon,target);
+                break;
+            case ITEM_PLAIN_SEED:
+                PlainSeedItemAction(pokemon,target);
+                break;
+            case ITEM_RAWST_BERRY:
+                RawstBerryItemAction(pokemon,target);
+                break;
+            case ITEM_HUNGER_SEED:
+                HungerSeedItemAction(pokemon,target);
+                break;
+            case ITEM_GINSENG:
+                GinsengItemAction(pokemon,target);
+                break;
+            case ITEM_BLAST_SEED:
+                BlastSeedItemAction(pokemon,target,param_1);
+                break;
+            case ITEM_MAX_ELIXIR:
+                MaxElixirAction(pokemon,target);
+                break;
+            case ITEM_PROTEIN:
+                ProteinItemAction(pokemon,target);
+                break;
+            case ITEM_CALCIUM:
+                CalciumItemAction(pokemon,target);
+                break;
+            case ITEM_IRON:
+                IronItemAction(pokemon,target);
+                break;
+            case ITEM_ZINC:
+                ZincItemAction(pokemon,target);
+                break;
+            case ITEM_SWITCH_BOX:
+                nullsub_94(pokemon,target,param_1);
+                break;
+            case ITEM_BIG_APPLE:
+                sub_80487CC(pokemon,target,100,10);
+                break;
+            case ITEM_HUGE_APPLE:
+                sub_80487CC(pokemon,target,999,10);
+                break;
+            case ITEM_GRIMY_FOOD:
+                GrimyFoodItemAction(pokemon,target);
+                break;
+            case ITEM_WHITE_GUMMI:
+                HandleGummiItemAction(pokemon,target,1);
+                break;
+            case ITEM_RED_GUMMI:
+                HandleGummiItemAction(pokemon,target,2);
+                break;
+            case ITEM_BLUE_GUMMI:
+                HandleGummiItemAction(pokemon,target,3);
+                break;
+            case ITEM_GRASS_GUMMI:
+                HandleGummiItemAction(pokemon,target,4);
+                break;
+            case ITEM_YELLOW_GUMMI:
+                HandleGummiItemAction(pokemon,target,5);
+                break;
+            case ITEM_CLEAR_GUMMI:
+                HandleGummiItemAction(pokemon,target,6);
+                break;
+            case ITEM_ORANGE_GUMMI:
+                HandleGummiItemAction(pokemon,target,7);
+                break;
+            case ITEM_PINK_GUMMI:
+                HandleGummiItemAction(pokemon,target,8);
+                break;
+            case ITEM_BROWN_GUMMI:
+                HandleGummiItemAction(pokemon,target,9);
+                break;
+            case ITEM_SKY_GUMMI:
+                HandleGummiItemAction(pokemon,target,10);
+                break;
+            case ITEM_GOLD_GUMMI:
+                HandleGummiItemAction(pokemon,target,0xb);
+                break;
+            case ITEM_GREEN_GUMMI:
+                HandleGummiItemAction(pokemon,target,0xc);
+                break;
+            case ITEM_GRAY_GUMMI:
+                HandleGummiItemAction(pokemon,target,0xd);
+                break;
+            case ITEM_PURPLE_GUMMI:
+                HandleGummiItemAction(pokemon,target,0xe);
+                break;
+            case ITEM_ROYAL_GUMMI:
+                HandleGummiItemAction(pokemon,target,0xf);
+                break;
+            case ITEM_BLACK_GUMMI:
+                HandleGummiItemAction(pokemon,target,0x10);
+                break;
+            case ITEM_SILVER_GUMMI:
+                HandleGummiItemAction(pokemon,target,0x11);
+                break;
+            case ITEM_APPLE:
+            case ITEM_BANANA:
+                sub_80487CC(pokemon,target,0x32,5);
+                break;
+            case ITEM_CHESTNUT:
+                sub_80487CC(pokemon,target,10,0);
+                break;
+            case ITEM_KEY:
+                KeyItemAction(pokemon,target,param_1);
+                break;
+            case ITEM_ICE_PART:
+                IcePartItemAction(pokemon,target,param_1);
+                break;
+            case ITEM_ROCK_PART:
+                RockPartItemAction(pokemon,target,param_1);
+                break;
+            case ITEM_STEEL_PART:
+                SteelPartItemAction(pokemon,target,param_1);
+                break;
+            case ITEM_WISH_STONE:
+                WishStoneItemAction(pokemon,target,param_1);
+                break;
+            case ITEM_MUSIC_BOX:
+                MusicBoxItemAction(pokemon,target,param_1);
+                break;
+            default:
+                if (param_1) {
+                    u8 auStack_22;
+                    sub_806F370(pokemon,target,gUnknown_80F4FAC,1,&auStack_22,0,DUNGEON_EXIT_FELLED_BY_THROWN_ITEM,RESIDUAL_DAMAGE_REGULAR,0,0);
+                }
+                else {
+                    TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FE458);
+                }
+                break;
+        }
+    }
+
+    EnemyEvolution(pokemon);
 }
 
 UNUSED static void nullsub_205(void) { }
@@ -806,8 +805,10 @@ bool8 sub_8048A68(Entity *param_1,Item *item)
   return FALSE;
 }
 
-bool8 sub_8048B9C(Entity *entity, Item *item)
+bool8 HandleLinkBoxAction(Entity *entity, Item *item)
 {
+    s32 i;
+    Entity *entity2;
     bool8 ret = FALSE;
     ActionContainer *entityActionPtr = &GetEntInfo(entity)->action;
     ActionContainer originalAction;
@@ -816,79 +817,71 @@ bool8 sub_8048B9C(Entity *entity, Item *item)
         DisplayDungeonMessage(0,gItemStickyDoesntWorkText,1);
         return FALSE;
     }
-    else
-    {
-        s32 i;
-        Entity *entity2;
 
-        for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
-            Entity *teamMon = gDungeon->teamPokemon[i];
-            if (EntityIsValid(teamMon)) {
-                EntityInfo *teamMonInfo = GetEntInfo(teamMon);
-                bool8 flag = TRUE;
-                if (CheckVariousStatuses2(teamMon, FALSE)){
-                    flag = FALSE;
-                }
-                if (teamMonInfo->monsterBehavior == BEHAVIOR_RESCUE_TARGET) {
-                    flag = FALSE;
-                }
-                if (IsExperienceLocked(teamMonInfo->joinedAt.id)) {
-                    flag = FALSE;
-                }
-                teamMonInfo->unk157 = flag;
+    for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
+        Entity *teamMon = gDungeon->teamPokemon[i];
+        if (EntityIsValid(teamMon)) {
+            EntityInfo *teamMonInfo = GetEntInfo(teamMon);
+            bool8 flag = TRUE;
+            if (CheckVariousStatuses2(teamMon, FALSE)){
+                flag = FALSE;
             }
+            if (teamMonInfo->monsterBehavior == BEHAVIOR_RESCUE_TARGET) {
+                flag = FALSE;
+            }
+            if (IsExperienceLocked(teamMonInfo->joinedAt.id)) {
+                flag = FALSE;
+            }
+            teamMonInfo->unk157 = flag;
+        }
+    }
+
+    entity2 = ShowDungeonToWhichMonMenu(NULL,WHICH_MENU_MOVES);
+    if (!EntityIsValid(entity2)) {
+        return FALSE;
+    }
+
+    originalAction = *entityActionPtr;
+    while (1) {
+        ClearMonsterActionFields(entityActionPtr);
+        if (ShowDungeonMovesMenu(entity2,1,0,0,1)) {
+            if (!ret)
+                break;
+            if (DisplayDungeonYesNoMessage(0,gUnknown_80FECA0,1) == 1)
+                break;
         }
 
-        entity2 = ShowDungeonToWhichMonMenu(NULL,WHICH_MENU_MOVES);
-        if (!EntityIsValid(entity2)) {
-            return FALSE;
+        if (entityActionPtr->action == ACTION_MOVE_INFO) {
+            ActionShowMoveInfo(entityActionPtr);
         }
-
-        originalAction = *entityActionPtr;
-        goto LOOP_MIDDLE; // Needed to match
-        while (1) {
-            if (entityActionPtr->action == ACTION_MOVE_INFO) {
-                ActionShowMoveInfo(entityActionPtr);
-            }
-            else if (entityActionPtr->action == ACTION_LINK_MOVES) {
-                sub_803EAF0(0, NULL);
-                ActionLinkMoves(entityActionPtr);
-                SetLeaderActionToNothing(TRUE);
-                ret = TRUE;
-            }
-            else if (entityActionPtr->action == ACTION_DELINK_MOVES) {
-                sub_803EAF0(0, NULL);
-                ActionDelinkMoves(entityActionPtr,0);
-                SetLeaderActionToNothing(TRUE);
-            }
-            else if ((entityActionPtr->action == ACTION_SET_MOVE) || (entityActionPtr->action == ACTION_UNSET_MOVE)) {
-                sub_803EAF0(0, NULL);
-                ActionSetOrUnsetMove(entityActionPtr, FALSE);
-            }
-            else if (entityActionPtr->action == ACTION_SWITCH_AI_MOVE) {
-                sub_803EAF0(0, NULL);
-                ActionToggleMoveUsableForAi(entityActionPtr);
-            }
-
-        LOOP_MIDDLE:
-            ClearMonsterActionFields(entityActionPtr);
-            if (ShowDungeonMovesMenu(entity2,1,0,0,1) != 0) {
-                if (ret) {
-                    ASM_MATCH_TRICK(ret);
-                    if (DisplayDungeonYesNoMessage(0,gUnknown_80FECA0,1) == 1) {
-                        *entityActionPtr = originalAction;
-                        sub_8044DF0(entity,0,0x6e);
-                        SetMonsterActionFields(entityActionPtr,0x2c);
-                        break;
-                    }
-                }
-                else
-                {
-                    SetLeaderActionToNothing(TRUE);
-                    break;
-                }
-            }
+        else if (entityActionPtr->action == ACTION_LINK_MOVES) {
+            sub_803EAF0(0, NULL);
+            ActionLinkMoves(entityActionPtr);
+            SetLeaderActionToNothing(TRUE);
+            ret = TRUE;
         }
+        else if (entityActionPtr->action == ACTION_DELINK_MOVES) {
+            sub_803EAF0(0, NULL);
+            ActionDelinkMoves(entityActionPtr,0);
+            SetLeaderActionToNothing(TRUE);
+        }
+        else if ((entityActionPtr->action == ACTION_SET_MOVE) || (entityActionPtr->action == ACTION_UNSET_MOVE)) {
+            sub_803EAF0(0, NULL);
+            ActionSetOrUnsetMove(entityActionPtr, FALSE);
+        }
+        else if (entityActionPtr->action == ACTION_SWITCH_AI_MOVE) {
+            sub_803EAF0(0, NULL);
+            ActionToggleMoveUsableForAi(entityActionPtr);
+        }
+    }
+
+    if (ret) {
+        *entityActionPtr = originalAction;
+        sub_8044DF0(entity,0,0x6e);
+        SetMonsterActionFields(entityActionPtr,ACTION_USE_LINK_BOX);
+    }
+    else {
+        SetLeaderActionToNothing(TRUE);
     }
 
     return ret;
