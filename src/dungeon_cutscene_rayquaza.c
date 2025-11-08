@@ -185,8 +185,8 @@ static void RayquazaDropInEffect(Entity *rayquazaEntity)
   iVar1 = IntToF248(6);
   PlaySoundEffect(0x1f8);
   while( 1 ) {
-    iVar2 = iVar2 - iVar1; // must be 
-    iVar1 = F248_Sub(iVar1, IntToF248(3./32.));
+    iVar2 = iVar2 - iVar1;
+    iVar1 = F248_Sub(iVar1, IntToF248(0.09375));
     if (F248LessThanFloat(iVar1, 0.08)) {
       iVar1 = IntToF248(0.08);
     }

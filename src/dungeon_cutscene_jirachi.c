@@ -425,7 +425,7 @@ static void JirachiDropInEffect(Entity *jirachiEntity)
   iVar2 = IntToF248(2);
   PlaySoundEffect(0x1f8);
   while (1) {
-    iVar1 = iVar1 - iVar2; // FRAGILE! Subtraction and assignment below must use 
+    iVar1 -= iVar2;
     if (F248LessThanInt(iVar1, 24)) {
       iVar2 = IntToF248(1);
     }
