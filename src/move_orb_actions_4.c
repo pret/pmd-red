@@ -113,7 +113,7 @@ bool8 HiddenPowerMoveAction(Entity * pokemon,Entity * target,Move *move, s32 ite
     return TRUE;
 }
 
-bool8 MetalClawMoveAction(Entity * pokemon,Entity * target,Move *move, struct StatIndex stat, s32 param_5)
+bool8 MetalClawMoveAction(Entity * pokemon,Entity * target,Move *move, StatIndex stat, s32 param_5)
 {
     EntityInfo *entityInfo;
     bool8 flag;

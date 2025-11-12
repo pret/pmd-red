@@ -43,7 +43,7 @@ bool8 SketchMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId);
 bool8 NaturePowerMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId);
 bool8 HelpingHandMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId);
 bool8 EndureMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId);
-bool8 DamageLowerDefMoveAction(Entity *pokemon, Entity *target, Move *move, struct StatIndex stat, u32 param_5);
+bool8 DamageLowerDefMoveAction(Entity *pokemon, Entity *target, Move *move, StatIndex stat, u32 param_5);
 bool8 SonicboomMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId);
 bool8 SelfDestructMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId);
 bool8 ExplosionMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId);

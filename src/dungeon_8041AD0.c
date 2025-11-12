@@ -840,7 +840,7 @@ void nullsub_90(Entity *pokemon)
 {
 }
 
-void PlayOffensiveStatDownEffect(Entity *pokemon, struct StatIndex stat)
+void PlayOffensiveStatDownEffect(Entity *pokemon, StatIndex stat)
 {
     if (stat.id == STAT_INDEX_PHYSICAL)
     {
@@ -852,7 +852,7 @@ void PlayOffensiveStatDownEffect(Entity *pokemon, struct StatIndex stat)
     }
 }
 
-void PlayDefensiveStatDownEffect(Entity *pokemon, struct StatIndex stat)
+void PlayDefensiveStatDownEffect(Entity *pokemon, StatIndex stat)
 {
     if(stat.id == STAT_INDEX_PHYSICAL)
     {
@@ -864,7 +864,7 @@ void PlayDefensiveStatDownEffect(Entity *pokemon, struct StatIndex stat)
     }
 }
 
-void PlayOffensiveStatUpEffect(Entity *pokemon, struct StatIndex stat)
+void PlayOffensiveStatUpEffect(Entity *pokemon, StatIndex stat)
 {
     if(stat.id == STAT_INDEX_PHYSICAL)
     {
@@ -876,7 +876,7 @@ void PlayOffensiveStatUpEffect(Entity *pokemon, struct StatIndex stat)
     }
 }
 
-void PlayDefensiveStatUpEffect(Entity *pokemon, struct StatIndex stat)
+void PlayDefensiveStatUpEffect(Entity *pokemon, StatIndex stat)
 {
     if(stat.id == STAT_INDEX_PHYSICAL)
     {
@@ -888,7 +888,7 @@ void PlayDefensiveStatUpEffect(Entity *pokemon, struct StatIndex stat)
     }
 }
 
-void PlayOffensiveStatMultiplierUpEffect(Entity *pokemon, struct StatIndex stat)
+void PlayOffensiveStatMultiplierUpEffect(Entity *pokemon, StatIndex stat)
 {
     if(stat.id == STAT_INDEX_PHYSICAL)
     {
@@ -900,7 +900,7 @@ void PlayOffensiveStatMultiplierUpEffect(Entity *pokemon, struct StatIndex stat)
     }
 }
 
-void PlayOffensiveStatMultiplierDownEffect(Entity *pokemon, struct StatIndex stat)
+void PlayOffensiveStatMultiplierDownEffect(Entity *pokemon, StatIndex stat)
 {
     if (stat.id == STAT_INDEX_PHYSICAL)
     {
@@ -912,7 +912,7 @@ void PlayOffensiveStatMultiplierDownEffect(Entity *pokemon, struct StatIndex sta
     }
 }
 
-void PlayDefensiveStatMultiplierUpEffect(Entity *pokemon, struct StatIndex stat)
+void PlayDefensiveStatMultiplierUpEffect(Entity *pokemon, StatIndex stat)
 {
     if (stat.id == STAT_INDEX_PHYSICAL)
     {
@@ -924,7 +924,7 @@ void PlayDefensiveStatMultiplierUpEffect(Entity *pokemon, struct StatIndex stat)
     }
 }
 
-void PlayDefensiveStatMultiplierDownEffect(Entity *pokemon, struct StatIndex stat)
+void PlayDefensiveStatMultiplierDownEffect(Entity *pokemon, StatIndex stat)
 {
     if (stat.id == STAT_INDEX_PHYSICAL)
     {
@@ -936,7 +936,7 @@ void PlayDefensiveStatMultiplierDownEffect(Entity *pokemon, struct StatIndex sta
     }
 }
 
-void PlayHitChanceUpEffect(Entity *pokemon, struct StatIndex stat)
+void PlayHitChanceUpEffect(Entity *pokemon, StatIndex stat)
 {
     if(stat.id == STAT_INDEX_ACCURACY)
     {

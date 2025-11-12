@@ -851,7 +851,7 @@ void PetrifiedStatusTarget(Entity * pokemon, Entity * target)
   }
 }
 
-void LowerOffensiveStat(Entity *user, Entity *target, struct StatIndex stat, s32 nStages, bool8 checkProtected, bool8 logMsgProtected)
+void LowerOffensiveStat(Entity *user, Entity *target, StatIndex stat, s32 nStages, bool8 checkProtected, bool8 logMsgProtected)
 {
     EntityInfo *entityInfo;
     s32 newStage;
@@ -910,7 +910,7 @@ void LowerOffensiveStat(Entity *user, Entity *target, struct StatIndex stat, s32
     UpdateStatusIconFlags(target);
 }
 
-void LowerDefensiveStat(Entity *user, Entity *target, struct StatIndex stat, s32 nStages, bool8 checkProtected, bool8 logMsgProtected)
+void LowerDefensiveStat(Entity *user, Entity *target, StatIndex stat, s32 nStages, bool8 checkProtected, bool8 logMsgProtected)
 {
     EntityInfo *entityInfo;
     s32 newStage;
@@ -957,7 +957,7 @@ void LowerDefensiveStat(Entity *user, Entity *target, struct StatIndex stat, s32
     UpdateStatusIconFlags(target);
 }
 
-void BoostOffensiveStat(Entity *user, Entity *target, struct StatIndex stat, s32 nStages)
+void BoostOffensiveStat(Entity *user, Entity *target, StatIndex stat, s32 nStages)
 {
     EntityInfo *entityInfo;
     s32 newStage;
@@ -998,7 +998,7 @@ void BoostOffensiveStat(Entity *user, Entity *target, struct StatIndex stat, s32
     UpdateStatusIconFlags(target);
 }
 
-void BoostDefensiveStat(Entity *user, Entity *target, struct StatIndex stat, s32 nStages)
+void BoostDefensiveStat(Entity *user, Entity *target, StatIndex stat, s32 nStages)
 {
     EntityInfo *entityInfo;
     s32 newStage;
@@ -1072,7 +1072,7 @@ void ActivateFlashFire(Entity * pokemon, Entity *target)
     }
 }
 
-void ApplyOffensiveStatMultiplier(Entity *user, Entity *target, struct StatIndex stat, s24_8 multiplier, bool8 displayMessage)
+void ApplyOffensiveStatMultiplier(Entity *user, Entity *target, StatIndex stat, s24_8 multiplier, bool8 displayMessage)
 {
     EntityInfo *entityInfo;
     s24_8 oldMulti;
@@ -1139,7 +1139,7 @@ void ApplyOffensiveStatMultiplier(Entity *user, Entity *target, struct StatIndex
     UpdateStatusIconFlags(target);
 }
 
-void ApplyDefensiveStatMultiplier(Entity *user, Entity *target, struct StatIndex stat, s24_8 multiplier, bool8 displayMessage)
+void ApplyDefensiveStatMultiplier(Entity *user, Entity *target, StatIndex stat, s24_8 multiplier, bool8 displayMessage)
 {
     EntityInfo *entityInfo;
     s24_8 oldMulti;
@@ -1190,7 +1190,7 @@ void ApplyDefensiveStatMultiplier(Entity *user, Entity *target, struct StatIndex
     UpdateStatusIconFlags(target);
 }
 
-void BoostHitChanceStat(Entity *user, Entity *target, struct StatIndex stat)
+void BoostHitChanceStat(Entity *user, Entity *target, StatIndex stat)
 {
     EntityInfo *entityInfo;
 
@@ -1217,7 +1217,7 @@ void BoostHitChanceStat(Entity *user, Entity *target, struct StatIndex stat)
     UpdateStatusIconFlags(target);
 }
 
-void LowerHitChanceStat(Entity *user, Entity *target, struct StatIndex stat, bool8 displayMessage)
+void LowerHitChanceStat(Entity *user, Entity *target, StatIndex stat, bool8 displayMessage)
 {
     EntityInfo *entityInfo;
 

@@ -140,7 +140,7 @@ bool8 PsywaveMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
   return flag;
 }
 
-bool8 DamageLowerDefMoveAction(Entity *pokemon, Entity *target, Move *move, struct StatIndex stat, u32 param_5)
+bool8 DamageLowerDefMoveAction(Entity *pokemon, Entity *target, Move *move, StatIndex stat, u32 param_5)
 {
   bool8 flag;
 

@@ -450,7 +450,7 @@ bool8 SuperpowerMoveAction(Entity *pokemon, Entity *target, Move *move, s32 item
   return flag;
 }
 
-bool8 SteelWingMoveAction(Entity *pokemon, Entity *target, Move *move, struct StatIndex stat, u32 param_5)
+bool8 SteelWingMoveAction(Entity *pokemon, Entity *target, Move *move, StatIndex stat, u32 param_5)
 {
   EntityInfo *entityInfo;
   bool8 flag;

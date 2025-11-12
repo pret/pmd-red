@@ -7,9 +7,9 @@
 #define STAT_INDEX_EVASION STAT_INDEX_SPECIAL
 
 // Needed to match in Blue/Sky. I wonder what was the reason for making it a struct as opposed to a simple int...
-struct StatIndex
+typedef struct StatIndex
 {
     int id;
-};
+} StatIndex;
 
 #endif // GUARD_STR_STAT_INDEX_X

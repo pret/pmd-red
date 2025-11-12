@@ -42,7 +42,7 @@ bool8 SunnyDayMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId
 bool8 BellyDrumMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId);
 bool8 HiJumpKickMoveAction(Entity * pokemon,Entity * target,Move * move,s32 itemId,u8 param_5);
 bool8 JumpKickMoveAction(Entity * pokemon,Entity * target,Move * move,s32 itemId,u8 param_5);
-bool8 SteelWingMoveAction(Entity *pokemon, Entity *target, Move *move, struct StatIndex stat, u32 param_5);
+bool8 SteelWingMoveAction(Entity *pokemon, Entity *target, Move *move, StatIndex stat, u32 param_5);
 bool8 BulkUpMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId);
 bool8 AmnesiaMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId);
 bool8 HandleColorChange(Entity *pokemon, Entity *target, Move *move, s32 itemId);

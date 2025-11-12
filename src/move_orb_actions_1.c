@@ -38,8 +38,8 @@
 #include "move_orb_effects_4.h"
 #include "move_orb_effects_5.h"
 
-const struct StatIndex gStatIndexAtkDef = {.id = STAT_INDEX_PHYSICAL};
-const struct StatIndex gStatIndexSpecial = {.id = STAT_INDEX_SPECIAL};
+const StatIndex gStatIndexAtkDef = {.id = STAT_INDEX_PHYSICAL};
+const StatIndex gStatIndexSpecial = {.id = STAT_INDEX_SPECIAL};
 
 bool8 IronTailMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 {
