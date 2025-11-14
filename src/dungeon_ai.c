@@ -98,7 +98,7 @@ void RunMonsterAI(Entity *pokemon, u32 unused)
                     AIDecideUseItem(pokemon);
                     if (pokemonInfo->action.action == ACTION_NOTHING)
                     {
-                        if (!IQSkillIsEnabled(pokemon, IQ_DEDICATED_TRAVELER))
+                        if (!IqSkillIsEnabled(pokemon, IQ_DEDICATED_TRAVELER))
                         {
                             ChooseAIMove(pokemon);
                             if (pokemonInfo->action.action != ACTION_NOTHING)

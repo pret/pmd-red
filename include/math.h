@@ -51,38 +51,17 @@ bool8 FP48_16_SLessThan(const s48_16 *a, const s48_16 *b);
 void FP48_16_Add(s48_16 *dst, s48_16 *a, s48_16 *b);
 void FP48_16_Subtract(s48_16 *dst, s48_16 *a, s48_16 *b);
 
-//static inline bool8 F248Equal(s24_8 x, s24_8 y) {
-//    return x.raw == y.raw;
-//}
-
-#define F248LessThanInt(x, y) (x.raw < 0x100 * y)
-#define F248LessThanFloat(x, y) (x.raw < (int)(y * 0x100))
-#define FloatLessThanF248(x, y) ((int)(x * 0x100) < y.raw)
-//static inline bool8 F248LessThanOne(s24_8 x) {
-//    return x.raw < 0x100;
-//}
-#define F248LessThan(x, y) (x.raw < y.raw)
-#define F248GreaterThan(x, y) (x.raw > y.raw)
-#define F248Equal(x, y) (x.raw == y.raw)
-#define F248EqualsInt(x, y) (x.raw == 0x100 * y)
-
-//static inline bool8 F248LessThan(s24_8 x, s24_8 y) {
-//    return x.raw < y.raw;
-//}
-
-#define F248_AddInt(x, y) ((s24_8){x.raw + 0x100 * y})
-#define F248_SubInt(x, y) ((s24_8){x.raw - 0x100 * y})
-
-static inline s24_8 F248_Add(s24_8 x, s24_8 y) {
-    return (s24_8){x.raw + y.raw};
-}
-
-static inline s24_8 F248_Sub(s24_8 x, s24_8 y) {
-    return (s24_8){x.raw - y.raw};
-}
-
-static inline s24_8 F248_MulInt(s24_8 x, s32 y) {
-    return (s24_8){x.raw * y};
-}
+#define F248LessThanInt(x, y) ((x) < 0x100 * (y))
+#define F248LessThanFloat(x, y) ((x) < (int)((y) * 0x100))
+#define FloatLessThanF248(x, y) ((int)((x) * 0x100) < (y))
+#define F248LessThan(x, y) ((x) < (y))
+#define F248GreaterThan(x, y) ((x) > (y))
+#define F248Equal(x, y) ((x) == (y))
+#define F248EqualsInt(x, y) ((x) == 0x100 * (y))
+#define F248_AddInt(x, y) ((s24_8)((x) + 0x100 * (y))
+#define F248_SubInt(x, y) ((s24_8)((x) - 0x100 * (y))
+#define F248_Add(x, y)((x) + (y))
+#define F248_Sub(x, y)((x) - (y))
+#define F248_MulInt(x, y)((x) * (y))
 
 #endif // GUARD_MATH_H

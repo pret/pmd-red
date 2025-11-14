@@ -61,4 +61,29 @@ enum TargetingFlag
     TARGETING_FLAG_EXPOSE = 0x600,
 };
 
+enum MoveTarget
+{
+    TARGET_ENEMIES = 0,
+    TARGET_PARTY = 1, // including the user
+    TARGET_ALL = 2,   // including the user
+    TARGET_USER = 3,
+    TARGET_ENEMIES_AFTER_CHARGING = 4, // in some sense the user while charging, then enemies
+    TARGET_ALL_EXCEPT_USER = 5,
+    TARGET_TEAMMATES = 6, // excluding the user
+    TARGET_SPECIAL = 15,  // for weird moves
+};
+
+enum MoveAiCondition
+{
+    AI_CONDITION_NONE = 0,
+    // The AI will consider a target elegible wirh a chance equal to the
+    // move's "ai_condition_random_chance" value
+    AI_CONDITION_RANDOM = 0x100,
+    AI_CONDITION_HP_25 = 0x200,           // Target has HP <= 25%
+    AI_CONDITION_STATUS = 0x300,          // Target has a negative status condition
+    AI_CONDITION_ASLEEP = 0x400,          // Target is asleep, napping or in a nightmare
+    AI_CONDITION_HP_25_OR_STATUS = 0x500, // Target has HP <= 25% or a negative status condition
+    AI_CONDITION_GHOST = 0x600,           // Target is ghost-type and not exposed
+};
+
 #endif // GUARD_CONSTANTS_MOVE_H

@@ -185,7 +185,7 @@ void UpdateMonsterSprite(Entity *entity)
     entity->prevPixelPos.y = entity->pixelPos.y;
 
     x = (entity->pixelPos.x / 256) - gDungeon->unk181e8.cameraPixelPos.x;
-    y = (((entity->pixelPos.y - entity->unk1C.raw) - entInfo->unk174.raw) / 256) - gDungeon->unk181e8.cameraPixelPos.y;
+    y = (((entity->pixelPos.y - entity->unk1C) - entInfo->unk174) / 256) - gDungeon->unk181e8.cameraPixelPos.y;
     y2 = (entity->pixelPos.y / 256) - gDungeon->unk181e8.cameraPixelPos.y;
     y2 /= 2;
     if (entInfo->unk156 == 0) {
@@ -208,7 +208,7 @@ void UpdateMonsterSprite(Entity *entity)
     }
 
     pos1.x = entity->pixelPos.x / 256;
-    pos1.y = ((entity->pixelPos.y - entity->unk1C.raw) - entInfo->unk174.raw) / 256;
+    pos1.y = ((entity->pixelPos.y - entity->unk1C) - entInfo->unk174) / 256;
 
     sub_8005700(posArray, &entity->axObj.axdata);
     UpdateDungeonPokemonSprite2(entInfo->dungeonSpriteId, &pos1, posArray, gDungeon->unk181e8.priority);
@@ -219,17 +219,17 @@ void UpdateMonsterSprite(Entity *entity)
     sub_8042EC8(entity, y2);
     if (entInfo->unk15C == 0) {
         if (entInfo->unkFF == 1) {
-            if (entInfo->unk174.raw <= IntToF248_2(199.999).raw) {
-                entInfo->unk174.raw += IntToF248_2(8).raw;
-                if (entInfo->unk174.raw > IntToF248_2(200).raw) {
-                    entInfo->unk174.raw = IntToF248_2(200).raw;
+            if (entInfo->unk174 <= IntToF248(199.999)) {
+                entInfo->unk174 += IntToF248(8);
+                if (entInfo->unk174 > IntToF248(200)) {
+                    entInfo->unk174 = IntToF248(200);
                 }
             }
         }
         else {
-            entInfo->unk174.raw -= IntToF248_2(12).raw;
-            if (entInfo->unk174.raw < IntToF248_2(0).raw) {
-                entInfo->unk174.raw = IntToF248_2(0).raw;
+            entInfo->unk174 -= IntToF248(12);
+            if (entInfo->unk174 < IntToF248(0)) {
+                entInfo->unk174 = IntToF248(0);
             }
         }
     }

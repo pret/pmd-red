@@ -238,11 +238,11 @@ static void ZapdosDropInEffect(Entity *zapdosEntity)
 
   GetEntInfo(zapdosEntity)->unk15C = 1;
   GetEntInfo(zapdosEntity)->unk15E = 0;
-  GetEntInfo(zapdosEntity)->unk174.raw = 200; // incorrect value? Overwritten immediately anyway
+  GetEntInfo(zapdosEntity)->unk174 = 200; // incorrect value? Overwritten immediately anyway
   PlaySoundEffect(0x1ea);
   for(iVar1 = 200; iVar1 >= 0; iVar1 -= 5)
   {
-    GetEntInfo(zapdosEntity)->unk174 = IntToF248_2(iVar1);
+    GetEntInfo(zapdosEntity)->unk174 = IntToF248(iVar1);
     DungeonRunFrameActions(0x46);
   }
   sub_803E708(0x1e,0x46);

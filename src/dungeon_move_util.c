@@ -106,7 +106,7 @@ bool32 sub_8055A00(Entity *attacker, s32 firstMoveId, s32 var_34, s32 itemId, s3
             break;
 
         if (currMove->id == MOVE_SNORE || currMove->id == MOVE_SLEEP_TALK) {
-            if (!IsSleeping(attacker)) {
+            if (!IsMonsterSleeping(attacker)) {
                 if (CannotAttack(attacker, TRUE))
                     break;
             }
@@ -241,11 +241,11 @@ void TriggerTargetAbilityEffect(Entity *attacker)
         }
         if (entInfo->abilityEffectFlags & ABILITY_FLAG_STATIC) {
             LogMessageByIdWithPopupCheckUser(attacker, gUnknown_80FEF0C); // Static caused paralysis!
-            ParalyzeStatusTarget(attacker, attacker, TRUE);
+            TryInflictParalysisStatus(attacker, attacker, TRUE);
         }
         if (entInfo->abilityEffectFlags & ABILITY_FLAG_EFFECT_SPORE_PRLZ) {
             LogMessageByIdWithPopupCheckUser(attacker, gUnknown_80FEF30); // Effect Spore scattered spores
-            ParalyzeStatusTarget(attacker, attacker, TRUE);
+            TryInflictParalysisStatus(attacker, attacker, TRUE);
         }
         if (entInfo->abilityEffectFlags & ABILITY_FLAG_POISON_POINT) {
             LogMessageByIdWithPopupCheckUser(attacker, gUnknown_80FEF4C); // Poison Point struck!
@@ -406,7 +406,7 @@ bool8 TryUseChosenMove(struct Entity *attacker, u32 r6, s32 itemId, u32 var_30, 
 
         entInfo = GetEntInfo(attacker);
         if (var_30 != 0 || move->id == MOVE_SNORE || move->id == MOVE_SLEEP_TALK) {
-            if (!IsSleeping(attacker) && CannotAttack(attacker, TRUE))
+            if (!IsMonsterSleeping(attacker) && CannotAttack(attacker, TRUE))
                 break;
         }
         else {
@@ -743,14 +743,14 @@ bool8 AccuracyCalc(Entity *attacker, Entity *target, Move *move, s32 accuracyTyp
 {
     s32 statStageAccuracy, statStageEvasion;
     s24_8 statStageMul;
-    s32 accuracy = GetMoveAccuracyOrAIChance(move, accuracyType);
+    s32 accuracy = GetMoveAccuracyOrAiChance(move, accuracyType);
     s32 rand = DungeonRandInt(100);
     EntityInfo *attackerInfo = GetEntInfo(attacker);
     EntityInfo *targetInfo = GetEntInfo(target);
 
     if (selfAlwaysHits && attacker == target)
         return TRUE;
-    if (move->id == MOVE_REGULAR_ATTACK && IQSkillIsEnabled(attacker, IQ_SURE_HIT_ATTACKER))
+    if (move->id == MOVE_REGULAR_ATTACK && IqSkillIsEnabled(attacker, IQ_SURE_HIT_ATTACKER))
         return TRUE;
     if (attackerInfo->sureShotClassStatus.status == STATUS_SURE_SHOT)
         return TRUE;
@@ -762,7 +762,7 @@ bool8 AccuracyCalc(Entity *attacker, Entity *target, Move *move, s32 accuracyTyp
     if (HasHeldItem(target, ITEM_DETECT_BAND)) {
         accuracy -= gDetectBandAccuracyDebuffValue;
     }
-    if (IQSkillIsEnabled(target, IQ_QUICK_DODGER)) {
+    if (IqSkillIsEnabled(target, IQ_QUICK_DODGER)) {
         accuracy -= gIqQuickDodgerAccuracyDebuffValue;
     }
 
@@ -784,10 +784,10 @@ bool8 AccuracyCalc(Entity *attacker, Entity *target, Move *move, s32 accuracyTyp
     if (statStageAccuracy > 20) statStageAccuracy = 20;
 
     statStageMul = gAccEvsStatStageMultipliers[0][statStageAccuracy];
-    if (statStageMul.raw < 0) statStageMul.raw = 0;
-    if (statStageMul.raw > IntToF248_2(100).raw) statStageMul = IntToF248_2(100);
+    if (statStageMul < 0) statStageMul = 0;
+    if (statStageMul > IntToF248(100)) statStageMul = IntToF248(100);
 
-    accuracy *= statStageMul.raw;
+    accuracy *= statStageMul;
     accuracy /= 256;
 
     statStageEvasion = targetInfo->hitChanceStages[1];
@@ -808,10 +808,10 @@ bool8 AccuracyCalc(Entity *attacker, Entity *target, Move *move, s32 accuracyTyp
     if (statStageEvasion > 20) statStageEvasion = 20;
 
     statStageMul = gAccEvsStatStageMultipliers[1][statStageEvasion];
-    if (statStageMul.raw < 0) statStageMul.raw = 0;
-    if (statStageMul.raw > IntToF248_2(100).raw) statStageMul = IntToF248_2(100);
+    if (statStageMul < 0) statStageMul = 0;
+    if (statStageMul > IntToF248(100)) statStageMul = IntToF248(100);
 
-    accuracy *= statStageMul.raw;
+    accuracy *= statStageMul;
     accuracy /= 256;
     if (rand < accuracy)
         return TRUE;
@@ -829,7 +829,7 @@ void SetTargetsForMove(Entity **targetsArray, Entity *attacker, Move *move)
                     || GetEntInfo(attacker)->cringeClassStatus.status == STATUS_COWERING);
     bool8 canHitSelf = (GetEntInfo(attacker)->cringeClassStatus.status == STATUS_CONFUSED || GetEntInfo(attacker)->cringeClassStatus.status == STATUS_COWERING);
 
-    if (IQSkillIsEnabled(attacker, IQ_NONTRAITOR)) {
+    if (IqSkillIsEnabled(attacker, IQ_NONTRAITOR)) {
         canHitSelf = FALSE;
         canHitPartner = FALSE;
     }

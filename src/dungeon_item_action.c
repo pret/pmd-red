@@ -94,7 +94,7 @@ void sub_80479B8(bool8 param_1, bool8 param_2, u8 param_3, Entity *pokemon, Enti
             }
             else {
                 if (GetItemCategory(item->id) != CATEGORY_BERRIES_SEEDS_VITAMINS) {
-                    flag = IQSkillIsEnabled(target, IQ_ITEM_CATCHER);
+                    flag = IqSkillIsEnabled(target, IQ_ITEM_CATCHER);
                 }
             }
 
@@ -374,7 +374,7 @@ static void sub_80482FC(Entity *pokemon, Entity *target, u32 pp, u8 param_4)
 
     InitPokemonMove(&move, MOVE_PROJECTILE);
     move.PP = pp;
-    HandleDamagingMove(pokemon, target, &move, IntToF248_2(1.0), param_4);
+    HandleDamagingMove(pokemon, target, &move, IntToF248(1), param_4);
 }
 
 static void sub_8048340(Entity *pokemon, Entity *target, u32 r2)
@@ -419,7 +419,7 @@ static void AllureSeedItemAction(Entity *pokemon, Entity *target)
 
 static void QuickSeedItemAction(Entity *pokemon, Entity *target)
 {
-    RaiseMovementSpeedTarget(pokemon, target, 0, TRUE);
+    BoostSpeed(pokemon, target, 0, TRUE);
 }
 
 static void EyedropSeedItemAction(Entity *pokemon, Entity *target)
@@ -502,7 +502,7 @@ static void HungerSeedItemAction(Entity *pokemon, Entity * target)
   {
     entityInfo = GetEntInfo(target);
     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], target, 0);
-    if (IQSkillIsEnabled(target, IQ_SELF_CURER))
+    if (IqSkillIsEnabled(target, IQ_SELF_CURER))
         TryDisplayDungeonLoggableMessage3(pokemon, target, gPtrSelfHealPreventedHungerMessage);
     else
     {
@@ -931,11 +931,11 @@ static void GrimyFoodItemAction(Entity *pokemon, Entity * target)
             BurnedStatusTarget(pokemon, target, 1, TRUE);
             break;
         case 3:
-            ParalyzeStatusTarget(pokemon, target, TRUE);
+            TryInflictParalysisStatus(pokemon, target, TRUE);
             break;
         case 4:
-            LowerAttackStageTarget(pokemon, target, gStatIndexAtkDef, 3, 1, TRUE);
-            LowerAttackStageTarget(pokemon, target, gStatIndexSpecial, 3, 1, TRUE);
+            LowerOffensiveStat(pokemon, target, gStatIndexAtkDef, 3, TRUE, TRUE);
+            LowerOffensiveStat(pokemon, target, gStatIndexSpecial, 3, TRUE, TRUE);
             break;
     }
 }

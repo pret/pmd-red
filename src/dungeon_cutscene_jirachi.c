@@ -425,15 +425,15 @@ static void JirachiDropInEffect(Entity *jirachiEntity)
   iVar2 = IntToF248(2);
   PlaySoundEffect(0x1f8);
   while (1) {
-    iVar1.raw = iVar1.raw - iVar2.raw; // FRAGILE! Subtraction and assignment below must use .raw
+    iVar1 -= iVar2;
     if (F248LessThanInt(iVar1, 24)) {
-      iVar2.raw = IntToF248_2(1).raw;
+      iVar2 = IntToF248(1);
     }
     if (F248LessThanInt(iVar1, 0)) break;
     GetEntInfo(jirachiEntity)->unk174 = iVar1;
     DungeonRunFrameActions(0x46);
   }
-  GetEntInfo(jirachiEntity)->unk174 = IntToF248_2(0);
+  GetEntInfo(jirachiEntity)->unk174 = IntToF248(0);
 }
 
 static void JirachiSpinEffect(Entity * jirachiEntity)

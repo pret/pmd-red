@@ -64,15 +64,15 @@ void WarpTarget(Entity *pokemon, Entity *target, u32 param_3, DungeonPos *pos)
     sub_80421AC(pokemon,target);
     if (ShouldDisplayEntity(target)) {
         direction = (info->action).direction;
-        target->unk1C.raw += + 0x800;
-        while ( target->unk1C.raw < 0xa000) {
+        target->unk1C += + 0x800;
+        while ( target->unk1C < 0xa000) {
             if ((gDungeonFramesCounter & 3) == 0) {
                 direction = (direction + 1) & DIRECTION_MASK;
                 info->action.direction = direction & DIRECTION_MASK;
                 sub_806CE68(target,direction);
             }
             DungeonRunFrameActions(0x22);
-            target->unk1C.raw += 0x800;
+            target->unk1C += 0x800;
         }
     }
 
@@ -110,7 +110,7 @@ void WarpTarget(Entity *pokemon, Entity *target, u32 param_3, DungeonPos *pos)
     UpdateCamera(1);
     if (ShouldDisplayEntity(target)) {
         direction = (info->action).direction;
-        target->unk1C.raw = 0x9c00;
+        target->unk1C = 0x9c00;
         do {
             if ((gDungeonFramesCounter & 3) == 0) {
                 direction = (direction + 1) & DIRECTION_MASK;
@@ -118,10 +118,10 @@ void WarpTarget(Entity *pokemon, Entity *target, u32 param_3, DungeonPos *pos)
                 sub_806CE68(target,direction);
             }
             DungeonRunFrameActions(0x22);
-            target->unk1C.raw -= 0x400;
-        } while (0 < target->unk1C.raw);
+            target->unk1C -= 0x400;
+        } while (0 < target->unk1C);
     }
-    target->unk1C = IntToF248_2(0);
+    target->unk1C = IntToF248(0);
     DungeonRunFrameActions(0x22);
     if (flag) {
         TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FCB14); // But it dropped back at the same spot!

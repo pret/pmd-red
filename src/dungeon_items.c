@@ -388,7 +388,7 @@ bool8 sub_80462AC(Entity * entity, u8 hallucinating, u8 a2, u8 a3, u8 a4)
     }
 
     x = (entity->pixelPos.x / 256) - gDungeon->unk181e8.cameraPixelPos.x;
-    y = ((entity->pixelPos.y - entity->unk1C.raw) / 256) - gDungeon->unk181e8.cameraPixelPos.y;
+    y = ((entity->pixelPos.y - entity->unk1C) / 256) - gDungeon->unk181e8.cameraPixelPos.y;
     y2 = ((entity->pixelPos.y / 256) - gDungeon->unk181e8.cameraPixelPos.y) + 8;
     y2 /= 2;
 
@@ -549,7 +549,7 @@ static void sub_8046734(Entity *entity, DungeonPos *pos)
         for (i = 0; i < 24; i++) {
             calcPixelPos.x += add.x;
             calcPixelPos.y += add.y;
-            entity->unk1C.raw = sin_4096(sinVal) * 12;
+            entity->unk1C = sin_4096(sinVal) * 12;
             UpdateEntityPixelPos(entity, &calcPixelPos);
             sub_80462AC(entity, hallucinating, 0, unk, 0);
             DungeonRunFrameActions(0x13);
@@ -562,7 +562,7 @@ static void sub_8046734(Entity *entity, DungeonPos *pos)
     }
 
     SetEntityPixelPos(entity, posPixel.x, posPixel.y);
-    entity->unk1C.raw = 0;
+    entity->unk1C = 0;
     sub_80462AC(entity, hallucinating, 1, 0xFF, 0);
     DungeonRunFrameActions(0x13);
 }
@@ -669,7 +669,7 @@ void sub_804687C(Entity *entity, DungeonPos *pos1, DungeonPos *pos2, Item *item,
             for (i = 0; i < count; i++) {
                 if (EntityIsValid(&itemEntities[i])) {
                     IncreaseEntityPixelPos(&itemEntities[i], itemVelocity[i].x, itemVelocity[i].y);
-                    itemEntities[i].unk1C.raw = sin_4096(sinVal) * 12;
+                    itemEntities[i].unk1C = sin_4096(sinVal) * 12;
                     sub_80462AC(&itemEntities[i], hallucinating, 1, dirMaybe, 0);
                 }
             }

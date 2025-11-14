@@ -164,15 +164,15 @@ void TriggerMonsterHouse(Entity *entity, bool8 forcedMonsterHouse)
             if (sub_806AA0C(spawnStruct.species, 1)) {
                 Entity *newMonster = SpawnWildMon(&spawnStruct, FALSE);
                 if (EntityIsValid(newMonster)) {
-                    newMonster->unk1C = IntToF248_2(200);
+                    newMonster->unk1C = IntToF248(200);
                     for (j = 0; j < 100; j++) {
-                        newMonster->unk1C = s24_8_mul(newMonster->unk1C, IntToF248_2(0.665));
-                        if (newMonster->unk1C.raw < IntToF248_2(1).raw) {
+                        newMonster->unk1C = s24_8_mul(newMonster->unk1C, IntToF248(0.665));
+                        if (newMonster->unk1C < IntToF248(1)) {
                             break;
                         }
                         DungeonRunFrameActions(0x57);
                     }
-                    newMonster->unk1C = IntToF248_2(0);
+                    newMonster->unk1C = IntToF248(0);
                 }
             }
         }

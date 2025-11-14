@@ -2,6 +2,7 @@
 #define GUARD_MOVE_ORB_ACTIONS_1_H
 
 #include "structs/dungeon_entity.h"
+#include "structs/str_stat_index.h"
 
 bool8 IronTailMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId);
 bool8 sub_805768C(Entity *pokemon, Entity *target, Move *move, s32 itemId);
@@ -27,7 +28,7 @@ bool8 SwaggerMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 bool8 SnoreMoveAction(Entity *pokemon, Entity *target, Move * move, s32 itemId);
 bool8 ScreechMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId);
 bool8 RockSlideMoveAction(Entity *pokemon, Entity *target, Move * move, s32 itemId);
-bool32 WeatherBallMoveAction(Entity * pokemon, Entity * target, Move * move, s32 itemId);
+bool8 WeatherBallMoveAction(Entity * pokemon, Entity * target, Move * move, s32 itemId);
 bool8 WhirlpoolMoveAction(Entity * pokemon, Entity * target, Move * move, s32 itemId);
 bool8 FakeTearsMoveAction(Entity * pokemon, Entity * target, Move *move, s32 itemId);
 bool8 SpiteMoveAction(Entity * pokemon, Entity * target, Move *move, s32 itemId);
@@ -79,7 +80,7 @@ bool8 RapidSpinMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemI
 bool8 SureShotMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId);
 bool8 CosmicPowerMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId);
 
-extern const s32 gStatIndexAtkDef;
-extern const s32 gStatIndexSpecial;
+extern const StatIndex gStatIndexAtkDef;
+extern const StatIndex gStatIndexSpecial;
 
 #endif /* ifndef GUARD_MOVE_ORB_ACTIONS_1_H */

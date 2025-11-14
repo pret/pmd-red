@@ -2172,7 +2172,7 @@ static s32 ExecuteScriptCommand(Action *action)
                 break;
             }
             case 0x71: case 0x77: case 0x7d: case 0x83: {
-#define HYPOT FP24_8_Hypot((s24_8){scriptData->pos2.x - scriptData->pos1.x}, (s24_8){scriptData->pos2.y - scriptData->pos1.y}).raw / curCmd.argShort
+#define HYPOT FP24_8_Hypot((s24_8){scriptData->pos2.x - scriptData->pos1.x}, (s24_8){scriptData->pos2.y - scriptData->pos1.y}) / curCmd.argShort
                 action->callbacks->getHitboxCenter(action->parentObject, &scriptData->pos1);
                 scriptData->pos2.x = curCmd.arg1 << 8;
                 scriptData->pos2.y = curCmd.arg2 << 8;

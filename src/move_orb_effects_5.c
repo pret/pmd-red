@@ -49,7 +49,7 @@ void sub_8079F20(Entity * pokemon, Entity * target, u8 param_3, u8 param_4)
   moveUnsealed = FALSE;
   if (EntityIsValid(target)) {
     entityInfo = GetEntInfo(target);
-    if (HasNegativeStatus(target)) {
+    if (MonsterHasNegativeStatus(target)) {
       bVar8 = TRUE;
       EndSleepClassStatus(pokemon,target,0,0);
       if (!EntityIsValid(target)) {
@@ -105,7 +105,7 @@ void sub_8079F20(Entity * pokemon, Entity * target, u8 param_3, u8 param_4)
     else if (param_4 == 0) {
       TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_81004E8);
     }
-    EntityUpdateStatusSprites(target);
+    UpdateStatusIconFlags(target);
   }
 }
 
@@ -128,7 +128,7 @@ void sub_807A0CC(Entity * pokemon, Entity * target)
             move->moveFlags2 &= ~(MOVE_FLAG_EXISTS);
         }
     }
-    EntityUpdateStatusSprites(target);
+    UpdateStatusIconFlags(target);
   };
 }
 
@@ -178,7 +178,7 @@ void EndSleepClassStatus(Entity * pokemon, Entity * target, bool8 param_3, bool8
             break;
   }
   entityInfo->sleepClassStatus.status = STATUS_NONE;
-  EntityUpdateStatusSprites(target);
+  UpdateStatusIconFlags(target);
   if (isAsleep) {
     sub_806CE68(target,8);
   }
@@ -210,7 +210,7 @@ void EndBurnClassStatus(Entity * pokemon, Entity * target)
 
   }
   entityInfo->burnClassStatus.status = STATUS_NONE;
-  EntityUpdateStatusSprites(target);
+  UpdateStatusIconFlags(target);
 }
 
 void EndFrozenClassStatus(Entity * pokemon, Entity *target)
@@ -249,7 +249,7 @@ void EndFrozenClassStatus(Entity * pokemon, Entity *target)
         break;
   }
   entityInfo->frozenClassStatus.status = STATUS_NONE;
-  EntityUpdateStatusSprites(target);
+  UpdateStatusIconFlags(target);
   if (isFrozen) {
     sub_8042A74(target);
   }
@@ -291,7 +291,7 @@ void EndCringeClassStatus(Entity * pokemon, Entity *target)
         break;
   }
   entityInfo->cringeClassStatus.status = STATUS_NONE;
-  EntityUpdateStatusSprites(target);
+  UpdateStatusIconFlags(target);
   CalcSpeedStage(target);
 }
 
@@ -350,7 +350,7 @@ void EndReflectClassStatus(Entity * pokemon, Entity *target)
         break;
   }
   entityInfo->reflectClassStatus.status = STATUS_NONE;
-  EntityUpdateStatusSprites(target);
+  UpdateStatusIconFlags(target);
 }
 
 void EndCurseClassStatus(Entity * pokemon, Entity * target, u8 curseClassStatus)
@@ -389,7 +389,7 @@ void EndCurseClassStatus(Entity * pokemon, Entity * target, u8 curseClassStatus)
             break;
     }
     entityInfo->curseClassStatus.status = STATUS_NONE;
-    EntityUpdateStatusSprites(target);
+    UpdateStatusIconFlags(target);
   }
 }
 
@@ -413,7 +413,7 @@ void EndLeechSeedClassStatus(Entity * pokemon, Entity * target)
     }
     entityInfo->leechSeedClassStatus.status = STATUS_NONE;
     entityInfo->leechSeedClassStatus.unk8 = 0xff;
-    EntityUpdateStatusSprites(target);
+    UpdateStatusIconFlags(target);
   }
 }
 
@@ -444,7 +444,7 @@ void SendMoveEndMessage(Entity * pokemon, Entity * target)
             break;
   }
   entityInfo->sureShotClassStatus.status = STATUS_NONE;
-  EntityUpdateStatusSprites(target);
+  UpdateStatusIconFlags(target);
 }
 
 void SendTransformEndMessage(Entity * pokemon, Entity *target)
@@ -479,7 +479,7 @@ void SendTransformEndMessage(Entity * pokemon, Entity *target)
             break;
   }
   entityInfo->invisibleClassStatus.status = STATUS_NONE;
-  EntityUpdateStatusSprites(target);
+  UpdateStatusIconFlags(target);
   if (isInvisible) {
     sub_807EC28(TRUE);
   }
@@ -509,7 +509,7 @@ void SendEyesightEndMessage(Entity * pokemon,Entity * target)
             break;
   }
   entityInfo->blinkerClassStatus.status = STATUS_NONE;
-  EntityUpdateStatusSprites(target);
+  UpdateStatusIconFlags(target);
   if (entityInfo->isTeamLeader) {
     DungeonRunFrameActions(0x31);
     UpdateTrapsVisibility();
@@ -535,7 +535,7 @@ void SendMuzzledEndMessage(Entity * pokemon, Entity * target)
         break;
   }
   entityInfo->muzzled.muzzled = FALSE;
-  EntityUpdateStatusSprites(target);
+  UpdateStatusIconFlags(target);
 }
 
 bool8 TrySendImmobilizeSleepEndMsg(Entity * pokemon, Entity * target)
@@ -562,7 +562,7 @@ void WakeUpPokemon(Entity * pokemon)
   entityInfo->sleepClassStatus.status = STATUS_NONE;
   entityInfo->sleepClassStatus.turns = 0;
   sub_806A898(pokemon, 1, 1);
-  EntityUpdateStatusSprites(pokemon);
+  UpdateStatusIconFlags(pokemon);
 }
 
 void SendThawedMessage(Entity *pokemon, Entity *target)
@@ -577,7 +577,7 @@ void SendThawedMessage(Entity *pokemon, Entity *target)
       entityInfo->frozenClassStatus.damageCountdown = 0;
       SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
       TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FA8BC); // $m0 thawed out!
-      EntityUpdateStatusSprites(target);
+      UpdateStatusIconFlags(target);
     }
   }
 }

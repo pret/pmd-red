@@ -212,11 +212,11 @@ static s32 sub_8041550(Entity *entity, s32 a1, u8 a2, u8 a3, s32 a4, u8 a5)
     sub_800569C(&pos, &entity->axObj.axdata, a3);
     if (pos.x != 99 && pos.y != 99) {
         pixelPos.x = entity->pixelPos.x + (pos.x << 8);
-        pixelPos.y = (entity->pixelPos.y + (pos.y << 8)) - entInfo->unk174.raw;
+        pixelPos.y = (entity->pixelPos.y + (pos.y << 8)) - entInfo->unk174;
     }
     else {
         pixelPos.x = entity->pixelPos.x;
-        pixelPos.y = entity->pixelPos.y - entInfo->unk174.raw;
+        pixelPos.y = entity->pixelPos.y - entInfo->unk174;
     }
 
     var = entity->pixelPos.y / 256;
@@ -358,12 +358,12 @@ void sub_8041888(u8 param_1)
             {
                 entityInfo->unk14C = 1;
             }
-            EntityUpdateStatusSprites(entity);
+            UpdateStatusIconFlags(entity);
         }
     }
 }
 
-void EntityUpdateStatusSprites(Entity *entity)
+void UpdateStatusIconFlags(Entity *entity)
 {
   bool32 flag;
   s32 HP;
@@ -563,7 +563,7 @@ void sub_8041C08(Entity *pokemon)
     sub_804151C(pokemon, 423, 1);
 }
 
-void sub_8041C1C(Entity *pokemon)
+void PlayParalysisEffect(Entity *pokemon)
 {
     sub_804151C(pokemon, 423, 1);
 }
@@ -623,12 +623,12 @@ void sub_8041CA8(Entity *pokemon)
     sub_804151C(pokemon, 7, 1);
 }
 
-void sub_8041CB8(Entity *pokemon)
+void PlaySpeedUpEffect(Entity *pokemon)
 {
     sub_804151C(pokemon, 0x18b, 1);
 }
 
-void sub_8041CCC(Entity *pokemon)
+void PlaySpeedDownEffect(Entity *pokemon)
 {
     sub_804151C(pokemon, 0xC5 << 1, 1);
 }
@@ -840,9 +840,9 @@ void nullsub_90(Entity *pokemon)
 {
 }
 
-void sub_8041F28(Entity *pokemon, u32 r1)
+void PlayOffensiveStatDownEffect(Entity *pokemon, StatIndex stat)
 {
-    if(r1 == 0)
+    if (stat.id == STAT_INDEX_PHYSICAL)
     {
         sub_804151C(pokemon, 0xCA << 1, 1);
     }
@@ -852,9 +852,9 @@ void sub_8041F28(Entity *pokemon, u32 r1)
     }
 }
 
-void sub_8041F4C(Entity *pokemon, u32 r1)
+void PlayDefensiveStatDownEffect(Entity *pokemon, StatIndex stat)
 {
-    if(r1 == 0)
+    if(stat.id == STAT_INDEX_PHYSICAL)
     {
         sub_804151C(pokemon, 0x18f, 1);
     }
@@ -864,9 +864,9 @@ void sub_8041F4C(Entity *pokemon, u32 r1)
     }
 }
 
-void sub_8041F70(Entity *pokemon, u32 r1)
+void PlayOffensiveStatUpEffect(Entity *pokemon, StatIndex stat)
 {
-    if(r1 == 0)
+    if(stat.id == STAT_INDEX_PHYSICAL)
     {
         sub_804151C(pokemon, 0x1a9, 1);
     }
@@ -876,9 +876,9 @@ void sub_8041F70(Entity *pokemon, u32 r1)
     }
 }
 
-void sub_8041F94(Entity *pokemon, u32 r1)
+void PlayDefensiveStatUpEffect(Entity *pokemon, StatIndex stat)
 {
-    if(r1 == 0)
+    if(stat.id == STAT_INDEX_PHYSICAL)
     {
         sub_804151C(pokemon, 0xC7 << 1, 1);
     }
@@ -888,9 +888,9 @@ void sub_8041F94(Entity *pokemon, u32 r1)
     }
 }
 
-void sub_8041FB4(Entity *pokemon, u32 r1)
+void PlayOffensiveStatMultiplierUpEffect(Entity *pokemon, StatIndex stat)
 {
-    if(r1 == 0)
+    if(stat.id == STAT_INDEX_PHYSICAL)
     {
         sub_804151C(pokemon, 0x1a9, 1);
     }
@@ -900,9 +900,9 @@ void sub_8041FB4(Entity *pokemon, u32 r1)
     }
 }
 
-void sub_8041FD8(Entity *pokemon, u32 r1)
+void PlayOffensiveStatMultiplierDownEffect(Entity *pokemon, StatIndex stat)
 {
-    if(r1 == 0)
+    if (stat.id == STAT_INDEX_PHYSICAL)
     {
         sub_804151C(pokemon, 0xCA << 1, 1);
     }
@@ -912,9 +912,9 @@ void sub_8041FD8(Entity *pokemon, u32 r1)
     }
 }
 
-void sub_8041FFC(Entity *pokemon, u32 r1)
+void PlayDefensiveStatMultiplierUpEffect(Entity *pokemon, StatIndex stat)
 {
-    if(r1 == 0)
+    if (stat.id == STAT_INDEX_PHYSICAL)
     {
         sub_804151C(pokemon, 0xC7 << 1, 1);
     }
@@ -924,9 +924,9 @@ void sub_8041FFC(Entity *pokemon, u32 r1)
     }
 }
 
-void sub_804201C(Entity *pokemon, u32 r1)
+void PlayDefensiveStatMultiplierDownEffect(Entity *pokemon, StatIndex stat)
 {
-    if(r1 == 0)
+    if (stat.id == STAT_INDEX_PHYSICAL)
     {
         sub_804151C(pokemon, 0x18f, 1);
     }
@@ -936,9 +936,9 @@ void sub_804201C(Entity *pokemon, u32 r1)
     }
 }
 
-void sub_8042040(Entity *pokemon, u32 r1)
+void PlayHitChanceUpEffect(Entity *pokemon, StatIndex stat)
 {
-    if(r1 == 0)
+    if(stat.id == STAT_INDEX_ACCURACY)
     {
         sub_804151C(pokemon, 0xC6 << 1, 1);
     }
@@ -948,7 +948,7 @@ void sub_8042040(Entity *pokemon, u32 r1)
     }
 }
 
-void sub_8042060(Entity *pokemon, u32 r1)
+void PlayHitChanceDownEffect(Entity *pokemon, u32 r1)
 {
     if(r1 == 0)
     {
@@ -972,7 +972,7 @@ void sub_8042080(Entity *pokemon, u32 r1)
     }
 }
 
-void sub_80420A0(Entity *pokemon)
+void PlayCringeExclamationPointEffect(Entity *pokemon)
 {
     sub_804151C(pokemon, 0x143, 1);
 }
@@ -1510,16 +1510,16 @@ static void sub_8042A84(s16 param_1, Entity *entity, u32 param_3)
 
   param_1_s16 = param_1;
 
-  r6 = IntToF248_2(2).raw;
+  r6 = IntToF248(2);
   if (sub_8042768(entity)) {
     sub_804151C(entity,param_1_s16,0);
     sub_803E708(param_3,0x42);
     do {
-      if (entity->unk1C.raw > IntToF248_2(199.999).raw) break;
+      if (entity->unk1C > IntToF248(199.999)) break;
       DungeonRunFrameActions(0x42);
-      entity->unk1C.raw += + r6;
-      r6 += IntToF248_2(1).raw;
-      iVar3 = (entity->pixelPos.y - entity->unk1C.raw) / 256;
+      entity->unk1C += + r6;
+      r6 += IntToF248(1);
+      iVar3 = (entity->pixelPos.y - entity->unk1C) / 256;
     } while (-8 <= iVar3 - gDungeon->unk181e8.cameraPixelPos.y);
     entity->isVisible = 0;
     sub_804178C(0);

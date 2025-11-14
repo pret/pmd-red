@@ -75,13 +75,13 @@ void SetChargeStatusTarget(Entity *pokemon, Entity *target, u8 newStatus, Move *
       }
       sub_8041BD0(target,uVar5);
       TryDisplayDungeonLoggableMessage3(pokemon,target,message);
-      EntityUpdateStatusSprites(target);
+      UpdateStatusIconFlags(target);
 
       // TODO: this could probably be cleaner..
       for (index = 0, iVar8 = 0xc7ff; index < 400; index++) {
         bVar2 = TRUE;
         if (entityInfo->unkFF == 1)
-            if(iVar7 = entityInfo->unk174.raw, bVar2 = FALSE, iVar7 > iVar8) // unk174 -> u32 to s32
+            if(iVar7 = entityInfo->unk174, bVar2 = FALSE, iVar7 > iVar8) // unk174 -> u32 to s32
             {
                 bVar2 = TRUE;
             }
@@ -105,6 +105,6 @@ void sub_8079764(Entity * pokemon)
             entityInfo->unk14A = 0;
             entityInfo->unkFF = 0;
         }
-        EntityUpdateStatusSprites(pokemon);
+        UpdateStatusIconFlags(pokemon);
     }
 }

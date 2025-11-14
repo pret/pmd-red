@@ -250,11 +250,11 @@ static void MoltresDropInEffect(Entity * moltresEntity)
 
   GetEntInfo(moltresEntity)->unk15C = 1;
   GetEntInfo(moltresEntity)->unk15E = 0;
-  GetEntInfo(moltresEntity)->unk174 = IntToF248_2(200);
+  GetEntInfo(moltresEntity)->unk174 = IntToF248(200);
   PlaySoundEffect(0x1f8);
   for(iVar1 = 200; iVar1 >= 0; iVar1 -= 5)
   {
-    GetEntInfo(moltresEntity)->unk174 = IntToF248_2(iVar1);
+    GetEntInfo(moltresEntity)->unk174 = IntToF248(iVar1);
     DungeonRunFrameActions(0x46);
   }
 }

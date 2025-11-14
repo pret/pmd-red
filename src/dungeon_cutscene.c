@@ -949,7 +949,7 @@ void sub_80856E0(Entity * pokemon, s32 direction)
         entityInfo->unk174 = F248_Sub(entityInfo->unk174, IntToF248(2));
         DungeonRunFrameActions(0x46);
     }
-    entityInfo->unk174.raw = 0; // weird one that doesn't match with struct assignment
+    entityInfo->unk174 = 0;
     DungeonRunFrameActions(0x46);
 }
 

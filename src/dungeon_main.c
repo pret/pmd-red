@@ -936,7 +936,7 @@ void CheckLeaderTile(void)
         return;
 
     tile = GetTileAtEntitySafe(leader);
-    if (IQSkillIsEnabled(leader, IQ_SUPER_MOBILE) && GetEntInfo(leader)->invisibleClassStatus.status != STATUS_MOBILE && !HasHeldItem(leader, ITEM_MOBILE_SCARF))
+    if (IqSkillIsEnabled(leader, IQ_SUPER_MOBILE) && GetEntInfo(leader)->invisibleClassStatus.status != STATUS_MOBILE && !HasHeldItem(leader, ITEM_MOBILE_SCARF))
         sub_804AE84(&leader->pos);
     if (tile->terrainFlags & TERRAIN_TYPE_STAIRS)
         gDungeon->unk1 = 1;
@@ -950,7 +950,7 @@ void CheckLeaderTile(void)
             Trap *trap = GetTrapInfo(tileObject);
             bool32 r8 = FALSE;
             bool32 r7 = FALSE;
-            if (IQSkillIsEnabled(leader, IQ_TRAP_SEER) && !tileObject->isVisible) {
+            if (IqSkillIsEnabled(leader, IQ_TRAP_SEER) && !tileObject->isVisible) {
                 tileObject->isVisible = TRUE;
                 UpdateTrapsVisibility();
                 r7 = TRUE;
@@ -1107,17 +1107,22 @@ static void ShowMainMenu(bool8 fromBPress, bool8 a1)
     s32 r10;
     bool8 printAll = fromBPress;
     s32 chosenOption;
-    s32 var_24;
-    struct UnkMenuBitsStruct var_30;
-    struct UnkMenuBitsStruct var_34;
+    bool8 var_24;
 
     r10 = gDungeon->unk5C0;
     chosenOption = 0;
-    var_24 = (gDungeon->unk5C0 > - 1);
+    var_24 = (gDungeon->unk5C0 >= 0);
     gDungeon->unk5C0 = -1;
+
     if (r10 >= 0) {
         chosenOption = r10;
     }
+
+    // Blue/DS only fields?
+    #if GAME_VERSION == VERSION_BLUE
+    gDungeon->unk17C = -1;
+    gDungeon->unk17E = -1;
+    #endif
 
     if (a1) {
         PlayFanfareSE(0x137, 0x100);
@@ -1143,7 +1148,7 @@ static void ShowMainMenu(bool8 fromBPress, bool8 a1)
                     PlayDungeonCursorSE(1);
                     MoveMenuCursorUpWrapAround(&gDungeonMenu, TRUE);
                 }
-                if ((gRealInputs.pressed & A_BUTTON || gDungeonMenu.touchScreen.a_button)) {
+                if ((gRealInputs.pressed & A_BUTTON /* || (gRealInputs.pressed & 0x400) */ || gDungeonMenu.touchScreen.a_button)) {
                     if (gUnknown_202749A[gDungeonMenu.menuIndex + 1] == 7) {
                         PlayDungeonConfirmationSE();
                         chosenOption = gDungeonMenu.menuIndex;
@@ -1165,6 +1170,7 @@ static void ShowMainMenu(bool8 fromBPress, bool8 a1)
         r10 = chosenOption;
         if (chosenOption == MAIN_MENU_ITEMS) {
             u16 action;
+            struct UnkMenuBitsStruct var_34;
 
             SetLeaderActionToNothing(TRUE);
             var_34.a0_8 = 0;
@@ -1269,7 +1275,7 @@ static void ShowMainMenu(bool8 fromBPress, bool8 a1)
                 break;
         }
         else if (chosenOption == MAIN_MENU_MOVES) {
-            s32 i, currMonId, teamMonsCount, r9;
+            s32 i, currMonId;
             Entity *currEntity;
 
             currMonId = 0;
@@ -1285,8 +1291,10 @@ static void ShowMainMenu(bool8 fromBPress, bool8 a1)
             }
 
             while (1) {
+                s32 r9, teamMonsCount;
+
                 SetLeaderActionToNothing(0);
-            LOOP_START_NO_CALL: // Actions 6 and 7 don't call SetLeaderActionToNothing
+            LOOP_START_NO_CALL: // Actions 6 and 7 don't call SetLeaderActionToNothing. Goto is real here.
                 currEntity = NULL;
                 r9 = 0;
                 teamMonsCount = 0;
@@ -1347,7 +1355,10 @@ static void ShowMainMenu(bool8 fromBPress, bool8 a1)
                 else if (GetLeaderActionId() == ACTION_MOVE_INFO) {
                     ActionShowMoveInfo(GetLeaderActionContainer());
                 }
-                else if (GetLeaderActionId() == ACTION_SET_MOVE || GetLeaderActionId() == ACTION_UNSET_MOVE) {
+                else if (GetLeaderActionId() == ACTION_SET_MOVE) {
+                    ActionSetOrUnsetMove(GetLeaderActionContainer(), FALSE);
+                }
+                else if (GetLeaderActionId() == ACTION_UNSET_MOVE) {
                     ActionSetOrUnsetMove(GetLeaderActionContainer(), FALSE);
                 }
                 else if (GetLeaderActionId() == ACTION_SWITCH_AI_MOVE) {
@@ -1375,6 +1386,7 @@ static void ShowMainMenu(bool8 fromBPress, bool8 a1)
             if (tileObject != NULL) {
                 if (GetEntityType(tileObject) == ENTITY_ITEM) {
                     u16 action;
+                    struct UnkMenuBitsStruct var_30;
 
                     SetLeaderActionToNothing(TRUE);
                     var_30.a0_8 = 0;
@@ -1449,14 +1461,13 @@ static void ShowMainMenu(bool8 fromBPress, bool8 a1)
         if (chosenOption < 0)
             break;
 
-        if (var_24 == 0) {
-            ResetRepeatTimers();
-            ResetUnusedInputStruct();
-        }
-        else {
+        if (var_24) {
             TryPointCameraToMonster(GetLeader(), 0);
             break;
         }
+
+        ResetRepeatTimers();
+        ResetUnusedInputStruct();
     }
 
     sub_803EAF0(0, NULL);

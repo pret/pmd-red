@@ -168,7 +168,7 @@ void HandleHurlOrb(Entity *target, Entity *attacker)
         var_54.y += r10;
         UpdateEntityPixelPos(attacker, &var_54);
         if (ShouldDisplayEntity(attacker)) {
-            attacker->unk1C.raw = sin_4096(var_2C) << 5;
+            attacker->unk1C = sin_4096(var_2C) << 5;
             DungeonRunFrameActions(0x3B);
             if (!(i & 3)) {
                 attackerDirection &= DIRECTION_MASK;
@@ -181,7 +181,7 @@ void HandleHurlOrb(Entity *target, Entity *attacker)
 
     var_54.x = pixelPosX;
     var_54.y = pixelPosY;
-    attacker->unk1C.raw = 0;
+    attacker->unk1C = 0;
     UpdateEntityPixelPos(attacker, &var_54);
     DungeonRunFrameActions(0x3B);
     GetEntInfo(attacker)->action.direction = attackerDirection & DIRECTION_MASK;

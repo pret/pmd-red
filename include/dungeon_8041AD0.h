@@ -3,12 +3,13 @@
 
 #include "structs/dungeon_entity.h"
 #include "structs/str_damage.h"
+#include "structs/str_stat_index.h"
 
 s32 sub_80416E0(PixelPos *pos, u32 param_2, bool8 param_3);
 void sub_804178C(u8 param_1);
 u32 EntityGetStatusSprites(Entity *entity);
 void sub_8041888(u8 param_1);
-void EntityUpdateStatusSprites(Entity *entity);
+void UpdateStatusIconFlags(Entity *entity);
 void sub_8041AD0(Entity *pokemon);
 void sub_8041AE0(Entity *pokemon);
 void sub_8041AF4(Entity *pokemon);
@@ -36,7 +37,7 @@ void sub_8041BD0(Entity *pokemon, u8 r1);
 void sub_8041BE8(Entity *pokemon);
 void sub_8041BF8(Entity *pokemon);
 void sub_8041C08(Entity *pokemon);
-void sub_8041C1C(Entity *pokemon);
+void PlayParalysisEffect(Entity *pokemon);
 void nullsub_69(Entity *pokemon, Entity *target);
 void sub_8041C34(Entity *pokemon);
 void nullsub_70(Entity *pokemon);
@@ -49,8 +50,8 @@ void nullsub_72(Entity *pokemon);
 void nullsub_73(Entity *pokemon);
 void sub_8041C94(Entity *pokemon);
 void sub_8041CA8(Entity *pokemon);
-void sub_8041CB8(Entity *pokemon);
-void sub_8041CCC(Entity *pokemon);
+void PlaySpeedUpEffect(Entity *pokemon);
+void PlaySpeedDownEffect(Entity *pokemon);
 void sub_8041CDC(Entity *pokemon);
 void sub_8041CEC(Entity *pokemon);
 void nullsub_74(Entity *pokemon);
@@ -93,18 +94,18 @@ void sub_8041EE8(Entity *pokemon);
 void sub_8041EF8(Entity *pokemon);
 void sub_8041F08(Entity *pokemon);
 void nullsub_90(Entity *pokemon);
-void sub_8041F28(Entity *pokemon, u32 r1);
-void sub_8041F4C(Entity *pokemon, u32 r1);
-void sub_8041F70(Entity *pokemon, u32 r1);
-void sub_8041F94(Entity *pokemon, u32 r1);
-void sub_8041FB4(Entity *pokemon, u32 r1);
-void sub_8041FD8(Entity *pokemon, u32 r1);
-void sub_8041FFC(Entity *pokemon, u32 r1);
-void sub_804201C(Entity *pokemon, u32 r1);
-void sub_8042040(Entity *pokemon, u32 r1);
-void sub_8042060(Entity *pokemon, u32 r1);
+void PlayOffensiveStatDownEffect(Entity *pokemon, StatIndex stat);
+void PlayDefensiveStatDownEffect(Entity *pokemon, StatIndex stat);
+void PlayOffensiveStatUpEffect(Entity *pokemon, StatIndex stat);
+void PlayDefensiveStatUpEffect(Entity *pokemon, StatIndex stat);
+void PlayOffensiveStatMultiplierUpEffect(Entity *pokemon, StatIndex stat);
+void PlayOffensiveStatMultiplierDownEffect(Entity *pokemon, StatIndex stat);
+void PlayDefensiveStatMultiplierUpEffect(Entity *pokemon, StatIndex stat);
+void PlayDefensiveStatMultiplierDownEffect(Entity *pokemon, StatIndex stat);
+void PlayHitChanceUpEffect(Entity *pokemon, StatIndex stat);
+void PlayHitChanceDownEffect(Entity *pokemon, u32 r1);
 void sub_8042080(Entity *pokemon, u32 r1);
-void sub_80420A0(Entity *pokemon);
+void PlayCringeExclamationPointEffect(Entity *pokemon);
 void nullsub_91(Entity *pokemon);
 void sub_80420B8(Entity *pokemon);
 void sub_80420C8(Entity *pokemon);

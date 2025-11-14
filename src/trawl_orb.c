@@ -60,7 +60,7 @@ void HandleTrawlOrb(Entity *user, Entity *target)
                 currItemEntity->spawnGenID = 0;
                 currItemEntity->isVisible = TRUE;
                 currItemEntity->unk22 = 0;
-                currItemEntity->unk1C = IntToF248_2(0);
+                currItemEntity->unk1C = IntToF248(0);
                 itemInfo[itemsCount] = gDungeon->unk3804[i];
                 currItemEntity++;
                 itemsCount++;
@@ -132,7 +132,7 @@ void HandleTrawlOrb(Entity *user, Entity *target)
             for (i = 0; i < itemsCount; i++) {
                 if (EntityIsValid(&itemEntities[i])) {
                     IncreaseEntityPixelPos(&itemEntities[i], itemVelocity[i].x, itemVelocity[i].y);
-                    itemEntities[i].unk1C.raw = sin_4096(unkAngle) * 0xC;
+                    itemEntities[i].unk1C = sin_4096(unkAngle) * 0xC;
                     sub_80462AC(&itemEntities[i], hallucinating, 0, var, 0);
                 }
             }

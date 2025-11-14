@@ -2,6 +2,7 @@
 #define GUARD_MOVE_ORB_EFFECTS_1_H
 
 #include "structs/dungeon_entity.h"
+#include "structs/str_stat_index.h"
 #include "number_util.h"
 
 #define FLASH_FIRE_STATUS_NONE 0
@@ -27,20 +28,20 @@ void IngrainedStatusTarget(Entity * pokemon, Entity * target);
 void WrapTarget(Entity * pokemon, Entity * target);
 void sub_8076CB4(s32 param_1);
 void PetrifiedStatusTarget(Entity * pokemon, Entity * target);
-void LowerAttackStageTarget(Entity * pokemon, Entity * target, s32 index, s32 decrement, u8 param_5, bool8 displayMessage);
-void LowerDefenseStageTarget(Entity * pokemon, Entity * target, s32 index, s32 decrement, u8 param_5, bool8 displayMessage);
-void RaiseAttackStageTarget(Entity * pokemon, Entity * target, s32 index, s32 increment);
-void RaiseDefenseStageTarget(Entity * pokemon, Entity * target, s32 index, s32 increment);
+void LowerOffensiveStat(Entity *user, Entity *target, StatIndex stat, s32 nStages, bool8 checkProtected, bool8 logMsgProtected);
+void LowerDefensiveStat(Entity *user, Entity *target, StatIndex stat, s32 nStages, bool8 checkProtected, bool8 logMsgProtected);
+void BoostOffensiveStat(Entity *user, Entity *target, StatIndex stat, s32 nStages);
+void BoostDefensiveStat(Entity *user, Entity *target, StatIndex stat, s32 nStages);
 u8 GetFlashFireStatus(Entity *pokemon);
-void UpdateFlashFireBoost(Entity * pokemon, Entity *target);
-void ChangeAttackMultiplierTarget(Entity *pokemon, Entity *target, u32 statStage, s24_8 param_4, bool8 displayMessage);
-void ChangeDefenseMultiplierTarget(Entity *pokemon, Entity *target, u32 statStage, s24_8 param_4, bool8 displayMessage);
-void RaiseAccuracyStageTarget(Entity * pokemon, Entity * target, s32 statStage);
-void LowerAccuracyStageTarget(Entity * pokemon, Entity * target, s32 statStage, bool8 displayMessage);
-void CringeStatusTarget(Entity * pokemon,Entity * target, bool8 displayMessage);
-void ParalyzeStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessage);
-void RaiseMovementSpeedTarget(Entity * pokemon, Entity * target, s32 turns, bool8 diplayMessage);
-void LowerMovementSpeedTarget(Entity * pokemon, Entity * target, s32 levels, bool8 displayMessage);
+void ActivateFlashFire(Entity * pokemon, Entity *target);
+void ApplyOffensiveStatMultiplier(Entity *user, Entity *target, StatIndex stat, s24_8 multiplier, bool8 displayMessage);
+void ApplyDefensiveStatMultiplier(Entity *user, Entity *target, StatIndex stat, s24_8 multiplier, bool8 displayMessage);
+void BoostHitChanceStat(Entity *user, Entity *target, StatIndex stat);
+void LowerHitChanceStat(Entity *user, Entity *target, StatIndex stat, bool8 displayMessage);
+void TryInflictCringeStatus(Entity *user ,Entity *target, bool8 displayMessage);
+void TryInflictParalysisStatus(Entity *user, Entity *target, bool8 displayMessage);
+void BoostSpeed(Entity *user, Entity *target, s32 turns, bool8 displayMessage);
+void LowerSpeed(Entity *user, Entity *target, s32 nStages, bool8 displayMessage);
 
 #endif
 

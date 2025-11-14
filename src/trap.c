@@ -410,16 +410,16 @@ void HandleMudTrap(Entity *pokemon, Entity *target)
     rand = DungeonRandInt(100);
     randDef = rand;
     if (rand < 25) {
-        LowerAttackStageTarget(pokemon,target,gStatIndexAtkDef,1,1,1);
+        LowerOffensiveStat(pokemon,target,gStatIndexAtkDef,1,1,1);
     }
     else if (rand < 50) {
-        LowerAttackStageTarget(pokemon,target,gStatIndexSpecial,1,1,1);
+        LowerOffensiveStat(pokemon,target,gStatIndexSpecial,1,1,1);
     }
     else if (randDef < 75) {
-        LowerDefenseStageTarget(pokemon,target,gStatIndexAtkDef,1,1,1);
+        LowerDefensiveStat(pokemon,target,gStatIndexAtkDef,1,1,1);
     }
     else {
-        LowerDefenseStageTarget(pokemon,target,gStatIndexSpecial,1,1,1);
+        LowerDefensiveStat(pokemon,target,gStatIndexSpecial,1,1,1);
     }
 }
 
@@ -493,7 +493,7 @@ void HandleSlumberTrap(Entity *pokemon, Entity *target)
 void HandleSlowTrap(Entity *pokemon, Entity *target)
 {
     if(target != NULL)
-        LowerMovementSpeedTarget(pokemon, target, 1, TRUE);
+        LowerSpeed(pokemon, target, 1, TRUE);
 }
 
 void HandlePoisonTrap(Entity *pokemon, Entity *target)
@@ -713,7 +713,7 @@ void HandleSealTrap(Entity *param_1,Entity *param_2)
     bool8 flag = FALSE;
 
 
-    if (param_2 != NULL && !HasSafeguardStatus(param_1, param_2, TRUE)) {
+    if (param_2 != NULL && !SafeguardIsActive(param_1, param_2, TRUE)) {
         info = GetEntInfo(param_2);
         counter = 0;
         for(i = 0;  i < MAX_MON_MOVES;i++)

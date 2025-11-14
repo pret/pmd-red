@@ -155,7 +155,7 @@ bool8 ExecuteEntityDungeonAction(Entity *entity)
                     pos.y = entity->pos.y;
                     sub_80694C0(entity,pos1.x,pos1.y,0);
                     sub_8074FB0(entity,(info->action).direction,&pos);
-                    if (((IQSkillIsEnabled(entity, IQ_SUPER_MOBILE)) && (info->invisibleClassStatus.status != STATUS_MOBILE)) &&
+                    if (((IqSkillIsEnabled(entity, IQ_SUPER_MOBILE)) && (info->invisibleClassStatus.status != STATUS_MOBILE)) &&
                         (!HasHeldItem(entity,ITEM_MOBILE_SCARF))) {
                         sub_804AE08(&entity->pos);
                     }
@@ -342,7 +342,7 @@ static void HandleSleepTalk(void)
                 if(CannotAttack(entity, TRUE)){
                     info->unk164 |= 0xFF;
                 }
-                else if(!IsSleeping(entity)){
+                else if(!IsMonsterSleeping(entity)){
                     info->unk164 |= 0xFF;
                 }
                 else if(info->muzzled.muzzled == TRUE){
@@ -418,7 +418,7 @@ static void HandleSnore(void)
                     info->unk165 |= 0xff;
                     info->unk164 |= 0xff;
                 }
-                else if (!IsSleeping(pokemon)) {
+                else if (!IsMonsterSleeping(pokemon)) {
                     info->unk165 |= 0xff;
                     info->unk164 |= 0xff;
                 }
@@ -460,7 +460,7 @@ static void HandleFlashFire(void)
         if (EntityIsValid(entity)) {
             if (GetEntInfo(entity)->unk152 != 0) {
                GetEntInfo(entity)->unk152 = 0;
-               UpdateFlashFireBoost(entity, entity);
+               ActivateFlashFire(entity, entity);
             }
         }
     }

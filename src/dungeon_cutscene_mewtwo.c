@@ -144,20 +144,20 @@ static void MewtwoDropInEffect(Entity *mewtwoEntity)
   s24_8 iVar2;
 
   GetEntInfo(mewtwoEntity)->unk15E = 0;
-  iVar2 = IntToF248_2(200);
-  iVar1 = IntToF248_2(4);
+  iVar2 = IntToF248(200);
+  iVar1 = IntToF248(4);
   PlaySoundEffect(0x1f8);
   while( 1 ) {
-    iVar2.raw -= iVar1.raw;
-    iVar1 = F248_Sub(iVar1, FloatToF248_2(0.045));
+    iVar2 -= iVar1;
+    iVar1 = F248_Sub(iVar1, IntToF248(0.045));
     if (F248LessThanFloat(iVar1, 0.12)) {
-      iVar1 = FloatToF248_2(0.12);
+      iVar1 = IntToF248(0.12);
     }
     if (F248LessThanInt(iVar2, 0)) break;
     GetEntInfo(mewtwoEntity)->unk174 = iVar2;
     DungeonRunFrameActions(0x46);
   }
-  GetEntInfo(mewtwoEntity)->unk174 = IntToF248_2(0);
+  GetEntInfo(mewtwoEntity)->unk174 = IntToF248(0);
 }
 
 static void MewtwoScreenFlash(void)

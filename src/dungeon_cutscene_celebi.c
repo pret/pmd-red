@@ -194,11 +194,11 @@ static void sub_808C8E0(Entity *entity)
   PlaySoundEffect(0x1a5);
   sub_806CDD4(entity, 0, DIRECTION_SOUTH);
   for(iVar1 = 0; iVar1 < 16; iVar1++){
-    GetEntInfo(entity)->unk174 = IntToF248_2(iVar1);
+    GetEntInfo(entity)->unk174 = IntToF248(iVar1);
     DungeonRunFrameActions(0x46);
   }
   for(iVar1 = 16; iVar1 < 200; iVar1 += 4){
-    GetEntInfo(entity)->unk174 = IntToF248_2(iVar1);
+    GetEntInfo(entity)->unk174 = IntToF248(iVar1);
     DungeonRunFrameActions(0x46);
   }
   sub_8086A3C(entity);

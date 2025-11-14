@@ -59,7 +59,7 @@ bool8 ProtectMoveAction(Entity * pokemon,Entity * target,Move *move, s32 itemId)
 
 bool8 DefenseCurlMoveAction(Entity * pokemon,Entity * target,Move *move, s32 itemId)
 {
-    RaiseDefenseStageTarget(pokemon,target,gStatIndexAtkDef,1);
+    BoostDefensiveStat(pokemon,target,gStatIndexAtkDef,1);
     return TRUE;
 }
 
@@ -74,10 +74,10 @@ bool8 MistBallMoveAction(Entity * pokemon,Entity * target,Move *move, s32 itemId
     bool8 flag;
 
     flag = FALSE;
-    if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),itemId) != 0) {
+    if (HandleDamagingMove(pokemon,target,move,IntToF248(1),itemId) != 0) {
         flag = TRUE;
         if (sub_805727C(pokemon,target,gMistBallSecondaryChance) != 0) {
-            LowerAttackStageTarget(pokemon,target,gStatIndexSpecial,1,1,0);
+            LowerOffensiveStat(pokemon,target,gStatIndexSpecial,1,1,0);
         }
     }
     return flag;
@@ -91,7 +91,7 @@ bool8 DestinyBondMoveAction(Entity * pokemon,Entity * target,Move *move, s32 ite
 
 bool8 FalseSwipeMoveAction(Entity * pokemon,Entity * target,Move *move, s32 itemId)
 {
-    return (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),itemId)) ? TRUE : FALSE;
+    return (HandleDamagingMove(pokemon,target,move,IntToF248(1),itemId)) ? TRUE : FALSE;
 }
 
 bool8 MirrorCoatMoveAction(Entity * pokemon,Entity * target,Move *move, s32 itemId)
@@ -102,29 +102,28 @@ bool8 MirrorCoatMoveAction(Entity * pokemon,Entity * target,Move *move, s32 item
 
 bool8 CalmMindMoveAction(Entity * pokemon,Entity * target,Move *move, s32 itemId)
 {
-    u32 stat = gStatIndexSpecial;
-    RaiseAttackStageTarget(pokemon,target,stat,1);
-    RaiseDefenseStageTarget(pokemon,target,stat,1);
+    BoostOffensiveStat(pokemon,target,gStatIndexSpecial,1);
+    BoostDefensiveStat(pokemon,target,gStatIndexSpecial,1);
     return TRUE;
 }
 
 bool8 HiddenPowerMoveAction(Entity * pokemon,Entity * target,Move *move, s32 itemId)
 {
-    HandleDamagingMove(pokemon,target,move,IntToF248_2(1),itemId);
+    HandleDamagingMove(pokemon,target,move,IntToF248(1),itemId);
     return TRUE;
 }
 
-bool8 MetalClawMoveAction(Entity * pokemon,Entity * target,Move *move, s32 itemId, s32 param_5)
+bool8 MetalClawMoveAction(Entity * pokemon,Entity * target,Move *move, StatIndex stat, s32 param_5)
 {
     EntityInfo *entityInfo;
     bool8 flag;
 
     flag = FALSE;
-    if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),param_5) != 0) {
+    if (HandleDamagingMove(pokemon,target,move,IntToF248(1),param_5) != 0) {
         flag = TRUE;
         if (sub_805727C(pokemon,pokemon,gMetalClawSecondaryChance) != 0) {
             entityInfo = GetEntInfo(pokemon);
-            RaiseAttackStageTarget(pokemon,pokemon,itemId,1);
+            BoostOffensiveStat(pokemon,pokemon,stat,1);
             SetExpMultplier(entityInfo);
         }
     }
@@ -222,8 +221,8 @@ bool8 DreamEaterMoveAction(Entity * pokemon, Entity * target, Move *move, s32 it
 
   flag = FALSE;
   hasLiquidOoze = AbilityIsActive(target, ABILITY_LIQUID_OOZE);
-  if (IsSleeping(target)) {
-    iVar3 = HandleDamagingMove(pokemon,target,move,IntToF248_2(1),itemId);
+  if (IsMonsterSleeping(target)) {
+    iVar3 = HandleDamagingMove(pokemon,target,move,IntToF248(1),itemId);
     if (iVar3 != 0) {
       flag = TRUE;
       newHP = iVar3 / 2;
@@ -306,8 +305,8 @@ bool8 DragonRageMoveAction(Entity * pokemon, Entity * target, Move *move, s32 it
 
 bool8 DragonDanceMoveAction( Entity * pokemon, Entity * target, Move *move, s32 itemId)
 {
-    RaiseAttackStageTarget(pokemon, target, gStatIndexAtkDef, 1);
-    RaiseMovementSpeedTarget(pokemon, target, 0, TRUE);
+    BoostOffensiveStat(pokemon, target, gStatIndexAtkDef, 1);
+    BoostSpeed(pokemon, target, 0, TRUE);
     return TRUE;
 }
 
@@ -331,11 +330,11 @@ bool8 LusterPurgeMoveAction(Entity * pokemon, Entity * target, Move * move, s32 
     bool8 flag;
 
     flag = FALSE;
-    if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),itemId) != 0) {
+    if (HandleDamagingMove(pokemon,target,move,IntToF248(1),itemId) != 0) {
         flag = TRUE;
         if(sub_805727C(pokemon, target, gLusterPurgeSecondaryChance))
         {
-            LowerDefenseStageTarget(pokemon, target, gStatIndexSpecial, 1, 1, 0);
+            LowerDefensiveStat(pokemon, target, gStatIndexSpecial, 1, 1, 0);
         }
     }
     return flag;
@@ -348,7 +347,7 @@ bool8 StruggleMoveAction(Entity * pokemon, Entity * target, Move * move, s32 ite
     bool8 flag;
 
     flag = FALSE;
-    if (HandleDamagingMove(pokemon, target, move, IntToF248_2(1), itemId) != 0) {
+    if (HandleDamagingMove(pokemon, target, move, IntToF248(1), itemId) != 0) {
         flag = TRUE;
         if (RollSecondaryEffect(pokemon, 0) != 0) {
             entityHP = GetEntInfo(pokemon)->maxHPStat;
@@ -402,7 +401,7 @@ bool8 ThiefAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
     Item *targetItem;
 
     flag = FALSE;
-    if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),itemId) != 0) {
+    if (HandleDamagingMove(pokemon,target,move,IntToF248(1),itemId) != 0) {
         flag = TRUE;
         if (sub_805727C(pokemon,target, 0) != 0) {
             pokemonInfo1 = GetEntInfo(pokemon);
@@ -603,7 +602,7 @@ bool8 TransferOrbAction(Entity *pokemon, Entity * target, Move *move, s32 itemId
 
 bool8 SlowDownMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 {
-  LowerMovementSpeedTarget(pokemon, target, 1, TRUE);
+  LowerSpeed(pokemon, target, 1, TRUE);
   return TRUE;
 }
 

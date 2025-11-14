@@ -452,11 +452,9 @@ typedef struct Dungeon
     u8 unk1356C;
     u8 fill1356D[0x13570 - 0x1356D];
     /* 0x13570 */ u8 unk13570;
-    u8 fill13571[0x13574 - 0x13571];
     /* 0x13574 */ DungeonPos trapPos;
     /* 0x13578 */ u8 trapID;
     /* 0x13579 */ u8 unk13579;
-    u8 fill1357A[0x1357C - 0x1357A];
     /* 0x1357C */ Entity *teamPokemon[MAX_TEAM_MEMBERS];
     /* 0x1358C */ Entity *wildPokemon[DUNGEON_MAX_WILD_POKEMON];
     /* 0x135CC */ Entity *activePokemon[DUNGEON_MAX_POKEMON]; // Contains both team and wild Pokémon

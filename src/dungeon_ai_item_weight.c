@@ -100,7 +100,7 @@ u32 GetAIUseItemProbability(Entity *targetPokemon, Item *item, u32 itemTargetFla
             }
             break;
         case ITEM_HEAL_SEED:
-            if (HasNegativeStatus(targetPokemon))
+            if (MonsterHasNegativeStatus(targetPokemon))
             {
                 itemWeight = 80;
             }
