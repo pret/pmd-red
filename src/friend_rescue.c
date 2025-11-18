@@ -28,6 +28,7 @@
 #include "wonder_mail_4.h"
 #include "wonder_mail_5.h"
 #include "naming_screen.h"
+#include "code_803C1B4.h"
 
 extern void SetFriendRescueMenuState(u32);
 
@@ -584,10 +585,7 @@ extern u32 sub_8039068(u32, u8 *passwordBuffer, unkStruct_203B480 *r0);
 
 extern void sub_8031E10(void);
 extern u8 sub_800D588(void);
-extern u32 FriendList_GetPtr(void);
 extern bool8 sub_8031D70(u32 mailIndex, s32);
-
-extern u32 GetDungeonTeamRankPts(DungeonLocation *, u32);
 
 u32 CreateFriendRescueMenu(void)
 {
@@ -1174,7 +1172,7 @@ void sub_8032828(void)
             CreateDialogueBoxAndPortrait(&gUnknown_80E2C48[0], 0, 0, 0x101);
             break;
         case 0x26:
-            if (FriendList_GetPtr() != 0)
+            if (FriendList_GetPtr() != NULL)
                 FriendList_Free();
             ResetUnusedInputStruct();
             ShowWindows(NULL, TRUE, TRUE);

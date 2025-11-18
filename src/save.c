@@ -15,6 +15,7 @@
 #include "adventure_save.h"
 #include "training_maze.h"
 #include "rescue_scenario.h"
+#include "code_800D090_1.h"
 
 // size: 0x800
 struct unk_struct
@@ -38,9 +39,6 @@ ALIGNED(4) static const char fill_save0[] = _("pksdir0");
 ALIGNED(4) static const char fill_save1[] = _("pksdir0");
 ALIGNED(4) static const char fill_save2[] = _("pksdir0");
 
-extern bool8 sub_800DAB0(u16, u8*, s32);
-extern bool8 sub_800DAB4(u16, u8*, s32);
-extern bool8 sub_800DAB8(void);
 extern u32 sub_80954CC(void* a, s32 b);
 extern u32 sub_8095624(u8 *, u32);
 extern u32 RestoreMailInfo(void* a, s32 b);

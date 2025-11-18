@@ -17,8 +17,7 @@
 #include "pokemon_mail.h"
 #include "event_flag.h"
 #include "rescue_team_info.h"
-
-extern void sub_803C37C(struct DungeonLocation *, u8, u8 *);
+#include "code_803C1B4.h"
 
 bool8 sub_8095E38(WonderMail *mail, u8 dungeon, u32 floor, u8 param_4);
 u8 sub_8095F28(u8 param_1);

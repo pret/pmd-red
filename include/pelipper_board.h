@@ -41,4 +41,7 @@ enum PelipperBoardActions
     PELIPPER_BOARD_ACCEPT,
     PELIPPER_BOARD_INFO,
 };
+
+bool8 sub_802E864(void);
+
 #endif // GUARD_PELIPPER_BOARD_H

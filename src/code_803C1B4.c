@@ -1,4 +1,5 @@
 #include "global.h"
+#include "code_803C1B4.h"
 #include "structs/str_wonder_mail.h"
 #include "dungeon_info.h"
 #include "event_flag.h"
@@ -6,7 +7,6 @@
 
 extern u8 *gMissionRankText[];
 extern s32 gUnknown_80E80A0[];
-void sub_803C37C(DungeonLocation *, u8, u8 *);
 
 s32 sub_803C1B4(DungeonLocation *dungeon, u8 missionType)
 {

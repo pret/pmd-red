@@ -82,7 +82,7 @@ void CreateMailboxMenu(void);
 void CreateMailActionMenu(void);
 void CreateMailAcceptedStatusBox(u32);
 
-u32 sub_802DFB0(void)
+u8 sub_802DFB0(void)
 {
     gUnknown_203B304 = MemoryAlloc(sizeof(struct unkStruct_203B304), 8);
     gUnknown_203B304->menuAction1 = 0;

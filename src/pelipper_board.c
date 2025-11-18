@@ -79,14 +79,14 @@ static void sub_802EC10(void);
 static void CreatePelipperAcceptedStatusBox(u32);
 static void SetPelipperBoardState(u32);
 
-u32 sub_802E864(void)
+bool8 sub_802E864(void)
 {
     gPelipperBoard = MemoryAlloc(sizeof(struct unkStruct_203B308), 8);
     gPelipperBoard->menuAction1 = 0;
     gPelipperBoard->menuAction2 = 0;
     gPelipperBoard->unk4 = 0;
     SetPelipperBoardState(INITIALIZE_PELIPPER_BOARD);
-    return 1;
+    return TRUE;
 }
 
 u32 sub_802E890(void)
