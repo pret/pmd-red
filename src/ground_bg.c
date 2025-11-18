@@ -11,6 +11,7 @@
 #include "debug.h"
 #include "bg_control.h"
 #include "unk_dungeon_load.h"
+#include "palette_fade_util.h"
 #include "constants/dungeon.h"
 
 // This file most likely deals with map loading and writing to VRAM. It even has a custom decompression function.
@@ -32,7 +33,6 @@ static void ClearDoubleBgTilemaps(MapRender *mapRender);
 static void RenderChunksToBgTilemaps_2x2(MapRender *mapRender);
 static void RenderChunksToBgTilemaps_3x3(MapRender *mapRender);
 
-extern void sub_8003810(u16 param_1, RGB_Union param_2);
 extern void sub_809971C(u16 idx, const RGB_Array *strPtrs, s32 n);
 
 static const PixelPos sPositionZero = {0, 0};
@@ -199,8 +199,8 @@ void sub_80A2E64(GroundBg *groundBg)
 
     r6 = groundBg->unk52C.unk0 * 16;
     for (i = 0; i < groundBg->unk52C.unk2; i++) {
-        RGB_Union str1 = {0};
-        RGB_Union str2 = {0xFF, 0xFF, 0xFF, 0};
+        RGB_Array str1 = {0};
+        RGB_Array str2 = {0xFF, 0xFF, 0xFF, 0};
 
         sub_8003810(r6++, str1);
         for (j = 0; j < 15; j++) {
@@ -225,8 +225,8 @@ void sub_80A2FBC(GroundBg *groundBg, s32 mapFileId_)
     const void *bmaData;
     const void *bplData;
     BmaHeader *bmaHeader;
-    RGB_Union str2;
-    RGB_Union str1;
+    RGB_Array str2;
+    RGB_Array str1;
     const RGB_Array *rgbPal;
     s32 unk0Id;
     s32 id;
@@ -278,11 +278,11 @@ void sub_80A2FBC(GroundBg *groundBg, s32 mapFileId_)
 
     rgbPal = bplData;
     r5 = groundBg->unk52C.unk0 * 16;
-    str2 = (RGB_Union) {0};
-    str1.asArr.c[0] = 0xff;
-    str1.asArr.c[1] = 0xff;
-    str1.asArr.c[2] = 0xff;
-    str1.asArr.c[3] = 0;
+    str2 = (RGB_Array) {0};
+    str1.c[0] = 0xff;
+    str1.c[1] = 0xff;
+    str1.c[2] = 0xff;
+    str1.c[3] = 0;
     for (i = 0; i < bplHeader->numPalettes && i < groundBg->unk52C.unk2; i++) {
         sub_8003810(r5++, str2);
         sub_809971C(r5, rgbPal, 15);
@@ -474,21 +474,21 @@ void sub_80A3440(GroundBg *groundBg, s32 mapFileId_, const DungeonLocation *dung
     groundBg->bplHeader.hasPalAnimations = FALSE;
     if (groundBg->unk43C != NULL) {
         s32 i, j;
-        const RGB_Union *strPtr = groundBg->unk43C->data;
+        const RGB_Array *strPtr = groundBg->unk43C->data;
         u16 r7 = 0;
-        RGB_Union str0 = {0};
-        RGB_Union str1;
+        RGB_Array str0 = {0};
+        RGB_Array str1;
 
-        str1.asArr.c[0] = 0xff;
-        str1.asArr.c[1] = 0xff;
-        str1.asArr.c[2] = 0xff;
-        str1.asArr.c[3] = 0;
+        str1.c[0] = 0xff;
+        str1.c[1] = 0xff;
+        str1.c[2] = 0xff;
+        str1.c[3] = 0;
 
         for (i = 0; i < 12 && i < groundBg->unk52C.unk2; i++) {
             sub_8003810(r7++, str0);
             strPtr++;
             for (j = 0; j < 15; j++) {
-                RGB_Union str2 = {strPtr->asArr.c[0], strPtr->asArr.c[1], strPtr->asArr.c[2], strPtr->asArr.c[3]};
+                RGB_Array str2 = {strPtr->c[0], strPtr->c[1], strPtr->c[2], strPtr->c[3]};
                 sub_8003810(r7++, str2);
                 strPtr++;
             }
@@ -1360,7 +1360,7 @@ void sub_80A4764(GroundBg *groundBg)
                 }
 
                 if (sub0Ptr->unk8 != NULL) {
-                    RGB_Union empty = {0};
+                    RGB_Array empty = {0};
                     sub_8003810(r6, empty);
                     sub_809971C(r6 + 1, sub0Ptr->unk8, 15);
                     sub0Ptr->unk8 += 60;
@@ -1376,7 +1376,7 @@ void sub_80A4764(GroundBg *groundBg)
         s32 r6 = 160;
 
         for (i = 0; i < 32; i++, unkE0Ptr++, r6++) {
-            RGB_Union color;
+            RGB_Array color;
 
             if (sub_8004D14(unkE0Ptr, 1) && !sub_8004D40(unkE0Ptr, 1) && --unkE0Ptr->unk6 <= 0) {
                 unkE0Ptr->unk6 = unkE0Ptr->unk4;
@@ -1384,7 +1384,7 @@ void sub_80A4764(GroundBg *groundBg)
                     unkE0Ptr->unkC = unkE0Ptr->unk8;
                 }
                 unkE0Ptr->unk14 = *unkE0Ptr->unkC++;
-                color = (RGB_Union) {unkE0Ptr->unk14.r, unkE0Ptr->unk14.g, unkE0Ptr->unk14.b, unkE0Ptr->unk14.unk4};
+                color = (RGB_Array) {unkE0Ptr->unk14.r, unkE0Ptr->unk14.g, unkE0Ptr->unk14.b, unkE0Ptr->unk14.unk4};
                 sub_8003810(r6, color);
             }
         }

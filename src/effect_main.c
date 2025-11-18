@@ -925,16 +925,16 @@ s32 sub_800E790(s32 species_, s32 moveId)
     return unkPtr1->soundEffectId;
 }
 
-bool8 sub_800E7D0(u16 *param_1)
+bool8 sub_800E7D0(struct UnkStruct_8040094 *param_1)
 {
     s32 local_1c[4];
     s32 index;
     bool8 flag = FALSE;
 
-    local_1c[0] = sub_800ECB8(*param_1)->unk0;
-    local_1c[1] = sub_800ECB8(*param_1)->unk2;
-    local_1c[2] = sub_800ECB8(*param_1)->unk4;
-    local_1c[3] = sub_800ECB8(*param_1)->unk6;
+    local_1c[0] = sub_800ECB8(param_1->unk0)->unk0;
+    local_1c[1] = sub_800ECB8(param_1->unk0)->unk2;
+    local_1c[2] = sub_800ECB8(param_1->unk0)->unk4;
+    local_1c[3] = sub_800ECB8(param_1->unk0)->unk6;
     for (index = 0; index < 4; index++) {
         flag = (sub_800ECA4(local_1c[index])->animType == 4);
         if (flag)
@@ -943,14 +943,14 @@ bool8 sub_800E7D0(u16 *param_1)
     return flag;
 }
 
-bool8 sub_800E838(u16 *param_1, s32 param_2)
+bool8 sub_800E838(struct UnkStruct_8040094 *param_1, s32 param_2)
 {
     s32 local_1c[4];
 
-    local_1c[0] = sub_800ECB8(*param_1)->unk0;
-    local_1c[1] = sub_800ECB8(*param_1)->unk2;
-    local_1c[2] = sub_800ECB8(*param_1)->unk4;
-    local_1c[3] = sub_800ECB8(*param_1)->unk6;
+    local_1c[0] = sub_800ECB8(param_1->unk0)->unk0;
+    local_1c[1] = sub_800ECB8(param_1->unk0)->unk2;
+    local_1c[2] = sub_800ECB8(param_1->unk0)->unk4;
+    local_1c[3] = sub_800ECB8(param_1->unk0)->unk6;
     return sub_800ECA4(local_1c[param_2])->animType == 4;
 }
 
@@ -1065,15 +1065,15 @@ bool8 sub_800E9FC(u8 a0)
     return FALSE;
 }
 
-u8 sub_800EA44(unkStruct_800EA44 param_1, s32 param_2)
+u8 sub_800EA44(s32 monsterId_, s32 param_2)
 {
     s32 i;
-    s32 a = param_1.unk0;
+    s32 monsterId = (s16) monsterId_;
     const unkStruct_80BDBC4 *ret = sub_800ECB8(param_2);
     const unkStruct_80C183C *unkStruct2 = sub_800ECD0(ret->unk20);
 
     for (i = 0; i < ret->unk1C; i++, unkStruct2++) {
-        if (unkStruct2->species == a) {
+        if (unkStruct2->species == monsterId) {
             return unkStruct2->unk2;
         }
     }

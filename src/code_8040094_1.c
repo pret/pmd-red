@@ -13,43 +13,26 @@
 #include "dungeon_info.h"
 #include "dungeon_message.h"
 #include "dungeon_move.h"
+#include "dungeon_move_util.h"
 #include "dungeon_music.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
+#include "dungeon_logic.h"
 #include "sprite.h"
 #include "weather.h"
 #include "dungeon_map_access.h"
 #include "dungeon_strings.h"
 #include "dungeon_mon_sprite_render.h"
 #include "dungeon_8041AD0.h"
-
-struct UnkStruct_8040094
-{
-    u16 unk0;
-    u16 unk2;
-    DungeonPos unk4;
-    DungeonPos unk8;
-    s32 unkC;
-    s32 unk10;
-};
+#include "effect_main.h"
 
 extern u8 sub_800EC94(s32 param_1);
-extern s32 sub_800E710(s32 species, u16 moveId);
 extern void sub_800EEC8(u16 r0);
-extern u8 sub_800EA44(s32 species, u16 a2);
-extern s32 sub_800E790(s32 species, u16 a2);
-extern s32 sub_800E52C(struct UnkStruct_8040094 *a0);
-extern s32 sub_800EA84(struct UnkStruct_8040094 *a0);
-extern bool8 sub_800E838(struct UnkStruct_8040094 *a0, s32 a1);
 extern bool8 sub_800E9A8(s32 a0);
 extern void sub_800EEF8(u16 a0);
 extern bool8 sub_803F428(DungeonPos *pos);
 extern void sub_800EEE0(u16 a0);
-extern s32 sub_800EBC8(struct UnkStruct_8040094 *a0);
-extern bool8 sub_800E7D0(struct UnkStruct_8040094 *a0);
 extern bool8 EffectiveMoveHasSineWobble(s32 moveId);
-extern bool8 MoveMatchesBideClassStatus(Entity *pokemon, Move *move);
-extern bool8 IsMonsterSleeping(Entity *pokemon);
 
 extern const s32 gUnknown_8106A8C[];
 
