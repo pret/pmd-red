@@ -48,8 +48,11 @@
 #include "wonder_mail.h"
 #include "naming_screen.h"
 #include "dungeon_list_menu.h"
+#include "thank_you_wonder_mail.h"
 #include "game_options.h"
+#include "pelipper_board.h"
 #include "script_item.h"
+#include "mailbox.h"
 #include "structs/menu.h"
 #include "structs/str_file_system.h"
 #include "structs/str_mon_portrait.h"
@@ -139,9 +142,6 @@ u32 sub_802E90C();
 void sub_802E918();
 u32 sub_80282DC(u8 *r0);
 void sub_80282FC(void);
-extern u8 CreateThankYouMailPelipper(void);
-extern u8 sub_802E864(void);
-extern u8 sub_802DFB0(void);
 extern void CleanThankYouMailPelipper(void);
 extern void CleanHelperPelipper(void);
 extern void sub_802E06C(void);

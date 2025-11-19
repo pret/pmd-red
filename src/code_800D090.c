@@ -11,8 +11,7 @@ void Hang(void)
     }
 }
 
-// Unused
-void sub_800D098(void)
+UNUSED static void sub_800D098(void)
 {
     u32 dispcnt_save;
     u32 ie_store;
@@ -71,8 +70,7 @@ void sprintfStatic(char *buffer, const char *text, ...)
     va_end(vArgv);
 }
 
-// Unused
-void sub_800D16C(const char *text, ...)
+UNUSED static void sub_800D16C(const char *text, ...)
 {
     char buffer[1024];
     va_list vArgv;
@@ -81,8 +79,7 @@ void sub_800D16C(const char *text, ...)
     va_end(vArgv);
 }
 
-// Unused
-void sub_800D10A(const char *r0, u32 r1, u32 r2, u32 r3, ...)
+UNUSED static void sub_800D10A(const char *r0, u32 r1, u32 r2, u32 r3, ...)
 {
 }
 

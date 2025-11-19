@@ -40,7 +40,6 @@ extern void sub_8031E10();
 extern void sub_8031E00();
 extern void sub_8031E10(void);
 extern void sub_8031D70(u8, u32);
-extern u32 FriendList_GetPtr(void);
 extern void sub_8030F58(u32);
 extern void sub_8029B34(void);
 extern void sub_8029AD8(void);
@@ -454,7 +453,7 @@ void sub_8028348(void)
             CreateDialogueBoxAndPortrait(gUnknown_80DDCBC, 0, 0,0x101);
             break;
         case SELECT_HELPER_POKEMON:
-            if(FriendList_GetPtr() == 0)
+            if (FriendList_GetPtr() == NULL)
             {
                 ResetUnusedInputStruct();
                 ShowWindows(NULL, TRUE, TRUE);

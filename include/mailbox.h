@@ -1,5 +1,5 @@
 #ifndef GUARD_MAILBOX_H
-#define GUARD_MAILBOX_H 
+#define GUARD_MAILBOX_H
 
 #include "structs/menu.h"
 #include "structs/str_text.h"
@@ -22,7 +22,8 @@ struct unkStruct_203B304
     WindowTemplates unk10C;
 };
 
-extern void SetMailboxState(u32);
+u8 sub_802DFB0(void);
+void SetMailboxState(u32);
 
 enum MailBoxStates
 {

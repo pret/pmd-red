@@ -33,6 +33,7 @@
 #include "code_809D148.h"
 #include "adventure_info.h"
 #include "palette_util.h"
+#include "code_800558C.h"
 
 EWRAM_DATA u32 gUnknown_20398A8 = {0};
 EWRAM_DATA s32 gUnknown_20398AC = {0};
@@ -59,8 +60,6 @@ extern void nullsub_106();
 extern void sub_80A73EC();
 extern void sub_8095494(DungeonMailSeed *param_1, u8 index);
 
-extern u16 gUnknown_2026E4E;
-
 // TODO: Move these externs to headers
 extern s16 sub_80A2654(s16 r0);
 extern bool8 sub_80048BC(void);
@@ -76,7 +75,6 @@ extern void sub_80060EC(void);
 extern void sub_809977C(void);
 extern void UpdateFadeInTile(s32);
 extern void sub_8001D88(void);
-extern void sub_8005838(s32, s32);
 
 static s16 sub_8098FCC(u32 unused);
 
@@ -271,7 +269,7 @@ u32 xxx_script_related_8098468(s32 param_1)
             GroundMap_ExecuteEvent(0x66,0);
         }
         GroundMap_Action();
-        sub_8005838(0,0);
+        sub_8005838(NULL,0);
         sub_80060EC();
         xxx_call_update_bg_sound_input();
         while ( 1 ) {

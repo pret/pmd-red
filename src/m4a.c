@@ -1,4 +1,5 @@
 #include "global.h"
+#include "m4a.h"
 #include "gba/m4a_internal.h"
 
 extern const u8 gCgb3Vol[];
@@ -7,7 +8,7 @@ IWRAM_DATA ALIGNED(4) char SoundMainRAM_Buffer[0x400] = {0};
 
 EWRAM_DATA struct MusicPlayerInfo gMPlayInfo_SE4 = {0};
 EWRAM_DATA struct MusicPlayerInfo gMPlayInfo_SE5 = {0};
-EWRAM_DATA struct MusicPlayerInfo gMPlayInfo_BGM = {0}; // BGM??
+EWRAM_DATA struct MusicPlayerInfo gMPlayInfo_BGM = {0};
 EWRAM_DATA struct MusicPlayerInfo gMPlayInfo_SE6 = {0};
 EWRAM_DATA struct MusicPlayerInfo gMPlayInfo_Fanfare = {0};
 EWRAM_DATA struct MusicPlayerInfo gMPlayInfo_SE1 = {0};

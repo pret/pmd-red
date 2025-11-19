@@ -19,6 +19,7 @@
 #include "string_format.h"
 #include "text_1.h"
 #include "ground_main.h"
+#include "code_803C1B4.h"
 
 struct unkStruct_203B2C8
 {
@@ -47,9 +48,6 @@ extern void sub_802B57C(void);
 extern void sub_802B5B8(void);
 extern void sub_802B5FC(void);
 extern void sub_802B624(void);
-
-extern void sub_803C37C(DungeonLocation *, u32, u8 *);
-extern u32 GetDungeonTeamRankPts(DungeonLocation *, u32);
 
 ALIGNED(4) const char gRescueTeamNamePlaceholder[] = "????";
 

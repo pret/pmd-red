@@ -26,6 +26,7 @@ u32 FriendList_HandleInput(bool8);
 s32 FriendList_GetCurrId(void);
 void sub_8023B7C(bool8 addCursor);
 void FriendList_Free(void);
+struct unkStruct_3001B60 *FriendList_GetPtr(void);
 void FriendList_ShowWindow(void);
 bool8 sub_8024108(s32);
 

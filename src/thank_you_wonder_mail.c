@@ -25,6 +25,7 @@
 #include "wonder_mail_4.h"
 #include "wonder_mail_5.h"
 #include "naming_screen.h"
+#include "code_803C1B4.h"
 
 static EWRAM_INIT WonderMailStruct_203B2C4 *sUnknown_203B2C4 = {NULL};
 
@@ -216,14 +217,13 @@ extern void sub_802A850();
 extern void sub_8031E10();
 extern void SetThankYouMailMenuState(u32);
 extern u8 sub_800D588(void);
-extern u32 GetDungeonTeamRankPts(DungeonLocation *, u32);
 extern void sub_8031D70(u8, u32);
 
 extern void sub_8011C28(u32);
 extern u32 sub_8039068(u32, u8 *r1, unkStruct_203B480 *r0);
 
 
-u32 CreateThankYouMailPelipper(void)
+bool8 CreateThankYouMailPelipper(void)
 {
   char *monName;
   OpenedFile *faceFile;
@@ -270,7 +270,7 @@ u32 CreateThankYouMailPelipper(void)
     SetThankYouMailMenuState(THANK_YOU_MAIL_MAIN_MENU);
   }
   sUnknown_203B2C4->fallbackState = 0x2b;
-  return 1;
+  return TRUE;
 }
 
 u32 ThankYouMailPelipperCallback(void)

@@ -55,7 +55,7 @@ void ZapdosReFightDialogue(void);
 void nullsub_100(u8, u8, u8);
 void sub_8086B14(void);
 void sub_8086B94(void);
-void sub_8086BDC(u8, s32); // TODO: should be u8
+void sub_8086BDC(u8, u8);
 void sub_8086E40(void);
 void sub_8086E9C(void);
 void sub_8086F00(void);
