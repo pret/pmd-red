@@ -113,7 +113,7 @@ u32 xxx_script_related_8098468(s32 param_1)
             s32 local_1c;
             u32 auStack24;
 
-            GetScriptVarScenario(3,&local_1c,&auStack24);
+            GetScriptVarScenario(SCENARIO_MAIN,&local_1c,&auStack24);
             gUnknown_20398B8 = local_1c == 0;
             gUnknown_20398B9 = 1;
             break;

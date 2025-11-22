@@ -922,7 +922,7 @@ bool8 sub_80026CC(s16 r0)
 }
 
 // arm9.bin::0200E568
-void sub_80026E8(s16 r0, bool8 r1)
+void ScriptUnlockFriendArea(s16 r0, bool8 r1)
 {
     UnlockFriendArea(MapIdToFriendAreaId(r0));
 }

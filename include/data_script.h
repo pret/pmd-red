@@ -103,7 +103,8 @@
 #define SCENARIO_ADVANCE(v,a)           { 0xAA, 0, v, a, 0, NULL }
 #define SET_DUNGEON_RES(r,e)            { 0xAB, 0, r, e, 0, NULL }
 #define SET_PLAYER_KIND(k)              { 0xAC, 0, k, 0, 0, NULL }
-// ad..b2: opaque functions
+#define UNLOCK_FRIEND_AREA(a)           { 0xAD, TRUE, a, 0, 0, NULL }
+// ae..b2: opaque functions
 #define JUMPIF_EQUAL(v,i,l)             { 0xB3, l, v, i, 0, NULL }
 #define JUMPIF(o,v,i,l)                 { 0xB4, o, l, v, i, NULL }
 #define JUMPIF_2(o,a,b,l)               { 0xB5, o, l, a, b, NULL }

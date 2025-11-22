@@ -2552,31 +2552,31 @@ static s32 ExecuteScriptCommand(Action *action)
                 UpdateScriptVarWithVar(scriptData->localVars.buf, curCmd.argShort, (s16)curCmd.arg1, curCmd.argByte);
                 break;
             }
-            case 0xa8: {
+            case 0xA8: { // SET_ARRAYVAL
                 SetScriptVarArrayValue(scriptData->localVars.buf, curCmd.argShort, (u16)curCmd.arg1, curCmd.arg2);
                 break;
             }
-            case 0xa9: {
+            case 0xA9: { // SCENARIO_CALC
                 ScenarioCalc(curCmd.argShort, curCmd.arg1, curCmd.arg2);
                 break;
             }
-            case 0xaa: {
+            case 0xAA: { // SCENARIO_ADVANCE
                 s32 a, b;
                 GetScriptVarScenario(curCmd.argShort, &a, &b);
-                ScenarioCalc(curCmd.argShort, a, b+1);
+                ScenarioCalc(curCmd.argShort, a, b + 1);
                 break;
             }
-            case 0xab: {
+            case 0xAB: { // SET_DUNGEON_RES
                 SetScriptVarValue(NULL, DUNGEON_ENTER, curCmd.arg1);
                 SetScriptVarValue(NULL, DUNGEON_RESULT, curCmd.argShort);
                 break;
             }
-            case 0xac: {
+            case 0xAC: { // SET_PLAYER_KIND
                 SetScriptVarValue(NULL, PLAYER_KIND, curCmd.argShort);
                 break;
             }
-            case 0xad: {
-                sub_80026E8(curCmd.argShort, (u8)curCmd.argByte > 0);
+            case 0xAD: { // UNLOCK_FRIEND_AREA
+                ScriptUnlockFriendArea(curCmd.argShort, (u8)curCmd.argByte > 0);
                 break;
             }
             case 0xae: {
@@ -2641,13 +2641,13 @@ static s32 ExecuteScriptCommand(Action *action)
                 }
                 break;
             }
-            case 0xba: { // JUMPIF_SCENE_GT
+            case 0xBA: { // JUMPIF_SCENE_GT
                 if (ScriptVarScenarioAfter(curCmd.argShort, curCmd.arg1, curCmd.arg2)) {
                     scriptData->script.ptr = FindLabel(action, (u8)curCmd.argByte);
                 }
                 break;
             }
-            case 0xbb: { // JUMPIF_SCENARIOCHECK
+            case 0xBB: { // JUMPIF_SCENARIOCHECK
                 if (CheckQuest(curCmd.argShort)) {
                     scriptData->script.ptr = FindLabel(action, (u8)curCmd.argByte);
                 }
@@ -3267,7 +3267,7 @@ static s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
             }
             break;
         case 0x20:
-            sub_80026E8(0x9E, 0x1);
+            ScriptUnlockFriendArea(MAP_FRIEND_AREA_LEGENDARY_ISLAND, TRUE);
             if (GetRecruitedMonBySpecies(MONSTER_ZAPDOS, 0) == NULL) {
                 static const DungeonLocation zapdosLoc = {.id = DUNGEON_MT_THUNDER_PEAK, .floor = 99};
                 if (TryAddLevel1PokemonToRecruited(MONSTER_ZAPDOS, NULL, ITEM_NOTHING, &zapdosLoc, NULL))

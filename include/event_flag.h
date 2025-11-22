@@ -39,7 +39,7 @@ bool8 CheckQuest(s32 questID);
 u8 MapIdToFriendAreaId(s16 mapId_); // map -> friend area lookup
 s16 FriendAreaIdToMapId(u8 friendAreaId); // friend area -> map lookup
 bool8 sub_80026CC(s16 r0);
-void sub_80026E8(s16 r0, bool8 r1);
+void ScriptUnlockFriendArea(s16 r0, bool8 r1);
 bool8 SaveGlobalScriptVars(void *dest);
 bool8 RestoreGlobalScriptVars(u8 *src);
 
