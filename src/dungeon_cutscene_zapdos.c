@@ -74,7 +74,7 @@ void sub_808729C(void)
   sub_80854D4();
   sub_8085930(4);
   sub_80855E4(sub_8086A3C);
-  if (sub_8086AE4(0x91) != 0) {
+  if (sub_8086AE4(MONSTER_ZAPDOS)) {
     HandleFaint(zapdosEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
   }
   else {

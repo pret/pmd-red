@@ -735,7 +735,7 @@ void sub_8052FB8(const u8 *str)
 
 const u8 *GetCurrentDungeonName(void)
 {
-    if (gDungeon->unk644.unk34 == 1) {
+    if (gDungeon->unk644.missionKind == DUNGEON_MISSION_OUTONRESCUE) {
         return GetDungeonName1(DUNGEON_OUT_ON_RESCUE);
     }
     else {

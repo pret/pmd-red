@@ -255,7 +255,7 @@ void sub_806B168(void)
         }
     }
 
-    if (gDungeon->unk644.unk18 == 0) {
+    if (!gDungeon->unk644.canChangeLeader) {
         for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
             DungeonMon *currMonPtr = monPtrs[i];
             if (currMonPtr != NULL && currMonPtr->dungeonLocation.id == DUNGEON_JOIN_LOCATION_PARTNER) {

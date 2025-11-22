@@ -1556,7 +1556,7 @@ static bool8 sub_809B648(void)
             FinishWriteSavePak();
             return 0;
           case 0x10: {
-            bool8 unkBool = (sub_80023E4(4) != 0);
+            bool8 unkBool = (CheckQuest(QUEST_SQUARE_ASLEEP) != FALSE);
             ResetTextbox();
             if (CreateKangaskhanStorage(unkBool)) {
                 sTextbox->unk418 = &gUnknown_81161C8;
@@ -1569,7 +1569,7 @@ static bool8 sub_809B648(void)
             sTextbox->unk418 = &gUnknown_81161D8;
             return 1;
           case 0x13: {
-            bool8 unkBool = (sub_80023E4(4) != 0);
+            bool8 unkBool = (CheckQuest(QUEST_SQUARE_ASLEEP) != FALSE);
             ResetTextbox();
             if (CreateFelicityBank(unkBool)) {
                 sTextbox->unk418 = &gUnknown_81161E8;
@@ -1583,7 +1583,7 @@ static bool8 sub_809B648(void)
           case 0x17:
           case 0x18: {
             u8 var;
-            bool8 unkBool = sub_80023E4(4);
+            bool8 unkBool = CheckQuest(QUEST_SQUARE_ASLEEP);
             ResetTextbox();
             if (sTextbox->unk414 == 0x17) {
                 var = (unkBool == 0) ? 0 : 1;
@@ -1605,7 +1605,7 @@ static bool8 sub_809B648(void)
             }
           }
           case 0x19: {
-            bool8 unkBool = (sub_80023E4(4) != 0);
+            bool8 unkBool = (CheckQuest(QUEST_SQUARE_ASLEEP) != FALSE);
             ResetTextbox();
             if (sub_801FB50(unkBool)) {
                 sTextbox->unk418 = &gUnknown_8116208;
@@ -1646,7 +1646,7 @@ static bool8 sub_809B648(void)
             }
            return 0;
         case 0x1b: {
-            bool8 unk = (sub_80023E4(4) != 0);
+            bool8 unk = (CheckQuest(QUEST_SQUARE_ASLEEP) != FALSE);
             ResetTextbox();
             if (CreateWigglytuffShop(unk)) {
                 sTextbox->unk418 = &gUnknown_8116218;
@@ -1739,7 +1739,7 @@ static bool8 sub_809B648(void)
           }
           case 0x24:
             if (sTextbox->unk420 == 1) {
-              u32 uVar19 = sub_80023E4(4) == 0 ? 0 : 4;
+              u32 uVar19 = CheckQuest(QUEST_SQUARE_ASLEEP) == FALSE ? 0 : 4;
               ResetTextbox();
               if (MakuhitaDojo_New(uVar19)) {
                    return 1;
@@ -1770,7 +1770,7 @@ static bool8 sub_809B648(void)
             return 0;
           case 0x25: {
             s32 var = 1;
-            if (sub_80023E4(4)) {
+            if (CheckQuest(QUEST_SQUARE_ASLEEP)) {
                 var = 5;
             }
             ResetTextbox();
@@ -1785,7 +1785,7 @@ static bool8 sub_809B648(void)
           }
           case 0x26: {
             s32 var = 2;
-            if (sub_80023E4(4)) {
+            if (CheckQuest(QUEST_SQUARE_ASLEEP)) {
                 var = 6;
             }
             ResetTextbox();
@@ -1800,7 +1800,7 @@ static bool8 sub_809B648(void)
           }
           case 0x27: {
             s32 var = 3;
-            if (sub_80023E4(4)) {
+            if (CheckQuest(QUEST_SQUARE_ASLEEP)) {
                 var = 7;
             }
             ResetTextbox();

@@ -66,7 +66,7 @@ static const struct ScriptRef s_gs199_g0_s0_evt0_sref = { 357, 2, NULL /* GETOUT
 
 static const struct ScriptCommand s_gs199_g0_s0_evt1_sref_script[] = { /* 0x824ea74 */
     DEBUGINFO_O(68),
-    JUMPIF_SCENARIOCHECK(5, /* to label */ 0),
+    JUMPIF_SCENARIOCHECK(QUEST_UNK5, /* to label */ 0),
     ASK1(FALSE, /*default*/ 0, /* speaker */ -1, _("Return to the rescue team base?")),
     CHOICE(/* label */  1, _("Yes.")),
     CHOICE(/* label */  2, _("*No.")),

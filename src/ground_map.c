@@ -372,7 +372,7 @@ s16 GetAdjustedGroundMap(s32 mapId)
             retMapId = (s16)(retMapId + ((GetScriptVarValue(NULL, BASE_KIND) * TEAM_BASE_MAPS_PER_SPECIES) + GetScriptVarValue(NULL, BASE_LEVEL)));
             break;
         case MAP_WHISCASH_POND:
-            if (sub_80023E4(6)) {
+            if (CheckQuest(QUEST_REACHED_POSTGAME)) {
                 retMapId = MAP_WHISCASH_POND_OPEN;
             }
             break;

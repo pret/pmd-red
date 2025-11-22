@@ -4288,7 +4288,7 @@ static void SpawnNonEnemies(FloorProperties *floorProps, bool8 isEmptyMonsterHou
                 // Spawn an item
                 tile->spawnOrVisibilityFlags.spawn |= SPAWN_FLAG_ITEM;
             }
-            else if (gDungeon->unk644.unk18) {
+            else if (gDungeon->unk644.canChangeLeader) {
                 tile->spawnOrVisibilityFlags.spawn |= SPAWN_FLAG_TRAP;
             }
 

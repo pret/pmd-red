@@ -6,7 +6,6 @@
 #include "exclusive_pokemon.h"
 #include "code_80958E8.h"
 #include "code_80A26CC.h"
-#include "constants/rescue_dungeon_id.h"
 
 // size: 0x8
 typedef struct MissionText
@@ -134,16 +133,14 @@ void sub_80973A8(s32 param_1, u32 param_2)
   }
 }
 
-bool8 RescueScenarioConquered(s32 param_1)
+bool8 RescueScenarioConquered(s32 rescueDungeonID_)
 {
-    s32 param1 = (s16) param_1;
+    s32 rescueDungeonID = (s16) rescueDungeonID_;
 
-    if (param1 == RESCUE_DUNGEON_DUMMY) {
+    if (rescueDungeonID == RESCUE_DUNGEON_DUMMY)
         return FALSE;
-    }
-    else {
-        return (GetScriptVarArrayValue(NULL, RESCUE_SCENARIO_CONQUEST_LIST, (u16) param1) != FALSE);
-    }
+
+    return (GetScriptVarArrayValue(NULL, RESCUE_SCENARIO_CONQUEST_LIST, (u16)rescueDungeonID) != FALSE);
 }
 
 void sub_8097418(s32 index, bool32 param_2)

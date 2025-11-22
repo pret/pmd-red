@@ -485,7 +485,7 @@ static s32 sub_80A7B94(s16 *a0)
                 return -1;
             }
 
-            if (sub_80023E4(9)) {
+            if (CheckQuest(QUEST_CAN_DEPOSIT_PARTNER)) {
                 val = sub_808D6A4(sp);
             }
             else {
@@ -505,7 +505,7 @@ static s32 sub_80A7B94(s16 *a0)
                 GetFriendAreaCapacity2(map, &fAreaCapacity, FALSE, FALSE);
                 if (id < fAreaCapacity.maxPokemon) {
                     Pokemon *monStrPtr = &gRecruitedPokemonRef->pokemon[fAreaCapacity.unk8 + id];
-                    if (sub_80023E4(9)) {
+                    if (CheckQuest(QUEST_CAN_DEPOSIT_PARTNER)) {
                         if (PokemonExists(monStrPtr) && !monStrPtr->isTeamLeader) {
                             return -1;
                         }
@@ -561,7 +561,7 @@ s32 sub_80A7DDC(s16 *a0, s16 *speciesDst)
                 return -1;
             }
 
-            if (sub_80023E4(9)) {
+            if (CheckQuest(QUEST_CAN_DEPOSIT_PARTNER)) {
                 val = sub_808D6A4(sp);
             }
             else {
@@ -583,7 +583,7 @@ s32 sub_80A7DDC(s16 *a0, s16 *speciesDst)
                 GetFriendAreaCapacity2(map, &fAreaCapacity, FALSE, FALSE);
                 if (id < fAreaCapacity.maxPokemon) {
                     Pokemon *monStrPtr = &gRecruitedPokemonRef->pokemon[fAreaCapacity.unk8 + id];
-                    if (sub_80023E4(9)) {
+                    if (CheckQuest(QUEST_CAN_DEPOSIT_PARTNER)) {
                         if (PokemonExists(monStrPtr) && !monStrPtr->isTeamLeader) {
                             *speciesDst = monStrPtr->speciesNum;
                             return -1;
@@ -1283,7 +1283,7 @@ Pokemon *sub_80A8D54(s32 a0)
         if (sub_8098F88())
             return NULL;
 
-        if (sub_80023E4(9)) {
+        if (CheckQuest(QUEST_CAN_DEPOSIT_PARTNER)) {
             val = sub_808D6A4(spArray);
         }
         else {
@@ -1310,7 +1310,7 @@ Pokemon *sub_80A8D54(s32 a0)
             return NULL;
 
         monPtr = &gRecruitedPokemonRef->pokemon[fAreaCapacity.unk8 + id];
-        if (sub_80023E4(9)) {
+        if (CheckQuest(QUEST_CAN_DEPOSIT_PARTNER)) {
             if (PokemonExists(monPtr) && !monPtr->isTeamLeader) {
                 return monPtr;
             }

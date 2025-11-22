@@ -943,7 +943,7 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                                 if (sub_80990EC(&unkStruct, dungeonEnter)) {
                                     s32 val;
                                     sub_8099220(&unkStruct, dungeonEnter);
-                                    val = sub_80023E4(6);
+                                    val = CheckQuest(QUEST_REACHED_POSTGAME);
                                     res = BufferDungeonRequirementsText(unkStruct.sub0.unk0.id, 0, gUnknown_203B4B0, val, FALSE);
                                     gUnknown_2039DA4 = res;
                                     switch (res) {
@@ -985,7 +985,7 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                                 s32 val;
                                 u32 res;
                                 ret = GetMailatIndex(GetScriptVarValue(NULL, 20));
-                                val = sub_80023E4(6);
+                                val = CheckQuest(QUEST_REACHED_POSTGAME);
                                 res = BufferDungeonRequirementsText(ret->dungeonSeed.location.id, 0, gUnknown_203B4B0, val, TRUE);
                                 gUnknown_2039DA4 = res;
                                 switch (res) {
@@ -2641,14 +2641,14 @@ static s32 ExecuteScriptCommand(Action *action)
                 }
                 break;
             }
-            case 0xba: {
+            case 0xba: { // JUMPIF_SCENE_GT
                 if (ScriptVarScenarioAfter(curCmd.argShort, curCmd.arg1, curCmd.arg2)) {
                     scriptData->script.ptr = FindLabel(action, (u8)curCmd.argByte);
                 }
                 break;
             }
-            case 0xbb: {
-                if (sub_80023E4(curCmd.argShort)) {
+            case 0xbb: { // JUMPIF_SCENARIOCHECK
+                if (CheckQuest(curCmd.argShort)) {
                     scriptData->script.ptr = FindLabel(action, (u8)curCmd.argByte);
                 }
                 break;
@@ -3014,7 +3014,7 @@ static s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
         case 9:
             {
                 u8 var;
-                if (sub_80023E4(8) == 0) {
+                if (CheckQuest(QUEST_CAN_CHANGE_LEADER) == 0) {
                     var = sub_808D4B0();
                 }
                 else {
@@ -3936,9 +3936,9 @@ static u32 sub_80A25AC(u16 param_1)
         return param_1;
     if (param_1 == 50)
         return 50;
-    if (!sub_80023E4(12))
+    if (!CheckQuest(QUEST_UNK12))
         return 999;
-    if (sub_80023E4(13))
+    if (CheckQuest(QUEST_IN_WORLD_CALAMITY))
         return 19;
     if (param_1 != 1)
         return param_1;

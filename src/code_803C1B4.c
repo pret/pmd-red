@@ -244,7 +244,7 @@ bool8 sub_803C580(WonderMail *param_1)
     counter = 0;
     ptr = gUnknown_80E8180;
 
-    if (!sub_80023E4(6))
+    if (!CheckQuest(QUEST_REACHED_POSTGAME))
         return FALSE;
 
     for (id = 0; id < ARRAY_COUNT_INT(gUnknown_80E8180); ptr++, id++) {

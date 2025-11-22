@@ -574,7 +574,7 @@ bool8 sub_80961D8(void)
         if(!gUnknown_203B490->PKMNNewsReceived[0x35])
             if(!sub_8096E80(0x35)) floor = 0x35;
     }
-    if(sub_80023E4(0xF))
+    if(CheckQuest(QUEST_MAZE_15))
     {
         if(!gUnknown_203B490->PKMNNewsReceived[0x34])
             if(!sub_8096E80(0x34)) floor = 0x34;
@@ -589,7 +589,7 @@ bool8 sub_80961D8(void)
         if(!gUnknown_203B490->PKMNNewsReceived[0x36])
             if(!sub_8096E80(0x36)) floor = 0x36;
     }
-    if(sub_80023E4(6))
+    if(CheckQuest(QUEST_REACHED_POSTGAME))
     {
         if(!gUnknown_203B490->PKMNNewsReceived[0x37])
             if(!sub_8096E80(0x37)) floor = 0x37;
@@ -598,7 +598,7 @@ bool8 sub_80961D8(void)
     if(floor != 0x38) goto _slot;
     if(num > index) goto _08096392;
     floor = sub_8096E2C();
-    if(!sub_80023E4(0xE) && (floor > 2)) goto _0809638E;
+    if(!CheckQuest(QUEST_MAZE_14) && (floor > 2)) goto _0809638E;
     if (floor > 0x31) goto _0809638E;
 _slot:
     slot = GetMailboxSlotInfo(num);
@@ -653,7 +653,7 @@ bool8 sub_80963B4(void)
     floor = sub_8096E2C();
     num = CountFilledMailboxSlots();
     if(num >= NUM_MAILBOX_SLOTS) return FALSE;
-    if(sub_80023E4(0xE))
+    if(CheckQuest(QUEST_MAZE_14))
     {
         if(floor < 0x32)
         {

@@ -529,14 +529,14 @@ bool8 ScriptVarScenarioEqual(s16 varId,u32 pMain,s32 pSub)
 }
 
 // arm9.bin::0200F1d8
-bool8 ScriptVarScenarioAfter(s16 varId,u32 pMain,s32 pSub)
+bool8 ScriptVarScenarioAfter(s16 varId, u32 pMain, s32 pSub)
 {
   s32 sMain;
   s32 sSub;
 
   sMain = GetScriptVarArrayValue(NULL, varId, 0);
   sSub = GetScriptVarArrayValue(NULL, varId, 1);
-  if (sMain == 0x3a) {
+  if (sMain == 58) {
     // DS: Assert(FALSE, "debug mode scenario comp %3d %3d %3d", varId, pMain, pSub)
     return FALSE;
   } else if (sMain > pMain) {
@@ -816,69 +816,68 @@ UNUSED static const u8 *sub_80023C4(u32 param_1)
 #endif
 
 // arm9.bin::0200E654
-// 6 checks for post game being reached
-bool8 sub_80023E4(u32 param_1)
+bool8 CheckQuest(s32 questID)
 {
-  switch(param_1) {
-    case 0:
-        return ScriptVarScenarioAfter(SCENARIO_MAIN,2,-1);
-    case 1:
-        return ScriptVarScenarioAfter(SCENARIO_MAIN,3,3);
-    case 2:
-        return ScriptVarScenarioAfter(SCENARIO_MAIN,4,3);
-    case 3:
-        return ScriptVarScenarioAfter(SCENARIO_MAIN,5,0);
-    case 4:
-        return (ScriptVarScenarioAfter(SCENARIO_MAIN,0xb,0) && ScriptVarScenarioBefore(SCENARIO_MAIN,0xd,0));
-    case 5:
-        return (ScriptVarScenarioAfter(SCENARIO_MAIN,0xb,3) && ScriptVarScenarioBefore(SCENARIO_MAIN,0xf,0));
-    case 6:
-        return ScriptVarScenarioAfter(SCENARIO_MAIN,0x11,-1);
-    case 7:
-        return ScriptVarScenarioAfter(SCENARIO_MAIN,0x12,2);
-    case 8:
-        return ScriptVarScenarioAfter(SCENARIO_MAIN,0x12,3);
-    case 9:
-        return ScriptVarScenarioAfter(SCENARIO_MAIN,0x12,-1);
-    case 10:
-        return ScriptVarScenarioAfter(SCENARIO_MAIN,5,4);
-    case 0xb:
-        return ScriptVarScenarioAfter(SCENARIO_MAIN,5,4);
-    case 0xc:
-        return (!ScriptVarScenarioEqual(SCENARIO_MAIN,0xb,2) && !ScriptVarScenarioEqual(SCENARIO_MAIN,0xb,3));
-    case 0xd:
-        return ScriptVarScenarioEqual(SCENARIO_MAIN,0x10,2);
-    case 0xe:
-        return !ScriptVarScenarioBefore(SCENARIO_MAIN,5,7);
-    case 0xf:
-        return !ScriptVarScenarioBefore(SCENARIO_MAIN,0xf,0);
-    case 0x10:
-        return ScriptVarScenarioAfter(SCENARIO_MAIN,7,-1);
-    case 0x11:
-        return ScriptVarScenarioAfter(SCENARIO_MAIN,0xc,-1);
-    case 0x12:
-        return ScriptVarScenarioAfter(SCENARIO_MAIN,0xd,-1);
-    case 0x13:
-        return ScriptVarScenarioAfter(SCENARIO_MAIN,0xf,-1);
-    case 0x14:
-        return ScriptVarScenarioAfter(SCENARIO_MAIN,0x10,-1);
-    case 0x15:
-        return ScriptVarScenarioAfter(SCENARIO_SUB2,0x21,-1);
-    case 0x16:
-        return ScriptVarScenarioAfter(SCENARIO_SUB2,0x22,-1);
-    case 0x17:
-        return ScriptVarScenarioAfter(SCENARIO_SUB3,0x24,-1);
-    case 0x18:
-        return ScriptVarScenarioAfter(SCENARIO_SUB4,0x2a,-1);
-    case 0x19:
-        return ScriptVarScenarioAfter(SCENARIO_SUB5,0x2c,-1);
-    case 0x1a:
-        return ScriptVarScenarioAfter(SCENARIO_SUB7,0x31,-1);
-    case 0x1b:
-        return RescueScenarioConquered(0x29);
-    case 0x1c:
+  switch (questID) {
+    case QUEST_SET_TEAM_NAME:
+        return ScriptVarScenarioAfter(SCENARIO_MAIN, 2, -1);
+    case QUEST_UNK1:
+        return ScriptVarScenarioAfter(SCENARIO_MAIN, 3, 3);
+    case QUEST_CAN_ACCESS_JOBS:
+        return ScriptVarScenarioAfter(SCENARIO_MAIN, 4, 3);
+    case QUEST_CAN_RECRUIT:
+        return ScriptVarScenarioAfter(SCENARIO_MAIN, 5, 0);
+    case QUEST_SQUARE_ASLEEP:
+        return (ScriptVarScenarioAfter(SCENARIO_MAIN, 11, 0) && ScriptVarScenarioBefore(SCENARIO_MAIN, 13, 0));
+    case QUEST_UNK5:
+        return (ScriptVarScenarioAfter(SCENARIO_MAIN, 11, 3) && ScriptVarScenarioBefore(SCENARIO_MAIN, 15, 0));
+    case QUEST_REACHED_POSTGAME:
+        return ScriptVarScenarioAfter(SCENARIO_MAIN, 17, -1);
+    case QUEST_UNLOCKED_EVOLUTIONS:
+        return ScriptVarScenarioAfter(SCENARIO_MAIN, 18, 2);
+    case QUEST_CAN_CHANGE_LEADER:
+        return ScriptVarScenarioAfter(SCENARIO_MAIN, 18, 3);
+    case QUEST_CAN_DEPOSIT_PARTNER:
+        return ScriptVarScenarioAfter(SCENARIO_MAIN, 18, -1);
+    case QUEST_UNK10:
+        return ScriptVarScenarioAfter(SCENARIO_MAIN, 5, 4);
+    case QUEST_UNK11: // Never checked? Same as above.
+        return ScriptVarScenarioAfter(SCENARIO_MAIN, 5, 4);
+    case QUEST_UNK12:
+        return (!ScriptVarScenarioEqual(SCENARIO_MAIN, 11, 2) && !ScriptVarScenarioEqual(SCENARIO_MAIN, 11, 3));
+    case QUEST_IN_WORLD_CALAMITY:
+        return ScriptVarScenarioEqual(SCENARIO_MAIN, 16, 2);
+    case QUEST_MAZE_14:
+        return !ScriptVarScenarioBefore(SCENARIO_MAIN, 5, 7);
+    case QUEST_MAZE_15:
+        return !ScriptVarScenarioBefore(SCENARIO_MAIN, 15, 0);
+    case QUEST_LEGEND_ZAPDOS:
+        return ScriptVarScenarioAfter(SCENARIO_MAIN, 7, -1);
+    case QUEST_LEGEND_MOLTRES:
+        return ScriptVarScenarioAfter(SCENARIO_MAIN, 12, -1);
+    case QUEST_LEGEND_ARTICUNO:
+        return ScriptVarScenarioAfter(SCENARIO_MAIN, 13, -1);
+    case QUEST_LEGEND_GROUDON:
+        return ScriptVarScenarioAfter(SCENARIO_MAIN, 15, -1);
+    case QUEST_LEGEND_RAYQUAZA:
+        return ScriptVarScenarioAfter(SCENARIO_MAIN, 16, -1);
+    case QUEST_LEGEND_KYOGRE:
+        return ScriptVarScenarioAfter(SCENARIO_SUB2, 33, -1);
+    case QUEST_LEGEND_LUGIA:
+        return ScriptVarScenarioAfter(SCENARIO_SUB2, 34, -1);
+    case QUEST_LEGEND_DEOXYS:
+        return ScriptVarScenarioAfter(SCENARIO_SUB3, 36, -1);
+    case QUEST_LEGEND_HO_OH:
+        return ScriptVarScenarioAfter(SCENARIO_SUB4, 42, -1);
+    case QUEST_LEGEND_MEWTWO:
+        return ScriptVarScenarioAfter(SCENARIO_SUB5, 44, -1);
+    case QUEST_LEGEND_MEW:
+        return ScriptVarScenarioAfter(SCENARIO_SUB7, 49, -1);
+    case QUEST_LEGEND_CELEBI:
+        return RescueScenarioConquered(RESCUE_DUNGEON_PURITY_FOREST);
+    case QUEST_LUCARIO_RANK: // Never checked?
         return GetRescueTeamRank() == LUCARIO_RANK;
-    case 0x1d:
+    case QUEST_COMPLETED_ALL_MAZES:
         return HasCompletedAllMazes();
     default:
         return FALSE;

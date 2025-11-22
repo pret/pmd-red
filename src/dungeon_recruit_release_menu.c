@@ -418,7 +418,7 @@ static void ShowPokemonSummary(Pokemon *a0)
 
         ResetTouchScreenMenuInput(&gDungeonMenu.touchScreen);
         DungeonShowWindows(&winTemplates, 1);
-        SetMonSummaryInfo(&unkStruct, a0, gDungeon->unk644.unk16);
+        SetMonSummaryInfo(&unkStruct, a0, gDungeon->unk644.unlockedEvolutions);
         ShowPokemonSummaryWindow(spF8[r7], r7, &unkStruct, &var_C8, 0);
 
         gDungeonMenu.leftRightArrowsPos.x = (gWindows[0].x + 15) * 8;

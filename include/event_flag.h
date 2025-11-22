@@ -34,7 +34,8 @@ void UpdateScriptVarWithVar(u8 *localVarBuf, s16 dstVarId, s16 srcVarId, enum Fl
 bool8 FlagJudge(s32 r0, s32 r1, enum FlagJudgeOperation operation);
 bool8 JudgeVarWithImmediate(u8 *localVarBuf, s16 varId, s32 val, enum FlagJudgeOperation operation);
 bool8 JudgeVarWithVar(u8 *localVarBuf, s16 varId1, s16 varId2, enum FlagJudgeOperation operation);
-bool8 sub_80023E4(u32 param_1); // some kind of helper for predefined scenario checks
+// See enum "MainQuest"
+bool8 CheckQuest(s32 questID);
 u8 MapIdToFriendAreaId(s16 mapId_); // map -> friend area lookup
 s16 FriendAreaIdToMapId(u8 friendAreaId); // friend area -> map lookup
 bool8 sub_80026CC(s16 r0);

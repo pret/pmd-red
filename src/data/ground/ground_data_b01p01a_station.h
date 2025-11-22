@@ -1,145 +1,4 @@
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 static const struct ScriptCommand s_gs9_g0_s0_station_sref_script[] = { /* 0x819ad18 */
     DEBUGINFO_O(144),
     SELECT_MAP(MAP_TEAM_BASE),
@@ -381,7 +240,7 @@ static const struct ScriptCommand s_gs9_g0_s0_station_sref_script[] = { /* 0x819
     BGM_SWITCH(1),
     JUMP_SCRIPT(COMMON_ENTER),
   LABEL(53), /* = 0x35 */
-    JUMPIF_SCENARIOCHECK(8, /* to label */ 57),
+    JUMPIF_SCENARIOCHECK(QUEST_CAN_CHANGE_LEADER, /* to label */ 57),
     CJUMP_VAR(DUNGEON_ENTER),
     COND_EQUAL(1, /* to label */ 58),
     COND_EQUAL(2, /* to label */ 59),
@@ -441,7 +300,7 @@ static const struct ScriptRef s_gs9_g0_s0_evt0_sref = { 357, 2, NULL /* GETOUT_N
 static const struct ScriptCommand s_gs9_g0_s0_evt1_sref_script[] = { /* 0x819bf50 */
     DEBUGINFO_O(442),
     JUMPIF_SCENE_LT(SCENARIO_MAIN, 4, 3, /* to label */ 0),
-    JUMPIF_SCENARIOCHECK(4, /* to label */ 1),
+    JUMPIF_SCENARIOCHECK(QUEST_SQUARE_ASLEEP, /* to label */ 1),
   LABEL(2), /* = 0x02 */
     { 0x3b, 0x12,  0x0000,  0x00000000,  0x00000000, NULL },
     COND_EQUAL(1, /* to label */ 3),
@@ -554,7 +413,7 @@ static const struct ScriptCommand s_gs9_g0_s0_obj2_dlg2[] = { /* 0x819c748 */
     WAIT(1),
     MSG_INSTANT(_("\n          ← Friend Areas")),
     TEXTBOX_CLEAR,
-    JUMPIF_SCENARIOCHECK(4, /* to label */ 0),
+    JUMPIF_SCENARIOCHECK(QUEST_SQUARE_ASLEEP, /* to label */ 0),
   LABEL(1), /* = 0x01 */
     SPECIAL_TEXT(SPECIAL_TEXT_FRIEND_AREA_SELECT, 0, 0),
     COND_EQUAL(-2, /* to label */ 2),
@@ -577,7 +436,7 @@ static const struct ScriptCommand s_gs9_g0_s0_obj2_dlg2[] = { /* 0x819c748 */
 
 static const struct ScriptCommand s_gs9_g0_s0_obj3_dlg0[] = { /* 0x819c8f4 */
     DEBUGINFO_O(579),
-    JUMPIF_SCENARIOCHECK(29, /* to label */ 0),
+    JUMPIF_SCENARIOCHECK(QUEST_COMPLETED_ALL_MAZES, /* to label */ 0),
     JUMPIF_ARRAY(EVENT_B01P01, 2, /* to label */ 0),
     END_DELETE,
   LABEL(0), /* = 0x00 */
@@ -1179,7 +1038,7 @@ static const struct ScriptCommand s_gs9_g5_s0_station_sref_script[] = { /* 0x819
     SET_DUNGEON_RES(/* result */ 0, /* enter */ -1),
     UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_TEAM_BASE),
     UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_TEAM_BASE_INSIDE),
-    JUMPIF_SCENARIOCHECK(8, /* to label */ 0),
+    JUMPIF_SCENARIOCHECK(QUEST_CAN_CHANGE_LEADER, /* to label */ 0),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 2),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     SELECT_MAP(MAP_TEAM_BASE),
@@ -1301,7 +1160,7 @@ static const struct ScriptCommand s_gs9_g7_s0_station_sref_script[] = { /* 0x819
     SET_DUNGEON_RES(/* result */ 0, /* enter */ -1),
     UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_TEAM_BASE),
     UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_TEAM_BASE_INSIDE),
-    JUMPIF_SCENARIOCHECK(8, /* to label */ 0),
+    JUMPIF_SCENARIOCHECK(QUEST_CAN_CHANGE_LEADER, /* to label */ 0),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 2),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     SELECT_MAP(MAP_TEAM_BASE),

@@ -4,7 +4,6 @@
 #include "code_80A26CC.h"
 #include "event_flag.h"
 #include "constants/dungeon.h"
-#include "constants/script_dungeon_id.h"
 #include "constants/rescue_dungeon_id.h"
 
 static const DungeonInfo gUnknown_81168A8[SCRIPT_DUNGEON_COUNT] = {
@@ -1147,10 +1146,10 @@ static const s16 sRescueToScriptDungeonIdTable[RESCUE_DUNGEON_COUNT] = {
     [RESCUE_DUNGEON_FANTASY_STRAIT]     = SCRIPT_DUNGEON_FANTASY_STRAIT,
 };
 
-const DungeonInfo *GetDungeonInfo_80A2608(s32 _index)
+const DungeonInfo *GetDungeonInfo_80A2608(s32 scriptDungeon_)
 {
-    s32 index = (s16) _index;
-    return &gUnknown_81168A8[index];
+    s32 scriptDungeon = (s16)scriptDungeon_;
+    return &gUnknown_81168A8[scriptDungeon];
 }
 
 static const DungeonInfo *GetRescueDungeonInfo(s16 rescueDungeonId)
@@ -1267,11 +1266,11 @@ s16 sub_80A2750(s16 r0)
     temp = GetDungeonInfo_80A2608(temp_2);
     if (temp->unkE == -1)
         return 1;
-    if (sub_80023E4(5))
+    if (CheckQuest(QUEST_UNK5))
         return 1;
-    if (!RescueScenarioConquered((s16) temp->unkE))
+    if (!RescueScenarioConquered((s16)temp->unkE))
         return 1;
-    if (!sub_80023E4(1))
+    if (!CheckQuest(QUEST_UNK1))
         return 1;
     return 2;
 }
@@ -1284,11 +1283,11 @@ bool8 IsRescueDungeonAvailable(s16 _rescueDungeonId)
 
     if (GetRescueDungeonInfo(_rescueDungeonId)->unk0 == -1)
         return FALSE;
-    if (sub_80023E4(5))
+    if (CheckQuest(QUEST_UNK5))
         return FALSE;
     if (sub_8097384(_rescueDungeonId))
         return TRUE;
-    if (!sub_80023E4(1))
+    if (!CheckQuest(QUEST_UNK1))
         return FALSE;
     if (!RescueScenarioConquered((s16) rescueDungeonId))
         return FALSE;
@@ -1300,10 +1299,10 @@ bool8 sub_80A2824(u8 index)
     s32 i;
     const DungeonInfo *temp;
 
-    if (sub_80023E4(5))
+    if (CheckQuest(QUEST_UNK5))
         return FALSE;
 
-    if (sub_80023E4(1)) {
+    if (CheckQuest(QUEST_UNK1)) {
         for (i = 0; i < RESCUE_DUNGEON_COUNT; i++) {
             temp = GetRescueDungeonInfo(i);
 
@@ -1405,7 +1404,7 @@ UNUSED static s32 sub_80A293C(u8 *param_1)
 
 s32 sub_80A29B0(u8 *param_1)
 {
-    u8 *pcVar2;
+    bool8 *pcVar2;
     const DungeonInfo *iVar3;
     s32 index;
     s32 counter;
@@ -1413,29 +1412,29 @@ s32 sub_80A29B0(u8 *param_1)
     u8 *local2;
     u8 *local3;
     u8 *local4;
-    u8 local_68[0x40];
-    u8 zero;
+    bool8 local_68[0x40];
+    bool8 zero;
 
     counter = 0;
     local1 = &local_68[43];
     local2 = &local_68[44];
     local3 = &local_68[45];
     local4 = &local_68[46];
-    zero = 0;
+    zero = FALSE;
 
     pcVar2 = &local_68[62];
     do {
         *pcVar2 = zero;
-        pcVar2 = pcVar2 + -1;
+        pcVar2--;
     } while ((int)pcVar2 >= (int)local_68);
 
 
-    if (sub_80023E4(1)) {
+    if (CheckQuest(QUEST_UNK1)) {
         for (index = 0; index < RESCUE_DUNGEON_COUNT; index++) {
             iVar3 = GetRescueDungeonInfo(index);
 
             if (iVar3->unk11 != 0 && RescueScenarioConquered((s16) index))
-                local_68[iVar3->dungeonIndex] = 1;
+                local_68[iVar3->dungeonIndex] = TRUE;
         }
     }
 
@@ -1445,7 +1444,7 @@ s32 sub_80A29B0(u8 *param_1)
     *local4 = 0;
 
     for (index = 0; index < 63; index++) {
-        if (local_68[index] != 0) {
+        if (local_68[index]) {
             param_1[counter] = index;
             counter++;
         }
@@ -1472,7 +1471,7 @@ UNUSED static s32 sub_80A2A5C(u8 *param_1)
         pcVar2--;
     } while ((s32)pcVar2 >= (s32)local_58);
 
-    if (sub_80023E4(1)) {
+    if (CheckQuest(QUEST_UNK1)) {
         for (index = 0; index < RESCUE_DUNGEON_COUNT; index++) {
             iVar3 = GetRescueDungeonInfo(index);
 

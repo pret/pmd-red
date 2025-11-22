@@ -145,7 +145,7 @@ void sub_802B3E0(void)
 
   switch(sUnknown_203B2C8->currState) {
       case INIT_STATE:
-        if (sub_80023E4(0)) {
+        if (CheckQuest(QUEST_SET_TEAM_NAME)) {
             // Copy Team Name to buffer
             sub_80920D8(teamNameBuffer);
         }

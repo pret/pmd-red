@@ -593,7 +593,7 @@ static u32 RunGameMode_Async(u32 a0)
 
             friendAreasSetup.friendAreasMapPtr = MemoryAlloc(sizeof(*friendAreasSetup.friendAreasMapPtr),8);
             friendAreasSetup.startingFriendAreaId = friendAreaId;
-            friendAreasSetup.unk5 = sub_80023E4(9);
+            friendAreasSetup.unk5 = CheckQuest(QUEST_CAN_DEPOSIT_PARTNER);
             ShowFriendAreasMap_Async(&friendAreasSetup);
             MemoryFree(friendAreasSetup.friendAreasMapPtr);
             if (friendAreasSetup.chosenAreaId != NUM_FRIEND_AREAS) {
@@ -627,7 +627,7 @@ static u32 RunGameMode_Async(u32 a0)
 
             worldMapSetup.info.startLocation.id = DUNGEON_OUT_ON_RESCUE;
             sub_80011CC(&worldMapSetup.info.unk4, dungeonId);
-            worldMapSetup.info.unk6C = worldMapSetup.info.unk4.unk5;
+            worldMapSetup.info.canChangeLeader = worldMapSetup.info.unk4.canChangeLeader;
             switch ((s16) sub_80A2750(scriptDungeonId)) {
                 case 1:
                     if (sub_80990EC(&dungeonSetup.info, scriptDungeonId)) {
@@ -722,7 +722,7 @@ static u32 RunGameMode_Async(u32 a0)
             if (var == 0xF1207) {
                 dungeonSetup.info.sub0.unkD = 1;
                 dungeonSetup.info.sub0.unk4 = 1;
-                dungeonSetup.info.sub0.unkB = 0;
+                dungeonSetup.info.sub0.missionKind = DUNGEON_MISSION_UNK0;
                 if (gUnknown_203B484->unk4.speciesNum != 0) {
                     dungeonSetup.info.sub0.unkC = 1;
                     dungeonSetup.info.mon = gUnknown_203B484->unk4;
@@ -1036,7 +1036,7 @@ static void sub_80011CC(DungeonSetupSubstruct *info, u8 dungId)
 
     sub_80011E8(info);
 
-    info->unkB = 0;
+    info->missionKind = DUNGEON_MISSION_UNK0;
     info->unk4 = 0;
     info->unkC = 0;
     info->unkD = 0;
@@ -1045,16 +1045,16 @@ static void sub_80011CC(DungeonSetupSubstruct *info, u8 dungId)
 // arm9.bin::0200CD1C
 static void sub_80011E8(DungeonSetupSubstruct *info)
 {
-    info->unk5 = sub_80023E4(8);
-    info->unk6 = sub_80023E4(3);
-    info->unk8 = sub_80023E4(7);
-    info->unk9 = sub_80023E4(0);
-    info->unkA = sub_80023E4(5);
+    info->canChangeLeader = CheckQuest(QUEST_CAN_CHANGE_LEADER);
+    info->canRecruit = CheckQuest(QUEST_CAN_RECRUIT);
+    info->unlockedEvolutions = CheckQuest(QUEST_UNLOCKED_EVOLUTIONS);
+    info->hasInventory = CheckQuest(QUEST_SET_TEAM_NAME);
+    info->unkA = CheckQuest(QUEST_UNK5);
 
-    if (sub_80023E4(24) && sub_80023E4(25) && sub_80023E4(26))
-        info->unk7 = 1;
+    if (CheckQuest(QUEST_LEGEND_HO_OH) && CheckQuest(QUEST_LEGEND_MEWTWO) && CheckQuest(QUEST_LEGEND_MEW))
+        info->canRecruitRescueTeamMazeBosses = TRUE;
     else
-        info->unk7 = 0;
+        info->canRecruitRescueTeamMazeBosses = FALSE;
 }
 
 // arm9.bin::0200CC4C

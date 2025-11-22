@@ -198,7 +198,7 @@ static s32 sub_8021664(void)
                         counter++;
                         break;
                     case UNLOCK_SHOP_POST_GAME:
-                        if (sub_80023E4(6)) {
+                        if (CheckQuest(QUEST_REACHED_POSTGAME)) {
                             sWigglytuffShop1Work->friendAreas[counter] = i;
                             counter++;
                         }
@@ -233,7 +233,7 @@ bool8 sub_8021700(u32 kind)
                     case UNLOCK_SHOP_STORY:
                         return FALSE;
                     case UNLOCK_SHOP_POST_GAME:
-                        if (sub_80023E4(6))
+                        if (CheckQuest(QUEST_REACHED_POSTGAME))
                             return FALSE;
                         break;
                 }

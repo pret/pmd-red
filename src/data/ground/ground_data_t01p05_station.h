@@ -110,7 +110,7 @@ static const struct ScriptRef s_gs6_g0_s3_evt0_sref = { 357, 2, NULL /* GETOUT_N
 
 static const struct ScriptCommand s_gs6_g1_s0_station_sref_script[] = { /* 0x8199310 */
     DEBUGINFO_O(112),
-    JUMPIF_SCENARIOCHECK(10, /* to label */ 0),
+    JUMPIF_SCENARIOCHECK(QUEST_UNK10, /* to label */ 0),
     CANCEL_EVENTS(-1, -1),
     SELECT_ENTITIES(-1, 1),
     RET_DIRECT,
@@ -144,7 +144,7 @@ static const struct ScriptCommand s_gs6_g1_s0_lives0_dlg2[] = { /* 0x81993dc */
 static const struct ScriptCommand s_gs6_g1_s0_lives0_dlg3[] = { /* 0x819947c */
     DEBUGINFO_O(145),
     CALL_SCRIPT(INIT_PLAZA_SLEEP_TALK_FUNC),
-    JUMPIF_SCENARIOCHECK(4, /* to label */ 0),
+    JUMPIF_SCENARIOCHECK(QUEST_SQUARE_ASLEEP, /* to label */ 0),
     { 0x8e, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
   LABEL(0), /* = 0x00 */
     { 0x8d, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },

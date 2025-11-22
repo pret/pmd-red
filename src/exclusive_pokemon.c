@@ -75,6 +75,7 @@ void sub_80980B4(s16 pokeID)
 {
     s32 pokeID_s32 = pokeID;
     s32 pokeID_s32_1 = pokeID_s32;
+
     if (pokeID_s32 == MONSTER_DECOY)
         return;
     if (pokeID_s32 == MONSTER_STATUE)
@@ -87,13 +88,10 @@ void sub_80980B4(s16 pokeID)
 
 bool8 sub_8098100(u8 param_1)
 {
-    if (param_1 > 0x3f) {
+    if (param_1 >= 64)
         return FALSE;
-    }
-    else
-    {
-        return (gUnknown_203B498->unk3C[param_1 / 32] & (1 << (param_1 % 32))) != 0;
-    }
+
+    return (gUnknown_203B498->unk3C[param_1 / 32] & (1 << (param_1 % 32))) != 0;
 }
 
 bool8 sub_8098134(s16 pokeID)
@@ -103,7 +101,7 @@ bool8 sub_8098134(s16 pokeID)
 
     pokeID_s32 = pokeID;
     pokeID_s32_1 = pokeID_s32;
-    return ((gUnknown_203B498->unk4[pokeID_s32 / 32] & (1 << (s16)(pokeID_s32_1 % 32))) != 0);
+    return (gUnknown_203B498->unk4[pokeID_s32 / 32] & (1 << (s16)(pokeID_s32_1 % 32))) != 0;
 }
 
 void SetTutorialFlag(s32 index)
@@ -113,12 +111,10 @@ void SetTutorialFlag(s32 index)
 
 bool32 GetTutorialFlag(s32 index)
 {
-    if (index > 0x1e) {
+    if (index >= 31)
         return FALSE;
-    }
-    else {
-        return (((gUnknown_203B498->unk54[index / 32]) & (1 << (index % 32))) != 0);
-    }
+
+    return ((gUnknown_203B498->unk54[index / 32]) & (1 << (index % 32))) != 0;
 }
 
 bool8 IsExclusivePokemonUnlocked(s32 pokeID)

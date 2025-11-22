@@ -705,7 +705,7 @@ static bool8 FriendListMenu_isOnTeam(Pokemon *pokeStruct)
     if (pokeStruct->isTeamLeader)
         return FALSE;
 
-    if (IsMonPartner(pokeStruct) && !sub_80023E4(8))
+    if (IsMonPartner(pokeStruct) && !CheckQuest(QUEST_CAN_CHANGE_LEADER))
         return FALSE;
 
     return TRUE;

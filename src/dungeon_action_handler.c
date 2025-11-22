@@ -656,7 +656,7 @@ static void sub_8067558(Entity *entity, Entity *targetEntity, s32 a2)
             else if (info2->joinedAt.id == DUNGEON_RESCUE_TEAM_BASE) {
                 speciesId = MONSTER_DECOY;
             }
-            else if (info2->joinedAt.id == DUNGEON_JOIN_LOCATION_PARTNER && !gDungeon->unk644.unk18) {
+            else if (info2->joinedAt.id == DUNGEON_JOIN_LOCATION_PARTNER && !gDungeon->unk644.canChangeLeader) {
                 r6 = TRUE;
             }
 

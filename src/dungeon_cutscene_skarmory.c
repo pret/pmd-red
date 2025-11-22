@@ -71,9 +71,9 @@ void sub_8086B94(void)
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y);
 }
 
-void sub_8086BDC(u8 param_1, u8 param_2)
+void sub_8086BDC(u8 param_1, u8 prefight)
 {
-    if ((param_2 == 1 || param_2 == 2) && param_1 == 3) {
+    if ((prefight == PREFIGHT_SKARMORY_ATTEMPT1 || prefight == PREFIGHT_SKARMORY_ATTEMPT2) && param_1 == 3) {
         sub_8097FA8(1);
         gDungeon->unk2 = 1;
     }

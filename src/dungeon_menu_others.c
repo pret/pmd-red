@@ -417,7 +417,7 @@ static void ShowQuickSaveGiveUpMenu(void)
 
 static void ShowMissionObjectivesMenu(void)
 {
-    sub_80319A4(gDungeon->unk644.unk34, gDungeon->unk644.dungeonLocation.id, 0);
+    sub_80319A4(gDungeon->unk644.missionKind, gDungeon->unk644.dungeonLocation.id, 0);
     do {
         DungeonRunFrameActions(0x47);
     } while (sub_80319F8() == 0);

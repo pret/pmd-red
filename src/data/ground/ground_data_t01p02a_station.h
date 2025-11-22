@@ -158,7 +158,7 @@ static const struct ScriptCommand s_gs2_g0_s0_station_sref_script[] = { /* 0x817
     JUMP_LABEL(30),
   LABEL(30), /* = 0x1e */
     BGM_SWITCH(8),
-    JUMPIF_SCENARIOCHECK(6, /* to label */ 31),
+    JUMPIF_SCENARIOCHECK(QUEST_REACHED_POSTGAME, /* to label */ 31),
     JUMP_LABEL(32),
   LABEL(31), /* = 0x1f */
     SELECT_EVENTS(0, 2),

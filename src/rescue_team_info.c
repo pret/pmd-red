@@ -127,7 +127,7 @@ u32 SaveRescueTeamInfo(u8 *param_1, u32 size)
     InitBitWriter(&auStack36, param_1, size);
     WriteBits(&auStack36, gRescueTeamInfoRef->teamName, 0x58);
     WriteBits(&auStack36, (u8 *)&gRescueTeamInfoRef->teamRankPts, 0x20);
-    gRescueTeamInfoRef->isTeamRenamed = sub_80023E4(0);
+    gRescueTeamInfoRef->isTeamRenamed = CheckQuest(QUEST_SET_TEAM_NAME);
 
     if (gRescueTeamInfoRef->isTeamRenamed)
     {

@@ -75,6 +75,6 @@ void sub_8086A3C(Entity *pokemon);
 void sub_8086A54(Entity *pokemon);
 void SetupBossFightHP(Entity *pokemon, s32 newHP, u16 songIndex);
 void sub_8086AC0(void);
-u8 sub_8086AE4(s16 _index);
+bool8 sub_8086AE4(s16 _index);
 
-#endif
+#endif // GUARD_DUNGEON_CUTSCENE_H

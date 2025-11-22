@@ -48,16 +48,14 @@ bool8 TryRecruitMonster(Entity *attacker, Entity *target)
     if (gDungeon->fixedRoomNumber != FIXED_ROOM_FROSTY_GROTTO_ARTICUNO
         && gDungeon->fixedRoomNumber != FIXED_ROOM_MT_BLAZE_PEAK_MOLTRES
         && gDungeon->fixedRoomNumber != FIXED_ROOM_WESTERN_CAVE_MEWTWO
-        && gDungeon->fixedRoomNumber != FIXED_ROOM_MT_FARAWAY_HO_OH
-    ) {
-        if (gDungeon->fixedRoomNumber >= FIXED_ROOM_TEAM_SHIFTY_BOSS
-            && gDungeon->fixedRoomNumber <= FIXED_ROOM_RESCUE_TEAM_2_BOSS
-        ) {
-            if (gDungeon->unk644.unk18 == 0)
+        && gDungeon->fixedRoomNumber != FIXED_ROOM_MT_FARAWAY_HO_OH) {
+
+        if (gDungeon->fixedRoomNumber >= FIXED_ROOM_TEAM_SHIFTY_BOSS && gDungeon->fixedRoomNumber <= FIXED_ROOM_RESCUE_TEAM_2_BOSS) {
+            if (!gDungeon->unk644.canChangeLeader)
                 return FALSE;
         }
         else if (gDungeon->fixedRoomNumber == FIXED_ROOM_RESCUE_TEAM_MAZE_BOSS) {
-            if (gDungeon->unk644.unk15 == 0)
+            if (!gDungeon->unk644.canRecruitRescueTeamMazeBosses)
                 return FALSE;
             if (!sub_8097900(MONSTER_DEOXYS_NORMAL))
                 return FALSE;
@@ -85,8 +83,7 @@ bool8 TryRecruitMonster(Entity *attacker, Entity *target)
          targetInfo->id == MONSTER_REGIROCK ||
          targetInfo->id == MONSTER_REGICE ||
          targetInfo->id == MONSTER_REGISTEEL)
-        && HasRecruitedMon(targetInfo->id))
-    {
+         && HasRecruitedMon(targetInfo->id)) {
         return FALSE;
     }
 
@@ -107,9 +104,9 @@ bool8 TryRecruitMonster(Entity *attacker, Entity *target)
     if (recruitRate == -999)
         return FALSE;
 
-    if (HasHeldItem(attacker, ITEM_FRIEND_BOW)) {
+    if (HasHeldItem(attacker, ITEM_FRIEND_BOW))
         recruitRate += gFriendBowRecruitRateUpValue;
-    }
+
     recruitRate += gRecruitRateByLevel[attackerInfo->level];
     if (rand >= recruitRate)
         return FALSE;
@@ -194,7 +191,7 @@ bool8 IsMonsterRecruitable(s32 species)
     else if (!sub_808529C(id)) {
         return FALSE;
     }
-    else if (id == MONSTER_MEW && gDungeon->unk644.unk34 == 1) {
+    else if (id == MONSTER_MEW && gDungeon->unk644.missionKind == DUNGEON_MISSION_OUTONRESCUE) {
         return FALSE;
     }
     else if (id == MONSTER_LATIAS) {

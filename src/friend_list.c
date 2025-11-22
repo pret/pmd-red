@@ -86,7 +86,7 @@ bool8 FriendList_Init(u32 r5, u32 windowId, DungeonPos *pos, u32 r10)
         case 4:
             sFriendList->unk18 = 1;
             sFriendList->unk15 = 1;
-            if (!sub_80023E4(9)) {
+            if (!CheckQuest(QUEST_CAN_DEPOSIT_PARTNER)) {
                 sFriendList->unk16 = 1;
             }
             break;
@@ -365,7 +365,7 @@ bool8 sub_8024108(s32 param_1)
             }
             else if (param_1 == 4) {
                 if (pokeStruct->isTeamLeader) continue;
-                if (!sub_80023E4(9)) {
+                if (!CheckQuest(QUEST_CAN_DEPOSIT_PARTNER)) {
                     if (!IsMonPartner(pokeStruct)) return FALSE;
                     if (PokemonFlag2(pokeStruct)) continue;
                 }

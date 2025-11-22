@@ -478,7 +478,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
     }
     else {
         DungeonMon *recruitedMon = &gRecruitedPokemonRef->dungeonTeam[targetData->teamIndex];
-        if (targetData->isTeamLeader || (targetData->joinedAt.id == DUNGEON_JOIN_LOCATION_PARTNER && gDungeon->unk644.unk18 == 0)) {
+        if (targetData->isTeamLeader || (targetData->joinedAt.id == DUNGEON_JOIN_LOCATION_PARTNER && !gDungeon->unk644.canChangeLeader)) {
             DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80F9CEC[r8]);
         }
         else if (IsExperienceLocked(targetData->joinedAt.id)) {

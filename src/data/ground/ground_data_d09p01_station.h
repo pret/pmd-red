@@ -1,25 +1,7 @@
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 static const struct ScriptCommand s_gs195_g0_s0_station_sref_script[] = { /* 0x8245cc8 */
     DEBUGINFO_O(21),
-    JUMPIF_SCENARIOCHECK(5, /* to label */ 0),
+    JUMPIF_SCENARIOCHECK(QUEST_UNK5, /* to label */ 0),
     EXECUTE_STATION(12, 0, 0),
   LABEL(0), /* = 0x00 */
     SELECT_MAP(195),

@@ -238,6 +238,14 @@ struct MinMaxPosition
     s32 maxY;
 };
 
+enum DungeonMissionKind
+{
+    DUNGEON_MISSION_UNK0,
+    DUNGEON_MISSION_OUTONRESCUE,
+    DUNGEON_MISSION_ACCEPTEDJOB_RELATED,
+    DUNGEON_MISSION_UNK3,
+};
+
 // size: 0x58
 typedef struct unkDungeon644
 {
@@ -247,10 +255,10 @@ typedef struct unkDungeon644
     /* 0x10 */ u8 unk10;
     /* 0x11 */ u8 fill11[3];
     /* 0x14 */ bool8 canRecruit;
-    /* 0x15 */ u8 unk15;
-    /* 0x16 */ u8 unk16;
+    /* 0x15 */ bool8 canRecruitRescueTeamMazeBosses;
+    /* 0x16 */ bool8 unlockedEvolutions;
     /* 0x17 */ bool8 hasInventory;
-    /* 0x18 */ u8 unk18;
+    /* 0x18 */ bool8 canChangeLeader;
     /* 0x19 */ u8 unk19;
     /* 0x1A */ u8 fill1A[2];
     /* 0x1C */ s16 fractionalTurn; // Handles turn order when Pokémon have different movement speeds.
@@ -271,7 +279,7 @@ typedef struct unkDungeon644
     /* 0x31 */ u8 unk31;
     /* 0x32 */ bool8 itemHoldersIdentified;
     /* 0x33 */ u8 unk33;
-    /* 0x34 */ u8 unk34;
+    /* 0x34 */ u8 missionKind; // See enum "DungeonMissionKind"
     /* 0x35 */ u8 emptyBellyAlert; // which alert message to show when belly gets empty.
     /* 0x36 */ u8 windPhase;
     /* 0x37 */ s8 unk37;
@@ -422,7 +430,7 @@ typedef struct Dungeon
     /* 0x3A0A */ bool8 unk3A0A;
     /* 0x3A0B */ bool8 unk3A0B;
     /* 0x3A0C */ u8 monsterHouseRoom; // room index of monster house
-    /* 0x3A0D */ u8 unk3A0D;
+    /* 0x3A0D */ u8 prefight; // See enum "PrefightKind"
     /* 0x3A0E */ s16 tileset;
     /* 0x3A10 */ s16 unk3A10;
     /* 0x3A12 */ s16 unk3A12;

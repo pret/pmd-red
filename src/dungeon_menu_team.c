@@ -360,7 +360,7 @@ static void AddTeamSubMenuOptions(struct UnkFieldTeamMenuStruct *a0)
     AddActionToDungeonSubMenu(ACTION_CHECK_SUMMARY, 0);
     AddActionToDungeonSubMenu(ACTION_CHECK_MOVES, 0);
     if (!monInfo->isTeamLeader) {
-        if (!gDungeon->unk644.unk19 && (monInfo->joinedAt.id != DUNGEON_JOIN_LOCATION_PARTNER || gDungeon->unk644.unk18)) {
+        if (!gDungeon->unk644.unk19 && (monInfo->joinedAt.id != DUNGEON_JOIN_LOCATION_PARTNER || gDungeon->unk644.canChangeLeader)) {
             AddActionToDungeonSubMenu(0x34, 0);
         }
         AddActionToDungeonSubMenu(ACTION_TALK_MENU, 0);
@@ -369,7 +369,7 @@ static void AddTeamSubMenuOptions(struct UnkFieldTeamMenuStruct *a0)
     if (!monInfo->isTeamLeader) {
         AddActionToDungeonSubMenu(ACTION_CHANGE_TACTICS, 0);
     }
-    if (!monInfo->isTeamLeader && gDungeon->unk644.unk18 && CanLeaderSwitch(gDungeon->unk644.dungeonLocation.id)) {
+    if (!monInfo->isTeamLeader && gDungeon->unk644.canChangeLeader && CanLeaderSwitch(gDungeon->unk644.dungeonLocation.id)) {
         bool32 r5;
 
         AddActionToDungeonSubMenu(0x3B, 0);

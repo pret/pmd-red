@@ -55,15 +55,15 @@ extern void sub_8088EE8(void);
 extern void sub_8088848(void);
 extern void sub_808A718(void);
 
-struct unkData_8107234
+typedef struct FixedRoomPrefightData
 {
-    u8 unk0;
-    u8 unk1;
-    u8 unk2;
-    u8 unk3;
-    u8 unk4;
-    u8 unk5;
-};
+    u8 fixedRoomNumber; // See enum "FixedRoomID"
+    u8 prefight1; // See enum "PrefightKind"
+    u8 unk2; // 64 is a special value...
+    u8 prefight3; // See enum "PrefightKind"
+    u8 unk4; // 64 is a special value...
+    u8 prefight5; // See enum "PrefightKind"
+} FixedRoomPrefightData;
 
 // size: 0x8
 typedef struct unkStruct_202F3D0
@@ -76,40 +76,40 @@ typedef struct unkStruct_202F3D0
     u8 unk5;
 } unkStruct_202F3D0;
 
-static void sub_8084854(const struct unkData_8107234 *);
+static void sub_8084854(const FixedRoomPrefightData *);
 static void sub_8085764(void);
 static void sub_80857B8(void);
 static void sub_80861EC(Entity *);
 
-static const struct unkData_8107234 gUnknown_8107234[28] = {
-    [0] = {1, 1, 0, 2, 1, 3},
-    [1] = {2, 4, 2, 5, 3, 6},
-    [2] = {3, 7, 4, 8, 5, 9},
-    [3] = {4, 0xA, 6, 0xB, 7, 0xC},
-    [4] = {5, 0xD, 8, 0xE, 9, 0xF},
-    [5] = {6, 0x10, 0xA, 0x11, 0xA, 0x11},
-    [6] = {7, 0x12, 0xB, 0x13, 0xC, 0x14},
-    [7] = {0x14, 0x15, 0xD, 0x16, 0xD, 0x16},
-    [8] = {8, 0x17, 0xE, 0x18, 0xF, 0x19},
-    [9] = {0xB, 0x1A, 0x10, 0x1B, 0x11, 0x1C},
-    [10] = {9, 0x1D, 0x12, 0x1E, 0x13, 0x1F},
-    [11] = {0xC, 0x20, 0x14, 0x21, 0x15, 0x22},
-    [12] = {0xD, 0x23, 0x16, 0x24, 0x17, 0x25},
-    [13] = {0xE, 0x26, 0x18, 0x27, 0x19, 0x28},
-    [14] = {0xF, 0x29, 0x40, 0x29, 0x1A, 0x2A},
-    [15] = {0x10, 0x2B, 0x1B, 0x2C, 0x1C, 0x2D},
-    [16] = {0x11, 0x2E, 0x40, 0x2E, 0x40, 0x2E},
-    [17] = {0x12, 0x2F, 0x40, 0x2F, 0x40, 0x2F},
-    [18] = {0x13, 0x30, 0x40, 0x30, 0x40, 0x30},
-    [19] = {0xA, 0x31, 0x40, 0x31, 0x1E, 0x32},
-    [20] = {0x15, 0x33, 0x40, 0x33, 0x40, 0x33},
-    [21] = {0x16, 0x34, 0x40, 0x34, 0x40, 0x34},
-    [22] = {0x17, 0x35, 0x40, 0x35, 0x40, 0x35},
-    [23] = {0x19, 0x36, 0x40, 0x36, 0x40, 0x36},
-    [24] = {0x1B, 0x37, 0x40, 0x37, 0x40, 0x37},
-    [25] = {0x1A, 0x38, 0x20, 0x39, 0x20, 0x39},
-    [26] = {0x18, 0x3A, 0x21, 0x3B, 0x21, 0x3B},
-    [27] = {0},
+static const FixedRoomPrefightData sFixedRoomPrefightLookup[] = {
+    { FIXED_ROOM_MT_STEEL_SKARMORY, PREFIGHT_SKARMORY_ATTEMPT1, 0, PREFIGHT_SKARMORY_ATTEMPT2, 1, PREFIGHT_SKARMORY_GONE },
+    { FIXED_ROOM_SINISTER_WOODS_TEAM_MEANIES, 4, 2, 5, 3, 6 },
+    { FIXED_ROOM_MT_THUNDER_PEAK_ZAPDOS, 7, 4, 8, 5, 9 },
+    { FIXED_ROOM_MT_BLAZE_PEAK_MOLTRES, 0xA, 6, 0xB, 7, 0xC },
+    { FIXED_ROOM_FROSTY_GROTTO_ARTICUNO, 0xD, 8, 0xE, 9, 0xF },
+    { FIXED_ROOM_MT_FREEZE_PEAK_NINETALES, 0x10, 0xA, 0x11, 0xA, 0x11 },
+    { FIXED_ROOM_MAGMA_CAVERN_PIT_GROUDON, 0x12, 0xB, 0x13, 0xC, 0x14 },
+    { FIXED_ROOM_MAGMA_CAVERN_PIT_TYRANITAR_ALAKAZAM, 0x15, 0xD, 0x16, 0xD, 0x16 },
+    { FIXED_ROOM_SKY_TOWER_SUMMIT_RAYQUAZA, 0x17, 0xE, 0x18, 0xF, 0x19 },
+    { FIXED_ROOM_UPROAR_FOREST_MANKEY, 0x1A, 0x10, 0x1B, 0x11, 0x1C },
+    { FIXED_ROOM_WESTERN_CAVE_MEWTWO, 0x1D, 0x12, 0x1E, 0x13, 0x1F },
+    { FIXED_ROOM_FIERY_FIELD_ENTEI, 0x20, 0x14, 0x21, 0x15, 0x22 },
+    { FIXED_ROOM_LIGHTNING_FIELD_RAIKOU, 0x23, 0x16, 0x24, 0x17, 0x25 },
+    { FIXED_ROOM_NORTHWIND_FIELD_SUICUNE, 0x26, 0x18, 0x27, 0x19, 0x28 },
+    { FIXED_ROOM_MT_FARAWAY_HO_OH, 0x29, 64, 0x29, 0x1A, 0x2A },
+    { FIXED_ROOM_NORTHERN_RANGE_LATIOS, 0x2B, 0x1B, 0x2C, 0x1C, 0x2D },
+    { FIXED_ROOM_BURIED_RELIC_REGIROCK, 0x2E, 64, 0x2E, 64, 0x2E },
+    { FIXED_ROOM_BURIED_RELIC_REGICE, 0x2F, 64, 0x2F, 64, 0x2F },
+    { FIXED_ROOM_BURIED_RELIC_REGISTEEL, 0x30, 64, 0x30, 64, 0x30 },
+    { FIXED_ROOM_WISH_CAVE_JIRACHI, 0x31, 64, 0x31, 0x1E, 0x32 },
+    { FIXED_ROOM_SILVER_TRENCH_LUGIA, 0x33, 64, 0x33, 64, 0x33 },
+    { FIXED_ROOM_STORMY_SEA_KYOGRE, 0x34, 64, 0x34, 64, 0x34 },
+    { FIXED_ROOM_METEOR_CAVE_DEOXYS, 0x35, 64, 0x35, 64, 0x35 },
+    { FIXED_ROOM_PURITY_FOREST_CELEBI, 0x36, 64, 0x36, 64, 0x36 },
+    { FIRST_DOJO_MAZE_BOSS_ROOM, 0x37, 64, 0x37, 64, 0x37 },
+    { FIXED_ROOM_WISH_CAVE_MEDICHAM, 0x38, 0x20, 0x39, 0x20, 0x39 },
+    { FIXED_ROOM_HOWLING_FOREST_SMEARGLE, 0x3A, 0x21, 0x3B, 0x21, 0x3B },
+    { FIXED_ROOM_NONE, 0, 0, 0, 0, 0 },
 };
 
 static const s32 gUnknown_8107314[] = {
@@ -123,41 +123,41 @@ EWRAM_DATA static unkStruct_202F3D0 gUnknown_202F3D0 = {0};
 void sub_80847D4(void)
 {
     u32 fixedRoomNumber;
-    s32 index;
+    s32 i;
 
-    gDungeon->unk3A0D = 0;
+    gDungeon->prefight = PREFIGHT_NONE;
     gDungeon->unk1356C = 0;
     UpdateMinimap();
-    for(index = 0; index < 0x3e7 && gUnknown_8107234[index].unk0 != 0;  index++) {
+    for (i = 0; i < 999 && sFixedRoomPrefightLookup[i].fixedRoomNumber != FIXED_ROOM_NONE; i++) {
         fixedRoomNumber = gDungeon->fixedRoomNumber;
         // Dojo maze bosses all use the same cutscene data
-        if (fixedRoomNumber - (FIRST_DOJO_MAZE_BOSS_ROOM+1) < NUM_MAZE_BOSS_ROOMS) {
+        if (fixedRoomNumber - (FIRST_DOJO_MAZE_BOSS_ROOM + 1) < NUM_MAZE_BOSS_ROOMS) {
             fixedRoomNumber = FIRST_DOJO_MAZE_BOSS_ROOM;
         }
-        if (fixedRoomNumber == gUnknown_8107234[index].unk0)
+        if (fixedRoomNumber == sFixedRoomPrefightLookup[i].fixedRoomNumber)
         {
-            sub_8084854(&gUnknown_8107234[index]);
+            sub_8084854(&sFixedRoomPrefightLookup[i]);
             break;
         }
     }
     sub_8097FF8();
 }
 
-static void sub_8084854(const struct unkData_8107234 *param_1)
+static void sub_8084854(const FixedRoomPrefightData *a0)
 {
-    if (gDungeon->unk644.unk34 != 0) {
-        gDungeon->unk3A0D = param_1->unk5;
+    if (gDungeon->unk644.missionKind != DUNGEON_MISSION_UNK0) {
+        gDungeon->prefight = a0->prefight5;
     }
-    else if (sub_8098100(param_1->unk4) != 0) {
-        gDungeon->unk3A0D = param_1->unk5;
+    else if (sub_8098100(a0->unk4)) {
+        gDungeon->prefight = a0->prefight5;
     }
-    else if (sub_8098100(param_1->unk2) != 0) {
-        gDungeon->unk3A0D = param_1->unk3;
+    else if (sub_8098100(a0->unk2)) {
+        gDungeon->prefight = a0->prefight3;
     }
     else {
-        gDungeon->unk3A0D = param_1->unk1;
-        if (param_1->unk2 != 0x40) {
-            sub_8097FA8(param_1->unk2);
+        gDungeon->prefight = a0->prefight1;
+        if (a0->unk2 != 64) {
+            sub_8097FA8(a0->unk2);
         }
     }
 
@@ -173,16 +173,16 @@ bool8 ShouldShowDungeonBanner(void)
 void sub_80848F0(void)
 {
   gDungeon->unk1356C = 1;
-  switch(gDungeon->unk3A0D) {
-    case 0:
+  switch(gDungeon->prefight) {
+    case PREFIGHT_NONE:
     case 0x3c:
         gDungeon->unk1356C = 0;
         break;
-    case 1:
-    case 2:
+    case PREFIGHT_SKARMORY_ATTEMPT1:
+    case PREFIGHT_SKARMORY_ATTEMPT2:
         sub_8086B14();
         break;
-    case 3:
+    case PREFIGHT_SKARMORY_GONE:
         sub_8086B94();
         break;
     case 4:
@@ -345,16 +345,16 @@ void sub_80848F0(void)
 
 void DisplayPreFightDialogue(void)
 {
-  switch(gDungeon->unk3A0D) {
-      case 0:
+  switch(gDungeon->prefight) {
+      case PREFIGHT_NONE:
         break;
-      case 1:
+      case PREFIGHT_SKARMORY_ATTEMPT1:
         SkarmoryPreFightDialogue();
         break;
-      case 2:
+      case PREFIGHT_SKARMORY_ATTEMPT2:
         SkarmoryReFightDialogue();
         break;
-      case 3:
+      case PREFIGHT_SKARMORY_GONE:
         sub_8086E40();
         break;
       case 4:
@@ -535,102 +535,102 @@ void DisplayPreFightDialogue(void)
 void sub_8084E00(Entity *entity, u8 param_2, bool8 param_3)
 {
   if (param_2 != 0) {
-    switch(gDungeon->unk3A0D) {
-        case 0:
+    switch(gDungeon->prefight) {
+        case PREFIGHT_NONE:
             break;
-        case 1:
-        case 2:
-            sub_8086BDC(param_2,gDungeon->unk3A0D);
+        case PREFIGHT_SKARMORY_ATTEMPT1:
+        case PREFIGHT_SKARMORY_ATTEMPT2:
+            sub_8086BDC(param_2, gDungeon->prefight);
             break;
         case 4:
         case 5:
-            sub_8086F54(param_2,gDungeon->unk3A0D);
+            sub_8086F54(param_2, gDungeon->prefight);
             break;
         case 7:
         case 8:
         case 9:
-            sub_8087334(param_2,gDungeon->unk3A0D);
+            sub_8087334(param_2,gDungeon->prefight);
             break;
         case 10:
         case 0xb:
         case 0xc:
-            sub_80878F4(param_2,gDungeon->unk3A0D);
+            sub_80878F4(param_2,gDungeon->prefight);
             break;
         case 0xd:
         case 0xe:
         case 0xf:
-            sub_8088088(param_2,gDungeon->unk3A0D);
+            sub_8088088(param_2,gDungeon->prefight);
             break;
         case 0x12:
         case 0x13:
         case 0x14:
-            sub_8088818(param_2,gDungeon->unk3A0D);
+            sub_8088818(param_2,gDungeon->prefight);
             break;
         case 0x17:
         case 0x18:
         case 0x19:
-            sub_80893B4(param_2,gDungeon->unk3A0D);
+            sub_80893B4(param_2,gDungeon->prefight);
             break;
         case 0x1a:
         case 0x1b:
-            sub_8089788(entity,param_2,gDungeon->unk3A0D);
+            sub_8089788(entity,param_2,gDungeon->prefight);
             break;
         case 0x1d:
         case 0x1e:
         case 0x1f:
-            sub_8089A00(param_2,gDungeon->unk3A0D);
+            sub_8089A00(param_2,gDungeon->prefight);
             break;
         case 0x20:
         case 0x21:
         case 0x22:
-            sub_8089CFC(param_2,gDungeon->unk3A0D);
+            sub_8089CFC(param_2,gDungeon->prefight);
             break;
         case 0x23:
         case 0x24:
         case 0x25:
-            sub_8089FF0(param_2,gDungeon->unk3A0D);
+            sub_8089FF0(param_2,gDungeon->prefight);
             break;
         case 0x26:
         case 0x27:
         case 0x28:
-            sub_808A36C(param_2,gDungeon->unk3A0D);
+            sub_808A36C(param_2,gDungeon->prefight);
             break;
         case 0x29:
         case 0x2a:
-            sub_808A6E8(param_2,gDungeon->unk3A0D);
+            sub_808A6E8(param_2,gDungeon->prefight);
             break;
         case 0x2b:
         case 0x2c:
         case 0x2d:
-            sub_808AAF0(param_2,gDungeon->unk3A0D);
+            sub_808AAF0(param_2,gDungeon->prefight);
             break;
         case 0x2e:
-            sub_808AE54(param_2,gDungeon->unk3A0D,&entity->pos);
+            sub_808AE54(param_2,gDungeon->prefight,&entity->pos);
             break;
         case 0x2f:
-            sub_808AEC8(param_2,gDungeon->unk3A0D,&entity->pos);
+            sub_808AEC8(param_2,gDungeon->prefight,&entity->pos);
             break;
         case 0x30:
-            sub_808AF3C(param_2,gDungeon->unk3A0D,&entity->pos);
+            sub_808AF3C(param_2,gDungeon->prefight,&entity->pos);
             break;
         case 0x31:
         case 0x32:
-            sub_808B3E4(param_2,gDungeon->unk3A0D,param_3);
+            sub_808B3E4(param_2,gDungeon->prefight,param_3);
             break;
         case 0x33:
-            sub_808BE70(param_2,gDungeon->unk3A0D,param_3);
+            sub_808BE70(param_2,gDungeon->prefight,param_3);
             break;
         case 0x34:
-            sub_808C1A4(param_2,gDungeon->unk3A0D,param_3);
+            sub_808C1A4(param_2,gDungeon->prefight,param_3);
             break;
         case 0x35:
-            sub_808C414(param_2,gDungeon->unk3A0D,param_3);
+            sub_808C414(param_2,gDungeon->prefight,param_3);
             break;
         case 0x36:
-            nullsub_100(param_2,gDungeon->unk3A0D,param_3);
+            nullsub_100(param_2,gDungeon->prefight,param_3);
             break;
         case 0x37:
-            sub_808C948(entity,gDungeon->unk3A0D);
+            sub_808C948(entity,gDungeon->prefight);
             break;
         case 0x38:
         case 0x39:
@@ -647,21 +647,21 @@ void sub_8084E00(Entity *entity, u8 param_2, bool8 param_3)
 
 void sub_8085140(void)
 {
-    switch(gDungeon->unk3A0D) {
+    switch (gDungeon->prefight) {
         // NOTE: shortcut way to generate all cases from 0 - 0x3C properly
         default:
-        case 0:
-        case 1:
+        case PREFIGHT_NONE:
+        case PREFIGHT_SKARMORY_ATTEMPT1:
         case 0x3C:
             break;
         case 0x2e:
-            sub_808AFB0(gDungeon->unk3A0D);
+            sub_808AFB0(gDungeon->prefight);
             break;
         case 0x2f:
-            sub_808B030(gDungeon->unk3A0D);
+            sub_808B030(gDungeon->prefight);
             break;
         case 0x30:
-            sub_808B0B0(gDungeon->unk3A0D);
+            sub_808B0B0(gDungeon->prefight);
             break;
   }
 }
@@ -760,7 +760,7 @@ void sub_8085374(void)
         }
     }
 
-    if (leaderEntity == NULL || partnerEntity != NULL || gDungeon->unk644.unk18 != 0)
+    if (leaderEntity == NULL || partnerEntity != NULL || gDungeon->unk644.canChangeLeader)
         return;
 
     j = 0;
@@ -1364,7 +1364,7 @@ void sub_8085F44(s32 param_1)
 
 void sub_8085F78(void)
 {
-    switch(gDungeon->unk3A0D) {
+    switch(gDungeon->prefight) {
         case 0x12:
         case 0x13:
         case 0x14:
@@ -1377,7 +1377,7 @@ void sub_8085F78(void)
         case 0x2A:
             sub_808A718();
             break;
-        case 0:
+        case PREFIGHT_NONE:
         case 0x3C:
         default:
             break;
@@ -1981,12 +1981,12 @@ void sub_8086AC0(void)
             sub_8097FF8();
 }
 
-u8 sub_8086AE4(s16 _index)
+bool8 sub_8086AE4(s16 _index)
 {
     s32 pokeIndex = _index;
 
-    if(gDungeon->unk644.unk18 == 0)
-        return 1;
+    if (!gDungeon->unk644.canChangeLeader)
+        return TRUE;
     else
         return HasRecruitedMon(pokeIndex);
 }

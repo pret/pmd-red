@@ -393,7 +393,7 @@ static void PartyListMenu_CreateMenu1(void)
         }
         loopMax += 1;
 
-        if(sub_80023E4(8) && !pokeStruct->isTeamLeader)
+        if(CheckQuest(QUEST_CAN_CHANGE_LEADER) && !pokeStruct->isTeamLeader)
         {
             sUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuMakeLeader;
             sUnknown_203B2B8->unk16C[loopMax].menuAction = PARTY_LIST_MENU_MAKE_LEADER;
@@ -860,7 +860,7 @@ static bool8 sub_8026E88(Pokemon *r0)
     {
         flag = (r0->dungeonLocation.id == DUNGEON_JOIN_LOCATION_PARTNER);
         if(flag)
-            if(!sub_80023E4(0x8))
+            if(!CheckQuest(QUEST_CAN_CHANGE_LEADER))
                 return FALSE;
     }
     else
@@ -878,7 +878,7 @@ static bool8 sub_8026EB8(Pokemon *r0)
                 flag = (r0->dungeonLocation.id == DUNGEON_JOIN_LOCATION_PARTNER);
                 if(flag)
                 {
-                    if(sub_80023E4(0x8))
+                    if(CheckQuest(QUEST_CAN_CHANGE_LEADER))
                         goto check;
                 }
                 else

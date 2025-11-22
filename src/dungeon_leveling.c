@@ -263,7 +263,7 @@ static void sub_807218C(Entity *pokemon)
         }
         else if(info->joinedAt.id == DUNGEON_JOIN_LOCATION_PARTNER)
         {
-            if(gDungeon->unk644.unk18 == 0)
+            if (!gDungeon->unk644.canChangeLeader)
                 r3 = 1;
         }
         sub_806A3D4(buffer, r1, 3, r3);

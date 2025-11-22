@@ -494,7 +494,7 @@ static const struct ScriptCommand s_script_MOVE_PLAZA_SLEEP[] = { /* 0x8120590 *
 
 static const struct ScriptCommand s_script_INIT_PLAZA_SLEEP_STAY_FUNC[] = { /* 0x81205f0 */
     DEBUGINFO_O(496),
-    JUMPIF_SCENARIOCHECK(4, /* to label */ 0),
+    JUMPIF_SCENARIOCHECK(QUEST_SQUARE_ASLEEP, /* to label */ 0),
     { 0x54, 0x00,  0x0300,  0x00000000,  0x00000000, NULL },
     SELECT_ANIMATION(4),
     RET_DIRECT,
@@ -505,7 +505,7 @@ static const struct ScriptCommand s_script_INIT_PLAZA_SLEEP_STAY_FUNC[] = { /* 0
 
 static const struct ScriptCommand s_script_INIT_PLAZA_SLEEP_TALK_FUNC[] = { /* 0x8120670 */
     DEBUGINFO_O(507),
-    JUMPIF_SCENARIOCHECK(4, /* to label */ 0),
+    JUMPIF_SCENARIOCHECK(QUEST_SQUARE_ASLEEP, /* to label */ 0),
     SELECT_ANIMATION(2),
     RET_DIRECT,
   LABEL(0), /* = 0x00 */

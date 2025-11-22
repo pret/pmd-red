@@ -12,13 +12,13 @@ typedef struct DungeonSetupSubstruct
 {
     DungeonLocation unk0;
     u8 unk4;
-    u8 unk5;
-    u8 unk6;
-    u8 unk7;
-    u8 unk8;
-    u8 unk9;
+    /* 0x5 */ bool8 canChangeLeader;
+    /* 0x6 */ bool8 canRecruit;
+    /* 0x7 */ bool8 canRecruitRescueTeamMazeBosses;
+    /* 0x8 */ bool8 unlockedEvolutions;
+    /* 0x9 */ bool8 hasInventory;
     u8 unkA;
-    u8 unkB;
+    /* 0xB */ u8 missionKind; // See enum "DungeonMissionKind"
     u8 unkC;
     u8 unkD;
 } DungeonSetupSubstruct;
@@ -30,7 +30,7 @@ typedef struct DungeonSetupInfo
     Pokemon mon;
     u8 *unk74;
     Dungeon *dungeon;
-    s16 unk7C; // Set to 5 if the dungeon was skipped (quicksave read failed)
+    s16 unk7C; // 4 = OutOnRescue related ... 5 = dungeon was skipped (quicksave read failed)
     u8 unk7E;
     DungeonLocation unk80;
     DungeonMailSeed unk84;

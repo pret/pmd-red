@@ -25,10 +25,10 @@
 #include "text_3.h"
 #include "text_util.h"
 
+// Size: 0x27C
 struct LoadScreen
 {
-    // size: 0x27c
-    u32 currMenu;
+    /* 0x000 */ u32 currMenu;
     MenuStruct unk4[4];
     WindowTemplates unk144;
     /* 0x1A4 */ u8 formattedTeamName[0x24];
@@ -45,26 +45,26 @@ extern unkStruct_203B484 *gUnknown_203B484;
 
 u8 IsQuickSave(void);
 void DrawLoadScreenText(void);
-void sub_80397B4(void);
+static void DrawQuestIcons(void);
 
 extern void sub_80920D8(u8 *);
 
 const WindowTemplate gUnknown_80E75F8 = {
-   0,
-   0x03,
-   0x00, 0x00,
-   0x00, 0x00,
-   0x00, 0x00,
-   NULL
+    0,
+    0x03,
+    0x00, 0x00,
+    0x00, 0x00,
+    0x00, 0x00,
+    NULL
 };
 
 const WindowTemplate gUnknown_80E7610 = {
-   0,
-   0x03,
-   0x02, 0x02,
-   0x1A, 0x0B,
-   0x0B, 0x00,
-   NULL
+    0,
+    0x03,
+    0x02, 0x02,
+    0x1A, 0x0B,
+    0x0B, 0x00,
+    NULL
 };
 
 EWRAM_INIT MenuItem gUnknown_203B378[2] = {
@@ -78,16 +78,30 @@ EWRAM_INIT MenuItem gUnknown_203B378[2] = {
     }
 };
 
-EWRAM_INIT u32 gUnknown_203B388[12] = {0xC, 0xC, 0xE, 0xE, 0xD, 0xE, 0xC, 0xD, 0xD, 0xB, 0xB, 0xB};
-EWRAM_INIT u32 gUnknown_203B3B8[12] = {0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x1A, 0x18, 0x1B, 0x16, 0x19, 0x17};
+EWRAM_INIT u32 gUnknown_203B388[12] = { 0xC, 0xC, 0xE, 0xE, 0xD, 0xE, 0xC, 0xD, 0xD, 0xB, 0xB, 0xB };
+
+static EWRAM_INIT u32 sLegendaryQuestIDs[12] = {
+    QUEST_LEGEND_ZAPDOS,
+    QUEST_LEGEND_MOLTRES,
+    QUEST_LEGEND_ARTICUNO,
+    QUEST_LEGEND_GROUDON,
+    QUEST_LEGEND_RAYQUAZA,
+    QUEST_LEGEND_KYOGRE,
+    QUEST_LEGEND_MEW,
+    QUEST_LEGEND_HO_OH,
+    QUEST_LEGEND_CELEBI,
+    QUEST_LEGEND_LUGIA,
+    QUEST_LEGEND_MEWTWO,
+    QUEST_LEGEND_DEOXYS,
+};
 
 const WindowTemplate gUnknown_80E762C = {
-   0,
-   0x03,
-   0x02, 0x0F,
-   0x13, 0x03,
-   0x03, 0x00,
-   NULL
+    0,
+    0x03,
+    0x02, 0x0F,
+    0x13, 0x03,
+    0x03, 0x00,
+    NULL
 };
 
 const MenuItem gResumeQuicksaveMenuItems[3] =
@@ -279,7 +293,7 @@ void DrawLoadScreenText(void)
   PrintStringOnWindow(8,60,gHelperHeadingText,0,0); // Helper:
 
   // Draw Team Name
-  if (sub_80023E4(0)) {
+  if (CheckQuest(QUEST_SET_TEAM_NAME)) {
     sub_80920D8(teamNameBuffer);
   }
   else {
@@ -362,7 +376,7 @@ void DrawLoadScreenText(void)
   }
   PrintStringOnWindow(64,60,gLoadScreen->formattedHelperInfo,0,0);
 
-  sub_80397B4(); // Draw event icons??
+  DrawQuestIcons();
   sub_80073E0(0);
 }
 
@@ -373,32 +387,31 @@ struct ClmkFileData
     /* 0x4 */ RGB *palette;
 };
 
-void sub_80397B4(void)
+static void DrawQuestIcons(void)
 {
-  OpenedFile *clmkFile;
-  s32 index;
-  s32 x;
-  s32 y;
+    OpenedFile *clmkFile;
+    s32 i;
+    s32 x;
+    s32 y;
 
-  clmkFile = OpenFileAndGetFileDataPtr(gClmkpatFileName,&gTitleMenuFileArchive); // clmkpat
+    clmkFile = OpenFileAndGetFileDataPtr(gClmkpatFileName, &gTitleMenuFileArchive); // clmkpat
 
-  for(index = 0; index < 64; index++)
-  {
-    SetBGPaletteBufferColorArray(index + 176, &((struct ClmkFileData *)(clmkFile->data))->palette[index]);
-  }
-
-  x = 8;
-  y = 0x49;
-
-  // Draw the 12 legendary icons
-  for(index = 0; index < 12; index++)
-  {
-    if (sub_80023E4(gUnknown_203B3B8[index])) {
-      sub_8007E20(0,x,y,0x10,0x10,(&((struct ClmkFileData *)(clmkFile->data))->pics[index * 32]), gUnknown_203B388[index]);
-      x += 16;
+    for (i = 0; i < 64; i++) {
+        SetBGPaletteBufferColorArray(i + 176, &((struct ClmkFileData *)(clmkFile->data))->palette[i]);
     }
-  }
-  CloseFile(clmkFile);
+
+    x = 8;
+    y = 73;
+
+    // Draw the 12 legendary icons
+    for (i = 0; i < ARRAY_COUNT_INT(sLegendaryQuestIDs); i++) {
+        if (CheckQuest(sLegendaryQuestIDs[i])) {
+          sub_8007E20(0, x, y, 16, 16, (&((struct ClmkFileData *)(clmkFile->data))->pics[i * 32]), gUnknown_203B388[i]);
+          x += 16;
+        }
+    }
+
+    CloseFile(clmkFile);
 }
 
 bool8 IsQuickSave(void)

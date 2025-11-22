@@ -1,12 +1,14 @@
 #ifndef GUARD_CODE_80A26CC_H
 #define GUARD_CODE_80A26CC_H
 
+#include "constants/script_dungeon_id.h"
+
 // size: 0x14
 typedef struct DungeonInfo
 {
     /* 0x0 */ s16 unk0;
-    /* 0x2 */ s16 unk2;
-    /* 0x4 */ s16 unk4;
+    /* 0x2 */ s16 unk2; // See enum "GroundMapID"
+    /* 0x4 */ s16 unk4; // See enum "GroundMapID"
     /* 0x6 */ s16 unk6;
     /* 0x8 */ s16 unk8;
     /* 0xA */ s16 unkA;
@@ -17,7 +19,7 @@ typedef struct DungeonInfo
     /* 0x11 */ u8 unk11;
 } DungeonInfo;
 
-const DungeonInfo *GetDungeonInfo_80A2608(s32 index);
+const DungeonInfo *GetDungeonInfo_80A2608(s32 scriptDungeon_);
 s16 sub_80A2654(s16 index);
 s16 sub_80A2668(s16);
 s16 sub_80A2688(u8);

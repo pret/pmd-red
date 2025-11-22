@@ -132,7 +132,7 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
     gPlayerDotMapPosition.x = 100;
 
     if (!r6) {
-        gDungeon->unk644.unk34 = setupPtr->info.sub0.unkB;
+        gDungeon->unk644.missionKind = setupPtr->info.sub0.missionKind;
         gDungeon->unk644.dungeonSeed = setupPtr->info.dungeonSeed;
         gDungeon->unk644.windTurns = GetTurnLimit(setupPtr->info.sub0.unk0.id);
         gDungeon->unk644.windPhase = 0;
@@ -140,11 +140,11 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
     }
     gDungeon->unk644.unk54 = 0;
     gDungeon->unk644.unk55 = 0;
-    gDungeon->unk644.unk18 = setupPtr->info.sub0.unk5;
-    gDungeon->unk644.unk16 = setupPtr->info.sub0.unk8;
-    gDungeon->unk644.canRecruit = setupPtr->info.sub0.unk6;
-    gDungeon->unk644.unk15 = setupPtr->info.sub0.unk7;
-    gDungeon->unk644.hasInventory = setupPtr->info.sub0.unk9;
+    gDungeon->unk644.canChangeLeader = setupPtr->info.sub0.canChangeLeader;
+    gDungeon->unk644.unlockedEvolutions = setupPtr->info.sub0.unlockedEvolutions;
+    gDungeon->unk644.canRecruit = setupPtr->info.sub0.canRecruit;
+    gDungeon->unk644.canRecruitRescueTeamMazeBosses = setupPtr->info.sub0.canRecruitRescueTeamMazeBosses;
+    gDungeon->unk644.hasInventory = setupPtr->info.sub0.hasInventory;
     gDungeon->unk644.unk19 = setupPtr->info.sub0.unkA;
     StopDungeonBGM();
     sub_803D4AC();
@@ -174,7 +174,7 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
     if (!r6) {
         gDungeon->unk181e8.allTilesRevealed = 1;
         gDungeon->unk181e8.unk1820C = 1;
-        if (gDungeon->unk644.unk34 == 1) {
+        if (gDungeon->unk644.missionKind == DUNGEON_MISSION_OUTONRESCUE) {
             gDungeon->unk644.dungeonLocation.id = setupPtr->info.dungeonSeed.location.id;
             gDungeon->unk644.dungeonLocation.floor = 1;
         }
@@ -186,7 +186,7 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
         EnforceMaxItemsAndMoney();
     }
     if (!r6) {
-        if (gDungeon->unk644.unk34 == 1) {
+        if (gDungeon->unk644.missionKind == DUNGEON_MISSION_OUTONRESCUE) {
             gDungeon->unk644.unk38 = setupPtr->info.dungeonSeed.seed;
         }
         else {
@@ -223,7 +223,7 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
     }
 
     OpenDungeonPaletteFile();
-    if (!r6 && gDungeon->unk644.unk34 == 1) {
+    if (!r6 && gDungeon->unk644.missionKind == DUNGEON_MISSION_OUTONRESCUE) {
         if (sub_8099394(&sp)) {
             unkStruct_203B480 *mailStr = GetMailatIndex(sp);
             if (mailStr->rescuesAllowed) {
@@ -565,7 +565,7 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
                 SetUpDungeonExitData(var, NULL, GetLeader());
                 check = TRUE;
             }
-            else if (gDungeon->unk644.unk34 == 1 && GetFloorType() == FLOOR_TYPE_RESCUE && gDungeon->unk644.unk10 == 2) {
+            else if (gDungeon->unk644.missionKind == DUNGEON_MISSION_OUTONRESCUE && GetFloorType() == FLOOR_TYPE_RESCUE && gDungeon->unk644.unk10 == 2) {
                 SetUpDungeonExitData(DUNGEON_EXIT_SUCCEEDED_IN_RESCUE_MISSION, NULL, GetLeader());
                 if (gDungeon->unk644.stoleFromKecleon != 0) {
                     IncrementThievingSuccesses();
@@ -612,7 +612,7 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
         sub_80095CC(1, 0x14);
         sub_803E13C();
         sub_800CDA8(4);
-        if (gDungeon->unk6 == 0 && sub_8083C88(gDungeon->unk644.unk34)) {
+        if (gDungeon->unk6 == 0 && sub_8083C88(gDungeon->unk644.missionKind)) {
             ShowDungeonClearedWindow();
         }
 
@@ -630,10 +630,10 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
             }
         }
         else if (sub_8083C50()) {
-            if (gDungeon->unk644.unk34 == 1) {
+            if (gDungeon->unk644.missionKind == DUNGEON_MISSION_OUTONRESCUE) {
                 setupPtr->info.unk7C = 4;
             }
-            else if (gDungeon->unk644.unk34 == 0) {
+            else if (gDungeon->unk644.missionKind == DUNGEON_MISSION_UNK0) {
                 setupPtr->info.unk7C = 1;
                 sub_8084424();
             }
@@ -689,7 +689,7 @@ bool8 sub_8043CE4(s32 dungeonId)
 
 u8 GetFloorType(void)
 {
-    if (gDungeon->unk644.unk34 == 1 && gDungeon->unk644.dungeonSeed.location.floor == gDungeon->unk644.dungeonLocation.floor)
+    if (gDungeon->unk644.missionKind == DUNGEON_MISSION_OUTONRESCUE && gDungeon->unk644.dungeonSeed.location.floor == gDungeon->unk644.dungeonLocation.floor)
         return FLOOR_TYPE_RESCUE;
     else if (IsFloorwideFixedRoom())
         return FLOOR_TYPE_FIXED;

@@ -98,7 +98,7 @@ void ShowWorldMap_Async(struct WorldMapSetupStruct *setupPtr)
         speciesId = 0;
     }
 
-    dungeonEnter = BufferDungeonRequirementsText(setupPtr->info.unk4.unk0.id, speciesId, text, setupPtr->info.unk6C, FALSE);
+    dungeonEnter = BufferDungeonRequirementsText(setupPtr->info.unk4.unk0.id, speciesId, text, setupPtr->info.canChangeLeader, FALSE);
     if (dungeonEnter == DUNGEON_REQUIREMENTS_PASS) {
         setupPtr->dungeonEntered = TRUE;
     }

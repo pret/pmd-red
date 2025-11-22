@@ -23,7 +23,7 @@ void sub_80842F0(void)
 
     gDungeon->unk644.unk33 = 0;
     gDungeon->unk644.unk46 = 0;
-    if (gDungeon->unk644.unk34 != 2)
+    if (gDungeon->unk644.missionKind != DUNGEON_MISSION_ACCEPTEDJOB_RELATED)
         return;
 
     for (i = 0; i < MAX_ACCEPTED_JOBS; i++) {

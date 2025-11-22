@@ -63,7 +63,6 @@ extern void sub_8095494(DungeonMailSeed *param_1, u8 index);
 // TODO: Move these externs to headers
 extern s16 sub_80A2654(s16 r0);
 extern bool8 sub_80048BC(void);
-extern u8 sub_80023E4(u32);
 extern bool8 sub_8099B94(void);
 extern void sub_8099768(void);
 extern void sub_809975C(void);
@@ -127,7 +126,7 @@ u32 xxx_script_related_8098468(s32 param_1)
             break;
     }
     ResetSoundEffectCounters();
-    if (gUnknown_20398B9 == 0 && !sub_80023E4(0xd)) {
+    if (gUnknown_20398B9 == 0 && !CheckQuest(QUEST_IN_WORLD_CALAMITY)) {
         FadeOutAllMusic(0x10);
     }
     gUnknown_2026E4E = 0x808;
@@ -521,7 +520,7 @@ bool8 sub_8098D80(u32 speed)
         gUnknown_20398AC = 1;
         gUnknown_20398B0 = speed;
         sub_809C730();
-        if(!sub_80023E4(0xD))
+        if(!CheckQuest(QUEST_IN_WORLD_CALAMITY))
         {
             FadeOutAllMusic(speed);
         }
@@ -538,7 +537,7 @@ bool8 sub_8098DCC(u32 speed)
         gUnknown_20398AC = 1;
         gUnknown_20398B0 = speed;
         sub_809C730();
-        if(!sub_80023E4(0xD))
+        if(!CheckQuest(QUEST_IN_WORLD_CALAMITY))
         {
             FadeOutAllMusic(speed);
         }
@@ -636,40 +635,47 @@ const char *GetCurrentGroundPlaceName(void)
     return GetGroundPlaceName(GetScriptVarValue(NULL, GROUND_PLACE));
 }
 
+// Returns an enum GroundMapID
 static s16 sub_8098FCC(u32 unused)
 {
-  s32 iVar4;
-  s32 iVar5;
-  s32 iVar6;
-  const DungeonInfo *iVar3;
+    s32 scriptDungeon;
+    s32 scriptDungeon__;
+    s32 scriptDungeon_;
+    const DungeonInfo *di;
 
-  iVar5 = (s16)GetScriptVarValue(NULL,DUNGEON_ENTER);
-  iVar6 = iVar5;
-  if (iVar5 == -1) return 0xC;
+    scriptDungeon__ = (s16)GetScriptVarValue(NULL,DUNGEON_ENTER);
+    scriptDungeon_ = scriptDungeon__;
+    if (scriptDungeon__ == -1)
+        return MAP_TEAM_BASE_INSIDE;
 
-  if (iVar5 == 0x51)
-    iVar4 = (s16)GetScriptVarValue(NULL,DUNGEON_ENTER_INDEX);
-  else
-    iVar4 = iVar6;
+    if (scriptDungeon__ == SCRIPT_DUNGEON_81)
+        scriptDungeon = (s16)GetScriptVarValue(NULL, DUNGEON_ENTER_INDEX);
+    else
+        scriptDungeon = scriptDungeon_;
 
-  iVar3 = GetDungeonInfo_80A2608(iVar4);
-  if (gUnknown_20398B4 == 9) {
-    return iVar3->unk2;
-  }
-  switch((s16)(iVar3->unk4 - 0xb2)) {
-    case 0:
-        if (ScriptVarScenarioAfter(SCENARIO_MAIN,2,-1) != 0) return 0xc;
-        break;
-    case 0xf:
-    case 0x11:
-    case 0x14:
-    case 0x17:
-        if (!sub_80023E4(5)) return 0xC;
-        break;
-    default:
-        break;
-  }
-    return iVar3->unk4;
+    di = GetDungeonInfo_80A2608(scriptDungeon);
+    if (gUnknown_20398B4 == 9)
+        return di->unk2;
+
+    switch (di->unk4) {
+        case MAP_TINY_WOODS_ENTRY: {
+            if (ScriptVarScenarioAfter(SCENARIO_MAIN, 2, -1))
+                return MAP_TEAM_BASE_INSIDE;
+            break;
+        }
+        case MAP_LAPIS_CAVE_ENTRY:
+        case MAP_MT_BLAZE_ENTRY:
+        case MAP_FROSTY_FOREST_ENTRY:
+        case MAP_MT_FREEZE_ENTRY: {
+            if (!CheckQuest(QUEST_UNK5))
+                return MAP_TEAM_BASE_INSIDE;
+            break;
+        }
+        default:
+            break;
+    }
+
+    return di->unk4;
 }
 
 UNUSED static const char *sub_80990B8(void)
@@ -686,7 +692,7 @@ UNUSED static const char *sub_80990B8(void)
 static inline bool8 sub_80990EC_sub(struct DungeonSetupInfo *iVar1, u32 iVar2)
 {
     bool8 flag = FALSE;
-    iVar1->sub0.unkB = 0;
+    iVar1->sub0.missionKind = DUNGEON_MISSION_UNK0;
 
     if ((u16)(iVar2 - 0x25) < 3)
         flag = TRUE;
@@ -737,10 +743,10 @@ u8 sub_80990EC(struct DungeonSetupInfo *param_1, s32 param_2)
             }
             break;
         case 4:
-            param_1->sub0.unkB = 0;
+            param_1->sub0.missionKind = DUNGEON_MISSION_UNK0;
             break;
         case 2:
-            param_1->sub0.unkB = 2;
+            param_1->sub0.missionKind = DUNGEON_MISSION_ACCEPTEDJOB_RELATED;
             break;
     }
     param_1->sub0.unk4 = 0;
@@ -785,7 +791,7 @@ void sub_809927C(u8 param_1)
     SetScriptVarValue(0x0,DUNGEON_ENTER,0x50);
     SetScriptVarValue(0x0,DUNGEON_ENTER_INDEX,gUnknown_2039950);
     sub_8095494(&gUnknown_20398C8.dungeonSeed,param_1);
-    gUnknown_20398C8.sub0.unkB = 1;
+    gUnknown_20398C8.sub0.missionKind = DUNGEON_MISSION_OUTONRESCUE;
     gUnknown_20398C8.sub0.unkC = 0;
     gUnknown_20398C8.sub0.unk4 = 0;
     gUnknown_20398C8.sub0.unkD = 0;

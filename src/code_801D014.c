@@ -304,7 +304,7 @@ static void sub_801D4C0(void)
             sUnknown_203B250->unk68[loopMax].menuAction = 4;
 
             loopMax++;
-            if (sub_80023E4(2)) {
+            if (CheckQuest(QUEST_CAN_ACCESS_JOBS)) {
                 sUnknown_203B250->unk68[loopMax].text = sJobList;
                 sUnknown_203B250->unk68[loopMax].menuAction = 9;
                 if (HasNoAcceptedJobs())

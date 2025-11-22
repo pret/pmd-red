@@ -486,7 +486,7 @@ void HandleFaint(Entity *entity, s32 dungeonExitReason_, Entity *param_3)
     entity->isVisible = FALSE;
     gLeaderPointer = NULL;
     joinId = entInfo->joinedAt.id;
-    if (joinId == DUNGEON_JOIN_LOCATION_PARTNER && gDungeon->unk644.unk18 == 0) {
+    if (joinId == DUNGEON_JOIN_LOCATION_PARTNER && !gDungeon->unk644.canChangeLeader) {
         gDungeon->unk10 = 1;
         entInfo->HP = 0;
         SubstitutePlaceholderStringTags(gDungeon->faintStringBuffer,entity,0);
@@ -505,9 +505,9 @@ void HandleFaint(Entity *entity, s32 dungeonExitReason_, Entity *param_3)
                 && dungeonExitReason != DUNGEON_EXIT_DELETED_FOR_EVENT
                 && dungeonExitReason != DUNGEON_EXIT_FAILED_TO_PROTECT_CLIENT
                 && dungeonExitReason != DUNGEON_EXIT_BLOWN_OUT_UNSEEN_FORCE
-                && gDungeon->unk3A0D == 0
+                && gDungeon->prefight == PREFIGHT_NONE
                 && gDungeon->unk644.unk37 >= 0
-                && gDungeon->unk644.unk34 != TRUE)
+                && gDungeon->unk644.missionKind != DUNGEON_MISSION_OUTONRESCUE)
             {
                 if (gDungeon->unk644.unk37 > 0) {
                     if (DisplayDungeonYesNoMessage(NULL,gUnknown_80FE268,1) == 1) {
@@ -605,7 +605,7 @@ void HandleFaint(Entity *entity, s32 dungeonExitReason_, Entity *param_3)
             if (entInfo->isTeamLeader) {
                 uVar10 = TRUE;
             }
-            if (gDungeon->unk644.unk18 == 0 && entInfo->joinedAt.id == DUNGEON_JOIN_LOCATION_PARTNER) {
+            if (!gDungeon->unk644.canChangeLeader && entInfo->joinedAt.id == DUNGEON_JOIN_LOCATION_PARTNER) {
                 uVar10 = TRUE;
             }
 
@@ -846,7 +846,7 @@ void SetMonSummaryInfoFromEntity(struct MonSummaryInfo *param_1, Entity *target)
     param_1->unk44[0].level = 0;
     param_1->unk44[1].level = 0;
     param_1->IQSkills = info->IQSkillMenuFlags;
-    if (gDungeon->unk644.unk16 != 0) {
+    if (gDungeon->unk644.unlockedEvolutions) {
         param_1->evoStringId = sub_806A4DC(info);
     }
     else {
@@ -1352,6 +1352,7 @@ bool8 sub_806A458(Entity *pokemon)
     return (count > 1);
 }
 
+// Evolution string related
 s32 sub_806A4DC(EntityInfo *info)
 {
     Pokemon pokemon;

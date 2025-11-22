@@ -234,7 +234,7 @@ void ShowPokemonSummaryWindow(s32 which, s32 currSubWindowId, struct MonSummaryI
     sub_80073E0(windowId);
 }
 
-void SetMonSummaryInfo(struct MonSummaryInfo *dst, struct Pokemon *pokemon, bool8 param_3)
+void SetMonSummaryInfo(struct MonSummaryInfo *dst, struct Pokemon *pokemon, bool8 unlockedEvolutions)
 {
     s32 index;
 
@@ -284,15 +284,13 @@ void SetMonSummaryInfo(struct MonSummaryInfo *dst, struct Pokemon *pokemon, bool
     dst->unk44[0] = pokemon->unkC[0];
     dst->unk44[1] = pokemon->unkC[1];
     dst->IQSkills = pokemon->IQSkills;
-    if (param_3) {
-        dst->evoStringId = GetMonSummaryScreenEvoStringId(pokemon);
-    }
-    else {
-        dst->evoStringId = EVO_STRING_EMPTY;
-    }
 
-    for(index = 0; index < 0xC; index++)
-    {
+    if (unlockedEvolutions)
+        dst->evoStringId = GetMonSummaryScreenEvoStringId(pokemon);
+    else
+        dst->evoStringId = EVO_STRING_EMPTY;
+
+    for (index = 0; index < MON_SUMMARY_UNK58_COUNT; index++) {
         dst->unk58[index] = 0;
     }
 }

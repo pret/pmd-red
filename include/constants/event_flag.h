@@ -1,7 +1,68 @@
 #ifndef GUARD_CONSTANTS_EVENT_FLAG_H
 #define GUARD_CONSTANTS_EVENT_FLAG_H
 
-enum FlagCalcOperation {
+enum MainQuest
+{
+    // SCENARIO_MAIN:
+
+    QUEST_SET_TEAM_NAME,
+    QUEST_UNK1, // Rescue dungeon related. For some reason it scans all rescue dungeons.
+    QUEST_CAN_ACCESS_JOBS,
+    QUEST_CAN_RECRUIT,
+    QUEST_SQUARE_ASLEEP,
+    QUEST_UNK5, // Run away related? It disallows "friend rescue" features.
+    QUEST_REACHED_POSTGAME,
+    QUEST_UNLOCKED_EVOLUTIONS,
+    QUEST_CAN_CHANGE_LEADER,
+    QUEST_CAN_DEPOSIT_PARTNER,
+    QUEST_UNK10, // Dojo-related
+    QUEST_UNK11,
+    QUEST_UNK12, // Music-related
+    QUEST_IN_WORLD_CALAMITY,
+    QUEST_MAZE_14,
+    QUEST_MAZE_15,
+    QUEST_LEGEND_ZAPDOS,
+    QUEST_LEGEND_MOLTRES,
+    QUEST_LEGEND_ARTICUNO,
+    QUEST_LEGEND_GROUDON,
+    QUEST_LEGEND_RAYQUAZA,
+
+    // SCENARIO_SUB2:
+
+    QUEST_LEGEND_KYOGRE,
+    QUEST_LEGEND_LUGIA,
+
+    // SCENARIO_SUB3:
+
+    QUEST_LEGEND_DEOXYS,
+
+    // SCENARIO_SUB4:
+
+    QUEST_LEGEND_HO_OH,
+
+    // SCENARIO_SUB5:
+
+    QUEST_LEGEND_MEWTWO,
+
+    // SCENARIO_SUB7:
+
+    QUEST_LEGEND_MEW,
+
+    // RESCUE_SCENARIO_CONQUEST_LIST:
+
+    QUEST_LEGEND_CELEBI,
+
+    // Special check:
+
+    QUEST_LUCARIO_RANK,
+
+    // TRAINING_CONQUEST_LIST:
+
+    QUEST_COMPLETED_ALL_MAZES,
+};
+
+enum FlagCalcOperation
+{
     CALC_SET,
     CALC_SUB,
     CALC_ADD,
@@ -16,7 +77,8 @@ enum FlagCalcOperation {
     CALC_RANDOM,
 };
 
-enum FlagJudgeOperation {
+enum FlagJudgeOperation
+{
     JUDGE_TRUE,
     JUDGE_FALSE,
     JUDGE_EQ,
@@ -30,7 +92,8 @@ enum FlagJudgeOperation {
     JUDGE_BIT_SET,
 };
 
-enum ScriptVarId {
+enum ScriptVarId
+{
     /* 0x00 */ VERSION,
     /* 0x01 */ CONDITION,
     /* 0x02 */ SCENARIO_SELECT,

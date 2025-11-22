@@ -756,7 +756,7 @@ bool8 sub_8048A68(Entity *param_1,Item *item)
   }
   else
   {
-    if (gDungeon->unk644.unk18 == 0) {
+    if (!gDungeon->unk644.canChangeLeader) {
         DisplayDungeonMessage(0,gUnknown_80F9BD8,1);
         return FALSE;
     }
