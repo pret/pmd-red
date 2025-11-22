@@ -563,7 +563,8 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                             }
                             break;
                         }
-                        case 0xe1: case 0xe2: {
+                        case 0xE1: // WAIT_FANFARE1
+                        case 0xE2: { // WAIT_FANFARE2
                             cmd = *action->scriptData.curPtr;
                             if (IsSoundPlaying(cmd.argShort)) {
                                 if (action->scriptData.unk2C++ < 3600) {
@@ -2865,7 +2866,12 @@ static s32 ExecuteScriptCommand(Action *action)
                 scriptData->unk2A = curCmd.argShort + OtherRandInt(curCmd.arg1 - curCmd.argShort);
                 return 2;
             }
-            case 0xdd ... 0xe2: {
+            case 0xDD:
+            case 0xDE:
+            case 0xDF:
+            case 0xE0:
+            case 0xE1: // WAIT_FANFARE1
+            case 0xE2: { // WAIT_FANFARE2
                 return 2; // do action
             }
             case 0xe3: {
@@ -2875,7 +2881,7 @@ static s32 ExecuteScriptCommand(Action *action)
                 }
                 break;
             }
-            case 0xe4: {
+            case 0xe4: { // ALERT_CUE
                 GroundScriptLockJumpZero(curCmd.argShort);
                 break;
             }

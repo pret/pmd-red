@@ -576,8 +576,7 @@ void sub_8001D88(void)
     }
     if (sMain_main > 0x11) {
         sub_80973A8(RESCUE_DUNGEON_WATERFALL_POND, TRUE);
-        if (((FindItemInInventory(ITEM_HM_DIVE) != -1) || (gTeamInventoryRef->teamStorage[ITEM_HM_DIVE] != 0)) ||
-             (ScriptVarScenarioAfter(SCENARIO_SUB2,0x21,3) != 0)) {
+        if (FindItemInInventory(ITEM_HM_DIVE) != -1 || gTeamInventoryRef->teamStorage[ITEM_HM_DIVE] != 0 || ScriptVarScenarioAfter(SCENARIO_SUB2,0x21,3)) {
             sub_80973A8(RESCUE_DUNGEON_SOLAR_CAVE, TRUE);
         }
         if (GetFriendAreaStatus(FURNACE_DESERT) != 0) {
@@ -611,10 +610,10 @@ void sub_8001D88(void)
             }
         }
         if (!ScriptVarScenarioBefore(SCENARIO_SUB6,0x30,0)) {
-            if ((ScriptVarScenarioEqual(SCENARIO_SUB2,0x22,0)) && HasRecruitedMon(MONSTER_ARTICUNO) && HasRecruitedMon(MONSTER_ZAPDOS) && HasRecruitedMon(MONSTER_MOLTRES)) {
+            if (ScriptVarScenarioEqual(SCENARIO_SUB2,0x22,0) && HasRecruitedMon(MONSTER_ARTICUNO) && HasRecruitedMon(MONSTER_ZAPDOS) && HasRecruitedMon(MONSTER_MOLTRES)) {
                 ScenarioCalc(SCENARIO_SUB2,0x22,1);
             }
-            if (((ScriptVarScenarioEqual(SCENARIO_SUB8,0,0)) && (ScriptVarScenarioAfter(SCENARIO_SUB2,0x21,3) != 0)) &&
+            if ((ScriptVarScenarioEqual(SCENARIO_SUB8,0,0) && (ScriptVarScenarioAfter(SCENARIO_SUB2,0x21,3))) &&
                  (GetFriendAreaStatus(SKY_BLUE_PLAINS))) {
                 ScenarioCalc(SCENARIO_SUB8,0x33,1);
             }

@@ -1,3 +1,4 @@
+#include "constants/bg_music.h"
 #include "constants/cutscenes.h"
 #include "constants/direction.h"
 #include "constants/event_flag.h"
@@ -169,6 +170,8 @@
 #define STOP_ANIMATION_ON_CURRENT_FRAME { 0xDD, 0, 0, 0, 0, NULL }
 // de..e2 - various HandleAction commands
 // e3..e5 - locking/condvar commands
+#define WAIT_FANFARE1(id)               { 0xE1, 0, id, 0, 0, NULL }
+#define WAIT_FANFARE2(id)               { 0xE2, 0, id, 0, 0, NULL }
 #define AWAIT_CUE(id)                   { 0xE3, 0, id, 0, 0, NULL }
 #define ALERT_CUE(id)                   { 0xE4, 0, id, 0, 0, NULL }
 #define CALL_LABEL(x)                   { 0xE6, 0, x, 0, 0, NULL }

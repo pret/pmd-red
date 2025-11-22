@@ -19,7 +19,7 @@ static const struct ScriptRef s_gs165_g0_s0_station_sref = { 404, 1, NULL /* ENT
 
 static const struct ScriptCommand s_gs165_g1_s0_station_sref_script[] = { /* 0x8218618 */
     DEBUGINFO_O(21),
-    BGM_SWITCH(24),
+    BGM_SWITCH(MUS_THE_ESCAPE),
     { 0x23, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
     { 0x26, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
     SELECT_MAP(165),

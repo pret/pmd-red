@@ -36,7 +36,7 @@ static const struct ScriptCommand s_gs167_g2_s0_station_sref_script[] = { /* 0x8
     DEBUGINFO_O(36),
     SELECT_MAP(167),
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(24),
+    BGM_SWITCH(MUS_THE_ESCAPE),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     { 0x23, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },

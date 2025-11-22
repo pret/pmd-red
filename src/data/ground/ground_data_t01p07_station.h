@@ -17,7 +17,7 @@ static const struct ScriptCommand s_gs8_g0_s0_station_sref_script[] = { /* 0x819
   LABEL(1), /* = 0x01 */
     JUMP_STATION(  1,  0),
   LABEL(2), /* = 0x02 */
-    BGM_SWITCH(8),
+    BGM_SWITCH(MUS_FILE_SELECT),
     JUMP_SCRIPT(COMMON_ENTER),
 };
 
@@ -50,7 +50,7 @@ static const struct ScriptCommand s_gs8_g1_s0_station_sref_script[] = { /* 0x819
     DEBUGINFO_O(50),
     SELECT_MAP(8),
     SELECT_ENTITIES(-1, -1),
-    BGM_SWITCH(8),
+    BGM_SWITCH(MUS_FILE_SELECT),
     { 0x22, 0x01, -0x0001,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     SELECT_EVENTS(0, 0),

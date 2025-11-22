@@ -23,7 +23,7 @@ static const struct ScriptCommand s_gs219_g1_s0_station_sref_script[] = { /* 0x8
     DEBUGINFO_O(23),
     SELECT_MAP(219),
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(114),
+    BGM_SWITCH(MUS_IN_THE_DEPTHS_OF_THE_PIT),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     BGM_FADEOUT(120),

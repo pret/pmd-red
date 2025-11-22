@@ -41,7 +41,7 @@ static const struct ScriptCommand s_gs199_g0_s0_station_sref_script[] = { /* 0x8
     SELECT_LIVES(0, 1),
     JUMP_LABEL(7),
   LABEL(7), /* = 0x07 */
-    BGM_SWITCH(104),
+    BGM_SWITCH(MUS_FROSTY_FOREST),
     JUMP_SCRIPT(COMMON_ENTER),
 };
 
@@ -148,7 +148,7 @@ static const struct ScriptCommand s_gs199_g1_s0_station_sref_script[] = { /* 0x8
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     SELECT_MAP(MAP_FROSTY_FOREST_MID),
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(104),
+    BGM_SWITCH(MUS_FROSTY_FOREST),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     SELECT_EVENTS(0, 0),
@@ -216,7 +216,7 @@ static const struct ScriptCommand s_gs199_g2_s0_station_sref_script[] = { /* 0x8
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     SELECT_MAP(MAP_FROSTY_FOREST_MID),
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(104),
+    BGM_SWITCH(MUS_FROSTY_FOREST),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     SELECT_EVENTS(0, 0),

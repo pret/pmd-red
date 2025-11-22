@@ -47,7 +47,7 @@ static const struct ScriptCommand s_gs166_g1_s0_lives0_dlg0[] = { /* 0x8218cb0 *
     PORTRAIT_REP(0x0001, 0x0000000c),
     MSG_NPC(1, _(" Oh, no! Look!")),
     TEXTBOX_CLEAR,
-    BGM_SWITCH(38),
+    BGM_SWITCH(MUS_THE_MOUNTAIN_OF_FIRE),
     ROTATE_TO(4, DIR_TRANS_11, DIRECTION_EAST),
     WAIT(20),
     ALERT_CUE(3),

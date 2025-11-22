@@ -8,7 +8,7 @@
 
 static const struct ScriptCommand s_gs162_g0_s0_station_sref_script[] = { /* 0x820fd30 */
     DEBUGINFO_O(10),
-    SELECT_MAP(162),
+    SELECT_MAP(MAP_PERSONALITY_TEST_CYAN),
     BGM_STOP,
     JUMP_SCRIPT(COMMON_ENTER),
 };
@@ -17,9 +17,9 @@ static const struct ScriptRef s_gs162_g0_s0_station_sref = { 404, 1, NULL /* ENT
 
 static const struct ScriptCommand s_gs162_g1_s0_station_sref_script[] = { /* 0x820fda8 */
     DEBUGINFO_O(19),
-    SELECT_MAP(162),
+    SELECT_MAP(MAP_PERSONALITY_TEST_CYAN),
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(4),
+    BGM_SWITCH(MUS_DREAM),
     { 0x22, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     BGM_FADEOUT(60),
@@ -59,9 +59,9 @@ static const struct ScriptCommand s_gs162_g1_s0_lives0_dlg0[] = { /* 0x820fe54 *
 
 static const struct ScriptCommand s_gs162_g2_s0_station_sref_script[] = { /* 0x8210084 */
     DEBUGINFO_O(61),
-    SELECT_MAP(162),
+    SELECT_MAP(MAP_PERSONALITY_TEST_CYAN),
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(4),
+    BGM_SWITCH(MUS_DREAM),
     { 0x22, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     FANFARE_FADEOUT2(60, 453),
@@ -119,9 +119,9 @@ static const struct ScriptCommand s_gs162_g2_s0_lives0_dlg0[] = { /* 0x8210190 *
 
 static const struct ScriptCommand s_gs162_g3_s0_station_sref_script[] = { /* 0x82104bc */
     DEBUGINFO_O(121),
-    SELECT_MAP(162),
+    SELECT_MAP(MAP_PERSONALITY_TEST_CYAN),
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(4),
+    BGM_SWITCH(MUS_DREAM),
     { 0x22, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     BGM_FADEOUT(60),
@@ -228,9 +228,9 @@ static const struct ScriptCommand s_gs162_g3_s1_lives0_dlg0[] = { /* 0x82107fc *
 
 static const struct ScriptCommand s_gs162_g4_s0_station_sref_script[] = { /* 0x8210bbc */
     DEBUGINFO_O(230),
-    SELECT_MAP(162),
+    SELECT_MAP(MAP_PERSONALITY_TEST_CYAN),
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(4),
+    BGM_SWITCH(MUS_DREAM),
     { 0x22, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     BGM_FADEOUT(60),
@@ -376,9 +376,9 @@ static const struct ScriptCommand s_gs162_g4_s1_lives0_dlg0[] = { /* 0x821124c *
 
 static const struct ScriptCommand s_gs162_g5_s0_station_sref_script[] = { /* 0x821161c */
     DEBUGINFO_O(378),
-    SELECT_MAP(162),
+    SELECT_MAP(MAP_PERSONALITY_TEST_CYAN),
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(5),
+    BGM_SWITCH(MUS_BENEVOLENT_SPIRIT),
     { 0x27, 0x00,  0x0005,  0x00000020,  0x00ffffff, NULL },
     AWAIT_CUE(3),
     FANFARE_PLAY2(506),
@@ -411,9 +411,9 @@ static const struct ScriptCommand s_gs162_g5_s0_lives0_dlg0[] = { /* 0x82116b8 *
 
 static const struct ScriptCommand s_gs162_g6_s0_station_sref_script[] = { /* 0x82117e4 */
     DEBUGINFO_O(413),
-    SELECT_MAP(162),
+    SELECT_MAP(MAP_PERSONALITY_TEST_CYAN),
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(5),
+    BGM_SWITCH(MUS_BENEVOLENT_SPIRIT),
     { 0x22, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     BGM_FADEOUT(60),
@@ -674,7 +674,7 @@ static const struct ScriptCommand s_gs162_g6_s1_lives0_dlg0[] = { /* 0x8212774 *
 
 static const struct ScriptCommand s_gs162_g7_s0_station_sref_script[] = { /* 0x8212df4 */
     DEBUGINFO_O(676),
-    SELECT_MAP(162),
+    SELECT_MAP(MAP_PERSONALITY_TEST_CYAN),
     SELECT_ENTITIES(-1, -1),
     { 0x27, 0x01,  0x000e,  0x0000001e,  0x00000000, NULL },
     AWAIT_CUE(3),
@@ -711,9 +711,9 @@ static const struct ScriptCommand s_gs162_g7_s0_lives1_dlg0[] = { /* 0x8212f40 *
 
 static const struct ScriptCommand s_gs162_g8_s0_station_sref_script[] = { /* 0x8212f90 */
     DEBUGINFO_O(713),
-    SELECT_MAP(162),
+    SELECT_MAP(MAP_PERSONALITY_TEST_CYAN),
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(5),
+    BGM_SWITCH(MUS_BENEVOLENT_SPIRIT),
     { 0x22, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     BGM_FADEOUT(60),
@@ -976,9 +976,9 @@ static const struct ScriptCommand s_gs162_g8_s1_lives0_dlg0[] = { /* 0x8213b50 *
 
 static const struct ScriptCommand s_gs162_g9_s0_station_sref_script[] = { /* 0x8214480 */
     DEBUGINFO_O(978),
-    SELECT_MAP(162),
+    SELECT_MAP(MAP_PERSONALITY_TEST_CYAN),
     SELECT_ENTITIES(-1, -1),
-    BGM_SWITCH(5),
+    BGM_SWITCH(MUS_BENEVOLENT_SPIRIT),
     { 0x27, 0x00,  0x0005,  0x0000003c,  0x00ffffff, NULL },
     AWAIT_CUE(3),
     BGM_FADEOUT(60),
@@ -1235,7 +1235,7 @@ static const struct ScriptCommand s_gs162_g9_s1_lives0_dlg0[] = { /* 0x82157b8 *
 
 static const struct ScriptCommand s_gs162_g10_s0_station_sref_script[] = { /* 0x8215d28 */
     DEBUGINFO_O(1237),
-    SELECT_MAP(162),
+    SELECT_MAP(MAP_PERSONALITY_TEST_CYAN),
     SELECT_ENTITIES(-1, 0),
     { 0x27, 0x01,  0x000e,  0x0000001e,  0x00000000, NULL },
     AWAIT_CUE(3),

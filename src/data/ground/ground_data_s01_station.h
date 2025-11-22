@@ -27,7 +27,7 @@ static const struct ScriptCommand s_gs223_g1_s0_station_sref_script[] = { /* 0x8
     MSG_ON_BG(_("{CENTER_ALIGN}OK...{WAIT_PRESS}\n{CENTER_ALIGN}Let the interview begin!")),
     TEXTBOX_CLEAR,
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(12),
+    BGM_SWITCH(MUS_WELCOME_TO_THE_WORLD_OF_POKEMON),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     SPECIAL_TEXT(SPECIAL_TEXT_PERSONALITY_QUIZ, 0, 0),
     BGM_FADEOUT(30),

@@ -19,7 +19,7 @@ static const struct ScriptCommand s_gs169_g1_s0_station_sref_script[] = { /* 0x8
     DEBUGINFO_O(19),
     SELECT_MAP(169),
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(36),
+    BGM_SWITCH(MUS_ESCAPE_THROUGH_THE_SNOW),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     { 0x23, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },

@@ -891,7 +891,7 @@ static const struct ScriptCommand s_script_LIVES_WARP_ARRIVE_SUB[] = { /* 0x8121
 static const struct ScriptCommand s_script_GET_ITEM_FUNC[] = { /* 0x8121a54 */
     DEBUGINFO_O(892),
     FANFARE_PLAY(203),
-    { 0xe1, 0x00,  0x00cb,  0x00000000,  0x00000000, NULL },
+    WAIT_FANFARE1(203),
     TEXTBOX_CLEAR2,
     RET_DIRECT,
 };
@@ -899,7 +899,7 @@ static const struct ScriptCommand s_script_GET_ITEM_FUNC[] = { /* 0x8121a54 */
 static const struct ScriptCommand s_script_GET_ITEM_WAIT_FUNC[] = { /* 0x8121aa4 */
     DEBUGINFO_O(900),
     FANFARE_PLAY(203),
-    { 0xe1, 0x00,  0x00cb,  0x00000000,  0x00000000, NULL },
+    WAIT_FANFARE1(203),
     TEXTBOX_CLEAR,
     RET_DIRECT,
 };
@@ -907,7 +907,7 @@ static const struct ScriptCommand s_script_GET_ITEM_WAIT_FUNC[] = { /* 0x8121aa4
 static const struct ScriptCommand s_script_GET_ITEM2_FUNC[] = { /* 0x8121af4 */
     DEBUGINFO_O(908),
     FANFARE_PLAY(203),
-    { 0xe1, 0x00,  0x00cb,  0x00000000,  0x00000000, NULL },
+    WAIT_FANFARE1(203),
     TEXTBOX_CLEAR2,
     RET_DIRECT,
 };
@@ -915,7 +915,7 @@ static const struct ScriptCommand s_script_GET_ITEM2_FUNC[] = { /* 0x8121af4 */
 static const struct ScriptCommand s_script_GET_ITEM2_WAIT_FUNC[] = { /* 0x8121b44 */
     DEBUGINFO_O(916),
     FANFARE_PLAY(203),
-    { 0xe1, 0x00,  0x00cb,  0x00000000,  0x00000000, NULL },
+    WAIT_FANFARE1(203),
     TEXTBOX_CLEAR,
     RET_DIRECT,
 };
@@ -923,7 +923,7 @@ static const struct ScriptCommand s_script_GET_ITEM2_WAIT_FUNC[] = { /* 0x8121b4
 static const struct ScriptCommand s_script_JOIN_FUNC[] = { /* 0x8121b94 */
     DEBUGINFO_O(924),
     FANFARE_PLAY(204),
-    { 0xe1, 0x00,  0x00cc,  0x00000000,  0x00000000, NULL },
+    WAIT_FANFARE1(204),
     TEXTBOX_CLEAR2,
     RET_DIRECT,
 };
@@ -957,7 +957,7 @@ static const struct ScriptCommand s_script_SAVE_START_FUNC[] = { /* 0x8121cb4 */
     DEBUGINFO_O(957),
     { 0x23, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     { 0x3b, 0x43,  0x0000,  0x00000000,  0x00000000, NULL },
-    BGM_SWITCH(50),
+    BGM_SWITCH(MUS_BLANK_50),
     RET_DIRECT,
 };
 
@@ -979,7 +979,7 @@ static const struct ScriptCommand s_script_SAVE_END_FUNC[] = { /* 0x8121d44 */
 static const struct ScriptCommand s_script_SAVE_SOUND_FUNC[] = { /* 0x8121d94 */
     DEBUGINFO_O(980),
     { 0x3b, 0x43,  0x0000,  0x00000000,  0x00000000, NULL },
-    BGM_SWITCH(50),
+    BGM_SWITCH(MUS_BLANK_50),
     { 0xe0, 0x00,  0x0032,  0x00000000,  0x00000000, NULL },
     { 0x3b, 0x45,  0x001e,  0x00000000,  0x00000000, NULL },
     RET_DIRECT,

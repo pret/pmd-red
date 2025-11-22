@@ -20,7 +20,7 @@ s32 GetScriptVarArrayValue(u8 *localVarBuf, s32 varId, s32 idx);
 void SetScriptVarValue(u8 *localVarBuf, s32 varId, s32 val);
 void SetScriptVarArrayValue(u8 *localVarBuf, s32 varId, s32 idx, s32 val);
 s32 GetScriptVarArraySum(u8 *localVarBuf, s16 varId);
-void GetScriptVarScenario(s32 varId,u32 *outMain,u32 *outSub);
+void GetScriptVarScenario(s32 varID, u32 *outMain, u32 *outSub);
 void ScenarioCalc(s16 varId, s32 main, s32 sub);
 bool8 ScriptVarScenarioBefore(s16 varId, u32 main, s32 sub);
 bool8 ScriptVarScenarioEqual(s16 varId, u32 main, s32 sub);

@@ -1,27 +1,11 @@
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#define NPC_ARTICUNO 1
+#define NPC_ZAPDOS 2
+#define NPC_MOLTRES 3
 
 static const struct ScriptCommand s_gs158_g0_s0_station_sref_script[] = { /* 0x820c898 */
     DEBUGINFO_O(23),
-    SELECT_MAP(158),
+    SELECT_MAP(MAP_FRIEND_AREA_LEGENDARY_ISLAND),
     JUMPIF_SCENE_EQ(SCENARIO_SUB2, 34, 2, /* to label */ 0),
     CJUMP_SCENARIO_0(SCENARIO_MAIN),
     COND(JUDGE_EQ, 3, /* to label */ 1),
@@ -61,7 +45,7 @@ static const struct ScriptCommand s_gs158_g0_s0_station_sref_script[] = { /* 0x8
     SELECT_LIVES(0, 1),
     JUMP_LABEL(9),
   LABEL(9), /* = 0x09 */
-    BGM_SWITCH(117),
+    BGM_SWITCH(MUS_FRIEND_AREA_LEGENDARY_ISLAND),
     JUMP_SCRIPT(COMMON_ENTER),
 };
 
@@ -187,9 +171,9 @@ static const struct ScriptCommand s_gs158_g1_s0_lives2_dlg2[] = { /* 0x820d080 *
 
 static const struct ScriptCommand s_gs158_g2_s0_station_sref_script[] = { /* 0x820d0a0 */
     DEBUGINFO_O(189),
-    SELECT_MAP(158),
+    SELECT_MAP(MAP_FRIEND_AREA_LEGENDARY_ISLAND),
     SELECT_ENTITIES(-1, -1),
-    BGM_SWITCH(117),
+    BGM_SWITCH(MUS_FRIEND_AREA_LEGENDARY_ISLAND),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     WAIT(60),
@@ -224,6 +208,7 @@ static const struct ScriptCommand s_gs158_g2_s0_lives0_dlg0[] = { /* 0x820d22c *
     { 0x52, 0x00,  0x0000,  0x00040000,  0x00000000, NULL },
     { 0x89, 0x30,  0x0100,  0x00000004,  0x00000000, NULL },
     { 0xdf, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    // Our character looks around
     WAIT(30),
     ROTATE_TO(8, DIR_TRANS_10, DIRECTION_WEST),
     WAIT(30),
@@ -231,84 +216,96 @@ static const struct ScriptCommand s_gs158_g2_s0_lives0_dlg0[] = { /* 0x820d22c *
     WAIT(30),
     ROTATE_TO(8, DIR_TRANS_10, DIRECTION_NORTH),
     WAIT(60),
-    { 0x23, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
-    { 0x8b, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    // TODO: Find out how:
+    // Fade to black
+    // Fade in, camera shows Moltres (west), moltres floats up, fade to black
+    // Fade in, camera shows Zapdos (east), zapdos floats up, fade to black
+    // Fade in, camera shows Articuno (north), moltres and zapdos glide down
+    // Shadows appear, moltres faces east and zapdos faces west
+    // Moltres anim speeds up, attacks east, red flash
+    // Zapdos anim speeds up, attacks west, yellow flash
+    // Articuno anim speeds up, attacks south, white flash
+    // Fade in (slow), vortex stone appears with flashing white circle
+    // Our character walks north
+    { 0x23, 0x01,  30,  0x00000000,  0x00000000, NULL }, // Fade out black?
+    { 0x8b, 0x00,  DIRECTION_NORTHWEST,  0x00000000,  0x00000000, NULL },
     ALERT_CUE(4),
     AWAIT_CUE(5),
-    { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
-    ALERT_CUE(8),
+    { 0x22, 0x01,  30,  0x00000000,  0x00000000, NULL }, // Fade in black?
+    ALERT_CUE(8), // Moltres float
     AWAIT_CUE(5),
-    { 0x23, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
-    { 0x8b, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    { 0x23, 0x01,  30,  0x00000000,  0x00000000, NULL }, // Fade out black?
+    { 0x8b, 0x00,  DIRECTION_NORTHEAST,  0x00000000,  0x00000000, NULL },
     ALERT_CUE(4),
     AWAIT_CUE(5),
-    { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
-    ALERT_CUE(7),
+    { 0x22, 0x01,  30,  0x00000000,  0x00000000, NULL }, // Fade in black?
+    ALERT_CUE(7), // Zapdos float
     AWAIT_CUE(5),
-    { 0x23, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
-    { 0x8b, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    { 0x23, 0x01,  30,  0x00000000,  0x00000000, NULL }, // Fade out black?
+    { 0x8b, 0x00,  DIRECTION_NORTH,  0x00000000,  0x00000000, NULL },
     ALERT_CUE(4),
     AWAIT_CUE(5),
-    { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
-    ALERT_CUE(8),
-    ALERT_CUE(7),
+    { 0x22, 0x01,  30,  0x00000000,  0x00000000, NULL }, // Fade in black?
+    ALERT_CUE(8), // Moltres glide
+    ALERT_CUE(7), // Zapdos glide
     AWAIT_CUE(5),
     WAIT(60),
-    ALERT_CUE(8),
+    ALERT_CUE(8), // Moltres attack
     AWAIT_CUE(5),
-    { 0x28, 0x01,  0x0001,  0x00000005,  0x00ff1010, NULL },
+    { 0x28, 0x01,  0x0001,  0x00000005,  0x00ff1010, NULL }, // Flash to red?
     FANFARE_PLAY2(502),
-    { 0x27, 0x01,  0x0001,  0x00000005,  0x00ff1010, NULL },
-    ALERT_CUE(7),
+    { 0x27, 0x01,  0x0001,  0x00000005,  0x00ff1010, NULL }, // Flash from red?
+    ALERT_CUE(7), // Zapdos attack
     AWAIT_CUE(5),
-    { 0x28, 0x01,  0x0001,  0x00000005,  0x00ffff10, NULL },
+    { 0x28, 0x01,  0x0001,  0x00000005,  0x00ffff10, NULL }, // Flash to yellow?
     FANFARE_PLAY2(502),
-    { 0x27, 0x01,  0x0001,  0x00000005,  0x00ffff10, NULL },
-    ALERT_CUE(6),
+    { 0x27, 0x01,  0x0001,  0x00000005,  0x00ffff10, NULL }, // Flash from yellow?
+    ALERT_CUE(6), // Articuno attack
     AWAIT_CUE(5),
     FANFARE_PLAY2(506),
-    { 0x28, 0x01,  0x0001,  0x00000005,  0x00ffffff, NULL },
-    ALERT_CUE(6),
-    ALERT_CUE(7),
-    ALERT_CUE(8),
-    ALERT_CUE(10),
+    { 0x28, 0x01,  0x0001,  0x00000005,  0x00ffffff, NULL }, // Flash to white?
+    ALERT_CUE(6), // Articuno something?
+    ALERT_CUE(7), // Zapdos something?
+    ALERT_CUE(8), // Moltres something?
+    ALERT_CUE(10), // Vortex stone or circle?
     WAIT(60),
-    { 0x27, 0x01,  0x0001,  0x0000003c,  0x00ffffff, NULL },
-    ALERT_CUE(10),
+    { 0x27, 0x01,  0x0001,  0x0000003c,  0x00ffffff, NULL }, // Flash from white?
+    ALERT_CUE(10), // Vortex stone or circle?
     AWAIT_CUE(5),
     WAIT(60),
-    WALK_GRID(256, 6),
-    ALERT_CUE(7),
-    ALERT_CUE(8),
+    WALK_GRID(256, 6), // Our character walks up?
+    ALERT_CUE(7), // Zapdos faces SouthWest
+    ALERT_CUE(8), // Moltres faces SouthEast
     WAIT(60),
-    PORTRAIT(PLACEMENT_TOP, 0x0001, 0x00000000),
-    PORTRAIT(PLACEMENT_RIGHT, 0x0002, 0x00000000),
-    PORTRAIT(PLACEMENT_LEFT_, 0x0003, 0x00000000),
-    MSG_NPC(3, _(" Fire, ice, and electricity...")),
+    PORTRAIT(PLACEMENT_TOP, NPC_ARTICUNO, 0),
+    PORTRAIT(PLACEMENT_RIGHT, NPC_ZAPDOS, 0),
+    PORTRAIT(PLACEMENT_LEFT_, NPC_MOLTRES, 0),
+    // Moltres speaks first.
+    MSG_NPC(NPC_MOLTRES, _(" Fire, ice, and electricity...")),
     TEXTBOX_CLEAR,
     WAIT(10),
-    MSG_NPC(1, _(" When the three powers\nmerge as one...")),
+    MSG_NPC(NPC_ARTICUNO, _(" When the three powers\nmerge as one...")),
     TEXTBOX_CLEAR,
     WAIT(10),
-    MSG_NPC(2, _(" The guardian of the sea is\nsaid to arise.")),
+    MSG_NPC(NPC_ZAPDOS, _(" The guardian of the sea is\nsaid to arise.")),
     TEXTBOX_CLEAR,
     WAIT(10),
-    MSG_NPC(3, _(" Our arrival at the\n{COLOR GREEN_H}Legendary Island{RESET}...")),
+    MSG_NPC(NPC_MOLTRES, _(" Our arrival at the\n{COLOR GREEN_H}Legendary Island{RESET}...")),
     TEXTBOX_CLEAR,
     WAIT(10),
-    MSG_NPC(2, _(" The three of us caused\nthe sea guardian to awaken.")),
-    MSG_NPC(2, _(" It is what caused whirlpools\nto grow into tornadoes.")),
+    MSG_NPC(NPC_ZAPDOS, _(" The three of us caused\nthe sea guardian to awaken.")),
+    MSG_NPC(NPC_ZAPDOS, _(" It is what caused whirlpools\nto grow into tornadoes.")),
     TEXTBOX_CLEAR,
     WAIT(10),
-    MSG_NPC(1, _(" I have here the\n{COLOR GREEN}Vortex Stone{RESET}.")),
-    MSG_NPC(1, _(" Bearing it, you will gain\npassage through the sea's tornadoes...")),
-    MSG_NPC(1, _(" It will lead you to a place\ncalled the {COLOR YELLOW_D}Silver Trench{RESET}.")),
+    MSG_NPC(NPC_ARTICUNO, _(" I have here the\n{COLOR GREEN}Vortex Stone{RESET}.")),
+    MSG_NPC(NPC_ARTICUNO, _(" Bearing it, you will gain\npassage through the sea's tornadoes...")),
+    MSG_NPC(NPC_ARTICUNO, _(" It will lead you to a place\ncalled the {COLOR YELLOW_D}Silver Trench{RESET}.")),
     TEXTBOX_CLEAR,
     WAIT(10),
-    MSG_NPC(2, _(" There, you will find the\nguardian of the sea.")),
+    MSG_NPC(NPC_ZAPDOS, _(" There, you will find the\nguardian of the sea.")),
     TEXTBOX_CLEAR,
     WAIT(10),
-    MSG_NPC(3, _(" Now go.\nThe guardian of the sea awaits you.")),
+    MSG_NPC(NPC_MOLTRES, _(" Now go.\nThe guardian of the sea awaits you.")),
     TEXTBOX_CLEAR,
     WAIT(30),
     WALK_RELATIVE(128, 0, -16),
@@ -317,12 +314,14 @@ static const struct ScriptCommand s_gs158_g2_s0_lives0_dlg0[] = { /* 0x820d22c *
     BGM_STOP,
     FANFARE_PLAY(212),
     MSG_INSTANT(_("{CENTER_ALIGN}Obtained the {COLOR GREEN}Vortex Stone{RESET}.")),
-    { 0xe1, 0x00,  0x00d4,  0x00000000,  0x00000000, NULL },
+    WAIT_FANFARE1(212),
     MSG_INSTANT(_("{CENTER_ALIGN}And...")),
     FANFARE_PLAY(205),
     MSG_INSTANT(_("{CENTER_ALIGN}Gained access to\n{CENTER_ALIGN}the {COLOR YELLOW_D}Silver Trench{RESET}!")),
-    { 0xe1, 0x00,  0x00cd,  0x00000000,  0x00000000, NULL },
+    WAIT_FANFARE1(205),
     TEXTBOX_CLEAR,
+    // TODO: Find out how:
+    // Fades to black, then you wake up in your bed...
     ALERT_CUE(3),
     HALT,
 };

@@ -36,7 +36,7 @@ static const struct ScriptCommand s_gs0_g0_s0_station_sref_script[] = { /* 0x813
     SELECT_LIVES(0, 3),
     JUMP_LABEL(7),
   LABEL(7), /* = 0x07 */
-    BGM_SWITCH(7),
+    BGM_SWITCH(MUS_POKEMON_SQUARE),
     JUMP_SCRIPT(COMMON_ENTER),
 };
 

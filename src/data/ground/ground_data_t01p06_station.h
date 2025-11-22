@@ -28,7 +28,7 @@ static const struct ScriptCommand s_gs7_g0_s0_station_sref_script[] = { /* 0x819
     SELECT_LIVES(0, 1),
     JUMP_LABEL(4),
   LABEL(4), /* = 0x04 */
-    BGM_SWITCH(110),
+    BGM_SWITCH(MUS_MAKUHITA_DOJO),
     JUMP_SCRIPT(COMMON_ENTER),
 };
 

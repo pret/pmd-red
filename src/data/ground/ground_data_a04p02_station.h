@@ -20,7 +20,7 @@ static const struct ScriptCommand s_gs172_g1_s0_station_sref_script[] = { /* 0x8
     SELECT_MAP(172),
     SELECT_ENTITIES(-1, 0),
     { 0x2d, 0x09,  0x0000,  0x00000022,  0x00000000, NULL },
-    BGM_SWITCH(22),
+    BGM_SWITCH(MUS_SKY_TOWER),
     ALERT_CUE(4),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(5),

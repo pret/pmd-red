@@ -73,7 +73,6 @@ extern void nullsub_16(void);
 extern void sub_80060EC(void);
 extern void sub_809977C(void);
 extern void UpdateFadeInTile(s32);
-extern void sub_8001D88(void);
 
 static s16 sub_8098FCC(u32 unused);
 

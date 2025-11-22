@@ -50,7 +50,8 @@ enum MusicID
     MUS_TIME_OF_REUNION,
     MUS_OPENING_TITLE,
     // 47 - 50 are blank/empty slots for BG Music
-    MUS_DUNGEON_FAIL = 51,
+    MUS_BLANK_50 = 50,
+    MUS_DUNGEON_FAIL,
     MUS_DUNGEON_COMPLETE,
     // 53 - 99 are blank/empty slots for BG Music
     MUS_FRIEND_AREA_UNUSED_1 = 100,
