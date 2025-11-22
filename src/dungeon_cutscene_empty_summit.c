@@ -54,7 +54,7 @@ void sub_80885C4(void)
 
 void sub_8088608(void)
 {
-    gDungeon->unk2 = 1;
+    gDungeon->unk2 = DUNGEON_UNK2_1;
 }
 
 void sub_8088618(void)

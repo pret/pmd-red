@@ -235,13 +235,13 @@ void sub_8068A84(Pokemon *pokemon)
     if (totalBodySize >= 7) {
         PrintColoredPokeNameToBuffer(gFormatBuffer_Monsters[0],pokemon,0);
         if (pokemon->dungeonLocation.id == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON) {
-            DisplayDungeonMessage(0,gUnknown_80FE0F4,1);
+            DisplayDungeonMessage_Async(0,gUnknown_80FE0F4,1);
         }
         else if (pokemon->dungeonLocation.id == DUNGEON_RESCUE_TEAM_BASE) {
-            DisplayDungeonMessage(0,gUnknown_80FE0F8,1);
+            DisplayDungeonMessage_Async(0,gUnknown_80FE0F8,1);
         }
         else {
-            DisplayDungeonMessage(0,gUnknown_80FE0AC,1);
+            DisplayDungeonMessage_Async(0,gUnknown_80FE0AC,1);
         }
     }
     else {
@@ -258,26 +258,26 @@ void sub_8068A84(Pokemon *pokemon)
                 ZeroOutItem(&monPtr->itemSlot);
                 PrintColoredPokeNameToBuffer(gFormatBuffer_Monsters[0],pokemon,6);
                 if (pokemon->dungeonLocation.id == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON) {
-                    DisplayDungeonMessage(0,gUnknown_80FE168,1);
+                    DisplayDungeonMessage_Async(0,gUnknown_80FE168,1);
                 }
                 else if (pokemon->dungeonLocation.id == DUNGEON_RESCUE_TEAM_BASE) {
                     ;
                 }
                 else {
-                    DisplayDungeonMessage(0,gUnknown_80FE134,1);
+                    DisplayDungeonMessage_Async(0,gUnknown_80FE134,1);
                 }
                 return;
             }
         }
         PrintColoredPokeNameToBuffer(gFormatBuffer_Monsters[0],pokemon,6);
         if (pokemon->dungeonLocation.id == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON) {
-            DisplayDungeonMessage(0,gUnknown_80FE0F4,1);
+            DisplayDungeonMessage_Async(0,gUnknown_80FE0F4,1);
         }
         else if (pokemon->dungeonLocation.id == DUNGEON_RESCUE_TEAM_BASE) {
-            DisplayDungeonMessage(0,gUnknown_80FE0F8,1);
+            DisplayDungeonMessage_Async(0,gUnknown_80FE0F8,1);
         }
         else {
-            DisplayDungeonMessage(0,gUnknown_80FE0AC,1);
+            DisplayDungeonMessage_Async(0,gUnknown_80FE0AC,1);
         }
     }
 }
@@ -370,7 +370,7 @@ void sub_8068BDC(bool8 a0)
         }
         else {
             WriteFriendAreaName(gFormatBuffer_Items[0], friendAreaId, FALSE);
-            DisplayDungeonMessage(NULL, gUnknown_80FE1A4, TRUE); // The Friend Area is full, a friend must be released.
+            DisplayDungeonMessage_Async(NULL, gUnknown_80FE1A4, TRUE); // The Friend Area is full, a friend must be released.
             while (1) {
                 ShowRecruitReleaseMenu(friendAreaId, j - areaCapacity.maxPokemon, j, monPointers);
                 for (id = 0; id < j; id++) {
@@ -447,7 +447,7 @@ static inline void ClearMonItemId(Pokemon *mon)
     mon->heldItem.id = ITEM_NOTHING;
 }
 
-void HandleFaint(Entity *entity, s32 dungeonExitReason_, Entity *param_3)
+void HandleFaint_Async(Entity *entity, s32 dungeonExitReason_, Entity *param_3)
 {
     u16 joinId;
     Entity EStack_a4;
@@ -505,13 +505,13 @@ void HandleFaint(Entity *entity, s32 dungeonExitReason_, Entity *param_3)
                 && dungeonExitReason != DUNGEON_EXIT_DELETED_FOR_EVENT
                 && dungeonExitReason != DUNGEON_EXIT_FAILED_TO_PROTECT_CLIENT
                 && dungeonExitReason != DUNGEON_EXIT_BLOWN_OUT_UNSEEN_FORCE
-                && gDungeon->prefight == PREFIGHT_NONE
+                && gDungeon->cutscene == CUTSCENE_NONE
                 && gDungeon->unk644.unk37 >= 0
                 && gDungeon->unk644.missionKind != DUNGEON_MISSION_OUTONRESCUE)
             {
                 if (gDungeon->unk644.unk37 > 0) {
                     if (DisplayDungeonYesNoMessage(NULL,gUnknown_80FE268,1) == 1) {
-                        DisplayDungeonMessage(NULL,gUnknown_80FE28C,1);
+                        DisplayDungeonMessage_Async(NULL,gUnknown_80FE28C,1);
                         gDungeon->unk4 = 1;
                         gDungeon->unk6 = 1;
                         gDungeon->unk644.unk10 = 1;
@@ -520,7 +520,7 @@ void HandleFaint(Entity *entity, s32 dungeonExitReason_, Entity *param_3)
                     }
                 }
                 else {
-                    DisplayDungeonMessage(NULL,gUnknown_80FE2D0,1);
+                    DisplayDungeonMessage_Async(NULL,gUnknown_80FE2D0,1);
                 }
             }
         }
@@ -579,10 +579,10 @@ void HandleFaint(Entity *entity, s32 dungeonExitReason_, Entity *param_3)
     }
 
     if (GetLeader() != NULL && dungeonExitReason != DUNGEON_EXIT_DELETED_FOR_EVENT && !entInfo->isTeamLeader && !gDungeon->unk10) {
-        sub_8084E00(entity,entInfo->monsterBehavior, dungeonExitReason == DUNGEON_EXIT_TRANSFORMED_INTO_FRIEND);
+        sub_8084E00_Async(entity, entInfo->monsterBehavior, dungeonExitReason == DUNGEON_EXIT_TRANSFORMED_INTO_FRIEND);
         if (IS_DEOXYS_FORM_MONSTER(entInfo->apparentID) && !IsFloorwideFixedRoom() && entInfo->isNotTeamMember) {
             gDungeon->deoxysDefeat = 1;
-            DisplayDungeonLoggableMessageTrue(entity,gUnknown_80FA580);
+            DisplayDungeonLoggableMessageTrue_Async(entity,gUnknown_80FA580);
             sub_803E178();
             UpdateTrapsVisibility();
         }
@@ -1146,7 +1146,7 @@ void sub_8069F9C(Entity *pokemon, Entity *target, Move *move)
                 targetInfo->abilities[abilityIndex] = abilities[randomIndex];
                 gDungeon->unkC = 1;
                 SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], target, 0);
-                TryDisplayDungeonLoggableMessage3(pokemon, target, gUnknown_80FCC7C);
+                TryDisplayDungeonLoggableMessage3_Async(pokemon, target, gUnknown_80FCC7C);
                 sub_8042900(target);
                 EndAbilityImmuneStatus(pokemon, target);
             }
@@ -1170,7 +1170,7 @@ void sub_8069F9C(Entity *pokemon, Entity *target, Move *move)
                 SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], target, 0);
                 str = GetUnformattedTypeString(targetInfo->types[0]);
                 strcpy(gFormatBuffer_Items[0], str);
-                TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FCCAC);
+                TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FCCAC);
                 sub_8042968(target);
             }
         }
@@ -1195,7 +1195,7 @@ void sub_806A120(Entity * pokemon, Entity * target, Move* move)
       SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
       typeString = GetUnformattedTypeString(uVar2_u32);
       strcpy(gFormatBuffer_Items[0],typeString);
-      TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FDCC8);
+      TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FDCC8);
     }
   }
 }
@@ -1256,7 +1256,7 @@ void TryPointCameraToMonster(Entity *pokemon, u8 param_2)
 {
   if ((EntityIsValid(pokemon)) && (GetEntityType(pokemon) == ENTITY_MONSTER) && (gDungeon->unk181e8.cameraTarget != pokemon)) {
     if (param_2 != '\0') {
-      sub_804178C(1);
+      sub_804178C_Async(1);
       while (gDungeon->unk12 < 0x3c) {
         DungeonRunFrameActions(0x34);
       }
@@ -1459,7 +1459,7 @@ void sub_806A5B8(Entity *entity)
             }
 
             if (str != NULL) {
-                LogMessageByIdWithPopupCheckUser(entity, str);
+                LogMessageByIdWithPopupCheckUser_Async(entity, str);
             }
         }
     }
@@ -1543,7 +1543,7 @@ void DisplayMsgIfNewIqSkillLearned(EntityInfo *info, s32 iqBefore)
 
         if (hadIqSkillBefore != hasIqSkillNow) {
             strcpy(gFormatBuffer_Items[0], GetIQSkillName(i));
-            DisplayDungeonLoggableMessageTrue(NULL, gUnknown_80FEAC4); // IQ rose! \n It learned the IQ skill 'i0'
+            DisplayDungeonLoggableMessageTrue_Async(NULL, gUnknown_80FEAC4); // IQ rose! \n It learned the IQ skill 'i0'
         }
     }
 }
@@ -1605,13 +1605,13 @@ void sub_806A9B4(Entity *entity, s32 moveIndex)
         s32 ret = sub_80935B8(info->moves.moves, moveIndex);
 
         if (ret == 0) {
-            LogMessageByIdWithPopupCheckUser(entity, gPtrLinkedMovesComeApartMessage);
+            LogMessageByIdWithPopupCheckUser_Async(entity, gPtrLinkedMovesComeApartMessage);
         }
         else if (ret == 1) {
-            LogMessageByIdWithPopupCheckUser(entity, gPtrLinkMoveOneUseWarningMessage);
+            LogMessageByIdWithPopupCheckUser_Async(entity, gPtrLinkMoveOneUseWarningMessage);
         }
         else if (ret == 2) {
-            LogMessageByIdWithPopupCheckUser(entity, gPtrLinkMoveTwoUsesWarningMessage);
+            LogMessageByIdWithPopupCheckUser_Async(entity, gPtrLinkMoveTwoUsesWarningMessage);
         }
     }
 }

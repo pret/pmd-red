@@ -52,7 +52,7 @@ void RunMonsterAI(Entity *pokemon, u32 unused)
                 {
                     pokemonInfo->useHeldItem = FALSE;
                     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], pokemon, 0);
-                    LogMessageByIdWithPopupCheckUser(pokemon, gPtrCouldntBeUsedMessage);
+                    LogMessageByIdWithPopupCheckUser_Async(pokemon, gPtrCouldntBeUsedMessage);
                     return;
                 }
                 AIDecideUseItem(pokemon);

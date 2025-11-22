@@ -59,25 +59,25 @@ void sub_808974C(void)
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y + -3);
 }
 
-void sub_8089788(Entity *entity, u8 param_2, u8 param_3)
+void sub_8089788(Entity *entity, u8 monsterBehavior, u8 cutscene)
 {
   Entity *monEntity;
   s32 index;
   bool8 found = FALSE;
 
-  if (param_3 == 0x1A || param_3 == 0x1B) {
+  if (cutscene == CUTSCENE_UPROAR_FOREST_ATTEMPT1 || cutscene == CUTSCENE_UPROAR_FOREST_ATTEMPT2) {
     for(index = 0; index < DUNGEON_MAX_WILD_POKEMON; index++)
     {
       monEntity = gDungeon->wildPokemon[index];
-      if ((EntityIsValid(monEntity)) && (monEntity != entity) && (GetEntInfo(monEntity)->monsterBehavior == param_2)) {
+      if ((EntityIsValid(monEntity)) && (monEntity != entity) && (GetEntInfo(monEntity)->monsterBehavior == monsterBehavior)) {
         found = TRUE;
         break;
       }
     }
 
     if(!found){
-        sub_8097FA8(0x11);
-        gDungeon->unk2 = 1;
+        sub_8097FA8(17);
+        gDungeon->unk2 = DUNGEON_UNK2_1;
     }
   }
 }
@@ -143,7 +143,7 @@ void sub_80898E4(void)
 
 static void sub_80898F8(Entity *r0)
 {
-    HandleFaint(r0, DUNGEON_EXIT_DELETED_FOR_EVENT, 0);
+    HandleFaint_Async(r0, DUNGEON_EXIT_DELETED_FOR_EVENT, 0);
 }
 
 static void sub_8089908(Entity *r0)

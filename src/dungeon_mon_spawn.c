@@ -444,7 +444,7 @@ void SpawnWildMonsOnFloor(void)
     s32 x, y;
     bool8 r8 = (gDungeon->unk644.unk44 != 0);
 
-    if (sub_80860A8(ITEM_MUSIC_BOX) && !HasRecruitedMon(MONSTER_MEW)) {
+    if (ItemInInventoryOrHeld(ITEM_MUSIC_BOX) && !HasRecruitedMon(MONSTER_MEW)) {
         gDungeon->unk37FF = FALSE;
     }
     else {

@@ -110,7 +110,7 @@ void sub_80479B8(bool8 param_1, bool8 param_2, u8 param_3, Entity *pokemon, Enti
                     PlaySoundEffect(0x14d);
                     sub_8045BF8(gFormatBuffer_Items[0],item);
                     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
-                    TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FDBB8); // $m0 caught the $i0
+                    TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FDBB8); // $m0 caught the $i0
                     info->heldItem = *item;
                     sub_806A6E8(target);
                 }
@@ -126,10 +126,10 @@ void sub_80479B8(bool8 param_1, bool8 param_2, u8 param_3, Entity *pokemon, Enti
 
     if (item->flags & ITEM_FLAG_STICKY) {
         sub_8045BF8(gFormatBuffer_Items[0],item);
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gItemStickyDoesntWorkText);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gItemStickyDoesntWorkText);
         if (param_1) {
             u8 uStack_24;
-            sub_806F370(pokemon,target,gUnknown_80F4FAE,1,&uStack_24,0,DUNGEON_EXIT_FELLED_BY_THROWN_ITEM,RESIDUAL_DAMAGE_REGULAR,0,0);
+            sub_806F370_Async(pokemon,target,gUnknown_80F4FAE,1,&uStack_24,0,DUNGEON_EXIT_FELLED_BY_THROWN_ITEM,RESIDUAL_DAMAGE_REGULAR,0,0);
             EnemyEvolution(pokemon);
             return;
         }
@@ -145,10 +145,10 @@ void sub_80479B8(bool8 param_1, bool8 param_2, u8 param_3, Entity *pokemon, Enti
     if (GetItemCategory(item->id) == CATEGORY_TMS_HMS || GetItemCategory(item->id) == CATEGORY_LINK_BOX) {
         if (param_1) {
             u8 uStack_23;
-            sub_806F370(pokemon,target,gUnknown_80F4FAC,1,&uStack_23,0,DUNGEON_EXIT_FELLED_BY_THROWN_ITEM,RESIDUAL_DAMAGE_REGULAR,0,0);
+            sub_806F370_Async(pokemon,target,gUnknown_80F4FAC,1,&uStack_23,0,DUNGEON_EXIT_FELLED_BY_THROWN_ITEM,RESIDUAL_DAMAGE_REGULAR,0,0);
         }
         else {
-            TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FE458);
+            TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FE458);
         }
     }
     else {
@@ -349,10 +349,10 @@ void sub_80479B8(bool8 param_1, bool8 param_2, u8 param_3, Entity *pokemon, Enti
             default:
                 if (param_1) {
                     u8 auStack_22;
-                    sub_806F370(pokemon,target,gUnknown_80F4FAC,1,&auStack_22,0,DUNGEON_EXIT_FELLED_BY_THROWN_ITEM,RESIDUAL_DAMAGE_REGULAR,0,0);
+                    sub_806F370_Async(pokemon,target,gUnknown_80F4FAC,1,&auStack_22,0,DUNGEON_EXIT_FELLED_BY_THROWN_ITEM,RESIDUAL_DAMAGE_REGULAR,0,0);
                 }
                 else {
-                    TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FE458);
+                    TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FE458);
                 }
                 break;
         }
@@ -379,7 +379,7 @@ static void sub_80482FC(Entity *pokemon, Entity *target, u32 pp, u8 param_4)
 
 static void sub_8048340(Entity *pokemon, Entity *target, u32 r2)
 {
-    sub_806F370(pokemon, target, r2, 1, 0, 0, DUNGEON_EXIT_FELLED_BY_THROWN_ROCK, RESIDUAL_DAMAGE_REGULAR, 0, 0);
+    sub_806F370_Async(pokemon, target, r2, 1, 0, 0, DUNGEON_EXIT_FELLED_BY_THROWN_ROCK, RESIDUAL_DAMAGE_REGULAR, 0, 0);
 }
 
 static void HealSeedItemAction(Entity *pokemon, Entity *target, u8 r2)
@@ -433,7 +433,7 @@ static void CheriBerryItemAction(Entity *pokemon, Entity *target)
         EndBurnClassStatus(pokemon, target);
     else
         // Pointer to "But nothing happened!"
-        TryDisplayDungeonLoggableMessage3(pokemon, target, gUnknown_80F89F4);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon, target, gUnknown_80F89F4);
 }
 
 static void PechaBerryItemAction(Entity *pokemon, Entity *target)
@@ -442,7 +442,7 @@ static void PechaBerryItemAction(Entity *pokemon, Entity *target)
     if (ENTITY_POISONED(entInfo))
         EndBurnClassStatus(pokemon, target);
     else
-        TryDisplayDungeonLoggableMessage3(pokemon, target, gUnknown_80F89F4); // Pointer to "But nothing happened!"
+        TryDisplayDungeonLoggableMessage3_Async(pokemon, target, gUnknown_80F89F4); // Pointer to "But nothing happened!"
 }
 
 static void WarpSeedItemAction(Entity *pokemon, Entity *target)
@@ -473,7 +473,7 @@ static void StunSeedItemAction(Entity *pokemon, Entity *target)
 static void PlainSeedItemAction(Entity *pokemon, Entity *target)
 {
     // Pointer to "But nothing happened!"
-    TryDisplayDungeonLoggableMessage3(pokemon, target, gUnknown_80F89F4);
+    TryDisplayDungeonLoggableMessage3_Async(pokemon, target, gUnknown_80F89F4);
 }
 
 static void DoomSeedItemAction(Entity *pokemon, Entity *target)
@@ -489,7 +489,7 @@ static void RawstBerryItemAction(Entity *pokemon, Entity *target)
     {
         SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], target, 0);
         // Pointer to "But nothing happened!"
-        TryDisplayDungeonLoggableMessage3(pokemon, target, gUnknown_80FB580);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon, target, gUnknown_80FB580);
     }
 }
 
@@ -503,15 +503,15 @@ static void HungerSeedItemAction(Entity *pokemon, Entity * target)
     entityInfo = GetEntInfo(target);
     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], target, 0);
     if (IqSkillIsEnabled(target, IQ_SELF_CURER))
-        TryDisplayDungeonLoggableMessage3(pokemon, target, gPtrSelfHealPreventedHungerMessage);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon, target, gPtrSelfHealPreventedHungerMessage);
     else
     {
       if (FixedPointToInt(entityInfo->belly) != 0) {
         entityInfo->belly = IntToFixedPoint(0);
-        TryDisplayDungeonLoggableMessage3(pokemon, target, gUnknown_80F9740);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon, target, gUnknown_80F9740);
       }
       else
-        TryDisplayDungeonLoggableMessage3(pokemon, target, gUnknown_80F9760);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon, target, gUnknown_80F9760);
     }
   }
 }
@@ -547,18 +547,18 @@ static void GinsengItemAction(Entity *pokemon, Entity * target)
         }
 
         if (isMoveBoosted) {
-            TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FE454);
+            TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FE454);
             if (moveBoost != 1) {
                 sub_803E708(10,0x40);
-                TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FE434);
+                TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FE434);
             }
         }
         else {
-            TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FE40C);
+            TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FE40C);
         }
     }
     else {
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FE40C);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FE40C);
     }
 }
 
@@ -575,7 +575,7 @@ static void BlastSeedItemAction(Entity *pokemon, Entity * target, u8 param_3)
     entityInfo_1 = entityInfo;
     if (gDungeon->unk644.unk31 != 0) {
         dmg = gBlastSeedThrownBossDmgValue;
-        TryDisplayDungeonLoggableMessage3(pokemon, target, gUnknown_80FEAE8); // It appears to be weak here...
+        TryDisplayDungeonLoggableMessage3_Async(pokemon, target, gUnknown_80FEAE8); // It appears to be weak here...
     }
     else {
         dmg = gBlastSeedThrownDmgValue;
@@ -583,7 +583,7 @@ static void BlastSeedItemAction(Entity *pokemon, Entity * target, u8 param_3)
     if (entityInfo_1->frozenClassStatus.status == STATUS_FROZEN) {
       EndFrozenClassStatus(pokemon, target);
     }
-    sub_806F370(pokemon, target, dmg, 1, auStack28, 0, DUNGEON_EXIT_DEFEATED_BLAST_SEED, RESIDUAL_DAMAGE_REGULAR, 0, 0);
+    sub_806F370_Async(pokemon, target, dmg, 1, auStack28, 0, DUNGEON_EXIT_DEFEATED_BLAST_SEED, RESIDUAL_DAMAGE_REGULAR, 0, 0);
   }
   else
   {
@@ -591,14 +591,14 @@ static void BlastSeedItemAction(Entity *pokemon, Entity * target, u8 param_3)
     entity = sub_80696FC(pokemon);
     if (entity == NULL)
     {
-      TryDisplayDungeonLoggableMessage3(pokemon, target, gUnknown_80FDBA0);
+      TryDisplayDungeonLoggableMessage3_Async(pokemon, target, gUnknown_80FDBA0);
     }
     else
     {
       entityInfo = GetEntInfo(entity);
       if (gDungeon->unk644.unk31 != 0) {
         dmg = gBlastSeedEatenBossDmgValue;
-        TryDisplayDungeonLoggableMessage3(pokemon, target, gUnknown_80FEAE8); // It appears to be weak here...
+        TryDisplayDungeonLoggableMessage3_Async(pokemon, target, gUnknown_80FEAE8); // It appears to be weak here...
       }
       else {
         dmg = gBlastSeedEatenDmgValue;
@@ -606,7 +606,7 @@ static void BlastSeedItemAction(Entity *pokemon, Entity * target, u8 param_3)
       if (entityInfo->frozenClassStatus.status == STATUS_FROZEN) {
         EndFrozenClassStatus(pokemon, entity);
       }
-      sub_806F370(pokemon, entity, dmg, 1, auStack28, 0, DUNGEON_EXIT_DEFEATED_BLAST_SEED, RESIDUAL_DAMAGE_REGULAR, 0, 0);
+      sub_806F370_Async(pokemon, entity, dmg, 1, auStack28, 0, DUNGEON_EXIT_DEFEATED_BLAST_SEED, RESIDUAL_DAMAGE_REGULAR, 0, 0);
     }
   }
 }
@@ -644,7 +644,7 @@ static void HandleGummiItemAction(Entity *pokemon, Entity *target, u8 gummiIndex
         targetInfo->IQ = 999;
       }
       if (baseIQ == targetInfo->IQ) {
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FD644);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FD644);
       }
       else {
         iVar5 = currIQ - baseIQ;
@@ -657,8 +657,8 @@ static void HandleGummiItemAction(Entity *pokemon, Entity *target, u8 gummiIndex
         if (((iVar5 < 9) && (iVar3 = 1, iVar5 < 5)) && (iVar3 = 3, 2 < iVar5)) {
           iVar3 = 2;
         }
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FD648[iVar4]);
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FD6E8[iVar3]);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FD648[iVar4]);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FD6E8[iVar3]);
         LoadIQSkills(target);
         DisplayMsgIfNewIqSkillLearned(targetInfo,baseIQ);
       }
@@ -700,11 +700,11 @@ bool8 sub_8048950(Entity *param_1,Item *item)
 
     moveID = GetItemMoveID(item->id);
     if ((item->flags & ITEM_FLAG_STICKY)) {
-        DisplayDungeonMessage(0,gItemStickyDoesntWorkText,1);
+        DisplayDungeonMessage_Async(0,gItemStickyDoesntWorkText,1);
         return FALSE;
     }
     else if (IsHMItem(item->id)) {
-        DisplayDungeonMessage(0,gPtrCantUseInDungeonMessage,1);
+        DisplayDungeonMessage_Async(0,gPtrCantUseInDungeonMessage,1);
         return FALSE;
     }
     else
@@ -751,13 +751,13 @@ bool8 sub_8048A68(Entity *param_1,Item *item)
   DungeonMon *pokemon;
 
   if ((item->flags & ITEM_FLAG_STICKY)) {
-    DisplayDungeonMessage(0,gItemStickyDoesntWorkText,1);
+    DisplayDungeonMessage_Async(0,gItemStickyDoesntWorkText,1);
     return FALSE;
   }
   else
   {
     if (!gDungeon->unk644.canChangeLeader) {
-        DisplayDungeonMessage(0,gUnknown_80F9BD8,1);
+        DisplayDungeonMessage_Async(0,gUnknown_80F9BD8,1);
         return FALSE;
     }
     else
@@ -814,7 +814,7 @@ bool8 HandleLinkBoxAction(Entity *entity, Item *item)
     ActionContainer originalAction;
 
     if (ItemSticky(item)) {
-        DisplayDungeonMessage(0,gItemStickyDoesntWorkText,1);
+        DisplayDungeonMessage_Async(0,gItemStickyDoesntWorkText,1);
         return FALSE;
     }
 
@@ -893,14 +893,14 @@ bool8 sub_8048D50(Entity *pokemon, Item *item)
 
   if ((item->flags & ITEM_FLAG_STICKY) != 0) {
     sub_8045BF8(gFormatBuffer_Items[0], item);
-    LogMessageByIdWithPopupCheckUser(pokemon,gItemStickyDoesntWorkText);
+    LogMessageByIdWithPopupCheckUser_Async(pokemon,gItemStickyDoesntWorkText);
     return FALSE;
   }
   else
   {
     if ((entityInfo->muzzled.muzzled == TRUE) && (IsEdibleItem(item->id))) {
         SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],pokemon,0);
-        LogMessageByIdWithPopupCheckUser(pokemon,gUnknown_80FDCA4);
+        LogMessageByIdWithPopupCheckUser_Async(pokemon,gUnknown_80FDCA4);
         return FALSE;
     }
   }
@@ -911,7 +911,7 @@ static void KeyItemAction(Entity *pokemon, Entity *target, u8 r2)
 {
     u8 temp;
     if(r2 != 0)
-        sub_806F370(pokemon, target, gUnknown_80F4FAC, 1, &temp, 0, DUNGEON_EXIT_FELLED_BY_THROWN_ITEM, RESIDUAL_DAMAGE_REGULAR, 0, 0);
+        sub_806F370_Async(pokemon, target, gUnknown_80F4FAC, 1, &temp, 0, DUNGEON_EXIT_FELLED_BY_THROWN_ITEM, RESIDUAL_DAMAGE_REGULAR, 0, 0);
     else
         sub_8051E7C(pokemon);
 }
@@ -942,27 +942,27 @@ static void GrimyFoodItemAction(Entity *pokemon, Entity * target)
 
 static void IcePartItemAction(Entity *pokemon, Entity *target, u8 r2)
 {
-    LogMessageByIdWithPopupCheckUser(pokemon, gPtrIcePartCrumbledMessage);
+    LogMessageByIdWithPopupCheckUser_Async(pokemon, gPtrIcePartCrumbledMessage);
 }
 
 static void RockPartItemAction(Entity *pokemon, Entity *target, u8 r2)
 {
-    LogMessageByIdWithPopupCheckUser(pokemon, gPtrRockPartCrumbledMessage);
+    LogMessageByIdWithPopupCheckUser_Async(pokemon, gPtrRockPartCrumbledMessage);
 }
 
 static void SteelPartItemAction(Entity *pokemon, Entity *target, u8 r2)
 {
-    LogMessageByIdWithPopupCheckUser(pokemon, gPtrSteelPartCrumbledMessage);
+    LogMessageByIdWithPopupCheckUser_Async(pokemon, gPtrSteelPartCrumbledMessage);
 }
 
 static void WishStoneItemAction(Entity *pokemon, Entity *target, u8 r2)
 {
-    LogMessageByIdWithPopupCheckUser(pokemon, gPtrWishStoneCrumbledMessage);
+    LogMessageByIdWithPopupCheckUser_Async(pokemon, gPtrWishStoneCrumbledMessage);
 }
 
 static void MusicBoxItemAction(Entity *pokemon, Entity *target, u8 r2)
 {
     sub_80421C0(pokemon, 0xD6);
-    LogMessageByIdWithPopupCheckUser(pokemon, gPtrMusicBoxPlayedCrumbledMessage);
+    LogMessageByIdWithPopupCheckUser_Async(pokemon, gPtrMusicBoxPlayedCrumbledMessage);
     sub_803E708(0x3C, 0x46);
 }

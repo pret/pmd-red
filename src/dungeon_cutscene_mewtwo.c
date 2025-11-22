@@ -65,7 +65,7 @@ void sub_8089978(void)
   sub_80855E4(sub_8086A3C);
   if(HasRecruitedMon(MONSTER_MEWTWO)){
     DungeonStartNewBGM(MUS_FRIEND_AREA_CRYPTIC_CAVE);
-    HandleFaint(MewtwoEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
+    HandleFaint_Async(MewtwoEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
   }
   else {
     gDungeon->unk7 = 1;
@@ -76,11 +76,11 @@ void sub_8089978(void)
   CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2],MONSTER_MEWTWO);
 }
 
-void sub_8089A00(u8 param_1, u8 param_2)
+void sub_8089A00(u8 monsterBehavior, u8 cutscene)
 {
-  if ((param_2 == 0x1d || param_2 == 0x1e || param_2 == 0x1f) && (param_1 == 0x11)) {
-    sub_8097FA8(0x13);
-    gDungeon->unk2 = 1;
+  if ((cutscene == CUTSCENE_WESTERN_CAVE_ATTEMPT1 || cutscene == CUTSCENE_WESTERN_CAVE_ATTEMPT2 || cutscene == CUTSCENE_WESTERN_CAVE_POSTSTORY) && monsterBehavior == BEHAVIOR_MEWTWO) {
+    sub_8097FA8(19);
+    gDungeon->unk2 = DUNGEON_UNK2_1;
   }
 }
 

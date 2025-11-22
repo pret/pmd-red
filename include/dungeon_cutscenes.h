@@ -124,7 +124,7 @@ void sub_808B030(u8);
 void sub_808B0B0(u8);
 void sub_808B2F4(void);
 void sub_808B35C(void);
-void sub_808B3E4(u8, u8, u8);
+void sub_808B3E4_Async(u8, u8, u8);
 void sub_808BDEC(void);
 void sub_808BE70(u8, u8, u8);
 void sub_808C10C(void);

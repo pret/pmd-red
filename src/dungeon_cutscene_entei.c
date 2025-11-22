@@ -59,7 +59,7 @@ void sub_8089C90(void)
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
   if (HasRecruitedMon(MONSTER_ENTEI)) {
-      HandleFaint(EnteiEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
+      HandleFaint_Async(EnteiEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
   }
   else {
       SetFacingDirection(EnteiEntity, DIRECTION_SOUTH);
@@ -68,11 +68,11 @@ void sub_8089C90(void)
   CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_ENTEI);
 }
 
-void sub_8089CFC(u8 param_1, u8 param_2)
+void sub_8089CFC(u8 monsterBehavior, u8 cutscene)
 {
-  if ((param_2 == 0x20 || param_2 == 0x21 || param_2 == 0x22) && (param_1 == 0x12)) {
-    sub_8097FA8(0x15);
-    gDungeon->unk2 = 1;
+  if ((cutscene == CUTSCENE_FIERY_FIELD_ATTEMPT1 || cutscene == CUTSCENE_FIERY_FIELD_ATTEMPT2 || cutscene == CUTSCENE_FIERY_FIELD_POSTSTORY) && monsterBehavior == BEHAVIOR_ENTEI) {
+    sub_8097FA8(21);
+    gDungeon->unk2 = DUNGEON_UNK2_1;
   }
 }
 

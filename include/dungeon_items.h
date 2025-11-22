@@ -13,7 +13,7 @@ void sub_8045C18(u8 *buffer, Item *item);
 #define FORCE_STICKY_NEVER 2
 void CreateItemWithStickyChance(Item *item, u8 itemID, u32 forceSticky);
 void CreateFloorItems(void);
-void TryLeaderItemPickUp(struct DungeonPos *pos, bool8 printMsg);
+void TryLeaderItemPickUp_Async(struct DungeonPos *pos, bool8 printMsg);
 bool8 SpawnItem(DungeonPos *pos, Item *item, bool8 a2);
 bool8 RemoveGroundItem(DungeonPos *pos, bool8 a2);
 bool8 sub_80462AC(Entity * entity, u8 hallucinating, u8 a2, u8 a3, u8 a4);

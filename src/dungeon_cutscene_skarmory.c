@@ -64,18 +64,18 @@ void sub_8086B94(void)
   diglettEntity = GetEntityFromMonsterBehavior(BEHAVIOR_DIGLETT);
   skarmoryEntity = GetEntityFromMonsterBehavior(BEHAVIOR_SKARMORY);
 
-  HandleFaint(skarmoryEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
-  HandleFaint(diglettEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
+  HandleFaint_Async(skarmoryEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
+  HandleFaint_Async(diglettEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y);
 }
 
-void sub_8086BDC(u8 param_1, u8 prefight)
+void sub_8086BDC(u8 monsterBehavior, u8 cutscene)
 {
-    if ((prefight == PREFIGHT_SKARMORY_ATTEMPT1 || prefight == PREFIGHT_SKARMORY_ATTEMPT2) && param_1 == 3) {
+    if ((cutscene == CUTSCENE_MT_STEEL_ATTEMPT1 || cutscene == CUTSCENE_MT_STEEL_ATTEMPT2) && monsterBehavior == BEHAVIOR_SKARMORY) {
         sub_8097FA8(1);
-        gDungeon->unk2 = 1;
+        gDungeon->unk2 = DUNGEON_UNK2_1;
     }
 }
 
@@ -166,11 +166,11 @@ void SkarmoryReFightDialogue(void)
 
 void sub_8086E40(void)
 {
-  SpriteLookAroundEffect(CutsceneGetLeader());
-  sub_803E708(10,0x46);
-  DisplayDungeonDialogue(&gUnknown_8100D3C);
-  sub_803E708(10,0x46);
-  gDungeon->unk2 = 1;
+    SpriteLookAroundEffect(CutsceneGetLeader());
+    sub_803E708(10, 70);
+    DisplayDungeonDialogue(&gUnknown_8100D3C);
+    sub_803E708(10, 70);
+    gDungeon->unk2 = DUNGEON_UNK2_1;
 }
 
 static void SkarmoryEntry(Entity * skarmoryEntity)

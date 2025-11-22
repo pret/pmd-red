@@ -1051,7 +1051,7 @@ void sub_809B474(void)
 
 void sub_809B57C(void)
 {
-    DrawDialogueBoxString();
+    DrawDialogueBoxString_Async();
     switch (sTextbox->type) {
         case 1:
         case 2:

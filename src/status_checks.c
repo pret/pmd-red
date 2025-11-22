@@ -29,13 +29,13 @@ bool8 HasStatusThatPreventsActing(Entity *pokemon)
 
     switch (pokemonInfo->frozenClassStatus.status) {
         case STATUS_FROZEN:
-            LogMessageByIdWithPopupCheckUser(pokemon, gPtrFrozenMessage);
+            LogMessageByIdWithPopupCheckUser_Async(pokemon, gPtrFrozenMessage);
             return TRUE;
         case STATUS_WRAP:
-            LogMessageByIdWithPopupCheckUser(pokemon, gPtrWrappedAroundMessage);
+            LogMessageByIdWithPopupCheckUser_Async(pokemon, gPtrWrappedAroundMessage);
             return TRUE;
         case STATUS_WRAPPED:
-            LogMessageByIdWithPopupCheckUser(pokemon, gPtrWrappedByMessage);
+            LogMessageByIdWithPopupCheckUser_Async(pokemon, gPtrWrappedByMessage);
             return TRUE;
         case STATUS_PETRIFIED:
             return TRUE;
@@ -43,15 +43,15 @@ bool8 HasStatusThatPreventsActing(Entity *pokemon)
 
     switch (pokemonInfo->cringeClassStatus.status) {
         case STATUS_PAUSED:
-            LogMessageByIdWithPopupCheckUser(pokemon, gPtrPausedMessage);
+            LogMessageByIdWithPopupCheckUser_Async(pokemon, gPtrPausedMessage);
             return TRUE;
         case STATUS_INFATUATED:
-            LogMessageByIdWithPopupCheckUser(pokemon, gPtrInfatuatedMessage);
+            LogMessageByIdWithPopupCheckUser_Async(pokemon, gPtrInfatuatedMessage);
             return TRUE;
     }
 
     if (pokemonInfo->bideClassStatus.status == STATUS_BIDE) {
-        LogMessageByIdWithPopupCheckUser(pokemon, gPtrBideMessage);
+        LogMessageByIdWithPopupCheckUser_Async(pokemon, gPtrBideMessage);
         return TRUE;
     }
     if (pokemonInfo->curseClassStatus.status == STATUS_DECOY) {
@@ -106,20 +106,20 @@ bool8 sub_80701A4(Entity *pokemon)
       case STATUS_SLEEP:
       case STATUS_NIGHTMARE:
       case STATUS_NAPPING:
-          LogMessageByIdWithPopupCheckUser(pokemon, gUnknown_80F95EC);
+          LogMessageByIdWithPopupCheckUser_Async(pokemon, gUnknown_80F95EC);
           return TRUE;
   }
 
   switch(pokemonInfo->frozenClassStatus.status)
   {
     case STATUS_FROZEN:
-        LogMessageByIdWithPopupCheckUser(pokemon,gPtrFrozenMessage);
+        LogMessageByIdWithPopupCheckUser_Async(pokemon,gPtrFrozenMessage);
         return TRUE;
     case STATUS_WRAP:
-        LogMessageByIdWithPopupCheckUser(pokemon,gPtrWrappedAroundMessage);
+        LogMessageByIdWithPopupCheckUser_Async(pokemon,gPtrWrappedAroundMessage);
         return TRUE;
     case STATUS_WRAPPED:
-        LogMessageByIdWithPopupCheckUser(pokemon,gPtrWrappedByMessage);
+        LogMessageByIdWithPopupCheckUser_Async(pokemon,gPtrWrappedByMessage);
         return TRUE;
     case STATUS_PETRIFIED:
         return TRUE;
@@ -130,10 +130,10 @@ bool8 sub_80701A4(Entity *pokemon)
         flag = TRUE;
         goto CRINGE_STATUS;
     case STATUS_PAUSED:
-        LogMessageByIdWithPopupCheckUser(pokemon,gPtrPausedMessage);
+        LogMessageByIdWithPopupCheckUser_Async(pokemon,gPtrPausedMessage);
         return TRUE;
     case STATUS_INFATUATED:
-        LogMessageByIdWithPopupCheckUser(pokemon,gPtrInfatuatedMessage);
+        LogMessageByIdWithPopupCheckUser_Async(pokemon,gPtrInfatuatedMessage);
         return TRUE;
     default:
     case STATUS_NONE:
@@ -141,12 +141,12 @@ bool8 sub_80701A4(Entity *pokemon)
     case 8:
     CRINGE_STATUS:
         if (pokemonInfo->bideClassStatus.status == STATUS_BIDE) {
-             LogMessageByIdWithPopupCheckUser(pokemon,gPtrBideMessage);
+             LogMessageByIdWithPopupCheckUser_Async(pokemon,gPtrBideMessage);
              return TRUE;
         }
         else if (((pokemonInfo->bideClassStatus.status != STATUS_NONE) && (pokemonInfo->bideClassStatus.status != STATUS_CHARGING)) && (pokemonInfo->bideClassStatus.status != STATUS_ENRAGED)) {
             if (flag) {
-                LogMessageByIdWithPopupCheckUser(pokemon,gPtrMoveInterruptedMessage);
+                LogMessageByIdWithPopupCheckUser_Async(pokemon,gPtrMoveInterruptedMessage);
             }
             else {
                 for(index = 0, move = pokemonInfo->moves.moves; index < MAX_MON_MOVES; move++, index++) {

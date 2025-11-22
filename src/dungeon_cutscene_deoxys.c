@@ -58,10 +58,10 @@ void sub_808C3A0(void)
   CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_DEOXYS_NORMAL);
 }
 
-void sub_808C414(u8 param_1,u8 param_2,u8 param_3)
+void sub_808C414(u8 monsterBehavior, u8 cutscene, u8 param_3)
 {
-  if ((param_2 == 0x35) && (param_1 == 0x1D)) {
-    gDungeon->unk2 = 1;
+  if (cutscene == CUTSCENE_METEOR_CAVE && monsterBehavior == BEHAVIOR_DEOXYS_NORMAL) {
+    gDungeon->unk2 = DUNGEON_UNK2_1;
     DungeonStartNewBGM(MUS_RAYQUAZAS_DOMAIN);
   }
 }
@@ -127,7 +127,7 @@ static void sub_808C550(void)
 
 static void sub_808C590(Entity *r0)
 {
-    HandleFaint(r0, DUNGEON_EXIT_DELETED_FOR_EVENT, 0);
+    HandleFaint_Async(r0, DUNGEON_EXIT_DELETED_FOR_EVENT, 0);
 }
 
 static void SetupDeoxysFacingDirection(Entity *deoxysEntity)

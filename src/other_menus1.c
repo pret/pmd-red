@@ -354,7 +354,7 @@ static void sub_8037748(void)
     if ((sUnknown_203B35C->unk14 & 8) != 0)
       AddSprite(&sUnknown_203B35C->unkC, 0x100, NULL, NULL);
 
-    DrawDialogueBoxString();
+    DrawDialogueBoxString_Async();
     sUnknown_203B35C->unk14++;
 }
 

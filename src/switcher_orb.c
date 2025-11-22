@@ -34,12 +34,12 @@ void HandleSwitcherOrb(Entity *pokemon, Entity *target, bool8 unused)
 
   if (AbilityIsActive(pokemon, ABILITY_SUCTION_CUPS)) {
     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],pokemon,0);
-    TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FCAC0); // $m0 is anchored! It won't switch places
+    TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FCAC0); // $m0 is anchored! It won't switch places
   }
   else if(AbilityIsActive(target, ABILITY_SUCTION_CUPS))
   {
     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
-    TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FCAC0); // $m0 is anchored! It won't switch places
+    TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FCAC0); // $m0 is anchored! It won't switch places
   }
   else
   {
@@ -60,7 +60,7 @@ void HandleSwitcherOrb(Entity *pokemon, Entity *target, bool8 unused)
         sub_807EC28(FALSE);
       }
       sub_806A5B8(pokemon);
-      TryTriggerMonsterHouseWithMsg(pokemon,gDungeon->forceMonsterHouse);
+      TryTriggerMonsterHouseWithMsg_Async(pokemon,gDungeon->forceMonsterHouse);
     }
 
     if (EntityIsValid(target)) {
@@ -69,7 +69,7 @@ void HandleSwitcherOrb(Entity *pokemon, Entity *target, bool8 unused)
         sub_807EC28(FALSE);
       }
       sub_806A5B8(target);
-      TryTriggerMonsterHouseWithMsg(target,gDungeon->forceMonsterHouse);
+      TryTriggerMonsterHouseWithMsg_Async(target,gDungeon->forceMonsterHouse);
     }
   }
 }

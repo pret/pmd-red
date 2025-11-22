@@ -64,7 +64,7 @@ static s32 GetCurrMenuIndex(MenuInputStruct *menuInput);
 void sub_8012A18(s32 unused)
 {
     UpdateSoundEffectCounters();
-    DrawDialogueBoxString();
+    DrawDialogueBoxString_Async();
     nullsub_8(gGameOptionsRef->touchScreen);
     sub_8005180();
     sub_80060EC();

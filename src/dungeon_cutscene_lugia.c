@@ -49,7 +49,7 @@ void sub_808BDEC(void)
   sub_80855E4(sub_8086A3C);
   if (HasRecruitedMon(MONSTER_LUGIA)) {
     DungeonStartNewBGM(MUS_FRIEND_AREA_CRYPTIC_CAVE);
-    HandleFaint(lugiaEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
+    HandleFaint_Async(lugiaEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
   }
   else {
     gDungeon->unk7 = 1;
@@ -59,10 +59,10 @@ void sub_808BDEC(void)
   CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_LUGIA);
 }
 
-void sub_808BE70(u8 param_1,u8 param_2,u8 param_3)
+void sub_808BE70(u8 monsterBehavior, u8 cutscene, u8 param_3)
 {
-  if ((param_2 == 0x33) && (param_1 == 0x1B)) {
-    gDungeon->unk2 = 1;
+  if (cutscene == CUTSCENE_SILVER_TRENCH && monsterBehavior == BEHAVIOR_LUGIA) {
+    gDungeon->unk2 = DUNGEON_UNK2_1;
   }
 }
 

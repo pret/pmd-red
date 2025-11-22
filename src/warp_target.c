@@ -42,24 +42,24 @@ void WarpTarget(Entity *pokemon, Entity *target, u32 param_3, DungeonPos *pos)
 
     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
     if (AbilityIsActive(target,ABILITY_SUCTION_CUPS)) {
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FCAE8);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FCAE8);
         return;
     }
     if (IsCurrentFixedRoomBossFight()) {
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FC97C);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FC97C);
         return;
     }
     if (param_3 == 1)
     {
         DungeonPos stairsPosition = gDungeon->stairsSpawn;
         if(stairsPosition.x == target->pos.x && stairsPosition.y == target->pos.y) {
-            TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FC9A0); // It's already on the stairs!
+            TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FC9A0); // It's already on the stairs!
             PetrifiedStatusTarget(pokemon,target);
             return;
         }
     }
 
-    TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FC584); // $m0 warped!
+    TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FC584); // $m0 warped!
     TrySendImmobilizeSleepEndMsg(target,target);
     sub_80421AC(pokemon,target);
     if (ShouldDisplayEntity(target)) {
@@ -124,7 +124,7 @@ void WarpTarget(Entity *pokemon, Entity *target, u32 param_3, DungeonPos *pos)
     target->unk1C = IntToF248(0);
     DungeonRunFrameActions(0x22);
     if (flag) {
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FCB14); // But it dropped back at the same spot!
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FCB14); // But it dropped back at the same spot!
     }
     if (param_3 == 1) {
         PetrifiedStatusTarget(pokemon,target);
@@ -136,5 +136,5 @@ void WarpTarget(Entity *pokemon, Entity *target, u32 param_3, DungeonPos *pos)
         sub_807EC28(0);
     }
     sub_806A5B8(target);
-    TryTriggerMonsterHouseWithMsg(target,gDungeon->forceMonsterHouse);
+    TryTriggerMonsterHouseWithMsg_Async(target,gDungeon->forceMonsterHouse);
 }

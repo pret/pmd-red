@@ -72,8 +72,8 @@ void sub_8088E5C(void)
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
   sub_80855E4(sub_8086A3C);
-  HandleFaint(groudonEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
-  HandleFaint(alakazamEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
+  HandleFaint_Async(groudonEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
+  HandleFaint_Async(alakazamEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y + -3);
   CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_GROUDON);
   CopyMonsterNameToBuffer(gFormatBuffer_Monsters[3], MONSTER_ALAKAZAM);
@@ -203,7 +203,7 @@ void MagmaCavernMidDialogue(void)
   // Be careful!
   DisplayDungeonDialogue(&MagmaCavernMidDialogue_15);
   sub_803E708(10,0x46);
-  gDungeon->unk2 = 1;
+  gDungeon->unk2 = DUNGEON_UNK2_1;
 }
 
 void sub_8089168(void)

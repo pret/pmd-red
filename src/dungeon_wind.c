@@ -37,9 +37,9 @@ void UpdateWindTurns(void)
         if (gDungeon->unk644.windTurns < 0xfa) {
             sub_805E804();
             TryPointCameraToMonster(leader,1);
-            DisplayActions(leader);
+            DisplayActions_Async(leader);
             if (!IsFloorOver()) {
-                LogMessageByIdWithPopupCheckUser(leader,gText_SomethingStirring);
+                LogMessageByIdWithPopupCheckUser_Async(leader,gText_SomethingStirring);
                 sub_80426C8(gUnknown_80F5FAC[gDungeon->tileset],0);
                 gDungeon->unk644.windPhase = 1;
             }
@@ -49,9 +49,9 @@ void UpdateWindTurns(void)
         if (gDungeon->unk644.windTurns < 0x96) {
             sub_805E804();
             TryPointCameraToMonster(leader,1);
-            DisplayActions(leader);
+            DisplayActions_Async(leader);
             if (!IsFloorOver()) {
-                LogMessageByIdWithPopupCheckUser(leader,gText_SomethingApproaching);
+                LogMessageByIdWithPopupCheckUser_Async(leader,gText_SomethingApproaching);
                 sub_80426C8(gUnknown_80F5FAC[gDungeon->tileset],1);
                 gDungeon->unk644.windPhase = 2;
             }
@@ -61,9 +61,9 @@ void UpdateWindTurns(void)
         if (gDungeon->unk644.windTurns < 0x32) {
             sub_805E804();
             TryPointCameraToMonster(leader,1);
-            DisplayActions(leader);
+            DisplayActions_Async(leader);
             if (!IsFloorOver()) {
-                LogMessageByIdWithPopupCheckUser(leader,gText_ItsGettingCloser);
+                LogMessageByIdWithPopupCheckUser_Async(leader,gText_ItsGettingCloser);
                 sub_80426C8(gUnknown_80F5FAC[gDungeon->tileset],2);
                 gDungeon->unk644.windPhase = 3;
             }
@@ -73,12 +73,12 @@ void UpdateWindTurns(void)
         if (gDungeon->unk644.windTurns < 1) {
             sub_805E804();
             TryPointCameraToMonster(leader,1);
-            DisplayActions(leader);
+            DisplayActions_Async(leader);
             if (!IsFloorOver()) {
-                LogMessageByIdWithPopupCheckUser(leader,gText_ItsRightNearbyGustingHard);
+                LogMessageByIdWithPopupCheckUser_Async(leader,gText_ItsRightNearbyGustingHard);
                 sub_80426C8(gUnknown_80F5FAC[gDungeon->tileset],3);
                 gDungeon->unk644.windPhase = 4;
-                HandleFaint(leader,DUNGEON_EXIT_BLOWN_OUT_UNSEEN_FORCE,leader);
+                HandleFaint_Async(leader,DUNGEON_EXIT_BLOWN_OUT_UNSEEN_FORCE,leader);
             }
         }
     }

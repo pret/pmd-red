@@ -206,7 +206,7 @@ static s32 sub_8041550(Entity *entity, s32 a1, u8 a2, u8 a3, s32 a4, u8 a5)
         return -1;
 
     if (a4 != 0) {
-        sub_804178C(a4 == 2);
+        sub_804178C_Async(a4 == 2);
     }
 
     sub_800569C(&pos, &entity->axObj.axdata, a3);
@@ -296,7 +296,7 @@ static u32 sub_8041764(unkStruct_80416E0 *param_1, bool8 param_2)
     return sub_800E890(param_1);
 }
 
-void sub_804178C(u8 param_1)
+void sub_804178C_Async(u8 param_1)
 {
   u32 temp;
   s32 counter;
@@ -1328,7 +1328,7 @@ void sub_80427AC(void)
                 sub_80429A0(entity);
                 if (!enInfo->isNotTeamMember) {
                     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], entity, 0);
-                    DisplayDungeonLoggableMessageTrue(entity, gPtrFeralFoundItemMessage);
+                    DisplayDungeonLoggableMessageTrue_Async(entity, gPtrFeralFoundItemMessage);
                 }
             }
         }
@@ -1522,7 +1522,7 @@ static void sub_8042A84(s16 param_1, Entity *entity, u32 param_3)
       iVar3 = (entity->pixelPos.y - entity->unk1C) / 256;
     } while (-8 <= iVar3 - gDungeon->unk181e8.cameraPixelPos.y);
     entity->isVisible = 0;
-    sub_804178C(0);
+    sub_804178C_Async(0);
   }
 }
 

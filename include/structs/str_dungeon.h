@@ -368,12 +368,19 @@ struct DungeonMap
 
 #define MONSTER_SPAWNS_ARR_COUNT 32
 
+enum DungeonUnk2Kind
+{
+    DUNGEON_UNK2_0,
+    DUNGEON_UNK2_1,
+    DUNGEON_UNK2_PITFALL_TRAP,
+};
+
 // size: 0x1CEDC
 typedef struct Dungeon
 {
     u8 unk0;
     u8 unk1;
-    u8 unk2;
+    u8 unk2; // Cutscene-related. See enum "DungeonUnk2Kind"
     u8 unk3;
     u8 unk4;
     u8 unk5;
@@ -387,7 +394,7 @@ typedef struct Dungeon
     u8 unkD;
     u8 unkE;
     /* 0xF */ bool8 noActionInProgress; // Whether the game is currently accepting input. Set to false while action animations play.
-    u8 unk10;
+    u8 unk10; // Forced-loss reason? 0 = partner felled ... 1 = failed to protect client ... 2 = failed to protect client
     u8 unk11;
     s16 unk12;
     s16 startFloorId; // It's always 0 by default(see sDungeonStartingFloor table). If changed, it would be possible for the first entered floor to be displayed as not B1, but the specified number.
@@ -430,7 +437,7 @@ typedef struct Dungeon
     /* 0x3A0A */ bool8 unk3A0A;
     /* 0x3A0B */ bool8 unk3A0B;
     /* 0x3A0C */ u8 monsterHouseRoom; // room index of monster house
-    /* 0x3A0D */ u8 prefight; // See enum "PrefightKind"
+    /* 0x3A0D */ u8 cutscene; // See enum "CutsceneKind"
     /* 0x3A0E */ s16 tileset;
     /* 0x3A10 */ s16 unk3A10;
     /* 0x3A12 */ s16 unk3A12;
@@ -457,7 +464,7 @@ typedef struct Dungeon
     u8 ALIGNED(4) unk12C24[0x930];
     u16 unk13554[10];
     OpenedFile *unk13568;
-    u8 unk1356C;
+    bool8 unk1356C; // Cutscene-related
     u8 fill1356D[0x13570 - 0x1356D];
     /* 0x13570 */ u8 unk13570;
     /* 0x13574 */ DungeonPos trapPos;

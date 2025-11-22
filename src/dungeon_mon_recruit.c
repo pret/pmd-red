@@ -222,7 +222,7 @@ bool8 IsMonsterRecruitable(s32 species)
     }
 }
 
-bool8 HandleMonsterJoinSequence(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *param_3)
+bool8 MonsterJoinSequence_Async(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *param_3)
 {
     DungeonMon *dungeonMon;
     int pokeIndex;
@@ -240,7 +240,7 @@ bool8 HandleMonsterJoinSequence(Entity *entity1, Entity *entity2, struct unkStru
 
     if (DisplayDungeonYesNoMessage(0,gUnknown_80F9FE8,1) == 0) {
         if (param_3->id != MONSTER_JIRACHI) {
-            LogMessageByIdWithPopupCheckUser(entity1,gText_Pokemon0WentAway);
+            LogMessageByIdWithPopupCheckUser_Async(entity1,gText_Pokemon0WentAway);
         }
         return FALSE;
     }
@@ -251,7 +251,7 @@ bool8 HandleMonsterJoinSequence(Entity *entity1, Entity *entity2, struct unkStru
     }
 
     if (pokeIndex == MAX_TEAM_MEMBERS) {
-        LogMessageByIdWithPopupCheckUser(entity1,gText_ThePokemonCouldntJoinTeam);
+        LogMessageByIdWithPopupCheckUser_Async(entity1,gText_ThePokemonCouldntJoinTeam);
         return FALSE;
     }
 
@@ -259,7 +259,7 @@ bool8 HandleMonsterJoinSequence(Entity *entity1, Entity *entity2, struct unkStru
         UnlockFriendArea(friendArea);
         unlockedFriendArea = TRUE;
     }
-    HandleFaint(entity2,DUNGEON_EXIT_TRANSFORMED_INTO_FRIEND,entity1);
+    HandleFaint_Async(entity2,DUNGEON_EXIT_TRANSFORMED_INTO_FRIEND,entity1);
     dungeonMon = &gRecruitedPokemonRef->dungeonTeam[pokeIndex];
     dungeonMon->flags = POKEMON_FLAG_EXISTS | POKEMON_FLAG_ON_TEAM;
     dungeonMon->isTeamLeader = FALSE;
@@ -291,7 +291,7 @@ bool8 HandleMonsterJoinSequence(Entity *entity1, Entity *entity2, struct unkStru
     IncrementAdventureNumJoined();
 
     if (SpawnTeamMember(param_3->id,param_3->pos.x,param_3->pos.y,dungeonMon,&local_2c,0,1) == 0) {
-        LogMessageByIdWithPopupCheckUser(entity1,gText_ButItCouldntJoinTheTeam);
+        LogMessageByIdWithPopupCheckUser_Async(entity1,gText_ButItCouldntJoinTheTeam);
         dungeonMon->flags = 0;
     }
     else {
@@ -299,17 +299,17 @@ bool8 HandleMonsterJoinSequence(Entity *entity1, Entity *entity2, struct unkStru
         sub_803E708(0xa0,0x46);
         if (DisplayDungeonYesNoMessage(0,gText_NewMemberJoinedGiveItNickname,TRUE) == 1) {
             while (DungeonGiveNameToRecruitedMon(dungeonMon->name) == 0) {
-                DisplayDungeonMessage(0,gText_PleaseGiveNicknameNewMember,TRUE);
+                DisplayDungeonMessage_Async(0,gText_PleaseGiveNicknameNewMember,TRUE);
             }
         }
         sub_808D9DC(gFormatBuffer_Monsters[0],dungeonMon,0);
-        LogMessageByIdWithPopupCheckUser(entity1,gText_Pokemon0JoinedToGoOnAdventures);
+        LogMessageByIdWithPopupCheckUser_Async(entity1,gText_Pokemon0JoinedToGoOnAdventures);
         if (unlockedFriendArea) {
             Entity *leader = CutsceneGetLeader();
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],leader,0);
             sub_8092558(gFormatBuffer_FriendArea, friendArea);
             PlaySound(0xce);
-            DisplayDungeonMessage(0,gText_Pokemon0GainedAccessToFriendArea,1);
+            DisplayDungeonMessage_Async(0,gText_Pokemon0GainedAccessToFriendArea,1);
         }
         if (param_3->id == MONSTER_MEW) {
             gDungeon->unk4 = 1;
@@ -416,14 +416,14 @@ bool8 HandleSpecialEntityJoinSequence(Entity *entity1,Entity *entity2,Entity **e
         unlockedFriendArea = TRUE;
     }
     IncrementAdventureNumJoined();
-    HandleFaint(entity2,DUNGEON_EXIT_TRANSFORMED_INTO_FRIEND,entity1);
+    HandleFaint_Async(entity2,DUNGEON_EXIT_TRANSFORMED_INTO_FRIEND,entity1);
     if (SpawnTeamMember(local_74.id,local_74.pos.x,local_74.pos.y,dungeonMon,&local_2c,0,0) == 0) {
         dungeonMon->flags = 0;
     }
     else {
         if (DisplayDungeonYesNoMessage(0,gText_NewMemberJoinedGiveItNickname,TRUE) == 1) {
             while (!DungeonGiveNameToRecruitedMon(dungeonMon->name)) {
-                DisplayDungeonMessage(0,gText_PleaseGiveNicknameNewMember,TRUE);
+                DisplayDungeonMessage_Async(0,gText_PleaseGiveNicknameNewMember,TRUE);
             }
         }
         if (unlockedFriendArea) {
@@ -431,7 +431,7 @@ bool8 HandleSpecialEntityJoinSequence(Entity *entity1,Entity *entity2,Entity **e
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],leader,0);
             sub_8092558(gFormatBuffer_FriendArea, friendArea);
             PlaySound(0xce);
-            DisplayDungeonMessage(0,gText_Pokemon0GainedAccessToFriendArea,1);
+            DisplayDungeonMessage_Async(0,gText_Pokemon0GainedAccessToFriendArea,1);
         }
         sub_808D9DC(gFormatBuffer_Monsters[3],dungeonMon,0);
         *entityPtr = local_2c;

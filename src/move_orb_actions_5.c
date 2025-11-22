@@ -31,7 +31,7 @@ bool8 FillInOrbAction(Entity *pokemon,Entity *target, Move *move, s32 itemId)
     filledInTile = FALSE;
     targetInfo = GetEntInfo(target);
     if (IsFloorwideFixedRoom()) {
-        LogMessageByIdWithPopupCheckUser(pokemon,gUnknown_80FD0B8);
+        LogMessageByIdWithPopupCheckUser_Async(pokemon,gUnknown_80FD0B8);
         return FALSE;
     }
     else
@@ -58,10 +58,10 @@ bool8 FillInOrbAction(Entity *pokemon,Entity *target, Move *move, s32 itemId)
 
         if (filledInTile) {
             sub_8042A64(&tileCoords);
-            TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FD0B4);
+            TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FD0B4);
         }
         else {
-            TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FD0B8);
+            TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FD0B8);
         }
         UpdateMinimap();
         UpdateTrapsVisibility();
@@ -84,7 +84,7 @@ bool8 ItemizeOrbAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 
     if(GetEntInfo(target)->monsterBehavior != BEHAVIOR_FIXED_ENEMY)
     {
-        TryDisplayDungeonLoggableMessage3(pokemon, target, gUnknown_80FF678);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon, target, gUnknown_80FF678);
         return FALSE;
     }
     else
@@ -92,7 +92,7 @@ bool8 ItemizeOrbAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
         target->isVisible = FALSE;
         CreateItemWithStickyChance(&stack, GetRandomFloorItem(0), 0);
         SpawnDroppedItemWrapper(pokemon, &posStruct, &stack);
-        HandleFaint(target, DUNGEON_EXIT_TRANSFORMED_INTO_ITEM, pokemon);
+        HandleFaint_Async(target, DUNGEON_EXIT_TRANSFORMED_INTO_ITEM, pokemon);
         return TRUE;
     }
 }

@@ -63,17 +63,17 @@ void sub_8086F00(void)
   CopyMonsterNameToBuffer(gFormatBuffer_Monsters[4], MONSTER_CATERPIE);
 }
 
-void sub_8086F54(u8 param_1, u8 param_2)
+void sub_8086F54(u8 monsterBehavior, u8 cutscene)
 {
     s32 index;
 
-    if (param_2 == 4 || param_2 == 5)  {
+    if (cutscene == CUTSCENE_SINISTER_WOODS_ATTEMPT1 || cutscene == CUTSCENE_SINISTER_WOODS_ATTEMPT2)  {
         bool8 found = FALSE;
-        for (index = 0; index < 0x10; index++) {
+        for (index = 0; index < 16; index++) {
             struct Entity *entity = gDungeon->wildPokemon[index];
             if ((EntityIsValid(entity))) {
                 struct EntityInfo *entInfo = GetEntInfo(entity);
-                if (entInfo->monsterBehavior != param_1) {
+                if (entInfo->monsterBehavior != monsterBehavior) {
                     found = TRUE;
                     return;
                 }
@@ -82,7 +82,7 @@ void sub_8086F54(u8 param_1, u8 param_2)
 
         if (!found) {
             sub_8097FA8(3);
-            gDungeon->unk2 = 1;
+            gDungeon->unk2 = DUNGEON_UNK2_1;
         }
     }
 }

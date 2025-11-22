@@ -38,12 +38,12 @@ void HandlePounceOrb(Entity *pokemon, Entity *target, u8 r2)
     if(AbilityIsActive(target, ABILITY_SUCTION_CUPS))
     {
         SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], target, 0);
-        TryDisplayDungeonLoggableMessage3(pokemon, target, gUnknown_80FCB98);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon, target, gUnknown_80FCB98);
         return;
     }
     if(IsCurrentFixedRoomBossFight())
     {
-        TryDisplayDungeonLoggableMessage3(pokemon, target, gUnknown_80FC9C0);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon, target, gUnknown_80FC9C0);
         return;
     }
     if(direction == NUM_DIRECTIONS)
@@ -83,6 +83,6 @@ void HandlePounceOrb(Entity *pokemon, Entity *target, u8 r2)
         }
         sub_806A5B8(target);
 
-        TryTriggerMonsterHouseWithMsg(target, gDungeon->forceMonsterHouse);
+        TryTriggerMonsterHouseWithMsg_Async(target, gDungeon->forceMonsterHouse);
     }
 }

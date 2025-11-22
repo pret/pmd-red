@@ -275,7 +275,7 @@ void GameLoop(void)
 // arm9.bin::0200E02C
 static void MainLoops_RunFrameActions(u32 unused)
 {
-    DrawDialogueBoxString();
+    DrawDialogueBoxString_Async();
     sub_8005838(NULL, 0);
     nullsub_8(gGameOptionsRef->touchScreen);
 

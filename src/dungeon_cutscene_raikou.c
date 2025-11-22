@@ -75,7 +75,7 @@ void sub_8089F8C(void)
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
   if (HasRecruitedMon(MONSTER_RAIKOU)) {
-      HandleFaint(RaikouEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
+      HandleFaint_Async(RaikouEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
   }
   else {
       SetFacingDirection(RaikouEntity, DIRECTION_SOUTH);
@@ -84,11 +84,11 @@ void sub_8089F8C(void)
   CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_RAIKOU);
 }
 
-void sub_8089FF0(u8 param_1, u8 param_2)
+void sub_8089FF0(u8 monsterBehavior, u8 cutscene)
 {
-  if ((param_2 == 0x23 || param_2 == 0x24 || param_2 == 0x25) && (param_1 == 0x13)) {
-    sub_8097FA8(0x17);
-    gDungeon->unk2 = 1;
+  if ((cutscene == CUTSCENE_LIGHTNING_FIELD_ATTEMPT1 || cutscene == CUTSCENE_LIGHTNING_FIELD_ATTEMPT2 || cutscene == CUTSCENE_LIGHTNING_FIELD_POSTSTORY) && monsterBehavior == BEHAVIOR_RAIKOU) {
+    sub_8097FA8(23);
+    gDungeon->unk2 = DUNGEON_UNK2_1;
   }
 }
 
@@ -156,7 +156,7 @@ void RaikouPostStoryPreFightDialogue(void)
     RaikouScreenFlash();
     DisplayDungeonDialogue(&gRaikouPostStoryPreFightDialogue_3);
     sub_803E708(10,70);
-    SetupBossFightHP(RaikouEntity,0x28a,MUS_BOSS_BATTLE);
+    SetupBossFightHP(RaikouEntity,650,MUS_BOSS_BATTLE);
     ShiftCameraToPosition(&leaderEntity->pixelPos,0x10);
   }
 }

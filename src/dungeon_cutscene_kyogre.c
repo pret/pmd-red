@@ -51,7 +51,7 @@ void sub_808C10C(void)
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
   if (HasRecruitedMon(MONSTER_KYOGRE)) {
-    HandleFaint(kyogreEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
+    HandleFaint_Async(kyogreEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
   }
   else {
     gDungeon->unk7 = 1;
@@ -65,10 +65,10 @@ void sub_808C10C(void)
   CopyMonsterNameToBuffer(gFormatBuffer_Monsters[3], MONSTER_GROUDON);
 }
 
-void sub_808C1A4(u8 param_1,u8 param_2,u8 param_3)
+void sub_808C1A4(u8 monsterBehavior, u8 cutscene, u8 param_3)
 {
-  if ((param_2 == 0x34) && (param_1 == 0x1C)) {
-    gDungeon->unk2 = 1;
+  if (cutscene == CUTSCENE_STORMY_SEA && monsterBehavior == BEHAVIOR_KYOGRE) {
+    gDungeon->unk2 = DUNGEON_UNK2_1;
     DungeonStartNewBGM(MUS_FRIEND_AREA_CRYPTIC_CAVE);
   }
 }
@@ -87,7 +87,7 @@ void KyogrePreFightDialogue(void)
     sub_803E708(10,0x46);
     DisplayDungeonDialogue(&gKyogrePreFightDialogue_8);
     sub_803E708(10,0x46);
-    gDungeon->unk2 = 1;
+    gDungeon->unk2 = DUNGEON_UNK2_1;
   }
   else {
     DisplayDungeonDialogue(&gKyogrePreFightDialogue_1);

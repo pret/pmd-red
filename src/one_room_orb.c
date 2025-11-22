@@ -37,17 +37,17 @@ void HandleOneRoomOrb(Entity *pokemon, Entity *target)
 	bool8 isMonsterHouse;
 
 	if (gDungeon->forceMonsterHouse != 0) {
-		LogMessageByIdWithPopupCheckUser(pokemon,gUnknown_80FD3C8);
+		LogMessageByIdWithPopupCheckUser_Async(pokemon,gUnknown_80FD3C8);
 		return;
 	}
 
 	if (gDungeon->unk3A0B != 0) {
-		LogMessageByIdWithPopupCheckUser(pokemon,gUnknown_80FD3CC);
+		LogMessageByIdWithPopupCheckUser_Async(pokemon,gUnknown_80FD3CC);
 		return;
 	}
 
 	if (IsFloorwideFixedRoom()) {
-		LogMessageByIdWithPopupCheckUser(pokemon,gUnknown_80FD3D0);
+		LogMessageByIdWithPopupCheckUser_Async(pokemon,gUnknown_80FD3D0);
 		return;
 	}
 	isMonsterHouse = FALSE;
@@ -130,9 +130,9 @@ void HandleOneRoomOrb(Entity *pokemon, Entity *target)
 	DetermineAllMonsterShadow();
 	UpdateMinimap();
 	UpdateTrapsVisibility();
-	LogMessageByIdWithPopupCheckUser(pokemon,gUnknown_80FD3A0);
+	LogMessageByIdWithPopupCheckUser_Async(pokemon,gUnknown_80FD3A0);
 	sub_803E708(0x28,0x2b);
-	TryTriggerMonsterHouseWithMsg(pokemon,1);
+	TryTriggerMonsterHouseWithMsg_Async(pokemon,1);
 	for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
 	{
 		entity = gDungeon->activePokemon[index];

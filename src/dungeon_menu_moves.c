@@ -735,10 +735,10 @@ void ActionSetOrUnsetMove(ActionContainer *a0, bool8 flagToSet)
     PlaySoundEffect(0x133);
     if (flagToSet) {
         if (!wasSet) {
-            LogMessageByIdWithPopupCheckUser(entity, gUnknown_80F8B40);
+            LogMessageByIdWithPopupCheckUser_Async(entity, gUnknown_80F8B40);
         }
         else {
-            LogMessageByIdWithPopupCheckUser(entity, gUnknown_80F8B64);
+            LogMessageByIdWithPopupCheckUser_Async(entity, gUnknown_80F8B64);
         }
         sub_803E708(0x78, 0x1F);
     }
@@ -844,10 +844,10 @@ void ActionDelinkMoves(ActionContainer *a0, bool8 showMsg)
     PlaySoundEffect(0x133);
     if (showMsg) {
         if (unlInked) {
-            LogMessageByIdWithPopupCheckUser(entity, gUnknown_80F8B88);
+            LogMessageByIdWithPopupCheckUser_Async(entity, gUnknown_80F8B88);
         }
         else {
-            LogMessageByIdWithPopupCheckUser(entity, gUnknown_80F8BB4);
+            LogMessageByIdWithPopupCheckUser_Async(entity, gUnknown_80F8BB4);
         }
         sub_803E708(0x78, 0x1F);
     }

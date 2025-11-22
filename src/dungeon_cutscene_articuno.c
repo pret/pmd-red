@@ -81,7 +81,7 @@ void sub_8087FF8(void)
   sub_8085930(DIRECTION_NORTH);
   sub_80855E4(sub_8086A3C);
   if (sub_8086AE4(MONSTER_ARTICUNO)) {
-    HandleFaint(articunoEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
+    HandleFaint_Async(articunoEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
   }
   else {
     LevelUpTarget(articunoEntity,articunoEntity,gArticunoConfigLevel,0,0);
@@ -92,11 +92,11 @@ void sub_8087FF8(void)
   CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_ARTICUNO);
 }
 
-void sub_8088088(u8 param_1, u8 param_2)
+void sub_8088088(u8 monsterBehavior, u8 cutscene)
 {
-  if ((param_2 == 0xD || param_2 == 0xE || param_2 == 0xF) && (param_1 == 0xD)) {
-    sub_8097FA8(0x9);
-    gDungeon->unk2 = 1;
+  if ((cutscene == CUTSCENE_FROSTY_GROTTO_ATTEMPT1 || cutscene == CUTSCENE_FROSTY_GROTTO_ATTEMPT2 || cutscene == CUTSCENE_FROSTY_GROTTO_POSTSTORY) && monsterBehavior == BEHAVIOR_ARTICUNO) {
+    sub_8097FA8(9);
+    gDungeon->unk2 = DUNGEON_UNK2_1;
   }
 }
 

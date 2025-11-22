@@ -77,16 +77,16 @@ void sub_808AA94(void)
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
   sub_80855E4(sub_8086A3C);
-  HandleFaint(LatiosEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
+  HandleFaint_Async(LatiosEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y - 3);
   CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_LATIOS);
 }
 
-void sub_808AAF0(u8 param_1, u8 param_2)
+void sub_808AAF0(u8 monsterBehavior, u8 cutscene)
 {
-  if ((param_2 == 0x2B || param_2 == 0x2C || param_2 == 0x2D) && (param_1 == 0x16)) {
-    sub_8097FA8(0x1C);
-    gDungeon->unk2 = 1;
+  if ((cutscene == CUTSCENE_NORTHERN_RANGE_ATTEMPT1 || cutscene == CUTSCENE_NORTHERN_RANGE_ATTEMPT2 || cutscene == CUTSCENE_NORTHERN_RANGE_POSTSTORY) && monsterBehavior == BEHAVIOR_LATIOS) {
+    sub_8097FA8(28);
+    gDungeon->unk2 = DUNGEON_UNK2_1;
   }
 }
 

@@ -185,7 +185,7 @@ void HandleStraightProjectileThrow(Entity *thrower, Item *item, DungeonPos *pos,
 
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], target, 0);
             sub_8045C08(gFormatBuffer_Items[0], item);
-            TryDisplayDungeonLoggableMessage3(thrower, target, gUnknown_80F94C4);
+            TryDisplayDungeonLoggableMessage3_Async(thrower, target, gUnknown_80F94C4);
             endMsg = TrySendImmobilizeSleepEndMsg(thrower, target);
             sub_80479B8(1, (lockOnActive || a4->unk0) ? 1 : 0, endMsg, thrower, target, item);
         }
@@ -198,10 +198,10 @@ void HandleStraightProjectileThrow(Entity *thrower, Item *item, DungeonPos *pos,
             sub_8045BF8(gFormatBuffer_Items[0], item);
 
             if (a4->unk0) {
-                TryDisplayDungeonLoggableMessage3(thrower, target, gUnknown_80F94D8);
+                TryDisplayDungeonLoggableMessage3_Async(thrower, target, gUnknown_80F94D8);
             }
             else {
-                TryDisplayDungeonLoggableMessage3(thrower, target, gUnknown_80F94F0);
+                TryDisplayDungeonLoggableMessage3_Async(thrower, target, gUnknown_80F94F0);
             }
         }
     }
@@ -217,7 +217,7 @@ void HandleStraightProjectileThrow(Entity *thrower, Item *item, DungeonPos *pos,
             break;
         case 2:
             sub_8045C08(gFormatBuffer_Items[0], item);
-            LogMessageByIdWithPopupCheckUser(thrower, gUnknown_80F9530);
+            LogMessageByIdWithPopupCheckUser_Async(thrower, gUnknown_80F9530);
             break;
     }
 }
@@ -359,17 +359,17 @@ void HandleCurvedProjectileThrow(Entity *thrower, Item *item, DungeonPos *startP
                 bool8 immobiSlpEndMsg;
 
                 sub_806CE94(hitResult.target, 8);
-                TryDisplayDungeonLoggableMessage3(thrower, hitResult.target, gUnknown_80F94C4);
+                TryDisplayDungeonLoggableMessage3_Async(thrower, hitResult.target, gUnknown_80F94C4);
                 immobiSlpEndMsg = TrySendImmobilizeSleepEndMsg(thrower, hitResult.target);
                 sub_80479B8(1, (lockOnSpecs || a4->unk0 != 0) ? 1 : 0, immobiSlpEndMsg, thrower, hitResult.target, item);
                 throwResult = 0;
             }
             else {
                 if (hasBounceBand) {
-                    TryDisplayDungeonLoggableMessage3(thrower, hitResult.target, gUnknown_80F9510);
+                    TryDisplayDungeonLoggableMessage3_Async(thrower, hitResult.target, gUnknown_80F9510);
                 }
                 else {
-                    TryDisplayDungeonLoggableMessage3(thrower, hitResult.target, gUnknown_80F94F0);
+                    TryDisplayDungeonLoggableMessage3_Async(thrower, hitResult.target, gUnknown_80F94F0);
                 }
                 throwResult = 1;
             }

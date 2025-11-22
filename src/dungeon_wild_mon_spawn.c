@@ -79,7 +79,7 @@ void TrySpawnWildMonster(void)
         }
     }
     if (illuminateEntity != NULL) {
-        DisplayDungeonLoggableMessageTrue(0,gText_Pokemon0Blinked);
+        DisplayDungeonLoggableMessageTrue_Async(0,gText_Pokemon0Blinked);
         sub_8042920(illuminateEntity);
     }
 

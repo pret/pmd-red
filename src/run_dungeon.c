@@ -204,10 +204,10 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
     if (r9) {
         gFormatArgs[0] = gDungeon->unk644.unk37;
         if (gFormatArgs[0] != 0) {
-            DisplayDungeonMessage(0, gUnknown_80FEC48, 1);
+            DisplayDungeonMessage_Async(0, gUnknown_80FEC48, 1);
         }
         else {
-            DisplayDungeonMessage(0, gUnknown_80FEC7C, 1);
+            DisplayDungeonMessage_Async(0, gUnknown_80FEC7C, 1);
         }
     }
 
@@ -228,10 +228,10 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
             unkStruct_203B480 *mailStr = GetMailatIndex(sp);
             if (mailStr->rescuesAllowed) {
                 gFormatArgs[0] = mailStr->rescuesAllowed;
-                DisplayDungeonMessage(0, gUnknown_81002B8, 1);
+                DisplayDungeonMessage_Async(0, gUnknown_81002B8, 1);
             }
             else {
-                DisplayDungeonMessage(0, gPtrFinalChanceMessage, 1);
+                DisplayDungeonMessage_Async(0, gPtrFinalChanceMessage, 1);
             }
         }
     }
@@ -267,7 +267,7 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
         SetFloorItemMonsterSpawns();
         gDungeon->unk1 = 0;
         gDungeon->unk10 = 0;
-        gDungeon->unk2 = 0;
+        gDungeon->unk2 = DUNGEON_UNK2_0;
         gDungeon->unk4 = 0;
         gDungeon->unk11 = 0;
         gDungeon->unk8 = 0;
@@ -418,7 +418,7 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
         gDungeon->unk5 = 0;
         if (!r6) {
             DisplayPreFightDialogue();
-            if (gDungeon->unk4 != 0 || gDungeon->unk2 != 0) {
+            if (gDungeon->unk4 != 0 || gDungeon->unk2 != DUNGEON_UNK2_0) {
                 gDungeon->unk5 = 1;
             }
             else {
@@ -444,7 +444,7 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
         }
         else {
             sub_80427AC();
-            TryTriggerMonsterHouseWithMsg(GetLeader(), gDungeon->forceMonsterHouse);
+            TryTriggerMonsterHouseWithMsg_Async(GetLeader(), gDungeon->forceMonsterHouse);
             sub_807EAA0(1, 0);
         }
 
@@ -456,7 +456,7 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
             gDungeon->unk181e8.unk18218 = 0;
             gDungeon->unk181e8.unk18219 = 1;
             do {
-                RunFractionalTurn(param);
+                RunFractionalTurn_Async(param);
                 param = FALSE;
             } while (!IsFloorOver());
         }
@@ -467,7 +467,7 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
         }
 
         if (gDungeon->unk644.unk10 != 1) {
-            if (TryForcedLoss(TRUE)) {
+            if (TryForcedLoss_Async(TRUE)) {
                 gDungeon->unk644.unk10 = 1;
             }
         }
@@ -508,7 +508,7 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
         gDungeon->unk181e8.unk18218 = 1;
         if ((GetForcedLossReason() == 2 || GetForcedLossReason() == 3) && gDungeon->unk6 != 0) {
             leader = GetLeader();
-            DisplayDungeonMessage(0, gPtrClientFaintedMessage, 1);
+            DisplayDungeonMessage_Async(0, gPtrClientFaintedMessage, 1);
             gDungeon->unk6 = 0;
             SetUpDungeonExitData(DUNGEON_EXIT_FAILED_TO_PROTECT_CLIENT, leader, leader);
         }
@@ -721,7 +721,7 @@ void sub_8043D60(void)
                 unk = FALSE;
 
             if (unk) {
-                HandleFaint(mon, DUNGEON_EXIT_DEBUG_DAMAGE, mon);
+                HandleFaint_Async(mon, DUNGEON_EXIT_DEBUG_DAMAGE, mon);
             }
         }
     }
@@ -765,7 +765,7 @@ void sub_8043D60(void)
     ClearAllItemsWithFlag(ITEM_FLAG_IN_SHOP);
 }
 
-bool8 TryForcedLoss(bool8 a0)
+bool8 TryForcedLoss_Async(bool8 a0)
 {
     bool8 ret = FALSE;
 
@@ -777,10 +777,10 @@ bool8 TryForcedLoss(bool8 a0)
         if (EntityIsValid(leader)) {
             if (!a0) {
                 strcpy(gFormatBuffer_Monsters[0], gDungeon->faintStringBuffer);
-                DisplayDungeonMessage(0, gUnknown_80F89B4, 1);
+                DisplayDungeonMessage_Async(0, gUnknown_80F89B4, 1);
             }
             sub_8042B0C(leader);
-            HandleFaint(leader, DUNGEON_EXIT_RETURNED_WITH_FALLEN_PARTNER, leader);
+            HandleFaint_Async(leader, DUNGEON_EXIT_RETURNED_WITH_FALLEN_PARTNER, leader);
             ret = TRUE;
         }
     }
@@ -789,10 +789,10 @@ bool8 TryForcedLoss(bool8 a0)
         if (EntityIsValid(leader)) {
             if (!a0) {
                 strcpy(gFormatBuffer_Monsters[0], gDungeon->faintStringBuffer);
-                DisplayDungeonMessage(0, gUnknown_80F89D4, 1);
+                DisplayDungeonMessage_Async(0, gUnknown_80F89D4, 1);
             }
             sub_8042B0C(leader);
-            HandleFaint(leader, DUNGEON_EXIT_FAILED_TO_PROTECT_CLIENT, leader);
+            HandleFaint_Async(leader, DUNGEON_EXIT_FAILED_TO_PROTECT_CLIENT, leader);
             ret = TRUE;
         }
     }
@@ -801,10 +801,10 @@ bool8 TryForcedLoss(bool8 a0)
         if (EntityIsValid(leader)) {
             if (!a0) {
                 strcpy(gFormatBuffer_Monsters[0], gDungeon->faintStringBuffer);
-                DisplayDungeonMessage(0, gUnknown_80F89D8, 1);
+                DisplayDungeonMessage_Async(0, gUnknown_80F89D8, 1);
             }
             sub_8042B0C(leader);
-            HandleFaint(leader, DUNGEON_EXIT_FAILED_TO_PROTECT_CLIENT, leader);
+            HandleFaint_Async(leader, DUNGEON_EXIT_FAILED_TO_PROTECT_CLIENT, leader);
             ret = TRUE;
         }
     }

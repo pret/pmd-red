@@ -191,7 +191,7 @@ void DungeonHandlePlayerInput(void)
                     }
                 }
                 else if (ShouldMonsterRunAwayAndShowEffect(leader, TRUE)) {
-                    LogMessageByIdWithPopupCheckUser(leader, gUnknown_80FD4B0);
+                    LogMessageByIdWithPopupCheckUser_Async(leader, gUnknown_80FD4B0);
                     SetLeaderActionFields(ACTION_PASS_TURN);
                     gDungeon->unk644.unk2F = 1;
                     break;
@@ -206,7 +206,7 @@ void DungeonHandlePlayerInput(void)
                         }
                     }
                     if (i == MAX_MON_MOVES) {
-                        LogMessageByIdWithPopupCheckUser(leader, gUnknown_80F8A28);
+                        LogMessageByIdWithPopupCheckUser_Async(leader, gUnknown_80F8A28);
                         break;
                     }
 
@@ -232,7 +232,7 @@ void DungeonHandlePlayerInput(void)
                         }
                     }
                     if (!canUseMove) {
-                        LogMessageByIdWithPopupCheckUser(leader, gUnknown_80F8A4C);
+                        LogMessageByIdWithPopupCheckUser_Async(leader, gUnknown_80F8A4C);
                     }
                     else {
                         SetMonsterActionFields(&leaderInfo->action, ACTION_USE_MOVE_PLAYER);
@@ -456,7 +456,7 @@ void DungeonHandlePlayerInput(void)
                     if (!(canMoveFlags & 2)) {
                         if (canMoveFlags & 1) {
                             if (immobilizedMsg != NULL) {
-                                LogMessageByIdWithPopupCheckUser(leader, immobilizedMsg);
+                                LogMessageByIdWithPopupCheckUser_Async(leader, immobilizedMsg);
                             }
                             SetLeaderActionFields(ACTION_PASS_TURN);
                             gDungeon->unk644.unk2F = 1;
@@ -971,7 +971,7 @@ void CheckLeaderTile(void)
         case ENTITY_ITEM: {
             Item *item = GetItemInfo(tileObject);
             if (!(item->flags & ITEM_FLAG_IN_SHOP)) {
-                TryLeaderItemPickUp(&leader->pos, 1);
+                TryLeaderItemPickUp_Async(&leader->pos, 1);
             }
             else {
                 gDungeon->unk5C0 = 4;
@@ -1033,13 +1033,13 @@ void sub_805F02C(void)
     EntityInfo *leaderInfo = GetEntInfo(leader);
 
     if (r8->isTeamLeader) {
-        DisplayDungeonLoggableMessageTrue(r7, gUnknown_80F9BD8);
+        DisplayDungeonLoggableMessageTrue_Async(r7, gUnknown_80F9BD8);
     }
     else if (PlayerHasItemWithFlag(ITEM_FLAG_IN_SHOP) || sub_807EF48()) {
-        DisplayDungeonLoggableMessageTrue(r7, gUnknown_80F9C08);
+        DisplayDungeonLoggableMessageTrue_Async(r7, gUnknown_80F9C08);
     }
     else if (gDungeon->unk644.stoleFromKecleon) {
-        DisplayDungeonLoggableMessageTrue(r7, gUnknown_80F9C2C);
+        DisplayDungeonLoggableMessageTrue_Async(r7, gUnknown_80F9C2C);
     }
     else {
         gDungeon->unk644.emptyBellyAlert = 0;
@@ -1073,7 +1073,7 @@ void sub_805F02C(void)
         sub_8041AD0(leader);
         sub_8041AE0(GetLeader());
         SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], r7, 0);
-        LogMessageByIdWithPopupCheckUser(r7, gUnknown_80F9BB0);
+        LogMessageByIdWithPopupCheckUser_Async(r7, gUnknown_80F9BB0);
         sub_807EC28(FALSE);
         r8->unk64 = 0;
         leaderInfo->unk64 = 0;
@@ -1208,14 +1208,14 @@ static void ShowMainMenu(bool8 fromBPress, bool8 a1)
                 }
             }
             else if (action == ACTION_SET_ITEM) {
-                HandleSetItemAction(GetLeader(), TRUE);
+                HandleSetItemAction_Async(GetLeader(), TRUE);
                 SetLeaderActionToNothing(TRUE);
                 sub_803E708(0x50, 0x4D);
                 sub_8052210(0);
                 break;
             }
             else if (action == ACTION_UNSET_ITEM) {
-                HandleUnsetItemAction(GetLeader(), TRUE);
+                HandleUnsetItemAction_Async(GetLeader(), TRUE);
                 SetLeaderActionToNothing(TRUE);
                 sub_803E708(0x50, 0x4D);
                 sub_8052210(0);
@@ -1443,7 +1443,7 @@ static void ShowMainMenu(bool8 fromBPress, bool8 a1)
             }
             else {
                 SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], GetLeader(), 0);
-                DisplayDungeonMessage(0, gUnknown_80FDE18, 1);
+                DisplayDungeonMessage_Async(0, gUnknown_80FDE18, 1);
             }
 
             r10 = -1;
@@ -1581,7 +1581,7 @@ bool8 DungeonGiveNameToRecruitedMon(u8 *name)
     do
     {
         DungeonRunFrameActions(0xE);
-        DrawDialogueBoxString();
+        DrawDialogueBoxString_Async();
         r4 = sub_8016080();
     } while (r4 == 0);
     CleanConfirmNameMenu();

@@ -157,7 +157,7 @@ void sub_8040DA0(Entity *entity, Move *move)
         gUnknown_202F224 = DungeonRandInt(7);
         gDungeon->unk181e8.unk18204 = gDungeon->unk181e8.unk18200 = gUnknown_8106A8C[gUnknown_202F224];
         gFormatArgs[0] = gUnknown_202F224 + 4;
-        LogMessageByIdWithPopupCheckUser(anotherEntity, gPtrMagnitudeMessage);
+        LogMessageByIdWithPopupCheckUser_Async(anotherEntity, gPtrMagnitudeMessage);
         sub_80421C0(anotherEntity, 0x1A4);
     }
     else if (move->id == MOVE_EARTHQUAKE) {

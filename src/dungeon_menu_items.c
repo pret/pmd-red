@@ -109,7 +109,7 @@ bool8 ShowDungeonItemsMenu(Entity * a0, struct UnkMenuBitsStruct *a1)
 
     sUnknown_202F258 = sub_8060D64(sUnknown_202F248, var_30, var_34, var_28, a0);
     if (sUnknown_202F258 == 0) {
-        DisplayDungeonMessage(0, gUnknown_80F8B24, 1);
+        DisplayDungeonMessage_Async(0, gUnknown_80F8B24, 1);
         return TRUE;
     }
 

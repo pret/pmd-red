@@ -58,7 +58,7 @@ void sub_808C5C0(void)
   CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_CELEBI);
 }
 
-void nullsub_100(u8 r0, u8 r1, u8 r3)
+void nullsub_100(u8 monsterBehavior, u8 cutscene, u8 r3)
 {
 }
 
@@ -73,7 +73,7 @@ void CelebiJoinDialogue(void)
     celebiEntity = GetEntityFromMonsterBehavior(BEHAVIOR_CELEBI);
     if ((HasRecruitedMon(MONSTER_CELEBI)) || (!CanEntityBeRecruited(celebiEntity)))
     {
-        HandleFaint(celebiEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
+        HandleFaint_Async(celebiEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
         SpriteLookAroundEffect(leaderEntity);
         sub_803E708(10,0x46);
         // .........
@@ -182,9 +182,9 @@ void CelebiJoinDialogue(void)
             }
         } while (state != 2);
     }
-    DungeonFadeOutBGM(0x1e);
-    sub_803E708(0x1e,0x46);
-    gDungeon->unk2 = 1;
+    DungeonFadeOutBGM(30);
+    sub_803E708(30, 70);
+    gDungeon->unk2 = DUNGEON_UNK2_1;
 }
 
 static void sub_808C8E0(Entity *entity)
@@ -209,13 +209,13 @@ void sub_808C938(void)
     sub_80855E4(sub_808C9B0);
 }
 
-void sub_808C948(Entity *entity, u8 param_2)
+void sub_808C948(Entity *entity, u8 cutscene)
 {
   bool8 flag;
   s32 index;
   Entity *pokeEntity;
 
-  if (param_2 == 0x37) {
+  if (cutscene == CUTSCENE_MAZE_BOSS) {
     flag = FALSE;
     for(index = 0; index < DUNGEON_MAX_WILD_POKEMON; index++){
       pokeEntity = gDungeon->wildPokemon[index];
@@ -225,7 +225,7 @@ void sub_808C948(Entity *entity, u8 param_2)
       }
     }
     if (!flag) {
-      gDungeon->unk2 = 1;
+      gDungeon->unk2 = DUNGEON_UNK2_1;
     }
   }
 }

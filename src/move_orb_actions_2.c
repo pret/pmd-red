@@ -136,7 +136,7 @@ bool8 PsywaveMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
   if (199 < rand) {
     rand = 199;
   }
-  flag = sub_8055864(pokemon,target,move,rand,itemId) != 0 ? TRUE: FALSE;
+  flag = sub_8055864_Async(pokemon,target,move,rand,itemId) != 0 ? TRUE: FALSE;
   return flag;
 }
 
@@ -217,7 +217,7 @@ bool8 PsychUpMoveAction(Entity * pokemon, Entity * target, Move * move, s32 item
     iVar4->defensiveMultipliers[index] = iVar3->defensiveMultipliers[index];
   }
   SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
-  TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FBD58); // It psyched itself up!
+  TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FBD58); // It psyched itself up!
   SetExpMultplier(iVar4);
   return TRUE;
 }
@@ -240,7 +240,7 @@ bool8 sub_8058E5C(Entity *pokemon, Entity *target, Move *move, s32 itemId)
     }
     flag = TRUE;
     if ((!AbilityIsActive(pokemon, ABILITY_ROCK_HEAD)) && RollSecondaryEffect(pokemon, 0)) {
-      sub_806F370(pokemon,pokemon,iVar3,0,0,0,DUNGEON_EXIT_FAINTED_FROM_RECOIL,RESIDUAL_DAMAGE_RECOIL,1,0);
+      sub_806F370_Async(pokemon,pokemon,iVar3,0,0,0,DUNGEON_EXIT_FAINTED_FROM_RECOIL,RESIDUAL_DAMAGE_RECOIL,1,0);
     }
   }
   return flag;
@@ -355,10 +355,10 @@ bool8 FissureMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
     uVar5 = FALSE;
   }
   if (!uVar5) {
-    TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FEB88);
+    TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FEB88);
   }
   else {
-    sub_806F370(pokemon,target,9999,1,&flag,GetMoveType(move),GetDungeonExitReasonFromMoveOrItem(move,itemId),RESIDUAL_DAMAGE_REGULAR,1,1);
+    sub_806F370_Async(pokemon,target,9999,1,&flag,GetMoveType(move),GetDungeonExitReasonFromMoveOrItem(move,itemId),RESIDUAL_DAMAGE_REGULAR,1,1);
     flag = flag == 0;
   }
   return flag;
@@ -406,7 +406,7 @@ bool8 AbsorbMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
       SetExpMultplier(entityInfo);
       if (RollSecondaryEffect(pokemon,0)) {
         if (hasLiquidOoze) {
-            DealDamageToEntity(pokemon,iVar4,RESIDUAL_DAMAGE_LIQUID_OOZE,DUNGEON_EXIT_FAINTED_COVERED_IN_SLUDGE);
+            DealDamageToEntity_Async(pokemon,iVar4,RESIDUAL_DAMAGE_LIQUID_OOZE,DUNGEON_EXIT_FAINTED_COVERED_IN_SLUDGE);
         }
         else {
             HealTargetHP(pokemon,pokemon,iVar4,0,1);
@@ -424,7 +424,7 @@ bool8 SkillSwapMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemI
   EntityInfo *pokeEntityData = GetEntInfo(pokemon);
   EntityInfo *targetEntityInfo = GetEntInfo(target);
   if ((AbilityIsActive(target, ABILITY_WONDER_GUARD)) || (AbilityIsActive(pokemon, ABILITY_WONDER_GUARD))) {
-    TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FC8C0);
+    TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FC8C0);
     flag = FALSE;
   }
   else
@@ -436,7 +436,7 @@ bool8 SkillSwapMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemI
     pokeEntityData->abilities[0] = ability1;
     pokeEntityData->abilities[1] = ability2;
     gDungeon->unkC = 1;
-    TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FC888);
+    TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FC888);
     // Weirdly enough SetExpMultplier inline doesn't work here...
     if (pokeEntityData->expMultiplier == EXP_HALVED) {
         pokeEntityData->expMultiplier = EXP_REGULAR;
@@ -466,19 +466,19 @@ bool8 SketchMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId)
     }
 
     if (!moveFound) {
-        TryDisplayDungeonLoggableMessage3(pokemon, target, gUnknown_80FE3BC);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon, target, gUnknown_80FE3BC);
         return FALSE;
     }
 
     if (moveId == MOVE_NOTHING) {
-        TryDisplayDungeonLoggableMessage3(pokemon, target, gUnknown_80FE3BC);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon, target, gUnknown_80FE3BC);
     }
     else {
         InitPokemonMove(move, moveId);
         BufferMoveName(gFormatBuffer_Items[0], move, 0);
         move->moveFlags2 |= MOVE_FLAG2_UNK4;
         move->moveFlags2 |= MOVE_FLAG_REPLACE;
-        TryDisplayDungeonLoggableMessage3(pokemon, target, gUnknown_80FE38C);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon, target, gUnknown_80FE38C);
         ASM_MATCH_TRICK(pokeInfo);
         SetExpMultplier(pokeInfo);
         ret = TRUE;
@@ -519,7 +519,7 @@ bool8 DoubleEdgeMoveAction(Entity * pokemon,Entity * target,Move * move,s32 item
       if (HP == 0) {
         HP = 1;
       }
-      sub_806F370(pokemon,pokemon,HP,0,0,0,DUNGEON_EXIT_FAINTED_FROM_RECOIL,RESIDUAL_DAMAGE_RECOIL,1,0);
+      sub_806F370_Async(pokemon,pokemon,HP,0,0,0,DUNGEON_EXIT_FAINTED_FROM_RECOIL,RESIDUAL_DAMAGE_RECOIL,1,0);
     }
   }
   return flag;
@@ -530,7 +530,7 @@ bool8 SandstormMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemI
     gDungeon->weather.unkE267[WEATHER_SANDSTORM] = gMoveWeatherDuration;
     if(sub_807EAA0(1, 0) == 0)
     {
-        TryDisplayDungeonLoggableMessage3(pokemon, target, gUnknown_80FCF78);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon, target, gUnknown_80FCF78);
     }
     return TRUE;
 }
@@ -584,12 +584,12 @@ bool8 sub_80595EC(Entity * pokemon,Entity * target,Move * move,s32 itemId)
 
   local_20 = 0;
   if (sub_806F4A4(target,GetMoveType(move)) == 0) {
-    TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FEB8C);
+    TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FEB8C);
     return FALSE;
   }
   else {
     moveType = GetMoveType(move);
-    sub_806F370(pokemon,target,9999,1,&local_20,moveType,GetDungeonExitReasonFromMoveOrItem(move,itemId),RESIDUAL_DAMAGE_REGULAR,1,0);
+    sub_806F370_Async(pokemon,target,9999,1,&local_20,moveType,GetDungeonExitReasonFromMoveOrItem(move,itemId),RESIDUAL_DAMAGE_REGULAR,1,0);
     local_20 = (local_20 == 0);
     return local_20;
   }
@@ -622,7 +622,7 @@ bool8 SonicboomMoveAction(Entity * pokemon,Entity * target,Move * move,s32 itemI
     u8 local_20;
 
     local_20 = 0;
-    sub_806F370(pokemon,target,gSonicboomDmgValue,1,&local_20,GetMoveType(move),GetDungeonExitReasonFromMoveOrItem(move,itemId),RESIDUAL_DAMAGE_REGULAR,1,0);
+    sub_806F370_Async(pokemon,target,gSonicboomDmgValue,1,&local_20,GetMoveType(move),GetDungeonExitReasonFromMoveOrItem(move,itemId),RESIDUAL_DAMAGE_REGULAR,1,0);
     local_20 = local_20 == 0;
     return local_20;
 }
@@ -655,7 +655,7 @@ bool8 DiveMoveAction(Entity * pokemon, Entity * target, Move * move, s32 itemId)
 
   flag = FALSE;
   if (IsTileGround(GetTileAtEntitySafe(pokemon))) {
-    TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FD128);
+    TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FD128);
   }
   else if (MoveMatchesBideClassStatus(pokemon,move)) {
       flag = HandleDamagingMove(pokemon,target,move,gDiveModifier,itemId) != 0 ? TRUE : FALSE;
@@ -748,7 +748,7 @@ bool8 sub_8059A2C(Entity * pokemon,Entity * target,Move * move,s32 itemId)
 
     local_20 = 0;
     level = GetEntInfo(pokemon)->level;
-    sub_806F370(pokemon,target,level,1,&local_20,GetMoveType(move),GetDungeonExitReasonFromMoveOrItem(move,itemId),RESIDUAL_DAMAGE_REGULAR,1,0);
+    sub_806F370_Async(pokemon,target,level,1,&local_20,GetMoveType(move),GetDungeonExitReasonFromMoveOrItem(move,itemId),RESIDUAL_DAMAGE_REGULAR,1,0);
     local_20 = local_20 == 0;
     return local_20;
 }
@@ -777,11 +777,11 @@ bool8 HornDrillMoveAction(Entity * pokemon,Entity * target,Move * move,s32 itemI
 
   local_20 = 0;
   if (sub_806F4A4(target,GetMoveType(move)) == 0) {
-    TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FEB90);
+    TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FEB90);
     return FALSE;
   }
   else {
-    sub_806F370(pokemon,target,9999,1,&local_20,GetMoveType(move),GetDungeonExitReasonFromMoveOrItem(move,itemId),RESIDUAL_DAMAGE_REGULAR,0,0);
+    sub_806F370_Async(pokemon,target,9999,1,&local_20,GetMoveType(move),GetDungeonExitReasonFromMoveOrItem(move,itemId),RESIDUAL_DAMAGE_REGULAR,0,0);
     local_20 = local_20 == 0;
     return local_20;
   }
@@ -806,7 +806,7 @@ bool8 ConversionMoveAction(Entity * pokemon,Entity * target,Move * move,s32 item
   counter = 0;
   info = GetEntInfo(target);
   if (AbilityIsActive(target, ABILITY_FORECAST)) {
-      TryDisplayDungeonLoggableMessage3(pokemon,target,gPtrForecastPreventsTypeSwitchMessage);
+      TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gPtrForecastPreventsTypeSwitchMessage);
       return FALSE;
   }
   else
@@ -820,7 +820,7 @@ bool8 ConversionMoveAction(Entity * pokemon,Entity * target,Move * move,s32 item
       }
     }
     if (counter == 0) {
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FE36C);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FE36C);
         return FALSE;
     }
     else
@@ -831,7 +831,7 @@ bool8 ConversionMoveAction(Entity * pokemon,Entity * target,Move * move,s32 item
       info->types[1] = TYPE_NONE;
       info->isColorChanged = TRUE;
       BufferMoveName(gFormatBuffer_Items[0], moveStack[newIndex], NULL);
-      TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FE330);
+      TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FE330);
       return TRUE;
     }
   }
@@ -849,7 +849,7 @@ bool8 HelpingHandMoveAction(Entity *pokemon, Entity *target, Move *move, s32 ite
     flag = FALSE;
     if(pokemon == target)
     {
-        TryDisplayDungeonLoggableMessage3(target, target, gUnknown_80FEB60);
+        TryDisplayDungeonLoggableMessage3_Async(target, target, gUnknown_80FEB60);
     }
     else {
         BoostOffensiveStat(pokemon, target, gStatIndexAtkDef, 1);

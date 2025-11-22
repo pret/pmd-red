@@ -94,7 +94,7 @@ void MedichamRescueDialogue(void)
     sub_806CE68(medichamEntity, DIRECTION_SOUTH);
     sub_803E708(0x20, 0x46);
     sub_8042B0C(medichamEntity);
-    HandleFaint(medichamEntity, DUNGEON_EXIT_DELETED_FOR_EVENT, 0);
+    HandleFaint_Async(medichamEntity, DUNGEON_EXIT_DELETED_FOR_EVENT, 0);
     gDungeon->unk4 = 1;
     gDungeon->unk11 = 4;
 }
@@ -109,7 +109,7 @@ void sub_808CB5C(void)
     DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
     sub_80854D4();
     sub_8085930(DIRECTION_NORTH);
-    HandleFaint(medichamEntity, DUNGEON_EXIT_DELETED_FOR_EVENT, 0);
+    HandleFaint_Async(medichamEntity, DUNGEON_EXIT_DELETED_FOR_EVENT, 0);
     sub_8085860(leaderEntity->pos.x, leaderEntity->pos.y);
     CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_MEDICHAM);
 }

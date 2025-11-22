@@ -72,7 +72,7 @@ void sub_8087848(void)
   sub_8085930(DIRECTION_WEST);
   sub_80855E4(sub_8086A3C);
   if (sub_8086AE4(MONSTER_MOLTRES)) {
-    HandleFaint(moltresEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
+    HandleFaint_Async(moltresEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
   }
   else {
     LevelUpTarget(moltresEntity,moltresEntity,gMoltresConfigLevel,0,0);
@@ -86,11 +86,11 @@ void sub_8087848(void)
   CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2],MONSTER_MOLTRES);
 }
 
-void sub_80878F4(u8 param_1, u8 param_2)
+void sub_80878F4(u8 monsterBehavior, u8 cutscene)
 {
-  if ((param_2 == 0xA || param_2 == 0xB || param_2 == 0xC) && (param_1 == 0x9)) {
-    sub_8097FA8(0x7);
-    gDungeon->unk2 = 1;
+  if ((cutscene == CUTSCENE_MT_BLAZE_PEAK_ATTEMPT1 || cutscene == CUTSCENE_MT_BLAZE_PEAK_ATTEMPT2 || cutscene == CUTSCENE_MT_BLAZE_PEAK_POSTSTORY) && monsterBehavior == BEHAVIOR_MOLTRES) {
+    sub_8097FA8(7);
+    gDungeon->unk2 = DUNGEON_UNK2_1;
   }
 }
 
@@ -222,7 +222,7 @@ void MoltresPostStoryPreFightDialogue(void)
     sub_803E708(10,0x46);
     DisplayDungeonDialogue(&gUnknown_8100D3C);
     sub_803E708(10,0x46);
-    gDungeon->unk2 = 1;
+    gDungeon->unk2 = DUNGEON_UNK2_1;
   }
   else {
     DisplayDungeonDialogue(&gMoltresPostStoryPreFightDialogue_1);

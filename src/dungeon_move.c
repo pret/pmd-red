@@ -46,7 +46,7 @@
 
 extern void sub_8041168(Entity *entity, Entity *entity2, Move *,DungeonPos *);
 
-static s32 TryHitTarget(Entity *attacker, Entity *target, Move *move, struct DamageStruct *dmgStruct, s16 unk_);
+static s32 TryHitTarget_Async(Entity *attacker, Entity *target, Move *move, struct DamageStruct *dmgStruct, s16 unk_);
 
 EWRAM_DATA s32 gUnknown_202F208 = 0;
 EWRAM_DATA s32 gUnknown_202F20C = 0;
@@ -99,7 +99,7 @@ void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move *move, 
                     && GetEntInfo(snatchMon)->dungeonSpriteId == gDungeon->unk17B3C
                     && targetInfo->unkFF == 0)
                 {
-                    TryDisplayDungeonLoggableMessage3(attacker, currTarget, gUnknown_80FCD28); // The move was snatched.
+                    TryDisplayDungeonLoggableMessage3_Async(attacker, currTarget, gUnknown_80FCD28); // The move was snatched.
                     currTarget = snatchMon;
                 }
             }
@@ -112,7 +112,7 @@ void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move *move, 
                         && ((targetInfo->unkFF == 0 && lightRodInfo->unkFF == 0) || currTarget == lightRodMon))
                     {
                         sub_8042930(lightRodMon);
-                        TryDisplayDungeonLoggableMessage3(attacker, currTarget, gUnknown_80FCD0C); // A Lightningrod took the move
+                        TryDisplayDungeonLoggableMessage3_Async(attacker, currTarget, gUnknown_80FCD0C); // A Lightningrod took the move
                         currTarget = lightRodMon;
                         lightRodRedirect = TRUE;
                     }
@@ -127,7 +127,7 @@ void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move *move, 
                     s32 direction1 = targetInfo->action.direction;
                     s32 direction2 = targetInfo->action.direction;
                     if (IsFloorwideFixedRoom()) {
-                        TryDisplayDungeonLoggableMessage3(attacker, currTarget, gUnknown_80FDD88); // A mysterious force prevents moves from being passed off!
+                        TryDisplayDungeonLoggableMessage3_Async(attacker, currTarget, gUnknown_80FDD88); // A mysterious force prevents moves from being passed off!
                     }
                     else {
                         s32 j;
@@ -157,10 +157,10 @@ void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move *move, 
                                 }
                                 targetInfo->belly = FixedPoint_Subtract(targetInfo->belly, IntToFixedPoint(gPassScarfBellyDownValue));
                                 if (move->id == MOVE_REGULAR_ATTACK) {
-                                    TryDisplayDungeonLoggableMessage3(attacker, currTarget, gUnknown_80FDDA8); // Attack was passed off
+                                    TryDisplayDungeonLoggableMessage3_Async(attacker, currTarget, gUnknown_80FDDA8); // Attack was passed off
                                 }
                                 else {
-                                    TryDisplayDungeonLoggableMessage3(attacker, currTarget, gUnknown_80FDD20); // Move was passed off
+                                    TryDisplayDungeonLoggableMessage3_Async(attacker, currTarget, gUnknown_80FDD20); // Move was passed off
                                 }
                                 currTargetSaved = currTarget;
                                 currTarget = tileEntity;
@@ -169,10 +169,10 @@ void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move *move, 
                         }
                         if (j == 8) {
                             if (move->id == MOVE_REGULAR_ATTACK) {
-                                TryDisplayDungeonLoggableMessage3(attacker, currTarget, gUnknown_80FDDAC); // There's no one to pass off to!
+                                TryDisplayDungeonLoggableMessage3_Async(attacker, currTarget, gUnknown_80FDDAC); // There's no one to pass off to!
                             }
                             else {
-                                TryDisplayDungeonLoggableMessage3(attacker, currTarget, gUnknown_80FDD48); //There's no one to pass off to!
+                                TryDisplayDungeonLoggableMessage3_Async(attacker, currTarget, gUnknown_80FDD48); //There's no one to pass off to!
                             }
                         }
                     }
@@ -193,7 +193,7 @@ void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move *move, 
             if (!lightRodRedirect) {
                 if (targetInfo->reflectClassStatus.status == STATUS_MAGIC_COAT) {
                     if (IsReflectedByMagicCoat(moveId) && sub_8055988(attacker, currTarget)) {
-                        TryDisplayDungeonLoggableMessage3(attacker, currTarget, gUnknown_80FC52C); // The target~27s Magic Coat bounced it back!
+                        TryDisplayDungeonLoggableMessage3_Async(attacker, currTarget, gUnknown_80FC52C); // The target~27s Magic Coat bounced it back!
                         sub_8041B48(currTarget);
                         sub_80559DC(currTarget, attacker);
                         currTarget = attacker;
@@ -210,7 +210,7 @@ void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move *move, 
                         && ((target & 0xF) == 0 || (target & 0xF) == 4 || (target & 0xF) == 5 || (target & 0xF) == 2)
                         && sub_8055988(attacker, currTarget))
                     {
-                        TryDisplayDungeonLoggableMessage3(attacker, currTarget, gUnknown_80FC558); // The target~27s Mirror Move returned it!
+                        TryDisplayDungeonLoggableMessage3_Async(attacker, currTarget, gUnknown_80FC558); // The target~27s Mirror Move returned it!
                         sub_8041BA8(currTarget);
                         sub_80559DC(currTarget, attacker);
                         currTarget = attacker;
@@ -226,7 +226,7 @@ void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move *move, 
                     s32 targetFlagsAnd = targetFlags & 0xF;
                     if ((targetFlagsAnd == 0 || targetFlagsAnd == 4 || targetFlagsAnd == 5 || targetFlagsAnd == 2) && !r4) {
                         SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], currTarget, 0);
-                        TryDisplayDungeonLoggableMessage3(attacker, currTarget, gUnknown_80FC574); // protected itself!
+                        TryDisplayDungeonLoggableMessage3_Async(attacker, currTarget, gUnknown_80FC574); // protected itself!
                         moveHits = FALSE;
                     }
                 }
@@ -239,7 +239,7 @@ void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move *move, 
             if (moveHits) {
                 if (AbilityIsActive(currTarget, ABILITY_SOUNDPROOF) && IsSoundMove(move)) {
                     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], currTarget, 0);
-                    TryDisplayDungeonLoggableMessage3(attacker, currTarget, gUnknown_8100524); // Soundproof suppressed the sound move!
+                    TryDisplayDungeonLoggableMessage3_Async(attacker, currTarget, gUnknown_8100524); // Soundproof suppressed the sound move!
                     moveHits = FALSE;
                 }
             }
@@ -272,16 +272,16 @@ void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move *move, 
                 SetMessageArgument_2(gFormatBuffer_Monsters[1], GetEntInfo(currTarget), 0);
                 // Interesting that these 3 strings are the same. Curious if that's the case in Blue/Europe versions.
                 if (attacker == currTarget) {
-                    TryDisplayDungeonLoggableMessage3(attacker, currTarget, gUnknown_80F9380); // The move missed
+                    TryDisplayDungeonLoggableMessage3_Async(attacker, currTarget, gUnknown_80F9380); // The move missed
                 }
                 else if (GetTreatmentBetweenMonsters(attacker, currTarget, TRUE, FALSE) == 0) {
-                    TryDisplayDungeonLoggableMessage3(attacker, currTarget, gUnknown_80F9384); // The move missed
+                    TryDisplayDungeonLoggableMessage3_Async(attacker, currTarget, gUnknown_80F9384); // The move missed
                 }
                 else if (lightRodRedirect) {
-                    TryDisplayDungeonLoggableMessage3(attacker, currTarget, gUnknown_80F93A4); // The move missed
+                    TryDisplayDungeonLoggableMessage3_Async(attacker, currTarget, gUnknown_80F93A4); // The move missed
                 }
                 else {
-                    TryDisplayDungeonLoggableMessage3(attacker, currTarget, gUnknown_80F9364); // is unaffected!
+                    TryDisplayDungeonLoggableMessage3_Async(attacker, currTarget, gUnknown_80F9364); // is unaffected!
                 }
 
                 if (ShouldDisplayEntity(currTarget)) {
@@ -1341,7 +1341,7 @@ s32 HandleDamagingMove(Entity *attacker, Entity *target, Move *move, s24_8 modif
 
     CalcDamage(attacker, target, moveType, movePower, critChance, &dmgStruct, modifier, move->id, 1);
     dungeonExitReason = GetDungeonExitReasonFromMoveOrItem(move, itemId);
-    return TryHitTarget(attacker, target, move, &dmgStruct, dungeonExitReason);
+    return TryHitTarget_Async(attacker, target, move, &dmgStruct, dungeonExitReason);
 }
 
 s32 sub_80556BC(Entity *attacker, Entity *target, u8 moveType, Move *move, s24_8 modifier, s32 itemId)
@@ -1353,10 +1353,10 @@ s32 sub_80556BC(Entity *attacker, Entity *target, u8 moveType, Move *move, s24_8
 
     CalcDamage(attacker, target, moveType, movePower, critChance, &dmgStruct, modifier, move->id, 1);
     dungeonExitReason = GetDungeonExitReasonFromMoveOrItem(move, itemId);
-    return TryHitTarget(attacker, target, move, &dmgStruct, dungeonExitReason);
+    return TryHitTarget_Async(attacker, target, move, &dmgStruct, dungeonExitReason);
 }
 
-static s32 TryHitTarget(Entity *attacker, Entity *target, Move *move, struct DamageStruct *dmgStruct, s16 dungeonExitReason_)
+static s32 TryHitTarget_Async(Entity *attacker, Entity *target, Move *move, struct DamageStruct *dmgStruct, s16 dungeonExitReason_)
 {
     s32 dungeonExitReason = dungeonExitReason_; // It's happening again...
     if (AccuracyCalc(attacker, target, move, ACCURACY_2, TRUE)) { // Move hits
@@ -1368,17 +1368,17 @@ static s32 TryHitTarget(Entity *attacker, Entity *target, Move *move, struct Dam
             gDungeon->illuminateMonSpawnGenID = target->spawnGenID;
         }
 
-        HandleDealingDamage(attacker, target, dmgStruct, isFalseSwipe, TRUE, dungeonExitReason, TRUE, 0);
+        HandleDealingDamage_Async(attacker, target, dmgStruct, isFalseSwipe, TRUE, dungeonExitReason, TRUE, 0);
     }
     else {
         SetMessageArgument_2(gFormatBuffer_Monsters[1], GetEntInfo(target), 0);
         if (ShouldDisplayEntity(attacker) && ShouldDisplayEntity(target)) {
             sub_803ED30(9999, target, 1, -1);
-            TryDisplayDungeonLoggableMessage4(attacker, target, gUnknown_80F9688); // It took no damage!
+            TryDisplayDungeonLoggableMessage4_Async(attacker, target, gUnknown_80F9688); // It took no damage!
             sub_8042238(attacker, target);
         }
         else {
-            TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80F9688); // It took no damage!
+            TryDisplayDungeonLoggableMessage3_Async(attacker, target, gUnknown_80F9688); // It took no damage!
         }
         dmgStruct->tookNoDamage = TRUE;
     }
@@ -1394,13 +1394,13 @@ static s32 TryHitTarget(Entity *attacker, Entity *target, Move *move, struct Dam
     return dmgStruct->dmg;
 }
 
-s32 sub_8055864(Entity *attacker, Entity *target, Move *move, s32 param_4, s32 itemId)
+s32 sub_8055864_Async(Entity *attacker, Entity *target, Move *move, s32 param_4, s32 itemId)
 {
     struct DamageStruct dmgStruct;
     s32 moveType = GetMoveTypeForMonster(attacker, move);
 
     sub_806F2BC(attacker, target, moveType, param_4, &dmgStruct);
-    HandleDealingDamage(attacker, target, &dmgStruct, FALSE, TRUE, GetDungeonExitReasonFromMoveOrItem(move, itemId), TRUE, 0);
+    HandleDealingDamage_Async(attacker, target, &dmgStruct, FALSE, TRUE, GetDungeonExitReasonFromMoveOrItem(move, itemId), TRUE, 0);
     if (dmgStruct.tookNoDamage) {
         return 0;
     }

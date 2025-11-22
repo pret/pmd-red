@@ -204,10 +204,10 @@ bool8 sub_807FD84(Entity *entity)
         gDungeon->unk13570 = 0;
         flag = LayTrap(&gDungeon->trapPos,gDungeon->trapID,gDungeon->unk13579);
         if (flag) {
-            LogMessageByIdWithPopupCheckUserUnknown(entity,&gDungeon->trapPos,gUnknown_80FC5F8); // A trap was laid!
+            LogMessageByIdWithPopupCheckUserUnknown_Async(entity,&gDungeon->trapPos,gUnknown_80FC5F8); // A trap was laid!
         }
         else {
-            LogMessageByIdWithPopupCheckUserUnknown(entity,&gDungeon->trapPos,gUnknown_80FC5FC); // A trap can't be laid here.
+            LogMessageByIdWithPopupCheckUserUnknown_Async(entity,&gDungeon->trapPos,gUnknown_80FC5FC); // A trap can't be laid here.
         }
         UpdateTrapsVisibility();
     }
@@ -299,7 +299,7 @@ void TryTriggerTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4)
             if (sub_803F428(pos)) {
                 UpdateTrapsVisibility();
             }
-            TryDisplayDungeonLoggableMessage3(pokemon,target,text);
+            TryDisplayDungeonLoggableMessage3_Async(pokemon,target,text);
             if (param_3 == 0) {
                 return;
             }
@@ -310,10 +310,10 @@ void TryTriggerTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4)
         UpdateTrapsVisibility();
         sub_804225C(pokemon,pos,trapData->id);
         if (gDungeon->unk181e8.blinded) {
-            LogMessageByIdWithPopupCheckUser(pokemon,gUnknown_80FD7F4);
+            LogMessageByIdWithPopupCheckUser_Async(pokemon,gUnknown_80FD7F4);
         }
         else {
-            LogMessageByIdWithPopupCheckUser(pokemon,gSteppedOnTrapStrings[trapData->id]);
+            LogMessageByIdWithPopupCheckUser_Async(pokemon,gSteppedOnTrapStrings[trapData->id]);
         }
     }
     if (target != NULL) {
@@ -377,7 +377,7 @@ void TryTriggerTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4)
             break;
         case TRAP_CHESTNUT_TRAP:
             if (target != NULL) {
-                DealDamageToEntity(target,gChestnutTrapDmgValue,RESIDUAL_DAMAGE_CHESTNUT_TRAP,DUNGEON_EXIT_TRIPPED_CHESTNUT_TRAP);
+                DealDamageToEntity_Async(target,gChestnutTrapDmgValue,RESIDUAL_DAMAGE_CHESTNUT_TRAP,DUNGEON_EXIT_TRIPPED_CHESTNUT_TRAP);
             }
             break;
         case TRAP_WONDER_TILE:
@@ -389,7 +389,7 @@ void TryTriggerTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4)
             break;
         case TRAP_SPIKE_TRAP:
             if (target != NULL) {
-                DealDamageToEntity(target,gSpikeTrapDmgValue,RESIDUAL_DAMAGE_SPIKES,DUNGEON_EXIT_FAINTED_FROM_SPIKES);
+                DealDamageToEntity_Async(target,gSpikeTrapDmgValue,RESIDUAL_DAMAGE_SPIKES,DUNGEON_EXIT_FAINTED_FROM_SPIKES);
             }
     }
     if (EntityIsValid(target)) {
@@ -433,7 +433,7 @@ void HandleStickyTrap(Entity *pokemon,Entity *target)
 
     info = GetEntInfo(target);
     if (HasHeldItem(target,0xe)) {
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FDC7C);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FDC7C);
     }
     else
     {
@@ -455,14 +455,14 @@ void HandleStickyTrap(Entity *pokemon,Entity *target)
         }
 
         if (itemCount == 0) {
-            TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FDC40);
+            TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FDC40);
         }
         else {
             newIndex = DungeonRandInt(itemCount);
             sub_8045BF8(gFormatBuffer_Items[0], itemStack[newIndex]);
             itemStack[newIndex]->flags |= ITEM_FLAG_STICKY;
             sub_80421C0(target, 0x192);
-            TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FDC18);
+            TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FDC18);
         }
     }
 }
@@ -549,14 +549,14 @@ void HandleGrimyTrap(Entity *pokemon, Entity *target)
             }
         }
         if (badFoodCount == 1) {
-            TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FD788); // A food item went bad.
+            TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FD788); // A food item went bad.
         }
         else if (badFoodCount == 0) {
-            TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FD7D4); // Nothing particularly bad happened.
+            TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FD7D4); // Nothing particularly bad happened.
         }
         else
         {
-            TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FD7AC); // Several food items went bad
+            TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FD7AC); // Several food items went bad
         }
     }
 }
@@ -569,7 +569,7 @@ void HandlePitfallTrap(Entity *pokemon, Entity *target, Tile *tile)
     flag = FALSE;
     if (target != NULL) {
         if (IsFloorwideFixedRoom()) {
-            LogMessageByIdWithPopupCheckUser(pokemon,gUnknown_80FED0C); // But nothing happened...
+            LogMessageByIdWithPopupCheckUser_Async(pokemon,gUnknown_80FED0C); // But nothing happened...
         }
         else
         {
@@ -585,22 +585,22 @@ void HandlePitfallTrap(Entity *pokemon, Entity *target, Tile *tile)
                     info->unk15C = 1;
                     info->unk15E = 1;
                     sub_803E708(0x28,0x4b);
-                    DealDamageToEntity(target,gPitfallTrapDmgValue,RESIDUAL_DAMAGE_PITFALL,DUNGEON_EXIT_FELL_INTO_PITFALL);
-                    gDungeon->unk2 = 2;
+                    DealDamageToEntity_Async(target,gPitfallTrapDmgValue,RESIDUAL_DAMAGE_PITFALL,DUNGEON_EXIT_FELL_INTO_PITFALL);
+                    gDungeon->unk2 = DUNGEON_UNK2_PITFALL_TRAP;
                     return;
                 }
-                LogMessageByIdWithPopupCheckUser(pokemon,gUnknown_80F9728);
+                LogMessageByIdWithPopupCheckUser_Async(pokemon,gUnknown_80F9728);
             }
             else
             {
                 SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
                 if (info->isNotTeamMember) {
-                    TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80F970C); // $m0 fell into the pitfall!
+                    TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80F970C); // $m0 fell into the pitfall!
                 }
                 else {
-                    DisplayDungeonLoggableMessageTrue(pokemon,gUnknown_80F970C); // $m0 fell into the pitfall!
+                    DisplayDungeonLoggableMessageTrue_Async(pokemon,gUnknown_80F970C); // $m0 fell into the pitfall!
                 }
-                HandleFaint(target,DUNGEON_EXIT_FELL_INTO_PITFALL,pokemon);
+                HandleFaint_Async(target,DUNGEON_EXIT_FELL_INTO_PITFALL,pokemon);
             }
             if (flag) {
                 SetTrap(tile, TRAP_PITFALL_TRAP);
@@ -650,11 +650,11 @@ void HandleSummonTrap(Entity *pokemon,DungeonPos *pos)
     sub_80421EC(pos,0x194);
     if (pokemonSummonCount == 0) {
 _ret:
-        LogMessageByIdWithPopupCheckUser(pokemon,gUnknown_80FED04);
+        LogMessageByIdWithPopupCheckUser_Async(pokemon,gUnknown_80FED04);
     }
     else
     {
-        LogMessageByIdWithPopupCheckUser(pokemon,gUnknown_80FED00);
+        LogMessageByIdWithPopupCheckUser_Async(pokemon,gUnknown_80FED00);
     }
   }
 }
@@ -691,9 +691,9 @@ void HandlePPZeroTrap(Entity *param_1,Entity *param_2)
       flag = TRUE;
     }
     if(flag)
-        TryDisplayDungeonLoggableMessage3(param_1,param_2,gUnknown_80FDA80);
+        TryDisplayDungeonLoggableMessage3_Async(param_1,param_2,gUnknown_80FDA80);
     else
-        TryDisplayDungeonLoggableMessage3(param_1,param_2,gUnknown_80FDAA0);
+        TryDisplayDungeonLoggableMessage3_Async(param_1,param_2,gUnknown_80FDAA0);
   }
 }
 
@@ -731,9 +731,9 @@ void HandleSealTrap(Entity *param_1,Entity *param_2)
             flag = TRUE;
         }
         if(flag)
-            TryDisplayDungeonLoggableMessage3(param_1,param_2,gUnknown_80FDB04);
+            TryDisplayDungeonLoggableMessage3_Async(param_1,param_2,gUnknown_80FDB04);
         else
-            TryDisplayDungeonLoggableMessage3(param_1,param_2,gUnknown_80FDB2C);
+            TryDisplayDungeonLoggableMessage3_Async(param_1,param_2,gUnknown_80FDB2C);
     }
 }
 
@@ -757,7 +757,7 @@ void HandlePokemonTrap(Entity *param_1,DungeonPos *pos)
     s32 range = gDungeon->unk181e8.visibilityRange;
 
     if (IsFloorwideFixedRoom()) {
-        LogMessageByIdWithPopupCheckUser(param_1,gUnknown_80FED08);
+        LogMessageByIdWithPopupCheckUser_Async(param_1,gUnknown_80FED08);
         return;
     }
 
@@ -819,10 +819,10 @@ void HandlePokemonTrap(Entity *param_1,DungeonPos *pos)
     }
 
     if (counter != 0) {
-        LogMessageByIdWithPopupCheckUser(param_1,gUnknown_80FDACC);
+        LogMessageByIdWithPopupCheckUser_Async(param_1,gUnknown_80FDACC);
     }
     else {
-        LogMessageByIdWithPopupCheckUser(param_1,gUnknown_80FDAE4);
+        LogMessageByIdWithPopupCheckUser_Async(param_1,gUnknown_80FDAE4);
     }
 }
 

@@ -403,7 +403,7 @@ static void WriteDungeonFloor(DataSerializer *seri)
     WriteBool8(seri, gDungeon->unk3A0A);
     WriteBool8(seri, gDungeon->unk3A0B);
     WriteU8(seri, gDungeon->monsterHouseRoom);
-    WriteU8(seri, gDungeon->prefight);
+    WriteU8(seri, gDungeon->cutscene);
     WriteS16(seri, gDungeon->tileset);
     WriteS16(seri,gDungeon->unk3A10);
     WriteS16(seri, gDungeon->unk3A12);
@@ -765,7 +765,7 @@ static void ReadDungeonFloor(DataSerializer *seri)
     gDungeon->unk3A0A = ReadBool8(seri);
     gDungeon->unk3A0B = ReadBool8(seri);
     gDungeon->monsterHouseRoom = ReadU8(seri);
-    gDungeon->prefight = ReadU8(seri);
+    gDungeon->cutscene = ReadU8(seri);
     gDungeon->tileset = ReadS16(seri);
     gDungeon->unk3A10 = ReadS16(seri);
     gDungeon->unk3A12 = ReadS16(seri);

@@ -77,7 +77,7 @@ void sub_808A308(void)
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
   if (HasRecruitedMon(MONSTER_SUICUNE)) {
-     HandleFaint(SuicuneEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
+     HandleFaint_Async(SuicuneEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
   }
   else {
      SetFacingDirection(SuicuneEntity, DIRECTION_SOUTH);
@@ -86,11 +86,11 @@ void sub_808A308(void)
   CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_SUICUNE);
 }
 
-void sub_808A36C(u8 param_1, u8 param_2)
+void sub_808A36C(u8 monsterBehavior, u8 cutscene)
 {
-  if ((param_2 == 0x26 || param_2 == 0x27 || param_2 == 0x28) && (param_1 == 0x14)) {
-    sub_8097FA8(0x19);
-    gDungeon->unk2 = 1;
+  if ((cutscene == CUTSCENE_NORTHWIND_FIELD_ATTEMPT1 || cutscene == CUTSCENE_NORTHWIND_FIELD_ATTEMPT2 || cutscene == CUTSCENE_NORTHWIND_FIELD_POSTSTORY) && monsterBehavior == BEHAVIOR_SUICUNE) {
+    sub_8097FA8(25);
+    gDungeon->unk2 = DUNGEON_UNK2_1;
   }
 }
 

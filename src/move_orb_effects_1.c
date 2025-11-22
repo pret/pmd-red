@@ -75,11 +75,11 @@ void SleepStatusTarget(Entity * pokemon, Entity * target, s32 turns, u8 displayM
     sleep = GetEntInfo(target)->sleepClassStatus.status;
     if (sleep == STATUS_SLEEPLESS) {
       if (displayMessage)
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB380);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FB380);
     }
     else if (sleep == STATUS_NAPPING) {
       if (displayMessage)
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB384);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FB384);
     }
     else {
       sub_8041AF4(target);
@@ -87,11 +87,11 @@ void SleepStatusTarget(Entity * pokemon, Entity * target, s32 turns, u8 displayM
       sub_806CE68(target,8);
 
       if (cVar2 == 1)
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB338);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FB338);
       else if (cVar2 == 2)
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB35C);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FB35C);
       else
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB318);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FB318);
     }
   }
 }
@@ -105,25 +105,25 @@ bool8 CannotSleep(Entity * pokemon, Entity * target, u8 param_3, bool8 displayMe
     }
     else if (IqSkillIsEnabled(target, IQ_NONSLEEPER)) {
         if (displayMessage) {
-            TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FCD54);
+            TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FCD54);
         }
         return TRUE;
     }
     else if (AbilityIsActive(target, ABILITY_INSOMNIA)) {
         if (displayMessage) {
-            TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FCD58);
+            TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FCD58);
         }
         return TRUE;
     }
     else if (AbilityIsActive(target, ABILITY_VITAL_SPIRIT)) {
         if (displayMessage) {
-            TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FCD88);
+            TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FCD88);
         }
         return TRUE;
     }
     else if (HasHeldItem(target, ITEM_INSOMNISCOPE)) {
         if (displayMessage) {
-            TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FD548);
+            TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FD548);
         }
         return TRUE;
     }
@@ -153,15 +153,15 @@ void NightmareStatusTarget(Entity * pokemon, Entity * target, s32 turns)
       entityInfo->sleepClassStatus.status = STATUS_NIGHTMARE;
       sub_806CE68(target,8);
       if (hasNightmare) {
-          TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB3CC);
+          TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FB3CC);
       }
       else {
-          TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB3A4);
+          TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FB3A4);
       }
     }
     else
     {
-      TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB3D0);
+      TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FB3D0);
     }
     UpdateStatusIconFlags(target);
   }
@@ -190,15 +190,15 @@ void NappingStatusTarget(Entity * pokemon, Entity * target, s32 turns)
       entityInfo->sleepClassStatus.status = STATUS_NAPPING;
       sub_806CE68(target, 8);
       if (isSleeping) {
-          TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB360);
+          TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FB360);
       }
       else {
-          TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB31C);
+          TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FB31C);
       }
     }
     else
     {
-      TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB388);
+      TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FB388);
     }
     UpdateStatusIconFlags(target);
   }
@@ -217,19 +217,19 @@ void YawnedStatusTarget(Entity * pokemon, Entity * target, s32 turns)
     entityInfo->sleepClassStatus.turns = turns;
     nullsub_91(target);
     sub_806CE68(target, 8);
-    TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB3E0);
+    TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FB3E0);
   }
   else if (((entityInfo->sleepClassStatus.status == STATUS_SLEEP) || (entityInfo->sleepClassStatus.status == STATUS_NIGHTMARE)) || (entityInfo->sleepClassStatus.status == STATUS_NAPPING)) {
-    TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB418);
+    TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FB418);
   }
   else if (entityInfo->sleepClassStatus.status == STATUS_SLEEPLESS) {
-    TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB3F8);
+    TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FB3F8);
   }
   else {
     if (entityInfo->sleepClassStatus.status == STATUS_YAWNING)
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB414);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FB414);
     else
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB3E0);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FB3E0);
   }
   UpdateStatusIconFlags(target);
 }
@@ -259,12 +259,12 @@ void SleeplessStatusTarget(Entity * pokemon, Entity * target)
     sub_8041EE8(target);
     sub_806CE68(target,8);
     if(isAsleep)
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB41C);
-    TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB458);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FB41C);
+    TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FB458);
   }
   else
   {
-      TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB43C);
+      TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FB43C);
   }
   UpdateStatusIconFlags(target);
 }
@@ -286,19 +286,19 @@ void PausedStatusTarget(Entity * pokemon, Entity * target, u8 param_3, s32 turns
     entityInfo->cringeClassStatus.turns = turns + 1;
     nullsub_72(target);
     if (turns == 1) {
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB480);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FB480);
     }
     else {
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB4D4);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FB4D4);
     }
   }
   else {
     if (turns == 1) {
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB4B0);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FB4B0);
     }
     else
     {
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB4F0);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FB4F0);
     }
   }
   UpdateStatusIconFlags(target);
@@ -315,7 +315,7 @@ void InfatuateStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessa
       if (AbilityIsActive(target,ABILITY_OBLIVIOUS)) {
         SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
         if (displayMessage) {
-          TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FCC4C);
+          TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FCC4C);
         }
       }
       else
@@ -325,10 +325,10 @@ void InfatuateStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessa
           entityInfo->cringeClassStatus.status = STATUS_INFATUATED;
           entityInfo->cringeClassStatus.turns = CalculateStatusTurns(target,gInfatuatedTurnRange,TRUE) + 1;
           sub_8041EF8(target);
-          TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB50C);
+          TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FB50C);
         }
         else {
-          TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB52C);
+          TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FB52C);
         }
         UpdateStatusIconFlags(target);
       }
@@ -355,13 +355,13 @@ void BurnedStatusTarget(Entity * pokemon, Entity * target, u8 param_3, bool8 dis
     SetMessageArgument_2(gFormatBuffer_Monsters[0],entityInfo,0);
     if (AbilityIsActive(target, ABILITY_WATER_VEIL)) {
       if (displayMessage)
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FCE5C);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FCE5C);
     }
     else
     {
       if (MonsterIsType(target, TYPE_FIRE)) {
         if (displayMessage)
-            TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FCE84);
+            TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FCE84);
       }
       else
       {
@@ -369,7 +369,7 @@ void BurnedStatusTarget(Entity * pokemon, Entity * target, u8 param_3, bool8 dis
         if (((tile_1->terrainFlags & (TERRAIN_TYPE_SECONDARY | TERRAIN_TYPE_NORMAL)) == TERRAIN_TYPE_SECONDARY) &&
            (gDungeonWaterType[gDungeon->tileset] != DUNGEON_WATER_TYPE_LAVA)) {
                 if (displayMessage)
-                    TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FEBBC);
+                    TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FEBBC);
            }
         else
         {
@@ -383,10 +383,10 @@ void BurnedStatusTarget(Entity * pokemon, Entity * target, u8 param_3, bool8 dis
                 if (param_3 != 0) {
                     sub_8041C34(target);
                 }
-                TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB548);
+                TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FB548);
             }
             else {
-                TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB564);
+                TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FB564);
             }
             UpdateStatusIconFlags(target);
 
@@ -410,7 +410,7 @@ void BurnedStatusTarget(Entity * pokemon, Entity * target, u8 param_3, bool8 dis
                     if (!hasSynchronized) {
                         hasSynchronized = TRUE;
                         SetMessageArgument_2(gFormatBuffer_Monsters[0],entityInfo,0);
-                        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FF01C);
+                        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FF01C);
                     }
                     if (GetTreatmentBetweenMonstersIgnoreStatus(target,entity) == TREATMENT_TREAT_AS_ENEMY) {
                         // Recurse with the new target
@@ -442,19 +442,19 @@ void PoisonedStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessag
     SetMessageArgument_2(gFormatBuffer_Monsters[0],entityInfo,0);
     if (HasHeldItem(target, ITEM_PECHA_SCARF)) {
       if (displayMessage)
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FD524);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FD524);
     }
     else
     {
       if (AbilityIsActive(target, ABILITY_IMMUNITY)) {
         if (displayMessage)
-            TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FCEB0);
+            TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FCEB0);
       }
       else
       {
         if(MonsterIsType(target, TYPE_POISON) || MonsterIsType(target, TYPE_STEEL)){
             if (displayMessage)
-                TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FCEDC);
+                TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FCEDC);
         }
         else
         {
@@ -470,17 +470,17 @@ void PoisonedStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessag
                     entityInfo->burnClassStatus.badlyPoisonedDamageCount = 0;
                     isNotPoisoned = FALSE;
                     sub_8041C6C(target);
-                    TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB598);
+                    TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FB598);
                     sub_806CE94(target, 8);
                 }
                 else
                 {
-                    TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB5D4);
+                    TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FB5D4);
                 }
             }
             else
             {
-                TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB5F8);
+                TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FB5F8);
             }
 
             if ((AbilityIsActive(target, ABILITY_SYNCHRONIZE)) && !isNotPoisoned)
@@ -497,7 +497,7 @@ void PoisonedStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessag
                         if (!hasSynchronized) {
                             hasSynchronized = TRUE;
                             SetMessageArgument_2(gFormatBuffer_Monsters[0],entityInfo,0);
-                            TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FF01C);
+                            TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FF01C);
                         }
                         if (GetTreatmentBetweenMonstersIgnoreStatus(target,entity) == TREATMENT_TREAT_AS_ENEMY) {
                             // Recurse with the new target
@@ -531,19 +531,19 @@ void BadlyPoisonedStatusTarget(Entity * pokemon, Entity * target, bool8 displayM
     SetMessageArgument_2(gFormatBuffer_Monsters[0],entityInfo,0);
     if (HasHeldItem(target, ITEM_PECHA_SCARF)) {
       if (displayMessage)
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FD524);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FD524);
     }
     else
     {
       if (AbilityIsActive(target, ABILITY_IMMUNITY)) {
         if (displayMessage)
-            TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FCEB0);
+            TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FCEB0);
       }
       else
       {
         if(MonsterIsType(target, TYPE_POISON) || MonsterIsType(target, TYPE_STEEL)){
             if (displayMessage)
-                TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FCEDC);
+                TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FCEDC);
         }
         else
         {
@@ -557,12 +557,12 @@ void BadlyPoisonedStatusTarget(Entity * pokemon, Entity * target, bool8 displayM
                     entityInfo->burnClassStatus.badlyPoisonedDamageCount = 0;
                     isNotBadlyPoisoned = FALSE;
                     sub_8041C7C(target);
-                    TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB5B4);
+                    TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FB5B4);
                     sub_806CE94(target, 8);
             }
             else
             {
-                TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB5F8);
+                TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FB5F8);
             }
 
             if ((AbilityIsActive(target, ABILITY_SYNCHRONIZE)) && !isNotBadlyPoisoned)
@@ -579,7 +579,7 @@ void BadlyPoisonedStatusTarget(Entity * pokemon, Entity * target, bool8 displayM
                         if (!hasSynchronized) {
                             hasSynchronized = TRUE;
                             SetMessageArgument_2(gFormatBuffer_Monsters[0],entityInfo,0);
-                            TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FF01C);
+                            TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FF01C);
                         }
                         if (GetTreatmentBetweenMonstersIgnoreStatus(target,entity) == TREATMENT_TREAT_AS_ENEMY) {
                             // Recurse with the new target
@@ -610,13 +610,13 @@ void FrozenStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessage)
   if ((entityInfo->frozenClassStatus.status != STATUS_FROZEN) && !SafeguardIsActive(pokemon,target,displayMessage)) {
     if (AbilityIsActive(target, ABILITY_MAGMA_ARMOR)) {
       if (displayMessage)
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FCDE0);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FCDE0);
     }
     else
     {
       if (MonsterIsType(target, TYPE_ICE)) {
         if (displayMessage)
-            TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FCE00);
+            TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FCE00);
       }
       else
       {
@@ -624,7 +624,7 @@ void FrozenStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessage)
         if (((tile->terrainFlags & (TERRAIN_TYPE_SECONDARY | TERRAIN_TYPE_NORMAL)) == TERRAIN_TYPE_SECONDARY) &&
            (gDungeonWaterType[gDungeon->tileset] == DUNGEON_WATER_TYPE_LAVA)) {
                 if (displayMessage)
-                    TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FCE34);
+                    TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FCE34);
            }
         else
         {
@@ -635,7 +635,7 @@ void FrozenStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessage)
             entityInfo->frozenClassStatus.status = STATUS_FROZEN;
             entityInfo->frozenClassStatus.turns = CalculateStatusTurns(target,gFreezeTurnRange,TRUE) + 1;
             entityInfo->frozenClassStatus.damageCountdown = 0;
-            TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB610);
+            TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FB610);
             UpdateStatusIconFlags(target);
         }
       }
@@ -656,7 +656,7 @@ void SqueezedStatusTarget(Entity * pokemon, Entity * target, s32 param_3, bool32
     }
     else if (entityInfo->frozenClassStatus.status == STATUS_INGRAIN) {
       SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
-      TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FA844);
+      TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FA844);
     }
     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
     if (entityInfo->frozenClassStatus.status != STATUS_CONSTRICTION) {
@@ -665,11 +665,11 @@ void SqueezedStatusTarget(Entity * pokemon, Entity * target, s32 param_3, bool32
       entityInfo->frozenClassStatus.damageCountdown = 0;
       entityInfo->frozenClassStatus.unk4 = param_3_s32;
       nullsub_71(target);
-      TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB628);
+      TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FB628);
       sub_806CE94(target,8);
     }
     else {
-      TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB64C);
+      TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FB64C);
     }
     UpdateStatusIconFlags(target);
   }
@@ -686,7 +686,7 @@ void ImmobilizedStatusTarget(Entity * pokemon, Entity * target)
     }
     else if (entityInfo->frozenClassStatus.status == STATUS_INGRAIN) {
       SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
-      TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FA844);
+      TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FA844);
     }
     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
     if (entityInfo->frozenClassStatus.status != STATUS_SHADOW_HOLD) {
@@ -694,11 +694,11 @@ void ImmobilizedStatusTarget(Entity * pokemon, Entity * target)
       entityInfo->frozenClassStatus.turns = CalculateStatusTurns(target,gShadowHoldTurnRange,TRUE) + 1;
       entityInfo->frozenClassStatus.damageCountdown = 0;
       nullsub_70(target);
-      TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB668);
+      TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FB668);
       sub_806CE94(target,8);
     }
     else {
-      TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB688);
+      TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FB688);
     }
     UpdateStatusIconFlags(target);
   }
@@ -719,10 +719,10 @@ void IngrainedStatusTarget(Entity * pokemon, Entity * target)
       entityInfo->frozenClassStatus.turns = CalculateStatusTurns(target,gIngrainTurnRange,TRUE) + 1;
       entityInfo->frozenClassStatus.damageCountdown = 0;
       nullsub_90(target);
-      TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB6A4);
+      TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FB6A4);
     }
     else {
-      TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB6C0);
+      TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FB6C0);
     }
     UpdateStatusIconFlags(target);
   }
@@ -756,25 +756,25 @@ void WrapTarget(Entity *pokemon, Entity *target)
         gDungeon->unk37F4++;
         nullsub_69(pokemon, target);
         SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB6D8);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FB6D8);
         sub_806CE94(target,8);
     }
     else {
         if (pokemonEntityData->frozenClassStatus.status == STATUS_WRAP) {
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],pokemon,0);
-            TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB6FC);
+            TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FB6FC);
         }
         if (targetEntityInfo->frozenClassStatus.status == STATUS_WRAP) {
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
-            TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB6FC);
+            TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FB6FC);
         }
         if (pokemonEntityData->frozenClassStatus.status == STATUS_WRAPPED) {
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],pokemon,0);
-            TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB718);
+            TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FB718);
         }
         if (targetEntityInfo->frozenClassStatus.status == STATUS_WRAPPED) {
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
-            TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB718);
+            TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FB718);
         }
     }
 
@@ -826,11 +826,11 @@ void PetrifiedStatusTarget(Entity * pokemon, Entity * target)
         targetEntityInfo->frozenClassStatus.turns = CalculateStatusTurns(target,gPetrifiedTurnRange,TRUE) + 1;
       }
       targetEntityInfo->frozenClassStatus.damageCountdown = 0;
-      TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB7BC);
+      TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FB7BC);
 
     }
     else {
-      TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB7DC);
+      TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FB7DC);
     }
     if (targetEntityInfo->isNotTeamMember) {
       for(index = 0; index < MAX_TEAM_MEMBERS; index++)
@@ -872,13 +872,13 @@ void LowerOffensiveStat(Entity *user, Entity *target, StatIndex stat, s32 nStage
 
         if (HasHeldItem(target, ITEM_TWIST_BAND)) {
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
-            TryDisplayDungeonLoggableMessage3(user,target,gUnknown_80FD550);
+            TryDisplayDungeonLoggableMessage3_Async(user,target,gUnknown_80FD550);
             return;
         }
 
         if (AbilityIsActive(target, ABILITY_HYPER_CUTTER) && stat.id == STAT_INDEX_PHYSICAL) {
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
-            TryDisplayDungeonLoggableMessage3(user,target,gUnknown_80FCA60);
+            TryDisplayDungeonLoggableMessage3_Async(user,target,gUnknown_80FCA60);
             return;
         }
     }
@@ -901,10 +901,10 @@ void LowerOffensiveStat(Entity *user, Entity *target, StatIndex stat, s32 nStage
 
     if (entityInfo->offensiveStages[stat.id] != newStage) {
         entityInfo->offensiveStages[stat.id] = newStage;
-        TryDisplayDungeonLoggableMessage3(user,target,gUnknown_80FC15C);
+        TryDisplayDungeonLoggableMessage3_Async(user,target,gUnknown_80FC15C);
     }
     else {
-        TryDisplayDungeonLoggableMessage3(user,target,gUnknown_80FC274);
+        TryDisplayDungeonLoggableMessage3_Async(user,target,gUnknown_80FC274);
     }
 
     UpdateStatusIconFlags(target);
@@ -948,10 +948,10 @@ void LowerDefensiveStat(Entity *user, Entity *target, StatIndex stat, s32 nStage
 
     if (entityInfo->defensiveStages[stat.id] != newStage) {
         entityInfo->defensiveStages[stat.id] = newStage;
-        TryDisplayDungeonLoggableMessage3(user,target,gUnknown_80FC158);
+        TryDisplayDungeonLoggableMessage3_Async(user,target,gUnknown_80FC158);
     }
     else {
-        TryDisplayDungeonLoggableMessage3(user,target,gUnknown_80FC248);
+        TryDisplayDungeonLoggableMessage3_Async(user,target,gUnknown_80FC248);
     }
 
     UpdateStatusIconFlags(target);
@@ -990,10 +990,10 @@ void BoostOffensiveStat(Entity *user, Entity *target, StatIndex stat, s32 nStage
 
     if (entityInfo->offensiveStages[stat.id] != newStage) {
         entityInfo->offensiveStages[stat.id] = newStage;
-        TryDisplayDungeonLoggableMessage3(user,target,gUnknown_80FC13C);
+        TryDisplayDungeonLoggableMessage3_Async(user,target,gUnknown_80FC13C);
     }
     else {
-        TryDisplayDungeonLoggableMessage3(user,target,gUnknown_80FC270);
+        TryDisplayDungeonLoggableMessage3_Async(user,target,gUnknown_80FC270);
     }
     UpdateStatusIconFlags(target);
 }
@@ -1031,10 +1031,10 @@ void BoostDefensiveStat(Entity *user, Entity *target, StatIndex stat, s32 nStage
 
     if (entityInfo->defensiveStages[stat.id] != newStage) {
         entityInfo->defensiveStages[stat.id] = newStage;
-        TryDisplayDungeonLoggableMessage3(user,target,gUnknown_80FC138);
+        TryDisplayDungeonLoggableMessage3_Async(user,target,gUnknown_80FC138);
     }
     else {
-        TryDisplayDungeonLoggableMessage3(user,target,gUnknown_80FC21C);
+        TryDisplayDungeonLoggableMessage3_Async(user,target,gUnknown_80FC21C);
     }
     UpdateStatusIconFlags(target);
 }
@@ -1092,7 +1092,7 @@ void ApplyOffensiveStatMultiplier(Entity *user, Entity *target, StatIndex stat, 
 
     if (HasHeldItem(target,ITEM_TWIST_BAND) && F248LessThanInt(multiplier, 1)) {
         SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
-        TryDisplayDungeonLoggableMessage3(user,target,gUnknown_80FD550);
+        TryDisplayDungeonLoggableMessage3_Async(user,target,gUnknown_80FD550);
         return;
     }
 
@@ -1102,7 +1102,7 @@ void ApplyOffensiveStatMultiplier(Entity *user, Entity *target, StatIndex stat, 
     {
         if (displayMessage) {
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
-            TryDisplayDungeonLoggableMessage3(user,target,gUnknown_80FCA60);
+            TryDisplayDungeonLoggableMessage3_Async(user,target,gUnknown_80FCA60);
         }
         return;
     }
@@ -1128,13 +1128,13 @@ void ApplyOffensiveStatMultiplier(Entity *user, Entity *target, StatIndex stat, 
     }
 
     if (F248GreaterThan(oldMulti, entityInfo->offensiveMultipliers[stat.id])) {
-        TryDisplayDungeonLoggableMessage3(user,target,gUnknown_80FC11C);
+        TryDisplayDungeonLoggableMessage3_Async(user,target,gUnknown_80FC11C);
     }
     else if (F248LessThan(oldMulti, entityInfo->offensiveMultipliers[stat.id])) {
-        TryDisplayDungeonLoggableMessage3(user,target,gUnknown_80FC118);
+        TryDisplayDungeonLoggableMessage3_Async(user,target,gUnknown_80FC118);
     }
     else {
-        TryDisplayDungeonLoggableMessage3(user,target,gUnknown_80FC184);
+        TryDisplayDungeonLoggableMessage3_Async(user,target,gUnknown_80FC184);
     }
     UpdateStatusIconFlags(target);
 }
@@ -1179,13 +1179,13 @@ void ApplyDefensiveStatMultiplier(Entity *user, Entity *target, StatIndex stat, 
     }
 
     if (F248GreaterThan(oldMulti, entityInfo->defensiveMultipliers[stat.id])) {
-        TryDisplayDungeonLoggableMessage3(user,target,gUnknown_80FC114);
+        TryDisplayDungeonLoggableMessage3_Async(user,target,gUnknown_80FC114);
     }
     else if (F248LessThan(oldMulti, entityInfo->defensiveMultipliers[stat.id])) {
-        TryDisplayDungeonLoggableMessage3(user,target,gUnknown_80FC0FC);
+        TryDisplayDungeonLoggableMessage3_Async(user,target,gUnknown_80FC0FC);
     }
     else {
-        TryDisplayDungeonLoggableMessage3(user,target,gUnknown_80FC180);
+        TryDisplayDungeonLoggableMessage3_Async(user,target,gUnknown_80FC180);
     }
     UpdateStatusIconFlags(target);
 }
@@ -1209,10 +1209,10 @@ void BoostHitChanceStat(Entity *user, Entity *target, StatIndex stat)
 
     if (entityInfo->hitChanceStages[stat.id] < MAX_STAT_STAGE) {
         entityInfo->hitChanceStages[stat.id]++;
-        TryDisplayDungeonLoggableMessage3(user,target,gUnknown_80FC1C4);
+        TryDisplayDungeonLoggableMessage3_Async(user,target,gUnknown_80FC1C4);
     }
     else {
-        TryDisplayDungeonLoggableMessage3(user,target,gUnknown_80FC218);
+        TryDisplayDungeonLoggableMessage3_Async(user,target,gUnknown_80FC218);
     }
     UpdateStatusIconFlags(target);
 }
@@ -1237,7 +1237,7 @@ void LowerHitChanceStat(Entity *user, Entity *target, StatIndex stat, bool8 disp
     if (AbilityIsActive(target, ABILITY_KEEN_EYE) && stat.id == STAT_INDEX_ACCURACY) {
         if (displayMessage) {
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
-            TryDisplayDungeonLoggableMessage3(user,target,gUnknown_80FCA64);
+            TryDisplayDungeonLoggableMessage3_Async(user,target,gUnknown_80FCA64);
         }
         return;
     }
@@ -1247,10 +1247,10 @@ void LowerHitChanceStat(Entity *user, Entity *target, StatIndex stat, bool8 disp
     PlayHitChanceDownEffect(target,stat.id);
     if (entityInfo->hitChanceStages[stat.id] != 0) {
         entityInfo->hitChanceStages[stat.id]--;
-        TryDisplayDungeonLoggableMessage3(user,target,gUnknown_80FC1A4);
+        TryDisplayDungeonLoggableMessage3_Async(user,target,gUnknown_80FC1A4);
     }
     else {
-        TryDisplayDungeonLoggableMessage3(user,target,gUnknown_80FC1F0);
+        TryDisplayDungeonLoggableMessage3_Async(user,target,gUnknown_80FC1F0);
     }
     UpdateStatusIconFlags(target);
 }
@@ -1268,7 +1268,7 @@ void TryInflictCringeStatus(Entity *user ,Entity *target, bool8 displayMessage)
     if (AbilityIsActive(target, ABILITY_INNER_FOCUS)){
         SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
         if (displayMessage)
-            TryDisplayDungeonLoggableMessage3(user,target,gUnknown_80FCC18);
+            TryDisplayDungeonLoggableMessage3_Async(user,target,gUnknown_80FCC18);
         return;
     }
 
@@ -1278,10 +1278,10 @@ void TryInflictCringeStatus(Entity *user ,Entity *target, bool8 displayMessage)
         entityInfo->cringeClassStatus.status = STATUS_CRINGE;
         entityInfo->cringeClassStatus.turns = CalculateStatusTurns(target, gCringeTurnRange, TRUE) + 1;
         PlayCringeExclamationPointEffect(target);
-        TryDisplayDungeonLoggableMessage3(user,target,gUnknown_80FB2E0);
+        TryDisplayDungeonLoggableMessage3_Async(user,target,gUnknown_80FB2E0);
     }
     else {
-        TryDisplayDungeonLoggableMessage3(user,target,gUnknown_80FB300);
+        TryDisplayDungeonLoggableMessage3_Async(user,target,gUnknown_80FB300);
     }
     UpdateStatusIconFlags(target);
 }
@@ -1300,7 +1300,7 @@ void TryInflictParalysisStatus(Entity *user, Entity *target, bool8 displayMessag
     if (AbilityIsActive(target, ABILITY_LIMBER)) {
         SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
         if (displayMessage) {
-            TryDisplayDungeonLoggableMessage3(user,target,gUnknown_80FCBF8);
+            TryDisplayDungeonLoggableMessage3_Async(user,target,gUnknown_80FCBF8);
         }
         return;
     }
@@ -1314,12 +1314,12 @@ void TryInflictParalysisStatus(Entity *user, Entity *target, bool8 displayMessag
         entityInfo->burnClassStatus.damageCountdown = 0;
         entityInfo->burnClassStatus.badlyPoisonedDamageCount = 0;
         alreadyParalyzed = FALSE;
-        TryDisplayDungeonLoggableMessage3(user,target,gUnknown_80FB2AC);
+        TryDisplayDungeonLoggableMessage3_Async(user,target,gUnknown_80FB2AC);
         PlayParalysisEffect(target);
         CalcSpeedStage(target);
     }
     else {
-        TryDisplayDungeonLoggableMessage3(user,target,gUnknown_80FB2CC);
+        TryDisplayDungeonLoggableMessage3_Async(user,target,gUnknown_80FB2CC);
     }
 
     if (AbilityIsActive(target, ABILITY_SYNCHRONIZE) && !alreadyParalyzed) {
@@ -1333,7 +1333,7 @@ void TryInflictParalysisStatus(Entity *user, Entity *target, bool8 displayMessag
                 if (!synchronizePrinted) {
                     synchronizePrinted = TRUE;
                     SetMessageArgument_2(gFormatBuffer_Monsters[0],entityInfo,0);
-                    TryDisplayDungeonLoggableMessage3(user,target,gUnknown_80FF01C);
+                    TryDisplayDungeonLoggableMessage3_Async(user,target,gUnknown_80FF01C);
                 }
                 if (GetTreatmentBetweenMonstersIgnoreStatus(target,mapMonster) == TREATMENT_TREAT_AS_ENEMY) {
                     TryInflictParalysisStatus(user, mapMonster, displayMessage);
@@ -1364,7 +1364,7 @@ void BoostSpeed(Entity *user, Entity *target, s32 turns, bool8 displayMessage)
     speedBefore = CalcSpeedStage(target);
     if (speedBefore == MAX_SPEED_STAGE) {
         if (displayMessage)
-            TryDisplayDungeonLoggableMessage3(user,target,gUnknown_80FC2B8);
+            TryDisplayDungeonLoggableMessage3_Async(user,target,gUnknown_80FC2B8);
     }
     else {
         for (i = 0; i < NUM_SPEED_COUNTERS; i++) {
@@ -1376,11 +1376,11 @@ void BoostSpeed(Entity *user, Entity *target, s32 turns, bool8 displayMessage)
 
         speedAfter = CalcSpeedStage(target);
         if (speedBefore == speedAfter) {
-            TryDisplayDungeonLoggableMessage3(user,target,gUnknown_80FC298);
+            TryDisplayDungeonLoggableMessage3_Async(user,target,gUnknown_80FC298);
         }
         else {
             PlaySpeedUpEffect(target);
-            TryDisplayDungeonLoggableMessage3(user,target,gUnknown_80FA124[speedAfter]);
+            TryDisplayDungeonLoggableMessage3_Async(user,target,gUnknown_80FA124[speedAfter]);
             entityInfo->speedStageChanged = TRUE;
             entityInfo->attacking = FALSE;
         }
@@ -1406,7 +1406,7 @@ void LowerSpeed(Entity *user, Entity *target, s32 nStages, bool8 displayMessage)
     speedBefore = CalcSpeedStage(target);
     if (speedBefore == 0) {
         if (displayMessage)
-            TryDisplayDungeonLoggableMessage3(user,target,gUnknown_80FC2D8);
+            TryDisplayDungeonLoggableMessage3_Async(user,target,gUnknown_80FC2D8);
     }
     else {
         s32 counter, i;
@@ -1421,11 +1421,11 @@ void LowerSpeed(Entity *user, Entity *target, s32 nStages, bool8 displayMessage)
         speedAfter = CalcSpeedStage(target);
         if (speedBefore == speedAfter) {
             if (displayMessage)
-                TryDisplayDungeonLoggableMessage3(user,target,gUnknown_80FC298);
+                TryDisplayDungeonLoggableMessage3_Async(user,target,gUnknown_80FC298);
         }
         else {
             PlaySpeedDownEffect(target);
-            TryDisplayDungeonLoggableMessage3(user,target,gUnknown_80FA124[speedAfter]);
+            TryDisplayDungeonLoggableMessage3_Async(user,target,gUnknown_80FA124[speedAfter]);
         }
     }
 

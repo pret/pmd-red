@@ -17,7 +17,7 @@ void ChooseAIMove(Entity *pokemon);
 s32 AIConsiderMove(struct AIPossibleMove *aiPossibleMove, Entity *pokemon, Move *move);
 bool8 IsTargetInRange(Entity *pokemon, Entity *targetPokemon, s32 direction, s32 maxRange);
 void HandleUseMoveAIAction(Entity *target);
-void HandleUseOrbAction(Entity *pokemon);
+void HandleUseOrbAction_Async(Entity *pokemon);
 s16 GetMoveTargetAndRangeForPokemon(Entity *pokemon, Move *move, bool32 isAI);
 
 #endif

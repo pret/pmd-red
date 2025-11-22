@@ -36,7 +36,7 @@
 
 
 static void sub_808B50C(void);
-static void JirachiWish(void);
+static void JirachiWish_Async(void);
 static void JirachiWishGrantFlash(void);
 static void sub_808BB3C(DungeonPos *pos1);
 static void sub_808BBA8(Entity *jirachiEntity);
@@ -78,7 +78,7 @@ void sub_808B35C(void)
   sub_8085930(DIRECTION_NORTH);
   sub_80855E4(sub_8086A3C);
   if (HasRecruitedMon(MONSTER_JIRACHI)) {
-    HandleFaint(jirachiEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
+    HandleFaint_Async(jirachiEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
   }
   else {
     SetFacingDirection(jirachiEntity, DIRECTION_SOUTH);
@@ -91,29 +91,24 @@ void sub_808B35C(void)
   CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_JIRACHI);
 }
 
-void sub_808B3E4(u8 param_1, u8 param_2, u8 param_3)
+void sub_808B3E4_Async(u8 monsterBehavior, u8 cutscene, u8 param_3)
 {
-  u8 uVar1;
-  if ((param_2 == 0x31 || param_2 == 0x32) && (param_1 == 0x1A)) {
-    sub_8097FA8(0x1E);
-    if(param_3 != 0)
-    {
-        gDungeon->unk2 = 1;
-    }
-    else {
-        uVar1 = gDungeon->unk1356C;
-        if(sub_80860A8(0x36) != 0)
-        {
-            JirachiWish();
+    if ((cutscene == CUTSCENE_JIRACHI || cutscene == CUTSCENE_JIRACHI_POSTSTORY) && monsterBehavior == BEHAVIOR_JIRACHI) {
+        sub_8097FA8(30);
+        if (param_3 != 0)
+            gDungeon->unk2 = DUNGEON_UNK2_1;
+        else {
+            bool8 b = gDungeon->unk1356C;
+
+            if (ItemInInventoryOrHeld(ITEM_WISH_STONE))
+                JirachiWish_Async();
+            else
+                sub_808B50C();
+
+            gDungeon->unk1356C = b;
+            UpdateMinimap();
         }
-        else
-        {
-            sub_808B50C();
-        }
-        gDungeon->unk1356C = uVar1;
-        UpdateMinimap();
     }
-  }
 }
 
 void JirachiPreFightDialogue(void)
@@ -168,12 +163,12 @@ static void sub_808B50C(void)
   JirachiSpinEffect(jirachiEntity);
   DisplayDungeonDialogue(&gUnknown_81055F4);
   sub_803E708(10,70);
-  gDungeon->unk2 = 1;
+  gDungeon->unk2 = DUNGEON_UNK2_1;
 }
 
 static const u8 sJirachiItems[] = {ITEM_PROTEIN, ITEM_CALCIUM, ITEM_IRON, ITEM_ZINC, ITEM_JOY_SEED, ITEM_GINSENG, ITEM_LIFE_SEED, ITEM_SITRUS_BERRY};
 
-static void JirachiWish(void)
+static void JirachiWish_Async(void)
 {
   Entity *jirachiEntity;
   DungeonPos *LeaderPos;
@@ -189,7 +184,7 @@ static void JirachiWish(void)
   GetEntInfo(jirachiEntity)->unk15E = 0;
   sub_80861B8(jirachiEntity,0xe,DIRECTION_SOUTH);
   sub_80855E4(sub_80861A8);
-  gDungeon->unk1356C = 1;
+  gDungeon->unk1356C = TRUE;
   DungeonFadeOutBGM(0x1e);
   sub_803E708(0x1e,0x46);
   DisplayDungeonDialogue(&gUnknown_8105668);

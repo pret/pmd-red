@@ -75,7 +75,7 @@ void sub_808729C(void)
   sub_8085930(4);
   sub_80855E4(sub_8086A3C);
   if (sub_8086AE4(MONSTER_ZAPDOS)) {
-    HandleFaint(zapdosEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
+    HandleFaint_Async(zapdosEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
   }
   else {
     LevelUpTarget(zapdosEntity,zapdosEntity,gZapdosConfigLevel,0,0);
@@ -87,11 +87,11 @@ void sub_808729C(void)
   CopyMonsterNameToBuffer(gFormatBuffer_Monsters[3], MONSTER_ZAPDOS);
 }
 
-void sub_8087334(u8 param_1, u8 param_2)
+void sub_8087334(u8 monsterBehavior, u8 cutscene)
 {
-  if ((param_2 == 7 || param_2 == 8 || param_2 == 9) && (param_1 == 8)) {
+  if ((cutscene == CUTSCENE_MT_THUNDER_PEAK_ATTEMPT1 || cutscene == CUTSCENE_MT_THUNDER_PEAK_ATTEMPT2 || cutscene == CUTSCENE_MT_THUNDER_PEAK_POSTSTORY) && monsterBehavior == BEHAVIOR_ZAPDOS) {
     sub_8097FA8(5);
-    gDungeon->unk2 = 1;
+    gDungeon->unk2 = DUNGEON_UNK2_1;
   }
 }
 

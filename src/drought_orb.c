@@ -35,13 +35,13 @@ void HandleDroughtOrb(Entity *pokemon, Entity *target)
 	flag = FALSE;
 	if(IsCurrentFixedRoomBossFight())
 	{
-		LogMessageByIdWithPopupCheckUser(pokemon, gUnknown_80FD060);
+		LogMessageByIdWithPopupCheckUser_Async(pokemon, gUnknown_80FD060);
 		return;
 	}
 
 	if(IsWaterTileset())
 	{
-		LogMessageByIdWithPopupCheckUser(pokemon, gUnknown_80FD08C);
+		LogMessageByIdWithPopupCheckUser_Async(pokemon, gUnknown_80FD08C);
 		return;
 	}
 
@@ -63,11 +63,11 @@ void HandleDroughtOrb(Entity *pokemon, Entity *target)
 	if(flag)
 	{
 		sub_80421C0(pokemon, 0x1A1);
-		LogMessageByIdWithPopupCheckUser(pokemon, gUnknown_80FD05C);
+		LogMessageByIdWithPopupCheckUser_Async(pokemon, gUnknown_80FD05C);
 	}
 	else
 	{
-		LogMessageByIdWithPopupCheckUser(pokemon, gUnknown_80FD060);
+		LogMessageByIdWithPopupCheckUser_Async(pokemon, gUnknown_80FD060);
 	}
 	gDungeon->unk644.unk2C = 1;
 	DetermineAllMonsterShadow();

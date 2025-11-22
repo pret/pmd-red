@@ -511,7 +511,7 @@ static void PrintDialogueMessage_Async(const u8 *text)
     CreateMenuDialogueBoxAndPortrait(text, NULL, 0, NULL, NULL, 3, 0, NULL, 0x301);
 
     do {
-        DrawDialogueBoxString();
+        DrawDialogueBoxString_Async();
         WorldMap_RunFrameActions();
     } while (sub_80144A4(&a) != 0);
 

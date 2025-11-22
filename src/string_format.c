@@ -297,7 +297,7 @@ s32 sub_80144A4(s32 *a0)
 }
 
 // arm9.bin::0201CEB0
-void DrawDialogueBoxString(void)
+void DrawDialogueBoxString_Async(void)
 {
     bool8 keepLooping = TRUE;
 

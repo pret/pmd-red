@@ -65,7 +65,7 @@ void sub_808A668(void)
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
   if (HasRecruitedMon(MONSTER_HO_OH)) {
-    HandleFaint(HoOhEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
+    HandleFaint_Async(HoOhEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
   }
   else {
     SetFacingDirection(HoOhEntity, DIRECTION_SOUTH);
@@ -75,11 +75,11 @@ void sub_808A668(void)
   CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_HO_OH);
 }
 
-void sub_808A6E8(u8 param_1, u8 param_2)
+void sub_808A6E8(u8 monsterBehavior, u8 cutscene)
 {
-  if ((param_2 == 0x29 || param_2 == 0x2A) && (param_1 == 0x15)) {
-    sub_8097FA8(0x1A);
-    gDungeon->unk2 = 1;
+  if ((cutscene == CUTSCENE_MT_FARAWAY || cutscene == CUTSCENE_MT_FARAWAY_POSTSTORY) && monsterBehavior == BEHAVIOR_HO_OH) {
+    sub_8097FA8(26);
+    gDungeon->unk2 = DUNGEON_UNK2_1;
   }
 }
 

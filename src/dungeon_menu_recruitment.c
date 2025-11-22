@@ -71,10 +71,10 @@ void ShowRecruitmentSearchMenu(void)
     s32 currTabId = 0;
 
     if (!IsRecruitingEnabled(gDungeon->unk644.dungeonLocation.id)) {
-        DisplayDungeonMessage(NULL, gUnknown_80FA5F4, TRUE);
+        DisplayDungeonMessage_Async(NULL, gUnknown_80FA5F4, TRUE);
     }
     else if (gDungeon->unk644.unk19) {
-        DisplayDungeonMessage(NULL, gUnknown_80FA61C, TRUE);
+        DisplayDungeonMessage_Async(NULL, gUnknown_80FA61C, TRUE);
     }
     else {
         struct MonRecruitList tabsData[2];
@@ -325,7 +325,7 @@ static void SetRecruitableMons(struct MonRecruitList *tabsData)
                 unrecruitableRate = (u16) -999;
                 if (recruitRate == unrecruitableRate)
                     continue;
-                if (speciesId == MONSTER_MEW && !sub_80860A8(122))
+                if (speciesId == MONSTER_MEW && !ItemInInventoryOrHeld(ITEM_MUSIC_BOX))
                     continue;
             }
             else {

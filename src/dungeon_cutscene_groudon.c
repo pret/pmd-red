@@ -78,7 +78,7 @@ void sub_80886C4(void)
   sub_8085374();
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
-  HandleFaint(alakazamEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
+  HandleFaint_Async(alakazamEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
   SetFacingDirection(groudonEntity, DIRECTION_SOUTH);
   sub_8086A3C(groudonEntity);
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y);
@@ -102,9 +102,9 @@ void sub_808875C(void)
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
   sub_80855E4(sub_8086A3C);
-  HandleFaint(alakazamEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
+  HandleFaint_Async(alakazamEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
   if (sub_8086AE4(MONSTER_GROUDON)) {
-    HandleFaint(groudonEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
+    HandleFaint_Async(groudonEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
   }
   else {
     LevelUpTarget(groudonEntity,groudonEntity,gGroudonConfigLevel,0,0);
@@ -116,11 +116,11 @@ void sub_808875C(void)
   CopyMonsterNameToBuffer(gFormatBuffer_Monsters[3], MONSTER_ALAKAZAM);
 }
 
-void sub_8088818(u8 param_1, u8 param_2)
+void sub_8088818(u8 monsterBehavior, u8 cutscene)
 {
-  if ((param_2 == 0x12 || param_2 == 0x13 || param_2 == 0x14) && (param_1 == 0xE)) {
-    sub_8097FA8(0xC);
-    gDungeon->unk2 = 1;
+  if ((cutscene == CUTSCENE_MAGMA_CAVERN_PIT_ATTEMPT1 || cutscene == CUTSCENE_MAGMA_CAVERN_PIT_ATTEMPT2 || cutscene == CUTSCENE_MAGMA_CAVERN_PIT_POSTSTORY) && monsterBehavior == BEHAVIOR_GROUDON_2) {
+    sub_8097FA8(12);
+    gDungeon->unk2 = DUNGEON_UNK2_1;
   }
 }
 
@@ -172,7 +172,7 @@ void GroudonPreFightDialogue(void)
   sub_80861B8(alakazamEntity,6,DIRECTION_NORTH);
   PlaySoundEffect(0x205);
   sub_8086738();
-  HandleFaint(alakazamEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
+  HandleFaint_Async(alakazamEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
   DisplayDungeonDialogue(&GroudonPreFightDialogue_8);
   sub_803E708(10,0x46);
   DisplayDungeonDialogue(&GroudonPreFightDialogue_9);
