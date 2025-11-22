@@ -729,7 +729,11 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                             }
                             break;
                         }
-                        case 0x91 ... 0x95: {
+                        case 0x91: // ROTATE_TO
+                        case 0x92: // CMD_UNK_92
+                        case 0x93: // CMD_UNK_93
+                        case 0x94: // CMD_UNK_94
+                        case 0x95: { // CMD_UNK_95
                             if (action->scriptData.unk2A > 0) {
                                 action->scriptData.unk2A--;
                                 loopContinue = FALSE;
@@ -747,11 +751,12 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                                 action->callbacks->getDirection(action->parentObject, &dir);
                                 // arg1h synthetic
                                 switch (cmd.op) {
-                                    case 0x91: case 0x92: {
+                                    case 0x91: // ROTATE_TO
+                                    case 0x92: { // CMD_UNK_92
                                         tmp2 = (s8) action->scriptData.unk4D;
                                         break;
                                     }
-                                    case 0x93: {
+                                    case 0x93: { // CMD_UNK_93
                                         s16 res;
                                         res = sub_80A7AE8((s16)cmd.arg1);
                                         if (res >= 0) {
@@ -761,7 +766,7 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                                         }
                                         break;
                                     }
-                                    case 0x94: {
+                                    case 0x94: { // CMD_UNK_94
                                         s32 res;
                                         res = (s16)sub_80A7AE8((s16)cmd.arg1);
                                         if (res >= 0) {
@@ -771,7 +776,7 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                                         }
                                         break;
                                     }
-                                    case 0x95: {
+                                    case 0x95: { // CMD_UNK_95
                                         flag = TRUE;
                                         action->callbacks->getHitboxCenter(action->parentObject, &pos1);
                                         action->callbacks->getSize(action->parentObject, &pos2);
@@ -793,7 +798,7 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                                 }
 
                                 ASM_MATCH_TRICK(dir);
-                                action->scriptData.unk26 = sub_8002A70(dir, tmp2, (u8)cmd.argShort);
+                                action->scriptData.unk26 = TransformDirection2(dir, tmp2, (u8)cmd.argShort);
                                 action->callbacks->setDirection(action->parentObject, action->scriptData.unk26);
                                 action->scriptData.unk2A = cmd.argByte;
                             }
@@ -1884,7 +1889,7 @@ static s32 ExecuteScriptCommand(Action *action)
                 return 2;
             }
             case 0x3d: {
-                int i;
+                s32 i;
                 if ((s16)curCmd.arg1 != -1) {
                     Pokemon *mon = sub_80A8D54((s16) curCmd.arg1);
                     if (mon != NULL) {
@@ -1911,7 +1916,7 @@ static s32 ExecuteScriptCommand(Action *action)
                 return 2;
             }
             case 0x3f: {
-                int i;
+                s32 i;
                 for (i = 0; i < ARRAY_COUNT_INT(sPokeNameBuffer); i++) {
                     sPokeNameBuffer[i] = '\0';
                 }
@@ -2275,10 +2280,10 @@ static s32 ExecuteScriptCommand(Action *action)
                 scriptData->unk2A = (u8)curCmd.argByte;
                 return 2;
             }
-            case 0x8a: {
+            case 0x8A: { // CMD_UNK_8A
                 s8 dir;
                 action->callbacks->getDirection(action->parentObject, &dir);
-                action->scriptData.unk26 = sub_8002984(dir, (u8)curCmd.arg1);
+                action->scriptData.unk26 = TransformDirection1(dir, (u8)curCmd.arg1);
                 action->callbacks->setDirection(action->parentObject, action->scriptData.unk26);
                 scriptData->unk30 = curCmd.argShort;
                 scriptData->unk2A = (u8)curCmd.argByte;
@@ -2290,31 +2295,33 @@ static s32 ExecuteScriptCommand(Action *action)
                 scriptData->unk2A = (u8)curCmd.argByte;
                 return 2;
             }
-            case 0x8c: {
-                int ret = (s16)sub_80A7AE8((s16)curCmd.arg1);
+            case 0x8C: { // CMD_UNK_8C
+                s32 ret = (s16)sub_80A7AE8((s16)curCmd.arg1);
                 s8 dir;
                 if (ret >= 0) {
                     sub_80A9050(ret, &dir);
-                    action->scriptData.unk26 = sub_8002984(dir, (u8)curCmd.argShort);
+                    action->scriptData.unk26 = TransformDirection1(dir, (u8)curCmd.argShort);
                     action->callbacks->setDirection(action->parentObject, action->scriptData.unk26);
                 }
                 scriptData->unk2A = (u8)curCmd.argByte;
                 return 2;
             }
-            case 0x8d: {
+            case 0x8D: { // CMD_UNK_8D
                 s8 dir;
                 action->callbacks->getDirection(action->parentObject, &dir);
-                action->scriptData.unk26 = sub_8002984(dir, (u8)curCmd.argShort);
+                action->scriptData.unk26 = TransformDirection1(dir, (u8)curCmd.argShort);
                 action->callbacks->setDirection(action->parentObject, action->scriptData.unk26);
                 scriptData->unk2A = (u8)curCmd.argByte;
                 return 2;
             }
-            case 0x8e: case 0x8f: case 0x90: {
+            case 0x8E: // CMD_UNK_8E
+            case 0x8F: // CMD_UNK_8F
+            case 0x90: { // CMD_UNK_90
                 bool8 flag = FALSE;
                 s8 dir;
                 PixelPos pos1, pos2, pos3, pos4;
                 switch (curCmd.op) {
-                    case 0x8e: {
+                    case 0x8e: { // CMD_UNK_8E
                         s32 val = (s16)sub_80A7AE8((s16)curCmd.arg1);
                         if (val >= 0) {
                             flag = TRUE;
@@ -2323,7 +2330,7 @@ static s32 ExecuteScriptCommand(Action *action)
                         }
                         break;
                     }
-                    case 0x8f: {
+                    case 0x8F: { // CMD_UNK_8F
                         s32 val = (s16)sub_80A7AE8((s16)curCmd.arg1);
                         if (val >= 0) {
                             flag = TRUE;
@@ -2332,7 +2339,7 @@ static s32 ExecuteScriptCommand(Action *action)
                         }
                         break;
                     }
-                    case 0x90: {
+                    case 0x90: { // CMD_UNK_90
                         flag = TRUE;
                         action->callbacks->getHitboxCenter(action->parentObject, &pos1);
                         action->callbacks->getSize(action->parentObject, &pos2);
@@ -2355,25 +2362,27 @@ static s32 ExecuteScriptCommand(Action *action)
                     if (dir == tmp) {
                         action->callbacks->getDirection(action->parentObject, &dir);
                     }
-                    action->scriptData.unk26 = sub_8002984(dir, (u8)curCmd.argShort);
+                    action->scriptData.unk26 = TransformDirection1(dir, (u8)curCmd.argShort);
                     action->callbacks->setDirection(action->parentObject, action->scriptData.unk26);
                 }
                 scriptData->unk2A = (u8)curCmd.argByte;
                 return 2;
             }
-            case 0x93: case 0x94: case 0x95: {
+            case 0x93: // CMD_UNK_93
+            case 0x94: // CMD_UNK_94
+            case 0x95: { // CMD_UNK_95
                 scriptData->unk2A = 0;
                 return 2;
             }
-            case 0x91: {
+            case 0x91: { // ROTATE_TO
                 action->scriptData.unk4D = (s8)curCmd.arg1;
                 scriptData->unk2A = 0;
                 return 2;
             }
-            case 0x92: {
+            case 0x92: { // CMD_UNK_92
                 s8 unk;
                 action->callbacks->getDirection(action->parentObject, &unk);
-                action->scriptData.unk4D = sub_8002984(unk, (u8)curCmd.arg1);
+                action->scriptData.unk4D = TransformDirection1(unk, (u8)curCmd.arg1);
                 scriptData->unk2A = 0;
                 return 2;
             }
@@ -2579,16 +2588,16 @@ static s32 ExecuteScriptCommand(Action *action)
                 ScriptUnlockFriendArea(curCmd.argShort, (u8)curCmd.argByte > 0);
                 break;
             }
-            case 0xae: {
+            case 0xAE: { // CMD_UNK_AE
                 sub_809733C(curCmd.argShort, (u8)curCmd.argByte > 0);
                 break;
             }
-            case 0xaf: {
+            case 0xAF: { // CMD_UNK_AF
                 sub_80973A8(curCmd.argShort, (u8)curCmd.argByte > 0);
                 break;
             }
-            case 0xb0: {
-                sub_8097418(curCmd.argShort, (u8)curCmd.argByte > 0);
+            case 0xB0: { // SET_RESCUE_CONQUERED
+                SetRescueScenarioConquered(curCmd.argShort, (u8)curCmd.argByte > 0);
                 break;
             }
             case 0xb1: {
@@ -2653,8 +2662,8 @@ static s32 ExecuteScriptCommand(Action *action)
                 }
                 break;
             }
-            case 0xbc: {
-                if (sub_8098100(curCmd.argShort)) {
+            case 0xBC: { // JUMPIF_CUTSCENE_FLAG
+                if (GetCutsceneFlag(curCmd.argShort)) {
                     scriptData->script.ptr = FindLabel(action, (u8)curCmd.argByte);
                 }
                 break;
@@ -2719,7 +2728,7 @@ static s32 ExecuteScriptCommand(Action *action)
                         val = GetScriptVarArrayValue(NULL, curCmd.argShort, 1);
                         break;
                     }
-                    case 0xc6: {
+                    case 0xC6: { // CJUMP_UNK_C6
                         val = (s16)sub_80A8C2C((s16)curCmd.arg1);
                         break;
                     }
@@ -3302,7 +3311,7 @@ static s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
                 pokemon = GetPlayerPokemonStruct();
                 if (pokemon != NULL && pokemon->speciesNum == MONSTER_HO_OH)
                     return 2;
-                else if (sub_8098134(MONSTER_HO_OH) != 0)
+                else if (GetMonSeenFlag(MONSTER_HO_OH))
                     return 1;
             }
             return 0;
@@ -3608,7 +3617,7 @@ static s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
                 if(pokemon != NULL && pokemon->speciesNum == MONSTER_CHANSEY)
                     return 2;
                 else
-                    if(sub_8098134(MONSTER_CHANSEY) != 0)
+                    if(GetMonSeenFlag(MONSTER_CHANSEY))
                         return 1;
                     else
                         return 0;

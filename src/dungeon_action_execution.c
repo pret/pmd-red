@@ -270,7 +270,7 @@ bool8 ExecuteEntityDungeonAction_Async(Entity *entity)
         }
         sub_8041888(0);
         if (EntityIsValid(entity)) {
-            sub_8085140();
+            sub_8085140_Async();
             if (info->unk14B != 0) {
                 bVar4 = FALSE;
                 info->unk14B = 0;
@@ -302,7 +302,7 @@ bool8 ExecuteEntityDungeonAction_Async(Entity *entity)
             }
             if (EntityIsValid(entity)) {
                 if (!sub_8044B84()) {
-                    sub_8046D20();
+                    PotentiallyCreateMusicBox_Async();
                 }
                 sub_8041888(0);
                 if (((EntityIsValid(entity)) && (!info->aiAllySkip)) && (!bVar14)) {

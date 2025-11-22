@@ -1527,10 +1527,10 @@ UNUSED static bool8 sub_80A91A0(s32 id1_, s32 id2_)
                 }
 
                 if (livesPtr2->unk2 <= 37) {
-                    livesPtr2->direction1 = sub_8002984(dir1, 5);
+                    livesPtr2->direction1 = TransformDirection1(dir1, DIR_TRANS_FLIP);
                 }
                 else {
-                    livesPtr2->direction1 = sub_8002984(dir2, 5);
+                    livesPtr2->direction1 = TransformDirection1(dir2, DIR_TRANS_FLIP);
                 }
 
                 return TRUE;
@@ -1650,7 +1650,7 @@ static s32 sub_80A95AC(struct GroundLive *livesPtr, PixelPos *posArg1, PixelPos 
 
             if (ptr2->flags & 0x40) {
                 if (ptr2->flags & 0x200) {
-                    ptr2->direction1 = sub_8002984(livesPtr->direction1, 5);
+                    ptr2->direction1 = TransformDirection1(livesPtr->direction1, DIR_TRANS_FLIP);
                 }
                 if (GroundLives_ExecutePlayerScriptActionLives(livesPtr->id, id2_))
                     return 2;
@@ -1993,7 +1993,7 @@ static s32 sub_80AA2BC(struct GroundLive *livesPtr, u32 flags, PixelPos *pixelPo
         if (id2 >= 0) {
             struct GroundLive *ptr2 = &gGroundLives->array[id2];
             if (ptr2->flags & 0x200) {
-                ptr2->direction1 = sub_8002984(livesPtr->direction1, 5);
+                ptr2->direction1 = TransformDirection1(livesPtr->direction1, DIR_TRANS_FLIP);
             }
             if (GroundLives_ExecutePlayerScriptActionLives(livesPtr->id, id2))
                 return 3;
@@ -2168,7 +2168,7 @@ static s32 sub_80AA7B0(struct GroundLive *livesPtr, s16 *a1, u32 flags, PixelPos
             s16 var = (s16) sub_80A8BBC(id2);
             if (var >= 14 && var < 30 && sub_80A8E9C(id2) != NULL) {
                 *a1 = id2;
-                sub_80A9090(id2, (s8) sub_8002984(livesPtr->direction1, 5));
+                sub_80A9090(id2, (s8)TransformDirection1(livesPtr->direction1, DIR_TRANS_FLIP));
                 return 5;
             }
         }

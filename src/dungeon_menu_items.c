@@ -333,9 +333,9 @@ bool8 ShowDungeonItemsMenu(Entity * a0, struct UnkMenuBitsStruct *a1)
     }
 
     gDungeon->unk181e8.unk18212 = 0;
-    sub_803E708(2, 0x61);
+    DungeonWaitFrames_Async(2, 0x61);
     sub_804AA60();
-    sub_803E708(2, 0x61);
+    DungeonWaitFrames_Async(2, 0x61);
     return inputAction;
 }
 

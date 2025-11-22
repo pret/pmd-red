@@ -109,7 +109,7 @@ static const struct ScriptCommand s_gs209_g1_s0_lives0_dlg0[] = { /* 0x826223c *
     ALERT_CUE(6),
     ALERT_CUE(7),
     ALERT_CUE(10),
-    ROTATE(4, 10, DIRECTION_NORTH),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_NORTH),
     WAIT(20),
     ALERT_CUE(4),
     ALERT_CUE(3),
@@ -132,7 +132,7 @@ static const struct ScriptCommand s_gs209_g1_s0_lives1_dlg0[] = { /* 0x826282c *
     CALL_SCRIPT(NOTICE_FUNC),
     ALERT_CUE(5),
     AWAIT_CUE(6),
-    ROTATE(4, 10, DIRECTION_NORTH),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_NORTH),
     AWAIT_CUE(6),
     HALT,
 };
@@ -145,7 +145,7 @@ static const struct ScriptCommand s_gs209_g1_s0_lives2_dlg0[] = { /* 0x826290c *
     AWAIT_CUE(10),
     CALL_SCRIPT(JUMP_SURPRISE_FUNC),
     AWAIT_CUE(10),
-    ROTATE(4, 10, DIRECTION_NORTH),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_NORTH),
     AWAIT_CUE(10),
     HALT,
 };
@@ -158,7 +158,7 @@ static const struct ScriptCommand s_gs209_g1_s0_lives3_dlg0[] = { /* 0x82629ac *
     AWAIT_CUE(10),
     CALL_SCRIPT(JUMP_SURPRISE_FUNC),
     AWAIT_CUE(10),
-    ROTATE(4, 10, DIRECTION_NORTH),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_NORTH),
     AWAIT_CUE(10),
     HALT,
 };

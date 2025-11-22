@@ -232,7 +232,7 @@ void ShowRecruitReleaseMenu(u8 a0, s32 a1, s32 a2, Pokemon **a3)
                     continue;
                 }
 
-                if (DisplayDungeonYesNoMessage(NULL, gUnknown_80FDFB8, TRUE) == 1) {
+                if (DisplayDungeonYesNoMessage_Async(NULL, gUnknown_80FDFB8, TRUE) == 1) {
                     break;
                 }
                 else {

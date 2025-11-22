@@ -323,7 +323,7 @@ static bool8 HandleDealingDamageInternal_Async(Entity *attacker, Entity *target,
             if (targetData->unk152 == 0) {
                 TryDisplayDungeonLoggableMessage3_Async(attacker, target, gUnknown_80F9688);
             }
-            sub_803E708(0x1E, 0x18);
+            DungeonWaitFrames_Async(0x1E, 0x18);
         }
         dmgStruct->tookNoDamage = TRUE;
         return FALSE;
@@ -331,7 +331,7 @@ static bool8 HandleDealingDamageInternal_Async(Entity *attacker, Entity *target,
     else if (dmgStruct->dmg == 9999) {
         if (arg8 != 0 && ShouldDisplayEntity(target)) {
             unkTile = GetTileAtEntitySafe(target);
-            sub_803E708(0x14, 0x18);
+            DungeonWaitFrames_Async(0x14, 0x18);
             unkTile->spawnOrVisibilityFlags.spawn |= SPAWN_FLAG_TRAP;
             UpdateTrapsVisibility();
         }
@@ -417,7 +417,7 @@ static bool8 HandleDealingDamageInternal_Async(Entity *attacker, Entity *target,
         hpChange = 0;
 
     if (var_24 || unkTile != NULL)
-        sub_803E708(0xA, 0x18);
+        DungeonWaitFrames_Async(0xA, 0x18);
 
     if (targetData->HP != 0) {
         if (var_24) {
@@ -441,15 +441,15 @@ static bool8 HandleDealingDamageInternal_Async(Entity *attacker, Entity *target,
     }
 
     if (unkTile != NULL) {
-        sub_803E708(0x14, 0x18);
+        DungeonWaitFrames_Async(0x14, 0x18);
         target->unk22 = 2;
-        sub_803E708(0xA, 0x18);
+        DungeonWaitFrames_Async(0xA, 0x18);
         unkTile->spawnOrVisibilityFlags.spawn &= ~(SPAWN_FLAG_TRAP);
         UpdateTrapsVisibility();
     }
     else if (var_24) {
         target->unk22 = 1;
-        sub_803E708(0x1E, 0x18);
+        DungeonWaitFrames_Async(0x1E, 0x18);
     }
 
     r8 = 1;
@@ -676,7 +676,7 @@ static bool8 HandleDealingDamageInternal_Async(Entity *attacker, Entity *target,
         if (exp == 0)
             exp = 1;
         if (attackerData->isTeamLeader) {
-            sub_80980B4(targetData->id);
+            SetMonSeenFlag(targetData->id);
         }
         if (targetData->grudge) {
             attackerData->unk14B = 1;

@@ -260,7 +260,7 @@ void sub_803E668(u32 unused)
     sUnknown_202EDD4--;
 }
 
-void sub_803E708(s32 numFrames, u32 a1)
+void DungeonWaitFrames_Async(s32 numFrames, u32 a1)
 {
     while (numFrames != 0) {
         DungeonRunFrameActions(a1);

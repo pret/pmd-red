@@ -86,10 +86,10 @@ void sub_8087848(void)
   CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2],MONSTER_MOLTRES);
 }
 
-void sub_80878F4(u8 monsterBehavior, u8 cutscene)
+void HandleMoltresBossFaint(u8 monsterBehavior, u8 cutscene)
 {
   if ((cutscene == CUTSCENE_MT_BLAZE_PEAK_ATTEMPT1 || cutscene == CUTSCENE_MT_BLAZE_PEAK_ATTEMPT2 || cutscene == CUTSCENE_MT_BLAZE_PEAK_POSTSTORY) && monsterBehavior == BEHAVIOR_MOLTRES) {
-    sub_8097FA8(7);
+    SetTempCutsceneFlag(CUTSCENE_FLAG_MT_BLAZE_PEAK_COMPLETE);
     gDungeon->unk2 = DUNGEON_UNK2_1;
   }
 }
@@ -105,60 +105,60 @@ void MoltresPreFightDialogue(void)
   moltresEntity = GetEntityFromMonsterBehavior(BEHAVIOR_MOLTRES);
   MoltresScreenFlash1(0xc,5);
   sub_8086500();
-  sub_803E708(10,0x46);
-  DisplayDungeonDialogue(&gMoltresPreFightDialogue_1);
-  sub_803E708(10,0x46);
-  sub_80869E4(partnerEntity,4,1,DIRECTION_NORTHWEST);
-  sub_803E708(4,0x46);
-  SpriteLookAroundEffect(partnerEntity);
-  sub_803E708(10,0x46);
-  DisplayDungeonDialogue(gMoltresPreFightDialogue_2);
-  sub_803E708(10,0x46);
+  DungeonWaitFrames_Async(10,0x46);
+  DisplayDungeonDialogue_Async(&gMoltresPreFightDialogue_1);
+  DungeonWaitFrames_Async(10,0x46);
+  CutsceneLookDir_Async(partnerEntity,4,DIR_TRANS_SPINRIGHT1,DIRECTION_NORTHWEST);
+  DungeonWaitFrames_Async(4,0x46);
+  CutsceneLookAroundEffect_Async(partnerEntity);
+  DungeonWaitFrames_Async(10,0x46);
+  DisplayDungeonDialogue_Async(gMoltresPreFightDialogue_2);
+  DungeonWaitFrames_Async(10,0x46);
   MoltresScreenFlash1(0xc,5);
   MoltresScreenFlash2(9,5);
-  DisplayDungeonDialogue(gMoltresPreFightDialogue_3);
-  sub_803E708(10,0x46);
-  sub_80869E4(partnerEntity,4,1,DIRECTION_EAST);
-  sub_80869E4(leaderEntity,4,2,DIRECTION_WEST);
-  DisplayDungeonDialogue(gMoltresPreFightDialogue_4);
-  sub_803E708(10,0x46);
-  sub_80869E4(partnerEntity,4,2,DIRECTION_WEST);
+  DisplayDungeonDialogue_Async(gMoltresPreFightDialogue_3);
+  DungeonWaitFrames_Async(10,0x46);
+  CutsceneLookDir_Async(partnerEntity,4,DIR_TRANS_SPINRIGHT1,DIRECTION_EAST);
+  CutsceneLookDir_Async(leaderEntity,4,DIR_TRANS_SPINLEFT1,DIRECTION_WEST);
+  DisplayDungeonDialogue_Async(gMoltresPreFightDialogue_4);
+  DungeonWaitFrames_Async(10,0x46);
+  CutsceneLookDir_Async(partnerEntity,4,DIR_TRANS_SPINLEFT1,DIRECTION_WEST);
   sub_8086690();
-  DisplayDungeonDialogue(&gMoltresPreFightDialogue_5);
-  sub_803E708(10,0x46);
+  DisplayDungeonDialogue_Async(&gMoltresPreFightDialogue_5);
+  DungeonWaitFrames_Async(10,0x46);
   sub_8085930(DIRECTION_NORTHWEST);
-  sub_803E708(4,0x46);
+  DungeonWaitFrames_Async(4,0x46);
   sub_8085930(DIRECTION_NORTH);
   PlaySoundEffect(0x2f2);
   DungeonStopBGM();
   MoltresScreenDarken();
-  DisplayDungeonDialogue(gMoltresPreFightDialogue_6);
-  sub_803E708(10,0x46);
-  DisplayDungeonDialogue(&gMoltresPreFightDialogue_7);
-  sub_803E708(10,0x46);
+  DisplayDungeonDialogue_Async(gMoltresPreFightDialogue_6);
+  DungeonWaitFrames_Async(10,0x46);
+  DisplayDungeonDialogue_Async(&gMoltresPreFightDialogue_7);
+  DungeonWaitFrames_Async(10,0x46);
   PlaySoundEffect(0x1cf);
   sub_80856E0(partnerEntity, DIRECTION_NORTH);
-  sub_803E708(10,0x46);
-  DisplayDungeonDialogue(gMoltresPreFightDialogue_8);
-  sub_803E708(10,0x46);
+  DungeonWaitFrames_Async(10,0x46);
+  DisplayDungeonDialogue_Async(gMoltresPreFightDialogue_8);
+  DungeonWaitFrames_Async(10,0x46);
   MoltresScreenFlash3();
   PlaySoundEffect(0x1da);
-  DisplayDungeonDialogue(&gMoltresPreFightDialogue_9);
-  sub_803E708(10,0x46);
+  DisplayDungeonDialogue_Async(&gMoltresPreFightDialogue_9);
+  DungeonWaitFrames_Async(10,0x46);
   MoltresScreenFlash1(9,5);
   MoltresScreenFlash2(0xb,5);
-  DisplayDungeonDialogue(&gMoltresPreFightDialogue_10);
-  sub_803E708(10,0x46);
+  DisplayDungeonDialogue_Async(&gMoltresPreFightDialogue_10);
+  DungeonWaitFrames_Async(10,0x46);
   MoltresScreenFlash1(0xc,5);
   MoltresScreenFlash2(9,5);
   MoltresDropInEffect(moltresEntity);
   sub_808663C();
   MoltresScreenFlash3();
-  DisplayDungeonDialogue(&gMoltresPreFightDialogue_11);
-  sub_803E708(10,0x46);
+  DisplayDungeonDialogue_Async(&gMoltresPreFightDialogue_11);
+  DungeonWaitFrames_Async(10,0x46);
   MoltresScreenFlash2(0xb,6);
-  DisplayDungeonDialogue(&gMoltresPreFightDialogue_12);
-  sub_803E708(10,0x46);
+  DisplayDungeonDialogue_Async(&gMoltresPreFightDialogue_12);
+  DungeonWaitFrames_Async(10,0x46);
   SetupBossFightHP(moltresEntity,400,MUS_BOSS_BATTLE);
   ShiftCameraToPosition(&leaderEntity->pixelPos,0x10);
 }
@@ -174,33 +174,33 @@ void MoltresReFightDialogue(void)
   moltresEntity = GetEntityFromMonsterBehavior(BEHAVIOR_MOLTRES);
   MoltresScreenFlash1(10,5);
   sub_8086500();
-  sub_803E708(10,0x46);
-  SpriteLookAroundEffect(partnerEntity);
-  sub_803E708(10,0x46);
-  DisplayDungeonDialogue(&gMoltresReFightDialogue_1);
-  sub_803E708(10,0x46);
-  sub_80869E4(partnerEntity,4,1,DIRECTION_EAST);
-  sub_80869E4(leaderEntity,4,2,DIRECTION_WEST);
-  DisplayDungeonDialogue(gMoltresReFightDialogue_2);
-  sub_803E708(10,0x46);
-  sub_80869E4(partnerEntity,4,2,DIRECTION_WEST);
-  sub_80869E4(leaderEntity,4,2,DIRECTION_WEST);
+  DungeonWaitFrames_Async(10,0x46);
+  CutsceneLookAroundEffect_Async(partnerEntity);
+  DungeonWaitFrames_Async(10,0x46);
+  DisplayDungeonDialogue_Async(&gMoltresReFightDialogue_1);
+  DungeonWaitFrames_Async(10,0x46);
+  CutsceneLookDir_Async(partnerEntity,4,DIR_TRANS_SPINRIGHT1,DIRECTION_EAST);
+  CutsceneLookDir_Async(leaderEntity,4,DIR_TRANS_SPINLEFT1,DIRECTION_WEST);
+  DisplayDungeonDialogue_Async(gMoltresReFightDialogue_2);
+  DungeonWaitFrames_Async(10,0x46);
+  CutsceneLookDir_Async(partnerEntity,4,DIR_TRANS_SPINLEFT1,DIRECTION_WEST);
+  CutsceneLookDir_Async(leaderEntity,4,DIR_TRANS_SPINLEFT1,DIRECTION_WEST);
   sub_8086690();
   MoltresScreenDarken();
-  sub_803E708(10,0x46);
+  DungeonWaitFrames_Async(10,0x46);
   sub_8085930(DIRECTION_NORTHWEST);
-  sub_803E708(4,0x46);
+  DungeonWaitFrames_Async(4,0x46);
   sub_8085930(DIRECTION_NORTH);
   MoltresDropInEffect(moltresEntity);
   sub_808663C();
   MoltresScreenFlash3();
-  DisplayDungeonDialogue(&gMoltresReFightDialogue_3);
-  sub_803E708(10,0x46);
+  DisplayDungeonDialogue_Async(&gMoltresReFightDialogue_3);
+  DungeonWaitFrames_Async(10,0x46);
   MoltresScreenFlash2(0xb,6);
-  DisplayDungeonDialogue(gMoltresReFightDialogue_4);
-  sub_803E708(10,0x46);
-  DisplayDungeonDialogue(&gMoltresReFightDialogue_5);
-  sub_803E708(10,0x46);
+  DisplayDungeonDialogue_Async(gMoltresReFightDialogue_4);
+  DungeonWaitFrames_Async(10,0x46);
+  DisplayDungeonDialogue_Async(&gMoltresReFightDialogue_5);
+  DungeonWaitFrames_Async(10,0x46);
   SetupBossFightHP(moltresEntity,400,MUS_BOSS_BATTLE);
   ShiftCameraToPosition(&leaderEntity->pixelPos,0x10);
 }
@@ -216,29 +216,29 @@ void MoltresPostStoryPreFightDialogue(void)
   sub_808654C();
   if (sub_8086AE4(MONSTER_MOLTRES)) {
     sub_8085930(DIRECTION_NORTHWEST);
-    sub_803E708(4,0x46);
+    DungeonWaitFrames_Async(4,0x46);
     sub_8085930(DIRECTION_NORTH);
-    sub_803E708(4,0x46);
-    sub_803E708(10,0x46);
-    DisplayDungeonDialogue(&gUnknown_8100D3C);
-    sub_803E708(10,0x46);
+    DungeonWaitFrames_Async(4,0x46);
+    DungeonWaitFrames_Async(10,0x46);
+    DisplayDungeonDialogue_Async(&gUnknown_8100D3C);
+    DungeonWaitFrames_Async(10,0x46);
     gDungeon->unk2 = DUNGEON_UNK2_1;
   }
   else {
-    DisplayDungeonDialogue(&gMoltresPostStoryPreFightDialogue_1);
+    DisplayDungeonDialogue_Async(&gMoltresPostStoryPreFightDialogue_1);
     sub_8085930(DIRECTION_NORTHWEST);
-    sub_803E708(4,0x46);
+    DungeonWaitFrames_Async(4,0x46);
     sub_8085930(DIRECTION_NORTH);
     MoltresDropInEffect(moltresEntity);
-    DisplayDungeonDialogue(&gMoltresPostStoryPreFightDialogue_2);
+    DisplayDungeonDialogue_Async(&gMoltresPostStoryPreFightDialogue_2);
     MoltresScreenFlash1(0xc,5);
     MoltresScreenFlash2(9,5);
-    DisplayDungeonDialogue(&gMoltresPostStoryPreFightDialogue_3);
+    DisplayDungeonDialogue_Async(&gMoltresPostStoryPreFightDialogue_3);
     MoltresScreenFlash3();
-    DisplayDungeonDialogue(&gMoltresPostStoryPreFightDialogue_4);
+    DisplayDungeonDialogue_Async(&gMoltresPostStoryPreFightDialogue_4);
     MoltresScreenFlash2(0xb,6);
-    DisplayDungeonDialogue(&gMoltresPostStoryPreFightDialogue_5);
-    sub_803E708(10,0x46);
+    DisplayDungeonDialogue_Async(&gMoltresPostStoryPreFightDialogue_5);
+    DungeonWaitFrames_Async(10,0x46);
     SetupBossFightHP(moltresEntity,400,MUS_BOSS_BATTLE);
     ShiftCameraToPosition(&leaderEntity->pixelPos,0x10);
   }
@@ -292,13 +292,13 @@ static void MoltresScreenFlash2(s32 xArg, s32 yArg)
         SetDungeonBGColorRGB(i, 0, 0, 1, 1);
         DungeonRunFrameActions(0x46);
     }
-    sub_803E708(0xA, 0x46);
+    DungeonWaitFrames_Async(0xA, 0x46);
 
     for (i = 250; i >= 0; i -= 10) {
         SetDungeonBGColorRGB(i, 0, 0, 1, 1);
         DungeonRunFrameActions(0x46);
     }
-    sub_803E708(0xA, 0x46);
+    DungeonWaitFrames_Async(0xA, 0x46);
 
     sub_8085EB0();
     sub_8085F44(r6);
@@ -315,14 +315,14 @@ static void MoltresScreenFlash3(void)
     SetDungeonBGColorRGB(iVar1,iVar1,iVar1 / 2,1,1);
     DungeonRunFrameActions(0x46);
   }
-  sub_803E708(0x1e,0x46);
+  DungeonWaitFrames_Async(0x1e,0x46);
   PlaySoundEffect(0x1ed);
   for(iVar1 = 250; iVar1 >= 0; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1,iVar1,iVar1 / 2,1,1);
     DungeonRunFrameActions(0x46);
   }
-  sub_803E708(0x1e,0x46);
+  DungeonWaitFrames_Async(0x1e,0x46);
   sub_8085EB0();
 }
 

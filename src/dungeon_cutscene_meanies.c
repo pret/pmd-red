@@ -63,25 +63,26 @@ void sub_8086F00(void)
   CopyMonsterNameToBuffer(gFormatBuffer_Monsters[4], MONSTER_CATERPIE);
 }
 
-void sub_8086F54(u8 monsterBehavior, u8 cutscene)
+void HandleMeaniesBossFaint(u8 monsterBehavior, u8 cutscene)
 {
-    s32 index;
+    s32 i;
 
     if (cutscene == CUTSCENE_SINISTER_WOODS_ATTEMPT1 || cutscene == CUTSCENE_SINISTER_WOODS_ATTEMPT2)  {
-        bool8 found = FALSE;
-        for (index = 0; index < 16; index++) {
-            struct Entity *entity = gDungeon->wildPokemon[index];
+        bool8 stillAlive = FALSE;
+
+        for (i = 0; i < DUNGEON_MAX_WILD_POKEMON; i++) {
+            struct Entity *entity = gDungeon->wildPokemon[i];
             if ((EntityIsValid(entity))) {
                 struct EntityInfo *entInfo = GetEntInfo(entity);
                 if (entInfo->monsterBehavior != monsterBehavior) {
-                    found = TRUE;
+                    stillAlive = TRUE;
                     return;
                 }
             }
         }
 
-        if (!found) {
-            sub_8097FA8(3);
+        if (!stillAlive) {
+            SetTempCutsceneFlag(CUTSCENE_FLAG_SINISTER_WOODS_COMPLETE);
             gDungeon->unk2 = DUNGEON_UNK2_1;
         }
     }
@@ -93,23 +94,23 @@ void TeamMeaniesPreFightDialogue(void)
 
     leaderEntity = CutsceneGetLeader();
     sub_8086448();
-    sub_803E708(10, 0x46);
-    DisplayDungeonDialogue(gTeamMeaniesPreFightDialogue_1);
-    sub_803E708(10, 0x46);
-    DisplayDungeonDialogue(&gTeamMeaniesPreFightDialogue_2);
-    sub_803E708(10, 0x46);
+    DungeonWaitFrames_Async(10, 0x46);
+    DisplayDungeonDialogue_Async(gTeamMeaniesPreFightDialogue_1);
+    DungeonWaitFrames_Async(10, 0x46);
+    DisplayDungeonDialogue_Async(&gTeamMeaniesPreFightDialogue_2);
+    DungeonWaitFrames_Async(10, 0x46);
     sub_8087144();
     DungeonStartNewBGM(MUS_THERES_TROUBLE);
-    DisplayDungeonDialogue(&gTeamMeaniesPreFightDialogue_3);
-    sub_803E708(10, 0x46);
-    DisplayDungeonDialogue(gTeamMeaniesPreFightDialogue_4);
-    sub_803E708(10, 0x46);
-    DisplayDungeonDialogue(&gTeamMeaniesPreFightDialogue_5);
-    sub_803E708(10, 0x46);
-    DisplayDungeonDialogue(&gTeamMeaniesPreFightDialogue_6);
-    sub_803E708(10, 0x46);
-    DisplayDungeonDialogue(&gTeamMeaniesPreFightDialogue_7);
-    sub_803E708(10, 0x46);
+    DisplayDungeonDialogue_Async(&gTeamMeaniesPreFightDialogue_3);
+    DungeonWaitFrames_Async(10, 0x46);
+    DisplayDungeonDialogue_Async(gTeamMeaniesPreFightDialogue_4);
+    DungeonWaitFrames_Async(10, 0x46);
+    DisplayDungeonDialogue_Async(&gTeamMeaniesPreFightDialogue_5);
+    DungeonWaitFrames_Async(10, 0x46);
+    DisplayDungeonDialogue_Async(&gTeamMeaniesPreFightDialogue_6);
+    DungeonWaitFrames_Async(10, 0x46);
+    DisplayDungeonDialogue_Async(&gTeamMeaniesPreFightDialogue_7);
+    DungeonWaitFrames_Async(10, 0x46);
     ShiftCameraToPosition(&leaderEntity->pixelPos, 0x10);
 }
 
@@ -121,25 +122,25 @@ void TeamMeaniesReFightDialogue(void)
     leaderEntity = CutsceneGetLeader();
     partnerEntity = CutsceneGetPartner();
     sub_8086448();
-    DisplayDungeonDialogue(gTeamMeaniesReFightDialogue_1);
-    sub_803E708(10, 0x46);
-    DisplayDungeonDialogue(&gTeamMeaniesPreFightDialogue_2);
-    sub_803E708(10, 0x46);
+    DisplayDungeonDialogue_Async(gTeamMeaniesReFightDialogue_1);
+    DungeonWaitFrames_Async(10, 0x46);
+    DisplayDungeonDialogue_Async(&gTeamMeaniesPreFightDialogue_2);
+    DungeonWaitFrames_Async(10, 0x46);
     sub_8087144();
-    sub_803E708(10, 0x46);
-    DisplayDungeonDialogue(gTeamMeaniesReFightDialogue_2);
-    sub_803E708(10, 0x46);
-    DisplayDungeonDialogue(&gTeamMeaniesReFightDialogue_3);
-    sub_803E708(10, 0x46);
+    DungeonWaitFrames_Async(10, 0x46);
+    DisplayDungeonDialogue_Async(gTeamMeaniesReFightDialogue_2);
+    DungeonWaitFrames_Async(10, 0x46);
+    DisplayDungeonDialogue_Async(&gTeamMeaniesReFightDialogue_3);
+    DungeonWaitFrames_Async(10, 0x46);
     sub_806CDD4(leaderEntity, 6, DIRECTION_NORTH);
     sub_806CDD4(partnerEntity, 6, DIRECTION_NORTH);
-    sub_803E708(10, 0x46);
+    DungeonWaitFrames_Async(10, 0x46);
     sub_806CDD4(leaderEntity, 7, DIRECTION_NORTH);
     sub_806CDD4(partnerEntity, 7, DIRECTION_NORTH);
-    sub_803E708(10, 0x46);
-    DisplayDungeonDialogue(&gTeamMeaniesReFightDialogue_4);
-    DisplayDungeonDialogue(&gTeamMeaniesReFightDialogue_5);
-    sub_803E708(10, 0x46);
+    DungeonWaitFrames_Async(10, 0x46);
+    DisplayDungeonDialogue_Async(&gTeamMeaniesReFightDialogue_4);
+    DisplayDungeonDialogue_Async(&gTeamMeaniesReFightDialogue_5);
+    DungeonWaitFrames_Async(10, 0x46);
     ShiftCameraToPosition(&leaderEntity->pixelPos, 0x10);
 }
 

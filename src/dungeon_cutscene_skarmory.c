@@ -71,10 +71,10 @@ void sub_8086B94(void)
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y);
 }
 
-void sub_8086BDC(u8 monsterBehavior, u8 cutscene)
+void HandleSkarmoryBossFaint(u8 monsterBehavior, u8 cutscene)
 {
     if ((cutscene == CUTSCENE_MT_STEEL_ATTEMPT1 || cutscene == CUTSCENE_MT_STEEL_ATTEMPT2) && monsterBehavior == BEHAVIOR_SKARMORY) {
-        sub_8097FA8(1);
+        SetTempCutsceneFlag(CUTSCENE_FLAG_MT_STEEL_COMPLETE);
         gDungeon->unk2 = DUNGEON_UNK2_1;
     }
 }
@@ -101,40 +101,40 @@ void SkarmoryPreFightDialogue(void)
   pos2.y = skarmoryEntity->pixelPos.y + 0x2000;
 
   sub_8086448();
-  sub_803E708(10,0x46);
+  DungeonWaitFrames_Async(10,0x46);
   SpriteShockEffect(partnerEntity);
-  sub_803E708(0x20,0x46);
-  sub_803E708(10,0x46);
-  DisplayDungeonDialogue(&gSkarmoryPreFightDialogue_1);
+  DungeonWaitFrames_Async(0x20,0x46);
+  DungeonWaitFrames_Async(10,0x46);
+  DisplayDungeonDialogue_Async(&gSkarmoryPreFightDialogue_1);
   ShiftCameraToPosition(&pos1,0x40);
-  sub_803E708(0x40,0x46);
+  DungeonWaitFrames_Async(0x40,0x46);
   ShiftCameraToPosition(&pos2,0x30);
-  DisplayDungeonDialogue(gSkarmoryPreFightDialogue_2);
-  sub_803E708(10,0x46);
+  DisplayDungeonDialogue_Async(gSkarmoryPreFightDialogue_2);
+  DungeonWaitFrames_Async(10,0x46);
   GetEntInfo(diglettEntity)->unk15D = 1;
   ShiftCameraToPosition(&pos1,0x30);
-  DisplayDungeonDialogue(&gSkarmoryPreFightDialogue_3); // Diglett: ...I...\nI'm scared.
-  sub_803E708(10,0x46);
+  DisplayDungeonDialogue_Async(&gSkarmoryPreFightDialogue_3); // Diglett: ...I...\nI'm scared.
+  DungeonWaitFrames_Async(10,0x46);
   ShiftCameraToPosition(&pos2,0x20);
-  sub_803E708(0x20,0x46);
+  DungeonWaitFrames_Async(0x20,0x46);
   SkarmoryEntry(skarmoryEntity);
-  DisplayDungeonDialogue(&gSkarmoryPreFightDialogue_4); // Skarmory: You!\nWhat do you think you're doing here?!
-  sub_803E708(10,0x46);
-  DisplayDungeonDialogue(gSkarmoryPreFightDialogue_5);
-  sub_803E708(10,0x46);
-  DisplayDungeonDialogue(&gSkarmoryPreFightDialogue_6);
-  sub_803E708(10,0x46);
-  DisplayDungeonDialogue(gSkarmoryPreFightDialogue_7);
-  sub_803E708(10,0x46);
+  DisplayDungeonDialogue_Async(&gSkarmoryPreFightDialogue_4); // Skarmory: You!\nWhat do you think you're doing here?!
+  DungeonWaitFrames_Async(10,0x46);
+  DisplayDungeonDialogue_Async(gSkarmoryPreFightDialogue_5);
+  DungeonWaitFrames_Async(10,0x46);
+  DisplayDungeonDialogue_Async(&gSkarmoryPreFightDialogue_6);
+  DungeonWaitFrames_Async(10,0x46);
+  DisplayDungeonDialogue_Async(gSkarmoryPreFightDialogue_7);
+  DungeonWaitFrames_Async(10,0x46);
   sub_806CDD4(skarmoryEntity,0xd,DIRECTION_SOUTH);
-  DisplayDungeonDialogue(&gSkarmoryPreFightDialogue_8);
-  sub_803E708(10,0x46);
-  sub_80869E4(partnerEntity,4,1,DIRECTION_EAST);
-  sub_80869E4(leaderEntity,4,2,DIRECTION_WEST);
-  DisplayDungeonDialogue(gSkarmoryPreFightDialogue_9);
-  sub_80869E4(partnerEntity,4,2,DIRECTION_NORTH);
-  sub_80869E4(leaderEntity,4,1,DIRECTION_NORTH);
-  sub_803E708(10,0x46);
+  DisplayDungeonDialogue_Async(&gSkarmoryPreFightDialogue_8);
+  DungeonWaitFrames_Async(10,0x46);
+  CutsceneLookDir_Async(partnerEntity,4,DIR_TRANS_SPINRIGHT1,DIRECTION_EAST);
+  CutsceneLookDir_Async(leaderEntity,4,DIR_TRANS_SPINLEFT1,DIRECTION_WEST);
+  DisplayDungeonDialogue_Async(gSkarmoryPreFightDialogue_9);
+  CutsceneLookDir_Async(partnerEntity,4,DIR_TRANS_SPINLEFT1,DIRECTION_NORTH);
+  CutsceneLookDir_Async(leaderEntity,4,DIR_TRANS_SPINRIGHT1,DIRECTION_NORTH);
+  DungeonWaitFrames_Async(10,0x46);
   DungeonStartNewBGM(MUS_BOSS_BATTLE);
   ShiftCameraToPosition(&leaderEntity->pixelPos,0x10);
 }
@@ -150,26 +150,26 @@ void SkarmoryReFightDialogue(void)
   pos.x = skarmoryEntity->pixelPos.x;
   pos.y = skarmoryEntity->pixelPos.y + 0x2000;
   sub_8086448();
-  sub_803E708(10,0x46);
+  DungeonWaitFrames_Async(10,0x46);
   SkarmoryEntry(skarmoryEntity);
   ShiftCameraToPosition(&pos,0x10);
-  DisplayDungeonDialogue(&gSkarmoryReFightDialogue_1);
-  sub_803E708(10,0x46);
-  DisplayDungeonDialogue(&gSkarmoryReFightDialogue_2);
-  sub_803E708(10,0x46);
+  DisplayDungeonDialogue_Async(&gSkarmoryReFightDialogue_1);
+  DungeonWaitFrames_Async(10,0x46);
+  DisplayDungeonDialogue_Async(&gSkarmoryReFightDialogue_2);
+  DungeonWaitFrames_Async(10,0x46);
   sub_806CDD4(skarmoryEntity,0xd,DIRECTION_SOUTH);
-  DisplayDungeonDialogue(&gSkarmoryReFightDialogue_3);
-  sub_803E708(10,0x46);
+  DisplayDungeonDialogue_Async(&gSkarmoryReFightDialogue_3);
+  DungeonWaitFrames_Async(10,0x46);
   ShiftCameraToPosition(&leaderEntity->pixelPos,0x10);
   DungeonStartNewBGM(MUS_BOSS_BATTLE);
 }
 
 void sub_8086E40(void)
 {
-    SpriteLookAroundEffect(CutsceneGetLeader());
-    sub_803E708(10, 70);
-    DisplayDungeonDialogue(&gUnknown_8100D3C);
-    sub_803E708(10, 70);
+    CutsceneLookAroundEffect_Async(CutsceneGetLeader());
+    DungeonWaitFrames_Async(10, 70);
+    DisplayDungeonDialogue_Async(&gUnknown_8100D3C);
+    DungeonWaitFrames_Async(10, 70);
     gDungeon->unk2 = DUNGEON_UNK2_1;
 }
 
@@ -178,6 +178,6 @@ static void SkarmoryEntry(Entity * skarmoryEntity)
   sub_806CDD4(skarmoryEntity,0xf,DIRECTION_SOUTH);
   sub_8086A54(skarmoryEntity);
   PlaySoundEffect(0x1f8);
-  sub_803E708(0x44,0x46);
+  DungeonWaitFrames_Async(0x44,0x46);
 }
 

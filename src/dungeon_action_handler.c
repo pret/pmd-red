@@ -451,7 +451,7 @@ void sub_8067110(Entity *entity)
         LogMessageByIdWithPopupCheckUser_Async(entity,sub_80464AC(item));
         item2 = *item;
         sub_8044DF0(entity,0,0x66);
-        sub_803E708(0x1e,0x11);
+        DungeonWaitFrames_Async(0x1e,0x11);
         sub_80479B8(0,0,0,entity,entity,&item2);
         TriggerMonsterHouse_Async(entity,gDungeon->forceMonsterHouse);
     }
@@ -465,16 +465,16 @@ void sub_80671A0(Entity *entity)
     if (info->action.actionParameters[0].actionUseIndex == 0x81 && ItemSticky(item)) {
         sub_8045BF8(gFormatBuffer_Items[0], item);
         LogMessageByIdWithPopupCheckUser_Async(entity, gUnknown_80F8BE0);
-        sub_803E708(0x14, 0x4C);
+        DungeonWaitFrames_Async(0x14, 0x4C);
     }
     else if ((GetItemCategory(item->id) == CATEGORY_THROWN_LINE || GetItemCategory(item->id) == CATEGORY_THROWN_ARC) && ItemSticky(item)) {
         sub_8045BF8(gFormatBuffer_Items[0], item);
         LogMessageByIdWithPopupCheckUser_Async(entity, gUnknown_80F8BE0);
-        sub_803E708(0x14, 0x4C);
+        DungeonWaitFrames_Async(0x14, 0x4C);
     }
     else if (ShouldMonsterRunAwayAndShowEffect(entity, TRUE)) {
         LogMessageByIdWithPopupCheckUser_Async(entity, gUnknown_80FF76C);
-        sub_803E708(0x14, 0x4C);
+        DungeonWaitFrames_Async(0x14, 0x4C);
     }
     else {
         bool8 r7;
@@ -524,7 +524,7 @@ void sub_80671A0(Entity *entity)
                 dir--;
                 dir &= DIRECTION_MASK;
                 sub_806CDD4(entity, 0, dir);
-                sub_803E708(2, 21);
+                DungeonWaitFrames_Async(2, 21);
             }
             info->unk166 = 4;
         }
@@ -728,7 +728,7 @@ static void sub_8067794(Entity *entity, Entity *targetEntity, s32 a2)
         }
     }
 
-    if (DisplayDungeonYesNoMessage(NULL, stringPtr1, FALSE) == 1) {
+    if (DisplayDungeonYesNoMessage_Async(NULL, stringPtr1, FALSE) == 1) {
         u8 tempText[64];
 
         strncpy(tempText, gFormatBuffer_Monsters[0], sizeof(tempText));

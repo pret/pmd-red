@@ -82,10 +82,10 @@ void sub_808AA94(void)
   CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_LATIOS);
 }
 
-void sub_808AAF0(u8 monsterBehavior, u8 cutscene)
+void HandleLatiosBossFaint(u8 monsterBehavior, u8 cutscene)
 {
   if ((cutscene == CUTSCENE_NORTHERN_RANGE_ATTEMPT1 || cutscene == CUTSCENE_NORTHERN_RANGE_ATTEMPT2 || cutscene == CUTSCENE_NORTHERN_RANGE_POSTSTORY) && monsterBehavior == BEHAVIOR_LATIOS) {
-    sub_8097FA8(28);
+    SetTempCutsceneFlag(CUTSCENE_FLAG_NORTHERN_RANGE_COMPLETE);
     gDungeon->unk2 = DUNGEON_UNK2_1;
   }
 }
@@ -106,19 +106,19 @@ void LatiosPreFightDialogue(void)
   local_19.x = 0xFC;
   sub_8085EC8(0x1bd,0,0,&local_19,1);
 
-  sub_803E708(0x1e,70);
+  DungeonWaitFrames_Async(0x1e,70);
   sub_8086448();
   ShiftCameraToPosition(&local_18,0x18);
-  sub_803E708(2,70);
+  DungeonWaitFrames_Async(2,70);
   SpriteShockEffect(LatiosEntity);
-  sub_803E708(0x20,70);
+  DungeonWaitFrames_Async(0x20,70);
   sub_808692C();
-  DisplayDungeonDialogue(&gLatiosPreFightDialogue_1);
+  DisplayDungeonDialogue_Async(&gLatiosPreFightDialogue_1);
   LatiosScreenFlash();
-  DisplayDungeonDialogue(&gLatiosPreFightDialogue_2);
+  DisplayDungeonDialogue_Async(&gLatiosPreFightDialogue_2);
   LatiosScreenFlash();
-  DisplayDungeonDialogue(&gLatiosPreFightDialogue_3);
-  sub_803E708(10,70);
+  DisplayDungeonDialogue_Async(&gLatiosPreFightDialogue_3);
+  DungeonWaitFrames_Async(10,70);
   SetupBossFightHP(LatiosEntity,600,MUS_BOSS_BATTLE);
   ShiftCameraToPosition(&leaderEntity->pixelPos,0x10);
 }
@@ -132,12 +132,12 @@ void LatiosReFightDialogue(void)
   LatiosEntity = GetEntityFromMonsterBehavior(BEHAVIOR_LATIOS);
   sub_8086448();
   sub_808692C();
-  DisplayDungeonDialogue(&gLatiosReFightDialogue_1);
+  DisplayDungeonDialogue_Async(&gLatiosReFightDialogue_1);
   LatiosScreenFlash();
-  DisplayDungeonDialogue(&gLatiosPreFightDialogue_2);
+  DisplayDungeonDialogue_Async(&gLatiosPreFightDialogue_2);
   LatiosScreenFlash();
-  DisplayDungeonDialogue(&gLatiosPreFightDialogue_3);
-  sub_803E708(10,70);
+  DisplayDungeonDialogue_Async(&gLatiosPreFightDialogue_3);
+  DungeonWaitFrames_Async(10,70);
   SetupBossFightHP(LatiosEntity,600,MUS_BOSS_BATTLE);
   ShiftCameraToPosition(&leaderEntity->pixelPos,0x10);
 }
@@ -160,12 +160,12 @@ static void LatiosScreenFlash(void)
     SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,1);
     DungeonRunFrameActions(70);
   }
-  sub_803E708(10,70);
+  DungeonWaitFrames_Async(10,70);
   for(iVar1 = 250; iVar1 >= 0; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,1);
     DungeonRunFrameActions(70);
   }
-  sub_803E708(10,70);
+  DungeonWaitFrames_Async(10,70);
   sub_8085EB0();
 }

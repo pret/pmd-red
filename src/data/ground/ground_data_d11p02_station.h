@@ -211,7 +211,7 @@ static const struct ScriptCommand s_gs202_g1_s0_lives1_dlg0[] = { /* 0x82561ac *
     CALL_SCRIPT(LOOK_AROUND_FUNC),
     ALERT_CUE(5),
     AWAIT_CUE(6),
-    { 0x93, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 0),
     ALERT_CUE(5),
     AWAIT_CUE(6),
     { 0x52, 0x00,  0x0000,  0x00001000,  0x00000000, NULL },

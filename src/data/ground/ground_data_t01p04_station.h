@@ -317,7 +317,7 @@ static const struct ScriptCommand s_gs5_g5_s0_lives0_dlg0[] = { /* 0x81988f4 */
     ALERT_CUE(4),
     { 0x53, 0x00,  0x0000,  0x01000000,  0x00000000, NULL },
     { 0x80, 0x00,  0x0080,  0x00000002,  0x00000000, NULL },
-    ROTATE(8, 10, DIRECTION_EAST),
+    ROTATE_TO(8, DIR_TRANS_10, DIRECTION_EAST),
     { 0x80, 0x00,  0x0100,  0x00000003,  0x00000000, NULL },
     ALERT_CUE(3),
     { 0x80, 0x00,  0x0100,  0x00000004,  0x00000000, NULL },
@@ -329,7 +329,7 @@ static const struct ScriptCommand s_gs5_g5_s0_lives1_dlg0[] = { /* 0x8198a24 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(6),
-    ROTATE(8, 10, DIRECTION_WEST),
+    ROTATE_TO(8, DIR_TRANS_10, DIRECTION_WEST),
     HALT,
 };
 

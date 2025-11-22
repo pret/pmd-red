@@ -1049,7 +1049,7 @@ void sub_8051E7C(Entity *pokemon)
         UpdateTrapsVisibility();
         sub_80429FC(&pos);
         LogMessageByIdWithPopupCheckUser_Async(pokemon, gUnknown_80FDDD0); // The closed corridor was opened!
-        sub_803E708(0x14, 0x3C);
+        DungeonWaitFrames_Async(0x14, 0x3C);
     }
     else {
         LogMessageByIdWithPopupCheckUser_Async(pokemon, gUnknown_80FDDF0); // It can't be used here!

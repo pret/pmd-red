@@ -1230,7 +1230,7 @@ static void ShowIqDescriptionWindow(u8 iqSkillId)
         ShowStatusesDescriptionMenu(count, result);
     }
 
-    sub_803E708(4, 0x3E);
+    DungeonWaitFrames_Async(4, 0x3E);
 }
 
 static void ShowTacticDescriptionWindow(u8 tacticId)
@@ -1283,7 +1283,7 @@ static void ShowTacticDescriptionWindow(u8 tacticId)
         ShowStatusesDescriptionMenu(count, result);
     }
 
-    sub_803E708(4, 0x3E);
+    DungeonWaitFrames_Async(4, 0x3E);
 }
 
 static void ShowStatusInfoWindow(s32 statusId)
@@ -1334,7 +1334,7 @@ static void ShowStatusInfoWindow(s32 statusId)
         }
     }
 
-    sub_803E708(4, 0x3E);
+    DungeonWaitFrames_Async(4, 0x3E);
 }
 
 static const WindowHeader sBottomWindowHeader = {1, 0, 15, 0};
@@ -1453,7 +1453,7 @@ Entity *ShowDungeonToWhichMonMenu(s32 *teamId, s32 caseId)
     sub_804AA60();
     TryPointCameraToMonster(GetLeader(), 0);
     sub_803EAF0(0, NULL);
-    sub_803E708(4, 0x3E);
+    DungeonWaitFrames_Async(4, 0x3E);
     if (bPress) {
         return NULL;
     }

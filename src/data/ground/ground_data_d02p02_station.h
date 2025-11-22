@@ -50,7 +50,7 @@ static const struct ScriptCommand s_gs181_g1_s0_lives0_dlg0[] = { /* 0x8231d84 *
     ALERT_CUE(3),
     WAIT(1),
     WALK_GRID(204, 1),
-    ROTATE(4, 10, DIRECTION_NORTHEAST),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_NORTHEAST),
     HALT,
 };
 
@@ -63,7 +63,7 @@ static const struct ScriptCommand s_gs181_g1_s0_lives1_dlg0[] = { /* 0x8231f0c *
     WALK_GRID(256, 2),
     AWAIT_CUE(6),
     WALK_GRID(204, 3),
-    ROTATE(4, 10, DIRECTION_NORTHWEST),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_NORTHWEST),
     HALT,
 };
 

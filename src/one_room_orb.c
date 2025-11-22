@@ -131,7 +131,7 @@ void HandleOneRoomOrb(Entity *pokemon, Entity *target)
 	UpdateMinimap();
 	UpdateTrapsVisibility();
 	LogMessageByIdWithPopupCheckUser_Async(pokemon,gUnknown_80FD3A0);
-	sub_803E708(0x28,0x2b);
+	DungeonWaitFrames_Async(0x28,0x2b);
 	TryTriggerMonsterHouseWithMsg_Async(pokemon,1);
 	for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
 	{
@@ -144,5 +144,5 @@ void HandleOneRoomOrb(Entity *pokemon, Entity *target)
 		}
 	}
 	gDungeon->forceMonsterHouse = TRUE;
-	sub_803E708(0x14,0x2b);
+	DungeonWaitFrames_Async(0x14,0x2b);
 }

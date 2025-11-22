@@ -188,7 +188,7 @@ bool8 IsMonsterRecruitable(s32 species)
     if (!gDungeon->unk644.canRecruit) {
         return FALSE;
     }
-    else if (!sub_808529C(id)) {
+    else if (!MonCutsceneCompleted(id)) {
         return FALSE;
     }
     else if (id == MONSTER_MEW && gDungeon->unk644.missionKind == DUNGEON_MISSION_OUTONRESCUE) {
@@ -238,7 +238,7 @@ bool8 MonsterJoinSequence_Async(Entity *entity1, Entity *entity2, struct unkStru
     sub_806CE68(entity2, direction);
     CopyCyanMonsterNametoBuffer(gFormatBuffer_Monsters[0],param_3->id);
 
-    if (DisplayDungeonYesNoMessage(0,gUnknown_80F9FE8,1) == 0) {
+    if (DisplayDungeonYesNoMessage_Async(0,gUnknown_80F9FE8,1) == 0) {
         if (param_3->id != MONSTER_JIRACHI) {
             LogMessageByIdWithPopupCheckUser_Async(entity1,gText_Pokemon0WentAway);
         }
@@ -296,8 +296,8 @@ bool8 MonsterJoinSequence_Async(Entity *entity1, Entity *entity2, struct unkStru
     }
     else {
         sub_8083D88();
-        sub_803E708(0xa0,0x46);
-        if (DisplayDungeonYesNoMessage(0,gText_NewMemberJoinedGiveItNickname,TRUE) == 1) {
+        DungeonWaitFrames_Async(0xa0,0x46);
+        if (DisplayDungeonYesNoMessage_Async(0,gText_NewMemberJoinedGiveItNickname,TRUE) == 1) {
             while (DungeonGiveNameToRecruitedMon(dungeonMon->name) == 0) {
                 DisplayDungeonMessage_Async(0,gText_PleaseGiveNicknameNewMember,TRUE);
             }
@@ -421,7 +421,7 @@ bool8 HandleSpecialEntityJoinSequence(Entity *entity1,Entity *entity2,Entity **e
         dungeonMon->flags = 0;
     }
     else {
-        if (DisplayDungeonYesNoMessage(0,gText_NewMemberJoinedGiveItNickname,TRUE) == 1) {
+        if (DisplayDungeonYesNoMessage_Async(0,gText_NewMemberJoinedGiveItNickname,TRUE) == 1) {
             while (!DungeonGiveNameToRecruitedMon(dungeonMon->name)) {
                 DisplayDungeonMessage_Async(0,gText_PleaseGiveNicknameNewMember,TRUE);
             }

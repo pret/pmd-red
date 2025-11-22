@@ -549,7 +549,7 @@ static void GinsengItemAction(Entity *pokemon, Entity * target)
         if (isMoveBoosted) {
             TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FE454);
             if (moveBoost != 1) {
-                sub_803E708(10,0x40);
+                DungeonWaitFrames_Async(10,0x40);
                 TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FE434);
             }
         }
@@ -847,7 +847,7 @@ bool8 HandleLinkBoxAction(Entity *entity, Item *item)
         if (ShowDungeonMovesMenu(entity2,1,0,0,1)) {
             if (!ret)
                 break;
-            if (DisplayDungeonYesNoMessage(0,gUnknown_80FECA0,1) == 1)
+            if (DisplayDungeonYesNoMessage_Async(0,gUnknown_80FECA0,1) == 1)
                 break;
         }
 
@@ -964,5 +964,5 @@ static void MusicBoxItemAction(Entity *pokemon, Entity *target, u8 r2)
 {
     sub_80421C0(pokemon, 0xD6);
     LogMessageByIdWithPopupCheckUser_Async(pokemon, gPtrMusicBoxPlayedCrumbledMessage);
-    sub_803E708(0x3C, 0x46);
+    DungeonWaitFrames_Async(0x3C, 0x46);
 }

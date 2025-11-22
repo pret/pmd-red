@@ -237,7 +237,7 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
     }
 
     while (TRUE) {
-        sub_8098080();
+        ClearTempCutsceneFlags();
         nullsub_16();
         sub_80521D0();
         ResetMessageLog();
@@ -270,7 +270,7 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
         gDungeon->unk2 = DUNGEON_UNK2_0;
         gDungeon->unk4 = 0;
         gDungeon->unk11 = 0;
-        gDungeon->unk8 = 0;
+        gDungeon->unk8 = FALSE;
         gDungeon->unk3 = 0;
         gDungeon->unk6 = 0;
         gDungeon->noActionInProgress = FALSE;
@@ -494,7 +494,7 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
             DungeonFadeOutBGM(60);
         }
 
-        sub_803E708(4, 0x4F);
+        DungeonWaitFrames_Async(4, 0x4F);
         if (gDungeon->unk7 == 0) {
             sub_803E830();
         }
@@ -578,13 +578,11 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
                 }
                 if (gDungeon->unk644.dungeonLocation.floor + 1 < gDungeon->unk1CEC8) {
                     gDungeon->unk644.dungeonLocation.floor++;
-                    if (gDungeon->unk644.dungeonLocation.id == DUNGEON_FROSTY_FOREST
-                        && gDungeon->unk644.dungeonLocation.floor == 6
-                        && !sub_8098100(0x1F))
+                    if (gDungeon->unk644.dungeonLocation.id == DUNGEON_FROSTY_FOREST && gDungeon->unk644.dungeonLocation.floor == 6 && !GetCutsceneFlag(CUTSCENE_FLAG_FROSTY_FOREST_INTRUDED))
                     {
-                        sub_8097FA8(0x1F);
-                        sub_8086130();
-                        sub_8097FF8();
+                        SetTempCutsceneFlag(CUTSCENE_FLAG_FROSTY_FOREST_INTRUDED);
+                        FrostyForestIntrusionCutscene_Async();
+                        FlushTempCutsceneFlags();
                     }
                     // We go back to the loop's start.
                     continue;
@@ -608,7 +606,7 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
     FAKEMATCH:
         gUnknown_203B40C = 0;
         setupPtr->info.unk7E = 0;
-        sub_8097FF8();
+        FlushTempCutsceneFlags();
         sub_80095CC(1, 0x14);
         sub_803E13C();
         sub_800CDA8(4);

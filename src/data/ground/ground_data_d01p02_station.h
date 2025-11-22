@@ -96,7 +96,7 @@ static const struct ScriptCommand s_gs179_g1_s0_lives2_dlg0[] = { /* 0x8230108 -
     { 0xe2, 0x00,  0x01c9,  0x00000000,  0x00000000, NULL },
     ALERT_CUE(5),
     AWAIT_CUE(7),
-    ROTATE(4, 1, DIRECTION_SOUTH),
+    ROTATE_TO(4, DIR_TRANS_SPINRIGHT1, DIRECTION_SOUTH),
     ALERT_CUE(5),
     AWAIT_CUE(7),
     CALL_SCRIPT(JUMP_HAPPY_FUNC),

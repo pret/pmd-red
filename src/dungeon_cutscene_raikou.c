@@ -84,10 +84,10 @@ void sub_8089F8C(void)
   CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_RAIKOU);
 }
 
-void sub_8089FF0(u8 monsterBehavior, u8 cutscene)
+void HandleRaikouBossFaint(u8 monsterBehavior, u8 cutscene)
 {
   if ((cutscene == CUTSCENE_LIGHTNING_FIELD_ATTEMPT1 || cutscene == CUTSCENE_LIGHTNING_FIELD_ATTEMPT2 || cutscene == CUTSCENE_LIGHTNING_FIELD_POSTSTORY) && monsterBehavior == BEHAVIOR_RAIKOU) {
-    sub_8097FA8(23);
+    SetTempCutsceneFlag(CUTSCENE_FLAG_LIGHTNING_FIELD_COMPLETE);
     gDungeon->unk2 = DUNGEON_UNK2_1;
   }
 }
@@ -99,20 +99,20 @@ void RaikouPreFightDialogue(void)
 
   leaderEntity = CutsceneGetLeader();
   RaikouEntity = GetEntityFromMonsterBehavior(BEHAVIOR_RAIKOU);
-  DisplayDungeonDialogue(&gRaikouPreFightDialogue_1);
+  DisplayDungeonDialogue_Async(&gRaikouPreFightDialogue_1);
   RaikouScreenFlash();
-  DisplayDungeonDialogue(&gRaikouPreFightDialogue_2);
+  DisplayDungeonDialogue_Async(&gRaikouPreFightDialogue_2);
   gDungeon->weather.unkE265 = WEATHER_RAIN;
   sub_807EAA0(0,1);
-  sub_803E708(10,70);
-  DisplayDungeonDialogue(&gRaikouPreFightDialogue_3);
+  DungeonWaitFrames_Async(10,70);
+  DisplayDungeonDialogue_Async(&gRaikouPreFightDialogue_3);
   RaikouScreenFlash();
-  DisplayDungeonDialogue(&gRaikouPreFightDialogue_4);
+  DisplayDungeonDialogue_Async(&gRaikouPreFightDialogue_4);
   RaikouScreenFlash();
-  DisplayDungeonDialogue(&gRaikouPreFightDialogue_5);
+  DisplayDungeonDialogue_Async(&gRaikouPreFightDialogue_5);
   RaikouScreenFlash();
-  DisplayDungeonDialogue(&gRaikouPreFightDialogue_6);
-  sub_803E708(10,70);
+  DisplayDungeonDialogue_Async(&gRaikouPreFightDialogue_6);
+  DungeonWaitFrames_Async(10,70);
   SetupBossFightHP(RaikouEntity,0x28a,MUS_BOSS_BATTLE);
   ShiftCameraToPosition(&leaderEntity->pixelPos,0x10);
 }
@@ -127,12 +127,12 @@ void RaikouReFightDialogue(void)
   gDungeon->weather.unkE265 = WEATHER_RAIN;
   sub_807EAA0(0,1);
   RaikouScreenFlash();
-  DisplayDungeonDialogue(&gRaikouReFightDialogue_1);
+  DisplayDungeonDialogue_Async(&gRaikouReFightDialogue_1);
   RaikouScreenFlash();
-  DisplayDungeonDialogue(&gRaikouReFightDialogue_2);
+  DisplayDungeonDialogue_Async(&gRaikouReFightDialogue_2);
   RaikouScreenFlash();
-  DisplayDungeonDialogue(&gRaikouReFightDialogue_3);
-  sub_803E708(10,70);
+  DisplayDungeonDialogue_Async(&gRaikouReFightDialogue_3);
+  DungeonWaitFrames_Async(10,70);
   SetupBossFightHP(RaikouEntity,0x28a,MUS_BOSS_BATTLE);
   ShiftCameraToPosition(&leaderEntity->pixelPos,0x10);
 }
@@ -150,12 +150,12 @@ void RaikouPostStoryPreFightDialogue(void)
   else {
     gDungeon->weather.unkE265 = WEATHER_RAIN;
     sub_807EAA0(0,1);
-    DisplayDungeonDialogue(&gRaikouPostStoryPreFightDialogue_1);
+    DisplayDungeonDialogue_Async(&gRaikouPostStoryPreFightDialogue_1);
     RaikouScreenFlash();
-    DisplayDungeonDialogue(&gRaikouPostStoryPreFightDialogue_2);
+    DisplayDungeonDialogue_Async(&gRaikouPostStoryPreFightDialogue_2);
     RaikouScreenFlash();
-    DisplayDungeonDialogue(&gRaikouPostStoryPreFightDialogue_3);
-    sub_803E708(10,70);
+    DisplayDungeonDialogue_Async(&gRaikouPostStoryPreFightDialogue_3);
+    DungeonWaitFrames_Async(10,70);
     SetupBossFightHP(RaikouEntity,650,MUS_BOSS_BATTLE);
     ShiftCameraToPosition(&leaderEntity->pixelPos,0x10);
   }
@@ -171,19 +171,19 @@ static void RaikouScreenFlash(void)
     SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,1);
     DungeonRunFrameActions(70);
   }
-  sub_803E708(10,70);
+  DungeonWaitFrames_Async(10,70);
   for(iVar1 = 250; iVar1 > 199; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,1);
     DungeonRunFrameActions(70);
   }
-  sub_803E708(10,70);
+  DungeonWaitFrames_Async(10,70);
   for(iVar1 = 250; iVar1 >= 0; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,1);
     DungeonRunFrameActions(70);
   }
-  sub_803E708(10,70);
+  DungeonWaitFrames_Async(10,70);
   sub_8085EB0();
 }
 

@@ -23,7 +23,7 @@ void SpawnDroppedItem(Entity *entity1, Entity *entity2, Item *item, bool8 a3, Du
 void sub_8046860(Entity *entity, DungeonPos *pos, Item *item, s32 a4);
 void sub_804687C(Entity *entity, DungeonPos *pos1, DungeonPos *pos2, Item *item, s32 count);
 bool8 HasHeldItem(Entity *pokemon, u8 id);
-void sub_8046D20(void);
+void PotentiallyCreateMusicBox_Async(void);
 bool8 sub_8046F00(Item *item);
 void ClearAllItemsWithFlag(s32 itemFlag);
 void AllItemsToPlainSeed(void);

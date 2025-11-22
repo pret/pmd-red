@@ -94,7 +94,7 @@ void sub_8084448(Entity *pokemon)
     }
 
     if (gDungeon->unk644.unk46 != 0) {
-        if (DisplayDungeonYesNoMessage(0, gUnknown_80FA32C, 1) != 1)
+        if (DisplayDungeonYesNoMessage_Async(0, gUnknown_80FA32C, 1) != 1)
             return;
         BufferItemName(gFormatBuffer_Items[0], gDungeon->unk644.unk46, 0);
         for (i = 0; i < INVENTORY_SIZE; i++) {
@@ -118,7 +118,7 @@ void sub_8084448(Entity *pokemon)
         str = gUnknown_80FA370;
     }
     else {
-        if (DisplayDungeonYesNoMessage(0, gUnknown_80FA2F0, 1) != 1)
+        if (DisplayDungeonYesNoMessage_Async(0, gUnknown_80FA2F0, 1) != 1)
             return;
         DisplayDungeonMessage_Async(0, gUnknown_80FA260, 1);
         str = gUnknown_80FA36C;
@@ -129,14 +129,14 @@ void sub_8084448(Entity *pokemon)
     HandleFaint_Async(pokemon,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
     sub_804178C_Async(1);
     while(1) {
-        if (DisplayDungeonYesNoMessage(0,str,1) == 1) {
-            if (DisplayDungeonYesNoMessage(0,gUnknown_80FA394,0) == 1) {
+        if (DisplayDungeonYesNoMessage_Async(0,str,1) == 1) {
+            if (DisplayDungeonYesNoMessage_Async(0,gUnknown_80FA394,0) == 1) {
                 gDungeon->unk4 = 1;
                 gDungeon->unk11 = 2;
                 return;
             }
         }
-        else if (DisplayDungeonYesNoMessage(0,gUnknown_80FA3B8,0) == 1) {
+        else if (DisplayDungeonYesNoMessage_Async(0,gUnknown_80FA3B8,0) == 1) {
             return;
         }
     }
@@ -189,14 +189,14 @@ void sub_80845E0(Entity *pokemon)
     HandleFaint_Async(entity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
     sub_804178C_Async(1);
     while(1) {
-        if (DisplayDungeonYesNoMessage(0,gUnknown_80FA4D8,1) == 1) {
-            if (DisplayDungeonYesNoMessage(0,gUnknown_80FA394,0) == 1) {
+        if (DisplayDungeonYesNoMessage_Async(0,gUnknown_80FA4D8,1) == 1) {
+            if (DisplayDungeonYesNoMessage_Async(0,gUnknown_80FA394,0) == 1) {
                 gDungeon->unk4 = 1;
                 gDungeon->unk11 = 2;
                 return;
             }
         }
-        else if (DisplayDungeonYesNoMessage(0,gUnknown_80FA3B8,0) == 1) {
+        else if (DisplayDungeonYesNoMessage_Async(0,gUnknown_80FA3B8,0) == 1) {
             return;
         }
     }

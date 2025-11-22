@@ -44,7 +44,7 @@ static const struct ScriptCommand s_gs221_g1_s0_lives0_dlg0[] = { /* 0x826d898 *
     ALERT_CUE(7),
     { 0x89, 0x50,  0x0099,  0x00000004,  0x00000000, NULL },
     AWAIT_CUE(5),
-    ROTATE(4, 10, DIRECTION_SOUTH),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_SOUTH),
     MSG_NPC(2, _(" You're going to the\n{COLOR YELLOW_D}Murky Cave{RESET}?")),
     MSG_NPC(2, _(" Don't forget to take me,\nkekeh!")),
     TEXTBOX_CLEAR,

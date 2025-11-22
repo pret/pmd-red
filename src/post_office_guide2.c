@@ -169,11 +169,11 @@ static void DisplayMissionObjectives(void)
         case DUNGEON_MISSION_UNK0:
         default: {
             s16 auStack44;
-            s16 missionIndex;
+            s16 rescueDungeonId;
             u8 local_test;
 
-            if (sub_80992E0(&auStack44, &missionIndex))
-                PrintStringOnWindow(10, 16, GetCurrentMissionText(missionIndex), sUnknown_203B330->unk10, 0);
+            if (sub_80992E0(&auStack44, &rescueDungeonId))
+                PrintStringOnWindow(10, 16, GetCurrentMissionText(rescueDungeonId), sUnknown_203B330->unk10, 0);
             else if (sub_8099360(&local_test) != 0)
                 PrintStringOnWindow(10, 16, sub_80975DC(sub_80A2688(local_test)), sUnknown_203B330->unk10, 0);
             else

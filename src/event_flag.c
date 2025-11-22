@@ -440,10 +440,10 @@ UNUSED static void ScriptVarStringPopFirstChar(s16 varId,u32 param_2,s32 maxLen)
 #endif
 
 // arm9.bin::0200F508
-void GetScriptVarScenario(s32 param_1,u32 *param_2,u32 *param_3)
+void GetScriptVarScenario(s32 varID, u32 *outMain, u32 *outSub)
 {
-  *param_2 = GetScriptVarArrayValue(NULL, (s16)param_1, 0);
-  *param_3 = GetScriptVarArrayValue(NULL, (s16)param_1, 1);
+  *outMain = GetScriptVarArrayValue(NULL, (s16)varID, 0);
+  *outSub = GetScriptVarArrayValue(NULL, (s16)varID, 1);
 }
 
 // arm9.bin::0200F36C
@@ -478,15 +478,15 @@ void ScenarioCalc(s16 param_1,s32 param_2,s32 param_3)
         }
         break;
       case 4:
-        if (ScriptVarScenarioBefore(SCENARIO_SUB1,31,0) == 0) {
+        if (!ScriptVarScenarioBefore(SCENARIO_SUB1,31,0)) {
             SetAdventureAchievement(AA_TEAM_BASE_DONE);
         }
-        if (ScriptVarScenarioBefore(SCENARIO_SUB1,32,0) == 0) {
+        if (!ScriptVarScenarioBefore(SCENARIO_SUB1,32,0)) {
             SetAdventureAchievement(AA_SMEARGLE);
         }
         break;
       case 0xC:
-        if(ScriptVarScenarioBefore(SCENARIO_SUB9,55,2) == 0) {
+        if(!ScriptVarScenarioBefore(SCENARIO_SUB9,55,2)) {
             SetAdventureAchievement(AA_BROKE_CURSE);
         }
         break;
@@ -551,17 +551,17 @@ bool8 ScriptVarScenarioAfter(s16 varId, u32 pMain, s32 pSub)
 // arm9.bin::0200ECE0
 void sub_8001D88(void)
 {
-    u32 local_c;
-    u32 auStack8;
+    u32 sMain_sub;
+    u32 sMain_main;
 
-    GetScriptVarScenario(3, &auStack8, &local_c);
-    if (auStack8 < 1 || auStack8 > 0x1b)
+    GetScriptVarScenario(SCENARIO_MAIN, &sMain_main, &sMain_sub);
+    if (sMain_main < 1 || sMain_main > 0x1b)
         return;
 
-    if (ScriptVarScenarioBefore(SCENARIO_SUB1,0x1f,0) != 0) {
+    if (ScriptVarScenarioBefore(SCENARIO_SUB1,31,0) != 0) {
         if (ScriptVarScenarioAfter(SCENARIO_MAIN,0xf,7) != 0) {
-            ScenarioCalc(SCENARIO_SUB1,0x1f,0);
-            sub_8097418(0xe,1);
+            ScenarioCalc(SCENARIO_SUB1,31,0);
+            SetRescueScenarioConquered(RESCUE_DUNGEON_UPROAR_FOREST, TRUE);
             SetScriptVarValue(NULL,BASE_LEVEL,2);
         }
         else {
@@ -572,32 +572,32 @@ void sub_8001D88(void)
     }
     if ((ScriptVarScenarioEqual(SCENARIO_SUB1,0x1f,0)) && (GetFriendAreaStatus(SKY_BLUE_PLAINS))) {
         ScenarioCalc(SCENARIO_SUB1,0x1f,1);
-        sub_809733C(0xf,1);
+        sub_809733C(RESCUE_DUNGEON_HOWLING_FOREST, TRUE);
     }
-    if (auStack8 > 0x11) {
-        sub_80973A8(0x25,1);
+    if (sMain_main > 0x11) {
+        sub_80973A8(RESCUE_DUNGEON_WATERFALL_POND, TRUE);
         if (((FindItemInInventory(ITEM_HM_DIVE) != -1) || (gTeamInventoryRef->teamStorage[ITEM_HM_DIVE] != 0)) ||
              (ScriptVarScenarioAfter(SCENARIO_SUB2,0x21,3) != 0)) {
-            sub_80973A8(0x22,1);
+            sub_80973A8(RESCUE_DUNGEON_SOLAR_CAVE, TRUE);
         }
         if (GetFriendAreaStatus(FURNACE_DESERT) != 0) {
-            sub_80973A8(0x1f,1);
+            sub_80973A8(RESCUE_DUNGEON_DESERT_REGION, TRUE);
         }
         if (GetFriendAreaStatus(BOULDER_CAVE)) {
-            sub_80973A8(0x20,1);
+            sub_80973A8(RESCUE_DUNGEON_SOUTHERN_CAVERN, TRUE);
         }
         if (GetFriendAreaStatus(DRAGON_CAVE)) {
-            sub_80973A8(0x21,1);
+            sub_80973A8(RESCUE_DUNGEON_WYVERN_HILL, TRUE);
         }
         if (GetFriendAreaStatus(SECRETIVE_FOREST)) {
-            sub_80973A8(0x23,1);
+            sub_80973A8(RESCUE_DUNGEON_DARKNIGHT_RELIC, TRUE);
         }
         if (GetFriendAreaStatus(SERENE_SEA)) {
-            sub_80973A8(0x24,1);
-            sub_80973A8(0x28,1);
+            sub_80973A8(RESCUE_DUNGEON_GRAND_SEA, TRUE);
+            sub_80973A8(RESCUE_DUNGEON_FAR_OFF_SEA, TRUE);
         }
-        if ((GetFriendAreaStatus(AGED_CHAMBER_AN)) && (GetFriendAreaStatus(AGED_CHAMBER_O_EXCLAIM))) {
-            sub_80973A8(0x26,1);
+        if (GetFriendAreaStatus(AGED_CHAMBER_AN) && GetFriendAreaStatus(AGED_CHAMBER_O_EXCLAIM)) {
+            sub_80973A8(RESCUE_DUNGEON_UNOWN_RELIC, TRUE);
         }
         if (ScriptVarScenarioEqual(SCENARIO_SUB2,0,0)) {
             ScenarioCalc(SCENARIO_SUB2,0x21,1);
@@ -619,16 +619,16 @@ void sub_8001D88(void)
                 ScenarioCalc(SCENARIO_SUB8,0x33,1);
             }
             if (GetFriendAreaStatus(SKY_BLUE_PLAINS)) {
-                sub_80973A8(0x27,1);
+                sub_80973A8(RESCUE_DUNGEON_JOYOUS_TOWER, TRUE);
             }
             if (GetFriendAreaStatus(SKY_BLUE_PLAINS)) {
-                sub_80973A8(0x29,1);
+                sub_80973A8(RESCUE_DUNGEON_PURITY_FOREST, TRUE);
             }
         }
         if (!ScriptVarScenarioBefore(SCENARIO_SUB2,0x22,0)) {
             if (ScriptVarScenarioEqual(SCENARIO_SUB7,0,0)) {
                 ScenarioCalc(SCENARIO_SUB7,0x31,1);
-                sub_809733C(0x1b,1);
+                sub_809733C(RESCUE_DUNGEON_BURIED_RELIC, TRUE);
             }
             if ((ScriptVarScenarioEqual(SCENARIO_SUB9,0,0)) && (!ScriptVarScenarioBefore(SCENARIO_SUB8,0x34,0))) {
                 ScenarioCalc(SCENARIO_SUB9,0x35,1);

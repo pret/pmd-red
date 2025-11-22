@@ -26,7 +26,7 @@ UNUSED EWRAM_DATA static u8 sUnused = 0;
 EWRAM_DATA static s32 gUnknown_202EC40[2] = {0};
 EWRAM_DATA static s32 gUnknown_202EC48 = 0;
 
-extern struct UnkStruct_203B184 *gUnknown_203B184;
+extern UnkStruct_203B184 *gUnknown_203B184;
 
 #include "data/other_menus2.h"
 

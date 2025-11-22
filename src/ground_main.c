@@ -797,19 +797,19 @@ void sub_809927C(u8 param_1)
     gUnknown_20398C8.sub0.unkD = 0;
 }
 
-bool8 sub_80992E0(s16 *param_1, s16 *param_2)
+bool8 sub_80992E0(s16 *param_1, s16 *rescueDungeonId)
 {
     s32 sVar2;
 
-    sVar2 = (s16)GetScriptVarValue(NULL,DUNGEON_ENTER);
-    if ((((sVar2 != -1) && (sVar2 != 0x50)) && (sVar2 != 0x51)) && (sVar2 != 0x52)) {
+    sVar2 = (s16)GetScriptVarValue(NULL, DUNGEON_ENTER);
+    if (sVar2 != -1 && sVar2 != 0x50 && sVar2 != 0x51 && sVar2 != 0x52) {
         *param_1 = sVar2;
-        *param_2 = GetScriptVarValue(NULL,DUNGEON_ENTER_INDEX);
+        *rescueDungeonId = GetScriptVarValue(NULL, DUNGEON_ENTER_INDEX);
         return TRUE;
     }
     else {
         *param_1 = -1;
-        *param_2 = -1;
+        *rescueDungeonId = RESCUE_DUNGEON_INVALID;
         return FALSE;
     }
 }

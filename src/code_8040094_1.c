@@ -178,7 +178,7 @@ void sub_8040DA0(Entity *entity, Move *move)
                 direction--;
                 direction &= DIRECTION_MASK;
                 sub_806CDD4(entity, 0, direction);
-                sub_803E708(2, 0x15);
+                DungeonWaitFrames_Async(2, 0x15);
             }
         }
     }
@@ -189,7 +189,7 @@ void sub_8040DA0(Entity *entity, Move *move)
             for (i = 0; i < NUM_DIRECTIONS + 1; i++) {
                 direction &= DIRECTION_MASK;
                 sub_806CDD4(entity, 0, direction);
-                sub_803E708(2, 0x15);
+                DungeonWaitFrames_Async(2, 0x15);
                 direction++;
             }
         }

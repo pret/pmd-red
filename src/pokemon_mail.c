@@ -413,7 +413,7 @@ bool8 sub_803C110(s16 index)
 
     species_s32 = (s32)index;
 
-    if (!sub_8098134(index) || index != GetBaseSpecies(index) || !sub_803C0DC(index))
+    if (!GetMonSeenFlag(index) || index != GetBaseSpecies(index) || !sub_803C0DC(index))
         return FALSE;
 
     if (!CheckQuest(QUEST_REACHED_POSTGAME)) {

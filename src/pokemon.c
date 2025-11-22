@@ -121,7 +121,7 @@ void sub_808CE74(s16 _species, bool32 _isLeader, u8* name)
              if (speciesFriendArea == friendArea) {
                  gRecruitedPokemonRef->pokemon[i] = pokemon;
                  gFriendAreas[speciesFriendArea] = TRUE;
-                 sub_80980B4(species);
+                 SetMonSeenFlag(species);
                  break;
              }
          }
@@ -245,7 +245,7 @@ Pokemon *TryAddPokemonToRecruited(Pokemon *pokemon)
             if (speciesFriendArea == friendArea) {
                 gRecruitedPokemonRef->pokemon[i] = *pokemon;
                 gRecruitedPokemonRef->pokemon[i].flags &= ~(POKEMON_FLAG_x4000);
-                sub_80980B4(pokemon->speciesNum);
+                SetMonSeenFlag(pokemon->speciesNum);
                 return &gRecruitedPokemonRef->pokemon[i];
             }
         }

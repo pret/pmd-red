@@ -157,7 +157,7 @@ void DoEndOfTurnEffects_Async(Entity *entity)
             if (sound)
                 PlaySoundEffect(0x153);
             LogMessageByIdWithPopupCheckUser_Async(entity, str);
-            sub_803E708(30, 0x32);
+            DungeonWaitFrames_Async(30, 0x32);
         }
     }
 

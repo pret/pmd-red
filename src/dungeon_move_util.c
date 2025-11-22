@@ -360,7 +360,7 @@ bool8 TryUseChosenMove(struct Entity *attacker, u32 r6, s32 itemId, u32 var_30, 
     if (GetEntInfo(attacker)->muzzled.muzzled == TRUE && FailsWhileMuzzled(move->id)) {
         SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], attacker, 0);
         LogMessageByIdWithPopupCheckUser_Async(attacker, msg);
-        sub_803E708(0xA, 0x3F);
+        DungeonWaitFrames_Async(0xA, 0x3F);
         LogMessageByIdWithPopupCheckUser_Async(attacker, gUnknown_80FC710); // is muzzled!
         return FALSE;
     }
@@ -369,13 +369,13 @@ bool8 TryUseChosenMove(struct Entity *attacker, u32 r6, s32 itemId, u32 var_30, 
         if (itemId == 0) {
             BufferMoveName(gFormatBuffer_Items[0], move, NULL);
             LogMessageByIdWithPopupCheckUser_Async(attacker, msg);
-            sub_803E708(0xA, 0x3F);
+            DungeonWaitFrames_Async(0xA, 0x3F);
             LogMessageByIdWithPopupCheckUser_Async(attacker, gUnknown_80FC6D0); // But the move couldn't be used!
         }
         else {
             BufferItemName(gFormatBuffer_Items[0], itemId, NULL);
             LogMessageByIdWithPopupCheckUser_Async(attacker, msg);
-            sub_803E708(0xA, 0x3F);
+            DungeonWaitFrames_Async(0xA, 0x3F);
             LogMessageByIdWithPopupCheckUser_Async(attacker, gUnknown_80FC6FC); // But Orbs are prevented from being used!
         }
         return FALSE;
@@ -734,7 +734,7 @@ void sub_80566F8(Entity *attacker, Move *move, s32 a2, bool8 a3, s32 itemId, s32
         UseMoveAgainstTargets(targetsArray, attacker, move, itemId, isLinkedMove);
     }
     else if (a2 == 1 && sub_803F428(&var_68)) {
-        sub_803E708(1, 0x4A);
+        DungeonWaitFrames_Async(1, 0x4A);
         sub_8041168(attacker, NULL, move, &var_68);
     }
 }

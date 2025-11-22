@@ -97,89 +97,89 @@ void MagmaCavernMidDialogue(void)
   partnerEntity = CutsceneGetPartner();
   groudonEntity = GetEntityFromMonsterBehavior(BEHAVIOR_GROUDON_1);
   alakazamEntity = GetEntityFromMonsterBehavior(BEHAVIOR_ALAKAZAM_2);
-  sub_8052D44(IDStack,leaderEntity,partnerEntity);
+  BufferCutsceneProtagonists(IDStack,leaderEntity,partnerEntity);
   sub_8086448();
-  SpriteLookAroundEffect(partnerEntity);
+  CutsceneLookAroundEffect_Async(partnerEntity);
   // Let's see..
   // I wonder where we are?
-  DisplayDungeonDialogue(&MagmaCavernMidDialogue_1);
-  sub_803E708(10,0x46);
-  sub_80869E4(partnerEntity,4,1,DIRECTION_EAST);
-  sub_80869E4(leaderEntity,4,2,DIRECTION_WEST);
+  DisplayDungeonDialogue_Async(&MagmaCavernMidDialogue_1);
+  DungeonWaitFrames_Async(10,0x46);
+  CutsceneLookDir_Async(partnerEntity,4,DIR_TRANS_SPINRIGHT1,DIRECTION_EAST);
+  CutsceneLookDir_Async(leaderEntity,4,DIR_TRANS_SPINLEFT1,DIRECTION_WEST);
   // I know we've come pretty
   // far...
   //
   // I'm certain we've come quite
   // far already..
-  DisplayDungeonDialogue(MagmaCavernMidDialogue_2);
-  sub_803E708(10,0x46);
+  DisplayDungeonDialogue_Async(MagmaCavernMidDialogue_2);
+  DungeonWaitFrames_Async(10,0x46);
   DungeonStopBGM();
   sub_80855E4(sub_80868F4);
   sub_808680C();
   PlaySoundEffect(0x1c5);
-  sub_803E708(0x28,0x46);
+  DungeonWaitFrames_Async(0x28,0x46);
   // Waaah!
   // Qu-quake!
-  DisplayDungeonDialogue(&MagmaCavernMidDialogue_3);
-  sub_803E708(0x78,0x46);
+  DisplayDungeonDialogue_Async(&MagmaCavernMidDialogue_3);
+  DungeonWaitFrames_Async(0x78,0x46);
   StopSoundEffect(0x1c5);
   sub_808682C();
   sub_80855E4(sub_8086910);
-  sub_803E708(0x14,0x46);
+  DungeonWaitFrames_Async(0x14,0x46);
   sub_8085930(DIRECTION_NORTH);
-  sub_803E708(10,0x46);
+  DungeonWaitFrames_Async(10,0x46);
   // Whew!
   // It settled down.
   //
   // Whew
   // It's over.
-  DisplayDungeonDialogue(MagmaCavernMidDialogue_4);
-  sub_803E708(10,0x46);
+  DisplayDungeonDialogue_Async(MagmaCavernMidDialogue_4);
+  DungeonWaitFrames_Async(10,0x46);
   PlaySoundEffect(0x1d5);
-  SpriteLookAroundEffect(partnerEntity);
+  CutsceneLookAroundEffect_Async(partnerEntity);
   PlaySoundEffect(0x1c7);
   sub_80856E0(partnerEntity, DIRECTION_NORTH);
   // Hey! {POKEMON_0}!
   // Over there!
-  DisplayDungeonDialogue(&MagmaCavernMidDialogue_5);
+  DisplayDungeonDialogue_Async(&MagmaCavernMidDialogue_5);
   GetEntInfo(groudonEntity)->unk15E = 0;
   GetEntInfo(alakazamEntity)->unk15E =0;
   pos.x = (groudonEntity->pixelPos.x + alakazamEntity->pixelPos.x) / 2;
   pos.y = (groudonEntity->pixelPos.y + alakazamEntity->pixelPos.y) / 2 + 0x800;
   ShiftCameraToPosition(&pos,0x20);
-  sub_803E708(0x3c,0x46);
+  DungeonWaitFrames_Async(0x3c,0x46);
   sub_80891F0();
   // Hey!
   // Are you OK?!
   //
   // Hey!
   // Snap out of it!
-  DisplayDungeonDialogue(MagmaCavernMidDialogue_6);
-  sub_803E708(10,0x46);
+  DisplayDungeonDialogue_Async(MagmaCavernMidDialogue_6);
+  DungeonWaitFrames_Async(10,0x46);
   // Urrrrgh...
-  DisplayDungeonDialogue(&MagmaCavernMidDialogue_7);
-  sub_803E708(10,0x46);
-  sub_80869E4(leaderEntity,4,2,DIRECTION_NORTHWEST);
+  DisplayDungeonDialogue_Async(&MagmaCavernMidDialogue_7);
+  DungeonWaitFrames_Async(10,0x46);
+  CutsceneLookDir_Async(leaderEntity,4,DIR_TRANS_SPINLEFT1,DIRECTION_NORTHWEST);
   // What happened to you?
   //
   // What happened here?
-  DisplayDungeonDialogue(MagmaCavernMidDialogue_8);
-  sub_803E708(10,0x46);
+  DisplayDungeonDialogue_Async(MagmaCavernMidDialogue_8);
+  DungeonWaitFrames_Async(10,0x46);
   // We challenged..
   // {POKEMON_2}...
   // And wiped out..
-  DisplayDungeonDialogue(&MagmaCavernMidDialogue_9);
-  sub_803E708(10,0x46);
-  DisplayDungeonDialogue(&MagmaCavernMidDialogue_10);
-  sub_803E708(10,0x46);
-  sub_80869E4(leaderEntity,4,1,DIRECTION_NORTHEAST);
-  sub_80869E4(partnerEntity,4,1,DIRECTION_NORTHEAST);
+  DisplayDungeonDialogue_Async(&MagmaCavernMidDialogue_9);
+  DungeonWaitFrames_Async(10,0x46);
+  DisplayDungeonDialogue_Async(&MagmaCavernMidDialogue_10);
+  DungeonWaitFrames_Async(10,0x46);
+  CutsceneLookDir_Async(leaderEntity,4,DIR_TRANS_SPINRIGHT1,DIRECTION_NORTHEAST);
+  CutsceneLookDir_Async(partnerEntity,4,DIR_TRANS_SPINRIGHT1,DIRECTION_NORTHEAST);
   // Grrgh..
   // We... It crushed us
-  DisplayDungeonDialogue(&MagmaCavernMidDialogue_11);
-  sub_803E708(10,0x46);
+  DisplayDungeonDialogue_Async(&MagmaCavernMidDialogue_11);
+  DungeonWaitFrames_Async(10,0x46);
   PlaySoundEffect(0x1d5);
-  SpriteLookAroundEffect(partnerEntity);
+  CutsceneLookAroundEffect_Async(partnerEntity);
   // That's right...
   // What happened to {POKEMON_3}?
   // Where is {POKEMON_3}?
@@ -187,22 +187,22 @@ void MagmaCavernMidDialogue(void)
   // Wait...
   // What about {POKEMON_3}?
   // Where did {POKEMON_3} go?
-  DisplayDungeonDialogue(MagmaCavernMidDialogue_12);
-  sub_803E708(0x1e,0x46);
+  DisplayDungeonDialogue_Async(MagmaCavernMidDialogue_12);
+  DungeonWaitFrames_Async(0x1e,0x46);
   // {POKEMON_3} is...
   // Still battling {POKEMON_2}...
-  DisplayDungeonDialogue(&MagmaCavernMidDialogue_13);
-  sub_803E708(10,0x46);
-  sub_80869E4(partnerEntity,4,1,DIRECTION_EAST);
-  sub_80869E4(leaderEntity,4,2,DIRECTION_WEST);
+  DisplayDungeonDialogue_Async(&MagmaCavernMidDialogue_13);
+  DungeonWaitFrames_Async(10,0x46);
+  CutsceneLookDir_Async(partnerEntity,4,DIR_TRANS_SPINRIGHT1,DIRECTION_EAST);
+  CutsceneLookDir_Async(leaderEntity,4,DIR_TRANS_SPINLEFT1,DIRECTION_WEST);
 
   // {POKEMON_0}!
   // We've got to hurry!
-  DisplayDungeonDialogue(&MagmaCavernMidDialogue_14);
+  DisplayDungeonDialogue_Async(&MagmaCavernMidDialogue_14);
   sub_8089294();
   // Be careful!
-  DisplayDungeonDialogue(&MagmaCavernMidDialogue_15);
-  sub_803E708(10,0x46);
+  DisplayDungeonDialogue_Async(&MagmaCavernMidDialogue_15);
+  DungeonWaitFrames_Async(10,0x46);
   gDungeon->unk2 = DUNGEON_UNK2_1;
 }
 
@@ -212,9 +212,9 @@ void sub_8089168(void)
 
   leaderEntity = CutsceneGetLeader();
   sub_8086448();
-  sub_803E708(10,0x46);
-  SpriteLookAroundEffect(leaderEntity);
-  sub_803E708(10,0x46);
+  DungeonWaitFrames_Async(10,0x46);
+  CutsceneLookAroundEffect_Async(leaderEntity);
+  DungeonWaitFrames_Async(10,0x46);
   ShiftCameraToPosition(&leaderEntity->pixelPos,0x10);
 }
 

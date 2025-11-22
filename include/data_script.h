@@ -1,7 +1,9 @@
+#include "constants/cutscenes.h"
 #include "constants/direction.h"
 #include "constants/event_flag.h"
 #include "constants/item.h"
 #include "constants/ground_map.h"
+#include "constants/rescue_dungeon_id.h"
 #include "constants/script_dungeon_id.h"
 #include "portrait_placement.h"
 #include "structs/str_ground_script.h"
@@ -82,12 +84,22 @@
 #define SELECT_ANIMATION(id)            { 0x54, 0, id, 0, 0, NULL }
 // 58..95: position and movement-related
 // For WARP/WALK, every map has a list of predefined locations.
-#define WARP_WAYPOINT(u, w)             { 0x5B, u, 0, w, 0, NULL }
-#define WALK_RELATIVE(spd, h, v)        { 0x6A, 0, spd, h, v, NULL }
-#define WALK_GRID(spd, w)               { 0x6B, 0, spd, w, 0, NULL }
-#define WALK_DIRECT(spd, w)             { 0x7A, 0, spd, w, 0, NULL }
-#define CAMERA_PAN(u1, u2)              { 0x86, 0, u1, u2, 0, NULL }
-#define ROTATE(spd, d, o)               { 0x91, spd, d, o, 0, NULL } // d=cw/ccw/shortest, o=final orientation
+#define WARP_WAYPOINT(u,w)              { 0x5B, u, 0, w, 0, NULL }
+#define WALK_RELATIVE(spd,h,v)          { 0x6A, 0, spd, h, v, NULL }
+#define WALK_GRID(spd,w)                { 0x6B, 0, spd, w, 0, NULL }
+#define WALK_DIRECT(spd,w)              { 0x7A, 0, spd, w, 0, NULL }
+#define CAMERA_PAN(u1,u2)               { 0x86, 0, u1, u2, 0, NULL }
+#define CMD_UNK_8A(a,b,t)               { 0x8A, a, b, t, 0, NULL }
+#define CMD_UNK_8C(a,t,c)               { 0x8C, a, t, c, 0, NULL }
+#define CMD_UNK_8D(a,t)                 { 0x8D, a, t, 0, 0, NULL }
+#define CMD_UNK_8E(a,t,c)               { 0x8E, a, t, c, 0, NULL }
+#define CMD_UNK_8F(a,t,c)               { 0x8F, a, t, c, 0, NULL }
+#define CMD_UNK_90(a,t,c)               { 0x90, a, t, c, 0, NULL }
+#define ROTATE_TO(spd,t,o)              { 0x91, spd, t, o, 0, NULL } // o=final orientation
+#define CMD_UNK_92(a,b,t)               { 0x92, a, b, t, 0, NULL }
+#define CMD_UNK_93(a,t,c)               { 0x93, a, t, c, 0, NULL }
+#define CMD_UNK_94(a,t,c)               { 0x94, a, t, c, 0, NULL }
+#define CMD_UNK_95(a,t,c)               { 0x95, a, t, c, 0, NULL }
 // 96: unused?
 // 97: ??? (maybe more camera?)
 #define CAMERA_INIT_PAN                 { 0x98, 0, 0, 0, 0, NULL }
@@ -104,7 +116,10 @@
 #define SET_DUNGEON_RES(r,e)            { 0xAB, 0, r, e, 0, NULL }
 #define SET_PLAYER_KIND(k)              { 0xAC, 0, k, 0, 0, NULL }
 #define UNLOCK_FRIEND_AREA(a)           { 0xAD, TRUE, a, 0, 0, NULL }
-// ae..b2: opaque functions
+#define CMD_UNK_AE(r)                   { 0xAE, TRUE, r, 0, 0, NULL }
+#define CMD_UNK_AF(r, b)                { 0xAF, b, r, 0, 0, NULL }
+#define SET_RESCUE_CONQUERED(s)         { 0xB0, TRUE, s, 0, 0, NULL }
+// b1..b2: opaque functions
 #define JUMPIF_EQUAL(v,i,l)             { 0xB3, l, v, i, 0, NULL }
 #define JUMPIF(o,v,i,l)                 { 0xB4, o, l, v, i, NULL }
 #define JUMPIF_2(o,a,b,l)               { 0xB5, o, l, a, b, NULL }
@@ -114,8 +129,8 @@
 #define JUMPIF_SCENE_EQ(v,a,b,l)        { 0xB9, l, v, a, b, NULL }
 #define JUMPIF_SCENE_GT(v,a,b,l)        { 0xBA, l, v, a, b, NULL }
 #define JUMPIF_SCENARIOCHECK(i,l)       { 0xBB, l, i, 0, 0, NULL }
+#define JUMPIF_CUTSCENE_FLAG(f,l)       { 0xBC, l, f, 0, 0, NULL }
 // functions need reversing
-#define JUMPIF_UNK_BC(i,l)              { 0xBC, l, i, 0, 0, NULL }
 #define JUMPIF_UNK_BD(i,l)              { 0xBD, l, 0, i, 0, NULL }
 #define JUMPIF_UNK_BE(l)                { 0xBE, l, 0, 0, 0, NULL }
 #define JUMPIF_HASITEM(i,l)             { 0xBF, l, i, 0, 0, NULL }

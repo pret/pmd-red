@@ -21,71 +21,73 @@ static const PixelPos sVectorDirections[NUM_DIRECTIONS] = {
 
 static s8 VecDirection4Radial(PixelPos *pixelPos);
 
-static inline s8 GetRandomizedDirection(s32 direction1, s32 rand, s32 add, s32 multi)
+static inline s8 GetRandomizedDirection(s32 dir, s32 randExclusiveMax, s32 add, s32 multi)
 {
-    return (s8)(((direction1 + add) + OtherRandInt(rand) * multi) % NUM_DIRECTIONS);
+    return (s8)(((dir + add) + (OtherRandInt(randExclusiveMax) * multi)) % NUM_DIRECTIONS);
 }
 
 // arm9.bin::020109F4
-s32 sub_8002984(s32 _direction1, u32 caseID)
+s32 TransformDirection1(s32 _direction1, u32 caseID)
 {
-    s32 direction1 = (s8) _direction1;
+    s32 dir = (s8) _direction1;
     switch((u8)caseID) {
-        case 1:
-            if (direction1 >= 0) {
-                direction1 += 7;
-                direction1 &= DIRECTION_MASK;
+        case DIR_TRANS_SPINRIGHT1:
+            if (dir >= 0) {
+                dir += 7;
+                dir &= DIRECTION_MASK;
             }
             break;
-        case 2:
-            if (direction1 >= 0) {
-                direction1 += 1;
-                direction1 &= DIRECTION_MASK;
+        case DIR_TRANS_SPINLEFT1:
+            if (dir >= 0) {
+                dir += 1;
+                dir &= DIRECTION_MASK;
             }
             break;
-        case 3:
-            if (direction1 >= 0) {
-                direction1 += 6;
-                direction1 &= DIRECTION_MASK;
+        case DIR_TRANS_SPINRIGHT2:
+            if (dir >= 0) {
+                dir += 6;
+                dir &= DIRECTION_MASK;
             }
             break;
-        case 4:
-            if (direction1 >= 0) {
-                direction1 += 2;
-                direction1 &= DIRECTION_MASK;
+        case DIR_TRANS_SPINLEFT2:
+            if (dir >= 0) {
+                dir += 2;
+                dir &= DIRECTION_MASK;
             }
             break;
-        case 5:
-            if (direction1 >= 0) {
-                direction1 += 4;
-                direction1 &= DIRECTION_MASK;
+        case DIR_TRANS_FLIP:
+            if (dir >= 0) {
+                dir += 4;
+                dir &= DIRECTION_MASK;
             }
             break;
-        case 6:
-            if ((direction1 & 1) != 0) {
-                direction1 = GetRandomizedDirection(direction1, 2, 7, 2);
+        case DIR_TRANS_RAND_OFFSET_SOFT_CARDINAL:
+            if ((dir & 1) != 0) {
+                // Diagonal
+                dir = GetRandomizedDirection(dir, 2, 7, 2); // spinRight1 + (0 or spinLeft2)
             }
             else {
-                direction1 = GetRandomizedDirection(direction1, 3, 6, 2);
+                // Cardinal
+                dir = GetRandomizedDirection(dir, 3, 6, 2); // spinRight2 + (0 or spinLeft2 or flip)
             }
             break;
-        case 7:
-            direction1 = GetRandomizedDirection(direction1, 3, 7, 1);
+        case DIR_TRANS_RAND_OFFSET_SOFT:
+            dir = GetRandomizedDirection(dir, 3, 7, 1); // spinRight1 + (0 or spinLeft1 or spinLeft2)
             break;
-        case 8:
-            direction1 = (s8)(OtherRandInt(NUM_DIRECTIONS) & 0xfe);
+        case DIR_TRANS_RAND_CARDINAL:
+            dir = (s8)(OtherRandInt(NUM_DIRECTIONS) & (u8)~1);
             break;
-        case 9:
-            direction1 = (s8) OtherRandInt(NUM_DIRECTIONS);
+        case DIR_TRANS_RAND:
+            dir = (s8) OtherRandInt(NUM_DIRECTIONS);
             break;
         default:
             break;
     }
-    return direction1;
+    return dir;
 }
 
 // arm9.bin::020108EC
-s32 sub_8002A70(s32 _direction1, s32 _direction2, s32 _caseId)
+s32 TransformDirection2(s32 _direction1, s32 _direction2, s32 _caseId)
 {
     s32 direction1 = (s8)(_direction1);
     s32 direction2 = (s8)(_direction2);
@@ -95,34 +97,34 @@ s32 sub_8002A70(s32 _direction1, s32 _direction2, s32 _caseId)
         return direction1;
 
     switch (caseId) {
-        case 1:
+        case DIR_TRANS_SPINRIGHT1:
             if (direction1 >= 0) {
                 direction1 += 7;
                 direction1 &= DIRECTION_MASK;
             }
             break;
-        case 2:
+        case DIR_TRANS_SPINLEFT1:
             if (direction1 >= 0) {
                 direction1 += 1;
                 direction1 &= DIRECTION_MASK;
             }
             break;
-        case 3:
+        case DIR_TRANS_SPINRIGHT2:
             if (direction1 >= 0) {
                 direction1 += 6;
                 direction1 &= DIRECTION_MASK;
             }
             break;
-        case 4:
+        case DIR_TRANS_SPINLEFT2:
             if (direction1 >= 0) {
                 direction1 += 2;
                 direction1 &= DIRECTION_MASK;
             }
             break;
-        case 11:
+        case DIR_TRANS_11:
             direction1 = sub_8002B04(direction1, direction2);
             // Fallthrough
-        case 10:
+        case DIR_TRANS_10:
             direction1 = sub_8002B04(direction1, direction2);
             break;
     }
@@ -139,11 +141,11 @@ s32 sub_8002B04(s32 _direction1, s32 _direction2)
     {
         s32 newDirection = ((direction2 + NUM_DIRECTIONS) - direction1) % NUM_DIRECTIONS;
 
-        if (newDirection != 0) {
-            if (newDirection < 4)
-                newDirection = (direction1 + 1) % NUM_DIRECTIONS;
+        if (newDirection != DIRECTION_SOUTH) {
+            if (newDirection <= DIRECTION_NORTHEAST)
+                newDirection = (direction1 + 1) % NUM_DIRECTIONS; // Spin Left 1
             else
-                newDirection = (direction1 + 7) % NUM_DIRECTIONS;
+                newDirection = (direction1 + 7) % NUM_DIRECTIONS; // Spin Right 1
 
             direction1 = (s8)newDirection;
         }
@@ -164,12 +166,12 @@ UNUSED static s32 sub_8002B5C(s32 _direction1, s32 _direction2)
     if (direction2 != -1) {
         newDirection = ((direction2 + NUM_DIRECTIONS) - direction1) % NUM_DIRECTIONS;
 
-        if (newDirection != 0) {
-            if (newDirection < 4) {
-                newDirection = (direction1 + 2) % NUM_DIRECTIONS;
+        if (newDirection != DIRECTION_SOUTH) {
+            if (newDirection <= DIRECTION_NORTHEAST) {
+                newDirection = (direction1 + 2) % NUM_DIRECTIONS; // Spin Left 2
             }
             else {
-                newDirection = (direction1 + 6) % NUM_DIRECTIONS;
+                newDirection = (direction1 + 6) % NUM_DIRECTIONS; // Spin Right 2
             }
             direction1 = (s8)(newDirection);
         }

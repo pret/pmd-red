@@ -384,7 +384,7 @@ void sub_8068BDC(bool8 a0)
 
                 if (id == j)
                     break;
-                if (DisplayDungeonYesNoMessage(NULL, gUnknown_80FE20C, TRUE) == TRUE) // If you dismiss this mon, it may never join you again. Bid farewell to it?
+                if (DisplayDungeonYesNoMessage_Async(NULL, gUnknown_80FE20C, TRUE) == TRUE) // If you dismiss this mon, it may never join you again. Bid farewell to it?
                     break;
             }
 
@@ -498,7 +498,7 @@ void HandleFaint_Async(Entity *entity, s32 dungeonExitReason_, Entity *param_3)
     joinId = entity->isVisible; joinId = entity->unk22;joinId = entity->isVisible; joinId = entity->unk22;joinId = entity->isVisible; joinId = entity->unk22;
     #endif
     if (entInfo->isTeamLeader) {
-        sub_803E708(0x3c,0x49);
+        DungeonWaitFrames_Async(0x3c,0x49);
         DisplayMessageLog();
         if (gDungeon->unk6 == 0) {
             if (gDungeon->unk644.stoleFromKecleon == 0
@@ -510,7 +510,7 @@ void HandleFaint_Async(Entity *entity, s32 dungeonExitReason_, Entity *param_3)
                 && gDungeon->unk644.missionKind != DUNGEON_MISSION_OUTONRESCUE)
             {
                 if (gDungeon->unk644.unk37 > 0) {
-                    if (DisplayDungeonYesNoMessage(NULL,gUnknown_80FE268,1) == 1) {
+                    if (DisplayDungeonYesNoMessage_Async(NULL,gUnknown_80FE268,1) == 1) {
                         DisplayDungeonMessage_Async(NULL,gUnknown_80FE28C,1);
                         gDungeon->unk4 = 1;
                         gDungeon->unk6 = 1;
@@ -579,7 +579,7 @@ void HandleFaint_Async(Entity *entity, s32 dungeonExitReason_, Entity *param_3)
     }
 
     if (GetLeader() != NULL && dungeonExitReason != DUNGEON_EXIT_DELETED_FOR_EVENT && !entInfo->isTeamLeader && !gDungeon->unk10) {
-        sub_8084E00_Async(entity, entInfo->monsterBehavior, dungeonExitReason == DUNGEON_EXIT_TRANSFORMED_INTO_FRIEND);
+        HandleBossFaint_Async(entity, entInfo->monsterBehavior, dungeonExitReason == DUNGEON_EXIT_TRANSFORMED_INTO_FRIEND);
         if (IS_DEOXYS_FORM_MONSTER(entInfo->apparentID) && !IsFloorwideFixedRoom() && entInfo->isNotTeamMember) {
             gDungeon->deoxysDefeat = 1;
             DisplayDungeonLoggableMessageTrue_Async(entity,gUnknown_80FA580);
@@ -1261,7 +1261,7 @@ void TryPointCameraToMonster(Entity *pokemon, u8 param_2)
         DungeonRunFrameActions(0x34);
       }
     }
-    sub_803E708(4,0x44);
+    DungeonWaitFrames_Async(4,0x44);
     PointCameraToMonster(pokemon);
     DiscoverMinimap(&pokemon->pos);
     gDungeon->unk12 = 0;

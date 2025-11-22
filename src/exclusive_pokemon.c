@@ -3,77 +3,80 @@
 #include "exclusive_pokemon.h"
 #include "dungeon_data.h"
 
-EWRAM_INIT struct ExclusivePokemonData *gUnknown_203B498 = {0};
-EWRAM_DATA struct ExclusivePokemonData gExclusivePokemonInfo = {0};
+EWRAM_INIT ExclusivePokemonData *gExclusiveMonPtr = { NULL };
+
+EWRAM_DATA ExclusivePokemonData gExclusivePokemonInfo = { 0 };
+
+// This file is more of a pokedex rather than just exclusive mon stuff
 
 void LoadExclusivePokemon(void)
 {
-    gUnknown_203B498 = &gExclusivePokemonInfo;
+    gExclusiveMonPtr = &gExclusivePokemonInfo;
 }
 
-struct ExclusivePokemonData *GetExclusivePokemon(void)
+ExclusivePokemonData *GetExclusivePokemon(void)
 {
     return &gExclusivePokemonInfo;
 }
 
 void InitializeExclusivePokemon(void)
 {
-    s32 counter;
-    memset(gUnknown_203B498, 0, sizeof(struct ExclusivePokemonData));
-    for(counter = 0; counter < NUM_EXCLUSIVE_POKEMON; counter++)
-    {
-        gUnknown_203B498->Exclusives[counter] = gExclusivePokemon[counter].in_rrt;
+    s32 i;
+
+    memset(gExclusiveMonPtr, 0, sizeof(ExclusivePokemonData));
+
+    for (i = 0; i < NUM_EXCLUSIVE_POKEMON; i++) {
+        gExclusiveMonPtr->exclusives[i] = gExclusivePokemon[i].in_rrt;
     }
 }
 
-void sub_8097FA8(u8 param_1)
+void SetTempCutsceneFlag(u8 flag)
 {
-    gUnknown_203B498->unk48[param_1 / 32] |= 1 << ((param_1 % 32));
+    gExclusiveMonPtr->tempCutsceneFlags[flag / 32] |= 1 << (flag % 32);
 }
 
-void sub_8097FD0(u8 param_1)
+void SetCutsceneFlag(u8 flag)
 {
-    gUnknown_203B498->unk3C[param_1 / 32] |= 1 << ((param_1 % 32));
+    gExclusiveMonPtr->cutsceneFlags[flag / 32] |= 1 << (flag % 32);
 }
 
-void sub_8097FF8(void)
+void FlushTempCutsceneFlags(void)
 {
-    s32 index;
+    s32 i;
 
-    for (index = 0; index < 0x40; index++) {
-        if ((gUnknown_203B498->unk48[index / 32] & (1 << (index % 32))) != 0) {
-            gUnknown_203B498->unk3C[index / 32] |= (1 << (index % 32));
+    for (i = 0; i < NUM_CUTSCENE_FLAGS; i++) {
+        if ((gExclusiveMonPtr->tempCutsceneFlags[i / 32] & (1 << (i % 32))) != 0) {
+            gExclusiveMonPtr->cutsceneFlags[i / 32] |= 1 << (i % 32);
         }
     }
-    sub_8098080();
+
+    ClearTempCutsceneFlags();
 }
 
-void sub_8098044(u8 param_1)
+void UnsetCutsceneFlag(u8 flag)
 {
-    gUnknown_203B498->unk3C[param_1 / 32] &= ~(1 << (((param_1 % 32))));
-    gUnknown_203B498->unk48[param_1 / 32] &= ~(1 << (((param_1 % 32))));
+    gExclusiveMonPtr->cutsceneFlags[flag / 32] &= ~(1 << (flag % 32));
+    gExclusiveMonPtr->tempCutsceneFlags[flag / 32] &= ~(1 << (flag % 32));
 }
 
-void sub_8098080(void)
+void ClearTempCutsceneFlags(void)
 {
-    s32 index;
+    s32 i;
 
-    for(index = 0; index < 0x3; index++)
-    {
-        gUnknown_203B498->unk48[index] = 0;
-    }
+    for (i = 0; i < CUTSCENE_FLAGS_U32STORAGE; i++)
+        gExclusiveMonPtr->tempCutsceneFlags[i] = 0;
 }
 
-u8 sub_80980A4(void)
+bool8 sub_80980A4(void)
 {
-    u32 temp = gUnknown_203B498->unk0;
-    gUnknown_203B498->unk0 = 1;
+    bool8 temp = gExclusiveMonPtr->unk0;
+    gExclusiveMonPtr->unk0 = TRUE;
     return temp;
 }
 
-void sub_80980B4(s16 pokeID)
+void SetMonSeenFlag(s16 monID)
 {
-    s32 pokeID_s32 = pokeID;
+    s32 pokeID_s32 = monID;
     s32 pokeID_s32_1 = pokeID_s32;
 
     if (pokeID_s32 == MONSTER_DECOY)
@@ -83,136 +86,135 @@ void sub_80980B4(s16 pokeID)
     if (pokeID_s32 == MONSTER_RAYQUAZA_CUTSCENE)
         return;
 
-    gUnknown_203B498->unk4[pokeID_s32 / 32] |= 1 << (s16)(pokeID_s32_1 % 32);
+    gExclusiveMonPtr->monSeenFlags[pokeID_s32 / 32] |= 1 << (s16)(pokeID_s32_1 % 32);
 }
 
-bool8 sub_8098100(u8 param_1)
+bool8 GetCutsceneFlag(u8 flag)
 {
-    if (param_1 >= 64)
+    if (flag >= NUM_CUTSCENE_FLAGS)
         return FALSE;
 
-    return (gUnknown_203B498->unk3C[param_1 / 32] & (1 << (param_1 % 32))) != 0;
+    return (gExclusiveMonPtr->cutsceneFlags[flag / 32] & (1 << (flag % 32))) != 0;
 }
 
-bool8 sub_8098134(s16 pokeID)
+bool8 GetMonSeenFlag(s16 monID)
 {
     s32 pokeID_s32;
     s32 pokeID_s32_1;
 
-    pokeID_s32 = pokeID;
+    pokeID_s32 = monID;
     pokeID_s32_1 = pokeID_s32;
-    return (gUnknown_203B498->unk4[pokeID_s32 / 32] & (1 << (s16)(pokeID_s32_1 % 32))) != 0;
+    return (gExclusiveMonPtr->monSeenFlags[pokeID_s32 / 32] & (1 << (s16)(pokeID_s32_1 % 32))) != 0;
 }
 
-void SetTutorialFlag(s32 index)
+void SetTutorialFlag(s32 flag)
 {
-    gUnknown_203B498->unk54[index / 32] |= (1 << (index % 32));
+    gExclusiveMonPtr->tutorialFlags[flag / 32] |= (1 << (flag % 32));
 }
 
-bool32 GetTutorialFlag(s32 index)
+bool8 GetTutorialFlag(s32 flag)
 {
-    if (index >= 31)
+    if (flag >= NUM_TUTORIAL_FLAGS)
         return FALSE;
 
-    return ((gUnknown_203B498->unk54[index / 32]) & (1 << (index % 32))) != 0;
+    return ((gExclusiveMonPtr->tutorialFlags[flag / 32]) & (1 << (flag % 32))) != 0;
 }
 
 bool8 IsExclusivePokemonUnlocked(s32 pokeID)
 {
-    s32 index;
+    s32 i;
     s32 pokeID_s32 = (s16) pokeID;
 
-    for(index = 0; index < NUM_EXCLUSIVE_POKEMON; index++)
-    {
-        if(gExclusivePokemon[index].poke_id == pokeID_s32)
-            return gUnknown_203B498->Exclusives[index];
+    for (i = 0; i < NUM_EXCLUSIVE_POKEMON; i++) {
+        if (gExclusivePokemon[i].poke_id == pokeID_s32)
+            return gExclusiveMonPtr->exclusives[i];
     }
+
     return TRUE;
 }
 
 void UnlockExclusivePokemon(s16 pokeID)
 {
-    s32 index;
-    s32 pokeID_s32;
+    s32 i;
+    s32 pokeID_s32 = pokeID;
 
-    pokeID_s32 = pokeID;
-
-    for(index = 0; index < NUM_EXCLUSIVE_POKEMON; index++)
-    {
-        if(gExclusivePokemon[index].poke_id == pokeID_s32)
-            gUnknown_203B498->Exclusives[index] = TRUE;
+    for (i = 0; i < NUM_EXCLUSIVE_POKEMON; i++) {
+        if (gExclusivePokemon[i].poke_id == pokeID_s32)
+            gExclusiveMonPtr->exclusives[i] = TRUE;
     }
 }
 
 void WriteExclusivePokemon(DataSerializer *r0)
 {
-    s32 index;
-    u8 *puVar2;
+    s32 i;
 
-    u8 stack_0;
-    u8 stack_1;
-    u8 stack_2;
-    u8 neg_1;
-    u8 zero;
+    u8 neg_1 = -1;
+    u8 zero = 0;
 
-    neg_1 = -1;
-    zero = 0;
+    WriteBits(r0, &gExclusiveMonPtr->unk0, 1);
 
-    WriteBits(r0, gUnknown_203B498, 1);
-    for(index = 0; index < MONSTER_MAX; index++)
-    {
-        stack_0 = sub_8098134(index);
-        WriteBits(r0, &stack_0, 1);
+    for (i = 0; i < MONSTER_MAX; i++) {
+        bool8 b = GetMonSeenFlag(i);
+        WriteBits(r0, &b, 1);
     }
-    for(index = 0; index < 64; index++)
-    {
-        stack_1 = sub_8098100(index);
-        WriteBits(r0, &stack_1, 1);
+
+    for (i = 0; i < NUM_CUTSCENE_FLAGS; i++) {
+        bool8 b = GetCutsceneFlag(i);
+        WriteBits(r0, &b, 1);
     }
-    for(index = 0; index < 31; index++)
-    {
-        stack_2 = GetTutorialFlag(index);
-        WriteBits(r0, &stack_2, 1);
+
+    for (i = 0; i < NUM_TUTORIAL_FLAGS; i++) {
+        bool8 b = GetTutorialFlag(i);
+        WriteBits(r0, &b, 1);
     }
-    for(index = 0; index < NUM_EXCLUSIVE_POKEMON; index++)
-    {
-        if(gUnknown_203B498->Exclusives[index])
-            puVar2 = &neg_1;
+
+    for (i = 0; i < NUM_EXCLUSIVE_POKEMON; i++) {
+        u8 *p;
+
+        if (gExclusiveMonPtr->exclusives[i])
+            p = &neg_1;
         else
-            puVar2 = &zero;
-        WriteBits(r0, puVar2, 1);
+            p = &zero;
+
+        WriteBits(r0, p, 1);
     }
 }
 
 void ReadExclusivePokemon(DataSerializer *r0)
 {
-    s32 index;
+    s32 i;
 
-    memset(gUnknown_203B498, 0, sizeof(struct ExclusivePokemonData));
-    ReadBits(r0, gUnknown_203B498, 1);
-    for (index = 0; index < MONSTER_MAX; index++) {
-        u8 stack_0;
-        ReadBits(r0, &stack_0, 1);
-        if(stack_0)
-            sub_80980B4(index);
+    memset(gExclusiveMonPtr, 0, sizeof(ExclusivePokemonData));
+
+    ReadBits(r0, &gExclusiveMonPtr->unk0, 1);
+
+    for (i = 0; i < MONSTER_MAX; i++) {
+        bool8 b;
+        ReadBits(r0, &b, 1);
+        if (b)
+            SetMonSeenFlag(i);
     }
-    for (index = 0; index < 64; index++) {
-        u8 stack_1;
-        ReadBits(r0, &stack_1, 1);
-        if(stack_1)
-            sub_8097FA8(index);
+
+    for (i = 0; i < NUM_CUTSCENE_FLAGS; i++) {
+        bool8 b;
+        ReadBits(r0, &b, 1);
+        if (b)
+            SetTempCutsceneFlag(i);
     }
-    for (index = 0; index < 31; index++) {
-        u8 stack_2;
-        ReadBits(r0, &stack_2, 1);
-        if(stack_2)
-            SetTutorialFlag(index);
+
+    for (i = 0; i < NUM_TUTORIAL_FLAGS; i++) {
+        bool8 b;
+        ReadBits(r0, &b, 1);
+        if (b)
+            SetTutorialFlag(i);
     }
-    for (index = 0; index < NUM_EXCLUSIVE_POKEMON; index++) {
-        u8 stack_3;
-        ReadBits(r0, &stack_3, 1);
+
+    for (i = 0; i < NUM_EXCLUSIVE_POKEMON; i++) {
+        bool8 b;
+        ReadBits(r0, &b, 1);
         do; while(0); // do/while needed for matching - jiang
-        gUnknown_203B498->Exclusives[index] = (stack_3 & 1) != 0;
+        gExclusiveMonPtr->exclusives[i] = (b & 1) != 0;
     }
-    sub_8097FF8();
+
+    FlushTempCutsceneFlags();
 }

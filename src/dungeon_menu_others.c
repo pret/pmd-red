@@ -349,7 +349,7 @@ static void TrySetNewGameOptions(bool8 bPressed)
     }
 
     if (optionsChanged) {
-        if (DisplayDungeonYesNoMessage(0, gUnknown_80FEBF8, TRUE) == 1) {
+        if (DisplayDungeonYesNoMessage_Async(0, gUnknown_80FEBF8, TRUE) == 1) {
             *gGameOptionsRef = sChangedGameOptions;
             sub_803E13C();
             LoadDungeonMapPalette();
@@ -359,7 +359,7 @@ static void TrySetNewGameOptions(bool8 bPressed)
 
 static void AskToResetToDefault(void)
 {
-    if (DisplayDungeonYesNoMessage(0, gUnknown_80FEC28, FALSE) == 1) {
+    if (DisplayDungeonYesNoMessage_Async(0, gUnknown_80FEC28, FALSE) == 1) {
         InitializeGameOptions(FALSE);
         sub_803E13C();
     }
@@ -426,7 +426,7 @@ static void ShowMissionObjectivesMenu(void)
 
 static bool8 AskToQuickSave(void)
 {
-    if (DisplayDungeonYesNoMessage(NULL, gUnknown_80FDE6C, FALSE) != 1) {
+    if (DisplayDungeonYesNoMessage_Async(NULL, gUnknown_80FDE6C, FALSE) != 1) {
         return TRUE;
     }
     SetMonsterActionFields(GetLeaderActionContainer(), ACTION_QUICK_SAVE);
@@ -435,7 +435,7 @@ static bool8 AskToQuickSave(void)
 
 static bool8 AskToGiveUp(void)
 {
-    if (DisplayDungeonYesNoMessage(NULL, gUnknown_80FDEB8, FALSE) != 1) {
+    if (DisplayDungeonYesNoMessage_Async(NULL, gUnknown_80FDEB8, FALSE) != 1) {
         return TRUE;
     }
     SetMonsterActionFields(GetLeaderActionContainer(), ACTION_GIVE_UP);

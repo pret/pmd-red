@@ -282,7 +282,7 @@ bool8 DisplayActions_Async(Entity *a0)
                     break;
 
                 EnemyEvolution(mon);
-                sub_8046D20();
+                PotentiallyCreateMusicBox_Async();
                 TryTriggerMonsterHouseWithMsg_Async(mon, gDungeon->forceMonsterHouse);
             }
             if (!EntityIsValid(mon))
@@ -302,7 +302,7 @@ bool8 DisplayActions_Async(Entity *a0)
 
     sub_8086AC0();
     if (!IsFloorOver()) {
-        sub_8085140();
+        sub_8085140_Async();
         gDungeon->unkB8 = savedEntityPtr;
     }
     else {
@@ -480,6 +480,6 @@ void TryTriggerMonsterHouseWithMsg_Async(Entity *pokemon, bool8 forcedMonsterHou
         TriggerMonsterHouse_Async(pokemon, forcedMonsterHouse);
         sub_8041888(0);
         if (sub_803F428(&pokemon->pos))
-            sub_803E708(0x78, 0x39);
+            DungeonWaitFrames_Async(0x78, 0x39);
     }
 }

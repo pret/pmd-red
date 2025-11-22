@@ -28,8 +28,8 @@
 #include "dungeon_vram.h"
 #include "sprite.h"
 
-static void MusicBoxCreation(void);
-static u8 sub_8046D70(void);
+static void MusicBoxCreation_Async(void);
+static bool8 sub_8046D70(void);
 
 static EWRAM_INIT u8 sUnkItemTileNums[8] = {0x15, 0x00, 0x16, 0x00, 0x15, 0x00, 0x16, 0x00};
 static EWRAM_INIT u8 sUnkItemMatrixNums[8] = {0x02, 0x03, 0x01, 0x01, 0x00, 0x00, 0x00, 0x02};
@@ -719,31 +719,31 @@ static void sub_8046CE4(Item *item,s32 param_2)
     item->quantity = 1;
 }
 
-void sub_8046D20(void)
+void PotentiallyCreateMusicBox_Async(void)
 {
-    u8 cVar1;
+    bool8 b = gDungeon->unk8;
 
-    cVar1 = gDungeon->unk8;
     gDungeon->unk8 = sub_8046D70();
-    if (((gDungeon->unk8 == 1) && (cVar1 == 0)) &&
-         (DisplayDungeonYesNoMessage(0, gUnknown_80FA408, 1) == 1)) {
+
+    if (gDungeon->unk8 == TRUE && !b && DisplayDungeonYesNoMessage_Async(NULL, gUnknown_80FA408, TRUE) == TRUE) {
         gDungeon->unk4 = 1;
         gDungeon->unk11 = 2;
     }
     else {
-        MusicBoxCreation();
+        MusicBoxCreation_Async();
     }
 }
 
-static u8 sub_8046D70(void)
+static bool8 sub_8046D70(void)
 {
+    // Insane
     if (gDungeon->unk644.unk46)
-        return 0;
+        return FALSE;
     else
-        return 0;
+        return FALSE;
 }
 
-static void MusicBoxCreation(void)
+static void MusicBoxCreation_Async(void)
 {
     bool8 musicBoxOnce;
     bool8 createMusicBox;
@@ -794,18 +794,18 @@ static void MusicBoxCreation(void)
         sub_80855E4(sub_80861A8);
         gDungeon->unk1356C = TRUE;
         DisplayDungeonMessage_Async(0,gUnknown_810531C,1);
-        sub_803E708(0x3c,0x41);
+        DungeonWaitFrames_Async(0x3c,0x41);
         DisplayDungeonMessage_Async(0,gUnknown_8105360,1);
-        sub_80869E4(leader,4,10,0);
+        CutsceneLookDir_Async(leader,4,DIR_TRANS_10,0);
         sub_80416E0(&leader->pixelPos,0x10c,FALSE);
         sub_80421C0(leader,0xd7);
-        sub_803E708(0x3c,0x41);
+        DungeonWaitFrames_Async(0x3c,0x41);
         SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],leader,0);
         DisplayDungeonMessage_Async(0,gUnknown_81053A8,1);
-        sub_803E708(10,0x41);
+        DungeonWaitFrames_Async(10,0x41);
         PlaySoundEffect(0xd4);
         DisplayDungeonMessage_Async(0,gUnknown_8105434,1);
-        sub_803E708(10,0x41);
+        DungeonWaitFrames_Async(10,0x41);
         sub_804178C_Async(1);
         gDungeon->unk1356C = FALSE;
         UpdateMinimap();

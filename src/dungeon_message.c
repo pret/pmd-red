@@ -359,7 +359,7 @@ void DisplayDungeonMessage_Async(struct MonDialogueSpriteInfo *monSpriteInfo, co
         }
     }
 
-    sub_803E708(8, 9);
+    DungeonWaitFrames_Async(8, 9);
 }
 
 void DisplayDungeonLoggableMessage(Entity *pokemon, const u8 *str)
@@ -370,7 +370,7 @@ void DisplayDungeonLoggableMessage(Entity *pokemon, const u8 *str)
 
 static const u16 sUnknownDialogueFlags[] = {0x30D, 0x10D, 0x30D, 0x10D, 0x301, 1, 0x11};
 
-void DisplayDungeonDialogue(const struct DungeonDialogueStruct *dialogueInfo)
+void DisplayDungeonDialogue_Async(const struct DungeonDialogueStruct *dialogueInfo)
 {
     MonPortraitMsg monPortrait;
     s32 leaderId, partnerId, dialogueMonId;
@@ -478,10 +478,10 @@ void DisplayDungeonDialogue(const struct DungeonDialogueStruct *dialogueInfo)
         LoadDungeonMapPalette();
         sub_803EAF0(0, NULL);
     }
-    sub_803E708(8, 9);
+    DungeonWaitFrames_Async(8, 9);
 }
 
-bool32 DisplayDungeonYesNoMessage(struct MonDialogueSpriteInfo *monSpriteInfo, const u8 *str, bool32 defaultYes)
+bool32 DisplayDungeonYesNoMessage_Async(struct MonDialogueSpriteInfo *monSpriteInfo, const u8 *str, bool32 defaultYes)
 {
     MonPortraitMsg monPortrait, *monPortraitPtr;
     s32 chosenMenuIndex;
@@ -569,24 +569,24 @@ s32 DisplayDungeonMenuMessage(struct MonDialogueSpriteInfo *monSpriteInfo, const
     return chosenMenuIndex;
 }
 
-void sub_8052D44(s16 *ids, Entity *leader, Entity *partner)
+void BufferCutsceneProtagonists(s16 destIDs[2], Entity *leader, Entity *partner)
 {
     if (EntityIsValid(leader)) {
-        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], leader, 0);
-        ids[0] = GetEntInfo(leader)->apparentID;
+        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], leader, COLOR_WHITE);
+        destIDs[0] = GetEntInfo(leader)->apparentID;
     }
     else {
         InlineStrcpy(gFormatBuffer_Monsters[0], "??");
-        ids[0] = 0;
+        destIDs[0] = 0;
     }
 
     if (EntityIsValid(partner)) {
-        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], partner, 0);
-        ids[1] = GetEntInfo(partner)->apparentID;
+        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], partner, COLOR_WHITE);
+        destIDs[1] = GetEntInfo(partner)->apparentID;
     }
     else {
         InlineStrcpy(gFormatBuffer_Monsters[1], "??");
-        ids[1] = 0;
+        destIDs[1] = 0;
     }
 }
 
@@ -595,7 +595,7 @@ static bool8 sub_8052DC0(Entity *entity)
     return ShouldDisplayEntity(entity);
 }
 
-static inline bool32 DislayTutorialMsg(Entity *leader, const struct TutorialFlagMsg *tutorial, bool32 unkFunctionCall)
+static inline bool32 DislayTutorialMsg(Entity *leader, const TutorialFlagMsg *tutorial, bool32 unkFunctionCall)
 {
     const u8 *str;
     s32 flag = tutorial->flagId;
@@ -730,7 +730,7 @@ void sub_8052FB8(const u8 *str)
     for (j = 0; j < 8; j++) {
         SetBGPaletteBufferColorArray(240 + j, &gFontPalette[j]);
     }
-    sub_803E708(8, 9);
+    DungeonWaitFrames_Async(8, 9);
 }
 
 const u8 *GetCurrentDungeonName(void)

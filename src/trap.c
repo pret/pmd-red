@@ -578,13 +578,13 @@ void HandlePitfallTrap(Entity *pokemon, Entity *target, Tile *tile)
                 SetTrap(tile, 0x1B);
                 flag = TRUE;
                 sub_80421C0(target,0x193);
-                sub_803E708(0x1e,0x48);
+                DungeonWaitFrames_Async(0x1e,0x48);
             }
             if (info->isTeamLeader) {
                 if (GetFloorType() != 2) {
                     info->unk15C = 1;
                     info->unk15E = 1;
-                    sub_803E708(0x28,0x4b);
+                    DungeonWaitFrames_Async(0x28,0x4b);
                     DealDamageToEntity_Async(target,gPitfallTrapDmgValue,RESIDUAL_DAMAGE_PITFALL,DUNGEON_EXIT_FELL_INTO_PITFALL);
                     gDungeon->unk2 = DUNGEON_UNK2_PITFALL_TRAP;
                     return;
@@ -835,7 +835,7 @@ void HandleTripTrap(Entity *pokemon, Entity *target)
 
     if (target != NULL) {
         sub_806CDD4(target, 6, NUM_DIRECTIONS);
-        sub_803E708(0x10, 0x55);
+        DungeonWaitFrames_Async(0x10, 0x55);
         sub_806CE68(target, NUM_DIRECTIONS);
         info = GetEntInfo(target);
         if ((info->heldItem).flags & ITEM_FLAG_EXISTS) {

@@ -386,7 +386,7 @@ typedef struct Dungeon
     u8 unk5;
     u8 unk6;
     u8 unk7;
-    u8 unk8;
+    bool8 unk8; // Related to a yes/no prompt for the Music Box creation
     u8 unk9;
     u8 unkA;
     u8 unkB;

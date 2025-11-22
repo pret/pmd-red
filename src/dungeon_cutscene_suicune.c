@@ -86,10 +86,10 @@ void sub_808A308(void)
   CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_SUICUNE);
 }
 
-void sub_808A36C(u8 monsterBehavior, u8 cutscene)
+void HandleSuicuneBossFaint(u8 monsterBehavior, u8 cutscene)
 {
   if ((cutscene == CUTSCENE_NORTHWIND_FIELD_ATTEMPT1 || cutscene == CUTSCENE_NORTHWIND_FIELD_ATTEMPT2 || cutscene == CUTSCENE_NORTHWIND_FIELD_POSTSTORY) && monsterBehavior == BEHAVIOR_SUICUNE) {
-    sub_8097FA8(25);
+    SetTempCutsceneFlag(CUTSCENE_FLAG_NORTHWIND_FIELD_COMPLETE);
     gDungeon->unk2 = DUNGEON_UNK2_1;
   }
 }
@@ -102,22 +102,22 @@ void SuicunePreFightDialogue(void)
   leaderEntity = CutsceneGetLeader();
   SuicuneEntity = GetEntityFromMonsterBehavior(BEHAVIOR_SUICUNE);
   sub_8086448();
-  DisplayDungeonDialogue(&gSuicunePreFightDialogue_1);
-  sub_803E708(10,70);
-  DisplayDungeonDialogue(&gSuicunePreFightDialogue_2);
-  sub_803E708(10,70);
+  DisplayDungeonDialogue_Async(&gSuicunePreFightDialogue_1);
+  DungeonWaitFrames_Async(10,70);
+  DisplayDungeonDialogue_Async(&gSuicunePreFightDialogue_2);
+  DungeonWaitFrames_Async(10,70);
   sub_80426C8(1,2);
-  sub_803E708(0x3c,70);
-  DisplayDungeonDialogue(&gSuicunePreFightDialogue_3);
-  sub_803E708(10,70);
+  DungeonWaitFrames_Async(0x3c,70);
+  DisplayDungeonDialogue_Async(&gSuicunePreFightDialogue_3);
+  DungeonWaitFrames_Async(10,70);
   sub_808A528(SuicuneEntity);
-  DisplayDungeonDialogue(&gSuicunePreFightDialogue_4);
-  DisplayDungeonDialogue(&gSuicunePreFightDialogue_5);
+  DisplayDungeonDialogue_Async(&gSuicunePreFightDialogue_4);
+  DisplayDungeonDialogue_Async(&gSuicunePreFightDialogue_5);
   SuicuneScreenFlash();
-  DisplayDungeonDialogue(&gSuicunePreFightDialogue_6);
+  DisplayDungeonDialogue_Async(&gSuicunePreFightDialogue_6);
   SuicuneScreenFlash();
-  DisplayDungeonDialogue(&gSuicunePreFightDialogue_7);
-  sub_803E708(10,70);
+  DisplayDungeonDialogue_Async(&gSuicunePreFightDialogue_7);
+  DungeonWaitFrames_Async(10,70);
   SetupBossFightHP(SuicuneEntity,0x28a,MUS_BOSS_BATTLE);
   ShiftCameraToPosition(&leaderEntity->pixelPos,0x10);
 }
@@ -129,12 +129,12 @@ void SuicuneReFightDialogue(void)
 
   leaderEntity = CutsceneGetLeader();
   SuicuneEntity = GetEntityFromMonsterBehavior(BEHAVIOR_SUICUNE);
-  DisplayDungeonDialogue(&gSuicuneReFightDialogue_1);
+  DisplayDungeonDialogue_Async(&gSuicuneReFightDialogue_1);
   SuicuneScreenFlash();
-  DisplayDungeonDialogue(&gSuicuneReFightDialogue_2);
+  DisplayDungeonDialogue_Async(&gSuicuneReFightDialogue_2);
   SuicuneScreenFlash();
-  DisplayDungeonDialogue(&gSuicuneReFightDialogue_3);
-  sub_803E708(10,70);
+  DisplayDungeonDialogue_Async(&gSuicuneReFightDialogue_3);
+  DungeonWaitFrames_Async(10,70);
   SetupBossFightHP(SuicuneEntity,0x28a,MUS_BOSS_BATTLE);
   ShiftCameraToPosition(&leaderEntity->pixelPos,0x10);
 }
@@ -150,12 +150,12 @@ void SuicunePostStoryPreFightDialogue(void)
     sub_80866C4(&gSuicunePostStoryPreFightDialogue_4);
   }
   else {
-    DisplayDungeonDialogue(&gSuicunePostStoryPreFightDialogue_1);
+    DisplayDungeonDialogue_Async(&gSuicunePostStoryPreFightDialogue_1);
     SuicuneScreenFlash();
-    DisplayDungeonDialogue(&gSuicunePostStoryPreFightDialogue_2);
+    DisplayDungeonDialogue_Async(&gSuicunePostStoryPreFightDialogue_2);
     SuicuneScreenFlash();
-    DisplayDungeonDialogue(&gSuicunePostStoryPreFightDialogue_3);
-    sub_803E708(10,70);
+    DisplayDungeonDialogue_Async(&gSuicunePostStoryPreFightDialogue_3);
+    DungeonWaitFrames_Async(10,70);
     SetupBossFightHP(SuicuneEntity,0x28a,MUS_BOSS_BATTLE);
     ShiftCameraToPosition(&leaderEntity->pixelPos,0x10);
   }
@@ -193,19 +193,19 @@ static void SuicuneScreenFlash(void)
     SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,1);
     DungeonRunFrameActions(70);
   }
-  sub_803E708(10,70);
+  DungeonWaitFrames_Async(10,70);
   for(iVar1 = 250; iVar1 > 199; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,1);
     DungeonRunFrameActions(70);
   }
-  sub_803E708(10,70);
+  DungeonWaitFrames_Async(10,70);
   for(iVar1 = 250; iVar1 >= 0; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,1);
     DungeonRunFrameActions(70);
   }
-  sub_803E708(10,70);
+  DungeonWaitFrames_Async(10,70);
   sub_8085EB0();
 }
 

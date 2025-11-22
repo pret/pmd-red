@@ -94,7 +94,7 @@ void DungeonHandlePlayerInput(void)
     gDungeon->unk12 = 0;
     TryPointCameraToMonster(GetLeader(), 1);
     if (sub_80701A4(GetLeader())) {
-        sub_803E708(60, 16);
+        DungeonWaitFrames_Async(60, 16);
         return;
     }
 
@@ -365,7 +365,7 @@ void DungeonHandlePlayerInput(void)
                 sub_8052210(1);
                 UpdateMinimap();
                 SetBGOBJEnableFlags(0x1E);
-                sub_803E708(0xA, 0x2F);
+                DungeonWaitFrames_Async(0xA, 0x2F);
                 while (1) {
                     DungeonRunFrameActions(0x2F);
                     if (gRealInputs.pressed & SELECT_BUTTON)
@@ -904,7 +904,7 @@ static bool8 sub_805EC4C(Entity *a0, u8 a1)
     if (IsChargingAnyTwoTurnMove(tileMonster, FALSE)) return FALSE;
     if (!sub_8070F80(a0, entityInfo->action.direction)) return FALSE;
 
-    if (a1 != 0 && sub_807049C(tileMonster, &a0->pos) && !DisplayDungeonYesNoMessage(0, gUnknown_8100208, 0)) return FALSE;
+    if (a1 != 0 && sub_807049C(tileMonster, &a0->pos) && !DisplayDungeonYesNoMessage_Async(0, gUnknown_8100208, 0)) return FALSE;
 
     SetMonsterActionFields(&entityInfo->action, ACTION_WALK);
     if (gRealInputs.held & B_BUTTON) {
@@ -1210,14 +1210,14 @@ static void ShowMainMenu(bool8 fromBPress, bool8 a1)
             else if (action == ACTION_SET_ITEM) {
                 HandleSetItemAction_Async(GetLeader(), TRUE);
                 SetLeaderActionToNothing(TRUE);
-                sub_803E708(0x50, 0x4D);
+                DungeonWaitFrames_Async(0x50, 0x4D);
                 sub_8052210(0);
                 break;
             }
             else if (action == ACTION_UNSET_ITEM) {
                 HandleUnsetItemAction_Async(GetLeader(), TRUE);
                 SetLeaderActionToNothing(TRUE);
-                sub_803E708(0x50, 0x4D);
+                DungeonWaitFrames_Async(0x50, 0x4D);
                 sub_8052210(0);
                 break;
             }

@@ -304,7 +304,7 @@ bool8 ShowDungeonMovesMenu(Entity * entity, bool8 addLinkOptions, bool8 addUseMo
             leaderInfo->action.actionParameters[0].actionUseIndex = entity->unk24;
             leaderInfo->action.actionParameters[1].actionUseIndex = sChosenMoveSlotId;
             sub_803EAF0(0, NULL);
-            sub_803E708(8, 0x1B);
+            DungeonWaitFrames_Async(8, 0x1B);
             ret = FALSE;
             break;
         }
@@ -390,7 +390,7 @@ bool8 ShowDungeonMovesMenu(Entity * entity, bool8 addLinkOptions, bool8 addUseMo
 
     if (unkBool) {
         sub_803EAF0(0, NULL);
-        sub_803E708(8, 0x1E);
+        DungeonWaitFrames_Async(8, 0x1E);
     }
 
     return ret;
@@ -740,7 +740,7 @@ void ActionSetOrUnsetMove(ActionContainer *a0, bool8 flagToSet)
         else {
             LogMessageByIdWithPopupCheckUser_Async(entity, gUnknown_80F8B64);
         }
-        sub_803E708(0x78, 0x1F);
+        DungeonWaitFrames_Async(0x78, 0x1F);
     }
 }
 
@@ -849,7 +849,7 @@ void ActionDelinkMoves(ActionContainer *a0, bool8 showMsg)
         else {
             LogMessageByIdWithPopupCheckUser_Async(entity, gUnknown_80F8BB4);
         }
-        sub_803E708(0x78, 0x1F);
+        DungeonWaitFrames_Async(0x78, 0x1F);
     }
 }
 
@@ -968,7 +968,7 @@ bool8 sub_8063E70(Entity *entity, Move *moves, bool8 showYesNoBox, bool8 allowBP
 
             if (inputAction == 2) {
                 sub_803EAF0(0, NULL);
-                sub_803E708(8, 0x1B);
+                DungeonWaitFrames_Async(8, 0x1B);
                 ASM_MATCH_TRICK(sChosenMoveSlotId);
                 ShowMovesInfoWindow(moves, sChosenMoveSlotId, MAX_MON_MOVES);
                 continue;
@@ -1037,7 +1037,7 @@ bool8 sub_8063E70(Entity *entity, Move *moves, bool8 showYesNoBox, bool8 allowBP
                 linked = TRUE;
             }
             BufferMoveName(gFormatBuffer_Items[0], move, NULL);
-            yesNoAnswer = DisplayDungeonYesNoMessage(NULL, (!linked) ? gUnknown_80FDF70 : gUnknown_80FDF00, FALSE);
+            yesNoAnswer = DisplayDungeonYesNoMessage_Async(NULL, (!linked) ? gUnknown_80FDF70 : gUnknown_80FDF00, FALSE);
         }
         else {
             yesNoAnswer = 1;

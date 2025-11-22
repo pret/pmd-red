@@ -65,7 +65,7 @@ void sub_808C10C(void)
   CopyMonsterNameToBuffer(gFormatBuffer_Monsters[3], MONSTER_GROUDON);
 }
 
-void sub_808C1A4(u8 monsterBehavior, u8 cutscene, u8 param_3)
+void HandleKyogreBossFaint(u8 monsterBehavior, u8 cutscene, bool8 transformedIntoFriend)
 {
   if (cutscene == CUTSCENE_STORMY_SEA && monsterBehavior == BEHAVIOR_KYOGRE) {
     gDungeon->unk2 = DUNGEON_UNK2_1;
@@ -83,38 +83,38 @@ void KyogrePreFightDialogue(void)
   DungeonStopBGM();
   if (HasRecruitedMon(MONSTER_KYOGRE)) {
     DungeonFadeInNewBGM(MUS_FRIEND_AREA_CRYPTIC_CAVE,0x3c);
-    SpriteLookAroundEffect(leaderEntity);
-    sub_803E708(10,0x46);
-    DisplayDungeonDialogue(&gKyogrePreFightDialogue_8);
-    sub_803E708(10,0x46);
+    CutsceneLookAroundEffect_Async(leaderEntity);
+    DungeonWaitFrames_Async(10,0x46);
+    DisplayDungeonDialogue_Async(&gKyogrePreFightDialogue_8);
+    DungeonWaitFrames_Async(10,0x46);
     gDungeon->unk2 = DUNGEON_UNK2_1;
   }
   else {
-    DisplayDungeonDialogue(&gKyogrePreFightDialogue_1);
-    sub_803E708(10,0x46);
-    DisplayDungeonDialogue(&gKyogrePreFightDialogue_2);
-    sub_803E708(10,0x46);
+    DisplayDungeonDialogue_Async(&gKyogrePreFightDialogue_1);
+    DungeonWaitFrames_Async(10,0x46);
+    DisplayDungeonDialogue_Async(&gKyogrePreFightDialogue_2);
+    DungeonWaitFrames_Async(10,0x46);
     nullsub_99();
-    sub_803E708(10,0x46);
+    DungeonWaitFrames_Async(10,0x46);
     // Gwwwwwooooooooh
-    DisplayDungeonDialogue(&gKyogrePreFightDialogue_3);
-    sub_803E708(10,0x46);
+    DisplayDungeonDialogue_Async(&gKyogrePreFightDialogue_3);
+    DungeonWaitFrames_Async(10,0x46);
     DungeonFadeInNewBGM(MUS_FRIEND_AREA_CRYPTIC_CAVE,0x3c);
     sub_808C360();
     // My duels against {POKEMON_3} (Groudon) left us both exhausted
-    DisplayDungeonDialogue(&gKyogrePreFightDialogue_4);
+    DisplayDungeonDialogue_Async(&gKyogrePreFightDialogue_4);
     KyogreScreenFlash();
     // I am {POKEMON_2} (Kyogre)!
     // The lord of the sea!
-    DisplayDungeonDialogue(&gKyogrePreFightDialogue_5);
+    DisplayDungeonDialogue_Async(&gKyogrePreFightDialogue_5);
     KyogreScreenFlash();
     // Witness the destructive force of my waves!
-    DisplayDungeonDialogue(&gKyogrePreFightDialogue_6);
+    DisplayDungeonDialogue_Async(&gKyogrePreFightDialogue_6);
     KyogreScreenFlash();
     // Marvel at my awesome
     // power!
-    DisplayDungeonDialogue(&gKyogrePreFightDialogue_7);
-    sub_803E708(10,0x46);
+    DisplayDungeonDialogue_Async(&gKyogrePreFightDialogue_7);
+    DungeonWaitFrames_Async(10,0x46);
     SetupBossFightHP(KyogreEntity,600,MUS_BOSS_BATTLE);
     DungeonStartNewBGM(MUS_FRIEND_AREA_CRYPTIC_CAVE);
     ShiftCameraToPosition(&leaderEntity->pixelPos,0x10);
@@ -134,17 +134,17 @@ static void KyogreScreenFlash(void)
     SetDungeonBGColorRGB(0,0,iVar1,1,1);
     DungeonRunFrameActions(0x46);
   }
-  sub_803E708(10,0x46);
+  DungeonWaitFrames_Async(10,0x46);
   for(iVar1 = 250; iVar1 > 199; iVar1 -= 10){
     SetDungeonBGColorRGB(0,iVar1,iVar1,1,1);
     DungeonRunFrameActions(0x46);
   }
-  sub_803E708(10,0x46);
+  DungeonWaitFrames_Async(10,0x46);
   for(iVar1 = 250; iVar1 >= 0; iVar1 -= 10){
     SetDungeonBGColorRGB(0,0,iVar1,1,1);
     DungeonRunFrameActions(0x46);
   }
-  sub_803E708(10,0x46);
+  DungeonWaitFrames_Async(10,0x46);
   sub_8085EB0();
 }
 

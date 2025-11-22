@@ -1016,11 +1016,11 @@ void sub_8001064(void)
 static u8 sub_8001170(void)
 {
     s16 local_10;
-    s16 auStack_e;
+    s16 rescueDungeonId;
     u8 auStack_b;
     u8 dungeonID = NUM_DUNGEONS + 1;
 
-    if (sub_80992E0(&local_10, &auStack_e))
+    if (sub_80992E0(&local_10, &rescueDungeonId))
         dungeonID = ScriptDungeonIdToDungeonId(local_10);
     else if (!sub_8099328(&dungeonID) && !sub_8099360(&dungeonID) && sub_8099394(&auStack_b))
         dungeonID = DUNGEON_OUT_ON_RESCUE;

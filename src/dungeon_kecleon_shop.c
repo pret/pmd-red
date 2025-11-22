@@ -213,7 +213,7 @@ static void sub_807EFFC(bool8 arg0)
         return;
 
     gFormatArgs[0] = gDungeon->unk644.unk4C;
-    if (DisplayDungeonYesNoMessage(&dialogueInfo, gUnknown_80FE5C0, TRUE) == 1) { // For the merch you have left, I shall pay X. Is that acceptable?
+    if (DisplayDungeonYesNoMessage_Async(&dialogueInfo, gUnknown_80FE5C0, TRUE) == 1) { // For the merch you have left, I shall pay X. Is that acceptable?
         s32 x, y;
         DungeonPos pos;
         s32 local_24;
@@ -262,7 +262,7 @@ static s32 sub_807F19C(bool8 arg0)
         }
 
         gFormatArgs[0] = diff;
-        if (DisplayDungeonYesNoMessage(&dialogueInfo, gUnknown_80FE568, TRUE) != 1) { // The merchandise you have chosen costs X
+        if (DisplayDungeonYesNoMessage_Async(&dialogueInfo, gUnknown_80FE568, TRUE) != 1) { // The merchandise you have chosen costs X
             return 1;
         }
         if (gTeamInventoryRef->teamMoney < diff) {

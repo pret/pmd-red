@@ -227,16 +227,16 @@ static void sub_802D2A8(void)
 
             switch (sUnknown_203B2F8->mail->wonderMail.dungeonSeed.location.id) {
                 case DUNGEON_ODDITY_CAVE:
-                    sub_8097418(DUNGEON_ODDITY_CAVE - 1, 1);
+                    SetRescueScenarioConquered(RESCUE_DUNGEON_ODDITY_CAVE, TRUE);
                     break;
                 case DUNGEON_REMAINS_ISLAND:
-                    sub_8097418(DUNGEON_REMAINS_ISLAND - 1, 1);
+                    SetRescueScenarioConquered(RESCUE_DUNGEON_REMAINS_ISLAND, TRUE);
                     break;
                 case DUNGEON_MARVELOUS_SEA:
-                    sub_8097418(DUNGEON_MARVELOUS_SEA - 1, 1);
+                    SetRescueScenarioConquered(RESCUE_DUNGEON_MARVELOUS_SEA, TRUE);
                     break;
                 case DUNGEON_FANTASY_STRAIT:
-                    sub_8097418(DUNGEON_FANTASY_STRAIT - 1, 1);
+                    SetRescueScenarioConquered(RESCUE_DUNGEON_FANTASY_STRAIT, TRUE);
                     break;
             }
 

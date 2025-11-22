@@ -68,10 +68,10 @@ void sub_8089C90(void)
   CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_ENTEI);
 }
 
-void sub_8089CFC(u8 monsterBehavior, u8 cutscene)
+void HandleEnteiBossFaint(u8 monsterBehavior, u8 cutscene)
 {
   if ((cutscene == CUTSCENE_FIERY_FIELD_ATTEMPT1 || cutscene == CUTSCENE_FIERY_FIELD_ATTEMPT2 || cutscene == CUTSCENE_FIERY_FIELD_POSTSTORY) && monsterBehavior == BEHAVIOR_ENTEI) {
-    sub_8097FA8(21);
+    SetTempCutsceneFlag(CUTSCENE_FLAG_FIERY_FIELD_COMPLETE);
     gDungeon->unk2 = DUNGEON_UNK2_1;
   }
 }
@@ -84,12 +84,12 @@ void EnteiPreFightDialogue(void)
   leaderEntity = CutsceneGetLeader();
   EnteiEntity = GetEntityFromMonsterBehavior(BEHAVIOR_ENTEI);
   EnteiScreenFlash();
-  DisplayDungeonDialogue(&gEnteiPreFightDialogue_1);
+  DisplayDungeonDialogue_Async(&gEnteiPreFightDialogue_1);
   EnteiScreenFlash();
-  DisplayDungeonDialogue(&gEnteiPreFightDialogue_2);
+  DisplayDungeonDialogue_Async(&gEnteiPreFightDialogue_2);
   EnteiScreenFlash();
-  DisplayDungeonDialogue(&gEnteiPreFightDialogue_3);
-  sub_803E708(10,70);
+  DisplayDungeonDialogue_Async(&gEnteiPreFightDialogue_3);
+  DungeonWaitFrames_Async(10,70);
   SetupBossFightHP(EnteiEntity,600,MUS_BOSS_BATTLE);
   ShiftCameraToPosition(&leaderEntity->pixelPos,0x10);
 }
@@ -102,12 +102,12 @@ void EnteiReFightDialogue(void)
   leaderEntity = CutsceneGetLeader();
   EnteiEntity = GetEntityFromMonsterBehavior(BEHAVIOR_ENTEI);
   EnteiScreenFlash();
-  DisplayDungeonDialogue(&gEnteiReFightDialogue_1);
+  DisplayDungeonDialogue_Async(&gEnteiReFightDialogue_1);
   EnteiScreenFlash();
-  DisplayDungeonDialogue(&gEnteiReFightDialogue_2);
+  DisplayDungeonDialogue_Async(&gEnteiReFightDialogue_2);
   EnteiScreenFlash();
-  DisplayDungeonDialogue(&gEnteiReFightDialogue_3);
-  sub_803E708(10,70);
+  DisplayDungeonDialogue_Async(&gEnteiReFightDialogue_3);
+  DungeonWaitFrames_Async(10,70);
   SetupBossFightHP(EnteiEntity,600,MUS_BOSS_BATTLE);
   ShiftCameraToPosition(&leaderEntity->pixelPos,0x10);
 }
@@ -124,12 +124,12 @@ void EnteiPostStoryPreFightDialogue(void)
   }
   else {
     EnteiScreenFlash();
-    DisplayDungeonDialogue(&gEnteiPostStoryPreFightDialogue_1);
+    DisplayDungeonDialogue_Async(&gEnteiPostStoryPreFightDialogue_1);
     EnteiScreenFlash();
-    DisplayDungeonDialogue(&gEnteiPostStoryPreFightDialogue_2);
+    DisplayDungeonDialogue_Async(&gEnteiPostStoryPreFightDialogue_2);
     EnteiScreenFlash();
-    DisplayDungeonDialogue(&gEnteiPostStoryPreFightDialogue_3);
-    sub_803E708(10,70);
+    DisplayDungeonDialogue_Async(&gEnteiPostStoryPreFightDialogue_3);
+    DungeonWaitFrames_Async(10,70);
     SetupBossFightHP(EnteiEntity,600,MUS_BOSS_BATTLE);
     ShiftCameraToPosition(&leaderEntity->pixelPos,0x10);
   }
@@ -140,24 +140,24 @@ static void EnteiScreenFlash(void)
   s32 iVar1;
 
   PlaySoundEffect(0x1ed);
-  for(iVar1 = 250; iVar1 > 149; iVar1 -= 10)
+  for(iVar1 = 250; iVar1 >= 150; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1, iVar1 / 2, iVar1 / 2, 1, 1);
     DungeonRunFrameActions(70);
   }
-  sub_803E708(10,70);
-  for(iVar1 = 250; iVar1 > 199; iVar1 -= 10)
+  DungeonWaitFrames_Async(10,70);
+  for(iVar1 = 250; iVar1 >= 200; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1, 0, 0, 1, 1);
     DungeonRunFrameActions(70);
   }
-  sub_803E708(10,70);
+  DungeonWaitFrames_Async(10,70);
   for(iVar1 = 250; iVar1 >= 0; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1, iVar1 / 2, iVar1 / 2, 1, 1);
     DungeonRunFrameActions(70);
   }
-  sub_803E708(10,70);
+  DungeonWaitFrames_Async(10,70);
   sub_8085EB0();
 }
 

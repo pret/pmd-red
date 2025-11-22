@@ -145,9 +145,9 @@ static const struct ScriptCommand s_gs6_g1_s0_lives0_dlg3[] = { /* 0x819947c */
     DEBUGINFO_O(145),
     CALL_SCRIPT(INIT_PLAZA_SLEEP_TALK_FUNC),
     JUMPIF_SCENARIOCHECK(QUEST_SQUARE_ASLEEP, /* to label */ 0),
-    { 0x8e, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_8E(0, DIR_TRANS_NONE, 0),
   LABEL(0), /* = 0x00 */
-    { 0x8d, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_8D(1, DIR_TRANS_NONE),
     JUMP_SCRIPT(LIVES_REPLY),
 };
 
@@ -231,7 +231,7 @@ static const struct ScriptCommand s_gs6_g2_s0_lives2_dlg0[] = { /* 0x81998c8 */
     { 0x4f, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
     CALL_SCRIPT(INIT_PLAZA_SLEEP_TALK_FUNC),
     { 0x2d, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
-    { 0x8e, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_8E(0, DIR_TRANS_NONE, 0),
     AWAIT_CUE(3),
     RET,
 };
@@ -281,7 +281,7 @@ static const struct ScriptCommand s_gs6_g3_s0_lives2_dlg0[] = { /* 0x8199b14 */
     { 0x4f, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
     CALL_SCRIPT(INIT_PLAZA_SLEEP_TALK_FUNC),
     { 0x2d, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
-    { 0x8e, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_8E(0, DIR_TRANS_NONE, 0),
     AWAIT_CUE(3),
     RET,
 };
@@ -331,7 +331,7 @@ static const struct ScriptCommand s_gs6_g4_s0_lives2_dlg0[] = { /* 0x8199d60 */
     { 0x4f, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
     CALL_SCRIPT(INIT_PLAZA_SLEEP_TALK_FUNC),
     { 0x2d, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
-    { 0x8e, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_8E(0, DIR_TRANS_NONE, 0),
     AWAIT_CUE(3),
     RET,
 };
@@ -381,7 +381,7 @@ static const struct ScriptCommand s_gs6_g5_s0_lives2_dlg0[] = { /* 0x8199fac */
     { 0x4f, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
     CALL_SCRIPT(INIT_PLAZA_SLEEP_TALK_FUNC),
     { 0x2d, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
-    { 0x8e, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_8E(0, DIR_TRANS_NONE, 0),
     AWAIT_CUE(3),
     RET,
 };

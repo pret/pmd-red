@@ -142,18 +142,18 @@ void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move *move, 
                                     s32 k;
                                     for (k = 0; k < 24; k++) {
                                         sub_806CE68(currTarget, direction1);
-                                        sub_803E708(2, 0x43);
+                                        DungeonWaitFrames_Async(2, 0x43);
                                         direction1++;
                                         direction1 &= DIRECTION_MASK;
                                     }
                                     while (direction1 != direction2) {
                                         sub_806CE68(currTarget, direction1);
-                                        sub_803E708(2, 0x43);
+                                        DungeonWaitFrames_Async(2, 0x43);
                                         direction1++;
                                         direction1 &= DIRECTION_MASK;
                                     }
                                     sub_806CE68(currTarget, direction1);
-                                    sub_803E708(2, 0x43);
+                                    DungeonWaitFrames_Async(2, 0x43);
                                 }
                                 targetInfo->belly = FixedPoint_Subtract(targetInfo->belly, IntToFixedPoint(gPassScarfBellyDownValue));
                                 if (move->id == MOVE_REGULAR_ATTACK) {
@@ -258,7 +258,7 @@ void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move *move, 
             }
 
             if (ShouldDisplayEntity(currTarget)) {
-                sub_803E708(4, 0x4A);
+                DungeonWaitFrames_Async(4, 0x4A);
                 sub_8041168(attacker, currTarget, move, NULL);
             }
 

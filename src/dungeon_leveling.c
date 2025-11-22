@@ -618,7 +618,7 @@ static void sub_8072778(Entity *pokemon, Entity *target, u8 param_2, u8 param_3)
 
         if (!info->isNotTeamMember && param_3) {
             if (!sp_0xCC && param_2) {
-                sub_803E708(0xA, 0x6);
+                DungeonWaitFrames_Async(0xA, 0x6);
                 DisplayDungeonMessage_Async(0, gUnknown_80F9FA4, 1);
             }
             sp_0xCC = 1;

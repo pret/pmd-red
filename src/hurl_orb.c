@@ -226,7 +226,7 @@ void HandleHurlOrb(Entity *target, Entity *attacker)
         if (EntityIsValid(attacker)) {
             sub_806CE68(attacker, GetEntInfo(attacker)->action.direction);
         }
-        sub_803E708(0x1E, 0x3B);
+        DungeonWaitFrames_Async(0x1E, 0x3B);
         sub_807F9BC(attacker);
     }
 }

@@ -4,6 +4,7 @@
 #include "structs/str_item_text.h"
 #include "constants/residual_damage.h"
 #include "constants/trap.h"
+#include "constants/tutorial_id.h"
 #include "constants/weather.h"
 
 struct Struct_80F7C50
@@ -12,11 +13,11 @@ struct Struct_80F7C50
     s32 val;
 };
 
-struct TutorialFlagMsg
+typedef struct TutorialFlagMsg
 {
-    s32 flagId;
+    s32 flagId; // See enum "TutorialFlagID"
     const u8 *str;
-};
+} TutorialFlagMsg;
 
 extern const ItemText gActions[];
 extern const struct Struct_80F7C50 gUnknown_80F7C50[];
@@ -778,21 +779,21 @@ extern const u8 *const gUnknown_80FEF98;
 extern const u8 *const gUnknown_80FEFD0;
 extern const u8 *const gUnknown_80FEFF4;
 extern const u8 *const gUnknown_80FF01C;
-extern const struct TutorialFlagMsg gUnknown_80FF020;
-extern const struct TutorialFlagMsg gUnknown_80FF080;
-extern const struct TutorialFlagMsg gUnknown_80FF0D8;
-extern const struct TutorialFlagMsg gUnknown_80FF13C;
-extern const struct TutorialFlagMsg gUnknown_80FF1B4;
-extern const struct TutorialFlagMsg gMovementTutorial;
-extern const struct TutorialFlagMsg gHungerTutorial;
-extern const struct TutorialFlagMsg gFoodTutorial;
-extern const struct TutorialFlagMsg gOranTutorial;
-extern const struct TutorialFlagMsg gCheriTutorial;
-extern const struct TutorialFlagMsg gBlastSeedTutorial;
-extern const struct TutorialFlagMsg gUnknown_80FF4A0;
-extern const struct TutorialFlagMsg gPechaTutorial;
-extern const struct TutorialFlagMsg gSleepSeedTutorial;
-extern const struct TutorialFlagMsg gMoneyTutorial;
+extern const TutorialFlagMsg gUnknown_80FF020;
+extern const TutorialFlagMsg gUnknown_80FF080;
+extern const TutorialFlagMsg gUnknown_80FF0D8;
+extern const TutorialFlagMsg gUnknown_80FF13C;
+extern const TutorialFlagMsg gUnknown_80FF1B4;
+extern const TutorialFlagMsg gMovementTutorial;
+extern const TutorialFlagMsg gHungerTutorial;
+extern const TutorialFlagMsg gFoodTutorial;
+extern const TutorialFlagMsg gOranTutorial;
+extern const TutorialFlagMsg gCheriTutorial;
+extern const TutorialFlagMsg gBlastSeedTutorial;
+extern const TutorialFlagMsg gUnknown_80FF4A0;
+extern const TutorialFlagMsg gPechaTutorial;
+extern const TutorialFlagMsg gSleepSeedTutorial;
+extern const TutorialFlagMsg gMoneyTutorial;
 extern const u8 *const gUnknown_80FF674;
 extern const u8 *const gUnknown_80FF678;
 extern const u8 *const gUnknown_80FF6A4;

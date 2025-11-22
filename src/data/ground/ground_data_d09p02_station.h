@@ -190,7 +190,7 @@ static const struct ScriptCommand s_gs196_g1_s0_lives1_dlg0[] = { /* 0x8249404 *
     WAIT(15),
     CALL_SCRIPT(WAKEUP_FUNC),
     CALL_SCRIPT(LOOK_AROUND_FUNC),
-    ROTATE(4, 10, DIRECTION_EAST),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_EAST),
     ALERT_CUE(5),
     AWAIT_CUE(6),
     { 0x52, 0x00,  0x0000,  0x00001000,  0x00000000, NULL },

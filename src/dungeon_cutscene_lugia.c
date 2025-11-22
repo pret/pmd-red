@@ -59,7 +59,7 @@ void sub_808BDEC(void)
   CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_LUGIA);
 }
 
-void sub_808BE70(u8 monsterBehavior, u8 cutscene, u8 param_3)
+void HandleLugiaBossFaint(u8 monsterBehavior, u8 cutscene, bool8 transformedIntoFriend)
 {
   if (cutscene == CUTSCENE_SILVER_TRENCH && monsterBehavior == BEHAVIOR_LUGIA) {
     gDungeon->unk2 = DUNGEON_UNK2_1;
@@ -80,26 +80,26 @@ void LugiaPreFightDialogue(void)
   else {
     DungeonStopBGM();
     sub_8086448();
-    DisplayDungeonDialogue(&gLugiaPreFightDialogue_1);
+    DisplayDungeonDialogue_Async(&gLugiaPreFightDialogue_1);
     DungeonFadeInNewBGM(MUS_FRIEND_AREA_CRYPTIC_CAVE,0x3c);
     sub_808C0CC();
-    DisplayDungeonDialogue(&gLugiaPreFightDialogue_2);
+    DisplayDungeonDialogue_Async(&gLugiaPreFightDialogue_2);
     LugiaScreenFlash();
-    DisplayDungeonDialogue(&gLugiaPreFightDialogue_3);
-    sub_803E708(10,0x46);
-    DisplayDungeonDialogue(&gLugiaPreFightDialogue_4);
+    DisplayDungeonDialogue_Async(&gLugiaPreFightDialogue_3);
+    DungeonWaitFrames_Async(10,0x46);
+    DisplayDungeonDialogue_Async(&gLugiaPreFightDialogue_4);
     PlaySoundEffect(0x1f8);
     sub_80861D4(lugiaEntity,0xd,DIRECTION_SOUTH);
-    sub_803E708(0x2b,0x46);
+    DungeonWaitFrames_Async(0x2b,0x46);
     sub_80861B8(lugiaEntity,0,DIRECTION_SOUTH);
-    DisplayDungeonDialogue(&gLugiaPreFightDialogue_5);
+    DisplayDungeonDialogue_Async(&gLugiaPreFightDialogue_5);
     LugiaScreenFlash();
-    DisplayDungeonDialogue(&gLugiaPreFightDialogue_6);
+    DisplayDungeonDialogue_Async(&gLugiaPreFightDialogue_6);
     LugiaScreenFlash2();
     SetDungeonBGColorRGB(-250,-250,-250,1,0);
     DungeonStopBGM();
     sub_80861D4(lugiaEntity,7,DIRECTION_SOUTH);
-    DisplayDungeonDialogue(&gLugiaPreFightDialogue_7);
+    DisplayDungeonDialogue_Async(&gLugiaPreFightDialogue_7);
     LugiaScreenFlash();
     SetupBossFightHP(lugiaEntity,800,MUS_BATTLE_WITH_RAYQUAZA);
     DungeonStartNewBGM(MUS_FRIEND_AREA_CRYPTIC_CAVE);
@@ -116,17 +116,17 @@ static void LugiaScreenFlash(void)
     SetDungeonBGColorRGB(0,0,iVar1,1,1);
     DungeonRunFrameActions(0x46);
   }
-  sub_803E708(10,0x46);
+  DungeonWaitFrames_Async(10,0x46);
   for(iVar1 = 250; iVar1 > 199; iVar1 -= 10){
     SetDungeonBGColorRGB(0,iVar1,iVar1,1,1);
     DungeonRunFrameActions(0x46);
   }
-  sub_803E708(10,0x46);
+  DungeonWaitFrames_Async(10,0x46);
   for(iVar1 = 250; iVar1 >= 0; iVar1 -= 10){
     SetDungeonBGColorRGB(0,0,iVar1,1,1);
     DungeonRunFrameActions(0x46);
   }
-  sub_803E708(10,0x46);
+  DungeonWaitFrames_Async(10,0x46);
   sub_8085EB0();
 }
 
@@ -146,7 +146,7 @@ static void LugiaScreenFlash2(void)
     DungeonRunFrameActions(0x46);
   }
 
-  sub_803E708(4,0x46);
+  DungeonWaitFrames_Async(4,0x46);
 
   for(iVar1 = 0; iVar1 < 200; iVar1 += 100){
     SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,0);
@@ -158,7 +158,7 @@ static void LugiaScreenFlash2(void)
     DungeonRunFrameActions(0x46);
   }
 
-  sub_803E708(10,0x46);
+  DungeonWaitFrames_Async(10,0x46);
   sub_8085EB0();
 }
 
