@@ -1486,6 +1486,24 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
     return 0;
 }
 
+#define MapValueOrDefault(curCmd, defaultVal, dst)                       \
+{                                                                        \
+    s32 tmp = (curCmd)->arg1 != -1 ? (s16)(curCmd)->arg1 : (defaultVal); \
+    *(dst) = tmp;                                                        \
+}
+
+#define SectorValueOrDefault(curCmd, defaultVal, dst)                              \
+{                                                                               \
+    s32 tmp = (s8)(curCmd)->argByte < 0 ? (defaultVal) : (s8)(curCmd)->argByte; \
+    *(dst) = tmp;                                                               \
+}
+
+#define GroupValueOrDefault(curCmd, defaultVal, dst)                       \
+{                                                                         \
+    s32 tmp = (curCmd)->argShort < 0 ? (defaultVal) : (curCmd)->argShort; \
+    *(dst) = tmp;                                                         \
+}
+
 // overlay_0000.bin::021497FC
 // Return values:
 // This function returns what's likely an enum, which controls the state of the script engine state machine, and possibly provides information to code calling the engine.
@@ -1660,21 +1678,17 @@ static s32 ExecuteScriptCommand(Action *action)
             case CMD_BYTE_0E:
             case CMD_BYTE_0F:
             case CMD_BYTE_10:
-            case CMD_BYTE_11:
+            case CMD_BYTE_11: // CANCEL_ENTITIES
             case CMD_BYTE_12:
             case CMD_BYTE_13:
             case CMD_BYTE_14:
             case CMD_BYTE_15: {
                 s32 group;
                 s32 sector;
-                {
-                    s32 tmp = curCmd.argShort < 0 ? scriptData->script.group : curCmd.argShort;
-                    group = tmp;
-                }
-                {
-                    s32 tmp = (s8)curCmd.argByte < 0 ? scriptData->script.sector : (s8)curCmd.argByte;
-                    sector = tmp;
-                }
+
+                GroupValueOrDefault(&curCmd, scriptData->script.group, &group);
+                SectorValueOrDefault(&curCmd, scriptData->script.sector, &sector);
+
                 switch (curCmd.op) {
                     case CMD_BYTE_0C: { // SELECT_ENTITIES
                         GroundLives_Select(gUnknown_2039A32, group, sector);
@@ -1699,7 +1713,7 @@ static s32 ExecuteScriptCommand(Action *action)
                         GroundEvent_Select(gUnknown_2039A32, group, sector);
                         break;
                     }
-                    case CMD_BYTE_11: {
+                    case CMD_BYTE_11: { // CANCEL_ENTITIES
                         GroundLives_Cancel(group, sector);
                         GroundObject_Cancel(group, sector);
                         GroundEffect_Cancel(group, sector);
@@ -1733,7 +1747,7 @@ static s32 ExecuteScriptCommand(Action *action)
                 GroundObject_CancelBlank();
                 break;
             }
-            case CMD_BYTE_18: {
+            case CMD_BYTE_18: { // CANCEL_OFFSCREEN_EFFECTS
                 GroundEffect_CancelBlank();
                 break;
             }
@@ -1749,7 +1763,7 @@ static s32 ExecuteScriptCommand(Action *action)
                     .unk1 = *unk,
                     .width = 1,
                     .height = 1,
-                    .pos = {},
+                    .pos = {0, 0, 0, 0},
                     .kind = curCmd.arg2,
                     .scripts = { [3] = gFunctionScriptTable[curCmd.arg1].script },
                     };
@@ -1776,7 +1790,7 @@ static s32 ExecuteScriptCommand(Action *action)
                     .unk1 = unk,
                     .width = 1,
                     .height = 1,
-                    .pos = {},
+                    .pos = {0, 0, 0, 0},
                     .kind = curCmd.arg2,
                     .script = gFunctionScriptTable[curCmd.arg1].script,
                     };
@@ -1802,20 +1816,14 @@ static s32 ExecuteScriptCommand(Action *action)
             case CMD_BYTE_1D: // EXECUTE_STATION
             case CMD_BYTE_1E: { // EXECUTE_SUBSTATION
                 s32 map;
-                s32 group, sector;
+                s32 group;
+                s32 sector;
                 bool8 isSubStation;
-                {
-                    s32 tmp = curCmd.arg1 != -1 ? (s16)curCmd.arg1 : gCurrentMap;
-                    map = tmp;
-                }
-                {
-                    s32 tmp = curCmd.argShort < 0 ? scriptData->script.group : curCmd.argShort;
-                    group = tmp;
-                }
-                {
-                    s32 tmp = (s8)curCmd.argByte < 0 ? scriptData->script.sector : (s8)curCmd.argByte;
-                    sector = tmp;
-                }
+
+                MapValueOrDefault(&curCmd, gCurrentMap, &map);
+                GroupValueOrDefault(&curCmd, scriptData->script.group, &group);
+                SectorValueOrDefault(&curCmd, scriptData->script.sector, &sector);
+
                 map = GetAdjustedGroundMap(map);
                 isSubStation = curCmd.op == CMD_BYTE_1E;
                 GroundMap_ExecuteStation(map, group, sector, isSubStation);
@@ -3195,14 +3203,9 @@ static s32 ExecuteScriptCommand(Action *action)
                 ScriptInfoSmall info;
                 u32 group, sector;
                 u32 tmp = gUnknown_2039A34;
-                {
-                    s32 tmp = curCmd.argShort < 0 ? scriptData->script.group : curCmd.argShort;
-                    group = tmp;
-                }
-                {
-                    s32 tmp = (s8)curCmd.argByte < 0 ? scriptData->script.sector : (s8)curCmd.argByte;
-                    sector = tmp;
-                }
+                GroupValueOrDefault(&curCmd, scriptData->script.group, &group);
+                SectorValueOrDefault(&curCmd, scriptData->script.sector, &sector);
+
                 GroundMap_GetStationScript(&info, tmp, group, sector);
                 scriptData->script.ptr = info.ptr;
                 scriptData->script.ptr2 = info.ptr;

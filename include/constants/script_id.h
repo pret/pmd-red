@@ -78,6 +78,7 @@ enum ScriptID
     NEXT_SAVE2_FUNC,
     SAVE_POINT,
     WAREHOUSE_POINT,
+    // Save and storage statue before fugitive dungeons.
     SAVE_AND_WAREHOUSE_POINT,
     WORLD_MAP_POINT,
     FORMATION_HERO,
