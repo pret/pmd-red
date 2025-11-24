@@ -39,7 +39,7 @@ typedef struct ExclusivePokemonData
     .in_brt = TRUE,             \
 }
 
-ExclusivePokemonData *gExclusiveMonPtr;
+extern ExclusivePokemonData *gExclusiveMonPtr;
 
 void LoadExclusivePokemon(void);
 ExclusivePokemonData *GetExclusivePokemon(void);

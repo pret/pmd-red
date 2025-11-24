@@ -124,9 +124,9 @@ void sub_807EC28(bool8 arg0)
                                 }
                             }
                         }
-                    LOOP_BREAK:
                     }
 
+LOOP_BREAK:
                     if (sub_8070BC0(leader)) {
                         sub_806CE34(leader, GetDirectionTowardsPosition(&leader->pos, &wildMon->pos));
                     }
