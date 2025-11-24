@@ -8,10 +8,10 @@
 enum
 {
     SCRIPT_TEXT_TYPE_INSTANT, // 0x32 Used for narration and signposts
-    SCRIPT_TEXT_TYPE_PLAYER, // 0x33 Used for player's thoughts, player's dialogue and Murky Cave's judge of darkness
+    SCRIPT_TEXT_TYPE_QUIET, // 0x33 Used for player's thoughts, player's dialogue and Murky Cave's judge of darkness
     SCRIPT_TEXT_TYPE_NPC, // 0x34 Used for all NPCs, has the speaker's name and dialogue sound
     SCRIPT_TEXT_TYPE_LETTER, // 0x35 Used for Mails/Letters. Has a dialogue sound when priting text, similarly to SCRIPT_TEXT_TYPE_NPC
-    SCRIPT_TEXT_TYPE_4, // 0x36 Used for sound-like texts such as "Flap-flap" or roars "Gyaaaaaaaah". It doesn't wait for button press, so the message just closes after printing unless WAIT command is used afterwards.
+    SCRIPT_TEXT_TYPE_OVERHEARD, // 0x36 Used for sound-like texts such as "Flap-flap" or roars "Gyaaaaaaaah". It doesn't wait for button press, so the message just closes after printing unless WAIT command is used afterwards.
 };
 
 typedef union MonOrStringPtr

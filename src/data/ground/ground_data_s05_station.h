@@ -72,4 +72,4 @@ static const struct GroundLink s_gs227_links[] = { /* 0x826f7ec */
     /* link   1 */ { { /*x*/  15, /*y*/  31, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
 };
 
-/*extern*/ const struct GroundScriptHeader gGroundScript_gs227 = { LPARRAY(s_gs227_groups), s_gs227_links }; /* 0x826f7fc */
+const GroundScriptHeader gGroundScript_gs227 = { LPARRAY(s_gs227_groups), s_gs227_links }; /* 0x826f7fc */

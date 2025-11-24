@@ -70,7 +70,7 @@ static const struct ScriptCommand s_gs192_g1_s0_lives0_dlg0[] = { /* 0x823e36c *
     TEXTBOX_CLEAR,
     WAIT(60),
     ALERT_CUE(7),
-    { 0x36, 0x00, -0x0001,  0x00000000,  0x00000000, _(" {COLOR YELLOW}{RESET}Kwaaaaah!") },
+    MSG_OVERHEARD(_(" {COLOR YELLOW}{RESET}Kwaaaaah!")),
     WAIT(30),
     ALERT_CUE(7),
     TEXTBOX_CLEAR,
@@ -366,7 +366,7 @@ static const struct ScriptCommand s_gs192_g2_s0_lives0_dlg0[] = { /* 0x823ef68 *
     BGM_STOP,
     ALERT_CUE(7),
     WAIT(10),
-    { 0x36, 0x00, -0x0001,  0x00000000,  0x00000000, _("Kwaaaaaaaaah!") },
+    MSG_OVERHEARD(_("Kwaaaaaaaaah!")),
     WAIT(30),
     ALERT_CUE(7),
     TEXTBOX_CLEAR,
@@ -427,7 +427,7 @@ static const struct ScriptCommand s_gs192_g2_s0_lives0_dlg0[] = { /* 0x823ef68 *
     TEXTBOX_AUTO_PRESS(-1, -1),
     ALERT_CUE(7),
     WAIT(10),
-    { 0x36, 0x00, -0x0001,  0x00000000,  0x00000000, _("Kwaaaaaaaaah!") },
+    MSG_OVERHEARD(_("Kwaaaaaaaaah!")),
     WAIT(30),
     ALERT_CUE(7),
     TEXTBOX_CLEAR,
@@ -971,4 +971,4 @@ static const struct GroundLink s_gs192_links[] = { /* 0x8242b34 */
     /* link  13 */ { { /*x*/  20, /*y*/  57, /*flags*/ CPOS_HALFTILE, 0 }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
 };
 
-/*extern*/ const struct GroundScriptHeader gGroundScript_gs192 = { LPARRAY(s_gs192_groups), s_gs192_links }; /* 0x8242ba4 */
+const GroundScriptHeader gGroundScript_gs192 = { LPARRAY(s_gs192_groups), s_gs192_links }; /* 0x8242ba4 */

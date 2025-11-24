@@ -196,10 +196,10 @@ struct GroundScriptGroup {
     u32 nSectors;
     const struct GroundScriptSector *sectors;
 };
-struct GroundScriptHeader {
+typedef struct GroundScriptHeader {
     u32 nGroups;
     const struct GroundScriptGroup *groups;
     const struct GroundLink *links;
-};
+} GroundScriptHeader;
 
 #endif // GUARD_STR_GROUND_SCRIPT_H

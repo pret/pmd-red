@@ -143,14 +143,18 @@
 
 #define MSG_INSTANT(msg)                { CMD_BYTE_32, 0, -1, 0, 0, msg }
 
-// TODO: CMD_BYTE_33
+// Used for messages that don't make a sound while printing characters.
+// The player hero, Munchlax munching, and the voice in Murky Cave use this.
+// id: Speaker ID. -1 for no portrait.
+#define MSG_QUIET(id, msg)              { CMD_BYTE_33, 0, id, 0, 0, msg }
 
-// ID is portrait id of the npc. -1 means no portrait
+// id: Speaker ID. -1 for no portrait.
 #define MSG_NPC(id, msg)                { CMD_BYTE_34, 0, id, 0, 0, msg }
 
 #define MSG_LETTER(msg)                 { CMD_BYTE_35, 0, -1, 0, 0, msg }
 
-// TODO: CMD_BYTE_36
+// Used for sounds or dialogue the player hears from the background such as flapping, boss cries, and NPCs conversing.
+#define MSG_OVERHEARD(msg)              { CMD_BYTE_36, 0, -1, 0, 0, msg }
 
 // Prints raw text on bg without any windows.
 // Used for the intro portal messages.

@@ -99,7 +99,7 @@ IWRAM_INIT struct GroundLives *gGroundLives = NULL;
 struct GroundLiveTypeData
 {
     s16 unk0;
-    s16 unk2;
+    s16 unk2; // Some species
     const char *unk4;
     u8 unk8;
     u8 unk9;

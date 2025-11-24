@@ -39,5 +39,6 @@ void PrintFormattedStringOnWindow2(s32 x, s32 y, const u8 *str, u32 windowId, u3
 #define STR_FORMAT_FLAG_INSTANT_TEXT_ON_AB_PRESS 0x40
 #define STR_FORMAT_FLAG_NEW_LINE_TERMINATES 0x80
 #define STR_FORMAT_FLAG_WAIT_FOR_BUTTON_PRESS 0x100
+#define STR_FORMAT_FLAG_x200 0x200
 
 #endif // GUARD_STRING_FORMAT_H

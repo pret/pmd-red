@@ -87,7 +87,7 @@ static bool8 TryAddItemWithText(const struct ItemWithQuantity *itemToAdd, const 
         newMoneyAmount = gTeamInventoryRef->teamMoney + itemToAdd->quantity;
         if (newMoneyAmount > MAX_TEAM_MONEY) {
             if (maxMoneyStr != NULL) {
-                ScriptPrintText(0, -1, maxMoneyStr);
+                ScriptPrintText(SCRIPT_TEXT_TYPE_INSTANT, -1, maxMoneyStr);
             }
             return FALSE;
         }
@@ -102,7 +102,7 @@ static bool8 TryAddItemWithText(const struct ItemWithQuantity *itemToAdd, const 
         sub_8090E14(buffer,&item,0);
         if (GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE) {
             if (noItemSpaceStr != NULL) {
-                ScriptPrintText(0, -1, noItemSpaceStr);
+                ScriptPrintText(SCRIPT_TEXT_TYPE_INSTANT, -1, noItemSpaceStr);
             }
             return FALSE;
         }
@@ -113,8 +113,8 @@ static bool8 TryAddItemWithText(const struct ItemWithQuantity *itemToAdd, const 
 
     if (itemGivenStr != NULL) {
         strcpy(gFormatBuffer_Items[0], buffer);
-        ScriptPrintText(0, -1, itemGivenStr);
-        PlaySoundWithVolume(0xcb,0x100);
+        ScriptPrintText(SCRIPT_TEXT_TYPE_INSTANT, -1, itemGivenStr);
+        PlaySoundWithVolume(0xcb, 0x100);
     }
 
     return TRUE;

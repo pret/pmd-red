@@ -42,18 +42,18 @@ static const struct ScriptCommand s_gs175_g1_s0_eff1_script[] = { /* 0x822b0f4 *
     BGM_SWITCH(MUS_CREDITS),
     WAIT(300),
     TEXTBOX_AUTO_PRESS(-200, 60),
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("(..................)") },
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("(What is this...?)") },
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("(I'm rising into the sky...)") },
+    MSG_QUIET(0, _("(..................)")),
+    MSG_QUIET(0, _("(What is this...?)")),
+    MSG_QUIET(0, _("(I'm rising into the sky...)")),
     TEXTBOX_AUTO_PRESS(-190, 60),
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("(Is this my spirit...?)") },
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("(I wonder where I'm going?)") },
+    MSG_QUIET(0, _("(Is this my spirit...?)")),
+    MSG_QUIET(0, _("(I wonder where I'm going?)")),
     TEXTBOX_CLEAR,
     WAIT(120),
     TEXTBOX_AUTO_PRESS(-110, 60),
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("(......!)") },
+    MSG_QUIET(0, _("(......!)")),
     TEXTBOX_AUTO_PRESS(-210, 50),
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("(Voices...{WAIT_PRESS}\nI hear voices...)") },
+    MSG_QUIET(0, _("(Voices...{WAIT_PRESS}\nI hear voices...)")),
     TEXTBOX_CLEAR,
     ALERT_CUE(3),
     HALT,
@@ -139,4 +139,4 @@ static const struct GroundLink s_gs175_links[] = { /* 0x822b650 */
     {},
 };
 
-/*extern*/ const struct GroundScriptHeader gGroundScript_gs175 = { LPARRAY(s_gs175_groups), s_gs175_links }; /* 0x822b658 */
+const GroundScriptHeader gGroundScript_gs175 = { LPARRAY(s_gs175_groups), s_gs175_links }; /* 0x822b658 */

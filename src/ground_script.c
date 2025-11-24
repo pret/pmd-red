@@ -886,7 +886,7 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                         case CMD_BYTE_30:
                         case CMD_BYTE_31:
                         case CMD_BYTE_32:
-                        case CMD_BYTE_33:
+                        case CMD_BYTE_33: // MSG_QUIET
                         case CMD_BYTE_34:
                         case CMD_BYTE_35:
                         case CMD_BYTE_36:
@@ -2068,21 +2068,42 @@ static s32 ExecuteScriptCommand(Action *action)
                 break;
             }
             case CMD_BYTE_32:
-            case CMD_BYTE_33:
+            case CMD_BYTE_33: // MSG_QUIET
             case CMD_BYTE_34:
             case CMD_BYTE_35:
-            case CMD_BYTE_36:
+            case CMD_BYTE_36: // MSG_OVERHEARD
             case CMD_BYTE_37:
             case CMD_BYTE_38: {
                 s8 ret = FALSE;
                 switch (scriptData->curScriptOp) {
-                    case CMD_BYTE_32: ret = ScriptPrintText(SCRIPT_TEXT_TYPE_INSTANT, curCmd.argShort, curCmd.argPtr); break;
-                    case CMD_BYTE_33: ret = ScriptPrintText(SCRIPT_TEXT_TYPE_PLAYER, curCmd.argShort, curCmd.argPtr); break;
-                    case CMD_BYTE_34: ret = ScriptPrintText(SCRIPT_TEXT_TYPE_NPC, curCmd.argShort, curCmd.argPtr); break;
-                    case CMD_BYTE_35: ret = ScriptPrintText(SCRIPT_TEXT_TYPE_LETTER, curCmd.argShort, curCmd.argPtr); break;
-                    case CMD_BYTE_36: ret = ScriptPrintText(SCRIPT_TEXT_TYPE_4, curCmd.argShort, curCmd.argPtr); break;
-                    case CMD_BYTE_37: ret = ScriptPrintTextOnBg(curCmd.argPtr); break;
-                    case CMD_BYTE_38: ret = ScriptPrintTextOnBg2(curCmd.argPtr); break;
+                    case CMD_BYTE_32: {
+                        ret = ScriptPrintText(SCRIPT_TEXT_TYPE_INSTANT, curCmd.argShort, curCmd.argPtr);
+                        break;
+                    }
+                    case CMD_BYTE_33: { // MSG_QUIET
+                        ret = ScriptPrintText(SCRIPT_TEXT_TYPE_QUIET, curCmd.argShort, curCmd.argPtr);
+                        break;
+                    }
+                    case CMD_BYTE_34: {
+                        ret = ScriptPrintText(SCRIPT_TEXT_TYPE_NPC, curCmd.argShort, curCmd.argPtr);
+                        break;
+                    }
+                    case CMD_BYTE_35: {
+                        ret = ScriptPrintText(SCRIPT_TEXT_TYPE_LETTER, curCmd.argShort, curCmd.argPtr);
+                        break;
+                    }
+                    case CMD_BYTE_36: { // MSG_OVERHEARD
+                        ret = ScriptPrintText(SCRIPT_TEXT_TYPE_OVERHEARD, curCmd.argShort, curCmd.argPtr);
+                        break;
+                    }
+                    case CMD_BYTE_37: {
+                        ret = ScriptPrintTextOnBg(curCmd.argPtr);
+                        break;
+                    }
+                    case CMD_BYTE_38: {
+                        ret = ScriptPrintTextOnBg2(curCmd.argPtr);
+                        break;
+                    }
                 }
                 if (ret) {
                     sub_80A87AC(0, 10);
@@ -3347,7 +3368,7 @@ static s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
 
                         dialogueId = GetFriendAreaDialogueId(action->unkC.unk2);
                         InlineStrcpy(text, gFriendAreaDialogue[dialogueId]);
-                        if (ScriptPrintText(0, 1, text) != 0)
+                        if (ScriptPrintText(SCRIPT_TEXT_TYPE_INSTANT, 1, text) != 0)
                             return 1;
                     }
                 }
@@ -3832,7 +3853,7 @@ static s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
                     rankAfter = GetRescueTeamRank();
                     InlineStrcpy(gFormatBuffer_Items[0], GetTeamRankString(rankBefore));
                     InlineStrcpy(gFormatBuffer_Items[1], GetTeamRankString(rankAfter));
-                    if (ScriptPrintText(0, -1, _("{CENTER_ALIGN}The rescue rank went up from\n{CENTER_ALIGN}{MOVE_ITEM_0} to {MOVE_ITEM_1}!")) != 0)
+                    if (ScriptPrintText(SCRIPT_TEXT_TYPE_INSTANT, -1, _("{CENTER_ALIGN}The rescue rank went up from\n{CENTER_ALIGN}{MOVE_ITEM_0} to {MOVE_ITEM_1}!")) != 0)
                         return 1;
                 }
                 else {

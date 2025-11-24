@@ -97,10 +97,10 @@ enum TextboxTypeID
     TEXTBOX_TYPE_4,
 };
 
+// size: 0x5A8
 struct Textbox
 {
-    // size: 0x5A8
-    u32 type;
+    u32 type; // See enum "TextboxTypeID"
     s32 endMsgFrames;
     s32 midMsgFrames;
     struct TextboxText text;
@@ -147,80 +147,87 @@ extern u32 HelperPelipperCallback(void);
 extern u32 sub_802E890(void);
 extern u32 sub_802DFD8(void);
 
-#define TEXTBOX_FLAG_UNUSED_x2 0x2 // Unused, but set for almost all flag sets
-#define TEXTBOX_FLAG_INSTANT_TEXT 0x20
+#define TEXTBOX_FLAG_NONE 0x0
+#define TEXTBOX_FLAG_x1 (1 << 0)
+// Unused, but set for almost all flag sets
+#define TEXTBOX_FLAG_UNUSED_x2 (1 << 1)
+#define TEXTBOX_FLAG_x4 (1 << 2)
+#define TEXTBOX_FLAG_x8 (1 << 3)
+#define TEXTBOX_FLAG_UNUSED_x10 (1 << 4)
+#define TEXTBOX_FLAG_INSTANT_TEXT (1 << 5)
 // Both need to be set to wait for the player's button press. One flag would be sufficient in my opinion, but what can you do?
-#define TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS_2 0x40
-#define TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS 0x80
-
-#define TEXTBOX_FLAG_SPEAKER 0x100 // Speaker's name + dialogue sound
-#define TEXTBOX_FLAG_DIALOGUE_SOUND 0x200 // Only dialogue sound
+#define TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS_2 (1 << 6)
+#define TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS (1 << 7)
+// Speaker's name + dialogue sound
+#define TEXTBOX_FLAG_SPEAKER (1 << 8)
+// Only dialogue sound
+#define TEXTBOX_FLAG_DIALOGUE_SOUND (1 << 9)
 
 static const struct PortraitPlacementInfo sPortraitPlacements[PLACEMENT_COUNT] = {
-    [PLACEMENT_LEFT]                    = {{2,  8}, FALSE},
-    [PLACEMENT_MIDDLE_TOP]              = {{12, 5}, FALSE},
-    [PLACEMENT_LEFT_]                   = {{2,  8}, FALSE},
-    [PLACEMENT_RIGHT]                   = {{23, 8}, TRUE},
-    [PLACEMENT_MIDDLE_LEFT]             = {{7,  8}, FALSE},
-    [PLACEMENT_MIDDLE_RIGHT]            = {{18, 8}, TRUE},
-    [PLACEMENT_MIDDLE_TOP_FLIP]         = {{13, 5}, TRUE},
-    [PLACEMENT_LEFT_FLIP]               = {{2,  8}, TRUE},
-    [PLACEMENT_RIGHT_FLIP]              = {{23, 8}, FALSE},
-    [PLACEMENT_MIDDLE_LEFT_FLIP]        = {{7,  8}, TRUE},
-    [PLACEMENT_MIDDLE_RIGHT_FLIP]       = {{18, 8}, FALSE},
-    [PLACEMENT_TOP]                     = {{12, 1}, FALSE},
-    [PLACEMENT_TOP_LEFT]                = {{2,  2}, FALSE},
-    [PLACEMENT_TOP_RIGHT]               = {{23, 2}, TRUE},
-    [PLACEMENT_MIDDLE_TOP_LEFT]         = {{7,  1}, FALSE},
-    [PLACEMENT_MIDDLE_TOP_RIGHT]        = {{18, 1}, TRUE},
-    [PLACEMENT_TOP_FLIP]                = {{13, 1}, TRUE},
-    [PLACEMENT_TOP_LEFT_FLIP]           = {{2,  2}, TRUE},
-    [PLACEMENT_TOP_RIGHT_FLIP]          = {{23, 2}, FALSE},
-    [PLACEMENT_MIDDLE_TOP_LEFT_FLIP]    = {{7,  1}, TRUE},
-    [PLACEMENT_MIDDLE_TOP_RIGHT_FLIP]   = {{18, 1}, FALSE},
+    [PLACEMENT_LEFT]                  = { { 2,  8}, FALSE },
+    [PLACEMENT_MIDDLE_TOP]            = { { 12, 5}, FALSE },
+    [PLACEMENT_LEFT_]                 = { { 2,  8}, FALSE },
+    [PLACEMENT_RIGHT]                 = { { 23, 8}, TRUE },
+    [PLACEMENT_MIDDLE_LEFT]           = { { 7,  8}, FALSE },
+    [PLACEMENT_MIDDLE_RIGHT]          = { { 18, 8}, TRUE },
+    [PLACEMENT_MIDDLE_TOP_FLIP]       = { { 13, 5}, TRUE },
+    [PLACEMENT_LEFT_FLIP]             = { { 2,  8}, TRUE },
+    [PLACEMENT_RIGHT_FLIP]            = { { 23, 8}, FALSE },
+    [PLACEMENT_MIDDLE_LEFT_FLIP]      = { { 7,  8}, TRUE },
+    [PLACEMENT_MIDDLE_RIGHT_FLIP]     = { { 18, 8}, FALSE },
+    [PLACEMENT_TOP]                   = { { 12, 1}, FALSE },
+    [PLACEMENT_TOP_LEFT]              = { { 2,  2}, FALSE },
+    [PLACEMENT_TOP_RIGHT]             = { { 23, 2}, TRUE },
+    [PLACEMENT_MIDDLE_TOP_LEFT]       = { { 7,  1}, FALSE },
+    [PLACEMENT_MIDDLE_TOP_RIGHT]      = { { 18, 1}, TRUE },
+    [PLACEMENT_TOP_FLIP]              = { { 13, 1}, TRUE },
+    [PLACEMENT_TOP_LEFT_FLIP]         = { { 2,  2}, TRUE },
+    [PLACEMENT_TOP_RIGHT_FLIP]        = { { 23, 2}, FALSE },
+    [PLACEMENT_MIDDLE_TOP_LEFT_FLIP]  = { { 7,  1}, TRUE },
+    [PLACEMENT_MIDDLE_TOP_RIGHT_FLIP] = { { 18, 1}, FALSE },
 };
 
 static const MenuItem gUnknown_81160E8[] =
 {
-    {"*Yes", 1},
-    {"No", 0},
-    {NULL, 0},
+    { "*Yes", 1 },
+    { "No", 0 },
+    { NULL, 0 },
 };
 
 static const MenuItem gUnknown_811610C[] =
 {
-    {"Yes", 1},
-    {"*No", 0},
-    {NULL, 0},
+    { "Yes", 1 },
+    { "*No", 0 },
+    { NULL, 0 },
 };
 
 static const MenuItem sEmptyMenuItems[] =
 {
-    {NULL, 0},
+    { NULL, 0 },
 };
 
-static const u32 sScriptTextboxTypes[] =
+static const u32 sScriptTextboxTypes[5] =
 {
-    [SCRIPT_TEXT_TYPE_INSTANT] =    TEXTBOX_TYPE_NORMAL,
-    [SCRIPT_TEXT_TYPE_PLAYER] =     TEXTBOX_TYPE_NORMAL,
-    [SCRIPT_TEXT_TYPE_NPC] =        TEXTBOX_TYPE_NORMAL,
-    [SCRIPT_TEXT_TYPE_LETTER] =     TEXTBOX_TYPE_NORMAL,
-    [SCRIPT_TEXT_TYPE_4] =          TEXTBOX_TYPE_NORMAL,
+    [SCRIPT_TEXT_TYPE_INSTANT] =   TEXTBOX_TYPE_NORMAL,
+    [SCRIPT_TEXT_TYPE_QUIET] =     TEXTBOX_TYPE_NORMAL,
+    [SCRIPT_TEXT_TYPE_NPC] =       TEXTBOX_TYPE_NORMAL,
+    [SCRIPT_TEXT_TYPE_LETTER] =    TEXTBOX_TYPE_NORMAL,
+    [SCRIPT_TEXT_TYPE_OVERHEARD] = TEXTBOX_TYPE_NORMAL,
 };
 
-static const u16 sScriptFlagSets[] =
+static const u16 sScriptFlagSets[10] =
 {
-    [SCRIPT_TEXT_TYPE_INSTANT] =    TEXTBOX_FLAG_UNUSED_x2 | TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS_2 | TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS | TEXTBOX_FLAG_INSTANT_TEXT,
-    [SCRIPT_TEXT_TYPE_PLAYER] =     TEXTBOX_FLAG_UNUSED_x2 | TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS_2 | TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS,
-    [SCRIPT_TEXT_TYPE_NPC] =        TEXTBOX_FLAG_UNUSED_x2 | TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS_2 | TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS | TEXTBOX_FLAG_SPEAKER,
-    [SCRIPT_TEXT_TYPE_LETTER] =     TEXTBOX_FLAG_UNUSED_x2 | TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS_2 | TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS | TEXTBOX_FLAG_DIALOGUE_SOUND,
-    [SCRIPT_TEXT_TYPE_4] =          0x01,
-    // These are effectively unused
-    0x121,
-    0x101,
-    0x10D,
-    0x105,
-    0
+    [SCRIPT_TEXT_TYPE_INSTANT] =   TEXTBOX_FLAG_UNUSED_x2 | TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS_2 | TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS | TEXTBOX_FLAG_INSTANT_TEXT,
+    [SCRIPT_TEXT_TYPE_QUIET] =     TEXTBOX_FLAG_UNUSED_x2 | TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS_2 | TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS,
+    [SCRIPT_TEXT_TYPE_NPC] =       TEXTBOX_FLAG_UNUSED_x2 | TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS_2 | TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS | TEXTBOX_FLAG_SPEAKER,
+    [SCRIPT_TEXT_TYPE_LETTER] =    TEXTBOX_FLAG_UNUSED_x2 | TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS_2 | TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS | TEXTBOX_FLAG_DIALOGUE_SOUND,
+    [SCRIPT_TEXT_TYPE_OVERHEARD] = TEXTBOX_FLAG_x1,
+    // Are these unused? Potentially they can be used.
+    TEXTBOX_FLAG_x1 | TEXTBOX_FLAG_INSTANT_TEXT | TEXTBOX_FLAG_SPEAKER,
+    TEXTBOX_FLAG_x1 | TEXTBOX_FLAG_SPEAKER,
+    TEXTBOX_FLAG_x1 | TEXTBOX_FLAG_x4 | TEXTBOX_FLAG_x8 | TEXTBOX_FLAG_SPEAKER,
+    TEXTBOX_FLAG_x1 | TEXTBOX_FLAG_x4 | TEXTBOX_FLAG_SPEAKER,
+    TEXTBOX_FLAG_NONE
 };
 
 ALIGNED(4) static const u8 sInvalidText[] = _("{COLOR RED_W}invalidity{RESET}");
@@ -372,10 +379,10 @@ bool8 ScriptClearTextbox(void)
 {
     switch (sTextbox->type) {
         case TEXTBOX_TYPE_ON_BG_AUTO:
-            return ScriptPrintTextInternal(&sTextbox->text, 4, -1, 0);
+            return ScriptPrintTextInternal(&sTextbox->text, TEXTBOX_FLAG_x4, -1, 0);
         case TEXTBOX_TYPE_NORMAL:
         case TEXTBOX_TYPE_ON_BG_PRESS:
-            return ScriptPrintTextInternal(&sTextbox->text, TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS | 0x4, -1, 0);
+            return ScriptPrintTextInternal(&sTextbox->text, TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS | TEXTBOX_FLAG_x4, -1, 0);
         default:
             SetTextboxType(TEXTBOX_TYPE_0, TRUE);
             return FALSE;
@@ -388,7 +395,7 @@ bool8 ScriptClearTextbox2(void)
         case TEXTBOX_TYPE_ON_BG_AUTO:
         case TEXTBOX_TYPE_NORMAL:
         case TEXTBOX_TYPE_ON_BG_PRESS:
-            return ScriptPrintTextInternal(&sTextbox->text, 4, -1, 0);
+            return ScriptPrintTextInternal(&sTextbox->text, TEXTBOX_FLAG_x4, -1, 0);
         default:
             SetTextboxType(TEXTBOX_TYPE_0, TRUE);
             return FALSE;
@@ -784,7 +791,7 @@ bool8 ScriptPrintTextOnBgAuto(s32 unused, const u8 *text)
         return ScriptClearTextbox();
 
     SetTextboxType(TEXTBOX_TYPE_ON_BG_AUTO, TRUE);
-    return ScriptPrintTextInternal(&sTextbox->text, 0x65, -1, text);
+    return ScriptPrintTextInternal(&sTextbox->text, TEXTBOX_FLAG_x1 | TEXTBOX_FLAG_x4 | TEXTBOX_FLAG_INSTANT_TEXT | TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS_2, -1, text);
 }
 
 bool8 sub_809AFAC(void)
@@ -898,8 +905,7 @@ bool8 sub_809B260(s32 *a0)
 static void ResetTextbox(void)
 {
     SetCharacterMask(3);
-    // All this function call does is basically setting textboxText->unk4 = 0;
-    ScriptPrintTextInternal(&sTextbox->text, 0, -1, NULL);
+    ScriptPrintTextInternal(&sTextbox->text, TEXTBOX_FLAG_NONE, -1, NULL);
 }
 
 static bool8 ScriptPrintTextInternal(struct TextboxText *textboxText, u32 flags_, s32 speakerId_, const char *text)
@@ -909,12 +915,12 @@ static bool8 ScriptPrintTextInternal(struct TextboxText *textboxText, u32 flags_
 
     textboxText->flags = flags;
     if (text == NULL) {
-        if (flags == 0) {
+        if (flags == TEXTBOX_FLAG_NONE) {
             textboxText->unk4 = 0;
             return FALSE;
         }
 
-        if (flags & 4) {
+        if (flags & TEXTBOX_FLAG_x4) {
             sub_8014490();
             SetTextboxType(TEXTBOX_TYPE_0, TRUE);
         }
@@ -944,7 +950,7 @@ static bool8 ScriptPrintTextInternal(struct TextboxText *textboxText, u32 flags_
          | ((flags & TEXTBOX_FLAG_INSTANT_TEXT) ? STR_FORMAT_FLAG_INSTANT_TEXT : 0)
          | ((flags & TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS_2) ? STR_FORMAT_FLAG_WAIT_FOR_BUTTON_PRESS_2 : 0)
          | ((flags & TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS) ? STR_FORMAT_FLAG_WAIT_FOR_BUTTON_PRESS : 0)
-         | ((flags & 0x4) ? 0x200 : 0)
+         | ((flags & TEXTBOX_FLAG_x4) ? STR_FORMAT_FLAG_x200 : 0)
          | ((sTextbox->endMsgFrames != -1) ? STR_FORMAT_FLAG_TIMED_AUTO_MSG_CLOSE : 0)
                                      );
 

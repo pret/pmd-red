@@ -133,9 +133,9 @@ static const struct ScriptCommand s_gs195_g1_s0_station_sref_script[] = { /* 0x8
     TEXTBOX_CLEAR,
     WAIT(15),
     FANFARE_PLAY2(503),
-    { 0x36, 0x00, -0x0001,  0x00000000,  0x00000000, _("Tromp, tromp, tromp, tromp, tromp!") },
+    MSG_OVERHEARD(_("Tromp, tromp, tromp, tromp, tromp!")),
     WAIT(120),
-    { 0x36, 0x00, -0x0001,  0x00000000,  0x00000000, _("........................") },
+    MSG_OVERHEARD(_("........................")),
     WAIT(120),
     TEXTBOX_CLEAR,
     WAIT(60),
@@ -436,9 +436,9 @@ static const struct ScriptCommand s_gs195_g3_s0_lives0_dlg0[] = { /* 0x82474ec *
     TEXTBOX_CLEAR,
     WAIT(15),
     FANFARE_PLAY2(503),
-    { 0x36, 0x00, -0x0001,  0x00000000,  0x00000000, _("Tromp, tromp, tromp, tromp, tromp!") },
+    MSG_OVERHEARD(_("Tromp, tromp, tromp, tromp, tromp!")),
     WAIT(120),
-    { 0x36, 0x00, -0x0001,  0x00000000,  0x00000000, _("........................") },
+    MSG_OVERHEARD(_("........................")),
     WAIT(120),
     TEXTBOX_CLEAR,
     WAIT(30),
@@ -815,4 +815,4 @@ static const struct GroundLink s_gs195_links[] = { /* 0x82489e8 */
     /* link  10 */ { { /*x*/   4, /*y*/  36, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
 };
 
-/*extern*/ const struct GroundScriptHeader gGroundScript_gs195 = { LPARRAY(s_gs195_groups), s_gs195_links }; /* 0x8248a40 */
+const GroundScriptHeader gGroundScript_gs195 = { LPARRAY(s_gs195_groups), s_gs195_links }; /* 0x8248a40 */

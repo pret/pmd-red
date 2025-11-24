@@ -477,7 +477,7 @@ static const struct ScriptCommand s_gs4_g1_s1_lives0_dlg0[] = { /* 0x818b710 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" (Papa still hasn't come\nhome...)") },
+    MSG_NPC(3, _(" (Papa still hasn't come\nhome...)")),
     MSG_NPC(-1, _(" Our son!{WAIT_PRESS}\nSorry to make you wait!")),
     TEXTBOX_CLEAR,
     WAIT(10),
@@ -1945,7 +1945,7 @@ static const struct ScriptCommand s_gs4_g18_s0_lives0_dlg2[] = { /* 0x8191968 */
     { 0x2d, 0x09,  0x0003,  0x00000044,  0x00000000, NULL },
     WAIT(1),
     MSG_NPC(3, _(" ............Papa said they've\ngone to sea before...")),
-    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" .........(Does that mean Papa\ncan swim...?)") },
+    MSG_NPC(3, _(" .........(Does that mean Papa\ncan swim...?)")),
     ALERT_CUE(6),
     AWAIT_CUE(5),
     ASK3( TRUE, /*default*/ -1, /* speaker */ 3, _(" {NAME_0}.{WAIT_PRESS}\n{NAME_0}, can you swim?")),
@@ -3078,7 +3078,7 @@ static const struct ScriptCommand s_gs4_g28_s0_lives0_dlg2[] = { /* 0x8195e54 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" (Everything returned to\npeace...)") },
+    MSG_NPC(1, _(" (Everything returned to\npeace...)")),
     ALERT_CUE(6),
     AWAIT_CUE(5),
     MSG_NPC(1, _(" But Papa still hasn't come\nback...")),
@@ -3951,4 +3951,4 @@ static const struct GroundLink s_gs4_links[] = { /* 0x8197968 */
     /* link  19 */ { { /*x*/  74, /*y*/  12, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
 };
 
-/*extern*/ const struct GroundScriptHeader gGroundScript_gs4 = { LPARRAY(s_gs4_groups), s_gs4_links }; /* 0x8197a08 */
+const GroundScriptHeader gGroundScript_gs4 = { LPARRAY(s_gs4_groups), s_gs4_links }; /* 0x8197a08 */

@@ -69,7 +69,7 @@ static const struct ScriptCommand s_gs206_g1_s0_lives0_dlg0[] = { /* 0x825eb18 *
     WAIT(30),
     ALERT_CUE(7),
     WAIT(20),
-    { 0x36, 0x00, -0x0001,  0x00000000,  0x00000000, _("Grgaaaaaah!") },
+    MSG_OVERHEARD(_("Grgaaaaaah!")),
     WAIT(120),
     TEXTBOX_CLEAR,
     WAIT(90),
@@ -417,4 +417,4 @@ static const struct GroundLink s_gs206_links[] = { /* 0x825ff4c */
     {},
 };
 
-/*extern*/ const struct GroundScriptHeader gGroundScript_gs206 = { LPARRAY(s_gs206_groups), s_gs206_links }; /* 0x825ff54 */
+const GroundScriptHeader gGroundScript_gs206 = { LPARRAY(s_gs206_groups), s_gs206_links }; /* 0x825ff54 */

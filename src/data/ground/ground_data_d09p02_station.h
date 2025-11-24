@@ -278,4 +278,4 @@ static const struct GroundLink s_gs196_links[] = { /* 0x82496e0 */
     {},
 };
 
-/*extern*/ const struct GroundScriptHeader gGroundScript_gs196 = { LPARRAY(s_gs196_groups), s_gs196_links }; /* 0x82496e8 */
+const GroundScriptHeader gGroundScript_gs196 = { LPARRAY(s_gs196_groups), s_gs196_links }; /* 0x82496e8 */

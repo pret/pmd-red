@@ -128,7 +128,7 @@ static const struct ScriptCommand s_gs187_g1_s0_lives0_dlg0[] = { /* 0x8237d1c *
     TEXTBOX_CLEAR,
     SELECT_ENTITIES(-1, 1),
     FANFARE_PLAY2(474),
-    { 0x36, 0x00, -0x0001,  0x00000000,  0x00000000, _("Gyaoooooh!") },
+    MSG_OVERHEARD(_("Gyaoooooh!")),
     WAIT(90),
     TEXTBOX_CLEAR,
     WAIT(10),
@@ -156,7 +156,7 @@ static const struct ScriptCommand s_gs187_g1_s0_lives0_dlg0[] = { /* 0x8237d1c *
     FANFARE_PLAY2(517),
     { 0x28, 0x01,  0x0005,  0x00000010,  0x00ffffff, NULL },
     WAIT(32),
-    { 0x36, 0x00, -0x0001,  0x00000000,  0x00000000, _("Gyaooooh!") },
+    MSG_OVERHEARD(_("Gyaooooh!")),
     WAIT(90),
     TEXTBOX_CLEAR,
     ALERT_CUE(8),
@@ -313,7 +313,7 @@ static const struct ScriptCommand s_gs187_g1_s1_lives0_dlg0[] = { /* 0x8238f38 *
     AWAIT_CUE(11),
     { 0x70, 0x00,  0x0100,  0x00000008,  0x00000000, NULL },
     WAIT(16),
-    { 0x36, 0x00, -0x0001,  0x00000000,  0x00000000, _("Gyaoooooooh!") },
+    MSG_OVERHEARD(_("Gyaoooooooh!")),
     FANFARE_PLAY2(459),
     { 0x70, 0x00,  0x0400,  0x00000080,  0x00000000, NULL },
     WAIT(90),
@@ -376,4 +376,4 @@ static const struct GroundLink s_gs187_links[] = { /* 0x823915c */
     {},
 };
 
-/*extern*/ const struct GroundScriptHeader gGroundScript_gs187 = { LPARRAY(s_gs187_groups), s_gs187_links }; /* 0x8239164 */
+const GroundScriptHeader gGroundScript_gs187 = { LPARRAY(s_gs187_groups), s_gs187_links }; /* 0x8239164 */

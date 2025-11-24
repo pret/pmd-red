@@ -125,4 +125,4 @@ static const struct GroundLink s_gs181_links[] = { /* 0x82320f0 */
     /* link   3 */ { { /*x*/  24, /*y*/  19, /*flags*/ CPOS_HALFTILE, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
 };
 
-/*extern*/ const struct GroundScriptHeader gGroundScript_gs181 = { LPARRAY(s_gs181_groups), s_gs181_links }; /* 0x8232110 */
+const GroundScriptHeader gGroundScript_gs181 = { LPARRAY(s_gs181_groups), s_gs181_links }; /* 0x8232110 */
