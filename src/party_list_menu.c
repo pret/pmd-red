@@ -552,7 +552,7 @@ static void PartyListMenu_HandleMenu1(void)
         break;
     case PARTY_LIST_MENU_MAKE_LEADER:
         newLeader = &gRecruitedPokemonRef->pokemon[sUnknown_203B2B8->pokeSpecies];
-        playerPokemon = GetPlayerPokemonStruct();
+        playerPokemon = GetLeaderMon1();
 
         if (!newLeader->isTeamLeader) {
             playerPokemon->isTeamLeader = FALSE;
@@ -871,8 +871,8 @@ static bool8 sub_8026E88(Pokemon *r0)
 static bool8 sub_8026EB8(Pokemon *r0)
 {
     bool8 flag;
-    if(sub_808D3BC() != r0)
-        if(sub_808D3F8() != r0)
+    if(GetLeaderMon2() != r0)
+        if(GetPartnerMon2() != r0)
             if(!r0->isTeamLeader)
             {
                 flag = (r0->dungeonLocation.id == DUNGEON_JOIN_LOCATION_PARTNER);

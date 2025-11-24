@@ -19,10 +19,10 @@ static const struct ScriptCommand s_gs204_g0_s0_station_sref_script[] = { /* 0x8
   LABEL(0), /* = 0x00 */
     JUMP_LABEL(1),
   LABEL(1), /* = 0x01 */
-    JUMPIF_EQUAL(START_MODE, 1, /* to label */ 2),
-    JUMPIF_EQUAL(START_MODE, 3, /* to label */ 3),
-    JUMPIF_EQUAL(START_MODE, 2, /* to label */ 4),
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 4),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_CONTINUE_GAME, /* to label */ 2),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_3, /* to label */ 3),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_GROUND, /* to label */ 4),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 4),
     JUMP_LABEL(2),
   LABEL(4), /* = 0x04 */
     CJUMP_VAR(GROUND_GETOUT),
@@ -42,7 +42,7 @@ static const struct ScriptCommand s_gs204_g0_s0_station_sref_script[] = { /* 0x8
     JUMP_SCRIPT(COMMON_ENTER),
 };
 
-static const struct ScriptRef s_gs204_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs204_g0_s0_station_sref_script }; /* 0x825d030 */
+static const struct ScriptRef s_gs204_g0_s0_station_sref = { ENTER_CONTROL , 1, NULL, s_gs204_g0_s0_station_sref_script }; /* 0x825d030 */
 
 static const struct ScriptCommand s_gs204_g0_s1_lives0_dlg0[] = { /* 0x825d03c */
     DEBUGINFO_O(48),
@@ -95,7 +95,7 @@ static const struct ScriptCommand s_gs204_g1_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs204_g1_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs204_g1_s0_station_sref_script }; /* 0x825d21c */
+static const struct ScriptRef s_gs204_g1_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs204_g1_s0_station_sref_script }; /* 0x825d21c */
 
 static const struct ScriptCommand s_gs204_g1_s0_lives0_dlg0[] = { /* 0x825d228 */
     DEBUGINFO_O(101),
@@ -163,7 +163,7 @@ static const struct ScriptCommand s_gs204_g2_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs204_g2_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs204_g2_s0_station_sref_script }; /* 0x825d80c */
+static const struct ScriptRef s_gs204_g2_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs204_g2_s0_station_sref_script }; /* 0x825d80c */
 
 static const struct ScriptCommand s_gs204_g2_s0_lives0_dlg0[] = { /* 0x825d818 */
     DEBUGINFO_O(169),

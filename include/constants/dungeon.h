@@ -68,6 +68,7 @@ enum DungeonID
     DUNGEON_MT_FARAWAY = 60,
     DUNGEON_D61 = 61,
     DUNGEON_PURITY_FOREST = 62,
+
     DUNGEON_OUT_ON_RESCUE = 63,
     DUNGEON_JOIN_LOCATION_LEADER = 64, // Displays as "???".
     DUNGEON_JOIN_LOCATION_PARTNER = 65, // Displays as "Tiny Woods".

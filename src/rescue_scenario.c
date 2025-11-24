@@ -97,9 +97,9 @@ void sub_809733C(s32 _rescueDungId, bool32 param_2)
     }
 }
 
-bool8 sub_8097384(s32 param_1)
+bool8 sub_8097384(s32 rescueDungeon)
 {
-    s32 param1 = (s16)param_1;
+    s32 param1 = (s16)rescueDungeon;
 
     if (param1 == RESCUE_DUNGEON_DUMMY)
         return FALSE;
@@ -116,7 +116,7 @@ void sub_80973A8(s32 _rescueDungId, bool32 param_2)
         if (param_2_u8) {
             s32 scriptDungeon = RescueDungeonToScriptDungeonId(_rescueDungId);
             SetScriptVarArrayValue(NULL, RESCUE_SCENARIO_ORDER_LIST, (u16)rescueDungId, 0);
-            if (scriptDungeon != SCRIPT_DUNGEON_INVALID)
+            if (scriptDungeon != -1)
                 SetScriptVarValue(NULL, DUNGEON_SELECT, scriptDungeon);
         }
 

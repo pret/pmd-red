@@ -13,7 +13,7 @@ static const struct ScriptCommand s_gs162_g0_s0_station_sref_script[] = { /* 0x8
     JUMP_SCRIPT(COMMON_ENTER),
 };
 
-static const struct ScriptRef s_gs162_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs162_g0_s0_station_sref_script }; /* 0x820fd9c */
+static const struct ScriptRef s_gs162_g0_s0_station_sref = { ENTER_CONTROL , 1, NULL, s_gs162_g0_s0_station_sref_script }; /* 0x820fd9c */
 
 static const struct ScriptCommand s_gs162_g1_s0_station_sref_script[] = { /* 0x820fda8 */
     DEBUGINFO_O(19),
@@ -28,7 +28,7 @@ static const struct ScriptCommand s_gs162_g1_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs162_g1_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs162_g1_s0_station_sref_script }; /* 0x820fe48 */
+static const struct ScriptRef s_gs162_g1_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs162_g1_s0_station_sref_script }; /* 0x820fe48 */
 
 static const struct ScriptCommand s_gs162_g1_s0_lives0_dlg0[] = { /* 0x820fe54 */
     DEBUGINFO_O(34),
@@ -72,7 +72,7 @@ static const struct ScriptCommand s_gs162_g2_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs162_g2_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs162_g2_s0_station_sref_script }; /* 0x8210144 */
+static const struct ScriptRef s_gs162_g2_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs162_g2_s0_station_sref_script }; /* 0x8210144 */
 
 static const struct ScriptCommand s_gs162_g2_s0_eff0_script[] = { /* 0x8210150 */
     DEBUGINFO_O(78),
@@ -130,7 +130,7 @@ static const struct ScriptCommand s_gs162_g3_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs162_g3_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs162_g3_s0_station_sref_script }; /* 0x821055c */
+static const struct ScriptRef s_gs162_g3_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs162_g3_s0_station_sref_script }; /* 0x821055c */
 
 static const struct ScriptCommand s_gs162_g3_s0_lives0_dlg0[] = { /* 0x8210568 */
     DEBUGINFO_O(136),
@@ -239,7 +239,7 @@ static const struct ScriptCommand s_gs162_g4_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs162_g4_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs162_g4_s0_station_sref_script }; /* 0x8210c5c */
+static const struct ScriptRef s_gs162_g4_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs162_g4_s0_station_sref_script }; /* 0x8210c5c */
 
 static const struct ScriptCommand s_gs162_g4_s0_lives0_dlg0[] = { /* 0x8210c68 */
     DEBUGINFO_O(245),
@@ -386,7 +386,7 @@ static const struct ScriptCommand s_gs162_g5_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs162_g5_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs162_g5_s0_station_sref_script }; /* 0x82116ac */
+static const struct ScriptRef s_gs162_g5_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs162_g5_s0_station_sref_script }; /* 0x82116ac */
 
 static const struct ScriptCommand s_gs162_g5_s0_lives0_dlg0[] = { /* 0x82116b8 */
     DEBUGINFO_O(392),
@@ -423,7 +423,7 @@ static const struct ScriptCommand s_gs162_g6_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs162_g6_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs162_g6_s0_station_sref_script }; /* 0x8211894 */
+static const struct ScriptRef s_gs162_g6_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs162_g6_s0_station_sref_script }; /* 0x8211894 */
 
 static const struct ScriptCommand s_gs162_g6_s0_lives0_dlg0[] = { /* 0x82118a0 */
     DEBUGINFO_O(429),
@@ -682,7 +682,7 @@ static const struct ScriptCommand s_gs162_g7_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs162_g7_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs162_g7_s0_station_sref_script }; /* 0x8212e64 */
+static const struct ScriptRef s_gs162_g7_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs162_g7_s0_station_sref_script }; /* 0x8212e64 */
 
 static const struct ScriptCommand s_gs162_g7_s0_lives0_dlg0[] = { /* 0x8212e70 */
     DEBUGINFO_O(688),
@@ -722,7 +722,7 @@ static const struct ScriptCommand s_gs162_g8_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs162_g8_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs162_g8_s0_station_sref_script }; /* 0x8213030 */
+static const struct ScriptRef s_gs162_g8_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs162_g8_s0_station_sref_script }; /* 0x8213030 */
 
 static const struct ScriptCommand s_gs162_g8_s0_lives0_dlg0[] = { /* 0x821303c */
     DEBUGINFO_O(728),
@@ -987,7 +987,7 @@ static const struct ScriptCommand s_gs162_g9_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs162_g9_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs162_g9_s0_station_sref_script }; /* 0x8214520 */
+static const struct ScriptRef s_gs162_g9_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs162_g9_s0_station_sref_script }; /* 0x8214520 */
 
 static const struct ScriptCommand s_gs162_g9_s0_lives0_dlg0[] = { /* 0x821452c */
     DEBUGINFO_O(993),
@@ -1243,7 +1243,7 @@ static const struct ScriptCommand s_gs162_g10_s0_station_sref_script[] = { /* 0x
     RET,
 };
 
-static const struct ScriptRef s_gs162_g10_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs162_g10_s0_station_sref_script }; /* 0x8215d98 */
+static const struct ScriptRef s_gs162_g10_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs162_g10_s0_station_sref_script }; /* 0x8215d98 */
 
 static const struct ScriptCommand s_gs162_g10_s0_lives0_dlg0[] = { /* 0x8215da4 */
     DEBUGINFO_O(1249),

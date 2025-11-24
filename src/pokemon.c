@@ -283,63 +283,67 @@ Pokemon *TryAddLevel1PokemonToRecruited(s32 species, u8 *name, u32 _itemID, cons
 
 void sub_808D31C(Pokemon *param_1)
 {
-  if ((!IsMonTeamLeader(param_1)) && !IsMonPartner(param_1))
-      param_1->flags = 0;
+    if (!IsMonTeamLeader(param_1) && !IsMonPartner(param_1))
+        param_1->flags = 0;
 }
 
-Pokemon * GetPlayerPokemonStruct(void)
+Pokemon *GetLeaderMon1(void)
 {
-    s32 index;
+    s32 i;
 
-    for(index = 0; index < NUM_MONSTERS; index++)
-    {
-        if(((PokemonExists(&gRecruitedPokemonRef->pokemon[index])))){
-            if(IsMonTeamLeader(&gRecruitedPokemonRef->pokemon[index])) {
-                return &gRecruitedPokemonRef->pokemon[index];
+    for (i = 0; i < NUM_MONSTERS; i++) {
+        if (PokemonExists(&gRecruitedPokemonRef->pokemon[i])){
+            if (IsMonTeamLeader(&gRecruitedPokemonRef->pokemon[i])) {
+                return &gRecruitedPokemonRef->pokemon[i];
             }
         }
     }
+
     return NULL;
 }
 
-Pokemon * sub_808D378(void)
+Pokemon *GetPartnerMon(void)
 {
-    s32 index;
+    s32 i;
 
-    for(index = 0; index < NUM_MONSTERS; index++)
-    {
-        if(((PokemonExists(&gRecruitedPokemonRef->pokemon[index])))){
-            if(IsMonPartner(&gRecruitedPokemonRef->pokemon[index])) {
-                return &gRecruitedPokemonRef->pokemon[index];
+    for (i = 0; i < NUM_MONSTERS; i++) {
+        if (PokemonExists(&gRecruitedPokemonRef->pokemon[i])){
+            if (IsMonPartner(&gRecruitedPokemonRef->pokemon[i])) {
+                return &gRecruitedPokemonRef->pokemon[i];
             }
         }
     }
+
     return NULL;
 }
 
-Pokemon * sub_808D3BC(void)
+Pokemon *GetLeaderMon2(void)
 {
-    s32 index;
-    for (index = 0; index < NUM_MONSTERS; index++) {
-        if (PokemonExists(&gRecruitedPokemonRef->pokemon[index])
-            && (gRecruitedPokemonRef->pokemon[index].dungeonLocation.id == DUNGEON_JOIN_LOCATION_LEADER))
+    s32 i;
+
+    for (i = 0; i < NUM_MONSTERS; i++) {
+        if (PokemonExists(&gRecruitedPokemonRef->pokemon[i])
+            && (gRecruitedPokemonRef->pokemon[i].dungeonLocation.id == DUNGEON_JOIN_LOCATION_LEADER))
         {
-            return &gRecruitedPokemonRef->pokemon[index];
+            return &gRecruitedPokemonRef->pokemon[i];
         }
     }
+
     return NULL;
 }
 
-Pokemon * sub_808D3F8(void)
+Pokemon *GetPartnerMon2(void)
 {
-    s32 index;
-    for (index = 0; index < NUM_MONSTERS; index++) {
-        if (PokemonExists(&gRecruitedPokemonRef->pokemon[index])
-            && (gRecruitedPokemonRef->pokemon[index].dungeonLocation.id == DUNGEON_JOIN_LOCATION_PARTNER))
+    s32 i;
+
+    for (i = 0; i < NUM_MONSTERS; i++) {
+        if (PokemonExists(&gRecruitedPokemonRef->pokemon[i])
+            && (gRecruitedPokemonRef->pokemon[i].dungeonLocation.id == DUNGEON_JOIN_LOCATION_PARTNER))
         {
-            return &gRecruitedPokemonRef->pokemon[index];
+            return &gRecruitedPokemonRef->pokemon[i];
         }
     }
+
     return NULL;
 }
 

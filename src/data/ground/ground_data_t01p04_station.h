@@ -21,10 +21,10 @@ static const struct ScriptCommand s_gs5_g0_s0_station_sref_script[] = { /* 0x819
     JUMP_LABEL(1),
   LABEL(1), /* = 0x01 */
     CJUMP_VAR(START_MODE),
-    COND_EQUAL(12, /* to label */ 2),
-    COND_EQUAL(11, /* to label */ 2),
-    COND_EQUAL(10, /* to label */ 3),
-    COND_EQUAL(9, /* to label */ 4),
+    COND_EQUAL(STARTMODE_DUNGEON_LOST, /* to label */ 2),
+    COND_EQUAL(STARTMODE_11, /* to label */ 2),
+    COND_EQUAL(STARTMODE_10, /* to label */ 3),
+    COND_EQUAL(STARTMODE_DUNGEON_WON, /* to label */ 4),
     SELECT_LIVES(0, 1),
     JUMP_LABEL(6),
   LABEL(2), /* = 0x02 */
@@ -45,7 +45,7 @@ static const struct ScriptCommand s_gs5_g0_s0_station_sref_script[] = { /* 0x819
     JUMP_SCRIPT(COMMON_ENTER),
 };
 
-static const struct ScriptRef s_gs5_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs5_g0_s0_station_sref_script }; /* 0x8197c28 */
+static const struct ScriptRef s_gs5_g0_s0_station_sref = { ENTER_CONTROL , 1, NULL, s_gs5_g0_s0_station_sref_script }; /* 0x8197c28 */
 
 
 static const struct ScriptCommand s_gs5_g0_s0_evt0_sref_script[] = { /* 0x8197c34 */
@@ -54,7 +54,7 @@ static const struct ScriptCommand s_gs5_g0_s0_evt0_sref_script[] = { /* 0x8197c3
     HALT,
 };
 
-static const struct ScriptRef s_gs5_g0_s0_evt0_sref = { 357, 2, NULL /* GETOUT_NORMAL */, s_gs5_g0_s0_evt0_sref_script }; /* 0x8197c64 */
+static const struct ScriptRef s_gs5_g0_s0_evt0_sref = { GETOUT_NORMAL, 2, NULL, s_gs5_g0_s0_evt0_sref_script }; /* 0x8197c64 */
 
 static const struct ScriptCommand s_gs5_g0_s1_lives0_dlg0[] = { /* 0x8197c70 */
     DEBUGINFO_O(60),
@@ -79,7 +79,7 @@ static const struct ScriptCommand s_gs5_g1_s0_station_sref_script[] = { /* 0x819
     RET_DIRECT,
 };
 
-static const struct ScriptRef s_gs5_g1_s0_station_sref = { 403, 8, NULL /* STATION_CONTROL */, s_gs5_g1_s0_station_sref_script }; /* 0x8197d50 */
+static const struct ScriptRef s_gs5_g1_s0_station_sref = { STATION_CONTROL , 8, NULL, s_gs5_g1_s0_station_sref_script }; /* 0x8197d50 */
 
 static const struct ScriptCommand s_gs5_g1_s0_lives0_dlg2[] = { /* 0x8197d5c */
     DEBUGINFO_O(85),
@@ -136,7 +136,7 @@ static const struct ScriptCommand s_gs5_g2_s0_station_sref_script[] = { /* 0x819
     RET,
 };
 
-static const struct ScriptRef s_gs5_g2_s0_station_sref = { 402, 7, NULL /* EVENT_STATION */, s_gs5_g2_s0_station_sref_script }; /* 0x8197fdc */
+static const struct ScriptRef s_gs5_g2_s0_station_sref = { EVENT_STATION , 7, NULL, s_gs5_g2_s0_station_sref_script }; /* 0x8197fdc */
 
 static const struct ScriptCommand s_gs5_g2_s0_lives0_dlg0[] = { /* 0x8197fe8 */
     DEBUGINFO_O(142),
@@ -186,7 +186,7 @@ static const struct ScriptCommand s_gs5_g3_s0_station_sref_script[] = { /* 0x819
     RET,
 };
 
-static const struct ScriptRef s_gs5_g3_s0_station_sref = { 402, 7, NULL /* EVENT_STATION */, s_gs5_g3_s0_station_sref_script }; /* 0x8198228 */
+static const struct ScriptRef s_gs5_g3_s0_station_sref = { EVENT_STATION , 7, NULL, s_gs5_g3_s0_station_sref_script }; /* 0x8198228 */
 
 static const struct ScriptCommand s_gs5_g3_s0_lives0_dlg0[] = { /* 0x8198234 */
     DEBUGINFO_O(192),
@@ -239,7 +239,7 @@ static const struct ScriptCommand s_gs5_g4_s0_station_sref_script[] = { /* 0x819
     RET,
 };
 
-static const struct ScriptRef s_gs5_g4_s0_station_sref = { 402, 7, NULL /* EVENT_STATION */, s_gs5_g4_s0_station_sref_script }; /* 0x81985ec */
+static const struct ScriptRef s_gs5_g4_s0_station_sref = { EVENT_STATION , 7, NULL, s_gs5_g4_s0_station_sref_script }; /* 0x81985ec */
 
 static const struct ScriptCommand s_gs5_g4_s0_lives0_dlg0[] = { /* 0x81985f8 */
     DEBUGINFO_O(245),
@@ -289,7 +289,7 @@ static const struct ScriptCommand s_gs5_g5_s0_station_sref_script[] = { /* 0x819
     RET,
 };
 
-static const struct ScriptRef s_gs5_g5_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs5_g5_s0_station_sref_script }; /* 0x8198868 */
+static const struct ScriptRef s_gs5_g5_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs5_g5_s0_station_sref_script }; /* 0x8198868 */
 
 static const struct ScriptCommand s_gs5_g5_s0_eff0_script[] = { /* 0x8198874 */
     DEBUGINFO_O(295),

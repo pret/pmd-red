@@ -143,7 +143,7 @@ static void sub_802BC08(void)
 
 void sub_802BC7C(void)
 {
-    PrintPokeNameToBuffer(gFormatBuffer_Monsters[0], sub_808D3BC());
+    PrintPokeNameToBuffer(gFormatBuffer_Monsters[0], GetLeaderMon2());
 
     if (gGameOptionsRef->playerGender == FEMALE)
         strcpy(gFormatBuffer_Monsters[1], sShe);

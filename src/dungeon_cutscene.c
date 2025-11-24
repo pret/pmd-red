@@ -753,7 +753,7 @@ void sub_8085374(void)
     s32 temp;
     Entity *leaderEntity = NULL;
     Entity *partnerEntity = NULL;
-    s32 species = sub_808D3F8()->speciesNum;
+    s32 species = GetPartnerMon2()->speciesNum;
 
     for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
         entity = gDungeon->teamPokemon[i];

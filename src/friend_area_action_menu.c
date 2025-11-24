@@ -434,7 +434,7 @@ void sub_80278B4(void)
         break;
       case FRIEND_AREA_ACTION_MENU_ACTION_MAKE_LEADER:
         newLeader = &gRecruitedPokemonRef->pokemon[sUnknown_203B2BC->targetPoke];
-        playerStruct = GetPlayerPokemonStruct();
+        playerStruct = GetLeaderMon1();
         if (!newLeader->isTeamLeader) {
           playerStruct->isTeamLeader = FALSE;
           newLeader->isTeamLeader = TRUE;
@@ -714,8 +714,8 @@ bool8 sub_8027D9C(Pokemon *pokeStruct)
 bool8 sub_8027DCC(Pokemon *pokeStruct)
 {
     u32 var1;
-    if(sub_808D3BC() != pokeStruct)
-        if(sub_808D3F8() != pokeStruct)
+    if(GetLeaderMon2() != pokeStruct)
+        if(GetPartnerMon2() != pokeStruct)
             if(!pokeStruct->isTeamLeader)
             {
                 var1 = 0;

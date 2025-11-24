@@ -304,7 +304,7 @@ void DrawLoadScreenText(void)
   PrintStringOnWindow(64,0,gLoadScreen->formattedTeamName,0,0);
 
   // Draw Player Name
-  playerInfo = GetPlayerPokemonStruct();
+  playerInfo = GetLeaderMon1();
   if (playerInfo == NULL)
         StrncpyCustom(playerName, gNoNamePlaceholder, POKEMON_NAME_LENGTH);
   else

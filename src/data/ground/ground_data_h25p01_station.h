@@ -29,10 +29,10 @@ static const struct ScriptCommand s_gs153_g0_s0_station_sref_script[] = { /* 0x8
     SELECT_ENTITIES(1, 0),
     JUMP_LABEL(2),
   LABEL(2), /* = 0x02 */
-    JUMPIF_EQUAL(START_MODE, 1, /* to label */ 4),
-    JUMPIF_EQUAL(START_MODE, 3, /* to label */ 5),
-    JUMPIF_EQUAL(START_MODE, 2, /* to label */ 6),
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 6),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_CONTINUE_GAME, /* to label */ 4),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_3, /* to label */ 5),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_GROUND, /* to label */ 6),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 6),
     JUMP_LABEL(4),
   LABEL(6), /* = 0x06 */
     CJUMP_VAR(GROUND_GETOUT),
@@ -52,7 +52,7 @@ static const struct ScriptCommand s_gs153_g0_s0_station_sref_script[] = { /* 0x8
     JUMP_SCRIPT(COMMON_ENTER),
 };
 
-static const struct ScriptRef s_gs153_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs153_g0_s0_station_sref_script }; /* 0x820a670 */
+static const struct ScriptRef s_gs153_g0_s0_station_sref = { ENTER_CONTROL , 1, NULL, s_gs153_g0_s0_station_sref_script }; /* 0x820a670 */
 
 static const struct ScriptCommand s_gs153_g0_s1_lives0_dlg0[] = { /* 0x820a67c */
     DEBUGINFO_O(58),
@@ -215,10 +215,10 @@ static const struct GroundLivesData s_gs153_g1_s0_lives[] = { /* 0x820aa4c */
 };
 
 static const struct GroundEventData s_gs153_g0_s0_evts[] = { /* 0x820aadc */
-    /*  0 */ {  60,   1,   0,   0, {   0,   0, 0, 0 }, &gFunctionScriptTable[358] },
-    /*  1 */ {  60,   1,   0,   0, {   0,  35, 0, 0 }, &gFunctionScriptTable[358] },
-    /*  2 */ {   1,  36,   0,   0, {   0,   0, 0, 0 }, &gFunctionScriptTable[358] },
-    /*  3 */ {   1,  36,   0,   0, {  59,   0, 0, 0 }, &gFunctionScriptTable[358] },
+    /*  0 */ {  60,   1,   0,   0, {   0,   0, 0, 0 }, &gFunctionScriptTable[GETOUT_HABITAT] },
+    /*  1 */ {  60,   1,   0,   0, {   0,  35, 0, 0 }, &gFunctionScriptTable[GETOUT_HABITAT] },
+    /*  2 */ {   1,  36,   0,   0, {   0,   0, 0, 0 }, &gFunctionScriptTable[GETOUT_HABITAT] },
+    /*  3 */ {   1,  36,   0,   0, {  59,   0, 0, 0 }, &gFunctionScriptTable[GETOUT_HABITAT] },
 };
 
 static const struct ScriptRef * const (sStationScripts[]) = { /* 0x820ab0c */

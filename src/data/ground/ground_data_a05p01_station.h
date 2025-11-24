@@ -8,17 +8,17 @@
 
 static const struct ScriptCommand s_gs175_g0_s0_station_sref_script[] = { /* 0x822af80 */
     DEBUGINFO_O(10),
-    SELECT_MAP(175),
+    SELECT_MAP(MAP_NIGHT_SKY_1),
     JUMP_SCRIPT(COMMON_ENTER),
 };
 
-static const struct ScriptRef s_gs175_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs175_g0_s0_station_sref_script }; /* 0x822afdc */
+static const struct ScriptRef s_gs175_g0_s0_station_sref = { ENTER_CONTROL , 1, NULL, s_gs175_g0_s0_station_sref_script }; /* 0x822afdc */
 
 static const struct ScriptCommand s_gs175_g1_s0_station_sref_script[] = { /* 0x822afe8 */
     DEBUGINFO_O(18),
     BGM_STOP,
     WAIT(180),
-    SELECT_MAP(175),
+    SELECT_MAP(MAP_NIGHT_SKY_1),
     SELECT_ENTITIES(-1, 0),
     { 0x3b, 0x36,  0x0000, -0x00000002,  0x00000000, NULL },
     { 0x22, 0x01,  0x00b4,  0x00000000,  0x00000000, NULL },
@@ -33,7 +33,7 @@ static const struct ScriptCommand s_gs175_g1_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs175_g1_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs175_g1_s0_station_sref_script }; /* 0x822b0e8 */
+static const struct ScriptRef s_gs175_g1_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs175_g1_s0_station_sref_script }; /* 0x822b0e8 */
 
 static const struct ScriptCommand s_gs175_g1_s0_eff1_script[] = { /* 0x822b0f4 */
     DEBUGINFO_O(39),
@@ -62,7 +62,7 @@ static const struct ScriptCommand s_gs175_g1_s0_eff1_script[] = { /* 0x822b0f4 *
 
 static const struct ScriptCommand s_gs175_g2_s0_station_sref_script[] = { /* 0x822b2f4 */
     DEBUGINFO_O(64),
-    SELECT_MAP(175),
+    SELECT_MAP(MAP_NIGHT_SKY_1),
     SELECT_ENTITIES(-1, 0),
     { 0x3b, 0x36,  0x0000, -0x00000002,  0x00000000, NULL },
     BGM_STOP,
@@ -76,7 +76,7 @@ static const struct ScriptCommand s_gs175_g2_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs175_g2_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs175_g2_s0_station_sref_script }; /* 0x822b3c4 */
+static const struct ScriptRef s_gs175_g2_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs175_g2_s0_station_sref_script }; /* 0x822b3c4 */
 
 static const struct ScriptCommand s_gs175_g2_s0_eff1_script[] = { /* 0x822b3d0 */
     DEBUGINFO_O(82),

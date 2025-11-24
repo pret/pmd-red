@@ -26,10 +26,10 @@ static const struct ScriptCommand s_gs158_g0_s0_station_sref_script[] = { /* 0x8
     COND_EQUAL(0, /* to label */ 2),
     JUMP_SCRIPT(EVENT_S02E02A_L002),
   LABEL(4), /* = 0x04 */
-    JUMPIF_EQUAL(START_MODE, 1, /* to label */ 5),
-    JUMPIF_EQUAL(START_MODE, 3, /* to label */ 6),
-    JUMPIF_EQUAL(START_MODE, 2, /* to label */ 7),
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 7),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_CONTINUE_GAME, /* to label */ 5),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_3, /* to label */ 6),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_GROUND, /* to label */ 7),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 7),
     JUMP_LABEL(5),
   LABEL(7), /* = 0x07 */
     CJUMP_VAR(GROUND_GETOUT),
@@ -49,7 +49,7 @@ static const struct ScriptCommand s_gs158_g0_s0_station_sref_script[] = { /* 0x8
     JUMP_SCRIPT(COMMON_ENTER),
 };
 
-static const struct ScriptRef s_gs158_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs158_g0_s0_station_sref_script }; /* 0x820cb74 */
+static const struct ScriptRef s_gs158_g0_s0_station_sref = { ENTER_CONTROL , 1, NULL, s_gs158_g0_s0_station_sref_script }; /* 0x820cb74 */
 
 static const struct ScriptCommand s_gs158_g0_s1_lives0_dlg0[] = { /* 0x820cb80 */
     DEBUGINFO_O(71),
@@ -183,7 +183,7 @@ static const struct ScriptCommand s_gs158_g2_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs158_g2_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs158_g2_s0_station_sref_script }; /* 0x820d150 */
+static const struct ScriptRef s_gs158_g2_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs158_g2_s0_station_sref_script }; /* 0x820d150 */
 
 static const struct ScriptCommand s_gs158_g2_s0_eff0_script[] = { /* 0x820d15c */
     DEBUGINFO_O(205),
@@ -273,7 +273,7 @@ static const struct ScriptCommand s_gs158_g2_s0_lives0_dlg0[] = { /* 0x820d22c *
     ALERT_CUE(10), // Vortex stone or circle?
     AWAIT_CUE(5),
     WAIT(60),
-    WALK_GRID(256, 6), // Our character walks up?
+    WALK_GRID(256, 6), // Our character walks up
     ALERT_CUE(7), // Zapdos faces SouthWest
     ALERT_CUE(8), // Moltres faces SouthEast
     WAIT(60),
@@ -604,10 +604,10 @@ static const struct GroundEffectData s_gs158_g2_s0_effs[] = { /* 0x820e81c */
 };
 
 static const struct GroundEventData s_gs158_g0_s0_evts[] = { /* 0x820e834 */
-    /*  0 */ {  60,   3,   0,   0, {   0,   0, 0, 0 }, &gFunctionScriptTable[358] },
-    /*  1 */ {  60,   1,   0,   0, {   0,  32, 0, 0 }, &gFunctionScriptTable[358] },
-    /*  2 */ {   1,  33,   0,   0, {   0,   0, 0, 0 }, &gFunctionScriptTable[358] },
-    /*  3 */ {   1,  33,   0,   0, {  59,   0, 0, 0 }, &gFunctionScriptTable[358] },
+    /*  0 */ {  60,   3,   0,   0, {   0,   0, 0, 0 }, &gFunctionScriptTable[GETOUT_HABITAT] },
+    /*  1 */ {  60,   1,   0,   0, {   0,  32, 0, 0 }, &gFunctionScriptTable[GETOUT_HABITAT] },
+    /*  2 */ {   1,  33,   0,   0, {   0,   0, 0, 0 }, &gFunctionScriptTable[GETOUT_HABITAT] },
+    /*  3 */ {   1,  33,   0,   0, {  59,   0, 0, 0 }, &gFunctionScriptTable[GETOUT_HABITAT] },
 };
 
 static const struct ScriptRef * const (sStationScripts[]) = { /* 0x820e864 */

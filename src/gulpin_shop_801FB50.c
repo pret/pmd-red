@@ -89,7 +89,7 @@ bool8 sub_801FB50(u32 mode)
     CopyYellowMonsterNametoBuffer(gFormatBuffer_Monsters[7], MONSTER_GULPIN);
     name = GetMonSpecies(MONSTER_GULPIN);
     strcpy(gFormatBuffer_Monsters[6], name);
-    PrintPokeNameToBuffer(gFormatBuffer_Monsters[4], GetPlayerPokemonStruct());
+    PrintPokeNameToBuffer(gFormatBuffer_Monsters[4], GetLeaderMon1());
 
     if (gUnknown_203B27C->mode == GULPIN_SHOP_MODE_ASLEEP)
         gUnknown_203B27C->monPortraitPtr = NULL;

@@ -85,7 +85,7 @@ bool8 sub_801D014(Pokemon *a0)
     sUnknown_203B250->currFriendAreaLocation = MapIdToFriendAreaId(GetGroundMapID());
     sUnknown_203B250->unk8 = 0;
     sUnknown_203B250->unk9 = 0;
-    sUnknown_203B250->unkC = GetPlayerPokemonStruct();
+    sUnknown_203B250->unkC = GetLeaderMon1();
     sUnknown_203B250->unk7 = 0;
 
     if (sUnknown_203B250->pokeStruct != NULL)
@@ -148,13 +148,13 @@ u32 sub_801D178(void)
     if (sUnknown_203B250->unk8 != 0)
         return 1;
 
-    if (sUnknown_203B250->unkC != GetPlayerPokemonStruct())
+    if (sUnknown_203B250->unkC != GetLeaderMon1())
         return 4;
 
     if ((s16) sub_80A7AE8(7) < 0)
         return 0;
 
-    if (PokemonFlag2(sub_808D3F8()))
+    if (PokemonFlag2(GetPartnerMon2()))
         return 0;
 
     return 4;

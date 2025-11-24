@@ -1,12 +1,14 @@
 #ifndef GUARD_STR_GROUND_SCRIPT_H
 #define GUARD_STR_GROUND_SCRIPT_H
 
+#include "constants/script_id.h"
+#include "constants/script_cmd.h"
 #include "structs/str_position.h"
 
 // size: 0x10
 typedef struct ScriptCommand
 {
-    /* 0x0 */ u8  op;
+    /* 0x0 */ u8  op; // See enum "ScriptOpID"
     /* 0x1 */ u8  argByte;
     /* 0x2 */ s16 argShort;
     /* 0x4 */ s32 arg1;
@@ -46,7 +48,7 @@ typedef struct ScriptData
     /* 0x04 */ ScriptInfo script;
     /* 0x10 */ ScriptInfo savedScript;
     /* 0x1C */ const ScriptCommand *curPtr;
-    /* 0x20 */ u8  curScriptOp;
+    /* 0x20 */ u8  curScriptOp; // See enum "ScriptOpID"
     /* 0x22 */ s16 unk22;
     /* 0x24 */ u16 unk24;
     /* 0x26 */ s8  unk26;
@@ -127,15 +129,16 @@ typedef struct GroundMapAction
                u32 unk10C;
 } GroundMapAction;
 
+// Size: 0xC
 typedef struct ScriptRef
 {
-    s16 id;
-    s16 type;
-    u8 *name;
-    const ScriptCommand *script;
+    /* 0x0 */ s16 id; // See enum "ScriptID"
+    /* 0x2 */ s16 type;
+    /* 0x4 */ const u8 *name;
+    /* 0x8 */ const ScriptCommand *script;
 } ScriptRef;
 
-extern const ScriptRef gFunctionScriptTable[];
+extern const ScriptRef gFunctionScriptTable[NUM_SCRIPT_IDS];
 
 struct GroundLink {
     CompactPos pos;

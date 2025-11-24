@@ -14,7 +14,7 @@ static const struct ScriptCommand s_gs207_g0_s0_station_sref_script[] = { /* 0x8
     JUMP_SCRIPT(COMMON_ENTER),
 };
 
-static const struct ScriptRef s_gs207_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs207_g0_s0_station_sref_script }; /* 0x825ffd4 */
+static const struct ScriptRef s_gs207_g0_s0_station_sref = { ENTER_CONTROL , 1, NULL, s_gs207_g0_s0_station_sref_script }; /* 0x825ffd4 */
 
 static const struct ScriptCommand s_gs207_g1_s0_station_sref_script[] = { /* 0x825ffe0 */
     DEBUGINFO_O(20),
@@ -29,7 +29,7 @@ static const struct ScriptCommand s_gs207_g1_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs207_g1_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs207_g1_s0_station_sref_script }; /* 0x8260080 */
+static const struct ScriptRef s_gs207_g1_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs207_g1_s0_station_sref_script }; /* 0x8260080 */
 
 static const struct ScriptCommand s_gs207_g1_s0_lives0_dlg0[] = { /* 0x826008c */
     DEBUGINFO_O(35),
@@ -173,7 +173,7 @@ static const struct ScriptCommand s_gs207_g2_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs207_g2_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs207_g2_s0_station_sref_script }; /* 0x8260928 */
+static const struct ScriptRef s_gs207_g2_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs207_g2_s0_station_sref_script }; /* 0x8260928 */
 
 static const struct ScriptCommand s_gs207_g2_s0_lives0_dlg0[] = { /* 0x8260934 */
     DEBUGINFO_O(179),
@@ -239,7 +239,7 @@ static const struct ScriptCommand s_gs207_g3_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs207_g3_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs207_g3_s0_station_sref_script }; /* 0x8260d2c */
+static const struct ScriptRef s_gs207_g3_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs207_g3_s0_station_sref_script }; /* 0x8260d2c */
 
 static const struct ScriptCommand s_gs207_g3_s0_lives0_dlg0[] = { /* 0x8260d38 */
     DEBUGINFO_O(245),

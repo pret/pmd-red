@@ -821,6 +821,7 @@ static inline void CreateMenuOnWindowInternal(MenuInputStruct *menuInput, s32 to
     SetEntryHeight(menuInput, entryHeight);
 }
 
+// arm9.bin::0201AF28
 void CreateMenuOnWindow(MenuInputStruct *menuInput, s32 totalCount, u32 perPageCount, s32 windowId)
 {
     CreateMenuOnWindowInternal(menuInput, totalCount, perPageCount, windowId, DEFAULT_MENU_ENTRY_HEIGHT);

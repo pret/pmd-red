@@ -1,6 +1,6 @@
 
-
-
+#define NPC_PARTNER 1
+#define NPC_RAYQUAZA 2
 
 
 
@@ -8,16 +8,16 @@
 
 static const struct ScriptCommand s_gs209_g0_s0_station_sref_script[] = { /* 0x82620a8 */
     DEBUGINFO_O(10),
-    SELECT_MAP(209),
+    SELECT_MAP(MAP_SKY_TOWER_END),
     BGM_STOP,
     JUMP_SCRIPT(COMMON_ENTER),
 };
 
-static const struct ScriptRef s_gs209_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs209_g0_s0_station_sref_script }; /* 0x8262114 */
+static const struct ScriptRef s_gs209_g0_s0_station_sref = { ENTER_CONTROL , 1, NULL, s_gs209_g0_s0_station_sref_script }; /* 0x8262114 */
 
 static const struct ScriptCommand s_gs209_g1_s0_station_sref_script[] = { /* 0x8262120 */
     DEBUGINFO_O(19),
-    SELECT_MAP(209),
+    SELECT_MAP(MAP_SKY_TOWER_END),
     SELECT_ENTITIES(-1, -1),
     BGM_SWITCH(MUS_RAYQUAZAS_DOMAIN),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
@@ -27,7 +27,7 @@ static const struct ScriptCommand s_gs209_g1_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs209_g1_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs209_g1_s0_station_sref_script }; /* 0x82621b0 */
+static const struct ScriptRef s_gs209_g1_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs209_g1_s0_station_sref_script }; /* 0x82621b0 */
 
 static const struct ScriptCommand s_gs209_g1_s0_eff0_script[] = { /* 0x82621bc */
     DEBUGINFO_O(33),
@@ -84,7 +84,7 @@ static const struct ScriptCommand s_gs209_g1_s0_lives0_dlg0[] = { /* 0x826223c *
     ALERT_CUE(10),
     CALL_SCRIPT(NOTICE_FUNC),
     WAIT(60),
-    PORTRAIT(PLACEMENT_LEFT_, 0x0001, 0x0000000c),
+    PORTRAIT(PLACEMENT_LEFT_, NPC_PARTNER, 12),
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
     VARIANT(/* == */  1, _(" Wh-wh-what?! Quake?!{WAIT_PRESS}\nIt can't be!")),
     VARIANT(/* == */  1, _(" We're up on clouds...")),
@@ -95,8 +95,8 @@ static const struct ScriptCommand s_gs209_g1_s0_lives0_dlg0[] = { /* 0x826223c *
     FANFARE_PLAY2(465),
     ALERT_CUE(7),
     AWAIT_CUE(5),
-    PORTRAIT(PLACEMENT_MIDDLE_TOP_RIGHT, 0x0002, 0x00000000),
-    MSG_NPC(2, _(" These are shock waves!{WAIT_PRESS}\nAnd they're huge!")),
+    PORTRAIT(PLACEMENT_MIDDLE_TOP_RIGHT, NPC_RAYQUAZA, 0),
+    MSG_NPC(NPC_RAYQUAZA, _(" These are shock waves!{WAIT_PRESS}\nAnd they're huge!")),
     TEXTBOX_CLEAR,
     WAIT(30),
     FANFARE_PLAY2(465),
@@ -227,7 +227,7 @@ static const struct ScriptCommand s_gs209_g1_s0_lives4_dlg0[] = { /* 0x8262a4c *
 
 static const struct ScriptCommand s_gs209_g2_s0_station_sref_script[] = { /* 0x8262e10 */
     DEBUGINFO_O(229),
-    SELECT_MAP(209),
+    SELECT_MAP(MAP_SKY_TOWER_END),
     SELECT_ENTITIES(-1, -1),
     BGM_SWITCH(MUS_RAYQUAZAS_DOMAIN),
     { 0x97, 0x00,  0x0002,  0x00000001,  0x00000001, NULL },
@@ -238,7 +238,7 @@ static const struct ScriptCommand s_gs209_g2_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs209_g2_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs209_g2_s0_station_sref_script }; /* 0x8262eb0 */
+static const struct ScriptRef s_gs209_g2_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs209_g2_s0_station_sref_script }; /* 0x8262eb0 */
 
 static const struct ScriptCommand s_gs209_g2_s0_eff0_script[] = { /* 0x8262ebc */
     DEBUGINFO_O(244),
@@ -261,11 +261,11 @@ static const struct ScriptCommand s_gs209_g2_s0_lives0_dlg0[] = { /* 0x8262f4c *
     FANFARE_PLAY2(465),
     ALERT_CUE(7),
     AWAIT_CUE(5),
-    PORTRAIT(PLACEMENT_MIDDLE_TOP_RIGHT, 0x0002, 0x00000000),
-    MSG_NPC(2, _(" What is that?!")),
+    PORTRAIT(PLACEMENT_MIDDLE_TOP_RIGHT, NPC_RAYQUAZA, 0),
+    MSG_NPC(NPC_RAYQUAZA, _(" What is that?!")),
     TEXTBOX_CLEAR,
     WAIT(10),
-    PORTRAIT(PLACEMENT_LEFT_, 0x0001, 0x0000000c),
+    PORTRAIT(PLACEMENT_LEFT_, NPC_PARTNER, 12),
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
     VARIANT(/* == */  1, _(" It's a shooting star!\nAnd it's gigantic!")),
     VARIANT(/* == */  1, _(" It's going to destroy\nthe world if it isn't stopped!")),
@@ -280,7 +280,7 @@ static const struct ScriptCommand s_gs209_g2_s0_lives0_dlg0[] = { /* 0x8262f4c *
     ALERT_CUE(7),
     AWAIT_CUE(5),
     WAIT(15),
-    MSG_NPC(2, _(" ...So, that is why...")),
+    MSG_NPC(NPC_RAYQUAZA, _(" ...So, that is why...")),
     TEXTBOX_CLEAR,
     WAIT(10),
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
@@ -288,10 +288,10 @@ static const struct ScriptCommand s_gs209_g2_s0_lives0_dlg0[] = { /* 0x8262f4c *
     VARIANT_DEFAULT(_(" Yes!\nPlease hurry and destroy it!")),
     TEXTBOX_CLEAR,
     WAIT(10),
-    MSG_NPC(2, _(" ............{WAIT_PRESS}Before I try...{WAIT_PRESS}\nI need to know your resolve.")),
-    MSG_NPC(2, _(" The star has come too close.")),
-    MSG_NPC(2, _(" If I were to loose my\nHyper Beam here...")),
-    MSG_NPC(2, _(" You would not escape\nunscathed!")),
+    MSG_NPC(NPC_RAYQUAZA, _(" ............{WAIT_PRESS}Before I try...{WAIT_PRESS}\nI need to know your resolve.")),
+    MSG_NPC(NPC_RAYQUAZA, _(" The star has come too close.")),
+    MSG_NPC(NPC_RAYQUAZA, _(" If I were to loose my\nHyper Beam here...")),
+    MSG_NPC(NPC_RAYQUAZA, _(" You would not escape\nunscathed!")),
     TEXTBOX_CLEAR,
     WAIT(10),
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
@@ -299,7 +299,7 @@ static const struct ScriptCommand s_gs209_g2_s0_lives0_dlg0[] = { /* 0x8262f4c *
     VARIANT_DEFAULT(_(" So?!{WAIT_PRESS}\nWe accepted that from the start!")),
     TEXTBOX_CLEAR,
     WAIT(10),
-    MSG_NPC(2, _(" Well said!")),
+    MSG_NPC(NPC_RAYQUAZA, _(" Well said!")),
     TEXTBOX_CLEAR,
     WAIT(30),
     ALERT_CUE(7),
@@ -308,7 +308,7 @@ static const struct ScriptCommand s_gs209_g2_s0_lives0_dlg0[] = { /* 0x8262f4c *
     FANFARE_PLAY2(664),
     ALERT_CUE(8),
     AWAIT_CUE(5),
-    MSG_NPC(2, _(" Take charge of your destiny!")),
+    MSG_NPC(NPC_RAYQUAZA, _(" Take charge of your destiny!")),
     TEXTBOX_CLEAR,
     ALERT_CUE(7),
     AWAIT_CUE(5),
@@ -394,7 +394,7 @@ static const struct ScriptCommand s_gs209_g2_s0_eff1_script[] = { /* 0x8263860 *
 
 static const struct ScriptCommand s_gs209_g3_s0_station_sref_script[] = { /* 0x8263980 */
     DEBUGINFO_O(396),
-    SELECT_MAP(209),
+    SELECT_MAP(MAP_SKY_TOWER_END),
     SELECT_ENTITIES(-1, -1),
     BGM_SWITCH(MUS_RAYQUAZAS_DOMAIN),
     { 0x97, 0x00,  0x0002,  0x00000005,  0x00000002, NULL },
@@ -410,7 +410,7 @@ static const struct ScriptCommand s_gs209_g3_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs209_g3_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs209_g3_s0_station_sref_script }; /* 0x8263a70 */
+static const struct ScriptRef s_gs209_g3_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs209_g3_s0_station_sref_script }; /* 0x8263a70 */
 
 static const struct ScriptCommand s_gs209_g3_s0_lives0_dlg0[] = { /* 0x8263a7c */
     DEBUGINFO_O(416),
@@ -420,8 +420,8 @@ static const struct ScriptCommand s_gs209_g3_s0_lives0_dlg0[] = { /* 0x8263a7c *
     WAIT(30),
     WAIT(30),
     TEXTBOX_AUTO_PRESS(15, 15),
-    PORTRAIT(PLACEMENT_LEFT_, 0x0001, 0x0000000c),
-    MSG_NPC(1, _(" Waaaaaaaaaaaaaaaaaah!")),
+    PORTRAIT(PLACEMENT_LEFT_, NPC_PARTNER, 12),
+    MSG_NPC(NPC_PARTNER, _(" Waaaaaaaaaaaaaaaaaah!")),
     ALERT_CUE(3),
     HALT,
 };

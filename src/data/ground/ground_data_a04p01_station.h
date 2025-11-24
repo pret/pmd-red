@@ -24,7 +24,7 @@ static const struct ScriptCommand s_gs171_g0_s0_station_sref_script[] = { /* 0x8
     JUMP_SCRIPT(COMMON_ENTER),
 };
 
-static const struct ScriptRef s_gs171_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs171_g0_s0_station_sref_script }; /* 0x821fa28 */
+static const struct ScriptRef s_gs171_g0_s0_station_sref = { ENTER_CONTROL , 1, NULL, s_gs171_g0_s0_station_sref_script }; /* 0x821fa28 */
 
 static const struct ScriptCommand s_gs171_g1_s0_station_sref_script[] = { /* 0x821fa34 */
     DEBUGINFO_O(30),
@@ -37,7 +37,7 @@ static const struct ScriptCommand s_gs171_g1_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs171_g1_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs171_g1_s0_station_sref_script }; /* 0x821fab4 */
+static const struct ScriptRef s_gs171_g1_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs171_g1_s0_station_sref_script }; /* 0x821fab4 */
 
 static const struct ScriptCommand s_gs171_g1_s0_eff0_script[] = { /* 0x821fac0 */
     DEBUGINFO_O(43),
@@ -81,7 +81,7 @@ static const struct ScriptCommand s_gs171_g2_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs171_g2_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs171_g2_s0_station_sref_script }; /* 0x821fd38 */
+static const struct ScriptRef s_gs171_g2_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs171_g2_s0_station_sref_script }; /* 0x821fd38 */
 
 static const struct ScriptCommand s_gs171_g2_s0_eff0_script[] = { /* 0x821fd44 */
     DEBUGINFO_O(87),
@@ -130,7 +130,7 @@ static const struct ScriptCommand s_gs171_g3_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs171_g3_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs171_g3_s0_station_sref_script }; /* 0x82200a4 */
+static const struct ScriptRef s_gs171_g3_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs171_g3_s0_station_sref_script }; /* 0x82200a4 */
 
 static const struct ScriptCommand s_gs171_g3_s0_lives0_dlg0[] = { /* 0x82200b0 */
     DEBUGINFO_O(136),
@@ -390,7 +390,7 @@ static const struct ScriptCommand s_gs171_g4_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs171_g4_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs171_g4_s0_station_sref_script }; /* 0x82213f0 */
+static const struct ScriptRef s_gs171_g4_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs171_g4_s0_station_sref_script }; /* 0x82213f0 */
 
 static const struct ScriptCommand s_gs171_g4_s0_lives0_dlg0[] = { /* 0x82213fc */
     DEBUGINFO_O(396),
@@ -578,7 +578,7 @@ static const struct ScriptCommand s_gs171_g5_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs171_g5_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs171_g5_s0_station_sref_script }; /* 0x8221e34 */
+static const struct ScriptRef s_gs171_g5_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs171_g5_s0_station_sref_script }; /* 0x8221e34 */
 
 static const struct ScriptCommand s_gs171_g5_s0_eff0_script[] = { /* 0x8221e40 */
     DEBUGINFO_O(584),
@@ -623,7 +623,7 @@ static const struct ScriptCommand s_gs171_g5_s0_lives0_dlg0[] = { /* 0x8221f00 *
     ALERT_CUE(6),
     AWAIT_CUE(5),
     PORTRAIT(PLACEMENT_MIDDLE_TOP_RIGHT, 0x0002, 0x00000000),
-    MSG_NPC(2, _("...Regained consciousness!")),
+    MSG_NPC(2, _("...Regained consciousness!")), // Alakazam is 2
     TEXTBOX_CLEAR,
     MSG_NPC(-1, _(" Oooooooohhhhh!")),
     TEXTBOX_CLEAR,
@@ -1064,7 +1064,7 @@ static const struct ScriptCommand s_gs171_g6_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs171_g6_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs171_g6_s0_station_sref_script }; /* 0x8223c34 */
+static const struct ScriptRef s_gs171_g6_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs171_g6_s0_station_sref_script }; /* 0x8223c34 */
 
 static const struct ScriptCommand s_gs171_g6_s0_eff0_script[] = { /* 0x8223c40 */
     DEBUGINFO_O(1070),
@@ -1186,7 +1186,7 @@ static const struct ScriptCommand s_gs171_g6_s0_lives0_dlg0[] = { /* 0x8223d40 *
     TEXTBOX_CLEAR,
     WAIT(10),
     BGM_SWITCH(MUS_FAREWELL),
-    PORTRAIT(PLACEMENT_RIGHT, 0x0005, 0x00000000),
+    PORTRAIT(PLACEMENT_RIGHT, 0x0005, 0x00000000), // Gardevoir is 5
     MSG_NPC(5, _(" We owe everything to you,\n{NAME_0}, and your friends.")),
     MSG_NPC(5, _(" Peace has returned to\nour world.")),
     MSG_NPC(5, _(" Thank you for everything.")),
@@ -1215,7 +1215,7 @@ static const struct ScriptCommand s_gs171_g6_s0_lives0_dlg0[] = { /* 0x8223d40 *
     ALERT_CUE(11),
     ALERT_CUE(4),
     AWAIT_CUE(5),
-    PORTRAIT(PLACEMENT_TOP_LEFT, 0x0006, 0x00000000),
+    PORTRAIT(PLACEMENT_TOP_LEFT, 0x0006, 0x00000000), // Caterpie is 6
     MSG_NPC(6, _(" Oh? {NAME_0}?")),
     TEXTBOX_CLEAR,
     ALERT_CUE(6),
@@ -1225,7 +1225,7 @@ static const struct ScriptCommand s_gs171_g6_s0_lives0_dlg0[] = { /* 0x8223d40 *
     WAIT(45),
     ALERT_CUE(6),
     AWAIT_CUE(5),
-    PORTRAIT(PLACEMENT_MIDDLE_TOP_RIGHT, 0x0001, 0x0000000c),
+    PORTRAIT(PLACEMENT_MIDDLE_TOP_RIGHT, 0x0001, 0x0000000c), // Partner is 1
     PORTRAIT_POS(1, 0, 3),
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
     VARIANT(/* == */  1, _(" ...!{WAIT_PRESS} {NAME_0}...!{WAIT_PRESS}\nYour body...{WAIT_PRESS} What's happening?")),
@@ -1250,13 +1250,13 @@ static const struct ScriptCommand s_gs171_g6_s0_lives0_dlg0[] = { /* 0x8223d40 *
     ALERT_CUE(6),
     WAIT(30),
     ALERT_CUE(12),
-    PORTRAIT(PLACEMENT_MIDDLE_TOP_RIGHT, 0x0007, 0x00000041),
+    PORTRAIT(PLACEMENT_MIDDLE_TOP_RIGHT, 0x0007, 0x00000041), // Snubbull is 7
     MSG_NPC(7, _(" What?!")),
     TEXTBOX_CLEAR,
     WAIT(10),
     ALERT_CUE(18),
     { 0x2d, 0x09,  0x0009,  0x0000004f,  0x00000000, NULL },
-    PORTRAIT(PLACEMENT_TOP_RIGHT, 0x0009, 0x00000041),
+    PORTRAIT(PLACEMENT_TOP_RIGHT, 0x0009, 0x00000041), // Bellsprout is 9
     MSG_NPC(9, _(" Wh-what are you saying?!")),
     TEXTBOX_CLEAR,
     WAIT(60),
@@ -1274,12 +1274,12 @@ static const struct ScriptCommand s_gs171_g6_s0_lives0_dlg0[] = { /* 0x8223d40 *
     TEXTBOX_CLEAR,
     WAIT(10),
     ALERT_CUE(7),
-    PORTRAIT(PLACEMENT_MIDDLE_TOP_RIGHT, 0x0002, 0x00000000),
+    PORTRAIT(PLACEMENT_MIDDLE_TOP_RIGHT, 0x0002, 0x00000000), // Alakazam is 2
     MSG_NPC(2, _(" Unbelievable!")),
     TEXTBOX_CLEAR,
     WAIT(10),
     { 0x2d, 0x09,  0x0009,  0x0000005a,  0x00000000, NULL },
-    PORTRAIT(PLACEMENT_TOP_LEFT, 0x0009, 0x00000041),
+    PORTRAIT(PLACEMENT_TOP_LEFT, 0x0009, 0x00000041), // Tyranitar is 9
     MSG_NPC(9, _(" Go back...{WAIT_PRESS}\nTo the human world?!")),
     TEXTBOX_CLEAR,
     WAIT(30),
@@ -2108,7 +2108,7 @@ static const struct ScriptCommand s_gs171_g7_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs171_g7_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs171_g7_s0_station_sref_script }; /* 0x8227f48 */
+static const struct ScriptRef s_gs171_g7_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs171_g7_s0_station_sref_script }; /* 0x8227f48 */
 
 static const struct ScriptCommand s_gs171_g7_s0_lives0_dlg0[] = { /* 0x8227f54 */
     DEBUGINFO_O(2114),
@@ -2120,23 +2120,23 @@ static const struct ScriptCommand s_gs171_g7_s0_lives0_dlg0[] = { /* 0x8227f54 *
     { 0xdf, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(90),
     TEXTBOX_AUTO_PRESS(-1, -1),
-    PORTRAIT(PLACEMENT_LEFT_, 0x0006, 0x00000042),
+    PORTRAIT(PLACEMENT_LEFT_, 0x0006, 0x00000042), // Caterpie is 6
     MSG_NPC(6, _(" Snivel... {NAME_0}...{WAIT_PRESS}\nWhy...{WAIT_PRESS} I don't understand...")),
     TEXTBOX_CLEAR,
     WAIT(10),
     { 0x2d, 0x09,  0x0009,  0x00000059,  0x00000000, NULL },
-    PORTRAIT(PLACEMENT_TOP_RIGHT, 0x0009, 0x00000044),
+    PORTRAIT(PLACEMENT_TOP_RIGHT, 0x0009, 0x00000044), // Charizard is 9
     MSG_NPC(9, _(" Why?{WAIT_PRESS}\nWhy was it necessary to leave us...?")),
     TEXTBOX_CLEAR,
     WAIT(10),
     { 0x2d, 0x09,  0x0009,  0x00000055,  0x00000000, NULL },
-    PORTRAIT(PLACEMENT_TOP_LEFT, 0x0009, 0x00000043),
+    PORTRAIT(PLACEMENT_TOP_LEFT, 0x0009, 0x00000043), // Now Shiftry is 9
     MSG_NPC(9, _(" {NAME_0} saved my\nlife...")),
     MSG_NPC(9, _(" But I hadn't done anything\nto show my thanks...")),
     MSG_NPC(9, _(" Left...{WAIT_PRESS}\nBefore I could even say thanks...")),
     TEXTBOX_CLEAR,
     WAIT(30),
-    PORTRAIT(PLACEMENT_MIDDLE_TOP_LEFT, 0x0004, 0x00000043),
+    PORTRAIT(PLACEMENT_MIDDLE_TOP_LEFT, 0x0004, 0x00000043), // Lombre is 4
     PORTRAIT_POS(4, -2, 0),
     MSG_NPC(4, _(" You're right...")),
     MSG_NPC(4, _(" Just upped and went like\nthat...")),
@@ -2146,13 +2146,13 @@ static const struct ScriptCommand s_gs171_g7_s0_lives0_dlg0[] = { /* 0x8227f54 *
     WAIT(10),
     ALERT_CUE(8),
     AWAIT_CUE(5),
-    PORTRAIT(PLACEMENT_MIDDLE_TOP_RIGHT, 0x0003, 0x00000000),
+    PORTRAIT(PLACEMENT_MIDDLE_TOP_RIGHT, 0x0003, 0x00000000), // Xatu is 3
     MSG_NPC(3, _(" This was coming...{WAIT_PRESS}\nOur world, it was saved by {NAME_0}.")),
     MSG_NPC(3, _(" I look back now...{WAIT_PRESS}\nWhen bound for the sky, {NAME_0}\nseemed...")),
     MSG_NPC(3, _(" As if resigned.\nResigned to accept what was to come.")),
     TEXTBOX_CLEAR,
     WAIT(10),
-    PORTRAIT(PLACEMENT_LEFT_, 0x0001, 0x00000005),
+    PORTRAIT(PLACEMENT_LEFT_, 0x0001, 0x00000005), // Partner is 1
     MSG_NPC(1, _(" ............{WAIT_PRESS}\nI think I know...")),
     TEXTBOX_CLEAR,
     WAIT(10),
@@ -2175,7 +2175,7 @@ static const struct ScriptCommand s_gs171_g7_s0_lives0_dlg0[] = { /* 0x8227f54 *
     MSG_NPC(1, _(" If this was coming...{WAIT_PRESS}\nWhy didn't {NAME_0} tell me?")),
     TEXTBOX_CLEAR,
     WAIT(10),
-    PORTRAIT(PLACEMENT_MIDDLE_TOP_RIGHT, 0x0002, 0x00000000),
+    PORTRAIT(PLACEMENT_MIDDLE_TOP_RIGHT, 0x0002, 0x00000000), // Alakazam is 2
     MSG_NPC(2, _(" Those words couldn't be\nspoken.")),
     MSG_NPC(2, _(" As much as you are heart-\nbroken now...")),
     MSG_NPC(2, _(" {NAME_0} must have felt\nthe same pain of leaving.")),

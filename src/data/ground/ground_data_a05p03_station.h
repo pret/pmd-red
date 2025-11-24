@@ -8,16 +8,16 @@
 
 static const struct ScriptCommand s_gs177_g0_s0_station_sref_script[] = { /* 0x822bde8 */
     DEBUGINFO_O(10),
-    SELECT_MAP(177),
+    SELECT_MAP(MAP_THE_END),
     BGM_STOP,
     JUMP_SCRIPT(COMMON_ENTER),
 };
 
-static const struct ScriptRef s_gs177_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs177_g0_s0_station_sref_script }; /* 0x822be54 */
+static const struct ScriptRef s_gs177_g0_s0_station_sref = { ENTER_CONTROL , 1, NULL, s_gs177_g0_s0_station_sref_script }; /* 0x822be54 */
 
 static const struct ScriptCommand s_gs177_g1_s0_station_sref_script[] = { /* 0x822be60 */
     DEBUGINFO_O(19),
-    SELECT_MAP(177),
+    SELECT_MAP(MAP_THE_END),
     SELECT_ENTITIES(-1, -1),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     { 0xe0, 0x00,  0x002d,  0x00000000,  0x00000000, NULL },
@@ -41,7 +41,7 @@ static const struct ScriptCommand s_gs177_g1_s0_station_sref_script[] = { /* 0x8
     { 0x25, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(60),
     { 0x3b, 0x09,  0x0000,  0x00000000,  0x00000000, NULL },
-    UPDATE_VARINT(CALC_SET, GROUND_PLACE, 11),
+    UPDATE_VARINT(CALC_SET, GROUND_PLACE, GROUND_PLACE_TEAM_BASE_INSIDE),
     ASK1(FALSE, /*default*/ -1, /* speaker */ -1, _("Would you like to save your adventure?")),
     CHOICE(/* label */  0, _("Yes.")),
     CHOICE(/* label */  1, _("No.")),
@@ -54,7 +54,7 @@ static const struct ScriptCommand s_gs177_g1_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs177_g1_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs177_g1_s0_station_sref_script }; /* 0x822c1ac */
+static const struct ScriptRef s_gs177_g1_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs177_g1_s0_station_sref_script }; /* 0x822c1ac */
 static const struct GroundEffectData s_gs177_g1_s0_effs[] = { /* 0x822c1b8 */
     /*  0 */ {   0,   0,   1,   1, {  21,  15, CPOS_HALFTILE, CPOS_HALFTILE }, NULL },
 };

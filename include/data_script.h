@@ -1,13 +1,19 @@
+//#ifndef GUARD_DATA_SCRIPT_H
+//#define GUARD_DATA_SCRIPT_H
+
 #include "constants/bg_music.h"
 #include "constants/cutscenes.h"
 #include "constants/direction.h"
 #include "constants/event_flag.h"
-#include "constants/item.h"
 #include "constants/ground_map.h"
+#include "constants/item.h"
 #include "constants/rescue_dungeon_id.h"
 #include "constants/script_dungeon_id.h"
-#include "portrait_placement.h"
+#include "constants/script_cmd.h"
+#include "constants/script_id.h"
 #include "structs/str_ground_script.h"
+#include "ground_place.h"
+#include "portrait_placement.h"
 
 #define LPARRAY(x) (ARRAY_COUNT(x)), x
 
@@ -15,638 +21,550 @@
 #define CPOS_CURRENT  0x4
 
 // 01..07: complex map/dungeon selection/check commands
-#define NEXT_DUNGEON(u, d)              { 0x02, 0, u, d, 0, NULL } // Seems to be a general command for setting up which dungeon to enter next. First argument is unknown. The second argument is script dungeon id(not the one in dungeon/constants.h). There's a different ordering and a table with the proper dungeon id.
 
-#define SELECT_MAP(m)                   { 0x08, 0, 0, m, 0, NULL }
-#define SELECT_GROUND(m)                { 0x09, 0, 0, m, 0, NULL }
-#define SELECT_DUNGEON(m,d,f,b)         { 0x0A, b, f, d, m, NULL }
-#define SELECT_WEATHER(w)               { 0x0B, 0, 0, w, 0, NULL }
-#define SELECT_ENTITIES(g,s)            { 0x0C, s, g, 0, 0, NULL }
-#define SELECT_LIVES(g,s)               { 0x0D, s, g, 0, 0, NULL }
-#define SELECT_OBJECTS(g,s)             { 0x0E, s, g, 0, 0, NULL }
-#define SELECT_EFFECTS(g,s)             { 0x0F, s, g, 0, 0, NULL }
-#define SELECT_EVENTS(g,s)              { 0x10, s, g, 0, 0, NULL }
-#define CANCEL_ENTITIES(g,s)            { 0x11, s, g, 0, 0, NULL }
-#define CANCEL_LIVES(g,s)               { 0x12, s, g, 0, 0, NULL }
-#define CANCEL_OBJECTS(g,s)             { 0x13, s, g, 0, 0, NULL }
-#define CANCEL_EFFECTS(g,s)             { 0x14, s, g, 0, 0, NULL }
-#define CANCEL_EVENTS(g,s)              { 0x15, s, g, 0, 0, NULL }
-#define CANCEL_OFFSCREEN_LIVES          { 0x16, 0, 0, 0, 0, NULL }
-#define CANCEL_OFFSCREEN_OBJECTS        { 0x17, 0, 0, 0, 0, NULL }
-#define CANCEL_OFFSCREEN_EFFECTS        { 0x18, 0, 0, 0, 0, NULL }
-#define SPAWN_OBJECT(k,d,g,s)           { 0x19, s, g, d, k, NULL }
-#define SPAWN_EFFECT(k,d,g,s)           { 0x1A, s, g, d, k, NULL }
-#define EXECUTE_FUNCTION(f)             { 0x1B, 0, f, 0, 0, NULL }
-#define EXECUTE_SUBROUTINE(f)           { 0x1C, 0, f, 0, 0, NULL }
-#define EXECUTE_STATION(m,g,s)          { 0x1D, s, g, m, 0, NULL }
-#define EXECUTE_SUBSTATION(m,g,s)       { 0x1E, s, g, m, 0, NULL }
-#define RESCUE_SELECT                   { 0x1F, 0, 0, 0, 0, NULL }
-// 20: execute script as parented object, maybe? Unused in ROM
-// 21: follow object/make object follow/get parented?
-// 22..2f: ???
-#define TEXTBOX_AUTO_PRESS(endF, midF)  { 0x2b, 0, 0, endF, midF, NULL} // Waits specified number of frames, then automatically does a button press without waiting for player's input. -1 disables it.
+// TODO: CMD_BYTE_01
 
-// Note for the spriteId: first 4 bits(0xF) are the actual spriteId, but sometimes a 0x40 flag is attached to it, but it has no practical use. Could be different in Blue?
-#define PORTRAIT(place, id, sprite)     { 0x2e, place, id, sprite, 0, NULL } // Sets up portrait data for the specified speaker
-#define PORTRAIT_REP(id, sprite)        { 0x2e, PLACEMENT_COUNT, id, sprite, 0, NULL } // Same as the above, but it assumes the last used placement for the speaker. Useful in long scripts, where you don't need to remember all the placements.
+// Seems to be a general command for setting up which dungeon to enter next.
+// u: Unknown.
+// d: enum "ScriptDungeonId".
+#define NEXT_DUNGEON(u, d)              { CMD_BYTE_02, 0, u, d, 0, NULL }
 
-#define PORTRAIT_POS(id, x, y)          { 0x2f, 0, id, x, y, NULL } // Sets portrait delta position, which modifies the portrait's position on the screen.
-// 30..39: various text printing
-#define TEXTBOX_CLEAR                   { 0x30, 0, 0, 0, 0, NULL }
-#define TEXTBOX_CLEAR2                  { 0x31, 0, 0, 0, 0, NULL } // Used rarely, I don't think there's a functional difference between 0x30 and 0x31.
-#define MSG_INSTANT(msg)                { 0x32, 0, -1, 0, 0, msg }
-#define MSG_NPC(id, msg)                { 0x34, 0, id, 0, 0, msg } // ID is portrait id of the npc. -1 means no portrait
-#define MSG_LETTER(msg)                 { 0x35, 0, -1, 0, 0, msg }
-#define MSG_ON_BG(msg)                  { 0x37, 0, -1, 0, 0, msg } // Prints raw text on bg without any windows. Used for the intro portal messages. To advance the text player needs to press a button.
-#define MSG_ON_BG2(msg)                 { 0x38, 0, -1, 0, 0, msg } // Identical to the above, used literally once for just a newline.
-#define MSG_ON_BG_AUTO(u, msg)          { 0x39, 0, u, 0, 0, msg } // Similar to the above, but the message appears and fades automatically, without any player's input. Used for narration text. The short argument isn't really used, but needs to be greater than 0.
-// 3a: yes/no choice (only used for saving)
-// 3b: uber command (conditional jump)
-#define SPECIAL_TEXT(k, i, t)           { 0x3C, k, 0, i, t, NULL }
-#define RENAME_ALLY(id)                 { 0x3D, 0, 0, id, 0, NULL }
-#define RENAME_TEAM                     { 0x3E, 0, 0, 0, 0, NULL }
-// 3f: input box?
-// 40: unused?
-#define REMOVE_ITEMSTACK(i)             { 0x41, 0, i, 0, 0, NULL }
-#define MUSIC_STOP_ALL                  { 0x42, 0, 0, 0, 0, NULL }
-#define MUSIC_FADEOUT_ALL(f)            { 0x43, 0, f, 0, 0, NULL }
-#define BGM_SWITCH(i)                   { 0x44, 0, 0, i, 0, NULL }
-#define BGM_FADEIN(f,i)                 { 0x45, 0, f, i, 0, NULL }
-#define BGM_QUEUE(i)                    { 0x46, 0, 0, i, 0, NULL }
-#define BGM_STOP                        { 0x47, 0, 0, 0, 0, NULL }
-#define BGM_FADEOUT(f)                  { 0x48, 0, f, 0, 0, NULL }
-#define FANFARE_PLAY(i)                 { 0x49, 0, 0, i, 0, NULL }
-#define FANFARE_STOP(i)                 { 0x4a, 0, 0, i, 0, NULL }
-#define FANFARE_FADEOUT(f,i)            { 0x4b, 0, f, i, 0, NULL }
-#define FANFARE_PLAY2(i)                { 0x4c, 0, 0, i, 0, NULL }
-#define FANFARE_STOP2(i)                { 0x4d, 0, 0, i, 0, NULL }
-#define FANFARE_FADEOUT2(f,i)           { 0x4e, 0, f, i, 0, NULL }
-// 4f..57: more movement/position? Some sprite stuff?
-#define SELECT_ANIMATION(id)            { 0x54, 0, id, 0, 0, NULL }
-// 58..95: position and movement-related
+// TODO: CMD_BYTE_03
+
+// TODO: CMD_BYTE_04
+
+// TODO: CMD_BYTE_05
+
+// TODO: CMD_BYTE_06
+
+// TODO: CMD_BYTE_07
+
+// m: enum "GroundMapID".
+#define SELECT_MAP(m)                   { CMD_BYTE_08, 0, 0, m, 0, NULL }
+
+#define SELECT_GROUND(m)                { CMD_BYTE_09, 0, 0, m, 0, NULL }
+
+#define SELECT_DUNGEON(m, d, f, b)      { CMD_BYTE_0A, b, f, d, m, NULL }
+
+#define SELECT_WEATHER(w)               { CMD_BYTE_0B, 0, 0, w, 0, NULL }
+
+// Uses the map from SELECT_MAP.
+// Does GroundLives_Select(), GroundObject_Select(), GroundEffect_Select(), and GroundEvent_Select().
+// g: Group. -1 will use the ScriptInfo group.
+// s: Sector. -1 will use the ScriptInfo sector.
+#define SELECT_ENTITIES(g, s)           { CMD_BYTE_0C, s, g, 0, 0, NULL }
+
+#define SELECT_LIVES(g,s)               { CMD_BYTE_0D, s, g, 0, 0, NULL }
+
+#define SELECT_OBJECTS(g,s)             { CMD_BYTE_0E, s, g, 0, 0, NULL }
+
+#define SELECT_EFFECTS(g,s)             { CMD_BYTE_0F, s, g, 0, 0, NULL }
+
+#define SELECT_EVENTS(g,s)              { CMD_BYTE_10, s, g, 0, 0, NULL }
+
+#define CANCEL_ENTITIES(g,s)            { CMD_BYTE_11, s, g, 0, 0, NULL }
+
+#define CANCEL_LIVES(g,s)               { CMD_BYTE_12, s, g, 0, 0, NULL }
+
+#define CANCEL_OBJECTS(g,s)             { CMD_BYTE_13, s, g, 0, 0, NULL }
+
+#define CANCEL_EFFECTS(g,s)             { CMD_BYTE_14, s, g, 0, 0, NULL }
+
+#define CANCEL_EVENTS(g,s)              { CMD_BYTE_15, s, g, 0, 0, NULL }
+
+#define CANCEL_OFFSCREEN_LIVES          { CMD_BYTE_16, 0, 0, 0, 0, NULL }
+
+#define CANCEL_OFFSCREEN_OBJECTS        { CMD_BYTE_17, 0, 0, 0, 0, NULL }
+
+#define CANCEL_OFFSCREEN_EFFECTS        { CMD_BYTE_18, 0, 0, 0, 0, NULL }
+
+#define SPAWN_OBJECT(k,d,g,s)           { CMD_BYTE_19, s, g, d, k, NULL }
+
+#define SPAWN_EFFECT(k,d,g,s)           { CMD_BYTE_1A, s, g, d, k, NULL }
+
+// f: enum "ScriptID".
+#define EXECUTE_FUNCTION(f)             { CMD_BYTE_1B, 0, f, 0, 0, NULL }
+
+// f: enum "ScriptID".
+#define EXECUTE_SUBROUTINE(f)           { CMD_BYTE_1C, 0, f, 0, 0, NULL }
+
+#define EXECUTE_STATION(m,g,s)          { CMD_BYTE_1D, s, g, m, 0, NULL }
+
+#define EXECUTE_SUBSTATION(m,g,s)       { CMD_BYTE_1E, s, g, m, 0, NULL }
+
+#define RESCUE_SELECT                   { CMD_BYTE_1F, 0, 0, 0, 0, NULL }
+
+// TODO: CMD_BYTE_20: execute script as parented object, maybe? Unused in ROM
+
+// TODO: CMD_BYTE_21: follow object/make object follow/get parented?
+
+// TODO: CMD_BYTE_22
+
+// TODO: CMD_BYTE_23
+
+// TODO: CMD_BYTE_24
+
+// TODO: CMD_BYTE_25
+
+// TODO: CMD_BYTE_26
+
+// TODO: CMD_BYTE_27
+
+// TODO: CMD_BYTE_28
+
+// TODO: CMD_BYTE_29
+
+// TODO: CMD_BYTE_2A
+
+// Waits specified number of frames, then automatically does a button press without waiting for player's input.
+// -1 disables it.
+#define TEXTBOX_AUTO_PRESS(endF, midF)  { CMD_BYTE_2B, 0, 0, endF, midF, NULL}
+
+// TODO: CMD_BYTE_2C
+
+// TODO: CMD_BYTE_2D
+
+// Sets up portrait data for the specified speaker
+// Note for the spriteId: first 4 bits(0xF) are the actual spriteId, but sometimes a 0x40 flag is attached to it, but it has no practical use.
+// Could be different in Blue?
+#define PORTRAIT(place, id, sprite)     { CMD_BYTE_2E, place, id, sprite, 0, NULL }
+
+// Same as the above, but it assumes the last used placement for the speaker.
+// Useful in long scripts, where you don't need to remember all the placements.
+#define PORTRAIT_REP(id, sprite)        { CMD_BYTE_2E, PLACEMENT_COUNT, id, sprite, 0, NULL }
+
+// Sets portrait delta position, which modifies the portrait's position on the screen.
+#define PORTRAIT_POS(id, x, y)          { CMD_BYTE_2F, 0, id, x, y, NULL }
+
+#define TEXTBOX_CLEAR                   { CMD_BYTE_30, 0, 0, 0, 0, NULL }
+
+// Used rarely. I don't think there's a functional difference from TEXTBOX_CLEAR.
+#define TEXTBOX_CLEAR2                  { CMD_BYTE_31, 0, 0, 0, 0, NULL }
+
+#define MSG_INSTANT(msg)                { CMD_BYTE_32, 0, -1, 0, 0, msg }
+
+// TODO: CMD_BYTE_33
+
+// ID is portrait id of the npc. -1 means no portrait
+#define MSG_NPC(id, msg)                { CMD_BYTE_34, 0, id, 0, 0, msg }
+
+#define MSG_LETTER(msg)                 { CMD_BYTE_35, 0, -1, 0, 0, msg }
+
+// TODO: CMD_BYTE_36
+
+// Prints raw text on bg without any windows.
+// Used for the intro portal messages.
+// To advance the text, the player needs to press a button.
+#define MSG_ON_BG(msg)                  { CMD_BYTE_37, 0, -1, 0, 0, msg }
+
+// Identical to the above, used literally once for just a newline.
+#define MSG_ON_BG2(msg)                 { CMD_BYTE_38, 0, -1, 0, 0, msg }
+
+// Similar to the above, but the message appears and fades automatically, without any player's input.
+// Used for narration text.
+// The short argument isn't really used, but needs to be greater than 0.
+#define MSG_ON_BG_AUTO(u, msg)          { CMD_BYTE_39, 0, u, 0, 0, msg }
+
+// TODO: CMD_BYTE_3A: yes/no choice (only used for saving)
+
+// TODO: CMD_BYTE_3B: uber command (conditional jump)
+// k=0x30 checks if gardevoir has space to join by checking its friend area
+// k=0x31 names gardevoir?
+// k=0x32 tries to recruit Gardevoir
+
+// k: See enum "SpecialTextKind"
+// i: ???
+// t: ???
+#define SPECIAL_TEXT(k, i, t)           { CMD_BYTE_3C, k, 0, i, t, NULL }
+
+#define RENAME_ALLY(id)                 { CMD_BYTE_3D, 0, 0, id, 0, NULL }
+
+#define RENAME_TEAM                     { CMD_BYTE_3E, 0, 0, 0, 0, NULL }
+
+// TODO: CMD_BYTE_3F: input box?
+
+// TODO: CMD_BYTE_40: unused?
+
+#define REMOVE_ITEMSTACK(i)             { CMD_BYTE_41, 0, i, 0, 0, NULL }
+
+#define MUSIC_STOP_ALL                  { CMD_BYTE_42, 0, 0, 0, 0, NULL }
+
+#define MUSIC_FADEOUT_ALL(f)            { CMD_BYTE_43, 0, f, 0, 0, NULL }
+
+#define BGM_SWITCH(i)                   { CMD_BYTE_44, 0, 0, i, 0, NULL }
+
+#define BGM_FADEIN(f,i)                 { CMD_BYTE_45, 0, f, i, 0, NULL }
+
+#define BGM_QUEUE(i)                    { CMD_BYTE_46, 0, 0, i, 0, NULL }
+
+#define BGM_STOP                        { CMD_BYTE_47, 0, 0, 0, 0, NULL }
+
+#define BGM_FADEOUT(f)                  { CMD_BYTE_48, 0, f, 0, 0, NULL }
+
+#define FANFARE_PLAY(i)                 { CMD_BYTE_49, 0, 0, i, 0, NULL }
+
+#define FANFARE_STOP(i)                 { CMD_BYTE_4A, 0, 0, i, 0, NULL }
+
+#define FANFARE_FADEOUT(f,i)            { CMD_BYTE_4B, 0, f, i, 0, NULL }
+
+#define FANFARE_PLAY2(i)                { CMD_BYTE_4C, 0, 0, i, 0, NULL }
+
+#define FANFARE_STOP2(i)                { CMD_BYTE_4D, 0, 0, i, 0, NULL }
+
+#define FANFARE_FADEOUT2(f,i)           { CMD_BYTE_4E, 0, f, i, 0, NULL }
+
+// TODO: CMD_BYTE_4F
+
+// TODO: CMD_BYTE_50
+
+// TODO: CMD_BYTE_51
+
+// TODO: CMD_BYTE_52
+
+// TODO: CMD_BYTE_53
+
+#define SELECT_ANIMATION(id)            { CMD_BYTE_54, 0, id, 0, 0, NULL }
+
+// TODO: CMD_BYTE_55
+
+// TODO: CMD_BYTE_56
+
+// TODO: CMD_BYTE_57
+
+// TODO: CMD_BYTE_58
+
+// TODO: CMD_BYTE_59
+
+// TODO: CMD_BYTE_5A
+
 // For WARP/WALK, every map has a list of predefined locations.
-#define WARP_WAYPOINT(u,w)              { 0x5B, u, 0, w, 0, NULL }
-#define WALK_RELATIVE(spd,h,v)          { 0x6A, 0, spd, h, v, NULL }
-#define WALK_GRID(spd,w)                { 0x6B, 0, spd, w, 0, NULL }
-#define WALK_DIRECT(spd,w)              { 0x7A, 0, spd, w, 0, NULL }
-#define CAMERA_PAN(u1,u2)               { 0x86, 0, u1, u2, 0, NULL }
-#define CMD_UNK_8A(a,b,t)               { 0x8A, a, b, t, 0, NULL }
-#define CMD_UNK_8C(a,t,c)               { 0x8C, a, t, c, 0, NULL }
-#define CMD_UNK_8D(a,t)                 { 0x8D, a, t, 0, 0, NULL }
-#define CMD_UNK_8E(a,t,c)               { 0x8E, a, t, c, 0, NULL }
-#define CMD_UNK_8F(a,t,c)               { 0x8F, a, t, c, 0, NULL }
-#define CMD_UNK_90(a,t,c)               { 0x90, a, t, c, 0, NULL }
-#define ROTATE_TO(spd,t,o)              { 0x91, spd, t, o, 0, NULL } // o=final orientation
-#define CMD_UNK_92(a,b,t)               { 0x92, a, b, t, 0, NULL }
-#define CMD_UNK_93(a,t,c)               { 0x93, a, t, c, 0, NULL }
-#define CMD_UNK_94(a,t,c)               { 0x94, a, t, c, 0, NULL }
-#define CMD_UNK_95(a,t,c)               { 0x95, a, t, c, 0, NULL }
-// 96: unused?
-// 97: ??? (maybe more camera?)
-#define CAMERA_INIT_PAN                 { 0x98, 0, 0, 0, 0, NULL }
-#define CAMERA_END_PAN                  { 0x99, 0, 0, 0, 0, NULL }
-// 9a: ??? (maybe more camera?)
-// 9b..a3: camera-related
-#define RESET_ARRAY(v)                  { 0xA4, 0, v, 0, 0, NULL }
-#define CLEAR_ARRAY(v)                  { 0xA5, 0, v, 0, 0, NULL }
-#define UPDATE_VARINT(o,v,i)            { 0xA6, o, v, i, 0, NULL }
-#define UPDATE_VARVAR(o,a,b)            { 0xA7, o, a, b, 0, NULL }
-#define SET_ARRAYVAL(v,i,x)             { 0xA8, 0, v, i, x, NULL }
-#define SCENARIO_CALC(v,a,b)            { 0xA9, 0, v, a, b, NULL }
-#define SCENARIO_ADVANCE(v,a)           { 0xAA, 0, v, a, 0, NULL }
-#define SET_DUNGEON_RES(r,e)            { 0xAB, 0, r, e, 0, NULL }
-#define SET_PLAYER_KIND(k)              { 0xAC, 0, k, 0, 0, NULL }
-#define UNLOCK_FRIEND_AREA(a)           { 0xAD, TRUE, a, 0, 0, NULL }
-#define CMD_UNK_AE(r)                   { 0xAE, TRUE, r, 0, 0, NULL }
-#define CMD_UNK_AF(r, b)                { 0xAF, b, r, 0, 0, NULL }
-#define SET_RESCUE_CONQUERED(s)         { 0xB0, TRUE, s, 0, 0, NULL }
-// b1..b2: opaque functions
-#define JUMPIF_EQUAL(v,i,l)             { 0xB3, l, v, i, 0, NULL }
-#define JUMPIF(o,v,i,l)                 { 0xB4, o, l, v, i, NULL }
-#define JUMPIF_2(o,a,b,l)               { 0xB5, o, l, a, b, NULL }
-#define JUMPIF_ARRAY(v,i,l)             { 0xB6, 0, l, v, i, NULL }
-#define JUMPIF_SUM(o,v,i,l)             { 0xB7, o, l, v, i, NULL }
-#define JUMPIF_SCENE_LT(v,a,b,l)        { 0xB8, l, v, a, b, NULL }
-#define JUMPIF_SCENE_EQ(v,a,b,l)        { 0xB9, l, v, a, b, NULL }
-#define JUMPIF_SCENE_GT(v,a,b,l)        { 0xBA, l, v, a, b, NULL }
-#define JUMPIF_SCENARIOCHECK(i,l)       { 0xBB, l, i, 0, 0, NULL }
-#define JUMPIF_CUTSCENE_FLAG(f,l)       { 0xBC, l, f, 0, 0, NULL }
-// functions need reversing
-#define JUMPIF_UNK_BD(i,l)              { 0xBD, l, 0, i, 0, NULL }
-#define JUMPIF_UNK_BE(l)                { 0xBE, l, 0, 0, 0, NULL }
-#define JUMPIF_HASITEM(i,l)             { 0xBF, l, i, 0, 0, NULL }
-#define CJUMP_VAR(v)                    { 0xC0, 0, v, 0, 0, NULL }
-#define CJUMP_CALC_VI(o,v,i)            { 0xC1, o, v, i, 0, NULL }
-#define CJUMP_CALC_VV(o,a,b)            { 0xC2, o, a, b, 0, NULL }
-#define CJUMP_RANDOM(h)                 { 0xC3, 0, h, 0, 0, NULL }
-#define CJUMP_SCENARIO_0(v)             { 0xC4, 0, v, 0, 0, NULL }
-#define CJUMP_SCENARIO_1(v)             { 0xC5, 0, v, 0, 0, NULL }
-// wtf is c6
-#define CJUMP_UNK_C6(a)                 { 0xC6, 0, 0, a, 0, NULL }
-#define CJUMP_DIRECTION                 { 0xC7, 0, 0, 0, 0, NULL }
+#define WARP_WAYPOINT(u,w)              { CMD_BYTE_5B, u, 0, w, 0, NULL }
+
+// TODO: CMD_BYTE_5C
+
+// TODO: CMD_BYTE_5D
+
+// TODO: CMD_BYTE_5E
+
+// TODO: CMD_BYTE_5F
+
+// TODO: CMD_BYTE_60
+
+// TODO: CMD_BYTE_61
+
+// TODO: CMD_BYTE_62
+
+// TODO: CMD_BYTE_63
+
+// TODO: CMD_BYTE_64
+
+// TODO: CMD_BYTE_65
+
+// TODO: CMD_BYTE_66
+
+// TODO: CMD_BYTE_67
+
+// TODO: CMD_BYTE_68
+
+// TODO: CMD_BYTE_69
+
+#define WALK_RELATIVE(spd,h,v)          { CMD_BYTE_6A, 0, spd, h, v, NULL }
+
+#define WALK_GRID(spd,w)                { CMD_BYTE_6B, 0, spd, w, 0, NULL }
+
+// TODO: CMD_BYTE_6C
+
+// TODO: CMD_BYTE_6D
+
+// TODO: CMD_BYTE_6E
+
+// TODO: CMD_BYTE_6F
+
+// TODO: CMD_BYTE_70
+
+// TODO: CMD_BYTE_71
+
+// TODO: CMD_BYTE_72
+
+// TODO: CMD_BYTE_73
+
+// TODO: CMD_BYTE_74
+
+// TODO: CMD_BYTE_75
+
+// TODO: CMD_BYTE_76
+
+// TODO: CMD_BYTE_77
+
+// TODO: CMD_BYTE_78
+
+// TODO: CMD_BYTE_79
+
+#define WALK_DIRECT(spd,w)              { CMD_BYTE_7A, 0, spd, w, 0, NULL }
+
+// TODO: CMD_BYTE_7B
+
+// TODO: CMD_BYTE_7C
+
+// TODO: CMD_BYTE_7D
+
+// TODO: CMD_BYTE_7E
+
+// TODO: CMD_BYTE_7F
+
+// TODO: CMD_BYTE_80
+
+// TODO: CMD_BYTE_81
+
+// TODO: CMD_BYTE_82
+
+// TODO: CMD_BYTE_83
+
+// TODO: CMD_BYTE_84
+
+// TODO: CMD_BYTE_85
+
+#define CAMERA_PAN(u1,u2)               { CMD_BYTE_86, 0, u1, u2, 0, NULL }
+
+// TODO: CMD_BYTE_87
+
+// TODO: CMD_BYTE_88
+
+// TODO: CMD_BYTE_89
+
+#define CMD_UNK_8A(a,b,t)               { CMD_BYTE_8A, a, b, t, 0, NULL }
+
+#define CMD_UNK_8C(a,t,c)               { CMD_BYTE_8C, a, t, c, 0, NULL }
+
+#define CMD_UNK_8D(a,t)                 { CMD_BYTE_8D, a, t, 0, 0, NULL }
+
+#define CMD_UNK_8E(a,t,c)               { CMD_BYTE_8E, a, t, c, 0, NULL }
+
+#define CMD_UNK_8F(a,t,c)               { CMD_BYTE_8F, a, t, c, 0, NULL }
+
+#define CMD_UNK_90(a,t,c)               { CMD_BYTE_90, a, t, c, 0, NULL }
+
+// o: Final orientation
+#define ROTATE_TO(spd,t,o)              { CMD_BYTE_91, spd, t, o, 0, NULL }
+
+#define CMD_UNK_92(a,b,t)               { CMD_BYTE_92, a, b, t, 0, NULL }
+
+#define CMD_UNK_93(a,t,c)               { CMD_BYTE_93, a, t, c, 0, NULL }
+
+#define CMD_UNK_94(a,t,c)               { CMD_BYTE_94, a, t, c, 0, NULL }
+
+#define CMD_UNK_95(a,t,c)               { CMD_BYTE_95, a, t, c, 0, NULL }
+
+// TODO: CMD_BYTE_96
+
+// TODO: CMD_BYTE_97
+
+#define CAMERA_INIT_PAN                 { CMD_BYTE_98, 0, 0, 0, 0, NULL }
+
+#define CAMERA_END_PAN                  { CMD_BYTE_99, 0, 0, 0, 0, NULL }
+
+// TODO: CMD_BYTE_9A
+
+// TODO: CMD_BYTE_9B
+
+// TODO: CMD_BYTE_9C
+
+// TODO: CMD_BYTE_9D
+
+// TODO: CMD_BYTE_9E
+
+// TODO: CMD_BYTE_9F
+
+// TODO: CMD_BYTE_A0
+
+// TODO: CMD_BYTE_A1
+
+// TODO: CMD_BYTE_A2
+
+// TODO: CMD_BYTE_A3
+
+#define RESET_ARRAY(v)                  { CMD_BYTE_A4, 0, v, 0, 0, NULL }
+
+#define CLEAR_ARRAY(v)                  { CMD_BYTE_A5, 0, v, 0, 0, NULL }
+
+#define UPDATE_VARINT(o,v,i)            { CMD_BYTE_A6, o, v, i, 0, NULL }
+
+#define UPDATE_VARVAR(o,a,b)            { CMD_BYTE_A7, o, a, b, 0, NULL }
+
+#define SET_ARRAYVAL(v,i,x)             { CMD_BYTE_A8, 0, v, i, x, NULL }
+
+#define SCENARIO_CALC(v,a,b)            { CMD_BYTE_A9, 0, v, a, b, NULL }
+
+#define SCENARIO_ADVANCE(v,a)           { CMD_BYTE_AA, 0, v, a, 0, NULL }
+
+// r is the value to put in DUNGEON_RESULT.
+// e is the value to put in DUNGEON_ENTER.
+#define SET_DUNGEON_RES(r,e)            { CMD_BYTE_AB, 0, r, e, 0, NULL }
+
+#define SET_PLAYER_KIND(k)              { CMD_BYTE_AC, 0, k, 0, 0, NULL }
+
+#define UNLOCK_FRIEND_AREA(a)           { CMD_BYTE_AD, TRUE, a, 0, 0, NULL }
+
+#define CMD_UNK_AE(r)                   { CMD_BYTE_AE, TRUE, r, 0, 0, NULL }
+
+#define CMD_UNK_AF(r, b)                { CMD_BYTE_AF, b, r, 0, 0, NULL }
+
+#define SET_RESCUE_CONQUERED(s)         { CMD_BYTE_B0, TRUE, s, 0, 0, NULL }
+
+// TODO: CMD_BYTE_B1
+
+// TODO: CMD_BYTE_B2
+
+#define JUMPIF_EQUAL(v,i,l)             { CMD_BYTE_B3, l, v, i, 0, NULL }
+
+#define JUMPIF(o,v,i,l)                 { CMD_BYTE_B4, o, l, v, i, NULL }
+
+#define JUMPIF_2(o,a,b,l)               { CMD_BYTE_B5, o, l, a, b, NULL }
+
+#define JUMPIF_ARRAY(v,i,l)             { CMD_BYTE_B6, 0, l, v, i, NULL }
+
+#define JUMPIF_SUM(o,v,i,l)             { CMD_BYTE_B7, o, l, v, i, NULL }
+
+#define JUMPIF_SCENE_LT(v,a,b,l)        { CMD_BYTE_B8, l, v, a, b, NULL }
+
+#define JUMPIF_SCENE_EQ(v,a,b,l)        { CMD_BYTE_B9, l, v, a, b, NULL }
+
+#define JUMPIF_SCENE_GT(v,a,b,l)        { CMD_BYTE_BA, l, v, a, b, NULL }
+
+// Jumps to a label if `CheckQuest(i)` returns TRUE.
+// i: The quest to check. See enum "MainQuest".
+// l: The label to jump to.
+#define JUMPIF_SCENARIOCHECK(i,l)       { CMD_BYTE_BB, l, i, 0, 0, NULL }
+
+#define JUMPIF_CUTSCENE_FLAG(f,l)       { CMD_BYTE_BC, l, f, 0, 0, NULL }
+
+#define JUMPIF_UNK_BD(i,l)              { CMD_BYTE_BD, l, 0, i, 0, NULL }
+
+#define JUMPIF_UNK_BE(l)                { CMD_BYTE_BE, l, 0, 0, 0, NULL }
+
+#define JUMPIF_HASITEM(i,l)             { CMD_BYTE_BF, l, i, 0, 0, NULL }
+
+#define CJUMP_VAR(v)                    { CMD_BYTE_C0, 0, v, 0, 0, NULL }
+
+#define CJUMP_CALC_VI(o,v,i)            { CMD_BYTE_C1, o, v, i, 0, NULL }
+
+#define CJUMP_CALC_VV(o,a,b)            { CMD_BYTE_C2, o, a, b, 0, NULL }
+
+#define CJUMP_RANDOM(h)                 { CMD_BYTE_C3, 0, h, 0, 0, NULL }
+
+#define CJUMP_SCENARIO_0(v)             { CMD_BYTE_C4, 0, v, 0, 0, NULL }
+
+#define CJUMP_SCENARIO_1(v)             { CMD_BYTE_C5, 0, v, 0, 0, NULL }
+
+#define CJUMP_UNK_C6(a)                 { CMD_BYTE_C6, 0, 0, a, 0, NULL }
+
+#define CJUMP_DIRECTION                 { CMD_BYTE_C7, 0, 0, 0, 0, NULL }
+
 // C8: distance calculation with that weird 80A7AE8
-#define CJUMP_UNK_C8(a)                 { 0xC8, 0, 0, a, 0, NULL }
+#define CJUMP_UNK_C8(a)                 { CMD_BYTE_C8, 0, 0, a, 0, NULL }
+
 // C9: ditto, but with one hardcoded pos of four
-#define CJUMP_UNK_C9(a)                 { 0xC9, 0, 0, a, 0, NULL }
-#define CJUMP_DIR_TO_LINK(l)            { 0xCA, 0, 0, l, 0, NULL }
-// wtf is cb
-#define CJUMP_UNK_CB(h)                 { 0xCB, 0, h, 0, 0, NULL }
-#define COND_EQUAL(v,t)                 { 0xCC, 0, t, v, 0, NULL }
-#define COND(o,v,t)                     { 0xCD, o, t, v, 0, NULL }
-#define COND_VAR(o,v,t)                 { 0xCE, o, t, v, 0, NULL }
-#define MSG_VAR(b,v,a)                  { 0xCF, b, v, a, 0, NULL }
-#define VARIANT(c,s)                    { 0xD0, 0, c, 0, 0, s    }
-#define VARIANT_DEFAULT(s)              { 0xD1, 0, 0, 0, 0, s    }
-#define ASK_DEBUG(b,h,a,s)              { 0xD2, b, h, a, 0, s    }
-#define ASK1(b,h,a,s)                   { 0xD3, b, h, a, 0, s    }
-#define ASK2(b,h,a,s)                   { 0xD4, b, h, a, 0, s    }
-#define ASK3(b,h,a,s)                   { 0xD5, b, h, a, 0, s    }
-#define ASK1_VAR(b,h,a,v)               { 0xD6, b, h, a, v, NULL }
-#define ASK2_VAR(b,h,a,v)               { 0xD7, b, h, a, v, NULL }
-#define ASK3_VAR(b,h,a,v)               { 0xD8, b, h, a, v, NULL }
-#define CHOICE(h,s)                     { 0xD9, 0, h, 0, 0, s    }
-#define WAIT(f)                         { 0xDB, 0, f, 0, 0, NULL }
-#define WAIT_RANDOM(a,b)                { 0xDC, 0, a, b, 0, NULL }
-#define STOP_ANIMATION_ON_CURRENT_FRAME { 0xDD, 0, 0, 0, 0, NULL }
-// de..e2 - various HandleAction commands
-// e3..e5 - locking/condvar commands
-#define WAIT_FANFARE1(id)               { 0xE1, 0, id, 0, 0, NULL }
-#define WAIT_FANFARE2(id)               { 0xE2, 0, id, 0, 0, NULL }
-#define AWAIT_CUE(id)                   { 0xE3, 0, id, 0, 0, NULL }
-#define ALERT_CUE(id)                   { 0xE4, 0, id, 0, 0, NULL }
-#define CALL_LABEL(x)                   { 0xE6, 0, x, 0, 0, NULL }
-#define JUMP_LABEL(x)                   { 0xE7, 0, x, 0, 0, NULL }
-#define CALL_SCRIPT(x)                  { 0xE8, 0, x, 0, 0, NULL }
-#define JUMP_SCRIPT(x)                  { 0xE9, 0, x, 0, 0, NULL }
-#define CALL_STATION(g,s)               { 0xEA, s, g,-1, 0, NULL }
-#define JUMP_STATION(g,s)               { 0xEB, s, g,-1, 0, NULL }
-#define EXECUTE_MAP_VAR(v)              { 0xEC, 0, v, 0, 0, NULL }
-#define RESET_CALLER                    { 0xED, 0, 0, 0, 0, NULL }
-#define RET_DIRECT                      { 0xEE, 0, 0, 0, 0, NULL }
-#define RET                             { 0xEF, 0, 0, 0, 0, NULL }
-#define HALT                            { 0xF0, 0, 0, 0, 0, NULL }
-#define END_DELETE                      { 0xF1, 0, 0, 0, 0, NULL }
-#define LABEL(x)                        { 0xF4, 0, x, 0, 0, NULL }
+#define CJUMP_UNK_C9(a)                 { CMD_BYTE_C9, 0, 0, a, 0, NULL }
+
+#define CJUMP_DIR_TO_LINK(l)            { CMD_BYTE_CA, 0, 0, l, 0, NULL }
+
+#define CJUMP_UNK_CB(h)                 { CMD_BYTE_CB, 0, h, 0, 0, NULL }
+
+#define COND_EQUAL(v,t)                 { CMD_BYTE_CC, 0, t, v, 0, NULL }
+
+#define COND(o,v,t)                     { CMD_BYTE_CD, o, t, v, 0, NULL }
+
+#define COND_VAR(o,v,t)                 { CMD_BYTE_CE, o, t, v, 0, NULL }
+
+#define MSG_VAR(b,v,a)                  { CMD_BYTE_CF, b, v, a, 0, NULL }
+
+#define VARIANT(c,s)                    { CMD_BYTE_D0, 0, c, 0, 0, s    }
+
+#define VARIANT_DEFAULT(s)              { CMD_BYTE_D1, 0, 0, 0, 0, s    }
+
+#define ASK_DEBUG(b,h,a,s)              { CMD_BYTE_D2, b, h, a, 0, s    }
+
+#define ASK1(b,h,a,s)                   { CMD_BYTE_D3, b, h, a, 0, s    }
+
+#define ASK2(b,h,a,s)                   { CMD_BYTE_D4, b, h, a, 0, s    }
+
+#define ASK3(b,h,a,s)                   { CMD_BYTE_D5, b, h, a, 0, s    }
+
+#define ASK1_VAR(b,h,a,v)               { CMD_BYTE_D6, b, h, a, v, NULL }
+
+#define ASK2_VAR(b,h,a,v)               { CMD_BYTE_D7, b, h, a, v, NULL }
+
+#define ASK3_VAR(b,h,a,v)               { CMD_BYTE_D8, b, h, a, v, NULL }
+
+#define CHOICE(h,s)                     { CMD_BYTE_D9, 0, h, 0, 0, s    }
+
+// TODO: CMD_BYTE_DA
+
+#define WAIT(f)                         { CMD_BYTE_DB, 0, f, 0, 0, NULL }
+
+#define WAIT_RANDOM(a,b)                { CMD_BYTE_DC, 0, a, b, 0, NULL }
+
+#define STOP_ANIMATION_ON_CURRENT_FRAME { CMD_BYTE_DD, 0, 0, 0, 0, NULL }
+
+// TODO: CMD_BYTE_DE
+
+// TODO: CMD_BYTE_DF
+
+// TODO: CMD_BYTE_E0
+
+#define WAIT_FANFARE1(id)               { CMD_BYTE_E1, 0, id, 0, 0, NULL }
+
+#define WAIT_FANFARE2(id)               { CMD_BYTE_E2, 0, id, 0, 0, NULL }
+
+#define AWAIT_CUE(id)                   { CMD_BYTE_E3, 0, id, 0, 0, NULL }
+
+#define ALERT_CUE(id)                   { CMD_BYTE_E4, 0, id, 0, 0, NULL }
+
+// a: Value to place in script's `branchDiscriminant`.
+// b: Value to place in `gUnlockBranchLabels[a]`.
+#define CMD_UNK_E5(a, b)                { CMD_BYTE_E5, b, a, 0, 0, NULL }
+
+#define CALL_LABEL(x)                   { CMD_BYTE_E6, 0, x, 0, 0, NULL }
+
+#define JUMP_LABEL(x)                   { CMD_BYTE_E7, 0, x, 0, 0, NULL }
+
+#define CALL_SCRIPT(x)                  { CMD_BYTE_E8, 0, x, 0, 0, NULL }
+
+#define JUMP_SCRIPT(x)                  { CMD_BYTE_E9, 0, x, 0, 0, NULL }
+
+#define CALL_STATION(g,s)               { CMD_BYTE_EA, s, g,-1, 0, NULL }
+
+#define JUMP_STATION(g,s)               { CMD_BYTE_EB, s, g,-1, 0, NULL }
+
+#define EXECUTE_MAP_VAR(v)              { CMD_BYTE_EC, 0, v, 0, 0, NULL }
+
+#define RESET_CALLER                    { CMD_BYTE_ED, 0, 0, 0, 0, NULL }
+
+#define RET_DIRECT                      { CMD_BYTE_EE, 0, 0, 0, 0, NULL }
+
+#define RET                             { CMD_BYTE_EF, 0, 0, 0, 0, NULL }
+
+#define HALT                            { CMD_BYTE_F0, 0, 0, 0, 0, NULL }
+
+#define END_DELETE                      { CMD_BYTE_F1, 0, 0, 0, 0, NULL }
+
+// Unused
+#define CMD_F2                          { CMD_BYTE_F2, 0, 0, 0, 0, NULL }
+
+// Unused
+#define CMD_F3                          { CMD_BYTE_F3, 0, 0, 0, 0, NULL }
+
+// Serves as an offset which the script can reference for jumps.
+#define LABEL(x)                        { CMD_BYTE_F4, 0, x, 0, 0, NULL }
+
+// Unused
+#define CMD_F5                          { CMD_BYTE_F5, 0, 0, 0, 0, NULL }
+
 #ifdef NONMATCHING
-#define DEBUGINFO                       { 0xF6, 0, __LINE__, 0, 0, __FILE__ }
+#define DEBUGINFO                       { CMD_BYTE_F6, 0, __LINE__, 0, 0, __FILE__ }
 #define DEBUGINFO_O(originalLineNum)    DEBUGINFO
 #else
-#define DEBUGINFO_O(originalLineNum)    { 0xF6, 0, originalLineNum, 0, 0, FAKE_FILENAME }
+#define DEBUGINFO_O(originalLineNum)    { CMD_BYTE_F6, 0, originalLineNum, 0, 0, FAKE_FILENAME }
 #endif
 
-// function/trigger/script names
-#define END_TALK 0
-#define WAIT_END_TALK_FUNC 1
-#define WAIT_END_EVENT_FUNC 2
-#define WAIT_START_FUNC 3
-#define INCOMPLETE_TALK 4
-#define NORMAL_WAIT_END_TALK 5
-#define LIVES_REPLY_NORMAL 6
-#define LIVES_REPLY 7
-#define OBJECT_REPLY_NORMAL 8
-#define EXAMINE_MISS 9
-#define ENTER_WAIT_FUNC 10
-#define UNIT_TALK 11
-#define HABITAT_TALK 12
-#define HABITAT_TALK_S01E02A 13
-#define HABITAT_MOVE1 14
-#define HABITAT_MOVE2 15
-#define HABITAT_MOVE_PAUSE 16
-#define HABITAT_MOVE_STAY_FIX 17
-#define HABITAT_MOVE_STAY_TURN 18
-#define LIVES_MOVE_NORMAL 19
-#define LIVES_MOVE_CHANGE 20
-#define OBJECT_MOVE_NORMAL 21
-#define OBJECT_MOVE_CHANGE 22
-#define EFFECT_MOVE_NORMAL 23
-#define EFFECT_MOVE_CHANGE 24
-#define MOVE_INIT 25
-#define MOVE_PAUSE 26
-#define MOVE_STAY 27
-#define MOVE_SLEEP 28
-#define MOVE_RANDOM 29
-#define MOVE_BOY 30
-#define MOVE_GIRL 31
-#define WAKEUP_FUNC 32
-#define LOOK_AROUND_FUNC 33
-#define LOOK_AROUND_DOWN_FUNC 34
-#define LOOK_AROUND_RIGHT_FUNC 35
-#define LOOK_AROUND_LEFT_FUNC 36
-#define JUMP_HAPPY_FUNC 37
-#define JUMP_SURPRISE_FUNC 38
-#define JUMP_ANGRY_FUNC 39
-#define NOTICE_FUNC 40
-#define QUESTION_FUNC 41
-#define SWEAT_FUNC 42
-#define SHOCK_FUNC 43
-#define SPREE_START_FUNC 44
-#define SPREE_END_FUNC 45
-#define SMILE_START_FUNC 46
-#define SMILE_END_FUNC 47
-#define ANGRY_START_FUNC 48
-#define ANGRY_END_FUNC 49
-#define MOVE_PLAZA_SLEEP 50
-#define INIT_PLAZA_SLEEP_STAY_FUNC 51
-#define INIT_PLAZA_SLEEP_TALK_FUNC 52
-#define INIT_SLEEP_FUNC 53
-#define INIT_BASE_FUNC 54
-#define INIT_DEBUG_HABITAT 55
-#define NORMAL_MESSAGE 56
-#define NORMAL_EVENT 57
-#define NORMAL_CAMERA 58
-#define DISMISSAL_SALLY_MEMBER_FUNC 59
-#define DISMISSAL_SALLY_MEMBER2_FUNC 60
-#define DISMISSAL_SALLY_MEMBER3_FUNC 61
-#define DISMISSAL_SALLY_MEMBER4_FUNC 62
-#define NEXT_SAVE_FUNC 63
-#define NEXT_SAVE2_FUNC 64
-#define SAVE_POINT 65
-#define WAREHOUSE_POINT 66
-#define SAVE_AND_WAREHOUSE_POINT 67
-#define WORLD_MAP_POINT 68
-#define FORMATION_HERO 69
-#define EVOLUTION_HERO 70
-#define WARP_LIVES_START 71
-#define WARP_LIVES_START2 72
-#define WARP_LIVES_START3 73
-#define WARP_LIVES_ARRIVE 74
-#define WARP_LIVES_ARRIVE2 75
-#define WARP_LIVES_ARRIVE3 76
-#define LIVES_WARP_START_FUNC 77
-#define LIVES_WARP_START2_FUNC 78
-#define LIVES_WARP_START3_FUNC 79
-#define LIVES_WARP_START_SUB 80
-#define LIVES_WARP_ARRIVE_FUNC 81
-#define LIVES_WARP_ARRIVE2_FUNC 82
-#define LIVES_WARP_ARRIVE3_FUNC 83
-#define LIVES_WARP_ARRIVE_SUB 84
-#define GET_ITEM_FUNC 85
-#define GET_ITEM_WAIT_FUNC 86
-#define GET_ITEM2_FUNC 87
-#define GET_ITEM2_WAIT_FUNC 88
-#define JOIN_FUNC 89
-#define LODGE_START_FUNC 90
-#define LODGE_WAIT_FUNC 91
-#define LODGE_END_FUNC 92
-#define LODGE_SOUND_FUNC 93
-#define SAVE_START_FUNC 94
-#define SAVE_WAIT_FUNC 95
-#define SAVE_END_FUNC 96
-#define SAVE_SOUND_FUNC 97
-#define EFFECT_TEST1 98
-#define EFFECT_TEST2 99
-#define EFFECT_MOVE_DIVE 100
-#define EFFECT_MOVE_WAVE 101
-#define EVENT_DIVIDE 102
-#define EVENT_DIVIDE_NEXT 103
-#define EVENT_DIVIDE_INIT_FUNC 104
-#define EVENT_DIVIDE_NEXT_DAY_FUNC 105
-#define EVENT_DIVIDE_NEXT_DAY2_FUNC 106
-#define EVENT_DIVIDE_FIRST 107
-#define EVENT_DIVIDE_SECOND 108
-#define EVENT_DIVIDE_AFTER 109
-#define EVENT_DIVIDE_WARP_LOCK_FUNC 110
-#define EVENT_RESCUE_ENTER_CHECK 111
-#define EVENT_RESCUE 112
-#define DEBUG_SCRIPT 113
-#define DEMO_CANCEL 114
-#define DEMO_01 115
-#define DEMO_02 116
-#define DEMO_03 117
-#define DEMO_04 118
-#define EVENT_M00E01A_L001 119
-#define EVENT_M01E01A_L001 120
-#define EVENT_M01E01A_L002 121
-#define EVENT_M01E01A_L003 122
-#define EVENT_M01E02A_L001 123
-#define EVENT_M01E02A_L001B 124
-#define EVENT_M01E02A_L001C 125
-#define EVENT_M01E02A_L002 126
-#define EVENT_M01E02A_L003 127
-#define EVENT_M01E02A_L004 128
-#define EVENT_M01E02A_L005 129
-#define EVENT_M01E02A_L006 130
-#define EVENT_M01E02B_L001 131
-#define EVENT_M01E02B_L002 132
-#define EVENT_M01E02B_L003 133
-#define EVENT_M01E02B_L004 134
-#define EVENT_M01E02B_L004B 135
-#define EVENT_M01E02B_L005 136
-#define EVENT_M01E02B_L006 137
-#define EVENT_M01E02B_L007 138
-#define EVENT_M01E02B_L008 139
-#define EVENT_M01E03A_L000 140
-#define EVENT_M01E03A_L001 141
-#define EVENT_M01E03A_L002 142
-#define EVENT_M01E03A_L003 143
-#define EVENT_M01E03A_L004 144
-#define EVENT_M01E03A_L005 145
-#define EVENT_M01E03A_L006 146
-#define EVENT_M01E03A_L007 147
-#define EVENT_M01E03A_L008 148
-#define EVENT_M01E03A_L009 149
-#define EVENT_M01E03A_L010 150
-#define EVENT_M01E03A_L011 151
-#define EVENT_M01E04A_L000 152
-#define EVENT_M01E04A_L001 153
-#define EVENT_M01E04A_L002 154
-#define EVENT_M01E04A_L003 155
-#define EVENT_M01E04A_L004 156
-#define EVENT_M01E04A_L005 157
-#define EVENT_M01E04A_L006 158
-#define EVENT_M01E04B_L000 159
-#define EVENT_M01E04B_L001 160
-#define EVENT_M01E04B_L002 161
-#define EVENT_M01E04B_L003 162
-#define EVENT_M01E04B_L004 163
-#define EVENT_M01E04B_L005 164
-#define EVENT_M01E04B_L006 165
-#define EVENT_M01E04B_L007 166
-#define EVENT_M01E05A_L000 167
-#define EVENT_M01E05A_L001 168
-#define EVENT_M01E05A_L002 169
-#define EVENT_M01E05A_L003 170
-#define EVENT_M01E05A_L004 171
-#define EVENT_M01E05A_L005 172
-#define EVENT_M01E05A_L006 173
-#define EVENT_M01E05B_L000 174
-#define EVENT_M01E05B_L001 175
-#define EVENT_M01E05B_L002 176
-#define EVENT_M01E05B_L003 177
-#define EVENT_M01E05B_L004 178
-#define EVENT_M01E05B_L005 179
-#define EVENT_M01E06A_L001 180
-#define EVENT_M01E06A_L002 181
-#define EVENT_M01E06A_L003 182
-#define EVENT_M01E07A_L001 183
-#define EVENT_M01E07A_L002 184
-#define EVENT_M01E07A_L003 185
-#define EVENT_M01E07A_L004 186
-#define EVENT_M01E07A_L005 187
-#define EVENT_M01E07A_T001 188
-#define EVENT_M01E07A_T002 189
-#define EVENT_M01E07B_L001 190
-#define EVENT_M01E07B_L002 191
-#define EVENT_M01E07B_L003 192
-#define EVENT_M01E07B_L004 193
-#define EVENT_M01E07B_L005 194
-#define EVENT_M01E07B_T001 195
-#define EVENT_M01E07B_T002 196
-#define EVENT_M01E08A_L001 197
-#define EVENT_M01E08A_L002 198
-#define EVENT_M01E08A_L003 199
-#define EVENT_M01E08A_L004 200
-#define EVENT_M01E08A_L005 201
-#define EVENT_M01E08A_T001 202
-#define EVENT_M01E08A_T002 203
-#define EVENT_M01E08B_L001 204
-#define EVENT_M01E08B_L002 205
-#define EVENT_M01E08B_L003 206
-#define EVENT_M01E08B_L004 207
-#define EVENT_M01E08B_L005 208
-#define EVENT_M01E08B_L006 209
-#define EVENT_M01E08B_T001 210
-#define EVENT_M01E08B_T002 211
-#define EVENT_M01E09A_L001 212
-#define EVENT_M01E09A_L002 213
-#define EVENT_M01E09A_L003 214
-#define EVENT_M01E09A_L004 215
-#define EVENT_M01E09A_L005 216
-#define EVENT_M01E09A_L006 217
-#define EVENT_M01E09A_L007 218
-#define EVENT_M01E09A_L008 219
-#define EVENT_M01E09A_L009 220
-#define EVENT_M01E09A_L010 221
-#define EVENT_M01E09A_L011 222
-#define EVENT_M01E09A_L012 223
-#define EVENT_M01E09A_L013 224
-#define EVENT_M01E09A_L014 225
-#define EVENT_M01E09A_L015 226
-#define EVENT_M01E10A_L001 227
-#define EVENT_M01E10A_L002 228
-#define EVENT_M01E10A_L003 229
-#define EVENT_M01E10A_L004 230
-#define EVENT_M01E10A_L005 231
-#define EVENT_M01E10A_L006 232
-#define EVENT_M01E10A_L007 233
-#define EVENT_M01E10A_L008 234
-#define EVENT_M01END_L001 235
-#define EVENT_M01END_L002 236
-#define EVENT_M02E01A_L001 237
-#define EVENT_M02E01A_L002 238
-#define EVENT_M02E01A_L003 239
-#define EVENT_M02E02A_L001 240
-#define EVENT_M02E02B_L001 241
-#define EVENT_M02E02C_L001 242
-#define EVENT_M02E02D_L001 243
-#define EVENT_M02E02E_L001 244
-#define EVENT_M02E02F_L001 245
-#define EVENT_M02E02G_L001 246
-#define EVENT_M02E02H_L001 247
-#define EVENT_M02END_L001 248
-#define EVENT_S00E01A_L001 249
-#define EVENT_S00E01A_L002 250
-#define EVENT_S00E01A_L003 251
-#define EVENT_S00E01A_L004 252
-#define EVENT_S01E01A_START 253
-#define EVENT_S01E01A_CONTINUE 254
-#define EVENT_S01E01A_END 255
-#define EVENT_S01E01A_L001 256
-#define EVENT_S01E01A_L002 257
-#define EVENT_S01E01A_L003 258
-#define EVENT_S01E01B_L001 259
-#define EVENT_S01E01B_L001L 260
-#define EVENT_S01E01C_L001 261
-#define EVENT_S01E02A_START 262
-#define EVENT_S01E02A_END 263
-#define EVENT_S01E02A_L001 264
-#define EVENT_S01E02A_L002 265
-#define EVENT_S01E02A_L002L 266
-#define EVENT_S01E02B_L001 267
-#define EVENT_S01E02B_L002 268
-#define EVENT_S02E01A_START 269
-#define EVENT_S02E01A_END 270
-#define EVENT_S02E01A_L001 271
-#define EVENT_S02E01A_L002 272
-#define EVENT_S02E01A_L003 273
-#define EVENT_S02E01A_L004 274
-#define EVENT_S02E01A_L004L 275
-#define EVENT_S02E02A_START 276
-#define EVENT_S02E02A_END 277
-#define EVENT_S02E02A_L001 278
-#define EVENT_S02E02A_L002 279
-#define EVENT_S02E02A_L003 280
-#define EVENT_S02E02A_L003L 281
-#define EVENT_S03E01A_START 282
-#define EVENT_S03E01A_CONTINUE 283
-#define EVENT_S03E01A_END 284
-#define EVENT_S03E01A_L001 285
-#define EVENT_S03E01A_L002 286
-#define EVENT_S03E01A_L002L 287
-#define EVENT_S04E01A_START 288
-#define EVENT_S04E01A_LAST 289
-#define EVENT_S04E01A_END 290
-#define EVENT_S04E01A_L001 291
-#define EVENT_S04E01A_L002 292
-#define EVENT_S04E01A_L002L 293
-#define EVENT_S04E01B_L001 294
-#define EVENT_S04E01B_L001L 295
-#define EVENT_S04E01C_L001 296
-#define EVENT_S04E01C_L001L 297
-#define EVENT_S04E01D_L001 298
-#define EVENT_S04E01D_L001L 299
-#define EVENT_S04E01E_L001 300
-#define EVENT_S04E01E_L001L 301
-#define EVENT_S04E01F_L001 302
-#define EVENT_S05E01A_START 303
-#define EVENT_S05E01A_CONTINUE 304
-#define EVENT_S05E01A_END 305
-#define EVENT_S05E01A_L001 306
-#define EVENT_S05E01A_L002 307
-#define EVENT_S05E01A_L002L 308
-#define EVENT_S06E01A_START 309
-#define EVENT_S06E01A_CONTINUE 310
-#define EVENT_S06E01A_END 311
-#define EVENT_S06E01A_L001 312
-#define EVENT_S06E01A_L002 313
-#define EVENT_S06E01A_L002L 314
-#define EVENT_S06E01B_L001 315
-#define EVENT_S06E01B_L002 316
-#define EVENT_S06E01B_L002L 317
-#define EVENT_S07E01A_START 318
-#define EVENT_S07E01A_END 319
-#define EVENT_S07E01A_L001 320
-#define EVENT_S07E01A_L002 321
-#define EVENT_S07E01A_L003 322
-#define EVENT_S07E01A_L003L 323
-#define EVENT_S08E01A_START 324
-#define EVENT_S08E01A_END 325
-#define EVENT_S08E01A_L001 326
-#define EVENT_S08E01A_L002 327
-#define EVENT_S08E01A_L003 328
-#define EVENT_S08E01A_L004 329
-#define EVENT_S08E01A_L005 330
-#define EVENT_S08E01A_L005B 331
-#define EVENT_S08E01A_L006 332
-#define EVENT_S08E01A_L006L 333
-#define EVENT_S08E01A_L007 334
-#define EVENT_S08E01A_L008 335
-#define EVENT_S08E01A_L008L 336
-#define EVENT_S08E01A_L008A 337
-#define EVENT_S08E01A_L008B 338
-#define EVENT_S08E01A_L008C 339
-#define EVENT_S09E01A_START 340
-#define EVENT_S09E01A_END 341
-#define EVENT_S09E01A_L001 342
-#define EVENT_S09E01A_L002 343
-#define EVENT_S09E01A_L003 344
-#define EVENT_S09E01A_L004 345
-#define EVENT_S09E01A_L004B 346
-#define EVENT_S09E01A_L005 347
-#define EVENT_S09E01A_L005L 348
-#define EVENT_S09E01B_L001 349
-#define EVENT_S09E01B_L001B 350
-#define EVENT_S09E01B_L002 351
-#define EVENT_S09E01B_L002L 352
-#define EVENT_S09E01C_L001 353
-#define EVENT_R00E01A_L001 354
-#define COMMON_ENTER 355
-#define DEBUG_ENTER 356
-#define GETOUT_NORMAL 357
-#define GETOUT_HABITAT 358
-#define GETOUT_M01E01A 359
-#define GETOUT_M01E02A 360
-#define GETOUT_M01E02B 361
-#define GETOUT_M01E03A 362
-#define GETOUT_M01E04A 363
-#define GETOUT_M01E04B 364
-#define GETOUT_M01E05A 365
-#define GETOUT_M01E07A 366
-#define GETOUT_M01E07B 367
-#define GETOUT_M01E08A 368
-#define GETOUT_M01E08B 369
-#define GETOUT_M01E09A 370
-#define GETOUT_M01E10A 371
-#define GETOUT_S00E01A 372
-#define GETOUT_S01E01A 373
-#define GETOUT_S01E02A 374
-#define GETOUT_S02E01A 375
-#define GETOUT_S02E02A 376
-#define GETOUT_S03E01A 377
-#define GETOUT_S04E01A 378
-#define GETOUT_S04E01B 379
-#define GETOUT_S04E01C 380
-#define GETOUT_S04E01D 381
-#define GETOUT_S04E01E 382
-#define GETOUT_S05E01A 383
-#define GETOUT_S06E01A 384
-#define GETOUT_S06E01B 385
-#define GETOUT_S07E01A 386
-#define GETOUT_S08E01A 387
-#define GETOUT_S09E01A 388
-#define GETOUT_S09E01B 389
-#define GETOUT_D62E01A 390
-#define GETOUT_D43E01A 391
-#define GETOUT_D44E01A 392
-#define GETOUT_D45E01A 393
-#define GETOUT_D46E01A 394
-#define GETOUT_U00E01A 395
-#define GETOUT_R00E01A 396
-#define GETOUT_T00E01A 397
-#define GETOUT_M01E07T 398
-#define GETOUT_M01E08T 399
-#define EVENT_CONTROL 400
-#define EVENT_WAKEUP 401
-#define EVENT_STATION 402
-#define STATION_CONTROL 403
-#define ENTER_CONTROL 404
-#define SETUP_DEBUG_CAMERA 405
-#define MOVE_DEBUG_CAMERA 406
-
-#define SPECIAL_TEXT_UNK_0 0x0
-#define SPECIAL_TEXT_UNK_1 0x1
-#define SPECIAL_TEXT_WAITING 0x2
-#define SPECIAL_TEXT_UNK_3 0x3
-#define SPECIAL_TEXT_PLAYER_NAME_INPUT 0x4
-#define SPECIAL_TEXT_TEAM_NAME_INPUT 0x5
-#define SPECIAL_TEXT_PASSWORD_INPUT 0x6
-#define SPECIAL_TEXT_FRIEND_MENU 0x7
-#define SPECIAL_TEXT_MENU 0x8
-#define SPECIAL_TEXT_YES_NO_WITH_LARGE_BOX 0x9
-#define SPECIAL_TEXT_LARGE_TEXT_BOX 0xA
-#define SPECIAL_TEXT_BUY_FRIEND_AREAS 0xB
-#define SPECIAL_TEXT_DUNGEON_LIST 0xC
-#define SPECIAL_TEXT_DOJO_LIST 0xD
-#define SPECIAL_TEXT_SAVE_1 0xE
-#define SPECIAL_TEXT_SAVE_2 0xF
-#define SPECIAL_TEXT_STORAGE_WITH_DIALOG 0x10
-#define SPECIAL_TEXT_STORAGE 0x11
-#define SPECIAL_TEXT_UNK_12 0x12
-#define SPECIAL_TEXT_BANK 0x13
-#define SPECIAL_TEXT_UNK_14 0x14
-#define SPECIAL_TEXT_UNK_15 0x15
-#define SPECIAL_TEXT_FRIEND_AREA_SELECT 0x16
-#define SPECIAL_TEXT_GREEN_KECLEON_SHOP 0x17
-#define SPECIAL_TEXT_PURPLE_KECLEON_SHOP 0x18
-#define SPECIAL_TEXT_LINK_SHOP 0x19
-#define SPECIAL_TEXT_LUMINOUS_CAVE 0x1A
-#define SPECIAL_TEXT_FRIEND_SHOP 0x1B
-#define SPECIAL_TEXT_FRIEND_RESCUE 0x1C
-#define SPECIAL_TEXT_UNK_1D 0x1D
-#define SPECIAL_TEXT_THANK_YOU_MAIL 0x1E
-#define SPECIAL_TEXT_PPO_HELP_COUNTER 0x1F
-#define SPECIAL_TEXT_BULLETIN_BOARD_JOBS 0x20
-#define SPECIAL_TEXT_BULLETIN_BOARD 0x21
-#define SPECIAL_TEXT_UNK_22 0x22
-#define SPECIAL_TEXT_UNK_23 0x23
-#define SPECIAL_TEXT_DOJO_ENTER 0x24
-#define SPECIAL_TEXT_DOJO_SUCCESS 0x25
-#define SPECIAL_TEXT_DOJO_FAILURE 0x26
-#define SPECIAL_TEXT_DOJO_ALL_CLEARED 0x27
-#define SPECIAL_TEXT_PERSONALITY_QUIZ 0x28
-#define SPECIAL_TEXT_UNK_29 0x29
-#define SPECIAL_TEXT_SCRIPTING_MENU 0x2A
-#define SPECIAL_TEXT_ITEM_REWARD 0x2B
-#define SPECIAL_TEXT_UNK_2C 0x2C
-#define SPECIAL_TEXT_TOOL_BOX 0x2D
-#define SPECIAL_TEXT_CREDITS_NAME 0x2E
+//#endif // GUARD_DATA_SCRIPT_H

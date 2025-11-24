@@ -46,7 +46,7 @@ UNUSED EWRAM_DATA static u8 gUnknown_20398BB = {0};
 EWRAM_DATA u16 gUnknown_20398BC = {0};
 EWRAM_DATA s16 gUnknown_20398BE = {0};
 EWRAM_DATA u32 gUnknown_20398C0 = {0};
-EWRAM_DATA s16 gUnknown_20398C4 = {0};
+EWRAM_DATA s16 gUnknown_20398C4 = {0}; // See enum "ScriptDungeonId"
 EWRAM_DATA struct DungeonSetupInfo gUnknown_20398C8 = {0};
 EWRAM_DATA u8 gUnknown_2039950 = 0;
 
@@ -61,7 +61,6 @@ extern void sub_80A73EC();
 extern void sub_8095494(DungeonMailSeed *param_1, u8 index);
 
 // TODO: Move these externs to headers
-extern s16 sub_80A2654(s16 r0);
 extern bool8 sub_80048BC(void);
 extern bool8 sub_8099B94(void);
 extern void sub_8099768(void);
@@ -86,7 +85,7 @@ UNUSED static const u8 sUnusedConstData[] = {
 
 u32 xxx_script_related_8098468(s32 param_1)
 {
-    s32 r7;
+    s32 scriptID;
     s32 varE;
 
     gUnknown_20398B4 = param_1;
@@ -151,11 +150,11 @@ u32 xxx_script_related_8098468(s32 param_1)
     gUnknown_20398A8 = 1;
     gUnknown_20398AC = 0;
     gUnknown_20398B0 = -1;
-    gUnknown_20398BE = GetScriptVarValue(0,GROUND_ENTER);
-    varE = GetScriptVarValue(0,GROUND_ENTER_LINK);
+    gUnknown_20398BE = GetScriptVarValue(NULL,GROUND_ENTER);
+    varE = GetScriptVarValue(NULL,GROUND_ENTER_LINK);
     gUnknown_20398C0 = varE;
     gUnknown_20398C4 = -1;
-    r7 = -1;
+    scriptID = -1;
     while (gUnknown_20398A8 - 1 <= 1) {
         SetAutoPressTextboxFrames(-1);
         ScriptClearTextbox();
@@ -170,31 +169,31 @@ u32 xxx_script_related_8098468(s32 param_1)
                 sub_8001D88();
                 break;
             case 5:
-                r7 = 0x70;
+                scriptID = EVENT_RESCUE;
                 break;
             case 9:
             case 10:
-            case 0xb:
-            case 0xc: {
+            case 11:
+            case 12: {
                 s32 scriptVar13;
 
-                SetScriptVarValue(0,DUNGEON_RESULT,gUnknown_20398B4);
-                SetScriptVarValue(0,WARP_LOCK,0);
+                SetScriptVarValue(NULL,DUNGEON_RESULT,gUnknown_20398B4);
+                SetScriptVarValue(NULL,WARP_LOCK,0);
                 sub_8098C58();
                 UpdateScriptVarWithImmediate(0,DUNGEON_ENTER_FREQUENCY,1,2);
-                scriptVar13 = (s16)GetScriptVarValue(0,DUNGEON_ENTER);
+                scriptVar13 = (s16)GetScriptVarValue(NULL,DUNGEON_ENTER);
                 if (scriptVar13 != -1) {
                     s32 var;
                     const DungeonInfo *dungInfo;
-                    if (scriptVar13 == 0x51) {
-                        dungInfo = GetDungeonInfo_80A2608((s16)GetScriptVarValue(0,DUNGEON_ENTER_INDEX));
+                    if (scriptVar13 == 81) {
+                        dungInfo = GetScriptDungeonInfo((s16)GetScriptVarValue(NULL,DUNGEON_ENTER_INDEX));
                     }
                     else {
-                        dungInfo = GetDungeonInfo_80A2608(scriptVar13);
+                        dungInfo = GetScriptDungeonInfo(scriptVar13);
                     }
-                    r7 = dungInfo->unkA;
+                    scriptID = dungInfo->scriptID3;
                     if (gUnknown_20398B4 == 9) {
-                        SetScriptVarArrayValue(0,DUNGEON_CLEAR_LIST,(u16) scriptVar13,1);
+                        SetScriptVarArrayValue(NULL,DUNGEON_CLEAR_LIST,(u16) scriptVar13,1);
                     }
                     var = sub_8098FCC(gUnknown_20398B4);
                     if (var != -1) {
@@ -204,41 +203,41 @@ u32 xxx_script_related_8098468(s32 param_1)
                 }
                 break;
             }
-            case 0xd:
+            case 13:
                 sub_8098C58();
                 gUnknown_20398B4 = 1;
-                SetScriptVarValue(0,START_MODE,1);
-                SetScriptVarValue(0,GROUND_GETOUT,0);
-                SetScriptVarValue(0,GROUND_ENTER,0);
-                SetScriptVarValue(0,GROUND_ENTER_LINK,0);
-                r7 = 0x71;
+                SetScriptVarValue(NULL,START_MODE,1);
+                SetScriptVarValue(NULL,GROUND_GETOUT,0);
+                SetScriptVarValue(NULL,GROUND_ENTER,0);
+                SetScriptVarValue(NULL,GROUND_ENTER_LINK,0);
+                scriptID = DEBUG_SCRIPT;
                 break;
-            case 0xe:
-                r7 = 0x73;
+            case 14:
+                scriptID = DEMO_01;
                 break;
-            case 0xf:
-                r7 = 0x74;
+            case 15:
+                scriptID = DEMO_02;
                 break;
-            case 0x10:
-                r7 = 0x75;
+            case 16:
+                scriptID = DEMO_03;
                 break;
-            case 0x11:
-                r7 = 0x76;
+            case 17:
+                scriptID = DEMO_04;
                 break;
         }
         if (gUnknown_20398B9 == 0) {
-            s32 var = GetScriptVarValue(0,GROUND_ENTER);
-            SetScriptVarValue(0,START_MODE,gUnknown_20398B4);
+            s32 var = GetScriptVarValue(NULL,GROUND_ENTER);
+            SetScriptVarValue(NULL,START_MODE,gUnknown_20398B4);
             if (gUnknown_20398B4 != 1) {
                 if (gUnknown_20398B4 == 3) {
-                    SetScriptVarValue(0,GROUND_GETOUT,gUnknown_20398BE);
+                    SetScriptVarValue(NULL,GROUND_GETOUT,gUnknown_20398BE);
                 }
                 else {
-                    SetScriptVarValue(0,GROUND_GETOUT,var);
+                    SetScriptVarValue(NULL,GROUND_GETOUT,var);
                 }
             }
-            SetScriptVarValue(0,GROUND_ENTER,gUnknown_20398BE);
-            SetScriptVarValue(0,GROUND_ENTER_LINK,gUnknown_20398C0);
+            SetScriptVarValue(NULL,GROUND_ENTER,gUnknown_20398BE);
+            SetScriptVarValue(NULL,GROUND_ENTER_LINK,gUnknown_20398C0);
         }
         gUnknown_20398B4 = 2;
         gUnknown_20398A8 = 0;
@@ -260,11 +259,11 @@ u32 xxx_script_related_8098468(s32 param_1)
         sub_809C658();
         nullsub_16();
         UpdateAdventureAchievements();
-        if (r7 != -1) {
-            GroundMap_ExecuteEvent(r7,0);
+        if (scriptID != -1) {
+            GroundMap_ExecuteEvent(scriptID, FALSE);
         }
         else {
-            GroundMap_ExecuteEvent(0x66,0);
+            GroundMap_ExecuteEvent(EVENT_DIVIDE, FALSE);
         }
         GroundMap_Action();
         sub_8005838(NULL,0);
@@ -288,9 +287,9 @@ u32 xxx_script_related_8098468(s32 param_1)
             else if (gUnknown_20398B9 != 0 && gUnknown_20398B8 == 0 && !sub_809AFAC()) {
                 u16 pressed = gRealInputs.pressed;
                 if ((pressed & (A_BUTTON | B_BUTTON | SELECT_BUTTON | START_BUTTON | R_BUTTON | L_BUTTON)) || sub_80048BC()) {
-                    GroundMap_ExecuteEvent(0x72,0);
-                    GroundMainGameCancelRequest(0x1e);
-                    FadeOutAllMusic(0x1e);
+                    GroundMap_ExecuteEvent(DEMO_CANCEL, FALSE);
+                    GroundMainGameCancelRequest(30);
+                    FadeOutAllMusic(30);
                 }
             }
             GroundMap_Action();
@@ -322,7 +321,7 @@ u32 xxx_script_related_8098468(s32 param_1)
         }
 
         GroundMap_Reset();
-        r7 = -1;
+        scriptID = -1;
     }
 
     FreeGroundMapAction();
@@ -343,69 +342,69 @@ u32 xxx_script_related_8098468(s32 param_1)
     nullsub_16();
     if (gUnknown_20398B9 != 0) {
         if (gUnknown_20398A8 == 9) {
-            FadeOutAllMusic(0x1e);
-            return 0xf;
+            FadeOutAllMusic(30);
+            return 15;
         }
         else if (gUnknown_20398A8 == 10) {
-            return 0x10;
+            return 16;
         }
         else {
-            FadeOutAllMusic(0x1e);
-            return 0xf;
+            FadeOutAllMusic(30);
+            return 15;
         }
     }
     else {
         switch (gUnknown_20398A8) {
             case 3:
-                SetScriptVarValue(0,DUNGEON_ENTER,-1);
-                SetScriptVarValue(0,DUNGEON_ENTER_INDEX,-1);
-                SetScriptVarValue(0,START_MODE,4);
-                SetScriptVarValue(0,DUNGEON_RESULT,4);
-                SetScriptVarValue(0,GROUND_GETOUT,GetScriptVarValue(0,GROUND_ENTER));
+                SetScriptVarValue(NULL,DUNGEON_ENTER,-1);
+                SetScriptVarValue(NULL,DUNGEON_ENTER_INDEX,-1);
+                SetScriptVarValue(NULL,START_MODE,4);
+                SetScriptVarValue(NULL,DUNGEON_RESULT,4);
+                SetScriptVarValue(NULL,GROUND_GETOUT,GetScriptVarValue(NULL,GROUND_ENTER));
                 return 5;
             case 4:
-                SetScriptVarValue(0,DUNGEON_ENTER,0);
-                SetScriptVarValue(0,START_MODE,5);
-                SetScriptVarValue(0,DUNGEON_RESULT,5);
-                SetScriptVarValue(0,DUNGEON_ENTER,-1);
+                SetScriptVarValue(NULL,DUNGEON_ENTER,0);
+                SetScriptVarValue(NULL,START_MODE,5);
+                SetScriptVarValue(NULL,DUNGEON_RESULT,5);
+                SetScriptVarValue(NULL,DUNGEON_ENTER,-1);
                 return 6;
             case 5: {
-                s32 sVar2 = sub_80A2654(gUnknown_20398C4);
-                SetScriptVarValue(0,DUNGEON_ENTER,gUnknown_20398C4);
-                SetScriptVarValue(0,DUNGEON_ENTER_INDEX,sVar2);
-                SetScriptVarArrayValue(0,DUNGEON_ENTER_LIST,(u16) gUnknown_20398C4,1);
-                SetScriptVarValue(0,START_MODE,7);
-                SetScriptVarValue(0,DUNGEON_RESULT,7);
-                if ((s16)GetScriptVarValue(0,GROUND_PLACE) == 10) {
-                    SetScriptVarValue(0,GROUND_PLACE,0);
+                s32 rescueDungeonID = ScriptDungeonIDToRescueDungeonID(gUnknown_20398C4);
+                SetScriptVarValue(NULL,DUNGEON_ENTER,gUnknown_20398C4);
+                SetScriptVarValue(NULL, DUNGEON_ENTER_INDEX, rescueDungeonID);
+                SetScriptVarArrayValue(NULL,DUNGEON_ENTER_LIST,(u16) gUnknown_20398C4,1);
+                SetScriptVarValue(NULL,START_MODE,7);
+                SetScriptVarValue(NULL,DUNGEON_RESULT,7);
+                if ((s16)GetScriptVarValue(NULL,GROUND_PLACE) == 10) {
+                    SetScriptVarValue(NULL,GROUND_PLACE,0);
                 }
                 return 7;
             }
             case 6:
-                SetScriptVarValue(0,DUNGEON_ENTER,0x51);
-                SetScriptVarValue(0,DUNGEON_ENTER_INDEX,gUnknown_20398C4);
-                SetScriptVarValue(0,START_MODE,7);
-                SetScriptVarValue(0,DUNGEON_RESULT,7);
-                if ((s16)GetScriptVarValue(0,GROUND_PLACE) == 10) {
-                    SetScriptVarValue(0,GROUND_PLACE,0);
+                SetScriptVarValue(NULL,DUNGEON_ENTER,81);
+                SetScriptVarValue(NULL,DUNGEON_ENTER_INDEX,gUnknown_20398C4);
+                SetScriptVarValue(NULL,START_MODE,7);
+                SetScriptVarValue(NULL,DUNGEON_RESULT,7);
+                if ((s16)GetScriptVarValue(NULL,GROUND_PLACE) == 10) {
+                    SetScriptVarValue(NULL,GROUND_PLACE,0);
                 }
                 return 8;
             case 7:
-                SetScriptVarValue(0,DUNGEON_ENTER,0x50);
-                SetScriptVarValue(0,DUNGEON_ENTER_INDEX,gUnknown_2039950);
-                SetScriptVarValue(0,START_MODE,7);
-                SetScriptVarValue(0,DUNGEON_RESULT,7);
+                SetScriptVarValue(NULL,DUNGEON_ENTER,80);
+                SetScriptVarValue(NULL,DUNGEON_ENTER_INDEX,gUnknown_2039950);
+                SetScriptVarValue(NULL,START_MODE,7);
+                SetScriptVarValue(NULL,DUNGEON_RESULT,7);
                 return 9;
             case 8:
-                SetScriptVarValue(0,DUNGEON_ENTER,0x52);
-                SetScriptVarValue(0,DUNGEON_ENTER_INDEX,gUnknown_20398C4);
-                SetScriptVarValue(0,START_MODE,7);
-                SetScriptVarValue(0,DUNGEON_RESULT,7);
+                SetScriptVarValue(NULL,DUNGEON_ENTER,82);
+                SetScriptVarValue(NULL,DUNGEON_ENTER_INDEX,gUnknown_20398C4);
+                SetScriptVarValue(NULL,START_MODE,7);
+                SetScriptVarValue(NULL,DUNGEON_RESULT,7);
                 return 10;
             default:
-                SetScriptVarValue(0,START_MODE,1);
-                FadeOutAllMusic(0x10);
-                return 0xe;
+                SetScriptVarValue(NULL,START_MODE,1);
+                FadeOutAllMusic(16);
+                return 14;
         }
     }
 }
@@ -652,11 +651,11 @@ static s16 sub_8098FCC(u32 unused)
     else
         scriptDungeon = scriptDungeon_;
 
-    di = GetDungeonInfo_80A2608(scriptDungeon);
+    di = GetScriptDungeonInfo(scriptDungeon);
     if (gUnknown_20398B4 == 9)
-        return di->unk2;
+        return di->mapID2;
 
-    switch (di->unk4) {
+    switch (di->mapID3) {
         case MAP_TINY_WOODS_ENTRY: {
             if (ScriptVarScenarioAfter(SCENARIO_MAIN, 2, -1))
                 return MAP_TEAM_BASE_INSIDE;
@@ -674,12 +673,12 @@ static s16 sub_8098FCC(u32 unused)
             break;
     }
 
-    return di->unk4;
+    return di->mapID3;
 }
 
 UNUSED static const char *sub_80990B8(void)
 {
-    s16 index = sub_8098FCC(0xB);
+    s16 index = sub_8098FCC(11);
     if (index != -1) {
         return GetGroundPlaceName(gGroundMapConversionTable[index].groundPlaceId);
     }
@@ -693,7 +692,7 @@ static inline bool8 sub_80990EC_sub(struct DungeonSetupInfo *iVar1, u32 iVar2)
     bool8 flag = FALSE;
     iVar1->sub0.missionKind = DUNGEON_MISSION_UNK0;
 
-    if ((u16)(iVar2 - 0x25) < 3)
+    if ((u16)(iVar2 - 37) < 3)
         flag = TRUE;
     else
         flag = FALSE;
@@ -708,8 +707,8 @@ u8 sub_80990EC(struct DungeonSetupInfo *param_1, s32 param_2)
     u8 dungeonIndex;
     s32 param2 = (s16) param_2;
 
-    iVar1 = GetDungeonInfo_80A2608(param2);
-    dungeonIndex = iVar1->dungeonIndex;
+    iVar1 = GetScriptDungeonInfo(param2);
+    dungeonIndex = iVar1->dungeonID;
 
     param_1->sub0.unk0.id = dungeonIndex;
     param_1->sub0.unk0.floor = 1;
@@ -719,7 +718,7 @@ u8 sub_80990EC(struct DungeonSetupInfo *param_1, s32 param_2)
         case 1:
             if (sub_80990EC_sub(param_1, param2)) {
                 param_1->sub0.unkC = 1;
-                sub_80A8EC0(auStack_98, 0x5b);
+                sub_80A8EC0(auStack_98, 91);
                 BoundedCopyStringtoBuffer(nameBuffer, auStack_98, POKEMON_NAME_LENGTH);
                 {
                     struct StoryMonData gengarData =
@@ -785,10 +784,10 @@ void sub_809927C(u8 param_1)
 {
     gUnknown_203B49C = 1;
     gUnknown_203B49D = 1;
-    gUnknown_20398C4 = 0x50;
+    gUnknown_20398C4 = 80;
     gUnknown_2039950 = param_1;
-    SetScriptVarValue(0x0,DUNGEON_ENTER,0x50);
-    SetScriptVarValue(0x0,DUNGEON_ENTER_INDEX,gUnknown_2039950);
+    SetScriptVarValue(NULL,DUNGEON_ENTER,80);
+    SetScriptVarValue(NULL,DUNGEON_ENTER_INDEX,gUnknown_2039950);
     sub_8095494(&gUnknown_20398C8.dungeonSeed,param_1);
     gUnknown_20398C8.sub0.missionKind = DUNGEON_MISSION_OUTONRESCUE;
     gUnknown_20398C8.sub0.unkC = 0;
@@ -801,7 +800,7 @@ bool8 sub_80992E0(s16 *param_1, s16 *rescueDungeonId)
     s32 sVar2;
 
     sVar2 = (s16)GetScriptVarValue(NULL, DUNGEON_ENTER);
-    if (sVar2 != -1 && sVar2 != 0x50 && sVar2 != 0x51 && sVar2 != 0x52) {
+    if (sVar2 != -1 && sVar2 != 80 && sVar2 != 81 && sVar2 != 82) {
         *param_1 = sVar2;
         *rescueDungeonId = GetScriptVarValue(NULL, DUNGEON_ENTER_INDEX);
         return TRUE;
@@ -819,11 +818,11 @@ bool8 sub_8099328(u8 *dungeonId)
     const DungeonInfo* dungeonInfo;
 
     script_disc = GetScriptVarValue(NULL, DUNGEON_ENTER);
-    if (script_disc == 0x51) {
+    if (script_disc == 81) {
         script_disc = GetScriptVarValue(NULL, DUNGEON_ENTER_INDEX);
-        dungeonInfo = GetDungeonInfo_80A2608(script_disc);
-        if (dungeonInfo->dungeonIndex < 0x3f) {
-            *dungeonId = dungeonInfo->dungeonIndex;
+        dungeonInfo = GetScriptDungeonInfo(script_disc);
+        if (dungeonInfo->dungeonID < DUNGEON_OUT_ON_RESCUE) {
+            *dungeonId = dungeonInfo->dungeonID;
             return TRUE;
         }
     }
@@ -836,10 +835,10 @@ bool8 sub_8099360(u8 *dungeonId)
     const DungeonInfo* dungeonInfo;
 
     script_disc = GetScriptVarValue(NULL, DUNGEON_ENTER);
-    if (script_disc == 0x52) {
+    if (script_disc == 82) {
         script_disc = GetScriptVarValue(NULL, DUNGEON_ENTER_INDEX);
-        dungeonInfo = GetDungeonInfo_80A2608(script_disc);
-            *dungeonId = dungeonInfo->dungeonIndex;
+        dungeonInfo = GetScriptDungeonInfo(script_disc);
+            *dungeonId = dungeonInfo->dungeonID;
             return TRUE;
     }
     return FALSE;
@@ -848,7 +847,7 @@ bool8 sub_8099360(u8 *dungeonId)
 bool8 sub_8099394(u8 *param)
 {
     s16 script_disc = GetScriptVarValue(NULL, DUNGEON_ENTER);
-    if (script_disc == 0x50) {
+    if (script_disc == 80) {
         script_disc = GetScriptVarValue(NULL, DUNGEON_ENTER_INDEX);
         *param = script_disc;
         return TRUE;

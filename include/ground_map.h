@@ -1,6 +1,7 @@
 #ifndef GUARD_GROUND_MAP_H
 #define GUARD_GROUND_MAP_H
 
+#include "constants/script_id.h"
 #include "structs/str_position.h"
 #include "structs/str_ground_script.h"
 #include "structs/str_dungeon_location.h"
@@ -11,7 +12,8 @@ void GroundMap_Reset(void);
 void sub_80A4B38(void);
 void sub_80A4B54(void);
 void GroundMap_GetStationScript(ScriptInfoSmall *r0, s32 _groundScriptId, s32 _groupId, s32 _sectorId);
-void GroundMap_ExecuteEvent(s16 scriptIndex, u32 param_2);
+// See enum "ScriptID"
+void GroundMap_ExecuteEvent(s16 scriptIndex, bool32 param_2);
 void GroundMap_ExecuteStation(s32 _map, s32 _group, s32 _sector, bool32 _setScriptState);
 void GroundMap_ExecuteEnter(s16 param_1);
 bool8 GroundMapNotifyAll(s16 param_1);

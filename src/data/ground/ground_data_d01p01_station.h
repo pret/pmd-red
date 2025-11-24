@@ -31,7 +31,7 @@ static const struct ScriptCommand s_gs178_g0_s0_station_sref_script[] = { /* 0x8
     JUMP_SCRIPT(COMMON_ENTER),
 };
 
-static const struct ScriptRef s_gs178_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs178_g0_s0_station_sref_script }; /* 0x822c2b4 */
+static const struct ScriptRef s_gs178_g0_s0_station_sref = { ENTER_CONTROL , 1, NULL, s_gs178_g0_s0_station_sref_script }; /* 0x822c2b4 */
 
 static const struct ScriptCommand s_gs178_g1_s0_station_sref_script[] = { /* 0x822c2c0 - PART 1 0:04:05-0:06:38 */
     DEBUGINFO_O(37),
@@ -68,7 +68,7 @@ static const struct ScriptCommand s_gs178_g1_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs178_g1_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs178_g1_s0_station_sref_script }; /* 0x822c5d8 */
+static const struct ScriptRef s_gs178_g1_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs178_g1_s0_station_sref_script }; /* 0x822c5d8 */
 
 
 
@@ -342,7 +342,7 @@ static const struct ScriptCommand s_gs178_g1_s1_lives0_dlg0[] = { /* 0x822dc90 -
     WALK_GRID(256, 7),
     ROTATE_TO(6, DIR_TRANS_SPINRIGHT1, DIRECTION_SOUTH),
     FANFARE_STOP2(450),
-    { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_E5(5, 0),
     AWAIT_CUE(7),
     CALL_SCRIPT(JUMP_ANGRY_FUNC),
     ALERT_CUE(5),
@@ -373,7 +373,7 @@ static const struct ScriptCommand s_gs178_g2_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs178_g2_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs178_g2_s0_station_sref_script }; /* 0x822df54 */
+static const struct ScriptRef s_gs178_g2_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs178_g2_s0_station_sref_script }; /* 0x822df54 */
 
 
 static const struct ScriptCommand s_gs178_g2_s0_lives0_dlg0[] = { /* 0x822df60 - PART 1 0:11:39-0:12:15 - Player */
@@ -460,7 +460,7 @@ static const struct ScriptCommand s_gs178_g2_s0_lives1_dlg0[] = { /* 0x822e5fc -
     { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(6),
     CALL_SCRIPT(WAKEUP_FUNC),
-    { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_E5(5, 0),
     AWAIT_CUE(6),
     ROTATE_TO(8, DIR_TRANS_SPINRIGHT1, DIRECTION_WEST),
     FANFARE_PLAY2(468),
@@ -528,7 +528,7 @@ static const struct ScriptCommand s_gs178_g3_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs178_g3_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs178_g3_s0_station_sref_script }; /* 0x822ea0c */
+static const struct ScriptRef s_gs178_g3_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs178_g3_s0_station_sref_script }; /* 0x822ea0c */
 
 static const struct ScriptCommand s_gs178_g3_s0_lives0_dlg0[] = { /* 0x822ea18 - PART 1 0:17:17-0:18:51 - Player */
     DEBUGINFO_O(534),

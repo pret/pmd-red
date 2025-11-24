@@ -68,7 +68,7 @@ void ThoroughlyResetScriptVars(void)
     SetScriptVarValue(NULL,START_MODE,0);
     SetScriptVarValue(NULL,CLEAR_COUNT,0);
     SetScriptVarValue(NULL,WEATHER_KIND,-1);
-    SetScriptVarValue(NULL,PLAYER_KIND,0);
+    SetScriptVarValue(NULL, PLAYER_KIND, 0);
     SetScriptVarValue(NULL,PARTNER1_KIND,0);
     SetScriptVarValue(NULL,PARTNER2_KIND,0);
     SetScriptVarValue(NULL,NEW_FRIEND_KIND,0);
@@ -772,7 +772,7 @@ bool8 JudgeVarWithVar(u8 *param_1, s16 param_2, s16 param_3, enum FlagJudgeOpera
 #if (GAME_VERSION == VERSION_RED)
 UNUSED static s32 sub_8002354(u32 param_1)
 {
-  if (param_1 < 0x3b) {
+  if (param_1 < 59) {
     return gUnknown_80B6D90[param_1].num;
   }
   else {
@@ -782,7 +782,7 @@ UNUSED static s32 sub_8002354(u32 param_1)
 
 UNUSED static const u8 *sub_8002374(u32 param_1)
 {
-  if (param_1 < 0x3b) {
+  if (param_1 < 59) {
     return gUnknown_80B6D90[param_1].text;
   }
   else {
@@ -792,10 +792,10 @@ UNUSED static const u8 *sub_8002374(u32 param_1)
 
 UNUSED static const u8 *sub_8002394(u32 param_1)
 {
-  if (param_1 - 0x12 < 9) {
-    return  gUnknown_80B714C[param_1 - 0x12];
+  if (param_1 - 18 < 9) {
+    return  gUnknown_80B714C[param_1 - 18];
   }
-  else if (param_1 == 0xf) {
+  else if (param_1 == 15) {
     return "1-1"; // 1-1
   }
   else {

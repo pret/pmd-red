@@ -273,7 +273,7 @@ static void sub_801059C(void)
     u8 filename[0xC];
     s32 i, size;
 
-    Pokemon *pokeStruct = GetPlayerPokemonStruct();
+    Pokemon *pokeStruct = GetLeaderMon1();
     OpenedFile *file = OpenFileAndGetFileDataPtr(gUnknown_80D4014[0], &gTitleMenuFileArchive);
     OpenedFile *file2 = OpenFileAndGetFileDataPtr(gUnknown_80D4014[1], &gTitleMenuFileArchive);
 

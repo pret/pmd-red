@@ -88,16 +88,13 @@ struct unkStruct_3001B64_unk418
 
 #define MAX_TEXTBOX_PORTRAITS 10
 
-enum {
-    TEXTBOX_TYPE_NORMAL = 1,
+enum TextboxTypeID
+{
+    TEXTBOX_TYPE_0,
+    TEXTBOX_TYPE_NORMAL,
     TEXTBOX_TYPE_ON_BG_PRESS, // Prints text on a bg without window, waits for the player button press
     TEXTBOX_TYPE_ON_BG_AUTO, // Prints text on a bg, waits 32 frames and then fades out the text
-};
-
-union MonOrStringPtr
-{
-    u8 *str;
-    Pokemon *mon;
+    TEXTBOX_TYPE_4,
 };
 
 struct Textbox
@@ -107,23 +104,23 @@ struct Textbox
     s32 endMsgFrames;
     s32 midMsgFrames;
     struct TextboxText text;
-    u32 unk414;
+    u32 unk414; // See enum "SpecialTextKind"
     const struct unkStruct_3001B64_unk418 *unk418;
     const MenuItem *unk41C;
     u32 unk420;
     u32 unk424;
     u32 unk428;
-    union MonOrStringPtr unk42C;
-    s32 unk430;
+    MonOrStringPtr unk42C;
+    s32 unk430; // See enum "ScriptID"
     s32 unk434;
     u32 fill438;
     struct TextboxPortrait portraits[MAX_TEXTBOX_PORTRAITS];
-    s16 unk5A4;
+    s16 unk5A4; // See enum "ScriptID"
 };
 
 static IWRAM_INIT struct Textbox *sTextbox = { NULL };
 
-void sub_809B028(const MenuItem *, s32 a1_, s32 a2, s32 a3, s32 a4_, const char *text);
+void sub_809B028(const MenuItem *, s32 a1_, s32 a2, s32 a3, s32 a4_, const u8 *text);
 bool8 sub_809B18C(s32 *sp);
 extern u8 sub_802B2D4(void);
 extern void sub_802B3B8(void);
@@ -219,7 +216,11 @@ static const u16 sScriptFlagSets[] =
     [SCRIPT_TEXT_TYPE_LETTER] =     TEXTBOX_FLAG_UNUSED_x2 | TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS_2 | TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS | TEXTBOX_FLAG_DIALOGUE_SOUND,
     [SCRIPT_TEXT_TYPE_4] =          0x01,
     // These are effectively unused
-    0x121, 0x101, 0x10D, 0x105, 0
+    0x121,
+    0x101,
+    0x10D,
+    0x105,
+    0
 };
 
 ALIGNED(4) static const u8 sInvalidText[] = _("{COLOR RED_W}invalidity{RESET}");
@@ -233,7 +234,8 @@ EWRAM_DATA u16 gUnknown_20399DE = 0;
 
 static void ResetAllTextboxPortraits(void);
 static bool8 ScriptPrintTextInternal(struct TextboxText *ptr, u32 flags_, s32 a2_, const char *text);
-static u32 SetTextboxType(u32 textboxType, bool8 unused);
+// textboxType: See enum "TextboxTypeID"
+static bool8 SetTextboxType(u32 textboxType, bool8 unused);
 static void ResetTextbox(void);
 static bool8 IsTextboxOpen_809B40C(struct TextboxText *a0);
 static u8 *sub_809B428(u8 *a0, s32 a1, u8 *a2);
@@ -292,13 +294,13 @@ void TextboxResetAll(void)
         ResetTextboxPortrait(index);
     }
     sTextbox->unk414 = 0;
-    SetTextboxType(0, TRUE);
+    SetTextboxType(TEXTBOX_TYPE_0, TRUE);
 }
 
-static u32 SetTextboxType(u32 textboxType, bool8 unused)
+static bool8 SetTextboxType(u32 textboxType, bool8 unused)
 {
     switch (textboxType) {
-        case 0:
+        case TEXTBOX_TYPE_0:
             ResetTextbox();
             ShowWindows(0,1,1);
             break;
@@ -311,7 +313,7 @@ static u32 SetTextboxType(u32 textboxType, bool8 unused)
         case TEXTBOX_TYPE_ON_BG_AUTO:
             ResetTextbox();
             break;
-        case 4:
+        case TEXTBOX_TYPE_4:
             ResetTextbox();
             break;
         default:
@@ -320,7 +322,7 @@ static u32 SetTextboxType(u32 textboxType, bool8 unused)
             break;
     }
     sTextbox->type = textboxType;
-    return 1;
+    return TRUE;
 }
 
 void sub_809A6E4(u16 r0)
@@ -366,17 +368,16 @@ bool8 sub_809A768(void)
     return FALSE;
 }
 
-// I think these two functions are functionally equivalent.
 bool8 ScriptClearTextbox(void)
 {
     switch (sTextbox->type) {
         case TEXTBOX_TYPE_ON_BG_AUTO:
-            return ScriptPrintTextInternal(&sTextbox->text,4,-1,0);
+            return ScriptPrintTextInternal(&sTextbox->text, 4, -1, 0);
         case TEXTBOX_TYPE_NORMAL:
         case TEXTBOX_TYPE_ON_BG_PRESS:
-            return ScriptPrintTextInternal(&sTextbox->text,TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS | 0x4,-1,0);
+            return ScriptPrintTextInternal(&sTextbox->text, TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS | 0x4, -1, 0);
         default:
-            SetTextboxType(0, TRUE);
+            SetTextboxType(TEXTBOX_TYPE_0, TRUE);
             return FALSE;
     }
 }
@@ -387,9 +388,9 @@ bool8 ScriptClearTextbox2(void)
         case TEXTBOX_TYPE_ON_BG_AUTO:
         case TEXTBOX_TYPE_NORMAL:
         case TEXTBOX_TYPE_ON_BG_PRESS:
-            return ScriptPrintTextInternal(&sTextbox->text,4,-1,0);
+            return ScriptPrintTextInternal(&sTextbox->text, 4, -1, 0);
         default:
-            SetTextboxType(0, TRUE);
+            SetTextboxType(TEXTBOX_TYPE_0, TRUE);
             return FALSE;
     }
 }
@@ -448,17 +449,17 @@ static bool8 sub_809A8B8(s32 param_1, s32 param_2)
 
     TRY_CLOSE_FILE_AND_SET_NULL(portraitPtr->faceFile);
 
-    sub_80A7DDC(&local_28,&speciesId);
+    sub_80A7DDC(&local_28, &speciesId);
     if (local_28 >= 10 && local_28 <= 29) {
         Pokemon *pPVar6 = sub_80A8D54(local_28);
         if (pPVar6 == NULL) {
             showPortrait = FALSE;
         }
-        else if (pPVar6 == sub_808D3BC()) {
-            local_28 = 0x21;
+        else if (pPVar6 == GetLeaderMon2()) {
+            local_28 = 33;
         }
-        else if (pPVar6 == sub_808D3F8()) {
-            local_28 = 0x22;
+        else if (pPVar6 == GetPartnerMon2()) {
+            local_28 = 34;
         }
         else if (pPVar6->dungeonLocation.id == DUNGEON_FROSTY_GROTTO_2
                  || pPVar6->dungeonLocation.id == DUNGEON_HOWLING_FOREST_2
@@ -507,8 +508,8 @@ static bool8 sub_809A8B8(s32 param_1, s32 param_2)
         case 2:
         case 6:
         case 7:
-        case 0x21:
-        case 0x22:
+        case 33:
+        case 34:
         if (IsStarterMonster(speciesId)) {
             byte1 = TRUE;
         }
@@ -733,7 +734,7 @@ static MonPortraitMsg *GetSpeakerPortrait(s32 portraitId_)
     return NULL;
 }
 
-bool8 ScriptPrintText(s32 scriptMsgType, s32 speakerId_, const char *text)
+bool8 ScriptPrintText(s32 scriptMsgType, s32 speakerId_, const u8 *text)
 {
     s32 speakerId = (s16) speakerId_;
 
@@ -750,46 +751,40 @@ bool8 ScriptPrintText(s32 scriptMsgType, s32 speakerId_, const char *text)
 }
 
 // These 2 functions are identical.
-bool8 ScriptPrintTextOnBg(const char *text)
+bool8 ScriptPrintTextOnBg(const u8 *text)
 {
-    if (text == NULL) {
+    if (text == NULL)
         return ScriptClearTextbox();
-    }
-    else if (text[0] == '\0') {
+
+    if (text[0] == '\0')
         return ScriptClearTextbox();
-    }
-    else {
-        SetTextboxType(TEXTBOX_TYPE_ON_BG_PRESS, TRUE);
-        return ScriptPrintTextInternal(&sTextbox->text, TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS | TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS_2 | TEXTBOX_FLAG_UNUSED_x2, -1, text);
-    }
+
+    SetTextboxType(TEXTBOX_TYPE_ON_BG_PRESS, TRUE);
+    return ScriptPrintTextInternal(&sTextbox->text, TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS | TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS_2 | TEXTBOX_FLAG_UNUSED_x2, -1, text);
 }
 
-bool8 ScriptPrintTextOnBg2(const char *text)
+bool8 ScriptPrintTextOnBg2(const u8 *text)
 {
-    if (text == NULL) {
+    if (text == NULL)
         return ScriptClearTextbox();
-    }
-    else if (text[0] == '\0') {
+
+    if (text[0] == '\0')
         return ScriptClearTextbox();
-    }
-    else {
-        SetTextboxType(TEXTBOX_TYPE_ON_BG_PRESS, TRUE);
-        return ScriptPrintTextInternal(&sTextbox->text, TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS | TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS_2 | TEXTBOX_FLAG_UNUSED_x2, -1, text);
-    }
+
+    SetTextboxType(TEXTBOX_TYPE_ON_BG_PRESS, TRUE);
+    return ScriptPrintTextInternal(&sTextbox->text, TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS | TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS_2 | TEXTBOX_FLAG_UNUSED_x2, -1, text);
 }
 
-bool8 ScriptPrintTextOnBgAuto(s32 unused, const char *text)
+bool8 ScriptPrintTextOnBgAuto(s32 unused, const u8 *text)
 {
-    if (text == NULL) {
+    if (text == NULL)
         return ScriptClearTextbox();
-    }
-    else if (text[0] == '\0') {
+
+    if (text[0] == '\0')
         return ScriptClearTextbox();
-    }
-    else {
-        SetTextboxType(TEXTBOX_TYPE_ON_BG_AUTO, TRUE);
-        return ScriptPrintTextInternal(&sTextbox->text, 0x65, -1, text);
-    }
+
+    SetTextboxType(TEXTBOX_TYPE_ON_BG_AUTO, TRUE);
+    return ScriptPrintTextInternal(&sTextbox->text, 0x65, -1, text);
 }
 
 bool8 sub_809AFAC(void)
@@ -797,7 +792,7 @@ bool8 sub_809AFAC(void)
     return (sTextbox->type == 4);
 }
 
-void sub_809AFC8(s32 a0_, s32 a1, s32 a2_, const char *text)
+void sub_809AFC8(s32 a0_, s32 a1, s32 a2_, const u8 *text)
 {
     s32 a0 = (u8) a0_;
     s32 a2 = (s16) a2_;
@@ -816,7 +811,7 @@ bool8 sub_809AFFC(u8 *a0)
     return ret;
 }
 
-void sub_809B028(const MenuItem * menuItems, s32 a1_, s32 a2, s32 a3, s32 a4_, const char *text)
+void sub_809B028(const MenuItem * menuItems, s32 a1_, s32 a2, s32 a3, s32 a4_, const u8 *text)
 {
     s32 a1 = (u8) a1_;
     s32 a4 = (s16) a4_;
@@ -857,20 +852,20 @@ bool8 sub_809B18C(s32 *sp)
     return (sTextbox->unk420 == 3);
 }
 
-bool8 sub_809B1C0(s32 a0, u32 kind, void *a2)
+bool8 ScriptSpecialTextHandler2(s32 kind, u32 a1, MonOrStrPtr_Arg monOrStr)
 {
-    return sub_809B1D4(a0, kind, 0, a2);
+    return ScriptSpecialTextHandler(kind, a1, 0, monOrStr);
 }
 
-bool8 sub_809B1D4(s32 a0, u32 kind, s32 a2, void *a3)
+bool8 ScriptSpecialTextHandler(s32 kind, u32 a1, s32 a2, MonOrStrPtr_Arg monOrStr)
 {
-    switch (a0) {
-        case 0xB:
-            if (sub_8021700(kind)) {
+    switch (kind) {
+        case SPECIAL_TEXT_BUY_FRIEND_AREAS:
+            if (sub_8021700(a1)) {
                 return FALSE;
             }
             break;
-        case 0xC:
+        case SPECIAL_TEXT_DUNGEON_LIST:
             sub_8001D88();
             if (HasZeroAvailableDungeons()) {
                 return FALSE;
@@ -878,14 +873,14 @@ bool8 sub_809B1D4(s32 a0, u32 kind, s32 a2, void *a3)
             break;
     }
 
-    SetTextboxType(4, FALSE);
-    sTextbox->unk414 = a0;
+    SetTextboxType(TEXTBOX_TYPE_4, FALSE);
+    sTextbox->unk414 = kind;
     sTextbox->unk418 = NULL;
     sTextbox->unk41C = NULL;
     sTextbox->unk420 = 1;
-    sTextbox->unk424 = kind;
+    sTextbox->unk424 = a1;
     sTextbox->unk428 = a2;
-    sTextbox->unk42C.str = a3;
+    SET_MONORSTRPTR(sTextbox->unk42C, monOrStr);
     sTextbox->unk430 = -1;
     return TRUE;
 }
@@ -921,7 +916,7 @@ static bool8 ScriptPrintTextInternal(struct TextboxText *textboxText, u32 flags_
 
         if (flags & 4) {
             sub_8014490();
-            SetTextboxType(0, TRUE);
+            SetTextboxType(TEXTBOX_TYPE_0, TRUE);
         }
         return TRUE;
     }
@@ -1006,7 +1001,7 @@ void sub_809B474(void)
                 case 1:
                     if (!sub_809B648()) {
                         sTextbox->unk420 = 3;
-                        SetTextboxType(0, TRUE);
+                        SetTextboxType(TEXTBOX_TYPE_0, TRUE);
                         break;
                     }
 
@@ -1017,7 +1012,7 @@ void sub_809B474(void)
                             if (!unkStructPtr->unk4()) {
                                 sTextbox->unk430 = -1;
                                 sTextbox->unk420 = 3;
-                                SetTextboxType(0, TRUE);
+                                SetTextboxType(TEXTBOX_TYPE_0, TRUE);
                                 break;
                             }
                         }
@@ -1041,7 +1036,7 @@ void sub_809B474(void)
                         break;
                     }
                     sTextbox->unk420 = 3;
-                    SetTextboxType(0, TRUE);
+                    SetTextboxType(TEXTBOX_TYPE_0, TRUE);
                     break;
             }
             break;
@@ -1489,14 +1484,14 @@ static bool8 sub_809B648(void)
             return 1;
         case 0xc:
             if (sTextbox->unk420 == 1) {
-                s32 var = sub_80A2654(GetScriptVarValue(0,0x12));
+                s32 rescueDungeonID = ScriptDungeonIDToRescueDungeonID(GetScriptVarValue(NULL, DUNGEON_SELECT));
                 ResetTextbox();
                 if (!DungeonListMenu_Init(3,0,10,TRUE)) {
                     sTextbox->unk430 = -1;
                     return 0;
                 }
-                if ((var != -1) && (!DungeonListMenu_MoveMenuTo(var))) {
-                    SetScriptVarValue(0,0x12,-1);
+                if (rescueDungeonID != -1 && !DungeonListMenu_MoveMenuTo(rescueDungeonID)) {
+                    SetScriptVarValue(NULL, DUNGEON_SELECT, -1);
                 }
                 PlayMenuSoundEffect(4);
             }
@@ -1504,7 +1499,7 @@ static bool8 sub_809B648(void)
                 switch (DungeonListMenu_GetInput(1)) {
                     case 3: {
                         s32 rescueDungeonId = DungeonListMenu_GetCurrentRescueDungeonId();
-                        SetScriptVarValue(0, 0x12, RescueDungeonToScriptDungeonId(rescueDungeonId));
+                        SetScriptVarValue(NULL, 0x12, RescueDungeonToScriptDungeonId(rescueDungeonId));
                         sTextbox->unk430 = rescueDungeonId;
                         DungeonListMenu_Free();
                         return 0;
@@ -1543,7 +1538,7 @@ static bool8 sub_809B648(void)
             if (sTextbox->unk420 == 1) {
                 ResetTextbox();
                 if (sTextbox->unk414 == 0xe) {
-                    SetScriptVarValue(0,0x18,1);
+                    SetScriptVarValue(NULL,0x18,1);
                 }
                 sub_8011C28(1);
                 PrepareSavePakWrite(0);
@@ -1625,9 +1620,9 @@ static bool8 sub_809B648(void)
             }
             else {
                 s32 iVar10 = sub_80246F0();
-                if (GetScriptVarValue(0,0x39) == 0 && HasEvolutionCompleted()) {
-                    SetScriptVarValue(0,0x39,1);
-                    GroundMap_ExecuteEvent(0x46,0);
+                if (GetScriptVarValue(NULL, EVENT_LOCAL) == 0 && HasEvolutionCompleted()) {
+                    SetScriptVarValue(NULL, EVENT_LOCAL, 1);
+                    GroundMap_ExecuteEvent(EVOLUTION_HERO, FALSE);
                 }
 
                 if (iVar10 == 3) {
@@ -1646,7 +1641,7 @@ static bool8 sub_809B648(void)
             }
            return 0;
         case 0x1b: {
-            bool8 unk = (CheckQuest(QUEST_SQUARE_ASLEEP) != FALSE);
+            bool8 unk = CheckQuest(QUEST_SQUARE_ASLEEP) != FALSE;
             ResetTextbox();
             if (CreateWigglytuffShop(unk)) {
                 sTextbox->unk418 = &gUnknown_8116218;
@@ -1727,11 +1722,11 @@ static bool8 sub_809B648(void)
                 return 0;
             }
             else {
-                s32 iVar14 = GetScriptVarValue(0,0x19);
+                s32 iVar14 = GetScriptVarValue(NULL,0x19);
                 if (iVar14 < 100) {
-                    SetScriptVarValue(0,0x19,iVar14 + 1);
+                    SetScriptVarValue(NULL,0x19,iVar14 + 1);
                 }
-                SetScriptVarValue(0,0x39,1);
+                SetScriptVarValue(NULL,0x39,1);
                 ScenarioCalc(2,local_20,local_1c + 1);
                 sTextbox->unk418 = &gUnknown_8116288;
                 return 1;
@@ -1983,17 +1978,17 @@ static void sub_809C478(void)
 
 static void sub_809C4B0(void)
 {
-    s16 scriptIndex_s16;
-    s32 scriptIndex = -1;
+    s16 scriptID_s16;
+    s32 scriptID = -1;
 
     if (sTextbox->unk430 == 0) {
-        scriptIndex = sub_803B168();
+        scriptID = sub_803B168();
 
         ASM_MATCH_TRICK(sTextbox->unk5A4);
-        scriptIndex_s16 = scriptIndex;
+        scriptID_s16 = scriptID;
 
-        sTextbox->unk5A4 = scriptIndex_s16;
-        sTextbox->unk430 = scriptIndex;
+        sTextbox->unk5A4 = scriptID_s16;
+        sTextbox->unk430 = scriptID;
     }
     else {
         sTextbox->unk430 = -1;
@@ -2001,8 +1996,8 @@ static void sub_809C4B0(void)
 
     sub_803B1BC();
 
-    if (scriptIndex != -1)
-        GroundMap_ExecuteEvent(scriptIndex, 0);
+    if (scriptID != -1)
+        GroundMap_ExecuteEvent(scriptID, FALSE);
 }
 
 static void sub_809C504(void)

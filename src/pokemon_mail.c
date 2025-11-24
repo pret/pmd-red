@@ -428,10 +428,10 @@ bool8 sub_803C110(s16 index)
             } while (*psVar5 != MONSTER_NONE);
         }
 
-        pokeStruct = GetPlayerPokemonStruct();
+        pokeStruct = GetLeaderMon1();
         if (pokeStruct->speciesNum == species_s32)
             return FALSE;
-        pokeStruct = sub_808D378();
+        pokeStruct = GetPartnerMon();
         if (pokeStruct->speciesNum == species_s32)
             return FALSE;
     }

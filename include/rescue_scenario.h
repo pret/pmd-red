@@ -8,7 +8,7 @@ void sub_80972F4(void);
 void nullsub_128(void);
 bool8 sub_8097318(s16 param_1);
 void sub_809733C(s32 _rescueDungId, bool32 param_2);
-bool8 sub_8097384(s32 param_1);
+bool8 sub_8097384(s32 rescueDungeon);
 void sub_80973A8(s32 _rescueDungId, bool32 param_2);
 bool8 RescueScenarioConquered(s32 rescueDungeonID_);
 // See enum "RescueDungeonId"
