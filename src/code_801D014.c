@@ -32,12 +32,19 @@
 #include "wonder_mail_802C4C8.h"
 #include "wonder_mail_802C860.h"
 
+// size: 0x8
+struct TeamBadgeData
+{
+    /* 0x0 */ u32 *pics; // Array of (MAX_TEAM_RANKS * 32)
+    /* 0x4 */ RGB_Struct *palette; // Array of 16
+};
+
 static EWRAM_INIT struct unk_203B250 *sUnknown_203B250 = {NULL};
 static EWRAM_INIT u32 sUnknown_203B254 = {0};
 
 #include "data/code_801D014.h"
 
-static void LoadTeamRankBadge(u32, u32, u32);
+static void LoadTeamRankBadge(u32 winID, u32 x, u32 y);
 
 static void sub_801D208(u32 newState);
 static void sub_801D220(void);
@@ -588,25 +595,27 @@ static void sub_801D894(void)
     sub_80073E0(2);
 }
 
-static void LoadTeamRankBadge(u32 a0, u32 a1, u32 a2)
+static void LoadTeamRankBadge(u32 winID, u32 x, u32 y)
 {
     OpenedFile *teamBadgeFile;
-    s32 paletteIndex;
-    u8 rank;
-    RGB *colorArray;
-    u8 *teamBadgePic;
+    u32 *pic;
+    RGB_Struct *pal;
+    s32 i;
 
     teamBadgeFile = OpenFileAndGetFileDataPtr(sTeamRankBadgeFileName, &gTitleMenuFileArchive);
-    teamBadgePic = ((struct TeamBadgeData *)(teamBadgeFile->data))->pics;
-    colorArray = ((struct TeamBadgeData *)(teamBadgeFile->data))->palette;
+#define TMRKPAT_DATA ((struct TeamBadgeData *)teamBadgeFile->data)
 
-    for (paletteIndex = 0; paletteIndex < 16; paletteIndex++) {
-        SetBGPaletteBufferColorArray(paletteIndex + 224, colorArray);
-        colorArray++;
+    pic = TMRKPAT_DATA->pics;
+    pal = TMRKPAT_DATA->palette;
+
+    for (i = 0; i < 16; i++) {
+        SetBGPaletteBufferColorArray(i + 0xE0, pal);
+        pal++;
     }
 
-    rank = GetRescueTeamRank();
-    teamBadgePic = &teamBadgePic[rank * 128];
-    sub_8007E20(a0, a1, a2, 16, 16, (void *) teamBadgePic, 14);
+    pic = &pic[GetRescueTeamRank() * 32];
+    sub_8007E20(winID, x, y, 16, 16, pic, 14);
+
+#undef TMRKPAT_DATA
     CloseFile(teamBadgeFile);
 }

@@ -51,7 +51,7 @@ void HandlePounceOrb(Entity *pokemon, Entity *target, u8 r2)
     sub_806CDD4(target, 6, direction);
 
 
-    while (1)
+    while (TRUE)
     {
         pos.x = target->pos.x + gAdjacentTileOffsets[direction].x;
         pos.y = target->pos.y + gAdjacentTileOffsets[direction].y;

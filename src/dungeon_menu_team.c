@@ -83,10 +83,10 @@ bool8 ShowDungeonTeamMenu(Entity *a0)
         .id = {
             [0] = {
                 .type = WINDOW_TYPE_WITH_HEADER,
-                .pos = {2, 2},
+                .pos = { 2, 2 },
                 .width = 14,
                 .height = 16,
-                .unk10 = 16,
+                .heightInTiles = 16,
                 .unk12 = 0,
                 .header = &sTeamWindowHeader,
             },
@@ -108,14 +108,14 @@ bool8 ShowDungeonTeamMenu(Entity *a0)
         windows.id[0].pos.y++;
     }
 
-    while (1) {
+    while (TRUE) {
         s32 id;
         bool32 r4;
 
         ret = FALSE;
         PrintOnDungeonTeamMenu(&sp, &windows, TRUE);
         r10 = FALSE;
-        while (1) {
+        while (TRUE) {
             s32 id = sp.unk4[gDungeonMenu.menuIndex];
             if (id >= 0) {
                 Entity *teamMon = gDungeon->teamPokemon[id];
@@ -182,7 +182,7 @@ bool8 ShowDungeonTeamMenu(Entity *a0)
         }
 
         CreateDungeonMenuSubWindow(&windows.id[0], 0x12);
-        while (1) {
+        while (TRUE) {
             AddMenuCursorSprite(&gDungeonMenu);
             DungeonRunFrameActions(0x1B);
             if (gRealInputs.repeated & DPAD_DOWN) {
@@ -278,7 +278,7 @@ static void PrintOnDungeonTeamMenu(struct UnkFieldTeamMenuStruct *a0, WindowTemp
     if (withHeader) {
         height += 2;
     }
-    windows->id[0].unk10 = height;
+    windows->id[0].heightInTiles = height;
     windows->id[0].height = height;
     sTeamWindowHeader.width = 8;
     if (a2) {
@@ -415,10 +415,10 @@ void ShowDungeonTacticsMenu(ActionContainer *a0)
         .id = {
             [0] = {
                 .type = WINDOW_TYPE_WITH_HEADER,
-                .pos = {2, 2},
+                .pos = { 2, 2 },
                 .width = 18,
                 .height = 14,
-                .unk10 = 18,
+                .heightInTiles = 18,
                 .unk12 = 2,
                 .header = &sTeamWindowHeader,
             },
@@ -437,7 +437,7 @@ void ShowDungeonTacticsMenu(ActionContainer *a0)
     monInfo = GetEntInfo(teamMon);
     menuIndex = 0;
     scrollFirstId = 0;
-    while (1) {
+    while (TRUE) {
         s32 i;
         bool32 addCursor = TRUE;
         bool32 loopBreak = FALSE;
@@ -465,7 +465,7 @@ void ShowDungeonTacticsMenu(ActionContainer *a0)
         ResetTouchScreenMenuInput(&gDungeonMenu.touchScreen);
         sub_80137B0(&gDungeonMenu, 0);
         gDungeonMenu.menuIndex = menuIndex;
-        while (1) {
+        while (TRUE) {
             s32 i;
 
             AddMenuCursorSprite(&gDungeonMenu);
@@ -528,7 +528,7 @@ void ShowDungeonTacticsMenu(ActionContainer *a0)
                     SetActionUnusableInDungeonSubMenu(0x2F);
                 }
                 CreateDungeonMenuSubWindow(&windows.id[0], 0x16);
-                while (1) {
+                while (TRUE) {
                     changed = FALSE;
                     AddMenuCursorSprite(&gDungeonMenu);
                     DungeonRunFrameActions(0x3D);
@@ -640,10 +640,10 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
         .id = {
             [0] = {
                 .type = WINDOW_TYPE_WITH_HEADER,
-                .pos = {2, 2},
+                .pos = { 2, 2 },
                 .width = 18,
                 .height = 14,
-                .unk10 = 18,
+                .heightInTiles = 18,
                 .unk12 = 2,
                 .header = &sTeamWindowHeader,
             },
@@ -695,7 +695,7 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
     monSummaryInfo.unk56 = 0;
     gDungeonMenu.menuIndex = 0;
 
-    while (1) {
+    while (TRUE) {
         bool8 loopBreak = FALSE;
         bool8 hasIqSkills = FALSE;
         bool8 hasStatusProblems = FALSE;
@@ -757,7 +757,7 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
             gDungeonMenu.menuIndex = r8;
         }
 
-        while (1) {
+        while (TRUE) {
             s32 touchScreenArrow;
             bool8 downArrowShown, upArrowShown;
 
@@ -973,7 +973,7 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
                     PlayDungeonConfirmationSE();
                     AddActionToDungeonSubMenu(0xC, 0);
                     CreateDungeonMenuSubWindow(&windows.id[0], 0x16);
-                    while (1) {
+                    while (TRUE) {
                         AddMenuCursorSprite(&gDungeonMenu);
                         DungeonRunFrameActions(0x1C);
                         if (gRealInputs.repeated & DPAD_DOWN) {
@@ -1013,7 +1013,7 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
                         SetActionUnusableInDungeonSubMenu(0x28);
                     }
                     CreateDungeonMenuSubWindow(&windows.id[0], 0x16);
-                    while (1) {
+                    while (TRUE) {
                         AddMenuCursorSprite(&gDungeonMenu);
                         DungeonRunFrameActions(0x1C);
                         if (gRealInputs.repeated & DPAD_DOWN) {
@@ -1162,7 +1162,7 @@ void ShowStatusesDescriptionMenu(s32 count, STATUSTEXTS(statuses))
     ResetTouchScreenMenuInput(&menuSub);
     for (i = 0; i < count; i++) {
         ShowStatusDescriptionMenu(statuses[i], &menuSub);
-        while (1) {
+        while (TRUE) {
             if (i < count - 1) {
                 ShowStatusDescriptionMenuArrow();
             }
@@ -1187,7 +1187,7 @@ static void ShowIqDescriptionWindow(u8 iqSkillId)
     WindowHeader header;
     STATUSTEXTS(result);
 
-    while (1) {
+    while (TRUE) {
         s32 count;
         bool8 bPress;
 
@@ -1206,7 +1206,7 @@ static void ShowIqDescriptionWindow(u8 iqSkillId)
         PrintFormattedStringOnWindow(8, 16, GetIQSkillDescription(iqSkillId), 0, '\0');
         sub_80073E0(0);
         count = PrepareStatusStringArrays(GetIQSkillDescription(iqSkillId), result);
-        while (1) {
+        while (TRUE) {
             if (count != 0) {
                 ShowStatusDescriptionMenuArrow();
             }
@@ -1259,7 +1259,7 @@ static void ShowTacticDescriptionWindow(u8 tacticId)
         PrintFormattedStringOnWindow(8, 16, GetTacticsDescription(tacticId), 0, '\0');
         sub_80073E0(0);
         count = PrepareStatusStringArrays(GetTacticsDescription(tacticId), result);
-        while (1) {
+        while (TRUE) {
             if (count != 0) {
                 ShowStatusDescriptionMenuArrow();
             }
@@ -1295,10 +1295,10 @@ static void ShowStatusInfoWindow(s32 statusId)
         .id = {
             [0] = {
                 .type = WINDOW_TYPE_WITH_HEADER,
-                .pos = {2, 2},
+                .pos = { 2, 2 },
                 .width = 26,
                 .height = 12,
-                .unk10 = 12,
+                .heightInTiles = 12,
                 .unk12 = 0,
                 .header = &header,
             },
@@ -1321,7 +1321,7 @@ static void ShowStatusInfoWindow(s32 statusId)
     PrintFormattedStringOnWindow(8, 16, sub_808E51C(statusId), 0, '\0');
     sub_80073E0(0);
 
-    while (1) {
+    while (TRUE) {
         GetTouchScreenMenuInput(&menuSub, 0);
         DungeonRunFrameActions(22);
         if ((gRealInputs.pressed & A_BUTTON) || menuSub.a_button) {
@@ -1340,19 +1340,19 @@ static void ShowStatusInfoWindow(s32 statusId)
 static const WindowHeader sBottomWindowHeader = {1, 0, 15, 0};
 static const WindowTemplate sMovesSubMenu = {
     .type = WINDOW_TYPE_WITH_HEADER,
-    .pos = {2, 10},
+    .pos = { 2, 10 },
     .width = 18,
     .height = 8,
-    .unk10 = 8,
+    .heightInTiles = 8,
     .unk12 = 0,
     .header = &sBottomWindowHeader,
 };
 static const WindowTemplate sItemSubMenu = {
     .type = WINDOW_TYPE_WITH_HEADER,
-    .pos = {2, 10},
+    .pos = { 2, 10 },
     .width = 18,
     .height = 4,
-    .unk10 = 4,
+    .heightInTiles = 4,
     .unk12 = 0,
     .header = &sBottomWindowHeader,
 };
@@ -1364,19 +1364,19 @@ Entity *ShowDungeonToWhichMonMenu(s32 *teamId, s32 caseId)
         .id = {
             [0] = {
                 .type = WINDOW_TYPE_NORMAL, // Since the window has a header, it should probably be WINDOW_TYPE_WTIH_HEADER.
-                .pos = {14, 2},
+                .pos = { 14, 2 },
                 .width = 14,
                 .height = 16,
-                .unk10 = 16,
+                .heightInTiles = 16,
                 .unk12 = 0,
                 .header = &sTeamWindowHeader,
             },
             [1] = {
                 .type = WINDOW_TYPE_NORMAL,
-                .pos = {2, 2},
+                .pos = { 2, 2 },
                 .width = 10,
                 .height = 2,
-                .unk10 = 2,
+                .heightInTiles = 2,
                 .unk12 = 0,
                 .header = NULL,
             },
@@ -1404,7 +1404,7 @@ Entity *ShowDungeonToWhichMonMenu(s32 *teamId, s32 caseId)
     sub_80073E0(1);
     prevId = -985; // Magic number or does it actually mean anything?
 
-    while (1) {
+    while (TRUE) {
         currId = unkStruct.unk4[gDungeonMenu.menuIndex];
 
         if (currId >= 0) {

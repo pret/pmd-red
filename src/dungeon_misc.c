@@ -371,7 +371,7 @@ void sub_8068BDC(bool8 a0)
         else {
             WriteFriendAreaName(gFormatBuffer_Items[0], friendAreaId, FALSE);
             DisplayDungeonMessage_Async(NULL, gUnknown_80FE1A4, TRUE); // The Friend Area is full, a friend must be released.
-            while (1) {
+            while (TRUE) {
                 ShowRecruitReleaseMenu(friendAreaId, j - areaCapacity.maxPokemon, j, monPointers);
                 for (id = 0; id < j; id++) {
                     Pokemon *monPtr = monPointers[id];

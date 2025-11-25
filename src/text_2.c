@@ -6,15 +6,15 @@
 #include "text_2.h"
 
 static void AddUnderScoreHighlightInternal(Window *windows, u32 windowId, s32 x, s32 y, s32 width, u32 color);
-static void DisplayMonPortrait(Window *a0, u16 a1[32][32], s32 a2, const u8 *compressedData, u32 a4);
-static void DisplayMonPortraitFlipped(Window *windows, s32 windowId, const u8 *compressedData, s32 a3);
+static void DisplayMonPortrait(Window *windows, u16 dst[32][32], s32 winID, const u8 *compressedData, u32 palNum);
+static void DisplayMonPortraitFlipped(Window *windows, s32 winID, const u8 *compressedData, s32 palNum);
 static u32 FlipPixelsHorizontally(u32 a0);
 static s32 HexDigitValue(u8 chr);
 static void nullsub_129(u32 windowId, s32 x, s32 y, s32 width, u32 color);
 static void sub_8007AA4(Window *windows, u32 windowId, s32 x, s32 y, s32 a4, u32 color);
 static void sub_8007BA8(Window *windows, u32 windowId, s32 x, s32 y, s32 a4, s32 color);
 static void sub_8007D00(Window *windows, u32 windowId, s32 x, s32 y, s32 a4, s32 color);
-static void sub_8007E64(Window *a0, u16 a1[32][32], u32 a2, s32 a3, s32 a4, s32 a5, s32 a6, u32 *a7, u32 a8);
+static void sub_8007E64(Window *windows, u16 dst[32][32], u32 winID, s32 x, s32 y, s32 w, s32 h, u32 *src, u32 palNum);
 static void sub_8008030(Window *a0, u16 a1[32][32], u32 a2, s32 a3, s32 a4, s32 a5, s32 a6, u32 *a7, u32 a8);
 static void sub_8008334(u32 *r7, u32 *r12);
 static void sub_80084A4(Window *a0, u16 a1[32][32], u32 a2, s32 a3, s32 a4, s32 a5, s32 a6, u32 a8);
@@ -78,7 +78,7 @@ u32 DrawCharOnWindowInternal(Window *windows, s32 x, s32 y, u32 chr, u32 color, 
         xDiv8 = x / 8;
         yDiv8 = y / 8;
 
-        if (yDiv8 < window->unk8) {
+        if (yDiv8 < window->heightInTiles) {
             for (i = 0; i < gCharHeight[gCurrentCharmap]; i++) {
                 r2 = (local_44[1] << 0x10) | (local_44[0]);
                 if (r2 != 0) {
@@ -123,7 +123,7 @@ u32 DrawCharOnWindowInternal(Window *windows, s32 x, s32 y, u32 chr, u32 color, 
                 if (y % 8 == 0) {
                     r3 += window->unk20;
                     yDiv8++;
-                    if (yDiv8 >= window->unk8)
+                    if (yDiv8 >= window->heightInTiles)
                         break;
                 }
             }
@@ -139,7 +139,7 @@ u32 DrawCharOnWindowInternal(Window *windows, s32 x, s32 y, u32 chr, u32 color, 
         xDiv8 = x / 8;
         yDiv8 = y / 8;
 
-        if (yDiv8 < window->unk8) {
+        if (yDiv8 < window->heightInTiles) {
             for (i = 0; i < gCharHeight[gCurrentCharmap]; i++) {
                 r4 = (local_44[1] << 0x10) | (local_44[0]);
                 r2 = (0x11111111 & r4) + (sp18 & r4);
@@ -216,7 +216,7 @@ u32 DrawCharOnWindowInternal(Window *windows, s32 x, s32 y, u32 chr, u32 color, 
                 if (y % 8 == 0) {
                     r3 += window->unk20;
                     yDiv8++;
-                    if (yDiv8 >= window->unk8)
+                    if (yDiv8 >= window->heightInTiles)
                         break;
                 }
             }
@@ -267,7 +267,7 @@ static void AddUnderScoreHighlightInternal(Window *windows, u32 windowId, s32 x,
     dest += (r4 * -8) + y;
     r6 = x / 8;
 
-    if (y / 8 >= window->unk8) {
+    if (y / 8 >= window->heightInTiles) {
         return;
     }
     else {
@@ -333,7 +333,7 @@ static void sub_8007AA4(Window *windows, u32 windowId, s32 x, s32 y, s32 a4, u32
     if (r2 < window->width) {
         // This goto looks like a fakematch, but I couldn't get it to work otherwise.
         goto LOOP_MIDDLE;
-        while (1) {
+        while (TRUE) {
             y++;
             dest++;
             if ((y % 8) == 0)
@@ -343,7 +343,7 @@ static void sub_8007AA4(Window *windows, u32 windowId, s32 x, s32 y, s32 a4, u32
         LOOP_MIDDLE:
             if (a4 <= 0)
                 return;
-            if (r3 >= window->unk8)
+            if (r3 >= window->heightInTiles)
                 return;
 
             dest[0] |= ip;
@@ -374,7 +374,7 @@ static void sub_8007BA8(Window *windows, u32 windowId, s32 x, s32 y, s32 a4, s32
 
     Window *window = &windows[windowId];
     yDiv8 = y / 8;
-    if (yDiv8 >= window->unk8)
+    if (yDiv8 >= window->heightInTiles)
         return;
 
     dst = window->unk18 + (((yDiv8 * window->width) + x / 8) * 8);
@@ -418,7 +418,7 @@ static void sub_8007BA8(Window *windows, u32 windowId, s32 x, s32 y, s32 a4, s32
         if ((y % 8) == 0) {
             dst += window->unk20;
             yDiv8++;
-            if (yDiv8 >= window->unk8)
+            if (yDiv8 >= window->heightInTiles)
                 return;
         }
     }
@@ -443,7 +443,7 @@ static void sub_8007D00(Window *windows, u32 windowId, s32 x, s32 y, s32 a4, s32
 
     Window *window = &windows[windowId];
     yDiv8 = y / 8;
-    if (yDiv8 >= window->unk8)
+    if (yDiv8 >= window->heightInTiles)
         return;
 
     dst = window->unk18 + (((yDiv8 * window->width) + x / 8) * 8);
@@ -487,68 +487,75 @@ static void sub_8007D00(Window *windows, u32 windowId, s32 x, s32 y, s32 a4, s32
         if ((y % 8) == 0) {
             dst += window->unk20;
             yDiv8++;
-            if (yDiv8 >= window->unk8)
+            if (yDiv8 >= window->heightInTiles)
                 return;
         }
     }
 }
 
-void sub_8007E20(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 *a5, u32 a6)
+void sub_8007E20(u32 winID, u32 x, u32 y, u32 w, u32 h, u32* src, u32 palNum)
 {
-    sub_8007E64(gWindows, gBgTilemaps[0], a0, a1, a2, a3, a4, a5, a6);
+    sub_8007E64(gWindows, gBgTilemaps[0], winID, x, y, w, h, src, palNum);
 }
 
 UNUSED static void nullsub_160(void)
 {
 }
 
-static void sub_8007E64(Window *a0, u16 a1[32][32], u32 a2, s32 a3, s32 a4, s32 a5, s32 a6, u32 *a7, u32 a8)
+static void sub_8007E64(Window *windows, u16 dst[32][32], u32 winID, s32 x, s32 y, s32 w, s32 h, u32* src, u32 palNum)
 {
-    s32 i, j;
-    Window *window = &a0[a2];
+    s32 iterY;
+    s32 iterX;
+    Window *win = &windows[winID];
 
-    a3 /= 8;
-    a4 /= 8;
-    a5 /= 8;
-    a6 /= 8;
-    a8 *= 4096;
-    if (a4 < window->unk8) {
-        s32 id = (window->width * a4) + a3;
-        u32 *unk18Ptr = &window->unk18[id * 8];
+    x /= 8;
+    y /= 8;
+    w /= 8;
+    h /= 8;
+    palNum <<= 12; // Pal shift
 
-        for (i = 0; i < a6; i++) {
-            s32 xMaybe = a3;
+    if (y < win->heightInTiles) {
+        s32 id = (win->width * y) + x;
+        u32 *unk18Ptr = &win->unk18[id * 8];
+
+        for (iterY = 0; iterY < h; iterY++) {
+            s32 curX = x;
             u32 *loopUnk18Ptr = unk18Ptr;
-            for (j = 0; j < a5; j++) {
-                if (xMaybe < window->width) {
-                    if (window->unk3C > loopUnk18Ptr) {
-                        window->unk3C = loopUnk18Ptr;
-                    }
-                    *(loopUnk18Ptr++) = *(a7++);
-                    *(loopUnk18Ptr++) = *(a7++);
-                    *(loopUnk18Ptr++) = *(a7++);
-                    *(loopUnk18Ptr++) = *(a7++);
-                    *(loopUnk18Ptr++) = *(a7++);
-                    *(loopUnk18Ptr++) = *(a7++);
-                    *(loopUnk18Ptr++) = *(a7++);
-                    *(loopUnk18Ptr++) = *a7;
-                    if (window->unk40 < loopUnk18Ptr) {
-                        window->unk40 = loopUnk18Ptr;
-                    }
-                    a7++;
-                    a1[window->y + a4][window->x + xMaybe] &= 0xFFF;
-                    a1[window->y + a4][window->x + xMaybe] |= a8;
+
+            for (iterX = 0; iterX < w; iterX++) {
+                if (curX < win->width) {
+                    if (win->unk3C > loopUnk18Ptr)
+                        win->unk3C = loopUnk18Ptr;
+
+                    *(loopUnk18Ptr++) = *(src++);
+                    *(loopUnk18Ptr++) = *(src++);
+                    *(loopUnk18Ptr++) = *(src++);
+                    *(loopUnk18Ptr++) = *(src++);
+                    *(loopUnk18Ptr++) = *(src++);
+                    *(loopUnk18Ptr++) = *(src++);
+                    *(loopUnk18Ptr++) = *(src++);
+                    *(loopUnk18Ptr++) = *src;
+
+                    if (win->unk40 < loopUnk18Ptr)
+                        win->unk40 = loopUnk18Ptr;
+
+                    src++;
+                    dst[win->y + y][win->x + curX] &= 0xFFF;
+                    dst[win->y + y][win->x + curX] |= palNum;
                 }
                 else {
                     loopUnk18Ptr += 8;
-                    a7 += 8;
+                    src += 8;
                 }
-                xMaybe++;
+
+                curX++;
             }
-            a4++;
-            unk18Ptr += window->unk20;
+
+            y++;
+            unk18Ptr += win->unk20;
             unk18Ptr += 8;
-            if (a4 >= window->unk8)
+
+            if (y >= win->heightInTiles)
                 break;
         }
     }
@@ -589,8 +596,9 @@ static void sub_8008030(Window *a0, u16 a1[32][32], u32 a2, s32 a3, s32 a4, s32 
     a4 /= 8;
     a5 /= 8;
     a6 /= 8;
-    a8 *= 4096;
-    if (a4 < window->unk8) {
+    a8 <<= 12; // Pal shift
+
+    if (a4 < window->heightInTiles) {
         u32 *unk18Ptr = &window->unk18[((window->width * a4) + (a3 + a5)) * 8];
         for (i = 0; i < a6; i++) {
             s32 xMaybe = a3 + a5;
@@ -623,7 +631,7 @@ static void sub_8008030(Window *a0, u16 a1[32][32], u32 a2, s32 a3, s32 a4, s32 
             a4++;
             unk18Ptr += window->unk20;
             unk18Ptr += 8;
-            if (a4 >= window->unk8)
+            if (a4 >= window->heightInTiles)
                 break;
         }
     }
@@ -640,7 +648,8 @@ UNUSED static void sub_80081A4(s32 a0, s32 a3, s32 a4, s32 a7Id)
     a4 /= 8;
     a5 = 2;
     a6 = 2;
-    if (a4 < window->unk8) {
+
+    if (a4 < window->heightInTiles) {
         s32 id = (window->width * a4) + a3;
         u32 *unk18Ptr = &window->unk28[id * 8];
 
@@ -668,34 +677,39 @@ UNUSED static void sub_80081A4(s32 a0, s32 a3, s32 a4, s32 a7Id)
             a4++;
             unk18Ptr += window->unk20;
             unk18Ptr += 8;
-            if (a4 >= window->unk8)
+
+            if (a4 >= window->heightInTiles)
                 break;
         }
     }
 }
 
-void DisplayMonPortraitSprite(s32 a0, const u8 *compressedData, s32 a2)
+void DisplayMonPortraitSprite(s32 winID, const u8 *compressedData, s32 palNum)
 {
-    DisplayMonPortrait(gWindows, gBgTilemaps[0], a0, compressedData, a2);
+    DisplayMonPortrait(gWindows, gBgTilemaps[0], winID, compressedData, palNum);
 }
 
 UNUSED static void nullsub_162(void)
 {
 }
 
-static void DisplayMonPortrait(Window *a0, u16 a1[32][32], s32 a2, const u8 *compressedData, u32 a4)
+static void DisplayMonPortrait(Window *windows, u16 dst[32][32], s32 winID, const u8 *compressedData, u32 palNum)
 {
-    s32 i, j;
-    Window *window = &a0[a2];
+    s32 iterY;
+    s32 iterX;
+    Window *window = &windows[winID];
 
-    a4 *= 4096;
-    DecompressAT((u8 *)window->unk18, (window->width * 32) * window->unk8, compressedData);
-    for (i = 0; i < window->unk8; i++) {
-        for (j = 0; j < window->width; j++) {
-            a1[window->y + i][window->x + j] &= 0xFFF;
-            a1[window->y + i][window->x + j] |= a4;
+    palNum <<= 12; // Pal shift
+
+    DecompressAT((u8 *)window->unk18, (window->width * 32) * window->heightInTiles, compressedData);
+
+    for (iterY = 0; iterY < window->heightInTiles; iterY++) {
+        for (iterX = 0; iterX < window->width; iterX++) {
+            dst[window->y + iterY][window->x + iterX] &= 0xFFF;
+            dst[window->y + iterY][window->x + iterX] |= palNum;
         }
     }
+
     window->unk30 = window->unk28;
     window->unk34 = window->unk1C;
     window->unk38 = window->unk2C;
@@ -726,32 +740,37 @@ static void sub_8008334(u32 *r7, u32 *r12)
     *r12 = r2;
 }
 
-void DisplayMonPortraitSpriteFlipped(s32 a0, const u8 *compressedData, s32 a1)
+void DisplayMonPortraitSpriteFlipped(s32 winID, const u8 *compressedData, s32 palNum)
 {
-    DisplayMonPortraitFlipped(gWindows, a0, compressedData, a1);
+    DisplayMonPortraitFlipped(gWindows, winID, compressedData, palNum);
 }
 
 UNUSED static void nullsub_163(void)
 {
 }
 
-static void DisplayMonPortraitFlipped(Window *windows, s32 windowId, const u8 *compressedData, s32 a3)
+static void DisplayMonPortraitFlipped(Window *windows, s32 winID, const u8 *compressedData, s32 palNum)
 {
-    s32 i, j;
-    Window *window = &windows[windowId];
+    s32 iterY;
+    s32 iterX;
+    Window *window = &windows[winID];
 
-    DisplayMonPortraitSprite(windowId, compressedData, a3);
-    for (i = 0; i < window->unk8; i++) {
+    DisplayMonPortraitSprite(winID, compressedData, palNum);
+
+    for (iterY = 0; iterY < window->heightInTiles; iterY++) {
         s32 r8 = window->width / 2;
+
         if (window->width & 1)
             r8++;
-        for (j = 0; j < r8; j++) {
-            u32 *r4, *r5;
-            s32 unk4Mul = window->width * i;
 
-            r4 = &window->unk18[(unk4Mul + j) * 8];
-            unk4Mul--;
-            r5 = &window->unk18[(unk4Mul + (window->width - j)) * 8];
+        for (iterX = 0; iterX < r8; iterX++) {
+            u32 *r4;
+            u32 *r5;
+            s32 baseVal = window->width * iterY;
+
+            r4 = &window->unk18[(baseVal + iterX) * 8];
+            baseVal--;
+            r5 = &window->unk18[(baseVal + (window->width - iterX)) * 8];
 
             sub_8008334(r4++, r5++);
             sub_8008334(r4++, r5++);
@@ -784,8 +803,9 @@ static void sub_80084A4(Window *a0, u16 a1[32][32], u32 a2, s32 a3, s32 a4, s32 
     a4 /= 8;
     a5 /= 8;
     a6 /= 8;
-    a8 *= 4096;
-    if (a4 < window->unk8) {
+    a8 <<= 12; // Pal shift
+
+    if (a4 < window->heightInTiles) {
         for (i = 0; i < a6; i++) {
             s32 xMaybe = a3;
             for (j = 0; j < a5; j++) {
@@ -796,7 +816,8 @@ static void sub_80084A4(Window *a0, u16 a1[32][32], u32 a2, s32 a3, s32 a4, s32 
                 xMaybe++;
             }
             a4++;
-            if (a4 >= window->unk8)
+
+            if (a4 >= window->heightInTiles)
                 break;
         }
     }
@@ -923,8 +944,8 @@ UNUSED static void sub_80086C8(Window *windows, s32 windowId, s32 a2, s32 a3, s3
     if (a4 + a2 > window->width * 8) {
         a4 = (window->width * 8) - a2;
     }
-    if (a3 + a5 > window->unk8 * 8) {
-        a5 = (window->unk8 * 8) - a3;
+    if (a3 + a5 > window->heightInTiles * 8) {
+        a5 = (window->heightInTiles * 8) - a3;
     }
 
     r2 = window->width * (a3 / 8);
@@ -1255,13 +1276,13 @@ void PrepareTextbox_8008C6C(Window *windows, u32 windowId)
     Window *window = &windows[windowId];
 
     if (!window->unk45) {
-        s32 count = (window->width * window->unk8) * 32;
+        s32 count = (window->width * window->heightInTiles) * 32;
         for (i = 0; i < count; i += 32) {
             CpuClear(&window->unk18[i / 4u], 32);
         }
     }
     else {
-        s32 count = (window->width * (window->unk8 - 1)) * 32;
+        s32 count = (window->width * (window->heightInTiles - 1)) * 32;
         u32 *ptr = window->unk18;
         for (i = 0; i < window->width; i++) {
             *(ptr++) = 0xFFFFFFFF;

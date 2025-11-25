@@ -95,7 +95,7 @@ static void sub_8040C4C(Entity *entity, Move *move, bool32 hasSpecialEffect)
     r4 = sub_800EA84(&sp);
     sub_8042DD4(r4, entity, 5);
     savedUnkVar = gUnknown_203B40D;
-    while (1) {
+    while (TRUE) {
         if (!sub_800E9A8(r4))
             break;
         if (!r8)
@@ -323,7 +323,7 @@ void sub_8041168(Entity *entity, Entity *entity2, Move *move, DungeonPos *pos)
     var3 = sub_800EBC8(&sp);
     DungeonRunFrameActions(0x5B);
     sub_8042DD4(var3, entity2, 6);
-    while (1) {
+    while (TRUE) {
         if (!sub_800E9A8(var3))
             break;
         DungeonRunFrameActions(0x28);

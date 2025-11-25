@@ -19,10 +19,10 @@ void ShowDungeonClearedWindow(void)
         .id = {
             [0] = {
                 .type = WINDOW_TYPE_WITH_HEADER,
-                .pos = {4, 3},
+                .pos = { 4, 3 },
                 .width = 22,
                 .height = 14,
-                .unk10 = 14,
+                .heightInTiles = 14,
                 .unk12 = 0,
                 .header = &header,
             },

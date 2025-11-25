@@ -81,7 +81,7 @@ extern s16 gUnknown_2026E4E;
 
 
 extern void sub_8009BE4(void);
-extern void sub_809971C(u16 a0, const RGB *a1, int a2);
+extern void sub_809971C(u16 a0, const RGB_Struct *a1, int a2);
 
 static s32 sub_800E900(s32 a0);
 static s32 sub_800E2C0(s32);

@@ -842,7 +842,7 @@ bool8 HandleLinkBoxAction(Entity *entity, Item *item)
     }
 
     originalAction = *entityActionPtr;
-    while (1) {
+    while (TRUE) {
         ClearMonsterActionFields(entityActionPtr);
         if (ShowDungeonMovesMenu(entity2,1,0,0,1)) {
             if (!ret)

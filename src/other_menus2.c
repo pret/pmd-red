@@ -263,7 +263,7 @@ s32 sub_8037D64(u32 mode, void * param_2, void *param_3)
     sub_800D494();
     sub_8037C44(mode, param_2);
 
-    while (1) {
+    while (TRUE) {
         sub_80373C4();
         iVar2 = sub_800D33C();
         sub_800D570();
@@ -578,7 +578,7 @@ s32 sub_80381F4(u32 mode, void *param_2, void *param_3)
     sub_800D494();
     sub_800D59C(&linkStatus, 4);
 
-    while (1) {
+    while (TRUE) {
         sub_80373C4();
         iVar2 = sub_800D33C();
         sub_800D570();

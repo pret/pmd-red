@@ -115,7 +115,7 @@ void DungeonHandlePlayerInput(void)
     }
 
     sub_806A914(1, 1, 1);
-    while (1) {
+    while (TRUE) {
         Entity *leader = GetLeader();
         EntityInfo *leaderInfo = GetEntInfo(leader);
 
@@ -366,7 +366,7 @@ void DungeonHandlePlayerInput(void)
                 UpdateMinimap();
                 SetBGOBJEnableFlags(0x1E);
                 DungeonWaitFrames_Async(0xA, 0x2F);
-                while (1) {
+                while (TRUE) {
                     DungeonRunFrameActions(0x2F);
                     if (gRealInputs.pressed & SELECT_BUTTON)
                         break;
@@ -1131,13 +1131,13 @@ static void ShowMainMenu(bool8 fromBPress, bool8 a1)
         PlayDungeonStartButtonSE();
     }
 
-    while (1) {
+    while (TRUE) {
         if (r10 < 0) {
             SetLeaderActionToNothing(TRUE);
             gTeamMenuChosenId = -1;
             PrintOnMainMenu(printAll);
             TryPointCameraToMonster(GetLeader(), 0);
-            while (1) {
+            while (TRUE) {
                 AddMenuCursorSprite(&gDungeonMenu);
                 DungeonRunFrameActions(0x1D);
                 if (gRealInputs.repeated & DPAD_DOWN) {
@@ -1290,7 +1290,7 @@ static void ShowMainMenu(bool8 fromBPress, bool8 a1)
                 }
             }
 
-            while (1) {
+            while (TRUE) {
                 s32 r9, teamMonsCount;
 
                 SetLeaderActionToNothing(0);

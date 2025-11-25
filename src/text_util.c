@@ -24,7 +24,7 @@ UNUSED static void sub_8092290(u8 *buffer, u8 *string)
 
 void StrncpyCustom(u8 *buffer, const u8 *string, s32 n)
 {
-    while(1) {
+    while (TRUE) {
         if (n-- <= 0 || *string == '\0') {
             break;
         }

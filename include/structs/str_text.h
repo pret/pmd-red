@@ -22,11 +22,11 @@ typedef struct Window
     /* 0x2 */ s16 y;
     /* 0x4 */ s16 width;
     /* 0x6 */ s16 height;
-    /* 0x8 */ s16 unk8;
+    /* 0x8 */ s16 heightInTiles;
     /* 0xC */ s32 type;
     /* 0x10 */ u32 unk10;
     /* 0x14 */ u32 unk14;
-    /* 0x18 */ u32 *unk18;
+    /* 0x18 */ u32 *unk18; // Appears to be window graphics data
     /* 0x1C */ u32 *unk1C;
     /* 0x20 */ s32 unk20;
     /* 0x24 */ s32 unk24;
@@ -54,14 +54,14 @@ typedef struct WindowHeader
 // size: 0x18
 typedef struct WindowTemplate
 {
-    u8 unk0;
-    /* 0x4 */ s32 type;
-    /* 0x8 */ DungeonPos pos;
-    /* 0xC */ s16 width;
-    /* 0xE */ s16 height;
-    s16 unk10; // In most cases it's the same as height. If it's smaller than height, the window may look glitchy. Maybe something with tile allocation/how the window is filled?
-    s16 unk12;
-    const WindowHeader *header;
+    /* 0x00 */ u8 unk0; // Appears to be some bit flags
+    /* 0x04 */ s32 type;
+    /* 0x08 */ DungeonPos pos;
+    /* 0x0C */ s16 width;
+    /* 0x0E */ s16 height;
+    /* 0x10 */ s16 heightInTiles;
+    /* 0x12 */ s16 unk12;
+    /* 0x14 */ const WindowHeader *header;
 } WindowTemplate;
 
 #define WINDOW_TYPE_0                0
@@ -76,7 +76,7 @@ typedef struct WindowTemplate
 #define MAX_WINDOWS 4
 
 // All fields are zeroed out except for type which is set to WINDOW_TYPE_NORMAL.
-#define WIN_TEMPLATE_DUMMY (WindowTemplate) { .unk0 = 0, .type = WINDOW_TYPE_NORMAL, .pos = { .x = 0, .y = 0 }, .width = 0, .height = 0, .unk10 = 0, .unk12 = 0, .header = NULL }
+#define WIN_TEMPLATE_DUMMY (WindowTemplate) { .unk0 = 0, .type = WINDOW_TYPE_NORMAL, .pos = { .x = 0, .y = 0 }, .width = 0, .height = 0, .heightInTiles = 0, .unk12 = 0, .header = NULL }
 
 // size: 0x60
 typedef struct WindowTemplates

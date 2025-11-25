@@ -24,13 +24,6 @@ struct unk_203B250
     WindowTemplates windows;
 };
 
-// size: 0x8
-struct TeamBadgeData
-{
-    /* 0x0 */ u8 *pics; // probably a pointer to an arrays of pixels?
-    /* 0x4 */ RGB *palette; // Pics share common palette
-};
-
 bool8 sub_801D014(Pokemon *);
 u32 sub_801D0DC(void);
 u32 sub_801D178(void);

@@ -110,7 +110,7 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
     bool8 r9;
     bool8 r10;
     u8 sp;
-    RGB color;
+    RGB_Struct color;
 
     gUnknown_203B40C = 0;
     r6 = setupPtr->info.sub0.unk4;

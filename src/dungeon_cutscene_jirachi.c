@@ -203,7 +203,7 @@ static void JirachiWish_Async(void)
   DisplayDungeonDialogue_Async(&gUnknown_81056DC);
   DungeonWaitFrames_Async(10,0x46);
   while( 1 ) {
-    while (1) {
+    while (TRUE) {
         wishChoice = DisplayDungeonMenuMessage(NULL,gUnknown_8105798,gUnknown_810579C,0x705);
         if (wishChoice >= 1) break;
     }
@@ -419,7 +419,7 @@ static void JirachiDropInEffect(Entity *jirachiEntity)
   iVar1 = IntToF248(160);
   iVar2 = IntToF248(2);
   PlaySoundEffect(0x1f8);
-  while (1) {
+  while (TRUE) {
     iVar1 -= iVar2;
     if (F248LessThanInt(iVar1, 24)) {
       iVar2 = IntToF248(1);

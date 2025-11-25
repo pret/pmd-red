@@ -65,7 +65,7 @@ void ShowMovesFromTeamMenu(ActionContainer *a0)
     Entity *entityOrg = gDungeon->teamPokemon[id];
     Entity *entityNew = entityOrg;
 
-    while (1) {
+    while (TRUE) {
         s32 i, count, countUntilId;
 
         countUntilId = 0;
@@ -168,10 +168,10 @@ bool8 ShowDungeonMovesMenu(Entity * entity, bool8 addLinkOptions, bool8 addUseMo
         .id = {
             [0] = {
                 .type = WINDOW_TYPE_WITH_HEADER,
-                .pos = {2, 2},
+                .pos = { 2, 2 },
                 .width = 18,
                 .height = 16,
-                .unk10 = 16,
+                .heightInTiles = 16,
                 .unk12 = 0,
                 .header = &header,
             },
@@ -350,7 +350,7 @@ bool8 ShowDungeonMovesMenu(Entity * entity, bool8 addLinkOptions, bool8 addUseMo
 
         sub_8009524(2);
         CreateDungeonMenuSubWindow(&windows.id[0], 0x16);
-        while (1) {
+        while (TRUE) {
             AddMenuCursorSprite(&gDungeonMenu);
             DungeonRunFrameActions(0x1B);
             if (gRealInputs.repeated & DPAD_DOWN) {
@@ -401,10 +401,10 @@ static void ShowMovesMenuWindows(Entity *entity, EntityInfo *entInfo, bool8 redC
     s32 i, movesCount;
     WindowTemplate windowNew = {
         .type = WINDOW_TYPE_NORMAL,
-        .pos = {2, 14},
+        .pos = { 2, 14 },
         .width = 26,
         .height = 3,
-        .unk10 = 3,
+        .heightInTiles = 3,
         .unk12 = 0,
         .header = NULL,
     };
@@ -432,7 +432,7 @@ static void ShowMovesMenuWindows(Entity *entity, EntityInfo *entInfo, bool8 redC
     gDungeonMenu.windowId = 0;
     ResetTouchScreenMenuInput(&gDungeonMenu.touchScreen);
 
-    windows->id[0].height = windows->id[0].unk10 = CalcEntriesTotalHeight(4, DEFAULT_MENU_ENTRY_HEIGHT) + 2;
+    windows->id[0].height = windows->id[0].heightInTiles = CalcEntriesTotalHeight(4, DEFAULT_MENU_ENTRY_HEIGHT) + 2;
     header->width = 13;
     windows->id[0].pos.x = 2;
     windows->id[1] = windows->id[3];
@@ -600,7 +600,7 @@ static void ShowMovesInfoWindow(Move *moves, s32 firstMoveId, s32 movesCount)
     }
 
     currId = 0;
-    while (1) {
+    while (TRUE) {
         s32 statusesCount;
         s32 inputAction = 0;
 
@@ -623,7 +623,7 @@ static void ShowMovesInfoWindow(Move *moves, s32 firstMoveId, s32 movesCount)
         gDungeonMenu.entriesPerPage = 0;
         DungeonShowWindows(&windows, TRUE);
         statusesCount = unk_PrintMoveDescription(currId, &moves[firstMoveId + currId], 0, statuses);
-        while (1) {
+        while (TRUE) {
             if (statusesCount != 0) {
                 ShowStatusDescriptionMenuArrow();
             }
@@ -901,10 +901,10 @@ bool8 sub_8063E70(Entity *entity, Move *moves, bool8 showYesNoBox, bool8 allowBP
         .id = {
             [0] = {
                 .type = WINDOW_TYPE_WITH_HEADER,
-                .pos = {2, 2},
+                .pos = { 2, 2 },
                 .width = 18,
                 .height = 16,
-                .unk10 = 16,
+                .heightInTiles = 16,
                 .unk12 = 0,
                 .header = &header,
             },
@@ -916,12 +916,12 @@ bool8 sub_8063E70(Entity *entity, Move *moves, bool8 showYesNoBox, bool8 allowBP
     Move movesLocal[8];
 
     sChosenMoveSlotId = 0;
-    while (1) {
+    while (TRUE) {
         s32 inputAction;
         s32 yesNoAnswer;
 
         sub_8064228(entity, moves, &windows, &header);
-        while (1) {
+        while (TRUE) {
             AddMenuCursorSprite(&gDungeonMenu);
             DungeonRunFrameActions(0x1E);
             if (gRealInputs.repeated & DPAD_DOWN) {
@@ -977,7 +977,7 @@ bool8 sub_8063E70(Entity *entity, Move *moves, bool8 showYesNoBox, bool8 allowBP
             sub_8064310(moves);
             CreateDungeonMenuSubWindow(&windows.id[0], 22);
 
-            while (1) {
+            while (TRUE) {
                 AddMenuCursorSprite(&gDungeonMenu);
                 DungeonRunFrameActions(0x1B);
 
@@ -1108,7 +1108,7 @@ static void sub_8064228(Entity *entity, Move *moves, WindowTemplates *windows, W
     gDungeonMenu.unk14.x = 0;
     gDungeonMenu.windowId = 0;
     ResetTouchScreenMenuInput(&gDungeonMenu.touchScreen);
-    windows->id[0].height = windows->id[0].unk10 = CalcEntriesTotalHeight(count, DEFAULT_MENU_ENTRY_HEIGHT) + 2;
+    windows->id[0].height = windows->id[0].heightInTiles = CalcEntriesTotalHeight(count, DEFAULT_MENU_ENTRY_HEIGHT) + 2;
     header->width = 14;
     windows->id[0].pos.x = 2;
     windows->id[1] = windows->id[3];

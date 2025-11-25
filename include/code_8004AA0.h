@@ -12,12 +12,12 @@ typedef struct unkDataFor8004AA4
 {
     /* 0x0 */ s16 colorCount;
     s16 unk2;
-    /* 0x4 */ RGB colors[0];
+    /* 0x4 */ RGB_Struct colors[0];
 } unkDataFor8004AA4;
 
 void nullsub_6(void);
 void sub_8004AA4(unkStruct_202EE8C *, OpenedFile *, s32);
-bool8 sub_8004AF0(bool8, unkStruct_202EE8C *, s32, s32, s32, const RGB *);
+bool8 sub_8004AF0(bool8, unkStruct_202EE8C *, s32, s32, s32, const RGB_Struct *);
 bool8 sub_8004D14(unkStruct_202EE8C *, s32);
 bool8 sub_8004D40(unkStruct_202EE8C *, s32);
 

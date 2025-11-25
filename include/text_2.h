@@ -6,14 +6,14 @@
 void AddDoubleUnderScoreHighlight(u32 windowId, s32 x, s32 y, s32 width, u32 color);
 void AddUnderScoreHighlight(u32 windowId, s32 x, s32 y, s32 width, u32 color);
 void CallPrepareTextbox_8008C54(u32 windowId);
-void DisplayMonPortraitSprite(s32 a0, const u8 *compressedData, s32 a2);
-void DisplayMonPortraitSpriteFlipped(s32 a0, const u8 *compressedData, s32 a1);
+void DisplayMonPortraitSprite(s32 winID, const u8 *compressedData, s32 palNum);
+void DisplayMonPortraitSpriteFlipped(s32 winID, const u8 *compressedData, s32 palNum);
 const unkChar *GetCharacter(s32 chr);
 void PrepareTextbox_8008C6C(Window *windows, u32 windowId);
 void ResetWindowBgData(void);
 void sub_8007A78(u32 a0, s32 x, s32 y, s32 a3, u32 color);
 void sub_8007B7C(u32 a0, s32 x, s32 y, s32 a3, u32 color);
-void sub_8007E20(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 *a5, u32 a6);
+void sub_8007E20(u32 winID, u32 x, u32 y, u32 w, u32 h, u32 src[8], u32 palNum);
 void sub_80087EC(s32 a0, s32 a1, s32 a2, s32 a3, s32 a4);
 void sub_80089AC(const WindowTemplate *r4, DungeonPos *r5_Str);
 u32 DrawCharOnWindow(s32 x, s32 y, u32 chr, u32 color, u32 windowId);

@@ -40,14 +40,14 @@ UNUSED static void DebugMapViewer(void)
     ResetDialogueBox();
     sub_8005838(NULL, 0);
     AllocGroundMapAction();
-    while (1) {
+    while (TRUE) {
         bool8 quitMapView;
         PixelPos pixPos1, pixPos2;
         PixelPos boundary;
 
         if (DebugFieldMapWindow_Init()) {
             DebugFieldMapWindow_MoveMenuTo(mapId);
-            while (1) {
+            while (TRUE) {
                 sub_8005838(NULL, 0);
                 sub_8012A18(0);
                 switch (DebugFieldMapWindow_GetInput()) {
@@ -88,7 +88,7 @@ UNUSED static void DebugMapViewer(void)
         currPos.y = 0;
         sub_80999E8(4);
         quitMapView = FALSE;
-        while (1) {
+        while (TRUE) {
             xxx_call_update_bg_sound_input();
             ResetSprites(FALSE);
             if (quitMapView && !sub_8099B94())

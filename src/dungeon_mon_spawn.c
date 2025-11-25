@@ -292,7 +292,7 @@ void sub_806B168(void)
 
             skipSecondLoop = FALSE;
             j = 0;
-            while (1) {
+            while (TRUE) {
                 unkPosition = gUnknown_80F4598[j];
                 if (unkPosition.x == 99)
                     break;
@@ -310,7 +310,7 @@ void sub_806B168(void)
                 continue;
 
             j = 0;
-            while (1) {
+            while (TRUE) {
                 unkPosition = gUnknown_80F4598[j];
                 if (unkPosition.x == 99)
                     break;
@@ -371,7 +371,7 @@ void sub_806B404(void)
             currMonPtr->recruitedPokemonId = UNK_RECRUITED_POKEMON_ID_5AA5;
             skipNextLoop = FALSE;
             j = 0;
-            while (1) {
+            while (TRUE) {
                 unkPosition = gUnknown_80F4598[j];
                 if (unkPosition.x == 99)
                     break;
@@ -390,7 +390,7 @@ void sub_806B404(void)
 
             skipNextLoop = FALSE;
             j = 0;
-            while (1) {
+            while (TRUE) {
                 unkPosition = gUnknown_80F4598[j];
                 if (unkPosition.x == 99)
                     break;

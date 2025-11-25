@@ -20,10 +20,10 @@ static const WindowTemplate sDummyWinTemplate = WIN_TEMPLATE_DUMMY;
 static const WindowTemplate sDebugWindowTemplate = {
     .unk0 = 0,
     .type = WINDOW_TYPE_WITH_HEADER,
-    .pos = {2, 2},
+    .pos = { 2, 2 },
     .width = 24,
     .height = 17,
-    .unk10 = 17,
+    .heightInTiles = 17,
     .unk12 = 0,
     .header = NULL,
 };

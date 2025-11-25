@@ -19,7 +19,7 @@ IWRAM_INIT static void ScrollDownWindowInternal(Window *windows, s32 windowId)
 {
     Window *window = &windows[windowId];
 
-    if (window->unk8 > 0) {
+    if (window->heightInTiles > 0) {
         s32 i, j;
         u32 *dstPtr;
         s32 n;
@@ -30,11 +30,11 @@ IWRAM_INIT static void ScrollDownWindowInternal(Window *windows, s32 windowId)
             s32 dstAdd = ((window->unk24 + 2) * 8);
             dstAdd *= unk4;
             dstPtr = window->unk18 + dstAdd;
-            n = window->unk8 - 2;
+            n = window->heightInTiles - 2;
         }
         else {
             dstPtr = window->unk18;
-            n = window->unk8;
+            n = window->heightInTiles;
         }
 
         id8 = window->unk20 + 8;
@@ -82,21 +82,24 @@ IWRAM_INIT static void ScrollUpWindowInternal(Window *windows, s32 windowId)
 {
     Window *window = &windows[windowId];
 
-    if (window->unk8 > 0) {
-        s32 i, j;
+    if (window->heightInTiles > 0) {
+        s32 i;
+        s32 j;
         u32 *dstPtr;
         s32 n;
         s32 id8;
-        s32 unk4, unk8, dstAdd;
+        s32 unk4;
+        s32 unk8;
+        s32 dstAdd;
 
         if (window->type == WINDOW_TYPE_WITH_HEADER) {
-            n = window->unk8 - 2;
+            n = window->heightInTiles - 2;
         }
         else {
-            n = window->unk8;
+            n = window->heightInTiles;
         }
 
-        unk8 = window->unk8 - 1;
+        unk8 = window->heightInTiles - 1;
         unk4 = window->width;
         dstAdd = (unk8 * unk4) * 8;
         dstPtr = window->unk18 + dstAdd;

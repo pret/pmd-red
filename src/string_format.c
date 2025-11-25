@@ -16,30 +16,28 @@
 #include "text_2.h"
 #include "text_3.h"
 
-static const MenuItem sYesNoMenuItems[] =
-{
-        {_("*Yes"), 1},
-        {_("No"), 0},
-        {NULL, -1}
+static const MenuItem sYesNoMenuItems[] = {
+        { _("*Yes"), 1 },
+        { _("No"), 0 },
+        { NULL, -1 }
 };
 
-static const MenuItem sYesNoMenuItems_DefaultNo[] =
-{
-        {_("Yes"), 1},
-        {_("*No"), 0},
-        {NULL, -1}
+static const MenuItem sYesNoMenuItems_DefaultNo[] = {
+        { _("Yes"), 1 },
+        { _("*No"), 0 },
+        { NULL, -1 }
 };
 
-static const u32 gUnknown_80D48A0[] = {0x7, 0x2, 0x2};
+static const u32 gUnknown_80D48A0[3] = { 0x7, 0x2, 0x2 };
 static const WindowTemplate sWinTemplateDummy = WIN_TEMPLATE_DUMMY;
 
 static const WindowTemplate sDialogueBoxWindowTemplate = {
     .unk0 = 0,
     .type = WINDOW_TYPE_0,
-    .pos = {2, 15},
+    .pos = { 2, 15 },
     .width = 26,
     .height = 5,
-    .unk10 = 7,
+    .heightInTiles = 7,
     .unk12 = 0,
     .header = NULL,
 };
@@ -47,10 +45,10 @@ static const WindowTemplate sDialogueBoxWindowTemplate = {
 static const WindowTemplate sOnlyTextDialogueBoxWindowTemplate = {
     .unk0 = 0,
     .type = WINDOW_TYPE_ONLY_TEXT,
-    .pos = {2, 8},
+    .pos = { 2, 8 },
     .width = 26,
     .height = 5,
-    .unk10 = 7,
+    .heightInTiles = 7,
     .unk12 = 0,
     .header = NULL,
 };
@@ -117,20 +115,20 @@ static EWRAM_INIT WindowTemplates sDialogueBoxWinTemplates = {
         [0] = {
             .unk0 = 0,
             .type = WINDOW_TYPE_0,
-            .pos = { .x = 2, .y = 15 },
+            .pos = { 2, 15 },
             .width = 26,
             .height = 5,
-            .unk10 = 7,
+            .heightInTiles = 7,
             .unk12 = 0,
             .header = NULL,
         },
         [1] = {
             .unk0 = 0x40,
             .type = WINDOW_TYPE_7,
-            .pos = { .x = 0, .y = 0 },
+            .pos = { 0, 0 },
             .width = 0,
             .height = 0,
-            .unk10 = 0,
+            .heightInTiles = 0,
             .unk12 = 0,
             .header = NULL,
         },
@@ -216,7 +214,7 @@ void CreateMenuDialogueBoxAndPortrait(const u8 *text, void *a1, u32 r9, const Me
 
     sDialogueBoxWinTemplates.id[1].width = 0;
     sDialogueBoxWinTemplates.id[1].height = 0;
-    sDialogueBoxWinTemplates.id[1].unk10 = 0;
+    sDialogueBoxWinTemplates.id[1].heightInTiles = 0;
     sDialogueBoxWinTemplates.id[1].unk0 = 0x40;
 
     if (monPortraitPtr != NULL && monPortraitPtr->faceData != NULL && monPortraitPtr->faceData->sprites[monPortraitPtr->spriteId].gfx != 0) {
@@ -226,7 +224,8 @@ void CreateMenuDialogueBoxAndPortrait(const u8 *text, void *a1, u32 r9, const Me
         sDialogueBoxWinTemplates.id[1].pos.y = monPortraitPtr->pos.y;
         sDialogueBoxWinTemplates.id[1].width = 5;
         sDialogueBoxWinTemplates.id[1].height = 5;
-        sDialogueBoxWinTemplates.id[1].unk10 = 5;
+        sDialogueBoxWinTemplates.id[1].heightInTiles = 5;
+
         for (i = 0; i < 16; i++) {
             SetBGPaletteBufferColorArray(224 + i, &monPortraitPtr->faceData->sprites[monPortraitPtr->spriteId].pal[i]);
         }
@@ -273,10 +272,10 @@ void CreateMenuDialogueBoxAndPortrait(const u8 *text, void *a1, u32 r9, const Me
 
         sub_80073B8(1);
         if (!monPortraitPtr->flip) {
-            DisplayMonPortraitSprite(1, data, 0xE);
+            DisplayMonPortraitSprite(1, data, 14);
         }
         else {
-            DisplayMonPortraitSpriteFlipped(1, data, 0xE);
+            DisplayMonPortraitSpriteFlipped(1, data, 14);
         }
         sub_80073E0(1);
     }
@@ -605,7 +604,7 @@ static void sub_8014A88(void)
     r1 = r7 / 8;
     r1 += 2;
     sDialogueBoxWinTemplates.id[2].width = r1;
-    sDialogueBoxWinTemplates.id[2].unk10 = r2;
+    sDialogueBoxWinTemplates.id[2].heightInTiles = r2;
     sDialogueBoxWinTemplates.id[2].height = r2;
     sDialogueBoxWinTemplates.id[2].pos.x = 28 - r1;
     sDialogueBoxWinTemplates.id[2].pos.y = 14 - r2;
@@ -647,7 +646,7 @@ const u8 *FormatString(const u8 *str, u8 *dst, u8 *dstMax, u16 flags)
     bool8 r9 = TRUE;
     dstMax--;
 
-    while (1) {
+    while (TRUE) {
         u8 currChar = *str;
 
         if (currChar == '\0')

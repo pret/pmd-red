@@ -86,7 +86,7 @@ static void sub_807E698(bool8 arg0)
 {
     s32 i, j;
     s32 weatherArrId = GetApparentWeather(NULL) * COLOR_RAMP_COUNT;
-    RGB *fileData = (void *) gUnknown_202ECA0->data;
+    RGB_Struct *fileData = (void *) gUnknown_202ECA0->data;
     u8 savedByte;
 
     sub_8042818(GetApparentWeather(NULL), arg0);
@@ -177,7 +177,7 @@ void sub_807E88C(void)
 {
     s32 i;
     s32 weatherArrId = GetApparentWeather(0) * COLOR_RAMP_COUNT;
-    RGB *fileData = (void *) gUnknown_202ECA0->data;
+    RGB_Struct *fileData = (void *) gUnknown_202ECA0->data;
 
     for (i = 0; i < COLOR_RAMP_COUNT; i++) {
         gDungeon->colorRamp[i].r = fileData[weatherArrId + i].r;

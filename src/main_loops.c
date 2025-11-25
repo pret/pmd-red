@@ -180,7 +180,7 @@ void GameLoop_Async(void)
             sTitleBrightness++;
 
             for (i = 0; i < 240; i++) {
-                SetBGPaletteBufferColorRGB(i, &((RGB*)sTitlePaletteFile->data)[i], sTitleBrightness, NULL);
+                SetBGPaletteBufferColorRGB(i, &((RGB_Struct*)sTitlePaletteFile->data)[i], sTitleBrightness, NULL);
             }
 
             MainLoops_RunFrameActions(0);
@@ -237,7 +237,7 @@ void GameLoop_Async(void)
             sTitleBrightness--;
 
             for (i = 0; i < 240; i++) {
-                SetBGPaletteBufferColorRGB(i, &((RGB*)sTitlePaletteFile->data)[i], sTitleBrightness, NULL);
+                SetBGPaletteBufferColorRGB(i, &((RGB_Struct*)sTitlePaletteFile->data)[i], sTitleBrightness, NULL);
             }
 
             MainLoops_RunFrameActions(0);
@@ -564,7 +564,7 @@ static u32 RunGameMode_Async(u32 a0)
     }
 
     ClearScriptVarArray(NULL, EVENT_S08E01);
-    while (1) {
+    while (TRUE) {
         s32 r5;
         struct FriendAreasMapSetupStruct friendAreasSetup;
         struct WorldMapSetupStruct worldMapSetup;

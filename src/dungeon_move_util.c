@@ -100,7 +100,7 @@ bool32 sub_8055A00(Entity *attacker, s32 firstMoveId, s32 var_34, s32 itemId, s3
     isLinkedMove = (j > 1);
     moveId = firstMoveId;
 
-    while (1) {
+    while (TRUE) {
         Move *currMove = &attackerInfo->moves.moves[moveId];
         if (!EntityIsValid(attacker) || IsFloorOver())
             break;

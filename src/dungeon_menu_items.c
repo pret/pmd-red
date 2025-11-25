@@ -85,10 +85,10 @@ bool8 ShowDungeonItemsMenu(Entity * a0, struct UnkMenuBitsStruct *a1)
             [0] =
             {
                 .type = WINDOW_TYPE_WITH_HEADER,
-                .pos = {2, 2},
-                .width = 0x12,
-                .height = 0x10,
-                .unk10 = 0x10,
+                .pos = { 2, 2 },
+                .width = 18,
+                .height = 16,
+                .heightInTiles = 16,
                 .header = &header,
             },
             [1] = WIN_TEMPLATE_DUMMY,
@@ -115,7 +115,7 @@ bool8 ShowDungeonItemsMenu(Entity * a0, struct UnkMenuBitsStruct *a1)
 
     r8 = 0;
     sUnknown_202F240 = 0;
-    while (1)
+    while (TRUE)
     {
         s32 id;
         Entity *r4;
@@ -157,7 +157,7 @@ bool8 ShowDungeonItemsMenu(Entity * a0, struct UnkMenuBitsStruct *a1)
         TryPointCameraToMonster(r4, 0);
         ChangeDungeonCameraPos(&r4->pos, 0, 1, 1);
 
-        while (1) {
+        while (TRUE) {
             AddMenuCursorSprite(&gDungeonMenu);
             DungeonRunFrameActions(0x14);
             if (!var_30) {
@@ -274,7 +274,7 @@ bool8 ShowDungeonItemsMenu(Entity * a0, struct UnkMenuBitsStruct *a1)
             SetSubMenuActions(a0);
             sub_8060800(&header, gDungeonMenu.currPage);
             CreateDungeonMenuSubWindow(&windows.id[0], 0x16);
-            while (1) {
+            while (TRUE) {
                 AddMenuCursorSprite(&gDungeonMenu);
                 DungeonRunFrameActions(0x14);
                 if (gRealInputs.repeated & DPAD_DOWN) {
@@ -348,10 +348,10 @@ static void PrintOnDungeonItemsMenu(s32 a0, Entity *a1, bool8 showWhichWindow, b
     Window *txtStrPtr;
     WindowTemplate whichWindow = {
         .type = WINDOW_TYPE_NORMAL,
-        .pos = {2, 4},
+        .pos = { 2, 4 },
         .width = 6,
         .height = 2,
-        .unk10 = 2,
+        .heightInTiles = 2,
         .unk12 = 0,
         .header = NULL,
     };
@@ -369,31 +369,35 @@ static void PrintOnDungeonItemsMenu(s32 a0, Entity *a1, bool8 showWhichWindow, b
     gDungeonMenu.unk14.x = 0;
     ResetTouchScreenMenuInput(&gDungeonMenu.touchScreen);
     gDungeon->unk181e8.unk18212 = 0;
+
     switch (sUnknown_202F248[a0]) {
         case 0:
-        case 1:
-            windows->id[0].unk10 = 0x10;
-            windows->id[0].height = 0x10;
-            header->width = 0xC;
-            gDungeonMenu.firstEntryY = 0x10;
-            gDungeonMenu.entriesPerPage = 0xA;
+        case 1: {
+            windows->id[0].heightInTiles = 16;
+            windows->id[0].height = 16;
+            header->width = 12;
+            gDungeonMenu.firstEntryY = 16;
+            gDungeonMenu.entriesPerPage = 10;
             gDungeon->unk181e8.unk18212 = 1;
             break;
-        case 2:
-            windows->id[0].unk10 = 4;
+        }
+        case 2: {
+            windows->id[0].heightInTiles = 4;
             windows->id[0].height = 4;
             header->width = 6;
-            gDungeonMenu.firstEntryY = 0x12;
+            gDungeonMenu.firstEntryY = 18;
             gDungeonMenu.entriesPerPage = 1;
             break;
+        }
         case 3:
-        default:
-            windows->id[0].unk10 = 4;
+        default: {
+            windows->id[0].heightInTiles = 4;
             windows->id[0].height = 4;
-            header->width = 0xC;
-            gDungeonMenu.firstEntryY = 0x12;
+            header->width = 12;
+            gDungeonMenu.firstEntryY = 18;
             gDungeonMenu.entriesPerPage = 1;
             break;
+        }
     }
 
     if (showWhichWindow) {

@@ -1,13 +1,14 @@
 #ifndef GUARD_RGB_H
 #define GUARD_RGB_H
 
-typedef struct RGB
+// 0x4
+typedef struct RGB_Struct
 {
     u8 r;
     u8 g;
     u8 b;
     u8 unk4; // Never read, always 0x80. Unused transparency/alpha flag?
-} RGB;
+} RGB_Struct;
 
 #define RGB_R 0
 #define RGB_G 1
@@ -23,7 +24,7 @@ typedef struct RGB_Array
 typedef union RGB_Union
 {
     RGB_Array asArr;
-    RGB separate;
+    RGB_Struct separate;
 } RGB_Union;
 
 #define RGB_TO_GBA(r, g, b) RGB2(((u32)(r) & 0xF8) >> 3, ((g) & 0xF8) >> 3, ((b) & 0xF8) >> 3)

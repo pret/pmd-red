@@ -31,10 +31,10 @@ static const WindowTemplate sWinTemplateDummy = WIN_TEMPLATE_DUMMY;
 static const WindowTemplate sWinTemplateNarrow = {
     .unk0 = 0,
     .type = WINDOW_TYPE_WITH_HEADER,
-    .pos = {2, 2},
+    .pos = { 2, 2 },
     .width = 14,
     .height = 14,
-    .unk10 = 14,
+    .heightInTiles = 14,
     .unk12 = 0,
     .header = NULL,
 };
@@ -42,10 +42,10 @@ static const WindowTemplate sWinTemplateNarrow = {
 static const WindowTemplate sWinTemplateWide = {
     .unk0 = 0,
     .type = WINDOW_TYPE_WITH_HEADER,
-    .pos = {2, 2},
+    .pos = { 2, 2 },
     .width = 16,
     .height = 16,
-    .unk10 = 16,
+    .heightInTiles = 16,
     .unk12 = 0,
     .header = NULL,
 };

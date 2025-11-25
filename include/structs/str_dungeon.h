@@ -404,7 +404,7 @@ typedef struct Dungeon
     Entity *unkBC;
     Entity unkC0;
     struct unkStruct_Dungeon134_sub unk134;
-    /* 0x17C */ RGB colorRamp[COLOR_RAMP_COUNT];
+    /* 0x17C */ RGB_Struct colorRamp[COLOR_RAMP_COUNT];
     /* 0x57C */ unkDungeon57C unk57C;
     /* 0x5C0 */ s32 unk5C0;
     /* 0x5C4 */ struct unkStruct_Dungeon5C4_sub unk5C4[3];

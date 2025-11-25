@@ -135,14 +135,14 @@ void LoadCharmaps(void)
     gCurrentCharmap = 0;
     sCharmapFiles[0] = OpenFileAndGetFileDataPtr(sKanjiA_file_string, &gSystemFileArchive);
     sCharmapFiles[1] = OpenFileAndGetFileDataPtr(sKanjiB_file_string, &gSystemFileArchive);
-    gCharmaps[0] = (CharMapStruct *) sCharmapFiles[0]->data;
-    gCharmaps[1] = (CharMapStruct *) sCharmapFiles[1]->data;
+    gCharmaps[0] = (CharMapStruct *)sCharmapFiles[0]->data;
+    gCharmaps[1] = (CharMapStruct *)sCharmapFiles[1]->data;
     gCharHeight[0] = 11;
     gCharHeight[1] = 12;
 
-    for (k = 0; k < 4; k++) {
+    for (k = 0; k < MAX_WINDOWS; k++) {
         gWindows[k].width = 0;
-        gWindows[k].unk8 = 0;
+        gWindows[k].heightInTiles = 0;
         gWindows[k].unk46 = 0;
     }
 
@@ -267,7 +267,7 @@ static void ShowWindowsInternal(const WindowTemplates *winTemplates, bool8 a1, b
         if (winTemplates->id[i].width != 0) {
             AddWindow(gWindows, (u32 *)VRAM, sUnknown_20274B4, gBgTilemaps, sUnknown_80B8804[i], &winTemplates->id[i], a1, area, positionModifier, 0);
             sub_80089AC(&winTemplates->id[i], positionModifier);
-            area += winTemplates->id[i].width * winTemplates->id[i].unk10;
+            area += winTemplates->id[i].width * winTemplates->id[i].heightInTiles;
         }
     }
 
@@ -321,7 +321,7 @@ static void AddWindow(Window *windows, u32 *vram, u32 *a2, u16 tilemaps[4][32][3
     newWindow->x = x;
     newWindow->y = y;
     newWindow->width = winTemplate->width;
-    newWindow->unk8 = winTemplate->unk10;
+    newWindow->heightInTiles = winTemplate->heightInTiles;
     newWindow->height = winTemplate->height;
     newWindow->type = winTemplate->type;
     newWindow->unk10 = firstBlockId;
@@ -347,7 +347,7 @@ static void AddWindow(Window *windows, u32 *vram, u32 *a2, u16 tilemaps[4][32][3
     newWindow->unk20 = (newWindow->width * 8) - 8;
     newWindow->unk45 = newWindow->type == WINDOW_TYPE_0;
 
-    if (newWindow->unk8 == 0)
+    if (newWindow->heightInTiles == 0)
         return;
 
     if ((winTemplate->unk0 & 0xA0) != 0x80) {

@@ -14,10 +14,10 @@ static const WindowTemplate sDummyWinTemplate = WIN_TEMPLATE_DUMMY;
 static const WindowTemplate gUnknown_80E4A28 = {
     .unk0 = 0,
     .type = WINDOW_TYPE_ONLY_TEXT,
-    .pos = {2, 2},
+    .pos = { 2, 2 },
     .width = 26,
     .height = 16,
-    .unk10 = 16,
+    .heightInTiles = 16,
     .unk12 = 0,
     .header = NULL,
 };

@@ -87,7 +87,7 @@ const ax_anim gUnknown_97BD6C8[] = {
     { 0,   0,   0, { 0, 0 }, { 0, 0 } },
 };
 const u32 gUnknown_97BD6E0[] = INCBIN_U32("data/effects/efob021.4bpp");
-const RGB gUnknown_97BE540[] = INCBIN_U8("data/effects/efob021.pmdpal");
+const RGB_Struct gUnknown_97BE540[] = INCBIN_U8("data/effects/efob021.pmdpal");
 const ax_pose *const gUnknown_97BE580[] = {
     gUnknown_97BD46C,
     gUnknown_97BD48A,

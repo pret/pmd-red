@@ -475,7 +475,7 @@ void SpawnDroppedItem(Entity *entity1, Entity *entity2, Item *item, bool8 a3, Du
         i = 1;
     }
 
-    while (1) {
+    while (TRUE) {
         if (gUnknown_80F4468[i].x == 99) {
             var_24 = FALSE;
             break;

@@ -165,7 +165,7 @@ UNUSED static s32 sub_800B720(s32 a0, IntrCallback a1)
     asS16 = (s16) a0;
     sp4 = DisableInterrupts();
 
-    while (1) {
+    while (TRUE) {
         bool8 sp10 = FALSE;
         for (i = 0, strPtr = gUnknown_202D608; i < gUnknown_203B0AA; i++, strPtr++) {
             if (strPtr->unk0 == gUnknown_203B0A8) {

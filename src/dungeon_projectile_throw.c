@@ -65,7 +65,7 @@ void HandleStraightProjectileThrow(Entity *thrower, Item *item, DungeonPos *pos,
 
     SetUnk1C05E(TRUE);
 
-    while (1) {
+    while (TRUE) {
         s32 i;
         DungeonPos prevPos = projectile->pos;
 

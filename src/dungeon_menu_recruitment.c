@@ -51,10 +51,10 @@ static const WindowTemplates sRecruitmentSearchWindows = {
     .id = {
             [0] = {
                 .type = WINDOW_TYPE_WITH_HEADER,
-                .pos = {2, 2},
+                .pos = { 2, 2 },
                 .width = 18,
                 .height = 14,
-                .unk10 = 18,
+                .heightInTiles = 18,
                 .unk12 = 2,
                 .header = &sRecruitmentWindowHeader,
             },
@@ -80,7 +80,7 @@ void ShowRecruitmentSearchMenu(void)
         struct MonRecruitList tabsData[2];
 
         SetRecruitableMons(tabsData);
-        while (1) {
+        while (TRUE) {
             bool8 closeWindow = FALSE;
             struct MonRecruitList *currTabData = &tabsData[currTabId];
 
@@ -102,7 +102,7 @@ void ShowRecruitmentSearchMenu(void)
             gDungeonMenu.leftRightArrowsPos.x = (gWindows[0].x + 16) * 8;
             gDungeonMenu.leftRightArrowsPos.y = ((gWindows[0].y + 1) * 8) - 2;
 
-            while (1) {
+            while (TRUE) {
                 s32 touchScreenArrow;
                 bool8 scroll = FALSE;
 

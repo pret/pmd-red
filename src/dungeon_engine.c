@@ -91,7 +91,7 @@ static bool8 RunLeaderTurn_Async(bool8 param_1)
     if (GetEntInfo(entity)->attacking)
         return FALSE;
 
-    while (1) {
+    while (TRUE) {
         entity = GetLeader();
         if (entity == NULL)
             return FALSE;

@@ -539,7 +539,7 @@ void FillInventoryGaps(void)
     }
     slot_checking++;
     last_filled++;
-  } while (1);
+  } while (TRUE);
 
   // clear out the rest of the slots
   for (; last_filled < INVENTORY_SIZE; last_filled++) {

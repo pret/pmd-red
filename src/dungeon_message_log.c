@@ -94,7 +94,7 @@ bool32 DisplayMessageLog(void)
     sMessageLogFlags = 0;
     PutStringsOnMessageLog();
 
-    while (1) {
+    while (TRUE) {
         s32 touchScreenArrow;
         bool32 scroll = FALSE;
 
@@ -170,7 +170,7 @@ static bool8 TryScrollLogUp(s32 touchScreenArrow)
     s32 y;
     s32 arrId;
 
-    while (1)
+    while (TRUE)
     {
         arrId = gDungeon->unk16 + sMessageLogCursor;
         y = 2;
@@ -221,7 +221,7 @@ static bool8 TryScrollLogDown(s32 touchScreenArrow)
     s32 y;
     s32 arrId;
 
-    while (1)
+    while (TRUE)
     {
         arrId = gDungeon->unk16 + sMessageLogCursor;
         y = 128;

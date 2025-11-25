@@ -51,11 +51,11 @@ void SetSavingIconCoords(DungeonPos *pos);
 void sub_8004E8C(unkStruct_2039DB0 *);
 void sub_8005180(void);
 void sub_8005304(void);
-void sub_8005610(OpenedFile *, s32 vramIdx, s32 brightness, const RGB *ramp);
-const RGB *sub_8005674(const EfoFileData *, s32 vramIdx);
+void sub_8005610(OpenedFile *, s32 vramIdx, s32 brightness, const RGB_Struct *ramp);
+const RGB_Struct *sub_8005674(const EfoFileData *, s32 vramIdx);
 void sub_800569C(DungeonPos *, axdata *, u8);
 void sub_8005700(DungeonPos *dstPos, axdata *axData);
-void sub_8005770(s32, const RGB *color, s32 brightness, const RGB *ramp);
+void sub_8005770(s32, const RGB_Struct *color, s32 brightness, const RGB_Struct *ramp);
 
 static inline bool8 AxFlag8000(axdata *ax)
 {

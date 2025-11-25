@@ -3726,7 +3726,7 @@ static s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
                 s32 r7 = 0x1A4;
                 s32 r6 = 0;
 
-                while (1)
+                while (TRUE)
                 {
                     s16 indexS16;
                     index = (s16)(index + 1);

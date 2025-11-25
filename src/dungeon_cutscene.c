@@ -48,9 +48,9 @@ struct RgbS16
 };
 
 extern OpenedFile *gDungeonPaletteFile;
-extern RGB gUnknown_202ECA4[];
+extern RGB_Struct gUnknown_202ECA4[33];
 
-extern bool8 sub_8004C00(unkStruct_202EE8C *a0, s32 a1, s32 a2, s32 brightness, const RGB *ramp, struct RgbS16 *a5);
+extern bool8 sub_8004C00(unkStruct_202EE8C *a0, s32 a1, s32 a2, s32 brightness, const RGB_Struct *ramp, struct RgbS16 *a5);
 extern void sub_8088EE8(void);
 extern void sub_8088848(void);
 extern void sub_808A718(void);
@@ -1217,8 +1217,8 @@ bool8 sub_8085B80(struct_8085B80 *a0)
 void SetDungeonBGColorRGB(s32 r, s32 g, s32 b, bool8 a3, bool8 a4)
 {
     s32 i, palIndex, n;
-    const RGB *colorPtr;
-    RGB color;
+    const RGB_Struct *colorPtr;
+    RGB_Struct color;
     struct RgbS16 colorS16;
 
     n = 160;

@@ -5,7 +5,7 @@
 
 void Hang(void)
 {
-    while(1)
+    while (TRUE)
     {
         asm("swi 0x2");
     }

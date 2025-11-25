@@ -229,7 +229,7 @@ void xxx_draw_string_80524F0(void)
                     AddDoubleUnderScoreHighlight(0, 0, strPtr->unk1C066 - 1, 0xE0, 7);
                 }
 
-                while (1) {
+                while (TRUE) {
                     txtPtr = HandleSpecialCharFormat(txtPtr, &sp);
                     if (*txtPtr == '\0' || *txtPtr == '\r' || *txtPtr == '\n')
                         break;
@@ -426,7 +426,7 @@ void DisplayDungeonDialogue_Async(const struct DungeonDialogueStruct *dialogueIn
         InlineStrcpy(gSpeakerNameBuffer, _("{COLOR YELLOW}{SPEECH_BUBBLE}{RESET}"));
     }
 
-    while (1) {
+    while (TRUE) {
         if (dialogueInfo->allowType == DIALOGUE_ALLOW_ALL)
             break;
         if (dialogueInfo->allowType == DIALOGUE_ONLY_SQUIRTLE_TOTODILE   && (dialogueMonId == MONSTER_SQUIRTLE || dialogueMonId == MONSTER_TOTODILE))
@@ -682,7 +682,7 @@ void sub_8052FB8(const u8 *str)
 
     CreateMenuDialogueBoxAndPortrait(str, 0, 0, NULL, NULL, 2, 0, NULL, 0x30);
     r9 = 0;
-    while (1) {
+    while (TRUE) {
         if (r8 < 62) {
             r8++;
             for (j = 0; j < 8; j++) {
