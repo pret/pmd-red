@@ -98,7 +98,7 @@ static const struct ScriptCommand s_gs224_g3_s1_lives0_dlg0[] = { /* 0x826e60c *
     { 0x52, 0x00,  0x0000,  0x00400000,  0x00000000, NULL },
     AWAIT_CUE(5),
     { 0x53, 0x00,  0x0000,  0x00400000,  0x00000000, NULL },
-    { 0x8b, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    SET_DIR_WAIT(DIRECTION_WEST, 0),
     { 0x80, 0x00,  0x0200,  0x00000004,  0x00000000, NULL },
     ALERT_CUE(6),
     END_DELETE,

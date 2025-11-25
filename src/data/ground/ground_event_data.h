@@ -328,13 +328,13 @@ static const struct ScriptCommand s_script_WAKEUP_FUNC[] = { /* 0x811ff00 */
     DEBUGINFO_O(328),
     JUMPIF_UNK_BE(/* to label */ 0), /* something sleep related?*/
     SELECT_ANIMATION(6),
-    { 0x8b, 0x3c,  0x0000,  0x00000000,  0x00000000, NULL },
+    SET_DIR_WAIT(DIRECTION_SOUTH, 60),
     SELECT_ANIMATION(2),
     WAIT(60),
     RET_DIRECT,
   LABEL(0), /* = 0x00 */
     SELECT_ANIMATION(38),
-    { 0x8b, 0x3c,  0x0000,  0x00000000,  0x00000000, NULL },
+    SET_DIR_WAIT(DIRECTION_SOUTH, 60),
     SELECT_ANIMATION(39),
     STOP_ANIMATION_ON_CURRENT_FRAME,
     WAIT(10),
@@ -517,11 +517,11 @@ static const struct ScriptCommand s_script_INIT_SLEEP_FUNC[] = { /* 0x81206e0 */
     DEBUGINFO_O(517),
     JUMPIF_UNK_BE(/* to label */ 0), /* something sleep related?*/
     SELECT_ANIMATION(6),
-    { 0x8b, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    SET_DIR_WAIT(DIRECTION_SOUTH, 0),
     RET_DIRECT,
   LABEL(0), /* = 0x00 */
     SELECT_ANIMATION(38),
-    { 0x8b, 0x3c,  0x0002,  0x00000000,  0x00000000, NULL },
+    SET_DIR_WAIT(DIRECTION_EAST, 60),
     RET_DIRECT,
 };
 

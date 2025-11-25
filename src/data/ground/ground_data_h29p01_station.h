@@ -228,21 +228,21 @@ static const struct ScriptCommand s_gs158_g2_s0_lives0_dlg0[] = { /* 0x820d22c *
     // Fade in (slow), vortex stone appears with flashing white circle
     // Our character walks north
     { 0x23, 0x01,  30,  0x00000000,  0x00000000, NULL }, // Fade out black?
-    { 0x8b, 0x00,  DIRECTION_NORTHWEST,  0x00000000,  0x00000000, NULL },
+    SET_DIR_WAIT(DIRECTION_NORTHWEST, 0),
     ALERT_CUE(4),
     AWAIT_CUE(5),
     { 0x22, 0x01,  30,  0x00000000,  0x00000000, NULL }, // Fade in black?
     ALERT_CUE(8), // Moltres float
     AWAIT_CUE(5),
     { 0x23, 0x01,  30,  0x00000000,  0x00000000, NULL }, // Fade out black?
-    { 0x8b, 0x00,  DIRECTION_NORTHEAST,  0x00000000,  0x00000000, NULL },
+    SET_DIR_WAIT(DIRECTION_NORTHEAST, 0),
     ALERT_CUE(4),
     AWAIT_CUE(5),
     { 0x22, 0x01,  30,  0x00000000,  0x00000000, NULL }, // Fade in black?
     ALERT_CUE(7), // Zapdos float
     AWAIT_CUE(5),
     { 0x23, 0x01,  30,  0x00000000,  0x00000000, NULL }, // Fade out black?
-    { 0x8b, 0x00,  DIRECTION_NORTH,  0x00000000,  0x00000000, NULL },
+    SET_DIR_WAIT(DIRECTION_NORTH, 0),
     ALERT_CUE(4),
     AWAIT_CUE(5),
     { 0x22, 0x01,  30,  0x00000000,  0x00000000, NULL }, // Fade in black?
@@ -342,7 +342,7 @@ static const struct ScriptCommand s_gs158_g2_s0_lives1_dlg0[] = { /* 0x820db5c *
     ALERT_CUE(5),
     AWAIT_CUE(6),
     SELECT_ANIMATION(2),
-    { 0x8b, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    SET_DIR_WAIT(DIRECTION_SOUTH, 0),
     AWAIT_CUE(6),
     { 0x70, 0x00,  0x0080,  0x0000000a,  0x00000000, NULL },
     { 0x53, 0x00,  0x0000,  0x01000000,  0x00000000, NULL },
@@ -369,7 +369,7 @@ static const struct ScriptCommand s_gs158_g2_s0_lives2_dlg0[] = { /* 0x820dccc *
     AWAIT_CUE(7),
     { 0x54, 0x00,  0x0300,  0x00000000,  0x00000000, NULL },
     WARP_WAYPOINT(0, 7),
-    { 0x8b, 0x04,  0x0000,  0x00000000,  0x00000000, NULL },
+    SET_DIR_WAIT(DIRECTION_SOUTH, 4),
     { 0x70, 0x00,  0x0100,  0x00000014,  0x00000000, NULL },
     { 0x54, 0x00,  0x0300,  0x00000000,  0x00000000, NULL },
     { 0x52, 0x00,  0x0000,  0x01000000,  0x00000000, NULL },
@@ -408,7 +408,7 @@ static const struct ScriptCommand s_gs158_g2_s0_lives3_dlg0[] = { /* 0x820df0c *
     AWAIT_CUE(8),
     { 0x54, 0x00,  0x0300,  0x00000000,  0x00000000, NULL },
     WARP_WAYPOINT(0, 8),
-    { 0x8b, 0x04,  0x0000,  0x00000000,  0x00000000, NULL },
+    SET_DIR_WAIT(DIRECTION_SOUTH, 4),
     { 0x70, 0x00,  0x0100,  0x00000014,  0x00000000, NULL },
     { 0x52, 0x00,  0x0000,  0x01000000,  0x00000000, NULL },
     { 0x70, 0x00,  0x0080,  0x00000000,  0x00000000, NULL },

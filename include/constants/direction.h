@@ -14,6 +14,7 @@ enum Direction
     DIRECTION_NORTHWEST,
     DIRECTION_WEST,
     DIRECTION_SOUTHWEST,
+
     NUM_DIRECTIONS
 };
 
@@ -33,4 +34,4 @@ enum DirectionTransformation
     DIR_TRANS_11,
 };
 
-#endif
+#endif // GUARD_CONSTANTS_DIRECTION_H

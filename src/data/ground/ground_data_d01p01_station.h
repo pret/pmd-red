@@ -348,10 +348,10 @@ static const struct ScriptCommand s_gs178_g1_s1_lives0_dlg0[] = { /* 0x822dc90 -
     ALERT_CUE(5),
     AWAIT_CUE(7),
   LABEL(0), /* = 0x00 */
-    { 0x8b, 0x1e,  0x0006,  0x00000000,  0x00000000, NULL },
-    { 0x8b, 0x1e,  0x0000,  0x00000000,  0x00000000, NULL },
-    { 0x8b, 0x1e,  0x0002,  0x00000000,  0x00000000, NULL },
-    { 0x8b, 0x1e,  0x0000,  0x00000000,  0x00000000, NULL },
+    SET_DIR_WAIT(DIRECTION_WEST, 30),
+    SET_DIR_WAIT(DIRECTION_SOUTH, 30),
+    SET_DIR_WAIT(DIRECTION_EAST, 30),
+    SET_DIR_WAIT(DIRECTION_SOUTH, 30),
     JUMP_LABEL(0),
 };
 
@@ -507,10 +507,10 @@ static const struct ScriptCommand s_gs178_g2_s0_lives2_dlg0[] = { /* 0x822e89c -
     CALL_SCRIPT(SHOCK_FUNC),
     AWAIT_CUE(7),
   LABEL(0), /* = 0x00 */
-    { 0x8b, 0x1e,  0x0006,  0x00000000,  0x00000000, NULL },
-    { 0x8b, 0x1e,  0x0000,  0x00000000,  0x00000000, NULL },
-    { 0x8b, 0x1e,  0x0002,  0x00000000,  0x00000000, NULL },
-    { 0x8b, 0x1e,  0x0000,  0x00000000,  0x00000000, NULL },
+    SET_DIR_WAIT(DIRECTION_WEST, 30),
+    SET_DIR_WAIT(DIRECTION_SOUTH, 30),
+    SET_DIR_WAIT(DIRECTION_EAST, 30),
+    SET_DIR_WAIT(DIRECTION_SOUTH, 30),
     JUMP_LABEL(0),
 };
 

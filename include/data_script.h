@@ -338,6 +338,11 @@
 
 #define CMD_UNK_8A(a,b,t)               { CMD_BYTE_8A, a, b, t, 0, NULL }
 
+// Sets the parent object's direction then waits the specified number of frames.
+// d: Direction to set. Can be -1 also, which doesn't set the object's direction, but is still stored in the action script data.
+// f: Amount of frames to wait afterwards.
+#define SET_DIR_WAIT(d, f)              { CMD_BYTE_8B, f, d, 0, 0, NULL }
+
 #define CMD_UNK_8C(a,t,c)               { CMD_BYTE_8C, a, t, c, 0, NULL }
 
 #define CMD_UNK_8D(a,t)                 { CMD_BYTE_8D, a, t, 0, 0, NULL }

@@ -51,10 +51,10 @@ typedef struct ScriptData
     /* 0x20 */ u8  curScriptOp; // See enum "ScriptOpID"
     /* 0x22 */ s16 unk22;
     /* 0x24 */ u16 unk24;
-    /* 0x26 */ s8  unk26;
+    /* 0x26 */ s8  storedDir; // Can be -1.
     /* 0x28 */ s16 branchDiscriminant;
-    /* 0x2A */ s16 unk2A;
-    /* 0x2C */ s16 unk2C;
+    /* 0x2A */ s16 unk2A; // Seems to be a frame counter for async script commands
+    /* 0x2C */ s16 unk2C; // Another counter for async script commands
     /* 0x30 */ s32 unk30;
     /* 0x34 */ PixelPos pos1;
     /* 0x3C */ PixelPos pos2;

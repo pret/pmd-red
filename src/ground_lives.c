@@ -276,9 +276,7 @@ void GroundLives_Select(s32 mapID, s32 group, s32 sector)
 
     size = sectorPtr->nLives;
     for (i = 0; i < size; i++, livesData++)
-    {
-        GroundLives_Add(-1,livesData,group_s32,sector_s32);
-    }
+        GroundLives_Add(-1, livesData, group_s32, sector_s32);
 }
 
 void GroundLives_Cancel(s32 scriptID, s32 sector)
@@ -837,33 +835,35 @@ static s32 GroundLives_Add(s32 id_, const GroundLivesData *ptr, s32 group_, s32 
 
     if (!var24) {
         if (sub_809D684(&livesPtr->action, &gGroundLivesMeta->unk32C)) {
-            s32 r10;
-            s32 r9;
+            s32 bakUnk24;
+            s32 bakStoredDir;
             // Note: these ptr variables are unfortunately a fakematch, but I was not able to match the function without them...
-            u16 *ptr1;
-            s8 *ptr2;
+            u16 *ptrToUnk24;
+            s8 *ptrToStoredDir;
 
             if (livesPtr->action.scriptData2.savedState != 0) {
-                r10 = livesPtr->action.scriptData2.unk24;
-                r9 = livesPtr->action.scriptData2.unk26;
+                bakUnk24 = livesPtr->action.scriptData2.unk24;
+                bakStoredDir = livesPtr->action.scriptData2.storedDir;
 
-                ptr1 = &livesPtr->action.scriptData.unk24;
-                ptr2 = &livesPtr->action.scriptData.unk26;
+                ptrToUnk24 = &livesPtr->action.scriptData.unk24;
+                ptrToStoredDir = &livesPtr->action.scriptData.storedDir;
             }
             else {
-                r10 = livesPtr->action.scriptData.unk24;
-                r9 = livesPtr->action.scriptData.unk26;
+                bakUnk24 = livesPtr->action.scriptData.unk24;
+                bakStoredDir = livesPtr->action.scriptData.storedDir;
 
-                ptr1 = &livesPtr->action.scriptData.unk24;
-                ptr2 = &livesPtr->action.scriptData.unk26;
+                ptrToUnk24 = &livesPtr->action.scriptData.unk24;
+                ptrToStoredDir = &livesPtr->action.scriptData.storedDir;
             }
 
             InitAction2(&livesPtr->action);
             InitActionWithParams(&livesPtr->action, &gGroundLivesCallbacks, livesPtr, group, sector);
             GroundScript_ExecutePP(&livesPtr->action, NULL, &gGroundLivesMeta->unk32C, DEBUG_LOC_PTR("../ground/ground_lives.c", 1417, "GroundLives_Add"));
-            ASM_MATCH_TRICK(ptr2);
-            *ptr1 = r10;
-            *ptr2 = r9;
+
+            ASM_MATCH_TRICK(ptrToStoredDir);
+
+            *ptrToUnk24 = bakUnk24;
+            *ptrToStoredDir = bakStoredDir;
             r8 = TRUE;
         }
         else {
@@ -898,13 +898,13 @@ static s32 GroundLives_Add(s32 id_, const GroundLivesData *ptr, s32 group_, s32 
         if (!var24 && !r8 && !(livesPtr->flags & 0x1800)) {
             GroundScript_ExecutePP(&livesPtr->action, NULL, &gGroundLivesMeta->unk32C, DEBUG_LOC_PTR("../ground/ground_lives.c", 1460, "GroundLives_Add"));
             livesPtr->action.scriptData.unk24 = livesPtr->unk160 | livesPtr->unk15E;
-            livesPtr->action.scriptData.unk26 = livesPtr->direction1;
+            livesPtr->action.scriptData.storedDir = livesPtr->direction1;
         }
         ExecutePredefinedScript(&livesPtr->action, NULL, 0, DEBUG_LOC_PTR("../ground/ground_lives.c", 1466, "GroundLives_Add"));
     }
     else if (r8) {
         livesPtr->directionRelated = TRUE;
-        livesPtr->direction1 = livesPtr->action.scriptData.unk26;
+        livesPtr->direction1 = livesPtr->action.scriptData.storedDir;
         sub_80A9750(livesPtr, livesPtr->action.scriptData.unk24);
     }
 

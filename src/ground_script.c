@@ -186,11 +186,12 @@ static void InitScriptData(ScriptData *a0)
     a0->curPtr = 0;
     a0->unk22 = -1;
     a0->unk24 = 0;
-    a0->unk26 = 0xFF;
+    a0->storedDir = -1;
     a0->branchDiscriminant = 0;
     a0->unk2A = 0;
     a0->unk2C = 0;
     a0->unk30 = 0;
+
     for (i = 0; i < 4; i++) {
         a0->localVars.val[i] = 0;
     }
@@ -387,7 +388,7 @@ bool8 GroundScript_ExecutePP(Action *action, ActionUnkIds *param_2, ScriptInfoSm
     action->scriptData.savedScript.ptr2 = NULL;
 
     if (action->callbacks->getDirection != 0) {
-        action->callbacks->getDirection(action->parentObject, &action->scriptData.unk26);
+        action->callbacks->getDirection(action->parentObject, &action->scriptData.storedDir);
     }
     return TRUE;
 }
@@ -515,7 +516,7 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                         case CMD_BYTE_5D:
                         case CMD_BYTE_5E:
                         case CMD_BYTE_60:
-                        case CMD_BYTE_8B:
+                        case CMD_BYTE_8B: // SET_DIR_WAIT
                         case CMD_BYTE_8C:
                         case CMD_BYTE_8D:
                         case CMD_BYTE_8E:
@@ -568,7 +569,7 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                         case CMD_BYTE_E0: {
                             cmd = *action->scriptData.curPtr;
                             if (IsEqualtoBGTrack(cmd.argShort)) {
-                                if (action->scriptData.unk2C++ < 10800)
+                                if (action->scriptData.unk2C++ < 180 * 60)
                                     loopContinue = FALSE;
                                 else
                                     action->scriptData.savedState = 3;
@@ -582,7 +583,7 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                         case CMD_BYTE_E2: { // WAIT_FANFARE2
                             cmd = *action->scriptData.curPtr;
                             if (IsSoundPlaying(cmd.argShort)) {
-                                if (action->scriptData.unk2C++ < 3600)
+                                if (action->scriptData.unk2C++ < 60 * 60)
                                     loopContinue = FALSE;
                                 else
                                     action->scriptData.savedState = 3;
@@ -653,9 +654,9 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                             }
                             res = action->callbacks->moveRelative(action->parentObject, &pos2);
                             dir = (s8) VecDirection8Radial(&pos2);
-                            dirBefore = action->scriptData.unk26;
+                            dirBefore = action->scriptData.storedDir;
                             dirS8 = dir;
-                            action->scriptData.unk26 = dirS8;
+                            action->scriptData.storedDir = dirS8;
                             action->callbacks->setDirection(action->parentObject, dir);
                             if (res & 9) {
                                 action->scriptData.savedState = 3;
@@ -726,9 +727,9 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                                 pos3.x = pos2.x - pos1.x;
                                 pos3.y = pos2.y - pos1.y;
                                 dir = (s8) VecDirection8Radial(&pos3);
-                                dirBefore = action->scriptData.unk26;
+                                dirBefore = action->scriptData.storedDir;
                                 dirS8 = dir;
-                                action->scriptData.unk26 = dirS8;
+                                action->scriptData.storedDir = dirS8;
                                 action->callbacks->setDirection(action->parentObject, dir);
                                 action->callbacks->moveReal(action->parentObject, &pos2);
                                 action->callbacks->setEventIndex(action->parentObject, 0x1000);
@@ -849,8 +850,8 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                                 }
 
                                 ASM_MATCH_TRICK(dir);
-                                action->scriptData.unk26 = TransformDirection2(dir, tmp2, (u8)cmd.argShort);
-                                action->callbacks->setDirection(action->parentObject, action->scriptData.unk26);
+                                action->scriptData.storedDir = TransformDirection2(dir, tmp2, (u8)cmd.argShort);
+                                action->callbacks->setDirection(action->parentObject, action->scriptData.storedDir);
                                 action->scriptData.unk2A = cmd.argByte;
                             }
                             break;
@@ -1446,11 +1447,11 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                         case 0: {
                             if (action->scriptData2.savedState) {
                                 action->scriptData = action->scriptData2;
-                                if (action->callbacks->setDirection && action->scriptData.unk26 != -1) {
+                                if (action->callbacks->setDirection && action->scriptData.storedDir != -1) {
                                     u32 tmp;
                                     action->callbacks->getFlags(action->parentObject, &tmp);
                                     if (tmp & 0x400) {
-                                        action->callbacks->setDirection(action->parentObject, action->scriptData.unk26);
+                                        action->callbacks->setDirection(action->parentObject, action->scriptData.storedDir);
                                     }
                                 }
                                 if (action->callbacks->setEventIndex) {
@@ -2248,7 +2249,7 @@ static s32 ExecuteScriptCommand(Action *action)
                     ptr->callbacks->getHitboxCenter(action->parentObject, &pos);
                     ptr->callbacks->getDirection(action->parentObject, &c);
                     action->callbacks->moveReal(action->parentObject, &pos);
-                    action->scriptData.unk26 = c;
+                    action->scriptData.storedDir = c;
                     action->callbacks->setDirection(action->parentObject, c);
                 }
                 break;
@@ -2275,7 +2276,7 @@ static s32 ExecuteScriptCommand(Action *action)
                 break;
             }
             case CMD_BYTE_54: {
-                action->callbacks->getDirection(action->parentObject, &action->scriptData.unk26);
+                action->callbacks->getDirection(action->parentObject, &action->scriptData.storedDir);
                 if (curCmd.argShort != 0)
                     action->scriptData.unk24 = curCmd.argShort;
 
@@ -2357,7 +2358,7 @@ static s32 ExecuteScriptCommand(Action *action)
                 dir = (s8)GetScriptVarArrayValue(NULL, POSITION_DIRECTION, (u16)curCmd.arg1);
                 action->callbacks->moveReal(action->parentObject, &pos);
                 action->callbacks->setPosHeight(action->parentObject, height);
-                action->scriptData.unk26 = dir;
+                action->scriptData.storedDir = dir;
                 action->callbacks->setDirection(action->parentObject, dir);
                 scriptData->unk2A = (u8)curCmd.argByte;
                 return 2;
@@ -2561,7 +2562,7 @@ static s32 ExecuteScriptCommand(Action *action)
                 return 2;
             }
             case CMD_BYTE_89: {
-                action->scriptData.unk26 = curCmd.arg1;
+                action->scriptData.storedDir = curCmd.arg1;
                 action->callbacks->setDirection(action->parentObject, (s8) curCmd.arg1);
                 scriptData->unk30 = curCmd.argShort;
                 scriptData->unk2A = (u8)curCmd.argByte;
@@ -2570,15 +2571,15 @@ static s32 ExecuteScriptCommand(Action *action)
             case CMD_BYTE_8A: { // CMD_UNK_8A
                 s8 dir;
                 action->callbacks->getDirection(action->parentObject, &dir);
-                action->scriptData.unk26 = TransformDirection1(dir, (u8)curCmd.arg1);
-                action->callbacks->setDirection(action->parentObject, action->scriptData.unk26);
+                action->scriptData.storedDir = TransformDirection1(dir, (u8)curCmd.arg1);
+                action->callbacks->setDirection(action->parentObject, action->scriptData.storedDir);
                 scriptData->unk30 = curCmd.argShort;
                 scriptData->unk2A = (u8)curCmd.argByte;
                 return 2;
             }
-            case CMD_BYTE_8B: {
-                action->scriptData.unk26 = curCmd.argShort;
-                action->callbacks->setDirection(action->parentObject, action->scriptData.unk26);
+            case CMD_BYTE_8B: { // SET_DIR_WAIT
+                action->scriptData.storedDir = curCmd.argShort;
+                action->callbacks->setDirection(action->parentObject, action->scriptData.storedDir);
                 scriptData->unk2A = (u8)curCmd.argByte;
                 return 2;
             }
@@ -2587,8 +2588,8 @@ static s32 ExecuteScriptCommand(Action *action)
                 s8 dir;
                 if (ret >= 0) {
                     sub_80A9050(ret, &dir);
-                    action->scriptData.unk26 = TransformDirection1(dir, (u8)curCmd.argShort);
-                    action->callbacks->setDirection(action->parentObject, action->scriptData.unk26);
+                    action->scriptData.storedDir = TransformDirection1(dir, (u8)curCmd.argShort);
+                    action->callbacks->setDirection(action->parentObject, action->scriptData.storedDir);
                 }
                 scriptData->unk2A = (u8)curCmd.argByte;
                 return 2;
@@ -2596,8 +2597,8 @@ static s32 ExecuteScriptCommand(Action *action)
             case CMD_BYTE_8D: { // CMD_UNK_8D
                 s8 dir;
                 action->callbacks->getDirection(action->parentObject, &dir);
-                action->scriptData.unk26 = TransformDirection1(dir, (u8)curCmd.argShort);
-                action->callbacks->setDirection(action->parentObject, action->scriptData.unk26);
+                action->scriptData.storedDir = TransformDirection1(dir, (u8)curCmd.argShort);
+                action->callbacks->setDirection(action->parentObject, action->scriptData.storedDir);
                 scriptData->unk2A = (u8)curCmd.argByte;
                 return 2;
             }
@@ -2649,8 +2650,8 @@ static s32 ExecuteScriptCommand(Action *action)
                     if (dir == tmp) {
                         action->callbacks->getDirection(action->parentObject, &dir);
                     }
-                    action->scriptData.unk26 = TransformDirection1(dir, (u8)curCmd.argShort);
-                    action->callbacks->setDirection(action->parentObject, action->scriptData.unk26);
+                    action->scriptData.storedDir = TransformDirection1(dir, (u8)curCmd.argShort);
+                    action->callbacks->setDirection(action->parentObject, action->scriptData.storedDir);
                 }
                 scriptData->unk2A = (u8)curCmd.argByte;
                 return 2;
