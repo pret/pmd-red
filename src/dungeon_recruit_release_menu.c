@@ -55,23 +55,23 @@ static const WindowTemplates sReleaseMenuWindowTemplates = {
     .id = {
         [0] =
         {
-            .unk0 = 0,
+            .flags = WINTEMPLATE_FLAG_NONE,
             .type = WINDOW_TYPE_WITH_HEADER,
             .pos = { 2, 2 },
             .width = 17,
             .height = 14,
-            .heightInTiles = 18,
+            .totalHeight = 18,
             .unk12 = 2,
             .header = &sReleaseMenuWinHeader
         },
         [1] =
         {
-            .unk0 = 0,
+            .flags = WINTEMPLATE_FLAG_NONE,
             .type = WINDOW_TYPE_NORMAL,
             .pos = { 21, 4 },
             .width = 7,
             .height = 4,
-            .heightInTiles = 4,
+            .totalHeight = 4,
             .unk12 = 0,
             .header = NULL
         },
@@ -385,7 +385,7 @@ static void ShowPokemonSummary(Pokemon *a0)
     winTemplates.id[0].pos.y = 2;
     winTemplates.id[0].width = 18;
     winTemplates.id[0].height = 14;
-    winTemplates.id[0].heightInTiles = 18;
+    winTemplates.id[0].totalHeight = 18;
     winTemplates.id[0].unk12 = 2;
     winTemplates.id[0].header = &sReleaseMenuWinHeader;
 

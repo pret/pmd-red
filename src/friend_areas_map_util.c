@@ -259,7 +259,7 @@ void FriendAreasMap_PrintCurrAreaName(void)
     windows.id[0].pos.y = 2;
     windows.id[0].width = 21;
     windows.id[0].height = 2;
-    windows.id[0].heightInTiles = 2;
+    windows.id[0].totalHeight = 2;
 
     windows.id[1].type = WINDOW_TYPE_NORMAL;
 
@@ -297,7 +297,7 @@ void FriendAreasMap_PrintAvailableSubAreas(void)
                 .pos = {7, 2},
                 .width = 21,
                 .height = 2,
-                .heightInTiles = 2,
+                .totalHeight = 2,
                 .header = &header,
             },
             [1] = WIN_TEMPLATE_DUMMY,
@@ -335,7 +335,7 @@ void FriendAreasMap_PrintAvailableSubAreas(void)
     menuInput->cursorArrowPos.y = 8;
     ResetTouchScreenMenuInput(&menuInput->touchScreen);
     var = CalcEntriesTotalHeight(menuInput->entriesPerPage, 0);
-    windows.id[0].heightInTiles = windows.id[0].height = var + 2;
+    windows.id[0].totalHeight = windows.id[0].height = var + 2;
     sub_80137B0(menuInput, var * 8);
 
     ShowWindows(&windows, TRUE, TRUE);

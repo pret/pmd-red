@@ -197,9 +197,9 @@ static void sub_801FDC0(void)
 
     switch (gUnknown_203B27C->state) {
         case 0x2:
-            gUnknown_203B27C->unk180.id[0].unk0 = 0x80;
-            gUnknown_203B27C->unk180.id[1].unk0 = 0x80;
-            gUnknown_203B27C->unk180.id[2].unk0 = 0x80;
+            gUnknown_203B27C->unk180.id[0].flags = WINTEMPLATE_FLAG_x80;
+            gUnknown_203B27C->unk180.id[1].flags = WINTEMPLATE_FLAG_x80;
+            gUnknown_203B27C->unk180.id[2].flags = WINTEMPLATE_FLAG_x80;
             gUnknown_203B27C->unk180.id[3] = gUnknown_80DC37C;
             ResetUnusedInputStruct();
             ShowWindows(&gUnknown_203B27C->unk180, TRUE, FALSE);

@@ -611,7 +611,7 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
         sub_803E13C();
         sub_800CDA8(4);
         if (gDungeon->unk6 == 0 && sub_8083C88(gDungeon->unk644.missionKind)) {
-            ShowDungeonClearedWindow();
+            ShowDungeonClearedWindow_Async();
         }
 
         if (IsUnsuccessfulDungeonExit()) {

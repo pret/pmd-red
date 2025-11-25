@@ -13,7 +13,8 @@ void PrepareTextbox_8008C6C(Window *windows, u32 windowId);
 void ResetWindowBgData(void);
 void sub_8007A78(u32 a0, s32 x, s32 y, s32 a3, u32 color);
 void sub_8007B7C(u32 a0, s32 x, s32 y, s32 a3, u32 color);
-void sub_8007E20(u32 winID, u32 x, u32 y, u32 w, u32 h, u32 src[8], u32 palNum);
+// srcGFX: Each u32 is 8 packed pixels, 4 bits per pixel.
+void WriteGFXToBG0Window(u32 winID, u32 x, u32 y, u32 w, u32 h, u32 *srcGFX, u32 palNum);
 void sub_80087EC(s32 a0, s32 a1, s32 a2, s32 a3, s32 a4);
 void sub_80089AC(const WindowTemplate *r4, DungeonPos *r5_Str);
 u32 DrawCharOnWindow(s32 x, s32 y, u32 chr, u32 color, u32 windowId);

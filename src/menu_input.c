@@ -237,7 +237,7 @@ void sub_8012D08(WindowTemplate *winTemplate, s32 entriesCount)
 
     sVar3 = sVar2;
     winTemplate->height = sVar3;
-    winTemplate->heightInTiles = sVar3;
+    winTemplate->totalHeight = sVar3;
 }
 
 void sub_8012D34(WindowTemplate *winTemplate, s32 entriesCount)
@@ -251,7 +251,7 @@ void sub_8012D34(WindowTemplate *winTemplate, s32 entriesCount)
 
     sVar3 = sVar2;
     winTemplate->height = sVar3;
-    winTemplate->heightInTiles = sVar3;
+    winTemplate->totalHeight = sVar3;
 }
 
 // arm9.bin::0201C26C

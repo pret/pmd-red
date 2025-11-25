@@ -30,22 +30,22 @@ static EWRAM_INIT struct WorldMap *sWorldMapPtr = NULL;
 static EWRAM_INIT WindowTemplates sWorldMapWindows = {
     .id = {
         [0] = {
-            .unk0 = 0,
+            .flags = WINTEMPLATE_FLAG_NONE,
             .type = WINDOW_TYPE_NORMAL,
             .pos = { 2, 10 },
             .width = 26,
             .height = 9,
-            .heightInTiles = 9,
+            .totalHeight = 9,
             .unk12 = 0,
             .header = NULL,
         },
         [1] = {
-            .unk0 = 0,
+            .flags = WINTEMPLATE_FLAG_NONE,
             .type = WINDOW_TYPE_NORMAL,
             .pos = { 23, 6 },
             .width = 5,
             .height = 3,
-            .heightInTiles = 3,
+            .totalHeight = 3,
             .unk12 = 0,
             .header = NULL,
         },
@@ -484,12 +484,12 @@ static void PrintDungeonName(DungeonLocation *dungLocation)
     WindowTemplates windows = {
         .id = {
             [0] = {
-                .unk0 = 0,
+                .flags = WINTEMPLATE_FLAG_NONE,
                 .type = WINDOW_TYPE_NORMAL,
                 .pos = { 12, 2 },
                 .width = 16,
                 .height = 2,
-                .heightInTiles = 2,
+                .totalHeight = 2,
                 .unk12 = 0,
                 .header = NULL,
             },
@@ -542,7 +542,7 @@ static bool8 PlayerEnterDungeonPrompt_Async(u8 *str)
     height /= 8;
 
     sWorldMapWindows.id[0].pos.y = 19 - height;
-    sWorldMapWindows.id[0].heightInTiles = height;
+    sWorldMapWindows.id[0].totalHeight = height;
     sWorldMapWindows.id[0].height = height;
     sWorldMapWindows.id[1].pos.y = 14 - height;
     ShowWindows(&sWorldMapWindows, TRUE, TRUE);

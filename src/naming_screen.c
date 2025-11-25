@@ -283,34 +283,34 @@ static const u8 *const sSpecialLetters[] =
 static const WindowTemplate sWindowTemplateDummy = WIN_TEMPLATE_DUMMY;
 
 static const WindowTemplate sInputWindowTemplate = {
-    .unk0 = 0,
+    .flags = WINTEMPLATE_FLAG_NONE,
     .type = WINDOW_TYPE_WITHOUT_BORDER,
     .pos = { 1, 10 },
     .width = 28,
     .height = 9,
-    .heightInTiles = 9,
+    .totalHeight = 9,
     .unk12 = 0,
     .header = NULL,
 };
 
 static const WindowTemplate sNameWindowTemplate = {
-    .unk0 = 0,
+    .flags = WINTEMPLATE_FLAG_NONE,
     .type = WINDOW_TYPE_WITHOUT_BORDER,
     .pos = { 4, 3 },
     .width = 22,
     .height = 5,
-    .heightInTiles = 5,
+    .totalHeight = 5,
     .unk12 = 0,
     .header = NULL,
 };
 
 static const WindowTemplate sPasswordNameWindowTemplate = {
-    .unk0 = 0,
+    .flags = WINTEMPLATE_FLAG_NONE,
     .type = WINDOW_TYPE_WITHOUT_BORDER,
     .pos = { 1, 2 },
     .width = 28,
     .height = 7,
-    .heightInTiles = 7,
+    .totalHeight = 7,
     .unk12 = 0,
     .header = NULL,
 };

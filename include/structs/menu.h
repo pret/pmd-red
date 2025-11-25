@@ -98,33 +98,34 @@ typedef struct MenuHeaderWindow
     /* R=0x9C | B=0x98 */ WindowHeader header;
 } MenuHeaderWindow;
 
+// I think the `+ 2`s below are actually `+ WINDOW_HEADER_HEIGHT`...
+
 // These macros are used for updating menu windows, as the last page can have less entries than other pages, so the window's height needs to reflect that.
 // Note: In order to get matching ASM, this macro had to be created.
 // It's probable the code below is not exactly how it was originally written, but it generates the same asm.
 #define UPDATE_MENU_WINDOW_HEIGHT_INTERNAL(ptr, _newHeight)             \
 {                                                                       \
-    UNUSED s32 newheightInTiles;                                        \
+    UNUSED s32 newtotalHeight;                                          \
     s16 newHeight;                                                      \
     s16 newHeightVal = (_newHeight);                                    \
     UNUSED s32 dummyMatch = newHeightVal;                               \
     UNUSED s16 oldHeight = (ptr).windows.id[(ptr).menuWinId].height;    \
     dummyMatch = 0;                                                     \
-    newheightInTiles = newHeightVal + 2;                                \
+    newtotalHeight = newHeightVal + 2;                                  \
     newHeight = newHeightVal;                                           \
                                                                         \
     (ptr).windows.id[(ptr).menuWinId].height = newHeight;               \
-    (ptr).windows.id[(ptr).menuWinId].heightInTiles = newHeightVal + 2; \
+    (ptr).windows.id[(ptr).menuWinId].totalHeight = newHeightVal + 2;   \
                                                                         \
     ResetUnusedInputStruct();                                           \
     ShowWindows(&(ptr).windows, TRUE, TRUE);                            \
 }
 
-#define UPDATE_MENU_WINDOW_HEIGHT(ptr)                                                  \
-{                                                                                       \
+#define UPDATE_MENU_WINDOW_HEIGHT(ptr)                                                                                          \
+{                                                                                                                               \
     UPDATE_MENU_WINDOW_HEIGHT_INTERNAL(ptr, CalcEntriesTotalHeight((ptr).input.currPageEntries, DEFAULT_MENU_ENTRY_HEIGHT) + 2) \
 }
 
-// For Windows where height is the same as unk10.
 #define UPDATE_MENU_WINDOW_HEIGHT_2(ptr)                                                                   \
 {                                                                                                          \
     s32 newHeightVal = CalcEntriesTotalHeight((ptr).input.currPageEntries, DEFAULT_MENU_ENTRY_HEIGHT) + 2; \
@@ -132,7 +133,7 @@ typedef struct MenuHeaderWindow
     s16 newHeight = newHeightVal;                                                                          \
                                                                                                            \
     (ptr).windows.id[(ptr).menuWinId].height = newHeight;                                                  \
-    (ptr).windows.id[(ptr).menuWinId].heightInTiles = newHeight;                                           \
+    (ptr).windows.id[(ptr).menuWinId].totalHeight = newHeight;                                             \
                                                                                                            \
     ResetUnusedInputStruct();                                                                              \
     ShowWindows(&(ptr).windows, TRUE, TRUE);                                                               \

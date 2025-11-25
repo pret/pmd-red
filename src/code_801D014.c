@@ -32,10 +32,14 @@
 #include "wonder_mail_802C4C8.h"
 #include "wonder_mail_802C860.h"
 
+#define RANK_ICON_W 16
+#define RANK_ICON_H 16
+#define RANK_ICON_4BPP_LEN (RANK_ICON_W * RANK_ICON_H / 8)
+
 // size: 0x8
 struct TeamBadgeData
 {
-    /* 0x0 */ u32 *pics; // Array of (MAX_TEAM_RANKS * 32)
+    /* 0x0 */ u32 *gfx; // Array of (MAX_TEAM_RANKS * RANK_ICON_4BPP_LEN)
     /* 0x4 */ RGB_Struct *palette; // Array of 16
 };
 
@@ -598,14 +602,14 @@ static void sub_801D894(void)
 static void LoadTeamRankBadge(u32 winID, u32 x, u32 y)
 {
     OpenedFile *teamBadgeFile;
-    u32 *pic;
+    u32 *gfx;
     RGB_Struct *pal;
     s32 i;
 
     teamBadgeFile = OpenFileAndGetFileDataPtr(sTeamRankBadgeFileName, &gTitleMenuFileArchive);
 #define TMRKPAT_DATA ((struct TeamBadgeData *)teamBadgeFile->data)
 
-    pic = TMRKPAT_DATA->pics;
+    gfx = TMRKPAT_DATA->gfx;
     pal = TMRKPAT_DATA->palette;
 
     for (i = 0; i < 16; i++) {
@@ -613,8 +617,8 @@ static void LoadTeamRankBadge(u32 winID, u32 x, u32 y)
         pal++;
     }
 
-    pic = &pic[GetRescueTeamRank() * 32];
-    sub_8007E20(winID, x, y, 16, 16, pic, 14);
+    gfx = &gfx[GetRescueTeamRank() * RANK_ICON_4BPP_LEN];
+    WriteGFXToBG0Window(winID, x, y, RANK_ICON_W, RANK_ICON_H, gfx, 14);
 
 #undef TMRKPAT_DATA
     CloseFile(teamBadgeFile);

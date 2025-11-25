@@ -26,11 +26,15 @@
 #include "text_3.h"
 #include "text_util.h"
 
+#define LEGEND_ICON_W 16
+#define LEGEND_ICON_H 16
+#define LEGEND_ICON_4BPP_LEN (LEGEND_ICON_W * LEGEND_ICON_H / 8)
+
 // Size: 0x8
 typedef struct ClmkFileData
 {
-    /* 0x0 */ /*const */u32 (*pics)[8 * 4];
-    /* 0x4 */ /*const */RGB_Struct (*palette)[16 * 4];
+    /* 0x0 */ /*const */u32 (*packedGFX)[LEGEND_ICON_4BPP_LEN];
+    /* 0x4 */ /*const */RGB_Struct (*palette)[16 * 4]; // Contains 4 palettes
 } ClmkFileData;
 
 enum
@@ -71,12 +75,12 @@ extern unkStruct_203B484 *gUnknown_203B484;
 const WindowTemplate gUnknown_80E75F8 = WIN_TEMPLATE_DUMMY;
 
 const WindowTemplate gUnknown_80E7610 = {
-    .unk0 = 0,
+    .flags = WINTEMPLATE_FLAG_NONE,
     .type = WINDOW_TYPE_NORMAL,
     .pos = { 2, 2 },
     .width = 26,
     .height = 11,
-    .heightInTiles = 11,
+    .totalHeight = 11,
     .unk12 = 0,
     .header = NULL
 };
@@ -117,12 +121,12 @@ static EWRAM_INIT u32 sLegendaryQuestIDs[NUM_LEGEND_ICONS] = {
 };
 
 const WindowTemplate gUnknown_80E762C = {
-    .unk0 = 0,
+    .flags = WINTEMPLATE_FLAG_NONE,
     .type = WINDOW_TYPE_NORMAL,
     .pos = { 2, 15 },
     .width = 19,
     .height = 3,
-    .heightInTiles = 3,
+    .totalHeight = 3,
     .unk12 = 0,
     .header = NULL
 };
@@ -158,12 +162,12 @@ const MenuItem gDeleteSaveConfirmMenuItems[] = {
 };
 
 const WindowTemplate gUnknown_80E7784 = {
-    .unk0 = 0,
+    .flags = WINTEMPLATE_FLAG_NONE,
     .type = WINDOW_TYPE_NORMAL,
     .pos = { 23, 15 },
     .width = 5,
     .height = 3,
-    .heightInTiles = 3,
+    .totalHeight = 3,
     .unk12 = 0,
     .header = NULL
 };
@@ -413,9 +417,8 @@ static void DrawQuestIcons(void)
 #define CLMKPAT_DATA ((ClmkFileData *)clmkFile->data)
 
     // Load all 4 palettes
-    for (i = 0; i < 16 * 4; i++) {
+    for (i = 0; i < 16 * 4; i++)
         SetBGPaletteBufferColorArray(i + 0xB0, &(*CLMKPAT_DATA->palette)[i]);
-    }
 
     x = 8;
     y = 73; // Shouldn't this be 72?
@@ -423,7 +426,7 @@ static void DrawQuestIcons(void)
     // Draw the legendary icons
     for (i = 0; i < NUM_LEGEND_ICONS; i++) {
         if (CheckQuest(sLegendaryQuestIDs[i])) {
-            sub_8007E20(0, x, y, 16, 16, CLMKPAT_DATA->pics[i], sLegendaryQuestIconPalNums[i]);
+            WriteGFXToBG0Window(0, x, y, LEGEND_ICON_W, LEGEND_ICON_H, CLMKPAT_DATA->packedGFX[i], sLegendaryQuestIconPalNums[i]);
             x += 16;
         }
     }

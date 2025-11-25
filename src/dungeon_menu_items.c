@@ -88,7 +88,7 @@ bool8 ShowDungeonItemsMenu(Entity * a0, struct UnkMenuBitsStruct *a1)
                 .pos = { 2, 2 },
                 .width = 18,
                 .height = 16,
-                .heightInTiles = 16,
+                .totalHeight = 16,
                 .header = &header,
             },
             [1] = WIN_TEMPLATE_DUMMY,
@@ -351,7 +351,7 @@ static void PrintOnDungeonItemsMenu(s32 a0, Entity *a1, bool8 showWhichWindow, b
         .pos = { 2, 4 },
         .width = 6,
         .height = 2,
-        .heightInTiles = 2,
+        .totalHeight = 2,
         .unk12 = 0,
         .header = NULL,
     };
@@ -373,7 +373,7 @@ static void PrintOnDungeonItemsMenu(s32 a0, Entity *a1, bool8 showWhichWindow, b
     switch (sUnknown_202F248[a0]) {
         case 0:
         case 1: {
-            windows->id[0].heightInTiles = 16;
+            windows->id[0].totalHeight = 16;
             windows->id[0].height = 16;
             header->width = 12;
             gDungeonMenu.firstEntryY = 16;
@@ -382,7 +382,7 @@ static void PrintOnDungeonItemsMenu(s32 a0, Entity *a1, bool8 showWhichWindow, b
             break;
         }
         case 2: {
-            windows->id[0].heightInTiles = 4;
+            windows->id[0].totalHeight = 4;
             windows->id[0].height = 4;
             header->width = 6;
             gDungeonMenu.firstEntryY = 18;
@@ -391,7 +391,7 @@ static void PrintOnDungeonItemsMenu(s32 a0, Entity *a1, bool8 showWhichWindow, b
         }
         case 3:
         default: {
-            windows->id[0].heightInTiles = 4;
+            windows->id[0].totalHeight = 4;
             windows->id[0].height = 4;
             header->width = 12;
             gDungeonMenu.firstEntryY = 18;

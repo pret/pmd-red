@@ -32,23 +32,23 @@ static const u32 gUnknown_80D48A0[3] = { 0x7, 0x2, 0x2 };
 static const WindowTemplate sWinTemplateDummy = WIN_TEMPLATE_DUMMY;
 
 static const WindowTemplate sDialogueBoxWindowTemplate = {
-    .unk0 = 0,
+    .flags = WINTEMPLATE_FLAG_NONE,
     .type = WINDOW_TYPE_0,
     .pos = { 2, 15 },
     .width = 26,
     .height = 5,
-    .heightInTiles = 7,
+    .totalHeight = 7,
     .unk12 = 0,
     .header = NULL,
 };
 
 static const WindowTemplate sOnlyTextDialogueBoxWindowTemplate = {
-    .unk0 = 0,
+    .flags = WINTEMPLATE_FLAG_NONE,
     .type = WINDOW_TYPE_ONLY_TEXT,
     .pos = { 2, 8 },
     .width = 26,
     .height = 5,
-    .heightInTiles = 7,
+    .totalHeight = 7,
     .unk12 = 0,
     .header = NULL,
 };
@@ -113,22 +113,22 @@ static EWRAM_DATA TouchScreenMenuInput sDialogueMenuTouchScreenInput = {0};
 static EWRAM_INIT WindowTemplates sDialogueBoxWinTemplates = {
     .id = {
         [0] = {
-            .unk0 = 0,
+            .flags = WINTEMPLATE_FLAG_NONE,
             .type = WINDOW_TYPE_0,
             .pos = { 2, 15 },
             .width = 26,
             .height = 5,
-            .heightInTiles = 7,
+            .totalHeight = 7,
             .unk12 = 0,
             .header = NULL,
         },
         [1] = {
-            .unk0 = 0x40,
+            .flags = WINTEMPLATE_FLAG_x40,
             .type = WINDOW_TYPE_7,
             .pos = { 0, 0 },
             .width = 0,
             .height = 0,
-            .heightInTiles = 0,
+            .totalHeight = 0,
             .unk12 = 0,
             .header = NULL,
         },
@@ -214,8 +214,8 @@ void CreateMenuDialogueBoxAndPortrait(const u8 *text, void *a1, u32 r9, const Me
 
     sDialogueBoxWinTemplates.id[1].width = 0;
     sDialogueBoxWinTemplates.id[1].height = 0;
-    sDialogueBoxWinTemplates.id[1].heightInTiles = 0;
-    sDialogueBoxWinTemplates.id[1].unk0 = 0x40;
+    sDialogueBoxWinTemplates.id[1].totalHeight = 0;
+    sDialogueBoxWinTemplates.id[1].flags = WINTEMPLATE_FLAG_x40;
 
     if (monPortraitPtr != NULL && monPortraitPtr->faceData != NULL && monPortraitPtr->faceData->sprites[monPortraitPtr->spriteId].gfx != 0) {
         s32 i;
@@ -224,7 +224,7 @@ void CreateMenuDialogueBoxAndPortrait(const u8 *text, void *a1, u32 r9, const Me
         sDialogueBoxWinTemplates.id[1].pos.y = monPortraitPtr->pos.y;
         sDialogueBoxWinTemplates.id[1].width = 5;
         sDialogueBoxWinTemplates.id[1].height = 5;
-        sDialogueBoxWinTemplates.id[1].heightInTiles = 5;
+        sDialogueBoxWinTemplates.id[1].totalHeight = 5;
 
         for (i = 0; i < 16; i++) {
             SetBGPaletteBufferColorArray(224 + i, &monPortraitPtr->faceData->sprites[monPortraitPtr->spriteId].pal[i]);
@@ -244,7 +244,7 @@ void CreateMenuDialogueBoxAndPortrait(const u8 *text, void *a1, u32 r9, const Me
     ShowWindows(&sDialogueBoxWinTemplates, TRUE, TRUE);
     sTextPrintStruct.x = 4;
     sTextPrintStruct.y = 4;
-    sTextPrintStruct.arrowSpritePosX = 0x70;
+    sTextPrintStruct.arrowSpritePosX = 112;
     sTextPrintStruct.arrowSpritePosY = (gWindows[0].y * 8) + TEXTBOX_HEIGHT;
     sTextPrintStruct.unk10 = 7;
     sTextPrintStruct.unk1C = 0;
@@ -604,12 +604,12 @@ static void sub_8014A88(void)
     r1 = r7 / 8;
     r1 += 2;
     sDialogueBoxWinTemplates.id[2].width = r1;
-    sDialogueBoxWinTemplates.id[2].heightInTiles = r2;
+    sDialogueBoxWinTemplates.id[2].totalHeight = r2;
     sDialogueBoxWinTemplates.id[2].height = r2;
     sDialogueBoxWinTemplates.id[2].pos.x = 28 - r1;
     sDialogueBoxWinTemplates.id[2].pos.y = 14 - r2;
-    sDialogueBoxWinTemplates.id[0].unk0 = 0x80;
-    sDialogueBoxWinTemplates.id[1].unk0 = 0xC0;
+    sDialogueBoxWinTemplates.id[0].flags = WINTEMPLATE_FLAG_x80;
+    sDialogueBoxWinTemplates.id[1].flags = WINTEMPLATE_FLAG_x40 | WINTEMPLATE_FLAG_x80;
     if (sNeverWrittenToUnknownStructPtr != NULL) {
         sDialogueBoxWinTemplates.id[3] = sNeverWrittenToUnknownStructPtr->unk0;
     }

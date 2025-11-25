@@ -36,12 +36,12 @@ static EWRAM_INIT u16 gUnknown_203B2AA = 0;
 static const WindowTemplate sDummyWinTemplate = WIN_TEMPLATE_DUMMY;
 
 static const WindowTemplate sUnknown_80DC968 = {
-    .unk0 = 0,
+    .flags = WINTEMPLATE_FLAG_NONE,
     .type = WINDOW_TYPE_WITH_HEADER,
     .pos = { 2, 2 },
     .width = 15,
     .height = 14,
-    .heightInTiles = 14,
+    .totalHeight = 14,
     .unk12 = 0,
     .header = NULL
 };

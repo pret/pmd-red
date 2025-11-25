@@ -86,7 +86,7 @@ bool8 ShowDungeonTeamMenu(Entity *a0)
                 .pos = { 2, 2 },
                 .width = 14,
                 .height = 16,
-                .heightInTiles = 16,
+                .totalHeight = 16,
                 .unk12 = 0,
                 .header = &sTeamWindowHeader,
             },
@@ -278,7 +278,7 @@ static void PrintOnDungeonTeamMenu(struct UnkFieldTeamMenuStruct *a0, WindowTemp
     if (withHeader) {
         height += 2;
     }
-    windows->id[0].heightInTiles = height;
+    windows->id[0].totalHeight = height;
     windows->id[0].height = height;
     sTeamWindowHeader.width = 8;
     if (a2) {
@@ -418,7 +418,7 @@ void ShowDungeonTacticsMenu(ActionContainer *a0)
                 .pos = { 2, 2 },
                 .width = 18,
                 .height = 14,
-                .heightInTiles = 18,
+                .totalHeight = 18,
                 .unk12 = 2,
                 .header = &sTeamWindowHeader,
             },
@@ -643,7 +643,7 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
                 .pos = { 2, 2 },
                 .width = 18,
                 .height = 14,
-                .heightInTiles = 18,
+                .totalHeight = 18,
                 .unk12 = 2,
                 .header = &sTeamWindowHeader,
             },
@@ -1298,7 +1298,7 @@ static void ShowStatusInfoWindow(s32 statusId)
                 .pos = { 2, 2 },
                 .width = 26,
                 .height = 12,
-                .heightInTiles = 12,
+                .totalHeight = 12,
                 .unk12 = 0,
                 .header = &header,
             },
@@ -1343,7 +1343,7 @@ static const WindowTemplate sMovesSubMenu = {
     .pos = { 2, 10 },
     .width = 18,
     .height = 8,
-    .heightInTiles = 8,
+    .totalHeight = 8,
     .unk12 = 0,
     .header = &sBottomWindowHeader,
 };
@@ -1352,7 +1352,7 @@ static const WindowTemplate sItemSubMenu = {
     .pos = { 2, 10 },
     .width = 18,
     .height = 4,
-    .heightInTiles = 4,
+    .totalHeight = 4,
     .unk12 = 0,
     .header = &sBottomWindowHeader,
 };
@@ -1367,7 +1367,7 @@ Entity *ShowDungeonToWhichMonMenu(s32 *teamId, s32 caseId)
                 .pos = { 14, 2 },
                 .width = 14,
                 .height = 16,
-                .heightInTiles = 16,
+                .totalHeight = 16,
                 .unk12 = 0,
                 .header = &sTeamWindowHeader,
             },
@@ -1376,7 +1376,7 @@ Entity *ShowDungeonToWhichMonMenu(s32 *teamId, s32 caseId)
                 .pos = { 2, 2 },
                 .width = 10,
                 .height = 2,
-                .heightInTiles = 2,
+                .totalHeight = 2,
                 .unk12 = 0,
                 .header = NULL,
             },

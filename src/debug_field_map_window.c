@@ -18,12 +18,12 @@ EWRAM_INIT static struct MenuHeaderWindow *sDebugWindow = {NULL};
 static const WindowTemplate sDummyWinTemplate = WIN_TEMPLATE_DUMMY;
 
 static const WindowTemplate sDebugWindowTemplate = {
-    .unk0 = 0,
+    .flags = WINTEMPLATE_FLAG_NONE,
     .type = WINDOW_TYPE_WITH_HEADER,
     .pos = { 2, 2 },
     .width = 24,
     .height = 17,
-    .heightInTiles = 17,
+    .totalHeight = 17,
     .unk12 = 0,
     .header = NULL,
 };

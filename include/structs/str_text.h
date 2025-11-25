@@ -3,6 +3,16 @@
 
 #include "structs/str_position.h"
 
+#define WINDOW_HEADER_HEIGHT 2
+
+enum WinTemplateFlag
+{
+    WINTEMPLATE_FLAG_NONE = 0,
+    WINTEMPLATE_FLAG_x20 = (1 << 5),
+    WINTEMPLATE_FLAG_x40 = (1 << 6),
+    WINTEMPLATE_FLAG_x80 = (1 << 7), // Appears to skip the border and preparation in `AddWindow()`
+};
+
 // size: 0xC
 typedef struct unkChar
 {
@@ -21,25 +31,25 @@ typedef struct Window
     /* 0x0 */ s16 x;
     /* 0x2 */ s16 y;
     /* 0x4 */ s16 width;
-    /* 0x6 */ s16 height;
-    /* 0x8 */ s16 heightInTiles;
+    /* 0x6 */ s16 height; // Inner height
+    /* 0x8 */ s16 totalHeight; // Including header
     /* 0xC */ s32 type;
-    /* 0x10 */ u32 unk10;
-    /* 0x14 */ u32 unk14;
-    /* 0x18 */ u32 *unk18; // Appears to be window graphics data
-    /* 0x1C */ u32 *unk1C;
-    /* 0x20 */ s32 unk20;
-    /* 0x24 */ s32 unk24;
+    /* 0x10 */ u32 unk10; // winGFX start tile?
+    /* 0x14 */ u32 unk14; // unk1C start tile?
+    /* 0x18 */ u32 *winGFX; // 8 packed pixels. Each pixel is 4 bits wide.
+    /* 0x1C */ u32 *unk1C; // Similar to winGFX
+    /* 0x20 */ s32 unk20; // Some width relation to winGFX (stride?)
+    /* 0x24 */ s32 unk24; // Set from winTemplate unk12
     /* 0x28 */ u32 *unk28; // Somewhere in VRAM
-    /* 0x2C */ s32 unk2C;
-    /* 0x30 */ u32 *unk30; // Somewhere in VRAM?
-    /* 0x34 */ u32 *unk34;
-    /* 0x38 */ s32 unk38;
-    /* 0x3C */ u32 *unk3C;
-    /* 0x40 */ u32 *unk40;
-    /* 0x44 */ u8 unk44;
-    /* 0x45 */ bool8 unk45;
-    /* 0x46 */ u8 unk46;
+    /* 0x2C */ s32 unk2C; // Related to unk38
+    /* 0x30 */ u32 *unk30; // Somewhere in VRAM
+    /* 0x34 */ u32 *unk34; // Related to unk1C and unk3C
+    /* 0x38 */ s32 unk38; // Related to unk2C and unk44
+    /* 0x3C */ u32 *unk3C; // Somewhere in winGFX or unk1C
+    /* 0x40 */ u32 *unk40; // Somewhere in winGFX or unk1C
+    /* 0x44 */ bool8 unk44; // Related to unk38 not being 0
+    /* 0x45 */ bool8 isWinType0;
+    /* 0x46 */ bool8 unk46;
 } Window;
 
 // size: 0x4
@@ -54,13 +64,13 @@ typedef struct WindowHeader
 // size: 0x18
 typedef struct WindowTemplate
 {
-    /* 0x00 */ u8 unk0; // Appears to be some bit flags
+    /* 0x00 */ u8 flags; // See enum "WinTemplateFlag"
     /* 0x04 */ s32 type;
     /* 0x08 */ DungeonPos pos;
     /* 0x0C */ s16 width;
-    /* 0x0E */ s16 height;
-    /* 0x10 */ s16 heightInTiles;
-    /* 0x12 */ s16 unk12;
+    /* 0x0E */ s16 height; // Inner height
+    /* 0x10 */ s16 totalHeight; // Including header
+    /* 0x12 */ s16 unk12; // Related to startTileNum and width
     /* 0x14 */ const WindowHeader *header;
 } WindowTemplate;
 
@@ -76,7 +86,7 @@ typedef struct WindowTemplate
 #define MAX_WINDOWS 4
 
 // All fields are zeroed out except for type which is set to WINDOW_TYPE_NORMAL.
-#define WIN_TEMPLATE_DUMMY (WindowTemplate) { .unk0 = 0, .type = WINDOW_TYPE_NORMAL, .pos = { .x = 0, .y = 0 }, .width = 0, .height = 0, .heightInTiles = 0, .unk12 = 0, .header = NULL }
+#define WIN_TEMPLATE_DUMMY (WindowTemplate) { .flags = WINTEMPLATE_FLAG_NONE, .type = WINDOW_TYPE_NORMAL, .pos = { .x = 0, .y = 0 }, .width = 0, .height = 0, .totalHeight = 0, .unk12 = 0, .header = NULL }
 
 // size: 0x60
 typedef struct WindowTemplates

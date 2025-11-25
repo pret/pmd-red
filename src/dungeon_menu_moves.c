@@ -171,7 +171,7 @@ bool8 ShowDungeonMovesMenu(Entity * entity, bool8 addLinkOptions, bool8 addUseMo
                 .pos = { 2, 2 },
                 .width = 18,
                 .height = 16,
-                .heightInTiles = 16,
+                .totalHeight = 16,
                 .unk12 = 0,
                 .header = &header,
             },
@@ -404,7 +404,7 @@ static void ShowMovesMenuWindows(Entity *entity, EntityInfo *entInfo, bool8 redC
         .pos = { 2, 14 },
         .width = 26,
         .height = 3,
-        .heightInTiles = 3,
+        .totalHeight = 3,
         .unk12 = 0,
         .header = NULL,
     };
@@ -432,7 +432,7 @@ static void ShowMovesMenuWindows(Entity *entity, EntityInfo *entInfo, bool8 redC
     gDungeonMenu.windowId = 0;
     ResetTouchScreenMenuInput(&gDungeonMenu.touchScreen);
 
-    windows->id[0].height = windows->id[0].heightInTiles = CalcEntriesTotalHeight(4, DEFAULT_MENU_ENTRY_HEIGHT) + 2;
+    windows->id[0].height = windows->id[0].totalHeight = CalcEntriesTotalHeight(4, DEFAULT_MENU_ENTRY_HEIGHT) + 2;
     header->width = 13;
     windows->id[0].pos.x = 2;
     windows->id[1] = windows->id[3];
@@ -904,7 +904,7 @@ bool8 sub_8063E70(Entity *entity, Move *moves, bool8 showYesNoBox, bool8 allowBP
                 .pos = { 2, 2 },
                 .width = 18,
                 .height = 16,
-                .heightInTiles = 16,
+                .totalHeight = 16,
                 .unk12 = 0,
                 .header = &header,
             },
@@ -1108,7 +1108,7 @@ static void sub_8064228(Entity *entity, Move *moves, WindowTemplates *windows, W
     gDungeonMenu.unk14.x = 0;
     gDungeonMenu.windowId = 0;
     ResetTouchScreenMenuInput(&gDungeonMenu.touchScreen);
-    windows->id[0].height = windows->id[0].heightInTiles = CalcEntriesTotalHeight(count, DEFAULT_MENU_ENTRY_HEIGHT) + 2;
+    windows->id[0].height = windows->id[0].totalHeight = CalcEntriesTotalHeight(count, DEFAULT_MENU_ENTRY_HEIGHT) + 2;
     header->width = 14;
     windows->id[0].pos.x = 2;
     windows->id[1] = windows->id[3];

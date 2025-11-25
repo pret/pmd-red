@@ -21,12 +21,12 @@ EWRAM_INIT unkStruct_203B3FC *gUnknown_203B3FC = NULL; // arm9.bin::020EAF84
 const WindowTemplate gUnknown_80E7F3C = WIN_TEMPLATE_DUMMY;
 
 const WindowTemplate gUnknown_80E7F54 = {
-    .unk0 = 0,
+    .flags = WINTEMPLATE_FLAG_NONE,
     .type = WINDOW_TYPE_WITH_HEADER,
     .pos = { 2, 2 },
     .width = 24,
     .height = 17,
-    .heightInTiles = 17,
+    .totalHeight = 17,
     .unk12 = 0,
     .header = NULL
 };

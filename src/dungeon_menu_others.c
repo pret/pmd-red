@@ -455,7 +455,7 @@ static void PrintOthersMenuOptions(void)
                 .pos = { 2, 2 },
                 .width = 18,
                 .height = 16,
-                .heightInTiles = 16,
+                .totalHeight = 16,
                 .unk12 = 0,
                 .header = &header,
             },
@@ -482,7 +482,7 @@ static void PrintOthersMenuOptions(void)
     gDungeonMenu.windowId = 0;
     ResetTouchScreenMenuInput(&gDungeonMenu.touchScreen);
     windows.id[0].width = 18;
-    windows.id[0].height = windows.id[0].heightInTiles = CalcEntriesTotalHeight(optionsCount, DEFAULT_MENU_ENTRY_HEIGHT) + 2;
+    windows.id[0].height = windows.id[0].totalHeight = CalcEntriesTotalHeight(optionsCount, DEFAULT_MENU_ENTRY_HEIGHT) + 2;
     header.width = 10;
     windows.id[0].pos.x = 2;
     DungeonShowWindows(&windows, TRUE);
@@ -518,7 +518,7 @@ static void PrintQuickSaveMenuOptions(void)
                 .pos = { 2, 2 },
                 .width = 18,
                 .height = 16,
-                .heightInTiles = 16,
+                .totalHeight = 16,
                 .unk12 = 0,
                 .header = &header,
             },
@@ -545,7 +545,7 @@ static void PrintQuickSaveMenuOptions(void)
     gDungeonMenu.windowId = 0;
     ResetTouchScreenMenuInput(&gDungeonMenu.touchScreen);
     windows.id[0].width = 18;
-    windows.id[0].height = windows.id[0].heightInTiles = CalcEntriesTotalHeight(optionsCount, DEFAULT_MENU_ENTRY_HEIGHT) + 2;
+    windows.id[0].height = windows.id[0].totalHeight = CalcEntriesTotalHeight(optionsCount, DEFAULT_MENU_ENTRY_HEIGHT) + 2;
     header.width = 10;
     windows.id[0].pos.x = 2;
     DungeonShowWindows(&windows, TRUE);
@@ -571,7 +571,7 @@ static void PrintGameOptions(void)
                 .pos = { 2, 2 },
                 .width = 12,
                 .height = 16,
-                .heightInTiles = 16,
+                .totalHeight = 16,
                 .unk12 = 0,
                 .header = &header,
             },
@@ -598,7 +598,7 @@ static void PrintGameOptions(void)
     gDungeonMenu.windowId = 0;
     ResetTouchScreenMenuInput(&gDungeonMenu.touchScreen);
     windows.id[0].width = 12;
-    windows.id[0].height = windows.id[0].heightInTiles = CalcEntriesTotalHeight(optionsCount, DEFAULT_MENU_ENTRY_HEIGHT) + 2;
+    windows.id[0].height = windows.id[0].totalHeight = CalcEntriesTotalHeight(optionsCount, DEFAULT_MENU_ENTRY_HEIGHT) + 2;
     header.width = 10;
     windows.id[0].pos.x = 2;
     DungeonShowWindows(&windows, TRUE);
@@ -626,7 +626,7 @@ static void PrintDungeonOptions(void)
                 .pos = { 2, 2 },
                 .width = 18,
                 .height = 16,
-                .heightInTiles = 16,
+                .totalHeight = 16,
                 .unk12 = 0,
                 .header = &header,
             },
@@ -653,7 +653,7 @@ static void PrintDungeonOptions(void)
     gDungeonMenu.windowId = 0;
     ResetTouchScreenMenuInput(&gDungeonMenu.touchScreen);
     windows.id[0].width = 24;
-    windows.id[0].height = windows.id[0].heightInTiles = CalcEntriesTotalHeight(DUNGEON_OPTIONS_COUNT, DEFAULT_MENU_ENTRY_HEIGHT) + 2;
+    windows.id[0].height = windows.id[0].totalHeight = CalcEntriesTotalHeight(DUNGEON_OPTIONS_COUNT, DEFAULT_MENU_ENTRY_HEIGHT) + 2;
     header.width = 10;
     windows.id[0].pos.x = 2;
     DungeonShowWindows(&windows, TRUE);
@@ -717,7 +717,7 @@ static void PrintOthersOptions(void)
                 .pos = { 2, 2 },
                 .width = 18,
                 .height = 16,
-                .heightInTiles = 16,
+                .totalHeight = 16,
                 .unk12 = 0,
                 .header = &header,
             },
@@ -744,7 +744,7 @@ static void PrintOthersOptions(void)
     gDungeonMenu.windowId = 0;
     ResetTouchScreenMenuInput(&gDungeonMenu.touchScreen);
     windows.id[0].width = 24;
-    windows.id[0].height = windows.id[0].heightInTiles = CalcEntriesTotalHeight(OTHERS_OPTIONS_COUNT, DEFAULT_MENU_ENTRY_HEIGHT) + 2;
+    windows.id[0].height = windows.id[0].totalHeight = CalcEntriesTotalHeight(OTHERS_OPTIONS_COUNT, DEFAULT_MENU_ENTRY_HEIGHT) + 2;
     header.width = 10;
     windows.id[0].pos.x = 2;
     DungeonShowWindows(&windows, TRUE);
@@ -890,7 +890,7 @@ static void PrintHintsMenu(void)
                 .pos = { 2, 2 },
                 .width = 12,
                 .height = 16,
-                .heightInTiles = 16,
+                .totalHeight = 16,
                 .unk12 = 0,
                 .header = &header,
             },
@@ -916,7 +916,7 @@ static void PrintHintsMenu(void)
     gDungeonMenu.windowId = 0;
     ResetTouchScreenMenuInput(&gDungeonMenu.touchScreen);
     windows.id[0].width = 12;
-    windows.id[0].height = windows.id[0].heightInTiles = CalcEntriesTotalHeight(HINTS_COUNT_RED_VERSION, DEFAULT_MENU_ENTRY_HEIGHT) + 2;
+    windows.id[0].height = windows.id[0].totalHeight = CalcEntriesTotalHeight(HINTS_COUNT_RED_VERSION, DEFAULT_MENU_ENTRY_HEIGHT) + 2;
     header.width = 10;
     windows.id[0].pos.x = 2;
     DungeonShowWindows(&windows, TRUE);
@@ -943,7 +943,7 @@ static void ShowChosenHintWindow(s32 hintId)
                     .pos = { 2, 2 },
                     .width = 12,
                     .height = 16,
-                    .heightInTiles = 16,
+                    .totalHeight = 16,
                     .unk12 = 0,
                     .header = &header,
                 },
@@ -967,7 +967,7 @@ static void ShowChosenHintWindow(s32 hintId)
         gDungeonMenu.windowId = 0;
         ResetTouchScreenMenuInput(&gDungeonMenu.touchScreen);
         windows.id[0].width = 24;
-        windows.id[0].height = windows.id[0].heightInTiles = CalcEntriesTotalHeight(HINTS_COUNT, DEFAULT_MENU_ENTRY_HEIGHT) + 2;
+        windows.id[0].height = windows.id[0].totalHeight = CalcEntriesTotalHeight(HINTS_COUNT, DEFAULT_MENU_ENTRY_HEIGHT) + 2;
         header.width = 10;
         windows.id[0].pos.x = 2;
         DungeonShowWindows(&windows, TRUE);

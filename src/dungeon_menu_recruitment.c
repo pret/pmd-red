@@ -54,7 +54,7 @@ static const WindowTemplates sRecruitmentSearchWindows = {
                 .pos = { 2, 2 },
                 .width = 18,
                 .height = 14,
-                .heightInTiles = 18,
+                .totalHeight = 18,
                 .unk12 = 2,
                 .header = &sRecruitmentWindowHeader,
             },
