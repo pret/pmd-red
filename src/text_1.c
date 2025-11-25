@@ -21,7 +21,7 @@ EWRAM_DATA bool8 gUnknown_20274A5 = FALSE;
 EWRAM_DATA u8 gUnknown_20274A6[6] = {0};
 EWRAM_DATA s32 gCurrentCharmap = 0;
 EWRAM_DATA static vu32 sUnknown_20274B0 = 0;
-EWRAM_DATA static u32 sUnknown_20274B4[0xEC0] = {0};
+EWRAM_DATA static u32 sWindowGFXPool[0xEC0] = {0};
 EWRAM_DATA static OpenedFile *sCharmapFiles[3] = { NULL };
 EWRAM_DATA static WindowTemplates sSavedWindows = {0};
 EWRAM_DATA s32 gUnknown_202B020 = 0; // NDS=020EDCEC
