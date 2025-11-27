@@ -387,7 +387,7 @@ bool8 sub_808D4B0(void)
     flag = FALSE;
     for(index = 0; index < NUM_MONSTERS; index++, pokeStruct++)
     {
-        if(PokemonFlag2(pokeStruct) && !IsMonTeamLeader(pokeStruct) && !IsMonPartner(pokeStruct)){
+        if(PokemonIsOnTeam(pokeStruct) && !IsMonTeamLeader(pokeStruct) && !IsMonPartner(pokeStruct)){
             flag = TRUE;
             pokeStruct->flags &= 0xFFFD;
         }
@@ -405,7 +405,7 @@ bool8 sub_808D500(void)
     flag = FALSE;
     for(index = 0; index < NUM_MONSTERS; index++, pokeStruct++)
     {
-        if(PokemonFlag2(pokeStruct) && !IsMonTeamLeader(pokeStruct)){
+        if(PokemonIsOnTeam(pokeStruct) && !IsMonTeamLeader(pokeStruct)){
             flag = TRUE;
             pokeStruct->flags &= 0xFFFD;
         }
@@ -420,7 +420,7 @@ s32 GetUnitSum_808D544(s32 *team)
 
     count = 0;
     for (i = 0; i < NUM_MONSTERS; i++, mon++) {
-        if (PokemonFlag2(mon)) {
+        if (PokemonIsOnTeam(mon)) {
             if (team != NULL) {
                 team[count] = i;
             }
@@ -451,7 +451,7 @@ s32 sub_808D580(s32 *team)
 
     for(mon = gRecruitedPokemonRef->pokemon, index = 0; index < NUM_MONSTERS; index++, mon++)
     {
-        if (((IsMonPartner(mon) && !IsMonTeamLeader(mon) && PokemonFlag2(mon)) && (PokemonExists(mon))) &&
+        if (((IsMonPartner(mon) && !IsMonTeamLeader(mon) && PokemonIsOnTeam(mon)) && (PokemonExists(mon))) &&
             ((((team != NULL)))))
         {
             team[counter] = index;
@@ -463,7 +463,7 @@ s32 sub_808D580(s32 *team)
 
     for(mon = gRecruitedPokemonRef->pokemon, index = 0; index < NUM_MONSTERS; index++, mon++)
     {
-        if ((((PokemonFlag2(mon)) && (PokemonExists(mon))) &&
+        if ((((PokemonIsOnTeam(mon)) && (PokemonExists(mon))) &&
             (!IsMonTeamLeader(mon))) &&
             (((!IsMonPartner(mon) && (team != NULL))))) {
             team[counter] = index;
@@ -481,7 +481,7 @@ s32 sub_808D654(s32 *ptr)
     s32 *ptr2;
 
     for (i = 0, ptr2 = ptr; i < NUM_MONSTERS; i++, mon++) {
-        if (PokemonFlag2(mon) && !IsMonTeamLeader(mon) && !IsMonPartner(mon)) {
+        if (PokemonIsOnTeam(mon) && !IsMonTeamLeader(mon) && !IsMonPartner(mon)) {
             if (ptr != NULL) {
                 *ptr2 = i;
             }
@@ -502,7 +502,7 @@ s32 sub_808D6A4(s32 *ptr)
     s32 *ptr2;
 
     for (i = 0, ptr2 = ptr; i < NUM_MONSTERS; i++, mon++) {
-        if (PokemonFlag2(mon) && !IsMonTeamLeader(mon)) {
+        if (PokemonIsOnTeam(mon) && !IsMonTeamLeader(mon)) {
             if (ptr != NULL) {
                 *ptr2 = i;
             }
@@ -521,7 +521,7 @@ UNUSED static bool8 sub_808D6E8(void)
     s32 size_count = 0;
     for (i = 0; i < NUM_MONSTERS; i++) {
         Pokemon* pokemon = &gRecruitedPokemonRef->pokemon[i];
-        if (PokemonExists(pokemon) && PokemonFlag2(pokemon)) {
+        if (PokemonExists(pokemon) && PokemonIsOnTeam(pokemon)) {
             size_count += GetBodySize(pokemon->speciesNum);
             count++;
         }
@@ -542,7 +542,7 @@ bool8 sub_808D750(s32 index_)
 
  for (i = 0; i < NUM_MONSTERS; i++) {
      pokemon = &gRecruitedPokemonRef->pokemon[i];
-     if (PokemonExists(pokemon) && PokemonFlag2(pokemon)) {
+     if (PokemonExists(pokemon) && PokemonIsOnTeam(pokemon)) {
          size_count += GetBodySize(pokemon->speciesNum);
          count++;
      }

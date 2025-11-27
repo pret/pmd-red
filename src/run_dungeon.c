@@ -819,7 +819,7 @@ static void sub_8043FD0(void)
         s32 i, monId, movesCount;
         for (monId = 0; monId < NUM_MONSTERS; monId++) {
             Pokemon *monStruct = &gRecruitedPokemonRef->pokemon[monId];
-            if (PokemonExists(monStruct) && PokemonFlag2(monStruct)) {
+            if (PokemonExists(monStruct) && PokemonIsOnTeam(monStruct)) {
                 u16 learnedMoves[16];
                 LevelData levelData;
                 // I have to make the variables volatile to get matching code. I'm sure there's a solution for this, but keeping it like that for now.
@@ -886,7 +886,7 @@ void EnforceMaxItemsAndMoney(void)
         }
         for (i = 0; i < NUM_MONSTERS; i++) {
             Pokemon *mon = (&gRecruitedPokemonRef->pokemon[i]);
-            if (PokemonExists(mon) && PokemonFlag2(mon)) {
+            if (PokemonExists(mon) && PokemonIsOnTeam(mon)) {
                 mon->heldItem.id = 0;
             }
         }

@@ -154,7 +154,7 @@ u32 sub_801D178(void)
     if ((s16) sub_80A7AE8(7) < 0)
         return 0;
 
-    if (PokemonFlag2(sub_808D3F8()))
+    if (PokemonIsOnTeam(sub_808D3F8()))
         return 0;
 
     return 4;

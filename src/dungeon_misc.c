@@ -191,7 +191,7 @@ void SetDungeonMonsFromTeam(void)
     for (recruitedId = 0; recruitedId < NUM_MONSTERS; recruitedId++) {
         Pokemon lvl1Mon;
         Pokemon *pokeStruct = &gRecruitedPokemonRef->pokemon[recruitedId];
-        if (PokemonExists(pokeStruct) && PokemonFlag2(pokeStruct)) {
+        if (PokemonExists(pokeStruct) && PokemonIsOnTeam(pokeStruct)) {
             RecruitedPokemonToDungeonMon(&gRecruitedPokemonRef->dungeonTeam[index],recruitedId);
             if (IsLevelResetDungeon(gDungeon->unk644.dungeonLocation.id)) {
                 struct DungeonLocation dungeonLoc = {.id = DUNGEON_TINY_WOODS, .floor = 1};

@@ -746,7 +746,7 @@ static bool8 LuminousCave_HasOnly1Member(void)
     mon = &gRecruitedPokemonRef->pokemon[0];
     memberCount = 0;
     for (i = 0; i < NUM_MONSTERS; i++, mon++) {
-        if (PokemonFlag2(mon))
+        if (PokemonIsOnTeam(mon))
             memberCount++;
     }
 

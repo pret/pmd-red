@@ -587,7 +587,7 @@ s32 GetItemPossessionCount(u8 id)
     for (i = 0; i < NUM_MONSTERS; i++) {
         Pokemon *mon = &gRecruitedPokemonRef->pokemon[i];
         if (PokemonExists(mon)
-        && PokemonFlag2(mon)
+        && PokemonIsOnTeam(mon)
         && (mon->heldItem.id != ITEM_NOTHING)
         && (mon->heldItem.id == id))
         {

@@ -129,7 +129,7 @@ static inline bool8 DungeonMonExists(DungeonMon *mon)
     return (mon->flags & POKEMON_FLAG_EXISTS) != 0;
 }
 
-static inline bool8 PokemonFlag2(Pokemon *mon)
+static inline bool8 PokemonIsOnTeam(Pokemon *mon)
 {
     return (mon->flags & POKEMON_FLAG_ON_TEAM) != 0;
 }

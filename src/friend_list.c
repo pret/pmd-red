@@ -261,7 +261,7 @@ void FriendList_ShowWindow(void)
         Pokemon *pokePtr = &gRecruitedPokemonRef->pokemon[id];
         u8 color = 7;
 
-        if (PokemonFlag2(pokePtr)) {
+        if (PokemonIsOnTeam(pokePtr)) {
             if (IsMonPartner(pokePtr)) {
                 color = 6;
             }
@@ -316,7 +316,7 @@ static s32 sub_8023F8C(void)
     if (!sFriendList->unk16) {
         for (i = 0; i < NUM_MONSTERS; i++) {
             pokeStruct = &gRecruitedPokemonRef->pokemon[i];
-            if (IsMonPartner(pokeStruct) && !pokeStruct->isTeamLeader && PokemonFlag2(pokeStruct) && PokemonExists(pokeStruct)) {
+            if (IsMonPartner(pokeStruct) && !pokeStruct->isTeamLeader && PokemonIsOnTeam(pokeStruct) && PokemonExists(pokeStruct)) {
                 sFriendList->unk1A[sFriendList->unk8++] = i;
                 break;
             }
@@ -327,7 +327,7 @@ static s32 sub_8023F8C(void)
     if (!sFriendList->unk17) {
         for (i = 0; i < NUM_MONSTERS; i++) {
             pokeStruct = &gRecruitedPokemonRef->pokemon[i];
-            if (PokemonFlag2(pokeStruct) && PokemonExists(pokeStruct) && !pokeStruct->isTeamLeader && !IsMonPartner(pokeStruct)) {
+            if (PokemonIsOnTeam(pokeStruct) && PokemonExists(pokeStruct) && !pokeStruct->isTeamLeader && !IsMonPartner(pokeStruct)) {
                 sFriendList->unk1A[sFriendList->unk8++] = i;
                 if (sFriendList->unk8 >= 4) {
                     break;
@@ -340,7 +340,7 @@ static s32 sub_8023F8C(void)
     if (!sFriendList->unk14) {
         for (i = 0; i < NUM_MONSTERS; i++) {
             pokeStruct = &gRecruitedPokemonRef->pokemon[i];
-            if (PokemonExists(pokeStruct) && !PokemonFlag2(&gRecruitedPokemonRef->pokemon[i])) {
+            if (PokemonExists(pokeStruct) && !PokemonIsOnTeam(&gRecruitedPokemonRef->pokemon[i])) {
                 sFriendList->unk1A[sFriendList->unk8++] = i;
             }
         }
@@ -358,16 +358,16 @@ bool8 sub_8024108(s32 param_1)
         Pokemon *pokeStruct = &gRecruitedPokemonRef->pokemon[i];
         if (PokemonExists(pokeStruct)) {
             if (param_1 == 2) {
-                if (!PokemonFlag2(pokeStruct)) continue;
+                if (!PokemonIsOnTeam(pokeStruct)) continue;
             }
             else if (param_1 == 3) {
-                if (PokemonFlag2(pokeStruct)) continue;
+                if (PokemonIsOnTeam(pokeStruct)) continue;
             }
             else if (param_1 == 4) {
                 if (pokeStruct->isTeamLeader) continue;
                 if (!sub_80023E4(9)) {
                     if (!IsMonPartner(pokeStruct)) return FALSE;
-                    if (PokemonFlag2(pokeStruct)) continue;
+                    if (PokemonIsOnTeam(pokeStruct)) continue;
                 }
             }
             return FALSE;

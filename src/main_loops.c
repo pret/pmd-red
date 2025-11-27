@@ -1071,7 +1071,7 @@ static void RemoveMoneyAndRandomItems(void)
 
     for (i = 0; i < NUM_MONSTERS; i++) {
         Pokemon *mon = &gRecruitedPokemonRef->pokemon[i];
-        if (PokemonExists(mon) && PokemonFlag2(mon))
+        if (PokemonExists(mon) && PokemonIsOnTeam(mon))
             mon->heldItem.id = ITEM_NOTHING;
     }
 
@@ -1091,7 +1091,7 @@ static void RemoveAllMoneyAndItems(void)
 
     for (i = 0; i < NUM_MONSTERS; i++) {
         Pokemon *mon = &gRecruitedPokemonRef->pokemon[i];
-        if (PokemonExists(mon) && PokemonFlag2(mon))
+        if (PokemonExists(mon) && PokemonIsOnTeam(mon))
             mon->heldItem.id = ITEM_NOTHING;
     }
 

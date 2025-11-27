@@ -221,7 +221,7 @@ UNUSED static bool8 sub_801B374(u8 id)
     moveID = GetItemMoveID(id);
 
     for (i = 0; i < NUM_MONSTERS; i++, pokeStruct++) {
-        if (PokemonFlag2(pokeStruct))
+        if (PokemonIsOnTeam(pokeStruct))
             if (CanMonLearnMove(moveID, pokeStruct->speciesNum))
                 return FALSE;
     }
