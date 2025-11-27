@@ -92,7 +92,7 @@ void LoadDungeonPokemonSprites(void)
     {
         DungeonMon *ptr = &gRecruitedPokemonRef->dungeonTeam[index];
         if(DungeonMonExists(ptr))
-            if(PokemonFlag2Struct2(ptr))
+            if(DungeonMonIsOnTeam(ptr))
                 LoadPokemonSprite(ptr->speciesNum, FALSE);
     }
     if(gDungeon->fixedRoomNumber == FIXED_ROOM_RESCUE_TEAM_MAZE_BOSS)

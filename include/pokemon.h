@@ -134,7 +134,7 @@ static inline bool8 PokemonIsOnTeam(Pokemon *mon)
     return (mon->flags & POKEMON_FLAG_ON_TEAM) != 0;
 }
 
-static inline bool8 PokemonFlag2Struct2(DungeonMon *mon)
+static inline bool8 DungeonMonIsOnTeam(DungeonMon *mon)
 {
     return (mon->flags & POKEMON_FLAG_ON_TEAM) != 0;
 }

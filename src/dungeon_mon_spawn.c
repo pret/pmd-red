@@ -191,7 +191,7 @@ UNUSED static s32 sub_806B09C(SpawnPokemonData *unkPtr, bool8 a1)
     for (i = 0, unk2Field = unkPtr->randNum, loopPtr = unkPtr; i < MAX_TEAM_MEMBERS; i++) {
         DungeonMon *monStructPtr = &gRecruitedPokemonRef->dungeonTeam[i];
 
-        if (DungeonMonExists(monStructPtr) && PokemonFlag2Struct2(monStructPtr))
+        if (DungeonMonExists(monStructPtr) && DungeonMonIsOnTeam(monStructPtr))
         {
             for (j = 0; j < count; j++) {
                 if (ExtractSpeciesIndex(&unkPtr[j]) == monStructPtr->speciesNum)
@@ -237,7 +237,7 @@ void sub_806B168(void)
     count = 0;
     for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
         DungeonMon *currMonPtr = &gRecruitedPokemonRef->dungeonTeam[i];
-        if (DungeonMonExists(currMonPtr) && PokemonFlag2Struct2(currMonPtr)) {
+        if (DungeonMonExists(currMonPtr) && DungeonMonIsOnTeam(currMonPtr)) {
             monPtrs[count++] = currMonPtr;
         }
     }
@@ -339,7 +339,7 @@ void sub_806B404(void)
 
     for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
         DungeonMon *currMonPtr = &gRecruitedPokemonRef->dungeonTeam[i];
-        if (DungeonMonExists(currMonPtr) && PokemonFlag2Struct2(currMonPtr) && currMonPtr->recruitedPokemonId == UNK_RECRUITED_POKEMON_ID_55AA) {
+        if (DungeonMonExists(currMonPtr) && DungeonMonIsOnTeam(currMonPtr) && currMonPtr->recruitedPokemonId == UNK_RECRUITED_POKEMON_ID_55AA) {
             monPtrs[count++] = currMonPtr;
             break;
         }
@@ -367,7 +367,7 @@ void sub_806B404(void)
         s32 j;
         DungeonMon *currMonPtr = monPtrs[i];
 
-        if (currMonPtr != NULL && DungeonMonExists(currMonPtr) && PokemonFlag2Struct2(currMonPtr) && currMonPtr->recruitedPokemonId == UNK_RECRUITED_POKEMON_ID_55AA) {
+        if (currMonPtr != NULL && DungeonMonExists(currMonPtr) && DungeonMonIsOnTeam(currMonPtr) && currMonPtr->recruitedPokemonId == UNK_RECRUITED_POKEMON_ID_55AA) {
             currMonPtr->recruitedPokemonId = UNK_RECRUITED_POKEMON_ID_5AA5;
             skipNextLoop = FALSE;
             j = 0;
