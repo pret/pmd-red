@@ -68,7 +68,7 @@ void InitializeRecruitedPokemon(void)
     }
 }
 
-void sub_808CE74(s16 _species, bool32 _isLeader, u8* name)
+void CreateLeaderPartnerData(s16 _species, bool32 _isLeader, u8* name)
 {
      struct Pokemon pokemon;
      u8 name_buffer[20];
@@ -102,7 +102,7 @@ void sub_808CE74(s16 _species, bool32 _isLeader, u8* name)
      pokemon.currExp = 0;
      pokemon.tacticIndex = TACTIC_LETS_GO_TOGETHER;
      pokemon.dungeonLocation.floor = 0;
-     sub_808E490(pokemon.moves, species);
+     InitializeLevel1MovesBySpecies(pokemon.moves, species);
 
      if (name == NULL) {
          CopyMonsterNameToBuffer(name_buffer, species);
@@ -165,7 +165,7 @@ void CreateLevel1Pokemon(Pokemon *pokemon, s16 _species, u8* name, u32 _itemID, 
         }
     }
     else {
-        sub_808E490(pokemon->moves, species);
+        InitializeLevel1MovesBySpecies(pokemon->moves, species);
     }
 
     if (name == NULL) {
@@ -192,7 +192,7 @@ void sub_808D0D8(Pokemon *pokemon)
      pokemon->tacticIndex = TACTIC_LETS_GO_TOGETHER;
      pokemon->IQ = 1;
      SetDefaultIQSkills(&pokemon->IQSkills, FALSE);
-     sub_808E490(pokemon->moves, pokemon->speciesNum);
+     InitializeLevel1MovesBySpecies(pokemon->moves, pokemon->speciesNum);
 }
 
 void ConvertStoryMonToPokemon(Pokemon *dst, const struct StoryMonData *src)
@@ -281,10 +281,10 @@ Pokemon *TryAddLevel1PokemonToRecruited(s32 species, u8 *name, u32 _itemID, cons
     return TryAddPokemonToRecruited(&pokemon);
 }
 
-void sub_808D31C(Pokemon *param_1)
+void TryResetPokemonFlags(Pokemon *pokemon)
 {
-  if ((!IsMonTeamLeader(param_1)) && !IsMonPartner(param_1))
-      param_1->flags = 0;
+  if ((!IsMonTeamLeader(pokemon)) && !IsMonPartner(pokemon))
+      pokemon->flags = 0;
 }
 
 Pokemon * GetPlayerPokemonStruct(void)
@@ -302,7 +302,7 @@ Pokemon * GetPlayerPokemonStruct(void)
     return NULL;
 }
 
-Pokemon * sub_808D378(void)
+Pokemon * GetPartnerPokemonStruct(void)
 {
     s32 index;
 
@@ -1247,13 +1247,13 @@ s32 sub_808E400(s32 _species, s16* _a2, bool32 _bodySizeCheck, bool32 _shedinjaC
     return count;
 }
 
-void sub_808E490(Move* a1, s32 species)
+void InitializeLevel1MovesBySpecies(Move* moves, s32 _species)
 {
     u16 buffer[0x10]; // of moveIDs
     s32 i;
-    s16 index_s32 = species;
+    s16 species = _species;
 
-    s32 count = GetMovesLearnedAtLevel(buffer, index_s32, 1, 999);
+    s32 count = GetMovesLearnedAtLevel(buffer, species, 1, 999);
     if (count == 0) {
         count = 1;
         buffer[0] = MOVE_ITEM_TOSS;
@@ -1262,13 +1262,13 @@ void sub_808E490(Move* a1, s32 species)
     i = 0;
     if (i < count) {
         while (i < count) {
-            InitZeroedPPPokemonMove(&a1[i], buffer[i]);
+            InitZeroedPPPokemonMove(&moves[i], buffer[i]);
             i++;
         }
         i = count;
     }
     while (i < MAX_MON_MOVES) {
-        a1[i].moveFlags = 0;
+        moves[i].moveFlags = 0;
         i++;
     }
 }

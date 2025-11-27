@@ -530,7 +530,7 @@ void sub_8027A78(void)
                 else
                 {
                     sub_8027EB8();
-                    sub_808D31C(sUnknown_203B2BC->pokeStruct);
+                    TryResetPokemonFlags(sUnknown_203B2BC->pokeStruct);
                 }
                 break;
         }
@@ -550,7 +550,7 @@ void sub_8027AE4(void)
             break;
         case FRIEND_AREA_ACTION_MENU_ACTION_YES:
             sub_8027EB8();
-            sub_808D31C(sUnknown_203B2BC->pokeStruct);
+            TryResetPokemonFlags(sUnknown_203B2BC->pokeStruct);
             break;
     }
   }

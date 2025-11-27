@@ -431,7 +431,7 @@ bool8 sub_803C110(s16 index)
         pokeStruct = GetPlayerPokemonStruct();
         if (pokeStruct->speciesNum == species_s32)
             return FALSE;
-        pokeStruct = sub_808D378();
+        pokeStruct = GetPartnerPokemonStruct();
         if (pokeStruct->speciesNum == species_s32)
             return FALSE;
     }

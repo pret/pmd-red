@@ -979,20 +979,20 @@ void sub_8001064(void)
         if (sTeamBasicInfo_203B040.StarterName[0] == '\0') {
             CopyMonsterNameToBuffer(buffer1, sTeamBasicInfo_203B040.StarterID);
             CopyStringtoBuffer(buffer2, buffer1);
-            sub_808CE74(sTeamBasicInfo_203B040.StarterID, TRUE, buffer2);
+            CreateLeaderPartnerData(sTeamBasicInfo_203B040.StarterID, TRUE, buffer2);
         }
         else
-            sub_808CE74(sTeamBasicInfo_203B040.StarterID, TRUE, sTeamBasicInfo_203B040.StarterName);
+            CreateLeaderPartnerData(sTeamBasicInfo_203B040.StarterID, TRUE, sTeamBasicInfo_203B040.StarterName);
     }
 
-    if (sub_808D378() == NULL) {
+    if (GetPartnerPokemonStruct() == NULL) {
         if (sTeamBasicInfo_203B040.PartnerNick[0] == '\0') {
             CopyMonsterNameToBuffer(buffer1, sTeamBasicInfo_203B040.PartnerID);
             CopyStringtoBuffer(buffer2, buffer1);
-            sub_808CE74(sTeamBasicInfo_203B040.PartnerID, FALSE, buffer2);
+            CreateLeaderPartnerData(sTeamBasicInfo_203B040.PartnerID, FALSE, buffer2);
         }
         else
-            sub_808CE74(sTeamBasicInfo_203B040.PartnerID, FALSE, sTeamBasicInfo_203B040.PartnerNick);
+            CreateLeaderPartnerData(sTeamBasicInfo_203B040.PartnerID, FALSE, sTeamBasicInfo_203B040.PartnerNick);
     }
 
     if (sTeamBasicInfo_203B040.StarterID != MONSTER_NONE) {

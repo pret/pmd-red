@@ -343,7 +343,7 @@ static void HandlePartyListMenuCallback(void)
             break;
         case 9:
             sub_8026FA4();
-            sub_808D31C(sUnknown_203B2B8->pokeStruct);
+            TryResetPokemonFlags(sUnknown_203B2B8->pokeStruct);
             sUnknown_203B2B8->unk8 = TRUE;
             break;
         case PARTY_LIST_STATE_GIVEN_ITEM:
