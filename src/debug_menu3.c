@@ -219,7 +219,7 @@ static bool8 sub_803ABC8(void)
         Pokemon *mon = &gRecruitedPokemonRef->pokemon[i];
 
         if (PokemonExists(mon)
-            && PokemonFlag2(mon)
+            && PokemonIsOnTeam(mon)
             && sUnknown_203B3F4->friendArea == GetFriendArea(mon->speciesNum))
             return FALSE;
 

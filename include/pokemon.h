@@ -37,14 +37,14 @@ extern RecruitedMon *gRecruitedPokemonRef;
 void LoadMonsterParameters(void);
 RecruitedMon *GetRecruitedPokemon(void);
 void InitializeRecruitedPokemon(void);
-void sub_808CE74(s16 _species, bool32 _isLeader, u8* name);
+void CreateLeaderPartnerData(s16 _species, bool32 _isLeader, u8* name);
 void CreateLevel1Pokemon(Pokemon *pokemon, s16 _species, u8* name, u32 _itemID, const DungeonLocation *location, u16 *moves);
 void sub_808D0D8(Pokemon *pokemon);
 void ConvertStoryMonToPokemon(Pokemon *dst, const struct StoryMonData *src);
 Pokemon *TryAddPokemonToRecruited(Pokemon*);
 Pokemon *sub_808D278(s32 species);
 Pokemon *TryAddLevel1PokemonToRecruited(s32 species, u8 *name, u32 _itemID, const DungeonLocation *location, u16 *moveID);
-void sub_808D31C(Pokemon *param_1);
+void TryResetPokemonFlags(Pokemon *pokemon);
 Pokemon *GetLeaderMon1(void);
 Pokemon *GetPartnerMon(void);
 Pokemon *GetLeaderMon2(void);
@@ -113,7 +113,7 @@ bool8 CanMonLearnMove(u16 moveID, s16 _species);
 s32 sub_808E218(unkStruct_808E218_arg* a1, Pokemon* pokemon);
 s32 GetEvolutionSequence(Pokemon* pokemon, EvolveStage* a2);
 s32 sub_808E400(s32 _species, s16* _a2, bool32 _bodySizeCheck, bool32 _shedinjaCheck);
-void sub_808E490(Move* a1, s32 species);
+void InitializeLevel1MovesBySpecies(Move* moves, s32 species);
 char* sub_808E4FC(s32 a1);
 char* sub_808E51C(s32 a1);
 void InitShadowSprites(s32 param_1, s32 param_2);
@@ -129,12 +129,12 @@ static inline bool8 DungeonMonExists(DungeonMon *mon)
     return (mon->flags & POKEMON_FLAG_EXISTS) != 0;
 }
 
-static inline bool8 PokemonFlag2(Pokemon *mon)
+static inline bool8 PokemonIsOnTeam(Pokemon *mon)
 {
     return (mon->flags & POKEMON_FLAG_ON_TEAM) != 0;
 }
 
-static inline bool8 PokemonFlag2Struct2(DungeonMon *mon)
+static inline bool8 DungeonMonIsOnTeam(DungeonMon *mon)
 {
     return (mon->flags & POKEMON_FLAG_ON_TEAM) != 0;
 }

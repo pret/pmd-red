@@ -343,7 +343,7 @@ static void HandlePartyListMenuCallback(void)
             break;
         case 9:
             sub_8026FA4();
-            sub_808D31C(sUnknown_203B2B8->pokeStruct);
+            TryResetPokemonFlags(sUnknown_203B2B8->pokeStruct);
             sUnknown_203B2B8->unk8 = TRUE;
             break;
         case PARTY_LIST_STATE_GIVEN_ITEM:
@@ -383,7 +383,7 @@ static void PartyListMenu_CreateMenu1(void)
 
     PeekPokemonItem(sUnknown_203B2B8->pokeSpecies, &sUnknown_203B2B8->item2);
 
-    if (PokemonFlag2(pokeStruct))
+    if (PokemonIsOnTeam(pokeStruct))
     {
         sUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuStandBy;
         sUnknown_203B2B8->unk16C[loopMax].menuAction = PARTY_LIST_MENU_STANDBY;
@@ -435,7 +435,7 @@ static void PartyListMenu_CreateMenu1(void)
     }
     loopMax += 1;
 
-    if (!PokemonFlag2(pokeStruct))
+    if (!PokemonIsOnTeam(pokeStruct))
     {
         sUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuSayFarewell;
         sUnknown_203B2B8->unk16C[loopMax].menuAction = PARTY_LIST_MENU_SAY_FAREWELL;

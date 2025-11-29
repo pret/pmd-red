@@ -68,7 +68,7 @@ void InitializeRecruitedPokemon(void)
     }
 }
 
-void sub_808CE74(s16 _species, bool32 _isLeader, u8* name)
+void CreateLeaderPartnerData(s16 _species, bool32 _isLeader, u8* name)
 {
      struct Pokemon pokemon;
      u8 name_buffer[20];
@@ -102,7 +102,7 @@ void sub_808CE74(s16 _species, bool32 _isLeader, u8* name)
      pokemon.currExp = 0;
      pokemon.tacticIndex = TACTIC_LETS_GO_TOGETHER;
      pokemon.dungeonLocation.floor = 0;
-     sub_808E490(pokemon.moves, species);
+     InitializeLevel1MovesBySpecies(pokemon.moves, species);
 
      if (name == NULL) {
          CopyMonsterNameToBuffer(name_buffer, species);
@@ -165,7 +165,7 @@ void CreateLevel1Pokemon(Pokemon *pokemon, s16 _species, u8* name, u32 _itemID, 
         }
     }
     else {
-        sub_808E490(pokemon->moves, species);
+        InitializeLevel1MovesBySpecies(pokemon->moves, species);
     }
 
     if (name == NULL) {
@@ -192,7 +192,7 @@ void sub_808D0D8(Pokemon *pokemon)
      pokemon->tacticIndex = TACTIC_LETS_GO_TOGETHER;
      pokemon->IQ = 1;
      SetDefaultIQSkills(&pokemon->IQSkills, FALSE);
-     sub_808E490(pokemon->moves, pokemon->speciesNum);
+     InitializeLevel1MovesBySpecies(pokemon->moves, pokemon->speciesNum);
 }
 
 void ConvertStoryMonToPokemon(Pokemon *dst, const struct StoryMonData *src)
@@ -281,10 +281,10 @@ Pokemon *TryAddLevel1PokemonToRecruited(s32 species, u8 *name, u32 _itemID, cons
     return TryAddPokemonToRecruited(&pokemon);
 }
 
-void sub_808D31C(Pokemon *param_1)
+void TryResetPokemonFlags(Pokemon *pokemon)
 {
-    if (!IsMonTeamLeader(param_1) && !IsMonPartner(param_1))
-        param_1->flags = 0;
+    if (!IsMonTeamLeader(pokemon) && !IsMonPartner(pokemon))
+        pokemon->flags = 0;
 }
 
 Pokemon *GetLeaderMon1(void)
@@ -391,7 +391,7 @@ bool8 sub_808D4B0(void)
     flag = FALSE;
     for(index = 0; index < NUM_MONSTERS; index++, pokeStruct++)
     {
-        if(PokemonFlag2(pokeStruct) && !IsMonTeamLeader(pokeStruct) && !IsMonPartner(pokeStruct)){
+        if(PokemonIsOnTeam(pokeStruct) && !IsMonTeamLeader(pokeStruct) && !IsMonPartner(pokeStruct)){
             flag = TRUE;
             pokeStruct->flags &= 0xFFFD;
         }
@@ -409,7 +409,7 @@ bool8 sub_808D500(void)
     flag = FALSE;
     for(index = 0; index < NUM_MONSTERS; index++, pokeStruct++)
     {
-        if(PokemonFlag2(pokeStruct) && !IsMonTeamLeader(pokeStruct)){
+        if(PokemonIsOnTeam(pokeStruct) && !IsMonTeamLeader(pokeStruct)){
             flag = TRUE;
             pokeStruct->flags &= 0xFFFD;
         }
@@ -424,7 +424,7 @@ s32 GetUnitSum_808D544(s32 *team)
 
     count = 0;
     for (i = 0; i < NUM_MONSTERS; i++, mon++) {
-        if (PokemonFlag2(mon)) {
+        if (PokemonIsOnTeam(mon)) {
             if (team != NULL) {
                 team[count] = i;
             }
@@ -455,7 +455,7 @@ s32 sub_808D580(s32 *team)
 
     for(mon = gRecruitedPokemonRef->pokemon, index = 0; index < NUM_MONSTERS; index++, mon++)
     {
-        if (((IsMonPartner(mon) && !IsMonTeamLeader(mon) && PokemonFlag2(mon)) && (PokemonExists(mon))) &&
+        if (((IsMonPartner(mon) && !IsMonTeamLeader(mon) && PokemonIsOnTeam(mon)) && (PokemonExists(mon))) &&
             ((((team != NULL)))))
         {
             team[counter] = index;
@@ -467,7 +467,7 @@ s32 sub_808D580(s32 *team)
 
     for(mon = gRecruitedPokemonRef->pokemon, index = 0; index < NUM_MONSTERS; index++, mon++)
     {
-        if ((((PokemonFlag2(mon)) && (PokemonExists(mon))) &&
+        if ((((PokemonIsOnTeam(mon)) && (PokemonExists(mon))) &&
             (!IsMonTeamLeader(mon))) &&
             (((!IsMonPartner(mon) && (team != NULL))))) {
             team[counter] = index;
@@ -485,7 +485,7 @@ s32 sub_808D654(s32 *ptr)
     s32 *ptr2;
 
     for (i = 0, ptr2 = ptr; i < NUM_MONSTERS; i++, mon++) {
-        if (PokemonFlag2(mon) && !IsMonTeamLeader(mon) && !IsMonPartner(mon)) {
+        if (PokemonIsOnTeam(mon) && !IsMonTeamLeader(mon) && !IsMonPartner(mon)) {
             if (ptr != NULL) {
                 *ptr2 = i;
             }
@@ -506,7 +506,7 @@ s32 sub_808D6A4(s32 *ptr)
     s32 *ptr2;
 
     for (i = 0, ptr2 = ptr; i < NUM_MONSTERS; i++, mon++) {
-        if (PokemonFlag2(mon) && !IsMonTeamLeader(mon)) {
+        if (PokemonIsOnTeam(mon) && !IsMonTeamLeader(mon)) {
             if (ptr != NULL) {
                 *ptr2 = i;
             }
@@ -525,7 +525,7 @@ UNUSED static bool8 sub_808D6E8(void)
     s32 size_count = 0;
     for (i = 0; i < NUM_MONSTERS; i++) {
         Pokemon* pokemon = &gRecruitedPokemonRef->pokemon[i];
-        if (PokemonExists(pokemon) && PokemonFlag2(pokemon)) {
+        if (PokemonExists(pokemon) && PokemonIsOnTeam(pokemon)) {
             size_count += GetBodySize(pokemon->speciesNum);
             count++;
         }
@@ -546,7 +546,7 @@ bool8 sub_808D750(s32 index_)
 
  for (i = 0; i < NUM_MONSTERS; i++) {
      pokemon = &gRecruitedPokemonRef->pokemon[i];
-     if (PokemonExists(pokemon) && PokemonFlag2(pokemon)) {
+     if (PokemonExists(pokemon) && PokemonIsOnTeam(pokemon)) {
          size_count += GetBodySize(pokemon->speciesNum);
          count++;
      }
@@ -1251,13 +1251,13 @@ s32 sub_808E400(s32 _species, s16* _a2, bool32 _bodySizeCheck, bool32 _shedinjaC
     return count;
 }
 
-void sub_808E490(Move* a1, s32 species)
+void InitializeLevel1MovesBySpecies(Move* moves, s32 _species)
 {
     u16 buffer[0x10]; // of moveIDs
     s32 i;
-    s16 index_s32 = species;
+    s16 species = _species;
 
-    s32 count = GetMovesLearnedAtLevel(buffer, index_s32, 1, 999);
+    s32 count = GetMovesLearnedAtLevel(buffer, species, 1, 999);
     if (count == 0) {
         count = 1;
         buffer[0] = MOVE_ITEM_TOSS;
@@ -1266,13 +1266,13 @@ void sub_808E490(Move* a1, s32 species)
     i = 0;
     if (i < count) {
         while (i < count) {
-            InitZeroedPPPokemonMove(&a1[i], buffer[i]);
+            InitZeroedPPPokemonMove(&moves[i], buffer[i]);
             i++;
         }
         i = count;
     }
     while (i < MAX_MON_MOVES) {
-        a1[i].moveFlags = 0;
+        moves[i].moveFlags = 0;
         i++;
     }
 }

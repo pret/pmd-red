@@ -242,7 +242,7 @@ void CreateFriendActionMenu(void)
   pokeStruct = &gRecruitedPokemonRef->pokemon[sUnknown_203B2BC->targetPoke];
   MemoryFill16(sUnknown_203B2BC->unk16C,0,sizeof(sUnknown_203B2BC->unk16C));
 
-  if (PokemonFlag2(pokeStruct)) {
+  if (PokemonIsOnTeam(pokeStruct)) {
       sUnknown_203B2BC->menuItems[loopMax].text = sStandBy;
       sUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_STANDBY;
       if(!sub_8027D9C(pokeStruct))
@@ -530,7 +530,7 @@ void sub_8027A78(void)
                 else
                 {
                     sub_8027EB8();
-                    sub_808D31C(sUnknown_203B2BC->pokeStruct);
+                    TryResetPokemonFlags(sUnknown_203B2BC->pokeStruct);
                 }
                 break;
         }
@@ -550,7 +550,7 @@ void sub_8027AE4(void)
             break;
         case FRIEND_AREA_ACTION_MENU_ACTION_YES:
             sub_8027EB8();
-            sub_808D31C(sUnknown_203B2BC->pokeStruct);
+            TryResetPokemonFlags(sUnknown_203B2BC->pokeStruct);
             break;
     }
   }

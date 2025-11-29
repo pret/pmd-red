@@ -3432,7 +3432,7 @@ static s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
             {
                 Pokemon *ptr = sub_80A8D54((s16) r2);
                 if (ptr)
-                    return PokemonFlag2(ptr);
+                    return PokemonIsOnTeam(ptr);
             }
             return 0;
         case 0x14:
