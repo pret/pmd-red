@@ -13,7 +13,7 @@
 // Looks like they defined `Y_MID_B` as 8 instead of 7 and that's why we have a duplicate placement
 #define Y_B 8
 
-static const struct PortraitPlacementInfo sPortraitPlacements[PLACEMENT_COUNT] = {
+static const PortraitPlacementInfo sPortraitPlacements[PLACEMENT_COUNT] = {
     [PLACEMENT_LEFT_BOTTOM_1] = { { X_L, Y_B }, FALSE },
     [PLACEMENT_CENTERLEFT_CENTER] = { { X_CENTER_L, Y_CENTER }, FALSE },
     [PLACEMENT_LEFT_BOTTOM_2] = { { X_L, Y_B }, FALSE },

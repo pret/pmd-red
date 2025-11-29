@@ -4,6 +4,6 @@
 #include "portrait_placement.h"
 
 // See enum "PortraitPlacementID"
-const struct PortraitPlacementInfo *GetPortraitPlacementInfo(u8 id);
+const PortraitPlacementInfo *GetPortraitPlacementInfo(u8 id);
 
 #endif // GUARD_DUNGEON_PORTRAIT_PLACEMENT_H

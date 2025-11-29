@@ -4,11 +4,11 @@
 #include "structs/str_position.h"
 
 // Size: R=0x8 | B=0x5
-struct PortraitPlacementInfo
+typedef struct PortraitPlacementInfo
 {
     /* 0x0 */ DungeonPos pos;
     /* 0x4 */ bool8 flip;
-};
+} PortraitPlacementInfo;
 
 // These are named like `PLACEMENT_X_Y` and `PLACEMENT_X_Y_FLIP`
 enum PortraitPlacementID

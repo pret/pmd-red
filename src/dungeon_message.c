@@ -444,7 +444,7 @@ void DisplayDungeonDialogue_Async(const struct DungeonDialogueStruct *dialogueIn
         && dialogueInfo->spriteId != 0x80
         && dialogueMonId != MONSTER_NONE)
     {
-        const struct PortraitPlacementInfo *placementInfo = GetPortraitPlacementInfo(dialogueInfo->spritePlacementId);
+        const PortraitPlacementInfo *placementInfo = GetPortraitPlacementInfo(dialogueInfo->spritePlacementId);
 
         monPortraitPtr = &monPortrait;
         monPortraitPtr->faceFile = GetDialogueSpriteDataPtr(dialogueMonId);

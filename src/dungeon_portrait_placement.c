@@ -6,7 +6,7 @@
 
 #include "data/portrait_placements.h"
 
-const struct PortraitPlacementInfo *GetPortraitPlacementInfo(u8 id)
+const PortraitPlacementInfo *GetPortraitPlacementInfo(u8 id)
 {
     return &sPortraitPlacements[id];
 }
