@@ -3,14 +3,14 @@
 
 #include "structs/dungeon_entity.h"
 
-void HandlePickUpPlayerAction(Entity *entity);
-void HandleSetItemAction(Entity *param_1, bool8 param_2);
-void HandleUnsetItemAction(Entity *entity, bool8 enableMessage);
-void HandleGiveItemAction(Entity *param_1);
-void HandleTakeItemAction(Entity *param_1);
-void sub_8066BD4(Entity *param_1);
+void HandlePickUpPlayerAction_Async(Entity *entity);
+void HandleSetItemAction_Async(Entity *param_1, bool8 param_2);
+void HandleUnsetItemAction_Async(Entity *entity, bool8 enableMessage);
+void HandleGiveItemAction_Async(Entity *param_1);
+void HandleTakeItemAction_Async(Entity *param_1);
+void sub_8066BD4_Async(Entity *param_1);
 void HandleUseItemAction(Entity *param_1);
-void HandlePlaceItemAction(Entity *entity);
+void HandlePlaceItemAction_Async(Entity *entity);
 void sub_8066E14(Entity *entity);
 void sub_8066FA4(Entity *entity);
 void sub_8067110(Entity *entity);

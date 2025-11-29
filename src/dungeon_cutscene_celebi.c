@@ -39,26 +39,26 @@ static void sub_808C9B0(Entity *param_1);
 
 void sub_808C5C0(void)
 {
-  Entity * leaderEntity;
-  Entity * celebiEntity;
+    Entity * leaderEntity;
+    Entity * celebiEntity;
 
-  u32 XPos;
-  s32 YPos;
+    u32 XPos;
+    s32 YPos;
 
-  leaderEntity = CutsceneGetLeader();
-  celebiEntity = GetEntityFromMonsterBehavior(BEHAVIOR_CELEBI);
-  DungeonStartNewBGM(MUS_FRIEND_AREA_HEALING_FOREST);
-  sub_80854D4();
-  sub_8085930(DIRECTION_NORTH);
-  SetFacingDirection(celebiEntity, DIRECTION_SOUTH);
-  sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y);
-  XPos = GetCameraXPos();
-  YPos = GetCameraYPos();
-  sub_803F878(XPos,YPos - 0x1000);
-  CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_CELEBI);
+    leaderEntity = CutsceneGetLeader();
+    celebiEntity = GetEntityFromMonsterBehavior(BEHAVIOR_CELEBI);
+    DungeonStartNewBGM(MUS_FRIEND_AREA_HEALING_FOREST);
+    sub_80854D4();
+    sub_8085930(DIRECTION_NORTH);
+    SetFacingDirection(celebiEntity, DIRECTION_SOUTH);
+    sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y);
+    XPos = GetCameraXPos();
+    YPos = GetCameraYPos();
+    sub_803F878(XPos,YPos - 0x1000);
+    CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_CELEBI);
 }
 
-void nullsub_100(u8 r0, u8 r1, u8 r3)
+void HandleCelebiBossFaint(u8 monsterBehavior, u8 cutscene, bool8 transformedIntoFriend)
 {
 }
 
@@ -73,36 +73,36 @@ void CelebiJoinDialogue(void)
     celebiEntity = GetEntityFromMonsterBehavior(BEHAVIOR_CELEBI);
     if ((HasRecruitedMon(MONSTER_CELEBI)) || (!CanEntityBeRecruited(celebiEntity)))
     {
-        HandleFaint(celebiEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
-        SpriteLookAroundEffect(leaderEntity);
-        sub_803E708(10,0x46);
+        HandleFaint_Async(celebiEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
+        CutsceneLookAroundEffect_Async(leaderEntity);
+        DungeonWaitFrames_Async(10,0x46);
         // .........
-        DisplayDungeonDialogue(&gCelebiJoinDialogue_10);
+        DisplayDungeonDialogue_Async(&gCelebiJoinDialogue_10);
     }
     else
     {
-        SpriteLookAroundEffect(leaderEntity);
-        sub_803E708(10,0x46);
+        CutsceneLookAroundEffect_Async(leaderEntity);
+        DungeonWaitFrames_Async(10,0x46);
         SpriteShockEffect(leaderEntity);
-        sub_803E708(10,0x46);
+        DungeonWaitFrames_Async(10,0x46);
         // Oh? There's someone there.
-        DisplayDungeonDialogue(&gCelebiJoinDialogue_1);
-        sub_803E708(10,0x46);
+        DisplayDungeonDialogue_Async(&gCelebiJoinDialogue_1);
+        DungeonWaitFrames_Async(10,0x46);
         sub_8086598();
         sub_8086598();
         sub_8086598();
         sub_8086598();
         // The Time-Traveling Pokemon {POKEMON_2} (Celebi)!
-        DisplayDungeonDialogue(&gCelebiJoinDialogue_2);
+        DisplayDungeonDialogue_Async(&gCelebiJoinDialogue_2);
         PlaySoundEffect(0x1c7);
         sub_806CDD4(celebiEntity,10,DIRECTION_SOUTH);
-        sub_803E708(0x14,0x46);
+        DungeonWaitFrames_Async(0x14,0x46);
         sub_806CE68(celebiEntity, DIRECTION_SOUTH);
-        sub_803E708(4,0x46);
+        DungeonWaitFrames_Async(4,0x46);
         PlaySoundEffect(0x1c7);
         sub_806CDD4(celebiEntity,10,DIRECTION_SOUTH);
-        DisplayDungeonDialogue(&gCelebiJoinDialogue_3);
-        sub_803E708(10,0x46);
+        DisplayDungeonDialogue_Async(&gCelebiJoinDialogue_3);
+        DungeonWaitFrames_Async(10,0x46);
         state = 0;
 
         do
@@ -115,7 +115,7 @@ void CelebiJoinDialogue(void)
                     menuChoice = DisplayDungeonMenuMessage(0,gPtrPurityForestAllowCelebiToJoinText, gPurityForestAllowCelebiToJoinPrompt,0x701);
                 } while (menuChoice < 1);
 
-                sub_803E708(10,0x46);
+                DungeonWaitFrames_Async(10,0x46);
 
                 if (menuChoice == 1)
                 {
@@ -127,26 +127,26 @@ void CelebiJoinDialogue(void)
                     DungeonStartNewBGM(MUS_FRIEND_AREA_HEALING_FOREST);
                     PlaySoundEffect(0x1c7);
                     sub_80861D4(celebiEntity,0xd,DIRECTION_SOUTH);
-                    sub_803E708(0x37,0x46);
+                    DungeonWaitFrames_Async(0x37,0x46);
                     PlaySoundEffect(0x1d5);
-                    sub_803E708(0x1a,0x46);
+                    DungeonWaitFrames_Async(0x1a,0x46);
                     PlaySoundEffect(0x1d5);
-                    sub_803E708(0x1c,0x46);
-                    DisplayDungeonDialogue(&gCelebiJoinDialogue_4);
-                    sub_803E708(10,0x46);
+                    DungeonWaitFrames_Async(0x1c,0x46);
+                    DisplayDungeonDialogue_Async(&gCelebiJoinDialogue_4);
+                    DungeonWaitFrames_Async(10,0x46);
                     HandleSpecialEntityJoinSequence(leaderEntity,celebiEntity,&celebiEntity);
                     DungeonStartNewBGM(MUS_FRIEND_AREA_HEALING_FOREST);
-                    DisplayDungeonDialogue(&gCelebiJoinDialogue_5);
-                    sub_803E708(10,0x46);
+                    DisplayDungeonDialogue_Async(&gCelebiJoinDialogue_5);
+                    DungeonWaitFrames_Async(10,0x46);
                     PlaySoundEffect(0x1c7);
                     sub_80861D4(celebiEntity,0xd,DIRECTION_SOUTH);
-                    sub_803E708(0x37,0x46);
+                    DungeonWaitFrames_Async(0x37,0x46);
                     PlaySoundEffect(0x1d5);
-                    sub_803E708(0x1a,0x46);
+                    DungeonWaitFrames_Async(0x1a,0x46);
                     PlaySoundEffect(0x1d5);
-                    sub_803E708(0x1b,0x46);
-                    DisplayDungeonDialogue(&gCelebiJoinDialogue_6);
-                    sub_803E708(10,0x46);
+                    DungeonWaitFrames_Async(0x1b,0x46);
+                    DisplayDungeonDialogue_Async(&gCelebiJoinDialogue_6);
+                    DungeonWaitFrames_Async(10,0x46);
                     state = 2;
                 }
                 else
@@ -165,26 +165,26 @@ void CelebiJoinDialogue(void)
                 }
                 else
                 {
-                    sub_803E708(10,0x46);
-                    DisplayDungeonDialogue(&gCelebiJoinDialogue_7);
+                    DungeonWaitFrames_Async(10,0x46);
+                    DisplayDungeonDialogue_Async(&gCelebiJoinDialogue_7);
                     sub_80861F8(0x3e,celebiEntity,1);
-                    sub_803E708(0x18,0x46);
+                    DungeonWaitFrames_Async(0x18,0x46);
                     sub_80861F8(0x3e,celebiEntity,1);
-                    sub_803E708(0xe,0x46);
-                    DisplayDungeonDialogue(&gCelebiJoinDialogue_8);
-                    sub_803E708(10,0x46);
+                    DungeonWaitFrames_Async(0xe,0x46);
+                    DisplayDungeonDialogue_Async(&gCelebiJoinDialogue_8);
+                    DungeonWaitFrames_Async(10,0x46);
                     sub_808C8E0(celebiEntity);
-                    DisplayDungeonDialogue(&gCelebiJoinDialogue_9);
-                    sub_803E708(10,0x46);
+                    DisplayDungeonDialogue_Async(&gCelebiJoinDialogue_9);
+                    DungeonWaitFrames_Async(10,0x46);
                     state = 2;
                 }
                 break;
             }
         } while (state != 2);
     }
-    DungeonFadeOutBGM(0x1e);
-    sub_803E708(0x1e,0x46);
-    gDungeon->unk2 = 1;
+    DungeonFadeOutBGM(30);
+    DungeonWaitFrames_Async(30, 70);
+    gDungeon->unk2 = DUNGEON_UNK2_1;
 }
 
 static void sub_808C8E0(Entity *entity)
@@ -204,38 +204,42 @@ static void sub_808C8E0(Entity *entity)
   sub_8086A3C(entity);
 }
 
+// TODO: Yeah that doesn't look like Celebi stuff.
+// Check if it's a file split in blue...
+
 void sub_808C938(void)
 {
     sub_80855E4(sub_808C9B0);
 }
 
-void sub_808C948(Entity *entity, u8 param_2)
+void HandleMazeBossFaint(Entity *entity, u8 cutscene)
 {
-  bool8 flag;
-  s32 index;
-  Entity *pokeEntity;
+    s32 i;
+    Entity *pokeEntity;
 
-  if (param_2 == 0x37) {
-    flag = FALSE;
-    for(index = 0; index < DUNGEON_MAX_WILD_POKEMON; index++){
-      pokeEntity = gDungeon->wildPokemon[index];
-      if ((pokeEntity != entity) && (EntityIsValid(pokeEntity))) {
-        flag = TRUE;
-        break;
-      }
+    if (cutscene == CUTSCENE_MAZE_BOSS) {
+        bool8 stillAlive = FALSE;
+
+        for (i = 0; i < DUNGEON_MAX_WILD_POKEMON; i++){
+            pokeEntity = gDungeon->wildPokemon[i];
+            if (pokeEntity != entity && EntityIsValid(pokeEntity)) {
+                stillAlive = TRUE;
+                break;
+            }
+        }
+
+        if (!stillAlive) {
+            gDungeon->unk2 = DUNGEON_UNK2_1;
+        }
     }
-    if (!flag) {
-      gDungeon->unk2 = 1;
-    }
-  }
 }
 
 void sub_808C998(void)
 {
     // Defeat the opposing team to win
     // Be careful, your opponents are tough
-    DisplayDungeonDialogue(&gUnknown_8106720);
-    sub_803E708(0xA, 0x46);
+    DisplayDungeonDialogue_Async(&gUnknown_8106720);
+    DungeonWaitFrames_Async(0xA, 0x46);
 }
 
 static void sub_808C9B0(Entity *param_1)

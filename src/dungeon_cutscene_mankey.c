@@ -36,50 +36,44 @@ static void sub_8089908(Entity *r0);
 
 void sub_808970C(void)
 {
-  Entity *leaderEntity;
-
-  leaderEntity = CutsceneGetLeader();
-  DungeonStartNewBGM(MUS_TINY_WOODS);
-  sub_80854D4();
-  sub_8085930(DIRECTION_NORTH);
-  sub_80855E4(sub_8086A3C);
-  sub_808563C(sub_8089908);
-  sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y -3);
+    Entity *leaderEntity = CutsceneGetLeader();
+    DungeonStartNewBGM(MUS_TINY_WOODS);
+    sub_80854D4();
+    sub_8085930(DIRECTION_NORTH);
+    sub_80855E4(sub_8086A3C);
+    sub_808563C(sub_8089908);
+    sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y -3);
 }
 
 void sub_808974C(void)
 {
-  Entity *leaderEntity;
-
-  leaderEntity = CutsceneGetLeader();
-  sub_80854D4();
-  sub_8085930(DIRECTION_NORTH);
-  sub_80855E4(sub_8086A3C);
-  sub_808563C(sub_80898F8);
-  sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y + -3);
+    Entity *leaderEntity = CutsceneGetLeader();
+    sub_80854D4();
+    sub_8085930(DIRECTION_NORTH);
+    sub_80855E4(sub_8086A3C);
+    sub_808563C(sub_80898F8);
+    sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y + -3);
 }
 
-void sub_8089788(Entity *entity, u8 param_2, u8 param_3)
+void HandleMankeyBossFaint(Entity *entity, u8 monsterBehavior, u8 cutscene)
 {
-  Entity *monEntity;
-  s32 index;
-  bool8 found = FALSE;
+    s32 i;
+    bool8 stillAlive = FALSE;
 
-  if (param_3 == 0x1A || param_3 == 0x1B) {
-    for(index = 0; index < DUNGEON_MAX_WILD_POKEMON; index++)
-    {
-      monEntity = gDungeon->wildPokemon[index];
-      if ((EntityIsValid(monEntity)) && (monEntity != entity) && (GetEntInfo(monEntity)->monsterBehavior == param_2)) {
-        found = TRUE;
-        break;
-      }
-    }
+    if (cutscene == CUTSCENE_UPROAR_FOREST_ATTEMPT1 || cutscene == CUTSCENE_UPROAR_FOREST_ATTEMPT2) {
+        for (i = 0; i < DUNGEON_MAX_WILD_POKEMON; i++) {
+            Entity *monEntity = gDungeon->wildPokemon[i];
+            if (EntityIsValid(monEntity) && monEntity != entity && GetEntInfo(monEntity)->monsterBehavior == monsterBehavior) {
+                stillAlive = TRUE;
+                break;
+            }
+        }
 
-    if(!found){
-        sub_8097FA8(0x11);
-        gDungeon->unk2 = 1;
+        if (!stillAlive){
+            SetTempCutsceneFlag(CUTSCENE_FLAG_UPROAR_FOREST_COMPLETE);
+            gDungeon->unk2 = DUNGEON_UNK2_1;
+        }
     }
-  }
 }
 
 void sub_80897F0(void)
@@ -88,32 +82,32 @@ void sub_80897F0(void)
 
   leaderEntity = CutsceneGetLeader();
   sub_8086448();
-  sub_803E708(10,0x46);
+  DungeonWaitFrames_Async(10,0x46);
   sub_808563C(SpriteShockEffect);
-  sub_803E708(0x20,0x46);
+  DungeonWaitFrames_Async(0x20,0x46);
   sub_808692C();
-  DisplayDungeonDialogue(&gUnknown_8103BD8);
+  DisplayDungeonDialogue_Async(&gUnknown_8103BD8);
   // We don't like to brag or
   // nothing, but
-  DisplayDungeonDialogue(&gUnknown_8103C00);
+  DisplayDungeonDialogue_Async(&gUnknown_8103C00);
   // We get furious real easy
   // You know that?!
-  DisplayDungeonDialogue(&gUnknown_8103C3C);
+  DisplayDungeonDialogue_Async(&gUnknown_8103C3C);
   // What really irritates us is
   // when we see some dim witted face
-  DisplayDungeonDialogue(&gUnknown_8103C74);
+  DisplayDungeonDialogue_Async(&gUnknown_8103C74);
   // .........
   // Wrooooooar!
   // That vacant expression
-  DisplayDungeonDialogue(&gUnknown_8103CC4);
+  DisplayDungeonDialogue_Async(&gUnknown_8103CC4);
   // Gwoooh
   // It's ticking me off!
   // I'm seeing red!
-  DisplayDungeonDialogue(&gUnknown_8103D0C);
+  DisplayDungeonDialogue_Async(&gUnknown_8103D0C);
   // Mukkkeeeeeh
   // Get 'em! It's frenzy time!
-  DisplayDungeonDialogue(&gUnknown_8103D50);
-  sub_803E708(10,0x46);
+  DisplayDungeonDialogue_Async(&gUnknown_8103D50);
+  DungeonWaitFrames_Async(10,0x46);
   ShiftCameraToPosition(&leaderEntity->pixelPos,0x10);
 }
 
@@ -123,15 +117,15 @@ void sub_8089878(void)
 
   leaderEntity = CutsceneGetLeader();
   sub_8086448();
-  sub_803E708(10,0x46);
+  DungeonWaitFrames_Async(10,0x46);
   sub_808563C(SpriteShockEffect);
-  sub_803E708(0x20,0x46);
+  DungeonWaitFrames_Async(0x20,0x46);
   sub_808692C();
-  DisplayDungeonDialogue(&gUnknown_8103D8C);
-  DisplayDungeonDialogue(&gUnknown_8103D98);
-  DisplayDungeonDialogue(&gUnknown_8103DD8);
-  DisplayDungeonDialogue(&gUnknown_8103E28);
-  sub_803E708(10,0x46);
+  DisplayDungeonDialogue_Async(&gUnknown_8103D8C);
+  DisplayDungeonDialogue_Async(&gUnknown_8103D98);
+  DisplayDungeonDialogue_Async(&gUnknown_8103DD8);
+  DisplayDungeonDialogue_Async(&gUnknown_8103E28);
+  DungeonWaitFrames_Async(10,0x46);
   ShiftCameraToPosition(&leaderEntity->pixelPos,0x10);
 }
 
@@ -143,7 +137,7 @@ void sub_80898E4(void)
 
 static void sub_80898F8(Entity *r0)
 {
-    HandleFaint(r0, DUNGEON_EXIT_DELETED_FOR_EVENT, 0);
+    HandleFaint_Async(r0, DUNGEON_EXIT_DELETED_FOR_EVENT, 0);
 }
 
 static void sub_8089908(Entity *r0)

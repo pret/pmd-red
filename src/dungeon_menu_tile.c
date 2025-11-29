@@ -27,17 +27,17 @@ static void ShowTileDescription(DungeonPos *pos);
 
 void ShowDungeonTileMenu(Entity *mon)
 {
-    while (1) {
+    while (TRUE) {
         s32 inputAction = 0;
         WindowHeader header;
         WindowTemplates windows = {
             .id = {
                 [0] = {
                     .type = WINDOW_TYPE_WITH_HEADER,
-                    .pos = {2, 2},
+                    .pos = { 2, 2 },
                     .width = 18,
                     .height = 4,
-                    .unk10 = 16,
+                    .totalHeight = 16,
                     .unk12 = 0,
                     .header = &header,
                 },
@@ -55,7 +55,7 @@ void ShowDungeonTileMenu(Entity *mon)
         gDungeonMenu.cursorArrowPos.y = 0;
         CreateDungeonMenuSubWindow(&windows.id[0], 22);
 
-        while (1) {
+        while (TRUE) {
             AddMenuCursorSprite(&gDungeonMenu);
             DungeonRunFrameActions(0x2D);
             if (gRealInputs.repeated & DPAD_DOWN) {
@@ -137,7 +137,7 @@ static void AddTileSubMenuOptions(Entity *mon)
 
 static void ShowTileDescription(DungeonPos *pos)
 {
-    while (1) {
+    while (TRUE) {
         const Tile *tile;
         Entity *object;
         Trap *trap;
@@ -149,10 +149,10 @@ static void ShowTileDescription(DungeonPos *pos)
             .id = {
                 [0] = {
                     .type = WINDOW_TYPE_WITH_HEADER,
-                    .pos = {2, 2},
+                    .pos = { 2, 2 },
                     .width = 26,
                     .height = 12,
-                    .unk10 = 12,
+                    .totalHeight = 12,
                     .unk12 = 0,
                     .header = &header,
                 },
@@ -185,7 +185,7 @@ static void ShowTileDescription(DungeonPos *pos)
         PrintStringOnWindow(8, 24, gTrapDescriptions[trap->id], 0, '\0');
         sub_80073E0(0);
         statusesCount = PrepareStatusStringArrays(gTrapDescriptions[trap->id], statuses);
-        while (1) {
+        while (TRUE) {
             if (statusesCount != 0) {
                 ShowStatusDescriptionMenuArrow();
             }
@@ -207,7 +207,7 @@ static void ShowTileDescription(DungeonPos *pos)
 
         for (i = 0; i < statusesCount; i++) {
             ShowStatusDescriptionMenu(statuses[i], &menuSub);
-            while (1) {
+            while (TRUE) {
                 if (i < statusesCount - 1) {
                     ShowStatusDescriptionMenuArrow();
                 }

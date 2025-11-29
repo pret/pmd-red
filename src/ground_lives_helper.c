@@ -160,7 +160,7 @@ u32 sub_809CDC8(struct GroundLives_Sub120 *strPtr, u32 *r6, s8 *direction, s32 *
                         return 4;
                     case 4:
                         strPtr->unk0 = 4;
-                        GroundMap_ExecuteEvent(0x45, 0);
+                        GroundMap_ExecuteEvent(FORMATION_HERO, FALSE);
                         *r6 = 1;
                         *direction = -1;
                         return strPtr->unk0;

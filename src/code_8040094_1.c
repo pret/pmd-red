@@ -95,7 +95,7 @@ static void sub_8040C4C(Entity *entity, Move *move, bool32 hasSpecialEffect)
     r4 = sub_800EA84(&sp);
     sub_8042DD4(r4, entity, 5);
     savedUnkVar = gUnknown_203B40D;
-    while (1) {
+    while (TRUE) {
         if (!sub_800E9A8(r4))
             break;
         if (!r8)
@@ -157,7 +157,7 @@ void sub_8040DA0(Entity *entity, Move *move)
         gUnknown_202F224 = DungeonRandInt(7);
         gDungeon->unk181e8.unk18204 = gDungeon->unk181e8.unk18200 = gUnknown_8106A8C[gUnknown_202F224];
         gFormatArgs[0] = gUnknown_202F224 + 4;
-        LogMessageByIdWithPopupCheckUser(anotherEntity, gPtrMagnitudeMessage);
+        LogMessageByIdWithPopupCheckUser_Async(anotherEntity, gPtrMagnitudeMessage);
         sub_80421C0(anotherEntity, 0x1A4);
     }
     else if (move->id == MOVE_EARTHQUAKE) {
@@ -178,7 +178,7 @@ void sub_8040DA0(Entity *entity, Move *move)
                 direction--;
                 direction &= DIRECTION_MASK;
                 sub_806CDD4(entity, 0, direction);
-                sub_803E708(2, 0x15);
+                DungeonWaitFrames_Async(2, 0x15);
             }
         }
     }
@@ -189,7 +189,7 @@ void sub_8040DA0(Entity *entity, Move *move)
             for (i = 0; i < NUM_DIRECTIONS + 1; i++) {
                 direction &= DIRECTION_MASK;
                 sub_806CDD4(entity, 0, direction);
-                sub_803E708(2, 0x15);
+                DungeonWaitFrames_Async(2, 0x15);
                 direction++;
             }
         }
@@ -323,7 +323,7 @@ void sub_8041168(Entity *entity, Entity *entity2, Move *move, DungeonPos *pos)
     var3 = sub_800EBC8(&sp);
     DungeonRunFrameActions(0x5B);
     sub_8042DD4(var3, entity2, 6);
-    while (1) {
+    while (TRUE) {
         if (!sub_800E9A8(var3))
             break;
         DungeonRunFrameActions(0x28);

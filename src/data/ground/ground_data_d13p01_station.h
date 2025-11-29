@@ -14,7 +14,7 @@ static const struct ScriptCommand s_gs207_g0_s0_station_sref_script[] = { /* 0x8
     JUMP_SCRIPT(COMMON_ENTER),
 };
 
-static const struct ScriptRef s_gs207_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs207_g0_s0_station_sref_script }; /* 0x825ffd4 */
+static const struct ScriptRef s_gs207_g0_s0_station_sref = { ENTER_CONTROL , 1, NULL, s_gs207_g0_s0_station_sref_script }; /* 0x825ffd4 */
 
 static const struct ScriptCommand s_gs207_g1_s0_station_sref_script[] = { /* 0x825ffe0 */
     DEBUGINFO_O(20),
@@ -22,14 +22,14 @@ static const struct ScriptCommand s_gs207_g1_s0_station_sref_script[] = { /* 0x8
     WAIT(60),
     SELECT_MAP(MAP_SKY_TOWER_ENTRY),
     SELECT_ENTITIES(-1, -1),
-    BGM_SWITCH(22),
+    BGM_SWITCH(MUS_SKY_TOWER),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     { 0x23, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     RET,
 };
 
-static const struct ScriptRef s_gs207_g1_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs207_g1_s0_station_sref_script }; /* 0x8260080 */
+static const struct ScriptRef s_gs207_g1_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs207_g1_s0_station_sref_script }; /* 0x8260080 */
 
 static const struct ScriptCommand s_gs207_g1_s0_lives0_dlg0[] = { /* 0x826008c */
     DEBUGINFO_O(35),
@@ -66,20 +66,20 @@ static const struct ScriptCommand s_gs207_g1_s0_lives0_dlg0[] = { /* 0x826008c *
     PORTRAIT_REP(0x0001, 0x0000000c),
     MSG_NPC(1, _(" Wah!\n{NAME_0}, this is cool!{WAIT_PRESS}\nWe're on clouds!")),
     TEXTBOX_CLEAR,
-    ROTATE(4, 10, DIRECTION_WEST),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_WEST),
     ALERT_CUE(7),
     ALERT_CUE(6),
     AWAIT_CUE(5),
-    ROTATE(4, 10, DIRECTION_SOUTHWEST),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_SOUTHWEST),
     AWAIT_CUE(5),
     MSG_NPC(1, _(" Oh, wow!")),
     TEXTBOX_CLEAR,
     ALERT_CUE(6),
-    ROTATE(4, 10, DIRECTION_WEST),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_WEST),
     AWAIT_CUE(5),
     MSG_NPC(1, _(" {NAME_0}, look up there!")),
     TEXTBOX_CLEAR,
-    ROTATE(4, 10, DIRECTION_NORTH),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_NORTH),
     ALERT_CUE(7),
     WAIT(30),
     ALERT_CUE(3),
@@ -124,7 +124,7 @@ static const struct ScriptCommand s_gs207_g1_s0_lives1_dlg0[] = { /* 0x8260458 *
     FANFARE_PLAY2(457),
     CALL_SCRIPT(JUMP_ANGRY_FUNC),
     WAIT(30),
-    ROTATE(4, 10, DIRECTION_NORTH),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_NORTH),
     WAIT(15),
     FANFARE_PLAY2(458),
     CALL_SCRIPT(JUMP_SURPRISE_FUNC),
@@ -152,12 +152,12 @@ static const struct ScriptCommand s_gs207_g1_s0_lives2_dlg0[] = { /* 0x8260738 *
     AWAIT_CUE(6),
     WAIT(10),
     SELECT_ANIMATION(2),
-    ROTATE(4, 10, DIRECTION_NORTH),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_NORTH),
     CALL_SCRIPT(LOOK_AROUND_FUNC),
     AWAIT_CUE(7),
-    ROTATE(4, 10, DIRECTION_NORTHWEST),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_NORTHWEST),
     AWAIT_CUE(7),
-    ROTATE(4, 10, DIRECTION_NORTH),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_NORTH),
     AWAIT_CUE(7),
     HALT,
 };
@@ -166,14 +166,14 @@ static const struct ScriptCommand s_gs207_g2_s0_station_sref_script[] = { /* 0x8
     DEBUGINFO_O(166),
     SELECT_MAP(MAP_SKY_TOWER_ENTRY),
     SELECT_ENTITIES(-1, -1),
-    BGM_SWITCH(22),
+    BGM_SWITCH(MUS_SKY_TOWER),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     NEXT_DUNGEON(30, SCRIPT_DUNGEON_SKY_TOWER),
     RET,
 };
 
-static const struct ScriptRef s_gs207_g2_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs207_g2_s0_station_sref_script }; /* 0x8260928 */
+static const struct ScriptRef s_gs207_g2_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs207_g2_s0_station_sref_script }; /* 0x8260928 */
 
 static const struct ScriptCommand s_gs207_g2_s0_lives0_dlg0[] = { /* 0x8260934 */
     DEBUGINFO_O(179),
@@ -189,7 +189,7 @@ static const struct ScriptCommand s_gs207_g2_s0_lives0_dlg0[] = { /* 0x8260934 *
     VARIANT_DEFAULT(_(" That's where {NAME_2}\nis...")),
     TEXTBOX_CLEAR,
     ALERT_CUE(6),
-    ROTATE(4, 10, DIRECTION_WEST),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_WEST),
     WAIT(10),
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
     VARIANT(/* == */  1, _(" {NAME_0}!\nLet's give it our best!")),
@@ -209,7 +209,7 @@ static const struct ScriptCommand s_gs207_g2_s0_lives1_dlg0[] = { /* 0x8260b8c *
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(6),
-    { 0x93, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 0),
     AWAIT_CUE(6),
     { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
     WAIT(10),
@@ -232,14 +232,14 @@ static const struct ScriptCommand s_gs207_g3_s0_station_sref_script[] = { /* 0x8
     DEBUGINFO_O(232),
     SELECT_MAP(MAP_SKY_TOWER_ENTRY),
     SELECT_ENTITIES(-1, -1),
-    BGM_SWITCH(22),
+    BGM_SWITCH(MUS_SKY_TOWER),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     NEXT_DUNGEON(30, SCRIPT_DUNGEON_SKY_TOWER),
     RET,
 };
 
-static const struct ScriptRef s_gs207_g3_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs207_g3_s0_station_sref_script }; /* 0x8260d2c */
+static const struct ScriptRef s_gs207_g3_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs207_g3_s0_station_sref_script }; /* 0x8260d2c */
 
 static const struct ScriptCommand s_gs207_g3_s0_lives0_dlg0[] = { /* 0x8260d38 */
     DEBUGINFO_O(245),
@@ -270,7 +270,7 @@ static const struct ScriptCommand s_gs207_g3_s0_lives0_dlg0[] = { /* 0x8260d38 *
     WAIT(10),
     ALERT_CUE(6),
     ALERT_CUE(7),
-    ROTATE(4, 10, DIRECTION_WEST),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_WEST),
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
     VARIANT(/* == */  1, _(" Let's storm our way to\nthe top floor!")),
     VARIANT_DEFAULT(_(" Let's head for the top!\nThis is it!")),
@@ -301,9 +301,9 @@ static const struct ScriptCommand s_gs207_g3_s0_lives1_dlg0[] = { /* 0x826104c *
     { 0x70, 0x00,  0x0200,  0x00000000,  0x00000000, NULL },
     SELECT_ANIMATION(2),
     AWAIT_CUE(6),
-    ROTATE(4, 10, DIRECTION_NORTH),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_NORTH),
     AWAIT_CUE(6),
-    { 0x93, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 0),
     AWAIT_CUE(6),
     { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
     WAIT(10),
@@ -327,7 +327,7 @@ static const struct ScriptCommand s_gs207_g3_s0_lives2_dlg0[] = { /* 0x82611dc *
     { 0x70, 0x00,  0x0200,  0x00000000,  0x00000000, NULL },
     SELECT_ANIMATION(2),
     AWAIT_CUE(7),
-    ROTATE(4, 10, DIRECTION_NORTH),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_NORTH),
     AWAIT_CUE(7),
     { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
     WALK_GRID(179, 0),
@@ -418,4 +418,4 @@ static const struct GroundLink s_gs207_links[] = { /* 0x82614f0 */
     /* link   0 */ { { /*x*/  25, /*y*/  12, /*flags*/ CPOS_HALFTILE, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
 };
 
-/*extern*/ const struct GroundScriptHeader gGroundScript_gs207 = { LPARRAY(s_gs207_groups), s_gs207_links }; /* 0x82614f8 */
+const GroundScriptHeader gGroundScript_gs207 = { LPARRAY(s_gs207_groups), s_gs207_links }; /* 0x82614f8 */

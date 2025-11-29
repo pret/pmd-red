@@ -3,7 +3,7 @@
 
 #include "structs/axdata.h"
 
-extern RGB gFontPalette[128];
+extern RGB_Struct gFontPalette[128];
 
 struct unkStruct_8009A1C_ptr
 {
@@ -19,7 +19,7 @@ void ScheduleMemCopy(u32 *, const u32 *, u32);
 void ScheduleBgTilemapCopy(u32);
 void DoScheduledMemCopies(void);
 void CopyBgTilemaps0And1(void);
-void SetFontsBaseColor(RGB);
+void SetFontsBaseColor(RGB_Struct);
 bool8 sub_8009A7C(struct EfbFileData *a0, s32 a1, s32 a2, s32 a3, bool8 a4, s32 *a5, s16 *a6);
 
 #endif // GUARD_GRAPHICS_MEMORY_H

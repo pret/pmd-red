@@ -85,7 +85,7 @@ const u16 *const gUnknown_9752F04[] = {
     gUnknown_97520F0,
     gUnknown_97527FA,
 };
-const RGB gUnknown_9752F44[] = INCBIN_U8("data/effects/efbg001.pmdpal");
+const RGB_Struct gUnknown_9752F44[] = INCBIN_U8("data/effects/efbg001.pmdpal");
 const u32 gUnknown_9753344[] = INCBIN_U32("data/effects/efbg001.4bpp");
 const struct EfbFileData gUnknown_97547C4 = {
     ARRAY_COUNT(gUnknown_9752F04), // 16

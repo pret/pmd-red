@@ -55,23 +55,23 @@ static const WindowTemplates sReleaseMenuWindowTemplates = {
     .id = {
         [0] =
         {
-            .unk0 = 0,
+            .flags = WINTEMPLATE_FLAG_NONE,
             .type = WINDOW_TYPE_WITH_HEADER,
-            .pos = {0x02, 0x02},
-            .width = 0x11,
-            .height = 0x0E,
-            .unk10 = 0x12,
-            .unk12 = 0x02,
+            .pos = { 2, 2 },
+            .width = 17,
+            .height = 14,
+            .totalHeight = 18,
+            .unk12 = 2,
             .header = &sReleaseMenuWinHeader
         },
         [1] =
         {
-            .unk0 = 0,
+            .flags = WINTEMPLATE_FLAG_NONE,
             .type = WINDOW_TYPE_NORMAL,
-            .pos = {0x15, 0x04},
-            .width = 0x07,
-            .height = 0x04,
-            .unk10 = 0x04,
+            .pos = { 21, 4 },
+            .width = 7,
+            .height = 4,
+            .totalHeight = 4,
             .unk12 = 0,
             .header = NULL
         },
@@ -92,11 +92,11 @@ void ShowRecruitReleaseMenu(u8 a0, s32 a1, s32 a2, Pokemon **a3)
         a3[i]->flags &= ~(POKEMON_FLAG_x8000);
     }
 
-    while (1) {
+    while (TRUE) {
         sub_8068310(a2, a3);
         if (gUnknown_202F310 >= a1)
             break;
-        while (1) {
+        while (TRUE) {
             s32 r7 = 0, r5 = 0;
 
             sReleaseMenuWinHeader.count = 1;
@@ -121,7 +121,7 @@ void ShowRecruitReleaseMenu(u8 a0, s32 a1, s32 a2, Pokemon **a3)
             gDungeonMenu.windowId = 0;
             ResetTouchScreenMenuInput(&gDungeonMenu.touchScreen);
             sub_80137B0(&gDungeonMenu, 0);
-            while (1) {
+            while (TRUE) {
                 s32 touchScreenArrow;
 
                 AddMenuCursorSprite(&gDungeonMenu);
@@ -232,7 +232,7 @@ void ShowRecruitReleaseMenu(u8 a0, s32 a1, s32 a2, Pokemon **a3)
                     continue;
                 }
 
-                if (DisplayDungeonYesNoMessage(NULL, gUnknown_80FDFB8, TRUE) == 1) {
+                if (DisplayDungeonYesNoMessage_Async(NULL, gUnknown_80FDFB8, TRUE) == 1) {
                     break;
                 }
                 else {
@@ -270,7 +270,7 @@ void ShowRecruitReleaseMenu(u8 a0, s32 a1, s32 a2, Pokemon **a3)
                 sub_8045064();
                 CreateDungeonMenuSubWindow(&winTemplates.id[0], 0x15);
 
-                while (1) {
+                while (TRUE) {
                     AddMenuCursorSprite(&gDungeonMenu);
                     DungeonRunFrameActions(0x37);
 
@@ -383,13 +383,16 @@ static void ShowPokemonSummary(Pokemon *a0)
     winTemplates.id[0].type = WINDOW_TYPE_WITH_HEADER;
     winTemplates.id[0].pos.x = 2;
     winTemplates.id[0].pos.y = 2;
-    winTemplates.id[0].width = 0x12;
-    winTemplates.id[0].height = 0xE;
-    winTemplates.id[0].unk10 = 0x12;
+    winTemplates.id[0].width = 18;
+    winTemplates.id[0].height = 14;
+    winTemplates.id[0].totalHeight = 18;
     winTemplates.id[0].unk12 = 2;
     winTemplates.id[0].header = &sReleaseMenuWinHeader;
+
     winTemplates.id[1].type = WINDOW_TYPE_NORMAL;
+
     winTemplates.id[2].type = WINDOW_TYPE_NORMAL;
+
     winTemplates.id[3].type = WINDOW_TYPE_NORMAL;
 
     r7 = 0;
@@ -397,7 +400,7 @@ static void ShowPokemonSummary(Pokemon *a0)
     unkStruct.unk56 = 0;
     gDungeonMenu.menuIndex = 0;
 
-    while (1) {
+    while (TRUE) {
         bool32 loopBreak = FALSE;
         s32 spF8[4] = {2, 3, 4, 5};
 
@@ -418,13 +421,13 @@ static void ShowPokemonSummary(Pokemon *a0)
 
         ResetTouchScreenMenuInput(&gDungeonMenu.touchScreen);
         DungeonShowWindows(&winTemplates, 1);
-        SetMonSummaryInfo(&unkStruct, a0, gDungeon->unk644.unk16);
+        SetMonSummaryInfo(&unkStruct, a0, gDungeon->unk644.unlockedEvolutions);
         ShowPokemonSummaryWindow(spF8[r7], r7, &unkStruct, &var_C8, 0);
 
         gDungeonMenu.leftRightArrowsPos.x = (gWindows[0].x + 15) * 8;
         gDungeonMenu.leftRightArrowsPos.y = ((gWindows[0].y + 1) * 8) - 2;
 
-        while (1) {
+        while (TRUE) {
             s32 r5;
 
             AddMenuCursorSprite(&gDungeonMenu);

@@ -1,6 +1,7 @@
 #ifndef GUARD_GROUND_MAIN_H
 #define GUARD_GROUND_MAIN_H
 
+#include "constants/rescue_dungeon_id.h"
 #include "structs/str_dungeon_setup.h"
 
 u32 xxx_script_related_8098468(s32 param_1);
@@ -19,7 +20,8 @@ u8 sub_80990EC(struct DungeonSetupInfo *param_1, s32 param_2);
 u8 sub_80991E0(struct DungeonSetupInfo *param_1, s16 *param_2);
 void sub_8099220(struct DungeonSetupInfo *param_1, s32 param_2);
 void sub_809927C(u8 param_1);
-bool8 sub_80992E0(s16 *param_1, s16 *param_2);
+// See enum "RescueDungeonId"
+bool8 sub_80992E0(s16 *param_1, s16 *rescueDungeonId);
 bool8 sub_8099328(u8 *dungeonId);
 bool8 sub_8099360(u8 *dungeonId);
 bool8 sub_8099394(u8 *param);

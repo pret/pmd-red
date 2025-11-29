@@ -121,7 +121,7 @@ u32 sub_802F204(unkStruct_802F204 *r0, bool8 displayClientSprite)
     // NOTE: dumb var to get correct ordering
     preload = gUnknown_203B310;
     strcpy(gSpeakerNameBuffer, preload->unk10->clientName);
-    PrintPokeNameToBuffer(gFormatBuffer_Monsters[0], GetPlayerPokemonStruct());
+    PrintPokeNameToBuffer(gFormatBuffer_Monsters[0], GetLeaderMon1());
 
     gUnknown_203B310->monPortrait.faceFile = GetDialogueSpriteDataPtr(gUnknown_203B310->unk10->clientSpecies);
     gUnknown_203B310->monPortrait.faceData = NULL;

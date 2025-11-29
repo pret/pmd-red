@@ -81,7 +81,7 @@ void sub_807EC28(bool8 arg0)
         if (!prevTileWasShop) {
             if (isShopTile == TRUE) {
                 if (sameRoom) {
-                    DisplayDungeonMessage(&dialogueInfo, gUnknown_80FE674, TRUE); // Ah welcome!
+                    DisplayDungeonMessage_Async(&dialogueInfo, gUnknown_80FE674, TRUE); // Ah welcome!
                 }
                 return;
             }
@@ -124,9 +124,9 @@ void sub_807EC28(bool8 arg0)
                                 }
                             }
                         }
-                    LOOP_BREAK:
                     }
 
+LOOP_BREAK:
                     if (sub_8070BC0(leader)) {
                         sub_806CE34(leader, GetDirectionTowardsPosition(&leader->pos, &wildMon->pos));
                     }
@@ -156,7 +156,7 @@ void sub_807EC28(bool8 arg0)
                 sub_807F33C();
             }
             else if (prevTileWasShop == TRUE && !isShopTile && sameRoom) {
-                DisplayDungeonMessage(&dialogueInfo, gUnknown_80FE65C, TRUE); // I await your next visit
+                DisplayDungeonMessage_Async(&dialogueInfo, gUnknown_80FE65C, TRUE); // I await your next visit
             }
         }
     }
@@ -188,7 +188,7 @@ void sub_807EF84(void)
         Tile *tile = GetTileAtEntitySafe(GetLeader());
         if (tile->terrainFlags & TERRAIN_TYPE_SHOP) {
             if (val != 2) {
-                DisplayDungeonMessage(&dialogueInfo, gUnknown_80FE63C, 1); // This is very disappointing, please return any items before you leave.
+                DisplayDungeonMessage_Async(&dialogueInfo, gUnknown_80FE63C, 1); // This is very disappointing, please return any items before you leave.
             }
         }
         else {
@@ -196,7 +196,7 @@ void sub_807EF84(void)
         }
     }
     else {
-        DisplayDungeonMessage(&dialogueInfo, gUnknown_80FE5F0, 1); // Looking forward to seeing you again!
+        DisplayDungeonMessage_Async(&dialogueInfo, gUnknown_80FE5F0, 1); // Looking forward to seeing you again!
     }
 }
 
@@ -213,7 +213,7 @@ static void sub_807EFFC(bool8 arg0)
         return;
 
     gFormatArgs[0] = gDungeon->unk644.unk4C;
-    if (DisplayDungeonYesNoMessage(&dialogueInfo, gUnknown_80FE5C0, TRUE) == 1) { // For the merch you have left, I shall pay X. Is that acceptable?
+    if (DisplayDungeonYesNoMessage_Async(&dialogueInfo, gUnknown_80FE5C0, TRUE) == 1) { // For the merch you have left, I shall pay X. Is that acceptable?
         s32 x, y;
         DungeonPos pos;
         s32 local_24;
@@ -243,7 +243,7 @@ static void sub_807EFFC(bool8 arg0)
         }
 
         gDungeon->unk644.unk50 += (gDungeon->unk644.unk48 - local_24);
-        DisplayDungeonMessage(&dialogueInfo, gUnknown_80FE4F4, 1); // Your patronage is valued
+        DisplayDungeonMessage_Async(&dialogueInfo, gUnknown_80FE4F4, 1); // Your patronage is valued
     }
 }
 
@@ -262,11 +262,11 @@ static s32 sub_807F19C(bool8 arg0)
         }
 
         gFormatArgs[0] = diff;
-        if (DisplayDungeonYesNoMessage(&dialogueInfo, gUnknown_80FE568, TRUE) != 1) { // The merchandise you have chosen costs X
+        if (DisplayDungeonYesNoMessage_Async(&dialogueInfo, gUnknown_80FE568, TRUE) != 1) { // The merchandise you have chosen costs X
             return 1;
         }
         if (gTeamInventoryRef->teamMoney < diff) {
-            DisplayDungeonMessage(&dialogueInfo, gUnknown_80FE520, TRUE); // You don't have enough money.
+            DisplayDungeonMessage_Async(&dialogueInfo, gUnknown_80FE520, TRUE); // You don't have enough money.
             return 2;
         }
         PlaySoundEffect(0x14c);
@@ -302,7 +302,7 @@ static s32 sub_807F19C(bool8 arg0)
             }
         }
         gDungeon->unk644.unk50 = gDungeon->unk644.unk48;
-        DisplayDungeonMessage(&dialogueInfo, gUnknown_80FE4D4, TRUE); // Thank you very much.
+        DisplayDungeonMessage_Async(&dialogueInfo, gUnknown_80FE4D4, TRUE); // Thank you very much.
     }
 
     return 0;
@@ -314,7 +314,7 @@ static void sub_807F33C(void)
 
     gDungeon->unk644.stoleFromKecleon = 1;
     gDungeon->unk644.unk2B = 1;
-    LogMessageByIdWithPopupCheckUser(GetLeader(), gUnknown_80FE4B8); // Help! Thief! I've been robbed! Help me catch the thief.
+    LogMessageByIdWithPopupCheckUser_Async(GetLeader(), gUnknown_80FE4B8); // Help! Thief! I've been robbed! Help me catch the thief.
     for (x = 0; x < DUNGEON_MAX_SIZE_X; x++) {
         for (y = 0; y < DUNGEON_MAX_SIZE_Y; y++) {
             const Tile *tile = GetTile(x,y);

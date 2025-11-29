@@ -55,7 +55,7 @@ void FriendAreasMap_InitGfx(void)
     u8 filename[12];
     s32 i, size;
 
-    Pokemon *pokeStruct = GetPlayerPokemonStruct();
+    Pokemon *pokeStruct = GetLeaderMon1();
     OpenedFile *file = OpenFileAndGetFileDataPtr(gUnknown_80D408C[0], &gTitleMenuFileArchive);
     OpenedFile *file2 = OpenFileAndGetFileDataPtr(gUnknown_80D408C[1], &gTitleMenuFileArchive);
 
@@ -180,7 +180,7 @@ static bool8 FadeScreen(void)
 
     if (gFriendAreasMapPtr->brightness < 31) {
         s32 i;
-        RGB *color = (void *) gFriendAreasMapPtr->unk0[0]->data;
+        RGB_Struct *color = (void *)gFriendAreasMapPtr->unk0[0]->data;
 
         if (++gFriendAreasMapPtr->brightness >= 31) {
             gFriendAreasMapPtr->brightness = 31;
@@ -190,7 +190,7 @@ static bool8 FadeScreen(void)
             SetBGPaletteBufferColorRGB(i, color, gFriendAreasMapPtr->brightness, NULL);
         }
 
-        color = (void *) gFriendAreasMapPtr->unk0[1]->data;
+        color = (void *)gFriendAreasMapPtr->unk0[1]->data;
         for (i = 0; i < 240; color++, i++) {
             SetBGPaletteBufferColorRGB(i + 256, color, gFriendAreasMapPtr->brightness, NULL);
         }
@@ -259,17 +259,18 @@ void FriendAreasMap_PrintCurrAreaName(void)
     windows.id[0].pos.y = 2;
     windows.id[0].width = 21;
     windows.id[0].height = 2;
-    windows.id[0].unk10 = 2;
+    windows.id[0].totalHeight = 2;
+
     windows.id[1].type = WINDOW_TYPE_NORMAL;
+
     windows.id[2].type = WINDOW_TYPE_NORMAL;
+
     windows.id[3].type = WINDOW_TYPE_NORMAL;
 
-    if (gFriendAreasMapPtr->monSpritePos.y - gFriendAreasMapPtr->bgPos.y <= 80) {
+    if (gFriendAreasMapPtr->monSpritePos.y - gFriendAreasMapPtr->bgPos.y <= 80)
         windows.id[0].pos.y = 17;
-    }
-    else {
+    else
         windows.id[0].pos.y = 1;
-    }
 
     ShowWindows(&windows, TRUE, TRUE);
     sub_80073B8(0);
@@ -296,7 +297,7 @@ void FriendAreasMap_PrintAvailableSubAreas(void)
                 .pos = {7, 2},
                 .width = 21,
                 .height = 2,
-                .unk10 = 2,
+                .totalHeight = 2,
                 .header = &header,
             },
             [1] = WIN_TEMPLATE_DUMMY,
@@ -334,7 +335,7 @@ void FriendAreasMap_PrintAvailableSubAreas(void)
     menuInput->cursorArrowPos.y = 8;
     ResetTouchScreenMenuInput(&menuInput->touchScreen);
     var = CalcEntriesTotalHeight(menuInput->entriesPerPage, 0);
-    windows.id[0].unk10 = windows.id[0].height = var + 2;
+    windows.id[0].totalHeight = windows.id[0].height = var + 2;
     sub_80137B0(menuInput, var * 8);
 
     ShowWindows(&windows, TRUE, TRUE);

@@ -18,20 +18,20 @@ static const struct ScriptCommand s_gs183_g0_s0_station_sref_script[] = { /* 0x8
     JUMP_SCRIPT(COMMON_ENTER),
 };
 
-static const struct ScriptRef s_gs183_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs183_g0_s0_station_sref_script }; /* 0x82332c4 */
+static const struct ScriptRef s_gs183_g0_s0_station_sref = { ENTER_CONTROL , 1, NULL, s_gs183_g0_s0_station_sref_script }; /* 0x82332c4 */
 
 static const struct ScriptCommand s_gs183_g1_s0_station_sref_script[] = { /* 0x82332d0 */
     DEBUGINFO_O(24),
     SELECT_MAP(183),
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(114),
+    BGM_SWITCH(MUS_IN_THE_DEPTHS_OF_THE_PIT),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     WAIT(30),
     RET,
 };
 
-static const struct ScriptRef s_gs183_g1_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs183_g1_s0_station_sref_script }; /* 0x8233350 */
+static const struct ScriptRef s_gs183_g1_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs183_g1_s0_station_sref_script }; /* 0x8233350 */
 
 static const struct ScriptCommand s_gs183_g1_s0_eff0_script[] = { /* 0x823335c */
     DEBUGINFO_O(37),
@@ -153,10 +153,10 @@ static const struct ScriptCommand s_gs183_g1_s0_lives1_dlg0[] = { /* 0x8233bec *
     ALERT_CUE(5),
     AWAIT_CUE(6),
     SELECT_ANIMATION(2),
-    { 0x93, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 0),
     ALERT_CUE(5),
     AWAIT_CUE(6),
-    ROTATE(4, 10, DIRECTION_NORTH),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_NORTH),
     CALL_SCRIPT(NOTICE_FUNC),
     AWAIT_CUE(6),
     HALT,
@@ -202,16 +202,16 @@ static const struct ScriptCommand s_gs183_g1_s1_lives0_dlg0[] = { /* 0x8233eec *
     { 0x70, 0x00,  0x0200,  0x00000000,  0x00000000, NULL },
     ALERT_CUE(5),
     AWAIT_CUE(8),
-    { 0x93, 0x04,  0x000a,  0x00000022,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 34),
     ALERT_CUE(5),
     AWAIT_CUE(8),
     WALK_GRID(128, 4),
-    { 0x93, 0x04,  0x000a,  0x00000044,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 68),
     ALERT_CUE(5),
     AWAIT_CUE(8),
     { 0x52, 0x00,  0x0000,  0x01000000,  0x00000000, NULL },
     WALK_RELATIVE(76, 0, -16),
-    { 0x93, 0x04,  0x000a,  0x00000044,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 68),
     { 0x52, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
     HALT,
 };
@@ -226,14 +226,14 @@ static const struct ScriptCommand s_gs183_g1_s1_lives1_dlg0[] = { /* 0x823405c *
     { 0x2d, 0x07,  0x0004,  0x00000000,  0x00000000, NULL },
     { 0x70, 0x00,  0x0200,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(8),
-    { 0x93, 0x04,  0x000a,  0x00000022,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 34),
     AWAIT_CUE(8),
     WALK_GRID(128, 3),
-    { 0x93, 0x04,  0x000a,  0x00000044,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 68),
     AWAIT_CUE(8),
     { 0x52, 0x00,  0x0000,  0x01000000,  0x00000000, NULL },
     WALK_RELATIVE(76, 0, -16),
-    { 0x93, 0x04,  0x000a,  0x00000044,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 68),
     { 0x52, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
     HALT,
 };
@@ -293,4 +293,4 @@ static const struct GroundLink s_gs183_links[] = { /* 0x82342b8 */
     /* link   4 */ { { /*x*/  26, /*y*/  28, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
 };
 
-/*extern*/ const struct GroundScriptHeader gGroundScript_gs183 = { LPARRAY(s_gs183_groups), s_gs183_links }; /* 0x82342e0 */
+const GroundScriptHeader gGroundScript_gs183 = { LPARRAY(s_gs183_groups), s_gs183_links }; /* 0x82342e0 */

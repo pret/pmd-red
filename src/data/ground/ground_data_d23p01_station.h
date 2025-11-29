@@ -17,13 +17,13 @@ static const struct ScriptCommand s_gs219_g0_s0_station_sref_script[] = { /* 0x8
     JUMP_SCRIPT(COMMON_ENTER),
 };
 
-static const struct ScriptRef s_gs219_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs219_g0_s0_station_sref_script }; /* 0x826a610 */
+static const struct ScriptRef s_gs219_g0_s0_station_sref = { ENTER_CONTROL , 1, NULL, s_gs219_g0_s0_station_sref_script }; /* 0x826a610 */
 
 static const struct ScriptCommand s_gs219_g1_s0_station_sref_script[] = { /* 0x826a61c */
     DEBUGINFO_O(23),
     SELECT_MAP(219),
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(114),
+    BGM_SWITCH(MUS_IN_THE_DEPTHS_OF_THE_PIT),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     BGM_FADEOUT(120),
@@ -31,7 +31,7 @@ static const struct ScriptCommand s_gs219_g1_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs219_g1_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs219_g1_s0_station_sref_script }; /* 0x826a6ac */
+static const struct ScriptRef s_gs219_g1_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs219_g1_s0_station_sref_script }; /* 0x826a6ac */
 
 static const struct ScriptCommand s_gs219_g1_s0_lives0_dlg0[] = { /* 0x826a6b8 */
     DEBUGINFO_O(37),
@@ -50,7 +50,7 @@ static const struct ScriptCommand s_gs219_g1_s0_lives0_dlg0[] = { /* 0x826a6b8 *
     ALERT_CUE(3),
     WAIT(1),
     WALK_GRID(204, 1),
-    ROTATE(4, 10, DIRECTION_NORTHEAST),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_NORTHEAST),
     HALT,
 };
 
@@ -63,7 +63,7 @@ static const struct ScriptCommand s_gs219_g1_s0_lives1_dlg0[] = { /* 0x826a84c *
     WALK_GRID(256, 2),
     AWAIT_CUE(6),
     WALK_GRID(204, 3),
-    ROTATE(4, 10, DIRECTION_NORTHWEST),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_NORTHWEST),
     HALT,
 };
 
@@ -115,4 +115,4 @@ static const struct GroundLink s_gs219_links[] = { /* 0x826a9d8 */
     /* link   3 */ { { /*x*/  24, /*y*/  19, /*flags*/ CPOS_HALFTILE, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
 };
 
-/*extern*/ const struct GroundScriptHeader gGroundScript_gs219 = { LPARRAY(s_gs219_groups), s_gs219_links }; /* 0x826a9f8 */
+const GroundScriptHeader gGroundScript_gs219 = { LPARRAY(s_gs219_groups), s_gs219_links }; /* 0x826a9f8 */

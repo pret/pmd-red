@@ -51,10 +51,10 @@ static const WindowTemplates sRecruitmentSearchWindows = {
     .id = {
             [0] = {
                 .type = WINDOW_TYPE_WITH_HEADER,
-                .pos = {2, 2},
+                .pos = { 2, 2 },
                 .width = 18,
                 .height = 14,
-                .unk10 = 18,
+                .totalHeight = 18,
                 .unk12 = 2,
                 .header = &sRecruitmentWindowHeader,
             },
@@ -71,16 +71,16 @@ void ShowRecruitmentSearchMenu(void)
     s32 currTabId = 0;
 
     if (!IsRecruitingEnabled(gDungeon->unk644.dungeonLocation.id)) {
-        DisplayDungeonMessage(NULL, gUnknown_80FA5F4, TRUE);
+        DisplayDungeonMessage_Async(NULL, gUnknown_80FA5F4, TRUE);
     }
     else if (gDungeon->unk644.unk19) {
-        DisplayDungeonMessage(NULL, gUnknown_80FA61C, TRUE);
+        DisplayDungeonMessage_Async(NULL, gUnknown_80FA61C, TRUE);
     }
     else {
         struct MonRecruitList tabsData[2];
 
         SetRecruitableMons(tabsData);
-        while (1) {
+        while (TRUE) {
             bool8 closeWindow = FALSE;
             struct MonRecruitList *currTabData = &tabsData[currTabId];
 
@@ -102,7 +102,7 @@ void ShowRecruitmentSearchMenu(void)
             gDungeonMenu.leftRightArrowsPos.x = (gWindows[0].x + 16) * 8;
             gDungeonMenu.leftRightArrowsPos.y = ((gWindows[0].y + 1) * 8) - 2;
 
-            while (1) {
+            while (TRUE) {
                 s32 touchScreenArrow;
                 bool8 scroll = FALSE;
 
@@ -325,7 +325,7 @@ static void SetRecruitableMons(struct MonRecruitList *tabsData)
                 unrecruitableRate = (u16) -999;
                 if (recruitRate == unrecruitableRate)
                     continue;
-                if (speciesId == MONSTER_MEW && !sub_80860A8(122))
+                if (speciesId == MONSTER_MEW && !ItemInInventoryOrHeld(ITEM_MUSIC_BOX))
                     continue;
             }
             else {

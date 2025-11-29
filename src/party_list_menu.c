@@ -393,7 +393,7 @@ static void PartyListMenu_CreateMenu1(void)
         }
         loopMax += 1;
 
-        if(sub_80023E4(8) && !pokeStruct->isTeamLeader)
+        if(CheckQuest(QUEST_CAN_CHANGE_LEADER) && !pokeStruct->isTeamLeader)
         {
             sUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuMakeLeader;
             sUnknown_203B2B8->unk16C[loopMax].menuAction = PARTY_LIST_MENU_MAKE_LEADER;
@@ -552,7 +552,7 @@ static void PartyListMenu_HandleMenu1(void)
         break;
     case PARTY_LIST_MENU_MAKE_LEADER:
         newLeader = &gRecruitedPokemonRef->pokemon[sUnknown_203B2B8->pokeSpecies];
-        playerPokemon = GetPlayerPokemonStruct();
+        playerPokemon = GetLeaderMon1();
 
         if (!newLeader->isTeamLeader) {
             playerPokemon->isTeamLeader = FALSE;
@@ -860,7 +860,7 @@ static bool8 sub_8026E88(Pokemon *r0)
     {
         flag = (r0->dungeonLocation.id == DUNGEON_JOIN_LOCATION_PARTNER);
         if(flag)
-            if(!sub_80023E4(0x8))
+            if(!CheckQuest(QUEST_CAN_CHANGE_LEADER))
                 return FALSE;
     }
     else
@@ -871,14 +871,14 @@ static bool8 sub_8026E88(Pokemon *r0)
 static bool8 sub_8026EB8(Pokemon *r0)
 {
     bool8 flag;
-    if(sub_808D3BC() != r0)
-        if(sub_808D3F8() != r0)
+    if(GetLeaderMon2() != r0)
+        if(GetPartnerMon2() != r0)
             if(!r0->isTeamLeader)
             {
                 flag = (r0->dungeonLocation.id == DUNGEON_JOIN_LOCATION_PARTNER);
                 if(flag)
                 {
-                    if(sub_80023E4(0x8))
+                    if(CheckQuest(QUEST_CAN_CHANGE_LEADER))
                         goto check;
                 }
                 else

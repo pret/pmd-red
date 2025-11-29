@@ -12,9 +12,9 @@ static s32 OtherRandom16(void)
 }
 
 // arm9.bin::020127DC
-s32 OtherRandInt(s32 cap)
+s32 OtherRandInt(s32 exclusiveMax)
 {
-    return (OtherRandom16() * cap) >> 16;
+    return (OtherRandom16() * exclusiveMax) >> 16;
 }
 
 // arm9.bin::020127C4

@@ -44,7 +44,7 @@
 #include "dungeon_entity_movement.h"
 #include "dungeon_main.h"
 
-void ApplyEndOfTurnEffects(Entity *entity)
+void DoEndOfTurnEffects_Async(Entity *entity)
 {
     s32 rand;
     EntityInfo *entityInfo;
@@ -63,8 +63,8 @@ void ApplyEndOfTurnEffects(Entity *entity)
             entityInfo->turnsSinceWarpScarfActivation = WARP_SCARF_ACTIVATION_CHANCES_COUNT - 1;
         if (DungeonRandInt(100) < gWarpScarfActivationChances[entityInfo->turnsSinceWarpScarfActivation]) {
             entityInfo->turnsSinceWarpScarfActivation = 0;
-            sub_80444F4(entity);
-            DisplayActions(NULL);
+            sub_80444F4_Async(entity);
+            DisplayActions_Async(NULL);
             if (!EntityIsValid(entity) || IsFloorOver())
                 return;
             WarpTarget(entity, entity, 0, NULL);
@@ -124,8 +124,8 @@ void ApplyEndOfTurnEffects(Entity *entity)
 
         if (FixedPointToInt(entityInfo->belly) == 0) {
             sub_805E804();
-            sub_80444F4(entity);
-            DisplayActions(NULL);
+            sub_80444F4_Async(entity);
+            DisplayActions_Async(NULL);
             if (!EntityIsValid(entity) || IsFloorOver())
                 return;
             if (gDungeon->unk644.emptyBellyAlert < MAX_EMPTY_BELLY_ALERT_STEPS)
@@ -144,7 +144,7 @@ void ApplyEndOfTurnEffects(Entity *entity)
             }
 
             TrySendImmobilizeSleepEndMsg(entity, entity);
-            DealDamageToEntity(entity, 1, RESIDUAL_DAMAGE_HUNGER, DUNGEON_EXIT_FAINTED_FROM_HUNGER);
+            DealDamageToEntity_Async(entity, 1, RESIDUAL_DAMAGE_HUNGER, DUNGEON_EXIT_FAINTED_FROM_HUNGER);
             entityInfo->bellyEmpty = TRUE;
             if (FixedPointToInt(entityInfo->belly) != 0)
                 str = NULL;
@@ -156,8 +156,8 @@ void ApplyEndOfTurnEffects(Entity *entity)
         if (str != NULL) {
             if (sound)
                 PlaySoundEffect(0x153);
-            LogMessageByIdWithPopupCheckUser(entity, str);
-            sub_803E708(30, 0x32);
+            LogMessageByIdWithPopupCheckUser_Async(entity, str);
+            DungeonWaitFrames_Async(30, 0x32);
         }
     }
 
@@ -166,12 +166,12 @@ void ApplyEndOfTurnEffects(Entity *entity)
     if (gDungeon->weather.weatherDamageCounter == 0) {
         if (GetApparentWeather(entity) == WEATHER_HAIL) {
             if (!MonsterIsType(entity, TYPE_ICE)) {
-                DealDamageToEntity(entity, gHailSandstormDmgValue, RESIDUAL_DAMAGE_BAD_WEATHER, DUNGEON_EXIT_FAINTED_DUE_TO_WEATHER);
+                DealDamageToEntity_Async(entity, gHailSandstormDmgValue, RESIDUAL_DAMAGE_BAD_WEATHER, DUNGEON_EXIT_FAINTED_DUE_TO_WEATHER);
             }
         }
         else if (GetApparentWeather(entity) == WEATHER_SANDSTORM) {
             if (!MonsterIsType(entity, TYPE_GROUND) && !MonsterIsType(entity, TYPE_ROCK) && !MonsterIsType(entity, TYPE_STEEL)) {
-                DealDamageToEntity(entity, gHailSandstormDmgValue, RESIDUAL_DAMAGE_BAD_WEATHER, DUNGEON_EXIT_FAINTED_DUE_TO_WEATHER);
+                DealDamageToEntity_Async(entity, gHailSandstormDmgValue, RESIDUAL_DAMAGE_BAD_WEATHER, DUNGEON_EXIT_FAINTED_DUE_TO_WEATHER);
             }
         }
         if (!EntityIsValid(entity) || IsFloorOver())
@@ -181,7 +181,7 @@ void ApplyEndOfTurnEffects(Entity *entity)
 // Abilities check
     rand = DungeonRandInt(100);
     if (AbilityIsActive(entity, ABILITY_SHED_SKIN) && rand < gShedSkinActivateChance && MonsterHasNegativeStatus(entity)) {
-        DisplayActions(NULL);
+        DisplayActions_Async(NULL);
         if (!EntityIsValid(entity) || IsFloorOver())
             return;
         sub_8079F20(entity, entity, 1, 0);
@@ -196,7 +196,7 @@ void ApplyEndOfTurnEffects(Entity *entity)
 
 // Statuses
     if (entityInfo->sleepClassStatus.status == STATUS_YAWNING) {
-        DisplayActions(NULL);
+        DisplayActions_Async(NULL);
         if (!EntityIsValid(entity) || IsFloorOver())
             return;
         sub_80420B8(entity);
@@ -204,12 +204,12 @@ void ApplyEndOfTurnEffects(Entity *entity)
 
     if (entityInfo->burnClassStatus.status == STATUS_BURN) {
         if (entityInfo->burnClassStatus.damageCountdown == 0 || --entityInfo->burnClassStatus.damageCountdown == 0) {
-            DisplayActions(NULL);
+            DisplayActions_Async(NULL);
             if (!EntityIsValid(entity) || IsFloorOver())
                 return;
             entityInfo->burnClassStatus.damageCountdown = gBurnDmgCountdown;
             TrySendImmobilizeSleepEndMsg(entity, entity);
-            DealDamageToEntity(entity, gBurnDmgValue, RESIDUAL_DAMAGE_BURN, DUNGEON_EXIT_FAINTED_FROM_BURN);
+            DealDamageToEntity_Async(entity, gBurnDmgValue, RESIDUAL_DAMAGE_BURN, DUNGEON_EXIT_FAINTED_FROM_BURN);
         }
         if (!EntityIsValid(entity) || IsFloorOver())
             return;
@@ -217,12 +217,12 @@ void ApplyEndOfTurnEffects(Entity *entity)
 
     if (entityInfo->burnClassStatus.status == STATUS_POISONED) {
         if (entityInfo->burnClassStatus.damageCountdown == 0 || --entityInfo->burnClassStatus.damageCountdown == 0) {
-            DisplayActions(NULL);
+            DisplayActions_Async(NULL);
             if (!EntityIsValid(entity) || IsFloorOver())
                 return;
             entityInfo->burnClassStatus.damageCountdown = gPoisonDmgCountdown;
             TrySendImmobilizeSleepEndMsg(entity, entity);
-            DealDamageToEntity(entity, gPoisonDmgValue, RESIDUAL_DAMAGE_POISON, DUNGEON_EXIT_FAINTED_FROM_POISON);
+            DealDamageToEntity_Async(entity, gPoisonDmgValue, RESIDUAL_DAMAGE_POISON, DUNGEON_EXIT_FAINTED_FROM_POISON);
         }
         if (!EntityIsValid(entity) || IsFloorOver())
             return;
@@ -236,12 +236,12 @@ void ApplyEndOfTurnEffects(Entity *entity)
             if (turns >= BAD_POISON_DMG_TURN_VALUES_COUNT - 1)
                 turns = BAD_POISON_DMG_TURN_VALUES_COUNT - 1;
 
-            DisplayActions(NULL);
+            DisplayActions_Async(NULL);
             if (!EntityIsValid(entity) || IsFloorOver())
                 return;
 
             TrySendImmobilizeSleepEndMsg(entity, entity);
-            DealDamageToEntity(entity, gBadPoisonDmgValuesByTurn[turns], RESIDUAL_DAMAGE_POISON, DUNGEON_EXIT_FAINTED_FROM_POISON);
+            DealDamageToEntity_Async(entity, gBadPoisonDmgValuesByTurn[turns], RESIDUAL_DAMAGE_POISON, DUNGEON_EXIT_FAINTED_FROM_POISON);
         }
         if (!EntityIsValid(entity) || IsFloorOver())
             return;
@@ -249,32 +249,32 @@ void ApplyEndOfTurnEffects(Entity *entity)
 
     if (entityInfo->frozenClassStatus.status == STATUS_CONSTRICTION) {
         if (entityInfo->frozenClassStatus.damageCountdown == 0 || --entityInfo->frozenClassStatus.damageCountdown == 0) {
-            DisplayActions(NULL);
+            DisplayActions_Async(NULL);
             if (!EntityIsValid(entity) || IsFloorOver())
                 return;
             entityInfo->frozenClassStatus.damageCountdown = gConstrictionDmgCountdown;
             TrySendImmobilizeSleepEndMsg(entity, entity);
             sub_8041C4C(entity, entityInfo->frozenClassStatus.unk4);
-            DealDamageToEntity(entity, gConstrictionDmgValue, RESIDUAL_DAMAGE_CONSTRICT, DUNGEON_EXIT_FAINTED_FROM_CONSTRICTION);
+            DealDamageToEntity_Async(entity, gConstrictionDmgValue, RESIDUAL_DAMAGE_CONSTRICT, DUNGEON_EXIT_FAINTED_FROM_CONSTRICTION);
         }
         if (!EntityIsValid(entity) || IsFloorOver())
             return;
     }
     else if (entityInfo->frozenClassStatus.status == STATUS_WRAPPED) {
         if (entityInfo->frozenClassStatus.damageCountdown == 0 || --entityInfo->frozenClassStatus.damageCountdown == 0) {
-            DisplayActions(NULL);
+            DisplayActions_Async(NULL);
             if (!EntityIsValid(entity) || IsFloorOver())
                 return;
             entityInfo->frozenClassStatus.damageCountdown = gWrapDmgCountdown;
             TrySendImmobilizeSleepEndMsg(entity, entity);
-            DealDamageToEntity(entity, gWrapDmgValue, RESIDUAL_DAMAGE_WRAP, DUNGEON_EXIT_FAINTED_FROM_WRAP);
+            DealDamageToEntity_Async(entity, gWrapDmgValue, RESIDUAL_DAMAGE_WRAP, DUNGEON_EXIT_FAINTED_FROM_WRAP);
         }
         if (!EntityIsValid(entity) || IsFloorOver())
             return;
     }
     else if (entityInfo->frozenClassStatus.status == STATUS_INGRAIN) {
         if (entityInfo->frozenClassStatus.damageCountdown == 0 || --entityInfo->frozenClassStatus.damageCountdown == 0) {
-            DisplayActions(NULL);
+            DisplayActions_Async(NULL);
             if (!EntityIsValid(entity) || IsFloorOver())
                 return;
             entityInfo->frozenClassStatus.damageCountdown = gIngrainHealCountdown;
@@ -288,12 +288,12 @@ void ApplyEndOfTurnEffects(Entity *entity)
             if (dmg == 0)
                 dmg = 1;
             entityInfo->curseClassStatus.damageCountdown = gCurseDmgCountdown;
-            DisplayActions(NULL);
+            DisplayActions_Async(NULL);
             if (!EntityIsValid(entity) || IsFloorOver())
                 return;
 
             TrySendImmobilizeSleepEndMsg(entity, entity);
-            DealDamageToEntity(entity, dmg, RESIDUAL_DAMAGE_CURSE, DUNGEON_EXIT_FELLED_BY_CURSE);
+            DealDamageToEntity_Async(entity, dmg, RESIDUAL_DAMAGE_CURSE, DUNGEON_EXIT_FELLED_BY_CURSE);
         }
         if (!EntityIsValid(entity) || IsFloorOver())
             return;
@@ -315,17 +315,17 @@ void ApplyEndOfTurnEffects(Entity *entity)
                 }
                 else {
                     bool8 dmgUser = AbilityIsActive(entity, ABILITY_LIQUID_OOZE);
-                    sub_80444F4(entity);
-                    DisplayActions(NULL);
+                    sub_80444F4_Async(entity);
+                    DisplayActions_Async(NULL);
                     if (!EntityIsValid(entity) || !EntityIsValid(target) || IsFloorOver())
                         return;
 
                     if (entityInfo->frozenClassStatus.status != STATUS_FROZEN) {
                         TrySendImmobilizeSleepEndMsg(entity, entity);
-                        DealDamageToEntity(entity, hp, RESIDUAL_DAMAGE_LEECH_SEED, DUNGEON_EXIT_DRAINED_BY_LEECH_SEED);
+                        DealDamageToEntity_Async(entity, hp, RESIDUAL_DAMAGE_LEECH_SEED, DUNGEON_EXIT_DRAINED_BY_LEECH_SEED);
                         if (dmgUser) {
                             TrySendImmobilizeSleepEndMsg(target, target);
-                            DealDamageToEntity(target, hp, RESIDUAL_DAMAGE_LIQUID_OOZE, DUNGEON_EXIT_FAINTED_COVERED_IN_SLUDGE);
+                            DealDamageToEntity_Async(target, hp, RESIDUAL_DAMAGE_LIQUID_OOZE, DUNGEON_EXIT_FAINTED_COVERED_IN_SLUDGE);
                         }
                         else {
                             HealTargetHP(target, target, hp, 0, TRUE);
@@ -341,17 +341,17 @@ void ApplyEndOfTurnEffects(Entity *entity)
     if (entityInfo->perishSongTurns != 0) {
         sub_80838EC(&entityInfo->perishSongTurns);
         if (entityInfo->perishSongTurns == 0) {
-            DisplayActions(NULL);
+            DisplayActions_Async(NULL);
             if (!EntityIsValid(entity) || IsFloorOver())
                 return;
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], entity, 0);
-            LogMessageByIdWithPopupCheckUser(entity, gUnknown_80FEB30);
+            LogMessageByIdWithPopupCheckUser_Async(entity, gUnknown_80FEB30);
             TrySendImmobilizeSleepEndMsg(entity, entity);
             if (entityInfo->reflectClassStatus.status == STATUS_PROTECT) {
-                LogMessageByIdWithPopupCheckUser(entity, gPtrProtectSavedItMessage);
+                LogMessageByIdWithPopupCheckUser_Async(entity, gPtrProtectSavedItMessage);
             }
             else {
-                DealDamageToEntity(entity, 9999, RESIDUAL_DAMAGE_PERISH_SONG, DUNGEON_EXIT_FAINTED_FROM_PERISH_SONG);
+                DealDamageToEntity_Async(entity, 9999, RESIDUAL_DAMAGE_PERISH_SONG, DUNGEON_EXIT_FAINTED_FROM_PERISH_SONG);
             }
             if (!EntityIsValid(entity) || IsFloorOver())
                 return;
@@ -365,7 +365,7 @@ void ApplyEndOfTurnEffects(Entity *entity)
             if (!CheckVariousStatuses2(entity, FALSE) && !CannotAttack(entity, FALSE) && !CheckVariousStatuses(entity)) {
                 Move bideMove;
 
-                DisplayActions(NULL);
+                DisplayActions_Async(NULL);
                 InitPokemonMove(&bideMove, MOVE_BIDE_2);
                 bideMove.moveFlags |= MOVE_FLAG_LAST_USED;
                 TryUseChosenMove(entity, 0, 0, 0, 0, &bideMove);
@@ -385,7 +385,7 @@ void ApplyEndOfTurnEffects(Entity *entity)
             entityInfo->bideClassStatus.status = 0;
             entityInfo->unk14A = 0;
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], entity, 0);
-            LogMessageByIdWithPopupCheckUser(entity, gUnknown_80FABD8);
+            LogMessageByIdWithPopupCheckUser_Async(entity, gUnknown_80FABD8);
         }
     }
 
@@ -541,7 +541,7 @@ void TickStatusAndHealthRegen(Entity *entity)
         sub_80838EC(&entityInfo->terrifiedTurns);
         if (entityInfo->terrifiedTurns == 0) {
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], entity, 0);
-            LogMessageByIdWithPopupCheckUser(entity, gPtrStenchWavedOffMessage);
+            LogMessageByIdWithPopupCheckUser_Async(entity, gPtrStenchWavedOffMessage);
         }
     }
 
@@ -565,7 +565,7 @@ void TickStatusAndHealthRegen(Entity *entity)
 
         if (oldSpdStage != newSpdStage) {
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], entity, 0);
-            LogMessageByIdWithPopupCheckUser(entity, gUnknown_80FA124[newSpdStage]);
+            LogMessageByIdWithPopupCheckUser_Async(entity, gUnknown_80FA124[newSpdStage]);
         }
     }
 }

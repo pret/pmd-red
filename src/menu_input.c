@@ -64,7 +64,7 @@ static s32 GetCurrMenuIndex(MenuInputStruct *menuInput);
 void sub_8012A18(s32 unused)
 {
     UpdateSoundEffectCounters();
-    DrawDialogueBoxString();
+    DrawDialogueBoxString_Async();
     nullsub_8(gGameOptionsRef->touchScreen);
     sub_8005180();
     sub_80060EC();
@@ -237,7 +237,7 @@ void sub_8012D08(WindowTemplate *winTemplate, s32 entriesCount)
 
     sVar3 = sVar2;
     winTemplate->height = sVar3;
-    winTemplate->unk10 = sVar3;
+    winTemplate->totalHeight = sVar3;
 }
 
 void sub_8012D34(WindowTemplate *winTemplate, s32 entriesCount)
@@ -251,7 +251,7 @@ void sub_8012D34(WindowTemplate *winTemplate, s32 entriesCount)
 
     sVar3 = sVar2;
     winTemplate->height = sVar3;
-    winTemplate->unk10 = sVar3;
+    winTemplate->totalHeight = sVar3;
 }
 
 // arm9.bin::0201C26C
@@ -821,6 +821,7 @@ static inline void CreateMenuOnWindowInternal(MenuInputStruct *menuInput, s32 to
     SetEntryHeight(menuInput, entryHeight);
 }
 
+// arm9.bin::0201AF28
 void CreateMenuOnWindow(MenuInputStruct *menuInput, s32 totalCount, u32 perPageCount, s32 windowId)
 {
     CreateMenuOnWindowInternal(menuInput, totalCount, perPageCount, windowId, DEFAULT_MENU_ENTRY_HEIGHT);

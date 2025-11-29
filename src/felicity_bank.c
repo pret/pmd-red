@@ -135,17 +135,17 @@ static void sub_801645C(void)
 
     switch (sFelicityBankWork->currState) {
         case 2:
-            sFelicityBankWork->unkA8.id[0].unk0 = 0x80;
-            sFelicityBankWork->unkA8.id[1].unk0 = 0x80;
-            sFelicityBankWork->unkA8.id[2].unk0 = 0x80;
+            sFelicityBankWork->unkA8.id[0].flags = WINTEMPLATE_FLAG_x80;
+            sFelicityBankWork->unkA8.id[1].flags = WINTEMPLATE_FLAG_x80;
+            sFelicityBankWork->unkA8.id[2].flags = WINTEMPLATE_FLAG_x80;
             sFelicityBankWork->unkA8.id[3] = sUnknown_80DB6F4;
             ResetUnusedInputStruct();
             ShowWindows(&sFelicityBankWork->unkA8, TRUE, FALSE);
             break;
         case FELICITY_BANK_STORE_HOW_MUCH:
         case FELICITY_BANK_TAKE_HOW_MUCH:
-            sFelicityBankWork->unkA8.id[0].unk0 = 0x80;
-            sFelicityBankWork->unkA8.id[1].unk0 = 0x80;
+            sFelicityBankWork->unkA8.id[0].flags = WINTEMPLATE_FLAG_x80;
+            sFelicityBankWork->unkA8.id[1].flags = WINTEMPLATE_FLAG_x80;
             sFelicityBankWork->unkA8.id[3] = sUnknown_80DB6F4;
             sFelicityBankWork->unkA8.id[2] = sUnknown_80DB70C;
             ResetUnusedInputStruct();

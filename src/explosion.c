@@ -102,16 +102,16 @@ void HandleExplosion(Entity *pokemon,Entity *target,DungeonPos *param_3,s32 para
     if (index != DUNGEON_MAX_POKEMON) {
         sub_804218C(pokemon,target);
         SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80F96EC);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80F96EC);
     }
     else if (GetApparentWeather(target) == WEATHER_RAIN) {
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80F96EC);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80F96EC);
     }
     else
     {
         sub_804216C(pokemon,target,param_4);
         SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80F96BC);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80F96BC);
         flag = FALSE;
 
         posPtr = (gUnknown_8107178)[param_4];
@@ -198,7 +198,7 @@ static void sub_807E1A0(Entity *pokemon,Entity *target,u8 moveType,s32 dungeonEx
            newHP /= 2;
         }
       }
-      sub_806F370(pokemon,target,newHP,0,&flag,moveType,dungeonExitReason,RESIDUAL_DAMAGE_REGULAR,0,0);
+      sub_806F370_Async(pokemon,target,newHP,0,&flag,moveType,dungeonExitReason,RESIDUAL_DAMAGE_REGULAR,0,0);
     }
   }
 }

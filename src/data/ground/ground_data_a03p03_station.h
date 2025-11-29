@@ -13,7 +13,7 @@ static const struct ScriptCommand s_gs170_g0_s0_station_sref_script[] = { /* 0x8
     JUMP_SCRIPT(COMMON_ENTER),
 };
 
-static const struct ScriptRef s_gs170_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs170_g0_s0_station_sref_script }; /* 0x821d250 */
+static const struct ScriptRef s_gs170_g0_s0_station_sref = { ENTER_CONTROL , 1, NULL, s_gs170_g0_s0_station_sref_script }; /* 0x821d250 */
 
 static const struct ScriptCommand s_gs170_g1_s0_station_sref_script[] = { /* 0x821d25c */
     DEBUGINFO_O(19),
@@ -27,7 +27,7 @@ static const struct ScriptCommand s_gs170_g1_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs170_g1_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs170_g1_s0_station_sref_script }; /* 0x821d2ec */
+static const struct ScriptRef s_gs170_g1_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs170_g1_s0_station_sref_script }; /* 0x821d2ec */
 
 static const struct ScriptCommand s_gs170_g1_s0_lives0_dlg0[] = { /* 0x821d2f8 */
     DEBUGINFO_O(33),
@@ -38,12 +38,12 @@ static const struct ScriptCommand s_gs170_g1_s0_lives0_dlg0[] = { /* 0x821d2f8 *
     WAIT(30),
     WAIT(120),
     PORTRAIT(PLACEMENT_LEFT_, 0x0000, 0x00000000),
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("(This icy mountain path seems to go\non forever...)") },
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("(We've walked a long way here...)") },
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("({NAME_1} looks exhausted, too...)") },
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("(We've been running all this time out\nof desperation...)") },
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("(What's in store for us ahead?)") },
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("(Are we really doing the right thing?)") },
+    MSG_QUIET(0, _("(This icy mountain path seems to go\non forever...)")),
+    MSG_QUIET(0, _("(We've walked a long way here...)")),
+    MSG_QUIET(0, _("({NAME_1} looks exhausted, too...)")),
+    MSG_QUIET(0, _("(We've been running all this time out\nof desperation...)")),
+    MSG_QUIET(0, _("(What's in store for us ahead?)")),
+    MSG_QUIET(0, _("(Are we really doing the right thing?)")),
     TEXTBOX_CLEAR,
     WAIT(30),
     PORTRAIT(PLACEMENT_MIDDLE_TOP_RIGHT_FLIP, 0x0001, 0x00000002),
@@ -84,7 +84,7 @@ static const struct ScriptCommand s_gs170_g1_s0_lives0_dlg0[] = { /* 0x821d2f8 *
     { 0x3b, 0x36,  0x0000,  0x00000000,  0x00000000, NULL },
     SELECT_ANIMATION(2),
     ALERT_CUE(6),
-    ROTATE(4, 1, DIRECTION_SOUTHEAST),
+    ROTATE_TO(4, DIR_TRANS_SPINRIGHT1, DIRECTION_SOUTHEAST),
     PORTRAIT(PLACEMENT_MIDDLE_TOP_RIGHT, 0x0001, 0x00000000),
     PORTRAIT_POS(1, 0, 2),
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
@@ -118,7 +118,7 @@ static const struct ScriptCommand s_gs170_g1_s0_lives0_dlg0[] = { /* 0x821d2f8 *
     { 0x3b, 0x36,  0x0000,  0x00000000,  0x00000000, NULL },
     SELECT_ANIMATION(2),
     ALERT_CUE(6),
-    ROTATE(4, 1, DIRECTION_SOUTHEAST),
+    ROTATE_TO(4, DIR_TRANS_SPINRIGHT1, DIRECTION_SOUTHEAST),
     PORTRAIT(PLACEMENT_MIDDLE_TOP_RIGHT, 0x0001, 0x00000000),
     PORTRAIT_POS(1, 0, 2),
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
@@ -151,10 +151,10 @@ static const struct ScriptCommand s_gs170_g1_s0_lives0_dlg0[] = { /* 0x821d2f8 *
   LABEL(5), /* = 0x05 */
     ALERT_CUE(6),
     WAIT(45),
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("(Yes...)") },
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("({NAME_1} trusts me without any\ndoubt.)") },
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("(I can't afford to be indecisive.)") },
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("(I have to believe in myself more.)") },
+    MSG_QUIET(0, _("(Yes...)")),
+    MSG_QUIET(0, _("({NAME_1} trusts me without any\ndoubt.)")),
+    MSG_QUIET(0, _("(I can't afford to be indecisive.)")),
+    MSG_QUIET(0, _("(I have to believe in myself more.)")),
     TEXTBOX_CLEAR,
     WAIT(30),
     BGM_FADEOUT(30),
@@ -169,7 +169,7 @@ static const struct ScriptCommand s_gs170_g1_s0_lives0_dlg0[] = { /* 0x821d2f8 *
     SELECT_ANIMATION(2),
     WAIT(60),
     PORTRAIT_REP(0x0000, 0x00000002),
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("(...{WAIT_PRESS}Wh-what?{WAIT_PRESS} What was that?)") },
+    MSG_QUIET(0, _("(...{WAIT_PRESS}Wh-what?{WAIT_PRESS} What was that?)")),
     TEXTBOX_CLEAR,
     FANFARE_PLAY2(476),
     { 0x28, 0x01,  0x0007,  0x00000004,  0x00806040, NULL },
@@ -180,7 +180,7 @@ static const struct ScriptCommand s_gs170_g1_s0_lives0_dlg0[] = { /* 0x821d2f8 *
     { 0x27, 0x01,  0x0007,  0x0000000c,  0x00806040, NULL },
     { 0x54, 0x00,  0x0300,  0x00000000,  0x00000000, NULL },
     SELECT_ANIMATION(2),
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("(...D-dizzy?{WAIT_PRESS} Or what?)") },
+    MSG_QUIET(0, _("(...D-dizzy?{WAIT_PRESS} Or what?)")),
     TEXTBOX_CLEAR,
     FANFARE_PLAY2(469),
     ALERT_CUE(6),
@@ -205,15 +205,15 @@ static const struct ScriptCommand s_gs170_g1_s0_lives0_dlg0[] = { /* 0x821d2f8 *
     MSG_NPC(-1, _(" ...Finally, you have arrived...")),
     TEXTBOX_CLEAR,
     WAIT(10),
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("(Someone...{WAIT_PRESS}\nSomeone is talking to me...)") },
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("({NAME_1}...?{WAIT_PRESS} No.\nThis voice isn't {NAME_1}...)") },
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("(This voice...{WAIT_PRESS}\nI've heard it somewhere...)") },
+    MSG_QUIET(0, _("(Someone...{WAIT_PRESS}\nSomeone is talking to me...)")),
+    MSG_QUIET(0, _("({NAME_1}...?{WAIT_PRESS} No.\nThis voice isn't {NAME_1}...)")),
+    MSG_QUIET(0, _("(This voice...{WAIT_PRESS}\nI've heard it somewhere...)")),
     TEXTBOX_CLEAR,
     WAIT(10),
     FANFARE_PLAY2(477),
     SELECT_ENTITIES(-1, 1),
     { 0x27, 0x01,  0x0005,  0x00000030,  0x00000000, NULL },
-    ROTATE(4, 2, DIRECTION_EAST),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_EAST),
     WAIT(30),
     MSG_NPC(-1, _(" Finally...")),
     MSG_NPC(-1, _(" You have arrived...")),
@@ -235,7 +235,7 @@ static const struct ScriptCommand s_gs170_g1_s0_lives1_dlg0[] = { /* 0x821ec08 *
     { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(6),
     SELECT_ANIMATION(2),
-    ROTATE(4, 2, DIRECTION_NORTHWEST),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_NORTHWEST),
     AWAIT_CUE(6),
     { 0x56, 0x00,  0x0000,  0x0000005d,  0x00000000, NULL },
     ALERT_CUE(5),
@@ -253,7 +253,7 @@ static const struct ScriptCommand s_gs170_g1_s0_lives2_dlg0[] = { /* 0x821ed08 *
     SELECT_ANIMATION(5),
     AWAIT_CUE(6),
     SELECT_ANIMATION(2),
-    ROTATE(4, 2, DIRECTION_NORTHEAST),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_NORTHEAST),
     AWAIT_CUE(6),
     HALT,
 };
@@ -278,7 +278,7 @@ static const struct ScriptCommand s_gs170_g2_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs170_g2_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs170_g2_s0_station_sref_script }; /* 0x821ee58 */
+static const struct ScriptRef s_gs170_g2_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs170_g2_s0_station_sref_script }; /* 0x821ee58 */
 
 static const struct ScriptCommand s_gs170_g2_s0_lives0_dlg0[] = { /* 0x821ee64 */
     DEBUGINFO_O(284),
@@ -292,7 +292,7 @@ static const struct ScriptCommand s_gs170_g2_s0_lives0_dlg0[] = { /* 0x821ee64 *
     TEXTBOX_CLEAR,
     WAIT(10),
     PORTRAIT(PLACEMENT_LEFT_, 0x0000, 0x00000000),
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("...You're...{WAIT_PRESS} What...") },
+    MSG_QUIET(0, _("...You're...{WAIT_PRESS} What...")),
     TEXTBOX_CLEAR,
     WAIT(10),
     ALERT_CUE(6),
@@ -308,9 +308,9 @@ static const struct ScriptCommand s_gs170_g2_s0_lives0_dlg0[] = { /* 0x821ee64 *
     WAIT(10),
     FANFARE_PLAY2(465),
     CALL_SCRIPT(NOTICE_FUNC),
-    ROTATE(4, 1, DIRECTION_SOUTHEAST),
+    ROTATE_TO(4, DIR_TRANS_SPINRIGHT1, DIRECTION_SOUTHEAST),
     WAIT(64),
-    ROTATE(4, 2, DIRECTION_EAST),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_EAST),
     WAIT(16),
     MSG_NPC(2, _(" I cannot be seen by others.")),
     MSG_NPC(2, _(" I am visible only to you.")),
@@ -322,7 +322,7 @@ static const struct ScriptCommand s_gs170_g2_s0_lives0_dlg0[] = { /* 0x821ee64 *
     TEXTBOX_CLEAR,
     WAIT(10),
     PORTRAIT_REP(0x0000, 0x0000000c),
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("...Ninetales?!") },
+    MSG_QUIET(0, _("...Ninetales?!")),
     TEXTBOX_CLEAR,
     WAIT(10),
     MSG_NPC(2, _(" Ninetales awaits your\narrival.")),
@@ -331,11 +331,11 @@ static const struct ScriptCommand s_gs170_g2_s0_lives0_dlg0[] = { /* 0x821ee64 *
     MSG_NPC(2, _(" Beware...")),
     TEXTBOX_CLEAR,
     WAIT(10),
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("Oh! W-wait...!") },
+    MSG_QUIET(0, _("Oh! W-wait...!")),
     UPDATE_VARINT(CALC_SET, EVENT_LOCAL, 1),
     WAIT(60),
     PORTRAIT_REP(0x0000, 0x00000005),
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("..................") },
+    MSG_QUIET(0, _("..................")),
     TEXTBOX_CLEAR,
     WAIT(10),
     ALERT_CUE(6),
@@ -377,10 +377,10 @@ static const struct ScriptCommand s_gs170_g2_s0_lives2_dlg0[] = { /* 0x821f5e4 *
     SELECT_ANIMATION(2),
     AWAIT_CUE(6),
     CALL_SCRIPT(LOOK_AROUND_RIGHT_FUNC),
-    ROTATE(4, 10, DIRECTION_NORTHEAST),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_NORTHEAST),
     AWAIT_CUE(6),
     CALL_SCRIPT(LOOK_AROUND_LEFT_FUNC),
-    ROTATE(4, 10, DIRECTION_NORTHEAST),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_NORTHEAST),
     AWAIT_CUE(6),
     HALT,
 };
@@ -482,4 +482,4 @@ static const struct GroundLink s_gs170_links[] = { /* 0x821f9a0 */
     {},
 };
 
-/*extern*/ const struct GroundScriptHeader gGroundScript_gs170 = { LPARRAY(s_gs170_groups), s_gs170_links }; /* 0x821f9a8 */
+const GroundScriptHeader gGroundScript_gs170 = { LPARRAY(s_gs170_groups), s_gs170_links }; /* 0x821f9a8 */

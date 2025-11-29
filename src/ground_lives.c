@@ -99,7 +99,7 @@ IWRAM_INIT struct GroundLives *gGroundLives = NULL;
 struct GroundLiveTypeData
 {
     s16 unk0;
-    s16 unk2;
+    s16 unk2; // Some species
     const char *unk4;
     u8 unk8;
     u8 unk9;
@@ -251,7 +251,7 @@ void FreeGroundLives(void)
     gGroundLivesMeta = NULL;
 }
 
-void GroundLives_Select(s32 scriptID, s32 group, s32 sector)
+void GroundLives_Select(s32 mapID, s32 group, s32 sector)
 {
     const struct GroundScriptHeader *scriptPtr;
     const struct GroundScriptSector *sectorPtr;
@@ -262,13 +262,13 @@ void GroundLives_Select(s32 scriptID, s32 group, s32 sector)
     const GroundLivesData *livesData;
     s32 sector_s32;
     s32 group_s32;
-    s32 scriptID_s32;
+    s32 mapID_s32;
 
-    scriptID_s32 = (s16)scriptID;
+    mapID_s32 = (s16)mapID;
     group_s32 = (s16)group;
     sector_s32 = (s8)sector;
-    scriptPtr = GetGroundScript(scriptID_s32, DEBUG_LOC_PTR("../ground/ground_lives.c", 542, "GroundLives_Select"));
-    Log('\0',"GroundLives Select %3d  %3d  %3d", scriptID_s32, group_s32, sector_s32);
+    scriptPtr = GetGroundScript(mapID_s32, DEBUG_LOC_PTR("../ground/ground_lives.c", 542, "GroundLives_Select"));
+    Log('\0',"GroundLives Select %3d  %3d  %3d", mapID_s32, group_s32, sector_s32);
 
     groupPtr = &scriptPtr->groups[group_s32];
     sectorPtr = &groupPtr->sectors[sector_s32];
@@ -276,9 +276,7 @@ void GroundLives_Select(s32 scriptID, s32 group, s32 sector)
 
     size = sectorPtr->nLives;
     for (i = 0; i < size; i++, livesData++)
-    {
-        GroundLives_Add(-1,livesData,group_s32,sector_s32);
-    }
+        GroundLives_Add(-1, livesData, group_s32, sector_s32);
 }
 
 void GroundLives_Cancel(s32 scriptID, s32 sector)
@@ -390,11 +388,11 @@ static s32 sub_80A7B94(s16 *a0)
                     *a0 = 2;
                     break;
                 case 2: {
-                    Pokemon *playerMonStruct = GetPlayerPokemonStruct();
-                    if (sub_808D3BC() == playerMonStruct) {
+                    Pokemon *playerMonStruct = GetLeaderMon1();
+                    if (GetLeaderMon2() == playerMonStruct) {
                         *a0 = 1;
                     }
-                    else if (sub_808D3F8() == playerMonStruct) {
+                    else if (GetPartnerMon2() == playerMonStruct) {
                         *a0 = 2;
                     }
                     else {
@@ -436,11 +434,11 @@ static s32 sub_80A7B94(s16 *a0)
                     *a0 = 7;
                     break;
                 case 3: {
-                    Pokemon *playerMonStruct = GetPlayerPokemonStruct();
-                    if (sub_808D3BC() == playerMonStruct) {
+                    Pokemon *playerMonStruct = GetLeaderMon1();
+                    if (GetLeaderMon2() == playerMonStruct) {
                         *a0 = 6;
                     }
-                    else if (sub_808D3F8() == playerMonStruct) {
+                    else if (GetPartnerMon2() == playerMonStruct) {
                         *a0 = 7;
                     }
                     else {
@@ -457,13 +455,13 @@ static s32 sub_80A7B94(s16 *a0)
         switch (*a0) {
             case 6:
                 ret = 2;
-                if (GetPlayerPokemonStruct() == sub_808D3BC()) {
+                if (GetLeaderMon1() == GetLeaderMon2()) {
                     *a0 = 6;
                 }
                 break;
             case 7:
                 ret = 1;
-                if (GetPlayerPokemonStruct() == sub_808D3F8()) {
+                if (GetLeaderMon1() == GetPartnerMon2()) {
                     *a0 = 6;
                 }
                 break;
@@ -485,7 +483,7 @@ static s32 sub_80A7B94(s16 *a0)
                 return -1;
             }
 
-            if (sub_80023E4(9)) {
+            if (CheckQuest(QUEST_CAN_DEPOSIT_PARTNER)) {
                 val = sub_808D6A4(sp);
             }
             else {
@@ -505,7 +503,7 @@ static s32 sub_80A7B94(s16 *a0)
                 GetFriendAreaCapacity2(map, &fAreaCapacity, FALSE, FALSE);
                 if (id < fAreaCapacity.maxPokemon) {
                     Pokemon *monStrPtr = &gRecruitedPokemonRef->pokemon[fAreaCapacity.unk8 + id];
-                    if (sub_80023E4(9)) {
+                    if (CheckQuest(QUEST_CAN_DEPOSIT_PARTNER)) {
                         if (PokemonExists(monStrPtr) && !monStrPtr->isTeamLeader) {
                             return -1;
                         }
@@ -522,11 +520,11 @@ static s32 sub_80A7B94(s16 *a0)
         return -1;
     }
     else if (id == 0x23) {
-        Pokemon *playerMonStruct = GetPlayerPokemonStruct();
-        if (sub_808D3BC() == playerMonStruct) {
+        Pokemon *playerMonStruct = GetLeaderMon1();
+        if (GetLeaderMon2() == playerMonStruct) {
             *a0 = 0x21;
         }
-        else if (sub_808D3F8() == playerMonStruct) {
+        else if (GetPartnerMon2() == playerMonStruct) {
             *a0 = 0x22;
         }
     }
@@ -561,7 +559,7 @@ s32 sub_80A7DDC(s16 *a0, s16 *speciesDst)
                 return -1;
             }
 
-            if (sub_80023E4(9)) {
+            if (CheckQuest(QUEST_CAN_DEPOSIT_PARTNER)) {
                 val = sub_808D6A4(sp);
             }
             else {
@@ -583,7 +581,7 @@ s32 sub_80A7DDC(s16 *a0, s16 *speciesDst)
                 GetFriendAreaCapacity2(map, &fAreaCapacity, FALSE, FALSE);
                 if (id < fAreaCapacity.maxPokemon) {
                     Pokemon *monStrPtr = &gRecruitedPokemonRef->pokemon[fAreaCapacity.unk8 + id];
-                    if (sub_80023E4(9)) {
+                    if (CheckQuest(QUEST_CAN_DEPOSIT_PARTNER)) {
                         if (PokemonExists(monStrPtr) && !monStrPtr->isTeamLeader) {
                             *speciesDst = monStrPtr->speciesNum;
                             return -1;
@@ -607,17 +605,17 @@ s32 sub_80A7DDC(s16 *a0, s16 *speciesDst)
             case 1:
             case 6:
             case 33:
-                *speciesDst = sub_808D3BC()->speciesNum;
+                *speciesDst = GetLeaderMon2()->speciesNum;
                 break;
             case 2:
             case 7:
             case 34:
-                *speciesDst = sub_808D3F8()->speciesNum;
+                *speciesDst = GetPartnerMon2()->speciesNum;
                 break;
             case 3:
             case 8:
             case 35:
-                *speciesDst = GetPlayerPokemonStruct()->speciesNum;
+                *speciesDst = GetLeaderMon1()->speciesNum;
                 break;
             case 36: {
                 // Identical to sStarterMons table
@@ -837,33 +835,35 @@ static s32 GroundLives_Add(s32 id_, const GroundLivesData *ptr, s32 group_, s32 
 
     if (!var24) {
         if (sub_809D684(&livesPtr->action, &gGroundLivesMeta->unk32C)) {
-            s32 r10;
-            s32 r9;
+            s32 bakUnk24;
+            s32 bakStoredDir;
             // Note: these ptr variables are unfortunately a fakematch, but I was not able to match the function without them...
-            u16 *ptr1;
-            s8 *ptr2;
+            u16 *ptrToUnk24;
+            s8 *ptrToStoredDir;
 
             if (livesPtr->action.scriptData2.savedState != 0) {
-                r10 = livesPtr->action.scriptData2.unk24;
-                r9 = livesPtr->action.scriptData2.unk26;
+                bakUnk24 = livesPtr->action.scriptData2.unk24;
+                bakStoredDir = livesPtr->action.scriptData2.storedDir;
 
-                ptr1 = &livesPtr->action.scriptData.unk24;
-                ptr2 = &livesPtr->action.scriptData.unk26;
+                ptrToUnk24 = &livesPtr->action.scriptData.unk24;
+                ptrToStoredDir = &livesPtr->action.scriptData.storedDir;
             }
             else {
-                r10 = livesPtr->action.scriptData.unk24;
-                r9 = livesPtr->action.scriptData.unk26;
+                bakUnk24 = livesPtr->action.scriptData.unk24;
+                bakStoredDir = livesPtr->action.scriptData.storedDir;
 
-                ptr1 = &livesPtr->action.scriptData.unk24;
-                ptr2 = &livesPtr->action.scriptData.unk26;
+                ptrToUnk24 = &livesPtr->action.scriptData.unk24;
+                ptrToStoredDir = &livesPtr->action.scriptData.storedDir;
             }
 
             InitAction2(&livesPtr->action);
             InitActionWithParams(&livesPtr->action, &gGroundLivesCallbacks, livesPtr, group, sector);
             GroundScript_ExecutePP(&livesPtr->action, NULL, &gGroundLivesMeta->unk32C, DEBUG_LOC_PTR("../ground/ground_lives.c", 1417, "GroundLives_Add"));
-            ASM_MATCH_TRICK(ptr2);
-            *ptr1 = r10;
-            *ptr2 = r9;
+
+            ASM_MATCH_TRICK(ptrToStoredDir);
+
+            *ptrToUnk24 = bakUnk24;
+            *ptrToStoredDir = bakStoredDir;
             r8 = TRUE;
         }
         else {
@@ -877,19 +877,19 @@ static s32 GroundLives_Add(s32 id_, const GroundLivesData *ptr, s32 group_, s32 
 
     scrCommand = ptr->scripts[1];
     if (scrCommand == NULL) {
-        scrCommand = gFunctionScriptTable[19].script;
+        scrCommand = gFunctionScriptTable[LIVES_MOVE_NORMAL].script;
     }
     SetPredefinedScript(&livesPtr->action, 1, scrCommand);
 
     scrCommand = ptr->scripts[2];
     if (scrCommand == NULL) {
-        scrCommand = gFunctionScriptTable[4].script;
+        scrCommand = gFunctionScriptTable[INCOMPLETE_TALK].script;
     }
     SetPredefinedScript(&livesPtr->action, 2, scrCommand);
 
     scrCommand = ptr->scripts[3];
     if (scrCommand == NULL) {
-        scrCommand = gFunctionScriptTable[6].script;
+        scrCommand = gFunctionScriptTable[LIVES_REPLY_NORMAL].script;
     }
     SetPredefinedScript(&livesPtr->action, 3, scrCommand);
 
@@ -898,13 +898,13 @@ static s32 GroundLives_Add(s32 id_, const GroundLivesData *ptr, s32 group_, s32 
         if (!var24 && !r8 && !(livesPtr->flags & 0x1800)) {
             GroundScript_ExecutePP(&livesPtr->action, NULL, &gGroundLivesMeta->unk32C, DEBUG_LOC_PTR("../ground/ground_lives.c", 1460, "GroundLives_Add"));
             livesPtr->action.scriptData.unk24 = livesPtr->unk160 | livesPtr->unk15E;
-            livesPtr->action.scriptData.unk26 = livesPtr->direction1;
+            livesPtr->action.scriptData.storedDir = livesPtr->direction1;
         }
         ExecutePredefinedScript(&livesPtr->action, NULL, 0, DEBUG_LOC_PTR("../ground/ground_lives.c", 1466, "GroundLives_Add"));
     }
     else if (r8) {
         livesPtr->directionRelated = TRUE;
-        livesPtr->direction1 = livesPtr->action.scriptData.unk26;
+        livesPtr->direction1 = livesPtr->action.scriptData.storedDir;
         sub_80A9750(livesPtr, livesPtr->action.scriptData.unk24);
     }
 
@@ -984,7 +984,7 @@ bool8 sub_80A87E0(s32 id_, Pokemon *a1)
     s32 id = (s16) id_;
     struct GroundLive *livesPtr = &gGroundLives->array[id];
 
-    if (livesPtr->unk2 != -1 && sub_809B1C0(7, 0, a1)) {
+    if (livesPtr->unk2 != -1 && ScriptSpecialTextHandler2(SPECIAL_TEXT_FRIEND_MENU, 0, MON_TO_MONORSTRPTR(a1))) {
         sub_809CD8C(&livesPtr->unk120, 5);
         return TRUE;
     }
@@ -1266,13 +1266,13 @@ Pokemon *sub_80A8D54(s32 a0)
 
     sub_80A7B94(&sp);
     if (sp == 1 || sp == 6 || sp == 33) {
-        return sub_808D3BC();
+        return GetLeaderMon2();
     }
     if (sp == 2 || sp == 7 || sp == 34) {
-        return sub_808D3F8();
+        return GetPartnerMon2();
     }
     if (sp == 3 || sp == 8 || sp == 35) {
-        return GetPlayerPokemonStruct();
+        return GetLeaderMon1();
     }
 
     if (sp >= 10 && sp <= 13) {
@@ -1283,7 +1283,7 @@ Pokemon *sub_80A8D54(s32 a0)
         if (sub_8098F88())
             return NULL;
 
-        if (sub_80023E4(9)) {
+        if (CheckQuest(QUEST_CAN_DEPOSIT_PARTNER)) {
             val = sub_808D6A4(spArray);
         }
         else {
@@ -1310,7 +1310,7 @@ Pokemon *sub_80A8D54(s32 a0)
             return NULL;
 
         monPtr = &gRecruitedPokemonRef->pokemon[fAreaCapacity.unk8 + id];
-        if (sub_80023E4(9)) {
+        if (CheckQuest(QUEST_CAN_DEPOSIT_PARTNER)) {
             if (PokemonExists(monPtr) && !monPtr->isTeamLeader) {
                 return monPtr;
             }
@@ -1527,10 +1527,10 @@ UNUSED static bool8 sub_80A91A0(s32 id1_, s32 id2_)
                 }
 
                 if (livesPtr2->unk2 <= 37) {
-                    livesPtr2->direction1 = sub_8002984(dir1, 5);
+                    livesPtr2->direction1 = TransformDirection1(dir1, DIR_TRANS_FLIP);
                 }
                 else {
-                    livesPtr2->direction1 = sub_8002984(dir2, 5);
+                    livesPtr2->direction1 = TransformDirection1(dir2, DIR_TRANS_FLIP);
                 }
 
                 return TRUE;
@@ -1650,7 +1650,7 @@ static s32 sub_80A95AC(struct GroundLive *livesPtr, PixelPos *posArg1, PixelPos 
 
             if (ptr2->flags & 0x40) {
                 if (ptr2->flags & 0x200) {
-                    ptr2->direction1 = sub_8002984(livesPtr->direction1, 5);
+                    ptr2->direction1 = TransformDirection1(livesPtr->direction1, DIR_TRANS_FLIP);
                 }
                 if (GroundLives_ExecutePlayerScriptActionLives(livesPtr->id, id2_))
                     return 2;
@@ -1993,7 +1993,7 @@ static s32 sub_80AA2BC(struct GroundLive *livesPtr, u32 flags, PixelPos *pixelPo
         if (id2 >= 0) {
             struct GroundLive *ptr2 = &gGroundLives->array[id2];
             if (ptr2->flags & 0x200) {
-                ptr2->direction1 = sub_8002984(livesPtr->direction1, 5);
+                ptr2->direction1 = TransformDirection1(livesPtr->direction1, DIR_TRANS_FLIP);
             }
             if (GroundLives_ExecutePlayerScriptActionLives(livesPtr->id, id2))
                 return 3;
@@ -2168,7 +2168,7 @@ static s32 sub_80AA7B0(struct GroundLive *livesPtr, s16 *a1, u32 flags, PixelPos
             s16 var = (s16) sub_80A8BBC(id2);
             if (var >= 14 && var < 30 && sub_80A8E9C(id2) != NULL) {
                 *a1 = id2;
-                sub_80A9090(id2, (s8) sub_8002984(livesPtr->direction1, 5));
+                sub_80A9090(id2, (s8)TransformDirection1(livesPtr->direction1, DIR_TRANS_FLIP));
                 return 5;
             }
         }
@@ -2436,10 +2436,10 @@ static void sub_80AAAE8(struct GroundLive *livesPtr, u32 a1, s32 dir_, s32 unuse
                 GetFunctionScript(NULL, &scriptInfo, 6);
                 GroundLives_ExecuteScript(sp, (void *) &livesPtr->action.unk8, &scriptInfo);
                 _ExecutePlayerScript(livesPtr, NULL, NULL);
-                sub_809B1C0(7, 0, sub_80A8E9C(sp));
+                ScriptSpecialTextHandler2(SPECIAL_TEXT_FRIEND_MENU, 0, MON_TO_MONORSTRPTR(sub_80A8E9C(sp)));
             }
             else {
-                sub_809B1C0(7, 0, NULL);
+                ScriptSpecialTextHandler2(SPECIAL_TEXT_FRIEND_MENU, 0, NULL_MONORSTRPTR);
             }
             sub_809CD8C(&livesPtr->unk120, 5);
             break;

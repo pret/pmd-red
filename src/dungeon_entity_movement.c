@@ -143,7 +143,7 @@ static void sub_8075050(EntityInfo *info, Unk_Entity_x184 *strPtr)
     }
 }
 
-bool8 DisplayActions(Entity *a0)
+bool8 DisplayActions_Async(Entity *a0)
 {
     s32 i, j, loop;
     Entity *savedEntityPtr;
@@ -274,16 +274,16 @@ bool8 DisplayActions(Entity *a0)
                 if (IsFloorOver())
                     break;
 
-                TryForcedLoss(0);
-                ApplyEndOfTurnEffects(mon);
+                TryForcedLoss_Async(FALSE);
+                DoEndOfTurnEffects_Async(mon);
                 if (!EntityIsValid(mon))
                     continue;
                 if (IsFloorOver())
                     break;
 
                 EnemyEvolution(mon);
-                sub_8046D20();
-                TryTriggerMonsterHouseWithMsg(mon, gDungeon->forceMonsterHouse);
+                PotentiallyCreateMusicBox_Async();
+                TryTriggerMonsterHouseWithMsg_Async(mon, gDungeon->forceMonsterHouse);
             }
             if (!EntityIsValid(mon))
                 continue;
@@ -302,7 +302,7 @@ bool8 DisplayActions(Entity *a0)
 
     sub_8086AC0();
     if (!IsFloorOver()) {
-        sub_8085140();
+        sub_8085140_Async();
         gDungeon->unkB8 = savedEntityPtr;
     }
     else {
@@ -466,7 +466,7 @@ bool8 CheckEntityTileForInteraction(Entity *entity)
     return FALSE;
 }
 
-void TryTriggerMonsterHouseWithMsg(Entity *pokemon, bool8 forcedMonsterHouse)
+void TryTriggerMonsterHouseWithMsg_Async(Entity *pokemon, bool8 forcedMonsterHouse)
 {
     if (EntityIsValid(pokemon)
         && !GetEntInfo(pokemon)->isNotTeamMember
@@ -475,11 +475,11 @@ void TryTriggerMonsterHouseWithMsg(Entity *pokemon, bool8 forcedMonsterHouse)
         && (GetTileAtEntitySafe(pokemon)->terrainFlags & TERRAIN_TYPE_IN_MONSTER_HOUSE))
     {
         // It's a monster house!
-        LogMessageByIdWithPopupCheckUser(GetLeader(), gPtrItsaMonsterHouseMessage);
+        LogMessageByIdWithPopupCheckUser_Async(GetLeader(), gPtrItsaMonsterHouseMessage);
         gDungeon->unk644.monsterHouseTriggeredEvent = TRUE;
-        TriggerMonsterHouse(pokemon, forcedMonsterHouse);
+        TriggerMonsterHouse_Async(pokemon, forcedMonsterHouse);
         sub_8041888(0);
         if (sub_803F428(&pokemon->pos))
-            sub_803E708(0x78, 0x39);
+            DungeonWaitFrames_Async(0x78, 0x39);
     }
 }

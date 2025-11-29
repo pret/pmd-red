@@ -48,16 +48,14 @@ bool8 TryRecruitMonster(Entity *attacker, Entity *target)
     if (gDungeon->fixedRoomNumber != FIXED_ROOM_FROSTY_GROTTO_ARTICUNO
         && gDungeon->fixedRoomNumber != FIXED_ROOM_MT_BLAZE_PEAK_MOLTRES
         && gDungeon->fixedRoomNumber != FIXED_ROOM_WESTERN_CAVE_MEWTWO
-        && gDungeon->fixedRoomNumber != FIXED_ROOM_MT_FARAWAY_HO_OH
-    ) {
-        if (gDungeon->fixedRoomNumber >= FIXED_ROOM_TEAM_SHIFTY_BOSS
-            && gDungeon->fixedRoomNumber <= FIXED_ROOM_RESCUE_TEAM_2_BOSS
-        ) {
-            if (gDungeon->unk644.unk18 == 0)
+        && gDungeon->fixedRoomNumber != FIXED_ROOM_MT_FARAWAY_HO_OH) {
+
+        if (gDungeon->fixedRoomNumber >= FIXED_ROOM_TEAM_SHIFTY_BOSS && gDungeon->fixedRoomNumber <= FIXED_ROOM_RESCUE_TEAM_2_BOSS) {
+            if (!gDungeon->unk644.canChangeLeader)
                 return FALSE;
         }
         else if (gDungeon->fixedRoomNumber == FIXED_ROOM_RESCUE_TEAM_MAZE_BOSS) {
-            if (gDungeon->unk644.unk15 == 0)
+            if (!gDungeon->unk644.canRecruitRescueTeamMazeBosses)
                 return FALSE;
             if (!sub_8097900(MONSTER_DEOXYS_NORMAL))
                 return FALSE;
@@ -85,8 +83,7 @@ bool8 TryRecruitMonster(Entity *attacker, Entity *target)
          targetInfo->id == MONSTER_REGIROCK ||
          targetInfo->id == MONSTER_REGICE ||
          targetInfo->id == MONSTER_REGISTEEL)
-        && HasRecruitedMon(targetInfo->id))
-    {
+         && HasRecruitedMon(targetInfo->id)) {
         return FALSE;
     }
 
@@ -107,9 +104,9 @@ bool8 TryRecruitMonster(Entity *attacker, Entity *target)
     if (recruitRate == -999)
         return FALSE;
 
-    if (HasHeldItem(attacker, ITEM_FRIEND_BOW)) {
+    if (HasHeldItem(attacker, ITEM_FRIEND_BOW))
         recruitRate += gFriendBowRecruitRateUpValue;
-    }
+
     recruitRate += gRecruitRateByLevel[attackerInfo->level];
     if (rand >= recruitRate)
         return FALSE;
@@ -191,10 +188,10 @@ bool8 IsMonsterRecruitable(s32 species)
     if (!gDungeon->unk644.canRecruit) {
         return FALSE;
     }
-    else if (!sub_808529C(id)) {
+    else if (!MonCutsceneCompleted(id)) {
         return FALSE;
     }
-    else if (id == MONSTER_MEW && gDungeon->unk644.unk34 == 1) {
+    else if (id == MONSTER_MEW && gDungeon->unk644.missionKind == DUNGEON_MISSION_OUTONRESCUE) {
         return FALSE;
     }
     else if (id == MONSTER_LATIAS) {
@@ -225,7 +222,7 @@ bool8 IsMonsterRecruitable(s32 species)
     }
 }
 
-bool8 HandleMonsterJoinSequence(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *param_3)
+bool8 MonsterJoinSequence_Async(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *param_3)
 {
     DungeonMon *dungeonMon;
     int pokeIndex;
@@ -241,9 +238,9 @@ bool8 HandleMonsterJoinSequence(Entity *entity1, Entity *entity2, struct unkStru
     sub_806CE68(entity2, direction);
     CopyCyanMonsterNametoBuffer(gFormatBuffer_Monsters[0],param_3->id);
 
-    if (DisplayDungeonYesNoMessage(0,gUnknown_80F9FE8,1) == 0) {
+    if (DisplayDungeonYesNoMessage_Async(0,gUnknown_80F9FE8,1) == 0) {
         if (param_3->id != MONSTER_JIRACHI) {
-            LogMessageByIdWithPopupCheckUser(entity1,gText_Pokemon0WentAway);
+            LogMessageByIdWithPopupCheckUser_Async(entity1,gText_Pokemon0WentAway);
         }
         return FALSE;
     }
@@ -254,7 +251,7 @@ bool8 HandleMonsterJoinSequence(Entity *entity1, Entity *entity2, struct unkStru
     }
 
     if (pokeIndex == MAX_TEAM_MEMBERS) {
-        LogMessageByIdWithPopupCheckUser(entity1,gText_ThePokemonCouldntJoinTeam);
+        LogMessageByIdWithPopupCheckUser_Async(entity1,gText_ThePokemonCouldntJoinTeam);
         return FALSE;
     }
 
@@ -262,7 +259,7 @@ bool8 HandleMonsterJoinSequence(Entity *entity1, Entity *entity2, struct unkStru
         UnlockFriendArea(friendArea);
         unlockedFriendArea = TRUE;
     }
-    HandleFaint(entity2,DUNGEON_EXIT_TRANSFORMED_INTO_FRIEND,entity1);
+    HandleFaint_Async(entity2,DUNGEON_EXIT_TRANSFORMED_INTO_FRIEND,entity1);
     dungeonMon = &gRecruitedPokemonRef->dungeonTeam[pokeIndex];
     dungeonMon->flags = POKEMON_FLAG_EXISTS | POKEMON_FLAG_ON_TEAM;
     dungeonMon->isTeamLeader = FALSE;
@@ -294,25 +291,25 @@ bool8 HandleMonsterJoinSequence(Entity *entity1, Entity *entity2, struct unkStru
     IncrementAdventureNumJoined();
 
     if (SpawnTeamMember(param_3->id,param_3->pos.x,param_3->pos.y,dungeonMon,&local_2c,0,1) == 0) {
-        LogMessageByIdWithPopupCheckUser(entity1,gText_ButItCouldntJoinTheTeam);
+        LogMessageByIdWithPopupCheckUser_Async(entity1,gText_ButItCouldntJoinTheTeam);
         dungeonMon->flags = 0;
     }
     else {
         sub_8083D88();
-        sub_803E708(0xa0,0x46);
-        if (DisplayDungeonYesNoMessage(0,gText_NewMemberJoinedGiveItNickname,TRUE) == 1) {
+        DungeonWaitFrames_Async(0xa0,0x46);
+        if (DisplayDungeonYesNoMessage_Async(0,gText_NewMemberJoinedGiveItNickname,TRUE) == 1) {
             while (DungeonGiveNameToRecruitedMon(dungeonMon->name) == 0) {
-                DisplayDungeonMessage(0,gText_PleaseGiveNicknameNewMember,TRUE);
+                DisplayDungeonMessage_Async(0,gText_PleaseGiveNicknameNewMember,TRUE);
             }
         }
         sub_808D9DC(gFormatBuffer_Monsters[0],dungeonMon,0);
-        LogMessageByIdWithPopupCheckUser(entity1,gText_Pokemon0JoinedToGoOnAdventures);
+        LogMessageByIdWithPopupCheckUser_Async(entity1,gText_Pokemon0JoinedToGoOnAdventures);
         if (unlockedFriendArea) {
             Entity *leader = CutsceneGetLeader();
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],leader,0);
             sub_8092558(gFormatBuffer_FriendArea, friendArea);
             PlaySound(0xce);
-            DisplayDungeonMessage(0,gText_Pokemon0GainedAccessToFriendArea,1);
+            DisplayDungeonMessage_Async(0,gText_Pokemon0GainedAccessToFriendArea,1);
         }
         if (param_3->id == MONSTER_MEW) {
             gDungeon->unk4 = 1;
@@ -419,14 +416,14 @@ bool8 HandleSpecialEntityJoinSequence(Entity *entity1,Entity *entity2,Entity **e
         unlockedFriendArea = TRUE;
     }
     IncrementAdventureNumJoined();
-    HandleFaint(entity2,DUNGEON_EXIT_TRANSFORMED_INTO_FRIEND,entity1);
+    HandleFaint_Async(entity2,DUNGEON_EXIT_TRANSFORMED_INTO_FRIEND,entity1);
     if (SpawnTeamMember(local_74.id,local_74.pos.x,local_74.pos.y,dungeonMon,&local_2c,0,0) == 0) {
         dungeonMon->flags = 0;
     }
     else {
-        if (DisplayDungeonYesNoMessage(0,gText_NewMemberJoinedGiveItNickname,TRUE) == 1) {
+        if (DisplayDungeonYesNoMessage_Async(0,gText_NewMemberJoinedGiveItNickname,TRUE) == 1) {
             while (!DungeonGiveNameToRecruitedMon(dungeonMon->name)) {
-                DisplayDungeonMessage(0,gText_PleaseGiveNicknameNewMember,TRUE);
+                DisplayDungeonMessage_Async(0,gText_PleaseGiveNicknameNewMember,TRUE);
             }
         }
         if (unlockedFriendArea) {
@@ -434,7 +431,7 @@ bool8 HandleSpecialEntityJoinSequence(Entity *entity1,Entity *entity2,Entity **e
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],leader,0);
             sub_8092558(gFormatBuffer_FriendArea, friendArea);
             PlaySound(0xce);
-            DisplayDungeonMessage(0,gText_Pokemon0GainedAccessToFriendArea,1);
+            DisplayDungeonMessage_Async(0,gText_Pokemon0GainedAccessToFriendArea,1);
         }
         sub_808D9DC(gFormatBuffer_Monsters[3],dungeonMon,0);
         *entityPtr = local_2c;

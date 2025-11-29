@@ -27,7 +27,7 @@ struct unkStruct_203B0D0_sub
     s32 unk14;
     s32 unk18;
     s32 unk1C;
-    const RGB *ramp;
+    const RGB_Struct *ramp;
 };
 
 struct unkStruct_203B0D0 {
@@ -38,7 +38,7 @@ struct unkStruct_203B0D0 {
 
 static EWRAM_INIT struct unkStruct_203B0D0 *gUnknown_203B0D0 = NULL;
 
-extern void sub_809971C(u16 a0, const RGB *a1, int a2);
+extern void sub_809971C(u16 a0, const RGB_Struct *a1, int a2);
 
 void sub_800ED38(s32 r0)
 {
@@ -197,7 +197,7 @@ void sub_800EF64(void)
                 sub_8005674(sub->fileData, sub->unk18);
                 switch (gUnknown_203B0D0->unk0) {
                     case 1: {
-                        const RGB *pal = sub->fileData->pal;
+                        const RGB_Struct *pal = sub->fileData->pal;
                         sub_809971C((sub->unkC + 16) * 16, pal, 0x10);
                         break;
                     }

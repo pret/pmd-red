@@ -22,143 +22,160 @@ void ShowPokemonSummaryWindow(s32 which, s32 currSubWindowId, struct MonSummaryI
     s32 j;
 
     sub_80073B8(windowId);
-    strncpy(gFormatBuffer_Monsters[0],monInfo->nameBuffer,0x14);
-    y = 0x20;
+    strncpy(gFormatBuffer_Monsters[0], monInfo->nameBuffer, 20);
+
+    y = 32;
+
     switch (which) {
-        case SUB_WINDOW_NONE:
+        case SUB_WINDOW_NONE: {
             break;
+        }
         case SUB_WINDOW_STATS: {
             const u8 *str;
             s32 iVar8;
             LevelData levelData;
 
-            PrintFormattedStringOnWindow(currSubWindowId * 8 + 0x10,0,_("Stats"),windowId,'\0');
+            PrintFormattedStringOnWindow((currSubWindowId * 8) + 16, 0, _("Stats"), windowId, '\0');
+
             gFormatArgs[0] = monInfo->level;
             gFormatArgs[1] = monInfo->exp;
-            PrintFormattedStringOnWindow(4,y,gText_LevelUnkMacro,windowId,'\0');
-            y += 0xA;
-            PrintFormattedStringOnWindow(4,y,gText_ExpPtsUnkMacro,windowId,'\0');
-            y += 0xA;
+            PrintFormattedStringOnWindow(4, y, gText_LevelUnkMacro, windowId, '\0');
+
+            y += 10;
+            PrintFormattedStringOnWindow(4, y,gText_ExpPtsUnkMacro, windowId, '\0');
+
+            y += 10;
             if (monInfo->level < 100) {
-                GetLvlUpEntry(&levelData,monInfo->species,monInfo->level + 1);
+                GetLvlUpEntry(&levelData, monInfo->species, monInfo->level + 1);
                 gFormatArgs[0] = levelData.expRequired - monInfo->exp;
-                PrintFormattedStringOnWindow(4,y,gText_ToNextLevel,windowId,'\0');
+                PrintFormattedStringOnWindow(4, y, gText_ToNextLevel, windowId, '\0');
             }
-            y += 0xC;
+
+            y += 12;
             gFormatArgs[0] = monInfo->HP1;
             gFormatArgs[1] = monInfo->HP2;
-            PrintFormattedStringOnWindow(4,y,gUnknown_810DDD0,windowId,'\0');
-            y += 0xA;
-            PrintFormattedStringOnWindow(4,y,gUnknown_810DDE4,windowId,'\0');
+            PrintFormattedStringOnWindow(4, y, gUnknown_810DDD0, windowId, '\0');
+
+            y += 10;
+            PrintFormattedStringOnWindow(4, y, gUnknown_810DDE4, windowId, '\0');
+
             str = gUnknown_810DE0C;
             gFormatArgs[0] = monInfo->offense.att[0];
             if (monInfo->atkBoost != 0) {
-                gFormatArgs[0] = gFormatArgs[0] + monInfo->atkBoost;
+                gFormatArgs[0] += monInfo->atkBoost;
                 str = gUnknown_810DE20;
             }
-            PrintFormattedStringOnWindow(4,y,str,windowId,'\0');
+            PrintFormattedStringOnWindow(4, y, str, windowId, '\0');
+
             if (monInfo->defBoost != 0) {
                 gFormatArgs[0] = monInfo->offense.def[0] + monInfo->defBoost;
-                PrintFormattedStringOnWindow(4,y,gUnknown_810DE4C,windowId,'\0');
+                PrintFormattedStringOnWindow(4, y, gUnknown_810DE4C, windowId, '\0');
             }
             else {
                 gFormatArgs[0] = monInfo->offense.def[0];
-                PrintFormattedStringOnWindow(4,y,gUnknown_810DE38,windowId,'\0');
+                PrintFormattedStringOnWindow(4, y, gUnknown_810DE38, windowId, '\0');
             }
-            y += 0xA;
-            PrintFormattedStringOnWindow(4,y,gUnknown_810DDFC,windowId,'\0');
+
+            y += 10;
+            PrintFormattedStringOnWindow(4, y, gUnknown_810DDFC, windowId, '\0');
+
             str = gUnknown_810DE24;
             gFormatArgs[0] = monInfo->offense.att[1];
             if (monInfo->spAtkBoost != 0) {
-                gFormatArgs[0] = gFormatArgs[0] + monInfo->spAtkBoost;
+                gFormatArgs[0] += monInfo->spAtkBoost;
                 str = gUnknown_810DE28;
             }
-            PrintFormattedStringOnWindow(4,y,str,windowId,'\0');
+            PrintFormattedStringOnWindow(4, y, str, windowId, '\0');
+
             if (monInfo->spDefBoost != 0) {
                 gFormatArgs[0] = monInfo->offense.def[1] + monInfo->spDefBoost;
-                PrintFormattedStringOnWindow(4,y,gUnknown_810DE54,windowId,'\0');
+                PrintFormattedStringOnWindow(4, y, gUnknown_810DE54, windowId, '\0');
             }
             else {
                 gFormatArgs[0] = monInfo->offense.def[1];
-                PrintFormattedStringOnWindow(4,y,gUnknown_810DE50,windowId,'\0');
-            }
-            y += 0xA;
-            if (ItemExists(&monInfo->item)) {
-                 sub_8090E14(gFormatBuffer_Items[0],&monInfo->item,0);
-            }
-            else {
-                strcpy(gFormatBuffer_Items[0],gUnknown_810DE58);
-            }
-            PrintFormattedStringOnWindow(4,y,gUnknown_810DE6C,windowId,'\0');
-            y += 0xC;
-            gFormatArgs[0] = monInfo->IQ;
-            iVar8 = monInfo->IQ / 10;
-            if (iVar8 < 0) {
-                iVar8 = 0;
-            }
-            if (0x62 < iVar8) {
-                iVar8 = 99;
+                PrintFormattedStringOnWindow(4, y, gUnknown_810DE50, windowId, '\0');
             }
 
-            InlineStrcpy(gFormatBuffer_Monsters[0],gUnknown_8115718[iVar8]);
-            PrintFormattedStringOnWindow(4,y,gUnknown_810DE80,windowId,'\0');
-            y += 0xA;
-            if (!monInfo->isTeamLeader)
-            {
-                CopyTacticsNameToBuffer(gFormatBuffer_Monsters[0],monInfo->tactic);
-                PrintFormattedStringOnWindow(4,y,gUnknown_810DE98,windowId,'\0');
+            y += 10;
+            if (ItemExists(&monInfo->item))
+                 sub_8090E14(gFormatBuffer_Items[0], &monInfo->item, NULL);
+            else
+                strcpy(gFormatBuffer_Items[0], gUnknown_810DE58);
+            PrintFormattedStringOnWindow(4, y, gUnknown_810DE6C, windowId, '\0');
+
+            y += 12;
+            gFormatArgs[0] = monInfo->IQ;
+            //iVar8 = clamp(monInfo->IQ / 10, 0, 99);
+            iVar8 = monInfo->IQ / 10;
+            if (iVar8 < 0)
+                iVar8 = 0;
+            if (iVar8 >= 99)
+                iVar8 = 99;
+            InlineStrcpy(gFormatBuffer_Monsters[0], gUnknown_8115718[iVar8]);
+            PrintFormattedStringOnWindow(4, y, gUnknown_810DE80, windowId, '\0');
+
+            y += 10;
+            if (!monInfo->isTeamLeader) {
+                CopyTacticsNameToBuffer(gFormatBuffer_Monsters[0], monInfo->tactic);
+                PrintFormattedStringOnWindow(4, y, gUnknown_810DE98, windowId, '\0');
             }
-            y += 0xA;
+
+            y += 10;
             break;
         }
         case SUB_WINDOW_FEATUERS: {
-            PrintFormattedStringOnWindow(currSubWindowId * 8 + 0x10,0,_("Features"),windowId,'\0');
-            PrintFormattedStringOnWindow(4,y,_("Type:"),windowId,'\0');
-            PrintFormattedStringOnWindow(0x38,y,GetFormattedTypeString(monInfo->types[0]),windowId,'\0');
-            if (monInfo->types[1] != TYPE_NONE) {
-                PrintFormattedStringOnWindow(0x60,y,GetFormattedTypeString(monInfo->types[1]),windowId,'\0');
-            }
-            y += 0xC;
-            PrintFormattedStringOnWindow(4,y,_("Special Abilities:"),windowId,'\0');
-            y += 0xC;
-            PrintFormattedStringOnWindow2(4,y,GetAbilityDescription(monInfo->abilities[0]),windowId,'\0',0xb);
-            y += 0x21;
-            if (monInfo->abilities[1] != ABILITY_UNKNOWN) {
-                PrintFormattedStringOnWindow2(4,y,GetAbilityDescription(monInfo->abilities[1]),windowId,'\0',0xb);
-            }
+            PrintFormattedStringOnWindow((currSubWindowId * 8) + 16, 0, _("Features"), windowId, '\0');
+
+            PrintFormattedStringOnWindow(4, y, _("Type:"), windowId, '\0');
+
+            PrintFormattedStringOnWindow(56, y, GetFormattedTypeString(monInfo->types[0]), windowId, '\0');
+
+            if (monInfo->types[1] != TYPE_NONE)
+                PrintFormattedStringOnWindow(96, y, GetFormattedTypeString(monInfo->types[1]), windowId, '\0');
+
+            y += 12;
+            PrintFormattedStringOnWindow(4, y, _("Special Abilities:"), windowId, '\0');
+
+            y += 12;
+            PrintFormattedStringOnWindow2(4, y, GetAbilityDescription(monInfo->abilities[0]), windowId, '\0', 11);
+
+            y += 33;
+            if (monInfo->abilities[1] != ABILITY_UNKNOWN)
+                PrintFormattedStringOnWindow2(4, y, GetAbilityDescription(monInfo->abilities[1]), windowId, '\0', 11);
+
             break;
         }
         case SUB_WINDOW_STATUS: {
             s32 iVar11;
             bool8 bVar10;
 
-            PrintFormattedStringOnWindow(currSubWindowId * 8 + 0x10,0,gUnknown_810DD58,windowId,'\0');
+            PrintFormattedStringOnWindow((currSubWindowId * 8) + 16, 0, gUnknown_810DD58, windowId, '\0');
+
             iVar11 = monInfo->unk56 - 1;
-            y -= 0xC;
+            y -= 12;
             bVar10 = FALSE;
 
-            for (i = 0; i < 9; i++) {
+            for (i = 0; i < 9; i++)
                 param_4->unkC[i] = 0;
-            }
 
-            for (j = 0; j < 10; j++, iVar11++, y += 0xC) {
-                if (-1 < iVar11) {
-                    if (0xb < iVar11)
+            for (j = 0; j < 10; j++, iVar11++, y += 12) {
+                if (iVar11 > -1) {
+                    if (iVar11 >= 12)
                         break;
+
                     if (monInfo->unk58[iVar11] != 0) {
                         bVar10 = TRUE;
-                        InlineStrncpy(gFormatBuffer_Items[1],gStatusNames[monInfo->unk58[iVar11]],0x50);
-                        PrintFormattedStringOnWindow(0xc,y,_("{MOVE_ITEM_1}"),windowId,'\0');
-                        if (0 < j) {
+                        InlineStrncpy(gFormatBuffer_Items[1], gStatusNames[monInfo->unk58[iVar11]], 80);
+                        PrintFormattedStringOnWindow(12, y, _("{MOVE_ITEM_1}"), windowId, '\0');
+                        if (0 < j)
                             param_4->unkC[j - 1] = monInfo->unk58[iVar11];
-                        }
                     }
                 }
             }
 
-            if (!bVar10) {
-                PrintFormattedStringOnWindow(0xc,0x20,gUnknown_810DF78,windowId,'\0');
-            }
+            if (!bVar10)
+                PrintFormattedStringOnWindow(12, 32, gUnknown_810DF78, windowId, '\0');
+
             break;
         }
         case SUB_WINDOW_IQ: {
@@ -234,7 +251,7 @@ void ShowPokemonSummaryWindow(s32 which, s32 currSubWindowId, struct MonSummaryI
     sub_80073E0(windowId);
 }
 
-void SetMonSummaryInfo(struct MonSummaryInfo *dst, struct Pokemon *pokemon, bool8 param_3)
+void SetMonSummaryInfo(struct MonSummaryInfo *dst, struct Pokemon *pokemon, bool8 unlockedEvolutions)
 {
     s32 index;
 
@@ -284,15 +301,13 @@ void SetMonSummaryInfo(struct MonSummaryInfo *dst, struct Pokemon *pokemon, bool
     dst->unk44[0] = pokemon->unkC[0];
     dst->unk44[1] = pokemon->unkC[1];
     dst->IQSkills = pokemon->IQSkills;
-    if (param_3) {
-        dst->evoStringId = GetMonSummaryScreenEvoStringId(pokemon);
-    }
-    else {
-        dst->evoStringId = EVO_STRING_EMPTY;
-    }
 
-    for(index = 0; index < 0xC; index++)
-    {
+    if (unlockedEvolutions)
+        dst->evoStringId = GetMonSummaryScreenEvoStringId(pokemon);
+    else
+        dst->evoStringId = EVO_STRING_EMPTY;
+
+    for (index = 0; index < MON_SUMMARY_UNK58_COUNT; index++) {
         dst->unk58[index] = 0;
     }
 }

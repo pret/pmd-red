@@ -149,7 +149,7 @@ void sub_803F4A0(Entity *a0)
 
     UpdateCamera(0);
     sub_803F38C();
-    if (gDungeon->unk1356C == 0) {
+    if (!gDungeon->unk1356C) {
         sub_806CD90();
     }
 }
@@ -172,7 +172,7 @@ void PointCameraToMonster(Entity *a0)
 
     UpdateCamera(0);
     sub_803F38C();
-    if (gDungeon->unk1356C == 0) {
+    if (!gDungeon->unk1356C) {
         sub_806CD90();
     }
     UpdateTrapsVisibility();
@@ -382,7 +382,7 @@ void sub_803F9CC(void)
     Entity *cameraTarget = gDungeon->unk181e8.cameraTarget;
     bool32 r5 = FALSE;
 
-    if (gDungeon->unk1356C != 0 || gDungeon->unk181e8.unk18218 != 0 || sub_800EC74() != 0) {
+    if (gDungeon->unk1356C || gDungeon->unk181e8.unk18218 != 0 || sub_800EC74() != 0) {
         r5 = FALSE;
     }
     else if (cameraTarget != NULL && GetEntityType(cameraTarget) == ENTITY_MONSTER) {
@@ -709,7 +709,7 @@ void HandleLuminousOrbAction(Entity *pokemon)
   UpdateCamera(0);
   UpdateTrapsVisibility();
   UpdateMinimap();
-  LogMessageByIdWithPopupCheckUser(pokemon, gUnknown_80FD040);
+  LogMessageByIdWithPopupCheckUser_Async(pokemon, gUnknown_80FD040);
 }
 
 void sub_8040094(u8 r0)

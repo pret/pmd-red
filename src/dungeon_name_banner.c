@@ -41,7 +41,7 @@ struct DungeonNameFontFileData
 
 struct DungeonNamePaletteFileData
 {
-    RGB pal[16];
+    RGB_Struct pal[16];
 };
 
 void ShowDungeonNameBanner_Async(void)

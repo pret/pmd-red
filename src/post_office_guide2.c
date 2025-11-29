@@ -30,10 +30,10 @@ static void DisplayMissionObjectives(void);
 static void sub_8031A2C(void);
 static void sub_8031A84(void);
 
-bool8 sub_80319A4(u8 param_1, u8 dungeon, s32 param_3)
+bool8 sub_80319A4(u8 dungeonMissionKind, u8 dungeon, s32 param_3)
 {
     sUnknown_203B330 = MemoryAlloc(sizeof(unkStruct_203B330), 8);
-    sUnknown_203B330->unkC = param_1;
+    sUnknown_203B330->dungeonMissionKind = dungeonMissionKind;
     sUnknown_203B330->dungeonIndex = dungeon;
     ResetTouchScreenMenuInput(&sUnknown_203B330->input);
     sUnknown_203B330->unk10 = param_3;
@@ -80,7 +80,7 @@ static void sub_8031A84(void)
     RestoreSavedWindows(&sUnknown_203B330->unk18);
     sUnknown_203B330->unk18.id[sUnknown_203B330->unk10] = sUnknown_80E1F18;
 
-    if (sUnknown_203B330->unkC == 2) {
+    if (sUnknown_203B330->dungeonMissionKind == DUNGEON_MISSION_ACCEPTEDJOB_RELATED) {
         jobs = CountJobsinDungeon(sUnknown_203B330->dungeonIndex);
         if (jobs == 0)
             jobs = 1;
@@ -94,23 +94,16 @@ static void sub_8031A84(void)
 
 static void DisplayMissionObjectives(void)
 {
-    s32 yCoord;
-    s32 jobSlotIdx;
-    unkStruct_203B480 *mail;
-    WonderMail *jobInfo;
-    u8 buffer[100];
-    volatile u8 local_94;
-    u8 buffer1[100];
-    s16 auStack44;
-    s16 missionIndex;
-    u8 local_test;
-
     sub_80073B8(sUnknown_203B330->unk10);
     // Objectives
     PrintStringOnWindow(10, 0, sObjectives, sUnknown_203B330->unk10, 0);
 
-    switch (sUnknown_203B330->unkC) {
-        case 1:
+    switch (sUnknown_203B330->dungeonMissionKind) {
+        case DUNGEON_MISSION_OUTONRESCUE: {
+            unkStruct_203B480 *mail;
+            u8 buffer[100];
+            volatile u8 local_94;
+
             sub_8099394((u8*)&local_94);
             mail = GetMailatIndex(local_94);
             sub_803B6B0(10, 16, 3, sUnknown_203B330->unk10);
@@ -121,15 +114,18 @@ static void DisplayMissionObjectives(void)
             sprintfStatic(buffer,sFmtRescue,GetMonSpecies(mail->clientSpecies));
             PrintStringOnWindow(40, 16, buffer, sUnknown_203B330->unk10, 0);
             break;
-        case 2:
+        }
+        case DUNGEON_MISSION_ACCEPTEDJOB_RELATED: {
             if (CountJobsinDungeon(sUnknown_203B330->dungeonIndex) == 0)
                 PrintStringOnWindow(10, 16, sJustGo, sUnknown_203B330->unk10, 0);
             else {
-                yCoord = 16;
+                s32 yCoord = 16;
+                s32 jobSlotIdx;
+                u8 buffer1[100];
 
                 // 8 Job Slots... check each of them
                 for (jobSlotIdx = 0; jobSlotIdx < MAX_ACCEPTED_JOBS; jobSlotIdx++) {
-                    jobInfo = GetJobSlotInfo(jobSlotIdx);
+                    WonderMail *jobInfo = GetJobSlotInfo(jobSlotIdx);
 
                     if (jobInfo->dungeonSeed.location.id == sUnknown_203B330->dungeonIndex
                         && jobInfo->mailType != 0
@@ -168,16 +164,22 @@ static void DisplayMissionObjectives(void)
                 }
             }
             break;
-        case 3:
-        case 0:
-        default:
-            if (sub_80992E0(&auStack44, &missionIndex))
-                PrintStringOnWindow(10, 16, GetCurrentMissionText(missionIndex), sUnknown_203B330->unk10, 0);
+        }
+        case DUNGEON_MISSION_UNK3:
+        case DUNGEON_MISSION_UNK0:
+        default: {
+            s16 auStack44;
+            s16 rescueDungeonId;
+            u8 local_test;
+
+            if (sub_80992E0(&auStack44, &rescueDungeonId))
+                PrintStringOnWindow(10, 16, GetCurrentMissionText(rescueDungeonId), sUnknown_203B330->unk10, 0);
             else if (sub_8099360(&local_test) != 0)
                 PrintStringOnWindow(10, 16, sub_80975DC(sub_80A2688(local_test)), sUnknown_203B330->unk10, 0);
             else
                 PrintStringOnWindow(10, 16, sRedQuestionMarks, sUnknown_203B330->unk10, 0);
             break;
+        }
     }
 
     sub_80073E0(sUnknown_203B330->unk10);

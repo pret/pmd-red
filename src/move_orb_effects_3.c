@@ -42,7 +42,7 @@ void SetChargeStatusTarget(Entity *pokemon, Entity *target, u8 newStatus, Move *
     entityInfo = GetEntInfo(target);
     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
     if ((entityInfo->bideClassStatus.status == newStatus) && (newStatus == STATUS_ENRAGED)) {
-      TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FC074);
+      TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FC074);
     }
     else {
       entityInfo->bideClassStatus.status = newStatus;
@@ -74,7 +74,7 @@ void SetChargeStatusTarget(Entity *pokemon, Entity *target, u8 newStatus, Move *
         entityInfo->bideClassStatus.turns = CalculateStatusTurns(target,gEnragedTurnRange, FALSE) + 1;
       }
       sub_8041BD0(target,uVar5);
-      TryDisplayDungeonLoggableMessage3(pokemon,target,message);
+      TryDisplayDungeonLoggableMessage3_Async(pokemon,target,message);
       UpdateStatusIconFlags(target);
 
       // TODO: this could probably be cleaner..

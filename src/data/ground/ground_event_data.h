@@ -51,7 +51,7 @@ static const struct ScriptCommand s_script_LIVES_REPLY_NORMAL[] = { /* 0x811efd8
     DEBUGINFO_O(51),
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
-    { 0x8d, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_8D(1, DIR_TRANS_NONE),
     AWAIT_CUE(2),
     WAIT(12),
     RET,
@@ -60,7 +60,7 @@ static const struct ScriptCommand s_script_LIVES_REPLY_NORMAL[] = { /* 0x811efd8
 static const struct ScriptCommand s_script_LIVES_REPLY[] = { /* 0x811f048 */
     DEBUGINFO_O(61),
     { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
-    { 0x8d, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_8D(1, DIR_TRANS_NONE),
     AWAIT_CUE(2),
     WAIT(12),
     RET,
@@ -162,7 +162,7 @@ static const struct ScriptCommand s_script_HABITAT_MOVE1[] = { /* 0x811f7c0 */
   LABEL(0), /* = 0x00 */
     SELECT_ANIMATION(1),
   LABEL(1), /* = 0x01 */
-    { 0x8a, 0x18,  0x0100,  0x00000009,  0x00000000, NULL },
+    CMD_UNK_8A(24, 256, DIR_TRANS_RAND),
     WAIT_RANDOM(24, 48),
     JUMP_LABEL(1),
 };
@@ -177,7 +177,7 @@ static const struct ScriptCommand s_script_HABITAT_MOVE2[] = { /* 0x811f860 */
     { 0x52, 0x00,  0x0000,  0x00000002,  0x00000000, NULL },
     { 0x53, 0x00,  0x0000,  0x00000001,  0x00000000, NULL },
   LABEL(1), /* = 0x01 */
-    { 0x8a, 0x18,  0x0100,  0x00000009,  0x00000000, NULL },
+    CMD_UNK_8A(24, 256, DIR_TRANS_RAND),
     WAIT_RANDOM(24, 48),
     JUMP_LABEL(1),
 };
@@ -186,7 +186,7 @@ static const struct ScriptCommand s_script_HABITAT_MOVE_PAUSE[] = { /* 0x811f920
     DEBUGINFO_O(186),
     { 0x54, 0x00,  0x0300,  0x00000000,  0x00000000, NULL },
     SELECT_ANIMATION(3),
-    { 0x8d, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_8D(1, DIR_TRANS_NONE),
   LABEL(0), /* = 0x00 */
     WAIT(240),
     JUMP_LABEL(0),
@@ -196,7 +196,7 @@ static const struct ScriptCommand s_script_HABITAT_MOVE_STAY_FIX[] = { /* 0x811f
     DEBUGINFO_O(196),
     { 0x54, 0x00,  0x0300,  0x00000000,  0x00000000, NULL },
     SELECT_ANIMATION(4),
-    { 0x8d, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_8D(1, DIR_TRANS_NONE),
   LABEL(0), /* = 0x00 */
     WAIT(240),
     JUMP_LABEL(0),
@@ -207,7 +207,7 @@ static const struct ScriptCommand s_script_HABITAT_MOVE_STAY_TURN[] = { /* 0x811
     { 0x54, 0x00,  0x0300,  0x00000000,  0x00000000, NULL },
     SELECT_ANIMATION(4),
   LABEL(0), /* = 0x00 */
-    { 0x8d, 0x01,  0x0009,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_8D(1, DIR_TRANS_RAND),
     WAIT_RANDOM(24, 48),
     JUMP_LABEL(0),
 };
@@ -272,7 +272,7 @@ static const struct ScriptCommand s_script_MOVE_PAUSE[] = { /* 0x811fca0 */
     DEBUGINFO_O(272),
     { 0x54, 0x00,  0x0300,  0x00000000,  0x00000000, NULL },
     SELECT_ANIMATION(3),
-    { 0x8d, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_8D(1, DIR_TRANS_NONE),
   LABEL(0), /* = 0x00 */
     WAIT(240),
     JUMP_LABEL(0),
@@ -282,7 +282,7 @@ static const struct ScriptCommand s_script_MOVE_STAY[] = { /* 0x811fd10 */
     DEBUGINFO_O(282),
     { 0x54, 0x00,  0x0300,  0x00000000,  0x00000000, NULL },
     SELECT_ANIMATION(4),
-    { 0x8d, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_8D(1, DIR_TRANS_NONE),
   LABEL(0), /* = 0x00 */
     WAIT(240),
     JUMP_LABEL(0),
@@ -301,7 +301,7 @@ static const struct ScriptCommand s_script_MOVE_RANDOM[] = { /* 0x811fde0 */
     DEBUGINFO_O(301),
     SELECT_ANIMATION(1),
   LABEL(0), /* = 0x00 */
-    { 0x8a, 0x18,  0x0100,  0x00000008,  0x00000000, NULL },
+    CMD_UNK_8A(24, 256, DIR_TRANS_RAND_CARDINAL),
     WAIT(48),
     JUMP_LABEL(0),
 };
@@ -310,7 +310,7 @@ static const struct ScriptCommand s_script_MOVE_BOY[] = { /* 0x811fe40 */
     DEBUGINFO_O(310),
     SELECT_ANIMATION(1),
   LABEL(0), /* = 0x00 */
-    { 0x8a, 0x18,  0x0100,  0x00000008,  0x00000000, NULL },
+    CMD_UNK_8A(24, 256, DIR_TRANS_RAND_CARDINAL),
     WAIT_RANDOM(24, 48),
     JUMP_LABEL(0),
 };
@@ -319,7 +319,7 @@ static const struct ScriptCommand s_script_MOVE_GIRL[] = { /* 0x811fea0 */
     DEBUGINFO_O(319),
     SELECT_ANIMATION(1),
   LABEL(0), /* = 0x00 */
-    { 0x8a, 0x10,  0x0100,  0x00000008,  0x00000000, NULL },
+    CMD_UNK_8A(16, 256, DIR_TRANS_RAND_CARDINAL),
     WAIT_RANDOM(16, 24),
     JUMP_LABEL(0),
 };
@@ -328,13 +328,13 @@ static const struct ScriptCommand s_script_WAKEUP_FUNC[] = { /* 0x811ff00 */
     DEBUGINFO_O(328),
     JUMPIF_UNK_BE(/* to label */ 0), /* something sleep related?*/
     SELECT_ANIMATION(6),
-    { 0x8b, 0x3c,  0x0000,  0x00000000,  0x00000000, NULL },
+    SET_DIR_WAIT(DIRECTION_SOUTH, 60),
     SELECT_ANIMATION(2),
     WAIT(60),
     RET_DIRECT,
   LABEL(0), /* = 0x00 */
     SELECT_ANIMATION(38),
-    { 0x8b, 0x3c,  0x0000,  0x00000000,  0x00000000, NULL },
+    SET_DIR_WAIT(DIRECTION_SOUTH, 60),
     SELECT_ANIMATION(39),
     STOP_ANIMATION_ON_CURRENT_FRAME,
     WAIT(10),
@@ -345,42 +345,42 @@ static const struct ScriptCommand s_script_WAKEUP_FUNC[] = { /* 0x811ff00 */
 
 static const struct ScriptCommand s_script_LOOK_AROUND_FUNC[] = { /* 0x8120000 */
     DEBUGINFO_O(347),
-    { 0x92, 0x04,  0x0002,  0x00000004,  0x00000000, NULL },
+    CMD_UNK_92(4, 2, DIR_TRANS_SPINLEFT2),
     WAIT(15),
-    { 0x92, 0x04,  0x0001,  0x00000005,  0x00000000, NULL },
+    CMD_UNK_92(4, 1, DIR_TRANS_FLIP),
     WAIT(15),
-    { 0x92, 0x04,  0x0002,  0x00000004,  0x00000000, NULL },
+    CMD_UNK_92(4, 2, DIR_TRANS_SPINLEFT2),
     WAIT(15),
     RET_DIRECT,
 };
 
 static const struct ScriptCommand s_script_LOOK_AROUND_DOWN_FUNC[] = { /* 0x8120080 */
     DEBUGINFO_O(358),
-    ROTATE(4, 2, DIRECTION_EAST),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_EAST),
     WAIT(15),
-    ROTATE(4, 1, DIRECTION_WEST),
+    ROTATE_TO(4, DIR_TRANS_SPINRIGHT1, DIRECTION_WEST),
     WAIT(15),
-    ROTATE(4, 2, DIRECTION_SOUTH),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_SOUTH),
     RET_DIRECT,
 };
 
 static const struct ScriptCommand s_script_LOOK_AROUND_RIGHT_FUNC[] = { /* 0x81200f0 */
     DEBUGINFO_O(368),
-    ROTATE(4, 2, DIRECTION_EAST),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_EAST),
     WAIT(15),
-    ROTATE(4, 1, DIRECTION_WEST),
+    ROTATE_TO(4, DIR_TRANS_SPINRIGHT1, DIRECTION_WEST),
     WAIT(15),
-    ROTATE(4, 2, DIRECTION_EAST),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_EAST),
     RET_DIRECT,
 };
 
 static const struct ScriptCommand s_script_LOOK_AROUND_LEFT_FUNC[] = { /* 0x8120160 */
     DEBUGINFO_O(378),
-    ROTATE(4, 1, DIRECTION_WEST),
+    ROTATE_TO(4, DIR_TRANS_SPINRIGHT1, DIRECTION_WEST),
     WAIT(15),
-    ROTATE(4, 2, DIRECTION_EAST),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_EAST),
     WAIT(15),
-    ROTATE(4, 1, DIRECTION_WEST),
+    ROTATE_TO(4, DIR_TRANS_SPINRIGHT1, DIRECTION_WEST),
     RET_DIRECT,
 };
 
@@ -486,7 +486,7 @@ static const struct ScriptCommand s_script_ANGRY_END_FUNC[] = { /* 0x8120560 */
 static const struct ScriptCommand s_script_MOVE_PLAZA_SLEEP[] = { /* 0x8120590 */
     DEBUGINFO_O(487),
     CALL_SCRIPT(INIT_PLAZA_SLEEP_STAY_FUNC),
-    { 0x8d, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_8D(1, DIR_TRANS_NONE),
   LABEL(0), /* = 0x00 */
     WAIT(240),
     JUMP_LABEL(0),
@@ -494,7 +494,7 @@ static const struct ScriptCommand s_script_MOVE_PLAZA_SLEEP[] = { /* 0x8120590 *
 
 static const struct ScriptCommand s_script_INIT_PLAZA_SLEEP_STAY_FUNC[] = { /* 0x81205f0 */
     DEBUGINFO_O(496),
-    JUMPIF_SCENARIOCHECK(4, /* to label */ 0),
+    JUMPIF_SCENARIOCHECK(QUEST_SQUARE_ASLEEP, /* to label */ 0),
     { 0x54, 0x00,  0x0300,  0x00000000,  0x00000000, NULL },
     SELECT_ANIMATION(4),
     RET_DIRECT,
@@ -505,7 +505,7 @@ static const struct ScriptCommand s_script_INIT_PLAZA_SLEEP_STAY_FUNC[] = { /* 0
 
 static const struct ScriptCommand s_script_INIT_PLAZA_SLEEP_TALK_FUNC[] = { /* 0x8120670 */
     DEBUGINFO_O(507),
-    JUMPIF_SCENARIOCHECK(4, /* to label */ 0),
+    JUMPIF_SCENARIOCHECK(QUEST_SQUARE_ASLEEP, /* to label */ 0),
     SELECT_ANIMATION(2),
     RET_DIRECT,
   LABEL(0), /* = 0x00 */
@@ -517,11 +517,11 @@ static const struct ScriptCommand s_script_INIT_SLEEP_FUNC[] = { /* 0x81206e0 */
     DEBUGINFO_O(517),
     JUMPIF_UNK_BE(/* to label */ 0), /* something sleep related?*/
     SELECT_ANIMATION(6),
-    { 0x8b, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    SET_DIR_WAIT(DIRECTION_SOUTH, 0),
     RET_DIRECT,
   LABEL(0), /* = 0x00 */
     SELECT_ANIMATION(38),
-    { 0x8b, 0x3c,  0x0002,  0x00000000,  0x00000000, NULL },
+    SET_DIR_WAIT(DIRECTION_EAST, 60),
     RET_DIRECT,
 };
 
@@ -677,8 +677,8 @@ static const struct ScriptCommand s_script_SAVE_AND_WAREHOUSE_POINT[] = { /* 0x8
 
 static const struct ScriptCommand s_script_WORLD_MAP_POINT[] = { /* 0x8121034 */
     DEBUGINFO_O(679),
-    EXECUTE_SUBSTATION(228, 1, 0),
-    EXECUTE_SUBSTATION(12, 1, 1),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_WALL_MAP, 1, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 1, 1),
     HALT,
 };
 
@@ -698,7 +698,7 @@ static const struct ScriptCommand s_script_FORMATION_HERO[] = { /* 0x8121074 */
 
 static const struct ScriptCommand s_script_EVOLUTION_HERO[] = { /* 0x8121124 */
     DEBUGINFO_O(700),
-    EXECUTE_STATION(8, 1, 1),
+    EXECUTE_STATION(MAP_LUMINOUS_CAVE, 1, 1),
     HALT,
 };
 
@@ -891,7 +891,7 @@ static const struct ScriptCommand s_script_LIVES_WARP_ARRIVE_SUB[] = { /* 0x8121
 static const struct ScriptCommand s_script_GET_ITEM_FUNC[] = { /* 0x8121a54 */
     DEBUGINFO_O(892),
     FANFARE_PLAY(203),
-    { 0xe1, 0x00,  0x00cb,  0x00000000,  0x00000000, NULL },
+    WAIT_FANFARE1(203),
     TEXTBOX_CLEAR2,
     RET_DIRECT,
 };
@@ -899,7 +899,7 @@ static const struct ScriptCommand s_script_GET_ITEM_FUNC[] = { /* 0x8121a54 */
 static const struct ScriptCommand s_script_GET_ITEM_WAIT_FUNC[] = { /* 0x8121aa4 */
     DEBUGINFO_O(900),
     FANFARE_PLAY(203),
-    { 0xe1, 0x00,  0x00cb,  0x00000000,  0x00000000, NULL },
+    WAIT_FANFARE1(203),
     TEXTBOX_CLEAR,
     RET_DIRECT,
 };
@@ -907,7 +907,7 @@ static const struct ScriptCommand s_script_GET_ITEM_WAIT_FUNC[] = { /* 0x8121aa4
 static const struct ScriptCommand s_script_GET_ITEM2_FUNC[] = { /* 0x8121af4 */
     DEBUGINFO_O(908),
     FANFARE_PLAY(203),
-    { 0xe1, 0x00,  0x00cb,  0x00000000,  0x00000000, NULL },
+    WAIT_FANFARE1(203),
     TEXTBOX_CLEAR2,
     RET_DIRECT,
 };
@@ -915,7 +915,7 @@ static const struct ScriptCommand s_script_GET_ITEM2_FUNC[] = { /* 0x8121af4 */
 static const struct ScriptCommand s_script_GET_ITEM2_WAIT_FUNC[] = { /* 0x8121b44 */
     DEBUGINFO_O(916),
     FANFARE_PLAY(203),
-    { 0xe1, 0x00,  0x00cb,  0x00000000,  0x00000000, NULL },
+    WAIT_FANFARE1(203),
     TEXTBOX_CLEAR,
     RET_DIRECT,
 };
@@ -923,7 +923,7 @@ static const struct ScriptCommand s_script_GET_ITEM2_WAIT_FUNC[] = { /* 0x8121b4
 static const struct ScriptCommand s_script_JOIN_FUNC[] = { /* 0x8121b94 */
     DEBUGINFO_O(924),
     FANFARE_PLAY(204),
-    { 0xe1, 0x00,  0x00cc,  0x00000000,  0x00000000, NULL },
+    WAIT_FANFARE1(204),
     TEXTBOX_CLEAR2,
     RET_DIRECT,
 };
@@ -957,7 +957,7 @@ static const struct ScriptCommand s_script_SAVE_START_FUNC[] = { /* 0x8121cb4 */
     DEBUGINFO_O(957),
     { 0x23, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     { 0x3b, 0x43,  0x0000,  0x00000000,  0x00000000, NULL },
-    BGM_SWITCH(50),
+    BGM_SWITCH(MUS_BLANK_50),
     RET_DIRECT,
 };
 
@@ -979,7 +979,7 @@ static const struct ScriptCommand s_script_SAVE_END_FUNC[] = { /* 0x8121d44 */
 static const struct ScriptCommand s_script_SAVE_SOUND_FUNC[] = { /* 0x8121d94 */
     DEBUGINFO_O(980),
     { 0x3b, 0x43,  0x0000,  0x00000000,  0x00000000, NULL },
-    BGM_SWITCH(50),
+    BGM_SWITCH(MUS_BLANK_50),
     { 0xe0, 0x00,  0x0032,  0x00000000,  0x00000000, NULL },
     { 0x3b, 0x45,  0x001e,  0x00000000,  0x00000000, NULL },
     RET_DIRECT,
@@ -1147,7 +1147,7 @@ static const struct ScriptCommand s_script_EVENT_DIVIDE[] = { /* 0x8121f94 */
 static const struct ScriptCommand s_script_EVENT_DIVIDE_NEXT[] = { /* 0x81226e4 */
     DEBUGINFO_O(1148),
     CALL_SCRIPT(EVENT_DIVIDE_NEXT_DAY_FUNC),
-    EXECUTE_SUBSTATION(12, 3, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 3, 0),
     RET,
 };
 
@@ -1156,7 +1156,7 @@ static const struct ScriptCommand s_script_EVENT_DIVIDE_INIT_FUNC[] = { /* 0x812
     { 0xf2, 0x00,  0x0002,  0x00000000,  0x00000000, _("EVENT_DIVIDE_INIT_FUNC\n") },
     UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_TEAM_BASE_INSIDE),
     UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_TEAM_BASE_INSIDE),
-    UPDATE_VARINT(CALC_SET, GROUND_PLACE, 11),
+    UPDATE_VARINT(CALC_SET, GROUND_PLACE, GROUND_PLACE_TEAM_BASE_INSIDE),
     SET_DUNGEON_RES(/* result */ 0, /* enter */ -1),
     CLEAR_ARRAY(WARP_LIST),
     UPDATE_VARINT(CALC_SET, WARP_LOCK, 0),
@@ -1197,7 +1197,7 @@ static const struct ScriptCommand s_script_EVENT_DIVIDE_NEXT_DAY_FUNC[] = { /* 0
     JUMP_LABEL(8),
   LABEL(7), /* = 0x07 */
     SCENARIO_CALC(SCENARIO_SUB8, 51,  7),
-    { 0xae, 0x01,  0x001c,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_AE(RESCUE_DUNGEON_WISH_CAVE),
     JUMP_LABEL(8),
   LABEL(8), /* = 0x08 */
     JUMPIF_SCENE_EQ(SCENARIO_SUB9, 53, 2, /* to label */ 9),
@@ -1260,7 +1260,7 @@ static const struct ScriptCommand s_script_EVENT_DIVIDE_NEXT_DAY2_FUNC[] = { /* 
     JUMP_LABEL(8),
   LABEL(7), /* = 0x07 */
     SCENARIO_CALC(SCENARIO_SUB8, 51,  7),
-    { 0xae, 0x01,  0x001c,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_AE(RESCUE_DUNGEON_WISH_CAVE),
     JUMP_LABEL(8),
   LABEL(8), /* = 0x08 */
     JUMPIF_SCENE_EQ(SCENARIO_SUB9, 53, 2, /* to label */ 9),
@@ -1737,16 +1737,16 @@ static const struct ScriptCommand s_script_EVENT_DIVIDE_AFTER[] = { /* 0x8124268
     CALL_SCRIPT(EVENT_S08E01A_END),
     CALL_SCRIPT(EVENT_S03E01A_END),
     CALL_SCRIPT(EVENT_S09E01A_END),
-    { 0xb0, 0x01,  0x001f,  0x00000000,  0x00000000, NULL },
-    { 0xb0, 0x01,  0x0020,  0x00000000,  0x00000000, NULL },
-    { 0xb0, 0x01,  0x0021,  0x00000000,  0x00000000, NULL },
-    { 0xb0, 0x01,  0x0022,  0x00000000,  0x00000000, NULL },
-    { 0xb0, 0x01,  0x0023,  0x00000000,  0x00000000, NULL },
-    { 0xb0, 0x01,  0x0024,  0x00000000,  0x00000000, NULL },
-    { 0xb0, 0x01,  0x0025,  0x00000000,  0x00000000, NULL },
-    { 0xb0, 0x01,  0x0027,  0x00000000,  0x00000000, NULL },
-    { 0xb0, 0x01,  0x0028,  0x00000000,  0x00000000, NULL },
-    { 0xb0, 0x01,  0x0029,  0x00000000,  0x00000000, NULL },
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_DESERT_REGION),
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_SOUTHERN_CAVERN),
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_WYVERN_HILL),
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_SOLAR_CAVE),
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_DARKNIGHT_RELIC),
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_GRAND_SEA),
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_WATERFALL_POND),
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_JOYOUS_TOWER),
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_FAR_OFF_SEA),
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_PURITY_FOREST),
     JUMP_SCRIPT(EVENT_M02END_L001),
 };
 
@@ -1839,8 +1839,8 @@ static const struct ScriptCommand s_script_DEMO_02[] = { /* 0x81250d0 */
 
 static const struct ScriptCommand s_script_DEMO_03[] = { /* 0x8125110 */
     DEBUGINFO_O(1841),
-    EXECUTE_SUBSTATION(5, 5, 0),
-    EXECUTE_SUBSTATION(4, 29, 0),
+    EXECUTE_SUBSTATION(MAP_PELIPPER_POST_OFFICE_INSIDE, 5, 0),
+    EXECUTE_SUBSTATION(MAP_PELIPPER_POST_OFFICE, 29, 0),
     EXECUTE_SUBSTATION(225, 1, 0),
     EXECUTE_SUBSTATION(224, 3, 0),
     { 0x3b, 0x41,  0x003c,  0x00000000,  0x00000000, NULL },
@@ -1866,34 +1866,34 @@ static const struct ScriptCommand s_script_EVENT_M00E01A_L001[] = { /* 0x81251c0
 
 static const struct ScriptCommand s_script_EVENT_M01E01A_L001[] = { /* 0x8125230 */
     DEBUGINFO_O(1868),
-    EXECUTE_SUBSTATION(178, 1, 0),
-    { 0xaf, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
+    EXECUTE_SUBSTATION(MAP_TINY_WOODS_ENTRY, 1, 0),
+    CMD_UNK_AF(RESCUE_DUNGEON_TINY_WOODS, TRUE),
     RET,
 };
 
 static const struct ScriptCommand s_script_EVENT_M01E01A_L002[] = { /* 0x8125270 */
     DEBUGINFO_O(1875),
-    EXECUTE_SUBSTATION(178, 2, 0),
+    EXECUTE_SUBSTATION(MAP_TINY_WOODS_ENTRY, 2, 0),
     RET,
 };
 
 static const struct ScriptCommand s_script_EVENT_M01E01A_L003[] = { /* 0x81252a0 */
     DEBUGINFO_O(1881),
     { 0x3b, 0x39,  0x0004,  0x00000000,  0x00000000, NULL },
-    EXECUTE_SUBSTATION(179, 1, 0),
-    EXECUTE_SUBSTATION(178, 3, 0),
-    EXECUTE_SUBSTATION(9, 17, 0),
+    EXECUTE_SUBSTATION(MAP_TINY_WOODS_END, 1, 0),
+    EXECUTE_SUBSTATION(MAP_TINY_WOODS_ENTRY, 3, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE, 17, 0),
     { 0x3b, 0x39,  0x0001,  0x00000000,  0x00000000, NULL },
-    EXECUTE_SUBSTATION(224, 2, 0),
+    EXECUTE_SUBSTATION(MAP_TITLE_SCREEN, 2, 0),
     { 0x3b, 0x39,  0x0000,  0x00000000,  0x00000000, NULL },
-    { 0xb0, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_TINY_WOODS),
     SCENARIO_CALC(SCENARIO_MAIN,  3,  0),
     JUMP_SCRIPT(EVENT_DIVIDE),
 };
 
 static const struct ScriptCommand s_script_EVENT_M01E02A_L001[] = { /* 0x8125350 */
     DEBUGINFO_O(1895),
-    EXECUTE_SUBSTATION(12, 15, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 15, 0),
     SCENARIO_CALC(SCENARIO_MAIN,  3,  2),
     RET,
 };
@@ -1906,14 +1906,14 @@ static const struct ScriptCommand s_script_EVENT_M01E02A_L001B[] = { /* 0x812539
 
 static const struct ScriptCommand s_script_EVENT_M01E02A_L001C[] = { /* 0x81253c0 */
     DEBUGINFO_O(1908),
-    EXECUTE_SUBSTATION(12, 17, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 17, 0),
     SCENARIO_CALC(SCENARIO_MAIN,  3,  4),
     RET,
 };
 
 static const struct ScriptCommand s_script_EVENT_M01E02A_L002[] = { /* 0x8125400 */
     DEBUGINFO_O(1915),
-    EXECUTE_SUBSTATION(9, 18, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE, 18, 0),
     SCENARIO_CALC(SCENARIO_MAIN,  3,  5),
     RET,
 };
@@ -1921,14 +1921,14 @@ static const struct ScriptCommand s_script_EVENT_M01E02A_L002[] = { /* 0x8125400
 static const struct ScriptCommand s_script_EVENT_M01E02A_L003[] = { /* 0x8125440 */
     DEBUGINFO_O(1922),
     EXECUTE_SUBSTATION(180, 1, 0),
-    { 0xaf, 0x01,  0x0001,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_AF(RESCUE_DUNGEON_THUNDERWAVE_CAVE, TRUE),
     SCENARIO_CALC(SCENARIO_MAIN,  3,  6),
     RET,
 };
 
 static const struct ScriptCommand s_script_EVENT_M01E02A_L004[] = { /* 0x8125490 */
     DEBUGINFO_O(1930),
-    EXECUTE_SUBSTATION(12, 18, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 18, 0),
     RET,
 };
 
@@ -1940,28 +1940,28 @@ static const struct ScriptCommand s_script_EVENT_M01E02A_L005[] = { /* 0x81254c0
 
 static const struct ScriptCommand s_script_EVENT_M01E02A_L006[] = { /* 0x81254f0 */
     DEBUGINFO_O(1942),
-    EXECUTE_SUBSTATION(181, 1, 0),
-    EXECUTE_SUBSTATION(180, 3, 0),
-    EXECUTE_SUBSTATION(9, 23, 0),
-    { 0xb0, 0x01,  0x0001,  0x00000000,  0x00000000, NULL },
-    SCENARIO_CALC(SCENARIO_MAIN,  4,  0),
-    UPDATE_VARINT(CALC_SET, GROUND_PLACE, 11),
+    EXECUTE_SUBSTATION(MAP_THUNDERWAVE_CAVE_END, 1, 0),
+    EXECUTE_SUBSTATION(MAP_THUNDERWAVE_CAVE_ENTRY, 3, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE, 23, 0),
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_THUNDERWAVE_CAVE),
+    SCENARIO_CALC(SCENARIO_MAIN, 4, 0),
+    UPDATE_VARINT(CALC_SET, GROUND_PLACE, GROUND_PLACE_TEAM_BASE_INSIDE),
     CALL_SCRIPT(NEXT_SAVE_FUNC),
     JUMP_SCRIPT(EVENT_DIVIDE),
 };
 
 static const struct ScriptCommand s_script_EVENT_M01E02B_L001[] = { /* 0x8125580 */
     DEBUGINFO_O(1954),
-    EXECUTE_SUBSTATION(12, 2, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 2, 0),
     EXECUTE_SUBSTATION(162, 1, 0),
-    EXECUTE_SUBSTATION(12, 19, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 19, 0),
     SCENARIO_CALC(SCENARIO_MAIN,  4,  2),
     RET,
 };
 
 static const struct ScriptCommand s_script_EVENT_M01E02B_L002[] = { /* 0x81255e0 */
     DEBUGINFO_O(1963),
-    EXECUTE_SUBSTATION(1, 6, 0),
+    EXECUTE_SUBSTATION(MAP_POKEMON_SQUARE, 6, 0),
     SCENARIO_CALC(SCENARIO_MAIN,  4,  3),
     UPDATE_VARINT(CALC_SET, WARP_LOCK, 3),
     RET,
@@ -1969,7 +1969,7 @@ static const struct ScriptCommand s_script_EVENT_M01E02B_L002[] = { /* 0x81255e0
 
 static const struct ScriptCommand s_script_EVENT_M01E02B_L003[] = { /* 0x8125630 */
     DEBUGINFO_O(1971),
-    EXECUTE_SUBSTATION(4, 12, 0),
+    EXECUTE_SUBSTATION(MAP_PELIPPER_POST_OFFICE, 12, 0),
     SCENARIO_CALC(SCENARIO_MAIN,  4,  4),
     UPDATE_VARINT(CALC_SET, WARP_LOCK, 0),
     RET,
@@ -1977,17 +1977,17 @@ static const struct ScriptCommand s_script_EVENT_M01E02B_L003[] = { /* 0x8125630
 
 static const struct ScriptCommand s_script_EVENT_M01E02B_L004[] = { /* 0x8125680 */
     DEBUGINFO_O(1979),
-    EXECUTE_SUBSTATION(12, 2, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 2, 0),
     EXECUTE_SUBSTATION(162, 2, 0),
-    EXECUTE_SUBSTATION(12, 20, 0),
-    { 0xaf, 0x01,  0x0002,  0x00000000,  0x00000000, NULL },
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 20, 0),
+    CMD_UNK_AF(RESCUE_DUNGEON_MT_STEEL, TRUE),
     SCENARIO_CALC(SCENARIO_MAIN,  4,  5),
     RET,
 };
 
 static const struct ScriptCommand s_script_EVENT_M01E02B_L004B[] = { /* 0x81256f0 */
     DEBUGINFO_O(1989),
-    EXECUTE_SUBSTATION(9, 26, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE, 26, 0),
     SCENARIO_CALC(SCENARIO_MAIN,  4,  6),
     RET,
 };
@@ -2001,7 +2001,7 @@ static const struct ScriptCommand s_script_EVENT_M01E02B_L005[] = { /* 0x8125730
 
 static const struct ScriptCommand s_script_EVENT_M01E02B_L006[] = { /* 0x8125770 */
     DEBUGINFO_O(2003),
-    EXECUTE_SUBSTATION(12, 21, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 21, 0),
     RET,
 };
 
@@ -2015,33 +2015,33 @@ static const struct ScriptCommand s_script_EVENT_M01E02B_L007[] = { /* 0x81257a0
 static const struct ScriptCommand s_script_EVENT_M01E02B_L008[] = { /* 0x81257e0 */
     DEBUGINFO_O(2016),
     EXECUTE_SUBSTATION(183, 1, 0),
-    EXECUTE_SUBSTATION(9, 28, 0),
-    { 0xb0, 0x01,  0x0002,  0x00000000,  0x00000000, NULL },
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE, 28, 0),
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_MT_STEEL),
     SCENARIO_CALC(SCENARIO_MAIN,  5,  0),
-    UPDATE_VARINT(CALC_SET, GROUND_PLACE, 11),
+    UPDATE_VARINT(CALC_SET, GROUND_PLACE, GROUND_PLACE_TEAM_BASE_INSIDE),
     CALL_SCRIPT(NEXT_SAVE_FUNC),
     JUMP_SCRIPT(EVENT_DIVIDE),
 };
 
 static const struct ScriptCommand s_script_EVENT_M01E03A_L000[] = { /* 0x8125860 */
     DEBUGINFO_O(2027),
-    EXECUTE_SUBSTATION(12, 3, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 3, 0),
     SCENARIO_CALC(SCENARIO_MAIN,  5,  1),
     RET,
 };
 
 static const struct ScriptCommand s_script_EVENT_M01E03A_L001[] = { /* 0x81258a0 */
     DEBUGINFO_O(2034),
-    EXECUTE_SUBSTATION(12, 2, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 2, 0),
     EXECUTE_SUBSTATION(162, 3, 0),
-    EXECUTE_SUBSTATION(12, 22, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 22, 0),
     SCENARIO_CALC(SCENARIO_MAIN,  5,  2),
     RET,
 };
 
 static const struct ScriptCommand s_script_EVENT_M01E03A_L002[] = { /* 0x8125900 */
     DEBUGINFO_O(2043),
-    EXECUTE_SUBSTATION(9, 29, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE, 29, 0),
     SCENARIO_CALC(SCENARIO_MAIN,  5,  3),
     UPDATE_VARINT(CALC_SET, WARP_LOCK, 4),
     SET_DUNGEON_RES(/* result */ 0, /* enter */ -1),
@@ -2059,7 +2059,7 @@ static const struct ScriptCommand s_script_EVENT_M01E03A_L003[] = { /* 0x81259b0
     UPDATE_VARINT(CALC_SET, WARP_LOCK, 0),
     { 0x3b, 0x03,  0x0000,  0x00000000,  0x00000000, NULL },
     JUMPIF(JUDGE_GE, CLEAR_COUNT, 3, /* to label */ 0),
-    EXECUTE_SUBSTATION(12, 3, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 3, 0),
     SCENARIO_CALC(SCENARIO_MAIN,  5,  5),
     RET,
   LABEL(0), /* = 0x00 */
@@ -2068,7 +2068,7 @@ static const struct ScriptCommand s_script_EVENT_M01E03A_L003[] = { /* 0x81259b0
 
 static const struct ScriptCommand s_script_EVENT_M01E03A_L004[] = { /* 0x8125a50 */
     DEBUGINFO_O(2070),
-    EXECUTE_SUBSTATION(12, 23, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 23, 0),
     SCENARIO_CALC(SCENARIO_MAIN,  5,  6),
     UPDATE_VARINT(CALC_SET, WARP_LOCK, 0),
     RET,
@@ -2076,7 +2076,7 @@ static const struct ScriptCommand s_script_EVENT_M01E03A_L004[] = { /* 0x8125a50
 
 static const struct ScriptCommand s_script_EVENT_M01E03A_L005[] = { /* 0x8125aa0 */
     DEBUGINFO_O(2078),
-    EXECUTE_SUBSTATION(9, 30, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE, 30, 0),
     SCENARIO_CALC(SCENARIO_MAIN,  5,  7),
     UPDATE_VARINT(CALC_SET, WARP_LOCK, 0),
     RET,
@@ -2084,15 +2084,15 @@ static const struct ScriptCommand s_script_EVENT_M01E03A_L005[] = { /* 0x8125aa0
 
 static const struct ScriptCommand s_script_EVENT_M01E03A_L006[] = { /* 0x8125af0 */
     DEBUGINFO_O(2086),
-    EXECUTE_SUBSTATION(12, 24, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 24, 0),
     SCENARIO_CALC(SCENARIO_MAIN,  5,  8),
     RET,
 };
 
 static const struct ScriptCommand s_script_EVENT_M01E03A_L007[] = { /* 0x8125b30 */
     DEBUGINFO_O(2093),
-    EXECUTE_SUBSTATION(9, 31, 0),
-    { 0xaf, 0x01,  0x0003,  0x00000000,  0x00000000, NULL },
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE, 31, 0),
+    CMD_UNK_AF(RESCUE_DUNGEON_SINISTER_WOODS, TRUE),
     SCENARIO_CALC(SCENARIO_MAIN,  5,  9),
     RET,
 };
@@ -2106,7 +2106,7 @@ static const struct ScriptCommand s_script_EVENT_M01E03A_L008[] = { /* 0x8125b80
 static const struct ScriptCommand s_script_EVENT_M01E03A_L009[] = { /* 0x8125bb0 */
     DEBUGINFO_O(2107),
     CALL_SCRIPT(DISMISSAL_SALLY_MEMBER3_FUNC),
-    EXECUTE_SUBSTATION(12, 25, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 25, 0),
     RET,
 };
 
@@ -2119,36 +2119,36 @@ static const struct ScriptCommand s_script_EVENT_M01E03A_L010[] = { /* 0x8125bf0
 static const struct ScriptCommand s_script_EVENT_M01E03A_L011[] = { /* 0x8125c20 */
     DEBUGINFO_O(2120),
     EXECUTE_SUBSTATION(185, 1, 0),
-    EXECUTE_SUBSTATION(9, 34, 0),
-    { 0xb0, 0x01,  0x0003,  0x00000000,  0x00000000, NULL },
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE, 34, 0),
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_SINISTER_WOODS),
     SCENARIO_CALC(SCENARIO_MAIN,  6,  0),
     CALL_SCRIPT(DISMISSAL_SALLY_MEMBER_FUNC),
-    UPDATE_VARINT(CALC_SET, GROUND_PLACE, 11),
+    UPDATE_VARINT(CALC_SET, GROUND_PLACE, GROUND_PLACE_TEAM_BASE_INSIDE),
     CALL_SCRIPT(NEXT_SAVE_FUNC),
     JUMP_SCRIPT(EVENT_DIVIDE),
 };
 
 static const struct ScriptCommand s_script_EVENT_M01E04A_L000[] = { /* 0x8125cb0 */
     DEBUGINFO_O(2132),
-    EXECUTE_SUBSTATION(12, 3, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 3, 0),
     SCENARIO_CALC(SCENARIO_MAIN,  6,  1),
     RET,
 };
 
 static const struct ScriptCommand s_script_EVENT_M01E04A_L001[] = { /* 0x8125cf0 */
     DEBUGINFO_O(2139),
-    EXECUTE_SUBSTATION(12, 26, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 26, 0),
     SCENARIO_CALC(SCENARIO_MAIN,  6,  2),
     RET,
 };
 
 static const struct ScriptCommand s_script_EVENT_M01E04A_L002[] = { /* 0x8125d30 */
     DEBUGINFO_O(2146),
-    EXECUTE_SUBSTATION(9, 35, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE, 35, 0),
     { 0x3b, 0x3b,  0x0000,  0x00000000,  0x00000000, NULL },
-    EXECUTE_SUBSTATION(1, 12, 0),
-    EXECUTE_SUBSTATION(9, 36, 0),
-    { 0xaf, 0x01,  0x0004,  0x00000000,  0x00000000, NULL },
+    EXECUTE_SUBSTATION(MAP_POKEMON_SQUARE, 12, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE, 36, 0),
+    CMD_UNK_AF(RESCUE_DUNGEON_SILENT_CHASM, TRUE),
     SCENARIO_CALC(SCENARIO_MAIN,  6,  3),
     RET,
 };
@@ -2162,7 +2162,7 @@ static const struct ScriptCommand s_script_EVENT_M01E04A_L003[] = { /* 0x8125db0
 static const struct ScriptCommand s_script_EVENT_M01E04A_L004[] = { /* 0x8125de0 */
     DEBUGINFO_O(2163),
     CALL_SCRIPT(DISMISSAL_SALLY_MEMBER3_FUNC),
-    EXECUTE_SUBSTATION(12, 27, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 27, 0),
     RET,
 };
 
@@ -2175,33 +2175,33 @@ static const struct ScriptCommand s_script_EVENT_M01E04A_L005[] = { /* 0x8125e20
 static const struct ScriptCommand s_script_EVENT_M01E04A_L006[] = { /* 0x8125e50 */
     DEBUGINFO_O(2176),
     EXECUTE_SUBSTATION(187, 1, 0),
-    EXECUTE_SUBSTATION(9, 39, 0),
-    { 0xb0, 0x01,  0x0004,  0x00000000,  0x00000000, NULL },
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE, 39, 0),
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_SILENT_CHASM),
     SCENARIO_CALC(SCENARIO_MAIN,  7,  0),
     CALL_SCRIPT(DISMISSAL_SALLY_MEMBER_FUNC),
-    UPDATE_VARINT(CALC_SET, GROUND_PLACE, 11),
+    UPDATE_VARINT(CALC_SET, GROUND_PLACE, GROUND_PLACE_TEAM_BASE_INSIDE),
     CALL_SCRIPT(NEXT_SAVE_FUNC),
     JUMP_SCRIPT(EVENT_DIVIDE),
 };
 
 static const struct ScriptCommand s_script_EVENT_M01E04B_L000[] = { /* 0x8125ee0 */
     DEBUGINFO_O(2188),
-    EXECUTE_SUBSTATION(12, 3, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 3, 0),
     SCENARIO_CALC(SCENARIO_MAIN,  7,  1),
     RET,
 };
 
 static const struct ScriptCommand s_script_EVENT_M01E04B_L001[] = { /* 0x8125f20 */
     DEBUGINFO_O(2195),
-    EXECUTE_SUBSTATION(12, 28, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 28, 0),
     SCENARIO_CALC(SCENARIO_MAIN,  7,  2),
     RET,
 };
 
 static const struct ScriptCommand s_script_EVENT_M01E04B_L002[] = { /* 0x8125f60 */
     DEBUGINFO_O(2202),
-    EXECUTE_SUBSTATION(9, 40, 0),
-    { 0xaf, 0x01,  0x0005,  0x00000000,  0x00000000, NULL },
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE, 40, 0),
+    CMD_UNK_AF(RESCUE_DUNGEON_MT_THUNDER, TRUE),
     SCENARIO_CALC(SCENARIO_MAIN,  7,  3),
     RET,
 };
@@ -2215,7 +2215,7 @@ static const struct ScriptCommand s_script_EVENT_M01E04B_L003[] = { /* 0x8125fb0
 static const struct ScriptCommand s_script_EVENT_M01E04B_L004[] = { /* 0x8125fe0 */
     DEBUGINFO_O(2216),
     CALL_SCRIPT(DISMISSAL_SALLY_MEMBER3_FUNC),
-    EXECUTE_SUBSTATION(12, 29, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 29, 0),
     RET,
 };
 
@@ -2234,32 +2234,32 @@ static const struct ScriptCommand s_script_EVENT_M01E04B_L006[] = { /* 0x8126050
 static const struct ScriptCommand s_script_EVENT_M01E04B_L007[] = { /* 0x8126080 */
     DEBUGINFO_O(2235),
     EXECUTE_SUBSTATION(190, 1, 0),
-    { 0xb0, 0x01,  0x0005,  0x00000000,  0x00000000, NULL },
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_MT_THUNDER),
     SCENARIO_CALC(SCENARIO_MAIN,  8,  0),
     CALL_SCRIPT(DISMISSAL_SALLY_MEMBER_FUNC),
-    UPDATE_VARINT(CALC_SET, GROUND_PLACE, 11),
+    UPDATE_VARINT(CALC_SET, GROUND_PLACE, GROUND_PLACE_TEAM_BASE_INSIDE),
     CALL_SCRIPT(NEXT_SAVE_FUNC),
     JUMP_SCRIPT(EVENT_DIVIDE),
 };
 
 static const struct ScriptCommand s_script_EVENT_M01E05A_L000[] = { /* 0x8126100 */
     DEBUGINFO_O(2246),
-    EXECUTE_SUBSTATION(12, 3, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 3, 0),
     SCENARIO_CALC(SCENARIO_MAIN,  8,  1),
     RET,
 };
 
 static const struct ScriptCommand s_script_EVENT_M01E05A_L001[] = { /* 0x8126140 */
     DEBUGINFO_O(2253),
-    EXECUTE_SUBSTATION(12, 30, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 30, 0),
     SCENARIO_CALC(SCENARIO_MAIN,  8,  2),
     RET,
 };
 
 static const struct ScriptCommand s_script_EVENT_M01E05A_L002[] = { /* 0x8126180 */
     DEBUGINFO_O(2260),
-    EXECUTE_SUBSTATION(9, 43, 0),
-    { 0xaf, 0x01,  0x0006,  0x00000000,  0x00000000, NULL },
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE, 43, 0),
+    CMD_UNK_AF(RESCUE_DUNGEON_GREAT_CANYON, TRUE),
     SCENARIO_CALC(SCENARIO_MAIN,  8,  3),
     RET,
 };
@@ -2273,7 +2273,7 @@ static const struct ScriptCommand s_script_EVENT_M01E05A_L003[] = { /* 0x81261d0
 static const struct ScriptCommand s_script_EVENT_M01E05A_L004[] = { /* 0x8126200 */
     DEBUGINFO_O(2274),
     CALL_SCRIPT(DISMISSAL_SALLY_MEMBER3_FUNC),
-    EXECUTE_SUBSTATION(12, 31, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 31, 0),
     RET,
 };
 
@@ -2286,31 +2286,31 @@ static const struct ScriptCommand s_script_EVENT_M01E05A_L005[] = { /* 0x8126240
 static const struct ScriptCommand s_script_EVENT_M01E05A_L006[] = { /* 0x8126270 */
     DEBUGINFO_O(2287),
     EXECUTE_SUBSTATION(192, 2, 0),
-    { 0xb0, 0x01,  0x0006,  0x00000000,  0x00000000, NULL },
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_GREAT_CANYON),
     SCENARIO_CALC(SCENARIO_MAIN,  9,  0),
     CALL_SCRIPT(DISMISSAL_SALLY_MEMBER_FUNC),
-    UPDATE_VARINT(CALC_SET, GROUND_PLACE, 11),
+    UPDATE_VARINT(CALC_SET, GROUND_PLACE, GROUND_PLACE_TEAM_BASE_INSIDE),
     CALL_SCRIPT(NEXT_SAVE_FUNC),
     JUMP_SCRIPT(EVENT_DIVIDE),
 };
 
 static const struct ScriptCommand s_script_EVENT_M01E05B_L000[] = { /* 0x81262f0 */
     DEBUGINFO_O(2298),
-    EXECUTE_SUBSTATION(12, 3, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 3, 0),
     SCENARIO_CALC(SCENARIO_MAIN,  9,  1),
     RET,
 };
 
 static const struct ScriptCommand s_script_EVENT_M01E05B_L001[] = { /* 0x8126330 */
     DEBUGINFO_O(2305),
-    EXECUTE_SUBSTATION(12, 32, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 32, 0),
     SCENARIO_CALC(SCENARIO_MAIN,  9,  2),
     RET,
 };
 
 static const struct ScriptCommand s_script_EVENT_M01E05B_L002[] = { /* 0x8126370 */
     DEBUGINFO_O(2312),
-    EXECUTE_SUBSTATION(9, 45, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE, 45, 0),
     SCENARIO_CALC(SCENARIO_MAIN,  9,  3),
     RET,
 };
@@ -2323,49 +2323,49 @@ static const struct ScriptCommand s_script_EVENT_M01E05B_L003[] = { /* 0x81263b0
 
 static const struct ScriptCommand s_script_EVENT_M01E05B_L004[] = { /* 0x81263e0 */
     DEBUGINFO_O(2325),
-    EXECUTE_SUBSTATION(2, 17, 0),
+    EXECUTE_SUBSTATION(MAP_WHISCASH_POND, 17, 0),
     SCENARIO_CALC(SCENARIO_MAIN,  9,  5),
     RET,
 };
 
 static const struct ScriptCommand s_script_EVENT_M01E05B_L005[] = { /* 0x8126420 */
     DEBUGINFO_O(2332),
-    EXECUTE_SUBSTATION(9, 46, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE, 46, 0),
     SCENARIO_CALC(SCENARIO_MAIN, 10,  0),
     JUMP_SCRIPT(EVENT_DIVIDE),
 };
 
 static const struct ScriptCommand s_script_EVENT_M01E06A_L001[] = { /* 0x8126460 */
     DEBUGINFO_O(2339),
-    EXECUTE_SUBSTATION(12, 2, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 2, 0),
     EXECUTE_SUBSTATION(162, 4, 0),
-    EXECUTE_SUBSTATION(12, 33, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 33, 0),
     { 0x3b, 0x3b,  0x0000,  0x00000000,  0x00000000, NULL },
-    EXECUTE_SUBSTATION(2, 18, 0),
-    EXECUTE_SUBSTATION(12, 34, 0),
+    EXECUTE_SUBSTATION(MAP_WHISCASH_POND, 18, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 34, 0),
     SCENARIO_CALC(SCENARIO_MAIN, 10,  2),
     RET,
 };
 
 static const struct ScriptCommand s_script_EVENT_M01E06A_L002[] = { /* 0x81264f0 */
     DEBUGINFO_O(2351),
-    EXECUTE_SUBSTATION(9, 47, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE, 47, 0),
     SCENARIO_CALC(SCENARIO_MAIN, 10,  3),
     RET,
 };
 
 static const struct ScriptCommand s_script_EVENT_M01E06A_L003[] = { /* 0x8126530 */
     DEBUGINFO_O(2358),
-    EXECUTE_SUBSTATION(1, 20, 0),
-    EXECUTE_SUBSTATION(1, 21, 0),
-    EXECUTE_SUBSTATION(9, 48, 0),
+    EXECUTE_SUBSTATION(MAP_POKEMON_SQUARE, 20, 0),
+    EXECUTE_SUBSTATION(MAP_POKEMON_SQUARE, 21, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE, 48, 0),
     SCENARIO_CALC(SCENARIO_MAIN, 11,  0),
     JUMP_SCRIPT(EVENT_DIVIDE),
 };
 
 static const struct ScriptCommand s_script_EVENT_M01E07A_L001[] = { /* 0x8126590 */
     DEBUGINFO_O(2367),
-    EXECUTE_SUBSTATION(9, 49, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE, 49, 0),
     SCENARIO_CALC(SCENARIO_MAIN, 11,  2),
     UPDATE_VARINT(CALC_SET, WARP_LOCK, 5),
     RET,
@@ -2374,9 +2374,9 @@ static const struct ScriptCommand s_script_EVENT_M01E07A_L001[] = { /* 0x8126590
 static const struct ScriptCommand s_script_EVENT_M01E07A_L002[] = { /* 0x81265e0 */
     DEBUGINFO_O(2375),
     SCENARIO_CALC(SCENARIO_MAIN, 11,  4),
-    EXECUTE_SUBSTATION(9, 51, 0),
-    EXECUTE_SUBSTATION(9, 52, 0),
-    EXECUTE_SUBSTATION(9, 53, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE, 51, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE, 52, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE, 53, 0),
     { 0x3b, 0x39,  0x0001,  0x00000000,  0x00000000, NULL },
     EXECUTE_SUBSTATION(164, 1, 0),
     EXECUTE_SUBSTATION(165, 1, 0),
@@ -2389,7 +2389,7 @@ static const struct ScriptCommand s_script_EVENT_M01E07A_L002[] = { /* 0x81265e0
 static const struct ScriptCommand s_script_EVENT_M01E07A_L003[] = { /* 0x81266a0 */
     DEBUGINFO_O(2390),
     EXECUTE_SUBSTATION(193, 1, 0),
-    { 0xaf, 0x01,  0x0007,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_AF(RESCUE_DUNGEON_LAPIS_CAVE, TRUE),
     RET,
 };
 
@@ -2407,7 +2407,7 @@ static const struct ScriptCommand s_script_EVENT_M01E07A_L005[] = { /* 0x8126710
     EXECUTE_SUBSTATION(167, 1, 0),
     { 0x3b, 0x39,  0x0000,  0x00000000,  0x00000000, NULL },
     EXECUTE_SUBSTATION(166, 2, 0),
-    { 0xb0, 0x01,  0x0007,  0x00000000,  0x00000000, NULL },
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_LAPIS_CAVE),
     SCENARIO_CALC(SCENARIO_MAIN, 12,  0),
     UPDATE_VARINT(CALC_SET, GROUND_PLACE, 24),
     CALL_SCRIPT(NEXT_SAVE_FUNC),
@@ -2435,7 +2435,7 @@ static const struct ScriptCommand s_script_EVENT_M01E07B_L001[] = { /* 0x8126830
 
 static const struct ScriptCommand s_script_EVENT_M01E07B_L002[] = { /* 0x8126870 */
     DEBUGINFO_O(2437),
-    { 0xaf, 0x01,  0x0008,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_AF(RESCUE_DUNGEON_MT_BLAZE, TRUE),
     RET,
 };
 
@@ -2457,7 +2457,7 @@ static const struct ScriptCommand s_script_EVENT_M01E07B_L005[] = { /* 0x8126900
     { 0x3b, 0x39,  0x0001,  0x00000000,  0x00000000, NULL },
     EXECUTE_SUBSTATION(167, 2, 0),
     { 0x3b, 0x39,  0x0000,  0x00000000,  0x00000000, NULL },
-    { 0xb0, 0x01,  0x0008,  0x00000000,  0x00000000, NULL },
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_MT_BLAZE),
     SCENARIO_CALC(SCENARIO_MAIN, 13,  0),
     UPDATE_VARINT(CALC_SET, GROUND_PLACE, 26),
     CALL_SCRIPT(NEXT_SAVE_FUNC),
@@ -2490,7 +2490,7 @@ static const struct ScriptCommand s_script_EVENT_M01E08A_L001[] = { /* 0x8126a00
 static const struct ScriptCommand s_script_EVENT_M01E08A_L002[] = { /* 0x8126a80 */
     DEBUGINFO_O(2491),
     EXECUTE_SUBSTATION(198, 1, 0),
-    { 0xaf, 0x01,  0x0009,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_AF(RESCUE_DUNGEON_FROSTY_FOREST, TRUE),
     RET,
 };
 
@@ -2502,7 +2502,7 @@ static const struct ScriptCommand s_script_EVENT_M01E08A_L003[] = { /* 0x8126ac0
 
 static const struct ScriptCommand s_script_EVENT_M01E08A_L004[] = { /* 0x8126af0 */
     DEBUGINFO_O(2504),
-    JUMPIF_UNK_BC(8, /* to label */ 0),
+    JUMPIF_CUTSCENE_FLAG(CUTSCENE_FLAG_FROSTY_GROTTO_REACHED, /* to label */ 0),
     EXECUTE_SUBSTATION(199, 1, 0),
     JUMP_LABEL(1),
   LABEL(0), /* = 0x00 */
@@ -2514,7 +2514,7 @@ static const struct ScriptCommand s_script_EVENT_M01E08A_L004[] = { /* 0x8126af0
 static const struct ScriptCommand s_script_EVENT_M01E08A_L005[] = { /* 0x8126b70 */
     DEBUGINFO_O(2515),
     EXECUTE_SUBSTATION(200, 1, 0),
-    { 0xb0, 0x01,  0x0009,  0x00000000,  0x00000000, NULL },
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_FROSTY_FOREST),
     SCENARIO_CALC(SCENARIO_MAIN, 14,  0),
     UPDATE_VARINT(CALC_SET, GROUND_PLACE, 28),
     CALL_SCRIPT(NEXT_SAVE_FUNC),
@@ -2547,7 +2547,7 @@ static const struct ScriptCommand s_script_EVENT_M01E08B_L001[] = { /* 0x8126c40
 static const struct ScriptCommand s_script_EVENT_M01E08B_L002[] = { /* 0x8126cc0 */
     DEBUGINFO_O(2548),
     EXECUTE_SUBSTATION(201, 1, 0),
-    { 0xaf, 0x01,  0x000a,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_AF(RESCUE_DUNGEON_MT_FREEZE, TRUE),
     RET,
 };
 
@@ -2573,7 +2573,7 @@ static const struct ScriptCommand s_script_EVENT_M01E08B_L006[] = { /* 0x8126d90
     DEBUGINFO_O(2573),
     EXECUTE_SUBSTATION(203, 2, 0),
     EXECUTE_SUBSTATION(203, 3, 0),
-    { 0xb0, 0x01,  0x000a,  0x00000000,  0x00000000, NULL },
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_MT_FREEZE),
     SCENARIO_CALC(SCENARIO_MAIN, 15,  0),
     UPDATE_VARINT(CALC_SET, GROUND_PLACE, 2),
     CALL_SCRIPT(NEXT_SAVE_FUNC),
@@ -2594,65 +2594,65 @@ static const struct ScriptCommand s_script_EVENT_M01E08B_T002[] = { /* 0x8126e40
 
 static const struct ScriptCommand s_script_EVENT_M01E09A_L001[] = { /* 0x8126e70 */
     DEBUGINFO_O(2596),
-    EXECUTE_SUBSTATION(1, 23, 0),
+    EXECUTE_SUBSTATION(MAP_POKEMON_SQUARE, 23, 0),
     CALL_SCRIPT(DISMISSAL_SALLY_MEMBER_FUNC),
-    EXECUTE_SUBSTATION(12, 35, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 35, 0),
     SCENARIO_CALC(SCENARIO_MAIN, 15,  2),
     RET,
 };
 
 static const struct ScriptCommand s_script_EVENT_M01E09A_L002[] = { /* 0x8126ed0 */
     DEBUGINFO_O(2605),
-    EXECUTE_SUBSTATION(9, 55, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE, 55, 0),
     SCENARIO_CALC(SCENARIO_MAIN, 15,  3),
     RET,
 };
 
 static const struct ScriptCommand s_script_EVENT_M01E09A_L003[] = { /* 0x8126f10 */
     DEBUGINFO_O(2612),
-    EXECUTE_SUBSTATION(12, 2, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 2, 0),
     EXECUTE_SUBSTATION(162, 6, 0),
-    EXECUTE_SUBSTATION(12, 36, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 36, 0),
     EXECUTE_SUBSTATION(162, 7, 0),
-    EXECUTE_SUBSTATION(12, 37, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 37, 0),
     SCENARIO_CALC(SCENARIO_MAIN, 15,  4),
     RET,
 };
 
 static const struct ScriptCommand s_script_EVENT_M01E09A_L004[] = { /* 0x8126f90 */
     DEBUGINFO_O(2623),
-    EXECUTE_SUBSTATION(9, 57, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE, 57, 0),
     SCENARIO_CALC(SCENARIO_MAIN, 15,  5),
     RET,
 };
 
 static const struct ScriptCommand s_script_EVENT_M01E09A_L005[] = { /* 0x8126fd0 */
     DEBUGINFO_O(2630),
-    EXECUTE_SUBSTATION(12, 38, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 38, 0),
     SCENARIO_CALC(SCENARIO_MAIN, 15,  6),
     RET,
 };
 
 static const struct ScriptCommand s_script_EVENT_M01E09A_L006[] = { /* 0x8127010 */
     DEBUGINFO_O(2637),
-    EXECUTE_SUBSTATION(9, 58, 0),
-    EXECUTE_SUBSTATION(1, 26, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE, 58, 0),
+    EXECUTE_SUBSTATION(MAP_POKEMON_SQUARE, 26, 0),
     SCENARIO_CALC(SCENARIO_MAIN, 15,  7),
-    EXECUTE_SUBSTATION(9, 59, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE, 59, 0),
     RET,
 };
 
 static const struct ScriptCommand s_script_EVENT_M01E09A_L007[] = { /* 0x8127070 */
     DEBUGINFO_O(2646),
-    EXECUTE_SUBSTATION(12, 39, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 39, 0),
     SCENARIO_CALC(SCENARIO_MAIN, 15,  8),
     JUMP_SCRIPT(EVENT_M01E09A_L008),
 };
 
 static const struct ScriptCommand s_script_EVENT_M01E09A_L008[] = { /* 0x81270b0 */
     DEBUGINFO_O(2653),
-    EXECUTE_SUBSTATION(1, 28, 0),
-    EXECUTE_SUBSTATION(9, 60, 0),
+    EXECUTE_SUBSTATION(MAP_POKEMON_SQUARE, 28, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE, 60, 0),
     SCENARIO_CALC(SCENARIO_MAIN, 15,  9),
     UPDATE_VARINT(CALC_SET, WARP_LOCK, 6),
     RET,
@@ -2660,11 +2660,11 @@ static const struct ScriptCommand s_script_EVENT_M01E09A_L008[] = { /* 0x81270b0
 
 static const struct ScriptCommand s_script_EVENT_M01E09A_L009[] = { /* 0x8127110 */
     DEBUGINFO_O(2662),
-    EXECUTE_SUBSTATION(12, 2, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 2, 0),
     EXECUTE_SUBSTATION(162, 8, 0),
     { 0x3b, 0x03,  0x0000,  0x00000000,  0x00000000, NULL },
-    EXECUTE_SUBSTATION(12, 40, 0),
-    { 0xaf, 0x01,  0x000b,  0x00000000,  0x00000000, NULL },
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 40, 0),
+    CMD_UNK_AF(RESCUE_DUNGEON_MAGMA_CAVERN, TRUE),
     SCENARIO_CALC(SCENARIO_MAIN, 15, 10),
     UPDATE_VARINT(CALC_SET, WARP_LOCK, 0),
     RET,
@@ -2672,8 +2672,8 @@ static const struct ScriptCommand s_script_EVENT_M01E09A_L009[] = { /* 0x8127110
 
 static const struct ScriptCommand s_script_EVENT_M01E09A_L010[] = { /* 0x81271a0 */
     DEBUGINFO_O(2674),
-    EXECUTE_SUBSTATION(9, 62, 0),
-    { 0xaf, 0x01,  0x000b,  0x00000000,  0x00000000, NULL },
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE, 62, 0),
+    CMD_UNK_AF(RESCUE_DUNGEON_MAGMA_CAVERN, TRUE),
     SCENARIO_CALC(SCENARIO_MAIN, 15, 11),
     RET,
 };
@@ -2687,7 +2687,7 @@ static const struct ScriptCommand s_script_EVENT_M01E09A_L011[] = { /* 0x81271f0
 static const struct ScriptCommand s_script_EVENT_M01E09A_L012[] = { /* 0x8127220 */
     DEBUGINFO_O(2688),
     CALL_SCRIPT(DISMISSAL_SALLY_MEMBER3_FUNC),
-    EXECUTE_SUBSTATION(12, 41, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 41, 0),
     RET,
 };
 
@@ -2706,7 +2706,7 @@ static const struct ScriptCommand s_script_EVENT_M01E09A_L014[] = { /* 0x8127290
 static const struct ScriptCommand s_script_EVENT_M01E09A_L015[] = { /* 0x81272c0 */
     DEBUGINFO_O(2707),
     EXECUTE_SUBSTATION(206, 1, 0),
-    { 0xb0, 0x01,  0x000b,  0x00000000,  0x00000000, NULL },
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_MAGMA_CAVERN),
     SCENARIO_CALC(SCENARIO_MAIN, 16,  0),
     CALL_SCRIPT(DISMISSAL_SALLY_MEMBER_FUNC),
     UPDATE_VARINT(CALC_SET, GROUND_PLACE, 2),
@@ -2717,12 +2717,12 @@ static const struct ScriptCommand s_script_EVENT_M01E09A_L015[] = { /* 0x81272c0
 static const struct ScriptCommand s_script_EVENT_M01E10A_L001[] = { /* 0x8127340 */
     DEBUGINFO_O(2718),
     SCENARIO_CALC(SCENARIO_MAIN, 16,  1),
-    EXECUTE_SUBSTATION(1, 31, 0),
+    EXECUTE_SUBSTATION(MAP_POKEMON_SQUARE, 31, 0),
     EXECUTE_SUBSTATION(171, 1, 0),
     EXECUTE_SUBSTATION(173, 1, 0),
     EXECUTE_SUBSTATION(171, 2, 0),
-    EXECUTE_SUBSTATION(1, 32, 0),
-    EXECUTE_SUBSTATION(1, 33, 0),
+    EXECUTE_SUBSTATION(MAP_POKEMON_SQUARE, 32, 0),
+    EXECUTE_SUBSTATION(MAP_POKEMON_SQUARE, 33, 0),
     SCENARIO_CALC(SCENARIO_MAIN, 16,  2),
     UPDATE_VARINT(CALC_SET, WARP_LOCK, 7),
     RET,
@@ -2731,22 +2731,22 @@ static const struct ScriptCommand s_script_EVENT_M01E10A_L001[] = { /* 0x8127340
 static const struct ScriptCommand s_script_EVENT_M01E10A_L002[] = { /* 0x81273f0 */
     DEBUGINFO_O(2732),
     SCENARIO_CALC(SCENARIO_MAIN, 16,  3),
-    EXECUTE_SUBSTATION(12, 2, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 2, 0),
     EXECUTE_SUBSTATION(163, 1, 0),
-    EXECUTE_SUBSTATION(12, 42, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 42, 0),
     EXECUTE_SUBSTATION(163, 2, 0),
     EXECUTE_SUBSTATION(162, 9, 0),
     { 0x3b, 0x03,  0x0000,  0x00000000,  0x00000000, NULL },
-    EXECUTE_SUBSTATION(12, 43, 0),
-    { 0xaf, 0x01,  0x000c,  0x00000000,  0x00000000, NULL },
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 43, 0),
+    CMD_UNK_AF(RESCUE_DUNGEON_SKY_TOWER, TRUE),
     UPDATE_VARINT(CALC_SET, WARP_LOCK, 0),
     RET,
 };
 
 static const struct ScriptCommand s_script_EVENT_M01E10A_L003[] = { /* 0x81274b0 */
     DEBUGINFO_O(2747),
-    EXECUTE_SUBSTATION(9, 65, 0),
-    { 0xaf, 0x01,  0x000c,  0x00000000,  0x00000000, NULL },
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE, 65, 0),
+    CMD_UNK_AF(RESCUE_DUNGEON_SKY_TOWER, TRUE),
     SCENARIO_CALC(SCENARIO_MAIN, 16,  4),
     UPDATE_VARINT(CALC_SET, WARP_LOCK, 0),
     RET,
@@ -2766,7 +2766,7 @@ static const struct ScriptCommand s_script_EVENT_M01E10A_L004[] = { /* 0x8127510
 static const struct ScriptCommand s_script_EVENT_M01E10A_L005[] = { /* 0x8127590 */
     DEBUGINFO_O(2767),
     CALL_SCRIPT(DISMISSAL_SALLY_MEMBER3_FUNC),
-    EXECUTE_SUBSTATION(12, 44, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 44, 0),
     RET,
 };
 
@@ -2789,7 +2789,7 @@ static const struct ScriptCommand s_script_EVENT_M01E10A_L008[] = { /* 0x8127630
     EXECUTE_SUBSTATION(209, 2, 0),
     EXECUTE_SUBSTATION(173, 3, 0),
     EXECUTE_SUBSTATION(209, 3, 0),
-    { 0xb0, 0x01,  0x000c,  0x00000000,  0x00000000, NULL },
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_SKY_TOWER),
     SCENARIO_CALC(SCENARIO_MAIN, 17,  0),
     JUMP_SCRIPT(EVENT_DIVIDE),
 };
@@ -2799,9 +2799,9 @@ static const struct ScriptCommand s_script_EVENT_M01END_L001[] = { /* 0x81276c0 
     { 0x3b, 0x39,  0x0001,  0x00000000,  0x00000000, NULL },
     EXECUTE_SUBSTATION(174, 1, 0),
     EXECUTE_SUBSTATION(171, 5, 0),
-    EXECUTE_SUBSTATION(1, 37, 0),
-    EXECUTE_SUBSTATION(2, 28, 0),
-    EXECUTE_SUBSTATION(4, 27, 0),
+    EXECUTE_SUBSTATION(MAP_POKEMON_SQUARE, 37, 0),
+    EXECUTE_SUBSTATION(MAP_WHISCASH_POND, 28, 0),
+    EXECUTE_SUBSTATION(MAP_PELIPPER_POST_OFFICE, 27, 0),
     EXECUTE_SUBSTATION(171, 6, 0),
     EXECUTE_SUBSTATION(171, 7, 0),
     { 0x3b, 0x39,  0x0001,  0x00000000,  0x00000000, NULL },
@@ -2810,7 +2810,7 @@ static const struct ScriptCommand s_script_EVENT_M01END_L001[] = { /* 0x81276c0 
     SCENARIO_CALC(SCENARIO_MAIN, 18,  0),
     CALL_SCRIPT(EVENT_DIVIDE_INIT_FUNC),
     EXECUTE_SUBSTATION(175, 2, 0),
-    EXECUTE_SUBSTATION(9, 68, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE, 68, 0),
     EXECUTE_SUBSTATION(177, 1, 0),
     { 0x3b, 0x42,  0x0000,  0x00000000,  0x00000000, NULL },
     HALT,
@@ -2824,7 +2824,7 @@ static const struct ScriptCommand s_script_EVENT_M01END_L002[] = { /* 0x81277f0 
     SCENARIO_CALC(SCENARIO_MAIN, 18,  0),
     CALL_SCRIPT(EVENT_DIVIDE_INIT_FUNC),
     EXECUTE_SUBSTATION(175, 2, 0),
-    EXECUTE_SUBSTATION(9, 68, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE, 68, 0),
     EXECUTE_SUBSTATION(177, 1, 0),
     { 0x3b, 0x42,  0x0000,  0x00000000,  0x00000000, NULL },
     HALT,
@@ -2832,22 +2832,22 @@ static const struct ScriptCommand s_script_EVENT_M01END_L002[] = { /* 0x81277f0 
 
 static const struct ScriptCommand s_script_EVENT_M02E01A_L001[] = { /* 0x81278a0 */
     DEBUGINFO_O(2834),
-    EXECUTE_SUBSTATION(12, 45, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 45, 0),
     SCENARIO_CALC(SCENARIO_MAIN, 18,  2),
     RET,
 };
 
 static const struct ScriptCommand s_script_EVENT_M02E01A_L002[] = { /* 0x81278e0 */
     DEBUGINFO_O(2841),
-    EXECUTE_SUBSTATION(9, 69, 0),
-    EXECUTE_SUBSTATION(2, 29, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE, 69, 0),
+    EXECUTE_SUBSTATION(MAP_WHISCASH_POND, 29, 0),
     SCENARIO_CALC(SCENARIO_MAIN, 18,  3),
     RET,
 };
 
 static const struct ScriptCommand s_script_EVENT_M02E01A_L003[] = { /* 0x8127930 */
     DEBUGINFO_O(2849),
-    EXECUTE_SUBSTATION(9, 72, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE, 72, 0),
     SCENARIO_CALC(SCENARIO_MAIN, 18,  4),
     RET,
 };
@@ -2856,7 +2856,7 @@ static const struct ScriptCommand s_script_EVENT_M02E02A_L001[] = { /* 0x8127970
     DEBUGINFO_O(2856),
     SCENARIO_CALC(SCENARIO_MAIN, 19,  2),
     CALL_SCRIPT(EVENT_DIVIDE_NEXT_DAY_FUNC),
-    EXECUTE_SUBSTATION(12, 6, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 6, 0),
     RET,
 };
 
@@ -2864,7 +2864,7 @@ static const struct ScriptCommand s_script_EVENT_M02E02B_L001[] = { /* 0x81279c0
     DEBUGINFO_O(2864),
     SCENARIO_CALC(SCENARIO_MAIN, 20,  2),
     CALL_SCRIPT(EVENT_DIVIDE_NEXT_DAY_FUNC),
-    EXECUTE_SUBSTATION(12, 6, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 6, 0),
     RET,
 };
 
@@ -2872,7 +2872,7 @@ static const struct ScriptCommand s_script_EVENT_M02E02C_L001[] = { /* 0x8127a10
     DEBUGINFO_O(2872),
     SCENARIO_CALC(SCENARIO_MAIN, 21,  2),
     CALL_SCRIPT(EVENT_DIVIDE_NEXT_DAY_FUNC),
-    EXECUTE_SUBSTATION(12, 6, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 6, 0),
     RET,
 };
 
@@ -2880,7 +2880,7 @@ static const struct ScriptCommand s_script_EVENT_M02E02D_L001[] = { /* 0x8127a60
     DEBUGINFO_O(2880),
     SCENARIO_CALC(SCENARIO_MAIN, 22,  2),
     CALL_SCRIPT(EVENT_DIVIDE_NEXT_DAY_FUNC),
-    EXECUTE_SUBSTATION(12, 6, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 6, 0),
     RET,
 };
 
@@ -2888,7 +2888,7 @@ static const struct ScriptCommand s_script_EVENT_M02E02E_L001[] = { /* 0x8127ab0
     DEBUGINFO_O(2888),
     SCENARIO_CALC(SCENARIO_MAIN, 23,  2),
     CALL_SCRIPT(EVENT_DIVIDE_NEXT_DAY_FUNC),
-    EXECUTE_SUBSTATION(12, 6, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 6, 0),
     RET,
 };
 
@@ -2896,7 +2896,7 @@ static const struct ScriptCommand s_script_EVENT_M02E02F_L001[] = { /* 0x8127b00
     DEBUGINFO_O(2896),
     SCENARIO_CALC(SCENARIO_MAIN, 24,  2),
     CALL_SCRIPT(EVENT_DIVIDE_NEXT_DAY_FUNC),
-    EXECUTE_SUBSTATION(12, 6, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 6, 0),
     RET,
 };
 
@@ -2904,7 +2904,7 @@ static const struct ScriptCommand s_script_EVENT_M02E02G_L001[] = { /* 0x8127b50
     DEBUGINFO_O(2904),
     SCENARIO_CALC(SCENARIO_MAIN, 25,  2),
     CALL_SCRIPT(EVENT_DIVIDE_NEXT_DAY_FUNC),
-    EXECUTE_SUBSTATION(12, 6, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 6, 0),
     RET,
 };
 
@@ -2912,13 +2912,13 @@ static const struct ScriptCommand s_script_EVENT_M02E02H_L001[] = { /* 0x8127ba0
     DEBUGINFO_O(2912),
     SCENARIO_CALC(SCENARIO_MAIN, 26,  2),
     CALL_SCRIPT(EVENT_DIVIDE_NEXT_DAY_FUNC),
-    EXECUTE_SUBSTATION(12, 6, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 6, 0),
     RET,
 };
 
 static const struct ScriptCommand s_script_EVENT_M02END_L001[] = { /* 0x8127bf0 */
     DEBUGINFO_O(2920),
-    EXECUTE_SUBSTATION(12, 6, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 6, 0),
     SCENARIO_CALC(SCENARIO_MAIN, 27,  2),
     RET,
 };
@@ -2927,13 +2927,13 @@ static const struct ScriptCommand s_script_EVENT_S00E01A_L001[] = { /* 0x8127c30
     DEBUGINFO_O(2927),
     CALL_SCRIPT(DISMISSAL_SALLY_MEMBER3_FUNC),
     CALL_SCRIPT(EVENT_DIVIDE_NEXT_DAY_FUNC),
-    EXECUTE_SUBSTATION(12, 7, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 7, 0),
     RET,
 };
 
 static const struct ScriptCommand s_script_EVENT_S00E01A_L002[] = { /* 0x8127c80 */
     DEBUGINFO_O(2935),
-    EXECUTE_SUBSTATION(9, 6, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE, 6, 0),
     UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_TEAM_BASE_INSIDE),
     UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_TEAM_BASE_INSIDE),
     CALL_SCRIPT(DISMISSAL_SALLY_MEMBER_FUNC),
@@ -2943,13 +2943,13 @@ static const struct ScriptCommand s_script_EVENT_S00E01A_L002[] = { /* 0x8127c80
 
 static const struct ScriptCommand s_script_EVENT_S00E01A_L003[] = { /* 0x8127cf0 */
     DEBUGINFO_O(2945),
-    EXECUTE_SUBSTATION(12, 4, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 4, 0),
     RET,
 };
 
 static const struct ScriptCommand s_script_EVENT_S00E01A_L004[] = { /* 0x8127d20 */
     DEBUGINFO_O(2951),
-    EXECUTE_SUBSTATION(12, 5, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 5, 0),
     RET,
 };
 
@@ -2968,7 +2968,7 @@ static const struct ScriptCommand s_script_EVENT_S01E01A_CONTINUE[] = { /* 0x812
     RET_DIRECT,
   LABEL(0), /* = 0x00 */
     SCENARIO_CALC(SCENARIO_SUB1, 29,  2),
-    { 0xae, 0x01,  0x000e,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_AE(RESCUE_DUNGEON_UPROAR_FOREST),
     RET_DIRECT,
 };
 
@@ -2978,14 +2978,14 @@ static const struct ScriptCommand s_script_EVENT_S01E01A_END[] = { /* 0x8127e20 
     RET_DIRECT,
   LABEL(0), /* = 0x00 */
     SCENARIO_CALC(SCENARIO_SUB1, 31,  0),
-    { 0xb0, 0x01,  0x000e,  0x00000000,  0x00000000, NULL },
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_UPROAR_FOREST),
     UPDATE_VARINT(CALC_SET, BASE_LEVEL, 2),
     RET_DIRECT,
 };
 
 static const struct ScriptCommand s_script_EVENT_S01E01A_L001[] = { /* 0x8127ea0 */
     DEBUGINFO_O(2987),
-    { 0xae, 0x01,  0x000e,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_AE(RESCUE_DUNGEON_UPROAR_FOREST),
     SCENARIO_CALC(SCENARIO_SUB1, 29,  2),
     RET,
     SCENARIO_CALC(SCENARIO_MAIN, 15,  5),
@@ -3001,30 +3001,30 @@ static const struct ScriptCommand s_script_EVENT_S01E01A_L001[] = { /* 0x8127ea0
 
 static const struct ScriptCommand s_script_EVENT_S01E01A_L002[] = { /* 0x8127f60 */
     DEBUGINFO_O(3003),
-    EXECUTE_SUBSTATION(4, 3, 0),
-    { 0xaf, 0x01,  0x000e,  0x00000000,  0x00000000, NULL },
+    EXECUTE_SUBSTATION(MAP_PELIPPER_POST_OFFICE, 3, 0),
+    CMD_UNK_AF(RESCUE_DUNGEON_UPROAR_FOREST, TRUE),
     SCENARIO_CALC(SCENARIO_SUB1, 29,  3),
     SET_DUNGEON_RES(/* result */ 0, /* enter */ -1),
     UPDATE_VARINT(CALC_SET, GROUND_ENTER, 4),
     UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 4),
-    EXECUTE_SUBSTATION(4, 0, 0),
+    EXECUTE_SUBSTATION(MAP_PELIPPER_POST_OFFICE, 0, 0),
     RET,
 };
 
 static const struct ScriptCommand s_script_EVENT_S01E01A_L003[] = { /* 0x8127ff0 */
     DEBUGINFO_O(3015),
-    EXECUTE_SUBSTATION(9, 75, 0),
-    { 0xb0, 0x01,  0x000e,  0x00000000,  0x00000000, NULL },
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE, 75, 0),
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_UPROAR_FOREST),
     JUMP_SCRIPT(EVENT_S01E01B_L001),
 };
 
 static const struct ScriptCommand s_script_EVENT_S01E01B_L001[] = { /* 0x8128030 */
     DEBUGINFO_O(3022),
     UPDATE_VARINT(CALC_SET, BASE_LEVEL, 1),
-    EXECUTE_SUBSTATION(9, 76, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE, 76, 0),
     SCENARIO_CALC(SCENARIO_SUB1, 30,  0),
     CALL_SCRIPT(DISMISSAL_SALLY_MEMBER_FUNC),
-    UPDATE_VARINT(CALC_SET, GROUND_PLACE, 11),
+    UPDATE_VARINT(CALC_SET, GROUND_PLACE, GROUND_PLACE_TEAM_BASE_INSIDE),
     SCENARIO_CALC(SCENARIO_SELECT, 30,  0),
     CALL_SCRIPT(NEXT_SAVE2_FUNC),
     JUMP_SCRIPT(EVENT_DIVIDE),
@@ -3032,14 +3032,14 @@ static const struct ScriptCommand s_script_EVENT_S01E01B_L001[] = { /* 0x8128030
 
 static const struct ScriptCommand s_script_EVENT_S01E01B_L001L[] = { /* 0x81280c0 */
     DEBUGINFO_O(3034),
-    EXECUTE_SUBSTATION(12, 8, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 8, 0),
     RET,
 };
 
 static const struct ScriptCommand s_script_EVENT_S01E01C_L001[] = { /* 0x81280f0 */
     DEBUGINFO_O(3040),
     UPDATE_VARINT(CALC_SET, BASE_LEVEL, 2),
-    EXECUTE_SUBSTATION(9, 78, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE, 78, 0),
     SCENARIO_CALC(SCENARIO_SUB1, 31,  0),
     { 0x3b, 0x03,  0x0000,  0x00000000,  0x00000000, NULL },
     EXECUTE_FUNCTION(EVENT_DIVIDE_NEXT),
@@ -3052,9 +3052,9 @@ static const struct ScriptCommand s_script_EVENT_S01E02A_START[] = { /* 0x812816
     RET_DIRECT,
   LABEL(0), /* = 0x00 */
     SCENARIO_CALC(SCENARIO_SUB1, 31,  1),
-    { 0xae, 0x01,  0x000f,  0x00000000,  0x00000000, NULL },
-    { 0xb0, 0x01,  0x000e,  0x00000000,  0x00000000, NULL },
-    { 0xad, 0x01,  0x0076,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_AE(RESCUE_DUNGEON_HOWLING_FOREST),
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_UPROAR_FOREST),
+    UNLOCK_FRIEND_AREA(MAP_FRIEND_AREA_SKY_BLUE_PLAINS),
     UPDATE_VARINT(CALC_SET, BASE_LEVEL, 2),
     RET_DIRECT,
 };
@@ -3065,31 +3065,31 @@ static const struct ScriptCommand s_script_EVENT_S01E02A_END[] = { /* 0x8128200 
     RET_DIRECT,
   LABEL(0), /* = 0x00 */
     SCENARIO_CALC(SCENARIO_SUB1, 32,  2),
-    { 0xb0, 0x01,  0x000e,  0x00000000,  0x00000000, NULL },
-    { 0xb0, 0x01,  0x000f,  0x00000000,  0x00000000, NULL },
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_UPROAR_FOREST),
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_HOWLING_FOREST),
     UPDATE_VARINT(CALC_SET, BASE_LEVEL, 2),
     RET_DIRECT,
 };
 
 static const struct ScriptCommand s_script_EVENT_S01E02A_L001[] = { /* 0x8128290 */
     DEBUGINFO_O(3075),
-    EXECUTE_SUBSTATION(4, 5, 0),
-    { 0xaf, 0x01,  0x000f,  0x00000000,  0x00000000, NULL },
+    EXECUTE_SUBSTATION(MAP_PELIPPER_POST_OFFICE, 5, 0),
+    CMD_UNK_AF(RESCUE_DUNGEON_HOWLING_FOREST, TRUE),
     SCENARIO_CALC(SCENARIO_SUB1, 31,  2),
     SET_DUNGEON_RES(/* result */ 0, /* enter */ -1),
     UPDATE_VARINT(CALC_SET, GROUND_ENTER, 4),
     UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 4),
-    EXECUTE_SUBSTATION(4, 0, 0),
+    EXECUTE_SUBSTATION(MAP_PELIPPER_POST_OFFICE, 0, 0),
     RET,
 };
 
 static const struct ScriptCommand s_script_EVENT_S01E02A_L002[] = { /* 0x8128320 */
     DEBUGINFO_O(3087),
     SCENARIO_CALC(SCENARIO_SUB1, 32,  0),
-    EXECUTE_SUBSTATION(9, 79, 0),
-    { 0xb0, 0x01,  0x000f,  0x00000000,  0x00000000, NULL },
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE, 79, 0),
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_HOWLING_FOREST),
     CALL_SCRIPT(DISMISSAL_SALLY_MEMBER_FUNC),
-    UPDATE_VARINT(CALC_SET, GROUND_PLACE, 11),
+    UPDATE_VARINT(CALC_SET, GROUND_PLACE, GROUND_PLACE_TEAM_BASE_INSIDE),
     SCENARIO_CALC(SCENARIO_SELECT, 31,  0),
     CALL_SCRIPT(NEXT_SAVE2_FUNC),
     JUMP_SCRIPT(EVENT_DIVIDE),
@@ -3098,7 +3098,7 @@ static const struct ScriptCommand s_script_EVENT_S01E02A_L002[] = { /* 0x8128320
 static const struct ScriptCommand s_script_EVENT_S01E02A_L002L[] = { /* 0x81283b0 */
     DEBUGINFO_O(3099),
     CALL_SCRIPT(EVENT_DIVIDE_NEXT_DAY2_FUNC),
-    EXECUTE_SUBSTATION(12, 8, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 8, 0),
     RET,
 };
 
@@ -3120,7 +3120,7 @@ static const struct ScriptCommand s_script_EVENT_S02E01A_START[] = { /* 0x812845
     RET_DIRECT,
   LABEL(0), /* = 0x00 */
     SCENARIO_CALC(SCENARIO_SUB2, 33,  1),
-    { 0xb0, 0x01,  0x0010,  0x00000000,  0x00000000, NULL },
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_STORMY_SEA),
     RET_DIRECT,
 };
 
@@ -3130,7 +3130,7 @@ static const struct ScriptCommand s_script_EVENT_S02E01A_END[] = { /* 0x81284c0 
     RET_DIRECT,
   LABEL(0), /* = 0x00 */
     SCENARIO_CALC(SCENARIO_SUB2, 34,  0),
-    { 0xb0, 0x01,  0x0010,  0x00000000,  0x00000000, NULL },
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_STORMY_SEA),
     RET_DIRECT,
 };
 
@@ -3148,17 +3148,17 @@ static const struct ScriptCommand s_script_EVENT_S02E01A_L002[] = { /* 0x8128560
 
 static const struct ScriptCommand s_script_EVENT_S02E01A_L003[] = { /* 0x8128590 */
     DEBUGINFO_O(3150),
-    { 0xaf, 0x01,  0x0010,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_AF(RESCUE_DUNGEON_STORMY_SEA, TRUE),
     SCENARIO_CALC(SCENARIO_SUB2, 33,  4),
     RET,
 };
 
 static const struct ScriptCommand s_script_EVENT_S02E01A_L004[] = { /* 0x81285d0 */
     DEBUGINFO_O(3157),
-    { 0xb0, 0x01,  0x0010,  0x00000000,  0x00000000, NULL },
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_STORMY_SEA),
     SCENARIO_CALC(SCENARIO_SUB2, 34,  0),
     CALL_SCRIPT(DISMISSAL_SALLY_MEMBER_FUNC),
-    UPDATE_VARINT(CALC_SET, GROUND_PLACE, 11),
+    UPDATE_VARINT(CALC_SET, GROUND_PLACE, GROUND_PLACE_TEAM_BASE_INSIDE),
     SCENARIO_CALC(SCENARIO_SELECT, 33,  0),
     CALL_SCRIPT(NEXT_SAVE2_FUNC),
     JUMP_SCRIPT(EVENT_DIVIDE),
@@ -3167,7 +3167,7 @@ static const struct ScriptCommand s_script_EVENT_S02E01A_L004[] = { /* 0x81285d0
 static const struct ScriptCommand s_script_EVENT_S02E01A_L004L[] = { /* 0x8128650 */
     DEBUGINFO_O(3168),
     CALL_SCRIPT(EVENT_DIVIDE_NEXT_DAY_FUNC),
-    EXECUTE_SUBSTATION(12, 8, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 8, 0),
     RET,
 };
 
@@ -3178,7 +3178,7 @@ static const struct ScriptCommand s_script_EVENT_S02E02A_START[] = { /* 0x812869
   LABEL(0), /* = 0x00 */
     SCENARIO_CALC(SCENARIO_SUB2, 34,  1),
     { 0x3b, 0x20,  0x0000,  0x00000000,  0x00000000, NULL },
-    { 0xb0, 0x01,  0x0010,  0x00000000,  0x00000000, NULL },
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_STORMY_SEA),
     RET_DIRECT,
 };
 
@@ -3188,8 +3188,8 @@ static const struct ScriptCommand s_script_EVENT_S02E02A_END[] = { /* 0x8128710 
     RET_DIRECT,
   LABEL(0), /* = 0x00 */
     SCENARIO_CALC(SCENARIO_SUB2, 35,  0),
-    { 0xb0, 0x01,  0x0010,  0x00000000,  0x00000000, NULL },
-    { 0xb0, 0x01,  0x0011,  0x00000000,  0x00000000, NULL },
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_STORMY_SEA),
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_SILVER_TRENCH),
     RET_DIRECT,
 };
 
@@ -3202,18 +3202,18 @@ static const struct ScriptCommand s_script_EVENT_S02E02A_L001[] = { /* 0x8128790
 static const struct ScriptCommand s_script_EVENT_S02E02A_L002[] = { /* 0x81287c0 */
     DEBUGINFO_O(3203),
     EXECUTE_SUBSTATION(158, 2, 0),
-    { 0xaf, 0x01,  0x0011,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_AF(RESCUE_DUNGEON_SILVER_TRENCH, TRUE),
     SCENARIO_CALC(SCENARIO_SUB2, 34,  3),
-    EXECUTE_SUBSTATION(12, 4, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 4, 0),
     RET,
 };
 
 static const struct ScriptCommand s_script_EVENT_S02E02A_L003[] = { /* 0x8128820 */
     DEBUGINFO_O(3212),
-    { 0xb0, 0x01,  0x0011,  0x00000000,  0x00000000, NULL },
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_SILVER_TRENCH),
     SCENARIO_CALC(SCENARIO_SUB2, 35,  0),
     CALL_SCRIPT(DISMISSAL_SALLY_MEMBER_FUNC),
-    UPDATE_VARINT(CALC_SET, GROUND_PLACE, 11),
+    UPDATE_VARINT(CALC_SET, GROUND_PLACE, GROUND_PLACE_TEAM_BASE_INSIDE),
     SCENARIO_CALC(SCENARIO_SELECT, 34,  0),
     CALL_SCRIPT(NEXT_SAVE2_FUNC),
     JUMP_SCRIPT(EVENT_DIVIDE),
@@ -3222,7 +3222,7 @@ static const struct ScriptCommand s_script_EVENT_S02E02A_L003[] = { /* 0x8128820
 static const struct ScriptCommand s_script_EVENT_S02E02A_L003L[] = { /* 0x81288a0 */
     DEBUGINFO_O(3223),
     CALL_SCRIPT(EVENT_DIVIDE_NEXT_DAY_FUNC),
-    EXECUTE_SUBSTATION(12, 8, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 8, 0),
     RET,
 };
 
@@ -3241,7 +3241,7 @@ static const struct ScriptCommand s_script_EVENT_S03E01A_CONTINUE[] = { /* 0x812
     RET_DIRECT,
   LABEL(0), /* = 0x00 */
     SCENARIO_CALC(SCENARIO_SUB3, 36,  2),
-    { 0xaf, 0x01,  0x0012,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_AF(RESCUE_DUNGEON_METEOR_CAVE, TRUE),
     RET_DIRECT,
 };
 
@@ -3251,25 +3251,25 @@ static const struct ScriptCommand s_script_EVENT_S03E01A_END[] = { /* 0x81289b0 
     RET_DIRECT,
   LABEL(0), /* = 0x00 */
     SCENARIO_CALC(SCENARIO_SUB3, 37,  0),
-    { 0xb0, 0x01,  0x0012,  0x00000000,  0x00000000, NULL },
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_METEOR_CAVE),
     RET_DIRECT,
 };
 
 static const struct ScriptCommand s_script_EVENT_S03E01A_L001[] = { /* 0x8128a20 */
     DEBUGINFO_O(3259),
-    { 0xaf, 0x01,  0x0012,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_AF(RESCUE_DUNGEON_METEOR_CAVE, TRUE),
     SCENARIO_CALC(SCENARIO_SUB3, 36,  2),
-    EXECUTE_SUBSTATION(9, 81, 0),
-    EXECUTE_SUBSTATION(12, 4, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE, 81, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 4, 0),
     RET,
 };
 
 static const struct ScriptCommand s_script_EVENT_S03E01A_L002[] = { /* 0x8128a80 */
     DEBUGINFO_O(3268),
-    { 0xb0, 0x01,  0x0012,  0x00000000,  0x00000000, NULL },
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_METEOR_CAVE),
     SCENARIO_CALC(SCENARIO_SUB3, 37,  0),
     CALL_SCRIPT(DISMISSAL_SALLY_MEMBER_FUNC),
-    UPDATE_VARINT(CALC_SET, GROUND_PLACE, 11),
+    UPDATE_VARINT(CALC_SET, GROUND_PLACE, GROUND_PLACE_TEAM_BASE_INSIDE),
     SCENARIO_CALC(SCENARIO_SELECT, 36,  0),
     CALL_SCRIPT(NEXT_SAVE2_FUNC),
     JUMP_SCRIPT(EVENT_DIVIDE),
@@ -3278,7 +3278,7 @@ static const struct ScriptCommand s_script_EVENT_S03E01A_L002[] = { /* 0x8128a80
 static const struct ScriptCommand s_script_EVENT_S03E01A_L002L[] = { /* 0x8128b00 */
     DEBUGINFO_O(3279),
     CALL_SCRIPT(EVENT_DIVIDE_NEXT_DAY_FUNC),
-    EXECUTE_SUBSTATION(12, 8, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 8, 0),
     RET,
 };
 
@@ -3297,11 +3297,11 @@ static const struct ScriptCommand s_script_EVENT_S04E01A_LAST[] = { /* 0x8128ba0
     RET_DIRECT,
   LABEL(0), /* = 0x00 */
     SCENARIO_CALC(SCENARIO_SUB4, 43,  0),
-    { 0xaf, 0x00,  0x0013,  0x00000000,  0x00000000, NULL },
-    { 0xb0, 0x01,  0x0014,  0x00000000,  0x00000000, NULL },
-    { 0xb0, 0x01,  0x0015,  0x00000000,  0x00000000, NULL },
-    { 0xb0, 0x01,  0x0016,  0x00000000,  0x00000000, NULL },
-    { 0xb0, 0x01,  0x0017,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_AF(RESCUE_DUNGEON_GREAT_CANYON_2, FALSE),
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_FIERY_FIELD),
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_LIGHTNING_FIELD),
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_NORTHWIND_FIELD),
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_MT_FARAWAY),
     RET_DIRECT,
 };
 
@@ -3311,19 +3311,19 @@ static const struct ScriptCommand s_script_EVENT_S04E01A_END[] = { /* 0x8128c50 
     RET_DIRECT,
   LABEL(0), /* = 0x00 */
     SCENARIO_CALC(SCENARIO_SUB4, 43,  2),
-    { 0xaf, 0x00,  0x0013,  0x00000000,  0x00000000, NULL },
-    { 0xb0, 0x01,  0x0014,  0x00000000,  0x00000000, NULL },
-    { 0xb0, 0x01,  0x0015,  0x00000000,  0x00000000, NULL },
-    { 0xb0, 0x01,  0x0016,  0x00000000,  0x00000000, NULL },
-    { 0xb0, 0x01,  0x0017,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_AF(RESCUE_DUNGEON_GREAT_CANYON_2, FALSE),
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_FIERY_FIELD),
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_LIGHTNING_FIELD),
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_NORTHWIND_FIELD),
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_MT_FARAWAY),
     RET_DIRECT,
 };
 
 static const struct ScriptCommand s_script_EVENT_S04E01A_L001[] = { /* 0x8128d00 */
     DEBUGINFO_O(3323),
-    EXECUTE_SUBSTATION(9, 82, 0),
-    EXECUTE_SUBSTATION(12, 9, 0),
-    { 0xaf, 0x01,  0x0013,  0x00000000,  0x00000000, NULL },
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE, 82, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 9, 0),
+    CMD_UNK_AF(RESCUE_DUNGEON_GREAT_CANYON_2, TRUE),
     SCENARIO_CALC(SCENARIO_SUB4, 38,  2),
     RET,
 };
@@ -3331,11 +3331,11 @@ static const struct ScriptCommand s_script_EVENT_S04E01A_L001[] = { /* 0x8128d00
 static const struct ScriptCommand s_script_EVENT_S04E01A_L002[] = { /* 0x8128d60 */
     DEBUGINFO_O(3332),
     EXECUTE_SUBSTATION(192, 1, 0),
-    { 0xaf, 0x00,  0x0013,  0x00000000,  0x00000000, NULL },
-    { 0xaf, 0x01,  0x0014,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_AF(RESCUE_DUNGEON_GREAT_CANYON_2, FALSE),
+    CMD_UNK_AF(RESCUE_DUNGEON_FIERY_FIELD, TRUE),
     SCENARIO_CALC(SCENARIO_SUB4, 39,  0),
     CALL_SCRIPT(DISMISSAL_SALLY_MEMBER_FUNC),
-    UPDATE_VARINT(CALC_SET, GROUND_PLACE, 11),
+    UPDATE_VARINT(CALC_SET, GROUND_PLACE, GROUND_PLACE_TEAM_BASE_INSIDE),
     SCENARIO_CALC(SCENARIO_SELECT, 38,  0),
     CALL_SCRIPT(NEXT_SAVE2_FUNC),
     JUMP_SCRIPT(EVENT_DIVIDE),
@@ -3350,11 +3350,11 @@ static const struct ScriptCommand s_script_EVENT_S04E01A_L002L[] = { /* 0x8128e0
 static const struct ScriptCommand s_script_EVENT_S04E01B_L001[] = { /* 0x8128e30 */
     DEBUGINFO_O(3351),
     EXECUTE_SUBSTATION(212, 1, 0),
-    { 0xb0, 0x01,  0x0014,  0x00000000,  0x00000000, NULL },
-    { 0xaf, 0x01,  0x0015,  0x00000000,  0x00000000, NULL },
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_FIERY_FIELD),
+    CMD_UNK_AF(RESCUE_DUNGEON_LIGHTNING_FIELD, TRUE),
     SCENARIO_CALC(SCENARIO_SUB4, 40,  0),
     CALL_SCRIPT(DISMISSAL_SALLY_MEMBER_FUNC),
-    UPDATE_VARINT(CALC_SET, GROUND_PLACE, 11),
+    UPDATE_VARINT(CALC_SET, GROUND_PLACE, GROUND_PLACE_TEAM_BASE_INSIDE),
     SCENARIO_CALC(SCENARIO_SELECT, 39,  0),
     CALL_SCRIPT(NEXT_SAVE2_FUNC),
     JUMP_SCRIPT(EVENT_DIVIDE),
@@ -3369,11 +3369,11 @@ static const struct ScriptCommand s_script_EVENT_S04E01B_L001L[] = { /* 0x8128ed
 static const struct ScriptCommand s_script_EVENT_S04E01C_L001[] = { /* 0x8128f00 */
     DEBUGINFO_O(3370),
     EXECUTE_SUBSTATION(213, 1, 0),
-    { 0xb0, 0x01,  0x0015,  0x00000000,  0x00000000, NULL },
-    { 0xaf, 0x01,  0x0016,  0x00000000,  0x00000000, NULL },
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_LIGHTNING_FIELD),
+    CMD_UNK_AF(RESCUE_DUNGEON_NORTHWIND_FIELD, TRUE),
     SCENARIO_CALC(SCENARIO_SUB4, 41,  0),
     CALL_SCRIPT(DISMISSAL_SALLY_MEMBER_FUNC),
-    UPDATE_VARINT(CALC_SET, GROUND_PLACE, 11),
+    UPDATE_VARINT(CALC_SET, GROUND_PLACE, GROUND_PLACE_TEAM_BASE_INSIDE),
     SCENARIO_CALC(SCENARIO_SELECT, 40,  0),
     CALL_SCRIPT(NEXT_SAVE2_FUNC),
     JUMP_SCRIPT(EVENT_DIVIDE),
@@ -3388,11 +3388,11 @@ static const struct ScriptCommand s_script_EVENT_S04E01C_L001L[] = { /* 0x8128fa
 static const struct ScriptCommand s_script_EVENT_S04E01D_L001[] = { /* 0x8128fd0 */
     DEBUGINFO_O(3389),
     EXECUTE_SUBSTATION(214, 1, 0),
-    { 0xb0, 0x01,  0x0016,  0x00000000,  0x00000000, NULL },
-    { 0xaf, 0x01,  0x0017,  0x00000000,  0x00000000, NULL },
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_NORTHWIND_FIELD),
+    CMD_UNK_AF(RESCUE_DUNGEON_MT_FARAWAY, TRUE),
     SCENARIO_CALC(SCENARIO_SUB4, 42,  0),
     CALL_SCRIPT(DISMISSAL_SALLY_MEMBER_FUNC),
-    UPDATE_VARINT(CALC_SET, GROUND_PLACE, 11),
+    UPDATE_VARINT(CALC_SET, GROUND_PLACE, GROUND_PLACE_TEAM_BASE_INSIDE),
     SCENARIO_CALC(SCENARIO_SELECT, 41,  0),
     CALL_SCRIPT(NEXT_SAVE2_FUNC),
     JUMP_SCRIPT(EVENT_DIVIDE),
@@ -3406,10 +3406,10 @@ static const struct ScriptCommand s_script_EVENT_S04E01D_L001L[] = { /* 0x812907
 
 static const struct ScriptCommand s_script_EVENT_S04E01E_L001[] = { /* 0x81290a0 */
     DEBUGINFO_O(3408),
-    { 0xb0, 0x01,  0x0017,  0x00000000,  0x00000000, NULL },
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_MT_FARAWAY),
     SCENARIO_CALC(SCENARIO_SUB4, 43,  0),
     CALL_SCRIPT(DISMISSAL_SALLY_MEMBER_FUNC),
-    UPDATE_VARINT(CALC_SET, GROUND_PLACE, 11),
+    UPDATE_VARINT(CALC_SET, GROUND_PLACE, GROUND_PLACE_TEAM_BASE_INSIDE),
     SCENARIO_CALC(SCENARIO_SELECT, 42,  0),
     CALL_SCRIPT(NEXT_SAVE2_FUNC),
     JUMP_SCRIPT(EVENT_DIVIDE),
@@ -3442,7 +3442,7 @@ static const struct ScriptCommand s_script_EVENT_S05E01A_CONTINUE[] = { /* 0x812
     RET_DIRECT,
   LABEL(0), /* = 0x00 */
     SCENARIO_CALC(SCENARIO_SUB5, 44,  2),
-    { 0xaf, 0x01,  0x0018,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_AF(RESCUE_DUNGEON_WESTERN_CAVE, TRUE),
     RET_DIRECT,
 };
 
@@ -3452,26 +3452,26 @@ static const struct ScriptCommand s_script_EVENT_S05E01A_END[] = { /* 0x8129250 
     RET_DIRECT,
   LABEL(0), /* = 0x00 */
     SCENARIO_CALC(SCENARIO_SUB5, 45,  0),
-    { 0xb0, 0x01,  0x0018,  0x00000000,  0x00000000, NULL },
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_WESTERN_CAVE),
     RET_DIRECT,
 };
 
 static const struct ScriptCommand s_script_EVENT_S05E01A_L001[] = { /* 0x81292c0 */
     DEBUGINFO_O(3460),
-    { 0xaf, 0x01,  0x0018,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_AF(RESCUE_DUNGEON_WESTERN_CAVE, TRUE),
     SCENARIO_CALC(SCENARIO_SUB5, 44,  2),
     EXECUTE_SUBSTATION(216, 1, 0),
-    EXECUTE_SUBSTATION(1, 46, 0),
-    EXECUTE_SUBSTATION(12, 4, 0),
+    EXECUTE_SUBSTATION(MAP_POKEMON_SQUARE, 46, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 4, 0),
     RET,
 };
 
 static const struct ScriptCommand s_script_EVENT_S05E01A_L002[] = { /* 0x8129330 */
     DEBUGINFO_O(3470),
-    { 0xb0, 0x01,  0x0018,  0x00000000,  0x00000000, NULL },
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_WESTERN_CAVE),
     SCENARIO_CALC(SCENARIO_SUB5, 45,  0),
     CALL_SCRIPT(DISMISSAL_SALLY_MEMBER_FUNC),
-    UPDATE_VARINT(CALC_SET, GROUND_PLACE, 11),
+    UPDATE_VARINT(CALC_SET, GROUND_PLACE, GROUND_PLACE_TEAM_BASE_INSIDE),
     SCENARIO_CALC(SCENARIO_SELECT, 44,  0),
     CALL_SCRIPT(NEXT_SAVE2_FUNC),
     JUMP_SCRIPT(EVENT_DIVIDE),
@@ -3498,7 +3498,7 @@ static const struct ScriptCommand s_script_EVENT_S06E01A_CONTINUE[] = { /* 0x812
     RET_DIRECT,
   LABEL(0), /* = 0x00 */
     SCENARIO_CALC(SCENARIO_SUB6, 46,  2),
-    { 0xaf, 0x01,  0x0019,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_AF(RESCUE_DUNGEON_NORTHERN_RANGE, TRUE),
     RET_DIRECT,
 };
 
@@ -3508,8 +3508,8 @@ static const struct ScriptCommand s_script_EVENT_S06E01A_END[] = { /* 0x81294b0 
     RET_DIRECT,
   LABEL(0), /* = 0x00 */
     SCENARIO_CALC(SCENARIO_SUB6, 48,  0),
-    { 0xb0, 0x01,  0x0019,  0x00000000,  0x00000000, NULL },
-    { 0xb0, 0x01,  0x001a,  0x00000000,  0x00000000, NULL },
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_NORTHERN_RANGE),
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_PITFALL_VALLEY),
     { 0x3b, 0x24,  0x0000,  0x00000000,  0x00000000, NULL },
     { 0x3b, 0x25,  0x0000,  0x00000000,  0x00000000, NULL },
     { 0x3b, 0x26,  0x0000,  0x00000000,  0x00000000, NULL },
@@ -3519,20 +3519,20 @@ static const struct ScriptCommand s_script_EVENT_S06E01A_END[] = { /* 0x81294b0 
 
 static const struct ScriptCommand s_script_EVENT_S06E01A_L001[] = { /* 0x8129570 */
     DEBUGINFO_O(3521),
-    { 0xaf, 0x01,  0x0019,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_AF(RESCUE_DUNGEON_NORTHERN_RANGE, TRUE),
     SCENARIO_CALC(SCENARIO_SUB6, 46,  2),
-    EXECUTE_SUBSTATION(12, 10, 0),
-    EXECUTE_SUBSTATION(9, 83, 0),
-    EXECUTE_SUBSTATION(12, 11, 0),
-    EXECUTE_SUBSTATION(1, 47, 0),
-    EXECUTE_SUBSTATION(12, 5, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 10, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE, 83, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 11, 0),
+    EXECUTE_SUBSTATION(MAP_POKEMON_SQUARE, 47, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 5, 0),
     RET,
 };
 
 static const struct ScriptCommand s_script_EVENT_S06E01A_L002[] = { /* 0x8129600 */
     DEBUGINFO_O(3533),
     EXECUTE_SUBSTATION(217, 1, 0),
-    { 0xb0, 0x01,  0x0019,  0x00000000,  0x00000000, NULL },
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_NORTHERN_RANGE),
     SCENARIO_CALC(SCENARIO_SUB6, 47,  2),
     UPDATE_VARINT(CALC_SET, GROUND_PLACE, 2),
     SCENARIO_CALC(SCENARIO_SELECT, 46,  0),
@@ -3547,22 +3547,22 @@ static const struct ScriptCommand s_script_EVENT_S06E01A_L002L[] = { /* 0x812968
 
 static const struct ScriptCommand s_script_EVENT_S06E01B_L001[] = { /* 0x81296a0 */
     DEBUGINFO_O(3549),
-    EXECUTE_SUBSTATION(1, 48, 0),
-    { 0xaf, 0x01,  0x001a,  0x00000000,  0x00000000, NULL },
+    EXECUTE_SUBSTATION(MAP_POKEMON_SQUARE, 48, 0),
+    CMD_UNK_AF(RESCUE_DUNGEON_PITFALL_VALLEY, TRUE),
     SCENARIO_CALC(SCENARIO_SUB6, 47,  2),
     CALL_SCRIPT(DISMISSAL_SALLY_MEMBER_FUNC),
-    EXECUTE_SUBSTATION(12, 5, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 5, 0),
     RET,
 };
 
 static const struct ScriptCommand s_script_EVENT_S06E01B_L002[] = { /* 0x8129710 */
     DEBUGINFO_O(3559),
     EXECUTE_SUBSTATION(218, 1, 0),
-    EXECUTE_SUBSTATION(1, 49, 0),
-    { 0xb0, 0x01,  0x001a,  0x00000000,  0x00000000, NULL },
+    EXECUTE_SUBSTATION(MAP_POKEMON_SQUARE, 49, 0),
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_PITFALL_VALLEY),
     SCENARIO_CALC(SCENARIO_SUB6, 48,  0),
     CALL_SCRIPT(DISMISSAL_SALLY_MEMBER_FUNC),
-    UPDATE_VARINT(CALC_SET, GROUND_PLACE, 11),
+    UPDATE_VARINT(CALC_SET, GROUND_PLACE, GROUND_PLACE_TEAM_BASE_INSIDE),
     SCENARIO_CALC(SCENARIO_SELECT, 47,  0),
     CALL_SCRIPT(NEXT_SAVE2_FUNC),
     JUMP_SCRIPT(EVENT_DIVIDE),
@@ -3571,7 +3571,7 @@ static const struct ScriptCommand s_script_EVENT_S06E01B_L002[] = { /* 0x8129710
 static const struct ScriptCommand s_script_EVENT_S06E01B_L002L[] = { /* 0x81297b0 */
     DEBUGINFO_O(3572),
     CALL_SCRIPT(EVENT_DIVIDE_NEXT_DAY_FUNC),
-    EXECUTE_SUBSTATION(12, 8, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 8, 0),
     RET,
 };
 
@@ -3590,7 +3590,7 @@ static const struct ScriptCommand s_script_EVENT_S07E01A_END[] = { /* 0x8129850 
     RET_DIRECT,
   LABEL(0), /* = 0x00 */
     SCENARIO_CALC(SCENARIO_SUB7, 50,  0),
-    { 0xb0, 0x01,  0x001b,  0x00000000,  0x00000000, NULL },
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_BURIED_RELIC),
     RET_DIRECT,
 };
 
@@ -3602,17 +3602,17 @@ static const struct ScriptCommand s_script_EVENT_S07E01A_L001[] = { /* 0x81298c0
 
 static const struct ScriptCommand s_script_EVENT_S07E01A_L002[] = { /* 0x81298f0 */
     DEBUGINFO_O(3604),
-    { 0xaf, 0x01,  0x001b,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_AF(RESCUE_DUNGEON_BURIED_RELIC, TRUE),
     SCENARIO_CALC(SCENARIO_SUB7, 49,  3),
     RET,
 };
 
 static const struct ScriptCommand s_script_EVENT_S07E01A_L003[] = { /* 0x8129930 */
     DEBUGINFO_O(3611),
-    { 0xb0, 0x01,  0x001b,  0x00000000,  0x00000000, NULL },
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_BURIED_RELIC),
     SCENARIO_CALC(SCENARIO_SUB7, 50,  0),
     CALL_SCRIPT(DISMISSAL_SALLY_MEMBER_FUNC),
-    UPDATE_VARINT(CALC_SET, GROUND_PLACE, 11),
+    UPDATE_VARINT(CALC_SET, GROUND_PLACE, GROUND_PLACE_TEAM_BASE_INSIDE),
     SCENARIO_CALC(SCENARIO_SELECT, 49,  0),
     CALL_SCRIPT(NEXT_SAVE2_FUNC),
     JUMP_SCRIPT(EVENT_DIVIDE),
@@ -3621,7 +3621,7 @@ static const struct ScriptCommand s_script_EVENT_S07E01A_L003[] = { /* 0x8129930
 static const struct ScriptCommand s_script_EVENT_S07E01A_L003L[] = { /* 0x81299b0 */
     DEBUGINFO_O(3622),
     CALL_SCRIPT(EVENT_DIVIDE_NEXT_DAY_FUNC),
-    EXECUTE_SUBSTATION(12, 8, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 8, 0),
     RET,
 };
 
@@ -3640,7 +3640,7 @@ static const struct ScriptCommand s_script_EVENT_S08E01A_END[] = { /* 0x8129a50 
     RET_DIRECT,
   LABEL(0), /* = 0x00 */
     SCENARIO_CALC(SCENARIO_SUB8, 52,  0),
-    { 0xb0, 0x01,  0x001c,  0x00000000,  0x00000000, NULL },
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_WISH_CAVE),
     RET_DIRECT,
 };
 
@@ -3670,30 +3670,30 @@ static const struct ScriptCommand s_script_EVENT_S08E01A_L004[] = { /* 0x8129b50
 
 static const struct ScriptCommand s_script_EVENT_S08E01A_L005[] = { /* 0x8129b80 */
     DEBUGINFO_O(3672),
-    { 0xae, 0x01,  0x001c,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_AE(RESCUE_DUNGEON_WISH_CAVE),
     SCENARIO_CALC(SCENARIO_SUB8, 51,  7),
     RET,
 };
 
 static const struct ScriptCommand s_script_EVENT_S08E01A_L005B[] = { /* 0x8129bc0 */
     DEBUGINFO_O(3679),
-    EXECUTE_SUBSTATION(4, 7, 0),
-    { 0xaf, 0x01,  0x001c,  0x00000000,  0x00000000, NULL },
+    EXECUTE_SUBSTATION(MAP_PELIPPER_POST_OFFICE, 7, 0),
+    CMD_UNK_AF(RESCUE_DUNGEON_WISH_CAVE, TRUE),
     SCENARIO_CALC(SCENARIO_SUB8, 51,  8),
     SET_DUNGEON_RES(/* result */ 0, /* enter */ -1),
     UPDATE_VARINT(CALC_SET, GROUND_ENTER, 4),
     UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 4),
-    EXECUTE_SUBSTATION(4, 0, 0),
+    EXECUTE_SUBSTATION(MAP_PELIPPER_POST_OFFICE, 0, 0),
     RET,
 };
 
 static const struct ScriptCommand s_script_EVENT_S08E01A_L006[] = { /* 0x8129c50 */
     DEBUGINFO_O(3691),
-    EXECUTE_SUBSTATION(9, 84, 0),
-    { 0xb0, 0x01,  0x001c,  0x00000000,  0x00000000, NULL },
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE, 84, 0),
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_WISH_CAVE),
     SCENARIO_CALC(SCENARIO_SUB8, 52,  0),
     CALL_SCRIPT(DISMISSAL_SALLY_MEMBER_FUNC),
-    UPDATE_VARINT(CALC_SET, GROUND_PLACE, 11),
+    UPDATE_VARINT(CALC_SET, GROUND_PLACE, GROUND_PLACE_TEAM_BASE_INSIDE),
     SCENARIO_CALC(SCENARIO_SELECT, 51,  0),
     CALL_SCRIPT(NEXT_SAVE2_FUNC),
     JUMP_SCRIPT(EVENT_DIVIDE),
@@ -3702,7 +3702,7 @@ static const struct ScriptCommand s_script_EVENT_S08E01A_L006[] = { /* 0x8129c50
 static const struct ScriptCommand s_script_EVENT_S08E01A_L006L[] = { /* 0x8129ce0 */
     DEBUGINFO_O(3703),
     CALL_SCRIPT(EVENT_DIVIDE_NEXT_DAY_FUNC),
-    EXECUTE_SUBSTATION(12, 8, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 8, 0),
     RET,
 };
 
@@ -3721,7 +3721,7 @@ static const struct ScriptCommand s_script_EVENT_S08E01A_L008[] = { /* 0x8129d40
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 0),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     CALL_SCRIPT(DISMISSAL_SALLY_MEMBER_FUNC),
-    UPDATE_VARINT(CALC_SET, GROUND_PLACE, 11),
+    UPDATE_VARINT(CALC_SET, GROUND_PLACE, GROUND_PLACE_TEAM_BASE_INSIDE),
     SCENARIO_CALC(SCENARIO_SELECT, 57,  0),
     CALL_SCRIPT(NEXT_SAVE2_FUNC),
     JUMP_SCRIPT(EVENT_DIVIDE),
@@ -3733,16 +3733,16 @@ static const struct ScriptCommand s_script_EVENT_S08E01A_L008[] = { /* 0x8129d40
     { 0x3b, 0x29,  0x0000,  0x00000000,  0x00000000, NULL },
     COND_EQUAL(0, /* to label */ 3),
   LABEL(4), /* = 0x04 */
-    EXECUTE_SUBSTATION(12, 12, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 12, 0),
     { 0x3b, 0x2a,  0x0000,  0x00000000,  0x00000000, NULL },
     COND_EQUAL(0, /* to label */ 5),
-    EXECUTE_SUBSTATION(9, 85, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE, 85, 0),
     JUMP_LABEL(5),
   LABEL(2), /* = 0x02 */
     { 0x3b, 0x2d,  0x0000,  0x00000000,  0x00000000, NULL },
     COND_EQUAL(0, /* to label */ 3),
   LABEL(6), /* = 0x06 */
-    EXECUTE_SUBSTATION(12, 13, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 13, 0),
     JUMP_LABEL(5),
   LABEL(3), /* = 0x03 */
     { 0x3b, 0x29,  0x0000,  0x00000000,  0x00000000, NULL },
@@ -3750,11 +3750,11 @@ static const struct ScriptCommand s_script_EVENT_S08E01A_L008[] = { /* 0x8129d40
     COND_EQUAL(2, /* to label */ 4),
     { 0x3b, 0x2d,  0x0000,  0x00000000,  0x00000000, NULL },
     COND_EQUAL(1, /* to label */ 6),
-    EXECUTE_SUBSTATION(12, 14, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 14, 0),
     JUMP_LABEL(5),
   LABEL(5), /* = 0x05 */
     CALL_SCRIPT(DISMISSAL_SALLY_MEMBER_FUNC),
-    UPDATE_VARINT(CALC_SET, GROUND_PLACE, 11),
+    UPDATE_VARINT(CALC_SET, GROUND_PLACE, GROUND_PLACE_TEAM_BASE_INSIDE),
     SCENARIO_CALC(SCENARIO_SELECT, 52,  0),
     CALL_SCRIPT(NEXT_SAVE2_FUNC),
     JUMP_SCRIPT(EVENT_DIVIDE),
@@ -3762,7 +3762,7 @@ static const struct ScriptCommand s_script_EVENT_S08E01A_L008[] = { /* 0x8129d40
 
 static const struct ScriptCommand s_script_EVENT_S08E01A_L008L[] = { /* 0x812a034 */
     DEBUGINFO_O(3764),
-    EXECUTE_SUBSTATION(12, 5, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 5, 0),
     RET,
 };
 
@@ -3770,26 +3770,26 @@ static const struct ScriptCommand s_script_EVENT_S08E01A_L008A[] = { /* 0x812a06
     DEBUGINFO_O(3770),
     { 0x3b, 0x29,  0x0000,  0x00000000,  0x00000000, NULL },
     COND_EQUAL(0, /* to label */ 0),
-    EXECUTE_SUBSTATION(12, 12, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 12, 0),
     { 0x3b, 0x2a,  0x0000,  0x00000000,  0x00000000, NULL },
     COND_EQUAL(0, /* to label */ 0),
-    EXECUTE_SUBSTATION(9, 85, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE, 85, 0),
   LABEL(0), /* = 0x00 */
-    EXECUTE_SUBSTATION(12, 5, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 5, 0),
     RET,
 };
 
 static const struct ScriptCommand s_script_EVENT_S08E01A_L008B[] = { /* 0x812a104 */
     DEBUGINFO_O(3783),
-    EXECUTE_SUBSTATION(12, 13, 0),
-    EXECUTE_SUBSTATION(12, 5, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 13, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 5, 0),
     RET,
 };
 
 static const struct ScriptCommand s_script_EVENT_S08E01A_L008C[] = { /* 0x812a144 */
     DEBUGINFO_O(3790),
-    EXECUTE_SUBSTATION(12, 14, 0),
-    EXECUTE_SUBSTATION(12, 5, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 14, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 5, 0),
     RET,
 };
 
@@ -3808,8 +3808,8 @@ static const struct ScriptCommand s_script_EVENT_S09E01A_END[] = { /* 0x812a1e4 
     RET_DIRECT,
   LABEL(0), /* = 0x00 */
     SCENARIO_CALC(SCENARIO_SUB9, 55,  2),
-    { 0xaf, 0x00,  0x001d,  0x00000000,  0x00000000, NULL },
-    { 0xb0, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_AF(RESCUE_DUNGEON_MT_FREEZE_2, FALSE),
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_MURKY_CAVE),
     RET_DIRECT,
 };
 
@@ -3833,8 +3833,8 @@ static const struct ScriptCommand s_script_EVENT_S09E01A_L003[] = { /* 0x812a2c4
 
 static const struct ScriptCommand s_script_EVENT_S09E01A_L004[] = { /* 0x812a2f4 */
     DEBUGINFO_O(3835),
-    EXECUTE_SUBSTATION(9, 86, 0),
-    { 0xaf, 0x01,  0x001d,  0x00000000,  0x00000000, NULL },
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE, 86, 0),
+    CMD_UNK_AF(RESCUE_DUNGEON_MT_FREEZE_2, TRUE),
     SCENARIO_CALC(SCENARIO_SUB9, 53,  6),
     RET,
 };
@@ -3849,11 +3849,11 @@ static const struct ScriptCommand s_script_EVENT_S09E01A_L004B[] = { /* 0x812a34
 static const struct ScriptCommand s_script_EVENT_S09E01A_L005[] = { /* 0x812a384 */
     DEBUGINFO_O(3850),
     EXECUTE_SUBSTATION(203, 1, 0),
-    EXECUTE_SUBSTATION(9, 88, 0),
-    { 0xaf, 0x00,  0x001d,  0x00000000,  0x00000000, NULL },
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE, 88, 0),
+    CMD_UNK_AF(RESCUE_DUNGEON_MT_FREEZE_2, FALSE),
     SCENARIO_CALC(SCENARIO_SUB9, 54,  0),
     CALL_SCRIPT(DISMISSAL_SALLY_MEMBER_FUNC),
-    UPDATE_VARINT(CALC_SET, GROUND_PLACE, 11),
+    UPDATE_VARINT(CALC_SET, GROUND_PLACE, GROUND_PLACE_TEAM_BASE_INSIDE),
     SCENARIO_CALC(SCENARIO_SELECT, 53,  0),
     CALL_SCRIPT(NEXT_SAVE2_FUNC),
     JUMP_SCRIPT(EVENT_DIVIDE),
@@ -3861,14 +3861,14 @@ static const struct ScriptCommand s_script_EVENT_S09E01A_L005[] = { /* 0x812a384
 
 static const struct ScriptCommand s_script_EVENT_S09E01A_L005L[] = { /* 0x812a424 */
     DEBUGINFO_O(3863),
-    EXECUTE_SUBSTATION(12, 8, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 8, 0),
     RET,
 };
 
 static const struct ScriptCommand s_script_EVENT_S09E01B_L001[] = { /* 0x812a454 */
     DEBUGINFO_O(3869),
-    EXECUTE_SUBSTATION(9, 89, 0),
-    { 0xaf, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE, 89, 0),
+    CMD_UNK_AF(RESCUE_DUNGEON_MURKY_CAVE, TRUE),
     SCENARIO_CALC(SCENARIO_SUB9, 54,  2),
     RET,
 };
@@ -3885,11 +3885,11 @@ static const struct ScriptCommand s_script_EVENT_S09E01B_L002[] = { /* 0x812a4e4
     EXECUTE_SUBSTATION(220, 1, 0),
     EXECUTE_SUBSTATION(163, 3, 0),
     EXECUTE_SUBSTATION(220, 2, 0),
-    EXECUTE_SUBSTATION(9, 91, 0),
-    { 0xb0, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE, 91, 0),
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_MURKY_CAVE),
     SCENARIO_CALC(SCENARIO_SUB9, 55,  2),
     CALL_SCRIPT(DISMISSAL_SALLY_MEMBER_FUNC),
-    UPDATE_VARINT(CALC_SET, GROUND_PLACE, 11),
+    UPDATE_VARINT(CALC_SET, GROUND_PLACE, GROUND_PLACE_TEAM_BASE_INSIDE),
     SCENARIO_CALC(SCENARIO_SELECT, 54,  0),
     CALL_SCRIPT(NEXT_SAVE2_FUNC),
     JUMP_SCRIPT(EVENT_DIVIDE),
@@ -3897,7 +3897,7 @@ static const struct ScriptCommand s_script_EVENT_S09E01B_L002[] = { /* 0x812a4e4
 
 static const struct ScriptCommand s_script_EVENT_S09E01B_L002L[] = { /* 0x812a5a4 */
     DEBUGINFO_O(3899),
-    EXECUTE_SUBSTATION(12, 8, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE_INSIDE, 8, 0),
     RET,
 };
 
@@ -3911,13 +3911,13 @@ static const struct ScriptCommand s_script_EVENT_R00E01A_L001[] = { /* 0x812a604
     DEBUGINFO_O(3911),
     CLEAR_ARRAY(EVENT_LOCAL),
   LABEL(0), /* = 0x00 */
-    EXECUTE_SUBSTATION(4, 11, 0),
+    EXECUTE_SUBSTATION(MAP_PELIPPER_POST_OFFICE, 11, 0),
     CJUMP_SCENARIO_0(SCENARIO_SELECT),
     COND(JUDGE_EQ, 56, /* to label */ 0),
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 1),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 1),
     JUMPIF_EQUAL(EVENT_LOCAL, 0, /* to label */ 2),
   LABEL(1), /* = 0x01 */
-    EXECUTE_SUBSTATION(9, 6, 0),
+    EXECUTE_SUBSTATION(MAP_TEAM_BASE, 6, 0),
   LABEL(2), /* = 0x02 */
     CJUMP_VAR(DUNGEON_ENTER_INDEX),
     COND_EQUAL(36, /* to label */ 3),
@@ -3927,16 +3927,16 @@ static const struct ScriptCommand s_script_EVENT_R00E01A_L001[] = { /* 0x812a604
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 0),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     CALL_SCRIPT(DISMISSAL_SALLY_MEMBER_FUNC),
-    UPDATE_VARINT(CALC_SET, GROUND_PLACE, 11),
+    UPDATE_VARINT(CALC_SET, GROUND_PLACE, GROUND_PLACE_TEAM_BASE_INSIDE),
     SCENARIO_CALC(SCENARIO_SELECT, 57,  0),
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 5),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 5),
     JUMPIF_EQUAL(EVENT_LOCAL, 0, /* to label */ 6),
   LABEL(5), /* = 0x05 */
     CALL_SCRIPT(NEXT_SAVE2_FUNC),
   LABEL(6), /* = 0x06 */
     JUMP_SCRIPT(EVENT_DIVIDE),
   LABEL(3), /* = 0x03 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 7),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 7),
     JUMP_LABEL(4),
   LABEL(7), /* = 0x07 */
     JUMP_SCRIPT(EVENT_S08E01A_L008),
@@ -3977,7 +3977,7 @@ static const struct ScriptCommand s_script_GETOUT_M01E01A[] = { /* 0x812a8d4 */
     JUMPIF_SCENE_GT(SCENARIO_MAIN, 2, 1, /* to label */ 4),
     SCENARIO_CALC(SCENARIO_MAIN,  2,  2),
   LABEL(4), /* = 0x04 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 5),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 5),
     JUMP_SCRIPT(EVENT_M01E01A_L002),
   LABEL(5), /* = 0x05 */
     JUMP_SCRIPT(EVENT_M01E01A_L003),
@@ -3997,8 +3997,8 @@ static const struct ScriptCommand s_script_GETOUT_M01E02A[] = { /* 0x812aa14 */
     JUMPIF_EQUAL(SCENARIO_MAIN, 3, /* to label */ 3),
     JUMP_LABEL(2),
   LABEL(3), /* = 0x03 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 4),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 2),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 4),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 2),
     JUMP_SCRIPT(EVENT_M01E02A_L004),
   LABEL(4), /* = 0x04 */
     JUMP_SCRIPT(EVENT_M01E02A_L006),
@@ -4022,8 +4022,8 @@ static const struct ScriptCommand s_script_GETOUT_M01E02B[] = { /* 0x812ab34 */
     JUMPIF_SCENE_GT(SCENARIO_MAIN, 4, 6, /* to label */ 5),
     SCENARIO_CALC(SCENARIO_MAIN,  4,  7),
   LABEL(5), /* = 0x05 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 6),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 3),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 6),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 3),
     JUMP_SCRIPT(EVENT_M01E02B_L006),
   LABEL(6), /* = 0x06 */
     NEXT_DUNGEON(-1, SCRIPT_DUNGEON_3),
@@ -4035,8 +4035,8 @@ static const struct ScriptCommand s_script_GETOUT_M01E02B[] = { /* 0x812ab34 */
     JUMPIF_SCENE_GT(SCENARIO_MAIN, 4, 7, /* to label */ 8),
     SCENARIO_CALC(SCENARIO_MAIN,  4,  8),
   LABEL(8), /* = 0x08 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 9),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 3),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 9),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 3),
     JUMP_SCRIPT(EVENT_M01E02B_L006),
   LABEL(9), /* = 0x09 */
     JUMP_SCRIPT(EVENT_M01E02B_L008),
@@ -4046,7 +4046,7 @@ static const struct ScriptCommand s_script_GETOUT_M01E02B[] = { /* 0x812ab34 */
     COND_EQUAL(3, /* to label */ 11),
     JUMP_LABEL(3),
   LABEL(10), /* = 0x0a */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 12),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 12),
   LABEL(11), /* = 0x0b */
     JUMP_SCRIPT(GETOUT_R00E01A),
   LABEL(12), /* = 0x0c */
@@ -4070,8 +4070,8 @@ static const struct ScriptCommand s_script_GETOUT_M01E03A[] = { /* 0x812ae04 */
     JUMPIF_SCENE_GT(SCENARIO_MAIN, 5, 9, /* to label */ 5),
     SCENARIO_CALC(SCENARIO_MAIN,  5, 10),
   LABEL(5), /* = 0x05 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 6),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 3),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 6),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 3),
     JUMP_SCRIPT(EVENT_M01E03A_L009),
   LABEL(6), /* = 0x06 */
     NEXT_DUNGEON(-1, SCRIPT_DUNGEON_5),
@@ -4083,8 +4083,8 @@ static const struct ScriptCommand s_script_GETOUT_M01E03A[] = { /* 0x812ae04 */
     JUMPIF_SCENE_GT(SCENARIO_MAIN, 5, 10, /* to label */ 8),
     SCENARIO_CALC(SCENARIO_MAIN,  5, 11),
   LABEL(8), /* = 0x08 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 9),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 3),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 9),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 3),
     JUMP_SCRIPT(EVENT_M01E03A_L009),
   LABEL(9), /* = 0x09 */
     JUMP_SCRIPT(EVENT_M01E03A_L011),
@@ -4094,7 +4094,7 @@ static const struct ScriptCommand s_script_GETOUT_M01E03A[] = { /* 0x812ae04 */
     COND_EQUAL(5, /* to label */ 11),
     JUMP_LABEL(3),
   LABEL(10), /* = 0x0a */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 12),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 12),
   LABEL(11), /* = 0x0b */
     JUMP_SCRIPT(GETOUT_R00E01A),
   LABEL(12), /* = 0x0c */
@@ -4117,8 +4117,8 @@ static const struct ScriptCommand s_script_GETOUT_M01E04A[] = { /* 0x812b0d4 */
     JUMPIF_SCENE_GT(SCENARIO_MAIN, 6, 2, /* to label */ 4),
     SCENARIO_CALC(SCENARIO_MAIN,  6,  3),
   LABEL(4), /* = 0x04 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 5),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 2),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 5),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 2),
     JUMP_SCRIPT(EVENT_M01E04A_L004),
   LABEL(5), /* = 0x05 */
     JUMP_SCRIPT(EVENT_M01E04A_L006),
@@ -4142,8 +4142,8 @@ static const struct ScriptCommand s_script_GETOUT_M01E04B[] = { /* 0x812b224 */
     JUMPIF_SCENE_GT(SCENARIO_MAIN, 7, 3, /* to label */ 5),
     SCENARIO_CALC(SCENARIO_MAIN,  7,  4),
   LABEL(5), /* = 0x05 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 6),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 3),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 6),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 3),
     JUMP_SCRIPT(EVENT_M01E04B_L004),
   LABEL(6), /* = 0x06 */
     { 0x01, 0x00, -0x0001,  0x000000bd,  0x00000000, NULL },
@@ -4155,8 +4155,8 @@ static const struct ScriptCommand s_script_GETOUT_M01E04B[] = { /* 0x812b224 */
     JUMPIF_SCENE_GT(SCENARIO_MAIN, 7, 4, /* to label */ 8),
     SCENARIO_CALC(SCENARIO_MAIN,  7,  5),
   LABEL(8), /* = 0x08 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 9),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 3),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 9),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 3),
     JUMP_SCRIPT(EVENT_M01E04B_L006),
   LABEL(9), /* = 0x09 */
     JUMP_SCRIPT(EVENT_M01E04B_L007),
@@ -4166,10 +4166,10 @@ static const struct ScriptCommand s_script_GETOUT_M01E04B[] = { /* 0x812b224 */
     COND_EQUAL(8, /* to label */ 11),
     JUMP_LABEL(3),
   LABEL(10), /* = 0x0a */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 12),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 12),
     JUMP_SCRIPT(GETOUT_R00E01A),
   LABEL(11), /* = 0x0b */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 13),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 13),
     JUMP_SCRIPT(EVENT_DIVIDE),
   LABEL(13), /* = 0x0d */
     JUMP_SCRIPT(GETOUT_R00E01A),
@@ -4195,8 +4195,8 @@ static const struct ScriptCommand s_script_GETOUT_M01E05A[] = { /* 0x812b554 */
     JUMPIF_SCENE_GT(SCENARIO_MAIN, 8, 3, /* to label */ 4),
     SCENARIO_CALC(SCENARIO_MAIN,  8,  4),
   LABEL(4), /* = 0x04 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 5),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 2),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 5),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 2),
     JUMP_SCRIPT(EVENT_M01E05A_L004),
   LABEL(5), /* = 0x05 */
     JUMP_SCRIPT(EVENT_M01E05A_L006),
@@ -4219,8 +4219,8 @@ static const struct ScriptCommand s_script_GETOUT_M01E07A[] = { /* 0x812b6a4 */
     JUMPIF_SCENE_GT(SCENARIO_MAIN, 11, 4, /* to label */ 4),
     SCENARIO_CALC(SCENARIO_MAIN, 11,  5),
   LABEL(4), /* = 0x04 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 5),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 2),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 5),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 2),
     JUMP_SCRIPT(EVENT_M01E07A_L004),
   LABEL(5), /* = 0x05 */
     JUMP_SCRIPT(EVENT_M01E07A_L005),
@@ -4244,8 +4244,8 @@ static const struct ScriptCommand s_script_GETOUT_M01E07B[] = { /* 0x812b7f4 */
     JUMPIF_SCENE_GT(SCENARIO_MAIN, 12, 2, /* to label */ 5),
     SCENARIO_CALC(SCENARIO_MAIN, 12,  3),
   LABEL(5), /* = 0x05 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 6),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 3),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 6),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 3),
     JUMP_SCRIPT(EVENT_M01E07B_L003),
   LABEL(6), /* = 0x06 */
     { 0x01, 0x00, -0x0001,  0x000000c4,  0x00000000, NULL },
@@ -4257,8 +4257,8 @@ static const struct ScriptCommand s_script_GETOUT_M01E07B[] = { /* 0x812b7f4 */
     JUMPIF_SCENE_GT(SCENARIO_MAIN, 12, 3, /* to label */ 8),
     SCENARIO_CALC(SCENARIO_MAIN, 12,  4),
   LABEL(8), /* = 0x08 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 9),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 3),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 9),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 3),
     JUMP_SCRIPT(EVENT_M01E07B_L004),
   LABEL(9), /* = 0x09 */
     JUMP_SCRIPT(EVENT_M01E07B_L005),
@@ -4268,10 +4268,10 @@ static const struct ScriptCommand s_script_GETOUT_M01E07B[] = { /* 0x812b7f4 */
     COND_EQUAL(12, /* to label */ 11),
     JUMP_LABEL(3),
   LABEL(10), /* = 0x0a */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 12),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 12),
     JUMP_SCRIPT(GETOUT_R00E01A),
   LABEL(11), /* = 0x0b */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 13),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 13),
     JUMP_SCRIPT(EVENT_DIVIDE),
   LABEL(13), /* = 0x0d */
     JUMP_SCRIPT(GETOUT_R00E01A),
@@ -4298,8 +4298,8 @@ static const struct ScriptCommand s_script_GETOUT_M01E08A[] = { /* 0x812bb24 */
     JUMPIF_SCENE_GT(SCENARIO_MAIN, 13, 2, /* to label */ 5),
     SCENARIO_CALC(SCENARIO_MAIN, 13,  3),
   LABEL(5), /* = 0x05 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 6),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 3),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 6),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 3),
     JUMP_SCRIPT(EVENT_M01E08A_L003),
   LABEL(6), /* = 0x06 */
     { 0x01, 0x00, -0x0001,  0x000000c7,  0x00000000, NULL },
@@ -4311,8 +4311,8 @@ static const struct ScriptCommand s_script_GETOUT_M01E08A[] = { /* 0x812bb24 */
     JUMPIF_SCENE_GT(SCENARIO_MAIN, 13, 3, /* to label */ 8),
     SCENARIO_CALC(SCENARIO_MAIN, 13,  4),
   LABEL(8), /* = 0x08 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 9),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 3),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 9),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 3),
     JUMP_SCRIPT(EVENT_M01E08A_L004),
   LABEL(9), /* = 0x09 */
     JUMP_SCRIPT(EVENT_M01E08A_L005),
@@ -4322,10 +4322,10 @@ static const struct ScriptCommand s_script_GETOUT_M01E08A[] = { /* 0x812bb24 */
     COND_EQUAL(14, /* to label */ 11),
     JUMP_LABEL(3),
   LABEL(10), /* = 0x0a */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 12),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 12),
     JUMP_SCRIPT(GETOUT_R00E01A),
   LABEL(11), /* = 0x0b */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 13),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 13),
     JUMP_SCRIPT(EVENT_DIVIDE),
   LABEL(13), /* = 0x0d */
     JUMP_SCRIPT(GETOUT_R00E01A),
@@ -4352,8 +4352,8 @@ static const struct ScriptCommand s_script_GETOUT_M01E08B[] = { /* 0x812be54 */
     JUMPIF_SCENE_GT(SCENARIO_MAIN, 14, 2, /* to label */ 5),
     SCENARIO_CALC(SCENARIO_MAIN, 14,  3),
   LABEL(5), /* = 0x05 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 6),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 3),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 6),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 3),
     JUMP_SCRIPT(EVENT_M01E08B_L003),
   LABEL(6), /* = 0x06 */
     { 0x01, 0x00, -0x0001,  0x000000ca,  0x00000000, NULL },
@@ -4362,8 +4362,8 @@ static const struct ScriptCommand s_script_GETOUT_M01E08B[] = { /* 0x812be54 */
     JUMPIF_EQUAL(SCENARIO_MAIN, 14, /* to label */ 7),
     JUMP_LABEL(3),
   LABEL(7), /* = 0x07 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 8),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 3),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 8),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 3),
     JUMP_SCRIPT(EVENT_M01E08B_L005),
   LABEL(8), /* = 0x08 */
     JUMP_SCRIPT(EVENT_M01E08B_L006),
@@ -4373,10 +4373,10 @@ static const struct ScriptCommand s_script_GETOUT_M01E08B[] = { /* 0x812be54 */
     COND_EQUAL(16, /* to label */ 10),
     JUMP_LABEL(3),
   LABEL(9), /* = 0x09 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 11),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 11),
     JUMP_SCRIPT(GETOUT_R00E01A),
   LABEL(10), /* = 0x0a */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 12),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 12),
     JUMP_SCRIPT(EVENT_DIVIDE),
   LABEL(12), /* = 0x0c */
     JUMP_SCRIPT(GETOUT_R00E01A),
@@ -4403,8 +4403,8 @@ static const struct ScriptCommand s_script_GETOUT_M01E09A[] = { /* 0x812c154 */
     JUMPIF_SCENE_GT(SCENARIO_MAIN, 15, 11, /* to label */ 5),
     SCENARIO_CALC(SCENARIO_MAIN, 15, 12),
   LABEL(5), /* = 0x05 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 6),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 3),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 6),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 3),
     JUMP_SCRIPT(EVENT_M01E09A_L012),
   LABEL(6), /* = 0x06 */
     { 0x01, 0x00, -0x0001,  0x000000cd,  0x00000000, NULL },
@@ -4416,8 +4416,8 @@ static const struct ScriptCommand s_script_GETOUT_M01E09A[] = { /* 0x812c154 */
     JUMPIF_SCENE_GT(SCENARIO_MAIN, 15, 8, /* to label */ 8),
     SCENARIO_CALC(SCENARIO_MAIN, 15,  9),
   LABEL(8), /* = 0x08 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 9),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 3),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 9),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 3),
     JUMP_SCRIPT(EVENT_M01E09A_L014),
   LABEL(9), /* = 0x09 */
     JUMP_SCRIPT(EVENT_M01E09A_L015),
@@ -4427,10 +4427,10 @@ static const struct ScriptCommand s_script_GETOUT_M01E09A[] = { /* 0x812c154 */
     COND_EQUAL(18, /* to label */ 11),
     JUMP_LABEL(3),
   LABEL(10), /* = 0x0a */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 12),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 12),
     JUMP_SCRIPT(GETOUT_R00E01A),
   LABEL(11), /* = 0x0b */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 13),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 13),
     JUMP_SCRIPT(EVENT_DIVIDE),
   LABEL(13), /* = 0x0d */
     JUMP_SCRIPT(GETOUT_R00E01A),
@@ -4457,8 +4457,8 @@ static const struct ScriptCommand s_script_GETOUT_M01E10A[] = { /* 0x812c484 */
     JUMPIF_SCENE_GT(SCENARIO_MAIN, 16, 4, /* to label */ 5),
     SCENARIO_CALC(SCENARIO_MAIN, 16,  5),
   LABEL(5), /* = 0x05 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 6),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 3),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 6),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 3),
     JUMP_SCRIPT(EVENT_M01E10A_L005),
   LABEL(6), /* = 0x06 */
     { 0x01, 0x00, -0x0001,  0x000000d0,  0x00000000, NULL },
@@ -4470,8 +4470,8 @@ static const struct ScriptCommand s_script_GETOUT_M01E10A[] = { /* 0x812c484 */
     JUMPIF_SCENE_GT(SCENARIO_MAIN, 16, 5, /* to label */ 8),
     SCENARIO_CALC(SCENARIO_MAIN, 16,  6),
   LABEL(8), /* = 0x08 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 9),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 3),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 9),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 3),
     JUMP_SCRIPT(EVENT_M01E10A_L007),
   LABEL(9), /* = 0x09 */
     JUMP_SCRIPT(EVENT_M01E10A_L008),
@@ -4481,10 +4481,10 @@ static const struct ScriptCommand s_script_GETOUT_M01E10A[] = { /* 0x812c484 */
     COND_EQUAL(20, /* to label */ 11),
     JUMP_LABEL(3),
   LABEL(10), /* = 0x0a */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 12),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 12),
     JUMP_SCRIPT(GETOUT_R00E01A),
   LABEL(11), /* = 0x0b */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 13),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 13),
     JUMP_SCRIPT(EVENT_DIVIDE),
   LABEL(13), /* = 0x0d */
     JUMP_SCRIPT(GETOUT_R00E01A),
@@ -4504,8 +4504,8 @@ static const struct ScriptCommand s_script_GETOUT_S00E01A[] = { /* 0x812c7b4 */
     COND_EQUAL(81, /* to label */ 0),
     JUMP_LABEL(1),
   LABEL(0), /* = 0x00 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 2),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 1),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 2),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 1),
     JUMP_SCRIPT(EVENT_S00E01A_L001),
   LABEL(2), /* = 0x02 */
     UPDATE_VARINT(CALC_SET, CLEAR_COUNT, 100),
@@ -4527,8 +4527,8 @@ static const struct ScriptCommand s_script_GETOUT_S01E01A[] = { /* 0x812c894 */
     JUMPIF_SCENE_GT(SCENARIO_SUB1, 29, 3, /* to label */ 4),
     SCENARIO_CALC(SCENARIO_SUB1, 29,  4),
   LABEL(4), /* = 0x04 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 5),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 2),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 5),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 2),
     JUMP_SCRIPT(EVENT_S00E01A_L001),
   LABEL(5), /* = 0x05 */
     JUMP_SCRIPT(EVENT_S01E01A_L003),
@@ -4551,8 +4551,8 @@ static const struct ScriptCommand s_script_GETOUT_S01E02A[] = { /* 0x812c9e4 */
     JUMPIF_SCENE_GT(SCENARIO_SUB1, 31, 2, /* to label */ 4),
     SCENARIO_CALC(SCENARIO_SUB1, 31,  3),
   LABEL(4), /* = 0x04 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 5),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 2),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 5),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 2),
     JUMP_SCRIPT(EVENT_S00E01A_L001),
   LABEL(5), /* = 0x05 */
     JUMP_SCRIPT(EVENT_S01E02A_L002),
@@ -4575,8 +4575,8 @@ static const struct ScriptCommand s_script_GETOUT_S02E01A[] = { /* 0x812cb34 */
     JUMPIF_SCENE_GT(SCENARIO_SUB2, 33, 4, /* to label */ 4),
     SCENARIO_CALC(SCENARIO_SUB2, 33,  5),
   LABEL(4), /* = 0x04 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 5),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 2),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 5),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 2),
     JUMP_SCRIPT(EVENT_S00E01A_L001),
   LABEL(5), /* = 0x05 */
     JUMP_SCRIPT(EVENT_S02E01A_L004),
@@ -4599,8 +4599,8 @@ static const struct ScriptCommand s_script_GETOUT_S02E02A[] = { /* 0x812cc84 */
     JUMPIF_SCENE_GT(SCENARIO_SUB2, 34, 4, /* to label */ 4),
     SCENARIO_CALC(SCENARIO_SUB2, 34,  5),
   LABEL(4), /* = 0x04 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 5),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 2),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 5),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 2),
     JUMP_SCRIPT(EVENT_S00E01A_L001),
   LABEL(5), /* = 0x05 */
     JUMP_SCRIPT(EVENT_S02E02A_L003),
@@ -4623,8 +4623,8 @@ static const struct ScriptCommand s_script_GETOUT_S03E01A[] = { /* 0x812cdd4 */
     JUMPIF_SCENE_GT(SCENARIO_SUB3, 36, 2, /* to label */ 4),
     SCENARIO_CALC(SCENARIO_SUB3, 36,  3),
   LABEL(4), /* = 0x04 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 5),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 2),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 5),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 2),
     JUMP_SCRIPT(EVENT_S00E01A_L001),
   LABEL(5), /* = 0x05 */
     JUMP_SCRIPT(EVENT_S03E01A_L002),
@@ -4644,8 +4644,8 @@ static const struct ScriptCommand s_script_GETOUT_S04E01A[] = { /* 0x812cf24 */
     JUMPIF_EQUAL(SCENARIO_SUB4, 38, /* to label */ 3),
     JUMP_LABEL(2),
   LABEL(3), /* = 0x03 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 5),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 2),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 5),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 2),
     JUMP_SCRIPT(EVENT_S00E01A_L001),
   LABEL(5), /* = 0x05 */
     JUMP_SCRIPT(EVENT_S04E01A_L002),
@@ -4669,8 +4669,8 @@ static const struct ScriptCommand s_script_GETOUT_S04E01B[] = { /* 0x812d044 */
     JUMPIF_SCENE_GT(SCENARIO_SUB4, 39, 2, /* to label */ 4),
     SCENARIO_CALC(SCENARIO_SUB4, 39,  3),
   LABEL(4), /* = 0x04 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 5),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 2),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 5),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 2),
     JUMP_SCRIPT(EVENT_S00E01A_L001),
   LABEL(5), /* = 0x05 */
     JUMP_SCRIPT(EVENT_S04E01B_L001),
@@ -4693,8 +4693,8 @@ static const struct ScriptCommand s_script_GETOUT_S04E01C[] = { /* 0x812d194 */
     JUMPIF_SCENE_GT(SCENARIO_SUB4, 40, 2, /* to label */ 4),
     SCENARIO_CALC(SCENARIO_SUB4, 40,  3),
   LABEL(4), /* = 0x04 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 5),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 2),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 5),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 2),
     JUMP_SCRIPT(EVENT_S00E01A_L001),
   LABEL(5), /* = 0x05 */
     JUMP_SCRIPT(EVENT_S04E01C_L001),
@@ -4717,8 +4717,8 @@ static const struct ScriptCommand s_script_GETOUT_S04E01D[] = { /* 0x812d2e4 */
     JUMPIF_SCENE_GT(SCENARIO_SUB4, 41, 2, /* to label */ 4),
     SCENARIO_CALC(SCENARIO_SUB4, 41,  3),
   LABEL(4), /* = 0x04 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 5),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 2),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 5),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 2),
     JUMP_SCRIPT(EVENT_S00E01A_L001),
   LABEL(5), /* = 0x05 */
     JUMP_SCRIPT(EVENT_S04E01D_L001),
@@ -4741,8 +4741,8 @@ static const struct ScriptCommand s_script_GETOUT_S04E01E[] = { /* 0x812d434 */
     JUMPIF_SCENE_GT(SCENARIO_SUB4, 42, 2, /* to label */ 4),
     SCENARIO_CALC(SCENARIO_SUB4, 42,  3),
   LABEL(4), /* = 0x04 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 5),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 2),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 5),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 2),
     JUMP_SCRIPT(EVENT_S00E01A_L001),
   LABEL(5), /* = 0x05 */
     JUMP_SCRIPT(EVENT_S04E01E_L001),
@@ -4765,8 +4765,8 @@ static const struct ScriptCommand s_script_GETOUT_S05E01A[] = { /* 0x812d584 */
     JUMPIF_SCENE_GT(SCENARIO_SUB5, 44, 2, /* to label */ 4),
     SCENARIO_CALC(SCENARIO_SUB5, 44,  3),
   LABEL(4), /* = 0x04 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 5),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 2),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 5),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 2),
     JUMP_SCRIPT(EVENT_S00E01A_L001),
   LABEL(5), /* = 0x05 */
     JUMP_SCRIPT(EVENT_S05E01A_L002),
@@ -4789,8 +4789,8 @@ static const struct ScriptCommand s_script_GETOUT_S06E01A[] = { /* 0x812d6d4 */
     JUMPIF_SCENE_GT(SCENARIO_SUB6, 46, 2, /* to label */ 4),
     SCENARIO_CALC(SCENARIO_SUB6, 46,  3),
   LABEL(4), /* = 0x04 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 5),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 2),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 5),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 2),
     JUMP_SCRIPT(EVENT_S00E01A_L001),
   LABEL(5), /* = 0x05 */
     JUMP_SCRIPT(EVENT_S06E01A_L002),
@@ -4813,8 +4813,8 @@ static const struct ScriptCommand s_script_GETOUT_S06E01B[] = { /* 0x812d824 */
     JUMPIF_SCENE_GT(SCENARIO_SUB6, 47, 2, /* to label */ 4),
     SCENARIO_CALC(SCENARIO_SUB6, 47,  3),
   LABEL(4), /* = 0x04 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 5),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 2),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 5),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 2),
     JUMP_SCRIPT(EVENT_S00E01A_L001),
   LABEL(5), /* = 0x05 */
     JUMP_SCRIPT(EVENT_S06E01B_L002),
@@ -4837,8 +4837,8 @@ static const struct ScriptCommand s_script_GETOUT_S07E01A[] = { /* 0x812d974 */
     JUMPIF_SCENE_GT(SCENARIO_SUB7, 49, 3, /* to label */ 4),
     SCENARIO_CALC(SCENARIO_SUB7, 49,  4),
   LABEL(4), /* = 0x04 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 5),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 2),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 5),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 2),
     JUMP_SCRIPT(EVENT_S00E01A_L001),
   LABEL(5), /* = 0x05 */
     JUMP_SCRIPT(EVENT_S07E01A_L003),
@@ -4861,8 +4861,8 @@ static const struct ScriptCommand s_script_GETOUT_S08E01A[] = { /* 0x812dac4 */
     JUMPIF_SCENE_GT(SCENARIO_SUB8, 51, 8, /* to label */ 4),
     SCENARIO_CALC(SCENARIO_SUB8, 51,  9),
   LABEL(4), /* = 0x04 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 5),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 2),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 5),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 2),
     JUMP_SCRIPT(EVENT_S00E01A_L001),
   LABEL(5), /* = 0x05 */
     JUMP_SCRIPT(EVENT_S08E01A_L006),
@@ -4883,8 +4883,8 @@ static const struct ScriptCommand s_script_GETOUT_S09E01A[] = { /* 0x812dc14 */
     JUMPIF_EQUAL(SCENARIO_SUB9, 53, /* to label */ 4),
     JUMP_LABEL(3),
   LABEL(4), /* = 0x04 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 6),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 3),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 6),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 3),
     JUMP_SCRIPT(EVENT_DIVIDE),
   LABEL(6), /* = 0x06 */
     { 0x01, 0x00, -0x0001,  0x000000ca,  0x00000000, NULL },
@@ -4893,8 +4893,8 @@ static const struct ScriptCommand s_script_GETOUT_S09E01A[] = { /* 0x812dc14 */
     JUMPIF_EQUAL(SCENARIO_SUB9, 53, /* to label */ 7),
     JUMP_LABEL(3),
   LABEL(7), /* = 0x07 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 8),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 3),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 8),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 3),
     JUMP_SCRIPT(EVENT_DIVIDE),
   LABEL(8), /* = 0x08 */
     JUMP_SCRIPT(EVENT_S09E01A_L005),
@@ -4904,8 +4904,8 @@ static const struct ScriptCommand s_script_GETOUT_S09E01A[] = { /* 0x812dc14 */
     COND_EQUAL(38, /* to label */ 10),
     JUMP_LABEL(3),
   LABEL(9), /* = 0x09 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 11),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 3),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 11),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 3),
     JUMP_SCRIPT(GETOUT_R00E01A),
   LABEL(10), /* = 0x0a */
     JUMP_SCRIPT(GETOUT_R00E01A),
@@ -4930,8 +4930,8 @@ static const struct ScriptCommand s_script_GETOUT_S09E01B[] = { /* 0x812dea4 */
     JUMPIF_SCENE_GT(SCENARIO_SUB9, 54, 3, /* to label */ 4),
     SCENARIO_CALC(SCENARIO_SUB9, 54,  4),
   LABEL(4), /* = 0x04 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 5),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 2),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 5),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 2),
     JUMP_SCRIPT(EVENT_S00E01A_L001),
   LABEL(5), /* = 0x05 */
     JUMP_SCRIPT(EVENT_S09E01B_L002),
@@ -4948,11 +4948,11 @@ static const struct ScriptCommand s_script_GETOUT_D62E01A[] = { /* 0x812dff4 */
     COND_EQUAL(81, /* to label */ 0),
     JUMP_LABEL(1),
   LABEL(0), /* = 0x00 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 2),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 3),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 2),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 3),
     JUMP_SCRIPT(EVENT_S00E01A_L001),
   LABEL(2), /* = 0x02 */
-    { 0xb0, 0x01,  0x0029,  0x00000000,  0x00000000, NULL },
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_PURITY_FOREST),
   LABEL(3), /* = 0x03 */
     JUMP_SCRIPT(GETOUT_R00E01A),
   LABEL(1), /* = 0x01 */
@@ -4966,11 +4966,11 @@ static const struct ScriptCommand s_script_GETOUT_D43E01A[] = { /* 0x812e0e4 */
     COND_EQUAL(81, /* to label */ 0),
     JUMP_LABEL(1),
   LABEL(0), /* = 0x00 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 2),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 3),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 2),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 3),
     JUMP_SCRIPT(EVENT_S00E01A_L001),
   LABEL(2), /* = 0x02 */
-    { 0xb0, 0x01,  0x002a,  0x00000000,  0x00000000, NULL },
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_ODDITY_CAVE),
   LABEL(3), /* = 0x03 */
     JUMP_SCRIPT(GETOUT_R00E01A),
   LABEL(1), /* = 0x01 */
@@ -4984,11 +4984,11 @@ static const struct ScriptCommand s_script_GETOUT_D44E01A[] = { /* 0x812e1d4 */
     COND_EQUAL(81, /* to label */ 0),
     JUMP_LABEL(1),
   LABEL(0), /* = 0x00 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 2),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 3),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 2),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 3),
     JUMP_SCRIPT(EVENT_S00E01A_L001),
   LABEL(2), /* = 0x02 */
-    { 0xb0, 0x01,  0x002b,  0x00000000,  0x00000000, NULL },
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_REMAINS_ISLAND),
   LABEL(3), /* = 0x03 */
     JUMP_SCRIPT(GETOUT_R00E01A),
   LABEL(1), /* = 0x01 */
@@ -5002,11 +5002,11 @@ static const struct ScriptCommand s_script_GETOUT_D45E01A[] = { /* 0x812e2c4 */
     COND_EQUAL(81, /* to label */ 0),
     JUMP_LABEL(1),
   LABEL(0), /* = 0x00 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 2),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 3),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 2),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 3),
     JUMP_SCRIPT(EVENT_S00E01A_L001),
   LABEL(2), /* = 0x02 */
-    { 0xb0, 0x01,  0x002c,  0x00000000,  0x00000000, NULL },
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_MARVELOUS_SEA),
   LABEL(3), /* = 0x03 */
     JUMP_SCRIPT(GETOUT_R00E01A),
   LABEL(1), /* = 0x01 */
@@ -5020,11 +5020,11 @@ static const struct ScriptCommand s_script_GETOUT_D46E01A[] = { /* 0x812e3b4 */
     COND_EQUAL(81, /* to label */ 0),
     JUMP_LABEL(1),
   LABEL(0), /* = 0x00 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 2),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 3),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 2),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 3),
     JUMP_SCRIPT(EVENT_S00E01A_L001),
   LABEL(2), /* = 0x02 */
-    { 0xb0, 0x01,  0x002d,  0x00000000,  0x00000000, NULL },
+    SET_RESCUE_CONQUERED(RESCUE_DUNGEON_FANTASY_STRAIT),
   LABEL(3), /* = 0x03 */
     JUMP_SCRIPT(GETOUT_R00E01A),
   LABEL(1), /* = 0x01 */
@@ -5045,8 +5045,8 @@ static const struct ScriptCommand s_script_GETOUT_U00E01A[] = { /* 0x812e4a4 */
     COND_EQUAL(80, /* to label */ 2),
     JUMP_SCRIPT(EVENT_DIVIDE),
   LABEL(2), /* = 0x02 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 3),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 3),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 3),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 3),
   LABEL(3), /* = 0x03 */
     JUMP_SCRIPT(EVENT_DIVIDE),
 };
@@ -5058,8 +5058,8 @@ static const struct ScriptCommand s_script_GETOUT_R00E01A[] = { /* 0x812e5c4 */
     COND_EQUAL(81, /* to label */ 0),
     JUMP_LABEL(1),
   LABEL(0), /* = 0x00 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 2),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 2),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 2),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 2),
     JUMP_SCRIPT(EVENT_S00E01A_L001),
   LABEL(2), /* = 0x02 */
     SCENARIO_CALC(SCENARIO_SELECT, 56,  0),
@@ -5086,8 +5086,8 @@ static const struct ScriptCommand s_script_GETOUT_T00E01A[] = { /* 0x812e6b4 */
     CJUMP_VAR(DUNGEON_ENTER_INDEX),
     COND_EQUAL(78, /* to label */ 4),
     COND_EQUAL(79, /* to label */ 5),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 6),
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 7),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 6),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 7),
     JUMP_LABEL(8),
   LABEL(7), /* = 0x07 */
     CJUMP_VAR(DUNGEON_ENTER_INDEX),
@@ -5204,14 +5204,14 @@ static const struct ScriptCommand s_script_GETOUT_M01E07T[] = { /* 0x812eeb8 */
     JUMPIF_EQUAL(SCENARIO_MAIN, 12, /* to label */ 2),
     JUMP_LABEL(3),
   LABEL(1), /* = 0x01 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 4),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 3),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 4),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 3),
     JUMP_SCRIPT(EVENT_M01E07A_T001),
   LABEL(4), /* = 0x04 */
     JUMP_SCRIPT(EVENT_M01E07A_T002),
   LABEL(2), /* = 0x02 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 5),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 3),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 5),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 3),
     JUMP_SCRIPT(EVENT_M01E07B_T001),
   LABEL(5), /* = 0x05 */
     JUMP_SCRIPT(EVENT_M01E07B_T002),
@@ -5227,14 +5227,14 @@ static const struct ScriptCommand s_script_GETOUT_M01E08T[] = { /* 0x812eff8 */
     JUMPIF_EQUAL(SCENARIO_MAIN, 14, /* to label */ 2),
     JUMP_LABEL(3),
   LABEL(1), /* = 0x01 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 4),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 3),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 4),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 3),
     JUMP_SCRIPT(EVENT_M01E08A_T001),
   LABEL(4), /* = 0x04 */
     JUMP_SCRIPT(EVENT_M01E08A_T002),
   LABEL(2), /* = 0x02 */
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 5),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 3),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 5),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 3),
     JUMP_SCRIPT(EVENT_M01E08B_T001),
   LABEL(5), /* = 0x05 */
     JUMP_SCRIPT(EVENT_M01E08B_T002),
@@ -5261,413 +5261,412 @@ static const struct ScriptCommand s_script_MOVE_DEBUG_CAMERA[] = { /* 0x812f198 
     END_DELETE,
 };
 
-/*extern*/ const struct ScriptRef gFunctionScriptTable[] = { /* 0x812f1f8 */
-    { 0, 4, _("END_TALK"), s_script_END_TALK },
-    { 1, 4, _("WAIT_END_TALK_FUNC"), s_script_WAIT_END_TALK_FUNC },
-    { 2, 4, _("WAIT_END_EVENT_FUNC"), s_script_WAIT_END_EVENT_FUNC },
-    { 3, 4, _("WAIT_START_FUNC"), s_script_WAIT_START_FUNC },
-    { 4, 4, _("INCOMPLETE_TALK"), s_script_INCOMPLETE_TALK },
-    { 5, 4, _("NORMAL_WAIT_END_TALK"), s_script_NORMAL_WAIT_END_TALK },
-    { 6, 4, _("LIVES_REPLY_NORMAL"), s_script_LIVES_REPLY_NORMAL },
-    { 7, 4, _("LIVES_REPLY"), s_script_LIVES_REPLY },
-    { 8, 4, _("OBJECT_REPLY_NORMAL"), s_script_OBJECT_REPLY_NORMAL },
-    { 9, 4, _("EXAMINE_MISS"), s_script_EXAMINE_MISS },
-    { 10, 4, _("ENTER_WAIT_FUNC"), s_script_ENTER_WAIT_FUNC },
-    { 11, 4, _("UNIT_TALK"), s_script_UNIT_TALK },
-    { 12, 4, _("HABITAT_TALK"), s_script_HABITAT_TALK },
-    { 13, 4, _("HABITAT_TALK_S01E02A"), s_script_HABITAT_TALK_S01E02A },
-    { 14, 5, _("HABITAT_MOVE1"), s_script_HABITAT_MOVE1 },
-    { 15, 5, _("HABITAT_MOVE2"), s_script_HABITAT_MOVE2 },
-    { 16, 5, _("HABITAT_MOVE_PAUSE"), s_script_HABITAT_MOVE_PAUSE },
-    { 17, 5, _("HABITAT_MOVE_STAY_FIX"), s_script_HABITAT_MOVE_STAY_FIX },
-    { 18, 5, _("HABITAT_MOVE_STAY_TURN"), s_script_HABITAT_MOVE_STAY_TURN },
-    { 19, 5, _("LIVES_MOVE_NORMAL"), s_script_LIVES_MOVE_NORMAL },
-    { 20, 5, _("LIVES_MOVE_CHANGE"), s_script_LIVES_MOVE_CHANGE },
-    { 21, 5, _("OBJECT_MOVE_NORMAL"), s_script_OBJECT_MOVE_NORMAL },
-    { 22, 5, _("OBJECT_MOVE_CHANGE"), s_script_OBJECT_MOVE_CHANGE },
-    { 23, 5, _("EFFECT_MOVE_NORMAL"), s_script_EFFECT_MOVE_NORMAL },
-    { 24, 5, _("EFFECT_MOVE_CHANGE"), s_script_EFFECT_MOVE_CHANGE },
-    { 25, 5, _("MOVE_INIT"), s_script_MOVE_INIT },
-    { 26, 5, _("MOVE_PAUSE"), s_script_MOVE_PAUSE },
-    { 27, 5, _("MOVE_STAY"), s_script_MOVE_STAY },
-    { 28, 5, _("MOVE_SLEEP"), s_script_MOVE_SLEEP },
-    { 29, 5, _("MOVE_RANDOM"), s_script_MOVE_RANDOM },
-    { 30, 5, _("MOVE_BOY"), s_script_MOVE_BOY },
-    { 31, 5, _("MOVE_GIRL"), s_script_MOVE_GIRL },
-    { 32, 9, _("WAKEUP_FUNC"), s_script_WAKEUP_FUNC },
-    { 33, 9, _("LOOK_AROUND_FUNC"), s_script_LOOK_AROUND_FUNC },
-    { 34, 9, _("LOOK_AROUND_DOWN_FUNC"), s_script_LOOK_AROUND_DOWN_FUNC },
-    { 35, 9, _("LOOK_AROUND_RIGHT_FUNC"), s_script_LOOK_AROUND_RIGHT_FUNC },
-    { 36, 9, _("LOOK_AROUND_LEFT_FUNC"), s_script_LOOK_AROUND_LEFT_FUNC },
-    { 37, 9, _("JUMP_HAPPY_FUNC"), s_script_JUMP_HAPPY_FUNC },
-    { 38, 9, _("JUMP_SURPRISE_FUNC"), s_script_JUMP_SURPRISE_FUNC },
-    { 39, 9, _("JUMP_ANGRY_FUNC"), s_script_JUMP_ANGRY_FUNC },
-    { 40, 9, _("NOTICE_FUNC"), s_script_NOTICE_FUNC },
-    { 41, 9, _("QUESTION_FUNC"), s_script_QUESTION_FUNC },
-    { 42, 9, _("SWEAT_FUNC"), s_script_SWEAT_FUNC },
-    { 43, 9, _("SHOCK_FUNC"), s_script_SHOCK_FUNC },
-    { 44, 9, _("SPREE_START_FUNC"), s_script_SPREE_START_FUNC },
-    { 45, 9, _("SPREE_END_FUNC"), s_script_SPREE_END_FUNC },
-    { 46, 9, _("SMILE_START_FUNC"), s_script_SMILE_START_FUNC },
-    { 47, 9, _("SMILE_END_FUNC"), s_script_SMILE_END_FUNC },
-    { 48, 9, _("ANGRY_START_FUNC"), s_script_ANGRY_START_FUNC },
-    { 49, 9, _("ANGRY_END_FUNC"), s_script_ANGRY_END_FUNC },
-    { 50, 5, _("MOVE_PLAZA_SLEEP"), s_script_MOVE_PLAZA_SLEEP },
-    { 51, 9, _("INIT_PLAZA_SLEEP_STAY_FUNC"), s_script_INIT_PLAZA_SLEEP_STAY_FUNC },
-    { 52, 9, _("INIT_PLAZA_SLEEP_TALK_FUNC"), s_script_INIT_PLAZA_SLEEP_TALK_FUNC },
-    { 53, 8, _("INIT_SLEEP_FUNC"), s_script_INIT_SLEEP_FUNC },
-    { 54, 8, _("INIT_BASE_FUNC"), s_script_INIT_BASE_FUNC },
-    { 55, 8, _("INIT_DEBUG_HABITAT"), s_script_INIT_DEBUG_HABITAT },
-    { 56, 7, _("NORMAL_MESSAGE"), NULL },
-    { 57, 7, _("NORMAL_EVENT"), NULL },
-    { 58, 7, _("NORMAL_CAMERA"), s_script_NORMAL_CAMERA },
-    { 59, 7, _("DISMISSAL_SALLY_MEMBER_FUNC"), s_script_DISMISSAL_SALLY_MEMBER_FUNC },
-    { 60, 7, _("DISMISSAL_SALLY_MEMBER2_FUNC"), s_script_DISMISSAL_SALLY_MEMBER2_FUNC },
-    { 61, 7, _("DISMISSAL_SALLY_MEMBER3_FUNC"), s_script_DISMISSAL_SALLY_MEMBER3_FUNC },
-    { 62, 7, _("DISMISSAL_SALLY_MEMBER4_FUNC"), s_script_DISMISSAL_SALLY_MEMBER4_FUNC },
-    { 63, 7, _("NEXT_SAVE_FUNC"), s_script_NEXT_SAVE_FUNC },
-    { 64, 7, _("NEXT_SAVE2_FUNC"), s_script_NEXT_SAVE2_FUNC },
-    { 65, 7, _("SAVE_POINT"), s_script_SAVE_POINT },
-    { 66, 7, _("WAREHOUSE_POINT"), s_script_WAREHOUSE_POINT },
-    { 67, 7, _("SAVE_AND_WAREHOUSE_POINT"), s_script_SAVE_AND_WAREHOUSE_POINT },
-    { 68, 7, _("WORLD_MAP_POINT"), s_script_WORLD_MAP_POINT },
-    { 69, 7, _("FORMATION_HERO"), s_script_FORMATION_HERO },
-    { 70, 7, _("EVOLUTION_HERO"), s_script_EVOLUTION_HERO },
-    { 71, 7, _("WARP_LIVES_START"), s_script_WARP_LIVES_START },
-    { 72, 7, _("WARP_LIVES_START2"), s_script_WARP_LIVES_START2 },
-    { 73, 7, _("WARP_LIVES_START3"), s_script_WARP_LIVES_START3 },
-    { 74, 7, _("WARP_LIVES_ARRIVE"), s_script_WARP_LIVES_ARRIVE },
-    { 75, 7, _("WARP_LIVES_ARRIVE2"), s_script_WARP_LIVES_ARRIVE2 },
-    { 76, 7, _("WARP_LIVES_ARRIVE3"), s_script_WARP_LIVES_ARRIVE3 },
-    { 77, 7, _("LIVES_WARP_START_FUNC"), s_script_LIVES_WARP_START_FUNC },
-    { 78, 7, _("LIVES_WARP_START2_FUNC"), s_script_LIVES_WARP_START2_FUNC },
-    { 79, 7, _("LIVES_WARP_START3_FUNC"), s_script_LIVES_WARP_START3_FUNC },
-    { 80, 7, _("LIVES_WARP_START_SUB"), s_script_LIVES_WARP_START_SUB },
-    { 81, 7, _("LIVES_WARP_ARRIVE_FUNC"), s_script_LIVES_WARP_ARRIVE_FUNC },
-    { 82, 7, _("LIVES_WARP_ARRIVE2_FUNC"), s_script_LIVES_WARP_ARRIVE2_FUNC },
-    { 83, 7, _("LIVES_WARP_ARRIVE3_FUNC"), s_script_LIVES_WARP_ARRIVE3_FUNC },
-    { 84, 7, _("LIVES_WARP_ARRIVE_SUB"), s_script_LIVES_WARP_ARRIVE_SUB },
-    { 85, 7, _("GET_ITEM_FUNC"), s_script_GET_ITEM_FUNC },
-    { 86, 7, _("GET_ITEM_WAIT_FUNC"), s_script_GET_ITEM_WAIT_FUNC },
-    { 87, 7, _("GET_ITEM2_FUNC"), s_script_GET_ITEM2_FUNC },
-    { 88, 7, _("GET_ITEM2_WAIT_FUNC"), s_script_GET_ITEM2_WAIT_FUNC },
-    { 89, 7, _("JOIN_FUNC"), s_script_JOIN_FUNC },
-    { 90, 7, _("LODGE_START_FUNC"), s_script_LODGE_START_FUNC },
-    { 91, 7, _("LODGE_WAIT_FUNC"), s_script_LODGE_WAIT_FUNC },
-    { 92, 7, _("LODGE_END_FUNC"), s_script_LODGE_END_FUNC },
-    { 93, 7, _("LODGE_SOUND_FUNC"), s_script_LODGE_SOUND_FUNC },
-    { 94, 7, _("SAVE_START_FUNC"), s_script_SAVE_START_FUNC },
-    { 95, 7, _("SAVE_WAIT_FUNC"), s_script_SAVE_WAIT_FUNC },
-    { 96, 7, _("SAVE_END_FUNC"), s_script_SAVE_END_FUNC },
-    { 97, 7, _("SAVE_SOUND_FUNC"), s_script_SAVE_SOUND_FUNC },
-    { 98, 9, _("EFFECT_TEST1"), s_script_EFFECT_TEST1 },
-    { 99, 9, _("EFFECT_TEST2"), s_script_EFFECT_TEST2 },
-    { 100, 9, _("EFFECT_MOVE_DIVE"), s_script_EFFECT_MOVE_DIVE },
-    { 101, 9, _("EFFECT_MOVE_WAVE"), s_script_EFFECT_MOVE_WAVE },
-    { 102, 7, _("EVENT_DIVIDE"), s_script_EVENT_DIVIDE },
-    { 103, 7, _("EVENT_DIVIDE_NEXT"), s_script_EVENT_DIVIDE_NEXT },
-    { 104, 7, _("EVENT_DIVIDE_INIT_FUNC"), s_script_EVENT_DIVIDE_INIT_FUNC },
-    { 105, 7, _("EVENT_DIVIDE_NEXT_DAY_FUNC"), s_script_EVENT_DIVIDE_NEXT_DAY_FUNC },
-    { 106, 7, _("EVENT_DIVIDE_NEXT_DAY2_FUNC"), s_script_EVENT_DIVIDE_NEXT_DAY2_FUNC },
-    { 107, 7, _("EVENT_DIVIDE_FIRST"), s_script_EVENT_DIVIDE_FIRST },
-    { 108, 7, _("EVENT_DIVIDE_SECOND"), s_script_EVENT_DIVIDE_SECOND },
-    { 109, 7, _("EVENT_DIVIDE_AFTER"), s_script_EVENT_DIVIDE_AFTER },
-    { 110, 7, _("EVENT_DIVIDE_WARP_LOCK_FUNC"), s_script_EVENT_DIVIDE_WARP_LOCK_FUNC },
-    { 111, 7, _("EVENT_RESCUE_ENTER_CHECK"), s_script_EVENT_RESCUE_ENTER_CHECK },
-    { 112, 7, _("EVENT_RESCUE"), s_script_EVENT_RESCUE },
-    { 113, 7, _("DEBUG_SCRIPT"), s_script_DEBUG_SCRIPT },
-    { 114, 7, _("DEMO_CANCEL"), s_script_DEMO_CANCEL },
-    { 115, 10, _("DEMO_01"), s_script_DEMO_01 },
-    { 116, 10, _("DEMO_02"), s_script_DEMO_02 },
-    { 117, 10, _("DEMO_03"), s_script_DEMO_03 },
-    { 118, 10, _("DEMO_04"), s_script_DEMO_04 },
-    { 119, 10, _("EVENT_M00E01A_L001"), s_script_EVENT_M00E01A_L001 },
-    { 120, 10, _("EVENT_M01E01A_L001"), s_script_EVENT_M01E01A_L001 },
-    { 121, 10, _("EVENT_M01E01A_L002"), s_script_EVENT_M01E01A_L002 },
-    { 122, 10, _("EVENT_M01E01A_L003"), s_script_EVENT_M01E01A_L003 },
-    { 123, 10, _("EVENT_M01E02A_L001"), s_script_EVENT_M01E02A_L001 },
-    { 124, 12, _("EVENT_M01E02A_L001B"), s_script_EVENT_M01E02A_L001B },
-    { 125, 10, _("EVENT_M01E02A_L001C"), s_script_EVENT_M01E02A_L001C },
-    { 126, 10, _("EVENT_M01E02A_L002"), s_script_EVENT_M01E02A_L002 },
-    { 127, 10, _("EVENT_M01E02A_L003"), s_script_EVENT_M01E02A_L003 },
-    { 128, 10, _("EVENT_M01E02A_L004"), s_script_EVENT_M01E02A_L004 },
-    { 129, 10, _("EVENT_M01E02A_L005"), s_script_EVENT_M01E02A_L005 },
-    { 130, 10, _("EVENT_M01E02A_L006"), s_script_EVENT_M01E02A_L006 },
-    { 131, 10, _("EVENT_M01E02B_L001"), s_script_EVENT_M01E02B_L001 },
-    { 132, 10, _("EVENT_M01E02B_L002"), s_script_EVENT_M01E02B_L002 },
-    { 133, 10, _("EVENT_M01E02B_L003"), s_script_EVENT_M01E02B_L003 },
-    { 134, 10, _("EVENT_M01E02B_L004"), s_script_EVENT_M01E02B_L004 },
-    { 135, 10, _("EVENT_M01E02B_L004B"), s_script_EVENT_M01E02B_L004B },
-    { 136, 10, _("EVENT_M01E02B_L005"), s_script_EVENT_M01E02B_L005 },
-    { 137, 10, _("EVENT_M01E02B_L006"), s_script_EVENT_M01E02B_L006 },
-    { 138, 10, _("EVENT_M01E02B_L007"), s_script_EVENT_M01E02B_L007 },
-    { 139, 10, _("EVENT_M01E02B_L008"), s_script_EVENT_M01E02B_L008 },
-    { 140, 10, _("EVENT_M01E03A_L000"), s_script_EVENT_M01E03A_L000 },
-    { 141, 10, _("EVENT_M01E03A_L001"), s_script_EVENT_M01E03A_L001 },
-    { 142, 10, _("EVENT_M01E03A_L002"), s_script_EVENT_M01E03A_L002 },
-    { 143, 10, _("EVENT_M01E03A_L003"), s_script_EVENT_M01E03A_L003 },
-    { 144, 10, _("EVENT_M01E03A_L004"), s_script_EVENT_M01E03A_L004 },
-    { 145, 10, _("EVENT_M01E03A_L005"), s_script_EVENT_M01E03A_L005 },
-    { 146, 10, _("EVENT_M01E03A_L006"), s_script_EVENT_M01E03A_L006 },
-    { 147, 10, _("EVENT_M01E03A_L007"), s_script_EVENT_M01E03A_L007 },
-    { 148, 10, _("EVENT_M01E03A_L008"), s_script_EVENT_M01E03A_L008 },
-    { 149, 10, _("EVENT_M01E03A_L009"), s_script_EVENT_M01E03A_L009 },
-    { 150, 10, _("EVENT_M01E03A_L010"), s_script_EVENT_M01E03A_L010 },
-    { 151, 10, _("EVENT_M01E03A_L011"), s_script_EVENT_M01E03A_L011 },
-    { 152, 10, _("EVENT_M01E04A_L000"), s_script_EVENT_M01E04A_L000 },
-    { 153, 10, _("EVENT_M01E04A_L001"), s_script_EVENT_M01E04A_L001 },
-    { 154, 10, _("EVENT_M01E04A_L002"), s_script_EVENT_M01E04A_L002 },
-    { 155, 10, _("EVENT_M01E04A_L003"), s_script_EVENT_M01E04A_L003 },
-    { 156, 10, _("EVENT_M01E04A_L004"), s_script_EVENT_M01E04A_L004 },
-    { 157, 12, _("EVENT_M01E04A_L005"), s_script_EVENT_M01E04A_L005 },
-    { 158, 10, _("EVENT_M01E04A_L006"), s_script_EVENT_M01E04A_L006 },
-    { 159, 10, _("EVENT_M01E04B_L000"), s_script_EVENT_M01E04B_L000 },
-    { 160, 10, _("EVENT_M01E04B_L001"), s_script_EVENT_M01E04B_L001 },
-    { 161, 10, _("EVENT_M01E04B_L002"), s_script_EVENT_M01E04B_L002 },
-    { 162, 10, _("EVENT_M01E04B_L003"), s_script_EVENT_M01E04B_L003 },
-    { 163, 10, _("EVENT_M01E04B_L004"), s_script_EVENT_M01E04B_L004 },
-    { 164, 10, _("EVENT_M01E04B_L005"), s_script_EVENT_M01E04B_L005 },
-    { 165, 10, _("EVENT_M01E04B_L006"), s_script_EVENT_M01E04B_L006 },
-    { 166, 10, _("EVENT_M01E04B_L007"), s_script_EVENT_M01E04B_L007 },
-    { 167, 10, _("EVENT_M01E05A_L000"), s_script_EVENT_M01E05A_L000 },
-    { 168, 10, _("EVENT_M01E05A_L001"), s_script_EVENT_M01E05A_L001 },
-    { 169, 10, _("EVENT_M01E05A_L002"), s_script_EVENT_M01E05A_L002 },
-    { 170, 10, _("EVENT_M01E05A_L003"), s_script_EVENT_M01E05A_L003 },
-    { 171, 10, _("EVENT_M01E05A_L004"), s_script_EVENT_M01E05A_L004 },
-    { 172, 10, _("EVENT_M01E05A_L005"), s_script_EVENT_M01E05A_L005 },
-    { 173, 10, _("EVENT_M01E05A_L006"), s_script_EVENT_M01E05A_L006 },
-    { 174, 10, _("EVENT_M01E05B_L000"), s_script_EVENT_M01E05B_L000 },
-    { 175, 10, _("EVENT_M01E05B_L001"), s_script_EVENT_M01E05B_L001 },
-    { 176, 10, _("EVENT_M01E05B_L002"), s_script_EVENT_M01E05B_L002 },
-    { 177, 12, _("EVENT_M01E05B_L003"), s_script_EVENT_M01E05B_L003 },
-    { 178, 10, _("EVENT_M01E05B_L004"), s_script_EVENT_M01E05B_L004 },
-    { 179, 10, _("EVENT_M01E05B_L005"), s_script_EVENT_M01E05B_L005 },
-    { 180, 10, _("EVENT_M01E06A_L001"), s_script_EVENT_M01E06A_L001 },
-    { 181, 10, _("EVENT_M01E06A_L002"), s_script_EVENT_M01E06A_L002 },
-    { 182, 10, _("EVENT_M01E06A_L003"), s_script_EVENT_M01E06A_L003 },
-    { 183, 10, _("EVENT_M01E07A_L001"), s_script_EVENT_M01E07A_L001 },
-    { 184, 10, _("EVENT_M01E07A_L002"), s_script_EVENT_M01E07A_L002 },
-    { 185, 10, _("EVENT_M01E07A_L003"), s_script_EVENT_M01E07A_L003 },
-    { 186, 10, _("EVENT_M01E07A_L004"), s_script_EVENT_M01E07A_L004 },
-    { 187, 10, _("EVENT_M01E07A_L005"), s_script_EVENT_M01E07A_L005 },
-    { 188, 10, _("EVENT_M01E07A_T001"), s_script_EVENT_M01E07A_T001 },
-    { 189, 10, _("EVENT_M01E07A_T002"), s_script_EVENT_M01E07A_T002 },
-    { 190, 10, _("EVENT_M01E07B_L001"), s_script_EVENT_M01E07B_L001 },
-    { 191, 10, _("EVENT_M01E07B_L002"), s_script_EVENT_M01E07B_L002 },
-    { 192, 10, _("EVENT_M01E07B_L003"), s_script_EVENT_M01E07B_L003 },
-    { 193, 10, _("EVENT_M01E07B_L004"), s_script_EVENT_M01E07B_L004 },
-    { 194, 10, _("EVENT_M01E07B_L005"), s_script_EVENT_M01E07B_L005 },
-    { 195, 10, _("EVENT_M01E07B_T001"), s_script_EVENT_M01E07B_T001 },
-    { 196, 10, _("EVENT_M01E07B_T002"), s_script_EVENT_M01E07B_T002 },
-    { 197, 10, _("EVENT_M01E08A_L001"), s_script_EVENT_M01E08A_L001 },
-    { 198, 10, _("EVENT_M01E08A_L002"), s_script_EVENT_M01E08A_L002 },
-    { 199, 10, _("EVENT_M01E08A_L003"), s_script_EVENT_M01E08A_L003 },
-    { 200, 10, _("EVENT_M01E08A_L004"), s_script_EVENT_M01E08A_L004 },
-    { 201, 10, _("EVENT_M01E08A_L005"), s_script_EVENT_M01E08A_L005 },
-    { 202, 10, _("EVENT_M01E08A_T001"), s_script_EVENT_M01E08A_T001 },
-    { 203, 10, _("EVENT_M01E08A_T002"), s_script_EVENT_M01E08A_T002 },
-    { 204, 10, _("EVENT_M01E08B_L001"), s_script_EVENT_M01E08B_L001 },
-    { 205, 10, _("EVENT_M01E08B_L002"), s_script_EVENT_M01E08B_L002 },
-    { 206, 10, _("EVENT_M01E08B_L003"), s_script_EVENT_M01E08B_L003 },
-    { 207, 10, _("EVENT_M01E08B_L004"), s_script_EVENT_M01E08B_L004 },
-    { 208, 10, _("EVENT_M01E08B_L005"), s_script_EVENT_M01E08B_L005 },
-    { 209, 10, _("EVENT_M01E08B_L006"), s_script_EVENT_M01E08B_L006 },
-    { 210, 10, _("EVENT_M01E08B_T001"), s_script_EVENT_M01E08B_T001 },
-    { 211, 10, _("EVENT_M01E08B_T002"), s_script_EVENT_M01E08B_T002 },
-    { 212, 10, _("EVENT_M01E09A_L001"), s_script_EVENT_M01E09A_L001 },
-    { 213, 10, _("EVENT_M01E09A_L002"), s_script_EVENT_M01E09A_L002 },
-    { 214, 10, _("EVENT_M01E09A_L003"), s_script_EVENT_M01E09A_L003 },
-    { 215, 10, _("EVENT_M01E09A_L004"), s_script_EVENT_M01E09A_L004 },
-    { 216, 10, _("EVENT_M01E09A_L005"), s_script_EVENT_M01E09A_L005 },
-    { 217, 10, _("EVENT_M01E09A_L006"), s_script_EVENT_M01E09A_L006 },
-    { 218, 10, _("EVENT_M01E09A_L007"), s_script_EVENT_M01E09A_L007 },
-    { 219, 10, _("EVENT_M01E09A_L008"), s_script_EVENT_M01E09A_L008 },
-    { 220, 10, _("EVENT_M01E09A_L009"), s_script_EVENT_M01E09A_L009 },
-    { 221, 10, _("EVENT_M01E09A_L010"), s_script_EVENT_M01E09A_L010 },
-    { 222, 10, _("EVENT_M01E09A_L011"), s_script_EVENT_M01E09A_L011 },
-    { 223, 10, _("EVENT_M01E09A_L012"), s_script_EVENT_M01E09A_L012 },
-    { 224, 10, _("EVENT_M01E09A_L013"), s_script_EVENT_M01E09A_L013 },
-    { 225, 10, _("EVENT_M01E09A_L014"), s_script_EVENT_M01E09A_L014 },
-    { 226, 10, _("EVENT_M01E09A_L015"), s_script_EVENT_M01E09A_L015 },
-    { 227, 10, _("EVENT_M01E10A_L001"), s_script_EVENT_M01E10A_L001 },
-    { 228, 10, _("EVENT_M01E10A_L002"), s_script_EVENT_M01E10A_L002 },
-    { 229, 10, _("EVENT_M01E10A_L003"), s_script_EVENT_M01E10A_L003 },
-    { 230, 10, _("EVENT_M01E10A_L004"), s_script_EVENT_M01E10A_L004 },
-    { 231, 10, _("EVENT_M01E10A_L005"), s_script_EVENT_M01E10A_L005 },
-    { 232, 10, _("EVENT_M01E10A_L006"), s_script_EVENT_M01E10A_L006 },
-    { 233, 10, _("EVENT_M01E10A_L007"), s_script_EVENT_M01E10A_L007 },
-    { 234, 10, _("EVENT_M01E10A_L008"), s_script_EVENT_M01E10A_L008 },
-    { 235, 10, _("EVENT_M01END_L001"), s_script_EVENT_M01END_L001 },
-    { 236, 10, _("EVENT_M01END_L002"), s_script_EVENT_M01END_L002 },
-    { 237, 10, _("EVENT_M02E01A_L001"), s_script_EVENT_M02E01A_L001 },
-    { 238, 10, _("EVENT_M02E01A_L002"), s_script_EVENT_M02E01A_L002 },
-    { 239, 10, _("EVENT_M02E01A_L003"), s_script_EVENT_M02E01A_L003 },
-    { 240, 10, _("EVENT_M02E02A_L001"), s_script_EVENT_M02E02A_L001 },
-    { 241, 10, _("EVENT_M02E02B_L001"), s_script_EVENT_M02E02B_L001 },
-    { 242, 10, _("EVENT_M02E02C_L001"), s_script_EVENT_M02E02C_L001 },
-    { 243, 10, _("EVENT_M02E02D_L001"), s_script_EVENT_M02E02D_L001 },
-    { 244, 10, _("EVENT_M02E02E_L001"), s_script_EVENT_M02E02E_L001 },
-    { 245, 10, _("EVENT_M02E02F_L001"), s_script_EVENT_M02E02F_L001 },
-    { 246, 10, _("EVENT_M02E02G_L001"), s_script_EVENT_M02E02G_L001 },
-    { 247, 10, _("EVENT_M02E02H_L001"), s_script_EVENT_M02E02H_L001 },
-    { 248, 10, _("EVENT_M02END_L001"), s_script_EVENT_M02END_L001 },
-    { 249, 10, _("EVENT_S00E01A_L001"), s_script_EVENT_S00E01A_L001 },
-    { 250, 10, _("EVENT_S00E01A_L002"), s_script_EVENT_S00E01A_L002 },
-    { 251, 10, _("EVENT_S00E01A_L003"), s_script_EVENT_S00E01A_L003 },
-    { 252, 10, _("EVENT_S00E01A_L004"), s_script_EVENT_S00E01A_L004 },
-    { 253, 11, _("EVENT_S01E01A_START"), s_script_EVENT_S01E01A_START },
-    { 254, 11, _("EVENT_S01E01A_CONTINUE"), s_script_EVENT_S01E01A_CONTINUE },
-    { 255, 11, _("EVENT_S01E01A_END"), s_script_EVENT_S01E01A_END },
-    { 256, 12, _("EVENT_S01E01A_L001"), s_script_EVENT_S01E01A_L001 },
-    { 257, 10, _("EVENT_S01E01A_L002"), s_script_EVENT_S01E01A_L002 },
-    { 258, 10, _("EVENT_S01E01A_L003"), s_script_EVENT_S01E01A_L003 },
-    { 259, 10, _("EVENT_S01E01B_L001"), s_script_EVENT_S01E01B_L001 },
-    { 260, 12, _("EVENT_S01E01B_L001L"), s_script_EVENT_S01E01B_L001L },
-    { 261, 10, _("EVENT_S01E01C_L001"), s_script_EVENT_S01E01C_L001 },
-    { 262, 11, _("EVENT_S01E02A_START"), s_script_EVENT_S01E02A_START },
-    { 263, 11, _("EVENT_S01E02A_END"), s_script_EVENT_S01E02A_END },
-    { 264, 10, _("EVENT_S01E02A_L001"), s_script_EVENT_S01E02A_L001 },
-    { 265, 10, _("EVENT_S01E02A_L002"), s_script_EVENT_S01E02A_L002 },
-    { 266, 12, _("EVENT_S01E02A_L002L"), s_script_EVENT_S01E02A_L002L },
-    { 267, 12, _("EVENT_S01E02B_L001"), s_script_EVENT_S01E02B_L001 },
-    { 268, 12, _("EVENT_S01E02B_L002"), s_script_EVENT_S01E02B_L002 },
-    { 269, 11, _("EVENT_S02E01A_START"), s_script_EVENT_S02E01A_START },
-    { 270, 11, _("EVENT_S02E01A_END"), s_script_EVENT_S02E01A_END },
-    { 271, 12, _("EVENT_S02E01A_L001"), s_script_EVENT_S02E01A_L001 },
-    { 272, 12, _("EVENT_S02E01A_L002"), s_script_EVENT_S02E01A_L002 },
-    { 273, 12, _("EVENT_S02E01A_L003"), s_script_EVENT_S02E01A_L003 },
-    { 274, 12, _("EVENT_S02E01A_L004"), s_script_EVENT_S02E01A_L004 },
-    { 275, 12, _("EVENT_S02E01A_L004L"), s_script_EVENT_S02E01A_L004L },
-    { 276, 11, _("EVENT_S02E02A_START"), s_script_EVENT_S02E02A_START },
-    { 277, 11, _("EVENT_S02E02A_END"), s_script_EVENT_S02E02A_END },
-    { 278, 12, _("EVENT_S02E02A_L001"), s_script_EVENT_S02E02A_L001 },
-    { 279, 10, _("EVENT_S02E02A_L002"), s_script_EVENT_S02E02A_L002 },
-    { 280, 12, _("EVENT_S02E02A_L003"), s_script_EVENT_S02E02A_L003 },
-    { 281, 12, _("EVENT_S02E02A_L003L"), s_script_EVENT_S02E02A_L003L },
-    { 282, 11, _("EVENT_S03E01A_START"), s_script_EVENT_S03E01A_START },
-    { 283, 11, _("EVENT_S03E01A_CONTINUE"), s_script_EVENT_S03E01A_CONTINUE },
-    { 284, 11, _("EVENT_S03E01A_END"), s_script_EVENT_S03E01A_END },
-    { 285, 10, _("EVENT_S03E01A_L001"), s_script_EVENT_S03E01A_L001 },
-    { 286, 12, _("EVENT_S03E01A_L002"), s_script_EVENT_S03E01A_L002 },
-    { 287, 12, _("EVENT_S03E01A_L002L"), s_script_EVENT_S03E01A_L002L },
-    { 288, 11, _("EVENT_S04E01A_START"), s_script_EVENT_S04E01A_START },
-    { 289, 11, _("EVENT_S04E01A_LAST"), s_script_EVENT_S04E01A_LAST },
-    { 290, 11, _("EVENT_S04E01A_END"), s_script_EVENT_S04E01A_END },
-    { 291, 10, _("EVENT_S04E01A_L001"), s_script_EVENT_S04E01A_L001 },
-    { 292, 10, _("EVENT_S04E01A_L002"), s_script_EVENT_S04E01A_L002 },
-    { 293, 12, _("EVENT_S04E01A_L002L"), s_script_EVENT_S04E01A_L002L },
-    { 294, 10, _("EVENT_S04E01B_L001"), s_script_EVENT_S04E01B_L001 },
-    { 295, 12, _("EVENT_S04E01B_L001L"), s_script_EVENT_S04E01B_L001L },
-    { 296, 10, _("EVENT_S04E01C_L001"), s_script_EVENT_S04E01C_L001 },
-    { 297, 12, _("EVENT_S04E01C_L001L"), s_script_EVENT_S04E01C_L001L },
-    { 298, 10, _("EVENT_S04E01D_L001"), s_script_EVENT_S04E01D_L001 },
-    { 299, 12, _("EVENT_S04E01D_L001L"), s_script_EVENT_S04E01D_L001L },
-    { 300, 10, _("EVENT_S04E01E_L001"), s_script_EVENT_S04E01E_L001 },
-    { 301, 12, _("EVENT_S04E01E_L001L"), s_script_EVENT_S04E01E_L001L },
-    { 302, 12, _("EVENT_S04E01F_L001"), s_script_EVENT_S04E01F_L001 },
-    { 303, 11, _("EVENT_S05E01A_START"), s_script_EVENT_S05E01A_START },
-    { 304, 11, _("EVENT_S05E01A_CONTINUE"), s_script_EVENT_S05E01A_CONTINUE },
-    { 305, 11, _("EVENT_S05E01A_END"), s_script_EVENT_S05E01A_END },
-    { 306, 10, _("EVENT_S05E01A_L001"), s_script_EVENT_S05E01A_L001 },
-    { 307, 12, _("EVENT_S05E01A_L002"), s_script_EVENT_S05E01A_L002 },
-    { 308, 12, _("EVENT_S05E01A_L002L"), s_script_EVENT_S05E01A_L002L },
-    { 309, 11, _("EVENT_S06E01A_START"), s_script_EVENT_S06E01A_START },
-    { 310, 11, _("EVENT_S06E01A_CONTINUE"), s_script_EVENT_S06E01A_CONTINUE },
-    { 311, 11, _("EVENT_S06E01A_END"), s_script_EVENT_S06E01A_END },
-    { 312, 10, _("EVENT_S06E01A_L001"), s_script_EVENT_S06E01A_L001 },
-    { 313, 10, _("EVENT_S06E01A_L002"), s_script_EVENT_S06E01A_L002 },
-    { 314, 12, _("EVENT_S06E01A_L002L"), s_script_EVENT_S06E01A_L002L },
-    { 315, 10, _("EVENT_S06E01B_L001"), s_script_EVENT_S06E01B_L001 },
-    { 316, 10, _("EVENT_S06E01B_L002"), s_script_EVENT_S06E01B_L002 },
-    { 317, 12, _("EVENT_S06E01B_L002L"), s_script_EVENT_S06E01B_L002L },
-    { 318, 11, _("EVENT_S07E01A_START"), s_script_EVENT_S07E01A_START },
-    { 319, 11, _("EVENT_S07E01A_END"), s_script_EVENT_S07E01A_END },
-    { 320, 12, _("EVENT_S07E01A_L001"), s_script_EVENT_S07E01A_L001 },
-    { 321, 12, _("EVENT_S07E01A_L002"), s_script_EVENT_S07E01A_L002 },
-    { 322, 12, _("EVENT_S07E01A_L003"), s_script_EVENT_S07E01A_L003 },
-    { 323, 12, _("EVENT_S07E01A_L003L"), s_script_EVENT_S07E01A_L003L },
-    { 324, 11, _("EVENT_S08E01A_START"), s_script_EVENT_S08E01A_START },
-    { 325, 11, _("EVENT_S08E01A_END"), s_script_EVENT_S08E01A_END },
-    { 326, 12, _("EVENT_S08E01A_L001"), s_script_EVENT_S08E01A_L001 },
-    { 327, 12, _("EVENT_S08E01A_L002"), s_script_EVENT_S08E01A_L002 },
-    { 328, 12, _("EVENT_S08E01A_L003"), s_script_EVENT_S08E01A_L003 },
-    { 329, 12, _("EVENT_S08E01A_L004"), s_script_EVENT_S08E01A_L004 },
-    { 330, 12, _("EVENT_S08E01A_L005"), s_script_EVENT_S08E01A_L005 },
-    { 331, 10, _("EVENT_S08E01A_L005B"), s_script_EVENT_S08E01A_L005B },
-    { 332, 10, _("EVENT_S08E01A_L006"), s_script_EVENT_S08E01A_L006 },
-    { 333, 12, _("EVENT_S08E01A_L006L"), s_script_EVENT_S08E01A_L006L },
-    { 334, 12, _("EVENT_S08E01A_L007"), s_script_EVENT_S08E01A_L007 },
-    { 335, 10, _("EVENT_S08E01A_L008"), s_script_EVENT_S08E01A_L008 },
-    { 336, 12, _("EVENT_S08E01A_L008L"), s_script_EVENT_S08E01A_L008L },
-    { 337, 10, _("EVENT_S08E01A_L008A"), s_script_EVENT_S08E01A_L008A },
-    { 338, 10, _("EVENT_S08E01A_L008B"), s_script_EVENT_S08E01A_L008B },
-    { 339, 10, _("EVENT_S08E01A_L008C"), s_script_EVENT_S08E01A_L008C },
-    { 340, 11, _("EVENT_S09E01A_START"), s_script_EVENT_S09E01A_START },
-    { 341, 11, _("EVENT_S09E01A_END"), s_script_EVENT_S09E01A_END },
-    { 342, 12, _("EVENT_S09E01A_L001"), s_script_EVENT_S09E01A_L001 },
-    { 343, 12, _("EVENT_S09E01A_L002"), s_script_EVENT_S09E01A_L002 },
-    { 344, 12, _("EVENT_S09E01A_L003"), s_script_EVENT_S09E01A_L003 },
-    { 345, 10, _("EVENT_S09E01A_L004"), s_script_EVENT_S09E01A_L004 },
-    { 346, 10, _("EVENT_S09E01A_L004B"), s_script_EVENT_S09E01A_L004B },
-    { 347, 10, _("EVENT_S09E01A_L005"), s_script_EVENT_S09E01A_L005 },
-    { 348, 12, _("EVENT_S09E01A_L005L"), s_script_EVENT_S09E01A_L005L },
-    { 349, 10, _("EVENT_S09E01B_L001"), s_script_EVENT_S09E01B_L001 },
-    { 350, 10, _("EVENT_S09E01B_L001B"), s_script_EVENT_S09E01B_L001B },
-    { 351, 10, _("EVENT_S09E01B_L002"), s_script_EVENT_S09E01B_L002 },
-    { 352, 12, _("EVENT_S09E01B_L002L"), s_script_EVENT_S09E01B_L002L },
-    { 353, 12, _("EVENT_S09E01C_L001"), s_script_EVENT_S09E01C_L001 },
-    { 354, 7, _("EVENT_R00E01A_L001"), s_script_EVENT_R00E01A_L001 },
-    { 355, 1, _("COMMON_ENTER"), s_script_COMMON_ENTER },
-    { 356, 1, _("DEBUG_ENTER"), s_script_DEBUG_ENTER },
-    { 357, 2, _("GETOUT_NORMAL"), NULL },
-    { 358, 2, _("GETOUT_HABITAT"), s_script_GETOUT_HABITAT },
-    { 359, 2, _("GETOUT_M01E01A"), s_script_GETOUT_M01E01A },
-    { 360, 2, _("GETOUT_M01E02A"), s_script_GETOUT_M01E02A },
-    { 361, 2, _("GETOUT_M01E02B"), s_script_GETOUT_M01E02B },
-    { 362, 2, _("GETOUT_M01E03A"), s_script_GETOUT_M01E03A },
-    { 363, 2, _("GETOUT_M01E04A"), s_script_GETOUT_M01E04A },
-    { 364, 2, _("GETOUT_M01E04B"), s_script_GETOUT_M01E04B },
-    { 365, 2, _("GETOUT_M01E05A"), s_script_GETOUT_M01E05A },
-    { 366, 2, _("GETOUT_M01E07A"), s_script_GETOUT_M01E07A },
-    { 367, 2, _("GETOUT_M01E07B"), s_script_GETOUT_M01E07B },
-    { 368, 2, _("GETOUT_M01E08A"), s_script_GETOUT_M01E08A },
-    { 369, 2, _("GETOUT_M01E08B"), s_script_GETOUT_M01E08B },
-    { 370, 2, _("GETOUT_M01E09A"), s_script_GETOUT_M01E09A },
-    { 371, 2, _("GETOUT_M01E10A"), s_script_GETOUT_M01E10A },
-    { 372, 2, _("GETOUT_S00E01A"), s_script_GETOUT_S00E01A },
-    { 373, 2, _("GETOUT_S01E01A"), s_script_GETOUT_S01E01A },
-    { 374, 2, _("GETOUT_S01E02A"), s_script_GETOUT_S01E02A },
-    { 375, 2, _("GETOUT_S02E01A"), s_script_GETOUT_S02E01A },
-    { 376, 2, _("GETOUT_S02E02A"), s_script_GETOUT_S02E02A },
-    { 377, 2, _("GETOUT_S03E01A"), s_script_GETOUT_S03E01A },
-    { 378, 2, _("GETOUT_S04E01A"), s_script_GETOUT_S04E01A },
-    { 379, 2, _("GETOUT_S04E01B"), s_script_GETOUT_S04E01B },
-    { 380, 2, _("GETOUT_S04E01C"), s_script_GETOUT_S04E01C },
-    { 381, 2, _("GETOUT_S04E01D"), s_script_GETOUT_S04E01D },
-    { 382, 2, _("GETOUT_S04E01E"), s_script_GETOUT_S04E01E },
-    { 383, 2, _("GETOUT_S05E01A"), s_script_GETOUT_S05E01A },
-    { 384, 2, _("GETOUT_S06E01A"), s_script_GETOUT_S06E01A },
-    { 385, 2, _("GETOUT_S06E01B"), s_script_GETOUT_S06E01B },
-    { 386, 2, _("GETOUT_S07E01A"), s_script_GETOUT_S07E01A },
-    { 387, 2, _("GETOUT_S08E01A"), s_script_GETOUT_S08E01A },
-    { 388, 2, _("GETOUT_S09E01A"), s_script_GETOUT_S09E01A },
-    { 389, 2, _("GETOUT_S09E01B"), s_script_GETOUT_S09E01B },
-    { 390, 2, _("GETOUT_D62E01A"), s_script_GETOUT_D62E01A },
-    { 391, 2, _("GETOUT_D43E01A"), s_script_GETOUT_D43E01A },
-    { 392, 2, _("GETOUT_D44E01A"), s_script_GETOUT_D44E01A },
-    { 393, 2, _("GETOUT_D45E01A"), s_script_GETOUT_D45E01A },
-    { 394, 2, _("GETOUT_D46E01A"), s_script_GETOUT_D46E01A },
-    { 395, 2, _("GETOUT_U00E01A"), s_script_GETOUT_U00E01A },
-    { 396, 2, _("GETOUT_R00E01A"), s_script_GETOUT_R00E01A },
-    { 397, 2, _("GETOUT_T00E01A"), s_script_GETOUT_T00E01A },
-    { 398, 2, _("GETOUT_M01E07T"), s_script_GETOUT_M01E07T },
-    { 399, 2, _("GETOUT_M01E08T"), s_script_GETOUT_M01E08T },
-    { 400, 7, _("EVENT_CONTROL"), NULL },
-    { 401, 7, _("EVENT_WAKEUP"), NULL },
-    { 402, 7, _("EVENT_STATION"), NULL },
-    { 403, 8, _("STATION_CONTROL"), NULL },
-    { 404, 1, _("ENTER_CONTROL"), NULL },
-    { 405, 7, _("SETUP_DEBUG_CAMERA"), s_script_SETUP_DEBUG_CAMERA },
-    { 406, 5, _("MOVE_DEBUG_CAMERA"), s_script_MOVE_DEBUG_CAMERA },
+const struct ScriptRef gFunctionScriptTable[NUM_SCRIPT_IDS] = { /* R = 0x812F1F8 | B = arm9.bin::020E7BE4 */
+    [END_TALK] = { END_TALK, 4, _("END_TALK"), s_script_END_TALK },
+    [WAIT_END_TALK_FUNC] = { WAIT_END_TALK_FUNC, 4, _("WAIT_END_TALK_FUNC"), s_script_WAIT_END_TALK_FUNC },
+    [WAIT_END_EVENT_FUNC] = { WAIT_END_EVENT_FUNC, 4, _("WAIT_END_EVENT_FUNC"), s_script_WAIT_END_EVENT_FUNC },
+    [WAIT_START_FUNC] = { WAIT_START_FUNC, 4, _("WAIT_START_FUNC"), s_script_WAIT_START_FUNC },
+    [INCOMPLETE_TALK] = { INCOMPLETE_TALK, 4, _("INCOMPLETE_TALK"), s_script_INCOMPLETE_TALK },
+    [NORMAL_WAIT_END_TALK] = { NORMAL_WAIT_END_TALK, 4, _("NORMAL_WAIT_END_TALK"), s_script_NORMAL_WAIT_END_TALK },
+    [LIVES_REPLY_NORMAL] = { LIVES_REPLY_NORMAL, 4, _("LIVES_REPLY_NORMAL"), s_script_LIVES_REPLY_NORMAL },
+    [LIVES_REPLY] = { LIVES_REPLY, 4, _("LIVES_REPLY"), s_script_LIVES_REPLY },
+    [OBJECT_REPLY_NORMAL] = { OBJECT_REPLY_NORMAL, 4, _("OBJECT_REPLY_NORMAL"), s_script_OBJECT_REPLY_NORMAL },
+    [EXAMINE_MISS] = { EXAMINE_MISS, 4, _("EXAMINE_MISS"), s_script_EXAMINE_MISS },
+    [ENTER_WAIT_FUNC] = { ENTER_WAIT_FUNC, 4, _("ENTER_WAIT_FUNC"), s_script_ENTER_WAIT_FUNC },
+    [UNIT_TALK] = { UNIT_TALK, 4, _("UNIT_TALK"), s_script_UNIT_TALK },
+    [HABITAT_TALK] = { HABITAT_TALK, 4, _("HABITAT_TALK"), s_script_HABITAT_TALK },
+    [HABITAT_TALK_S01E02A] = { HABITAT_TALK_S01E02A, 4, _("HABITAT_TALK_S01E02A"), s_script_HABITAT_TALK_S01E02A },
+    [HABITAT_MOVE1] = { HABITAT_MOVE1, 5, _("HABITAT_MOVE1"), s_script_HABITAT_MOVE1 },
+    [HABITAT_MOVE2] = { HABITAT_MOVE2, 5, _("HABITAT_MOVE2"), s_script_HABITAT_MOVE2 },
+    [HABITAT_MOVE_PAUSE] = { HABITAT_MOVE_PAUSE, 5, _("HABITAT_MOVE_PAUSE"), s_script_HABITAT_MOVE_PAUSE },
+    [HABITAT_MOVE_STAY_FIX] = { HABITAT_MOVE_STAY_FIX, 5, _("HABITAT_MOVE_STAY_FIX"), s_script_HABITAT_MOVE_STAY_FIX },
+    [HABITAT_MOVE_STAY_TURN] = { HABITAT_MOVE_STAY_TURN, 5, _("HABITAT_MOVE_STAY_TURN"), s_script_HABITAT_MOVE_STAY_TURN },
+    [LIVES_MOVE_NORMAL] = { LIVES_MOVE_NORMAL, 5, _("LIVES_MOVE_NORMAL"), s_script_LIVES_MOVE_NORMAL },
+    [LIVES_MOVE_CHANGE] = { LIVES_MOVE_CHANGE, 5, _("LIVES_MOVE_CHANGE"), s_script_LIVES_MOVE_CHANGE },
+    [OBJECT_MOVE_NORMAL] = { OBJECT_MOVE_NORMAL, 5, _("OBJECT_MOVE_NORMAL"), s_script_OBJECT_MOVE_NORMAL },
+    [OBJECT_MOVE_CHANGE] = { OBJECT_MOVE_CHANGE, 5, _("OBJECT_MOVE_CHANGE"), s_script_OBJECT_MOVE_CHANGE },
+    [EFFECT_MOVE_NORMAL] = { EFFECT_MOVE_NORMAL, 5, _("EFFECT_MOVE_NORMAL"), s_script_EFFECT_MOVE_NORMAL },
+    [EFFECT_MOVE_CHANGE] = { EFFECT_MOVE_CHANGE, 5, _("EFFECT_MOVE_CHANGE"), s_script_EFFECT_MOVE_CHANGE },
+    [MOVE_INIT] = { MOVE_INIT, 5, _("MOVE_INIT"), s_script_MOVE_INIT },
+    [MOVE_PAUSE] = { MOVE_PAUSE, 5, _("MOVE_PAUSE"), s_script_MOVE_PAUSE },
+    [MOVE_STAY] = { MOVE_STAY, 5, _("MOVE_STAY"), s_script_MOVE_STAY },
+    [MOVE_SLEEP] = { MOVE_SLEEP, 5, _("MOVE_SLEEP"), s_script_MOVE_SLEEP },
+    [MOVE_RANDOM] = { MOVE_RANDOM, 5, _("MOVE_RANDOM"), s_script_MOVE_RANDOM },
+    [MOVE_BOY] = { MOVE_BOY, 5, _("MOVE_BOY"), s_script_MOVE_BOY },
+    [MOVE_GIRL] = { MOVE_GIRL, 5, _("MOVE_GIRL"), s_script_MOVE_GIRL },
+    [WAKEUP_FUNC] = { WAKEUP_FUNC, 9, _("WAKEUP_FUNC"), s_script_WAKEUP_FUNC },
+    [LOOK_AROUND_FUNC] = { LOOK_AROUND_FUNC, 9, _("LOOK_AROUND_FUNC"), s_script_LOOK_AROUND_FUNC },
+    [LOOK_AROUND_DOWN_FUNC] = { LOOK_AROUND_DOWN_FUNC, 9, _("LOOK_AROUND_DOWN_FUNC"), s_script_LOOK_AROUND_DOWN_FUNC },
+    [LOOK_AROUND_RIGHT_FUNC] = { LOOK_AROUND_RIGHT_FUNC, 9, _("LOOK_AROUND_RIGHT_FUNC"), s_script_LOOK_AROUND_RIGHT_FUNC },
+    [LOOK_AROUND_LEFT_FUNC] = { LOOK_AROUND_LEFT_FUNC, 9, _("LOOK_AROUND_LEFT_FUNC"), s_script_LOOK_AROUND_LEFT_FUNC },
+    [JUMP_HAPPY_FUNC] = { JUMP_HAPPY_FUNC, 9, _("JUMP_HAPPY_FUNC"), s_script_JUMP_HAPPY_FUNC },
+    [JUMP_SURPRISE_FUNC] = { JUMP_SURPRISE_FUNC, 9, _("JUMP_SURPRISE_FUNC"), s_script_JUMP_SURPRISE_FUNC },
+    [JUMP_ANGRY_FUNC] = { JUMP_ANGRY_FUNC, 9, _("JUMP_ANGRY_FUNC"), s_script_JUMP_ANGRY_FUNC },
+    [NOTICE_FUNC] = { NOTICE_FUNC, 9, _("NOTICE_FUNC"), s_script_NOTICE_FUNC },
+    [QUESTION_FUNC] = { QUESTION_FUNC, 9, _("QUESTION_FUNC"), s_script_QUESTION_FUNC },
+    [SWEAT_FUNC] = { SWEAT_FUNC, 9, _("SWEAT_FUNC"), s_script_SWEAT_FUNC },
+    [SHOCK_FUNC] = { SHOCK_FUNC, 9, _("SHOCK_FUNC"), s_script_SHOCK_FUNC },
+    [SPREE_START_FUNC] = { SPREE_START_FUNC, 9, _("SPREE_START_FUNC"), s_script_SPREE_START_FUNC },
+    [SPREE_END_FUNC] = { SPREE_END_FUNC, 9, _("SPREE_END_FUNC"), s_script_SPREE_END_FUNC },
+    [SMILE_START_FUNC] = { SMILE_START_FUNC, 9, _("SMILE_START_FUNC"), s_script_SMILE_START_FUNC },
+    [SMILE_END_FUNC] = { SMILE_END_FUNC, 9, _("SMILE_END_FUNC"), s_script_SMILE_END_FUNC },
+    [ANGRY_START_FUNC] = { ANGRY_START_FUNC, 9, _("ANGRY_START_FUNC"), s_script_ANGRY_START_FUNC },
+    [ANGRY_END_FUNC] = { ANGRY_END_FUNC, 9, _("ANGRY_END_FUNC"), s_script_ANGRY_END_FUNC },
+    [MOVE_PLAZA_SLEEP] = { MOVE_PLAZA_SLEEP, 5, _("MOVE_PLAZA_SLEEP"), s_script_MOVE_PLAZA_SLEEP },
+    [INIT_PLAZA_SLEEP_STAY_FUNC] = { INIT_PLAZA_SLEEP_STAY_FUNC, 9, _("INIT_PLAZA_SLEEP_STAY_FUNC"), s_script_INIT_PLAZA_SLEEP_STAY_FUNC },
+    [INIT_PLAZA_SLEEP_TALK_FUNC] = { INIT_PLAZA_SLEEP_TALK_FUNC, 9, _("INIT_PLAZA_SLEEP_TALK_FUNC"), s_script_INIT_PLAZA_SLEEP_TALK_FUNC },
+    [INIT_SLEEP_FUNC] = { INIT_SLEEP_FUNC, 8, _("INIT_SLEEP_FUNC"), s_script_INIT_SLEEP_FUNC },
+    [INIT_BASE_FUNC] = { INIT_BASE_FUNC, 8, _("INIT_BASE_FUNC"), s_script_INIT_BASE_FUNC },
+    [INIT_DEBUG_HABITAT] = { INIT_DEBUG_HABITAT, 8, _("INIT_DEBUG_HABITAT"), s_script_INIT_DEBUG_HABITAT },
+    [NORMAL_MESSAGE] = { NORMAL_MESSAGE, 7, _("NORMAL_MESSAGE"), NULL },
+    [NORMAL_EVENT] = { NORMAL_EVENT, 7, _("NORMAL_EVENT"), NULL },
+    [NORMAL_CAMERA] = { NORMAL_CAMERA, 7, _("NORMAL_CAMERA"), s_script_NORMAL_CAMERA },
+    [DISMISSAL_SALLY_MEMBER_FUNC] = { DISMISSAL_SALLY_MEMBER_FUNC, 7, _("DISMISSAL_SALLY_MEMBER_FUNC"), s_script_DISMISSAL_SALLY_MEMBER_FUNC },
+    [DISMISSAL_SALLY_MEMBER2_FUNC] = { DISMISSAL_SALLY_MEMBER2_FUNC, 7, _("DISMISSAL_SALLY_MEMBER2_FUNC"), s_script_DISMISSAL_SALLY_MEMBER2_FUNC },
+    [DISMISSAL_SALLY_MEMBER3_FUNC] = { DISMISSAL_SALLY_MEMBER3_FUNC, 7, _("DISMISSAL_SALLY_MEMBER3_FUNC"), s_script_DISMISSAL_SALLY_MEMBER3_FUNC },
+    [DISMISSAL_SALLY_MEMBER4_FUNC] = { DISMISSAL_SALLY_MEMBER4_FUNC, 7, _("DISMISSAL_SALLY_MEMBER4_FUNC"), s_script_DISMISSAL_SALLY_MEMBER4_FUNC },
+    [NEXT_SAVE_FUNC] = { NEXT_SAVE_FUNC, 7, _("NEXT_SAVE_FUNC"), s_script_NEXT_SAVE_FUNC },
+    [NEXT_SAVE2_FUNC] = { NEXT_SAVE2_FUNC, 7, _("NEXT_SAVE2_FUNC"), s_script_NEXT_SAVE2_FUNC },
+    [SAVE_POINT] = { SAVE_POINT, 7, _("SAVE_POINT"), s_script_SAVE_POINT },
+    [WAREHOUSE_POINT] = { WAREHOUSE_POINT, 7, _("WAREHOUSE_POINT"), s_script_WAREHOUSE_POINT },
+    [SAVE_AND_WAREHOUSE_POINT] = { SAVE_AND_WAREHOUSE_POINT, 7, _("SAVE_AND_WAREHOUSE_POINT"), s_script_SAVE_AND_WAREHOUSE_POINT },
+    [WORLD_MAP_POINT] = { WORLD_MAP_POINT, 7, _("WORLD_MAP_POINT"), s_script_WORLD_MAP_POINT },
+    [FORMATION_HERO] = { FORMATION_HERO, 7, _("FORMATION_HERO"), s_script_FORMATION_HERO },
+    [EVOLUTION_HERO] = { EVOLUTION_HERO, 7, _("EVOLUTION_HERO"), s_script_EVOLUTION_HERO },
+    [WARP_LIVES_START] = { WARP_LIVES_START, 7, _("WARP_LIVES_START"), s_script_WARP_LIVES_START },
+    [WARP_LIVES_START2] = { WARP_LIVES_START2, 7, _("WARP_LIVES_START2"), s_script_WARP_LIVES_START2 },
+    [WARP_LIVES_START3] = { WARP_LIVES_START3, 7, _("WARP_LIVES_START3"), s_script_WARP_LIVES_START3 },
+    [WARP_LIVES_ARRIVE] = { WARP_LIVES_ARRIVE, 7, _("WARP_LIVES_ARRIVE"), s_script_WARP_LIVES_ARRIVE },
+    [WARP_LIVES_ARRIVE2] = { WARP_LIVES_ARRIVE2, 7, _("WARP_LIVES_ARRIVE2"), s_script_WARP_LIVES_ARRIVE2 },
+    [WARP_LIVES_ARRIVE3] = { WARP_LIVES_ARRIVE3, 7, _("WARP_LIVES_ARRIVE3"), s_script_WARP_LIVES_ARRIVE3 },
+    [LIVES_WARP_START_FUNC] = { LIVES_WARP_START_FUNC, 7, _("LIVES_WARP_START_FUNC"), s_script_LIVES_WARP_START_FUNC },
+    [LIVES_WARP_START2_FUNC] = { LIVES_WARP_START2_FUNC, 7, _("LIVES_WARP_START2_FUNC"), s_script_LIVES_WARP_START2_FUNC },
+    [LIVES_WARP_START3_FUNC] = { LIVES_WARP_START3_FUNC, 7, _("LIVES_WARP_START3_FUNC"), s_script_LIVES_WARP_START3_FUNC },
+    [LIVES_WARP_START_SUB] = { LIVES_WARP_START_SUB, 7, _("LIVES_WARP_START_SUB"), s_script_LIVES_WARP_START_SUB },
+    [LIVES_WARP_ARRIVE_FUNC] = { LIVES_WARP_ARRIVE_FUNC, 7, _("LIVES_WARP_ARRIVE_FUNC"), s_script_LIVES_WARP_ARRIVE_FUNC },
+    [LIVES_WARP_ARRIVE2_FUNC] = { LIVES_WARP_ARRIVE2_FUNC, 7, _("LIVES_WARP_ARRIVE2_FUNC"), s_script_LIVES_WARP_ARRIVE2_FUNC },
+    [LIVES_WARP_ARRIVE3_FUNC] = { LIVES_WARP_ARRIVE3_FUNC, 7, _("LIVES_WARP_ARRIVE3_FUNC"), s_script_LIVES_WARP_ARRIVE3_FUNC },
+    [LIVES_WARP_ARRIVE_SUB] = { LIVES_WARP_ARRIVE_SUB, 7, _("LIVES_WARP_ARRIVE_SUB"), s_script_LIVES_WARP_ARRIVE_SUB },
+    [GET_ITEM_FUNC] = { GET_ITEM_FUNC, 7, _("GET_ITEM_FUNC"), s_script_GET_ITEM_FUNC },
+    [GET_ITEM_WAIT_FUNC] = { GET_ITEM_WAIT_FUNC, 7, _("GET_ITEM_WAIT_FUNC"), s_script_GET_ITEM_WAIT_FUNC },
+    [GET_ITEM2_FUNC] = { GET_ITEM2_FUNC, 7, _("GET_ITEM2_FUNC"), s_script_GET_ITEM2_FUNC },
+    [GET_ITEM2_WAIT_FUNC] = { GET_ITEM2_WAIT_FUNC, 7, _("GET_ITEM2_WAIT_FUNC"), s_script_GET_ITEM2_WAIT_FUNC },
+    [JOIN_FUNC] = { JOIN_FUNC, 7, _("JOIN_FUNC"), s_script_JOIN_FUNC },
+    [LODGE_START_FUNC] = { LODGE_START_FUNC, 7, _("LODGE_START_FUNC"), s_script_LODGE_START_FUNC },
+    [LODGE_WAIT_FUNC] = { LODGE_WAIT_FUNC, 7, _("LODGE_WAIT_FUNC"), s_script_LODGE_WAIT_FUNC },
+    [LODGE_END_FUNC] = { LODGE_END_FUNC, 7, _("LODGE_END_FUNC"), s_script_LODGE_END_FUNC },
+    [LODGE_SOUND_FUNC] = { LODGE_SOUND_FUNC, 7, _("LODGE_SOUND_FUNC"), s_script_LODGE_SOUND_FUNC },
+    [SAVE_START_FUNC] = { SAVE_START_FUNC, 7, _("SAVE_START_FUNC"), s_script_SAVE_START_FUNC },
+    [SAVE_WAIT_FUNC] = { SAVE_WAIT_FUNC, 7, _("SAVE_WAIT_FUNC"), s_script_SAVE_WAIT_FUNC },
+    [SAVE_END_FUNC] = { SAVE_END_FUNC, 7, _("SAVE_END_FUNC"), s_script_SAVE_END_FUNC },
+    [SAVE_SOUND_FUNC] = { SAVE_SOUND_FUNC, 7, _("SAVE_SOUND_FUNC"), s_script_SAVE_SOUND_FUNC },
+    [EFFECT_TEST1] = { EFFECT_TEST1, 9, _("EFFECT_TEST1"), s_script_EFFECT_TEST1 },
+    [EFFECT_TEST2] = { EFFECT_TEST2, 9, _("EFFECT_TEST2"), s_script_EFFECT_TEST2 },
+    [EFFECT_MOVE_DIVE] = { EFFECT_MOVE_DIVE, 9, _("EFFECT_MOVE_DIVE"), s_script_EFFECT_MOVE_DIVE },
+    [EFFECT_MOVE_WAVE] = { EFFECT_MOVE_WAVE, 9, _("EFFECT_MOVE_WAVE"), s_script_EFFECT_MOVE_WAVE },
+    [EVENT_DIVIDE] = { EVENT_DIVIDE, 7, _("EVENT_DIVIDE"), s_script_EVENT_DIVIDE },
+    [EVENT_DIVIDE_NEXT] = { EVENT_DIVIDE_NEXT, 7, _("EVENT_DIVIDE_NEXT"), s_script_EVENT_DIVIDE_NEXT },
+    [EVENT_DIVIDE_INIT_FUNC] = { EVENT_DIVIDE_INIT_FUNC, 7, _("EVENT_DIVIDE_INIT_FUNC"), s_script_EVENT_DIVIDE_INIT_FUNC },
+    [EVENT_DIVIDE_NEXT_DAY_FUNC] = { EVENT_DIVIDE_NEXT_DAY_FUNC, 7, _("EVENT_DIVIDE_NEXT_DAY_FUNC"), s_script_EVENT_DIVIDE_NEXT_DAY_FUNC },
+    [EVENT_DIVIDE_NEXT_DAY2_FUNC] = { EVENT_DIVIDE_NEXT_DAY2_FUNC, 7, _("EVENT_DIVIDE_NEXT_DAY2_FUNC"), s_script_EVENT_DIVIDE_NEXT_DAY2_FUNC },
+    [EVENT_DIVIDE_FIRST] = { EVENT_DIVIDE_FIRST, 7, _("EVENT_DIVIDE_FIRST"), s_script_EVENT_DIVIDE_FIRST },
+    [EVENT_DIVIDE_SECOND] = { EVENT_DIVIDE_SECOND, 7, _("EVENT_DIVIDE_SECOND"), s_script_EVENT_DIVIDE_SECOND },
+    [EVENT_DIVIDE_AFTER] = { EVENT_DIVIDE_AFTER, 7, _("EVENT_DIVIDE_AFTER"), s_script_EVENT_DIVIDE_AFTER },
+    [EVENT_DIVIDE_WARP_LOCK_FUNC] = { EVENT_DIVIDE_WARP_LOCK_FUNC, 7, _("EVENT_DIVIDE_WARP_LOCK_FUNC"), s_script_EVENT_DIVIDE_WARP_LOCK_FUNC },
+    [EVENT_RESCUE_ENTER_CHECK] = { EVENT_RESCUE_ENTER_CHECK, 7, _("EVENT_RESCUE_ENTER_CHECK"), s_script_EVENT_RESCUE_ENTER_CHECK },
+    [EVENT_RESCUE] = { EVENT_RESCUE, 7, _("EVENT_RESCUE"), s_script_EVENT_RESCUE },
+    [DEBUG_SCRIPT] = { DEBUG_SCRIPT, 7, _("DEBUG_SCRIPT"), s_script_DEBUG_SCRIPT },
+    [DEMO_CANCEL] = { DEMO_CANCEL, 7, _("DEMO_CANCEL"), s_script_DEMO_CANCEL },
+    [DEMO_01] = { DEMO_01, 10, _("DEMO_01"), s_script_DEMO_01 },
+    [DEMO_02] = { DEMO_02, 10, _("DEMO_02"), s_script_DEMO_02 },
+    [DEMO_03] = { DEMO_03, 10, _("DEMO_03"), s_script_DEMO_03 },
+    [DEMO_04] = { DEMO_04, 10, _("DEMO_04"), s_script_DEMO_04 },
+    [EVENT_M00E01A_L001] = { EVENT_M00E01A_L001, 10, _("EVENT_M00E01A_L001"), s_script_EVENT_M00E01A_L001 },
+    [EVENT_M01E01A_L001] = { EVENT_M01E01A_L001, 10, _("EVENT_M01E01A_L001"), s_script_EVENT_M01E01A_L001 },
+    [EVENT_M01E01A_L002] = { EVENT_M01E01A_L002, 10, _("EVENT_M01E01A_L002"), s_script_EVENT_M01E01A_L002 },
+    [EVENT_M01E01A_L003] = { EVENT_M01E01A_L003, 10, _("EVENT_M01E01A_L003"), s_script_EVENT_M01E01A_L003 },
+    [EVENT_M01E02A_L001] = { EVENT_M01E02A_L001, 10, _("EVENT_M01E02A_L001"), s_script_EVENT_M01E02A_L001 },
+    [EVENT_M01E02A_L001B] = { EVENT_M01E02A_L001B, 12, _("EVENT_M01E02A_L001B"), s_script_EVENT_M01E02A_L001B },
+    [EVENT_M01E02A_L001C] = { EVENT_M01E02A_L001C, 10, _("EVENT_M01E02A_L001C"), s_script_EVENT_M01E02A_L001C },
+    [EVENT_M01E02A_L002] = { EVENT_M01E02A_L002, 10, _("EVENT_M01E02A_L002"), s_script_EVENT_M01E02A_L002 },
+    [EVENT_M01E02A_L003] = { EVENT_M01E02A_L003, 10, _("EVENT_M01E02A_L003"), s_script_EVENT_M01E02A_L003 },
+    [EVENT_M01E02A_L004] = { EVENT_M01E02A_L004, 10, _("EVENT_M01E02A_L004"), s_script_EVENT_M01E02A_L004 },
+    [EVENT_M01E02A_L005] = { EVENT_M01E02A_L005, 10, _("EVENT_M01E02A_L005"), s_script_EVENT_M01E02A_L005 },
+    [EVENT_M01E02A_L006] = { EVENT_M01E02A_L006, 10, _("EVENT_M01E02A_L006"), s_script_EVENT_M01E02A_L006 },
+    [EVENT_M01E02B_L001] = { EVENT_M01E02B_L001, 10, _("EVENT_M01E02B_L001"), s_script_EVENT_M01E02B_L001 },
+    [EVENT_M01E02B_L002] = { EVENT_M01E02B_L002, 10, _("EVENT_M01E02B_L002"), s_script_EVENT_M01E02B_L002 },
+    [EVENT_M01E02B_L003] = { EVENT_M01E02B_L003, 10, _("EVENT_M01E02B_L003"), s_script_EVENT_M01E02B_L003 },
+    [EVENT_M01E02B_L004] = { EVENT_M01E02B_L004, 10, _("EVENT_M01E02B_L004"), s_script_EVENT_M01E02B_L004 },
+    [EVENT_M01E02B_L004B] = { EVENT_M01E02B_L004B, 10, _("EVENT_M01E02B_L004B"), s_script_EVENT_M01E02B_L004B },
+    [EVENT_M01E02B_L005] = { EVENT_M01E02B_L005, 10, _("EVENT_M01E02B_L005"), s_script_EVENT_M01E02B_L005 },
+    [EVENT_M01E02B_L006] = { EVENT_M01E02B_L006, 10, _("EVENT_M01E02B_L006"), s_script_EVENT_M01E02B_L006 },
+    [EVENT_M01E02B_L007] = { EVENT_M01E02B_L007, 10, _("EVENT_M01E02B_L007"), s_script_EVENT_M01E02B_L007 },
+    [EVENT_M01E02B_L008] = { EVENT_M01E02B_L008, 10, _("EVENT_M01E02B_L008"), s_script_EVENT_M01E02B_L008 },
+    [EVENT_M01E03A_L000] = { EVENT_M01E03A_L000, 10, _("EVENT_M01E03A_L000"), s_script_EVENT_M01E03A_L000 },
+    [EVENT_M01E03A_L001] = { EVENT_M01E03A_L001, 10, _("EVENT_M01E03A_L001"), s_script_EVENT_M01E03A_L001 },
+    [EVENT_M01E03A_L002] = { EVENT_M01E03A_L002, 10, _("EVENT_M01E03A_L002"), s_script_EVENT_M01E03A_L002 },
+    [EVENT_M01E03A_L003] = { EVENT_M01E03A_L003, 10, _("EVENT_M01E03A_L003"), s_script_EVENT_M01E03A_L003 },
+    [EVENT_M01E03A_L004] = { EVENT_M01E03A_L004, 10, _("EVENT_M01E03A_L004"), s_script_EVENT_M01E03A_L004 },
+    [EVENT_M01E03A_L005] = { EVENT_M01E03A_L005, 10, _("EVENT_M01E03A_L005"), s_script_EVENT_M01E03A_L005 },
+    [EVENT_M01E03A_L006] = { EVENT_M01E03A_L006, 10, _("EVENT_M01E03A_L006"), s_script_EVENT_M01E03A_L006 },
+    [EVENT_M01E03A_L007] = { EVENT_M01E03A_L007, 10, _("EVENT_M01E03A_L007"), s_script_EVENT_M01E03A_L007 },
+    [EVENT_M01E03A_L008] = { EVENT_M01E03A_L008, 10, _("EVENT_M01E03A_L008"), s_script_EVENT_M01E03A_L008 },
+    [EVENT_M01E03A_L009] = { EVENT_M01E03A_L009, 10, _("EVENT_M01E03A_L009"), s_script_EVENT_M01E03A_L009 },
+    [EVENT_M01E03A_L010] = { EVENT_M01E03A_L010, 10, _("EVENT_M01E03A_L010"), s_script_EVENT_M01E03A_L010 },
+    [EVENT_M01E03A_L011] = { EVENT_M01E03A_L011, 10, _("EVENT_M01E03A_L011"), s_script_EVENT_M01E03A_L011 },
+    [EVENT_M01E04A_L000] = { EVENT_M01E04A_L000, 10, _("EVENT_M01E04A_L000"), s_script_EVENT_M01E04A_L000 },
+    [EVENT_M01E04A_L001] = { EVENT_M01E04A_L001, 10, _("EVENT_M01E04A_L001"), s_script_EVENT_M01E04A_L001 },
+    [EVENT_M01E04A_L002] = { EVENT_M01E04A_L002, 10, _("EVENT_M01E04A_L002"), s_script_EVENT_M01E04A_L002 },
+    [EVENT_M01E04A_L003] = { EVENT_M01E04A_L003, 10, _("EVENT_M01E04A_L003"), s_script_EVENT_M01E04A_L003 },
+    [EVENT_M01E04A_L004] = { EVENT_M01E04A_L004, 10, _("EVENT_M01E04A_L004"), s_script_EVENT_M01E04A_L004 },
+    [EVENT_M01E04A_L005] = { EVENT_M01E04A_L005, 12, _("EVENT_M01E04A_L005"), s_script_EVENT_M01E04A_L005 },
+    [EVENT_M01E04A_L006] = { EVENT_M01E04A_L006, 10, _("EVENT_M01E04A_L006"), s_script_EVENT_M01E04A_L006 },
+    [EVENT_M01E04B_L000] = { EVENT_M01E04B_L000, 10, _("EVENT_M01E04B_L000"), s_script_EVENT_M01E04B_L000 },
+    [EVENT_M01E04B_L001] = { EVENT_M01E04B_L001, 10, _("EVENT_M01E04B_L001"), s_script_EVENT_M01E04B_L001 },
+    [EVENT_M01E04B_L002] = { EVENT_M01E04B_L002, 10, _("EVENT_M01E04B_L002"), s_script_EVENT_M01E04B_L002 },
+    [EVENT_M01E04B_L003] = { EVENT_M01E04B_L003, 10, _("EVENT_M01E04B_L003"), s_script_EVENT_M01E04B_L003 },
+    [EVENT_M01E04B_L004] = { EVENT_M01E04B_L004, 10, _("EVENT_M01E04B_L004"), s_script_EVENT_M01E04B_L004 },
+    [EVENT_M01E04B_L005] = { EVENT_M01E04B_L005, 10, _("EVENT_M01E04B_L005"), s_script_EVENT_M01E04B_L005 },
+    [EVENT_M01E04B_L006] = { EVENT_M01E04B_L006, 10, _("EVENT_M01E04B_L006"), s_script_EVENT_M01E04B_L006 },
+    [EVENT_M01E04B_L007] = { EVENT_M01E04B_L007, 10, _("EVENT_M01E04B_L007"), s_script_EVENT_M01E04B_L007 },
+    [EVENT_M01E05A_L000] = { EVENT_M01E05A_L000, 10, _("EVENT_M01E05A_L000"), s_script_EVENT_M01E05A_L000 },
+    [EVENT_M01E05A_L001] = { EVENT_M01E05A_L001, 10, _("EVENT_M01E05A_L001"), s_script_EVENT_M01E05A_L001 },
+    [EVENT_M01E05A_L002] = { EVENT_M01E05A_L002, 10, _("EVENT_M01E05A_L002"), s_script_EVENT_M01E05A_L002 },
+    [EVENT_M01E05A_L003] = { EVENT_M01E05A_L003, 10, _("EVENT_M01E05A_L003"), s_script_EVENT_M01E05A_L003 },
+    [EVENT_M01E05A_L004] = { EVENT_M01E05A_L004, 10, _("EVENT_M01E05A_L004"), s_script_EVENT_M01E05A_L004 },
+    [EVENT_M01E05A_L005] = { EVENT_M01E05A_L005, 10, _("EVENT_M01E05A_L005"), s_script_EVENT_M01E05A_L005 },
+    [EVENT_M01E05A_L006] = { EVENT_M01E05A_L006, 10, _("EVENT_M01E05A_L006"), s_script_EVENT_M01E05A_L006 },
+    [EVENT_M01E05B_L000] = { EVENT_M01E05B_L000, 10, _("EVENT_M01E05B_L000"), s_script_EVENT_M01E05B_L000 },
+    [EVENT_M01E05B_L001] = { EVENT_M01E05B_L001, 10, _("EVENT_M01E05B_L001"), s_script_EVENT_M01E05B_L001 },
+    [EVENT_M01E05B_L002] = { EVENT_M01E05B_L002, 10, _("EVENT_M01E05B_L002"), s_script_EVENT_M01E05B_L002 },
+    [EVENT_M01E05B_L003] = { EVENT_M01E05B_L003, 12, _("EVENT_M01E05B_L003"), s_script_EVENT_M01E05B_L003 },
+    [EVENT_M01E05B_L004] = { EVENT_M01E05B_L004, 10, _("EVENT_M01E05B_L004"), s_script_EVENT_M01E05B_L004 },
+    [EVENT_M01E05B_L005] = { EVENT_M01E05B_L005, 10, _("EVENT_M01E05B_L005"), s_script_EVENT_M01E05B_L005 },
+    [EVENT_M01E06A_L001] = { EVENT_M01E06A_L001, 10, _("EVENT_M01E06A_L001"), s_script_EVENT_M01E06A_L001 },
+    [EVENT_M01E06A_L002] = { EVENT_M01E06A_L002, 10, _("EVENT_M01E06A_L002"), s_script_EVENT_M01E06A_L002 },
+    [EVENT_M01E06A_L003] = { EVENT_M01E06A_L003, 10, _("EVENT_M01E06A_L003"), s_script_EVENT_M01E06A_L003 },
+    [EVENT_M01E07A_L001] = { EVENT_M01E07A_L001, 10, _("EVENT_M01E07A_L001"), s_script_EVENT_M01E07A_L001 },
+    [EVENT_M01E07A_L002] = { EVENT_M01E07A_L002, 10, _("EVENT_M01E07A_L002"), s_script_EVENT_M01E07A_L002 },
+    [EVENT_M01E07A_L003] = { EVENT_M01E07A_L003, 10, _("EVENT_M01E07A_L003"), s_script_EVENT_M01E07A_L003 },
+    [EVENT_M01E07A_L004] = { EVENT_M01E07A_L004, 10, _("EVENT_M01E07A_L004"), s_script_EVENT_M01E07A_L004 },
+    [EVENT_M01E07A_L005] = { EVENT_M01E07A_L005, 10, _("EVENT_M01E07A_L005"), s_script_EVENT_M01E07A_L005 },
+    [EVENT_M01E07A_T001] = { EVENT_M01E07A_T001, 10, _("EVENT_M01E07A_T001"), s_script_EVENT_M01E07A_T001 },
+    [EVENT_M01E07A_T002] = { EVENT_M01E07A_T002, 10, _("EVENT_M01E07A_T002"), s_script_EVENT_M01E07A_T002 },
+    [EVENT_M01E07B_L001] = { EVENT_M01E07B_L001, 10, _("EVENT_M01E07B_L001"), s_script_EVENT_M01E07B_L001 },
+    [EVENT_M01E07B_L002] = { EVENT_M01E07B_L002, 10, _("EVENT_M01E07B_L002"), s_script_EVENT_M01E07B_L002 },
+    [EVENT_M01E07B_L003] = { EVENT_M01E07B_L003, 10, _("EVENT_M01E07B_L003"), s_script_EVENT_M01E07B_L003 },
+    [EVENT_M01E07B_L004] = { EVENT_M01E07B_L004, 10, _("EVENT_M01E07B_L004"), s_script_EVENT_M01E07B_L004 },
+    [EVENT_M01E07B_L005] = { EVENT_M01E07B_L005, 10, _("EVENT_M01E07B_L005"), s_script_EVENT_M01E07B_L005 },
+    [EVENT_M01E07B_T001] = { EVENT_M01E07B_T001, 10, _("EVENT_M01E07B_T001"), s_script_EVENT_M01E07B_T001 },
+    [EVENT_M01E07B_T002] = { EVENT_M01E07B_T002, 10, _("EVENT_M01E07B_T002"), s_script_EVENT_M01E07B_T002 },
+    [EVENT_M01E08A_L001] = { EVENT_M01E08A_L001, 10, _("EVENT_M01E08A_L001"), s_script_EVENT_M01E08A_L001 },
+    [EVENT_M01E08A_L002] = { EVENT_M01E08A_L002, 10, _("EVENT_M01E08A_L002"), s_script_EVENT_M01E08A_L002 },
+    [EVENT_M01E08A_L003] = { EVENT_M01E08A_L003, 10, _("EVENT_M01E08A_L003"), s_script_EVENT_M01E08A_L003 },
+    [EVENT_M01E08A_L004] = { EVENT_M01E08A_L004, 10, _("EVENT_M01E08A_L004"), s_script_EVENT_M01E08A_L004 },
+    [EVENT_M01E08A_L005] = { EVENT_M01E08A_L005, 10, _("EVENT_M01E08A_L005"), s_script_EVENT_M01E08A_L005 },
+    [EVENT_M01E08A_T001] = { EVENT_M01E08A_T001, 10, _("EVENT_M01E08A_T001"), s_script_EVENT_M01E08A_T001 },
+    [EVENT_M01E08A_T002] = { EVENT_M01E08A_T002, 10, _("EVENT_M01E08A_T002"), s_script_EVENT_M01E08A_T002 },
+    [EVENT_M01E08B_L001] = { EVENT_M01E08B_L001, 10, _("EVENT_M01E08B_L001"), s_script_EVENT_M01E08B_L001 },
+    [EVENT_M01E08B_L002] = { EVENT_M01E08B_L002, 10, _("EVENT_M01E08B_L002"), s_script_EVENT_M01E08B_L002 },
+    [EVENT_M01E08B_L003] = { EVENT_M01E08B_L003, 10, _("EVENT_M01E08B_L003"), s_script_EVENT_M01E08B_L003 },
+    [EVENT_M01E08B_L004] = { EVENT_M01E08B_L004, 10, _("EVENT_M01E08B_L004"), s_script_EVENT_M01E08B_L004 },
+    [EVENT_M01E08B_L005] = { EVENT_M01E08B_L005, 10, _("EVENT_M01E08B_L005"), s_script_EVENT_M01E08B_L005 },
+    [EVENT_M01E08B_L006] = { EVENT_M01E08B_L006, 10, _("EVENT_M01E08B_L006"), s_script_EVENT_M01E08B_L006 },
+    [EVENT_M01E08B_T001] = { EVENT_M01E08B_T001, 10, _("EVENT_M01E08B_T001"), s_script_EVENT_M01E08B_T001 },
+    [EVENT_M01E08B_T002] = { EVENT_M01E08B_T002, 10, _("EVENT_M01E08B_T002"), s_script_EVENT_M01E08B_T002 },
+    [EVENT_M01E09A_L001] = { EVENT_M01E09A_L001, 10, _("EVENT_M01E09A_L001"), s_script_EVENT_M01E09A_L001 },
+    [EVENT_M01E09A_L002] = { EVENT_M01E09A_L002, 10, _("EVENT_M01E09A_L002"), s_script_EVENT_M01E09A_L002 },
+    [EVENT_M01E09A_L003] = { EVENT_M01E09A_L003, 10, _("EVENT_M01E09A_L003"), s_script_EVENT_M01E09A_L003 },
+    [EVENT_M01E09A_L004] = { EVENT_M01E09A_L004, 10, _("EVENT_M01E09A_L004"), s_script_EVENT_M01E09A_L004 },
+    [EVENT_M01E09A_L005] = { EVENT_M01E09A_L005, 10, _("EVENT_M01E09A_L005"), s_script_EVENT_M01E09A_L005 },
+    [EVENT_M01E09A_L006] = { EVENT_M01E09A_L006, 10, _("EVENT_M01E09A_L006"), s_script_EVENT_M01E09A_L006 },
+    [EVENT_M01E09A_L007] = { EVENT_M01E09A_L007, 10, _("EVENT_M01E09A_L007"), s_script_EVENT_M01E09A_L007 },
+    [EVENT_M01E09A_L008] = { EVENT_M01E09A_L008, 10, _("EVENT_M01E09A_L008"), s_script_EVENT_M01E09A_L008 },
+    [EVENT_M01E09A_L009] = { EVENT_M01E09A_L009, 10, _("EVENT_M01E09A_L009"), s_script_EVENT_M01E09A_L009 },
+    [EVENT_M01E09A_L010] = { EVENT_M01E09A_L010, 10, _("EVENT_M01E09A_L010"), s_script_EVENT_M01E09A_L010 },
+    [EVENT_M01E09A_L011] = { EVENT_M01E09A_L011, 10, _("EVENT_M01E09A_L011"), s_script_EVENT_M01E09A_L011 },
+    [EVENT_M01E09A_L012] = { EVENT_M01E09A_L012, 10, _("EVENT_M01E09A_L012"), s_script_EVENT_M01E09A_L012 },
+    [EVENT_M01E09A_L013] = { EVENT_M01E09A_L013, 10, _("EVENT_M01E09A_L013"), s_script_EVENT_M01E09A_L013 },
+    [EVENT_M01E09A_L014] = { EVENT_M01E09A_L014, 10, _("EVENT_M01E09A_L014"), s_script_EVENT_M01E09A_L014 },
+    [EVENT_M01E09A_L015] = { EVENT_M01E09A_L015, 10, _("EVENT_M01E09A_L015"), s_script_EVENT_M01E09A_L015 },
+    [EVENT_M01E10A_L001] = { EVENT_M01E10A_L001, 10, _("EVENT_M01E10A_L001"), s_script_EVENT_M01E10A_L001 },
+    [EVENT_M01E10A_L002] = { EVENT_M01E10A_L002, 10, _("EVENT_M01E10A_L002"), s_script_EVENT_M01E10A_L002 },
+    [EVENT_M01E10A_L003] = { EVENT_M01E10A_L003, 10, _("EVENT_M01E10A_L003"), s_script_EVENT_M01E10A_L003 },
+    [EVENT_M01E10A_L004] = { EVENT_M01E10A_L004, 10, _("EVENT_M01E10A_L004"), s_script_EVENT_M01E10A_L004 },
+    [EVENT_M01E10A_L005] = { EVENT_M01E10A_L005, 10, _("EVENT_M01E10A_L005"), s_script_EVENT_M01E10A_L005 },
+    [EVENT_M01E10A_L006] = { EVENT_M01E10A_L006, 10, _("EVENT_M01E10A_L006"), s_script_EVENT_M01E10A_L006 },
+    [EVENT_M01E10A_L007] = { EVENT_M01E10A_L007, 10, _("EVENT_M01E10A_L007"), s_script_EVENT_M01E10A_L007 },
+    [EVENT_M01E10A_L008] = { EVENT_M01E10A_L008, 10, _("EVENT_M01E10A_L008"), s_script_EVENT_M01E10A_L008 },
+    [EVENT_M01END_L001] = { EVENT_M01END_L001, 10, _("EVENT_M01END_L001"), s_script_EVENT_M01END_L001 },
+    [EVENT_M01END_L002] = { EVENT_M01END_L002, 10, _("EVENT_M01END_L002"), s_script_EVENT_M01END_L002 },
+    [EVENT_M02E01A_L001] = { EVENT_M02E01A_L001, 10, _("EVENT_M02E01A_L001"), s_script_EVENT_M02E01A_L001 },
+    [EVENT_M02E01A_L002] = { EVENT_M02E01A_L002, 10, _("EVENT_M02E01A_L002"), s_script_EVENT_M02E01A_L002 },
+    [EVENT_M02E01A_L003] = { EVENT_M02E01A_L003, 10, _("EVENT_M02E01A_L003"), s_script_EVENT_M02E01A_L003 },
+    [EVENT_M02E02A_L001] = { EVENT_M02E02A_L001, 10, _("EVENT_M02E02A_L001"), s_script_EVENT_M02E02A_L001 },
+    [EVENT_M02E02B_L001] = { EVENT_M02E02B_L001, 10, _("EVENT_M02E02B_L001"), s_script_EVENT_M02E02B_L001 },
+    [EVENT_M02E02C_L001] = { EVENT_M02E02C_L001, 10, _("EVENT_M02E02C_L001"), s_script_EVENT_M02E02C_L001 },
+    [EVENT_M02E02D_L001] = { EVENT_M02E02D_L001, 10, _("EVENT_M02E02D_L001"), s_script_EVENT_M02E02D_L001 },
+    [EVENT_M02E02E_L001] = { EVENT_M02E02E_L001, 10, _("EVENT_M02E02E_L001"), s_script_EVENT_M02E02E_L001 },
+    [EVENT_M02E02F_L001] = { EVENT_M02E02F_L001, 10, _("EVENT_M02E02F_L001"), s_script_EVENT_M02E02F_L001 },
+    [EVENT_M02E02G_L001] = { EVENT_M02E02G_L001, 10, _("EVENT_M02E02G_L001"), s_script_EVENT_M02E02G_L001 },
+    [EVENT_M02E02H_L001] = { EVENT_M02E02H_L001, 10, _("EVENT_M02E02H_L001"), s_script_EVENT_M02E02H_L001 },
+    [EVENT_M02END_L001] = { EVENT_M02END_L001, 10, _("EVENT_M02END_L001"), s_script_EVENT_M02END_L001 },
+    [EVENT_S00E01A_L001] = { EVENT_S00E01A_L001, 10, _("EVENT_S00E01A_L001"), s_script_EVENT_S00E01A_L001 },
+    [EVENT_S00E01A_L002] = { EVENT_S00E01A_L002, 10, _("EVENT_S00E01A_L002"), s_script_EVENT_S00E01A_L002 },
+    [EVENT_S00E01A_L003] = { EVENT_S00E01A_L003, 10, _("EVENT_S00E01A_L003"), s_script_EVENT_S00E01A_L003 },
+    [EVENT_S00E01A_L004] = { EVENT_S00E01A_L004, 10, _("EVENT_S00E01A_L004"), s_script_EVENT_S00E01A_L004 },
+    [EVENT_S01E01A_START] = { EVENT_S01E01A_START, 11, _("EVENT_S01E01A_START"), s_script_EVENT_S01E01A_START },
+    [EVENT_S01E01A_CONTINUE] = { EVENT_S01E01A_CONTINUE, 11, _("EVENT_S01E01A_CONTINUE"), s_script_EVENT_S01E01A_CONTINUE },
+    [EVENT_S01E01A_END] = { EVENT_S01E01A_END, 11, _("EVENT_S01E01A_END"), s_script_EVENT_S01E01A_END },
+    [EVENT_S01E01A_L001] = { EVENT_S01E01A_L001, 12, _("EVENT_S01E01A_L001"), s_script_EVENT_S01E01A_L001 },
+    [EVENT_S01E01A_L002] = { EVENT_S01E01A_L002, 10, _("EVENT_S01E01A_L002"), s_script_EVENT_S01E01A_L002 },
+    [EVENT_S01E01A_L003] = { EVENT_S01E01A_L003, 10, _("EVENT_S01E01A_L003"), s_script_EVENT_S01E01A_L003 },
+    [EVENT_S01E01B_L001] = { EVENT_S01E01B_L001, 10, _("EVENT_S01E01B_L001"), s_script_EVENT_S01E01B_L001 },
+    [EVENT_S01E01B_L001L] = { EVENT_S01E01B_L001L, 12, _("EVENT_S01E01B_L001L"), s_script_EVENT_S01E01B_L001L },
+    [EVENT_S01E01C_L001] = { EVENT_S01E01C_L001, 10, _("EVENT_S01E01C_L001"), s_script_EVENT_S01E01C_L001 },
+    [EVENT_S01E02A_START] = { EVENT_S01E02A_START, 11, _("EVENT_S01E02A_START"), s_script_EVENT_S01E02A_START },
+    [EVENT_S01E02A_END] = { EVENT_S01E02A_END, 11, _("EVENT_S01E02A_END"), s_script_EVENT_S01E02A_END },
+    [EVENT_S01E02A_L001] = { EVENT_S01E02A_L001, 10, _("EVENT_S01E02A_L001"), s_script_EVENT_S01E02A_L001 },
+    [EVENT_S01E02A_L002] = { EVENT_S01E02A_L002, 10, _("EVENT_S01E02A_L002"), s_script_EVENT_S01E02A_L002 },
+    [EVENT_S01E02A_L002L] = { EVENT_S01E02A_L002L, 12, _("EVENT_S01E02A_L002L"), s_script_EVENT_S01E02A_L002L },
+    [EVENT_S01E02B_L001] = { EVENT_S01E02B_L001, 12, _("EVENT_S01E02B_L001"), s_script_EVENT_S01E02B_L001 },
+    [EVENT_S01E02B_L002] = { EVENT_S01E02B_L002, 12, _("EVENT_S01E02B_L002"), s_script_EVENT_S01E02B_L002 },
+    [EVENT_S02E01A_START] = { EVENT_S02E01A_START, 11, _("EVENT_S02E01A_START"), s_script_EVENT_S02E01A_START },
+    [EVENT_S02E01A_END] = { EVENT_S02E01A_END, 11, _("EVENT_S02E01A_END"), s_script_EVENT_S02E01A_END },
+    [EVENT_S02E01A_L001] = { EVENT_S02E01A_L001, 12, _("EVENT_S02E01A_L001"), s_script_EVENT_S02E01A_L001 },
+    [EVENT_S02E01A_L002] = { EVENT_S02E01A_L002, 12, _("EVENT_S02E01A_L002"), s_script_EVENT_S02E01A_L002 },
+    [EVENT_S02E01A_L003] = { EVENT_S02E01A_L003, 12, _("EVENT_S02E01A_L003"), s_script_EVENT_S02E01A_L003 },
+    [EVENT_S02E01A_L004] = { EVENT_S02E01A_L004, 12, _("EVENT_S02E01A_L004"), s_script_EVENT_S02E01A_L004 },
+    [EVENT_S02E01A_L004L] = { EVENT_S02E01A_L004L, 12, _("EVENT_S02E01A_L004L"), s_script_EVENT_S02E01A_L004L },
+    [EVENT_S02E02A_START] = { EVENT_S02E02A_START, 11, _("EVENT_S02E02A_START"), s_script_EVENT_S02E02A_START },
+    [EVENT_S02E02A_END] = { EVENT_S02E02A_END, 11, _("EVENT_S02E02A_END"), s_script_EVENT_S02E02A_END },
+    [EVENT_S02E02A_L001] = { EVENT_S02E02A_L001, 12, _("EVENT_S02E02A_L001"), s_script_EVENT_S02E02A_L001 },
+    [EVENT_S02E02A_L002] = { EVENT_S02E02A_L002, 10, _("EVENT_S02E02A_L002"), s_script_EVENT_S02E02A_L002 },
+    [EVENT_S02E02A_L003] = { EVENT_S02E02A_L003, 12, _("EVENT_S02E02A_L003"), s_script_EVENT_S02E02A_L003 },
+    [EVENT_S02E02A_L003L] = { EVENT_S02E02A_L003L, 12, _("EVENT_S02E02A_L003L"), s_script_EVENT_S02E02A_L003L },
+    [EVENT_S03E01A_START] = { EVENT_S03E01A_START, 11, _("EVENT_S03E01A_START"), s_script_EVENT_S03E01A_START },
+    [EVENT_S03E01A_CONTINUE] = { EVENT_S03E01A_CONTINUE, 11, _("EVENT_S03E01A_CONTINUE"), s_script_EVENT_S03E01A_CONTINUE },
+    [EVENT_S03E01A_END] = { EVENT_S03E01A_END, 11, _("EVENT_S03E01A_END"), s_script_EVENT_S03E01A_END },
+    [EVENT_S03E01A_L001] = { EVENT_S03E01A_L001, 10, _("EVENT_S03E01A_L001"), s_script_EVENT_S03E01A_L001 },
+    [EVENT_S03E01A_L002] = { EVENT_S03E01A_L002, 12, _("EVENT_S03E01A_L002"), s_script_EVENT_S03E01A_L002 },
+    [EVENT_S03E01A_L002L] = { EVENT_S03E01A_L002L, 12, _("EVENT_S03E01A_L002L"), s_script_EVENT_S03E01A_L002L },
+    [EVENT_S04E01A_START] = { EVENT_S04E01A_START, 11, _("EVENT_S04E01A_START"), s_script_EVENT_S04E01A_START },
+    [EVENT_S04E01A_LAST] = { EVENT_S04E01A_LAST, 11, _("EVENT_S04E01A_LAST"), s_script_EVENT_S04E01A_LAST },
+    [EVENT_S04E01A_END] = { EVENT_S04E01A_END, 11, _("EVENT_S04E01A_END"), s_script_EVENT_S04E01A_END },
+    [EVENT_S04E01A_L001] = { EVENT_S04E01A_L001, 10, _("EVENT_S04E01A_L001"), s_script_EVENT_S04E01A_L001 },
+    [EVENT_S04E01A_L002] = { EVENT_S04E01A_L002, 10, _("EVENT_S04E01A_L002"), s_script_EVENT_S04E01A_L002 },
+    [EVENT_S04E01A_L002L] = { EVENT_S04E01A_L002L, 12, _("EVENT_S04E01A_L002L"), s_script_EVENT_S04E01A_L002L },
+    [EVENT_S04E01B_L001] = { EVENT_S04E01B_L001, 10, _("EVENT_S04E01B_L001"), s_script_EVENT_S04E01B_L001 },
+    [EVENT_S04E01B_L001L] = { EVENT_S04E01B_L001L, 12, _("EVENT_S04E01B_L001L"), s_script_EVENT_S04E01B_L001L },
+    [EVENT_S04E01C_L001] = { EVENT_S04E01C_L001, 10, _("EVENT_S04E01C_L001"), s_script_EVENT_S04E01C_L001 },
+    [EVENT_S04E01C_L001L] = { EVENT_S04E01C_L001L, 12, _("EVENT_S04E01C_L001L"), s_script_EVENT_S04E01C_L001L },
+    [EVENT_S04E01D_L001] = { EVENT_S04E01D_L001, 10, _("EVENT_S04E01D_L001"), s_script_EVENT_S04E01D_L001 },
+    [EVENT_S04E01D_L001L] = { EVENT_S04E01D_L001L, 12, _("EVENT_S04E01D_L001L"), s_script_EVENT_S04E01D_L001L },
+    [EVENT_S04E01E_L001] = { EVENT_S04E01E_L001, 10, _("EVENT_S04E01E_L001"), s_script_EVENT_S04E01E_L001 },
+    [EVENT_S04E01E_L001L] = { EVENT_S04E01E_L001L, 12, _("EVENT_S04E01E_L001L"), s_script_EVENT_S04E01E_L001L },
+    [EVENT_S04E01F_L001] = { EVENT_S04E01F_L001, 12, _("EVENT_S04E01F_L001"), s_script_EVENT_S04E01F_L001 },
+    [EVENT_S05E01A_START] = { EVENT_S05E01A_START, 11, _("EVENT_S05E01A_START"), s_script_EVENT_S05E01A_START },
+    [EVENT_S05E01A_CONTINUE] = { EVENT_S05E01A_CONTINUE, 11, _("EVENT_S05E01A_CONTINUE"), s_script_EVENT_S05E01A_CONTINUE },
+    [EVENT_S05E01A_END] = { EVENT_S05E01A_END, 11, _("EVENT_S05E01A_END"), s_script_EVENT_S05E01A_END },
+    [EVENT_S05E01A_L001] = { EVENT_S05E01A_L001, 10, _("EVENT_S05E01A_L001"), s_script_EVENT_S05E01A_L001 },
+    [EVENT_S05E01A_L002] = { EVENT_S05E01A_L002, 12, _("EVENT_S05E01A_L002"), s_script_EVENT_S05E01A_L002 },
+    [EVENT_S05E01A_L002L] = { EVENT_S05E01A_L002L, 12, _("EVENT_S05E01A_L002L"), s_script_EVENT_S05E01A_L002L },
+    [EVENT_S06E01A_START] = { EVENT_S06E01A_START, 11, _("EVENT_S06E01A_START"), s_script_EVENT_S06E01A_START },
+    [EVENT_S06E01A_CONTINUE] = { EVENT_S06E01A_CONTINUE, 11, _("EVENT_S06E01A_CONTINUE"), s_script_EVENT_S06E01A_CONTINUE },
+    [EVENT_S06E01A_END] = { EVENT_S06E01A_END, 11, _("EVENT_S06E01A_END"), s_script_EVENT_S06E01A_END },
+    [EVENT_S06E01A_L001] = { EVENT_S06E01A_L001, 10, _("EVENT_S06E01A_L001"), s_script_EVENT_S06E01A_L001 },
+    [EVENT_S06E01A_L002] = { EVENT_S06E01A_L002, 10, _("EVENT_S06E01A_L002"), s_script_EVENT_S06E01A_L002 },
+    [EVENT_S06E01A_L002L] = { EVENT_S06E01A_L002L, 12, _("EVENT_S06E01A_L002L"), s_script_EVENT_S06E01A_L002L },
+    [EVENT_S06E01B_L001] = { EVENT_S06E01B_L001, 10, _("EVENT_S06E01B_L001"), s_script_EVENT_S06E01B_L001 },
+    [EVENT_S06E01B_L002] = { EVENT_S06E01B_L002, 10, _("EVENT_S06E01B_L002"), s_script_EVENT_S06E01B_L002 },
+    [EVENT_S06E01B_L002L] = { EVENT_S06E01B_L002L, 12, _("EVENT_S06E01B_L002L"), s_script_EVENT_S06E01B_L002L },
+    [EVENT_S07E01A_START] = { EVENT_S07E01A_START, 11, _("EVENT_S07E01A_START"), s_script_EVENT_S07E01A_START },
+    [EVENT_S07E01A_END] = { EVENT_S07E01A_END, 11, _("EVENT_S07E01A_END"), s_script_EVENT_S07E01A_END },
+    [EVENT_S07E01A_L001] = { EVENT_S07E01A_L001, 12, _("EVENT_S07E01A_L001"), s_script_EVENT_S07E01A_L001 },
+    [EVENT_S07E01A_L002] = { EVENT_S07E01A_L002, 12, _("EVENT_S07E01A_L002"), s_script_EVENT_S07E01A_L002 },
+    [EVENT_S07E01A_L003] = { EVENT_S07E01A_L003, 12, _("EVENT_S07E01A_L003"), s_script_EVENT_S07E01A_L003 },
+    [EVENT_S07E01A_L003L] = { EVENT_S07E01A_L003L, 12, _("EVENT_S07E01A_L003L"), s_script_EVENT_S07E01A_L003L },
+    [EVENT_S08E01A_START] = { EVENT_S08E01A_START, 11, _("EVENT_S08E01A_START"), s_script_EVENT_S08E01A_START },
+    [EVENT_S08E01A_END] = { EVENT_S08E01A_END, 11, _("EVENT_S08E01A_END"), s_script_EVENT_S08E01A_END },
+    [EVENT_S08E01A_L001] = { EVENT_S08E01A_L001, 12, _("EVENT_S08E01A_L001"), s_script_EVENT_S08E01A_L001 },
+    [EVENT_S08E01A_L002] = { EVENT_S08E01A_L002, 12, _("EVENT_S08E01A_L002"), s_script_EVENT_S08E01A_L002 },
+    [EVENT_S08E01A_L003] = { EVENT_S08E01A_L003, 12, _("EVENT_S08E01A_L003"), s_script_EVENT_S08E01A_L003 },
+    [EVENT_S08E01A_L004] = { EVENT_S08E01A_L004, 12, _("EVENT_S08E01A_L004"), s_script_EVENT_S08E01A_L004 },
+    [EVENT_S08E01A_L005] = { EVENT_S08E01A_L005, 12, _("EVENT_S08E01A_L005"), s_script_EVENT_S08E01A_L005 },
+    [EVENT_S08E01A_L005B] = { EVENT_S08E01A_L005B, 10, _("EVENT_S08E01A_L005B"), s_script_EVENT_S08E01A_L005B },
+    [EVENT_S08E01A_L006] = { EVENT_S08E01A_L006, 10, _("EVENT_S08E01A_L006"), s_script_EVENT_S08E01A_L006 },
+    [EVENT_S08E01A_L006L] = { EVENT_S08E01A_L006L, 12, _("EVENT_S08E01A_L006L"), s_script_EVENT_S08E01A_L006L },
+    [EVENT_S08E01A_L007] = { EVENT_S08E01A_L007, 12, _("EVENT_S08E01A_L007"), s_script_EVENT_S08E01A_L007 },
+    [EVENT_S08E01A_L008] = { EVENT_S08E01A_L008, 10, _("EVENT_S08E01A_L008"), s_script_EVENT_S08E01A_L008 },
+    [EVENT_S08E01A_L008L] = { EVENT_S08E01A_L008L, 12, _("EVENT_S08E01A_L008L"), s_script_EVENT_S08E01A_L008L },
+    [EVENT_S08E01A_L008A] = { EVENT_S08E01A_L008A, 10, _("EVENT_S08E01A_L008A"), s_script_EVENT_S08E01A_L008A },
+    [EVENT_S08E01A_L008B] = { EVENT_S08E01A_L008B, 10, _("EVENT_S08E01A_L008B"), s_script_EVENT_S08E01A_L008B },
+    [EVENT_S08E01A_L008C] = { EVENT_S08E01A_L008C, 10, _("EVENT_S08E01A_L008C"), s_script_EVENT_S08E01A_L008C },
+    [EVENT_S09E01A_START] = { EVENT_S09E01A_START, 11, _("EVENT_S09E01A_START"), s_script_EVENT_S09E01A_START },
+    [EVENT_S09E01A_END] = { EVENT_S09E01A_END, 11, _("EVENT_S09E01A_END"), s_script_EVENT_S09E01A_END },
+    [EVENT_S09E01A_L001] = { EVENT_S09E01A_L001, 12, _("EVENT_S09E01A_L001"), s_script_EVENT_S09E01A_L001 },
+    [EVENT_S09E01A_L002] = { EVENT_S09E01A_L002, 12, _("EVENT_S09E01A_L002"), s_script_EVENT_S09E01A_L002 },
+    [EVENT_S09E01A_L003] = { EVENT_S09E01A_L003, 12, _("EVENT_S09E01A_L003"), s_script_EVENT_S09E01A_L003 },
+    [EVENT_S09E01A_L004] = { EVENT_S09E01A_L004, 10, _("EVENT_S09E01A_L004"), s_script_EVENT_S09E01A_L004 },
+    [EVENT_S09E01A_L004B] = { EVENT_S09E01A_L004B, 10, _("EVENT_S09E01A_L004B"), s_script_EVENT_S09E01A_L004B },
+    [EVENT_S09E01A_L005] = { EVENT_S09E01A_L005, 10, _("EVENT_S09E01A_L005"), s_script_EVENT_S09E01A_L005 },
+    [EVENT_S09E01A_L005L] = { EVENT_S09E01A_L005L, 12, _("EVENT_S09E01A_L005L"), s_script_EVENT_S09E01A_L005L },
+    [EVENT_S09E01B_L001] = { EVENT_S09E01B_L001, 10, _("EVENT_S09E01B_L001"), s_script_EVENT_S09E01B_L001 },
+    [EVENT_S09E01B_L001B] = { EVENT_S09E01B_L001B, 10, _("EVENT_S09E01B_L001B"), s_script_EVENT_S09E01B_L001B },
+    [EVENT_S09E01B_L002] = { EVENT_S09E01B_L002, 10, _("EVENT_S09E01B_L002"), s_script_EVENT_S09E01B_L002 },
+    [EVENT_S09E01B_L002L] = { EVENT_S09E01B_L002L, 12, _("EVENT_S09E01B_L002L"), s_script_EVENT_S09E01B_L002L },
+    [EVENT_S09E01C_L001] = { EVENT_S09E01C_L001, 12, _("EVENT_S09E01C_L001"), s_script_EVENT_S09E01C_L001 },
+    [EVENT_R00E01A_L001] = { EVENT_R00E01A_L001, 7, _("EVENT_R00E01A_L001"), s_script_EVENT_R00E01A_L001 },
+    [COMMON_ENTER] = { COMMON_ENTER, 1, _("COMMON_ENTER"), s_script_COMMON_ENTER },
+    [DEBUG_ENTER] = { DEBUG_ENTER, 1, _("DEBUG_ENTER"), s_script_DEBUG_ENTER },
+    [GETOUT_NORMAL] = { GETOUT_NORMAL, 2, _("GETOUT_NORMAL"), NULL },
+    [GETOUT_HABITAT] = { GETOUT_HABITAT, 2, _("GETOUT_HABITAT"), s_script_GETOUT_HABITAT },
+    [GETOUT_M01E01A] = { GETOUT_M01E01A, 2, _("GETOUT_M01E01A"), s_script_GETOUT_M01E01A },
+    [GETOUT_M01E02A] = { GETOUT_M01E02A, 2, _("GETOUT_M01E02A"), s_script_GETOUT_M01E02A },
+    [GETOUT_M01E02B] = { GETOUT_M01E02B, 2, _("GETOUT_M01E02B"), s_script_GETOUT_M01E02B },
+    [GETOUT_M01E03A] = { GETOUT_M01E03A, 2, _("GETOUT_M01E03A"), s_script_GETOUT_M01E03A },
+    [GETOUT_M01E04A] = { GETOUT_M01E04A, 2, _("GETOUT_M01E04A"), s_script_GETOUT_M01E04A },
+    [GETOUT_M01E04B] = { GETOUT_M01E04B, 2, _("GETOUT_M01E04B"), s_script_GETOUT_M01E04B },
+    [GETOUT_M01E05A] = { GETOUT_M01E05A, 2, _("GETOUT_M01E05A"), s_script_GETOUT_M01E05A },
+    [GETOUT_M01E07A] = { GETOUT_M01E07A, 2, _("GETOUT_M01E07A"), s_script_GETOUT_M01E07A },
+    [GETOUT_M01E07B] = { GETOUT_M01E07B, 2, _("GETOUT_M01E07B"), s_script_GETOUT_M01E07B },
+    [GETOUT_M01E08A] = { GETOUT_M01E08A, 2, _("GETOUT_M01E08A"), s_script_GETOUT_M01E08A },
+    [GETOUT_M01E08B] = { GETOUT_M01E08B, 2, _("GETOUT_M01E08B"), s_script_GETOUT_M01E08B },
+    [GETOUT_M01E09A] = { GETOUT_M01E09A, 2, _("GETOUT_M01E09A"), s_script_GETOUT_M01E09A },
+    [GETOUT_M01E10A] = { GETOUT_M01E10A, 2, _("GETOUT_M01E10A"), s_script_GETOUT_M01E10A },
+    [GETOUT_S00E01A] = { GETOUT_S00E01A, 2, _("GETOUT_S00E01A"), s_script_GETOUT_S00E01A },
+    [GETOUT_S01E01A] = { GETOUT_S01E01A, 2, _("GETOUT_S01E01A"), s_script_GETOUT_S01E01A },
+    [GETOUT_S01E02A] = { GETOUT_S01E02A, 2, _("GETOUT_S01E02A"), s_script_GETOUT_S01E02A },
+    [GETOUT_S02E01A] = { GETOUT_S02E01A, 2, _("GETOUT_S02E01A"), s_script_GETOUT_S02E01A },
+    [GETOUT_S02E02A] = { GETOUT_S02E02A, 2, _("GETOUT_S02E02A"), s_script_GETOUT_S02E02A },
+    [GETOUT_S03E01A] = { GETOUT_S03E01A, 2, _("GETOUT_S03E01A"), s_script_GETOUT_S03E01A },
+    [GETOUT_S04E01A] = { GETOUT_S04E01A, 2, _("GETOUT_S04E01A"), s_script_GETOUT_S04E01A },
+    [GETOUT_S04E01B] = { GETOUT_S04E01B, 2, _("GETOUT_S04E01B"), s_script_GETOUT_S04E01B },
+    [GETOUT_S04E01C] = { GETOUT_S04E01C, 2, _("GETOUT_S04E01C"), s_script_GETOUT_S04E01C },
+    [GETOUT_S04E01D] = { GETOUT_S04E01D, 2, _("GETOUT_S04E01D"), s_script_GETOUT_S04E01D },
+    [GETOUT_S04E01E] = { GETOUT_S04E01E, 2, _("GETOUT_S04E01E"), s_script_GETOUT_S04E01E },
+    [GETOUT_S05E01A] = { GETOUT_S05E01A, 2, _("GETOUT_S05E01A"), s_script_GETOUT_S05E01A },
+    [GETOUT_S06E01A] = { GETOUT_S06E01A, 2, _("GETOUT_S06E01A"), s_script_GETOUT_S06E01A },
+    [GETOUT_S06E01B] = { GETOUT_S06E01B, 2, _("GETOUT_S06E01B"), s_script_GETOUT_S06E01B },
+    [GETOUT_S07E01A] = { GETOUT_S07E01A, 2, _("GETOUT_S07E01A"), s_script_GETOUT_S07E01A },
+    [GETOUT_S08E01A] = { GETOUT_S08E01A, 2, _("GETOUT_S08E01A"), s_script_GETOUT_S08E01A },
+    [GETOUT_S09E01A] = { GETOUT_S09E01A, 2, _("GETOUT_S09E01A"), s_script_GETOUT_S09E01A },
+    [GETOUT_S09E01B] = { GETOUT_S09E01B, 2, _("GETOUT_S09E01B"), s_script_GETOUT_S09E01B },
+    [GETOUT_D62E01A] = { GETOUT_D62E01A, 2, _("GETOUT_D62E01A"), s_script_GETOUT_D62E01A },
+    [GETOUT_D43E01A] = { GETOUT_D43E01A, 2, _("GETOUT_D43E01A"), s_script_GETOUT_D43E01A },
+    [GETOUT_D44E01A] = { GETOUT_D44E01A, 2, _("GETOUT_D44E01A"), s_script_GETOUT_D44E01A },
+    [GETOUT_D45E01A] = { GETOUT_D45E01A, 2, _("GETOUT_D45E01A"), s_script_GETOUT_D45E01A },
+    [GETOUT_D46E01A] = { GETOUT_D46E01A, 2, _("GETOUT_D46E01A"), s_script_GETOUT_D46E01A },
+    [GETOUT_U00E01A] = { GETOUT_U00E01A, 2, _("GETOUT_U00E01A"), s_script_GETOUT_U00E01A },
+    [GETOUT_R00E01A] = { GETOUT_R00E01A, 2, _("GETOUT_R00E01A"), s_script_GETOUT_R00E01A },
+    [GETOUT_T00E01A] = { GETOUT_T00E01A, 2, _("GETOUT_T00E01A"), s_script_GETOUT_T00E01A },
+    [GETOUT_M01E07T] = { GETOUT_M01E07T, 2, _("GETOUT_M01E07T"), s_script_GETOUT_M01E07T },
+    [GETOUT_M01E08T] = { GETOUT_M01E08T, 2, _("GETOUT_M01E08T"), s_script_GETOUT_M01E08T },
+    [EVENT_CONTROL] = { EVENT_CONTROL, 7, _("EVENT_CONTROL"), NULL },
+    [EVENT_WAKEUP] = { EVENT_WAKEUP, 7, _("EVENT_WAKEUP"), NULL },
+    [EVENT_STATION] = { EVENT_STATION, 7, _("EVENT_STATION"), NULL },
+    [STATION_CONTROL] = { STATION_CONTROL, 8, _("STATION_CONTROL"), NULL },
+    [ENTER_CONTROL] = { ENTER_CONTROL, 1, _("ENTER_CONTROL"), NULL },
+    [SETUP_DEBUG_CAMERA] = { SETUP_DEBUG_CAMERA, 7, _("SETUP_DEBUG_CAMERA"), s_script_SETUP_DEBUG_CAMERA },
+    [MOVE_DEBUG_CAMERA] = { MOVE_DEBUG_CAMERA, 5, _("MOVE_DEBUG_CAMERA"), s_script_MOVE_DEBUG_CAMERA },
 };
-

@@ -12,12 +12,12 @@ EWRAM_INIT static Credits1Work *sCredits1Work = {NULL};
 
 static const WindowTemplate sDummyWinTemplate = WIN_TEMPLATE_DUMMY;
 static const WindowTemplate gUnknown_80E4A28 = {
-    .unk0 = 0,
+    .flags = WINTEMPLATE_FLAG_NONE,
     .type = WINDOW_TYPE_ONLY_TEXT,
-    .pos = {2, 2},
+    .pos = { 2, 2 },
     .width = 26,
     .height = 16,
-    .unk10 = 16,
+    .totalHeight = 16,
     .unk12 = 0,
     .header = NULL,
 };

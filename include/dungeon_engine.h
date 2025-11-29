@@ -7,8 +7,8 @@
 
 extern const s16 gSpeedTurns[NUM_SPEED_COUNTERS][25];
 
-void RunFractionalTurn(bool8 param_1);
-void sub_80444F4(Entity *pokemon);
+void RunFractionalTurn_Async(bool8 param_1);
+void sub_80444F4_Async(Entity *pokemon);
 bool8 IsFloorOver(void);
 bool8 sub_8044B84(void);
 

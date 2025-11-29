@@ -23,11 +23,11 @@
 #include "dungeon_entity_movement.h"
 #include "dungeon_wind.h"
 
-static void sub_8044454(void);
-static bool8 RunLeaderTurn(bool8);
-static void sub_8044574(void);
-static void sub_8044820(void);
-static void TrySpawnMonsterAndActivatePlusMinus(void);
+static void sub_8044454_Async(void);
+static bool8 RunLeaderTurn_Async(bool8);
+static void sub_8044574_Async(void);
+static void sub_8044820_Async(void);
+static void TrySpawnMonsterAndActivatePlusMinus_Async(void);
 static void sub_8044AB4(void);
 
 EWRAM_DATA DungeonPos gLeaderPosition = {0};
@@ -41,31 +41,42 @@ const s16 gSpeedTurns[NUM_SPEED_COUNTERS][25] = {
     [4] = {40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64},
 };
 
-void RunFractionalTurn(bool8 param_1)
+void RunFractionalTurn_Async(bool8 param_1)
 {
     bool8 cVar2;
 
-    if (IsFloorOver()) return;
-    TrySpawnMonsterAndActivatePlusMinus();
-    if (IsFloorOver()) return;
-    cVar2 = RunLeaderTurn(param_1);
-    if (IsFloorOver()) return;
+    if (IsFloorOver())
+        return;
+
+    TrySpawnMonsterAndActivatePlusMinus_Async();
+    if (IsFloorOver())
+        return;
+
+    cVar2 = RunLeaderTurn_Async(param_1);
+    if (IsFloorOver())
+        return;
     if (cVar2) {
         UpdateWindTurns();
-        if (IsFloorOver()) return;
+        if (IsFloorOver())
+            return;
     }
-    if (IsFloorOver()) return;
-    sub_8044574();
-    if (IsFloorOver()) return;
-    sub_8044820();
-    if (IsFloorOver()) return;
+    if (IsFloorOver())
+        return;
+
+    sub_8044574_Async();
+    if (IsFloorOver())
+        return;
+
+    sub_8044820_Async();
+    if (IsFloorOver())
+        return;
+
     sub_8044AB4();
-    if (++gDungeon->unk644.fractionalTurn == 24) {
+    if (++gDungeon->unk644.fractionalTurn == 24)
         gDungeon->unk644.fractionalTurn = 0;
-    }
 }
 
-static bool8 RunLeaderTurn(bool8 param_1)
+static bool8 RunLeaderTurn_Async(bool8 param_1)
 {
     EntityInfo *entityInfo;
     s32 movSpeed;
@@ -80,12 +91,12 @@ static bool8 RunLeaderTurn(bool8 param_1)
     if (GetEntInfo(entity)->attacking)
         return FALSE;
 
-    while (1) {
+    while (TRUE) {
         entity = GetLeader();
         if (entity == NULL)
             return FALSE;
-        if (DisplayActions(0) == 0 && (gDungeon->unk644.unk28 != 0 || (gDungeon->unk644.unk2F != 0))) {
-            DungeonRunFrameActions(0xc);
+        if (!DisplayActions_Async(NULL) && (gDungeon->unk644.unk28 != 0 || gDungeon->unk644.unk2F != 0)) {
+            DungeonRunFrameActions(12);
         }
         GetEntInfo(entity)->speedStageChanged = FALSE;
         if (IsFloorOver())
@@ -107,9 +118,9 @@ static bool8 RunLeaderTurn(bool8 param_1)
         gDungeon->noActionInProgress = FALSE;
         if (IsFloorOver())
             break;
-        ExecuteEntityDungeonAction(entity);
+        ExecuteEntityDungeonAction_Async(entity);
         sub_8086AC0();
-        TryForcedLoss(0);
+        TryForcedLoss_Async(FALSE);
         if (IsFloorOver())
             break;
         entityInfo = GetEntInfo(entity);
@@ -118,7 +129,7 @@ static bool8 RunLeaderTurn(bool8 param_1)
         }
         if (IsFloorOver())
             break;
-        sub_8044454();
+        sub_8044454_Async();
         if (IsFloorOver())
             break;
 
@@ -137,7 +148,7 @@ static bool8 RunLeaderTurn(bool8 param_1)
     return TRUE;
 }
 
-static void sub_8044454(void)
+static void sub_8044454_Async(void)
 {
   Entity *entity;
   EntityInfo *entityInfo;
@@ -155,9 +166,9 @@ static void sub_8044454(void)
         if (EntityIsValid(entity)) {
           EnemyEvolution(entity);
           RunMonsterAI(entity, 0);
-          ExecuteEntityDungeonAction(entity);
+          ExecuteEntityDungeonAction_Async(entity);
           sub_8086AC0();
-          TryForcedLoss(0);
+          TryForcedLoss_Async(FALSE);
           entityInfo->flags = (entityInfo->flags & ~(MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY)) | MOVEMENT_FLAG_UNK_14;
         }
       }
@@ -165,7 +176,7 @@ static void sub_8044454(void)
   }
 }
 
-void sub_80444F4(Entity *pokemon)
+void sub_80444F4_Async(Entity *pokemon)
 {
   Entity *entity;
   EntityInfo *entityInfo;
@@ -180,9 +191,9 @@ void sub_80444F4(Entity *pokemon)
       if ((EntityIsValid(entity)) && (pokemon != entity) && (entityInfo = GetEntInfo(entity), (entityInfo->flags & MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY))) {
         if (IsFloorOver()) break;
         RunMonsterAI(entity, 0);
-        ExecuteEntityDungeonAction(entity);
+        ExecuteEntityDungeonAction_Async(entity);
         sub_8086AC0();
-        TryForcedLoss(0);
+        TryForcedLoss_Async(FALSE);
       }
     }
   }
@@ -194,7 +205,7 @@ struct Struct_8044574
     struct Struct_8044574 *next;
 };
 
-static void sub_8044574(void)
+static void sub_8044574_Async(void)
 {
     s32 i, id;
     struct Struct_8044574 sp0[4];
@@ -231,10 +242,10 @@ static void sub_8044574(void)
                             EnemyEvolution(teamMon);
                             for (j = 0; j < 3; j++) {
                                 RunMonsterAI(teamMon, 0);
-                                if (IsFloorOver() || !ExecuteEntityDungeonAction(teamMon))
+                                if (IsFloorOver() || !ExecuteEntityDungeonAction_Async(teamMon))
                                     break;
                                 sub_8086AC0();
-                                TryForcedLoss(0);
+                                TryForcedLoss_Async(FALSE);
                                 if (IsFloorOver())
                                     break;
                             }
@@ -288,9 +299,9 @@ static void sub_8044574(void)
                 info->recalculateFollow = TRUE;
                 info->aiAllySkip = FALSE;
                 RunMonsterAI(entity,1);
-                ExecuteEntityDungeonAction(entity);
+                ExecuteEntityDungeonAction_Async(entity);
                 sub_8086AC0();
-                TryForcedLoss(0);
+                TryForcedLoss_Async(FALSE);
                 EntityIsValid(entity); // Does nothing
             }
             ptr = ptr->next;
@@ -303,7 +314,7 @@ static void sub_8044574(void)
             if (EntityIsValid(teamMon)) {
                 EntityInfo *teamMonInfo = GetEntInfo(teamMon);
                 if (teamMonInfo->aiAllySkip) {
-                    ApplyEndOfTurnEffects(teamMon);
+                    DoEndOfTurnEffects_Async(teamMon);
                     if (EntityIsValid(teamMon)) {
                         EnemyEvolution(teamMon);
                         teamMonInfo->aiAllySkip = FALSE;
@@ -314,7 +325,7 @@ static void sub_8044574(void)
     }
 }
 
-static void sub_8044820(void)
+static void sub_8044820_Async(void)
 {
   s32 movSpeed;
   EntityInfo *entityInfo;
@@ -347,9 +358,9 @@ static void sub_8044820(void)
                 EnemyEvolution(entity);
                 RunMonsterAI(entity, 0);
                 if (IsFloorOver()) break;
-                ExecuteEntityDungeonAction(entity);
+                ExecuteEntityDungeonAction_Async(entity);
                 sub_8086AC0();
-                TryForcedLoss(0);
+                TryForcedLoss_Async(FALSE);
                 if (IsFloorOver()) break;
               }
             }
@@ -364,7 +375,7 @@ static void sub_8044820(void)
       entity2 = gDungeon->wildPokemon[index];
       if ((EntityIsValid(entity2)) && (entityInfo2 = GetEntInfo(entity2), entityInfo2->aiAllySkip))
       {
-        ApplyEndOfTurnEffects(entity2);
+        DoEndOfTurnEffects_Async(entity2);
         if (EntityIsValid(entity2)) {
           EnemyEvolution(entity2);
           entityInfo2->aiAllySkip = FALSE;
@@ -374,7 +385,7 @@ static void sub_8044820(void)
   }
 }
 
-static void TrySpawnMonsterAndActivatePlusMinus(void)
+static void TrySpawnMonsterAndActivatePlusMinus_Async(void)
 {
   EntityInfo * entityInfo;
   Entity *entity;
@@ -417,7 +428,7 @@ static void TrySpawnMonsterAndActivatePlusMinus(void)
             }
         }
     }
-    TryForcedLoss(0);
+    TryForcedLoss_Async(FALSE);
   }
 }
 
@@ -428,13 +439,13 @@ static void sub_8044AB4(void)
   if (gSpeedTurns[1][gDungeon->unk644.fractionalTurn + 1] != 0) {
     for (index = 0; index < DUNGEON_MAX_POKEMON; index++) {
       if (EntityIsValid(gDungeon->activePokemon[index])) {
-        DisplayActions(0);
+        DisplayActions_Async(0);
         break;
       }
     }
     sub_807EAA0(1,0);
     sub_8086AC0();
-    TryForcedLoss(0);
+    TryForcedLoss_Async(FALSE);
   }
 }
 
@@ -444,10 +455,10 @@ bool8 IsFloorOver(void)
         if (GetLeader() == NULL) {
             gDungeon->unk644.unk10 = 1;
         }
-        else if (gDungeon->unk2 == 1) {
+        else if (gDungeon->unk2 == DUNGEON_UNK2_1) {
             gDungeon->unk644.unk10 = 2;
         }
-        else if (gDungeon->unk2 != 2) {
+        else if (gDungeon->unk2 != DUNGEON_UNK2_PITFALL_TRAP) {
             return FALSE;
         }
         else {
@@ -459,11 +470,8 @@ bool8 IsFloorOver(void)
 
 bool8 sub_8044B84(void)
 {
-    if(gDungeon->unk10 != 0)
-    {
+    if (gDungeon->unk10 != 0)
         return TRUE;
-    }
-    else {
-        return IsFloorOver();
-    }
+
+    return IsFloorOver();
 }

@@ -13,19 +13,19 @@ static const struct ScriptCommand s_gs221_g0_s0_station_sref_script[] = { /* 0x8
     JUMP_SCRIPT(COMMON_ENTER),
 };
 
-static const struct ScriptRef s_gs221_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs221_g0_s0_station_sref_script }; /* 0x826d7a0 */
+static const struct ScriptRef s_gs221_g0_s0_station_sref = { ENTER_CONTROL , 1, NULL, s_gs221_g0_s0_station_sref_script }; /* 0x826d7a0 */
 
 static const struct ScriptCommand s_gs221_g1_s0_station_sref_script[] = { /* 0x826d7ac */
     DEBUGINFO_O(19),
     SELECT_MAP(221),
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(21),
+    BGM_SWITCH(MUS_STORMY_SEA),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     RET,
 };
 
-static const struct ScriptRef s_gs221_g1_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs221_g1_s0_station_sref_script }; /* 0x826d81c */
+static const struct ScriptRef s_gs221_g1_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs221_g1_s0_station_sref_script }; /* 0x826d81c */
 
 static const struct ScriptCommand s_gs221_g1_s0_eff0_script[] = { /* 0x826d828 */
     DEBUGINFO_O(31),
@@ -44,7 +44,7 @@ static const struct ScriptCommand s_gs221_g1_s0_lives0_dlg0[] = { /* 0x826d898 *
     ALERT_CUE(7),
     { 0x89, 0x50,  0x0099,  0x00000004,  0x00000000, NULL },
     AWAIT_CUE(5),
-    ROTATE(4, 10, DIRECTION_SOUTH),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_SOUTH),
     MSG_NPC(2, _(" You're going to the\n{COLOR YELLOW_D}Murky Cave{RESET}?")),
     MSG_NPC(2, _(" Don't forget to take me,\nkekeh!")),
     TEXTBOX_CLEAR,
@@ -101,4 +101,4 @@ static const struct GroundLink s_gs221_links[] = { /* 0x826dafc */
     {},
 };
 
-/*extern*/ const struct GroundScriptHeader gGroundScript_gs221 = { LPARRAY(s_gs221_groups), s_gs221_links }; /* 0x826db04 */
+const GroundScriptHeader gGroundScript_gs221 = { LPARRAY(s_gs221_groups), s_gs221_links }; /* 0x826db04 */

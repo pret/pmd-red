@@ -413,10 +413,10 @@ bool8 sub_803C110(s16 index)
 
     species_s32 = (s32)index;
 
-    if (!sub_8098134(index) || index != GetBaseSpecies(index) || !sub_803C0DC(index))
+    if (!GetMonSeenFlag(index) || index != GetBaseSpecies(index) || !sub_803C0DC(index))
         return FALSE;
 
-    if (!sub_80023E4(6)) {
+    if (!CheckQuest(QUEST_REACHED_POSTGAME)) {
         psVar5 = &gUnknown_80E8126[0]; // TODO: Un-ugly this
         if (*psVar5 != MONSTER_NONE) {
             psVar6 = &gUnknown_80E8126[0];
@@ -428,10 +428,10 @@ bool8 sub_803C110(s16 index)
             } while (*psVar5 != MONSTER_NONE);
         }
 
-        pokeStruct = GetPlayerPokemonStruct();
+        pokeStruct = GetLeaderMon1();
         if (pokeStruct->speciesNum == species_s32)
             return FALSE;
-        pokeStruct = sub_808D378();
+        pokeStruct = GetPartnerMon();
         if (pokeStruct->speciesNum == species_s32)
             return FALSE;
     }

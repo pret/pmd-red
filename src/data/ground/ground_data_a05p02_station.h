@@ -9,15 +9,15 @@
 static const struct ScriptCommand s_gs176_g0_s0_station_sref_script[] = { /* 0x822b66c */
     DEBUGINFO_O(10),
     BGM_STOP,
-    SELECT_MAP(176),
+    SELECT_MAP(MAP_NIGHT_SKY_2),
     JUMP_SCRIPT(COMMON_ENTER),
 };
 
-static const struct ScriptRef s_gs176_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs176_g0_s0_station_sref_script }; /* 0x822b6d8 */
+static const struct ScriptRef s_gs176_g0_s0_station_sref = { ENTER_CONTROL , 1, NULL, s_gs176_g0_s0_station_sref_script }; /* 0x822b6d8 */
 
 static const struct ScriptCommand s_gs176_g1_s0_station_sref_script[] = { /* 0x822b6e4 */
     DEBUGINFO_O(19),
-    SELECT_MAP(176),
+    SELECT_MAP(MAP_NIGHT_SKY_2),
     SELECT_ENTITIES(-1, 0),
     { 0x3b, 0x36,  0x0000, -0x00000002,  0x00000000, NULL },
     { 0x27, 0x01,  0x0001,  0x0000001e,  0x00ffffff, NULL },
@@ -88,7 +88,7 @@ static const struct ScriptCommand s_gs176_g1_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs176_g1_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs176_g1_s0_station_sref_script }; /* 0x822bb44 */
+static const struct ScriptRef s_gs176_g1_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs176_g1_s0_station_sref_script }; /* 0x822bb44 */
 
 static const struct ScriptCommand s_gs176_g1_s0_eff1_script[] = { /* 0x822bb50 */
     DEBUGINFO_O(94),
@@ -140,4 +140,4 @@ static const struct GroundLink s_gs176_links[] = { /* 0x822bdcc */
     {},
 };
 
-/*extern*/ const struct GroundScriptHeader gGroundScript_gs176 = { LPARRAY(s_gs176_groups), s_gs176_links }; /* 0x822bdd4 */
+const GroundScriptHeader gGroundScript_gs176 = { LPARRAY(s_gs176_groups), s_gs176_links }; /* 0x822bdd4 */

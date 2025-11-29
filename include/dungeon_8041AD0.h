@@ -6,7 +6,7 @@
 #include "structs/str_stat_index.h"
 
 s32 sub_80416E0(PixelPos *pos, u32 param_2, bool8 param_3);
-void sub_804178C(u8 param_1);
+void sub_804178C_Async(u8 param_1);
 u32 EntityGetStatusSprites(Entity *entity);
 void sub_8041888(u8 param_1);
 void UpdateStatusIconFlags(Entity *entity);

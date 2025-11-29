@@ -250,7 +250,7 @@ void CreateFriendActionMenu(void)
           sUnknown_203B2BC->unk16C[loopMax] = 1;
       }
       loopMax += 1;
-      if(sub_80023E4(8) && !pokeStruct->isTeamLeader)
+      if(CheckQuest(QUEST_CAN_CHANGE_LEADER) && !pokeStruct->isTeamLeader)
       {
           sUnknown_203B2BC->menuItems[loopMax].text = sMakeLeader;
           sUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_MAKE_LEADER;
@@ -434,7 +434,7 @@ void sub_80278B4(void)
         break;
       case FRIEND_AREA_ACTION_MENU_ACTION_MAKE_LEADER:
         newLeader = &gRecruitedPokemonRef->pokemon[sUnknown_203B2BC->targetPoke];
-        playerStruct = GetPlayerPokemonStruct();
+        playerStruct = GetLeaderMon1();
         if (!newLeader->isTeamLeader) {
           playerStruct->isTeamLeader = FALSE;
           newLeader->isTeamLeader = TRUE;
@@ -702,7 +702,7 @@ bool8 sub_8027D9C(Pokemon *pokeStruct)
             var1 = 1;
         if(var1 != 0)
         {
-            if(!sub_80023E4(8))
+            if(!CheckQuest(QUEST_CAN_CHANGE_LEADER))
                 return FALSE;
         }
     }
@@ -714,8 +714,8 @@ bool8 sub_8027D9C(Pokemon *pokeStruct)
 bool8 sub_8027DCC(Pokemon *pokeStruct)
 {
     u32 var1;
-    if(sub_808D3BC() != pokeStruct)
-        if(sub_808D3F8() != pokeStruct)
+    if(GetLeaderMon2() != pokeStruct)
+        if(GetPartnerMon2() != pokeStruct)
             if(!pokeStruct->isTeamLeader)
             {
                 var1 = 0;
@@ -723,7 +723,7 @@ bool8 sub_8027DCC(Pokemon *pokeStruct)
                     var1 = 1;
                 if(var1 != 0)
                 {
-                    if(sub_80023E4(8))
+                    if(CheckQuest(QUEST_CAN_CHANGE_LEADER))
                         goto check;
                 }
                 else

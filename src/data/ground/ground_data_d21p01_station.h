@@ -13,13 +13,13 @@ static const struct ScriptCommand s_gs217_g0_s0_station_sref_script[] = { /* 0x8
     JUMP_SCRIPT(COMMON_ENTER),
 };
 
-static const struct ScriptRef s_gs217_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs217_g0_s0_station_sref_script }; /* 0x82697c0 */
+static const struct ScriptRef s_gs217_g0_s0_station_sref = { ENTER_CONTROL , 1, NULL, s_gs217_g0_s0_station_sref_script }; /* 0x82697c0 */
 
 static const struct ScriptCommand s_gs217_g1_s0_station_sref_script[] = { /* 0x82697cc */
     DEBUGINFO_O(19),
     SELECT_MAP(217),
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(114),
+    BGM_SWITCH(MUS_IN_THE_DEPTHS_OF_THE_PIT),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     BGM_FADEOUT(60),
@@ -28,7 +28,7 @@ static const struct ScriptCommand s_gs217_g1_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs217_g1_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs217_g1_s0_station_sref_script }; /* 0x826986c */
+static const struct ScriptRef s_gs217_g1_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs217_g1_s0_station_sref_script }; /* 0x826986c */
 
 static const struct ScriptCommand s_gs217_g1_s0_lives0_dlg0[] = { /* 0x8269878 */
     DEBUGINFO_O(34),
@@ -41,7 +41,7 @@ static const struct ScriptCommand s_gs217_g1_s0_lives0_dlg0[] = { /* 0x8269878 *
     WAIT(10),
     { 0x28, 0x01,  0x0005,  0x00000005,  0x00ffffff, NULL },
     { 0x27, 0x01,  0x0005,  0x00000005,  0x00ffffff, NULL },
-    { 0xe2, 0x00,  0x01db,  0x00000000,  0x00000000, NULL },
+    WAIT_FANFARE2(475),
     AWAIT_CUE(5),
     PORTRAIT(PLACEMENT_TOP_RIGHT, 0x0002, 0x00000000),
     MSG_NPC(2, _(" Urghgh...")),
@@ -82,14 +82,14 @@ static const struct ScriptCommand s_gs217_g1_s0_lives1_dlg0[] = { /* 0x8269b04 *
     WAIT(30),
     FANFARE_PLAY2(475),
     SELECT_ANIMATION(9),
-    { 0xe2, 0x00,  0x01db,  0x00000000,  0x00000000, NULL },
+    WAIT_FANFARE2(475),
     FANFARE_PLAY2(779),
     { 0x54, 0x00,  0x000a,  0x00000000,  0x00000000, NULL },
     WAIT(50),
     { 0x54, 0x00,  0x001a,  0x00000000,  0x00000000, NULL },
     WAIT(40),
     FANFARE_PLAY2(682),
-    { 0xe2, 0x00,  0x02aa,  0x00000000,  0x00000000, NULL },
+    WAIT_FANFARE2(682),
     ALERT_CUE(5),
     HALT,
 };
@@ -129,4 +129,4 @@ static const struct GroundLink s_gs217_links[] = { /* 0x8269d58 */
     {},
 };
 
-/*extern*/ const struct GroundScriptHeader gGroundScript_gs217 = { LPARRAY(s_gs217_groups), s_gs217_links }; /* 0x8269d60 */
+const GroundScriptHeader gGroundScript_gs217 = { LPARRAY(s_gs217_groups), s_gs217_links }; /* 0x8269d60 */

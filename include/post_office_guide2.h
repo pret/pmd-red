@@ -8,14 +8,14 @@
 typedef struct unkStruct_203B330
 {
     /* 0x0 */ TouchScreenMenuInput input;
-    u8 unkC;
+    u8 dungeonMissionKind; // See enum "DungeonMissionKind"
     /* 0xD */ u8 dungeonIndex;
     u32 unk10;
     WindowTemplate *unk14;
     WindowTemplates unk18;
 } unkStruct_203B330;
 
-bool8 sub_80319A4(u8, u8 dungeon, s32);
+bool8 sub_80319A4(u8 dungeonMissionKind, u8 dungeon, s32);
 u32 sub_80319F8(void);
 void sub_8031A3C(void);
 

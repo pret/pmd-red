@@ -1489,7 +1489,7 @@ void sub_8032828(void)
             CreateMenuDialogueBoxAndPortrait(&gUnknown_80E2D7C[0], 0, 6, gUnknown_80E2290, NULL, 4, 0, NULL, 0x101);
             break;
         case 0x59:
-            StrncpyCustom(buffer, GetPlayerPokemonStruct()->name, POKEMON_NAME_LENGTH);
+            StrncpyCustom(buffer, GetLeaderMon1()->name, POKEMON_NAME_LENGTH);
             sprintfStatic(gUnknown_203B33C->unk424, gUnknown_80E32C4, buffer);
             CreateDialogueBoxAndPortrait(gUnknown_203B33C->unk424, 0, 0, 0x101);
             break;

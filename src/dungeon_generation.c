@@ -223,7 +223,7 @@ void GenerateFloor(void)
 
                 // Attempt to generate random grid dimensions
                 attempts = 32;
-                while (1) {
+                while (TRUE) {
                     if (layout != LAYOUT_LARGE_0x8) {
                         gridSizeX = DungeonRandRange(2, 9);
                         gridSizeY = DungeonRandRange(2, 8);
@@ -1250,7 +1250,7 @@ static void GenerateExtraHallways(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_
 
         roomId = GetTile(currX, currY)->room;
 		// Walk in the random direction until out of the room
-		while (1) {
+		while (TRUE) {
             if (roomId != GetTile(currX, currY)->room)
                 break;
             // gAdjacentTileOffsets gives us the proper (x,y) offset to move one tile in the given direction.
@@ -1259,7 +1259,7 @@ static void GenerateExtraHallways(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_
 		}
 
 		// Keep walking until an obstacle is encountered
-		while (1) {
+		while (TRUE) {
             if (GetTerrainType(GetTile(currX, currY)) != TERRAIN_TYPE_NORMAL)
                 break;
 
@@ -1796,7 +1796,7 @@ static void AssignGridCellConnections(struct GridCell grid[GRID_CELL_LEN][GRID_C
 
 		// Make sure our cardinalDirection isn't going into a border
 		// If so, rotate counterclockwise
-		while (1) {
+		while (TRUE) {
             bool8 notOk = FALSE;
             switch (cardinalDirection & CARDINAL_DIRECTION_MASK) {
             	case CARDINAL_DIR_RIGHT:
@@ -1870,7 +1870,7 @@ static void AssignGridCellConnections(struct GridCell grid[GRID_CELL_LEN][GRID_C
         return;
 
     // No dead ends, add some extra connections!
-    while (1) {
+    while (TRUE) {
         bool8 more = FALSE;
 
         // Locate potential dead ends
@@ -3573,13 +3573,13 @@ static void GenerateMaze(struct GridCell *gridCell, bool8 useSecondaryTerrain)
  */
 static void GenerateMazeLine(s32 x0, s32 y0, s32 xMin, s32 yMin, s32 xMax, s32 yMax, bool8 useSecondaryTerrain, u32 roomIndex)
 {
-	while (1) {
+	while (TRUE) {
 		s32 direction = DungeonRandInt(NUM_CARDINAL_DIRECTIONS);
         s32 i = 0;
 
 		SetTerrainObstacleChecked(GetTileMut(x0, y0), useSecondaryTerrain, roomIndex);
 
-        while (1) {
+        while (TRUE) {
             s32 offsetX, offsetY;
             s32 posX, posY;
 
@@ -4288,7 +4288,7 @@ static void SpawnNonEnemies(FloorProperties *floorProps, bool8 isEmptyMonsterHou
                 // Spawn an item
                 tile->spawnOrVisibilityFlags.spawn |= SPAWN_FLAG_ITEM;
             }
-            else if (gDungeon->unk644.unk18) {
+            else if (gDungeon->unk644.canChangeLeader) {
                 tile->spawnOrVisibilityFlags.spawn |= SPAWN_FLAG_TRAP;
             }
 
@@ -4646,7 +4646,7 @@ static void GenerateSecondaryTerrainFormations(u32 flag, FloorProperties *floorP
 		x = DungeonRandRange(2, DUNGEON_MAX_SIZE_X - 2);
 		dirX = 0;
 
-		while (1) {
+		while (TRUE) {
             // Fill in tiles in chunks of size 2-7 before changing the flow direction
             numTilesFill = DungeonRandInt(6) + 2;
             while (numTilesFill != 0) {
@@ -5631,7 +5631,7 @@ bool8 StairsAlwaysReachable(s32 stairsX, s32 stairsY, bool8 markUnreachable)
 
 	// Uses a semi-BFS starting from the stairs until all reachable tiles
 	// have been visited
-	while (1) {
+	while (TRUE) {
         s32 checked = 0;
 		sNumTilesReachableFromStairs += 1;
 

@@ -119,7 +119,7 @@ void EnemyEvolution(Entity *entity)
               info->exp += expGained;
               gFormatArgs[0] = expGained;
               SetMessageArgument_2(gFormatBuffer_Monsters[0],info,0);
-              TryDisplayDungeonLoggableMessage3(entityPtr,target,gUnknown_80F9E64); // $m0 gained $d0 Exp Points
+              TryDisplayDungeonLoggableMessage3_Async(entityPtr,target,gUnknown_80F9E64); // $m0 gained $d0 Exp Points
               flag = LevelUp(entityPtr,target,1,1);
             }
           }
@@ -159,7 +159,7 @@ void EnemyEvolution(Entity *entity)
               if ((tacticsBuffer1[tacticIndex] == 0) && (tacticsBuffer2[tacticIndex] == 1)) {
                 SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
                 CopyTacticsNameToBuffer(gFormatBuffer_Items[0],tacticIndex);
-                TryDisplayDungeonLoggableMessage3(entityPtr,target,gUnknown_80FF730); // $i0 was added to $m0's list of usable tactics
+                TryDisplayDungeonLoggableMessage3_Async(entityPtr,target,gUnknown_80FF730); // $i0 was added to $m0's list of usable tactics
               }
             }
           }
@@ -223,7 +223,7 @@ void LevelUpTarget(Entity *pokemon, Entity *target, s32 level, u8 param_4, u8 pa
                 if ((tacticsBuffer1[tacticIndex] == 0) && (tacticsBuffer2[tacticIndex] == 1)) {
                     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
                     CopyTacticsNameToBuffer(gFormatBuffer_Items[0],tacticIndex);
-                    TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FF730);
+                    TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FF730);
                 }
             }
         }
@@ -231,7 +231,7 @@ void LevelUpTarget(Entity *pokemon, Entity *target, s32 level, u8 param_4, u8 pa
         info->unk149 = 0;
         if ((flag == 0) && (param_4 != 0)) {
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
-            TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80F9B74);
+            TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80F9B74);
         }
     }
 }
@@ -263,7 +263,7 @@ static void sub_807218C(Entity *pokemon)
         }
         else if(info->joinedAt.id == DUNGEON_JOIN_LOCATION_PARTNER)
         {
-            if(gDungeon->unk644.unk18 == 0)
+            if (!gDungeon->unk644.canChangeLeader)
                 r3 = 1;
         }
         sub_806A3D4(buffer, r1, 3, r3);
@@ -272,7 +272,7 @@ static void sub_807218C(Entity *pokemon)
     {
         strcpy(buffer, gUnknown_80FCF18);
     }
-    DisplayDungeonMessage(0, buffer, 1);
+    DisplayDungeonMessage_Async(0, buffer, 1);
     buffer[0] = 0;
 
 
@@ -311,7 +311,7 @@ static void sub_807218C(Entity *pokemon)
     }
 
     if(buffer[0])
-        DisplayDungeonMessage(0, buffer, 1);
+        DisplayDungeonMessage_Async(0, buffer, 1);
 
     TryPointCameraToMonster(GetLeader(), 0);
 }
@@ -346,7 +346,7 @@ void LevelDownTarget(Entity *pokemon, Entity *target, u32 level)
         if(!flag)
         {
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], target, 0);
-            TryDisplayDungeonLoggableMessage3(pokemon, target, gUnknown_80F9B94);
+            TryDisplayDungeonLoggableMessage3_Async(pokemon, target, gUnknown_80F9B94);
         }
     }
 }
@@ -395,7 +395,7 @@ static bool8 LevelUp(Entity *pokemon, Entity *target, u8 param_3, u8 param_4)
                     sub_8083D58();
                 gFormatArgs[0] = level;
                 SetMessageArgument_2(gFormatBuffer_Monsters[0], info, 0);
-                DisplayDungeonLoggableMessageTrue(target, gUnknown_80F9E80);
+                DisplayDungeonLoggableMessageTrue_Async(target, gUnknown_80F9E80);
             }
         }
         flag = TRUE;
@@ -542,12 +542,12 @@ static bool8 sub_80725A4(Entity *pokemon, Entity *target)
     {
         gFormatArgs[0] = info->level;
         sub_80421C0(target, 0xD3 << 1);
-        TryDisplayDungeonLoggableMessage3(pokemon, target, gUnknown_80F9EC8); // $m0 dropped to Level $d0!
+        TryDisplayDungeonLoggableMessage3_Async(pokemon, target, gUnknown_80F9EC8); // $m0 dropped to Level $d0!
         return TRUE;
     }
     else
     {
-        TryDisplayDungeonLoggableMessage3(pokemon, target, gUnknown_80F9EEC); // $m0's level didn't drop!
+        TryDisplayDungeonLoggableMessage3_Async(pokemon, target, gUnknown_80F9EEC); // $m0's level didn't drop!
         return FALSE;
     }
 }
@@ -618,8 +618,8 @@ static void sub_8072778(Entity *pokemon, Entity *target, u8 param_2, u8 param_3)
 
         if (!info->isNotTeamMember && param_3) {
             if (!sp_0xCC && param_2) {
-                sub_803E708(0xA, 0x6);
-                DisplayDungeonMessage(0, gUnknown_80F9FA4, 1);
+                DungeonWaitFrames_Async(0xA, 0x6);
+                DisplayDungeonMessage_Async(0, gUnknown_80F9FA4, 1);
             }
             sp_0xCC = 1;
             sub_8063E70(target, localMoves, 1, 0);
@@ -687,7 +687,7 @@ bool8 sub_8072938(Entity *target, u16 moveId)
         r10 = FALSE;
 
         if (!info->isNotTeamMember) {
-            DisplayDungeonMessage(0, gUnknown_80FDF40, 1);
+            DisplayDungeonMessage_Async(0, gUnknown_80FDF40, 1);
             if (!sub_8063E70(target, localMoves, TRUE, TRUE)) {
                 return FALSE;
             }
@@ -784,7 +784,7 @@ static void sub_8072B78(Entity *pokemon, Entity *target, s16 id)
   ResetMonEntityData(entityInfo,0);
   sub_8069E0C(target);
   sub_806CCB4(target,7);
-  TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FE2EC);
+  TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FE2EC);
   sub_8042A44(target);
   sub_8083D78();
   if (id_s32 == MONSTER_NINJASK) {

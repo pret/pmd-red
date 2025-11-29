@@ -24,7 +24,7 @@ struct MemCopyData
 
 #define MAX_MEM_COPIES 8
 
-EWRAM_DATA RGB gFontPalette[128] = {0};
+EWRAM_DATA RGB_Struct gFontPalette[128] = {0};
 static EWRAM_DATA bool8 sTilemapCopyScheduled[4] = {FALSE};
 static EWRAM_DATA s32 sNumMemCopies = 0;
 static EWRAM_DATA struct MemCopyData sMemCopies[MAX_MEM_COPIES] = {0};
@@ -40,7 +40,7 @@ void InitGraphics(void)
     s32 i;
     OpenedFile *file;
     u32 *dest;
-    const RGB *rgbColors;
+    const RGB_Struct *rgbColors;
     struct FontData *font;
     #ifdef NONMATCHING
     const FileArchive *sysFileArchieve;
@@ -81,7 +81,7 @@ void InitGraphics(void)
 
     InitFontPalette();
     file = OpenFileAndGetFileDataPtr("fontsppa", sysFileArchieve);
-    rgbColors = (RGB *)file->data;
+    rgbColors = (RGB_Struct *)file->data;
 
     for (i = 0; i < 16; rgbColors++, i++) {
         SetBGPaletteBufferColorArray(0x1F0 + i, rgbColors);
@@ -95,7 +95,7 @@ void InitFontPalette(void)
 {
     OpenedFile *fontpalFile;
     s32 i;
-    RGB *ptr;
+    RGB_Struct *ptr;
 
     fontpalFile = OpenFileAndGetFileDataPtr("fontpal", &gSystemFileArchive);
     CpuCopy(gFontPalette, fontpalFile->data, sizeof(gFontPalette));
@@ -212,7 +212,7 @@ void CopyBgTilemaps0And1(void)
     CpuCopy(BG_SCREEN_ADDR(13), gBgTilemaps[1], BG_SCREEN_SIZE);
 }
 
-void SetFontsBaseColor(RGB a0)
+void SetFontsBaseColor(RGB_Struct a0)
 {
     s32 i;
 

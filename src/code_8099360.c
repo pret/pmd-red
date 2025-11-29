@@ -32,38 +32,40 @@ void sub_809965C(void)
 
 void sub_8099690(u32 param_1)
 {
-    OpenedFile *temp;
-    RGB *pal;
-    RGB *var2;
+    OpenedFile *file;
+    RGB_Struct *pal;
+    RGB_Struct *var2;
     u8 gender;
 
     s32 index;
 
-    temp = OpenFileAndGetFileDataPtr("fontpal", &gSystemFileArchive);
+    file = OpenFileAndGetFileDataPtr("fontpal", &gSystemFileArchive);
 
-    switch(param_1)
-    {
-        default:
+    switch (param_1) {
+        default: {
             gender = gGameOptionsRef->playerGender;
-             pal = &gFontPalette[0x10];
-            if(gender != 0)
+            pal = &gFontPalette[0x10];
+            if (gender != MALE)
                 pal += 0x40;
             break;
-        case 1:
+        }
+        case 1: {
             pal = &gFontPalette[0x60];
             break;
-        case 2:
+        }
+        case 2: {
             pal = &gFontPalette[0x70];
             break;
+        }
     }
 
     sub_800388C(0xF0, (const RGB_Union *)pal, 0x10);
     var2 = pal;
-    for(index = 0; index < 0x10; index++)
-    {
+    for (index = 0; index < 0x10; index++) {
         nullsub_5(index + 0xF0, var2++);
     }
-    CloseFile(temp);
+
+    CloseFile(file);
 }
 
 UNUSED static void sub_8099708(u16 a0, RGB_Array a1)

@@ -13,7 +13,7 @@ static const struct ScriptCommand s_gs168_g0_s0_station_sref_script[] = { /* 0x8
     JUMP_SCRIPT(COMMON_ENTER),
 };
 
-static const struct ScriptRef s_gs168_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs168_g0_s0_station_sref_script }; /* 0x821ba90 */
+static const struct ScriptRef s_gs168_g0_s0_station_sref = { ENTER_CONTROL , 1, NULL, s_gs168_g0_s0_station_sref_script }; /* 0x821ba90 */
 
 static const struct ScriptCommand s_gs168_g1_s0_station_sref_script[] = { /* 0x821ba9c */
     DEBUGINFO_O(19),
@@ -27,7 +27,7 @@ static const struct ScriptCommand s_gs168_g1_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs168_g1_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs168_g1_s0_station_sref_script }; /* 0x821bb2c */
+static const struct ScriptRef s_gs168_g1_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs168_g1_s0_station_sref_script }; /* 0x821bb2c */
 
 static const struct ScriptCommand s_gs168_g1_s0_eff0_script[] = { /* 0x821bb38 */
     DEBUGINFO_O(33),
@@ -65,7 +65,7 @@ static const struct ScriptCommand s_gs168_g1_s0_lives0_dlg0[] = { /* 0x821bbf8 *
     MSG_NPC(1, _(" Hachoo!")),
     TEXTBOX_CLEAR,
     WAIT(8),
-    ROTATE(4, 1, DIRECTION_SOUTHWEST),
+    ROTATE_TO(4, DIR_TRANS_SPINRIGHT1, DIRECTION_SOUTHWEST),
     WAIT(24),
     ALERT_CUE(6),
     AWAIT_CUE(5),
@@ -74,7 +74,7 @@ static const struct ScriptCommand s_gs168_g1_s0_lives0_dlg0[] = { /* 0x821bbf8 *
     MSG_NPC(1, _(" Yuck...{WAIT_PRESS}\nMy nose is running, and it's freezing.")),
     TEXTBOX_CLEAR,
     WAIT(30),
-    ROTATE(4, 2, DIRECTION_EAST),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_EAST),
     { 0x3b, 0x36,  0x0004,  0x00000000,  0x00000000, NULL },
     SELECT_ANIMATION(5),
     ALERT_CUE(6),
@@ -167,32 +167,32 @@ static const struct ScriptCommand s_gs168_g1_s0_lives1_dlg0[] = { /* 0x821c620 *
     { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
     SELECT_ANIMATION(2),
     AWAIT_CUE(6),
-    ROTATE(4, 2, DIRECTION_NORTHEAST),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_NORTHEAST),
     ALERT_CUE(5),
     AWAIT_CUE(6),
-    ROTATE(4, 1, DIRECTION_EAST),
+    ROTATE_TO(4, DIR_TRANS_SPINRIGHT1, DIRECTION_EAST),
     SELECT_ANIMATION(5),
     AWAIT_CUE(6),
     SELECT_ANIMATION(2),
-    ROTATE(4, 2, DIRECTION_NORTHEAST),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_NORTHEAST),
     ALERT_CUE(5),
     AWAIT_CUE(6),
-    ROTATE(4, 1, DIRECTION_EAST),
+    ROTATE_TO(4, DIR_TRANS_SPINRIGHT1, DIRECTION_EAST),
     { 0x56, 0x00,  0x0000,  0x00000058,  0x00000000, NULL },
     { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
     { 0x89, 0x0c,  0x0100,  0x00000002,  0x00000000, NULL },
     ALERT_CUE(5),
     AWAIT_CUE(6),
-    ROTATE(4, 2, DIRECTION_NORTHEAST),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_NORTHEAST),
     ALERT_CUE(5),
     AWAIT_CUE(6),
-    ROTATE(4, 1, DIRECTION_EAST),
+    ROTATE_TO(4, DIR_TRANS_SPINRIGHT1, DIRECTION_EAST),
     ALERT_CUE(5),
     AWAIT_CUE(6),
-    ROTATE(4, 2, DIRECTION_NORTHEAST),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_NORTHEAST),
     ALERT_CUE(5),
     AWAIT_CUE(6),
-    ROTATE(4, 1, DIRECTION_EAST),
+    ROTATE_TO(4, DIR_TRANS_SPINRIGHT1, DIRECTION_EAST),
     ALERT_CUE(5),
     SELECT_ANIMATION(5),
     HALT,
@@ -203,7 +203,7 @@ static const struct ScriptCommand s_gs168_g1_s0_lives2_dlg0[] = { /* 0x821c8e0 *
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(7),
-    ROTATE(4, 2, DIRECTION_EAST),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_EAST),
     SELECT_ANIMATION(32),
     WAIT(9),
     FANFARE_PLAY2(478),
@@ -216,14 +216,14 @@ static const struct ScriptCommand s_gs168_g2_s0_station_sref_script[] = { /* 0x8
     SELECT_MAP(168),
     SELECT_WEATHER(-1),
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(36),
+    BGM_SWITCH(MUS_ESCAPE_THROUGH_THE_SNOW),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     { 0x23, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
     RET,
 };
 
-static const struct ScriptRef s_gs168_g2_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs168_g2_s0_station_sref_script }; /* 0x821ca10 */
+static const struct ScriptRef s_gs168_g2_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs168_g2_s0_station_sref_script }; /* 0x821ca10 */
 
 static const struct ScriptCommand s_gs168_g2_s0_lives0_dlg0[] = { /* 0x821ca1c */
     DEBUGINFO_O(229),
@@ -244,13 +244,13 @@ static const struct ScriptCommand s_gs168_g2_s0_lives0_dlg0[] = { /* 0x821ca1c *
     VARIANT_DEFAULT(_(" Oh!")),
     TEXTBOX_CLEAR,
     WAIT(10),
-    ROTATE(4, 1, DIRECTION_SOUTHEAST),
+    ROTATE_TO(4, DIR_TRANS_SPINRIGHT1, DIRECTION_SOUTHEAST),
     ALERT_CUE(6),
     AWAIT_CUE(5),
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
     VARIANT(/* == */  1, _(" {NAME_0}!\nCheck that out!")),
     VARIANT_DEFAULT(_(" {NAME_0}! Look!")),
-    ROTATE(4, 2, DIRECTION_EAST),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_EAST),
     ALERT_CUE(6),
     MSG_NPC(1, _(" See that?{WAIT_PRESS}\nThose trees are frozen!")),
     TEXTBOX_CLEAR,
@@ -270,10 +270,10 @@ static const struct ScriptCommand s_gs168_g2_s0_lives1_dlg0[] = { /* 0x821cc58 *
     SELECT_ANIMATION(2),
     ALERT_CUE(5),
     AWAIT_CUE(6),
-    ROTATE(4, 2, DIRECTION_NORTHWEST),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_NORTHWEST),
     ALERT_CUE(5),
     AWAIT_CUE(6),
-    ROTATE(4, 1, DIRECTION_EAST),
+    ROTATE_TO(4, DIR_TRANS_SPINRIGHT1, DIRECTION_EAST),
     AWAIT_CUE(6),
     HALT,
 };
@@ -335,4 +335,4 @@ static const struct GroundLink s_gs168_links[] = { /* 0x821ce84 */
     {},
 };
 
-/*extern*/ const struct GroundScriptHeader gGroundScript_gs168 = { LPARRAY(s_gs168_groups), s_gs168_links }; /* 0x821ce8c */
+const GroundScriptHeader gGroundScript_gs168 = { LPARRAY(s_gs168_groups), s_gs168_links }; /* 0x821ce8c */

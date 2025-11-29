@@ -6,6 +6,6 @@
 extern u8 gUnknown_202F32C;
 extern u8 gUnknown_202F32D;
 
-bool8 ExecuteEntityDungeonAction(Entity *entity);
+bool8 ExecuteEntityDungeonAction_Async(Entity *entity);
 
 #endif

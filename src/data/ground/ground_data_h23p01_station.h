@@ -36,10 +36,10 @@ static const struct ScriptCommand s_gs151_g0_s0_station_sref_script[] = { /* 0x8
     SELECT_ENTITIES(1, 0),
     JUMP_LABEL(2),
   LABEL(2), /* = 0x02 */
-    JUMPIF_EQUAL(START_MODE, 1, /* to label */ 4),
-    JUMPIF_EQUAL(START_MODE, 3, /* to label */ 5),
-    JUMPIF_EQUAL(START_MODE, 2, /* to label */ 6),
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 6),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_CONTINUE_GAME, /* to label */ 4),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_3, /* to label */ 5),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_GROUND, /* to label */ 6),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 6),
     JUMP_LABEL(4),
   LABEL(6), /* = 0x06 */
     CJUMP_VAR(GROUND_GETOUT),
@@ -55,11 +55,11 @@ static const struct ScriptCommand s_gs151_g0_s0_station_sref_script[] = { /* 0x8
     SELECT_LIVES(0, 1),
     JUMP_LABEL(8),
   LABEL(8), /* = 0x08 */
-    BGM_SWITCH(2),
+    BGM_SWITCH(MUS_FRIEND_AREA_SWAMP),
     JUMP_SCRIPT(COMMON_ENTER),
 };
 
-static const struct ScriptRef s_gs151_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs151_g0_s0_station_sref_script }; /* 0x8209220 */
+static const struct ScriptRef s_gs151_g0_s0_station_sref = { ENTER_CONTROL , 1, NULL, s_gs151_g0_s0_station_sref_script }; /* 0x8209220 */
 
 static const struct ScriptCommand s_gs151_g0_s1_lives0_dlg0[] = { /* 0x820922c */
     DEBUGINFO_O(65),
@@ -327,10 +327,10 @@ static const struct GroundLivesData s_gs151_g1_s0_lives[] = { /* 0x820982c */
 };
 
 static const struct GroundEventData s_gs151_g0_s0_evts[] = { /* 0x8209964 */
-    /*  0 */ {  57,   3,   0,   0, {   0,   0, 0, 0 }, &gFunctionScriptTable[358] },
-    /*  1 */ {  57,   1,   0,   0, {   0,  38, 0, 0 }, &gFunctionScriptTable[358] },
-    /*  2 */ {   1,  39,   0,   0, {   0,   0, 0, 0 }, &gFunctionScriptTable[358] },
-    /*  3 */ {   1,  39,   0,   0, {  56,   0, 0, 0 }, &gFunctionScriptTable[358] },
+    /*  0 */ {  57,   3,   0,   0, {   0,   0, 0, 0 }, &gFunctionScriptTable[GETOUT_HABITAT] },
+    /*  1 */ {  57,   1,   0,   0, {   0,  38, 0, 0 }, &gFunctionScriptTable[GETOUT_HABITAT] },
+    /*  2 */ {   1,  39,   0,   0, {   0,   0, 0, 0 }, &gFunctionScriptTable[GETOUT_HABITAT] },
+    /*  3 */ {   1,  39,   0,   0, {  56,   0, 0, 0 }, &gFunctionScriptTable[GETOUT_HABITAT] },
 };
 
 static const struct ScriptRef * const (sStationScripts[]) = { /* 0x8209994 */
@@ -371,4 +371,4 @@ static const struct GroundLink s_gs151_links[] = { /* 0x8209aa0 */
     /* link  12 */ { { /*x*/  30, /*y*/  22, /*flags*/ 0, 0 }, /*w*/  6, /*h*/  6, /*ret*/ 3, /*?*/ 2 },
 };
 
-/*extern*/ const struct GroundScriptHeader gGroundScript_gs151 = { LPARRAY(s_gs151_groups), s_gs151_links }; /* 0x8209b08 */
+const GroundScriptHeader gGroundScript_gs151 = { LPARRAY(s_gs151_groups), s_gs151_links }; /* 0x8209b08 */

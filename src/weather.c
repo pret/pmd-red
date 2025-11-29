@@ -86,12 +86,12 @@ static void sub_807E698(bool8 arg0)
 {
     s32 i, j;
     s32 weatherArrId = GetApparentWeather(NULL) * COLOR_RAMP_COUNT;
-    RGB *fileData = (void *) gUnknown_202ECA0->data;
+    RGB_Struct *fileData = (void *) gUnknown_202ECA0->data;
     u8 savedByte;
 
     sub_8042818(GetApparentWeather(NULL), arg0);
     DungeonRunFrameActions(0x25);
-    sub_804178C(1);
+    sub_804178C_Async(1);
     savedByte = gUnknown_203B40D;
     gUnknown_203B40D = 1;
 
@@ -159,9 +159,9 @@ void sub_807E7FC(bool8 r0)
     }
 
     if (r0) {
-        if (gDungeon->unk1356C == 0) {
+        if (!gDungeon->unk1356C) {
             GetWeatherName(gFormatBuffer_Monsters[0], GetApparentWeather(NULL));
-            LogMessageByIdWithPopupCheckUser(cameraTarget, gUnknown_80FC5E0); // Weather: {ARG_POKEMON_0}
+            LogMessageByIdWithPopupCheckUser_Async(cameraTarget, gUnknown_80FC5E0); // Weather: {ARG_POKEMON_0}
         }
     }
 
@@ -177,7 +177,7 @@ void sub_807E88C(void)
 {
     s32 i;
     s32 weatherArrId = GetApparentWeather(0) * COLOR_RAMP_COUNT;
-    RGB *fileData = (void *) gUnknown_202ECA0->data;
+    RGB_Struct *fileData = (void *) gUnknown_202ECA0->data;
 
     for (i = 0; i < COLOR_RAMP_COUNT; i++) {
         gDungeon->colorRamp[i].r = fileData[weatherArrId + i].r;
@@ -240,11 +240,11 @@ void MudWaterSportEffect(u8 which)
 {
     if (which == 0) {
         gDungeon->weather.mudSportTurns = CalculateStatusTurns(0, gMudWaterSportTurnRange, FALSE);
-        LogMessageByIdWithPopupCheckUser(GetLeader(), gUnknown_80FAD8C);
+        LogMessageByIdWithPopupCheckUser_Async(GetLeader(), gUnknown_80FAD8C);
     }
     else {
         gDungeon->weather.waterSportTurns =CalculateStatusTurns(0, gMudWaterSportTurnRange, FALSE);
-        LogMessageByIdWithPopupCheckUser(GetLeader(), gUnknown_80FADB0);
+        LogMessageByIdWithPopupCheckUser_Async(GetLeader(), gUnknown_80FADB0);
     }
 }
 
@@ -296,13 +296,13 @@ bool8 sub_807EAA0(bool8 arg0, bool8 arg1)
     if (gDungeon->weather.mudSportTurns != 0) {
         sub_80838EC(&gDungeon->weather.mudSportTurns);
         if (gDungeon->weather.mudSportTurns == 0) {
-            LogMessageByIdWithPopupCheckUser(GetLeader(), gUnknown_80FA778);
+            LogMessageByIdWithPopupCheckUser_Async(GetLeader(), gUnknown_80FA778);
         }
     }
     if (gDungeon->weather.waterSportTurns != 0) {
         sub_80838EC(&gDungeon->weather.waterSportTurns);
         if (gDungeon->weather.waterSportTurns == 0) {
-            LogMessageByIdWithPopupCheckUser(GetLeader(), gUnknown_80FA758);
+            LogMessageByIdWithPopupCheckUser_Async(GetLeader(), gUnknown_80FA758);
         }
     }
 

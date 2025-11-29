@@ -1,28 +1,25 @@
-static const WindowTemplate sUnknown_80DB6DC = {
-    0,
-    3,
-    0, 0,
-    0, 0,
-    0, 0,
-    NULL
-};
+static const WindowTemplate sUnknown_80DB6DC = WIN_TEMPLATE_DUMMY;
 
 static const WindowTemplate sUnknown_80DB6F4 = {
-    0,
-    3,
-    2, 3,
-    26, 2,
-    2, 0,
-    NULL
+    .flags = WINTEMPLATE_FLAG_NONE,
+    .type = WINDOW_TYPE_NORMAL,
+    .pos = { 2, 3 },
+    .width = 26,
+    .height = 2,
+    .totalHeight = 2,
+    .unk12 = 0,
+    .header = NULL
 };
 
 static const WindowTemplate sUnknown_80DB70C = {
-    0,
-    3,
-    17, 8,
-    11, 4,
-    4, 0,
-    NULL
+    .flags = WINTEMPLATE_FLAG_NONE,
+    .type = WINDOW_TYPE_NORMAL,
+    .pos = { 17, 8 },
+    .width = 11,
+    .height = 4,
+    .totalHeight = 4,
+    .unk12 = 0,
+    .header = NULL
 };
 
 ALIGNED(4) static const u8 sDisplayMoney[] = _("Money: ");

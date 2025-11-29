@@ -48,22 +48,23 @@ struct RgbS16
 };
 
 extern OpenedFile *gDungeonPaletteFile;
-extern RGB gUnknown_202ECA4[];
+extern RGB_Struct gUnknown_202ECA4[33];
 
-extern bool8 sub_8004C00(unkStruct_202EE8C *a0, s32 a1, s32 a2, s32 brightness, const RGB *ramp, struct RgbS16 *a5);
+extern bool8 sub_8004C00(unkStruct_202EE8C *a0, s32 a1, s32 a2, s32 brightness, const RGB_Struct *ramp, struct RgbS16 *a5);
 extern void sub_8088EE8(void);
 extern void sub_8088848(void);
 extern void sub_808A718(void);
 
-struct unkData_8107234
+// Size: R=0x8 | B=0x6
+typedef struct FixedRoomCutsceneData
 {
-    u8 unk0;
-    u8 unk1;
-    u8 unk2;
-    u8 unk3;
-    u8 unk4;
-    u8 unk5;
-};
+    /* 0x0 */ u8 fixedRoomNum; // See enum "FixedRoomID"
+    /* 0x1 */ u8 cutscene1; // See enum "CutsceneKind"
+    /* 0x2 */ u8 cutscene2Flag; // See enum "CutsceneFlagID"
+    /* 0x3 */ u8 cutscene2; // See enum "CutsceneKind"
+    /* 0x4 */ u8 cutscene3Flag; // See enum "CutsceneFlagID"
+    /* 0x5 */ u8 cutscene3; // See enum "CutsceneKind"
+} FixedRoomCutsceneData;
 
 // size: 0x8
 typedef struct unkStruct_202F3D0
@@ -76,89 +77,91 @@ typedef struct unkStruct_202F3D0
     u8 unk5;
 } unkStruct_202F3D0;
 
-static void sub_8084854(const struct unkData_8107234 *);
+static void sub_8084854(const FixedRoomCutsceneData *data);
 static void sub_8085764(void);
 static void sub_80857B8(void);
 static void sub_80861EC(Entity *);
 
-static const struct unkData_8107234 gUnknown_8107234[28] = {
-    [0] = {1, 1, 0, 2, 1, 3},
-    [1] = {2, 4, 2, 5, 3, 6},
-    [2] = {3, 7, 4, 8, 5, 9},
-    [3] = {4, 0xA, 6, 0xB, 7, 0xC},
-    [4] = {5, 0xD, 8, 0xE, 9, 0xF},
-    [5] = {6, 0x10, 0xA, 0x11, 0xA, 0x11},
-    [6] = {7, 0x12, 0xB, 0x13, 0xC, 0x14},
-    [7] = {0x14, 0x15, 0xD, 0x16, 0xD, 0x16},
-    [8] = {8, 0x17, 0xE, 0x18, 0xF, 0x19},
-    [9] = {0xB, 0x1A, 0x10, 0x1B, 0x11, 0x1C},
-    [10] = {9, 0x1D, 0x12, 0x1E, 0x13, 0x1F},
-    [11] = {0xC, 0x20, 0x14, 0x21, 0x15, 0x22},
-    [12] = {0xD, 0x23, 0x16, 0x24, 0x17, 0x25},
-    [13] = {0xE, 0x26, 0x18, 0x27, 0x19, 0x28},
-    [14] = {0xF, 0x29, 0x40, 0x29, 0x1A, 0x2A},
-    [15] = {0x10, 0x2B, 0x1B, 0x2C, 0x1C, 0x2D},
-    [16] = {0x11, 0x2E, 0x40, 0x2E, 0x40, 0x2E},
-    [17] = {0x12, 0x2F, 0x40, 0x2F, 0x40, 0x2F},
-    [18] = {0x13, 0x30, 0x40, 0x30, 0x40, 0x30},
-    [19] = {0xA, 0x31, 0x40, 0x31, 0x1E, 0x32},
-    [20] = {0x15, 0x33, 0x40, 0x33, 0x40, 0x33},
-    [21] = {0x16, 0x34, 0x40, 0x34, 0x40, 0x34},
-    [22] = {0x17, 0x35, 0x40, 0x35, 0x40, 0x35},
-    [23] = {0x19, 0x36, 0x40, 0x36, 0x40, 0x36},
-    [24] = {0x1B, 0x37, 0x40, 0x37, 0x40, 0x37},
-    [25] = {0x1A, 0x38, 0x20, 0x39, 0x20, 0x39},
-    [26] = {0x18, 0x3A, 0x21, 0x3B, 0x21, 0x3B},
-    [27] = {0},
+static const FixedRoomCutsceneData sFixedRoomCutsceneLookup[] = {
+    { FIXED_ROOM_MT_STEEL_SKARMORY, CUTSCENE_MT_STEEL_ATTEMPT1, CUTSCENE_FLAG_MT_STEEL_REACHED, CUTSCENE_MT_STEEL_ATTEMPT2, CUTSCENE_FLAG_MT_STEEL_COMPLETE, CUTSCENE_MT_STEEL_POSTSTORY },
+    { FIXED_ROOM_SINISTER_WOODS_TEAM_MEANIES, CUTSCENE_SINISTER_WOODS_ATTEMPT1, CUTSCENE_FLAG_SINISTER_WOODS_REACHED, CUTSCENE_SINISTER_WOODS_ATTEMPT2, CUTSCENE_FLAG_SINISTER_WOODS_COMPLETE, CUTSCENE_SINISTER_WOODS_POSTSTORY },
+    { FIXED_ROOM_MT_THUNDER_PEAK_ZAPDOS, CUTSCENE_MT_THUNDER_PEAK_ATTEMPT1, CUTSCENE_FLAG_MT_THUNDER_PEAK_REACHED, CUTSCENE_MT_THUNDER_PEAK_ATTEMPT2, CUTSCENE_FLAG_MT_THUNDER_PEAK_COMPLETE, CUTSCENE_MT_THUNDER_PEAK_POSTSTORY },
+    { FIXED_ROOM_MT_BLAZE_PEAK_MOLTRES, CUTSCENE_MT_BLAZE_PEAK_ATTEMPT1, CUTSCENE_FLAG_MT_BLAZE_PEAK_REACHED, CUTSCENE_MT_BLAZE_PEAK_ATTEMPT2, CUTSCENE_FLAG_MT_BLAZE_PEAK_COMPLETE, CUTSCENE_MT_BLAZE_PEAK_POSTSTORY },
+    { FIXED_ROOM_FROSTY_GROTTO_ARTICUNO, CUTSCENE_FROSTY_GROTTO_ATTEMPT1, CUTSCENE_FLAG_FROSTY_GROTTO_REACHED, CUTSCENE_FROSTY_GROTTO_ATTEMPT2, CUTSCENE_FLAG_FROSTY_GROTTO_COMPLETE, CUTSCENE_FROSTY_GROTTO_POSTSTORY },
+    { FIXED_ROOM_MT_FREEZE_PEAK_NINETALES, CUTSCENE_MT_FREEZE_PEAK, CUTSCENE_FLAG_MT_FREEZE_PEAK_COMPLETE, CUTSCENE_MT_FREEZE_PEAK_POSTSTORY, CUTSCENE_FLAG_MT_FREEZE_PEAK_COMPLETE, CUTSCENE_MT_FREEZE_PEAK_POSTSTORY },
+    { FIXED_ROOM_MAGMA_CAVERN_PIT_GROUDON, CUTSCENE_MAGMA_CAVERN_PIT_ATTEMPT1, CUTSCENE_FLAG_MAGMA_CAVERN_PIT_REACHED, CUTSCENE_MAGMA_CAVERN_PIT_ATTEMPT2, CUTSCENE_FLAG_MAGMA_CAVERN_PIT_COMPLETE, CUTSCENE_MAGMA_CAVERN_PIT_POSTSTORY },
+    { FIXED_ROOM_MAGMA_CAVERN_PIT_TYRANITAR_ALAKAZAM, CUTSCENE_MAGMA_CAVERN_MID, CUTSCENE_FLAG_MAGMA_CAVERN_MID_REACHED, CUTSCENE_MAGMA_CAVERN_MID_POSTSTORY, CUTSCENE_FLAG_MAGMA_CAVERN_MID_REACHED, CUTSCENE_MAGMA_CAVERN_MID_POSTSTORY },
+    { FIXED_ROOM_SKY_TOWER_SUMMIT_RAYQUAZA, CUTSCENE_SKY_TOWER_SUMMIT_ATTEMPT1, CUTSCENE_FLAG_SKY_TOWER_SUMMIT_REACHED, CUTSCENE_SKY_TOWER_SUMMIT_ATTEMPT2, CUTSCENE_FLAG_SKY_TOWER_SUMMIT_COMPLETE, CUTSCENE_SKY_TOWER_SUMMIT_POSTSTORY },
+    { FIXED_ROOM_UPROAR_FOREST_MANKEY, CUTSCENE_UPROAR_FOREST_ATTEMPT1, CUTSCENE_FLAG_UPROAR_FOREST_REACHED, CUTSCENE_UPROAR_FOREST_ATTEMPT2, CUTSCENE_FLAG_UPROAR_FOREST_COMPLETE, CUTSCENE_UPROAR_FOREST_POSTSTORY },
+    { FIXED_ROOM_WESTERN_CAVE_MEWTWO, CUTSCENE_WESTERN_CAVE_ATTEMPT1, CUTSCENE_FLAG_WESTERN_CAVE_REACHED, CUTSCENE_WESTERN_CAVE_ATTEMPT2, CUTSCENE_FLAG_WESTERN_CAVE_COMPLETE, CUTSCENE_WESTERN_CAVE_POSTSTORY },
+    { FIXED_ROOM_FIERY_FIELD_ENTEI, CUTSCENE_FIERY_FIELD_ATTEMPT1, CUTSCENE_FLAG_FIERY_FIELD_REACHED, CUTSCENE_FIERY_FIELD_ATTEMPT2, CUTSCENE_FLAG_FIERY_FIELD_COMPLETE, CUTSCENE_FIERY_FIELD_POSTSTORY },
+    { FIXED_ROOM_LIGHTNING_FIELD_RAIKOU, CUTSCENE_LIGHTNING_FIELD_ATTEMPT1, CUTSCENE_FLAG_LIGHTNING_FIELD_REACHED, CUTSCENE_LIGHTNING_FIELD_ATTEMPT2, CUTSCENE_FLAG_LIGHTNING_FIELD_COMPLETE, CUTSCENE_LIGHTNING_FIELD_POSTSTORY },
+    { FIXED_ROOM_NORTHWIND_FIELD_SUICUNE, CUTSCENE_NORTHWIND_FIELD_ATTEMPT1, CUTSCENE_FLAG_NORTHWIND_FIELD_REACHED, CUTSCENE_NORTHWIND_FIELD_ATTEMPT2, CUTSCENE_FLAG_NORTHWIND_FIELD_COMPLETE, CUTSCENE_NORTHWIND_FIELD_POSTSTORY },
+    { FIXED_ROOM_MT_FARAWAY_HO_OH, CUTSCENE_MT_FARAWAY, NUM_CUTSCENE_FLAGS, CUTSCENE_MT_FARAWAY, CUTSCENE_FLAG_MT_FARAWAY_COMPLETE, CUTSCENE_MT_FARAWAY_POSTSTORY },
+    { FIXED_ROOM_NORTHERN_RANGE_LATIOS, CUTSCENE_NORTHERN_RANGE_ATTEMPT1, CUTSCENE_FLAG_NORTHERN_RANGE_REACHED, CUTSCENE_NORTHERN_RANGE_ATTEMPT2, CUTSCENE_FLAG_NORTHERN_RANGE_COMPLETE, CUTSCENE_NORTHERN_RANGE_POSTSTORY },
+    { FIXED_ROOM_BURIED_RELIC_REGIROCK, CUTSCENE_REGIROCK, NUM_CUTSCENE_FLAGS, CUTSCENE_REGIROCK, NUM_CUTSCENE_FLAGS, CUTSCENE_REGIROCK },
+    { FIXED_ROOM_BURIED_RELIC_REGICE, CUTSCENE_REGICE, NUM_CUTSCENE_FLAGS, CUTSCENE_REGICE, NUM_CUTSCENE_FLAGS, CUTSCENE_REGICE },
+    { FIXED_ROOM_BURIED_RELIC_REGISTEEL, CUTSCENE_REGISTEEL, NUM_CUTSCENE_FLAGS, CUTSCENE_REGISTEEL, NUM_CUTSCENE_FLAGS, CUTSCENE_REGISTEEL },
+    { FIXED_ROOM_WISH_CAVE_JIRACHI, CUTSCENE_JIRACHI, NUM_CUTSCENE_FLAGS, CUTSCENE_JIRACHI, CUTSCENE_FLAG_JIRACHI_COMPLETE, CUTSCENE_JIRACHI_POSTSTORY },
+    { FIXED_ROOM_SILVER_TRENCH_LUGIA, CUTSCENE_SILVER_TRENCH, NUM_CUTSCENE_FLAGS, CUTSCENE_SILVER_TRENCH, NUM_CUTSCENE_FLAGS, CUTSCENE_SILVER_TRENCH },
+    { FIXED_ROOM_STORMY_SEA_KYOGRE, CUTSCENE_STORMY_SEA, NUM_CUTSCENE_FLAGS, CUTSCENE_STORMY_SEA, NUM_CUTSCENE_FLAGS, CUTSCENE_STORMY_SEA },
+    { FIXED_ROOM_METEOR_CAVE_DEOXYS, CUTSCENE_METEOR_CAVE, NUM_CUTSCENE_FLAGS, CUTSCENE_METEOR_CAVE, NUM_CUTSCENE_FLAGS, CUTSCENE_METEOR_CAVE },
+    { FIXED_ROOM_PURITY_FOREST_CELEBI, CUTSCENE_PURITY_FOREST, NUM_CUTSCENE_FLAGS, CUTSCENE_PURITY_FOREST, NUM_CUTSCENE_FLAGS, CUTSCENE_PURITY_FOREST },
+    { FIRST_DOJO_MAZE_BOSS_ROOM, CUTSCENE_MAZE_BOSS, NUM_CUTSCENE_FLAGS, CUTSCENE_MAZE_BOSS, NUM_CUTSCENE_FLAGS, CUTSCENE_MAZE_BOSS },
+    { FIXED_ROOM_WISH_CAVE_MEDICHAM, CUTSCENE_MEDICHAM, CUTSCENE_FLAG_MEDICHAM_COMPLETE, CUTSCENE_MEDICHAM_POSTSTORY, CUTSCENE_FLAG_MEDICHAM_COMPLETE, CUTSCENE_MEDICHAM_POSTSTORY },
+    { FIXED_ROOM_HOWLING_FOREST_SMEARGLE, CUTSCENE_HOWLING_FOREST, CUTSCENE_FLAG_HOWLING_FOREST_COMPLETE, CUTSCENE_HOWLING_FOREST_POSTSTORY, CUTSCENE_FLAG_HOWLING_FOREST_COMPLETE, CUTSCENE_HOWLING_FOREST_POSTSTORY },
+    { FIXED_ROOM_NONE, 0, 0, 0, 0, 0 },
 };
 
-static const s32 gUnknown_8107314[] = {
+static const s32 gUnknown_8107314[17] = {
     0, -1, 1, -2, 2, -3, 3, -4,
     4, -4, 4, -4, 4, -4, 4, -4,
     4
 };
 
-EWRAM_DATA static unkStruct_202F3D0 gUnknown_202F3D0 = {0};
+EWRAM_DATA static unkStruct_202F3D0 gUnknown_202F3D0 = { 0 };
 
 void sub_80847D4(void)
 {
     u32 fixedRoomNumber;
-    s32 index;
+    s32 i;
 
-    gDungeon->unk3A0D = 0;
-    gDungeon->unk1356C = 0;
+    gDungeon->cutscene = CUTSCENE_NONE;
+    gDungeon->unk1356C = FALSE;
     UpdateMinimap();
-    for(index = 0; index < 0x3e7 && gUnknown_8107234[index].unk0 != 0;  index++) {
+
+    for (i = 0; i < 999 && sFixedRoomCutsceneLookup[i].fixedRoomNum != FIXED_ROOM_NONE; i++) {
         fixedRoomNumber = gDungeon->fixedRoomNumber;
+
         // Dojo maze bosses all use the same cutscene data
-        if (fixedRoomNumber - (FIRST_DOJO_MAZE_BOSS_ROOM+1) < NUM_MAZE_BOSS_ROOMS) {
+        if (fixedRoomNumber >= (FIRST_DOJO_MAZE_BOSS_ROOM + 1) && fixedRoomNumber <= LAST_DOJO_MAZE_BOSS_ROOM)
             fixedRoomNumber = FIRST_DOJO_MAZE_BOSS_ROOM;
-        }
-        if (fixedRoomNumber == gUnknown_8107234[index].unk0)
-        {
-            sub_8084854(&gUnknown_8107234[index]);
+
+        if (fixedRoomNumber == sFixedRoomCutsceneLookup[i].fixedRoomNum) {
+            sub_8084854(&sFixedRoomCutsceneLookup[i]);
             break;
         }
     }
-    sub_8097FF8();
+
+    FlushTempCutsceneFlags();
 }
 
-static void sub_8084854(const struct unkData_8107234 *param_1)
+static void sub_8084854(const FixedRoomCutsceneData *data)
 {
-    if (gDungeon->unk644.unk34 != 0) {
-        gDungeon->unk3A0D = param_1->unk5;
+    if (gDungeon->unk644.missionKind != DUNGEON_MISSION_UNK0) {
+        gDungeon->cutscene = data->cutscene3;
     }
-    else if (sub_8098100(param_1->unk4) != 0) {
-        gDungeon->unk3A0D = param_1->unk5;
+    else if (GetCutsceneFlag(data->cutscene3Flag)) {
+        gDungeon->cutscene = data->cutscene3;
     }
-    else if (sub_8098100(param_1->unk2) != 0) {
-        gDungeon->unk3A0D = param_1->unk3;
+    else if (GetCutsceneFlag(data->cutscene2Flag)) {
+        gDungeon->cutscene = data->cutscene2;
     }
     else {
-        gDungeon->unk3A0D = param_1->unk1;
-        if (param_1->unk2 != 0x40) {
-            sub_8097FA8(param_1->unk2);
-        }
+        gDungeon->cutscene = data->cutscene1;
+
+        if (data->cutscene2Flag != NUM_CUTSCENE_FLAGS)
+            SetTempCutsceneFlag(data->cutscene2Flag);
     }
 
     gDungeon->unk644.unk31 = 1;
@@ -172,569 +175,571 @@ bool8 ShouldShowDungeonBanner(void)
 
 void sub_80848F0(void)
 {
-  gDungeon->unk1356C = 1;
-  switch(gDungeon->unk3A0D) {
-    case 0:
-    case 0x3c:
-        gDungeon->unk1356C = 0;
-        break;
-    case 1:
-    case 2:
-        sub_8086B14();
-        break;
-    case 3:
-        sub_8086B94();
-        break;
-    case 4:
-    case 5:
-        sub_8086E9C();
-        break;
-    case 6:
-        sub_8086F00();
-        break;
-    case 7:
-    case 8:
-        sub_8087230();
-        break;
-    case 9:
-        sub_808729C();
-        break;
-    case 10:
-    case 0xb:
-        sub_80877E8();
-        break;
-    case 0xc:
-        sub_8087848();
-        break;
-    case 0xd:
-        sub_8087F54();
-        break;
-    case 0xe:
-        sub_8087FB4();
-        break;
-    case 0xf:
-        sub_8087FF8();
-        break;
-    case 0x10:
-        sub_80885A0();
-        break;
-    case 0x11:
-        sub_80885C4();
-        break;
-    case 0x12:
-        sub_808862C();
-        break;
-    case 0x13:
-        sub_80886C4();
-        break;
-    case 0x14:
-        sub_808875C();
-        break;
-    case 0x15:
-        sub_8088DC0();
-        break;
-    case 0x16:
-        sub_8088E5C();
-        break;
-    case 0x17:
-    case 0x18:
-        sub_80892C8();
-        break;
-    case 0x19:
-        sub_8089328();
-        break;
-    case 0x1a:
-    case 0x1b:
-        sub_808970C();
-        break;
-    case 0x1c:
-        sub_808974C();
-        break;
-    case 0x1d:
-    case 0x1e:
-        sub_8089914();
-        break;
-    case 0x1f:
-        sub_8089978();
-        break;
-    case 0x20:
-    case 0x21:
-        sub_8089C44();
-        break;
-    case 0x22:
-        sub_8089C90();
-        break;
-    case 0x23:
-        sub_8089EFC();
-        break;
-    case 0x24:
-        sub_8089F44();
-        break;
-    case 0x25:
-        sub_8089F8C();
-        break;
-    case 0x26:
-        sub_808A264();
-        break;
-    case 0x27:
-        sub_808A2C0();
-        break;
-    case 0x28:
-        sub_808A308();
-        break;
-    case 0x29:
-        sub_808A608();
-        break;
-    case 0x2a:
-        sub_808A668();
-        break;
-    case 0x2b:
-        sub_808A9E4();
-        break;
-    case 0x2c:
-        sub_808AA3C();
-        break;
-    case 0x2d:
-        sub_808AA94();
-        break;
-    case 0x2e:
-        sub_808ACC0();
-        break;
-    case 0x2f:
-        sub_808AD48();
-        break;
-    case 0x30:
-        sub_808ADCC();
-        break;
-    case 0x31:
-        sub_808B2F4();
-        break;
-    case 0x32:
-        sub_808B35C();
-        break;
-    case 0x33:
-        sub_808BDEC();
-        break;
-    case 0x34:
-        sub_808C10C();
-        break;
-    case 0x35:
-        sub_808C3A0();
-        break;
-    case 0x36:
-        sub_808C5C0();
-        break;
-    case 0x37:
-        sub_808C938();
-        break;
-    case 0x38:
-        sub_808C9C4();
-        break;
-    case 0x39:
-        sub_808CB5C();
-        break;
-    case 0x3a:
-        sub_808CBB0();
-        break;
-    case 0x3b:
-        sub_808CD44();
-        break;
-  }
-  sub_8097FF8();
+    gDungeon->unk1356C = TRUE;
+
+    switch (gDungeon->cutscene) {
+        case CUTSCENE_NONE:
+        case NUM_CUTSCENES:
+            gDungeon->unk1356C = FALSE;
+            break;
+        case CUTSCENE_MT_STEEL_ATTEMPT1:
+        case CUTSCENE_MT_STEEL_ATTEMPT2:
+            sub_8086B14();
+            break;
+        case CUTSCENE_MT_STEEL_POSTSTORY:
+            sub_8086B94();
+            break;
+        case CUTSCENE_SINISTER_WOODS_ATTEMPT1:
+        case CUTSCENE_SINISTER_WOODS_ATTEMPT2:
+            sub_8086E9C();
+            break;
+        case CUTSCENE_SINISTER_WOODS_POSTSTORY:
+            sub_8086F00();
+            break;
+        case CUTSCENE_MT_THUNDER_PEAK_ATTEMPT1:
+        case CUTSCENE_MT_THUNDER_PEAK_ATTEMPT2:
+            sub_8087230();
+            break;
+        case CUTSCENE_MT_THUNDER_PEAK_POSTSTORY:
+            sub_808729C();
+            break;
+        case CUTSCENE_MT_BLAZE_PEAK_ATTEMPT1:
+        case CUTSCENE_MT_BLAZE_PEAK_ATTEMPT2:
+            sub_80877E8();
+            break;
+        case CUTSCENE_MT_BLAZE_PEAK_POSTSTORY:
+            sub_8087848();
+            break;
+        case CUTSCENE_FROSTY_GROTTO_ATTEMPT1:
+            sub_8087F54();
+            break;
+        case CUTSCENE_FROSTY_GROTTO_ATTEMPT2:
+            sub_8087FB4();
+            break;
+        case CUTSCENE_FROSTY_GROTTO_POSTSTORY:
+            sub_8087FF8();
+            break;
+        case CUTSCENE_MT_FREEZE_PEAK:
+            sub_80885A0();
+            break;
+        case CUTSCENE_MT_FREEZE_PEAK_POSTSTORY:
+            sub_80885C4();
+            break;
+        case CUTSCENE_MAGMA_CAVERN_PIT_ATTEMPT1:
+            sub_808862C();
+            break;
+        case CUTSCENE_MAGMA_CAVERN_PIT_ATTEMPT2:
+            sub_80886C4();
+            break;
+        case CUTSCENE_MAGMA_CAVERN_PIT_POSTSTORY:
+            sub_808875C();
+            break;
+        case CUTSCENE_MAGMA_CAVERN_MID:
+            sub_8088DC0();
+            break;
+        case CUTSCENE_MAGMA_CAVERN_MID_POSTSTORY:
+            sub_8088E5C();
+            break;
+        case CUTSCENE_SKY_TOWER_SUMMIT_ATTEMPT1:
+        case CUTSCENE_SKY_TOWER_SUMMIT_ATTEMPT2:
+            sub_80892C8();
+            break;
+        case CUTSCENE_SKY_TOWER_SUMMIT_POSTSTORY:
+            sub_8089328();
+            break;
+        case CUTSCENE_UPROAR_FOREST_ATTEMPT1:
+        case CUTSCENE_UPROAR_FOREST_ATTEMPT2:
+            sub_808970C();
+            break;
+        case CUTSCENE_UPROAR_FOREST_POSTSTORY:
+            sub_808974C();
+            break;
+        case CUTSCENE_WESTERN_CAVE_ATTEMPT1:
+        case CUTSCENE_WESTERN_CAVE_ATTEMPT2:
+            sub_8089914();
+            break;
+        case CUTSCENE_WESTERN_CAVE_POSTSTORY:
+            sub_8089978();
+            break;
+        case CUTSCENE_FIERY_FIELD_ATTEMPT1:
+        case CUTSCENE_FIERY_FIELD_ATTEMPT2:
+            sub_8089C44();
+            break;
+        case CUTSCENE_FIERY_FIELD_POSTSTORY:
+            sub_8089C90();
+            break;
+        case CUTSCENE_LIGHTNING_FIELD_ATTEMPT1:
+            sub_8089EFC();
+            break;
+        case CUTSCENE_LIGHTNING_FIELD_ATTEMPT2:
+            sub_8089F44();
+            break;
+        case CUTSCENE_LIGHTNING_FIELD_POSTSTORY:
+            sub_8089F8C();
+            break;
+        case CUTSCENE_NORTHWIND_FIELD_ATTEMPT1:
+            sub_808A264();
+            break;
+        case CUTSCENE_NORTHWIND_FIELD_ATTEMPT2:
+            sub_808A2C0();
+            break;
+        case CUTSCENE_NORTHWIND_FIELD_POSTSTORY:
+            sub_808A308();
+            break;
+        case CUTSCENE_MT_FARAWAY:
+            sub_808A608();
+            break;
+        case CUTSCENE_MT_FARAWAY_POSTSTORY:
+            sub_808A668();
+            break;
+        case CUTSCENE_NORTHERN_RANGE_ATTEMPT1:
+            sub_808A9E4();
+            break;
+        case CUTSCENE_NORTHERN_RANGE_ATTEMPT2:
+            sub_808AA3C();
+            break;
+        case CUTSCENE_NORTHERN_RANGE_POSTSTORY:
+            sub_808AA94();
+            break;
+        case CUTSCENE_REGIROCK:
+            sub_808ACC0();
+            break;
+        case CUTSCENE_REGICE:
+            sub_808AD48();
+            break;
+        case CUTSCENE_REGISTEEL:
+            sub_808ADCC();
+            break;
+        case CUTSCENE_JIRACHI:
+            sub_808B2F4();
+            break;
+        case CUTSCENE_JIRACHI_POSTSTORY:
+            sub_808B35C();
+            break;
+        case CUTSCENE_SILVER_TRENCH:
+            sub_808BDEC();
+            break;
+        case CUTSCENE_STORMY_SEA:
+            sub_808C10C();
+            break;
+        case CUTSCENE_METEOR_CAVE:
+            sub_808C3A0();
+            break;
+        case CUTSCENE_PURITY_FOREST:
+            sub_808C5C0();
+            break;
+        case CUTSCENE_MAZE_BOSS:
+            sub_808C938();
+            break;
+        case CUTSCENE_MEDICHAM:
+            sub_808C9C4();
+            break;
+        case CUTSCENE_MEDICHAM_POSTSTORY:
+            sub_808CB5C();
+            break;
+        case CUTSCENE_HOWLING_FOREST:
+            sub_808CBB0();
+            break;
+        case CUTSCENE_HOWLING_FOREST_POSTSTORY:
+            sub_808CD44();
+            break;
+    }
+    FlushTempCutsceneFlags();
 }
 
 void DisplayPreFightDialogue(void)
 {
-  switch(gDungeon->unk3A0D) {
-      case 0:
-        break;
-      case 1:
-        SkarmoryPreFightDialogue();
-        break;
-      case 2:
-        SkarmoryReFightDialogue();
-        break;
-      case 3:
-        sub_8086E40();
-        break;
-      case 4:
-        TeamMeaniesPreFightDialogue();
-        break;
-      case 5:
-        TeamMeaniesReFightDialogue();
-        break;
-      case 6:
-        sub_8087130();
-        break;
-      case 7:
-        ZapdosPreFightDialogue();
-        break;
-      case 8:
-        ZapdosReFightDialogue();
-        break;
-      case 9:
-        ZapdosPostStoryPreFightDialogue();
-        break;
-      case 10:
-        MoltresPreFightDialogue();
-        break;
-      case 0xb:
-        MoltresReFightDialogue();
-        break;
-      case 0xc:
-        MoltresPostStoryPreFightDialogue();
-        break;
-      case 0xd:
-        ArticunoPreFightDialogue();
-        break;
-      case 0xe:
-        ArticunoReFightDialogue();
-        break;
-      case 0xf:
-        ArticunoPostStoryPreFightDialogue();
-        break;
-      case 0x10:
-        sub_8088608();
-        break;
-      case 0x11:
-        sub_8088618();
-        break;
-      case 0x12:
-        GroudonPreFightDialogue();
-        break;
-      case 0x13:
-        GroudonReFightDialogue();
-        break;
-      case 0x14:
-        GroudonPostStoryPreFightDialogue();
-        break;
-      case 0x15:
-        MagmaCavernMidDialogue();
-        break;
-      case 0x16:
-        sub_8089168();
-        break;
-      case 0x17:
-        RayquazaPreFightDialogue();
-        break;
-      case 0x18:
-        RayquazaReFightDialogue();
-        break;
-      case 0x19:
-        RayquazaPostStoryPreFightDialogue();
-        break;
-      case 0x1a:
-        sub_80897F0();
-        break;
-      case 0x1b:
-        sub_8089878();
-        break;
-      case 0x1c:
-        sub_80898E4();
-        break;
-      case 0x1d:
-      case 0x1e:
-        MewtwoPreFightDialogue();
-        break;
-      case 0x1f:
-        MewtwoReFightDialogue();
-        break;
-      case 0x20:
-        EnteiPreFightDialogue();
-        break;
-      case 0x21:
-        EnteiReFightDialogue();
-        break;
-      case 0x22:
-        EnteiPostStoryPreFightDialogue();
-        break;
-      case 0x23:
-        RaikouPreFightDialogue();
-        break;
-      case 0x24:
-        RaikouReFightDialogue();
-        break;
-      case 0x25:
-        RaikouPostStoryPreFightDialogue();
-        break;
-      case 0x26:
-        SuicunePreFightDialogue();
-        break;
-      case 0x27:
-        SuicuneReFightDialogue();
-        break;
-      case 0x28:
-        SuicunePostStoryPreFightDialogue();
-        break;
-      case 0x29:
-        HoOhPreFightDialogue();
-        break;
-      case 0x2a:
-        HoOhReFightDialogue();
-        break;
-      case 0x2b:
-        LatiosPreFightDialogue();
-        break;
-      case 0x2c:
-        LatiosReFightDialogue();
-        break;
-      case 0x2d:
-        sub_808AC3C();
-        break;
-      case 0x2e:
-        RegirockPreFightDialogue();
-        break;
-      case 0x2f:
-        RegicePreFightDialogue();
-        break;
-      case 0x30:
-        RegisteelPreFightDialogue();
-        break;
-      case 0x31:
-        JirachiPreFightDialogue();
-        break;
-      case 0x32:
-        JirachiReFightDialogue();
-        break;
-      case 0x33:
-        LugiaPreFightDialogue();
-        break;
-      case 0x34:
-        KyogrePreFightDialogue();
-        break;
-      case 0x35:
-        DeoxysPreFightDialogue();
-        break;
-      case 0x36:
-        CelebiJoinDialogue();
-        break;
-      case 0x37:
-        sub_808C998();
-        break;
-      case 0x38:
-        MedichamRescueDialogue();
-        break;
-      case 0x39:
-        DummyFightDialogue();
-        break;
-      case 0x3a:
-        SmeargleRescueDialogue();
-        break;
-      case 0x3b:
-        sub_808CD9C();
-        break;
-      case 0x3C:
-        break;
-  }
-  sub_8085764();
-  sub_80857B8();
-  gDungeon->unk1356C = 0;
-  sub_8097FF8();
-}
-
-void sub_8084E00(Entity *entity, u8 param_2, bool8 param_3)
-{
-  if (param_2 != 0) {
-    switch(gDungeon->unk3A0D) {
-        case 0:
+    switch (gDungeon->cutscene) {
+        case CUTSCENE_NONE:
             break;
-        case 1:
-        case 2:
-            sub_8086BDC(param_2,gDungeon->unk3A0D);
+        case CUTSCENE_MT_STEEL_ATTEMPT1:
+            SkarmoryPreFightDialogue();
             break;
-        case 4:
-        case 5:
-            sub_8086F54(param_2,gDungeon->unk3A0D);
+        case CUTSCENE_MT_STEEL_ATTEMPT2:
+            SkarmoryReFightDialogue();
             break;
-        case 7:
-        case 8:
-        case 9:
-            sub_8087334(param_2,gDungeon->unk3A0D);
+        case CUTSCENE_MT_STEEL_POSTSTORY:
+            sub_8086E40();
             break;
-        case 10:
-        case 0xb:
-        case 0xc:
-            sub_80878F4(param_2,gDungeon->unk3A0D);
+        case CUTSCENE_SINISTER_WOODS_ATTEMPT1:
+            TeamMeaniesPreFightDialogue();
             break;
-        case 0xd:
-        case 0xe:
-        case 0xf:
-            sub_8088088(param_2,gDungeon->unk3A0D);
+        case CUTSCENE_SINISTER_WOODS_ATTEMPT2:
+            TeamMeaniesReFightDialogue();
             break;
-        case 0x12:
-        case 0x13:
-        case 0x14:
-            sub_8088818(param_2,gDungeon->unk3A0D);
+        case CUTSCENE_SINISTER_WOODS_POSTSTORY:
+            sub_8087130();
             break;
-        case 0x17:
-        case 0x18:
-        case 0x19:
-            sub_80893B4(param_2,gDungeon->unk3A0D);
+        case CUTSCENE_MT_THUNDER_PEAK_ATTEMPT1:
+            ZapdosPreFightDialogue();
             break;
-        case 0x1a:
-        case 0x1b:
-            sub_8089788(entity,param_2,gDungeon->unk3A0D);
+        case CUTSCENE_MT_THUNDER_PEAK_ATTEMPT2:
+            ZapdosReFightDialogue();
             break;
-        case 0x1d:
-        case 0x1e:
-        case 0x1f:
-            sub_8089A00(param_2,gDungeon->unk3A0D);
+        case CUTSCENE_MT_THUNDER_PEAK_POSTSTORY:
+            ZapdosPostStoryPreFightDialogue();
             break;
-        case 0x20:
-        case 0x21:
-        case 0x22:
-            sub_8089CFC(param_2,gDungeon->unk3A0D);
+        case CUTSCENE_MT_BLAZE_PEAK_ATTEMPT1:
+            MoltresPreFightDialogue();
             break;
-        case 0x23:
-        case 0x24:
-        case 0x25:
-            sub_8089FF0(param_2,gDungeon->unk3A0D);
+        case CUTSCENE_MT_BLAZE_PEAK_ATTEMPT2:
+            MoltresReFightDialogue();
             break;
-        case 0x26:
-        case 0x27:
-        case 0x28:
-            sub_808A36C(param_2,gDungeon->unk3A0D);
+        case CUTSCENE_MT_BLAZE_PEAK_POSTSTORY:
+            MoltresPostStoryPreFightDialogue();
             break;
-        case 0x29:
-        case 0x2a:
-            sub_808A6E8(param_2,gDungeon->unk3A0D);
+        case CUTSCENE_FROSTY_GROTTO_ATTEMPT1:
+            ArticunoPreFightDialogue();
             break;
-        case 0x2b:
-        case 0x2c:
-        case 0x2d:
-            sub_808AAF0(param_2,gDungeon->unk3A0D);
+        case CUTSCENE_FROSTY_GROTTO_ATTEMPT2:
+            ArticunoReFightDialogue();
             break;
-        case 0x2e:
-            sub_808AE54(param_2,gDungeon->unk3A0D,&entity->pos);
+        case CUTSCENE_FROSTY_GROTTO_POSTSTORY:
+            ArticunoPostStoryPreFightDialogue();
             break;
-        case 0x2f:
-            sub_808AEC8(param_2,gDungeon->unk3A0D,&entity->pos);
+        case CUTSCENE_MT_FREEZE_PEAK:
+            sub_8088608();
             break;
-        case 0x30:
-            sub_808AF3C(param_2,gDungeon->unk3A0D,&entity->pos);
+        case CUTSCENE_MT_FREEZE_PEAK_POSTSTORY:
+            sub_8088618();
             break;
-        case 0x31:
-        case 0x32:
-            sub_808B3E4(param_2,gDungeon->unk3A0D,param_3);
+        case CUTSCENE_MAGMA_CAVERN_PIT_ATTEMPT1:
+            GroudonPreFightDialogue();
             break;
-        case 0x33:
-            sub_808BE70(param_2,gDungeon->unk3A0D,param_3);
+        case CUTSCENE_MAGMA_CAVERN_PIT_ATTEMPT2:
+            GroudonReFightDialogue();
             break;
-        case 0x34:
-            sub_808C1A4(param_2,gDungeon->unk3A0D,param_3);
+        case CUTSCENE_MAGMA_CAVERN_PIT_POSTSTORY:
+            GroudonPostStoryPreFightDialogue();
             break;
-        case 0x35:
-            sub_808C414(param_2,gDungeon->unk3A0D,param_3);
+        case CUTSCENE_MAGMA_CAVERN_MID:
+            MagmaCavernMidDialogue();
             break;
-        case 0x36:
-            nullsub_100(param_2,gDungeon->unk3A0D,param_3);
+        case CUTSCENE_MAGMA_CAVERN_MID_POSTSTORY:
+            sub_8089168();
             break;
-        case 0x37:
-            sub_808C948(entity,gDungeon->unk3A0D);
+        case CUTSCENE_SKY_TOWER_SUMMIT_ATTEMPT1:
+            RayquazaPreFightDialogue();
             break;
-        case 0x38:
-        case 0x39:
-        case 0x3A:
-        case 0x3B:
-        case 0x3C:
+        case CUTSCENE_SKY_TOWER_SUMMIT_ATTEMPT2:
+            RayquazaReFightDialogue();
+            break;
+        case CUTSCENE_SKY_TOWER_SUMMIT_POSTSTORY:
+            RayquazaPostStoryPreFightDialogue();
+            break;
+        case CUTSCENE_UPROAR_FOREST_ATTEMPT1:
+            sub_80897F0();
+            break;
+        case CUTSCENE_UPROAR_FOREST_ATTEMPT2:
+            sub_8089878();
+            break;
+        case CUTSCENE_UPROAR_FOREST_POSTSTORY:
+            sub_80898E4();
+            break;
+        case CUTSCENE_WESTERN_CAVE_ATTEMPT1:
+        case CUTSCENE_WESTERN_CAVE_ATTEMPT2:
+            MewtwoPreFightDialogue();
+            break;
+        case CUTSCENE_WESTERN_CAVE_POSTSTORY:
+            MewtwoReFightDialogue();
+            break;
+        case CUTSCENE_FIERY_FIELD_ATTEMPT1:
+            EnteiPreFightDialogue();
+            break;
+        case CUTSCENE_FIERY_FIELD_ATTEMPT2:
+            EnteiReFightDialogue();
+            break;
+        case CUTSCENE_FIERY_FIELD_POSTSTORY:
+            EnteiPostStoryPreFightDialogue();
+            break;
+        case CUTSCENE_LIGHTNING_FIELD_ATTEMPT1:
+            RaikouPreFightDialogue();
+            break;
+        case CUTSCENE_LIGHTNING_FIELD_ATTEMPT2:
+            RaikouReFightDialogue();
+            break;
+        case CUTSCENE_LIGHTNING_FIELD_POSTSTORY:
+            RaikouPostStoryPreFightDialogue();
+            break;
+        case CUTSCENE_NORTHWIND_FIELD_ATTEMPT1:
+            SuicunePreFightDialogue();
+            break;
+        case CUTSCENE_NORTHWIND_FIELD_ATTEMPT2:
+            SuicuneReFightDialogue();
+            break;
+        case CUTSCENE_NORTHWIND_FIELD_POSTSTORY:
+            SuicunePostStoryPreFightDialogue();
+            break;
+        case CUTSCENE_MT_FARAWAY:
+            HoOhPreFightDialogue();
+            break;
+        case CUTSCENE_MT_FARAWAY_POSTSTORY:
+            HoOhReFightDialogue();
+            break;
+        case CUTSCENE_NORTHERN_RANGE_ATTEMPT1:
+            LatiosPreFightDialogue();
+            break;
+        case CUTSCENE_NORTHERN_RANGE_ATTEMPT2:
+            LatiosReFightDialogue();
+            break;
+        case CUTSCENE_NORTHERN_RANGE_POSTSTORY:
+            sub_808AC3C();
+            break;
+        case CUTSCENE_REGIROCK:
+            RegirockPreFightDialogue();
+            break;
+        case CUTSCENE_REGICE:
+            RegicePreFightDialogue();
+            break;
+        case CUTSCENE_REGISTEEL:
+            RegisteelPreFightDialogue();
+            break;
+        case CUTSCENE_JIRACHI:
+            JirachiPreFightDialogue();
+            break;
+        case CUTSCENE_JIRACHI_POSTSTORY:
+            JirachiReFightDialogue();
+            break;
+        case CUTSCENE_SILVER_TRENCH:
+            LugiaPreFightDialogue();
+            break;
+        case CUTSCENE_STORMY_SEA:
+            KyogrePreFightDialogue();
+            break;
+        case CUTSCENE_METEOR_CAVE:
+            DeoxysPreFightDialogue();
+            break;
+        case CUTSCENE_PURITY_FOREST:
+            CelebiJoinDialogue();
+            break;
+        case CUTSCENE_MAZE_BOSS:
+            sub_808C998();
+            break;
+        case CUTSCENE_MEDICHAM:
+            MedichamRescueDialogue();
+            break;
+        case CUTSCENE_MEDICHAM_POSTSTORY:
+            DummyFightDialogue();
+            break;
+        case CUTSCENE_HOWLING_FOREST:
+            SmeargleRescueDialogue();
+            break;
+        case CUTSCENE_HOWLING_FOREST_POSTSTORY:
+            sub_808CD9C();
+            break;
+        case NUM_CUTSCENES:
             break;
     }
-    if ((param_3 == 0) && (gDungeon->unk2 != 0)) {
-      DungeonStartNewBGM(999);
-    }
-  }
+    sub_8085764();
+    sub_80857B8();
+    gDungeon->unk1356C = FALSE;
+    FlushTempCutsceneFlags();
 }
 
-void sub_8085140(void)
+void HandleBossFaint_Async(Entity *entity, u8 monsterBehavior, bool8 transformedIntoFriend)
 {
-    switch(gDungeon->unk3A0D) {
-        // NOTE: shortcut way to generate all cases from 0 - 0x3C properly
+    if (monsterBehavior == BEHAVIOR_FIXED_ENEMY)
+        return;
+
+    switch (gDungeon->cutscene) {
+        case CUTSCENE_NONE:
+            break;
+        case CUTSCENE_MT_STEEL_ATTEMPT1:
+        case CUTSCENE_MT_STEEL_ATTEMPT2:
+            HandleSkarmoryBossFaint(monsterBehavior, gDungeon->cutscene);
+            break;
+        case CUTSCENE_SINISTER_WOODS_ATTEMPT1:
+        case CUTSCENE_SINISTER_WOODS_ATTEMPT2:
+            HandleMeaniesBossFaint(monsterBehavior, gDungeon->cutscene);
+            break;
+        case CUTSCENE_MT_THUNDER_PEAK_ATTEMPT1:
+        case CUTSCENE_MT_THUNDER_PEAK_ATTEMPT2:
+        case CUTSCENE_MT_THUNDER_PEAK_POSTSTORY:
+            HandleZapdosBossFaint(monsterBehavior, gDungeon->cutscene);
+            break;
+        case CUTSCENE_MT_BLAZE_PEAK_ATTEMPT1:
+        case CUTSCENE_MT_BLAZE_PEAK_ATTEMPT2:
+        case CUTSCENE_MT_BLAZE_PEAK_POSTSTORY:
+            HandleMoltresBossFaint(monsterBehavior, gDungeon->cutscene);
+            break;
+        case CUTSCENE_FROSTY_GROTTO_ATTEMPT1:
+        case CUTSCENE_FROSTY_GROTTO_ATTEMPT2:
+        case CUTSCENE_FROSTY_GROTTO_POSTSTORY:
+            HandleArticunoBossFaint(monsterBehavior, gDungeon->cutscene);
+            break;
+        case CUTSCENE_MAGMA_CAVERN_PIT_ATTEMPT1:
+        case CUTSCENE_MAGMA_CAVERN_PIT_ATTEMPT2:
+        case CUTSCENE_MAGMA_CAVERN_PIT_POSTSTORY:
+            HandleGroudonBossFaint(monsterBehavior, gDungeon->cutscene);
+            break;
+        case CUTSCENE_SKY_TOWER_SUMMIT_ATTEMPT1:
+        case CUTSCENE_SKY_TOWER_SUMMIT_ATTEMPT2:
+        case CUTSCENE_SKY_TOWER_SUMMIT_POSTSTORY:
+            HandleRayquazaBossFaint(monsterBehavior, gDungeon->cutscene);
+            break;
+        case CUTSCENE_UPROAR_FOREST_ATTEMPT1:
+        case CUTSCENE_UPROAR_FOREST_ATTEMPT2:
+            HandleMankeyBossFaint(entity, monsterBehavior, gDungeon->cutscene);
+            break;
+        case CUTSCENE_WESTERN_CAVE_ATTEMPT1:
+        case CUTSCENE_WESTERN_CAVE_ATTEMPT2:
+        case CUTSCENE_WESTERN_CAVE_POSTSTORY:
+            HandleMewtwoBossFaint(monsterBehavior, gDungeon->cutscene);
+            break;
+        case CUTSCENE_FIERY_FIELD_ATTEMPT1:
+        case CUTSCENE_FIERY_FIELD_ATTEMPT2:
+        case CUTSCENE_FIERY_FIELD_POSTSTORY:
+            HandleEnteiBossFaint(monsterBehavior, gDungeon->cutscene);
+            break;
+        case CUTSCENE_LIGHTNING_FIELD_ATTEMPT1:
+        case CUTSCENE_LIGHTNING_FIELD_ATTEMPT2:
+        case CUTSCENE_LIGHTNING_FIELD_POSTSTORY:
+            HandleRaikouBossFaint(monsterBehavior, gDungeon->cutscene);
+            break;
+        case CUTSCENE_NORTHWIND_FIELD_ATTEMPT1:
+        case CUTSCENE_NORTHWIND_FIELD_ATTEMPT2:
+        case CUTSCENE_NORTHWIND_FIELD_POSTSTORY:
+            HandleSuicuneBossFaint(monsterBehavior, gDungeon->cutscene);
+            break;
+        case CUTSCENE_MT_FARAWAY:
+        case CUTSCENE_MT_FARAWAY_POSTSTORY:
+            HandleHoOhBossFaint(monsterBehavior, gDungeon->cutscene);
+            break;
+        case CUTSCENE_NORTHERN_RANGE_ATTEMPT1:
+        case CUTSCENE_NORTHERN_RANGE_ATTEMPT2:
+        case CUTSCENE_NORTHERN_RANGE_POSTSTORY:
+            HandleLatiosBossFaint(monsterBehavior, gDungeon->cutscene);
+            break;
+        case CUTSCENE_REGIROCK:
+            HandleRegirockBossFaint_Async(monsterBehavior, gDungeon->cutscene, &entity->pos);
+            break;
+        case CUTSCENE_REGICE:
+            HandleRegiceBossFaint_Async(monsterBehavior, gDungeon->cutscene, &entity->pos);
+            break;
+        case CUTSCENE_REGISTEEL:
+            HandleRegisteelBossFaint_Async(monsterBehavior, gDungeon->cutscene, &entity->pos);
+            break;
+        case CUTSCENE_JIRACHI:
+        case CUTSCENE_JIRACHI_POSTSTORY:
+            HandleJirachiBossFaint_Async(monsterBehavior, gDungeon->cutscene, transformedIntoFriend);
+            break;
+        case CUTSCENE_SILVER_TRENCH:
+            HandleLugiaBossFaint(monsterBehavior, gDungeon->cutscene, transformedIntoFriend);
+            break;
+        case CUTSCENE_STORMY_SEA:
+            HandleKyogreBossFaint(monsterBehavior, gDungeon->cutscene, transformedIntoFriend);
+            break;
+        case CUTSCENE_METEOR_CAVE:
+            HandleDeoxysNormalBossFaint(monsterBehavior, gDungeon->cutscene, transformedIntoFriend);
+            break;
+        case CUTSCENE_PURITY_FOREST:
+            HandleCelebiBossFaint(monsterBehavior, gDungeon->cutscene, transformedIntoFriend);
+            break;
+        case CUTSCENE_MAZE_BOSS:
+            HandleMazeBossFaint(entity, gDungeon->cutscene);
+            break;
+        case CUTSCENE_MEDICHAM:
+        case CUTSCENE_MEDICHAM_POSTSTORY:
+        case CUTSCENE_HOWLING_FOREST:
+        case CUTSCENE_HOWLING_FOREST_POSTSTORY:
+        case NUM_CUTSCENES:
+            break;
+    }
+
+    if (!transformedIntoFriend && gDungeon->unk2 != DUNGEON_UNK2_0)
+        DungeonStartNewBGM(999);
+}
+
+void sub_8085140_Async(void)
+{
+    switch (gDungeon->cutscene) {
+        // NOTE: shortcut way to generate all cases from [CUTSCENE_NONE, NUM_CUTSCENES] properly
         default:
-        case 0:
-        case 1:
-        case 0x3C:
+        case CUTSCENE_NONE:
+        case CUTSCENE_MT_STEEL_ATTEMPT1:
+        case NUM_CUTSCENES:
             break;
-        case 0x2e:
-            sub_808AFB0(gDungeon->unk3A0D);
+        case CUTSCENE_REGIROCK:
+            sub_808AFB0_Async(gDungeon->cutscene);
             break;
-        case 0x2f:
-            sub_808B030(gDungeon->unk3A0D);
+        case CUTSCENE_REGICE:
+            sub_808B030_Async(gDungeon->cutscene);
             break;
-        case 0x30:
-            sub_808B0B0(gDungeon->unk3A0D);
+        case CUTSCENE_REGISTEEL:
+            sub_808B0B0_Async(gDungeon->cutscene);
             break;
   }
 }
 
-bool8 sub_808529C(s32 speciesId_)
+bool8 MonCutsceneCompleted(s32 speciesId_)
 {
-    s32 r3;
+    s32 flag;
     s32 speciesId = 0;
 
     // This line serves no purpose other than generating the right asm. Feel free to remove it.
     speciesId += (s16) speciesId_;
 
     speciesId = (s16) speciesId_;
-    r3 = 0x40;
+    flag = NUM_CUTSCENE_FLAGS;
 
     switch (speciesId) {
         case MONSTER_SKARMORY:
-            r3 = 1;
+            flag = CUTSCENE_FLAG_MT_STEEL_COMPLETE;
             break;
         case MONSTER_EKANS:
-            r3 = 3;
+            flag = CUTSCENE_FLAG_SINISTER_WOODS_COMPLETE;
             break;
         case MONSTER_GENGAR:
-            r3 = 3;
+            flag = CUTSCENE_FLAG_SINISTER_WOODS_COMPLETE;
             break;
         case MONSTER_MEDICHAM:
-            r3 = 3;
+            flag = CUTSCENE_FLAG_SINISTER_WOODS_COMPLETE;
             break;
         case MONSTER_ZAPDOS:
-            r3 = 5;
+            flag = CUTSCENE_FLAG_MT_THUNDER_PEAK_COMPLETE;
             break;
         case MONSTER_MOLTRES:
-            r3 = 7;
+            flag = CUTSCENE_FLAG_MT_BLAZE_PEAK_COMPLETE;
             break;
         case MONSTER_ARTICUNO:
-            r3 = 9;
+            flag = CUTSCENE_FLAG_FROSTY_GROTTO_COMPLETE;
             break;
         case MONSTER_GROUDON:
-            r3 = 0xC;
+            flag = CUTSCENE_FLAG_MAGMA_CAVERN_PIT_COMPLETE;
             break;
         case MONSTER_RAYQUAZA:
-            r3 = 0xF;
+            flag = CUTSCENE_FLAG_SKY_TOWER_SUMMIT_COMPLETE;
             break;
         case MONSTER_MEWTWO:
-            r3 = 0x13;
+            flag = CUTSCENE_FLAG_WESTERN_CAVE_COMPLETE;
             break;
         case MONSTER_ENTEI:
-            r3 = 0x15;
+            flag = CUTSCENE_FLAG_FIERY_FIELD_COMPLETE;
             break;
         case MONSTER_RAIKOU:
-            r3 = 0x17;
+            flag = CUTSCENE_FLAG_LIGHTNING_FIELD_COMPLETE;
             break;
         case MONSTER_SUICUNE:
-            r3 = 0x19;
+            flag = CUTSCENE_FLAG_NORTHWIND_FIELD_COMPLETE;
             break;
         case MONSTER_HO_OH:
-            r3 = 0x1A;
+            flag = CUTSCENE_FLAG_MT_FARAWAY_COMPLETE;
             break;
         case MONSTER_MANKEY:
-            r3 = 0x11;
+            flag = CUTSCENE_FLAG_UPROAR_FOREST_COMPLETE;
             break;
         case MONSTER_REGIROCK:
-            r3 = 0x1D;
+            flag = CUTSCENE_FLAG_REGI_ITEM_OBTAINED;
             break;
         case MONSTER_REGICE:
-            r3 = 0x1D;
+            flag = CUTSCENE_FLAG_REGI_ITEM_OBTAINED;
             break;
         case MONSTER_REGISTEEL:
-            r3 = 0x1D;
+            flag = CUTSCENE_FLAG_REGI_ITEM_OBTAINED;
             break;
     }
 
-    if (r3 != 0x40 && !sub_8098100(r3))
+    if (flag != NUM_CUTSCENE_FLAGS && !GetCutsceneFlag(flag))
         return FALSE;
     return TRUE;
 }
@@ -748,7 +753,7 @@ void sub_8085374(void)
     s32 temp;
     Entity *leaderEntity = NULL;
     Entity *partnerEntity = NULL;
-    s32 species = sub_808D3F8()->speciesNum;
+    s32 species = GetPartnerMon2()->speciesNum;
 
     for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
         entity = gDungeon->teamPokemon[i];
@@ -760,7 +765,7 @@ void sub_8085374(void)
         }
     }
 
-    if (leaderEntity == NULL || partnerEntity != NULL || gDungeon->unk644.unk18 != 0)
+    if (leaderEntity == NULL || partnerEntity != NULL || gDungeon->unk644.canChangeLeader)
         return;
 
     j = 0;
@@ -964,7 +969,7 @@ static void sub_8085764(void)
     {
         entity = gDungeon->wildPokemon[index];
         if ((EntityIsValid(entity)) && (GetEntInfo(entity)->monsterBehavior == BEHAVIOR_ALLY)) {
-            HandleFaint(entity,DUNGEON_EXIT_DEBUG_DAMAGE,&stackEntity);
+            HandleFaint_Async(entity,DUNGEON_EXIT_DEBUG_DAMAGE,&stackEntity);
         }
     }
 }
@@ -972,13 +977,13 @@ static void sub_8085764(void)
 static void sub_80857B8(void)
 {
     u8 *direction;
-    int index;
+    s32 index;
 
     for (index = 0; index < DUNGEON_MAX_POKEMON; index++) {
         Entity *entity = gDungeon->activePokemon[index];
         if (EntityIsValid(entity)) {
             EntityInfo *entityInfo = GetEntInfo(entity);
-            if (gDungeon->unk4 == 0 && gDungeon->unk2 == 0) {
+            if (gDungeon->unk4 == 0 && gDungeon->unk2 == DUNGEON_UNK2_0) {
                 UpdateEntityPixelPos(entity, 0);
                 entityInfo->unk15C = 0;
                 entityInfo->unkFE = 99;
@@ -993,8 +998,8 @@ static void sub_80857B8(void)
 
 void sub_8085860(s32 x, s32 y)
 {
-  sub_803F4A0(0);
-  sub_803F878(X_POS_TO_PIXELPOS(x), Y_POS_TO_PIXELPOS(y));
+    sub_803F4A0(0);
+    sub_803F878(X_POS_TO_PIXELPOS(x), Y_POS_TO_PIXELPOS(y));
 }
 
 UNUSED static void sub_8085890(s32 x, s32 y)
@@ -1125,7 +1130,7 @@ bool8 ShouldRunMonsterAI(Entity *pokemon)
         case BEHAVIOR_JIRACHI:
         case BEHAVIOR_LUGIA:
         case BEHAVIOR_KYOGRE:
-        case BEHAVIOR_29:
+        case BEHAVIOR_DEOXYS_NORMAL:
         case BEHAVIOR_CELEBI:
         case BEHAVIOR_SMEARGLE:
         case BEHAVIOR_32:
@@ -1152,7 +1157,7 @@ UNUSED static void sub_8085B0C(Entity *pokemon)
 
   while (local_28[index] != 0) {
     SetFacingDirection(pokemon, local_28[index]);
-    sub_803E708(6,0x46);
+    DungeonWaitFrames_Async(6,0x46);
     index++;
   }
 }
@@ -1212,8 +1217,8 @@ bool8 sub_8085B80(struct_8085B80 *a0)
 void SetDungeonBGColorRGB(s32 r, s32 g, s32 b, bool8 a3, bool8 a4)
 {
     s32 i, palIndex, n;
-    const RGB *colorPtr;
-    RGB color;
+    const RGB_Struct *colorPtr;
+    RGB_Struct color;
     struct RgbS16 colorS16;
 
     n = 160;
@@ -1364,48 +1369,48 @@ void sub_8085F44(s32 param_1)
 
 void sub_8085F78(void)
 {
-    switch(gDungeon->unk3A0D) {
-        case 0x12:
-        case 0x13:
-        case 0x14:
+    switch(gDungeon->cutscene) {
+        case CUTSCENE_MAGMA_CAVERN_PIT_ATTEMPT1:
+        case CUTSCENE_MAGMA_CAVERN_PIT_ATTEMPT2:
+        case CUTSCENE_MAGMA_CAVERN_PIT_POSTSTORY:
             sub_8088848();
             break;
-        case 0x15:
+        case CUTSCENE_MAGMA_CAVERN_MID:
             sub_8088EE8();
             break;
-        case 0x29:
-        case 0x2A:
+        case CUTSCENE_MT_FARAWAY:
+        case CUTSCENE_MT_FARAWAY_POSTSTORY:
             sub_808A718();
             break;
-        case 0:
-        case 0x3C:
+        case CUTSCENE_NONE:
+        case NUM_CUTSCENES:
         default:
             break;
     }
 }
 
-bool8 sub_80860A8(u8 id)
+bool8 ItemInInventoryOrHeld(u8 id)
 {
-    Item *item;
-    EntityInfo *info;
-    Entity *entity;
-    int index;
+    s32 i;
 
+    for (i = 0; i < INVENTORY_SIZE; i++) {
+        Item *item = &gTeamInventoryRef->teamItems[i];
 
-    for(index = 0; index < INVENTORY_SIZE; index++)
-    {
-        item = &gTeamInventoryRef->teamItems[index];
-        if((item->flags & 1) != 0)
-        {
-            if((item->id) == id) return TRUE;
+        if ((item->flags & 1) != 0 && item->id == id)
+            return TRUE;
+    }
+
+    for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
+        Entity *entity = gDungeon->teamPokemon[i];
+
+        if (EntityIsValid(entity)) {
+            EntityInfo *info = GetEntInfo(entity);
+
+            if (ItemExists(&info->heldItem) && info->heldItem.id == id)
+                return TRUE;
         }
     }
 
-    for(index = 0; index < MAX_TEAM_MEMBERS; index++)
-    {
-        entity = gDungeon->teamPokemon[index];
-        if (((EntityIsValid(entity)) && (info = GetEntInfo(entity), ((info->heldItem).flags & 1))) && ((info->heldItem).id == id)) return TRUE;
-    }
     return FALSE;
 }
 
@@ -1414,20 +1419,20 @@ UNUSED static void sub_8086124(Entity *entity, u8 param_2)
     GetEntInfo(entity)->unk160 = param_2;
 }
 
-void sub_8086130(void)
+void FrostyForestIntrusionCutscene_Async(void)
 {
-    DungeonFadeOutBGM(0x3c);
-    sub_803E708(0x3c,0x46);
+    DungeonFadeOutBGM(60);
+    DungeonWaitFrames_Async(60, 70);
     sub_8052FB8(gUnknown_810665C);
-    sub_803E708(0x1e,0x46);
+    DungeonWaitFrames_Async(30, 70);
     sub_8052FB8(gUnknown_810668C);
-    sub_803E708(0x1e,0x46);
+    DungeonWaitFrames_Async(30, 70);
     sub_8052FB8(gUnknown_81066D4);
-    sub_803E708(0x1e,0x46);
+    DungeonWaitFrames_Async(30, 70);
     sub_8052FB8(gUnknown_81066F0);
-    sub_803E708(0x1e,0x46);
+    DungeonWaitFrames_Async(30, 70);
     sub_8052FB8(gUnknown_810671C);
-    sub_803E708(0x1e,0x46);
+    DungeonWaitFrames_Async(30, 70);
 }
 
 void sub_80861A8(Entity *a0)
@@ -1620,16 +1625,16 @@ static void sub_8086494(void)
     s32 i;
 
     sub_8085930(DIRECTION_NORTHEAST);
-    sub_803E708(4, 70);
+    DungeonWaitFrames_Async(4, 70);
 
     sub_8085930(DIRECTION_EAST);
-    sub_803E708(4, 70);
+    DungeonWaitFrames_Async(4, 70);
 
     sub_8085930(DIRECTION_SOUTHEAST);
-    sub_803E708(4, 70);
+    DungeonWaitFrames_Async(4, 70);
 
     sub_8085930(DIRECTION_SOUTH);
-    sub_803E708(4, 70);
+    DungeonWaitFrames_Async(4, 70);
 
     sub_80855E4(sub_80863C8);
 
@@ -1756,12 +1761,12 @@ void sub_8086690(void)
 
 void sub_80866C4(const struct DungeonDialogueStruct *dialogue)
 {
-    SpriteLookAroundEffect(CutsceneGetLeader());
-    sub_803E708(10, 70);
-    DisplayDungeonDialogue(dialogue);
-    sub_803E708(10, 70);
+    CutsceneLookAroundEffect_Async(CutsceneGetLeader());
+    DungeonWaitFrames_Async(10, 70);
+    DisplayDungeonDialogue_Async(dialogue);
+    DungeonWaitFrames_Async(10, 70);
     sub_8086494();
-    gDungeon->unk2 = 1;
+    gDungeon->unk2 = DUNGEON_UNK2_1;
 }
 
 UNUSED static void sub_80866FC(void)
@@ -1901,43 +1906,45 @@ void sub_8086910(Entity *entity)
 void sub_808692C(void)
 {
     sub_80859F0(DIRECTION_NORTHWEST);
-    sub_803E708(4, 70);
+    DungeonWaitFrames_Async(4, 70);
 
     sub_80859F0(DIRECTION_WEST);
-    sub_803E708(4, 70);
+    DungeonWaitFrames_Async(4, 70);
 
     sub_80859F0(DIRECTION_SOUTHWEST);
-    sub_803E708(4, 70);
+    DungeonWaitFrames_Async(4, 70);
 
     sub_80859F0(DIRECTION_SOUTH);
-    sub_803E708(4, 70);
+    DungeonWaitFrames_Async(4, 70);
 }
 
-void SpriteLookAroundEffect(Entity *entity)
+void CutsceneLookAroundEffect_Async(Entity *entity)
 {
-    s8 dir = sub_8002984((s8) GetEntInfo(entity)->action.direction, 4);
+    s8 dir = (s8)GetEntInfo(entity)->action.direction;
 
-    sub_80869E4(entity, 4, 2, dir);
-    sub_803E708(15, 70);
-    dir = sub_8002984(dir, 5);
-    sub_80869E4(entity, 4, 1, dir);
-    sub_803E708(15, 70);
-    sub_80869E4(entity, 4, 2, (s8) sub_8002984(dir, 4));
-    sub_803E708(15, 70);
+    dir = TransformDirection1(dir, DIR_TRANS_SPINLEFT2);
+    CutsceneLookDir_Async(entity, 4, DIR_TRANS_SPINLEFT1, dir);
+    DungeonWaitFrames_Async(15, 70);
+    dir = TransformDirection1(dir, DIR_TRANS_FLIP);
+    CutsceneLookDir_Async(entity, 4, DIR_TRANS_SPINRIGHT1, dir);
+    DungeonWaitFrames_Async(15, 70);
+    dir = TransformDirection1(dir, DIR_TRANS_SPINLEFT2);
+    CutsceneLookDir_Async(entity, 4, DIR_TRANS_SPINLEFT1, dir);
+    DungeonWaitFrames_Async(15, 70);
 }
 
-void sub_80869E4(struct Entity *entity, s32 a1, u8 a2, s32 _someDirection)
+void CutsceneLookDir_Async(struct Entity *entity, s32 numFrames, u8 dirTrans, s32 _someDirection)
 {
     s32 someDirection = (s8) _someDirection;
     struct EntityInfo *info = GetEntInfo(entity);
     s32 direction = (s8) info->action.direction;
 
     while (direction != someDirection) {
-        direction = (s8) sub_8002A70(direction, someDirection, a2);
+        direction = (s8) TransformDirection2(direction, someDirection, dirTrans);
         info->action.direction = direction;
         info->action.direction &= DIRECTION_MASK;
         sub_806CE68(entity, info->action.direction);
-        sub_803E708(a1, 70);
+        DungeonWaitFrames_Async(numFrames, 70);
     }
 }
 
@@ -1955,38 +1962,37 @@ void sub_8086A54(Entity *pokemon)
 
 void SetupBossFightHP(Entity *pokemon, s32 newHP, u16 songIndex)
 {
-  EntityInfo *entityInfo = GetEntInfo(pokemon);
+    EntityInfo *entityInfo = GetEntInfo(pokemon);
 
-  entityInfo->bossFlag = TRUE;
+    entityInfo->bossFlag = TRUE;
 
-  // BUG: Source of the Reviver Seed Boss Glitch
-  //
-  // Video to demonstration:
-  // https://www.youtube.com/watch?v=rHu7EehrZ68
-  entityInfo->originalHP = entityInfo->maxHPStat;
-  if (newHP != 0) {
-    entityInfo->maxHPStat = newHP;
-    entityInfo->HP = newHP;
-  }
+    // BUG: Source of the Reviver Seed Boss Glitch
+    //
+    // Video to demonstration:
+    // https://www.youtube.com/watch?v=rHu7EehrZ68
+    entityInfo->originalHP = entityInfo->maxHPStat;
+    if (newHP != 0) {
+        entityInfo->maxHPStat = newHP;
+        entityInfo->HP = newHP;
+    }
 
-  gDungeon->unk644.bossSongIndex = songIndex;
-  SetDefaultIQSkills(&entityInfo->IQSkillMenuFlags, entityInfo->bossFlag);
-  LoadIQSkills(pokemon);
+    gDungeon->unk644.bossSongIndex = songIndex;
+    SetDefaultIQSkills(&entityInfo->IQSkillMenuFlags, entityInfo->bossFlag);
+    LoadIQSkills(pokemon);
 }
 
 void sub_8086AC0(void)
 {
-    if(!IsFloorOver())
-        if(gDungeon->unk2 == 0)
-            sub_8097FF8();
+    if (!IsFloorOver() && gDungeon->unk2 == DUNGEON_UNK2_0)
+        FlushTempCutsceneFlags();
 }
 
-u8 sub_8086AE4(s16 _index)
+bool8 sub_8086AE4(s16 _index)
 {
     s32 pokeIndex = _index;
 
-    if(gDungeon->unk644.unk18 == 0)
-        return 1;
+    if (!gDungeon->unk644.canChangeLeader)
+        return TRUE;
     else
         return HasRecruitedMon(pokeIndex);
 }

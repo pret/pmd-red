@@ -19,10 +19,10 @@ static const struct ScriptCommand s_gs204_g0_s0_station_sref_script[] = { /* 0x8
   LABEL(0), /* = 0x00 */
     JUMP_LABEL(1),
   LABEL(1), /* = 0x01 */
-    JUMPIF_EQUAL(START_MODE, 1, /* to label */ 2),
-    JUMPIF_EQUAL(START_MODE, 3, /* to label */ 3),
-    JUMPIF_EQUAL(START_MODE, 2, /* to label */ 4),
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 4),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_CONTINUE_GAME, /* to label */ 2),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_3, /* to label */ 3),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_GROUND, /* to label */ 4),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 4),
     JUMP_LABEL(2),
   LABEL(4), /* = 0x04 */
     CJUMP_VAR(GROUND_GETOUT),
@@ -38,11 +38,11 @@ static const struct ScriptCommand s_gs204_g0_s0_station_sref_script[] = { /* 0x8
     SELECT_LIVES(0, 1),
     JUMP_LABEL(6),
   LABEL(6), /* = 0x06 */
-    BGM_SWITCH(108),
+    BGM_SWITCH(MUS_MAGMA_CAVERN),
     JUMP_SCRIPT(COMMON_ENTER),
 };
 
-static const struct ScriptRef s_gs204_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs204_g0_s0_station_sref_script }; /* 0x825d030 */
+static const struct ScriptRef s_gs204_g0_s0_station_sref = { ENTER_CONTROL , 1, NULL, s_gs204_g0_s0_station_sref_script }; /* 0x825d030 */
 
 static const struct ScriptCommand s_gs204_g0_s1_lives0_dlg0[] = { /* 0x825d03c */
     DEBUGINFO_O(48),
@@ -88,14 +88,14 @@ static const struct ScriptCommand s_gs204_g1_s0_station_sref_script[] = { /* 0x8
     DEBUGINFO_O(88),
     SELECT_MAP(MAP_MAGMA_CAVERN_ENTRY),
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(108),
+    BGM_SWITCH(MUS_MAGMA_CAVERN),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     NEXT_DUNGEON(30, SCRIPT_DUNGEON_MAGMA_CAVERN),
     RET,
 };
 
-static const struct ScriptRef s_gs204_g1_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs204_g1_s0_station_sref_script }; /* 0x825d21c */
+static const struct ScriptRef s_gs204_g1_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs204_g1_s0_station_sref_script }; /* 0x825d21c */
 
 static const struct ScriptCommand s_gs204_g1_s0_lives0_dlg0[] = { /* 0x825d228 */
     DEBUGINFO_O(101),
@@ -119,7 +119,7 @@ static const struct ScriptCommand s_gs204_g1_s0_lives0_dlg0[] = { /* 0x825d228 *
     TEXTBOX_CLEAR,
     ALERT_CUE(6),
     WAIT(5),
-    { 0x93, 0x04,  0x000b,  0x00000022,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_11, 34),
     WAIT(15),
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
     VARIANT(/* == */  1, _(" Other rescue teams should\nalready be inside.")),
@@ -146,7 +146,7 @@ static const struct ScriptCommand s_gs204_g1_s0_lives1_dlg0[] = { /* 0x825d6dc *
     WALK_GRID(256, 1),
     CALL_SCRIPT(LOOK_AROUND_FUNC),
     AWAIT_CUE(6),
-    { 0x93, 0x04,  0x000b,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_11, 0),
     AWAIT_CUE(6),
     WALK_GRID(256, 2),
     HALT,
@@ -156,14 +156,14 @@ static const struct ScriptCommand s_gs204_g2_s0_station_sref_script[] = { /* 0x8
     DEBUGINFO_O(156),
     SELECT_MAP(MAP_MAGMA_CAVERN_ENTRY),
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(108),
+    BGM_SWITCH(MUS_MAGMA_CAVERN),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     NEXT_DUNGEON(30, SCRIPT_DUNGEON_MAGMA_CAVERN),
     RET,
 };
 
-static const struct ScriptRef s_gs204_g2_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs204_g2_s0_station_sref_script }; /* 0x825d80c */
+static const struct ScriptRef s_gs204_g2_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs204_g2_s0_station_sref_script }; /* 0x825d80c */
 
 static const struct ScriptCommand s_gs204_g2_s0_lives0_dlg0[] = { /* 0x825d818 */
     DEBUGINFO_O(169),
@@ -172,7 +172,7 @@ static const struct ScriptCommand s_gs204_g2_s0_lives0_dlg0[] = { /* 0x825d818 *
     { 0x2d, 0x09,  0x0002,  0x00000058,  0x00000000, NULL },
     ALERT_CUE(6),
     WALK_GRID(256, 0),
-    { 0x93, 0x04,  0x000b,  0x00000022,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_11, 34),
     WAIT(15),
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
     VARIANT(/* == */  1, _(" This time, we'll rescue\n{NAME_2}'s team!\nLet's get it done!")),
@@ -193,7 +193,7 @@ static const struct ScriptCommand s_gs204_g2_s0_lives1_dlg0[] = { /* 0x825d9bc *
     { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(6),
     WALK_GRID(256, 1),
-    { 0x93, 0x04,  0x000b,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_11, 0),
     AWAIT_CUE(6),
     WALK_GRID(256, 2),
     HALT,
@@ -288,4 +288,4 @@ static const struct GroundLink s_gs204_links[] = { /* 0x825dc98 */
     /* link   3 */ { { /*x*/  26, /*y*/  11, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
 };
 
-/*extern*/ const struct GroundScriptHeader gGroundScript_gs204 = { LPARRAY(s_gs204_groups), s_gs204_links }; /* 0x825dcb8 */
+const GroundScriptHeader gGroundScript_gs204 = { LPARRAY(s_gs204_groups), s_gs204_links }; /* 0x825dcb8 */

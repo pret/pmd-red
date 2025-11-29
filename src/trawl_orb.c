@@ -69,7 +69,7 @@ void HandleTrawlOrb(Entity *user, Entity *target)
     }
 
     if (itemsCount == 0) {
-        LogMessageByIdWithPopupCheckUser(user, gUnknown_80FE034);
+        LogMessageByIdWithPopupCheckUser_Async(user, gUnknown_80FE034);
     }
     else {
         s32 var;
@@ -154,10 +154,10 @@ void HandleTrawlOrb(Entity *user, Entity *target)
         }
 
         if (hasTrawled) {
-            LogMessageByIdWithPopupCheckUser(user, gUnknown_80FE060);
+            LogMessageByIdWithPopupCheckUser_Async(user, gUnknown_80FE060);
         }
         else {
-            LogMessageByIdWithPopupCheckUser(user, gUnknown_80FE034);
+            LogMessageByIdWithPopupCheckUser_Async(user, gUnknown_80FE034);
         }
         sub_807EC28(1);
     }

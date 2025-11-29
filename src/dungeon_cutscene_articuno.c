@@ -81,7 +81,7 @@ void sub_8087FF8(void)
   sub_8085930(DIRECTION_NORTH);
   sub_80855E4(sub_8086A3C);
   if (sub_8086AE4(MONSTER_ARTICUNO)) {
-    HandleFaint(articunoEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
+    HandleFaint_Async(articunoEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
   }
   else {
     LevelUpTarget(articunoEntity,articunoEntity,gArticunoConfigLevel,0,0);
@@ -92,11 +92,11 @@ void sub_8087FF8(void)
   CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_ARTICUNO);
 }
 
-void sub_8088088(u8 param_1, u8 param_2)
+void HandleArticunoBossFaint(u8 monsterBehavior, u8 cutscene)
 {
-  if ((param_2 == 0xD || param_2 == 0xE || param_2 == 0xF) && (param_1 == 0xD)) {
-    sub_8097FA8(0x9);
-    gDungeon->unk2 = 1;
+  if ((cutscene == CUTSCENE_FROSTY_GROTTO_ATTEMPT1 || cutscene == CUTSCENE_FROSTY_GROTTO_ATTEMPT2 || cutscene == CUTSCENE_FROSTY_GROTTO_POSTSTORY) && monsterBehavior == BEHAVIOR_ARTICUNO) {
+    SetTempCutsceneFlag(CUTSCENE_FLAG_FROSTY_GROTTO_COMPLETE);
+    gDungeon->unk2 = DUNGEON_UNK2_1;
   }
 }
 
@@ -110,70 +110,70 @@ void ArticunoPreFightDialogue(void)
   partnerEntity = CutsceneGetPartner();
   articunoEntity = GetEntityFromMonsterBehavior(BEHAVIOR_ARTICUNO);
   sub_8086448();
-  SpriteLookAroundEffect(partnerEntity);
-  DisplayDungeonDialogue(gArticunoPreFightDialogue_1);
-  sub_803E708(10,0x46);
+  CutsceneLookAroundEffect_Async(partnerEntity);
+  DisplayDungeonDialogue_Async(gArticunoPreFightDialogue_1);
+  DungeonWaitFrames_Async(10,0x46);
   sub_8086598();
   DungeonStopBGM();
-  DisplayDungeonDialogue(&gArticunoPreFightDialogue_2);
-  sub_803E708(10,0x46);
-  sub_80869E4(partnerEntity,4,1,DIRECTION_EAST);
-  sub_80869E4(leaderEntity,4,2,DIRECTION_WEST);
-  DisplayDungeonDialogue(&gArticunoPreFightDialogue_3);
-  sub_803E708(10,0x46);
+  DisplayDungeonDialogue_Async(&gArticunoPreFightDialogue_2);
+  DungeonWaitFrames_Async(10,0x46);
+  CutsceneLookDir_Async(partnerEntity,4,DIR_TRANS_SPINRIGHT1,DIRECTION_EAST);
+  CutsceneLookDir_Async(leaderEntity,4,DIR_TRANS_SPINLEFT1,DIRECTION_WEST);
+  DisplayDungeonDialogue_Async(&gArticunoPreFightDialogue_3);
+  DungeonWaitFrames_Async(10,0x46);
   SetFacingDirection(leaderEntity, DIRECTION_WEST);
-  sub_803E708(4,0x46);
+  DungeonWaitFrames_Async(4,0x46);
   SetFacingDirection(leaderEntity, DIRECTION_NORTHWEST);
-  sub_803E708(4,0x46);
+  DungeonWaitFrames_Async(4,0x46);
   SetFacingDirection(leaderEntity, DIRECTION_WEST);
-  sub_803E708(4,0x46);
+  DungeonWaitFrames_Async(4,0x46);
   SetFacingDirection(leaderEntity, DIRECTION_SOUTHWEST);
-  sub_803E708(4,0x46);
+  DungeonWaitFrames_Async(4,0x46);
   SetFacingDirection(leaderEntity, DIRECTION_WEST);
-  sub_803E708(4,0x46);
+  DungeonWaitFrames_Async(4,0x46);
   SetFacingDirection(leaderEntity, DIRECTION_NORTHWEST);
-  sub_803E708(4,0x46);
+  DungeonWaitFrames_Async(4,0x46);
   SetFacingDirection(leaderEntity, DIRECTION_WEST);
-  sub_803E708(10,0x46);
-  DisplayDungeonDialogue(gArticunoPreFightDialogue_4);
-  sub_803E708(10,0x46);
-  DisplayDungeonDialogue(&gArticunoPreFightDialogue_5);
-  sub_803E708(10,0x46);
-  sub_80869E4(leaderEntity,4,1,DIRECTION_NORTH);
-  sub_80869E4(partnerEntity,4,2,DIRECTION_NORTH);
+  DungeonWaitFrames_Async(10,0x46);
+  DisplayDungeonDialogue_Async(gArticunoPreFightDialogue_4);
+  DungeonWaitFrames_Async(10,0x46);
+  DisplayDungeonDialogue_Async(&gArticunoPreFightDialogue_5);
+  DungeonWaitFrames_Async(10,0x46);
+  CutsceneLookDir_Async(leaderEntity,4,DIR_TRANS_SPINRIGHT1,DIRECTION_NORTH);
+  CutsceneLookDir_Async(partnerEntity,4,DIR_TRANS_SPINLEFT1,DIRECTION_NORTH);
   PlaySoundEffect(0x1d5);
-  SpriteLookAroundEffect(partnerEntity);
+  CutsceneLookAroundEffect_Async(partnerEntity);
   PlaySoundEffect(0x1d5);
-  SpriteLookAroundEffect(leaderEntity);
-  DisplayDungeonDialogue(&gArticunoPreFightDialogue_6);
-  sub_803E708(10,0x46);
-  DisplayDungeonDialogue(&gArticunoPreFightDialogue_7);
-  sub_803E708(10,0x46);
+  CutsceneLookAroundEffect_Async(leaderEntity);
+  DisplayDungeonDialogue_Async(&gArticunoPreFightDialogue_6);
+  DungeonWaitFrames_Async(10,0x46);
+  DisplayDungeonDialogue_Async(&gArticunoPreFightDialogue_7);
+  DungeonWaitFrames_Async(10,0x46);
   PlaySoundEffect(0); // snow flurry
   gDungeon->weather.unkE265 = WEATHER_SNOW;
   sub_807EAA0(0,1);
   PlaySoundEffect(0x1ee); // flash effect?
   sub_8088574();
-  DisplayDungeonDialogue(&gArticunoPreFightDialogue_8);
-  sub_803E708(10,0x46);
+  DisplayDungeonDialogue_Async(&gArticunoPreFightDialogue_8);
+  DungeonWaitFrames_Async(10,0x46);
   ArticunoScreenFlash();
   sub_8086738();
   PlaySoundEffect(0x1da);
-  DisplayDungeonDialogue(&gArticunoPreFightDialogue_9);
-  sub_803E708(10,0x46);
+  DisplayDungeonDialogue_Async(&gArticunoPreFightDialogue_9);
+  DungeonWaitFrames_Async(10,0x46);
   PlaySoundEffect(0x1ea);
   sub_8088484(articunoEntity);
   sub_80865E8();
   ArticunoScreenFlash();
-  DisplayDungeonDialogue(&gArticunoPreFightDialogue_10);
+  DisplayDungeonDialogue_Async(&gArticunoPreFightDialogue_10);
   sub_806CDD4(articunoEntity,0xf,DIRECTION_SOUTH);
   ArticunoScreenFlash();
-  DisplayDungeonDialogue(&gArticunoPreFightDialogue_11);
+  DisplayDungeonDialogue_Async(&gArticunoPreFightDialogue_11);
   sub_806CDD4(articunoEntity,0x10,DIRECTION_SOUTH);
   ArticunoScreenFlash();
-  DisplayDungeonDialogue(&gArticunoPreFightDialogue_12);
+  DisplayDungeonDialogue_Async(&gArticunoPreFightDialogue_12);
   sub_806CDD4(articunoEntity,0xf,DIRECTION_SOUTH);
-  sub_803E708(0x10,0x46);
+  DungeonWaitFrames_Async(0x10,0x46);
   SetupBossFightHP(articunoEntity,0x1c2,MUS_BOSS_BATTLE);
   ShiftCameraToPosition(&leaderEntity->pixelPos,0x10);
 }
@@ -187,15 +187,15 @@ void ArticunoReFightDialogue(void)
   articunoEntity = GetEntityFromMonsterBehavior(BEHAVIOR_ARTICUNO);
   gDungeon->weather.unkE265 = WEATHER_SNOW;
   sub_807EAA0(0,1);
-  sub_803E708(10,0x46);
-  DisplayDungeonDialogue(&gArticunoReFightDialogue_1);
+  DungeonWaitFrames_Async(10,0x46);
+  DisplayDungeonDialogue_Async(&gArticunoReFightDialogue_1);
   sub_806CDD4(articunoEntity,0x10,DIRECTION_SOUTH);
   ArticunoScreenFlash();
-  DisplayDungeonDialogue(&gArticunoReFightDialogue_2);
+  DisplayDungeonDialogue_Async(&gArticunoReFightDialogue_2);
   ArticunoScreenFlash();
-  DisplayDungeonDialogue(&gArticunoReFightDialogue_3);
+  DisplayDungeonDialogue_Async(&gArticunoReFightDialogue_3);
   sub_806CDD4(articunoEntity,0xf,DIRECTION_SOUTH);
-  sub_803E708(0x28,0x46);
+  DungeonWaitFrames_Async(0x28,0x46);
   SetupBossFightHP(articunoEntity,0x1c2,MUS_BOSS_BATTLE);
   ShiftCameraToPosition(&leaderEntity->pixelPos,0x10);
 }
@@ -217,21 +217,21 @@ void ArticunoPostStoryPreFightDialogue(void)
     ArticunoScreenFlash();
     sub_8086738();
     PlaySoundEffect(0x1da);
-    DisplayDungeonDialogue(&gArticunoPostStoryPreFightDialogue_1);
-    sub_803E708(10,0x46);
+    DisplayDungeonDialogue_Async(&gArticunoPostStoryPreFightDialogue_1);
+    DungeonWaitFrames_Async(10,0x46);
     sub_8088484(articunoEntity);
     ArticunoScreenFlash();
-    DisplayDungeonDialogue(&gArticunoPostStoryPreFightDialogue_2);
+    DisplayDungeonDialogue_Async(&gArticunoPostStoryPreFightDialogue_2);
     sub_806CDD4(articunoEntity,0xf,DIRECTION_SOUTH);
     ArticunoScreenFlash();
-    DisplayDungeonDialogue(&gArticunoPostStoryPreFightDialogue_3);
+    DisplayDungeonDialogue_Async(&gArticunoPostStoryPreFightDialogue_3);
     sub_806CDD4(articunoEntity,0x10,DIRECTION_SOUTH);
     ArticunoScreenFlash();
-    DisplayDungeonDialogue(&gArticunoPostStoryPreFightDialogue_4);
+    DisplayDungeonDialogue_Async(&gArticunoPostStoryPreFightDialogue_4);
     ArticunoScreenFlash();
-    DisplayDungeonDialogue(&gArticunoPostStoryPreFightDialogue_5);
+    DisplayDungeonDialogue_Async(&gArticunoPostStoryPreFightDialogue_5);
     sub_806CDD4(articunoEntity,0xf,DIRECTION_SOUTH);
-    sub_803E708(0x28,0x46);
+    DungeonWaitFrames_Async(0x28,0x46);
     SetupBossFightHP(articunoEntity,0x1c2,MUS_BOSS_BATTLE);
     ShiftCameraToPosition(&leaderEntity->pixelPos,0x10);
   }
@@ -262,19 +262,19 @@ static void ArticunoScreenFlash(void)
     SetDungeonBGColorRGB(iVar1 / 2,iVar1,iVar1,1,1);
     DungeonRunFrameActions(0x46);
   }
-  sub_803E708(4,0x46);
+  DungeonWaitFrames_Async(4,0x46);
   for(iVar1 = 250; iVar1 > 199; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(0,iVar1,iVar1,1,1);
     DungeonRunFrameActions(0x46);
   }
-  sub_803E708(4,0x46);
+  DungeonWaitFrames_Async(4,0x46);
   for(iVar1 = 250; iVar1 >= 0; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1 / 2,iVar1,iVar1,1,1);
     DungeonRunFrameActions(0x46);
   }
-  sub_803E708(4,0x46);
+  DungeonWaitFrames_Async(4,0x46);
   sub_8085EB0();
 }
 

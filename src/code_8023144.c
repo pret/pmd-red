@@ -201,7 +201,7 @@ static u32 sub_80236A4(void)
     gUnknown_3001B5C->unk8 = 0;
 
     for (index = 0; index < MONSTER_MAX; index++) {
-        if (sub_8098134(index) && (s16)index == GetBaseSpeciesNoUnown(index))
+        if (GetMonSeenFlag(index) && (s16)index == GetBaseSpeciesNoUnown(index))
             gUnknown_3001B5C->unkC[gUnknown_3001B5C->unk8++] = index;
     }
 
@@ -211,10 +211,10 @@ static u32 sub_80236A4(void)
 
 static bool8 sub_8023704(u8 unused)
 {
-    s32 index;
+    s32 i;
 
-    for (index = 0; index < MONSTER_MAX; index++) {
-        if (sub_8098134(index))
+    for (i = 0; i < MONSTER_MAX; i++) {
+        if (GetMonSeenFlag(i))
             return FALSE;
     }
 

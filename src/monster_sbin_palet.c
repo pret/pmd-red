@@ -2,7 +2,7 @@
 #include "structs/rgb.h"
 
 // These correspond to the 'overworldPalette' field in the monster data. Only slots 0-12 are actually used, slot 13 seems to be a placeholder.
-const RGB gAxMonsPalette[] = {
+const RGB_Struct gAxMonsPalette[] = {
     INCBIN_RGB("graphics/ax/pal/0.pmdpal",
                "graphics/ax/pal/1.pmdpal",
                "graphics/ax/pal/2.pmdpal",

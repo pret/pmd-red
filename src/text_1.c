@@ -21,7 +21,7 @@ EWRAM_DATA bool8 gUnknown_20274A5 = FALSE;
 EWRAM_DATA u8 gUnknown_20274A6[6] = {0};
 EWRAM_DATA s32 gCurrentCharmap = 0;
 EWRAM_DATA static vu32 sUnknown_20274B0 = 0;
-EWRAM_DATA static u32 sUnknown_20274B4[0xEC0] = {0};
+EWRAM_DATA static u32 sWindowGFXPool[0xEC0] = {0};
 EWRAM_DATA static OpenedFile *sCharmapFiles[3] = { NULL };
 EWRAM_DATA static WindowTemplates sSavedWindows = {0};
 EWRAM_DATA s32 gUnknown_202B020 = 0; // NDS=020EDCEC
@@ -116,13 +116,13 @@ static const u32 sFadeInDungeon[8] = {0x88888888, 0x88888888, 0x88888888, 0x8888
 static const u32 sUnknown_80B8804[4] = {0, 1, 2, 3};
 static const u32 sUnknown_80B8814[4] = {1, 2, 3, 0};
 
-static void AddWindow(Window *windows, u32 *vram, u32 *, u16 tilemaps[4][32][32], u32 windowId, const WindowTemplate *winTemplate, bool8, s32 firstBlockId, DungeonPos *positionModifier, u8);
+static void AddWindow(Window *windows, u32 *vram, u32 *gfxPool, u16 tilemaps[4][32][32], u32 windowId, const WindowTemplate *winTemplate, bool8, s32 firstBlockId, DungeonPos *positionModifier, u8);
 static void ShowWindowsInternal(const WindowTemplates *winTemplates, bool8, bool8, DungeonPos *positionModifier);
-static void PutWindowTopBorderTilemap(Window *window, s32 y, u16 tilemaps[4][32][32], u8 a3);
+static void PutWindowTopBorderTilemap(Window *window, s32 y, u16 tilemaps[4][32][32], bool8 a3);
 static void PutWindowLeftBorderTilemap(Window *window, s32 x, s32 y, s32 a3, u16 tilemaps[4][32][32]);
 static void PutWindowFillTilemap(Window *window, s32 x, s32 y, s32 a3, u16 tilemaps[4][32][32]);
 static void PutWindowRightBorderTilemap(Window *window, s32 x, s32 y, s32 a3, u16 tilemaps[4][32][32]);
-static void PutWindowBottomBorderTilemap(Window *window, s32, u16 tilemaps[4][32][32], u8);
+static void PutWindowBottomBorderTilemap(Window *window, s32 y, u16 tilemaps[4][32][32], bool8 a3);
 static void PutHeaderWindowTopBorderTilemap(Window *window, s32 y, u32 a2, const WindowHeader *winHeader, u16 tilemaps[4][32][32]);
 
 // arm9.bin::02005448
@@ -135,15 +135,15 @@ void LoadCharmaps(void)
     gCurrentCharmap = 0;
     sCharmapFiles[0] = OpenFileAndGetFileDataPtr(sKanjiA_file_string, &gSystemFileArchive);
     sCharmapFiles[1] = OpenFileAndGetFileDataPtr(sKanjiB_file_string, &gSystemFileArchive);
-    gCharmaps[0] = (CharMapStruct *) sCharmapFiles[0]->data;
-    gCharmaps[1] = (CharMapStruct *) sCharmapFiles[1]->data;
+    gCharmaps[0] = (CharMapStruct *)sCharmapFiles[0]->data;
+    gCharmaps[1] = (CharMapStruct *)sCharmapFiles[1]->data;
     gCharHeight[0] = 11;
     gCharHeight[1] = 12;
 
-    for (k = 0; k < 4; k++) {
+    for (k = 0; k < MAX_WINDOWS; k++) {
         gWindows[k].width = 0;
-        gWindows[k].unk8 = 0;
-        gWindows[k].unk46 = 0;
+        gWindows[k].totalHeight = 0;
+        gWindows[k].unk46 = FALSE;
     }
 
     gCharacterSpacing = 0;
@@ -252,7 +252,7 @@ void ShowWindows(const WindowTemplates *winTemplates, bool8 a1, bool8 a2)
 static void ShowWindowsInternal(const WindowTemplates *winTemplates, bool8 a1, bool8 a2, DungeonPos *positionModifier)
 {
     s32 i;
-    s32 area = 2;
+    s32 startTileNum = 2;
 
     if (winTemplates == NULL)
         winTemplates = &sDummyWindows;
@@ -265,9 +265,10 @@ static void ShowWindowsInternal(const WindowTemplates *winTemplates, bool8 a1, b
         sSavedWindows.id[i] = winTemplates->id[i];
 
         if (winTemplates->id[i].width != 0) {
-            AddWindow(gWindows, (u32 *)VRAM, sUnknown_20274B4, gBgTilemaps, sUnknown_80B8804[i], &winTemplates->id[i], a1, area, positionModifier, 0);
+            AddWindow(gWindows, (u32 *)VRAM, sWindowGFXPool, gBgTilemaps, sUnknown_80B8804[i], &winTemplates->id[i], a1, startTileNum, positionModifier, FALSE);
             sub_80089AC(&winTemplates->id[i], positionModifier);
-            area += winTemplates->id[i].width * winTemplates->id[i].unk10;
+
+            startTileNum += winTemplates->id[i].width * winTemplates->id[i].totalHeight;
         }
     }
 
@@ -308,10 +309,11 @@ u32 sub_8006544(u32 index)
 }
 
 // arm9.bin::02004D54
-static void AddWindow(Window *windows, u32 *vram, u32 *a2, u16 tilemaps[4][32][32], u32 windowId, const WindowTemplate *winTemplate, bool8 a6, s32 firstBlockId, DungeonPos *positionModifier, u8 a9)
+static void AddWindow(Window *windows, u32 *vram, u32 *gfxPool, u16 tilemaps[4][32][32], u32 windowId, const WindowTemplate *winTemplate, bool8 a6, s32 startTileNum, DungeonPos *positionModifier, bool8 a9)
 {
     Window *newWindow;
-    s32 x, y;
+    s32 x;
+    s32 y;
     s32 numI;
     u32 uVar1;
 
@@ -321,18 +323,18 @@ static void AddWindow(Window *windows, u32 *vram, u32 *a2, u16 tilemaps[4][32][3
     newWindow->x = x;
     newWindow->y = y;
     newWindow->width = winTemplate->width;
-    newWindow->unk8 = winTemplate->unk10;
+    newWindow->totalHeight = winTemplate->totalHeight;
     newWindow->height = winTemplate->height;
     newWindow->type = winTemplate->type;
-    newWindow->unk10 = firstBlockId;
+    newWindow->unk10 = startTileNum;
 
     if (newWindow->type == WINDOW_TYPE_WITH_HEADER)
-        newWindow->unk14 = firstBlockId;
+        newWindow->unk14 = startTileNum;
     else
-        newWindow->unk14 = firstBlockId + winTemplate->unk12 * newWindow->width;
+        newWindow->unk14 = startTileNum + (winTemplate->unk12 * newWindow->width);
 
-    newWindow->unk18 = &a2[newWindow->unk10 * 8];
-    newWindow->unk1C = &a2[newWindow->unk14 * 8];
+    newWindow->winGFX = &gfxPool[newWindow->unk10 * 8];
+    newWindow->unk1C = &gfxPool[newWindow->unk14 * 8];
     newWindow->unk24 = winTemplate->unk12;
     newWindow->unk28 = &vram[newWindow->unk14 * 8];
 
@@ -341,16 +343,16 @@ static void AddWindow(Window *windows, u32 *vram, u32 *a2, u16 tilemaps[4][32][3
     else
         newWindow->unk2C = newWindow->width * newWindow->height * 32;
 
-    newWindow->unk30 = 0;
-    newWindow->unk34 = 0;
+    newWindow->unk30 = NULL;
+    newWindow->unk34 = NULL;
     newWindow->unk38 = 0;
     newWindow->unk20 = (newWindow->width * 8) - 8;
-    newWindow->unk45 = newWindow->type == WINDOW_TYPE_0;
+    newWindow->isWinType0 = newWindow->type == WINDOW_TYPE_0;
 
-    if (newWindow->unk8 == 0)
+    if (newWindow->totalHeight == 0)
         return;
 
-    if ((winTemplate->unk0 & 0xA0) != 0x80) {
+    if ((winTemplate->flags & (WINTEMPLATE_FLAG_x20 | WINTEMPLATE_FLAG_x80)) != WINTEMPLATE_FLAG_x80) {
         s32 workingY = y - 1;
         s32 i, j;
 
@@ -359,9 +361,9 @@ static void AddWindow(Window *windows, u32 *vram, u32 *a2, u16 tilemaps[4][32][3
 
             PutHeaderWindowTopBorderTilemap(newWindow, workingY, uVar1, winTemplate->header, tilemaps);
 
-            workingY = y + 2;
+            workingY = y + WINDOW_HEADER_HEIGHT;
             uVar1 = a6 ? newWindow->unk14 + newWindow->width * (winTemplate->unk12 + 2) : 0;
-            numI = newWindow->height - 2;
+            numI = newWindow->height - WINDOW_HEADER_HEIGHT;
         }
         else {
             PutWindowTopBorderTilemap(newWindow, workingY, tilemaps, a9);
@@ -390,14 +392,14 @@ static void AddWindow(Window *windows, u32 *vram, u32 *a2, u16 tilemaps[4][32][3
         PutWindowBottomBorderTilemap(newWindow, workingY, tilemaps, a9);
     }
 
-    if ((winTemplate->unk0 & 0x80) == 0)
+    if (!(winTemplate->flags & WINTEMPLATE_FLAG_x80))
         PrepareTextbox_8008C6C(windows, windowId);
 
-    newWindow->unk46 = 0;
+    newWindow->unk46 = FALSE;
 }
 
 // arm9.bin::02004B0C
-static void PutWindowTopBorderTilemap(Window *window, s32 y, u16 tilemaps[4][32][32], u8 a3)
+static void PutWindowTopBorderTilemap(Window *window, s32 y, u16 tilemaps[4][32][32], bool8 a3)
 {
     s32 x;
     s32 i;
@@ -413,11 +415,12 @@ static void PutWindowTopBorderTilemap(Window *window, s32 y, u16 tilemaps[4][32]
         case WINDOW_TYPE_0:
         case WINDOW_TYPE_WITHOUT_BORDER:
         case WINDOW_TYPE_ONLY_TEXT:
-        case WINDOW_TYPE_WITH_HEADER:
+        case WINDOW_TYPE_WITH_HEADER: {
             break;
-        case WINDOW_TYPE_NORMAL:
+        }
+        case WINDOW_TYPE_NORMAL: {
             tilemaps[0][y][x] = TILEMAP_TILE_NUM(0x2D8) | TILEMAP_PAL(15);
-            if (a3 != 0)
+            if (a3)
                 tilemaps[1][y][x] = TILEMAP_TILE_NUM(0x293) | TILEMAP_PAL(15);
             else
                 tilemaps[1][y][x] = TILEMAP_TILE_NUM(0x2DB) | TILEMAP_PAL(15);
@@ -429,12 +432,13 @@ static void PutWindowTopBorderTilemap(Window *window, s32 y, u16 tilemaps[4][32]
             }
 
             tilemaps[0][y][x] = TILEMAP_TILE_NUM(0x2D8) | TILEMAP_PAL(15) | TILEMAP_FLIP_HORIZONTAL(1);
-            if (a3 != 0)
+            if (a3)
                 tilemaps[1][y][x] = TILEMAP_TILE_NUM(0x293) | TILEMAP_PAL(15) | TILEMAP_FLIP_HORIZONTAL(1);
             else
                 tilemaps[1][y][x] = TILEMAP_TILE_NUM(0x2DB) | TILEMAP_PAL(15);
             break;
-        case WINDOW_TYPE_4:
+        }
+        case WINDOW_TYPE_4: {
             tilemaps[0][y][x] = TILEMAP_TILE_NUM(0x2E8) | TILEMAP_PAL(15);
             tilemaps[1][y][x] = TILEMAP_TILE_NUM(0x2DB) | TILEMAP_PAL(15);
             x++;
@@ -447,7 +451,8 @@ static void PutWindowTopBorderTilemap(Window *window, s32 y, u16 tilemaps[4][32]
             tilemaps[0][y][x] = TILEMAP_TILE_NUM(0x2E8) | TILEMAP_PAL(15) | TILEMAP_FLIP_HORIZONTAL(1);
             tilemaps[1][y][x] = TILEMAP_TILE_NUM(0x2DB) | TILEMAP_PAL(15);
             break;
-        case WINDOW_TYPE_FILL_TRANSPARENT:
+        }
+        case WINDOW_TYPE_FILL_TRANSPARENT: {
             tilemaps[0][y][x] = TILEMAP_TILE_NUM(0x2DC) | TILEMAP_PAL(15);
             x++;
             for (i = 0; i < window->width; i++) {
@@ -457,7 +462,8 @@ static void PutWindowTopBorderTilemap(Window *window, s32 y, u16 tilemaps[4][32]
 
             tilemaps[0][y][x] = TILEMAP_TILE_NUM(0x2DC) | TILEMAP_PAL(15) | TILEMAP_FLIP_HORIZONTAL(1);
             break;
-        case WINDOW_TYPE_7:
+        }
+        case WINDOW_TYPE_7: {
             tilemaps[0][y][x] = TILEMAP_TILE_NUM(0x293) | TILEMAP_PAL(15);
             x++;
             for (i = 0; i < window->width; i++) {
@@ -467,6 +473,7 @@ static void PutWindowTopBorderTilemap(Window *window, s32 y, u16 tilemaps[4][32]
 
             tilemaps[0][y][x] = TILEMAP_TILE_NUM(0x293) | TILEMAP_PAL(15) | TILEMAP_FLIP_HORIZONTAL(1);
             break;
+        }
     }
 }
 
@@ -583,7 +590,7 @@ static void PutWindowRightBorderTilemap(Window *window, s32 x, s32 y, s32 a3, u1
 }
 
 // arm9.bin::0200456C
-static void PutWindowBottomBorderTilemap(Window *window, s32 y, u16 tilemaps[4][32][32], u8 a3)
+static void PutWindowBottomBorderTilemap(Window *window, s32 y, u16 tilemaps[4][32][32], bool8 a3)
 {
     s32 x;
     s32 i;
@@ -598,12 +605,13 @@ static void PutWindowBottomBorderTilemap(Window *window, s32 y, u16 tilemaps[4][
     switch (window->type) {
         case WINDOW_TYPE_0:
         case WINDOW_TYPE_WITHOUT_BORDER:
-        case WINDOW_TYPE_ONLY_TEXT:
+        case WINDOW_TYPE_ONLY_TEXT: {
             break;
+        }
         case WINDOW_TYPE_NORMAL:
-        case WINDOW_TYPE_WITH_HEADER:
+        case WINDOW_TYPE_WITH_HEADER: {
             tilemaps[0][y][x] = TILEMAP_TILE_NUM(0x2D8) | TILEMAP_PAL(15) | TILEMAP_FLIP_VERTICAL(1);
-            if (a3 != 0)
+            if (a3)
                 tilemaps[1][y][x] = TILEMAP_TILE_NUM(0x293) | TILEMAP_PAL(15) | TILEMAP_FLIP_VERTICAL(1);
             else
                 tilemaps[1][y][x] = TILEMAP_TILE_NUM(0x2DB) | TILEMAP_PAL(15);
@@ -615,12 +623,13 @@ static void PutWindowBottomBorderTilemap(Window *window, s32 y, u16 tilemaps[4][
             }
 
             tilemaps[0][y][x] = TILEMAP_TILE_NUM(0x2D8) | TILEMAP_PAL(15) | TILEMAP_FLIP_VERTICAL(1) | TILEMAP_FLIP_HORIZONTAL(1);
-            if (a3 != 0)
+            if (a3)
                 tilemaps[1][y][x] = TILEMAP_TILE_NUM(0x293) | TILEMAP_PAL(15) | TILEMAP_FLIP_VERTICAL(1) | TILEMAP_FLIP_HORIZONTAL(1);
             else
                 tilemaps[1][y][x] = TILEMAP_TILE_NUM(0x2DB) | TILEMAP_PAL(15);
             break;
-        case WINDOW_TYPE_4:
+        }
+        case WINDOW_TYPE_4: {
             tilemaps[0][y][x] = TILEMAP_TILE_NUM(0x2E8) | TILEMAP_PAL(15) | TILEMAP_FLIP_VERTICAL(1);
             tilemaps[1][y][x] = TILEMAP_TILE_NUM(0x2DB) | TILEMAP_PAL(15);
             x++;
@@ -633,7 +642,8 @@ static void PutWindowBottomBorderTilemap(Window *window, s32 y, u16 tilemaps[4][
             tilemaps[0][y][x] = TILEMAP_TILE_NUM(0x2E8) | TILEMAP_PAL(15) | TILEMAP_FLIP_VERTICAL(1) | TILEMAP_FLIP_HORIZONTAL(1);
             tilemaps[1][y][x] = TILEMAP_TILE_NUM(0x2DB) | TILEMAP_PAL(15);
             break;
-        case WINDOW_TYPE_FILL_TRANSPARENT:
+        }
+        case WINDOW_TYPE_FILL_TRANSPARENT: {
             tilemaps[0][y][x] = TILEMAP_TILE_NUM(0x2DC) | TILEMAP_PAL(15) | TILEMAP_FLIP_VERTICAL(1);
             x++;
             for (i = 0; i < window->width; i++) {
@@ -643,7 +653,8 @@ static void PutWindowBottomBorderTilemap(Window *window, s32 y, u16 tilemaps[4][
 
             tilemaps[0][y][x] = TILEMAP_TILE_NUM(0x2DC) | TILEMAP_PAL(15) | TILEMAP_FLIP_VERTICAL(1) | TILEMAP_FLIP_HORIZONTAL(1);
             break;
-        case WINDOW_TYPE_7:
+        }
+        case WINDOW_TYPE_7: {
            tilemaps[0][y][x] = TILEMAP_TILE_NUM(0x293) | TILEMAP_PAL(15) | TILEMAP_FLIP_VERTICAL(1);
             x++;
             for (i = 0; i < window->width; i++) {
@@ -653,6 +664,7 @@ static void PutWindowBottomBorderTilemap(Window *window, s32 y, u16 tilemaps[4][
 
             tilemaps[0][y][x] = TILEMAP_TILE_NUM(0x293) | TILEMAP_PAL(15) | TILEMAP_FLIP_VERTICAL(1) | TILEMAP_FLIP_HORIZONTAL(1);
             break;
+        }
     }
 }
 
@@ -825,9 +837,9 @@ void sub_80073B8(s32 windowId)
 {
     Window *window = &gWindows[windowId];
 
-    window->unk3C = &window->unk1C[(u32)window->unk2C >> 2];
+    window->unk3C = &window->unk1C[(u32)window->unk2C / 4];
     window->unk40 = window->unk1C;
-    window->unk46 = 1;
+    window->unk46 = TRUE;
 }
 
 // arm9.bin::02003E9C
@@ -841,7 +853,7 @@ void sub_80073E0(s32 windowId)
 {
     Window *window = &gWindows[windowId];
 
-    if (window->unk44 == 0) {
+    if (!window->unk44) {
         window->unk30 = &window->unk28[window->unk3C - window->unk1C];
         window->unk34 = window->unk3C;
         window->unk38 = (window->unk40 - window->unk3C + 1) * 4;
@@ -853,7 +865,7 @@ void sub_80073E0(s32 windowId)
             window->unk38 = 0;
     }
 
-    window->unk46 = 0;
+    window->unk46 = FALSE;
 }
 
 // arm9.bin::02003D74

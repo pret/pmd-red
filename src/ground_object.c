@@ -422,9 +422,9 @@ s32 GroundObject_Add(s32 id_, const GroundObjectData *objectData, s32 group_, s3
       SetPredefinedScript(&parent->action,1, (objectData->scripts[1] != NULL) ? objectData->scripts[1]
           : (SpriteHasPokemonSize_80A66A4(&parent->unk144)) ? gUnknown_8118350 : gUnknown_81182F4);
       SetPredefinedScript(&parent->action,2,(objectData->scripts[2] != NULL) ? objectData->scripts[2]
-          : gFunctionScriptTable[4].script);
+          : gFunctionScriptTable[INCOMPLETE_TALK].script);
       SetPredefinedScript(&parent->action,3,(objectData->scripts[3] != NULL) ? objectData->scripts[3]
-          : gFunctionScriptTable[8].script);
+          : gFunctionScriptTable[OBJECT_REPLY_NORMAL].script);
 
       if (objectData->scripts[0] != NULL) {
         SetPredefinedScript(&parent->action,0,objectData->scripts[0]);

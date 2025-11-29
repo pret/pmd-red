@@ -1,6 +1,7 @@
 #ifndef GUARD_DUNGEON_UTIL_H
 #define GUARD_DUNGEON_UTIL_H
 
+#include "constants/colors.h"
 #include "constants/direction.h"
 #include "structs/dungeon_entity.h"
 #include "structs/str_position.h"
@@ -38,7 +39,7 @@ bool8 CanTargetEntity(Entity *entity, Entity *targetEntity);
 bool8 sub_8045A70(Entity *entity, Entity *targetEntity);
 bool8 sub_8045AAC(Entity *entity, DungeonPos *pos);
 bool8 CanTargetPosition(Entity *entity, DungeonPos *pos);
-void SubstitutePlaceholderStringTags(u8 *buffer, Entity *entity, u32 param_3);
+void SubstitutePlaceholderStringTags(u8 *buffer, Entity *entity, u32 monsterColorNum);
 void sub_8045ACC(void);
 s32 GetTeamMemberEntityIndex(Entity *pokemon);
 

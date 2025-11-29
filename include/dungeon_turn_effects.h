@@ -3,7 +3,7 @@
 
 #include "structs/dungeon_entity.h"
 
-void ApplyEndOfTurnEffects(Entity *entity);
+void DoEndOfTurnEffects_Async(Entity *entity);
 void TickStatusAndHealthRegen(Entity *entity);
 
 #endif

@@ -15,7 +15,7 @@ static const struct ScriptCommand s_gs227_g0_s0_station_sref_script[] = { /* 0x8
     JUMP_SCRIPT(COMMON_ENTER),
 };
 
-static const struct ScriptRef s_gs227_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs227_g0_s0_station_sref_script }; /* 0x826f620 */
+static const struct ScriptRef s_gs227_g0_s0_station_sref = { ENTER_CONTROL , 1, NULL, s_gs227_g0_s0_station_sref_script }; /* 0x826f620 */
 
 static const struct ScriptCommand s_gs227_g1_s0_station_sref_script[] = { /* 0x826f62c */
     DEBUGINFO_O(21),
@@ -31,7 +31,7 @@ static const struct ScriptCommand s_gs227_g1_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs227_g1_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs227_g1_s0_station_sref_script }; /* 0x826f6dc */
+static const struct ScriptRef s_gs227_g1_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs227_g1_s0_station_sref_script }; /* 0x826f6dc */
 
 static const struct ScriptCommand s_gs227_g1_s0_eff0_script[] = { /* 0x826f6e8 */
     DEBUGINFO_O(37),
@@ -72,4 +72,4 @@ static const struct GroundLink s_gs227_links[] = { /* 0x826f7ec */
     /* link   1 */ { { /*x*/  15, /*y*/  31, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
 };
 
-/*extern*/ const struct GroundScriptHeader gGroundScript_gs227 = { LPARRAY(s_gs227_groups), s_gs227_links }; /* 0x826f7fc */
+const GroundScriptHeader gGroundScript_gs227 = { LPARRAY(s_gs227_groups), s_gs227_links }; /* 0x826f7fc */

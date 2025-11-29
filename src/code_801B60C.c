@@ -54,7 +54,7 @@ bool8 sub_801B60C(u32 r0, u8 id, u8 quantity)
     sUnknown_203B234->unk14.unk0 = 0;
     sUnknown_203B234->unk14.unk4 = 0;
     sUnknown_203B234->unk14.unk8 = 1;
-    PrintColoredPokeNameToBuffer(gFormatBuffer_Monsters[0], GetPlayerPokemonStruct(), COLOR_YELLOW);
+    PrintColoredPokeNameToBuffer(gFormatBuffer_Monsters[0], GetLeaderMon1(), COLOR_YELLOW);
     sub_8090E14(gFormatBuffer_Items[0], &sUnknown_203B234->unk10, &sUnknown_203B234->unk14);
     sub_801B748(0);
     return TRUE;

@@ -65,7 +65,7 @@ void sub_8089978(void)
   sub_80855E4(sub_8086A3C);
   if(HasRecruitedMon(MONSTER_MEWTWO)){
     DungeonStartNewBGM(MUS_FRIEND_AREA_CRYPTIC_CAVE);
-    HandleFaint(MewtwoEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
+    HandleFaint_Async(MewtwoEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
   }
   else {
     gDungeon->unk7 = 1;
@@ -76,11 +76,11 @@ void sub_8089978(void)
   CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2],MONSTER_MEWTWO);
 }
 
-void sub_8089A00(u8 param_1, u8 param_2)
+void HandleMewtwoBossFaint(u8 monsterBehavior, u8 cutscene)
 {
-  if ((param_2 == 0x1d || param_2 == 0x1e || param_2 == 0x1f) && (param_1 == 0x11)) {
-    sub_8097FA8(0x13);
-    gDungeon->unk2 = 1;
+  if ((cutscene == CUTSCENE_WESTERN_CAVE_ATTEMPT1 || cutscene == CUTSCENE_WESTERN_CAVE_ATTEMPT2 || cutscene == CUTSCENE_WESTERN_CAVE_POSTSTORY) && monsterBehavior == BEHAVIOR_MEWTWO) {
+    SetTempCutsceneFlag(CUTSCENE_FLAG_WESTERN_CAVE_COMPLETE);
+    gDungeon->unk2 = DUNGEON_UNK2_1;
   }
 }
 
@@ -92,21 +92,21 @@ void MewtwoPreFightDialogue(void)
   leaderEntity = CutsceneGetLeader();
   MewtwoEntity = GetEntityFromMonsterBehavior(BEHAVIOR_MEWTWO);
   sub_8086448();
-  DisplayDungeonDialogue(&gMewtwoPreFightDialogue_1);
-  sub_803E708(10,0x46);
+  DisplayDungeonDialogue_Async(&gMewtwoPreFightDialogue_1);
+  DungeonWaitFrames_Async(10,0x46);
   DungeonStartNewBGM(MUS_FRIEND_AREA_CRYPTIC_CAVE);
   sub_8086794();
-  sub_803E708(0x1e,0x46);
+  DungeonWaitFrames_Async(0x1e,0x46);
   MewtwoDropInEffect(MewtwoEntity);
-  sub_803E708(0x3c,0x46);
-  DisplayDungeonDialogue(&gMewtwoPreFightDialogue_2);
-  DisplayDungeonDialogue(&gMewtwoPreFightDialogue_3);
-  sub_803E708(10,0x46);
+  DungeonWaitFrames_Async(0x3c,0x46);
+  DisplayDungeonDialogue_Async(&gMewtwoPreFightDialogue_2);
+  DisplayDungeonDialogue_Async(&gMewtwoPreFightDialogue_3);
+  DungeonWaitFrames_Async(10,0x46);
   MewtwoScreenFlash();
-  DisplayDungeonDialogue(&gMewtwoPreFightDialogue_4);
+  DisplayDungeonDialogue_Async(&gMewtwoPreFightDialogue_4);
   MewtwoScreenFlash();
-  DisplayDungeonDialogue(&gMewtwoPreFightDialogue_5);
-  sub_803E708(10,0x46);
+  DisplayDungeonDialogue_Async(&gMewtwoPreFightDialogue_5);
+  DungeonWaitFrames_Async(10,0x46);
   SetupBossFightHP(MewtwoEntity,900,MUS_BATTLE_WITH_RAYQUAZA);
   ShiftCameraToPosition(&leaderEntity->pixelPos,0x10);
 }
@@ -123,16 +123,16 @@ void MewtwoReFightDialogue(void)
     sub_80866C4(&gMewtwoReFightDialogue_5);
   }
   else {
-    DisplayDungeonDialogue(&gMewtwoReFightDialogue_1);
+    DisplayDungeonDialogue_Async(&gMewtwoReFightDialogue_1);
     DungeonStartNewBGM(MUS_FRIEND_AREA_CRYPTIC_CAVE);
     sub_8086794();
     MewtwoDropInEffect(MewtwoEntity);
-    sub_803E708(0x3c,0x46);
-    DisplayDungeonDialogue(&gMewtwoReFightDialogue_2);
+    DungeonWaitFrames_Async(0x3c,0x46);
+    DisplayDungeonDialogue_Async(&gMewtwoReFightDialogue_2);
     MewtwoScreenFlash();
-    DisplayDungeonDialogue(&gMewtwoReFightDialogue_3);
+    DisplayDungeonDialogue_Async(&gMewtwoReFightDialogue_3);
     MewtwoScreenFlash();
-    DisplayDungeonDialogue(&gMewtwoReFightDialogue_4);
+    DisplayDungeonDialogue_Async(&gMewtwoReFightDialogue_4);
     SetupBossFightHP(MewtwoEntity,900,MUS_BATTLE_WITH_RAYQUAZA);
     ShiftCameraToPosition(&leaderEntity->pixelPos,0x10);
   }
@@ -170,19 +170,19 @@ static void MewtwoScreenFlash(void)
     SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,1);
     DungeonRunFrameActions(0x46);
   }
-  sub_803E708(10,0x46);
+  DungeonWaitFrames_Async(10,0x46);
   for(iVar1 = 250; iVar1 > 199; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1,iVar1,0,1,1);
     DungeonRunFrameActions(0x46);
   }
-  sub_803E708(10,0x46);
+  DungeonWaitFrames_Async(10,0x46);
   for(iVar1 = 250; iVar1 >= 0; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,1);
     DungeonRunFrameActions(0x46);
   }
-  sub_803E708(10,0x46);
+  DungeonWaitFrames_Async(10,0x46);
   sub_8085EB0();
 }
 

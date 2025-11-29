@@ -28,8 +28,8 @@
 #include "dungeon_vram.h"
 #include "sprite.h"
 
-static void MusicBoxCreation(void);
-static u8 sub_8046D70(void);
+static void MusicBoxCreation_Async(void);
+static bool8 sub_8046D70(void);
 
 static EWRAM_INIT u8 sUnkItemTileNums[8] = {0x15, 0x00, 0x16, 0x00, 0x15, 0x00, 0x16, 0x00};
 static EWRAM_INIT u8 sUnkItemMatrixNums[8] = {0x02, 0x03, 0x01, 0x01, 0x00, 0x00, 0x00, 0x02};
@@ -142,7 +142,7 @@ void CreateFloorItems(void)
     }
 }
 
-void TryLeaderItemPickUp(struct DungeonPos *pos, bool8 printMsg)
+void TryLeaderItemPickUp_Async(struct DungeonPos *pos, bool8 printMsg)
 {
     Item *tileItem;
     int inventoryIds[INVENTORY_SIZE + 1];
@@ -164,7 +164,7 @@ void TryLeaderItemPickUp(struct DungeonPos *pos, bool8 printMsg)
         }
         sub_8045BF8(gFormatBuffer_Items[0],tileItem);
         SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],leader,0);
-        LogMessageByIdWithPopupCheckUser(leader,gMonSteppedOnItem);
+        LogMessageByIdWithPopupCheckUser_Async(leader,gMonSteppedOnItem);
     }
     else if (ShouldMonsterRunAwayAndShowEffect(leader,1)) {
         if (!printMsg) {
@@ -172,14 +172,14 @@ void TryLeaderItemPickUp(struct DungeonPos *pos, bool8 printMsg)
         }
         sub_8045BF8(gFormatBuffer_Items[0],tileItem);
         SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],leader,0);
-        LogMessageByIdWithPopupCheckUser(leader,gMonTerrifiedCouldntPickUpItem);
+        LogMessageByIdWithPopupCheckUser_Async(leader,gMonTerrifiedCouldntPickUpItem);
     }
     else if (GetItemCategory(tileItem->id) == CATEGORY_POKE) {
         PlaySoundEffect(0x14c);
         AddToTeamMoney(GetMoneyValue(tileItem));
         sub_8045BF8(gFormatBuffer_Items[0],tileItem);
         RemoveGroundItem(pos,TRUE);
-        LogMessageByIdWithPopupCheckUser(leader,gPickedUpItem);
+        LogMessageByIdWithPopupCheckUser_Async(leader,gPickedUpItem);
         DisplayItemTip(tileItem->id);
     }
     else {
@@ -248,10 +248,10 @@ void TryLeaderItemPickUp(struct DungeonPos *pos, bool8 printMsg)
                 RemoveGroundItem(pos,TRUE);
                 PlaySoundEffect(0x14a);
                 if (inventoryIds[index] < 0) {
-                    LogMessageByIdWithPopupCheckUser(leader,gPickedUpItem2);
+                    LogMessageByIdWithPopupCheckUser_Async(leader,gPickedUpItem2);
                 }
                 else {
-                    LogMessageByIdWithPopupCheckUser(leader,gPickedUpItemToolbox);
+                    LogMessageByIdWithPopupCheckUser_Async(leader,gPickedUpItemToolbox);
                 }
                 DisplayItemTip(tileItem->id);
                 return;
@@ -269,7 +269,7 @@ void TryLeaderItemPickUp(struct DungeonPos *pos, bool8 printMsg)
             }
             sub_8045BF8(gFormatBuffer_Items[0],tileItem);
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],leader,0);
-            LogMessageByIdWithPopupCheckUser(leader,gMonSteppedOnItem);
+            LogMessageByIdWithPopupCheckUser_Async(leader,gMonSteppedOnItem);
         }
         else {
             PlaySoundEffect(0x14a);
@@ -277,16 +277,16 @@ void TryLeaderItemPickUp(struct DungeonPos *pos, bool8 printMsg)
                 leaderInfo->heldItem = *tileItem;
                 sub_8045BF8(gFormatBuffer_Items[0],tileItem);
                 RemoveGroundItem(pos,TRUE);
-                LogMessageByIdWithPopupCheckUser(leader,gPickedUpItem2);
+                LogMessageByIdWithPopupCheckUser_Async(leader,gPickedUpItem2);
             }
             else if (AddItemToInventory(tileItem) != 0) {
                 SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],leader,0);
-                LogMessageByIdWithPopupCheckUser(leader,gMonCouldntPickUpItem);
+                LogMessageByIdWithPopupCheckUser_Async(leader,gMonCouldntPickUpItem);
             }
             else {
                 sub_8045BF8(gFormatBuffer_Items[0],tileItem);
                 RemoveGroundItem(pos,TRUE);
-                LogMessageByIdWithPopupCheckUser(leader,gPickedUpItemToolbox);
+                LogMessageByIdWithPopupCheckUser_Async(leader,gPickedUpItemToolbox);
             }
             DisplayItemTip(tileItem->id);
          }
@@ -460,7 +460,7 @@ void SpawnDroppedItem(Entity *entity1, Entity *entity2, Item *item, bool8 a3, Du
     if (tileObject != NULL && GetEntityType(tileObject) == ENTITY_TRAP) {
         sub_8046734(entity2, &entity2->pos);
         sub_807FE44(&entity2->pos, 1);
-        LogMessageByIdWithPopupCheckUser(entity1, gUnknown_80FED30);
+        LogMessageByIdWithPopupCheckUser_Async(entity1, gUnknown_80FED30);
         if (!ItemExists(item))
             return;
     }
@@ -475,7 +475,7 @@ void SpawnDroppedItem(Entity *entity1, Entity *entity2, Item *item, bool8 a3, Du
         i = 1;
     }
 
-    while (1) {
+    while (TRUE) {
         if (gUnknown_80F4468[i].x == 99) {
             var_24 = FALSE;
             break;
@@ -499,16 +499,16 @@ void SpawnDroppedItem(Entity *entity1, Entity *entity2, Item *item, bool8 a3, Du
         DrawMinimapTile(localPos.x, localPos.y);
         switch (GetTerrainType(GetTile(localPos.x, localPos.y))) {
             case TERRAIN_TYPE_NORMAL:
-                LogMessageByIdWithPopupCheckUserUnknown(entity1, &localPos, gItemFellOnGround);
+                LogMessageByIdWithPopupCheckUserUnknown_Async(entity1, &localPos, gItemFellOnGround);
                 break;
             case TERRAIN_TYPE_SECONDARY:
-                LogMessageByIdWithPopupCheckUserUnknown(entity1, &localPos, gItemFellInWater);
+                LogMessageByIdWithPopupCheckUserUnknown_Async(entity1, &localPos, gItemFellInWater);
                 break;
             case TERRAIN_TYPE_WALL:
-                LogMessageByIdWithPopupCheckUserUnknown(entity1, &localPos, gItemBuried);
+                LogMessageByIdWithPopupCheckUserUnknown_Async(entity1, &localPos, gItemBuried);
                 break;
             case TERRAIN_TYPE_SECONDARY | TERRAIN_TYPE_NORMAL:
-                LogMessageByIdWithPopupCheckUserUnknown(entity1, &localPos, gItemFellOutOfSight);
+                LogMessageByIdWithPopupCheckUserUnknown_Async(entity1, &localPos, gItemFellOutOfSight);
                 break;
         }
     }
@@ -523,7 +523,7 @@ void SpawnDroppedItem(Entity *entity1, Entity *entity2, Item *item, bool8 a3, Du
         }
 
         sub_804219C(&pixelPos);
-        LogMessageByIdWithPopupCheckUserUnknown(entity1, &localPos, gItemLost);
+        LogMessageByIdWithPopupCheckUserUnknown_Async(entity1, &localPos, gItemLost);
     }
 }
 
@@ -647,10 +647,10 @@ void sub_804687C(Entity *entity, DungeonPos *pos1, DungeonPos *pos2, Item *item,
 
     if (!r1) {
         if (count > 1) {
-            LogMessageByIdWithPopupCheckUser(entity, gAllItemsLost);
+            LogMessageByIdWithPopupCheckUser_Async(entity, gAllItemsLost);
         }
         else {
-            LogMessageByIdWithPopupCheckUser(entity, gItemLost);
+            LogMessageByIdWithPopupCheckUser_Async(entity, gItemLost);
         }
     }
     else {
@@ -659,7 +659,7 @@ void sub_804687C(Entity *entity, DungeonPos *pos1, DungeonPos *pos2, Item *item,
         bool8 hallucinating;
 
         if (r9) {
-            LogMessageByIdWithPopupCheckUser(entity, gSeveralItemsLost);
+            LogMessageByIdWithPopupCheckUser_Async(entity, gSeveralItemsLost);
         }
 
         dirMaybe = 0;
@@ -719,31 +719,31 @@ static void sub_8046CE4(Item *item,s32 param_2)
     item->quantity = 1;
 }
 
-void sub_8046D20(void)
+void PotentiallyCreateMusicBox_Async(void)
 {
-    u8 cVar1;
+    bool8 b = gDungeon->unk8;
 
-    cVar1 = gDungeon->unk8;
     gDungeon->unk8 = sub_8046D70();
-    if (((gDungeon->unk8 == 1) && (cVar1 == 0)) &&
-         (DisplayDungeonYesNoMessage(0, gUnknown_80FA408, 1) == 1)) {
+
+    if (gDungeon->unk8 == TRUE && !b && DisplayDungeonYesNoMessage_Async(NULL, gUnknown_80FA408, TRUE) == TRUE) {
         gDungeon->unk4 = 1;
         gDungeon->unk11 = 2;
     }
     else {
-        MusicBoxCreation();
+        MusicBoxCreation_Async();
     }
 }
 
-static u8 sub_8046D70(void)
+static bool8 sub_8046D70(void)
 {
+    // Insane
     if (gDungeon->unk644.unk46)
-        return 0;
+        return FALSE;
     else
-        return 0;
+        return FALSE;
 }
 
-static void MusicBoxCreation(void)
+static void MusicBoxCreation_Async(void)
 {
     bool8 musicBoxOnce;
     bool8 createMusicBox;
@@ -792,22 +792,22 @@ static void MusicBoxCreation(void)
     if (createMusicBox) {
         Entity *leader = GetLeader();
         sub_80855E4(sub_80861A8);
-        gDungeon->unk1356C = 1;
-        DisplayDungeonMessage(0,gUnknown_810531C,1);
-        sub_803E708(0x3c,0x41);
-        DisplayDungeonMessage(0,gUnknown_8105360,1);
-        sub_80869E4(leader,4,10,0);
+        gDungeon->unk1356C = TRUE;
+        DisplayDungeonMessage_Async(0,gUnknown_810531C,1);
+        DungeonWaitFrames_Async(0x3c,0x41);
+        DisplayDungeonMessage_Async(0,gUnknown_8105360,1);
+        CutsceneLookDir_Async(leader,4,DIR_TRANS_10,0);
         sub_80416E0(&leader->pixelPos,0x10c,FALSE);
         sub_80421C0(leader,0xd7);
-        sub_803E708(0x3c,0x41);
+        DungeonWaitFrames_Async(0x3c,0x41);
         SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],leader,0);
-        DisplayDungeonMessage(0,gUnknown_81053A8,1);
-        sub_803E708(10,0x41);
+        DisplayDungeonMessage_Async(0,gUnknown_81053A8,1);
+        DungeonWaitFrames_Async(10,0x41);
         PlaySoundEffect(0xd4);
-        DisplayDungeonMessage(0,gUnknown_8105434,1);
-        sub_803E708(10,0x41);
-        sub_804178C(1);
-        gDungeon->unk1356C = 0;
+        DisplayDungeonMessage_Async(0,gUnknown_8105434,1);
+        DungeonWaitFrames_Async(10,0x41);
+        sub_804178C_Async(1);
+        gDungeon->unk1356C = FALSE;
         UpdateMinimap();
     }
 }

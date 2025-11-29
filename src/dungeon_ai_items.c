@@ -454,7 +454,7 @@ void MonTryPickUpItem(Entity *entity)
     if (ShouldMonsterRunAwayAndShowEffect(entity, TRUE)) {
         sub_8045BF8(gFormatBuffer_Items[0], groundItem);
         SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], entity, 0);
-        DisplayDungeonLoggableMessageTrue(entity, gMonTerrifiedCouldntPickUpItem);
+        DisplayDungeonLoggableMessageTrue_Async(entity, gMonTerrifiedCouldntPickUpItem);
     }
     else if (!_entityInfo->isNotTeamMember && GetItemCategory(groundItem->id) == CATEGORY_POKE) {
         // Why check the same thing again?
@@ -467,7 +467,7 @@ void MonTryPickUpItem(Entity *entity)
         AddToTeamMoney(GetMoneyValue(groundItem));
         sub_8045BF8(gFormatBuffer_Items[0], groundItem);
         RemoveGroundItem(&entity->pos, 1);
-        DisplayDungeonLoggableMessageTrue(entity, gMonPickedUpItem);
+        DisplayDungeonLoggableMessageTrue_Async(entity, gMonPickedUpItem);
     }
     else {
         s32 i, nItems, newInventoryId;
@@ -531,9 +531,9 @@ void MonTryPickUpItem(Entity *entity)
                 RemoveGroundItem(&entity->pos, 1);
                 PlaySoundEffect(0x14A);
                 if (inventoryIds[newInventoryId] <= -1)
-                    DisplayDungeonLoggableMessageTrue(entity, gMonPickedUpItem2);
+                    DisplayDungeonLoggableMessageTrue_Async(entity, gMonPickedUpItem2);
                 else
-                    DisplayDungeonLoggableMessageTrue(entity, gMonPickedUpItemToolbox);
+                    DisplayDungeonLoggableMessageTrue_Async(entity, gMonPickedUpItemToolbox);
 
                 return;
             }
@@ -546,7 +546,7 @@ void MonTryPickUpItem(Entity *entity)
 
         if (i == nItems) {
             sub_8045BF8(gFormatBuffer_Items[0], groundItem);
-            DisplayDungeonLoggableMessageTrue(entity, gMonSteppedOnItem);
+            DisplayDungeonLoggableMessageTrue_Async(entity, gMonSteppedOnItem);
         }
         else {
             if (_entityInfo->isNotTeamMember) {
@@ -560,16 +560,16 @@ void MonTryPickUpItem(Entity *entity)
                 _entityInfo->heldItem = *groundItem;
                 sub_8045BF8(gFormatBuffer_Items[0], groundItem);
                 RemoveGroundItem(&entity->pos, 1);
-                DisplayDungeonLoggableMessageTrue(entity, gMonPickedUpItem2);
+                DisplayDungeonLoggableMessageTrue_Async(entity, gMonPickedUpItem2);
             }
             else if (AddItemToInventory(groundItem)) {
                 SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], entity, 0);
-                DisplayDungeonLoggableMessageTrue(entity, gMonCouldntPickUpItem);
+                DisplayDungeonLoggableMessageTrue_Async(entity, gMonCouldntPickUpItem);
             }
             else {
                 sub_8045BF8(gFormatBuffer_Items[0], groundItem);
                 RemoveGroundItem(&entity->pos, 1);
-                DisplayDungeonLoggableMessageTrue(entity, gMonPickedUpItemToolbox);
+                DisplayDungeonLoggableMessageTrue_Async(entity, gMonPickedUpItemToolbox);
             }
         }
     }

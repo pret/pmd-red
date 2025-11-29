@@ -9,7 +9,7 @@
 void sub_803E250(void);
 void DungeonRunFrameActions(u32 a0);
 void sub_803E668(u32 unused);
-void sub_803E708(s32 numFrames, u32 a1);
+void DungeonWaitFrames_Async(s32 numFrames, u32 a1);
 void sub_803E724(s32 r0);
 void sub_803E748(void);
 void sub_803E7C8(void);

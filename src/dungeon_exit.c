@@ -90,11 +90,11 @@ bool8 sub_8083C50(void)
     return FALSE;
 }
 
-bool8 sub_8083C88(u8 param_1)
+bool8 sub_8083C88(u8 dungeonMissionKind)
 {
     DungeonExitSummary *exitSummary = &gDungeon->exitSummary;
 
-    if ((!HasCheckpoint(gDungeon->unk644.dungeonLocation.id) && (gDungeon->unk644.unk18 != 0 || param_1 != 0))
+    if ((!HasCheckpoint(gDungeon->unk644.dungeonLocation.id) && (gDungeon->unk644.canChangeLeader || dungeonMissionKind != DUNGEON_MISSION_UNK0))
         || exitSummary->exitReason != DUNGEON_EXIT_CLEARED_DUNGEON) {
         return TRUE;
     }

@@ -65,7 +65,7 @@ void sub_808A668(void)
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
   if (HasRecruitedMon(MONSTER_HO_OH)) {
-    HandleFaint(HoOhEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
+    HandleFaint_Async(HoOhEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
   }
   else {
     SetFacingDirection(HoOhEntity, DIRECTION_SOUTH);
@@ -75,11 +75,11 @@ void sub_808A668(void)
   CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_HO_OH);
 }
 
-void sub_808A6E8(u8 param_1, u8 param_2)
+void HandleHoOhBossFaint(u8 monsterBehavior, u8 cutscene)
 {
-  if ((param_2 == 0x29 || param_2 == 0x2A) && (param_1 == 0x15)) {
-    sub_8097FA8(0x1A);
-    gDungeon->unk2 = 1;
+  if ((cutscene == CUTSCENE_MT_FARAWAY || cutscene == CUTSCENE_MT_FARAWAY_POSTSTORY) && monsterBehavior == BEHAVIOR_HO_OH) {
+    SetTempCutsceneFlag(CUTSCENE_FLAG_MT_FARAWAY_COMPLETE);
+    gDungeon->unk2 = DUNGEON_UNK2_1;
   }
 }
 
@@ -99,30 +99,30 @@ void HoOhPreFightDialogue(void)
   local_14.x = leaderEntity->pixelPos.x;
   local_14.y = leaderEntity->pixelPos.y + -0x1000;
   ShiftCameraToPosition(&local_14,0x88);
-  sub_803E708(0x40,70);
-  DisplayDungeonDialogue(&gHoOhPreFightDialogue_1);
-  sub_803E708(10,70);
+  DungeonWaitFrames_Async(0x40,70);
+  DisplayDungeonDialogue_Async(&gHoOhPreFightDialogue_1);
+  DungeonWaitFrames_Async(10,70);
   HoOhScreenFlash();
-  DisplayDungeonDialogue(&gHoOhPreFightDialogue_2);
-  sub_803E708(10,70);
+  DisplayDungeonDialogue_Async(&gHoOhPreFightDialogue_2);
+  DungeonWaitFrames_Async(10,70);
   sub_80855E4(sub_80868F4);
   sub_808680C();
   PlaySoundEffect(0x1c5);
-  sub_803E708(0xfa,70);
+  DungeonWaitFrames_Async(0xfa,70);
   HoOhDropInEffect(HoOhEntity);
   StopSoundEffect(0x1c5);
   sub_808682C();
   sub_80855E4(sub_8086910);
   sub_8085930(DIRECTION_NORTH);
-  DisplayDungeonDialogue(&gHoOhPreFightDialogue_3);
-  DisplayDungeonDialogue(&gHoOhPreFightDialogue_4);
-  sub_803E708(0x1e,70);
-  sub_803E708(0x1e,70);
+  DisplayDungeonDialogue_Async(&gHoOhPreFightDialogue_3);
+  DisplayDungeonDialogue_Async(&gHoOhPreFightDialogue_4);
+  DungeonWaitFrames_Async(0x1e,70);
+  DungeonWaitFrames_Async(0x1e,70);
   HoOhScreenFlash();
-  DisplayDungeonDialogue(&gHoOhPreFightDialogue_5);
+  DisplayDungeonDialogue_Async(&gHoOhPreFightDialogue_5);
   HoOhScreenFlash();
-  DisplayDungeonDialogue(&gHoOhPreFightDialogue_6);
-  sub_803E708(10,70);
+  DisplayDungeonDialogue_Async(&gHoOhPreFightDialogue_6);
+  DungeonWaitFrames_Async(10,70);
   SetupBossFightHP(HoOhEntity,800,MUS_BATTLE_WITH_RAYQUAZA);
   ShiftCameraToPosition(&leaderEntity->pixelPos,0x10);
 }
@@ -139,26 +139,26 @@ void HoOhReFightDialogue(void)
   local_14.x = leaderEntity->pixelPos.x;
   local_14.y = leaderEntity->pixelPos.y + -0x1000;
   ShiftCameraToPosition(&local_14,0x88);
-  sub_803E708(0x40,70);
+  DungeonWaitFrames_Async(0x40,70);
   if (HasRecruitedMon(MONSTER_HO_OH)) {
     sub_80866C4(&HoOhReFightDialogue_5);
   }
   else {
-    DisplayDungeonDialogue(&HoOhReFightDialogue_1);
+    DisplayDungeonDialogue_Async(&HoOhReFightDialogue_1);
     HoOhScreenFlash();
     sub_80855E4(sub_80868F4);
     sub_808680C();
-    sub_803E708(10,70);
+    DungeonWaitFrames_Async(10,70);
     HoOhDropInEffect(HoOhEntity);
     sub_808682C();
     sub_80855E4(sub_8086910);
     sub_8085930(DIRECTION_NORTH);
-    DisplayDungeonDialogue(&HoOhReFightDialogue_2);
+    DisplayDungeonDialogue_Async(&HoOhReFightDialogue_2);
     HoOhScreenFlash();
-    DisplayDungeonDialogue(&HoOhReFightDialogue_3);
+    DisplayDungeonDialogue_Async(&HoOhReFightDialogue_3);
     HoOhScreenFlash();
-    DisplayDungeonDialogue(&HoOhReFightDialogue_4);
-    sub_803E708(10,70);
+    DisplayDungeonDialogue_Async(&HoOhReFightDialogue_4);
+    DungeonWaitFrames_Async(10,70);
     SetupBossFightHP(HoOhEntity,800,MUS_BATTLE_WITH_RAYQUAZA);
     ShiftCameraToPosition(&leaderEntity->pixelPos,0x10);
   }
@@ -196,18 +196,18 @@ static void HoOhScreenFlash(void)
     SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,1);
     DungeonRunFrameActions(70);
   }
-  sub_803E708(10,70);
+  DungeonWaitFrames_Async(10,70);
   for(iVar1 = 250; iVar1 > 199; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,1);
     DungeonRunFrameActions(70);
   }
-  sub_803E708(10,70);
+  DungeonWaitFrames_Async(10,70);
   for(iVar1 = 250; iVar1 >= 0; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,1);
     DungeonRunFrameActions(70);
   }
-  sub_803E708(10,70);
+  DungeonWaitFrames_Async(10,70);
   sub_8085EB0();
 }

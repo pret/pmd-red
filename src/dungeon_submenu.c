@@ -19,11 +19,14 @@ void CreateDungeonMenuSubWindow(WindowTemplate *mainWindow, s32 subWindowX)
         .id = {
             [0] = WIN_TEMPLATE_DUMMY,
             [1] = {
+                .flags = WINTEMPLATE_FLAG_NONE,
                 .type = WINDOW_TYPE_NORMAL,
-                .pos = {22, 4},
+                .pos = { 22, 4 },
                 .width = 6,
                 .height = 4,
-                .unk10 = 4,
+                .totalHeight = 4,
+                .unk12 = 0,
+                .header = NULL,
             },
             [2] = WIN_TEMPLATE_DUMMY,
             [3] = WIN_TEMPLATE_DUMMY,
@@ -31,7 +34,7 @@ void CreateDungeonMenuSubWindow(WindowTemplate *mainWindow, s32 subWindowX)
     };
 
     windows.id[0] = *mainWindow;
-    windows.id[0].unk0 = 0x80;
+    windows.id[0].flags = WINTEMPLATE_FLAG_x80;
 
     gDungeonMenu.menuIndex = 0;
     gDungeonMenu.entriesPerPage = gDungeonSubMenuItemsCount;
@@ -49,7 +52,7 @@ void CreateDungeonMenuSubWindow(WindowTemplate *mainWindow, s32 subWindowX)
 
     windows.id[1].pos.x = subWindowX;
     windows.id[1].width = 28 - subWindowX;
-    windows.id[1].height = windows.id[1].unk10 = CalcEntriesTotalHeight(gDungeonMenu.entriesPerPage, 0);
+    windows.id[1].height = windows.id[1].totalHeight = CalcEntriesTotalHeight(gDungeonMenu.entriesPerPage, 0);
     DungeonShowWindows(&windows, FALSE);
     sub_80137B0(&gDungeonMenu, windows.id[1].height * 8);
     sub_80073B8(1);

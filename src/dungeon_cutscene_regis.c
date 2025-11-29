@@ -40,238 +40,237 @@ static void SetupRegisteelFightHP(Entity *r0);
 
 void sub_808ACC0(void)
 {
-  Entity * entity;
-
-  if (HasRecruitedMon(MONSTER_REGIROCK)) {
-    entity = GetEntityFromMonsterBehavior(BEHAVIOR_REGIROCK);
-    HandleFaint(entity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
-    sub_8097FA8(0x22);
-    sub_8097FA8(0x1d);
-    sub_808B1CC(ITEM_ROCK_PART);
-  }
-  else if (sub_80860A8(ITEM_ROCK_PART) != 0) {
-        sub_8098044(0x22);
-        sub_8097FA8(0x1d);
-  }
-  else if (sub_80860A8(ITEM_MUSIC_BOX) != 0) {
-        sub_8098044(0x22);
-        sub_8097FA8(0x1d);
-  }
-  else {
-        sub_8098044(0x22);
-        sub_8098044(0x1d);
+    if (HasRecruitedMon(MONSTER_REGIROCK)) {
+        Entity *entity = GetEntityFromMonsterBehavior(BEHAVIOR_REGIROCK);
+        HandleFaint_Async(entity, DUNGEON_EXIT_DELETED_FOR_EVENT, NULL);
+        SetTempCutsceneFlag(CUTSCENE_FLAG_REGI_RECRUITED);
+        SetTempCutsceneFlag(CUTSCENE_FLAG_REGI_ITEM_OBTAINED);
+        sub_808B1CC(ITEM_ROCK_PART);
+    }
+    else if (ItemInInventoryOrHeld(ITEM_ROCK_PART)) {
+        UnsetCutsceneFlag(CUTSCENE_FLAG_REGI_RECRUITED);
+        SetTempCutsceneFlag(CUTSCENE_FLAG_REGI_ITEM_OBTAINED);
+    }
+    else if (ItemInInventoryOrHeld(ITEM_MUSIC_BOX)) {
+        UnsetCutsceneFlag(CUTSCENE_FLAG_REGI_RECRUITED);
+        SetTempCutsceneFlag(CUTSCENE_FLAG_REGI_ITEM_OBTAINED);
+    }
+    else {
+        UnsetCutsceneFlag(CUTSCENE_FLAG_REGI_RECRUITED);
+        UnsetCutsceneFlag(CUTSCENE_FLAG_REGI_ITEM_OBTAINED);
         sub_80855E4(SetupRegiFacingDirection);
         CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_REGIROCK);
-  }
+    }
 }
 
 void sub_808AD48(void)
 {
-  Entity * entity;
-
-  if (HasRecruitedMon(MONSTER_REGICE)) {
-    entity = GetEntityFromMonsterBehavior(BEHAVIOR_REGICE);
-    HandleFaint(entity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
-    sub_8097FA8(0x22);
-    sub_8097FA8(0x1d);
-    sub_808B1CC(ITEM_ICE_PART);
-  }
-  else if (sub_80860A8(ITEM_ICE_PART) != 0) {
-        sub_8098044(0x22);
-        sub_8097FA8(0x1d);
-  }
-  else if (sub_80860A8(ITEM_MUSIC_BOX) != 0) {
-        sub_8098044(0x22);
-        sub_8097FA8(0x1d);
-  }
-  else {
-        sub_8098044(0x22);
-        sub_8098044(0x1d);
+    if (HasRecruitedMon(MONSTER_REGICE)) {
+        Entity *entity = GetEntityFromMonsterBehavior(BEHAVIOR_REGICE);
+        HandleFaint_Async(entity, DUNGEON_EXIT_DELETED_FOR_EVENT, NULL);
+        SetTempCutsceneFlag(CUTSCENE_FLAG_REGI_RECRUITED);
+        SetTempCutsceneFlag(CUTSCENE_FLAG_REGI_ITEM_OBTAINED);
+        sub_808B1CC(ITEM_ICE_PART);
+    }
+    else if (ItemInInventoryOrHeld(ITEM_ICE_PART)) {
+        UnsetCutsceneFlag(CUTSCENE_FLAG_REGI_RECRUITED);
+        SetTempCutsceneFlag(CUTSCENE_FLAG_REGI_ITEM_OBTAINED);
+    }
+    else if (ItemInInventoryOrHeld(ITEM_MUSIC_BOX)) {
+        UnsetCutsceneFlag(CUTSCENE_FLAG_REGI_RECRUITED);
+        SetTempCutsceneFlag(CUTSCENE_FLAG_REGI_ITEM_OBTAINED);
+    }
+    else {
+        UnsetCutsceneFlag(CUTSCENE_FLAG_REGI_RECRUITED);
+        UnsetCutsceneFlag(CUTSCENE_FLAG_REGI_ITEM_OBTAINED);
         sub_80855E4(SetupRegiFacingDirection);
         CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_REGICE);
-  }
+    }
 }
 
 void sub_808ADCC(void)
 {
-
-  Entity * entity;
-
-  if (HasRecruitedMon(MONSTER_REGISTEEL)) {
-    entity = GetEntityFromMonsterBehavior(BEHAVIOR_REGISTEEL);
-    HandleFaint(entity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
-    sub_8097FA8(0x22);
-    sub_8097FA8(0x1d);
-    sub_808B1CC(ITEM_STEEL_PART);
-  }
-  else if (sub_80860A8(ITEM_STEEL_PART) != 0) {
-        sub_8098044(0x22);
-        sub_8097FA8(0x1d);
-  }
-  else if (sub_80860A8(ITEM_MUSIC_BOX) != 0) {
-        sub_8098044(0x22);
-        sub_8097FA8(0x1d);
-  }
-  else {
-        sub_8098044(0x22);
-        sub_8098044(0x1d);
+    if (HasRecruitedMon(MONSTER_REGISTEEL)) {
+        Entity *entity = GetEntityFromMonsterBehavior(BEHAVIOR_REGISTEEL);
+        HandleFaint_Async(entity, DUNGEON_EXIT_DELETED_FOR_EVENT, NULL);
+        SetTempCutsceneFlag(CUTSCENE_FLAG_REGI_RECRUITED);
+        SetTempCutsceneFlag(CUTSCENE_FLAG_REGI_ITEM_OBTAINED);
+        sub_808B1CC(ITEM_STEEL_PART);
+    }
+    else if (ItemInInventoryOrHeld(ITEM_STEEL_PART)) {
+        UnsetCutsceneFlag(CUTSCENE_FLAG_REGI_RECRUITED);
+        SetTempCutsceneFlag(CUTSCENE_FLAG_REGI_ITEM_OBTAINED);
+    }
+    else if (ItemInInventoryOrHeld(ITEM_MUSIC_BOX)) {
+        UnsetCutsceneFlag(CUTSCENE_FLAG_REGI_RECRUITED);
+        SetTempCutsceneFlag(CUTSCENE_FLAG_REGI_ITEM_OBTAINED);
+    }
+    else {
+        UnsetCutsceneFlag(CUTSCENE_FLAG_REGI_RECRUITED);
+        UnsetCutsceneFlag(CUTSCENE_FLAG_REGI_ITEM_OBTAINED);
         sub_80855E4(SetupRegiFacingDirection);
         CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_REGISTEEL);
-  }
-}
-
-void sub_808AE54(u8 param_1,u8 param_2,DungeonPos *param_3)
-{
-  Entity * leaderEntity;
-  s16 IDStack[2];
-  Item item;
-
-
-  leaderEntity = CutsceneGetLeader();
-  sub_8052D44(IDStack,leaderEntity,0);
-  if (!sub_8098100(0x22) && (param_2 == 0x2E) && (param_1 == 0x17)) {
-    sub_808B1CC(ITEM_NOTHING);
-    if (!sub_8098100(0x1d)) {
-      ItemIdToItem(&item,ITEM_ROCK_PART,0);
-      SpawnDroppedItemWrapper(GetLeader(),param_3,&item);
-      DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
-      // Something fell from Regirock's body
-      // Regirock was apparently guarding this item
-      DisplayDungeonDialogue(&gRegirockPostFightDialogue_1);
     }
-  }
 }
 
-void sub_808AEC8(u8 param_1,u8 param_2,DungeonPos *param_3)
+void HandleRegirockBossFaint_Async(u8 monsterBehavior, u8 cutscene, DungeonPos *pos)
 {
-  Entity * leaderEntity;
-  s16 IDStack[2];
-  Item item;
+    Entity *leaderEntity;
+    s16 IDStack[2];
 
+    leaderEntity = CutsceneGetLeader();
+    BufferCutsceneProtagonists(IDStack, leaderEntity, NULL);
 
-  leaderEntity = CutsceneGetLeader();
-  sub_8052D44(IDStack,leaderEntity,0);
-  if (!sub_8098100(0x22) && (param_2 == 0x2F) && (param_1 == 0x18)) {
-    sub_808B1CC(ITEM_NOTHING);
-    if (!sub_8098100(0x1d)) {
-      ItemIdToItem(&item,ITEM_ICE_PART,0);
-      SpawnDroppedItemWrapper(GetLeader(),param_3,&item);
-      DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
-      // Something fell from Regice's body
-      // Regice was apparently guarding this item
-      DisplayDungeonDialogue(&gRegicePostFightDialogue_1);
+    if (!GetCutsceneFlag(CUTSCENE_FLAG_REGI_RECRUITED) && cutscene == CUTSCENE_REGIROCK && monsterBehavior == BEHAVIOR_REGIROCK) {
+        sub_808B1CC(ITEM_NOTHING);
+        if (!GetCutsceneFlag(CUTSCENE_FLAG_REGI_ITEM_OBTAINED)) {
+            Item item;
+
+            ItemIdToItem(&item, ITEM_ROCK_PART, FALSE);
+            SpawnDroppedItemWrapper(GetLeader(),pos,&item);
+            DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
+            // Something fell from Regirock's body
+            // Regirock was apparently guarding this item
+            DisplayDungeonDialogue_Async(&gRegirockPostFightDialogue_1);
+        }
     }
-  }
 }
 
-void sub_808AF3C(u8 param_1,u8 param_2,DungeonPos *param_3)
+void HandleRegiceBossFaint_Async(u8 monsterBehavior, u8 cutscene, DungeonPos *pos)
 {
-  Entity * leaderEntity;
-  s16 IDStack[2];
-  Item item;
+    Entity *leaderEntity;
+    s16 IDStack[2];
 
+    leaderEntity = CutsceneGetLeader();
+    BufferCutsceneProtagonists(IDStack, leaderEntity, NULL);
 
-  leaderEntity = CutsceneGetLeader();
-  sub_8052D44(IDStack,leaderEntity,0);
-  if (!sub_8098100(0x22) && (param_2 == 0x30) && (param_1 == 0x19)) {
-    sub_808B1CC(ITEM_NOTHING);
-    if (!sub_8098100(0x1d)) {
-      ItemIdToItem(&item,ITEM_STEEL_PART,0);
-      SpawnDroppedItemWrapper(GetLeader(),param_3, &item);
-      DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
-      // Something fell from Registeel's body
-      // Registeel was apparently guarding this item
-      DisplayDungeonDialogue(&gRegisteelPostFightDialogue_1);
+    if (!GetCutsceneFlag(CUTSCENE_FLAG_REGI_RECRUITED) && cutscene == CUTSCENE_REGICE && monsterBehavior == BEHAVIOR_REGICE) {
+        sub_808B1CC(ITEM_NOTHING);
+        if (!GetCutsceneFlag(CUTSCENE_FLAG_REGI_ITEM_OBTAINED)) {
+            Item item;
+
+            ItemIdToItem(&item, ITEM_ICE_PART, FALSE);
+            SpawnDroppedItemWrapper(GetLeader(), pos, &item);
+            DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
+            // Something fell from Regice's body
+            // Regice was apparently guarding this item
+            DisplayDungeonDialogue_Async(&gRegicePostFightDialogue_1);
+        }
     }
-  }
 }
 
-void sub_808AFB0(u8 param_1)
+void HandleRegisteelBossFaint_Async(u8 monsterBehavior, u8 cutscene, DungeonPos *pos)
 {
-  Entity * leaderEntity;
-  s16 IDStack [2];
+    Entity *leaderEntity;
+    s16 IDStack[2];
 
-  leaderEntity = CutsceneGetLeader();
-  sub_8052D44(IDStack,leaderEntity,0);
-  if (!sub_8098100(0x22) && (param_1 == 0x2E) && (!sub_8098100(0x1d)) && (sub_80860A8(ITEM_ROCK_PART) != 0)) {
-    sub_8097FD0(0x1d);
-    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],GetLeader(),0);
-    // {POKEMON_0} obtained the Rock Part that Regirock was guarding
-    DisplayDungeonDialogue(&gRegirockPostFightDialogue_2);
-    sub_80421C0(0,0xd4);
-    sub_803E708(10,70);
-    sub_8046D20();
-  }
+    leaderEntity = CutsceneGetLeader();
+    BufferCutsceneProtagonists(IDStack, leaderEntity, NULL);
+
+    if (!GetCutsceneFlag(CUTSCENE_FLAG_REGI_RECRUITED) && cutscene == CUTSCENE_REGISTEEL && monsterBehavior == BEHAVIOR_REGISTEEL) {
+        sub_808B1CC(ITEM_NOTHING);
+        if (!GetCutsceneFlag(CUTSCENE_FLAG_REGI_ITEM_OBTAINED)) {
+            Item item;
+
+            ItemIdToItem(&item, ITEM_STEEL_PART, FALSE);
+            SpawnDroppedItemWrapper(GetLeader(), pos, &item);
+            DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
+            // Something fell from Registeel's body
+            // Registeel was apparently guarding this item
+            DisplayDungeonDialogue_Async(&gRegisteelPostFightDialogue_1);
+        }
+    }
 }
 
-void sub_808B030(u8 param_1)
+void sub_808AFB0_Async(u8 cutscene)
 {
-  Entity * leaderEntity;
-  s16 IDStack [2];
+    Entity *leaderEntity;
+    s16 IDStack[2];
 
-  leaderEntity = CutsceneGetLeader();
-  sub_8052D44(IDStack,leaderEntity,0);
-  if (!sub_8098100(0x22) && (param_1 == 0x2F) && (!sub_8098100(0x1d)) && (sub_80860A8(ITEM_ICE_PART) != 0)) {
-    sub_8097FD0(0x1d);
-    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],GetLeader(),0);
-    // {POKEMON_0} obtained the Ice Part that Regice was guarding
-    DisplayDungeonDialogue(&gRegicePostFightDialogue_2);
-    sub_80421C0(0,0xd4);
-    sub_803E708(10,70);
-    sub_8046D20();
-  }
+    leaderEntity = CutsceneGetLeader();
+    BufferCutsceneProtagonists(IDStack, leaderEntity, NULL);
+
+    if (!GetCutsceneFlag(CUTSCENE_FLAG_REGI_RECRUITED) && cutscene == CUTSCENE_REGIROCK && !GetCutsceneFlag(CUTSCENE_FLAG_REGI_ITEM_OBTAINED) && ItemInInventoryOrHeld(ITEM_ROCK_PART)) {
+        SetCutsceneFlag(CUTSCENE_FLAG_REGI_ITEM_OBTAINED);
+        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], GetLeader(), 0);
+        // {POKEMON_0} obtained the Rock Part that Regirock was guarding
+        DisplayDungeonDialogue_Async(&gRegirockPostFightDialogue_2);
+        sub_80421C0(0, 212);
+        DungeonWaitFrames_Async(10, 70);
+        PotentiallyCreateMusicBox_Async();
+    }
 }
 
-void sub_808B0B0(u8 param_1)
+void sub_808B030_Async(u8 cutscene)
 {
-  Entity * leaderEntity;
-  s16 IDStack [2];
+    Entity *leaderEntity;
+    s16 IDStack[2];
 
-  leaderEntity = CutsceneGetLeader();
-  sub_8052D44(IDStack,leaderEntity,0);
-  if (!sub_8098100(0x22) && (param_1 == 0x30) && (!sub_8098100(0x1d)) && (sub_80860A8(ITEM_STEEL_PART) != 0)) {
-    sub_8097FD0(0x1d);
-    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], GetLeader(), 0);
-    // {POKEMON_0} obtained the Steel Part that Registeel was guarding
-    DisplayDungeonDialogue(&gRegisteelPostFightDialogue_2);
-    sub_80421C0(0,0xd4);
-    sub_803E708(10,70);
-    sub_8046D20();
-  }
+    leaderEntity = CutsceneGetLeader();
+    BufferCutsceneProtagonists(IDStack, leaderEntity, NULL);
+
+    if (!GetCutsceneFlag(CUTSCENE_FLAG_REGI_RECRUITED) && cutscene == CUTSCENE_REGICE && !GetCutsceneFlag(CUTSCENE_FLAG_REGI_ITEM_OBTAINED) && ItemInInventoryOrHeld(ITEM_ICE_PART)) {
+        SetCutsceneFlag(CUTSCENE_FLAG_REGI_ITEM_OBTAINED);
+        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], GetLeader(), 0);
+        // {POKEMON_0} obtained the Ice Part that Regice was guarding
+        DisplayDungeonDialogue_Async(&gRegicePostFightDialogue_2);
+        sub_80421C0(0, 212);
+        DungeonWaitFrames_Async(10, 70);
+        PotentiallyCreateMusicBox_Async();
+    }
+}
+
+void sub_808B0B0_Async(u8 cutscene)
+{
+    Entity *leaderEntity;
+    s16 IDStack[2];
+
+    leaderEntity = CutsceneGetLeader();
+    BufferCutsceneProtagonists(IDStack, leaderEntity, NULL);
+
+    if (!GetCutsceneFlag(CUTSCENE_FLAG_REGI_RECRUITED) && cutscene == CUTSCENE_REGISTEEL && !GetCutsceneFlag(CUTSCENE_FLAG_REGI_ITEM_OBTAINED) && ItemInInventoryOrHeld(ITEM_STEEL_PART)) {
+        SetCutsceneFlag(CUTSCENE_FLAG_REGI_ITEM_OBTAINED);
+        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], GetLeader(), 0);
+        // {POKEMON_0} obtained the Steel Part that Registeel was guarding
+        DisplayDungeonDialogue_Async(&gRegisteelPostFightDialogue_2);
+        sub_80421C0(0, 212);
+        DungeonWaitFrames_Async(10, 70);
+        PotentiallyCreateMusicBox_Async();
+    }
 }
 
 void RegirockPreFightDialogue(void)
 {
-  if (!sub_8098100(0x22)) {
+  if (!GetCutsceneFlag(CUTSCENE_FLAG_REGI_RECRUITED)) {
     sub_8085930(DIRECTION_NORTH);
     // INTRUDER ALERT
     // EXTERMINATE
-    DisplayDungeonDialogue(&gRegirockPreFightDialogue_1);
-    sub_803E708(10,70);
+    DisplayDungeonDialogue_Async(&gRegirockPreFightDialogue_1);
+    DungeonWaitFrames_Async(10, 70);
     sub_808563C(SetupRegirockFightHP);
   }
 }
 
 void RegicePreFightDialogue(void)
 {
-  if (!sub_8098100(0x22)) {
+  if (!GetCutsceneFlag(CUTSCENE_FLAG_REGI_RECRUITED)) {
     sub_8085930(DIRECTION_NORTH);
     // INTRUDER ALERT
     // EXTERMINATE
-    DisplayDungeonDialogue(&gRegicePreFightDialogue_1);
-    sub_803E708(10,70);
+    DisplayDungeonDialogue_Async(&gRegicePreFightDialogue_1);
+    DungeonWaitFrames_Async(10,70);
     sub_808563C(SetupRegiceFightHP);
   }
 }
 
 void RegisteelPreFightDialogue(void)
 {
-  if (!sub_8098100(0x22)) {
+  if (!GetCutsceneFlag(CUTSCENE_FLAG_REGI_RECRUITED)) {
     sub_8085930(DIRECTION_NORTH);
     // INTRUDER ALERT
     // EXTERMINATE
-    DisplayDungeonDialogue(&gRegisteelPreFightDialogue_1);
-    sub_803E708(10,70);
+    DisplayDungeonDialogue_Async(&gRegisteelPreFightDialogue_1);
+    DungeonWaitFrames_Async(10,70);
     sub_808563C(SetupRegisteelFightHP);
   }
 }
@@ -288,7 +287,7 @@ static void sub_808B1CC(u8 itemID)
     if ((pos.x < 0) || (pos.y  < 0)) {
         entity = GetLeader();
         if (entity == NULL) {
-            gDungeon->unk2 = 1;
+            gDungeon->unk2 = DUNGEON_UNK2_1;
             return;
         }
         pos.x = entity->pos.x;
@@ -297,9 +296,8 @@ static void sub_808B1CC(u8 itemID)
     sub_807FE04(&pos, 0);
     tile = GetTileMut(pos.x, pos.y);
     tile->terrainFlags = tile->terrainFlags | TERRAIN_TYPE_STAIRS;
-    if (((itemID != ITEM_NOTHING) && (sub_80860A8(itemID) == 0)) &&
-        (sub_80860A8(ITEM_MUSIC_BOX) == 0)) {
-        ItemIdToItem(&item,itemID,0);
+    if (itemID != ITEM_NOTHING && !ItemInInventoryOrHeld(itemID) && !ItemInInventoryOrHeld(ITEM_MUSIC_BOX)) {
+        ItemIdToItem(&item, itemID, FALSE);
         pos.y--;
         SpawnItem(&pos,&item,1);
     }

@@ -100,6 +100,6 @@ void AgbMain(void)
     InitGraphics();
     SetInterruptCallback(1, VBlank_CB);
     REG_DISPCNT = DISPCNT_WIN1_ON | DISPCNT_WIN0_ON | DISPCNT_OBJ_ON | DISPCNT_BG_ALL_ON | DISPCNT_OBJ_1D_MAP; // 32576
-    GameLoop();
+    GameLoop_Async();
     Hang();
 }

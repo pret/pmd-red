@@ -65,7 +65,7 @@ void ShowMovesFromTeamMenu(ActionContainer *a0)
     Entity *entityOrg = gDungeon->teamPokemon[id];
     Entity *entityNew = entityOrg;
 
-    while (1) {
+    while (TRUE) {
         s32 i, count, countUntilId;
 
         countUntilId = 0;
@@ -168,10 +168,10 @@ bool8 ShowDungeonMovesMenu(Entity * entity, bool8 addLinkOptions, bool8 addUseMo
         .id = {
             [0] = {
                 .type = WINDOW_TYPE_WITH_HEADER,
-                .pos = {2, 2},
+                .pos = { 2, 2 },
                 .width = 18,
                 .height = 16,
-                .unk10 = 16,
+                .totalHeight = 16,
                 .unk12 = 0,
                 .header = &header,
             },
@@ -304,7 +304,7 @@ bool8 ShowDungeonMovesMenu(Entity * entity, bool8 addLinkOptions, bool8 addUseMo
             leaderInfo->action.actionParameters[0].actionUseIndex = entity->unk24;
             leaderInfo->action.actionParameters[1].actionUseIndex = sChosenMoveSlotId;
             sub_803EAF0(0, NULL);
-            sub_803E708(8, 0x1B);
+            DungeonWaitFrames_Async(8, 0x1B);
             ret = FALSE;
             break;
         }
@@ -350,7 +350,7 @@ bool8 ShowDungeonMovesMenu(Entity * entity, bool8 addLinkOptions, bool8 addUseMo
 
         sub_8009524(2);
         CreateDungeonMenuSubWindow(&windows.id[0], 0x16);
-        while (1) {
+        while (TRUE) {
             AddMenuCursorSprite(&gDungeonMenu);
             DungeonRunFrameActions(0x1B);
             if (gRealInputs.repeated & DPAD_DOWN) {
@@ -390,7 +390,7 @@ bool8 ShowDungeonMovesMenu(Entity * entity, bool8 addLinkOptions, bool8 addUseMo
 
     if (unkBool) {
         sub_803EAF0(0, NULL);
-        sub_803E708(8, 0x1E);
+        DungeonWaitFrames_Async(8, 0x1E);
     }
 
     return ret;
@@ -401,10 +401,10 @@ static void ShowMovesMenuWindows(Entity *entity, EntityInfo *entInfo, bool8 redC
     s32 i, movesCount;
     WindowTemplate windowNew = {
         .type = WINDOW_TYPE_NORMAL,
-        .pos = {2, 14},
+        .pos = { 2, 14 },
         .width = 26,
         .height = 3,
-        .unk10 = 3,
+        .totalHeight = 3,
         .unk12 = 0,
         .header = NULL,
     };
@@ -432,7 +432,7 @@ static void ShowMovesMenuWindows(Entity *entity, EntityInfo *entInfo, bool8 redC
     gDungeonMenu.windowId = 0;
     ResetTouchScreenMenuInput(&gDungeonMenu.touchScreen);
 
-    windows->id[0].height = windows->id[0].unk10 = CalcEntriesTotalHeight(4, DEFAULT_MENU_ENTRY_HEIGHT) + 2;
+    windows->id[0].height = windows->id[0].totalHeight = CalcEntriesTotalHeight(4, DEFAULT_MENU_ENTRY_HEIGHT) + 2;
     header->width = 13;
     windows->id[0].pos.x = 2;
     windows->id[1] = windows->id[3];
@@ -600,7 +600,7 @@ static void ShowMovesInfoWindow(Move *moves, s32 firstMoveId, s32 movesCount)
     }
 
     currId = 0;
-    while (1) {
+    while (TRUE) {
         s32 statusesCount;
         s32 inputAction = 0;
 
@@ -623,7 +623,7 @@ static void ShowMovesInfoWindow(Move *moves, s32 firstMoveId, s32 movesCount)
         gDungeonMenu.entriesPerPage = 0;
         DungeonShowWindows(&windows, TRUE);
         statusesCount = unk_PrintMoveDescription(currId, &moves[firstMoveId + currId], 0, statuses);
-        while (1) {
+        while (TRUE) {
             if (statusesCount != 0) {
                 ShowStatusDescriptionMenuArrow();
             }
@@ -735,12 +735,12 @@ void ActionSetOrUnsetMove(ActionContainer *a0, bool8 flagToSet)
     PlaySoundEffect(0x133);
     if (flagToSet) {
         if (!wasSet) {
-            LogMessageByIdWithPopupCheckUser(entity, gUnknown_80F8B40);
+            LogMessageByIdWithPopupCheckUser_Async(entity, gUnknown_80F8B40);
         }
         else {
-            LogMessageByIdWithPopupCheckUser(entity, gUnknown_80F8B64);
+            LogMessageByIdWithPopupCheckUser_Async(entity, gUnknown_80F8B64);
         }
-        sub_803E708(0x78, 0x1F);
+        DungeonWaitFrames_Async(0x78, 0x1F);
     }
 }
 
@@ -844,12 +844,12 @@ void ActionDelinkMoves(ActionContainer *a0, bool8 showMsg)
     PlaySoundEffect(0x133);
     if (showMsg) {
         if (unlInked) {
-            LogMessageByIdWithPopupCheckUser(entity, gUnknown_80F8B88);
+            LogMessageByIdWithPopupCheckUser_Async(entity, gUnknown_80F8B88);
         }
         else {
-            LogMessageByIdWithPopupCheckUser(entity, gUnknown_80F8BB4);
+            LogMessageByIdWithPopupCheckUser_Async(entity, gUnknown_80F8BB4);
         }
-        sub_803E708(0x78, 0x1F);
+        DungeonWaitFrames_Async(0x78, 0x1F);
     }
 }
 
@@ -901,10 +901,10 @@ bool8 sub_8063E70(Entity *entity, Move *moves, bool8 showYesNoBox, bool8 allowBP
         .id = {
             [0] = {
                 .type = WINDOW_TYPE_WITH_HEADER,
-                .pos = {2, 2},
+                .pos = { 2, 2 },
                 .width = 18,
                 .height = 16,
-                .unk10 = 16,
+                .totalHeight = 16,
                 .unk12 = 0,
                 .header = &header,
             },
@@ -916,12 +916,12 @@ bool8 sub_8063E70(Entity *entity, Move *moves, bool8 showYesNoBox, bool8 allowBP
     Move movesLocal[8];
 
     sChosenMoveSlotId = 0;
-    while (1) {
+    while (TRUE) {
         s32 inputAction;
         s32 yesNoAnswer;
 
         sub_8064228(entity, moves, &windows, &header);
-        while (1) {
+        while (TRUE) {
             AddMenuCursorSprite(&gDungeonMenu);
             DungeonRunFrameActions(0x1E);
             if (gRealInputs.repeated & DPAD_DOWN) {
@@ -968,7 +968,7 @@ bool8 sub_8063E70(Entity *entity, Move *moves, bool8 showYesNoBox, bool8 allowBP
 
             if (inputAction == 2) {
                 sub_803EAF0(0, NULL);
-                sub_803E708(8, 0x1B);
+                DungeonWaitFrames_Async(8, 0x1B);
                 ASM_MATCH_TRICK(sChosenMoveSlotId);
                 ShowMovesInfoWindow(moves, sChosenMoveSlotId, MAX_MON_MOVES);
                 continue;
@@ -977,7 +977,7 @@ bool8 sub_8063E70(Entity *entity, Move *moves, bool8 showYesNoBox, bool8 allowBP
             sub_8064310(moves);
             CreateDungeonMenuSubWindow(&windows.id[0], 22);
 
-            while (1) {
+            while (TRUE) {
                 AddMenuCursorSprite(&gDungeonMenu);
                 DungeonRunFrameActions(0x1B);
 
@@ -1037,7 +1037,7 @@ bool8 sub_8063E70(Entity *entity, Move *moves, bool8 showYesNoBox, bool8 allowBP
                 linked = TRUE;
             }
             BufferMoveName(gFormatBuffer_Items[0], move, NULL);
-            yesNoAnswer = DisplayDungeonYesNoMessage(NULL, (!linked) ? gUnknown_80FDF70 : gUnknown_80FDF00, FALSE);
+            yesNoAnswer = DisplayDungeonYesNoMessage_Async(NULL, (!linked) ? gUnknown_80FDF70 : gUnknown_80FDF00, FALSE);
         }
         else {
             yesNoAnswer = 1;
@@ -1108,7 +1108,7 @@ static void sub_8064228(Entity *entity, Move *moves, WindowTemplates *windows, W
     gDungeonMenu.unk14.x = 0;
     gDungeonMenu.windowId = 0;
     ResetTouchScreenMenuInput(&gDungeonMenu.touchScreen);
-    windows->id[0].height = windows->id[0].unk10 = CalcEntriesTotalHeight(count, DEFAULT_MENU_ENTRY_HEIGHT) + 2;
+    windows->id[0].height = windows->id[0].totalHeight = CalcEntriesTotalHeight(count, DEFAULT_MENU_ENTRY_HEIGHT) + 2;
     header->width = 14;
     windows->id[0].pos.x = 2;
     windows->id[1] = windows->id[3];

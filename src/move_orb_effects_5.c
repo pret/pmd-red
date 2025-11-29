@@ -65,11 +65,11 @@ void sub_8079F20(Entity * pokemon, Entity * target, u8 param_3, u8 param_4)
       SendMuzzledEndMessage(pokemon,target);
       if (entityInfo->perishSongTurns != 0) {
         entityInfo->perishSongTurns = 0;
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_8100594);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_8100594);
       }
       if (entityInfo->exposed) {
         entityInfo->exposed = FALSE;
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gPtrExposedWoreOffMessage);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gPtrExposedWoreOffMessage);
       }
     }
 
@@ -81,7 +81,7 @@ void sub_8079F20(Entity * pokemon, Entity * target, u8 param_3, u8 param_4)
 
     if (moveSpeed != CalcSpeedStage(target)) {
       bVar8 = TRUE;
-      TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FA124[entityInfo->speedStage]);
+      TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FA124[entityInfo->speedStage]);
     }
 
     for(index = 0; index < MAX_MON_MOVES; index++)
@@ -99,11 +99,11 @@ void sub_8079F20(Entity * pokemon, Entity * target, u8 param_3, u8 param_4)
         sub_80420C8(target);
       }
       if (moveUnsealed) {
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gPtrSealedMoveReleasedMessage);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gPtrSealedMoveReleasedMessage);
       }
     }
     else if (param_4 == 0) {
-      TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_81004E8);
+      TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_81004E8);
     }
     UpdateStatusIconFlags(target);
   }
@@ -149,21 +149,21 @@ void EndSleepClassStatus(Entity * pokemon, Entity * target, bool8 param_3, bool8
             break;
         case STATUS_SLEEP:
             isAsleep = TRUE;
-            TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FA6E8);
+            TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FA6E8);
             break;
         case STATUS_SLEEPLESS:
-            TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FA708);
+            TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FA708);
             break;
         case STATUS_NIGHTMARE:
             isAsleep = TRUE;
-            TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FA70C);
+            TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FA70C);
             if (param_4) {
-                DealDamageToEntity(target,gNightmareDmgValue,RESIDUAL_DAMAGE_NIGHTMARE,DUNGEON_EXIT_FAINTED_WHILE_IN_NIGHTMARE);
+                DealDamageToEntity_Async(target,gNightmareDmgValue,RESIDUAL_DAMAGE_NIGHTMARE,DUNGEON_EXIT_FAINTED_WHILE_IN_NIGHTMARE);
             }
             break;
         case STATUS_NAPPING:
             isAsleep = TRUE;
-            TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FA710);
+            TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FA710);
             HealTargetHP(pokemon,target,gNappingHpHealValue, 0, FALSE);
             entityInfo->sleepClassStatus.status = 0;
             sub_8079F20(pokemon,target,1,1);
@@ -174,7 +174,7 @@ void EndSleepClassStatus(Entity * pokemon, Entity * target, bool8 param_3, bool8
                 SleepStatusTarget(pokemon,target,CalculateStatusTurns(target, gSleepFromYawnTurnRange, TRUE) + 1, TRUE);
                 return;
             }
-            TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FA734);
+            TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FA734);
             break;
   }
   entityInfo->sleepClassStatus.status = STATUS_NONE;
@@ -199,13 +199,13 @@ void EndBurnClassStatus(Entity * pokemon, Entity * target)
         break;
     case STATUS_POISONED:
     case STATUS_BADLY_POISONED:
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FA8A8);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FA8A8);
         break;
     case STATUS_PARALYSIS:
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FA868);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FA868);
         break;
     case STATUS_BURN:
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FA888);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FA888);
         break;
 
   }
@@ -229,23 +229,23 @@ void EndFrozenClassStatus(Entity * pokemon, Entity *target)
     case 8:
         break;
     case STATUS_FROZEN:
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FA8BC);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FA8BC);
         isFrozen = TRUE;
         break;
     case STATUS_CONSTRICTION:
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FA820);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FA820);
         break;
     case STATUS_SHADOW_HOLD:
     case STATUS_INGRAIN:
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FA824);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FA824);
         break;
     case STATUS_WRAP:
     case STATUS_WRAPPED:
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FA81C);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FA81C);
         sub_8076CB4(entityInfo->unk9C);
         break;
     case STATUS_PETRIFIED:
-        TryDisplayDungeonLoggableMessage3(pokemon,target, gPtrMonNoLongerPetrifiedMessage);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target, gPtrMonNoLongerPetrifiedMessage);
         break;
   }
   entityInfo->frozenClassStatus.status = STATUS_NONE;
@@ -269,25 +269,25 @@ void EndCringeClassStatus(Entity * pokemon, Entity *target)
     case 8:
         break;
     case STATUS_CONFUSED:
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FA800);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FA800);
         break;
     case STATUS_COWERING:
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FA97C);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FA97C);
         break;
     case STATUS_TAUNTED:
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FA9DC);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FA9DC);
         break;
     case STATUS_PAUSED:
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FAC38);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FAC38);
         break;
     case STATUS_INFATUATED:
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FAB90);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FAB90);
         break;
     case STATUS_ENCORE:
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FAAAC);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FAAAC);
         break;
     case STATUS_CRINGE:
-        TryDisplayDungeonLoggableMessage3(pokemon,target, gPtrMonNoLongerCringingMessage);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target, gPtrMonNoLongerCringingMessage);
         break;
   }
   entityInfo->cringeClassStatus.status = STATUS_NONE;
@@ -309,44 +309,44 @@ void EndReflectClassStatus(Entity * pokemon, Entity *target)
     case 0xF:
         break;
     case STATUS_REFLECT:
-        LogMessageByIdWithPopupCheckUser(target,gUnknown_80FA638);
+        LogMessageByIdWithPopupCheckUser_Async(target,gUnknown_80FA638);
         break;
     case STATUS_SAFEGUARD:
-        LogMessageByIdWithPopupCheckUser(target,gUnknown_80FA69C);
+        LogMessageByIdWithPopupCheckUser_Async(target,gUnknown_80FA69C);
         break;
     case STATUS_LIGHT_SCREEN:
-        LogMessageByIdWithPopupCheckUser(target,gUnknown_80FA658);
+        LogMessageByIdWithPopupCheckUser_Async(target,gUnknown_80FA658);
         break;
     case STATUS_COUNTER:
     case STATUS_MINI_COUNTER:
-        LogMessageByIdWithPopupCheckUser(target,gUnknown_80FA67C);
+        LogMessageByIdWithPopupCheckUser_Async(target,gUnknown_80FA67C);
         break;
     case STATUS_MAGIC_COAT:
-        LogMessageByIdWithPopupCheckUser(target,gUnknown_80FA6BC);
+        LogMessageByIdWithPopupCheckUser_Async(target,gUnknown_80FA6BC);
         break;
     case STATUS_WISH:
-        LogMessageByIdWithPopupCheckUser(target,gUnknown_80FA6D4);
+        LogMessageByIdWithPopupCheckUser_Async(target,gUnknown_80FA6D4);
         break;
     case STATUS_PROTECT:
-        LogMessageByIdWithPopupCheckUser(target,gUnknown_80FA9C0);
+        LogMessageByIdWithPopupCheckUser_Async(target,gUnknown_80FA9C0);
         break;
     case STATUS_MIRROR_COAT:
-        LogMessageByIdWithPopupCheckUser(target,gUnknown_80FAA68);
+        LogMessageByIdWithPopupCheckUser_Async(target,gUnknown_80FAA68);
         break;
     case STATUS_ENDURING:
-        LogMessageByIdWithPopupCheckUser(target, gPtrMonStoppedEnduringMessage);
+        LogMessageByIdWithPopupCheckUser_Async(target, gPtrMonStoppedEnduringMessage);
         break;
     case STATUS_MIRROR_MOVE:
-        LogMessageByIdWithPopupCheckUser(target,gPtrMonMirrorMoveFadedMessage);
+        LogMessageByIdWithPopupCheckUser_Async(target,gPtrMonMirrorMoveFadedMessage);
         break;
     case STATUS_CONVERSION2:
-        LogMessageByIdWithPopupCheckUser(target, gPtrMonConversion2FailedMessage);
+        LogMessageByIdWithPopupCheckUser_Async(target, gPtrMonConversion2FailedMessage);
         break;
     case STATUS_VITAL_THROW:
-        LogMessageByIdWithPopupCheckUser(target, gPtrMonGaveUpVitalThrowMessage);
+        LogMessageByIdWithPopupCheckUser_Async(target, gPtrMonGaveUpVitalThrowMessage);
         break;
     case STATUS_MIST:
-        LogMessageByIdWithPopupCheckUser(target,gUnknown_80FAB40);
+        LogMessageByIdWithPopupCheckUser_Async(target,gUnknown_80FAB40);
         break;
   }
   entityInfo->reflectClassStatus.status = STATUS_NONE;
@@ -367,12 +367,12 @@ void EndCurseClassStatus(Entity * pokemon, Entity * target, u8 curseClassStatus)
             break;
         case STATUS_CURSED:
             if (curseClassStatus != STATUS_CURSED) {
-                LogMessageByIdWithPopupCheckUser(target,gUnknown_80FA7BC);
+                LogMessageByIdWithPopupCheckUser_Async(target,gUnknown_80FA7BC);
             }
             break;
         case STATUS_SNATCH:
             if (curseClassStatus != STATUS_SNATCH) {
-                LogMessageByIdWithPopupCheckUser(target,gUnknown_80FA7DC);
+                LogMessageByIdWithPopupCheckUser_Async(target,gUnknown_80FA7DC);
             }
             gDungeon->snatchPokemon = NULL;
             gDungeon->unk17B3C = 0;
@@ -384,7 +384,7 @@ void EndCurseClassStatus(Entity * pokemon, Entity * target, u8 curseClassStatus)
             gDungeon->decoyIsActive = FALSE;
             if (curseClassStatus != STATUS_DECOY) {
                 SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
-                LogMessageByIdWithPopupCheckUser(target,gUnknown_80FA9A0);
+                LogMessageByIdWithPopupCheckUser_Async(target,gUnknown_80FA9A0);
             }
             break;
     }
@@ -405,10 +405,10 @@ void EndLeechSeedClassStatus(Entity * pokemon, Entity * target)
         case STATUS_NONE:
             break;
         case STATUS_LEECH_SEED:
-            LogMessageByIdWithPopupCheckUser(target,gUnknown_80FA79C);
+            LogMessageByIdWithPopupCheckUser_Async(target,gUnknown_80FA79C);
             break;
         case STATUS_DESTINY_BOND:
-            LogMessageByIdWithPopupCheckUser(target,gUnknown_80FAA8C);
+            LogMessageByIdWithPopupCheckUser_Async(target,gUnknown_80FAA8C);
             break;
     }
     entityInfo->leechSeedClassStatus.status = STATUS_NONE;
@@ -431,16 +431,16 @@ void SendMoveEndMessage(Entity * pokemon, Entity * target)
         case 5:
             break;
         case STATUS_SURE_SHOT:
-            LogMessageByIdWithPopupCheckUser(target,gUnknown_80FA8E0);
+            LogMessageByIdWithPopupCheckUser_Async(target,gUnknown_80FA8E0);
             break;
         case STATUS_WHIFFER:
-            LogMessageByIdWithPopupCheckUser(target,gUnknown_80FA90C);
+            LogMessageByIdWithPopupCheckUser_Async(target,gUnknown_80FA90C);
             break;
         case STATUS_SET_DAMAGE:
-            LogMessageByIdWithPopupCheckUser(target,gUnknown_80FA934);
+            LogMessageByIdWithPopupCheckUser_Async(target,gUnknown_80FA934);
             break;
         case STATUS_FOCUS_ENERGY:
-            LogMessageByIdWithPopupCheckUser(target,gUnknown_80FA95C);
+            LogMessageByIdWithPopupCheckUser_Async(target,gUnknown_80FA95C);
             break;
   }
   entityInfo->sureShotClassStatus.status = STATUS_NONE;
@@ -465,17 +465,17 @@ void SendTransformEndMessage(Entity * pokemon, Entity *target)
             break;
         case STATUS_INVISIBLE:
             isInvisible = TRUE;
-            LogMessageByIdWithPopupCheckUser(target,gUnknown_80FA9F4);
+            LogMessageByIdWithPopupCheckUser_Async(target,gUnknown_80FA9F4);
             break;
         case STATUS_MOBILE:
-            LogMessageByIdWithPopupCheckUser(target,gUnknown_80FABBC);
+            LogMessageByIdWithPopupCheckUser_Async(target,gUnknown_80FABBC);
             break;
         case STATUS_TRANSFORMED:
             entityInfo->apparentID = GetMonsterApparentID(target, entityInfo->id);
             target->axObj.spriteFile = GetSpriteData(entityInfo->apparentID);
             uVar3 = sub_806CEBC(target);
             sub_806CCB4(target,uVar3);
-            LogMessageByIdWithPopupCheckUser(target,gUnknown_80FAB6C);
+            LogMessageByIdWithPopupCheckUser_Async(target,gUnknown_80FAB6C);
             break;
   }
   entityInfo->invisibleClassStatus.status = STATUS_NONE;
@@ -499,13 +499,13 @@ void SendEyesightEndMessage(Entity * pokemon,Entity * target)
         case 4:
             break;
         case STATUS_BLINKER:
-            LogMessageByIdWithPopupCheckUser(target,gUnknown_80FAA0C);
+            LogMessageByIdWithPopupCheckUser_Async(target,gUnknown_80FAA0C);
             break;
         case STATUS_CROSS_EYED:
-            LogMessageByIdWithPopupCheckUser(target,gUnknown_80FAA2C);
+            LogMessageByIdWithPopupCheckUser_Async(target,gUnknown_80FAA2C);
             break;
         case STATUS_EYEDROPS:
-            LogMessageByIdWithPopupCheckUser(target,gUnknown_80FAA48);
+            LogMessageByIdWithPopupCheckUser_Async(target,gUnknown_80FAA48);
             break;
   }
   entityInfo->blinkerClassStatus.status = STATUS_NONE;
@@ -531,7 +531,7 @@ void SendMuzzledEndMessage(Entity * pokemon, Entity * target)
     case 2:
         break;
     case TRUE:
-        LogMessageByIdWithPopupCheckUser(target,gUnknown_80FABC0);
+        LogMessageByIdWithPopupCheckUser_Async(target,gUnknown_80FABC0);
         break;
   }
   entityInfo->muzzled.muzzled = FALSE;
@@ -576,7 +576,7 @@ void SendThawedMessage(Entity *pokemon, Entity *target)
       entityInfo->frozenClassStatus.turns = 0;
       entityInfo->frozenClassStatus.damageCountdown = 0;
       SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
-      TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FA8BC); // $m0 thawed out!
+      TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FA8BC); // $m0 thawed out!
       UpdateStatusIconFlags(target);
     }
   }

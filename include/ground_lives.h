@@ -10,7 +10,7 @@
 void AllocGroundLives(void);
 void DeleteGroundLives(void);
 void FreeGroundLives(void);
-void GroundLives_Select(s32 scriptID, s32 group, s32 sector);
+void GroundLives_Select(s32 mapID, s32 group, s32 sector);
 void GroundLives_Cancel(s32 scriptID, s32 sector);
 void GroundLives_CancelBlank_1(void);
 void GroundLives_CancelBlank_2(void);

@@ -5,9 +5,9 @@
 #include "structs/str_position.h"
 
 void sub_8074FB0(Entity *entity, s32 a1, DungeonPos *pos);
-bool8 DisplayActions(Entity *a0);
+bool8 DisplayActions_Async(Entity *a0);
 void sub_8075680(bool8 unused);
 bool8 CheckEntityTileForInteraction(Entity *entity);
-void TryTriggerMonsterHouseWithMsg(Entity *pokemon, bool8 forcedMonsterHouse);
+void TryTriggerMonsterHouseWithMsg_Async(Entity *pokemon, bool8 forcedMonsterHouse);
 
 #endif

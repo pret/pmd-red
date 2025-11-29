@@ -128,7 +128,7 @@ typedef struct axObject
 
 typedef struct Palette256
 {
-    RGB pal[256];
+    RGB_Struct pal[256];
 } Palette256;
 
 // size: 0x20
@@ -140,7 +140,7 @@ typedef struct EfoFileData
     /* 0xC */ void *spriteData; // ?
     /* 0x10 */ Palette256 *unk10; // ?
     /* 0x14 */ const u32 *tiles;
-    /* 0x18 */ const RGB *pal;
+    /* 0x18 */ const RGB_Struct *pal;
     /* 0x1C */ s32 tileCount;
 } EfoFileData;
 
@@ -150,7 +150,7 @@ typedef struct EfbFileData
     const u16 *const *frames;
     s32 tileCount;
     const u32 *tiles;
-    const RGB *pal;
+    const RGB_Struct *pal;
 } EfbFileData;
 
 #endif // GUARD_AXDATA_H

@@ -65,12 +65,12 @@ void HandleHurlOrb(Entity *target, Entity *attacker)
 
     if (AbilityIsActive(attacker, ABILITY_SUCTION_CUPS)) {
         SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], attacker, 0);
-        TryDisplayDungeonLoggableMessage3(target, attacker, gUnknown_80FCB40); // is anchored, cannot be moved
+        TryDisplayDungeonLoggableMessage3_Async(target, attacker, gUnknown_80FCB40); // is anchored, cannot be moved
         return;
     }
     if (target == attacker) {
         SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], attacker, 0);
-        TryDisplayDungeonLoggableMessage3(target, attacker, gUnknown_80FCB70); // couldn't be thrown for some reason
+        TryDisplayDungeonLoggableMessage3_Async(target, attacker, gUnknown_80FCB70); // couldn't be thrown for some reason
         return;
     }
 
@@ -135,13 +135,13 @@ void HandleHurlOrb(Entity *target, Entity *attacker)
             }
         }
         if (i == 100) {
-            TryDisplayDungeonLoggableMessage3(target, attacker, gUnknown_80FE6B4); // But it didn~27t go anywhere.
+            TryDisplayDungeonLoggableMessage3_Async(target, attacker, gUnknown_80FE6B4); // But it didn~27t go anywhere.
             return;
         }
     }
 
     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], attacker, 0);
-    TryDisplayDungeonLoggableMessage3(target, attacker, gUnknown_80FE690); // m0 was sent flying!
+    TryDisplayDungeonLoggableMessage3_Async(target, attacker, gUnknown_80FE690); // m0 was sent flying!
     if (ShouldDisplayEntity(attacker)) {
         PlaySoundEffect(0x1A3);
     }
@@ -215,18 +215,18 @@ void HandleHurlOrb(Entity *target, Entity *attacker)
 
             InitPokemonMove(&move, MOVE_REGULAR_ATTACK);
             if (!sub_80571F0(tileEntity, &move)) {
-                sub_806F370(target, tileEntity, gHurlOrbDmgValue, FALSE, NULL, TYPE_NONE, DUNGEON_EXIT_FELLED_BY_POKEMON_FLYING, RESIDUAL_DAMAGE_REGULAR, 0, 0);
+                sub_806F370_Async(target, tileEntity, gHurlOrbDmgValue, FALSE, NULL, TYPE_NONE, DUNGEON_EXIT_FELLED_BY_POKEMON_FLYING, RESIDUAL_DAMAGE_REGULAR, 0, 0);
             }
             if (EntityIsValid(tileEntity)) {
                 sub_806CE68(tileEntity, GetEntInfo(tileEntity)->action.direction);
             }
         }
 
-        sub_806F370(target, attacker, gHurlOrbDmgValue, FALSE, NULL, TYPE_NONE, DUNGEON_EXIT_FAINTED_FROM_BEING_KNOCKED, RESIDUAL_DAMAGE_REGULAR, 0, 0);
+        sub_806F370_Async(target, attacker, gHurlOrbDmgValue, FALSE, NULL, TYPE_NONE, DUNGEON_EXIT_FAINTED_FROM_BEING_KNOCKED, RESIDUAL_DAMAGE_REGULAR, 0, 0);
         if (EntityIsValid(attacker)) {
             sub_806CE68(attacker, GetEntInfo(attacker)->action.direction);
         }
-        sub_803E708(0x1E, 0x3B);
+        DungeonWaitFrames_Async(0x1E, 0x3B);
         sub_807F9BC(attacker);
     }
 }
@@ -242,6 +242,6 @@ static void sub_807F9BC(Entity *entity)
             sub_807EC28(FALSE);
         }
         sub_806A5B8(entity);
-        TryTriggerMonsterHouseWithMsg(entity, gDungeon->forceMonsterHouse);
+        TryTriggerMonsterHouseWithMsg_Async(entity, gDungeon->forceMonsterHouse);
     }
 }

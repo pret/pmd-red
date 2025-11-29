@@ -211,7 +211,7 @@ static void MakuhitaDojo_UpdateDialogue(void)
             CreateDialogueBoxAndPortrait(gCommonMakuhita[sMakuhitaDojoWork1->dlgMode][MAKUHITA_DLG_7], 0, sMakuhitaDojoWork1->monPortraitPtr, 0x10D);
             break;
         case 9:
-            PrintColoredPokeNameToBuffer(gFormatBuffer_Names[0], GetPlayerPokemonStruct(), COLOR_YELLOW);
+            PrintColoredPokeNameToBuffer(gFormatBuffer_Names[0], GetLeaderMon1(), COLOR_YELLOW);
             sMakuhitaDojoWork1->fallbackState = 11;
             PlaySound(203);
             CreateDialogueBoxAndPortrait(sReceivedBonslyDoll, 0, 0, 0x101);

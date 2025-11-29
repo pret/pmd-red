@@ -185,11 +185,11 @@ void ReadGameOptionsBits(DataSerializer *param_1)
 
 void SetWindowBGColor(void)
 {
-    struct RGB winColors[] = {
-        {0x20, 0x48, 0x68}, // Blue
-        {0x80, 0x38, 0x20}, // Red
-        {0x28, 0x80, 0x48}, // Green
-        {0x28, 0x80, 0x48} // Green
+    struct RGB_Struct winColors[4] = {
+        { .r = 0x20, .g = 0x48, .b = 0x68, .unk4 = 0x00}, // Blue
+        { .r = 0x80, .g = 0x38, .b = 0x20, .unk4 = 0x00}, // Red
+        { .r = 0x28, .g = 0x80, .b = 0x48, .unk4 = 0x00}, // Green
+        { .r = 0x28, .g = 0x80, .b = 0x48, .unk4 = 0x00} // Green
     };
 
     SetFontsBaseColor(winColors[gGameOptionsRef->windowColor & NUM_WINDOW_COLORS]);

@@ -705,6 +705,6 @@ void sub_80391F8(void)
     if (gRescuePasswordMenu->unk210 & 8)
         AddSprite(&gRescuePasswordMenu->unk208, 0x100, NULL, NULL);
 
-    DrawDialogueBoxString();
+    DrawDialogueBoxString_Async();
     gRescuePasswordMenu->unk210++;
 }

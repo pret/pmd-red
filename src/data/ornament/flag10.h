@@ -111,7 +111,7 @@ static const axmain sAxMainFlag109 = {
 	.spriteData = sAxSpritesFlag109,
 	.positions = NULL,
 };
-const RGB gFlag10Pal[] = { INCBIN_RGB("graphics/ornament/pal/flag10.pmdpal") };
+const RGB_Struct gFlag10Pal[] = { INCBIN_RGB("graphics/ornament/pal/flag10.pmdpal") };
 
 static const axmain sAxMainFlag10;
 const SiroArchive gAxFlag10 = {"SIRO", &sAxMainFlag10};

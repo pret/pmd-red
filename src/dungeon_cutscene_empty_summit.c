@@ -33,7 +33,7 @@
 void sub_80885A0(void)
 {
   DungeonFadeOutBGM(0x3c);
-  sub_803E708(0x3c,0x46);
+  DungeonWaitFrames_Async(0x3c,0x46);
   DungeonStopBGM();
   gDungeon->unk7 = 1;
 }
@@ -44,7 +44,7 @@ void sub_80885C4(void)
 
   leaderEntity = CutsceneGetLeader();
   DungeonFadeOutBGM(0x3c);
-  sub_803E708(0x3c,0x46);
+  DungeonWaitFrames_Async(0x3c,0x46);
   DungeonStopBGM();
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
@@ -54,7 +54,7 @@ void sub_80885C4(void)
 
 void sub_8088608(void)
 {
-    gDungeon->unk2 = 1;
+    gDungeon->unk2 = DUNGEON_UNK2_1;
 }
 
 void sub_8088618(void)

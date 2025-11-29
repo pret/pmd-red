@@ -25,7 +25,7 @@ void CreateYesNoDialogueBoxAndPortrait_DefaultNo(const u8 *text, MonPortraitMsg 
 void CreateMenuDialogueBoxAndPortrait(const u8 *text, void *a1, u32 r9, const MenuItem *menuItems, void *arg_0, u32 a5, u32 unknownUnused, MonPortraitMsg *monPortraitPtr, u16 flags);
 void sub_8014490(void);
 s32 sub_80144A4(s32 *a0);
-void DrawDialogueBoxString(void);
+void DrawDialogueBoxString_Async(void);
 const u8 *FormatString(const u8 *str, u8 *dst, u8 *dstMax, u16 flags);
 void PrintFormattedStringOnWindow(s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr);
 void PrintFormattedStringOnWindow2(s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr, s32 lineSpacing);
@@ -39,5 +39,6 @@ void PrintFormattedStringOnWindow2(s32 x, s32 y, const u8 *str, u32 windowId, u3
 #define STR_FORMAT_FLAG_INSTANT_TEXT_ON_AB_PRESS 0x40
 #define STR_FORMAT_FLAG_NEW_LINE_TERMINATES 0x80
 #define STR_FORMAT_FLAG_WAIT_FOR_BUTTON_PRESS 0x100
+#define STR_FORMAT_FLAG_x200 0x200
 
 #endif // GUARD_STRING_FORMAT_H

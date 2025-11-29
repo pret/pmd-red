@@ -9,15 +9,15 @@
 
 void PlayFriendAreasMapBGM(void)
 {
-    if (sub_80023E4(13))
+    if (CheckQuest(QUEST_IN_WORLD_CALAMITY))
         StartNewBGM(MUS_WORLD_CALAMITY);
-    else if (sub_80023E4(12))
+    else if (CheckQuest(QUEST_UNK12))
         StartNewBGM(MUS_POKEMON_SQUARE);
 }
 
 void PlayWorldMapBGM(void)
 {
-    if (sub_80023E4(13))
+    if (CheckQuest(QUEST_IN_WORLD_CALAMITY))
         StartNewBGM(MUS_WORLD_CALAMITY);
     else
         StartNewBGM(MUS_POKEMON_SQUARE);
@@ -25,7 +25,7 @@ void PlayWorldMapBGM(void)
 
 void FadeOutFriendAreasMapBGM(void)
 {
-    if (!sub_80023E4(13))
+    if (!CheckQuest(QUEST_IN_WORLD_CALAMITY))
         FadeOutBGM(30);
 }
 
