@@ -41,7 +41,7 @@ static const struct ScriptCommand s_gs222_g1_s0_lives0_dlg0[] = { /* 0x826dc2c *
     ALERT_CUE(6),
     WALK_GRID(256, 0),
     WAIT(15),
-    PORTRAIT(PLACEMENT_RIGHT, 0x0001, 0x00000000),
+    PORTRAIT(PLACEMENT_RIGHT_BOTTOM_FLIP, 0x0001, 0x00000000),
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
     VARIANT(/* == */  1, _(" Look. Over there.\nLet's get this rescue done.")),
     VARIANT_DEFAULT(_(" Look, there's our Pokémon.\nWe can get this rescue done.")),

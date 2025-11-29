@@ -19,7 +19,7 @@ typedef struct PortraitGfx
     /* 0x0 */ PortraitGfxSub sprites[13];
 } PortraitGfx;
 
-// size: 0x10
+// Size: R=0x10 | B=0xF
 typedef struct MonPortraitMsg
 {
     /* 0x0 */ OpenedFile *faceFile;

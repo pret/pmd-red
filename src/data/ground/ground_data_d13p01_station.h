@@ -52,7 +52,7 @@ static const struct ScriptCommand s_gs207_g1_s0_lives0_dlg0[] = { /* 0x826008c *
     { 0x70, 0x00,  0x0200,  0x00000000,  0x00000000, NULL },
     { 0x54, 0x00,  0x002c,  0x00000000,  0x00000000, NULL },
     WAIT(60),
-    PORTRAIT(PLACEMENT_LEFT_, 0x0001, 0x00000002),
+    PORTRAIT(PLACEMENT_LEFT_BOTTOM_2, 0x0001, 0x00000002),
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
     VARIANT(/* == */  1, _(" Ouch...{WAIT_PRESS}\nWhere are we?")),
     VARIANT_DEFAULT(_(" Owowow...{WAIT_PRESS}\nWhere are we?")),

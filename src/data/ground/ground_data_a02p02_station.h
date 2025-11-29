@@ -57,7 +57,7 @@ static const struct ScriptCommand s_gs165_g1_s0_lives0_dlg0[] = { /* 0x8218834 *
     ROTATE_TO(4, DIR_TRANS_11, DIRECTION_NORTH),
     AWAIT_CUE(5),
     WAIT(30),
-    PORTRAIT(PLACEMENT_LEFT_, 0x0001, 0x00000005),
+    PORTRAIT(PLACEMENT_LEFT_BOTTOM_2, 0x0001, 0x00000005),
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
     VARIANT(/* == */  1, _(" Nature's gone savage\nhere too...")),
     VARIANT(/* == */  1, _(" The forest fires are still\nburning out of control...")),

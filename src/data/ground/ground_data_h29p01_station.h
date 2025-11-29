@@ -277,9 +277,9 @@ static const struct ScriptCommand s_gs158_g2_s0_lives0_dlg0[] = { /* 0x820d22c *
     ALERT_CUE(7), // Zapdos faces SouthWest
     ALERT_CUE(8), // Moltres faces SouthEast
     WAIT(60),
-    PORTRAIT(PLACEMENT_TOP, NPC_ARTICUNO, 0),
-    PORTRAIT(PLACEMENT_RIGHT, NPC_ZAPDOS, 0),
-    PORTRAIT(PLACEMENT_LEFT_, NPC_MOLTRES, 0),
+    PORTRAIT(PLACEMENT_CENTERLEFT_TOP, NPC_ARTICUNO, 0),
+    PORTRAIT(PLACEMENT_RIGHT_BOTTOM_FLIP, NPC_ZAPDOS, 0),
+    PORTRAIT(PLACEMENT_LEFT_BOTTOM_2, NPC_MOLTRES, 0),
     // Moltres speaks first.
     MSG_NPC(NPC_MOLTRES, _(" Fire, ice, and electricity...")),
     TEXTBOX_CLEAR,

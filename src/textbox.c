@@ -57,34 +57,36 @@
 #include "structs/str_file_system.h"
 #include "structs/str_mon_portrait.h"
 
-struct TextboxPortrait
+// Size: 0x24
+typedef struct TextboxPortrait
 {
-    // size: 0x24
-    s16 unk0;
-    /* 0x2 */ s16 speciesID;
-    bool8 showPortrait;
-    u8 unk5;
-    s8 spriteId;
-    u8 placementId;
-    PixelPos posDelta; // By default 0, 0. Allows to modify the position of the portrait. Can be changed by the scripting command 0x2f.
-    MonPortraitMsg monPortrait;
+    /* 0x00 */ s16 unk0;
+    /* 0x02 */ s16 speciesID;
+    /* 0x04 */ bool8 showPortrait;
+    /* 0x05 */ u8 unk5;
+    /* 0x06 */ s8 spriteId;
+    /* 0x07 */ u8 placementId; // See enum "PortraitPlacementID"
+    /* 0x08 */ PixelPos posDelta; // By default 0, 0. Allows to modify the position of the portrait. Can be changed by the scripting command 0x2f.
+    /* 0x10 */ MonPortraitMsg monPortrait;
     /* 0x20 */ OpenedFile *faceFile;
-};
+} TextboxPortrait;
 
-struct TextboxText
+// Size: 0x408
+typedef struct TextboxText
 {
-    u16 flags;
-    u32 unk4;
-    u8 buffer[0x400];
-};
+    /* 0x0 */ u16 flags;
+    /* 0x4 */ u32 unk4;
+    /* 0x8 */ u8 buffer[0x400];
+} TextboxText;
 
-struct unkStruct_3001B64_unk418
+// Size: 0x10
+typedef struct unkStruct_3001B64_unk418
 {
-    u16 unk0;
-    u8 (*unk4)(void);
-    void (*unk8)(void);
-    u32 (*unkC)(void);
-};
+    /* 0x0 */ u16 unk0;
+    /* 0x4 */ u8 (*unk4)(void);
+    /* 0x8 */ void (*unk8)(void);
+    /* 0xC */ u32 (*unkC)(void);
+} unkStruct_3001B64_unk418;
 
 #define MAX_TEXTBOX_PORTRAITS 10
 
@@ -97,28 +99,28 @@ enum TextboxTypeID
     TEXTBOX_TYPE_4,
 };
 
-// size: 0x5A8
-struct Textbox
+// Size: R=0x5A8 | B=0x5A6
+typedef struct Textbox
 {
-    u32 type; // See enum "TextboxTypeID"
-    s32 endMsgFrames;
-    s32 midMsgFrames;
-    struct TextboxText text;
-    u32 unk414; // See enum "SpecialTextKind"
-    const struct unkStruct_3001B64_unk418 *unk418;
-    const MenuItem *unk41C;
-    u32 unk420;
-    u32 unk424;
-    u32 unk428;
-    MonOrStringPtr unk42C;
-    s32 unk430; // See enum "ScriptID"
-    s32 unk434;
-    u32 fill438;
-    struct TextboxPortrait portraits[MAX_TEXTBOX_PORTRAITS];
-    s16 unk5A4; // See enum "ScriptID"
-};
+    /* 0x000 */ u32 type; // See enum "TextboxTypeID"
+    /* 0x004 */ s32 endMsgFrames;
+    /* 0x008 */ s32 midMsgFrames;
+    /* 0x00C */ TextboxText text;
+    /* 0x414 */ u32 unk414; // See enum "SpecialTextKind"
+    /* 0x418 */ const unkStruct_3001B64_unk418 *unk418;
+    /* 0x41C */ const MenuItem *unk41C;
+    /* 0x420 */ u32 unk420;
+    /* 0x424 */ u32 unk424;
+    /* 0x428 */ u32 unk428;
+    /* 0x42C */ MonOrStringPtr unk42C;
+    /* 0x430 */ s32 unk430; // See enum "ScriptID"
+    /* 0x434 */ s32 unk434;
+    /* 0x438 */ u32 unused438;
+    /* 0x43C */ TextboxPortrait portraits[MAX_TEXTBOX_PORTRAITS];
+    /* 0x5A4 */ s16 unk5A4; // See enum "ScriptID"
+} Textbox;
 
-static IWRAM_INIT struct Textbox *sTextbox = { NULL };
+static IWRAM_INIT Textbox *sTextbox = { NULL };
 
 void sub_809B028(const MenuItem *, s32 a1_, s32 a2, s32 a3, s32 a4_, const u8 *text);
 bool8 sub_809B18C(s32 *sp);
@@ -163,29 +165,7 @@ extern u32 sub_802DFD8(void);
 // Only dialogue sound
 #define TEXTBOX_FLAG_DIALOGUE_SOUND (1 << 9)
 
-static const struct PortraitPlacementInfo sPortraitPlacements[PLACEMENT_COUNT] = {
-    [PLACEMENT_LEFT]                  = { { 2,  8}, FALSE },
-    [PLACEMENT_MIDDLE_TOP]            = { { 12, 5}, FALSE },
-    [PLACEMENT_LEFT_]                 = { { 2,  8}, FALSE },
-    [PLACEMENT_RIGHT]                 = { { 23, 8}, TRUE },
-    [PLACEMENT_MIDDLE_LEFT]           = { { 7,  8}, FALSE },
-    [PLACEMENT_MIDDLE_RIGHT]          = { { 18, 8}, TRUE },
-    [PLACEMENT_MIDDLE_TOP_FLIP]       = { { 13, 5}, TRUE },
-    [PLACEMENT_LEFT_FLIP]             = { { 2,  8}, TRUE },
-    [PLACEMENT_RIGHT_FLIP]            = { { 23, 8}, FALSE },
-    [PLACEMENT_MIDDLE_LEFT_FLIP]      = { { 7,  8}, TRUE },
-    [PLACEMENT_MIDDLE_RIGHT_FLIP]     = { { 18, 8}, FALSE },
-    [PLACEMENT_TOP]                   = { { 12, 1}, FALSE },
-    [PLACEMENT_TOP_LEFT]              = { { 2,  2}, FALSE },
-    [PLACEMENT_TOP_RIGHT]             = { { 23, 2}, TRUE },
-    [PLACEMENT_MIDDLE_TOP_LEFT]       = { { 7,  1}, FALSE },
-    [PLACEMENT_MIDDLE_TOP_RIGHT]      = { { 18, 1}, TRUE },
-    [PLACEMENT_TOP_FLIP]              = { { 13, 1}, TRUE },
-    [PLACEMENT_TOP_LEFT_FLIP]         = { { 2,  2}, TRUE },
-    [PLACEMENT_TOP_RIGHT_FLIP]        = { { 23, 2}, FALSE },
-    [PLACEMENT_MIDDLE_TOP_LEFT_FLIP]  = { { 7,  1}, TRUE },
-    [PLACEMENT_MIDDLE_TOP_RIGHT_FLIP] = { { 18, 1}, FALSE },
-};
+#include "data/portrait_placements.h"
 
 static const MenuItem gUnknown_81160E8[] =
 {
@@ -240,11 +220,11 @@ EWRAM_DATA u16 gUnknown_20399DC = 0;
 EWRAM_DATA u16 gUnknown_20399DE = 0;
 
 static void ResetAllTextboxPortraits(void);
-static bool8 ScriptPrintTextInternal(struct TextboxText *ptr, u32 flags_, s32 a2_, const char *text);
+static bool8 ScriptPrintTextInternal(TextboxText *ptr, u32 flags_, s32 a2_, const char *text);
 // textboxType: See enum "TextboxTypeID"
 static bool8 SetTextboxType(u32 textboxType, bool8 unused);
 static void ResetTextbox(void);
-static bool8 IsTextboxOpen_809B40C(struct TextboxText *a0);
+static bool8 IsTextboxOpen_809B40C(TextboxText *a0);
 static u8 *sub_809B428(u8 *a0, s32 a1, u8 *a2);
 static bool8 sub_809B648(void);
 static void sub_809C39C(void);
@@ -259,7 +239,7 @@ static void sub_809C550(void);
 void TextboxInit(void)
 {
     ResetDialogueBox();
-    sTextbox = MemoryAlloc(sizeof(struct Textbox), 6);
+    sTextbox = MemoryAlloc(sizeof(Textbox), 6);
     sTextbox->type = 0;
     sTextbox->endMsgFrames = -1;
     sTextbox->midMsgFrames = -1;
@@ -405,7 +385,7 @@ bool8 ScriptClearTextbox2(void)
 static void ResetAllTextboxPortraits(void)
 {
     s32 i;
-    struct TextboxPortrait *ptr = &sTextbox->portraits[0];
+    TextboxPortrait *ptr = &sTextbox->portraits[0];
 
     for (i = 0; i < MAX_TEXTBOX_PORTRAITS; i++, ptr++) {
         ptr->unk0 = -1;
@@ -426,7 +406,7 @@ static void ResetAllTextboxPortraits(void)
 void ResetTextboxPortrait(s16 id_)
 {
     s32 id = id_;
-    struct TextboxPortrait *ptr = &sTextbox->portraits[id];
+    TextboxPortrait *ptr = &sTextbox->portraits[id];
 
     ptr->unk0 = -1;
     ptr->speciesID = MONSTER_NONE;
@@ -450,7 +430,7 @@ static bool8 sub_809A8B8(s32 param_1, s32 param_2)
     s16 speciesId;
     s32 portraitId = (s16) param_1;
     s16 local_28 = (s16) param_2;
-    struct TextboxPortrait *portraitPtr = &sTextbox->portraits[portraitId];
+    TextboxPortrait *portraitPtr = &sTextbox->portraits[portraitId];
     bool8 showPortrait = TRUE;
     bool8 byte1 = FALSE;
 
@@ -577,7 +557,7 @@ bool8 sub_809AB4C(s32 a0_, s32 a1_)
 {
     s32 a0 = (s16) a0_;
     s32 a1 = (s16) a1_;
-    struct TextboxPortrait *portrait = &sTextbox->portraits[a0];
+    TextboxPortrait *portrait = &sTextbox->portraits[a0];
 
     if (sub_809A8B8(a0, a1)) {
         CopyCyanMonsterNametoBuffer(gFormatBuffer_Monsters[a0], portrait->speciesID);
@@ -593,7 +573,7 @@ bool8 sub_809ABB4(s32 id_, s32 a1_)
 {
     s32 id = (s16) id_;
     s32 a1 = (s16) a1_;
-    struct TextboxPortrait *portrait = &sTextbox->portraits[id];
+    TextboxPortrait *portrait = &sTextbox->portraits[id];
 
     if (sub_809A8B8(id, a1)) {
         CopyCyanMonsterNametoBuffer(gFormatBuffer_Monsters[id], portrait->speciesID);
@@ -609,7 +589,7 @@ bool8 sub_809AC18(s32 a0_, s32 a1_)
 {
     s32 a0 = (s16) a0_;
     s32 a1 = (s16) a1_;
-    struct TextboxPortrait *portrait = &sTextbox->portraits[a0];
+    TextboxPortrait *portrait = &sTextbox->portraits[a0];
 
     if (sub_809A8B8(a0, a1)) {
         CopyCyanMonsterNametoBuffer(gFormatBuffer_Monsters[a0], portrait->speciesID);
@@ -626,7 +606,7 @@ bool8 ScriptSetPortraitInfo(s32 portraitId_, s32 spriteId_, s32 placementId_)
     s32 portraitId = (s16) portraitId_;
     s32 spriteId = (s8) spriteId_;
     u8 placementId = (u8) placementId_;
-    struct TextboxPortrait *portraitPtr = &sTextbox->portraits[portraitId];
+    TextboxPortrait *portraitPtr = &sTextbox->portraits[portraitId];
 
     TRY_CLOSE_FILE_AND_SET_NULL(portraitPtr->faceFile);
 
@@ -711,7 +691,7 @@ bool8 ScriptSetPortraitInfo(s32 portraitId_, s32 spriteId_, s32 placementId_)
 bool8 ScriptSetPortraitPosDelta(s32 portraitId_, PixelPos *newPosDelta)
 {
     s32 portraitId = (s16) portraitId_;
-    struct TextboxPortrait *portraitPtr = &sTextbox->portraits[portraitId];
+    TextboxPortrait *portraitPtr = &sTextbox->portraits[portraitId];
 
     if (portraitPtr->speciesID < 0)
         return FALSE;
@@ -729,7 +709,7 @@ static MonPortraitMsg *GetSpeakerPortrait(s32 portraitId_)
     s32 portraitId = (s16) portraitId_;
 
     if (portraitId >= 0) {
-        struct TextboxPortrait *portraitPtr = &sTextbox->portraits[portraitId];
+        TextboxPortrait *portraitPtr = &sTextbox->portraits[portraitId];
         if (portraitPtr->speciesID != MONSTER_NONE && portraitPtr->spriteId == -1) {
             ScriptSetPortraitInfo(portraitId, 0, 0);
         }
@@ -908,7 +888,7 @@ static void ResetTextbox(void)
     ScriptPrintTextInternal(&sTextbox->text, TEXTBOX_FLAG_NONE, -1, NULL);
 }
 
-static bool8 ScriptPrintTextInternal(struct TextboxText *textboxText, u32 flags_, s32 speakerId_, const char *text)
+static bool8 ScriptPrintTextInternal(TextboxText *textboxText, u32 flags_, s32 speakerId_, const char *text)
 {
     u16 flags = (u16) flags_;
     s32 speakerId = (s16) speakerId_;
@@ -957,7 +937,7 @@ static bool8 ScriptPrintTextInternal(struct TextboxText *textboxText, u32 flags_
     return TRUE;
 }
 
-static bool8 IsTextboxOpen_809B40C(struct TextboxText *a0)
+static bool8 IsTextboxOpen_809B40C(TextboxText *a0)
 {
     switch (a0->unk4) {
         case 0:
@@ -993,7 +973,7 @@ static u8 *sub_809B428(u8 *a0, s32 a1, u8 *a2)
 
 void sub_809B474(void)
 {
-    const struct unkStruct_3001B64_unk418 *unkStructPtr;
+    const unkStruct_3001B64_unk418 *unkStructPtr;
 
     switch (sTextbox->type) {
         case 0:
@@ -1105,7 +1085,7 @@ UNUSED static void nullsub_210(void)
 
 }
 
-static const struct unkStruct_3001B64_unk418 gUnknown_81161A8 =
+static const unkStruct_3001B64_unk418 gUnknown_81161A8 =
 {
     .unk0 = 1,
     .unk4 = NULL,
@@ -1113,7 +1093,7 @@ static const struct unkStruct_3001B64_unk418 gUnknown_81161A8 =
     .unkC = sub_801D0DC,
 };
 
-static const struct unkStruct_3001B64_unk418 gUnknown_81161B8 =
+static const unkStruct_3001B64_unk418 gUnknown_81161B8 =
 {
     .unk0 = 1,
     .unk4 = NULL,
@@ -1121,7 +1101,7 @@ static const struct unkStruct_3001B64_unk418 gUnknown_81161B8 =
     .unkC = sub_801D0DC,
 };
 
-static const struct unkStruct_3001B64_unk418 gUnknown_81161C8 =
+static const unkStruct_3001B64_unk418 gUnknown_81161C8 =
 {
     .unk0 = 1,
     .unk4 = NULL,
@@ -1129,7 +1109,7 @@ static const struct unkStruct_3001B64_unk418 gUnknown_81161C8 =
     .unkC = KangaskhanStorageCallback,
 };
 
-static const struct unkStruct_3001B64_unk418 gUnknown_81161D8 =
+static const unkStruct_3001B64_unk418 gUnknown_81161D8 =
 {
     .unk0 = 1,
     .unk4 = sub_8017E1C,
@@ -1137,7 +1117,7 @@ static const struct unkStruct_3001B64_unk418 gUnknown_81161D8 =
     .unkC = sub_8017E54,
 };
 
-static const struct unkStruct_3001B64_unk418 gUnknown_81161E8 =
+static const unkStruct_3001B64_unk418 gUnknown_81161E8 =
 {
     .unk0 = 1,
     .unk4 = NULL,
@@ -1145,7 +1125,7 @@ static const struct unkStruct_3001B64_unk418 gUnknown_81161E8 =
     .unkC = FelicityBankCallback,
 };
 
-static const struct unkStruct_3001B64_unk418 gUnknown_81161F8 =
+static const unkStruct_3001B64_unk418 gUnknown_81161F8 =
 {
     .unk0 = 1,
     .unk4 = NULL,
@@ -1153,7 +1133,7 @@ static const struct unkStruct_3001B64_unk418 gUnknown_81161F8 =
     .unkC = KecleonBrosCallback,
 };
 
-static const struct unkStruct_3001B64_unk418 gUnknown_8116208 =
+static const unkStruct_3001B64_unk418 gUnknown_8116208 =
 {
     .unk0 = 1,
     .unk4 = NULL,
@@ -1161,7 +1141,7 @@ static const struct unkStruct_3001B64_unk418 gUnknown_8116208 =
     .unkC = sub_801FC40,
 };
 
-static const struct unkStruct_3001B64_unk418 gUnknown_8116218 =
+static const unkStruct_3001B64_unk418 gUnknown_8116218 =
 {
     .unk0 = 1,
     .unk4 = NULL,
@@ -1169,7 +1149,7 @@ static const struct unkStruct_3001B64_unk418 gUnknown_8116218 =
     .unkC = sub_8021C5C,
 };
 
-static const struct unkStruct_3001B64_unk418 gUnknown_8116228 =
+static const unkStruct_3001B64_unk418 gUnknown_8116228 =
 {
     .unk0 = 1,
     .unk4 = sub_8027F88,
@@ -1177,7 +1157,7 @@ static const struct unkStruct_3001B64_unk418 gUnknown_8116228 =
     .unkC = sub_8028078,
 };
 
-static const struct unkStruct_3001B64_unk418 gUnknown_8116238 =
+static const unkStruct_3001B64_unk418 gUnknown_8116238 =
 {
     .unk0 = 1,
     .unk4 = sub_802B2D4,
@@ -1185,7 +1165,7 @@ static const struct unkStruct_3001B64_unk418 gUnknown_8116238 =
     .unkC = sub_802B358,
 };
 
-static const struct unkStruct_3001B64_unk418 gUnknown_8116248 =
+static const unkStruct_3001B64_unk418 gUnknown_8116248 =
 {
     .unk0 = 1,
     .unk4 = CreateThankYouMailPelipper,
@@ -1193,7 +1173,7 @@ static const struct unkStruct_3001B64_unk418 gUnknown_8116248 =
     .unkC = ThankYouMailPelipperCallback,
 };
 
-static const struct unkStruct_3001B64_unk418 gUnknown_8116258 =
+static const unkStruct_3001B64_unk418 gUnknown_8116258 =
 {
     .unk0 = 1,
     .unk4 = NULL,
@@ -1201,7 +1181,7 @@ static const struct unkStruct_3001B64_unk418 gUnknown_8116258 =
     .unkC = HelperPelipperCallback,
 };
 
-static const struct unkStruct_3001B64_unk418 gUnknown_8116268 =
+static const unkStruct_3001B64_unk418 gUnknown_8116268 =
 {
     .unk0 = 1,
     .unk4 = sub_802E864,
@@ -1209,7 +1189,7 @@ static const struct unkStruct_3001B64_unk418 gUnknown_8116268 =
     .unkC = sub_802E890,
 };
 
-static const struct unkStruct_3001B64_unk418 gUnknown_8116278 =
+static const unkStruct_3001B64_unk418 gUnknown_8116278 =
 {
     .unk0 = 1,
     .unk4 = sub_802DFB0,
@@ -1217,7 +1197,7 @@ static const struct unkStruct_3001B64_unk418 gUnknown_8116278 =
     .unkC = sub_802DFD8,
 };
 
-static const struct unkStruct_3001B64_unk418 gUnknown_8116288 =
+static const unkStruct_3001B64_unk418 gUnknown_8116288 =
 {
     .unk0 = 1,
     .unk4 = NULL,
@@ -1226,7 +1206,7 @@ static const struct unkStruct_3001B64_unk418 gUnknown_8116288 =
 };
 
 // These 3 are identical
-static const struct unkStruct_3001B64_unk418 gUnknown_8116298 =
+static const unkStruct_3001B64_unk418 gUnknown_8116298 =
 {
     .unk0 = 1,
     .unk4 = NULL,
@@ -1234,7 +1214,7 @@ static const struct unkStruct_3001B64_unk418 gUnknown_8116298 =
     .unkC = HandleMakuhitaDojoState,
 };
 
-static const struct unkStruct_3001B64_unk418 gUnknown_81162A8 =
+static const unkStruct_3001B64_unk418 gUnknown_81162A8 =
 {
     .unk0 = 1,
     .unk4 = NULL,
@@ -1242,7 +1222,7 @@ static const struct unkStruct_3001B64_unk418 gUnknown_81162A8 =
     .unkC = HandleMakuhitaDojoState,
 };
 
-static const struct unkStruct_3001B64_unk418 gUnknown_81162B8 =
+static const unkStruct_3001B64_unk418 gUnknown_81162B8 =
 {
     .unk0 = 1,
     .unk4 = NULL,
@@ -1250,7 +1230,7 @@ static const struct unkStruct_3001B64_unk418 gUnknown_81162B8 =
     .unkC = HandleMakuhitaDojoState,
 };
 
-static const struct unkStruct_3001B64_unk418 gUnknown_81162C8 =
+static const unkStruct_3001B64_unk418 gUnknown_81162C8 =
 {
     .unk0 = 0,
     .unk4 = CreateTestTracker,
@@ -1258,7 +1238,7 @@ static const struct unkStruct_3001B64_unk418 gUnknown_81162C8 =
     .unkC = HandleTestTrackerState,
 };
 
-static const struct unkStruct_3001B64_unk418 gUnknown_81162D8 =
+static const unkStruct_3001B64_unk418 gUnknown_81162D8 =
 {
     .unk0 = 0,
     .unk4 = sub_8035678,
@@ -1266,7 +1246,7 @@ static const struct unkStruct_3001B64_unk418 gUnknown_81162D8 =
     .unkC = sub_80356A0,
 };
 
-static const struct unkStruct_3001B64_unk418 gUnknown_81162E8 =
+static const unkStruct_3001B64_unk418 gUnknown_81162E8 =
 {
     .unk0 = 0,
     .unk4 = NULL,
@@ -1274,7 +1254,7 @@ static const struct unkStruct_3001B64_unk418 gUnknown_81162E8 =
     .unkC = sub_803B120,
 };
 
-static const struct unkStruct_3001B64_unk418 gUnknown_81162F8 =
+static const unkStruct_3001B64_unk418 gUnknown_81162F8 =
 {
     .unk0 = 1,
     .unk4 = NULL,
@@ -1282,7 +1262,7 @@ static const struct unkStruct_3001B64_unk418 gUnknown_81162F8 =
     .unkC = sub_8025354,
 };
 
-static const struct unkStruct_3001B64_unk418 gUnknown_8116308 =
+static const unkStruct_3001B64_unk418 gUnknown_8116308 =
 {
     .unk0 = 0,
     .unk4 = NULL,
@@ -1290,7 +1270,7 @@ static const struct unkStruct_3001B64_unk418 gUnknown_8116308 =
     .unkC = ScriptItemTextboxFunc,
 };
 
-static const struct unkStruct_3001B64_unk418 gUnknown_8116318 =
+static const unkStruct_3001B64_unk418 gUnknown_8116318 =
 {
     .unk0 = 1,
     .unk4 = NULL,

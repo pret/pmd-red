@@ -35,7 +35,7 @@ static const struct ScriptCommand s_gs169_g1_s0_lives0_dlg0[] = { /* 0x821cfa4 *
     { 0xdf, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(30),
     WAIT(90),
-    PORTRAIT(PLACEMENT_LEFT_, 0x0001, 0x0000000b),
+    PORTRAIT(PLACEMENT_LEFT_BOTTOM_2, 0x0001, 0x0000000b),
     MSG_NPC(1, _(" Wow!{WAIT_PRESS}\nThe snow is like frozen powder!")),
     PORTRAIT_REP(0x0001, 0x00000005),
     MSG_NPC(1, _(" It looks pretty, but...{WAIT_PRESS}\nIt must be harsh there...")),

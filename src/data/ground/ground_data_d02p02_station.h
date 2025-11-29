@@ -41,7 +41,7 @@ static const struct ScriptCommand s_gs181_g1_s0_lives0_dlg0[] = { /* 0x8231d84 *
     ALERT_CUE(6),
     WALK_GRID(256, 0),
     WAIT(15),
-    PORTRAIT(PLACEMENT_RIGHT, 0x0001, 0x00000000),
+    PORTRAIT(PLACEMENT_RIGHT_BOTTOM_FLIP, 0x0001, 0x00000000),
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
     VARIANT(/* == */  1, _(" Oh, hey, there they are.\nLet's get them out.")),
     VARIANT_DEFAULT(_(" Oh, there they are!\nLet's get them out safely.")),
