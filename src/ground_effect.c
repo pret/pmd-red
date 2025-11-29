@@ -329,7 +329,7 @@ s32 GroundEffect_Add(s32 _id, const GroundEffectData *effectData, s32 _group, s3
     script = effectData->script;
     if (script == NULL) {
         if (puVar4->type == 1) {
-            script = gFunctionScriptTable[58].script;
+            script = gFunctionScriptTable[NORMAL_CAMERA].script;
         }
         if (script == NULL)
             return id;

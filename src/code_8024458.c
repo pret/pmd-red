@@ -98,5 +98,5 @@ static void sub_8024604(void)
     CreateMenuOnWindow(&sUnknown_203B2AC->input, 3, 1, sUnknown_203B2AC->unkE0);
     iVar3 = &sUnknown_203B2AC->unk4C;
     pokeStruct = &gRecruitedPokemonRef->pokemon[sUnknown_203B2AC->speciesNum];
-    SetMonSummaryInfo(iVar3, pokeStruct, sub_80023E4(7));
+    SetMonSummaryInfo(iVar3, pokeStruct, CheckQuest(QUEST_UNLOCKED_EVOLUTIONS));
 }

@@ -110,7 +110,7 @@ const ax_anim gUnknown_9800D6C[] = {
     { 0,   0,   0, { 0, 0 }, { 0, 0 } },
 };
 const u32 gUnknown_9800DFC[] = INCBIN_U32("data/effects/efob061.4bpp");
-const RGB gUnknown_9800F9C[] = INCBIN_U8("data/effects/efob061.pmdpal");
+const RGB_Struct gUnknown_9800F9C[] = INCBIN_U8("data/effects/efob061.pmdpal");
 const ax_pose *const gUnknown_9800FDC[] = {
     gUnknown_9800B10,
     gUnknown_9800B24,

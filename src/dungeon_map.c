@@ -31,7 +31,7 @@ struct UnkStruct1
 struct DungeonMapGfx
 {
     struct UnkStruct1 *gfx;
-    RGB *pal;
+    RGB_Struct *pal;
 };
 
 enum {

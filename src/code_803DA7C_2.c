@@ -20,7 +20,7 @@ EWRAM_DATA OpenedFile *gUnknown_202EC94 = NULL;
 EWRAM_DATA OpenedFile *gUnknown_202EC98 = NULL;
 EWRAM_DATA OpenedFile *gUnknown_202EC9C = NULL;
 EWRAM_DATA OpenedFile *gUnknown_202ECA0 = NULL;
-EWRAM_DATA RGB gUnknown_202ECA4[33] = {0};
+EWRAM_DATA RGB_Struct gUnknown_202ECA4[33] = {0};
 
 struct FileStruct2
 {
@@ -121,7 +121,7 @@ void sub_803E02C(void)
 void sub_803E13C(void)
 {
     s32 i;
-    RGB *pal;
+    RGB_Struct *pal;
 
     SetWindowBGColor();
     if (gGameOptionsRef->playerGender != 0)

@@ -279,7 +279,7 @@ static void UpdateWigglytuffDialogue(void)
             else {
                 switch (GetFriendAreaUnlockCondition(sWigglytuffShop3Work->chosenFriendArea)) {
                     case UNLOCK_SHOP_POST_GAME:
-                        if (sub_80023E4(6) != 0)
+                        if (CheckQuest(QUEST_REACHED_POSTGAME))
                             sWigglytuffShop3Work->fallbackState = WIGGLYTUFF_CHECK_AGAIN;
                         else
                             sWigglytuffShop3Work->fallbackState = WIGGLYTUFF_CHECK_POST_GAME;

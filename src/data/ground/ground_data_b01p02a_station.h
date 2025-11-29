@@ -37,12 +37,12 @@ static const struct ScriptCommand s_gs12_g0_s0_station_sref_script[] = { /* 0x81
     RET,
   LABEL(2), /* = 0x02 */
     CJUMP_VAR(START_MODE),
-    COND_EQUAL(1, /* to label */ 6),
-    COND_EQUAL(2, /* to label */ 7),
-    COND_EQUAL(12, /* to label */ 8),
-    COND_EQUAL(11, /* to label */ 8),
-    COND_EQUAL(10, /* to label */ 9),
-    COND_EQUAL(9, /* to label */ 10),
+    COND_EQUAL(STARTMODE_CONTINUE_GAME, /* to label */ 6),
+    COND_EQUAL(STARTMODE_GROUND, /* to label */ 7),
+    COND_EQUAL(STARTMODE_DUNGEON_LOST, /* to label */ 8),
+    COND_EQUAL(STARTMODE_11, /* to label */ 8),
+    COND_EQUAL(STARTMODE_10, /* to label */ 9),
+    COND_EQUAL(STARTMODE_DUNGEON_WON, /* to label */ 10),
     JUMP_LABEL(6),
   LABEL(7), /* = 0x07 */
     CJUMP_VAR(GROUND_GETOUT),
@@ -75,11 +75,11 @@ static const struct ScriptCommand s_gs12_g0_s0_station_sref_script[] = { /* 0x81
     SELECT_LIVES(0, 1),
     JUMP_LABEL(12),
   LABEL(12), /* = 0x0c */
-    BGM_SWITCH(1),
+    BGM_SWITCH(MUS_RESCUE_TEAM_BASE),
     JUMP_SCRIPT(COMMON_ENTER),
 };
 
-static const struct ScriptRef s_gs12_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs12_g0_s0_station_sref_script }; /* 0x81e1da4 */
+static const struct ScriptRef s_gs12_g0_s0_station_sref = { ENTER_CONTROL , 1, NULL, s_gs12_g0_s0_station_sref_script }; /* 0x81e1da4 */
 
 static const struct ScriptCommand s_gs12_g0_s0_evt0_sref_script[] = { /* 0x81e1db0 */
     DEBUGINFO_O(85),
@@ -87,7 +87,7 @@ static const struct ScriptCommand s_gs12_g0_s0_evt0_sref_script[] = { /* 0x81e1d
     HALT,
 };
 
-static const struct ScriptRef s_gs12_g0_s0_evt0_sref = { 357, 2, NULL /* GETOUT_NORMAL */, s_gs12_g0_s0_evt0_sref_script }; /* 0x81e1de0 */
+static const struct ScriptRef s_gs12_g0_s0_evt0_sref = { GETOUT_NORMAL, 2, NULL, s_gs12_g0_s0_evt0_sref_script }; /* 0x81e1de0 */
 
 static const struct ScriptCommand s_gs12_g0_s0_evt1_sref_script[] = { /* 0x81e1dec */
     DEBUGINFO_O(93),
@@ -105,7 +105,7 @@ static const struct ScriptCommand s_gs12_g0_s0_evt1_sref_script[] = { /* 0x81e1d
     JUMP_SCRIPT(END_TALK),
 };
 
-static const struct ScriptRef s_gs12_g0_s0_evt1_sref = { 57, 7, NULL /* NORMAL_EVENT */, s_gs12_g0_s0_evt1_sref_script }; /* 0x81e1ee4 */
+static const struct ScriptRef s_gs12_g0_s0_evt1_sref = { NORMAL_EVENT, 7, NULL, s_gs12_g0_s0_evt1_sref_script }; /* 0x81e1ee4 */
 
 static const struct ScriptCommand s_gs12_g0_s0_obj0_dlg0[] = { /* 0x81e1ef0 */
     DEBUGINFO_O(111),
@@ -179,7 +179,7 @@ static const struct ScriptCommand s_gs12_g1_s0_station_sref_script[] = { /* 0x81
     RET,
 };
 
-static const struct ScriptRef s_gs12_g1_s0_station_sref = { 401, 7, NULL /* EVENT_WAKEUP */, s_gs12_g1_s0_station_sref_script }; /* 0x81e2220 */
+static const struct ScriptRef s_gs12_g1_s0_station_sref = { EVENT_WAKEUP, 7, NULL, s_gs12_g1_s0_station_sref_script }; /* 0x81e2220 */
 
 static const struct ScriptCommand s_gs12_g1_s0_lives0_dlg0[] = { /* 0x81e222c */
     DEBUGINFO_O(185),
@@ -204,7 +204,7 @@ static const struct ScriptCommand s_gs12_g1_s1_station_sref_script[] = { /* 0x81
     RET,
 };
 
-static const struct ScriptRef s_gs12_g1_s1_station_sref = { 402, 7, NULL /* EVENT_STATION */, s_gs12_g1_s1_station_sref_script }; /* 0x81e230c */
+static const struct ScriptRef s_gs12_g1_s1_station_sref = { EVENT_STATION , 7, NULL, s_gs12_g1_s1_station_sref_script }; /* 0x81e230c */
 
 static const struct ScriptCommand s_gs12_g1_s1_lives0_dlg0[] = { /* 0x81e2318 */
     DEBUGINFO_O(210),
@@ -233,7 +233,7 @@ static const struct ScriptCommand s_gs12_g2_s0_station_sref_script[] = { /* 0x81
     RET,
 };
 
-static const struct ScriptRef s_gs12_g2_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs12_g2_s0_station_sref_script }; /* 0x81e2438 */
+static const struct ScriptRef s_gs12_g2_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs12_g2_s0_station_sref_script }; /* 0x81e2438 */
 
 static const struct ScriptCommand s_gs12_g2_s0_lives0_dlg0[] = { /* 0x81e2444 */
     DEBUGINFO_O(239),
@@ -260,14 +260,14 @@ static const struct ScriptCommand s_gs12_g3_s0_station_sref_script[] = { /* 0x81
     WAIT(1),
     { 0x25, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(1),
+    BGM_SWITCH(MUS_RESCUE_TEAM_BASE),
     { 0x22, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     SELECT_EVENTS(0, 0),
     RET,
 };
 
-static const struct ScriptRef s_gs12_g3_s0_station_sref = { 402, 7, NULL /* EVENT_STATION */, s_gs12_g3_s0_station_sref_script }; /* 0x81e25fc */
+static const struct ScriptRef s_gs12_g3_s0_station_sref = { EVENT_STATION , 7, NULL, s_gs12_g3_s0_station_sref_script }; /* 0x81e25fc */
 
 static const struct ScriptCommand s_gs12_g3_s0_lives0_dlg0[] = { /* 0x81e2608 */
     DEBUGINFO_O(273),
@@ -289,14 +289,14 @@ static const struct ScriptCommand s_gs12_g4_s0_station_sref_script[] = { /* 0x81
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     SELECT_MAP(MAP_TEAM_BASE_INSIDE),
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(1),
+    BGM_SWITCH(MUS_RESCUE_TEAM_BASE),
     { 0x22, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     SELECT_EVENTS(0, 0),
     RET,
 };
 
-static const struct ScriptRef s_gs12_g4_s0_station_sref = { 402, 7, NULL /* EVENT_STATION */, s_gs12_g4_s0_station_sref_script }; /* 0x81e2758 */
+static const struct ScriptRef s_gs12_g4_s0_station_sref = { EVENT_STATION , 7, NULL, s_gs12_g4_s0_station_sref_script }; /* 0x81e2758 */
 
 static const struct ScriptCommand s_gs12_g4_s0_lives0_dlg0[] = { /* 0x81e2764 */
     DEBUGINFO_O(302),
@@ -316,12 +316,12 @@ static const struct ScriptCommand s_gs12_g5_s0_station_sref_script[] = { /* 0x81
     SELECT_MAP(MAP_TEAM_BASE_INSIDE),
     SELECT_ENTITIES(0, 2),
     SELECT_EVENTS(0, 0),
-    BGM_SWITCH(1),
+    BGM_SWITCH(MUS_RESCUE_TEAM_BASE),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     RET,
 };
 
-static const struct ScriptRef s_gs12_g5_s0_station_sref = { 402, 7, NULL /* EVENT_STATION */, s_gs12_g5_s0_station_sref_script }; /* 0x81e2874 */
+static const struct ScriptRef s_gs12_g5_s0_station_sref = { EVENT_STATION , 7, NULL, s_gs12_g5_s0_station_sref_script }; /* 0x81e2874 */
 
 static const struct ScriptCommand s_gs12_g6_s0_station_sref_script[] = { /* 0x81e2880 */
     DEBUGINFO_O(327),
@@ -339,14 +339,14 @@ static const struct ScriptCommand s_gs12_g6_s0_station_sref_script[] = { /* 0x81
     WAIT(1),
     { 0x25, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
     SELECT_ENTITIES(-1, -1),
-    BGM_SWITCH(1),
+    BGM_SWITCH(MUS_RESCUE_TEAM_BASE),
     { 0x22, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     SELECT_EVENTS(0, 0),
     RET,
 };
 
-static const struct ScriptRef s_gs12_g6_s0_station_sref = { 402, 7, NULL /* EVENT_STATION */, s_gs12_g6_s0_station_sref_script }; /* 0x81e29c0 */
+static const struct ScriptRef s_gs12_g6_s0_station_sref = { EVENT_STATION , 7, NULL, s_gs12_g6_s0_station_sref_script }; /* 0x81e29c0 */
 
 static const struct ScriptCommand s_gs12_g6_s0_lives0_dlg0[] = { /* 0x81e29cc */
     DEBUGINFO_O(352),
@@ -367,14 +367,14 @@ static const struct ScriptCommand s_gs12_g7_s0_station_sref_script[] = { /* 0x81
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     SELECT_MAP(MAP_TEAM_BASE_INSIDE),
     SELECT_ENTITIES(-1, -1),
-    BGM_SWITCH(1),
+    BGM_SWITCH(MUS_RESCUE_TEAM_BASE),
     { 0x22, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     SELECT_EVENTS(0, 0),
     RET,
 };
 
-static const struct ScriptRef s_gs12_g7_s0_station_sref = { 402, 7, NULL /* EVENT_STATION */, s_gs12_g7_s0_station_sref_script }; /* 0x81e2b0c */
+static const struct ScriptRef s_gs12_g7_s0_station_sref = { EVENT_STATION , 7, NULL, s_gs12_g7_s0_station_sref_script }; /* 0x81e2b0c */
 
 static const struct ScriptCommand s_gs12_g7_s0_lives0_dlg0[] = { /* 0x81e2b18 */
     DEBUGINFO_O(380),
@@ -396,14 +396,14 @@ static const struct ScriptCommand s_gs12_g8_s0_station_sref_script[] = { /* 0x81
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     SELECT_MAP(MAP_TEAM_BASE_INSIDE),
     SELECT_ENTITIES(-1, -1),
-    BGM_SWITCH(1),
+    BGM_SWITCH(MUS_RESCUE_TEAM_BASE),
     { 0x22, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     SELECT_EVENTS(0, 0),
     RET,
 };
 
-static const struct ScriptRef s_gs12_g8_s0_station_sref = { 402, 7, NULL /* EVENT_STATION */, s_gs12_g8_s0_station_sref_script }; /* 0x81e2c68 */
+static const struct ScriptRef s_gs12_g8_s0_station_sref = { EVENT_STATION , 7, NULL, s_gs12_g8_s0_station_sref_script }; /* 0x81e2c68 */
 
 static const struct ScriptCommand s_gs12_g8_s0_lives0_dlg0[] = { /* 0x81e2c74 */
     DEBUGINFO_O(409),
@@ -427,7 +427,7 @@ static const struct ScriptCommand s_gs12_g9_s0_station_sref_script[] = { /* 0x81
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     SELECT_MAP(MAP_TEAM_BASE_INSIDE),
     SELECT_ENTITIES(-1, -1),
-    BGM_SWITCH(1),
+    BGM_SWITCH(MUS_RESCUE_TEAM_BASE),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     SELECT_EVENTS(0, 0),
@@ -437,11 +437,11 @@ static const struct ScriptCommand s_gs12_g9_s0_station_sref_script[] = { /* 0x81
     SELECT_LIVES(9, 1),
     { 0x22, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
     { 0xdf, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
-    BGM_SWITCH(1),
+    BGM_SWITCH(MUS_RESCUE_TEAM_BASE),
     RET,
 };
 
-static const struct ScriptRef s_gs12_g9_s0_station_sref = { 402, 7, NULL /* EVENT_STATION */, s_gs12_g9_s0_station_sref_script }; /* 0x81e2e54 */
+static const struct ScriptRef s_gs12_g9_s0_station_sref = { EVENT_STATION , 7, NULL, s_gs12_g9_s0_station_sref_script }; /* 0x81e2e54 */
 
 static const struct ScriptCommand s_gs12_g9_s0_eff0_script[] = { /* 0x81e2e60 */
     DEBUGINFO_O(447),
@@ -466,7 +466,7 @@ static const struct ScriptCommand s_gs12_g9_s0_lives0_dlg0[] = { /* 0x81e2ec0 */
     ALERT_CUE(7),
     AWAIT_CUE(5),
     ALERT_CUE(6),
-    ROTATE(4, 1, DIRECTION_NORTHEAST),
+    ROTATE_TO(4, DIR_TRANS_SPINRIGHT1, DIRECTION_NORTHEAST),
     PORTRAIT(PLACEMENT_RIGHT, 0x0001, 0x00000000),
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
     VARIANT(/* == */  1, _(" It's {NAME_0}'s house.")),
@@ -484,7 +484,7 @@ static const struct ScriptCommand s_gs12_g9_s0_lives0_dlg0[] = { /* 0x81e2ec0 */
     WAIT(10),
     ALERT_CUE(7),
     ALERT_CUE(6),
-    ROTATE(4, 2, DIRECTION_NORTH),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_NORTH),
     AWAIT_CUE(5),
     MSG_NPC(-1, _(" Th-thank you...")),
     TEXTBOX_CLEAR,
@@ -558,13 +558,13 @@ static const struct ScriptCommand s_gs12_g9_s0_lives0_dlg0[] = { /* 0x81e2ec0 */
     BGM_STOP,
     FANFARE_PLAY(212),
     MSG_INSTANT(_("{CENTER_ALIGN}{NAME_1} received something\n{CENTER_ALIGN}from {NAME_2}.")),
-    { 0xe1, 0x00,  0x00d4,  0x00000000,  0x00000000, NULL },
+    WAIT_FANFARE1(212),
     TEXTBOX_CLEAR,
     WAIT(10),
     ALERT_CUE(7),
     AWAIT_CUE(5),
     WALK_RELATIVE(256, 0, -24),
-    ROTATE(4, 1, DIRECTION_NORTHEAST),
+    ROTATE_TO(4, DIR_TRANS_SPINRIGHT1, DIRECTION_NORTHEAST),
     WAIT(30),
     SELECT_EFFECTS(9, 1),
     WAIT(30),
@@ -574,7 +574,7 @@ static const struct ScriptCommand s_gs12_g9_s0_lives0_dlg0[] = { /* 0x81e2ec0 */
     TEXTBOX_CLEAR,
     WAIT(10),
     ALERT_CUE(7),
-    ROTATE(4, 1, DIRECTION_NORTHEAST),
+    ROTATE_TO(4, DIR_TRANS_SPINRIGHT1, DIRECTION_NORTHEAST),
     MSG_NPC(2, _(" It's a...{WAIT_PRESS}\n{COLOR GREEN_I}Clear Wing{RESET}...")),
     TEXTBOX_CLEAR,
     WAIT(10),
@@ -588,7 +588,7 @@ static const struct ScriptCommand s_gs12_g9_s0_lives0_dlg0[] = { /* 0x81e2ec0 */
     CANCEL_EFFECTS(9, 1),
     ALERT_CUE(7),
     ALERT_CUE(6),
-    ROTATE(4, 2, DIRECTION_NORTH),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_NORTH),
     AWAIT_CUE(5),
     MSG_NPC(2, _(" See? Depending on the light,\nit takes on many different colors.")),
     ALERT_CUE(7),
@@ -603,13 +603,13 @@ static const struct ScriptCommand s_gs12_g9_s0_lives0_dlg0[] = { /* 0x81e2ec0 */
     ALERT_CUE(6),
     AWAIT_CUE(5),
     ALERT_CUE(6),
-    ROTATE(4, 1, DIRECTION_SOUTH),
+    ROTATE_TO(4, DIR_TRANS_SPINRIGHT1, DIRECTION_SOUTH),
     AWAIT_CUE(5),
     ALERT_CUE(6),
-    ROTATE(4, 1, DIRECTION_SOUTHWEST),
+    ROTATE_TO(4, DIR_TRANS_SPINRIGHT1, DIRECTION_SOUTHWEST),
     AWAIT_CUE(5),
     ALERT_CUE(6),
-    ROTATE(4, 2, DIRECTION_SOUTHEAST),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_SOUTHEAST),
     AWAIT_CUE(5),
     ALERT_CUE(6),
     AWAIT_CUE(5),
@@ -628,7 +628,7 @@ static const struct ScriptCommand s_gs12_g9_s0_lives0_dlg0[] = { /* 0x81e2ec0 */
     ALERT_CUE(7),
     AWAIT_CUE(5),
     ALERT_CUE(6),
-    ROTATE(4, 1, DIRECTION_SOUTH),
+    ROTATE_TO(4, DIR_TRANS_SPINRIGHT1, DIRECTION_SOUTH),
     AWAIT_CUE(5),
     WAIT(30),
     PORTRAIT(PLACEMENT_RIGHT, 0x0001, 0x00000004),
@@ -636,7 +636,7 @@ static const struct ScriptCommand s_gs12_g9_s0_lives0_dlg0[] = { /* 0x81e2ec0 */
     TEXTBOX_CLEAR,
     WAIT(10),
     ALERT_CUE(6),
-    ROTATE(4, 2, DIRECTION_SOUTHEAST),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_SOUTHEAST),
     PORTRAIT(PLACEMENT_RIGHT, 0x0001, 0x00000000),
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
     VARIANT(/* == */  1, _(" But you are interested in\nthe mirage Pokémon, right?")),
@@ -674,43 +674,43 @@ static const struct ScriptCommand s_gs12_g9_s0_lives1_dlg0[] = { /* 0x81e4480 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(6),
-    ROTATE(4, 2, DIRECTION_NORTHWEST),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_NORTHWEST),
     AWAIT_CUE(6),
-    ROTATE(4, 1, DIRECTION_NORTH),
+    ROTATE_TO(4, DIR_TRANS_SPINRIGHT1, DIRECTION_NORTH),
     AWAIT_CUE(6),
     FANFARE_PLAY2(469),
     CALL_SCRIPT(QUESTION_FUNC),
-    { 0xe2, 0x00,  0x01d5,  0x00000000,  0x00000000, NULL },
+    WAIT_FANFARE2(469),
     AWAIT_CUE(6),
     CALL_SCRIPT(SHOCK_FUNC),
     AWAIT_CUE(6),
     WALK_RELATIVE(512, 0, -24),
-    ROTATE(4, 2, DIRECTION_NORTHWEST),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_NORTHWEST),
     ALERT_CUE(5),
     AWAIT_CUE(6),
     FANFARE_PLAY2(469),
     CALL_SCRIPT(QUESTION_FUNC),
-    { 0xe2, 0x00,  0x01d5,  0x00000000,  0x00000000, NULL },
+    WAIT_FANFARE2(469),
     AWAIT_CUE(6),
-    ROTATE(4, 1, DIRECTION_NORTH),
+    ROTATE_TO(4, DIR_TRANS_SPINRIGHT1, DIRECTION_NORTH),
     AWAIT_CUE(6),
-    ROTATE(4, 2, DIRECTION_NORTHWEST),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_NORTHWEST),
     AWAIT_CUE(6),
-    ROTATE(4, 2, DIRECTION_SOUTH),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_SOUTH),
     AWAIT_CUE(6),
-    ROTATE(4, 1, DIRECTION_SOUTHWEST),
+    ROTATE_TO(4, DIR_TRANS_SPINRIGHT1, DIRECTION_SOUTHWEST),
     AWAIT_CUE(6),
-    ROTATE(4, 2, DIRECTION_SOUTHEAST),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_SOUTHEAST),
     AWAIT_CUE(6),
     ALERT_CUE(4),
     WALK_RELATIVE(256, 0, 40),
     { 0x56, 0x00,  0x0000,  0x00000047,  0x00000000, NULL },
-    ROTATE(4, 10, DIRECTION_SOUTHWEST),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_SOUTHWEST),
     ALERT_CUE(5),
     AWAIT_CUE(6),
-    ROTATE(4, 2, DIRECTION_SOUTH),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_SOUTH),
     AWAIT_CUE(6),
-    ROTATE(4, 10, DIRECTION_NORTHWEST),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_NORTHWEST),
     HALT,
 };
 
@@ -728,7 +728,7 @@ static const struct ScriptCommand s_gs12_g9_s0_lives2_dlg0[] = { /* 0x81e4720 */
     AWAIT_CUE(7),
     FANFARE_PLAY2(465),
     CALL_SCRIPT(NOTICE_FUNC),
-    { 0xe2, 0x00,  0x01d1,  0x00000000,  0x00000000, NULL },
+    WAIT_FANFARE2(465),
     ALERT_CUE(5),
     AWAIT_CUE(7),
     { 0x62, 0x00,  0x0100,  0x00000000, -0x00000008, NULL },
@@ -743,7 +743,7 @@ static const struct ScriptCommand s_gs12_g9_s0_lives2_dlg0[] = { /* 0x81e4720 */
     CALL_SCRIPT(JUMP_HAPPY_FUNC),
     ALERT_CUE(5),
     AWAIT_CUE(7),
-    ROTATE(4, 1, DIRECTION_SOUTH),
+    ROTATE_TO(4, DIR_TRANS_SPINRIGHT1, DIRECTION_SOUTH),
     AWAIT_CUE(7),
     FANFARE_PLAY2(470),
     SELECT_ANIMATION(22),
@@ -756,69 +756,69 @@ static const struct ScriptCommand s_gs12_g9_s0_lives2_dlg0[] = { /* 0x81e4720 */
     ALERT_CUE(5),
     AWAIT_CUE(7),
     { 0x62, 0x00,  0x0100,  0x00000000,  0x00000010, NULL },
-    ROTATE(4, 2, DIRECTION_SOUTHEAST),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_SOUTHEAST),
     SELECT_ANIMATION(5),
     WAIT(60),
     SELECT_ANIMATION(2),
     ALERT_CUE(5),
     AWAIT_CUE(7),
     { 0x62, 0x00,  0x0100,  0x00000000, -0x00000008, NULL },
-    ROTATE(4, 10, DIRECTION_SOUTH),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_SOUTH),
     ALERT_CUE(5),
     AWAIT_CUE(7),
-    ROTATE(4, 2, DIRECTION_SOUTHEAST),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_SOUTHEAST),
     AWAIT_CUE(7),
-    ROTATE(4, 1, DIRECTION_SOUTH),
+    ROTATE_TO(4, DIR_TRANS_SPINRIGHT1, DIRECTION_SOUTH),
     SELECT_ANIMATION(7),
     SELECT_EFFECTS(9, 2),
     ALERT_CUE(5),
     AWAIT_CUE(7),
     SELECT_ANIMATION(2),
     AWAIT_CUE(7),
-    ROTATE(4, 2, DIRECTION_SOUTHEAST),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_SOUTHEAST),
     SELECT_ANIMATION(5),
     WAIT(60),
     WALK_RELATIVE(256, 0, 32),
     ALERT_CUE(5),
     FANFARE_PLAY2(468),
-    { 0xe2, 0x00,  0x01d4,  0x00000000,  0x00000000, NULL },
+    WAIT_FANFARE2(468),
     FANFARE_PLAY2(468),
     WAIT(30),
     WALK_RELATIVE(256, -32, 16),
-    ROTATE(4, 2, DIRECTION_SOUTH),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_SOUTH),
     FANFARE_PLAY2(468),
-    { 0xe2, 0x00,  0x01d4,  0x00000000,  0x00000000, NULL },
+    WAIT_FANFARE2(468),
     FANFARE_PLAY2(468),
     ALERT_CUE(5),
     WAIT(30),
     WALK_RELATIVE(256, 64, 16),
-    ROTATE(4, 1, DIRECTION_SOUTH),
+    ROTATE_TO(4, DIR_TRANS_SPINRIGHT1, DIRECTION_SOUTH),
     FANFARE_PLAY2(468),
-    { 0xe2, 0x00,  0x01d4,  0x00000000,  0x00000000, NULL },
+    WAIT_FANFARE2(468),
     FANFARE_PLAY2(468),
     ALERT_CUE(5),
     WAIT(30),
     WALK_RELATIVE(256, -32, 24),
-    ROTATE(4, 2, DIRECTION_SOUTH),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_SOUTH),
     FANFARE_PLAY2(468),
-    { 0xe2, 0x00,  0x01d4,  0x00000000,  0x00000000, NULL },
+    WAIT_FANFARE2(468),
     FANFARE_PLAY2(468),
     WAIT(30),
     ALERT_CUE(5),
     AWAIT_CUE(7),
-    ROTATE(4, 10, DIRECTION_NORTHEAST),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_NORTHEAST),
     ALERT_CUE(5),
     AWAIT_CUE(7),
     WALK_RELATIVE(256, 16, 16),
     FANFARE_PLAY2(468),
-    { 0xe2, 0x00,  0x01d4,  0x00000000,  0x00000000, NULL },
+    WAIT_FANFARE2(468),
     FANFARE_PLAY2(468),
     WAIT(60),
     WALK_RELATIVE(256, -16, 16),
     FANFARE_PLAY2(468),
-    { 0xe2, 0x00,  0x01d4,  0x00000000,  0x00000000, NULL },
+    WAIT_FANFARE2(468),
     FANFARE_PLAY2(468),
-    ROTATE(4, 2, DIRECTION_SOUTH),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_SOUTH),
     WAIT(30),
     ALERT_CUE(5),
     WALK_RELATIVE(256, 0, 16),
@@ -838,7 +838,7 @@ static const struct ScriptCommand s_gs12_g9_s1_lives0_dlg0[] = { /* 0x81e4e40 */
     DEBUGINFO_O(838),
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
-    { 0x8b, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
+    SET_DIR_WAIT(DIRECTION_SOUTH, 1),
     { 0x58, 0x01,  0x0000,  0x000000f0,  0x00000120, NULL },
     { 0x9b, 0x00,  0x0100,  0x00000000,  0x00000000, NULL },
     { 0xdf, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
@@ -871,7 +871,7 @@ static const struct ScriptCommand s_gs12_g10_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs12_g10_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs12_g10_s0_station_sref_script }; /* 0x81e5070 */
+static const struct ScriptRef s_gs12_g10_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs12_g10_s0_station_sref_script }; /* 0x81e5070 */
 
 
 static const struct ScriptCommand s_gs12_g10_s0_lives0_dlg0[] = { /* 0x81e507c */
@@ -880,22 +880,22 @@ static const struct ScriptCommand s_gs12_g10_s0_lives0_dlg0[] = { /* 0x81e507c *
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     { 0xdf, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(60),
-    { 0x33, 0x00, -0x0001,  0x00000000,  0x00000000, _("......") },
-    { 0x33, 0x00, -0x0001,  0x00000000,  0x00000000, _("............") },
-    { 0x33, 0x00, -0x0001,  0x00000000,  0x00000000, _("........................") },
+    MSG_QUIET(-1, _("......")),
+    MSG_QUIET(-1, _("............")),
+    MSG_QUIET(-1, _("........................")),
     TEXTBOX_CLEAR,
     FANFARE_PLAY2(508),
     { 0x97, 0x00,  0x0002,  0x00000001,  0x00000003, NULL },
-    { 0x36, 0x00, -0x0001,  0x00000000,  0x00000000, _("Gggwwooooooooooooaahhhhh!") },
+    MSG_OVERHEARD(_("Gggwwooooooooooooaahhhhh!")),
     CALL_SCRIPT(JUMP_SURPRISE_FUNC),
     WAIT(20),
-    ROTATE(4, 1, DIRECTION_SOUTH),
+    ROTATE_TO(4, DIR_TRANS_SPINRIGHT1, DIRECTION_SOUTH),
     CALL_SCRIPT(LOOK_AROUND_FUNC),
     TEXTBOX_CLEAR,
     WAIT(10),
     PORTRAIT(PLACEMENT_LEFT_, 0x0000, 0x0000000c),
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("Wha...{WAIT_PRESS} What is it?!") },
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("What...{WAIT_PRESS}\nWhat's happening outside?!") },
+    MSG_QUIET(0, _("Wha...{WAIT_PRESS} What is it?!")),
+    MSG_QUIET(0, _("What...{WAIT_PRESS}\nWhat's happening outside?!")),
     TEXTBOX_CLEAR,
     WALK_RELATIVE(512, 0, 32),
     ALERT_CUE(3),
@@ -928,7 +928,7 @@ static const struct ScriptCommand s_gs12_g11_s0_station_sref_script[] = { /* 0x8
     VARIANT_DEFAULT(_(" {NAME_0}, wake up!\nCome on, wake up!")),
     TEXTBOX_CLEAR,
     SELECT_ENTITIES(-1, -1),
-    BGM_SWITCH(1),
+    BGM_SWITCH(MUS_RESCUE_TEAM_BASE),
     { 0x22, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     BGM_FADEOUT(120),
@@ -937,7 +937,7 @@ static const struct ScriptCommand s_gs12_g11_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs12_g11_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs12_g11_s0_station_sref_script }; /* 0x81e551c */
+static const struct ScriptRef s_gs12_g11_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs12_g11_s0_station_sref_script }; /* 0x81e551c */
 
 
 static const struct ScriptCommand s_gs12_g11_s0_lives0_dlg0[] = { /* 0x81e5528 */
@@ -981,7 +981,7 @@ static const struct ScriptCommand s_gs12_g12_s0_station_sref_script[] = { /* 0x8
     WAIT(1),
     { 0x25, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
     SELECT_ENTITIES(-1, -1),
-    BGM_SWITCH(1),
+    BGM_SWITCH(MUS_RESCUE_TEAM_BASE),
     { 0x22, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     { 0x23, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
@@ -989,7 +989,7 @@ static const struct ScriptCommand s_gs12_g12_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs12_g12_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs12_g12_s0_station_sref_script }; /* 0x81e5878 */
+static const struct ScriptRef s_gs12_g12_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs12_g12_s0_station_sref_script }; /* 0x81e5878 */
 
 static const struct ScriptCommand s_gs12_g12_s0_lives0_dlg0[] = { /* 0x81e5884 */
     DEBUGINFO_O(995),
@@ -1125,7 +1125,7 @@ static const struct ScriptCommand s_gs12_g13_s0_station_sref_script[] = { /* 0x8
     WAIT(1),
     { 0x25, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
     SELECT_ENTITIES(-1, -1),
-    BGM_SWITCH(1),
+    BGM_SWITCH(MUS_RESCUE_TEAM_BASE),
     { 0x22, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     { 0x23, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
@@ -1133,7 +1133,7 @@ static const struct ScriptCommand s_gs12_g13_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs12_g13_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs12_g13_s0_station_sref_script }; /* 0x81e6574 */
+static const struct ScriptRef s_gs12_g13_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs12_g13_s0_station_sref_script }; /* 0x81e6574 */
 
 static const struct ScriptCommand s_gs12_g13_s0_lives0_dlg0[] = { /* 0x81e6580 */
     DEBUGINFO_O(1139),
@@ -1182,7 +1182,7 @@ static const struct ScriptCommand s_gs12_g13_s0_lives0_dlg0[] = { /* 0x81e6580 *
     WAIT(15),
     MSG_INSTANT(_("{CENTER_ALIGN}Team {COLOR CYAN}{TEAM_NAME}{RESET}'s\n{CENTER_ALIGN}rescue rank went up!")),
     FANFARE_PLAY(201),
-    { 0xe1, 0x00,  0x00c9,  0x00000000,  0x00000000, NULL },
+    WAIT_FANFARE1(201),
     TEXTBOX_CLEAR2,
     { 0x3b, 0x2e,  0x0000,  0x00000000,  0x00000000, NULL },
     COND_EQUAL(0, /* to label */ 2),
@@ -1225,7 +1225,7 @@ static const struct ScriptCommand s_gs12_g14_s0_station_sref_script[] = { /* 0x8
     WAIT(1),
     { 0x25, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
     SELECT_ENTITIES(-1, -1),
-    BGM_SWITCH(1),
+    BGM_SWITCH(MUS_RESCUE_TEAM_BASE),
     { 0x22, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     { 0x23, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
@@ -1233,7 +1233,7 @@ static const struct ScriptCommand s_gs12_g14_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs12_g14_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs12_g14_s0_station_sref_script }; /* 0x81e6fc0 */
+static const struct ScriptRef s_gs12_g14_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs12_g14_s0_station_sref_script }; /* 0x81e6fc0 */
 
 static const struct ScriptCommand s_gs12_g14_s0_lives0_dlg0[] = { /* 0x81e6fcc */
     DEBUGINFO_O(1239),
@@ -1302,14 +1302,14 @@ static const struct ScriptCommand s_gs12_g15_s0_station_sref_script[] = { /* 0x8
     MSG_ON_BG_AUTO(30, _("{CENTER_ALIGN}The next morning...")),
     { 0x25, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(1),
+    BGM_SWITCH(MUS_RESCUE_TEAM_BASE),
     { 0x22, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     CALL_STATION( 16,  0),
     RET,
 };
 
-static const struct ScriptRef s_gs12_g15_s0_station_sref = { 402, 7, NULL /* EVENT_STATION */, s_gs12_g15_s0_station_sref_script }; /* 0x81e7554 */
+static const struct ScriptRef s_gs12_g15_s0_station_sref = { EVENT_STATION , 7, NULL, s_gs12_g15_s0_station_sref_script }; /* 0x81e7554 */
 
 
 static const struct ScriptCommand s_gs12_g15_s0_lives0_dlg0[] = { /* 0x81e7560 - PART 1 0:22:30-0:22:53 - Player */
@@ -1321,16 +1321,16 @@ static const struct ScriptCommand s_gs12_g15_s0_lives0_dlg0[] = { /* 0x81e7560 -
     CALL_SCRIPT(WAKEUP_FUNC),
     CALL_SCRIPT(LOOK_AROUND_FUNC),
     PORTRAIT(PLACEMENT_LEFT, 0x0000, 0x00000000),
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("...I'm still the same.") },
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("The way I look...\nI'm still {POKEMON_0}.") },
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("But why would I be transformed\ninto a Pokémon?") },
+    MSG_QUIET(0, _("...I'm still the same.")),
+    MSG_QUIET(0, _("The way I look...\nI'm still {POKEMON_0}.")),
+    MSG_QUIET(0, _("But why would I be transformed\ninto a Pokémon?")),
     FANFARE_PLAY2(469),
     CALL_SCRIPT(QUESTION_FUNC),
     PORTRAIT(PLACEMENT_LEFT, 0x0000, 0x00000004),
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("............{WAIT_PRESS}\nHmm... I don't understand this at all...") },
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("........................") },
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("............{WAIT_PRESS}\nI feel groggy and sleepy...") },
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("Not feeling well...{WAIT_PRESS}\nI need more sleep...") },
+    MSG_QUIET(0, _("............{WAIT_PRESS}\nHmm... I don't understand this at all...")),
+    MSG_QUIET(0, _("........................")),
+    MSG_QUIET(0, _("............{WAIT_PRESS}\nI feel groggy and sleepy...")),
+    MSG_QUIET(0, _("Not feeling well...{WAIT_PRESS}\nI need more sleep...")),
     TEXTBOX_CLEAR,
     { 0x9b, 0x00,  0x0100,  0x00000000,  0x00000000, NULL },
     ALERT_CUE(3),
@@ -1344,20 +1344,20 @@ static const struct ScriptCommand s_gs12_g16_s0_station_sref_script[] = { /* 0x8
     RET_DIRECT,
 };
 
-static const struct ScriptRef s_gs12_g16_s0_station_sref = { 403, 8, NULL /* STATION_CONTROL */, s_gs12_g16_s0_station_sref_script }; /* 0x81e77f4 */
+static const struct ScriptRef s_gs12_g16_s0_station_sref = { STATION_CONTROL , 8, NULL, s_gs12_g16_s0_station_sref_script }; /* 0x81e77f4 */
 
 static const struct ScriptCommand s_gs12_g16_s0_evt0_sref_script[] = { /* 0x81e7800 - Likely door event/nearby trigger */
     DEBUGINFO_O(1350),
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("Now, I only want to sleep...") },
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("I'll rest in bed...") },
+    MSG_QUIET(0, _("Now, I only want to sleep...")),
+    MSG_QUIET(0, _("I'll rest in bed...")),
     TEXTBOX_CLEAR,
     ALERT_CUE(3),
     RET,
 };
 
-static const struct ScriptRef s_gs12_g16_s0_evt0_sref = { 357, 2, NULL /* GETOUT_NORMAL */, s_gs12_g16_s0_evt0_sref_script }; /* 0x81e78b8 */
+static const struct ScriptRef s_gs12_g16_s0_evt0_sref = { GETOUT_NORMAL, 2, NULL, s_gs12_g16_s0_evt0_sref_script }; /* 0x81e78b8 */
 
 
 static const struct ScriptCommand s_gs12_g16_s0_evt1_sref_script[] = { /* 0x81e78c4 - PART 1 0:22:53-0:23:04 - Bed, sleep trigger */
@@ -1377,7 +1377,7 @@ static const struct ScriptCommand s_gs12_g16_s0_evt1_sref_script[] = { /* 0x81e7
     HALT,
 };
 
-static const struct ScriptRef s_gs12_g16_s0_evt1_sref = { 57, 7, NULL /* NORMAL_EVENT */, s_gs12_g16_s0_evt1_sref_script }; /* 0x81e79a4 */
+static const struct ScriptRef s_gs12_g16_s0_evt1_sref = { NORMAL_EVENT, 7, NULL, s_gs12_g16_s0_evt1_sref_script }; /* 0x81e79a4 */
 
 static const struct ScriptCommand s_gs12_g16_s1_station_sref_script[] = { /* 0x81e79b0 */
     DEBUGINFO_O(1383),
@@ -1388,14 +1388,14 @@ static const struct ScriptCommand s_gs12_g16_s1_station_sref_script[] = { /* 0x8
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     SELECT_MAP(MAP_TEAM_BASE_INSIDE),
     SELECT_ENTITIES(-1, -1),
-    BGM_SWITCH(1),
+    BGM_SWITCH(MUS_RESCUE_TEAM_BASE),
     { 0x22, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     SELECT_ENTITIES(-1, 0),
     RET,
 };
 
-static const struct ScriptRef s_gs12_g16_s1_station_sref = { 402, 7, NULL /* EVENT_STATION */, s_gs12_g16_s1_station_sref_script }; /* 0x81e7a80 */
+static const struct ScriptRef s_gs12_g16_s1_station_sref = { EVENT_STATION , 7, NULL, s_gs12_g16_s1_station_sref_script }; /* 0x81e7a80 */
 
 static const struct ScriptCommand s_gs12_g16_s1_lives0_dlg0[] = { /* 0x81e7a8c */
     DEBUGINFO_O(1401),
@@ -1417,14 +1417,14 @@ static const struct ScriptCommand s_gs12_g17_s0_station_sref_script[] = { /* 0x8
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     SELECT_MAP(MAP_TEAM_BASE_INSIDE),
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(1),
+    BGM_SWITCH(MUS_RESCUE_TEAM_BASE),
     { 0x22, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     SELECT_EVENTS(0, 0),
     RET,
 };
 
-static const struct ScriptRef s_gs12_g17_s0_station_sref = { 402, 7, NULL /* EVENT_STATION */, s_gs12_g17_s0_station_sref_script }; /* 0x81e7bdc */
+static const struct ScriptRef s_gs12_g17_s0_station_sref = { EVENT_STATION , 7, NULL, s_gs12_g17_s0_station_sref_script }; /* 0x81e7bdc */
 
 static const struct ScriptCommand s_gs12_g17_s0_lives0_dlg0[] = { /* 0x81e7be8 */
     DEBUGINFO_O(1430),
@@ -1435,13 +1435,13 @@ static const struct ScriptCommand s_gs12_g17_s0_lives0_dlg0[] = { /* 0x81e7be8 *
     CALL_SCRIPT(WAKEUP_FUNC),
     CALL_SCRIPT(LOOK_AROUND_FUNC),
     PORTRAIT(PLACEMENT_LEFT, 0x0000, 0x00000000),
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("..................") },
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("Oof...{WAIT_PRESS}\nI'm feeling refreshed!") },
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("I still look like a Pokémon, but...") },
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("..................") },
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("Oh, that's right.{WAIT_PRESS} That Pokémon...{WAIT_PRESS}\nI think it was {NAME_1}?") },
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("We made a promise to form a rescue\nteam together...") },
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("I wonder what {NAME_1} is doing?{WAIT_PRESS}\nI should go out.") },
+    MSG_QUIET(0, _("..................")),
+    MSG_QUIET(0, _("Oof...{WAIT_PRESS}\nI'm feeling refreshed!")),
+    MSG_QUIET(0, _("I still look like a Pokémon, but...")),
+    MSG_QUIET(0, _("..................")),
+    MSG_QUIET(0, _("Oh, that's right.{WAIT_PRESS} That Pokémon...{WAIT_PRESS}\nI think it was {NAME_1}?")),
+    MSG_QUIET(0, _("We made a promise to form a rescue\nteam together...")),
+    MSG_QUIET(0, _("I wonder what {NAME_1} is doing?{WAIT_PRESS}\nI should go out.")),
     TEXTBOX_CLEAR,
     { 0x9b, 0x00,  0x0100,  0x00000000,  0x00000000, NULL },
     ALERT_CUE(3),
@@ -1462,14 +1462,14 @@ static const struct ScriptCommand s_gs12_g18_s0_station_sref_script[] = { /* 0x8
     MSG_ON_BG_AUTO(30, _("{CENTER_ALIGN}The next morning...")),
     { 0x25, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(1),
+    BGM_SWITCH(MUS_RESCUE_TEAM_BASE),
     { 0x22, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     SELECT_EVENTS(0, 0),
     RET,
 };
 
-static const struct ScriptRef s_gs12_g18_s0_station_sref = { 402, 7, NULL /* EVENT_STATION */, s_gs12_g18_s0_station_sref_script }; /* 0x81e7f2c */
+static const struct ScriptRef s_gs12_g18_s0_station_sref = { EVENT_STATION , 7, NULL, s_gs12_g18_s0_station_sref_script }; /* 0x81e7f2c */
 
 static const struct ScriptCommand s_gs12_g18_s0_lives0_dlg0[] = { /* 0x81e7f38 */
     DEBUGINFO_O(1475),
@@ -1491,14 +1491,14 @@ static const struct ScriptCommand s_gs12_g19_s0_station_sref_script[] = { /* 0x8
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     SELECT_MAP(MAP_TEAM_BASE_INSIDE),
     SELECT_ENTITIES(-1, -1),
-    BGM_SWITCH(1),
+    BGM_SWITCH(MUS_RESCUE_TEAM_BASE),
     { 0x22, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     SELECT_EVENTS(0, 0),
     RET,
 };
 
-static const struct ScriptRef s_gs12_g19_s0_station_sref = { 402, 7, NULL /* EVENT_STATION */, s_gs12_g19_s0_station_sref_script }; /* 0x81e8088 */
+static const struct ScriptRef s_gs12_g19_s0_station_sref = { EVENT_STATION , 7, NULL, s_gs12_g19_s0_station_sref_script }; /* 0x81e8088 */
 
 static const struct ScriptCommand s_gs12_g19_s0_lives0_dlg0[] = { /* 0x81e8094 */
     DEBUGINFO_O(1504),
@@ -1508,12 +1508,12 @@ static const struct ScriptCommand s_gs12_g19_s0_lives0_dlg0[] = { /* 0x81e8094 *
     { 0x2d, 0x09,  0x0002,  0x00000052,  0x00000000, NULL },
     { 0xdf, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
     CALL_SCRIPT(WAKEUP_FUNC),
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("I think I dreamt something...") },
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("But I can't quite remember what that\ndream was about...") },
+    MSG_QUIET(0, _("I think I dreamt something...")),
+    MSG_QUIET(0, _("But I can't quite remember what that\ndream was about...")),
     PORTRAIT_REP(0x0000, 0x00000009),
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("Oh, well.\nToday's another day of rescues!") },
+    MSG_QUIET(0, _("Oh, well.\nToday's another day of rescues!")),
     PORTRAIT_REP(0x0000, 0x00000000),
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("I wonder if I have any mail?\nBetter check the Mailbox.") },
+    MSG_QUIET(0, _("I wonder if I have any mail?\nBetter check the Mailbox.")),
     TEXTBOX_CLEAR,
     { 0x9b, 0x00,  0x0100,  0x00000000,  0x00000000, NULL },
     ALERT_CUE(3),
@@ -1542,7 +1542,7 @@ static const struct ScriptCommand s_gs12_g20_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs12_g20_s0_station_sref = { 402, 7, NULL /* EVENT_STATION */, s_gs12_g20_s0_station_sref_script }; /* 0x81e8388 */
+static const struct ScriptRef s_gs12_g20_s0_station_sref = { EVENT_STATION , 7, NULL, s_gs12_g20_s0_station_sref_script }; /* 0x81e8388 */
 
 static const struct ScriptCommand s_gs12_g20_s0_lives0_dlg0[] = { /* 0x81e8394 */
     DEBUGINFO_O(1548),
@@ -1559,12 +1559,12 @@ static const struct ScriptCommand s_gs12_g20_s0_lives0_dlg0[] = { /* 0x81e8394 *
     CALL_SCRIPT(WAKEUP_FUNC),
     WAIT(60),
     FANFARE_PLAY2(468),
-    { 0x92, 0x04,  0x0002,  0x00000004,  0x00000000, NULL },
+    CMD_UNK_92(4, 2, DIR_TRANS_SPINLEFT2),
     WAIT(15),
     FANFARE_PLAY2(468),
-    { 0x92, 0x04,  0x0001,  0x00000005,  0x00000000, NULL },
+    CMD_UNK_92(4, 1, DIR_TRANS_FLIP),
     WAIT(15),
-    { 0x92, 0x04,  0x0002,  0x00000004,  0x00000000, NULL },
+    CMD_UNK_92(4, 2, DIR_TRANS_SPINLEFT2),
     WAIT(15),
     WAIT(30),
     FANFARE_PLAY2(469),
@@ -1574,15 +1574,15 @@ static const struct ScriptCommand s_gs12_g20_s0_lives0_dlg0[] = { /* 0x81e8394 *
     TEXTBOX_CLEAR,
     WAIT(10),
     FANFARE_PLAY2(468),
-    { 0x92, 0x04,  0x0002,  0x00000005,  0x00000000, NULL },
+    CMD_UNK_92(4, 2, DIR_TRANS_FLIP),
     WAIT(15),
     FANFARE_PLAY2(468),
-    { 0x92, 0x04,  0x0002,  0x00000004,  0x00000000, NULL },
+    CMD_UNK_92(4, 2, DIR_TRANS_SPINLEFT2),
     WAIT(15),
     FANFARE_PLAY2(468),
-    { 0x92, 0x04,  0x0001,  0x00000005,  0x00000000, NULL },
+    CMD_UNK_92(4, 1, DIR_TRANS_FLIP),
     WAIT(15),
-    { 0x92, 0x04,  0x0001,  0x00000003,  0x00000000, NULL },
+    CMD_UNK_92(4, 1, DIR_TRANS_SPINRIGHT2),
     WAIT(30),
     MSG_NPC(-1, _(" ...Oh! You can't see us, of course!{WAIT_PRESS}\nHow very rude of us!")),
     TEXTBOX_CLEAR,
@@ -1612,9 +1612,9 @@ static const struct ScriptCommand s_gs12_g20_s0_lives0_dlg0[] = { /* 0x81e8394 *
     FANFARE_PLAY2(470),
     CALL_SCRIPT(SWEAT_FUNC),
     WAIT(10),
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("............") },
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("...That was so sudden, there was no time\nto even say no...") },
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("It's too bad. I'd better go.") },
+    MSG_QUIET(0, _("............")),
+    MSG_QUIET(0, _("...That was so sudden, there was no time\nto even say no...")),
+    MSG_QUIET(0, _("It's too bad. I'd better go.")),
     TEXTBOX_CLEAR,
     { 0x9b, 0x00,  0x0100,  0x00000000,  0x00000000, NULL },
     ALERT_CUE(3),
@@ -1633,7 +1633,7 @@ static const struct ScriptCommand s_gs12_g20_s1_lives0_dlg0[] = { /* 0x81e8ac8 *
     STOP_ANIMATION_ON_CURRENT_FRAME,
     SELECT_ANIMATION(2),
     WAIT(45),
-    ROTATE(10, 2, DIRECTION_NORTH),
+    ROTATE_TO(10, DIR_TRANS_SPINLEFT1, DIRECTION_NORTH),
     ALERT_CUE(5),
     AWAIT_CUE(7),
     CALL_SCRIPT(ANGRY_START_FUNC),
@@ -1663,14 +1663,14 @@ static const struct ScriptCommand s_gs12_g21_s0_station_sref_script[] = { /* 0x8
     MSG_ON_BG_AUTO(30, _("{CENTER_ALIGN}The next morning...")),
     { 0x25, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(1),
+    BGM_SWITCH(MUS_RESCUE_TEAM_BASE),
     { 0x22, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     SELECT_EVENTS(0, 0),
     RET,
 };
 
-static const struct ScriptRef s_gs12_g21_s0_station_sref = { 402, 7, NULL /* EVENT_STATION */, s_gs12_g21_s0_station_sref_script }; /* 0x81e8d48 */
+static const struct ScriptRef s_gs12_g21_s0_station_sref = { EVENT_STATION , 7, NULL, s_gs12_g21_s0_station_sref_script }; /* 0x81e8d48 */
 
 static const struct ScriptCommand s_gs12_g21_s0_lives0_dlg0[] = { /* 0x81e8d54 */
     DEBUGINFO_O(1676),
@@ -1700,14 +1700,14 @@ static const struct ScriptCommand s_gs12_g22_s0_station_sref_script[] = { /* 0x8
     WAIT(1),
     { 0x25, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(1),
+    BGM_SWITCH(MUS_RESCUE_TEAM_BASE),
     { 0x22, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     SELECT_EVENTS(0, 0),
     RET,
 };
 
-static const struct ScriptRef s_gs12_g22_s0_station_sref = { 402, 7, NULL /* EVENT_STATION */, s_gs12_g22_s0_station_sref_script }; /* 0x81e8f24 */
+static const struct ScriptRef s_gs12_g22_s0_station_sref = { EVENT_STATION , 7, NULL, s_gs12_g22_s0_station_sref_script }; /* 0x81e8f24 */
 
 static const struct ScriptCommand s_gs12_g22_s0_lives0_dlg0[] = { /* 0x81e8f30 */
     DEBUGINFO_O(1713),
@@ -1736,14 +1736,14 @@ static const struct ScriptCommand s_gs12_g23_s0_station_sref_script[] = { /* 0x8
     WAIT(1),
     { 0x25, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(1),
+    BGM_SWITCH(MUS_RESCUE_TEAM_BASE),
     { 0x22, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     SELECT_EVENTS(0, 0),
     RET,
 };
 
-static const struct ScriptRef s_gs12_g23_s0_station_sref = { 402, 7, NULL /* EVENT_STATION */, s_gs12_g23_s0_station_sref_script }; /* 0x81e90f0 */
+static const struct ScriptRef s_gs12_g23_s0_station_sref = { EVENT_STATION , 7, NULL, s_gs12_g23_s0_station_sref_script }; /* 0x81e90f0 */
 
 static const struct ScriptCommand s_gs12_g23_s0_lives0_dlg0[] = { /* 0x81e90fc */
     DEBUGINFO_O(1749),
@@ -1772,14 +1772,14 @@ static const struct ScriptCommand s_gs12_g24_s0_station_sref_script[] = { /* 0x8
     WAIT(1),
     { 0x25, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(1),
+    BGM_SWITCH(MUS_RESCUE_TEAM_BASE),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     SELECT_EVENTS(0, 0),
     RET,
 };
 
-static const struct ScriptRef s_gs12_g24_s0_station_sref = { 402, 7, NULL /* EVENT_STATION */, s_gs12_g24_s0_station_sref_script }; /* 0x81e92bc */
+static const struct ScriptRef s_gs12_g24_s0_station_sref = { EVENT_STATION , 7, NULL, s_gs12_g24_s0_station_sref_script }; /* 0x81e92bc */
 
 static const struct ScriptCommand s_gs12_g24_s0_lives0_dlg0[] = { /* 0x81e92c8 */
     DEBUGINFO_O(1785),
@@ -1800,14 +1800,14 @@ static const struct ScriptCommand s_gs12_g25_s0_station_sref_script[] = { /* 0x8
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     SELECT_MAP(MAP_TEAM_BASE_INSIDE),
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(1),
+    BGM_SWITCH(MUS_RESCUE_TEAM_BASE),
     { 0x22, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     SELECT_EVENTS(0, 0),
     RET,
 };
 
-static const struct ScriptRef s_gs12_g25_s0_station_sref = { 402, 7, NULL /* EVENT_STATION */, s_gs12_g25_s0_station_sref_script }; /* 0x81e9408 */
+static const struct ScriptRef s_gs12_g25_s0_station_sref = { EVENT_STATION , 7, NULL, s_gs12_g25_s0_station_sref_script }; /* 0x81e9408 */
 
 static const struct ScriptCommand s_gs12_g25_s0_lives0_dlg0[] = { /* 0x81e9414 */
     DEBUGINFO_O(1813),
@@ -1836,14 +1836,14 @@ static const struct ScriptCommand s_gs12_g26_s0_station_sref_script[] = { /* 0x8
     WAIT(1),
     { 0x25, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(1),
+    BGM_SWITCH(MUS_RESCUE_TEAM_BASE),
     { 0x22, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     SELECT_EVENTS(0, 0),
     RET,
 };
 
-static const struct ScriptRef s_gs12_g26_s0_station_sref = { 402, 7, NULL /* EVENT_STATION */, s_gs12_g26_s0_station_sref_script }; /* 0x81e95d4 */
+static const struct ScriptRef s_gs12_g26_s0_station_sref = { EVENT_STATION , 7, NULL, s_gs12_g26_s0_station_sref_script }; /* 0x81e95d4 */
 
 static const struct ScriptCommand s_gs12_g26_s0_lives0_dlg0[] = { /* 0x81e95e0 */
     DEBUGINFO_O(1849),
@@ -1864,14 +1864,14 @@ static const struct ScriptCommand s_gs12_g27_s0_station_sref_script[] = { /* 0x8
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     SELECT_MAP(MAP_TEAM_BASE_INSIDE),
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(1),
+    BGM_SWITCH(MUS_RESCUE_TEAM_BASE),
     { 0x22, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     SELECT_EVENTS(0, 0),
     RET,
 };
 
-static const struct ScriptRef s_gs12_g27_s0_station_sref = { 402, 7, NULL /* EVENT_STATION */, s_gs12_g27_s0_station_sref_script }; /* 0x81e9720 */
+static const struct ScriptRef s_gs12_g27_s0_station_sref = { EVENT_STATION , 7, NULL, s_gs12_g27_s0_station_sref_script }; /* 0x81e9720 */
 
 static const struct ScriptCommand s_gs12_g27_s0_lives0_dlg0[] = { /* 0x81e972c */
     DEBUGINFO_O(1877),
@@ -1900,14 +1900,14 @@ static const struct ScriptCommand s_gs12_g28_s0_station_sref_script[] = { /* 0x8
     WAIT(1),
     { 0x25, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(1),
+    BGM_SWITCH(MUS_RESCUE_TEAM_BASE),
     { 0x22, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     SELECT_EVENTS(0, 0),
     RET,
 };
 
-static const struct ScriptRef s_gs12_g28_s0_station_sref = { 402, 7, NULL /* EVENT_STATION */, s_gs12_g28_s0_station_sref_script }; /* 0x81e98ec */
+static const struct ScriptRef s_gs12_g28_s0_station_sref = { EVENT_STATION , 7, NULL, s_gs12_g28_s0_station_sref_script }; /* 0x81e98ec */
 
 static const struct ScriptCommand s_gs12_g28_s0_lives0_dlg0[] = { /* 0x81e98f8 */
     DEBUGINFO_O(1913),
@@ -1928,14 +1928,14 @@ static const struct ScriptCommand s_gs12_g29_s0_station_sref_script[] = { /* 0x8
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     SELECT_MAP(MAP_TEAM_BASE_INSIDE),
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(1),
+    BGM_SWITCH(MUS_RESCUE_TEAM_BASE),
     { 0x22, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     SELECT_EVENTS(0, 0),
     RET,
 };
 
-static const struct ScriptRef s_gs12_g29_s0_station_sref = { 402, 7, NULL /* EVENT_STATION */, s_gs12_g29_s0_station_sref_script }; /* 0x81e9a38 */
+static const struct ScriptRef s_gs12_g29_s0_station_sref = { EVENT_STATION , 7, NULL, s_gs12_g29_s0_station_sref_script }; /* 0x81e9a38 */
 
 static const struct ScriptCommand s_gs12_g29_s0_lives0_dlg0[] = { /* 0x81e9a44 */
     DEBUGINFO_O(1941),
@@ -1964,14 +1964,14 @@ static const struct ScriptCommand s_gs12_g30_s0_station_sref_script[] = { /* 0x8
     WAIT(1),
     { 0x25, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(1),
+    BGM_SWITCH(MUS_RESCUE_TEAM_BASE),
     { 0x22, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     SELECT_EVENTS(0, 0),
     RET,
 };
 
-static const struct ScriptRef s_gs12_g30_s0_station_sref = { 402, 7, NULL /* EVENT_STATION */, s_gs12_g30_s0_station_sref_script }; /* 0x81e9c04 */
+static const struct ScriptRef s_gs12_g30_s0_station_sref = { EVENT_STATION , 7, NULL, s_gs12_g30_s0_station_sref_script }; /* 0x81e9c04 */
 
 static const struct ScriptCommand s_gs12_g30_s0_lives0_dlg0[] = { /* 0x81e9c10 */
     DEBUGINFO_O(1977),
@@ -1992,14 +1992,14 @@ static const struct ScriptCommand s_gs12_g31_s0_station_sref_script[] = { /* 0x8
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     SELECT_MAP(MAP_TEAM_BASE_INSIDE),
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(1),
+    BGM_SWITCH(MUS_RESCUE_TEAM_BASE),
     { 0x22, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     SELECT_EVENTS(0, 0),
     RET,
 };
 
-static const struct ScriptRef s_gs12_g31_s0_station_sref = { 402, 7, NULL /* EVENT_STATION */, s_gs12_g31_s0_station_sref_script }; /* 0x81e9d50 */
+static const struct ScriptRef s_gs12_g31_s0_station_sref = { EVENT_STATION , 7, NULL, s_gs12_g31_s0_station_sref_script }; /* 0x81e9d50 */
 
 static const struct ScriptCommand s_gs12_g31_s0_lives0_dlg0[] = { /* 0x81e9d5c */
     DEBUGINFO_O(2005),
@@ -2028,14 +2028,14 @@ static const struct ScriptCommand s_gs12_g32_s0_station_sref_script[] = { /* 0x8
     WAIT(1),
     { 0x25, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(1),
+    BGM_SWITCH(MUS_RESCUE_TEAM_BASE),
     { 0x22, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     SELECT_EVENTS(0, 0),
     RET,
 };
 
-static const struct ScriptRef s_gs12_g32_s0_station_sref = { 402, 7, NULL /* EVENT_STATION */, s_gs12_g32_s0_station_sref_script }; /* 0x81e9f1c */
+static const struct ScriptRef s_gs12_g32_s0_station_sref = { EVENT_STATION , 7, NULL, s_gs12_g32_s0_station_sref_script }; /* 0x81e9f1c */
 
 static const struct ScriptCommand s_gs12_g32_s0_lives0_dlg0[] = { /* 0x81e9f28 */
     DEBUGINFO_O(2041),
@@ -2065,7 +2065,7 @@ static const struct ScriptCommand s_gs12_g33_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs12_g33_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs12_g33_s0_station_sref_script }; /* 0x81ea088 */
+static const struct ScriptRef s_gs12_g33_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs12_g33_s0_station_sref_script }; /* 0x81ea088 */
 
 static const struct ScriptCommand s_gs12_g33_s0_lives0_dlg0[] = { /* 0x81ea094 */
     DEBUGINFO_O(2071),
@@ -2079,14 +2079,14 @@ static const struct ScriptCommand s_gs12_g33_s0_lives0_dlg0[] = { /* 0x81ea094 *
     WAIT(15),
     CALL_SCRIPT(LOOK_AROUND_DOWN_FUNC),
     WAIT(45),
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("............{WAIT_PRESS}\nWhat a strange dream...") },
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("It's the dream I always have, but it was\nclearer than it was before...") },
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("I think I finally learned who that\nPokémon was...") },
+    MSG_QUIET(0, _("............{WAIT_PRESS}\nWhat a strange dream...")),
+    MSG_QUIET(0, _("It's the dream I always have, but it was\nclearer than it was before...")),
+    MSG_QUIET(0, _("I think I finally learned who that\nPokémon was...")),
     FANFARE_PLAY2(464),
     CALL_SCRIPT(NOTICE_FUNC),
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("That's it!{WAIT_PRESS}\n{NAME_2}!") },
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("It was {NAME_2}!") },
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("Yesterday, {NAME_3} said...") },
+    MSG_QUIET(0, _("That's it!{WAIT_PRESS}\n{NAME_2}!")),
+    MSG_QUIET(0, _("It was {NAME_2}!")),
+    MSG_QUIET(0, _("Yesterday, {NAME_3} said...")),
     TEXTBOX_CLEAR,
     ALERT_CUE(3),
     HALT,
@@ -2106,11 +2106,11 @@ static const struct ScriptCommand s_gs12_g34_s0_station_sref_script[] = { /* 0x8
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     SELECT_EVENTS(0, 0),
-    BGM_SWITCH(1),
+    BGM_SWITCH(MUS_RESCUE_TEAM_BASE),
     RET,
 };
 
-static const struct ScriptRef s_gs12_g34_s0_station_sref = { 402, 7, NULL /* EVENT_STATION */, s_gs12_g34_s0_station_sref_script }; /* 0x81ea3b8 */
+static const struct ScriptRef s_gs12_g34_s0_station_sref = { EVENT_STATION , 7, NULL, s_gs12_g34_s0_station_sref_script }; /* 0x81ea3b8 */
 
 static const struct ScriptCommand s_gs12_g34_s0_lives0_dlg0[] = { /* 0x81ea3c4 */
     DEBUGINFO_O(2116),
@@ -2121,11 +2121,11 @@ static const struct ScriptCommand s_gs12_g34_s0_lives0_dlg0[] = { /* 0x81ea3c4 *
     { 0xdf, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(30),
     WAIT(30),
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("..................") },
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("Maybe...{WAIT_PRESS}\nMaybe, I...") },
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("Maybe I was the human who was\n{NAME_2}'s partner...") },
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("Maybe I was the one that abandoned\n{NAME_2} when she was cursed...") },
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("Maybe that's why I turned into\na Pokémon...") },
+    MSG_QUIET(0, _("..................")),
+    MSG_QUIET(0, _("Maybe...{WAIT_PRESS}\nMaybe, I...")),
+    MSG_QUIET(0, _("Maybe I was the human who was\n{NAME_2}'s partner...")),
+    MSG_QUIET(0, _("Maybe I was the one that abandoned\n{NAME_2} when she was cursed...")),
+    MSG_QUIET(0, _("Maybe that's why I turned into\na Pokémon...")),
     TEXTBOX_CLEAR,
     WAIT(60),
     { 0x9b, 0x00,  0x0100,  0x00000000,  0x00000000, NULL },
@@ -2150,14 +2150,14 @@ static const struct ScriptCommand s_gs12_g35_s0_station_sref_script[] = { /* 0x8
     WAIT(1),
     { 0x25, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
     SELECT_ENTITIES(-1, -1),
-    BGM_SWITCH(1),
+    BGM_SWITCH(MUS_RESCUE_TEAM_BASE),
     { 0x22, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     SELECT_EVENTS(0, 0),
     RET,
 };
 
-static const struct ScriptRef s_gs12_g35_s0_station_sref = { 402, 7, NULL /* EVENT_STATION */, s_gs12_g35_s0_station_sref_script }; /* 0x81ea6e4 */
+static const struct ScriptRef s_gs12_g35_s0_station_sref = { EVENT_STATION , 7, NULL, s_gs12_g35_s0_station_sref_script }; /* 0x81ea6e4 */
 
 static const struct ScriptCommand s_gs12_g35_s0_lives0_dlg0[] = { /* 0x81ea6f0 */
     DEBUGINFO_O(2163),
@@ -2187,7 +2187,7 @@ static const struct ScriptCommand s_gs12_g36_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs12_g36_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs12_g36_s0_station_sref_script }; /* 0x81ea850 */
+static const struct ScriptRef s_gs12_g36_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs12_g36_s0_station_sref_script }; /* 0x81ea850 */
 
 static const struct ScriptCommand s_gs12_g36_s0_lives0_dlg0[] = { /* 0x81ea85c */
     DEBUGINFO_O(2193),
@@ -2197,14 +2197,14 @@ static const struct ScriptCommand s_gs12_g36_s0_lives0_dlg0[] = { /* 0x81ea85c *
     CALL_SCRIPT(WAKEUP_FUNC),
     CALL_SCRIPT(LOOK_AROUND_FUNC),
     WAIT(30),
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("............{WAIT_PRESS}\nThere was an earthquake...{WAIT_PRESS}\nWasn't there...?") },
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("I think I had that dream again...") },
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("I think I spoke with Gardevoir...{WAIT_PRESS}\nShe said something important...") },
+    MSG_QUIET(0, _("............{WAIT_PRESS}\nThere was an earthquake...{WAIT_PRESS}\nWasn't there...?")),
+    MSG_QUIET(0, _("I think I had that dream again...")),
+    MSG_QUIET(0, _("I think I spoke with Gardevoir...{WAIT_PRESS}\nShe said something important...")),
     TEXTBOX_CLEAR,
     FANFARE_PLAY2(464),
     CALL_SCRIPT(NOTICE_FUNC),
     WAIT(30),
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("That's it!{WAIT_PRESS}\nShe did say something!") },
+    MSG_QUIET(0, _("That's it!{WAIT_PRESS}\nShe did say something!")),
     TEXTBOX_CLEAR,
     WAIT(30),
     ALERT_CUE(3),
@@ -2225,11 +2225,11 @@ static const struct ScriptCommand s_gs12_g37_s0_station_sref_script[] = { /* 0x8
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     SELECT_EVENTS(0, 0),
-    BGM_SWITCH(1),
+    BGM_SWITCH(MUS_RESCUE_TEAM_BASE),
     RET,
 };
 
-static const struct ScriptRef s_gs12_g37_s0_station_sref = { 402, 7, NULL /* EVENT_STATION */, s_gs12_g37_s0_station_sref_script }; /* 0x81eab3c */
+static const struct ScriptRef s_gs12_g37_s0_station_sref = { EVENT_STATION , 7, NULL, s_gs12_g37_s0_station_sref_script }; /* 0x81eab3c */
 
 static const struct ScriptCommand s_gs12_g37_s0_lives0_dlg0[] = { /* 0x81eab48 */
     DEBUGINFO_O(2235),
@@ -2239,9 +2239,9 @@ static const struct ScriptCommand s_gs12_g37_s0_lives0_dlg0[] = { /* 0x81eab48 *
     { 0xdf, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(30),
     FANFARE_PLAY2(466),
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("{NAME_2} knows!{WAIT_PRESS}\nShe knows why I became a Pokémon.") },
+    MSG_QUIET(0, _("{NAME_2} knows!{WAIT_PRESS}\nShe knows why I became a Pokémon.")),
     PORTRAIT(PLACEMENT_LEFT_, 0x0000, 0x00000004),
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("She also said something about a role...{WAIT_PRESS}\nWhat did she mean by that?") },
+    MSG_QUIET(0, _("She also said something about a role...{WAIT_PRESS}\nWhat did she mean by that?")),
     TEXTBOX_CLEAR,
     { 0x9b, 0x00,  0x0100,  0x00000000,  0x00000000, NULL },
     ALERT_CUE(3),
@@ -2271,7 +2271,7 @@ static const struct ScriptCommand s_gs12_g38_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs12_g38_s0_station_sref = { 402, 7, NULL /* EVENT_STATION */, s_gs12_g38_s0_station_sref_script }; /* 0x81eadd0 */
+static const struct ScriptRef s_gs12_g38_s0_station_sref = { EVENT_STATION , 7, NULL, s_gs12_g38_s0_station_sref_script }; /* 0x81eadd0 */
 
 static const struct ScriptCommand s_gs12_g38_s0_lives0_dlg0[] = { /* 0x81eaddc */
     DEBUGINFO_O(2277),
@@ -2286,7 +2286,7 @@ static const struct ScriptCommand s_gs12_g38_s0_lives0_dlg0[] = { /* 0x81eaddc *
     WAIT(30),
     CALL_SCRIPT(SHOCK_FUNC),
     PORTRAIT(PLACEMENT_LEFT_, 0x0000, 0x0000000c),
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("Oh, wow, another earthquake...") },
+    MSG_QUIET(0, _("Oh, wow, another earthquake...")),
     TEXTBOX_CLEAR,
     WAIT(120),
     FANFARE_FADEOUT2(60, 453),
@@ -2294,10 +2294,10 @@ static const struct ScriptCommand s_gs12_g38_s0_lives0_dlg0[] = { /* 0x81eaddc *
     WAIT(60),
     CALL_SCRIPT(LOOK_AROUND_FUNC),
     PORTRAIT_REP(0x0000, 0x00000000),
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("............{WAIT_PRESS}\nI guess it settled down...") },
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _(".......There've been a lot of earthquakes\nlately...") },
+    MSG_QUIET(0, _("............{WAIT_PRESS}\nI guess it settled down...")),
+    MSG_QUIET(0, _(".......There've been a lot of earthquakes\nlately...")),
     TEXTBOX_CLEAR,
-    BGM_SWITCH(1),
+    BGM_SWITCH(MUS_RESCUE_TEAM_BASE),
     { 0x9b, 0x00,  0x0100,  0x00000000,  0x00000000, NULL },
     ALERT_CUE(3),
     RET,
@@ -2321,7 +2321,7 @@ static const struct ScriptCommand s_gs12_g39_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs12_g39_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs12_g39_s0_station_sref_script }; /* 0x81eb0f4 */
+static const struct ScriptRef s_gs12_g39_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs12_g39_s0_station_sref_script }; /* 0x81eb0f4 */
 
 static const struct ScriptCommand s_gs12_g39_s0_lives0_dlg0[] = { /* 0x81eb100 */
     DEBUGINFO_O(2327),
@@ -2336,15 +2336,15 @@ static const struct ScriptCommand s_gs12_g39_s0_lives0_dlg0[] = { /* 0x81eb100 *
     WAIT(30),
     CALL_SCRIPT(SHOCK_FUNC),
     PORTRAIT(PLACEMENT_LEFT_, 0x0000, 0x0000000c),
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("Oh? Another earthquake...") },
+    MSG_QUIET(0, _("Oh? Another earthquake...")),
     TEXTBOX_CLEAR,
     WAIT(120),
     FANFARE_FADEOUT2(60, 453),
     { 0x97, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(60),
     PORTRAIT_REP(0x0000, 0x00000000),
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("There've been so many quakes lately...") },
-    { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("I wonder when they'll settle down...") },
+    MSG_QUIET(0, _("There've been so many quakes lately...")),
+    MSG_QUIET(0, _("I wonder when they'll settle down...")),
     TEXTBOX_CLEAR,
     SELECT_ENTITIES(-1, 1),
     AWAIT_CUE(5),
@@ -2398,14 +2398,14 @@ static const struct ScriptCommand s_gs12_g40_s0_station_sref_script[] = { /* 0x8
     WAIT(1),
     { 0x25, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
     SELECT_ENTITIES(-1, -1),
-    BGM_SWITCH(1),
+    BGM_SWITCH(MUS_RESCUE_TEAM_BASE),
     { 0x22, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     SELECT_EVENTS(0, 0),
     RET,
 };
 
-static const struct ScriptRef s_gs12_g40_s0_station_sref = { 402, 7, NULL /* EVENT_STATION */, s_gs12_g40_s0_station_sref_script }; /* 0x81eb668 */
+static const struct ScriptRef s_gs12_g40_s0_station_sref = { EVENT_STATION , 7, NULL, s_gs12_g40_s0_station_sref_script }; /* 0x81eb668 */
 
 static const struct ScriptCommand s_gs12_g40_s0_lives0_dlg0[] = { /* 0x81eb674 */
     DEBUGINFO_O(2411),
@@ -2433,14 +2433,14 @@ static const struct ScriptCommand s_gs12_g41_s0_station_sref_script[] = { /* 0x8
     WAIT(1),
     { 0x25, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(1),
+    BGM_SWITCH(MUS_RESCUE_TEAM_BASE),
     { 0x22, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     SELECT_EVENTS(0, 0),
     RET,
 };
 
-static const struct ScriptRef s_gs12_g41_s0_station_sref = { 402, 7, NULL /* EVENT_STATION */, s_gs12_g41_s0_station_sref_script }; /* 0x81eb824 */
+static const struct ScriptRef s_gs12_g41_s0_station_sref = { EVENT_STATION , 7, NULL, s_gs12_g41_s0_station_sref_script }; /* 0x81eb824 */
 
 static const struct ScriptCommand s_gs12_g41_s0_lives0_dlg0[] = { /* 0x81eb830 */
     DEBUGINFO_O(2446),
@@ -2466,7 +2466,7 @@ static const struct ScriptCommand s_gs12_g42_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs12_g42_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs12_g42_s0_station_sref_script }; /* 0x81eb950 */
+static const struct ScriptRef s_gs12_g42_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs12_g42_s0_station_sref_script }; /* 0x81eb950 */
 
 static const struct ScriptCommand s_gs12_g42_s0_lives0_dlg0[] = { /* 0x81eb95c */
     DEBUGINFO_O(2472),
@@ -2513,17 +2513,17 @@ static const struct ScriptCommand s_gs12_g42_s0_lives1_dlg0[] = { /* 0x81ebd04 *
     { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(6),
     CALL_SCRIPT(NOTICE_FUNC),
-    ROTATE(6, 10, DIRECTION_NORTHWEST),
+    ROTATE_TO(6, DIR_TRANS_10, DIRECTION_NORTHWEST),
     WAIT(15),
-    ROTATE(6, 10, DIRECTION_NORTHEAST),
+    ROTATE_TO(6, DIR_TRANS_10, DIRECTION_NORTHEAST),
     WAIT(15),
-    ROTATE(6, 10, DIRECTION_NORTHWEST),
+    ROTATE_TO(6, DIR_TRANS_10, DIRECTION_NORTHWEST),
     ALERT_CUE(5),
     AWAIT_CUE(6),
-    ROTATE(4, 10, DIRECTION_NORTHEAST),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_NORTHEAST),
     ALERT_CUE(5),
     AWAIT_CUE(6),
-    ROTATE(12, 10, DIRECTION_NORTH),
+    ROTATE_TO(12, DIR_TRANS_10, DIRECTION_NORTH),
     { 0x62, 0x00,  0x0080,  0x00000000,  0x0000000a, NULL },
     WAIT(30),
     { 0x89, 0x40,  0x0200,  0x00000000,  0x00000000, NULL },
@@ -2559,14 +2559,14 @@ static const struct ScriptCommand s_gs12_g43_s0_station_sref_script[] = { /* 0x8
     WAIT(1),
     { 0x25, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
     SELECT_ENTITIES(-1, -1),
-    BGM_SWITCH(1),
+    BGM_SWITCH(MUS_RESCUE_TEAM_BASE),
     { 0x22, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     SELECT_EVENTS(0, 0),
     RET,
 };
 
-static const struct ScriptRef s_gs12_g43_s0_station_sref = { 402, 7, NULL /* EVENT_STATION */, s_gs12_g43_s0_station_sref_script }; /* 0x81ec024 */
+static const struct ScriptRef s_gs12_g43_s0_station_sref = { EVENT_STATION , 7, NULL, s_gs12_g43_s0_station_sref_script }; /* 0x81ec024 */
 
 static const struct ScriptCommand s_gs12_g43_s0_lives0_dlg0[] = { /* 0x81ec030 */
     DEBUGINFO_O(2572),
@@ -2587,14 +2587,14 @@ static const struct ScriptCommand s_gs12_g44_s0_station_sref_script[] = { /* 0x8
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     SELECT_MAP(MAP_TEAM_BASE_INSIDE),
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(1),
+    BGM_SWITCH(MUS_RESCUE_TEAM_BASE),
     { 0x22, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     SELECT_EVENTS(0, 0),
     RET,
 };
 
-static const struct ScriptRef s_gs12_g44_s0_station_sref = { 402, 7, NULL /* EVENT_STATION */, s_gs12_g44_s0_station_sref_script }; /* 0x81ec170 */
+static const struct ScriptRef s_gs12_g44_s0_station_sref = { EVENT_STATION , 7, NULL, s_gs12_g44_s0_station_sref_script }; /* 0x81ec170 */
 
 static const struct ScriptCommand s_gs12_g44_s0_lives0_dlg0[] = { /* 0x81ec17c */
     DEBUGINFO_O(2600),
@@ -2635,7 +2635,7 @@ static const struct ScriptCommand s_gs12_g45_s0_station_sref_script[] = { /* 0x8
     { 0x25, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(60),
     SELECT_ENTITIES(-1, -1),
-    BGM_SWITCH(1),
+    BGM_SWITCH(MUS_RESCUE_TEAM_BASE),
     { 0x22, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
     { 0x3b, 0x39,  0x0004,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
@@ -2644,7 +2644,7 @@ static const struct ScriptCommand s_gs12_g45_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs12_g45_s0_station_sref = { 402, 7, NULL /* EVENT_STATION */, s_gs12_g45_s0_station_sref_script }; /* 0x81ec590 */
+static const struct ScriptRef s_gs12_g45_s0_station_sref = { EVENT_STATION , 7, NULL, s_gs12_g45_s0_station_sref_script }; /* 0x81ec590 */
 
 static const struct ScriptCommand s_gs12_g45_s0_lives0_dlg0[] = { /* 0x81ec59c */
     DEBUGINFO_O(2650),
@@ -2692,7 +2692,7 @@ static const struct ScriptCommand s_gs12_g46_s0_station_sref_script[] = { /* 0x8
     RET_DIRECT,
 };
 
-static const struct ScriptRef s_gs12_g46_s0_station_sref = { 403, 8, NULL /* STATION_CONTROL */, s_gs12_g46_s0_station_sref_script }; /* 0x81eca10 */
+static const struct ScriptRef s_gs12_g46_s0_station_sref = { STATION_CONTROL , 8, NULL, s_gs12_g46_s0_station_sref_script }; /* 0x81eca10 */
 
 static const struct ScriptCommand s_gs12_g46_s0_evt0_sref_script[] = { /* 0x81eca1c */
     DEBUGINFO_O(2698),
@@ -2700,7 +2700,7 @@ static const struct ScriptCommand s_gs12_g46_s0_evt0_sref_script[] = { /* 0x81ec
     HALT,
 };
 
-static const struct ScriptRef s_gs12_g46_s0_evt0_sref = { 357, 2, NULL /* GETOUT_NORMAL */, s_gs12_g46_s0_evt0_sref_script }; /* 0x81eca4c */
+static const struct ScriptRef s_gs12_g46_s0_evt0_sref = { GETOUT_NORMAL, 2, NULL, s_gs12_g46_s0_evt0_sref_script }; /* 0x81eca4c */
 
 static const struct ScriptCommand s_gs12_g46_s0_evt1_sref_script[] = { /* 0x81eca58 */
     DEBUGINFO_O(2706),
@@ -2716,7 +2716,7 @@ static const struct ScriptCommand s_gs12_g46_s0_evt1_sref_script[] = { /* 0x81ec
     JUMP_SCRIPT(END_TALK),
 };
 
-static const struct ScriptRef s_gs12_g46_s0_evt1_sref = { 57, 7, NULL /* NORMAL_EVENT */, s_gs12_g46_s0_evt1_sref_script }; /* 0x81ecb2c */
+static const struct ScriptRef s_gs12_g46_s0_evt1_sref = { NORMAL_EVENT, 7, NULL, s_gs12_g46_s0_evt1_sref_script }; /* 0x81ecb2c */
 
 static const struct ScriptCommand s_gs12_g46_s1_station_sref_script[] = { /* 0x81ecb38 */
     DEBUGINFO_O(2722),
@@ -2727,13 +2727,13 @@ static const struct ScriptCommand s_gs12_g46_s1_station_sref_script[] = { /* 0x8
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     SELECT_MAP(MAP_TEAM_BASE_INSIDE),
     SELECT_ENTITIES(0, 2),
-    BGM_SWITCH(1),
+    BGM_SWITCH(MUS_RESCUE_TEAM_BASE),
     { 0x22, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
     SELECT_ENTITIES(-1, 0),
     RET,
 };
 
-static const struct ScriptRef s_gs12_g46_s1_station_sref = { 402, 7, NULL /* EVENT_STATION */, s_gs12_g46_s1_station_sref_script }; /* 0x81ecbf8 */
+static const struct ScriptRef s_gs12_g46_s1_station_sref = { EVENT_STATION , 7, NULL, s_gs12_g46_s1_station_sref_script }; /* 0x81ecbf8 */
 
 static const struct ScriptCommand s_gs12_g46_s1_lives0_dlg0[] = { /* 0x81ecc04 */
     DEBUGINFO_O(2739),
@@ -3628,4 +3628,4 @@ static const struct GroundLink s_gs12_links[] = { /* 0x81ee1f4 */
     /* link   3 */ { { /*x*/  30, /*y*/  35, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
 };
 
-/*extern*/ const struct GroundScriptHeader gGroundScript_gs12 = { LPARRAY(s_gs12_groups), s_gs12_links }; /* 0x81ee214 */
+const GroundScriptHeader gGroundScript_gs12 = { LPARRAY(s_gs12_groups), s_gs12_links }; /* 0x81ee214 */

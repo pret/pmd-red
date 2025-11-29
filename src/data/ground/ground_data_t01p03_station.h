@@ -151,11 +151,11 @@ static const struct ScriptCommand s_gs4_g0_s0_station_sref_script[] = { /* 0x818
     SELECT_LIVES(0, 2),
     JUMP_LABEL(31),
   LABEL(31), /* = 0x1f */
-    BGM_SWITCH(7),
+    BGM_SWITCH(MUS_POKEMON_SQUARE),
     JUMP_SCRIPT(COMMON_ENTER),
 };
 
-static const struct ScriptRef s_gs4_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs4_g0_s0_station_sref_script }; /* 0x818a174 */
+static const struct ScriptRef s_gs4_g0_s0_station_sref = { ENTER_CONTROL , 1, NULL, s_gs4_g0_s0_station_sref_script }; /* 0x818a174 */
 
 
 static const struct ScriptCommand s_gs4_g0_s0_evt0_sref_script[] = { /* 0x818a180 */
@@ -164,7 +164,7 @@ static const struct ScriptCommand s_gs4_g0_s0_evt0_sref_script[] = { /* 0x818a18
     HALT,
 };
 
-static const struct ScriptRef s_gs4_g0_s0_evt0_sref = { 357, 2, NULL /* GETOUT_NORMAL */, s_gs4_g0_s0_evt0_sref_script }; /* 0x818a1b0 */
+static const struct ScriptRef s_gs4_g0_s0_evt0_sref = { GETOUT_NORMAL, 2, NULL, s_gs4_g0_s0_evt0_sref_script }; /* 0x818a1b0 */
 
 static const struct ScriptCommand s_gs4_g0_s0_evt1_sref_script[] = { /* 0x818a1bc */
     DEBUGINFO_O(170),
@@ -172,14 +172,14 @@ static const struct ScriptCommand s_gs4_g0_s0_evt1_sref_script[] = { /* 0x818a1b
     HALT,
 };
 
-static const struct ScriptRef s_gs4_g0_s0_evt1_sref = { 357, 2, NULL /* GETOUT_NORMAL */, s_gs4_g0_s0_evt1_sref_script }; /* 0x818a1ec */
+static const struct ScriptRef s_gs4_g0_s0_evt1_sref = { GETOUT_NORMAL, 2, NULL, s_gs4_g0_s0_evt1_sref_script }; /* 0x818a1ec */
 
 static const struct ScriptCommand s_gs4_g0_s0_obj0_dlg2[] = { /* 0x818a1f8 */
     DEBUGINFO_O(178),
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0xaf, 0x01,  0x000d,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_AF(RESCUE_DUNGEON_DUMMY, TRUE),
     SPECIAL_TEXT(SPECIAL_TEXT_BULLETIN_BOARD_JOBS, 0, 0),
     COND_EQUAL(1, /* to label */ 0),
     COND_EQUAL(2, /* to label */ 1),
@@ -212,10 +212,10 @@ static const struct ScriptCommand s_gs4_g0_s0_lives0_dlg0[] = { /* 0x818a358 */
     WAIT(15),
     { 0x68, 0x00,  0x0100,  0x00000018,  0x00000000, NULL },
     WAIT(15),
-    ROTATE(30, 10, DIRECTION_WEST),
+    ROTATE_TO(30, DIR_TRANS_10, DIRECTION_WEST),
     WALK_DIRECT(300, 1),
     WALK_DIRECT(300, 0),
-    ROTATE(30, 10, DIRECTION_SOUTH),
+    ROTATE_TO(30, DIR_TRANS_10, DIRECTION_SOUTH),
     WAIT(15),
     { 0x68, 0x00,  0x0100,  0x00000008,  0x00000000, NULL },
     WAIT(15),
@@ -239,7 +239,7 @@ static const struct ScriptCommand s_gs4_g0_s0_lives1_dlg0[] = { /* 0x818a4f8 */
   LABEL(1), /* = 0x01 */
     WAIT(90),
     WALK_DIRECT(300, 2),
-    ROTATE(30, 10, DIRECTION_SOUTH),
+    ROTATE_TO(30, DIR_TRANS_10, DIRECTION_SOUTH),
     WAIT(15),
     { 0x68, 0x00,  0x0100,  0x00000008,  0x00000000, NULL },
     WAIT(15),
@@ -249,7 +249,7 @@ static const struct ScriptCommand s_gs4_g0_s0_lives1_dlg0[] = { /* 0x818a4f8 */
     WAIT(15),
     { 0x68, 0x00,  0x0100,  0x00000018,  0x00000000, NULL },
     WAIT(15),
-    ROTATE(30, 10, DIRECTION_EAST),
+    ROTATE_TO(30, DIR_TRANS_10, DIRECTION_EAST),
     WALK_DIRECT(300, 3),
     JUMP_LABEL(1),
     { 0x52, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
@@ -326,7 +326,7 @@ static const struct ScriptCommand s_gs4_g1_s0_station_sref_script[] = { /* 0x818
     RET,
 };
 
-static const struct ScriptRef s_gs4_g1_s0_station_sref = { 403, 8, NULL /* STATION_CONTROL */, s_gs4_g1_s0_station_sref_script }; /* 0x818a938 */
+static const struct ScriptRef s_gs4_g1_s0_station_sref = { STATION_CONTROL , 8, NULL, s_gs4_g1_s0_station_sref_script }; /* 0x818a938 */
 
 static const struct ScriptCommand s_gs4_g1_s0_lives0_dlg2[] = { /* 0x818a944 */
     DEBUGINFO_O(332),
@@ -434,12 +434,12 @@ static const struct ScriptCommand s_gs4_g1_s0_lives4_dlg3[] = { /* 0x818b4d4 */
     COND_EQUAL(1, /* to label */ 1),
     COND_EQUAL(2, /* to label */ 2),
   LABEL(1), /* = 0x01 */
-    { 0x8d, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_8D(1, DIR_TRANS_NONE),
     AWAIT_CUE(2),
     WAIT(12),
     RET,
   LABEL(2), /* = 0x02 */
-    { 0x8d, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_8D(1, DIR_TRANS_NONE),
     AWAIT_CUE(6),
     FANFARE_PLAY2(465),
     CALL_SCRIPT(JUMP_SURPRISE_FUNC),
@@ -458,7 +458,7 @@ static const struct ScriptCommand s_gs4_g1_s1_station_sref_script[] = { /* 0x818
     RET,
 };
 
-static const struct ScriptRef s_gs4_g1_s1_station_sref = { 401, 7, NULL /* EVENT_WAKEUP */, s_gs4_g1_s1_station_sref_script }; /* 0x818b674 */
+static const struct ScriptRef s_gs4_g1_s1_station_sref = { EVENT_WAKEUP, 7, NULL, s_gs4_g1_s1_station_sref_script }; /* 0x818b674 */
 
 static const struct ScriptCommand s_gs4_g1_s1_eff0_script[] = { /* 0x818b680 */
     DEBUGINFO_O(464),
@@ -477,7 +477,7 @@ static const struct ScriptCommand s_gs4_g1_s1_lives0_dlg0[] = { /* 0x818b710 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" (Papa still hasn't come\nhome...)") },
+    MSG_NPC(3, _(" (Papa still hasn't come\nhome...)")),
     MSG_NPC(-1, _(" Our son!{WAIT_PRESS}\nSorry to make you wait!")),
     TEXTBOX_CLEAR,
     WAIT(10),
@@ -505,35 +505,35 @@ static const struct ScriptCommand s_gs4_g1_s1_lives0_dlg0[] = { /* 0x818b710 */
     AWAIT_CUE(5),
     MSG_NPC(2, _(" Ha!")),
     ALERT_CUE(8),
-    ROTATE(4, 10, DIRECTION_SOUTHWEST),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_SOUTHWEST),
     AWAIT_CUE(5),
     TEXTBOX_CLEAR,
     ALERT_CUE(7),
     AWAIT_CUE(5),
     MSG_NPC(2, _(" Ha!")),
     ALERT_CUE(8),
-    ROTATE(4, 10, DIRECTION_WEST),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_WEST),
     AWAIT_CUE(5),
     TEXTBOX_CLEAR,
     ALERT_CUE(7),
     AWAIT_CUE(5),
     MSG_NPC(2, _(" Ha!")),
     ALERT_CUE(8),
-    ROTATE(4, 10, DIRECTION_SOUTH),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_SOUTH),
     AWAIT_CUE(5),
     TEXTBOX_CLEAR,
     ALERT_CUE(7),
     AWAIT_CUE(5),
     MSG_NPC(2, _(" Ha!")),
     ALERT_CUE(8),
-    { 0x93, 0x04,  0x000a,  0x00000042,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 66),
     AWAIT_CUE(5),
     TEXTBOX_CLEAR,
     ALERT_CUE(7),
     AWAIT_CUE(5),
     MSG_NPC(2, _(" Ha!")),
     ALERT_CUE(8),
-    { 0x93, 0x04,  0x000a,  0x00000042,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 66),
     AWAIT_CUE(5),
     TEXTBOX_CLEAR,
     WAIT(30),
@@ -586,7 +586,7 @@ static const struct ScriptCommand s_gs4_g1_s1_lives1_dlg0[] = { /* 0x818bfec */
     DEBUGINFO_O(586),
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
-    { 0x8e, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_8E(1, DIR_TRANS_NONE, 0),
     AWAIT_CUE(6),
     { 0x52, 0x00,  0x0000,  0x00001000,  0x00000000, NULL },
     RET,
@@ -602,7 +602,7 @@ static const struct ScriptCommand s_gs4_g1_s1_lives2_dlg0[] = { /* 0x818c05c */
     { 0x2d, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(7),
     WARP_WAYPOINT(0, 5),
-    { 0x8b, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    SET_DIR_WAIT(DIRECTION_SOUTH, 0),
     { 0x53, 0x00,  0x0000,  0x00400000,  0x00000000, NULL },
     FANFARE_PLAY2(454),
     SELECT_ANIMATION(22),
@@ -614,7 +614,7 @@ static const struct ScriptCommand s_gs4_g1_s1_lives2_dlg0[] = { /* 0x818c05c */
     SELECT_ANIMATION(23),
     STOP_ANIMATION_ON_CURRENT_FRAME,
     WARP_WAYPOINT(0, 6),
-    { 0x8b, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    SET_DIR_WAIT(DIRECTION_NORTH, 0),
     FANFARE_PLAY2(454),
     SELECT_ANIMATION(22),
     STOP_ANIMATION_ON_CURRENT_FRAME,
@@ -625,7 +625,7 @@ static const struct ScriptCommand s_gs4_g1_s1_lives2_dlg0[] = { /* 0x818c05c */
     SELECT_ANIMATION(23),
     STOP_ANIMATION_ON_CURRENT_FRAME,
     WARP_WAYPOINT(0, 7),
-    { 0x8b, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    SET_DIR_WAIT(DIRECTION_WEST, 0),
     FANFARE_PLAY2(454),
     SELECT_ANIMATION(22),
     STOP_ANIMATION_ON_CURRENT_FRAME,
@@ -636,7 +636,7 @@ static const struct ScriptCommand s_gs4_g1_s1_lives2_dlg0[] = { /* 0x818c05c */
     SELECT_ANIMATION(23),
     STOP_ANIMATION_ON_CURRENT_FRAME,
     WARP_WAYPOINT(0, 8),
-    { 0x8b, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SET_DIR_WAIT(DIRECTION_EAST, 0),
     FANFARE_PLAY2(454),
     SELECT_ANIMATION(22),
     STOP_ANIMATION_ON_CURRENT_FRAME,
@@ -647,7 +647,7 @@ static const struct ScriptCommand s_gs4_g1_s1_lives2_dlg0[] = { /* 0x818c05c */
     SELECT_ANIMATION(23),
     STOP_ANIMATION_ON_CURRENT_FRAME,
     WARP_WAYPOINT(0, 9),
-    { 0x8b, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    SET_DIR_WAIT(DIRECTION_NORTH, 0),
     FANFARE_PLAY2(454),
     SELECT_ANIMATION(22),
     STOP_ANIMATION_ON_CURRENT_FRAME,
@@ -655,10 +655,10 @@ static const struct ScriptCommand s_gs4_g1_s1_lives2_dlg0[] = { /* 0x818c05c */
     SELECT_ANIMATION(2),
     ALERT_CUE(5),
     AWAIT_CUE(7),
-    ROTATE(8, 1, DIRECTION_SOUTH),
+    ROTATE_TO(8, DIR_TRANS_SPINRIGHT1, DIRECTION_SOUTH),
     ALERT_CUE(5),
     AWAIT_CUE(7),
-    ROTATE(4, 10, DIRECTION_EAST),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_EAST),
     { 0x52, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
     ALERT_CUE(5),
     AWAIT_CUE(7),
@@ -673,34 +673,34 @@ static const struct ScriptCommand s_gs4_g1_s1_lives3_dlg0[] = { /* 0x818c4dc */
     { 0x2d, 0x07,  0x0003,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(8),
     CALL_SCRIPT(NOTICE_FUNC),
-    { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_E5(5, 0),
     AWAIT_CUE(8),
-    ROTATE(4, 10, DIRECTION_WEST),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_WEST),
     WAIT(15),
     CALL_SCRIPT(LOOK_AROUND_FUNC),
-    { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_E5(5, 0),
     AWAIT_CUE(8),
-    ROTATE(4, 10, DIRECTION_SOUTHWEST),
-    { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_SOUTHWEST),
+    CMD_UNK_E5(5, 0),
     AWAIT_CUE(8),
-    ROTATE(4, 10, DIRECTION_WEST),
-    { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_WEST),
+    CMD_UNK_E5(5, 0),
     AWAIT_CUE(8),
-    ROTATE(4, 10, DIRECTION_SOUTH),
-    { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_SOUTH),
+    CMD_UNK_E5(5, 0),
     AWAIT_CUE(8),
-    ROTATE(4, 10, DIRECTION_WEST),
-    { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_WEST),
+    CMD_UNK_E5(5, 0),
     AWAIT_CUE(8),
-    ROTATE(4, 10, DIRECTION_NORTH),
-    { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_NORTH),
+    CMD_UNK_E5(5, 0),
     AWAIT_CUE(8),
     CALL_SCRIPT(SMILE_START_FUNC),
     WAIT(60),
     CALL_SCRIPT(SMILE_END_FUNC),
-    { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_E5(5, 0),
     AWAIT_CUE(8),
-    ROTATE(4, 10, DIRECTION_EAST),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_EAST),
     { 0x53, 0x00,  0x0000,  0x00000400,  0x00000000, NULL },
     SELECT_ANIMATION(4),
     ALERT_CUE(5),
@@ -713,7 +713,7 @@ static const struct ScriptCommand s_gs4_g1_s2_station_sref_script[] = { /* 0x818
     RET_DIRECT,
 };
 
-static const struct ScriptRef s_gs4_g1_s2_station_sref = { 403, 8, NULL /* STATION_CONTROL */, s_gs4_g1_s2_station_sref_script }; /* 0x818c75c */
+static const struct ScriptRef s_gs4_g1_s2_station_sref = { STATION_CONTROL , 8, NULL, s_gs4_g1_s2_station_sref_script }; /* 0x818c75c */
 
 static const struct ScriptCommand s_gs4_g1_s2_lives0_dlg2[] = { /* 0x818c768 */
     DEBUGINFO_O(719),
@@ -752,20 +752,20 @@ static const struct ScriptCommand s_gs4_g2_s0_station_sref_script[] = { /* 0x818
     RET_DIRECT,
 };
 
-static const struct ScriptRef s_gs4_g2_s0_station_sref = { 403, 8, NULL /* STATION_CONTROL */, s_gs4_g2_s0_station_sref_script }; /* 0x818c978 */
+static const struct ScriptRef s_gs4_g2_s0_station_sref = { STATION_CONTROL , 8, NULL, s_gs4_g2_s0_station_sref_script }; /* 0x818c978 */
 
 static const struct ScriptCommand s_gs4_g3_s0_station_sref_script[] = { /* 0x818c984 */
     DEBUGINFO_O(758),
     SELECT_MAP(4),
     SELECT_ENTITIES(-1, -1),
-    BGM_SWITCH(7),
+    BGM_SWITCH(MUS_POKEMON_SQUARE),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     { 0x23, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     RET,
 };
 
-static const struct ScriptRef s_gs4_g3_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs4_g3_s0_station_sref_script }; /* 0x818ca04 */
+static const struct ScriptRef s_gs4_g3_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs4_g3_s0_station_sref_script }; /* 0x818ca04 */
 
 static const struct ScriptCommand s_gs4_g3_s0_eff0_script[] = { /* 0x818ca10 */
     DEBUGINFO_O(771),
@@ -791,12 +791,12 @@ static const struct ScriptCommand s_gs4_g3_s0_lives0_dlg0[] = { /* 0x818ca80 */
     MSG_NPC(1, _(" Did you two put up that job?")),
     TEXTBOX_CLEAR,
     WAIT(10),
-    ROTATE(4, 1, DIRECTION_NORTHEAST),
+    ROTATE_TO(4, DIR_TRANS_SPINRIGHT1, DIRECTION_NORTHEAST),
     ALERT_CUE(7),
     MSG_NPC(2, _(" Yup, yup!")),
     TEXTBOX_CLEAR,
     WAIT(10),
-    ROTATE(4, 2, DIRECTION_NORTH),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_NORTH),
     ALERT_CUE(6),
     ALERT_CUE(8),
     AWAIT_CUE(5),
@@ -805,12 +805,12 @@ static const struct ScriptCommand s_gs4_g3_s0_lives0_dlg0[] = { /* 0x818ca80 */
     TEXTBOX_CLEAR,
     ALERT_CUE(8),
     WAIT(10),
-    ROTATE(4, 1, DIRECTION_NORTHEAST),
+    ROTATE_TO(4, DIR_TRANS_SPINRIGHT1, DIRECTION_NORTHEAST),
     ALERT_CUE(6),
     MSG_NPC(2, _(" A bad Mankey gang is going\nwild in our forest.\nEveryone is upset.")),
     TEXTBOX_CLEAR,
     WAIT(10),
-    ROTATE(4, 2, DIRECTION_NORTH),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_NORTH),
     ALERT_CUE(6),
     ALERT_CUE(8),
     AWAIT_CUE(5),
@@ -818,13 +818,13 @@ static const struct ScriptCommand s_gs4_g3_s0_lives0_dlg0[] = { /* 0x818ca80 */
     TEXTBOX_CLEAR,
     ALERT_CUE(8),
     WAIT(10),
-    ROTATE(4, 1, DIRECTION_NORTHEAST),
+    ROTATE_TO(4, DIR_TRANS_SPINRIGHT1, DIRECTION_NORTHEAST),
     ALERT_CUE(7),
     MSG_NPC(2, _(" We don't know why they\nrampage around...")),
     MSG_NPC(2, _(" But they are always angry\nand attack anyone they see!")),
     TEXTBOX_CLEAR,
     WAIT(10),
-    ROTATE(4, 2, DIRECTION_NORTH),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_NORTH),
     ALERT_CUE(6),
     ALERT_CUE(8),
     AWAIT_CUE(5),
@@ -836,7 +836,7 @@ static const struct ScriptCommand s_gs4_g3_s0_lives0_dlg0[] = { /* 0x818ca80 */
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
     VARIANT(/* == */  1, _(" Hmm... That is a problem.")),
     VARIANT_DEFAULT(_(" Oh, no... That is a problem.")),
-    ROTATE(4, 1, DIRECTION_EAST),
+    ROTATE_TO(4, DIR_TRANS_SPINRIGHT1, DIRECTION_EAST),
     ALERT_CUE(6),
     PORTRAIT_REP(0x0001, 0x00000000),
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
@@ -848,7 +848,7 @@ static const struct ScriptCommand s_gs4_g3_s0_lives0_dlg0[] = { /* 0x818ca80 */
     TEXTBOX_CLEAR,
     WAIT(20),
     ALERT_CUE(6),
-    ROTATE(4, 2, DIRECTION_NORTH),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_NORTH),
     ALERT_CUE(8),
     AWAIT_CUE(5),
     MSG_NPC(3, _(" Wobbuffet!")),
@@ -859,7 +859,7 @@ static const struct ScriptCommand s_gs4_g3_s0_lives0_dlg0[] = { /* 0x818ca80 */
     BGM_STOP,
     FANFARE_PLAY(205),
     MSG_INSTANT(_("{CENTER_ALIGN}The {COLOR YELLOW_D}Uproar Forest{RESET} is now\n{CENTER_ALIGN}open for exploration!")),
-    { 0xe1, 0x00,  0x00cd,  0x00000000,  0x00000000, NULL },
+    WAIT_FANFARE1(205),
     TEXTBOX_CLEAR,
     ALERT_CUE(3),
     HALT,
@@ -876,17 +876,17 @@ static const struct ScriptCommand s_gs4_g3_s0_lives1_dlg0[] = { /* 0x818d208 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(6),
-    ROTATE(4, 2, DIRECTION_NORTHWEST),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_NORTHWEST),
     AWAIT_CUE(6),
-    ROTATE(4, 1, DIRECTION_NORTH),
+    ROTATE_TO(4, DIR_TRANS_SPINRIGHT1, DIRECTION_NORTH),
     AWAIT_CUE(6),
-    ROTATE(4, 2, DIRECTION_NORTHWEST),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_NORTHWEST),
     AWAIT_CUE(6),
-    ROTATE(4, 2, DIRECTION_NORTHWEST),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_NORTHWEST),
     AWAIT_CUE(6),
-    ROTATE(4, 2, DIRECTION_WEST),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_WEST),
     AWAIT_CUE(6),
-    ROTATE(4, 1, DIRECTION_NORTH),
+    ROTATE_TO(4, DIR_TRANS_SPINRIGHT1, DIRECTION_NORTH),
     AWAIT_CUE(6),
     WALK_RELATIVE(256, -80, 0),
     HALT,
@@ -901,7 +901,7 @@ static const struct ScriptCommand s_gs4_g3_s0_lives2_dlg0[] = { /* 0x818d328 */
     WAIT(15),
     SELECT_ANIMATION(2),
     AWAIT_CUE(7),
-    ROTATE(4, 1, DIRECTION_SOUTHWEST),
+    ROTATE_TO(4, DIR_TRANS_SPINRIGHT1, DIRECTION_SOUTHWEST),
     HALT,
 };
 
@@ -959,7 +959,7 @@ static const struct ScriptCommand s_gs4_g5_s0_station_sref_script[] = { /* 0x818
     SELECT_MAP(4),
     WAIT(30),
     SELECT_ENTITIES(-1, -1),
-    BGM_SWITCH(7),
+    BGM_SWITCH(MUS_POKEMON_SQUARE),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     { 0x23, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
@@ -967,7 +967,7 @@ static const struct ScriptCommand s_gs4_g5_s0_station_sref_script[] = { /* 0x818
     RET,
 };
 
-static const struct ScriptRef s_gs4_g5_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs4_g5_s0_station_sref_script }; /* 0x818d74c */
+static const struct ScriptRef s_gs4_g5_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs4_g5_s0_station_sref_script }; /* 0x818d74c */
 
 static const struct ScriptCommand s_gs4_g5_s0_lives0_dlg0[] = { /* 0x818d758 */
     DEBUGINFO_O(973),
@@ -979,7 +979,7 @@ static const struct ScriptCommand s_gs4_g5_s0_lives0_dlg0[] = { /* 0x818d758 */
     PORTRAIT(PLACEMENT_RIGHT, 0x0001, 0x00000000),
     ALERT_CUE(6),
     AWAIT_CUE(5),
-    { 0x93, 0x04,  0x000a,  0x00000022,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 34),
     PORTRAIT(PLACEMENT_RIGHT, 0x0001, 0x00000000),
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
     VARIANT(/* == */  1, _(" “Smeargle's desperate plea,“\nhuh...?{WAIT_PRESS}\nThat's some title.")),
@@ -988,7 +988,7 @@ static const struct ScriptCommand s_gs4_g5_s0_lives0_dlg0[] = { /* 0x818d758 */
     VARIANT_DEFAULT(_(" What does it say?{WAIT_PRESS}\nCan you read it?")),
     TEXTBOX_CLEAR,
     WAIT(20),
-    ROTATE(4, 10, DIRECTION_NORTH),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_NORTH),
     ALERT_CUE(6),
     AWAIT_CUE(5),
     MSG_INSTANT(_("{CENTER_ALIGN}{NAME_0} read the letter.")),
@@ -1004,7 +1004,7 @@ static const struct ScriptCommand s_gs4_g5_s0_lives0_dlg0[] = { /* 0x818d758 */
     WAIT(20),
     ALERT_CUE(6),
     AWAIT_CUE(5),
-    { 0x93, 0x04,  0x000a,  0x00000022,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 34),
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
     VARIANT(/* == */  1, _(" .............{WAIT_PRESS}\nIt says he ran away because he didn't want\nto be an adult...{WAIT_PRESS} What's up with that?")),
     VARIANT(/* == */  1, _(" I don't really get it, but...{WAIT_PRESS}\nWell, let's go rescue this Smeargle!")),
@@ -1016,7 +1016,7 @@ static const struct ScriptCommand s_gs4_g5_s0_lives0_dlg0[] = { /* 0x818d758 */
     BGM_STOP,
     FANFARE_PLAY(205),
     MSG_INSTANT(_("{CENTER_ALIGN}The {COLOR YELLOW_D}Howling Forest{RESET}\n{CENTER_ALIGN}is now open for exploration!")),
-    { 0xe1, 0x00,  0x00cd,  0x00000000,  0x00000000, NULL },
+    WAIT_FANFARE1(205),
     TEXTBOX_CLEAR,
     ALERT_CUE(3),
     HALT,
@@ -1031,13 +1031,13 @@ static const struct ScriptCommand s_gs4_g5_s0_lives1_dlg0[] = { /* 0x818def4 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(6),
-    { 0x93, 0x04,  0x000a,  0x00000001,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 1),
     ALERT_CUE(5),
     AWAIT_CUE(6),
-    ROTATE(4, 10, DIRECTION_NORTH),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_NORTH),
     ALERT_CUE(5),
     AWAIT_CUE(6),
-    { 0x93, 0x04,  0x000a,  0x00000001,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 1),
     ALERT_CUE(5),
     AWAIT_CUE(6),
     HALT,
@@ -1089,21 +1089,21 @@ static const struct ScriptCommand s_gs4_g6_s0_lives0_dlg3[] = { /* 0x818e248 */
     { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(6),
     WAIT(30),
-    { 0x92, 0x04,  0x0001,  0x00000001,  0x00000000, NULL },
+    CMD_UNK_92(4, 1, DIR_TRANS_SPINRIGHT1),
     WAIT(5),
-    { 0x92, 0x04,  0x0002,  0x00000004,  0x00000000, NULL },
+    CMD_UNK_92(4, 2, DIR_TRANS_SPINLEFT2),
     WAIT(5),
-    { 0x92, 0x04,  0x0001,  0x00000001,  0x00000000, NULL },
+    CMD_UNK_92(4, 1, DIR_TRANS_SPINRIGHT1),
     ALERT_CUE(5),
     AWAIT_CUE(6),
-    { 0x92, 0x04,  0x0001,  0x00000001,  0x00000000, NULL },
+    CMD_UNK_92(4, 1, DIR_TRANS_SPINRIGHT1),
     WAIT(5),
-    { 0x92, 0x04,  0x0002,  0x00000004,  0x00000000, NULL },
+    CMD_UNK_92(4, 2, DIR_TRANS_SPINLEFT2),
     WAIT(5),
-    { 0x92, 0x04,  0x0001,  0x00000001,  0x00000000, NULL },
+    CMD_UNK_92(4, 1, DIR_TRANS_SPINRIGHT1),
     ALERT_CUE(5),
     AWAIT_CUE(6),
-    ROTATE(4, 10, DIRECTION_NORTH),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_NORTH),
     ALERT_CUE(5),
     RET,
 };
@@ -1113,7 +1113,7 @@ static const struct ScriptCommand s_gs4_g7_s0_station_sref_script[] = { /* 0x818
     SELECT_MAP(4),
     WAIT(30),
     SELECT_ENTITIES(-1, -1),
-    BGM_SWITCH(7),
+    BGM_SWITCH(MUS_POKEMON_SQUARE),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     { 0x23, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
@@ -1121,7 +1121,7 @@ static const struct ScriptCommand s_gs4_g7_s0_station_sref_script[] = { /* 0x818
     RET,
 };
 
-static const struct ScriptRef s_gs4_g7_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs4_g7_s0_station_sref_script }; /* 0x818e458 */
+static const struct ScriptRef s_gs4_g7_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs4_g7_s0_station_sref_script }; /* 0x818e458 */
 
 static const struct ScriptCommand s_gs4_g7_s0_lives0_dlg0[] = { /* 0x818e464 */
     DEBUGINFO_O(1127),
@@ -1145,7 +1145,7 @@ static const struct ScriptCommand s_gs4_g7_s0_lives0_dlg0[] = { /* 0x818e464 */
     BGM_STOP,
     FANFARE_PLAY(205),
     MSG_INSTANT(_("{CENTER_ALIGN}The {COLOR YELLOW_D}Wish Cave{RESET} is now\n{CENTER_ALIGN}open for exploration!")),
-    { 0xe1, 0x00,  0x00cd,  0x00000000,  0x00000000, NULL },
+    WAIT_FANFARE1(205),
     TEXTBOX_CLEAR,
     ALERT_CUE(3),
     HALT,
@@ -1225,7 +1225,7 @@ static const struct ScriptCommand s_gs4_g9_s0_station_sref_script[] = { /* 0x818
     RET,
 };
 
-static const struct ScriptRef s_gs4_g9_s0_station_sref = { 401, 7, NULL /* EVENT_WAKEUP */, s_gs4_g9_s0_station_sref_script }; /* 0x818eaf0 */
+static const struct ScriptRef s_gs4_g9_s0_station_sref = { EVENT_WAKEUP, 7, NULL, s_gs4_g9_s0_station_sref_script }; /* 0x818eaf0 */
 
 static const struct ScriptCommand s_gs4_g9_s0_lives0_dlg0[] = { /* 0x818eafc */
     DEBUGINFO_O(1231),
@@ -1235,7 +1235,7 @@ static const struct ScriptCommand s_gs4_g9_s0_lives0_dlg0[] = { /* 0x818eafc */
     ALERT_CUE(7),
     ALERT_CUE(8),
     AWAIT_CUE(5),
-    { 0x93, 0x04,  0x000a,  0x0000005d,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 93),
     PORTRAIT(PLACEMENT_LEFT_, 0x0002, 0x00000000),
     ASK3(FALSE, /*default*/ -1, /* speaker */ 2, _(" Say, sweetie.{WAIT_PRESS}\nHave you seen Gengar around?")),
     CHOICE(/* label */  2, _("Yes.")),
@@ -1258,7 +1258,7 @@ static const struct ScriptCommand s_gs4_g9_s0_lives0_dlg0[] = { /* 0x818eafc */
     MSG_NPC(2, _(" ...Oh, OK.")),
     TEXTBOX_CLEAR,
     WAIT(10),
-    { 0x93, 0x04,  0x000a,  0x0000005c,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 92),
     PORTRAIT(PLACEMENT_RIGHT, 0x0003, 0x00000000),
     MSG_NPC(3, _(" Something seems to be\nwrong with Gengar lately.")),
     TEXTBOX_CLEAR,
@@ -1273,7 +1273,7 @@ static const struct ScriptCommand s_gs4_g9_s0_lives0_dlg0[] = { /* 0x818eafc */
     WAIT(10),
     ALERT_CUE(7),
     AWAIT_CUE(5),
-    { 0x93, 0x04,  0x000a,  0x0000005d,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 93),
     PORTRAIT_REP(0x0002, 0x00000000),
     MSG_NPC(2, _(" You think so?{WAIT_PRESS}\nHis expression...\nIt looks the same as usual, no?")),
     MSG_NPC(2, _(" All I have seen is him\nlaughing in his usual mean way?")),
@@ -1281,7 +1281,7 @@ static const struct ScriptCommand s_gs4_g9_s0_lives0_dlg0[] = { /* 0x818eafc */
     WAIT(10),
     ALERT_CUE(8),
     AWAIT_CUE(5),
-    { 0x93, 0x04,  0x000a,  0x0000005c,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 92),
     MSG_NPC(3, _(" No, it's different.{WAIT_PRESS}\nI can tell.")),
     MSG_NPC(3, _(" The way he sets his mouth.\nIt's different just a little at the corners.")),
     TEXTBOX_CLEAR,
@@ -1291,7 +1291,7 @@ static const struct ScriptCommand s_gs4_g9_s0_lives0_dlg0[] = { /* 0x818eafc */
     WAIT(10),
     ALERT_CUE(7),
     AWAIT_CUE(5),
-    { 0x93, 0x04,  0x000a,  0x0000005d,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 93),
     MSG_NPC(2, _(" Anyway, without Gengar\naround, {COLOR CYAN}Team Meanies{RESET} can't operate.")),
     MSG_NPC(2, _(" Such a vexing problem!")),
     TEXTBOX_CLEAR,
@@ -1328,7 +1328,7 @@ static const struct ScriptCommand s_gs4_g9_s0_lives2_dlg0[] = { /* 0x818f2e4 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(7),
-    { 0x93, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 0),
     AWAIT_CUE(7),
     JUMPIF(JUDGE_EQ, EVENT_LOCAL, 1, /* to label */ 0),
     CALL_SCRIPT(JUMP_SURPRISE_FUNC),
@@ -1336,13 +1336,13 @@ static const struct ScriptCommand s_gs4_g9_s0_lives2_dlg0[] = { /* 0x818f2e4 */
     AWAIT_CUE(7),
     JUMPIF(JUDGE_EQ, EVENT_LOCAL, 0, /* to label */ 0),
   LABEL(0), /* = 0x00 */
-    { 0x93, 0x04,  0x000a,  0x0000005c,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 92),
     ALERT_CUE(5),
     AWAIT_CUE(7),
-    { 0x93, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 0),
     ALERT_CUE(5),
     AWAIT_CUE(7),
-    ROTATE(4, 10, DIRECTION_EAST),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_EAST),
     ALERT_CUE(5),
     HALT,
 };
@@ -1354,10 +1354,10 @@ static const struct ScriptCommand s_gs4_g9_s0_lives3_dlg0[] = { /* 0x818f434 */
     { 0x2d, 0x07,  0x0003,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(8),
     WAIT(5),
-    { 0x93, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 0),
     ALERT_CUE(5),
     AWAIT_CUE(8),
-    { 0x93, 0x04,  0x000a,  0x0000005d,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 93),
     ALERT_CUE(5),
     AWAIT_CUE(8),
     HALT,
@@ -1417,14 +1417,14 @@ static const struct ScriptCommand s_gs4_g11_s0_station_sref_script[] = { /* 0x81
     SELECT_ENTITIES(-1, 2),
     JUMP_LABEL(5),
   LABEL(5), /* = 0x05 */
-    BGM_SWITCH(7),
+    BGM_SWITCH(MUS_POKEMON_SQUARE),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     { 0x23, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     RET,
 };
 
-static const struct ScriptRef s_gs4_g11_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs4_g11_s0_station_sref_script }; /* 0x818f834 */
+static const struct ScriptRef s_gs4_g11_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs4_g11_s0_station_sref_script }; /* 0x818f834 */
 
 
 static const struct ScriptCommand s_gs4_g11_s1_lives0_dlg0[] = { /* 0x818f840 */
@@ -1500,16 +1500,16 @@ static const struct ScriptCommand s_gs4_g12_s0_station_sref_script[] = { /* 0x81
     SELECT_MAP(4),
     SELECT_ENTITIES(-1, -1),
     CANCEL_LIVES(0, 0),
-    BGM_SWITCH(7),
+    BGM_SWITCH(MUS_POKEMON_SQUARE),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     SELECT_EVENTS(0, 0),
     SELECT_LIVES(0, 0),
-    { 0xaf, 0x01,  0x000d,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_AF(RESCUE_DUNGEON_DUMMY, TRUE),
     RET,
 };
 
-static const struct ScriptRef s_gs4_g12_s0_station_sref = { 402, 7, NULL /* EVENT_STATION */, s_gs4_g12_s0_station_sref_script }; /* 0x818fbe0 */
+static const struct ScriptRef s_gs4_g12_s0_station_sref = { EVENT_STATION , 7, NULL, s_gs4_g12_s0_station_sref_script }; /* 0x818fbe0 */
 
 static const struct ScriptCommand s_gs4_g12_s0_eff0_script[] = { /* 0x818fbec */
     DEBUGINFO_O(1515),
@@ -1544,7 +1544,7 @@ static const struct ScriptCommand s_gs4_g12_s0_lives0_dlg0[] = { /* 0x818fcdc */
     AWAIT_CUE(5),
     ALERT_CUE(6),
     WALK_GRID(256, 12),
-    ROTATE(4, 10, DIRECTION_NORTHEAST),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_NORTHEAST),
     AWAIT_CUE(5),
     PORTRAIT(PLACEMENT_RIGHT, 0x0001, 0x00000000),
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
@@ -1553,18 +1553,18 @@ static const struct ScriptCommand s_gs4_g12_s0_lives0_dlg0[] = { /* 0x818fcdc */
     TEXTBOX_CLEAR,
     ALERT_CUE(6),
     AWAIT_CUE(5),
-    ROTATE(4, 10, DIRECTION_NORTH),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_NORTH),
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
     VARIANT(/* == */  1, _(" Take a look at this!\nSee this Bulletin Board?")),
     VARIANT_DEFAULT(_(" See?\nHave a look at this Bulletin Board.")),
     TEXTBOX_CLEAR,
     WAIT(10),
-    { 0x8b, 0x14,  0x0004,  0x00000000,  0x00000000, NULL },
+    SET_DIR_WAIT(DIRECTION_NORTH, 20),
     MSG_NPC(1, _(" It lists rescue jobs.\nCheck it out?")),
     TEXTBOX_CLEAR,
     SPECIAL_TEXT(SPECIAL_TEXT_BULLETIN_BOARD_JOBS, 0, 0),
     ALERT_CUE(6),
-    ROTATE(4, 10, DIRECTION_NORTHEAST),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_NORTHEAST),
     AWAIT_CUE(5),
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
     VARIANT(/* == */  1, _(" See?\nThere were jobs listed, right?")),
@@ -1613,15 +1613,15 @@ static const struct ScriptCommand s_gs4_g12_s0_lives1_dlg0[] = { /* 0x81909bc */
     AWAIT_CUE(6),
     WALK_GRID(256, 13),
     WAIT(20),
-    { 0x8e, 0x14,  0x0000,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_8E(20, DIR_TRANS_NONE, 0),
     ALERT_CUE(5),
     AWAIT_CUE(6),
     WAIT(20),
-    { 0x8b, 0x14,  0x0004,  0x00000000,  0x00000000, NULL },
+    SET_DIR_WAIT(DIRECTION_NORTH, 20),
     ALERT_CUE(5),
     AWAIT_CUE(6),
-    { 0x93, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
-    { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 0),
+    CMD_UNK_E5(5, 0),
     AWAIT_CUE(6),
     { 0x52, 0x00,  0x0000,  0x00001000,  0x00000000, NULL },
     RET,
@@ -1638,7 +1638,7 @@ static const struct ScriptCommand s_gs4_g12_s0_lives2_dlg0[] = { /* 0x8190aec */
     WAIT(60),
     { 0x68, 0x00,  0x0100,  0x00000018,  0x00000000, NULL },
     WAIT(15),
-    ROTATE(30, 10, DIRECTION_WEST),
+    ROTATE_TO(30, DIR_TRANS_10, DIRECTION_WEST),
     WAIT(15),
     WALK_DIRECT(120, 14),
     WAIT(15),
@@ -1657,7 +1657,7 @@ static const struct ScriptCommand s_gs4_g12_s0_lives3_dlg0[] = { /* 0x8190bec */
     WAIT(160),
     WALK_DIRECT(120, 15),
     WAIT(15),
-    ROTATE(30, 10, DIRECTION_SOUTH),
+    ROTATE_TO(30, DIR_TRANS_10, DIRECTION_SOUTH),
     WAIT(15),
     { 0x68, 0x00,  0x0100,  0x00000008,  0x00000000, NULL },
     WAIT(15),
@@ -1670,7 +1670,7 @@ static const struct ScriptCommand s_gs4_g13_s0_station_sref_script[] = { /* 0x81
     RET_DIRECT,
 };
 
-static const struct ScriptRef s_gs4_g13_s0_station_sref = { 403, 8, NULL /* STATION_CONTROL */, s_gs4_g13_s0_station_sref_script }; /* 0x8190d0c */
+static const struct ScriptRef s_gs4_g13_s0_station_sref = { STATION_CONTROL , 8, NULL, s_gs4_g13_s0_station_sref_script }; /* 0x8190d0c */
 
 static const struct ScriptCommand s_gs4_g14_s0_station_sref_script[] = { /* 0x8190d18 */
     DEBUGINFO_O(1676),
@@ -1678,14 +1678,14 @@ static const struct ScriptCommand s_gs4_g14_s0_station_sref_script[] = { /* 0x81
     RET_DIRECT,
 };
 
-static const struct ScriptRef s_gs4_g14_s0_station_sref = { 403, 8, NULL /* STATION_CONTROL */, s_gs4_g14_s0_station_sref_script }; /* 0x8190d48 */
+static const struct ScriptRef s_gs4_g14_s0_station_sref = { STATION_CONTROL , 8, NULL, s_gs4_g14_s0_station_sref_script }; /* 0x8190d48 */
 
 static const struct ScriptCommand s_gs4_g15_s0_station_sref_script[] = { /* 0x8190d54 */
     DEBUGINFO_O(1684),
     RET_DIRECT,
 };
 
-static const struct ScriptRef s_gs4_g15_s0_station_sref = { 403, 8, NULL /* STATION_CONTROL */, s_gs4_g15_s0_station_sref_script }; /* 0x8190d74 */
+static const struct ScriptRef s_gs4_g15_s0_station_sref = { STATION_CONTROL , 8, NULL, s_gs4_g15_s0_station_sref_script }; /* 0x8190d74 */
 
 static const struct ScriptCommand s_gs4_g16_s0_station_sref_script[] = { /* 0x8190d80 */
     DEBUGINFO_O(1691),
@@ -1693,7 +1693,7 @@ static const struct ScriptCommand s_gs4_g16_s0_station_sref_script[] = { /* 0x81
     RET_DIRECT,
 };
 
-static const struct ScriptRef s_gs4_g16_s0_station_sref = { 403, 8, NULL /* STATION_CONTROL */, s_gs4_g16_s0_station_sref_script }; /* 0x8190db0 */
+static const struct ScriptRef s_gs4_g16_s0_station_sref = { STATION_CONTROL , 8, NULL, s_gs4_g16_s0_station_sref_script }; /* 0x8190db0 */
 
 static const struct ScriptCommand s_gs4_g16_s0_lives0_dlg2[] = { /* 0x8190dbc */
     DEBUGINFO_O(1699),
@@ -1737,7 +1737,7 @@ static const struct ScriptCommand s_gs4_g16_s1_station_sref_script[] = { /* 0x81
     RET,
 };
 
-static const struct ScriptRef s_gs4_g16_s1_station_sref = { 401, 7, NULL /* EVENT_WAKEUP */, s_gs4_g16_s1_station_sref_script }; /* 0x8190fc0 */
+static const struct ScriptRef s_gs4_g16_s1_station_sref = { EVENT_WAKEUP, 7, NULL, s_gs4_g16_s1_station_sref_script }; /* 0x8190fc0 */
 
 static const struct ScriptCommand s_gs4_g16_s1_lives0_dlg0[] = { /* 0x8190fcc */
     DEBUGINFO_O(1743),
@@ -1776,10 +1776,10 @@ static const struct ScriptCommand s_gs4_g16_s1_lives1_dlg0[] = { /* 0x8191244 */
     SELECT_ANIMATION(2),
     { 0x53, 0x00,  0x0000,  0x00000200,  0x00000000, NULL },
     AWAIT_CUE(7),
-    ROTATE(4, 1, DIRECTION_SOUTH),
+    ROTATE_TO(4, DIR_TRANS_SPINRIGHT1, DIRECTION_SOUTH),
     ALERT_CUE(5),
     AWAIT_CUE(7),
-    { 0x8b, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SET_DIR_WAIT(DIRECTION_EAST, 0),
     SELECT_ANIMATION(4),
     ALERT_CUE(5),
     HALT,
@@ -1796,10 +1796,10 @@ static const struct ScriptCommand s_gs4_g16_s1_lives2_dlg0[] = { /* 0x8191324 */
     SELECT_ANIMATION(2),
     { 0x53, 0x00,  0x0000,  0x00000200,  0x00000000, NULL },
     AWAIT_CUE(8),
-    ROTATE(4, 2, DIRECTION_NORTH),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_NORTH),
     ALERT_CUE(5),
     AWAIT_CUE(8),
-    { 0x8b, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SET_DIR_WAIT(DIRECTION_EAST, 0),
     SELECT_ANIMATION(4),
     HALT,
 };
@@ -1816,7 +1816,7 @@ static const struct ScriptCommand s_gs4_g17_s0_station_sref_script[] = { /* 0x81
     RET_DIRECT,
 };
 
-static const struct ScriptRef s_gs4_g17_s0_station_sref = { 403, 8, NULL /* STATION_CONTROL */, s_gs4_g17_s0_station_sref_script }; /* 0x8191424 */
+static const struct ScriptRef s_gs4_g17_s0_station_sref = { STATION_CONTROL , 8, NULL, s_gs4_g17_s0_station_sref_script }; /* 0x8191424 */
 
 static const struct ScriptCommand s_gs4_g17_s0_lives0_dlg0[] = { /* 0x8191430 */
     DEBUGINFO_O(1822),
@@ -1850,7 +1850,7 @@ static const struct ScriptCommand s_gs4_g17_s1_station_sref_script[] = { /* 0x81
     RET,
 };
 
-static const struct ScriptRef s_gs4_g17_s1_station_sref = { 401, 7, NULL /* EVENT_WAKEUP */, s_gs4_g17_s1_station_sref_script }; /* 0x8191540 */
+static const struct ScriptRef s_gs4_g17_s1_station_sref = { EVENT_WAKEUP, 7, NULL, s_gs4_g17_s1_station_sref_script }; /* 0x8191540 */
 
 static const struct ScriptCommand s_gs4_g17_s1_lives0_dlg0[] = { /* 0x819154c */
     DEBUGINFO_O(1856),
@@ -1889,10 +1889,10 @@ static const struct ScriptCommand s_gs4_g17_s1_lives1_dlg0[] = { /* 0x819171c */
     SELECT_ANIMATION(2),
     { 0x53, 0x00,  0x0000,  0x00000200,  0x00000000, NULL },
     AWAIT_CUE(7),
-    ROTATE(4, 1, DIRECTION_SOUTH),
+    ROTATE_TO(4, DIR_TRANS_SPINRIGHT1, DIRECTION_SOUTH),
     ALERT_CUE(5),
     AWAIT_CUE(7),
-    { 0x8b, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SET_DIR_WAIT(DIRECTION_EAST, 0),
     SELECT_ANIMATION(4),
     ALERT_CUE(5),
     HALT,
@@ -1909,10 +1909,10 @@ static const struct ScriptCommand s_gs4_g17_s1_lives2_dlg0[] = { /* 0x81917fc */
     SELECT_ANIMATION(2),
     { 0x53, 0x00,  0x0000,  0x00000200,  0x00000000, NULL },
     AWAIT_CUE(8),
-    ROTATE(4, 2, DIRECTION_NORTH),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_NORTH),
     ALERT_CUE(5),
     AWAIT_CUE(8),
-    { 0x8b, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SET_DIR_WAIT(DIRECTION_EAST, 0),
     SELECT_ANIMATION(4),
     HALT,
 };
@@ -1935,7 +1935,7 @@ static const struct ScriptCommand s_gs4_g18_s0_station_sref_script[] = { /* 0x81
     RET_DIRECT,
 };
 
-static const struct ScriptRef s_gs4_g18_s0_station_sref = { 403, 8, NULL /* STATION_CONTROL */, s_gs4_g18_s0_station_sref_script }; /* 0x819195c */
+static const struct ScriptRef s_gs4_g18_s0_station_sref = { STATION_CONTROL , 8, NULL, s_gs4_g18_s0_station_sref_script }; /* 0x819195c */
 
 static const struct ScriptCommand s_gs4_g18_s0_lives0_dlg2[] = { /* 0x8191968 */
     DEBUGINFO_O(1941),
@@ -1945,7 +1945,7 @@ static const struct ScriptCommand s_gs4_g18_s0_lives0_dlg2[] = { /* 0x8191968 */
     { 0x2d, 0x09,  0x0003,  0x00000044,  0x00000000, NULL },
     WAIT(1),
     MSG_NPC(3, _(" ............Papa said they've\ngone to sea before...")),
-    { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" .........(Does that mean Papa\ncan swim...?)") },
+    MSG_NPC(3, _(" .........(Does that mean Papa\ncan swim...?)")),
     ALERT_CUE(6),
     AWAIT_CUE(5),
     ASK3( TRUE, /*default*/ -1, /* speaker */ 3, _(" {NAME_0}.{WAIT_PRESS}\n{NAME_0}, can you swim?")),
@@ -1971,10 +1971,10 @@ static const struct ScriptCommand s_gs4_g18_s0_lives0_dlg3[] = { /* 0x8191c7c */
     { 0x2d, 0x09,  0x0003,  0x00000000,  0x00000000, NULL },
     { 0x53, 0x00,  0x0000,  0x00000200,  0x00000000, NULL },
     AWAIT_CUE(6),
-    { 0x8e, 0x0a,  0x000a,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_8E(10, DIR_TRANS_10, 0),
     ALERT_CUE(5),
     AWAIT_CUE(6),
-    ROTATE(4, 10, DIRECTION_EAST),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_EAST),
     ALERT_CUE(5),
     HALT,
 };
@@ -2009,7 +2009,7 @@ static const struct ScriptCommand s_gs4_g19_s0_station_sref_script[] = { /* 0x81
     RET,
 };
 
-static const struct ScriptRef s_gs4_g19_s0_station_sref = { 403, 8, NULL /* STATION_CONTROL */, s_gs4_g19_s0_station_sref_script }; /* 0x81921d0 */
+static const struct ScriptRef s_gs4_g19_s0_station_sref = { STATION_CONTROL , 8, NULL, s_gs4_g19_s0_station_sref_script }; /* 0x81921d0 */
 
 static const struct ScriptCommand s_gs4_g19_s0_lives0_dlg0[] = { /* 0x81921dc */
     DEBUGINFO_O(2015),
@@ -2043,7 +2043,7 @@ static const struct ScriptCommand s_gs4_g19_s1_station_sref_script[] = { /* 0x81
     RET,
 };
 
-static const struct ScriptRef s_gs4_g19_s1_station_sref = { 401, 7, NULL /* EVENT_WAKEUP */, s_gs4_g19_s1_station_sref_script }; /* 0x81922ec */
+static const struct ScriptRef s_gs4_g19_s1_station_sref = { EVENT_WAKEUP, 7, NULL, s_gs4_g19_s1_station_sref_script }; /* 0x81922ec */
 
 static const struct ScriptCommand s_gs4_g19_s1_lives0_dlg0[] = { /* 0x81922f8 */
     DEBUGINFO_O(2049),
@@ -2081,10 +2081,10 @@ static const struct ScriptCommand s_gs4_g19_s1_lives1_dlg0[] = { /* 0x8192548 */
     SELECT_ANIMATION(2),
     { 0x53, 0x00,  0x0000,  0x00000200,  0x00000000, NULL },
     AWAIT_CUE(7),
-    ROTATE(4, 1, DIRECTION_SOUTH),
+    ROTATE_TO(4, DIR_TRANS_SPINRIGHT1, DIRECTION_SOUTH),
     ALERT_CUE(5),
     AWAIT_CUE(7),
-    { 0x8b, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SET_DIR_WAIT(DIRECTION_EAST, 0),
     SELECT_ANIMATION(4),
     ALERT_CUE(5),
     RET,
@@ -2101,10 +2101,10 @@ static const struct ScriptCommand s_gs4_g19_s1_lives2_dlg0[] = { /* 0x8192628 */
     SELECT_ANIMATION(2),
     { 0x53, 0x00,  0x0000,  0x00000200,  0x00000000, NULL },
     AWAIT_CUE(8),
-    ROTATE(4, 2, DIRECTION_NORTH),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_NORTH),
     ALERT_CUE(5),
     AWAIT_CUE(8),
-    { 0x8b, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SET_DIR_WAIT(DIRECTION_EAST, 0),
     SELECT_ANIMATION(4),
     RET,
 };
@@ -2122,7 +2122,7 @@ static const struct ScriptCommand s_gs4_g20_s0_station_sref_script[] = { /* 0x81
     RET,
 };
 
-static const struct ScriptRef s_gs4_g20_s0_station_sref = { 403, 8, NULL /* STATION_CONTROL */, s_gs4_g20_s0_station_sref_script }; /* 0x8192738 */
+static const struct ScriptRef s_gs4_g20_s0_station_sref = { STATION_CONTROL , 8, NULL, s_gs4_g20_s0_station_sref_script }; /* 0x8192738 */
 
 static const struct ScriptCommand s_gs4_g20_s0_lives0_dlg0[] = { /* 0x8192744 */
     DEBUGINFO_O(2128),
@@ -2142,10 +2142,10 @@ static const struct ScriptCommand s_gs4_g20_s0_lives1_dlg0[] = { /* 0x81927b4 */
     SELECT_ANIMATION(2),
     { 0x53, 0x00,  0x0000,  0x00000200,  0x00000000, NULL },
     AWAIT_CUE(8),
-    ROTATE(4, 2, DIRECTION_NORTH),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_NORTH),
     ALERT_CUE(5),
     AWAIT_CUE(8),
-    { 0x8b, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SET_DIR_WAIT(DIRECTION_EAST, 0),
     SELECT_ANIMATION(4),
     HALT,
 };
@@ -2173,7 +2173,7 @@ static const struct ScriptCommand s_gs4_g20_s1_station_sref_script[] = { /* 0x81
     RET,
 };
 
-static const struct ScriptRef s_gs4_g20_s1_station_sref = { 401, 7, NULL /* EVENT_WAKEUP */, s_gs4_g20_s1_station_sref_script }; /* 0x8192934 */
+static const struct ScriptRef s_gs4_g20_s1_station_sref = { EVENT_WAKEUP, 7, NULL, s_gs4_g20_s1_station_sref_script }; /* 0x8192934 */
 
 static const struct ScriptCommand s_gs4_g20_s1_eff0_script[] = { /* 0x8192940 */
     DEBUGINFO_O(2179),
@@ -2214,7 +2214,7 @@ static const struct ScriptCommand s_gs4_g20_s1_lives1_dlg0[] = { /* 0x81929a0 */
     MSG_NPC(2, _(" Hah!")),
     ALERT_CUE(6),
     ALERT_CUE(8),
-    { 0x93, 0x04,  0x000a,  0x00000042,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 66),
     TEXTBOX_CLEAR,
     ALERT_CUE(7),
     AWAIT_CUE(5),
@@ -2222,7 +2222,7 @@ static const struct ScriptCommand s_gs4_g20_s1_lives1_dlg0[] = { /* 0x81929a0 */
     MSG_NPC(2, _(" Hah!")),
     ALERT_CUE(6),
     ALERT_CUE(8),
-    { 0x93, 0x04,  0x000a,  0x00000042,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 66),
     TEXTBOX_CLEAR,
     ALERT_CUE(7),
     AWAIT_CUE(5),
@@ -2230,14 +2230,14 @@ static const struct ScriptCommand s_gs4_g20_s1_lives1_dlg0[] = { /* 0x81929a0 */
     MSG_NPC(2, _(" Hah!")),
     ALERT_CUE(6),
     ALERT_CUE(8),
-    { 0x93, 0x04,  0x000a,  0x00000042,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 66),
     TEXTBOX_CLEAR,
     PORTRAIT(PLACEMENT_RIGHT, 0x0002, 0x00000000),
     ALERT_CUE(7),
     AWAIT_CUE(5),
     ALERT_CUE(6),
     ALERT_CUE(8),
-    { 0x93, 0x04,  0x000a,  0x00000042,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 66),
     TEXTBOX_AUTO_PRESS(30, 30),
     PORTRAIT(PLACEMENT_LEFT_FLIP, 0x0002, 0x00000000),
     MSG_NPC(2, _(" Hah!")),
@@ -2266,15 +2266,15 @@ static const struct ScriptCommand s_gs4_g20_s1_lives2_dlg0[] = { /* 0x8192fa8 */
     DEBUGINFO_O(2266),
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
-    { 0x8e, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_8E(1, DIR_TRANS_NONE, 0),
     AWAIT_CUE(6),
-    { 0x93, 0x04,  0x000a,  0x00000042,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 66),
     AWAIT_CUE(6),
-    { 0x93, 0x04,  0x000a,  0x00000042,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 66),
     AWAIT_CUE(6),
-    { 0x93, 0x04,  0x000a,  0x00000042,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 66),
     AWAIT_CUE(6),
-    { 0x93, 0x04,  0x000a,  0x00000042,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 66),
     AWAIT_CUE(6),
     { 0x52, 0x00,  0x0000,  0x00001000,  0x00000000, NULL },
     RET,
@@ -2287,7 +2287,7 @@ static const struct ScriptCommand s_gs4_g20_s1_lives3_dlg0[] = { /* 0x8193098 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(7),
-    ROTATE(4, 10, DIRECTION_SOUTH),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_SOUTH),
     ALERT_CUE(5),
     AWAIT_CUE(7),
     { 0x54, 0x00,  0x0400,  0x00000000,  0x00000000, NULL },
@@ -2296,7 +2296,7 @@ static const struct ScriptCommand s_gs4_g20_s1_lives3_dlg0[] = { /* 0x8193098 */
     STOP_ANIMATION_ON_CURRENT_FRAME,
     { 0x52, 0x00,  0x0000,  0x00400000,  0x00000000, NULL },
     { 0x59, 0x01, -0x0050,  0x00000030,  0x00000000, NULL },
-    { 0x8b, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    SET_DIR_WAIT(DIRECTION_WEST, 0),
     FANFARE_PLAY2(454),
     { 0x53, 0x00,  0x0000,  0x00400000,  0x00000000, NULL },
     SELECT_ANIMATION(22),
@@ -2309,7 +2309,7 @@ static const struct ScriptCommand s_gs4_g20_s1_lives3_dlg0[] = { /* 0x8193098 */
     STOP_ANIMATION_ON_CURRENT_FRAME,
     { 0x52, 0x00,  0x0000,  0x00400000,  0x00000000, NULL },
     { 0x59, 0x01,  0x0050, -0x00000030,  0x00000000, NULL },
-    { 0x8b, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    SET_DIR_WAIT(DIRECTION_SOUTH, 0),
     FANFARE_PLAY2(454),
     { 0x53, 0x00,  0x0000,  0x00400000,  0x00000000, NULL },
     SELECT_ANIMATION(22),
@@ -2322,7 +2322,7 @@ static const struct ScriptCommand s_gs4_g20_s1_lives3_dlg0[] = { /* 0x8193098 */
     STOP_ANIMATION_ON_CURRENT_FRAME,
     { 0x52, 0x00,  0x0000,  0x00400000,  0x00000000, NULL },
     { 0x59, 0x01, -0x0030,  0x00000030,  0x00000000, NULL },
-    { 0x8b, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    SET_DIR_WAIT(DIRECTION_NORTH, 0),
     FANFARE_PLAY2(454),
     { 0x53, 0x00,  0x0000,  0x00400000,  0x00000000, NULL },
     SELECT_ANIMATION(22),
@@ -2335,7 +2335,7 @@ static const struct ScriptCommand s_gs4_g20_s1_lives3_dlg0[] = { /* 0x8193098 */
     STOP_ANIMATION_ON_CURRENT_FRAME,
     { 0x52, 0x00,  0x0000,  0x00400000,  0x00000000, NULL },
     { 0x59, 0x01,  0x0030, -0x00000030,  0x00000000, NULL },
-    { 0x8b, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SET_DIR_WAIT(DIRECTION_EAST, 0),
     FANFARE_PLAY2(454),
     { 0x53, 0x00,  0x0000,  0x00400000,  0x00000000, NULL },
     SELECT_ANIMATION(22),
@@ -2345,10 +2345,10 @@ static const struct ScriptCommand s_gs4_g20_s1_lives3_dlg0[] = { /* 0x8193098 */
     ALERT_CUE(5),
     AWAIT_CUE(7),
     SELECT_ANIMATION(2),
-    ROTATE(8, 10, DIRECTION_SOUTH),
+    ROTATE_TO(8, DIR_TRANS_10, DIRECTION_SOUTH),
     ALERT_CUE(5),
     AWAIT_CUE(7),
-    { 0x8b, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SET_DIR_WAIT(DIRECTION_EAST, 0),
     { 0x57, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
     RET,
 };
@@ -2365,18 +2365,18 @@ static const struct ScriptCommand s_gs4_g20_s1_lives4_dlg0[] = { /* 0x8193528 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0003,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(8),
-    ROTATE(4, 10, DIRECTION_NORTH),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_NORTH),
     ALERT_CUE(5),
     AWAIT_CUE(8),
-    { 0x93, 0x04,  0x000a,  0x00000042,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 66),
     AWAIT_CUE(8),
-    { 0x93, 0x04,  0x000a,  0x00000042,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 66),
     AWAIT_CUE(8),
-    { 0x93, 0x04,  0x000a,  0x00000042,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 66),
     AWAIT_CUE(8),
-    { 0x93, 0x04,  0x000a,  0x00000042,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 66),
     AWAIT_CUE(8),
-    { 0x8b, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SET_DIR_WAIT(DIRECTION_EAST, 0),
     ALERT_CUE(5),
     RET,
     HALT,
@@ -2395,7 +2395,7 @@ static const struct ScriptCommand s_gs4_g21_s0_station_sref_script[] = { /* 0x81
     RET,
 };
 
-static const struct ScriptRef s_gs4_g21_s0_station_sref = { 403, 8, NULL /* STATION_CONTROL */, s_gs4_g21_s0_station_sref_script }; /* 0x81936d8 */
+static const struct ScriptRef s_gs4_g21_s0_station_sref = { STATION_CONTROL , 8, NULL, s_gs4_g21_s0_station_sref_script }; /* 0x81936d8 */
 
 static const struct ScriptCommand s_gs4_g21_s0_lives0_dlg0[] = { /* 0x81936e4 */
     DEBUGINFO_O(2401),
@@ -2430,7 +2430,7 @@ static const struct ScriptCommand s_gs4_g21_s1_station_sref_script[] = { /* 0x81
     RET,
 };
 
-static const struct ScriptRef s_gs4_g21_s1_station_sref = { 401, 7, NULL /* EVENT_WAKEUP */, s_gs4_g21_s1_station_sref_script }; /* 0x8193804 */
+static const struct ScriptRef s_gs4_g21_s1_station_sref = { EVENT_WAKEUP, 7, NULL, s_gs4_g21_s1_station_sref_script }; /* 0x8193804 */
 
 static const struct ScriptCommand s_gs4_g21_s1_eff0_script[] = { /* 0x8193810 */
     DEBUGINFO_O(2436),
@@ -2473,7 +2473,7 @@ static const struct ScriptCommand s_gs4_g21_s1_lives0_dlg0[] = { /* 0x8193870 */
     MSG_NPC(2, _(" Hah!")),
     ALERT_CUE(6),
     ALERT_CUE(8),
-    { 0x93, 0x04,  0x000a,  0x00000042,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 66),
     TEXTBOX_CLEAR,
     ALERT_CUE(7),
     AWAIT_CUE(5),
@@ -2482,7 +2482,7 @@ static const struct ScriptCommand s_gs4_g21_s1_lives0_dlg0[] = { /* 0x8193870 */
     MSG_NPC(2, _(" Hah!")),
     ALERT_CUE(6),
     ALERT_CUE(8),
-    { 0x93, 0x04,  0x000a,  0x00000042,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 66),
     TEXTBOX_CLEAR,
     ALERT_CUE(7),
     AWAIT_CUE(5),
@@ -2490,13 +2490,13 @@ static const struct ScriptCommand s_gs4_g21_s1_lives0_dlg0[] = { /* 0x8193870 */
     MSG_NPC(2, _(" Hah!")),
     ALERT_CUE(6),
     ALERT_CUE(8),
-    { 0x93, 0x04,  0x000a,  0x00000042,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 66),
     TEXTBOX_CLEAR,
     ALERT_CUE(7),
     AWAIT_CUE(5),
     ALERT_CUE(6),
     ALERT_CUE(8),
-    { 0x93, 0x04,  0x000a,  0x00000042,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 66),
     TEXTBOX_AUTO_PRESS(30, 30),
     PORTRAIT(PLACEMENT_RIGHT_FLIP, 0x0002, 0x00000000),
     MSG_NPC(2, _(" Hah!")),
@@ -2524,15 +2524,15 @@ static const struct ScriptCommand s_gs4_g21_s1_lives1_dlg0[] = { /* 0x8193edc */
     DEBUGINFO_O(2524),
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
-    { 0x8e, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_8E(1, DIR_TRANS_NONE, 0),
     AWAIT_CUE(6),
-    { 0x93, 0x04,  0x000a,  0x00000042,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 66),
     AWAIT_CUE(6),
-    { 0x93, 0x04,  0x000a,  0x00000042,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 66),
     AWAIT_CUE(6),
-    { 0x93, 0x04,  0x000a,  0x00000042,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 66),
     AWAIT_CUE(6),
-    { 0x93, 0x04,  0x000a,  0x00000042,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 66),
     AWAIT_CUE(6),
     { 0x52, 0x00,  0x0000,  0x00001000,  0x00000000, NULL },
     RET,
@@ -2545,7 +2545,7 @@ static const struct ScriptCommand s_gs4_g21_s1_lives2_dlg0[] = { /* 0x8193fcc */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(7),
-    ROTATE(4, 10, DIRECTION_SOUTH),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_SOUTH),
     ALERT_CUE(5),
     AWAIT_CUE(7),
     { 0x54, 0x00,  0x0400,  0x00000000,  0x00000000, NULL },
@@ -2554,7 +2554,7 @@ static const struct ScriptCommand s_gs4_g21_s1_lives2_dlg0[] = { /* 0x8193fcc */
     STOP_ANIMATION_ON_CURRENT_FRAME,
     { 0x52, 0x00,  0x0000,  0x00400000,  0x00000000, NULL },
     { 0x59, 0x01, -0x0050,  0x00000030,  0x00000000, NULL },
-    { 0x8b, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    SET_DIR_WAIT(DIRECTION_NORTH, 0),
     FANFARE_PLAY2(454),
     { 0x53, 0x00,  0x0000,  0x00400000,  0x00000000, NULL },
     SELECT_ANIMATION(22),
@@ -2567,7 +2567,7 @@ static const struct ScriptCommand s_gs4_g21_s1_lives2_dlg0[] = { /* 0x8193fcc */
     STOP_ANIMATION_ON_CURRENT_FRAME,
     { 0x52, 0x00,  0x0000,  0x00400000,  0x00000000, NULL },
     { 0x59, 0x01,  0x0050, -0x00000030,  0x00000000, NULL },
-    { 0x8b, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    SET_DIR_WAIT(DIRECTION_WEST, 0),
     FANFARE_PLAY2(454),
     { 0x53, 0x00,  0x0000,  0x00400000,  0x00000000, NULL },
     SELECT_ANIMATION(22),
@@ -2580,7 +2580,7 @@ static const struct ScriptCommand s_gs4_g21_s1_lives2_dlg0[] = { /* 0x8193fcc */
     STOP_ANIMATION_ON_CURRENT_FRAME,
     { 0x52, 0x00,  0x0000,  0x00400000,  0x00000000, NULL },
     { 0x59, 0x01, -0x0030,  0x00000030,  0x00000000, NULL },
-    { 0x8b, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    SET_DIR_WAIT(DIRECTION_SOUTH, 0),
     FANFARE_PLAY2(454),
     { 0x53, 0x00,  0x0000,  0x00400000,  0x00000000, NULL },
     SELECT_ANIMATION(22),
@@ -2593,7 +2593,7 @@ static const struct ScriptCommand s_gs4_g21_s1_lives2_dlg0[] = { /* 0x8193fcc */
     STOP_ANIMATION_ON_CURRENT_FRAME,
     { 0x52, 0x00,  0x0000,  0x00400000,  0x00000000, NULL },
     { 0x59, 0x01,  0x0030, -0x00000030,  0x00000000, NULL },
-    { 0x8b, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SET_DIR_WAIT(DIRECTION_EAST, 0),
     FANFARE_PLAY2(454),
     { 0x53, 0x00,  0x0000,  0x00400000,  0x00000000, NULL },
     SELECT_ANIMATION(22),
@@ -2603,10 +2603,10 @@ static const struct ScriptCommand s_gs4_g21_s1_lives2_dlg0[] = { /* 0x8193fcc */
     ALERT_CUE(5),
     AWAIT_CUE(7),
     SELECT_ANIMATION(2),
-    ROTATE(8, 10, DIRECTION_SOUTH),
+    ROTATE_TO(8, DIR_TRANS_10, DIRECTION_SOUTH),
     ALERT_CUE(5),
     AWAIT_CUE(7),
-    { 0x8b, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SET_DIR_WAIT(DIRECTION_EAST, 0),
     { 0x57, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
     RET,
 };
@@ -2623,18 +2623,18 @@ static const struct ScriptCommand s_gs4_g21_s1_lives3_dlg0[] = { /* 0x819445c */
     { 0x53, 0x00,  0x0000,  0x00000200,  0x00000000, NULL },
     { 0x2d, 0x07,  0x0003,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(8),
-    ROTATE(4, 10, DIRECTION_NORTH),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_NORTH),
     ALERT_CUE(5),
     AWAIT_CUE(8),
-    { 0x93, 0x04,  0x000a,  0x00000042,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 66),
     AWAIT_CUE(8),
-    { 0x93, 0x04,  0x000a,  0x00000042,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 66),
     AWAIT_CUE(8),
-    { 0x93, 0x04,  0x000a,  0x00000042,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 66),
     AWAIT_CUE(8),
-    { 0x93, 0x04,  0x000a,  0x00000042,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 66),
     AWAIT_CUE(8),
-    { 0x8b, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SET_DIR_WAIT(DIRECTION_EAST, 0),
     ALERT_CUE(5),
     RET,
 };
@@ -2657,7 +2657,7 @@ static const struct ScriptCommand s_gs4_g22_s0_station_sref_script[] = { /* 0x81
     RET,
 };
 
-static const struct ScriptRef s_gs4_g22_s0_station_sref = { 403, 8, NULL /* STATION_CONTROL */, s_gs4_g22_s0_station_sref_script }; /* 0x819464c */
+static const struct ScriptRef s_gs4_g22_s0_station_sref = { STATION_CONTROL , 8, NULL, s_gs4_g22_s0_station_sref_script }; /* 0x819464c */
 
 static const struct ScriptCommand s_gs4_g22_s0_lives0_dlg0[] = { /* 0x8194658 */
     DEBUGINFO_O(2663),
@@ -2686,7 +2686,7 @@ static const struct ScriptCommand s_gs4_g22_s1_station_sref_script[] = { /* 0x81
     RET,
 };
 
-static const struct ScriptRef s_gs4_g22_s1_station_sref = { 401, 7, NULL /* EVENT_WAKEUP */, s_gs4_g22_s1_station_sref_script }; /* 0x8194748 */
+static const struct ScriptRef s_gs4_g22_s1_station_sref = { EVENT_WAKEUP, 7, NULL, s_gs4_g22_s1_station_sref_script }; /* 0x8194748 */
 
 static const struct ScriptCommand s_gs4_g22_s1_eff0_script[] = { /* 0x8194754 */
     DEBUGINFO_O(2692),
@@ -2748,7 +2748,7 @@ static const struct ScriptCommand s_gs4_g22_s1_lives1_dlg0[] = { /* 0x8194c3c */
     DEBUGINFO_O(2748),
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
-    { 0x8e, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_8E(1, DIR_TRANS_NONE, 0),
     AWAIT_CUE(6),
     { 0x52, 0x00,  0x0000,  0x00001000,  0x00000000, NULL },
     RET,
@@ -2760,7 +2760,7 @@ static const struct ScriptCommand s_gs4_g22_s1_lives2_dlg0[] = { /* 0x8194cac */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(7),
-    ROTATE(4, 10, DIRECTION_SOUTH),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_SOUTH),
     ALERT_CUE(5),
     AWAIT_CUE(7),
     SELECT_ANIMATION(23),
@@ -2776,7 +2776,7 @@ static const struct ScriptCommand s_gs4_g22_s1_lives3_dlg0[] = { /* 0x8194d7c */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0003,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(8),
-    { 0x8e, 0x04,  0x000a,  0x00000042,  0x00000000, NULL },
+    CMD_UNK_8E(4, DIR_TRANS_10, 66),
     ALERT_CUE(5),
     AWAIT_CUE(8),
     CALL_SCRIPT(LOOK_AROUND_FUNC),
@@ -2784,7 +2784,7 @@ static const struct ScriptCommand s_gs4_g22_s1_lives3_dlg0[] = { /* 0x8194d7c */
     FANFARE_PLAY2(469),
     CALL_SCRIPT(QUESTION_FUNC),
     WAIT(10),
-    ROTATE(4, 10, DIRECTION_EAST),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_EAST),
     ALERT_CUE(5),
     HALT,
 };
@@ -2815,7 +2815,7 @@ static const struct ScriptCommand s_gs4_g23_s0_station_sref_script[] = { /* 0x81
     RET,
 };
 
-static const struct ScriptRef s_gs4_g23_s0_station_sref = { 403, 8, NULL /* STATION_CONTROL */, s_gs4_g23_s0_station_sref_script }; /* 0x8194f60 */
+static const struct ScriptRef s_gs4_g23_s0_station_sref = { STATION_CONTROL , 8, NULL, s_gs4_g23_s0_station_sref_script }; /* 0x8194f60 */
 
 static const struct ScriptCommand s_gs4_g23_s0_lives0_dlg1[] = { /* 0x8194f6c */
     DEBUGINFO_O(2821),
@@ -2857,7 +2857,7 @@ static const struct ScriptCommand s_gs4_g24_s0_station_sref_script[] = { /* 0x81
     RET_DIRECT,
 };
 
-static const struct ScriptRef s_gs4_g24_s0_station_sref = { 403, 8, NULL /* STATION_CONTROL */, s_gs4_g24_s0_station_sref_script }; /* 0x8195270 */
+static const struct ScriptRef s_gs4_g24_s0_station_sref = { STATION_CONTROL , 8, NULL, s_gs4_g24_s0_station_sref_script }; /* 0x8195270 */
 
 static const struct ScriptCommand s_gs4_g24_s0_lives0_dlg0[] = { /* 0x819527c */
     DEBUGINFO_O(2863),
@@ -2920,7 +2920,7 @@ static const struct ScriptCommand s_gs4_g25_s0_station_sref_script[] = { /* 0x81
     RET,
 };
 
-static const struct ScriptRef s_gs4_g25_s0_station_sref = { 403, 8, NULL /* STATION_CONTROL */, s_gs4_g25_s0_station_sref_script }; /* 0x8195704 */
+static const struct ScriptRef s_gs4_g25_s0_station_sref = { STATION_CONTROL , 8, NULL, s_gs4_g25_s0_station_sref_script }; /* 0x8195704 */
 
 static const struct ScriptCommand s_gs4_g25_s0_lives0_dlg0[] = { /* 0x8195710 */
     DEBUGINFO_O(2926),
@@ -2982,7 +2982,7 @@ static const struct ScriptCommand s_gs4_g26_s0_station_sref_script[] = { /* 0x81
     RET,
 };
 
-static const struct ScriptRef s_gs4_g26_s0_station_sref = { 403, 8, NULL /* STATION_CONTROL */, s_gs4_g26_s0_station_sref_script }; /* 0x8195a10 */
+static const struct ScriptRef s_gs4_g26_s0_station_sref = { STATION_CONTROL , 8, NULL, s_gs4_g26_s0_station_sref_script }; /* 0x8195a10 */
 
 static const struct ScriptCommand s_gs4_g26_s0_lives0_dlg0[] = { /* 0x8195a1c */
     DEBUGINFO_O(2988),
@@ -3041,14 +3041,14 @@ static const struct ScriptCommand s_gs4_g27_s0_station_sref_script[] = { /* 0x81
     DEBUGINFO_O(3041),
     SELECT_MAP(4),
     SELECT_ENTITIES(-1, -1),
-    BGM_SWITCH(41),
+    BGM_SWITCH(MUS_AFTERMATH),
     { 0x22, 0x01,  0x002d,  0x00000000,  0x00000000, NULL },
     WAIT(240),
     { 0x23, 0x01,  0x002d,  0x00000000,  0x00000000, NULL },
     RET,
 };
 
-static const struct ScriptRef s_gs4_g27_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs4_g27_s0_station_sref_script }; /* 0x8195d7c */
+static const struct ScriptRef s_gs4_g27_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs4_g27_s0_station_sref_script }; /* 0x8195d7c */
 
 static const struct ScriptCommand s_gs4_g27_s0_eff0_script[] = { /* 0x8195d88 */
     DEBUGINFO_O(3054),
@@ -3063,11 +3063,11 @@ static const struct ScriptCommand s_gs4_g28_s0_station_sref_script[] = { /* 0x81
     RET_DIRECT,
 };
 
-static const struct ScriptRef s_gs4_g28_s0_station_sref = { 403, 8, NULL /* STATION_CONTROL */, s_gs4_g28_s0_station_sref_script }; /* 0x8195df8 */
+static const struct ScriptRef s_gs4_g28_s0_station_sref = { STATION_CONTROL , 8, NULL, s_gs4_g28_s0_station_sref_script }; /* 0x8195df8 */
 
 static const struct ScriptCommand s_gs4_g28_s0_lives0_dlg1[] = { /* 0x8195e04 */
     DEBUGINFO_O(3069),
-    { 0x8b, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SET_DIR_WAIT(DIRECTION_EAST, 0),
     { 0x53, 0x00,  0x0000,  0x00000200,  0x00000000, NULL },
     SELECT_ANIMATION(1),
     RET,
@@ -3078,7 +3078,7 @@ static const struct ScriptCommand s_gs4_g28_s0_lives0_dlg2[] = { /* 0x8195e54 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" (Everything returned to\npeace...)") },
+    MSG_NPC(1, _(" (Everything returned to\npeace...)")),
     ALERT_CUE(6),
     AWAIT_CUE(5),
     MSG_NPC(1, _(" But Papa still hasn't come\nback...")),
@@ -3098,7 +3098,7 @@ static const struct ScriptCommand s_gs4_g28_s0_lives0_dlg3[] = { /* 0x819609c */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(6),
-    { 0x93, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 0),
     ALERT_CUE(5),
     AWAIT_CUE(6),
     CALL_SCRIPT(NOTICE_FUNC),
@@ -3150,14 +3150,14 @@ static const struct ScriptCommand s_gs4_g29_s0_station_sref_script[] = { /* 0x81
     SELECT_MAP(4),
     CANCEL_ENTITIES(0, 0),
     SELECT_ENTITIES(-1, -1),
-    BGM_SWITCH(40),
+    BGM_SWITCH(MUS_INTRO),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     { 0x23, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     RET,
 };
 
-static const struct ScriptRef s_gs4_g29_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs4_g29_s0_station_sref_script }; /* 0x81964c8 */
+static const struct ScriptRef s_gs4_g29_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs4_g29_s0_station_sref_script }; /* 0x81964c8 */
 
 static const struct ScriptCommand s_gs4_g29_s0_lives0_dlg0[] = { /* 0x81964d4 */
     DEBUGINFO_O(3163),
@@ -3951,4 +3951,4 @@ static const struct GroundLink s_gs4_links[] = { /* 0x8197968 */
     /* link  19 */ { { /*x*/  74, /*y*/  12, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
 };
 
-/*extern*/ const struct GroundScriptHeader gGroundScript_gs4 = { LPARRAY(s_gs4_groups), s_gs4_links }; /* 0x8197a08 */
+const GroundScriptHeader gGroundScript_gs4 = { LPARRAY(s_gs4_groups), s_gs4_links }; /* 0x8197a08 */

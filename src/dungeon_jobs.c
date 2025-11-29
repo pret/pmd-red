@@ -23,7 +23,7 @@ void sub_80842F0(void)
 
     gDungeon->unk644.unk33 = 0;
     gDungeon->unk644.unk46 = 0;
-    if (gDungeon->unk644.unk34 != 2)
+    if (gDungeon->unk644.missionKind != DUNGEON_MISSION_ACCEPTEDJOB_RELATED)
         return;
 
     for (i = 0; i < MAX_ACCEPTED_JOBS; i++) {
@@ -89,12 +89,12 @@ void sub_8084448(Entity *pokemon)
     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],GetLeader(),0);
     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1],pokemon,0);
     if (!sub_8070BC0(pokemon)) {
-        DisplayDungeonMessage(0,gUnknown_80FA464,1);
+        DisplayDungeonMessage_Async(0,gUnknown_80FA464,1);
         return;
     }
 
     if (gDungeon->unk644.unk46 != 0) {
-        if (DisplayDungeonYesNoMessage(0, gUnknown_80FA32C, 1) != 1)
+        if (DisplayDungeonYesNoMessage_Async(0, gUnknown_80FA32C, 1) != 1)
             return;
         BufferItemName(gFormatBuffer_Items[0], gDungeon->unk644.unk46, 0);
         for (i = 0; i < INVENTORY_SIZE; i++) {
@@ -109,34 +109,34 @@ void sub_8084448(Entity *pokemon)
         }
 
         if (i == INVENTORY_SIZE) {
-            DisplayDungeonMessage(0, gUnknown_80FA448, 1);
+            DisplayDungeonMessage_Async(0, gUnknown_80FA448, 1);
             return;
         }
         ZeroOutItem(&gTeamInventoryRef->teamItems[i]);
         FillInventoryGaps();
-        DisplayDungeonMessage(0, gUnknown_80FA2B0, 1);
+        DisplayDungeonMessage_Async(0, gUnknown_80FA2B0, 1);
         str = gUnknown_80FA370;
     }
     else {
-        if (DisplayDungeonYesNoMessage(0, gUnknown_80FA2F0, 1) != 1)
+        if (DisplayDungeonYesNoMessage_Async(0, gUnknown_80FA2F0, 1) != 1)
             return;
-        DisplayDungeonMessage(0, gUnknown_80FA260, 1);
+        DisplayDungeonMessage_Async(0, gUnknown_80FA260, 1);
         str = gUnknown_80FA36C;
     }
 
     sub_80843BC(entInfo->id);
     sub_8042A34(&pokemon->pos);
-    HandleFaint(pokemon,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
-    sub_804178C(1);
-    while(1) {
-        if (DisplayDungeonYesNoMessage(0,str,1) == 1) {
-            if (DisplayDungeonYesNoMessage(0,gUnknown_80FA394,0) == 1) {
+    HandleFaint_Async(pokemon,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
+    sub_804178C_Async(1);
+    while (TRUE) {
+        if (DisplayDungeonYesNoMessage_Async(0,str,1) == 1) {
+            if (DisplayDungeonYesNoMessage_Async(0,gUnknown_80FA394,0) == 1) {
                 gDungeon->unk4 = 1;
                 gDungeon->unk11 = 2;
                 return;
             }
         }
-        else if (DisplayDungeonYesNoMessage(0,gUnknown_80FA3B8,0) == 1) {
+        else if (DisplayDungeonYesNoMessage_Async(0,gUnknown_80FA3B8,0) == 1) {
             return;
         }
     }
@@ -151,7 +151,7 @@ void sub_80845E0(Entity *pokemon)
     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],GetLeader(),0);
     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1],pokemon,0);
     if (!sub_8070BC0(pokemon)) {
-        DisplayDungeonMessage(0,gUnknown_80FA530,1);
+        DisplayDungeonMessage_Async(0,gUnknown_80FA530,1);
         return;
     }
 
@@ -166,37 +166,37 @@ void sub_80845E0(Entity *pokemon)
         }
     }
     if (entity == NULL) {
-        DisplayDungeonMessage(0,gUnknown_80FA52C,1);
+        DisplayDungeonMessage_Async(0,gUnknown_80FA52C,1);
         return;
     }
 
     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[2],entity,0);
     if (!sub_8070BC0(entity)) {
-        DisplayDungeonMessage(0,gUnknown_80FA54C,1);
+        DisplayDungeonMessage_Async(0,gUnknown_80FA54C,1);
         return;
     }
     if (!CanSeeTarget(pokemon,entity)) {
-        DisplayDungeonMessage(0,gUnknown_80FA500,1);
+        DisplayDungeonMessage_Async(0,gUnknown_80FA500,1);
         return;
     }
 
-    DisplayDungeonMessage(0,gUnknown_80FA4D4,1);
+    DisplayDungeonMessage_Async(0,gUnknown_80FA4D4,1);
     sub_80843BC(info1->id);
     info2->joinedAt.id = gDungeon->unk644.dungeonLocation.id;
     sub_8042A34(&pokemon->pos);
     sub_8042A34(&entity->pos);
-    HandleFaint(pokemon,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
-    HandleFaint(entity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
-    sub_804178C(1);
-    while(1) {
-        if (DisplayDungeonYesNoMessage(0,gUnknown_80FA4D8,1) == 1) {
-            if (DisplayDungeonYesNoMessage(0,gUnknown_80FA394,0) == 1) {
+    HandleFaint_Async(pokemon,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
+    HandleFaint_Async(entity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
+    sub_804178C_Async(1);
+    while (TRUE) {
+        if (DisplayDungeonYesNoMessage_Async(0,gUnknown_80FA4D8,1) == 1) {
+            if (DisplayDungeonYesNoMessage_Async(0,gUnknown_80FA394,0) == 1) {
                 gDungeon->unk4 = 1;
                 gDungeon->unk11 = 2;
                 return;
             }
         }
-        else if (DisplayDungeonYesNoMessage(0,gUnknown_80FA3B8,0) == 1) {
+        else if (DisplayDungeonYesNoMessage_Async(0,gUnknown_80FA3B8,0) == 1) {
             return;
         }
     }

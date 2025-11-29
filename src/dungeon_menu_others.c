@@ -75,11 +75,11 @@ void ShowDungeonOthersMenu(void)
 
     sOthersCursorId = 0;
     unkAlwaysFalse = FALSE;
-    while (1) {
+    while (TRUE) {
         bool8 bPress = FALSE;
 
         PrintOthersMenuOptions();
-        while (1) {
+        while (TRUE) {
             AddMenuCursorSprite(&gDungeonMenu);
             DungeonRunFrameActions(0x24);
             if (gRealInputs.repeated & DPAD_DOWN) {
@@ -152,11 +152,11 @@ enum {
 
 static void ShowGameOptionsMenu(void)
 {
-    while (1) {
+    while (TRUE) {
         bool8 bPress = FALSE;
 
         PrintGameOptions();
-        while (1) {
+        while (TRUE) {
             AddMenuCursorSprite(&gDungeonMenu);
             DungeonRunFrameActions(0x24);
             if (gRealInputs.repeated & DPAD_DOWN) {
@@ -220,12 +220,12 @@ static bool8 ShowDungeonOptions(void)
     bool8 bPress = FALSE;
 
     gDungeonMenu.menuIndex = 0;
-    while (1) {
+    while (TRUE) {
         bPress = FALSE;
         dpadMoved = FALSE;
 
         PrintDungeonOptions();
-        while (1) {
+        while (TRUE) {
             AddMenuCursorSprite(&gDungeonMenu);
             DungeonRunFrameActions(0x24);
             if (gRealInputs.repeated & DPAD_DOWN) {
@@ -281,12 +281,12 @@ static bool8 ShowOthersOptions(void)
     bool8 bPress = FALSE;
 
     gDungeonMenu.menuIndex = 0;
-    while (1) {
+    while (TRUE) {
         bPress = FALSE;
         dpadMoved = FALSE;
 
         PrintOthersOptions();
-        while (1) {
+        while (TRUE) {
             AddMenuCursorSprite(&gDungeonMenu);
             DungeonRunFrameActions(0x24);
             if (gRealInputs.repeated & DPAD_DOWN) {
@@ -349,7 +349,7 @@ static void TrySetNewGameOptions(bool8 bPressed)
     }
 
     if (optionsChanged) {
-        if (DisplayDungeonYesNoMessage(0, gUnknown_80FEBF8, TRUE) == 1) {
+        if (DisplayDungeonYesNoMessage_Async(0, gUnknown_80FEBF8, TRUE) == 1) {
             *gGameOptionsRef = sChangedGameOptions;
             sub_803E13C();
             LoadDungeonMapPalette();
@@ -359,7 +359,7 @@ static void TrySetNewGameOptions(bool8 bPressed)
 
 static void AskToResetToDefault(void)
 {
-    if (DisplayDungeonYesNoMessage(0, gUnknown_80FEC28, FALSE) == 1) {
+    if (DisplayDungeonYesNoMessage_Async(0, gUnknown_80FEC28, FALSE) == 1) {
         InitializeGameOptions(FALSE);
         sub_803E13C();
     }
@@ -368,11 +368,11 @@ static void AskToResetToDefault(void)
 static void ShowQuickSaveGiveUpMenu(void)
 {
     bool8 unkAlwaysFalse = FALSE;
-    while (1) {
+    while (TRUE) {
         bool8 bPress = FALSE;
 
         PrintQuickSaveMenuOptions();
-        while (1) {
+        while (TRUE) {
             AddMenuCursorSprite(&gDungeonMenu);
             DungeonRunFrameActions(0x24);
             if (gRealInputs.repeated & DPAD_DOWN) {
@@ -417,7 +417,7 @@ static void ShowQuickSaveGiveUpMenu(void)
 
 static void ShowMissionObjectivesMenu(void)
 {
-    sub_80319A4(gDungeon->unk644.unk34, gDungeon->unk644.dungeonLocation.id, 0);
+    sub_80319A4(gDungeon->unk644.missionKind, gDungeon->unk644.dungeonLocation.id, 0);
     do {
         DungeonRunFrameActions(0x47);
     } while (sub_80319F8() == 0);
@@ -426,7 +426,7 @@ static void ShowMissionObjectivesMenu(void)
 
 static bool8 AskToQuickSave(void)
 {
-    if (DisplayDungeonYesNoMessage(NULL, gUnknown_80FDE6C, FALSE) != 1) {
+    if (DisplayDungeonYesNoMessage_Async(NULL, gUnknown_80FDE6C, FALSE) != 1) {
         return TRUE;
     }
     SetMonsterActionFields(GetLeaderActionContainer(), ACTION_QUICK_SAVE);
@@ -435,7 +435,7 @@ static bool8 AskToQuickSave(void)
 
 static bool8 AskToGiveUp(void)
 {
-    if (DisplayDungeonYesNoMessage(NULL, gUnknown_80FDEB8, FALSE) != 1) {
+    if (DisplayDungeonYesNoMessage_Async(NULL, gUnknown_80FDEB8, FALSE) != 1) {
         return TRUE;
     }
     SetMonsterActionFields(GetLeaderActionContainer(), ACTION_GIVE_UP);
@@ -452,10 +452,10 @@ static void PrintOthersMenuOptions(void)
         .id = {
             [0] = {
                 .type = WINDOW_TYPE_WITH_HEADER,
-                .pos = {2, 2},
+                .pos = { 2, 2 },
                 .width = 18,
                 .height = 16,
-                .unk10 = 16,
+                .totalHeight = 16,
                 .unk12 = 0,
                 .header = &header,
             },
@@ -482,7 +482,7 @@ static void PrintOthersMenuOptions(void)
     gDungeonMenu.windowId = 0;
     ResetTouchScreenMenuInput(&gDungeonMenu.touchScreen);
     windows.id[0].width = 18;
-    windows.id[0].height = windows.id[0].unk10 = CalcEntriesTotalHeight(optionsCount, DEFAULT_MENU_ENTRY_HEIGHT) + 2;
+    windows.id[0].height = windows.id[0].totalHeight = CalcEntriesTotalHeight(optionsCount, DEFAULT_MENU_ENTRY_HEIGHT) + 2;
     header.width = 10;
     windows.id[0].pos.x = 2;
     DungeonShowWindows(&windows, TRUE);
@@ -515,10 +515,10 @@ static void PrintQuickSaveMenuOptions(void)
         .id = {
             [0] = {
                 .type = WINDOW_TYPE_WITH_HEADER,
-                .pos = {2, 2},
+                .pos = { 2, 2 },
                 .width = 18,
                 .height = 16,
-                .unk10 = 16,
+                .totalHeight = 16,
                 .unk12 = 0,
                 .header = &header,
             },
@@ -545,7 +545,7 @@ static void PrintQuickSaveMenuOptions(void)
     gDungeonMenu.windowId = 0;
     ResetTouchScreenMenuInput(&gDungeonMenu.touchScreen);
     windows.id[0].width = 18;
-    windows.id[0].height = windows.id[0].unk10 = CalcEntriesTotalHeight(optionsCount, DEFAULT_MENU_ENTRY_HEIGHT) + 2;
+    windows.id[0].height = windows.id[0].totalHeight = CalcEntriesTotalHeight(optionsCount, DEFAULT_MENU_ENTRY_HEIGHT) + 2;
     header.width = 10;
     windows.id[0].pos.x = 2;
     DungeonShowWindows(&windows, TRUE);
@@ -568,10 +568,10 @@ static void PrintGameOptions(void)
         .id = {
             [0] = {
                 .type = WINDOW_TYPE_WITH_HEADER,
-                .pos = {2, 2},
+                .pos = { 2, 2 },
                 .width = 12,
                 .height = 16,
-                .unk10 = 16,
+                .totalHeight = 16,
                 .unk12 = 0,
                 .header = &header,
             },
@@ -598,7 +598,7 @@ static void PrintGameOptions(void)
     gDungeonMenu.windowId = 0;
     ResetTouchScreenMenuInput(&gDungeonMenu.touchScreen);
     windows.id[0].width = 12;
-    windows.id[0].height = windows.id[0].unk10 = CalcEntriesTotalHeight(optionsCount, DEFAULT_MENU_ENTRY_HEIGHT) + 2;
+    windows.id[0].height = windows.id[0].totalHeight = CalcEntriesTotalHeight(optionsCount, DEFAULT_MENU_ENTRY_HEIGHT) + 2;
     header.width = 10;
     windows.id[0].pos.x = 2;
     DungeonShowWindows(&windows, TRUE);
@@ -623,10 +623,10 @@ static void PrintDungeonOptions(void)
         .id = {
             [0] = {
                 .type = WINDOW_TYPE_WITH_HEADER,
-                .pos = {2, 2},
+                .pos = { 2, 2 },
                 .width = 18,
                 .height = 16,
-                .unk10 = 16,
+                .totalHeight = 16,
                 .unk12 = 0,
                 .header = &header,
             },
@@ -653,7 +653,7 @@ static void PrintDungeonOptions(void)
     gDungeonMenu.windowId = 0;
     ResetTouchScreenMenuInput(&gDungeonMenu.touchScreen);
     windows.id[0].width = 24;
-    windows.id[0].height = windows.id[0].unk10 = CalcEntriesTotalHeight(DUNGEON_OPTIONS_COUNT, DEFAULT_MENU_ENTRY_HEIGHT) + 2;
+    windows.id[0].height = windows.id[0].totalHeight = CalcEntriesTotalHeight(DUNGEON_OPTIONS_COUNT, DEFAULT_MENU_ENTRY_HEIGHT) + 2;
     header.width = 10;
     windows.id[0].pos.x = 2;
     DungeonShowWindows(&windows, TRUE);
@@ -714,10 +714,10 @@ static void PrintOthersOptions(void)
         .id = {
             [0] = {
                 .type = WINDOW_TYPE_WITH_HEADER,
-                .pos = {2, 2},
+                .pos = { 2, 2 },
                 .width = 18,
                 .height = 16,
-                .unk10 = 16,
+                .totalHeight = 16,
                 .unk12 = 0,
                 .header = &header,
             },
@@ -744,7 +744,7 @@ static void PrintOthersOptions(void)
     gDungeonMenu.windowId = 0;
     ResetTouchScreenMenuInput(&gDungeonMenu.touchScreen);
     windows.id[0].width = 24;
-    windows.id[0].height = windows.id[0].unk10 = CalcEntriesTotalHeight(OTHERS_OPTIONS_COUNT, DEFAULT_MENU_ENTRY_HEIGHT) + 2;
+    windows.id[0].height = windows.id[0].totalHeight = CalcEntriesTotalHeight(OTHERS_OPTIONS_COUNT, DEFAULT_MENU_ENTRY_HEIGHT) + 2;
     header.width = 10;
     windows.id[0].pos.x = 2;
     DungeonShowWindows(&windows, TRUE);
@@ -843,11 +843,11 @@ static bool8 UnknownOthersOption(void)
 
 static void ShowHintsMenu(void)
 {
-    while (1) {
+    while (TRUE) {
         bool8 bPress = FALSE;
 
         PrintHintsMenu();
-        while (1) {
+        while (TRUE) {
             AddMenuCursorSprite(&gDungeonMenu);
             DungeonRunFrameActions(0x24);
             if (gRealInputs.repeated & DPAD_DOWN) {
@@ -887,10 +887,10 @@ static void PrintHintsMenu(void)
         .id = {
             [0] = {
                 .type = WINDOW_TYPE_WITH_HEADER,
-                .pos = {2, 2},
+                .pos = { 2, 2 },
                 .width = 12,
                 .height = 16,
-                .unk10 = 16,
+                .totalHeight = 16,
                 .unk12 = 0,
                 .header = &header,
             },
@@ -916,7 +916,7 @@ static void PrintHintsMenu(void)
     gDungeonMenu.windowId = 0;
     ResetTouchScreenMenuInput(&gDungeonMenu.touchScreen);
     windows.id[0].width = 12;
-    windows.id[0].height = windows.id[0].unk10 = CalcEntriesTotalHeight(HINTS_COUNT_RED_VERSION, DEFAULT_MENU_ENTRY_HEIGHT) + 2;
+    windows.id[0].height = windows.id[0].totalHeight = CalcEntriesTotalHeight(HINTS_COUNT_RED_VERSION, DEFAULT_MENU_ENTRY_HEIGHT) + 2;
     header.width = 10;
     windows.id[0].pos.x = 2;
     DungeonShowWindows(&windows, TRUE);
@@ -933,17 +933,17 @@ static void ShowChosenHintWindow(s32 hintId)
 {
     bool8 dsControls = (gGameOptionsRef->controls != CONTROLS_GBA);
 
-    while (1) {
+    while (TRUE) {
         bool8 dpadPressed = FALSE;
         WindowHeader header;
         WindowTemplates windows = {
             .id = {
                 [0] = {
                     .type = WINDOW_TYPE_WITH_HEADER,
-                    .pos = {2, 2},
+                    .pos = { 2, 2 },
                     .width = 12,
                     .height = 16,
-                    .unk10 = 16,
+                    .totalHeight = 16,
                     .unk12 = 0,
                     .header = &header,
                 },
@@ -967,7 +967,7 @@ static void ShowChosenHintWindow(s32 hintId)
         gDungeonMenu.windowId = 0;
         ResetTouchScreenMenuInput(&gDungeonMenu.touchScreen);
         windows.id[0].width = 24;
-        windows.id[0].height = windows.id[0].unk10 = CalcEntriesTotalHeight(HINTS_COUNT, DEFAULT_MENU_ENTRY_HEIGHT) + 2;
+        windows.id[0].height = windows.id[0].totalHeight = CalcEntriesTotalHeight(HINTS_COUNT, DEFAULT_MENU_ENTRY_HEIGHT) + 2;
         header.width = 10;
         windows.id[0].pos.x = 2;
         DungeonShowWindows(&windows, TRUE);
@@ -978,7 +978,7 @@ static void ShowChosenHintWindow(s32 hintId)
         PrintFormattedStringOnWindow(8, 16, gHintsDescriptions[dsControls][hintId], 0, '\0');
         sub_80073E0(0);
 
-        while (1) {
+        while (TRUE) {
             AddMenuCursorSprite(&gDungeonMenu);
             DungeonRunFrameActions(0x24);
             if ((gRealInputs.pressed & DPAD_RIGHT) || gDungeonMenu.touchScreen.dpad_right) {

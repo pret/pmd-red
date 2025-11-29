@@ -13,7 +13,7 @@ static const struct ScriptCommand s_gs223_g0_s0_station_sref_script[] = { /* 0x8
     JUMP_SCRIPT(COMMON_ENTER),
 };
 
-static const struct ScriptRef s_gs223_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs223_g0_s0_station_sref_script }; /* 0x826dfec */
+static const struct ScriptRef s_gs223_g0_s0_station_sref = { ENTER_CONTROL , 1, NULL, s_gs223_g0_s0_station_sref_script }; /* 0x826dfec */
 
 static const struct ScriptCommand s_gs223_g1_s0_station_sref_script[] = { /* 0x826dff8 - PART 1 0:00:31-0:00:45 - New game intro to personality test */
     DEBUGINFO_O(19),
@@ -27,7 +27,7 @@ static const struct ScriptCommand s_gs223_g1_s0_station_sref_script[] = { /* 0x8
     MSG_ON_BG(_("{CENTER_ALIGN}OK...{WAIT_PRESS}\n{CENTER_ALIGN}Let the interview begin!")),
     TEXTBOX_CLEAR,
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(12),
+    BGM_SWITCH(MUS_WELCOME_TO_THE_WORLD_OF_POKEMON),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     SPECIAL_TEXT(SPECIAL_TEXT_PERSONALITY_QUIZ, 0, 0),
     BGM_FADEOUT(30),
@@ -35,7 +35,7 @@ static const struct ScriptCommand s_gs223_g1_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs223_g1_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs223_g1_s0_station_sref_script }; /* 0x826e200 */
+static const struct ScriptRef s_gs223_g1_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs223_g1_s0_station_sref_script }; /* 0x826e200 */
 static const struct GroundEffectData s_gs223_g1_s0_effs[] = { /* 0x826e20c */
     /*  0 */ {   0,   0,   1,   1, {  30,  19, CPOS_HALFTILE, CPOS_HALFTILE }, NULL },
 };
@@ -62,4 +62,4 @@ static const struct GroundLink s_gs223_links[] = { /* 0x826e280 */
     {},
 };
 
-/*extern*/ const struct GroundScriptHeader gGroundScript_gs223 = { LPARRAY(s_gs223_groups), s_gs223_links }; /* 0x826e288 */
+const GroundScriptHeader gGroundScript_gs223 = { LPARRAY(s_gs223_groups), s_gs223_links }; /* 0x826e288 */

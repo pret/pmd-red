@@ -16,13 +16,13 @@ static const struct ScriptCommand s_gs188_g0_s0_station_sref_script[] = { /* 0x8
     JUMP_SCRIPT(COMMON_ENTER),
 };
 
-static const struct ScriptRef s_gs188_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs188_g0_s0_station_sref_script }; /* 0x82391e4 */
+static const struct ScriptRef s_gs188_g0_s0_station_sref = { ENTER_CONTROL , 1, NULL, s_gs188_g0_s0_station_sref_script }; /* 0x82391e4 */
 
 static const struct ScriptCommand s_gs188_g1_s0_station_sref_script[] = { /* 0x82391f0 */
     DEBUGINFO_O(22),
     SELECT_MAP(MAP_MT_THUNDER_ENTRY),
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(111),
+    BGM_SWITCH(MUS_MT_THUNDER),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     { 0x23, 0x01,  0x0001,  0x00000000,  0x00000000, NULL },
@@ -30,7 +30,7 @@ static const struct ScriptCommand s_gs188_g1_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs188_g1_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs188_g1_s0_station_sref_script }; /* 0x8239280 */
+static const struct ScriptRef s_gs188_g1_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs188_g1_s0_station_sref_script }; /* 0x8239280 */
 
 static const struct ScriptCommand s_gs188_g1_s0_eff0_script[] = { /* 0x823928c */
     DEBUGINFO_O(36),
@@ -67,7 +67,7 @@ static const struct ScriptCommand s_gs188_g1_s0_lives0_dlg0[] = { /* 0x82392cc *
     TEXTBOX_CLEAR,
     WAIT(30),
     ALERT_CUE(6),
-    ROTATE(4, 1, DIRECTION_EAST),
+    ROTATE_TO(4, DIR_TRANS_SPINRIGHT1, DIRECTION_EAST),
     PORTRAIT_REP(0x0001, 0x00000000),
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
     VARIANT(/* == */  1, _(" But I can't be spooked\nby this.")),
@@ -96,7 +96,7 @@ static const struct ScriptCommand s_gs188_g1_s0_lives1_dlg0[] = { /* 0x8239824 *
     { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(6),
     WALK_GRID(256, 1),
-    ROTATE(4, 2, DIRECTION_NORTH),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_NORTH),
     WAIT(8),
     CALL_SCRIPT(LOOK_AROUND_FUNC),
     ALERT_CUE(5),
@@ -105,7 +105,7 @@ static const struct ScriptCommand s_gs188_g1_s0_lives1_dlg0[] = { /* 0x8239824 *
     WAIT(30),
     SELECT_ANIMATION(2),
     AWAIT_CUE(6),
-    ROTATE(4, 2, DIRECTION_WEST),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_WEST),
     AWAIT_CUE(6),
     { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
     WALK_GRID(256, 2),
@@ -116,7 +116,7 @@ static const struct ScriptCommand s_gs188_g2_s0_station_sref_script[] = { /* 0x8
     DEBUGINFO_O(116),
     SELECT_MAP(MAP_MT_THUNDER_ENTRY),
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(111),
+    BGM_SWITCH(MUS_MT_THUNDER),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     { 0x23, 0x01,  0x0001,  0x00000000,  0x00000000, NULL },
@@ -124,7 +124,7 @@ static const struct ScriptCommand s_gs188_g2_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs188_g2_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs188_g2_s0_station_sref_script }; /* 0x82399e4 */
+static const struct ScriptRef s_gs188_g2_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs188_g2_s0_station_sref_script }; /* 0x82399e4 */
 
 static const struct ScriptCommand s_gs188_g2_s0_eff0_script[] = { /* 0x82399f0 */
     DEBUGINFO_O(130),
@@ -142,7 +142,7 @@ static const struct ScriptCommand s_gs188_g2_s0_lives0_dlg0[] = { /* 0x8239a30 *
     ALERT_CUE(6),
     WALK_GRID(256, 0),
     AWAIT_CUE(5),
-    ROTATE(4, 1, DIRECTION_EAST),
+    ROTATE_TO(4, DIR_TRANS_SPINRIGHT1, DIRECTION_EAST),
     WAIT(20),
     PORTRAIT(PLACEMENT_RIGHT, 0x0001, 0x00000000),
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
@@ -167,7 +167,7 @@ static const struct ScriptCommand s_gs188_g2_s0_lives1_dlg0[] = { /* 0x8239c48 *
     { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(6),
     WALK_GRID(256, 1),
-    ROTATE(4, 2, DIRECTION_WEST),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_WEST),
     WAIT(8),
     ALERT_CUE(5),
     AWAIT_CUE(6),
@@ -233,4 +233,4 @@ static const struct GroundLink s_gs188_links[] = { /* 0x8239e24 */
     /* link   2 */ { { /*x*/  25, /*y*/  11, /*flags*/ CPOS_HALFTILE, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
 };
 
-/*extern*/ const struct GroundScriptHeader gGroundScript_gs188 = { LPARRAY(s_gs188_groups), s_gs188_links }; /* 0x8239e3c */
+const GroundScriptHeader gGroundScript_gs188 = { LPARRAY(s_gs188_groups), s_gs188_links }; /* 0x8239e3c */

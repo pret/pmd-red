@@ -33,7 +33,7 @@ EWRAM_DATA s32 gUnknown_202DE28 = {0};
 
 EWRAM_INIT u32 gUnknown_203B17C = {0};
 EWRAM_INIT const char *gUnknown_203B180 = {"POKE_DUNGEON__05"};
-EWRAM_INIT struct UnkStruct_203B184 *gUnknown_203B184 = {NULL};
+EWRAM_INIT UnkStruct_203B184 *gUnknown_203B184 = { NULL };
 
 ALIGNED(4) static const char fill_save0[] = _("pksdir0");
 ALIGNED(4) static const char fill_save1[] = _("pksdir0");
@@ -473,23 +473,23 @@ UNUSED static void nullsub_200(u32 r0)
 {
 }
 
-UNUSED static void sub_8012334(struct UnkStruct_203B184 *r0)
+UNUSED static void sub_8012334(UnkStruct_203B184 *data)
 {
-    gUnknown_203B184 = r0;
-    if (r0 != NULL) {
-        gTeamInventoryRef = r0->MoneyItems;
-        gRecruitedPokemonRef = r0->recruitedPokemon;
-        gUnknown_203B480 = r0->unk8;
-        gUnknown_203B484 = r0->unkC;
-        gUnknown_203B488 = r0->unk10;
-        gUnknown_203B48C = r0->unk14;
-        gUnknown_203B490 = r0->mailInfo;
-        gRescueTeamInfoRef = r0->RescueTeamInfo;
-        gUnknown_203B494 = r0->unk20;
-        gUnknown_203B498 = r0->ExclusivePokemon;
-        gFriendAreas = r0->BoughtFriendAreas;
-        gGameOptionsRef = r0->gameOptions;
-        gPlayTimeRef = r0->playTime;
+    gUnknown_203B184 = data;
+    if (data != NULL) {
+        gTeamInventoryRef = data->MoneyItems;
+        gRecruitedPokemonRef = data->recruitedPokemon;
+        gUnknown_203B480 = data->unk8;
+        gUnknown_203B484 = data->unkC;
+        gUnknown_203B488 = data->unk10;
+        gUnknown_203B48C = data->unk14;
+        gUnknown_203B490 = data->mailInfo;
+        gRescueTeamInfoRef = data->RescueTeamInfo;
+        gUnknown_203B494 = data->unk20;
+        gExclusiveMonPtr = data->exclusivePokemon;
+        gFriendAreas = data->BoughtFriendAreas;
+        gGameOptionsRef = data->gameOptions;
+        gPlayTimeRef = data->playTime;
     }
     else {
         gTeamInventoryRef = GetMoneyItemsInfo();
@@ -501,7 +501,7 @@ UNUSED static void sub_8012334(struct UnkStruct_203B184 *r0)
         gUnknown_203B490 = GetMailInfo();
         gRescueTeamInfoRef = GetRescueTeamInfo();
         gUnknown_203B494 = sub_8097680();
-        gUnknown_203B498 = GetExclusivePokemon();
+        gExclusiveMonPtr = GetExclusivePokemon();
         gFriendAreas = GetBoughtFriendAreas();
         gGameOptionsRef = GetGameOptions();
         gPlayTimeRef = GetPlayTime();

@@ -40,10 +40,10 @@ struct WorldMap
 
 struct WorldMapInfo
 {
-    DungeonLocation startLocation;
+    /* 0x0 */ DungeonLocation startLocation;
     DungeonSetupSubstruct unk4;
-    Pokemon mon;
-    u8 unk6C;
+    /* 0x14 */ Pokemon mon;
+    /* 0x6C */ bool8 canChangeLeader;
     u8 unk6D[WORLD_MAP_UNK_6D_COUNT];
 };
 

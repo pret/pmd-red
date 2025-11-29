@@ -58,10 +58,10 @@ void sub_808C3A0(void)
   CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_DEOXYS_NORMAL);
 }
 
-void sub_808C414(u8 param_1,u8 param_2,u8 param_3)
+void HandleDeoxysNormalBossFaint(u8 monsterBehavior, u8 cutscene, bool8 transformedIntoFriend)
 {
-  if ((param_2 == 0x35) && (param_1 == 0x1D)) {
-    gDungeon->unk2 = 1;
+  if (cutscene == CUTSCENE_METEOR_CAVE && monsterBehavior == BEHAVIOR_DEOXYS_NORMAL) {
+    gDungeon->unk2 = DUNGEON_UNK2_1;
     DungeonStartNewBGM(MUS_RAYQUAZAS_DOMAIN);
   }
 }
@@ -78,15 +78,15 @@ void DeoxysPreFightDialogue(void)
     sub_80866C4(&gDeoxysPreFightDialogue_5);
   }
   else {
-    DisplayDungeonDialogue(&gDeoxysPreFightDialogue_1);
+    DisplayDungeonDialogue_Async(&gDeoxysPreFightDialogue_1);
     DungeonFadeInNewBGM(MUS_RAYQUAZAS_DOMAIN, 0x3c);
     sub_808C550();
-    DisplayDungeonDialogue(&gDeoxysPreFightDialogue_2);
+    DisplayDungeonDialogue_Async(&gDeoxysPreFightDialogue_2);
     DeoxysScreenFlash();
-    DisplayDungeonDialogue(&gDeoxysPreFightDialogue_3);
+    DisplayDungeonDialogue_Async(&gDeoxysPreFightDialogue_3);
     DeoxysScreenFlash();
-    DisplayDungeonDialogue(&gDeoxysPreFightDialogue_4);
-    sub_803E708(10,0x46);
+    DisplayDungeonDialogue_Async(&gDeoxysPreFightDialogue_4);
+    DungeonWaitFrames_Async(10,0x46);
     sub_808563C(SetupDeoxysFightHP);
     ShiftCameraToPosition(&leaderEntity->pixelPos,0x10);
   }
@@ -101,17 +101,17 @@ static void DeoxysScreenFlash(void)
     SetDungeonBGColorRGB(iVar1,0,0,1,1);
     DungeonRunFrameActions(0x46);
   }
-  sub_803E708(10,0x46);
+  DungeonWaitFrames_Async(10,0x46);
   for(iVar1 = 250; iVar1 > 199; iVar1 -= 10){
     SetDungeonBGColorRGB(iVar1,iVar1,0,1,1);
     DungeonRunFrameActions(0x46);
   }
-  sub_803E708(10,0x46);
+  DungeonWaitFrames_Async(10,0x46);
   for(iVar1 = 250; iVar1 >= 0; iVar1 -= 10){
     SetDungeonBGColorRGB(iVar1,0,0,1,1);
     DungeonRunFrameActions(0x46);
   }
-  sub_803E708(10,0x46);
+  DungeonWaitFrames_Async(10,0x46);
   sub_8085EB0();
 }
 
@@ -127,7 +127,7 @@ static void sub_808C550(void)
 
 static void sub_808C590(Entity *r0)
 {
-    HandleFaint(r0, DUNGEON_EXIT_DELETED_FOR_EVENT, 0);
+    HandleFaint_Async(r0, DUNGEON_EXIT_DELETED_FOR_EVENT, 0);
 }
 
 static void SetupDeoxysFacingDirection(Entity *deoxysEntity)

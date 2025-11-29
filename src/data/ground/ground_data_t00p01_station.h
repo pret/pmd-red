@@ -10,10 +10,10 @@ static const struct ScriptCommand s_gs0_g0_s0_station_sref_script[] = { /* 0x813
     DEBUGINFO_O(10),
     SELECT_MAP(0),
     SELECT_ENTITIES(1, 0),
-    JUMPIF_EQUAL(START_MODE, 1, /* to label */ 2),
-    JUMPIF_EQUAL(START_MODE, 3, /* to label */ 3),
-    JUMPIF_EQUAL(START_MODE, 2, /* to label */ 4),
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 4),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_CONTINUE_GAME, /* to label */ 2),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_3, /* to label */ 3),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_GROUND, /* to label */ 4),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 4),
     JUMP_LABEL(2),
   LABEL(4), /* = 0x04 */
     CJUMP_VAR(GROUND_GETOUT),
@@ -36,11 +36,11 @@ static const struct ScriptCommand s_gs0_g0_s0_station_sref_script[] = { /* 0x813
     SELECT_LIVES(0, 3),
     JUMP_LABEL(7),
   LABEL(7), /* = 0x07 */
-    BGM_SWITCH(7),
+    BGM_SWITCH(MUS_POKEMON_SQUARE),
     JUMP_SCRIPT(COMMON_ENTER),
 };
 
-static const struct ScriptRef s_gs0_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs0_g0_s0_station_sref_script }; /* 0x8132918 */
+static const struct ScriptRef s_gs0_g0_s0_station_sref = { ENTER_CONTROL , 1, NULL, s_gs0_g0_s0_station_sref_script }; /* 0x8132918 */
 
 
 
@@ -50,21 +50,21 @@ static const struct ScriptCommand s_gs0_g0_s0_evt0_sref_script[] = { /* 0x813292
     RET,
 };
 
-static const struct ScriptRef s_gs0_g0_s0_evt0_sref = { 357, 2, NULL /* GETOUT_NORMAL */, s_gs0_g0_s0_evt0_sref_script }; /* 0x8132944 */
+static const struct ScriptRef s_gs0_g0_s0_evt0_sref = { GETOUT_NORMAL, 2, NULL, s_gs0_g0_s0_evt0_sref_script }; /* 0x8132944 */
 
 static const struct ScriptCommand s_gs0_g0_s0_evt1_sref_script[] = { /* 0x8132950 */
     DEBUGINFO_O(56),
     RET,
 };
 
-static const struct ScriptRef s_gs0_g0_s0_evt1_sref = { 357, 2, NULL /* GETOUT_NORMAL */, s_gs0_g0_s0_evt1_sref_script }; /* 0x8132970 */
+static const struct ScriptRef s_gs0_g0_s0_evt1_sref = { GETOUT_NORMAL, 2, NULL, s_gs0_g0_s0_evt1_sref_script }; /* 0x8132970 */
 
 static const struct ScriptCommand s_gs0_g0_s0_evt2_sref_script[] = { /* 0x813297c */
     DEBUGINFO_O(63),
     RET,
 };
 
-static const struct ScriptRef s_gs0_g0_s0_evt2_sref = { 357, 2, NULL /* GETOUT_NORMAL */, s_gs0_g0_s0_evt2_sref_script }; /* 0x813299c */
+static const struct ScriptRef s_gs0_g0_s0_evt2_sref = { GETOUT_NORMAL, 2, NULL, s_gs0_g0_s0_evt2_sref_script }; /* 0x813299c */
 
 static const struct ScriptCommand s_gs0_g0_s1_lives0_dlg0[] = { /* 0x81329a8 */
     DEBUGINFO_O(70),
@@ -1484,4 +1484,4 @@ static const struct GroundLink s_gs0_links[] = { /* 0x813824c */
     {},
 };
 
-/*extern*/ const struct GroundScriptHeader gGroundScript_gs0 = { LPARRAY(s_gs0_groups), s_gs0_links }; /* 0x8138254 */
+const GroundScriptHeader gGroundScript_gs0 = { LPARRAY(s_gs0_groups), s_gs0_links }; /* 0x8138254 */

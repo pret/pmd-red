@@ -96,7 +96,7 @@ u32 sub_802465C(void)
     sLuminousCaveWork->menuAction1 = 0;
     sLuminousCaveWork->menuAction2 = 0;
     sLuminousCaveWork->menuAction3 = 0;
-    sLuminousCaveWork->pokeStruct = GetPlayerPokemonStruct();
+    sLuminousCaveWork->pokeStruct = GetLeaderMon1();
     sLuminousCaveWork->pokeRenamed = IsPokemonRenamed(sLuminousCaveWork->pokeStruct);
     sLuminousCaveWork->evolutionComplete = FALSE;
     faceFile = GetDialogueSpriteDataPtr(MONSTER_GULPIN);
@@ -315,7 +315,7 @@ static void UpdateLuminousCaveDialogue(void)
             IncrementNumEvolved();
             sub_808F734(sLuminousCaveWork->pokeStruct,sLuminousCaveWork->evolveStatus.targetEvolveSpecies);
             nullsub_104();
-            sLuminousCaveWork->pokeStruct = GetPlayerPokemonStruct();
+            sLuminousCaveWork->pokeStruct = GetLeaderMon1();
             if (sLuminousCaveWork->evoItem1_InvIndex != INVENTORY_SIZE) {
                 ClearItemSlotAt(sLuminousCaveWork->evoItem1_InvIndex);
             }

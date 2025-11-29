@@ -1,16 +1,8 @@
 
-
-
-
-
-
-
-
-
 static const struct ScriptCommand s_gs198_g0_s0_station_sref_script[] = { /* 0x824bbfc */
     DEBUGINFO_O(11),
-    JUMPIF_SCENARIOCHECK(5, /* to label */ 0),
-    EXECUTE_STATION(12, 0, 0),
+    JUMPIF_SCENARIOCHECK(QUEST_UNK5, /* to label */ 0),
+    EXECUTE_STATION(MAP_TEAM_BASE_INSIDE, 0, 0),
   LABEL(0), /* = 0x00 */
     SELECT_MAP(MAP_FROSTY_FOREST_ENTRY),
     CJUMP_SCENARIO_0(SCENARIO_MAIN),
@@ -22,13 +14,13 @@ static const struct ScriptCommand s_gs198_g0_s0_station_sref_script[] = { /* 0x8
     CALL_STATION(  2,  0),
     JUMP_LABEL(2),
   LABEL(2), /* = 0x02 */
-    JUMPIF_EQUAL(START_MODE, 1, /* to label */ 3),
-    JUMPIF_EQUAL(START_MODE, 3, /* to label */ 4),
-    JUMPIF_EQUAL(START_MODE, 2, /* to label */ 5),
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 6),
-    JUMPIF_EQUAL(START_MODE, 10, /* to label */ 6),
-    JUMPIF_EQUAL(START_MODE, 12, /* to label */ 6),
-    JUMPIF_EQUAL(START_MODE, 11, /* to label */ 6),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_CONTINUE_GAME, /* to label */ 3),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_3, /* to label */ 4),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_GROUND, /* to label */ 5),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 6),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_10, /* to label */ 6),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_LOST, /* to label */ 6),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_11, /* to label */ 6),
     JUMP_LABEL(3),
   LABEL(5), /* = 0x05 */
     CJUMP_VAR(GROUND_GETOUT),
@@ -47,11 +39,11 @@ static const struct ScriptCommand s_gs198_g0_s0_station_sref_script[] = { /* 0x8
     SELECT_LIVES(0, 2),
     JUMP_LABEL(8),
   LABEL(8), /* = 0x08 */
-    BGM_SWITCH(36),
+    BGM_SWITCH(MUS_ESCAPE_THROUGH_THE_SNOW),
     JUMP_SCRIPT(COMMON_ENTER),
 };
 
-static const struct ScriptRef s_gs198_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs198_g0_s0_station_sref_script }; /* 0x824beb8 */
+static const struct ScriptRef s_gs198_g0_s0_station_sref = { ENTER_CONTROL , 1, NULL, s_gs198_g0_s0_station_sref_script }; /* 0x824beb8 */
 
 static const struct ScriptCommand s_gs198_g0_s0_obj0_dlg2[] = { /* 0x824bec4 */
     DEBUGINFO_O(57),
@@ -134,14 +126,14 @@ static const struct ScriptCommand s_gs198_g1_s0_station_sref_script[] = { /* 0x8
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     SELECT_MAP(MAP_FROSTY_FOREST_ENTRY),
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(36),
+    BGM_SWITCH(MUS_ESCAPE_THROUGH_THE_SNOW),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     CALL_STATION(  2,  0),
     RET,
 };
 
-static const struct ScriptRef s_gs198_g1_s0_station_sref = { 402, 7, NULL /* EVENT_STATION */, s_gs198_g1_s0_station_sref_script }; /* 0x824c204 */
+static const struct ScriptRef s_gs198_g1_s0_station_sref = { EVENT_STATION , 7, NULL, s_gs198_g1_s0_station_sref_script }; /* 0x824c204 */
 
 static const struct ScriptCommand s_gs198_g1_s0_eff0_script[] = { /* 0x824c210 */
     DEBUGINFO_O(147),
@@ -176,7 +168,7 @@ static const struct ScriptCommand s_gs198_g1_s0_lives0_dlg0[] = { /* 0x824c290 *
     VARIANT_DEFAULT(_(" But hiding out in this area\nisn't the answer either...")),
     VARIANT_DEFAULT(_(" We can only go forward.{WAIT_PRESS}\nWe'll just have to keep our spirits up\nand keep going, {NAME_0}!")),
     TEXTBOX_CLEAR,
-    ROTATE(4, 2, DIRECTION_WEST),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_WEST),
     WAIT(10),
     { 0x9b, 0x00,  0x0100,  0x00000000,  0x00000000, NULL },
     ALERT_CUE(3),
@@ -189,7 +181,7 @@ static const struct ScriptCommand s_gs198_g1_s0_lives1_dlg0[] = { /* 0x824c670 *
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(6),
-    ROTATE(4, 1, DIRECTION_EAST),
+    ROTATE_TO(4, DIR_TRANS_SPINRIGHT1, DIRECTION_EAST),
     HALT,
 };
 
@@ -199,7 +191,7 @@ static const struct ScriptCommand s_gs198_g2_s0_station_sref_script[] = { /* 0x8
     RET_DIRECT,
 };
 
-static const struct ScriptRef s_gs198_g2_s0_station_sref = { 403, 8, NULL /* STATION_CONTROL */, s_gs198_g2_s0_station_sref_script }; /* 0x824c700 */
+static const struct ScriptRef s_gs198_g2_s0_station_sref = { STATION_CONTROL , 8, NULL, s_gs198_g2_s0_station_sref_script }; /* 0x824c700 */
 
 static const struct ScriptCommand s_gs198_g2_s0_lives0_dlg2[] = { /* 0x824c70c */
     DEBUGINFO_O(205),
@@ -213,7 +205,7 @@ static const struct ScriptCommand s_gs198_g2_s0_evt0_sref_script[] = { /* 0x824c
     HALT,
 };
 
-static const struct ScriptRef s_gs198_g2_s0_evt0_sref = { 357, 2, NULL /* GETOUT_NORMAL */, s_gs198_g2_s0_evt0_sref_script }; /* 0x824c76c */
+static const struct ScriptRef s_gs198_g2_s0_evt0_sref = { GETOUT_NORMAL, 2, NULL, s_gs198_g2_s0_evt0_sref_script }; /* 0x824c76c */
 
 static const struct ScriptCommand s_gs198_g2_s1_station_sref_script[] = { /* 0x824c778 */
     DEBUGINFO_O(219),
@@ -223,14 +215,14 @@ static const struct ScriptCommand s_gs198_g2_s1_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs198_g2_s1_station_sref = { 401, 7, NULL /* EVENT_WAKEUP */, s_gs198_g2_s1_station_sref_script }; /* 0x824c7c8 */
+static const struct ScriptRef s_gs198_g2_s1_station_sref = { EVENT_WAKEUP, 7, NULL, s_gs198_g2_s1_station_sref_script }; /* 0x824c7c8 */
 
 static const struct ScriptCommand s_gs198_g2_s1_lives0_dlg0[] = { /* 0x824c7d4 */
     DEBUGINFO_O(229),
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x8e, 0x01,  0x0000,  0x00000022,  0x00000000, NULL },
+    CMD_UNK_8E(1, DIR_TRANS_NONE, 34),
     ASK3_VAR( TRUE, /*default*/ -1, /* speaker */ 1, PARTNER_TALK_KIND),
     VARIANT(/* == */  1, _(" {NAME_0}, are you ready\nto roll?")),
     VARIANT_DEFAULT(_(" {NAME_0}, are you\nready?")),
@@ -316,7 +308,7 @@ static const struct ScriptCommand s_gs198_g2_s1_lives1_dlg0[] = { /* 0x824cea4 *
     SELECT_ANIMATION(2),
     { 0x53, 0x00,  0x0000,  0x00000400,  0x00000000, NULL },
     { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
-    { 0x8e, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_8E(1, DIR_TRANS_NONE, 0),
     AWAIT_CUE(6),
     CJUMP_UNK_C8(0),
     COND_EQUAL(0, /* to label */ 0),
@@ -343,14 +335,14 @@ static const struct ScriptCommand s_gs198_g3_s0_station_sref_script[] = { /* 0x8
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     SELECT_MAP(MAP_FROSTY_FOREST_ENTRY),
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(36),
+    BGM_SWITCH(MUS_ESCAPE_THROUGH_THE_SNOW),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     CALL_STATION(  2,  0),
     RET,
 };
 
-static const struct ScriptRef s_gs198_g3_s0_station_sref = { 402, 7, NULL /* EVENT_STATION */, s_gs198_g3_s0_station_sref_script }; /* 0x824d0b4 */
+static const struct ScriptRef s_gs198_g3_s0_station_sref = { EVENT_STATION , 7, NULL, s_gs198_g3_s0_station_sref_script }; /* 0x824d0b4 */
 
 static const struct ScriptCommand s_gs198_g3_s0_lives0_dlg0[] = { /* 0x824d0c0 */
     DEBUGINFO_O(356),
@@ -391,7 +383,7 @@ static const struct ScriptCommand s_gs198_g3_s0_lives1_dlg0[] = { /* 0x824d364 *
     CALL_SCRIPT(LOOK_AROUND_FUNC),
     ALERT_CUE(5),
     AWAIT_CUE(6),
-    ROTATE(4, 2, DIRECTION_EAST),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_EAST),
     AWAIT_CUE(6),
     HALT,
 };
@@ -405,14 +397,14 @@ static const struct ScriptCommand s_gs198_g4_s0_station_sref_script[] = { /* 0x8
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     SELECT_MAP(MAP_FROSTY_FOREST_ENTRY),
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(36),
+    BGM_SWITCH(MUS_ESCAPE_THROUGH_THE_SNOW),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     CALL_STATION(  2,  0),
     RET,
 };
 
-static const struct ScriptRef s_gs198_g4_s0_station_sref = { 402, 7, NULL /* EVENT_STATION */, s_gs198_g4_s0_station_sref_script }; /* 0x824d4f4 */
+static const struct ScriptRef s_gs198_g4_s0_station_sref = { EVENT_STATION , 7, NULL, s_gs198_g4_s0_station_sref_script }; /* 0x824d4f4 */
 
 static const struct ScriptCommand s_gs198_g4_s0_lives0_dlg0[] = { /* 0x824d500 */
     DEBUGINFO_O(418),
@@ -421,7 +413,7 @@ static const struct ScriptCommand s_gs198_g4_s0_lives0_dlg0[] = { /* 0x824d500 *
     { 0xdf, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
     CALL_SCRIPT(WAKEUP_FUNC),
     SELECT_ANIMATION(2),
-    ROTATE(4, 1, DIRECTION_WEST),
+    ROTATE_TO(4, DIR_TRANS_SPINRIGHT1, DIRECTION_WEST),
     WAIT(30),
     { 0x2d, 0x09,  0x0002,  0x00000066,  0x00000000, NULL },
     PORTRAIT(PLACEMENT_LEFT_, 0x0001, 0x00000002),
@@ -450,7 +442,7 @@ static const struct ScriptCommand s_gs198_g4_s0_lives1_dlg0[] = { /* 0x824d834 *
     { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
     CALL_SCRIPT(WAKEUP_FUNC),
     SELECT_ANIMATION(2),
-    ROTATE(4, 2, DIRECTION_EAST),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_EAST),
     HALT,
 };
 
@@ -463,14 +455,14 @@ static const struct ScriptCommand s_gs198_g5_s0_station_sref_script[] = { /* 0x8
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     SELECT_MAP(MAP_FROSTY_FOREST_ENTRY),
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(36),
+    BGM_SWITCH(MUS_ESCAPE_THROUGH_THE_SNOW),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     CALL_STATION(  2,  0),
     RET,
 };
 
-static const struct ScriptRef s_gs198_g5_s0_station_sref = { 402, 7, NULL /* EVENT_STATION */, s_gs198_g5_s0_station_sref_script }; /* 0x824d974 */
+static const struct ScriptRef s_gs198_g5_s0_station_sref = { EVENT_STATION , 7, NULL, s_gs198_g5_s0_station_sref_script }; /* 0x824d974 */
 
 static const struct ScriptCommand s_gs198_g5_s0_lives0_dlg0[] = { /* 0x824d980 */
     DEBUGINFO_O(476),
@@ -513,11 +505,11 @@ static const struct ScriptCommand s_gs198_g5_s0_lives1_dlg0[] = { /* 0x824dd18 *
     { 0x89, 0x20,  0x0080,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(6),
     CALL_SCRIPT(NOTICE_FUNC),
-    { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_E5(5, 0),
     AWAIT_CUE(6),
     CALL_SCRIPT(LOOK_AROUND_FUNC),
     AWAIT_CUE(6),
-    { 0x93, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 0),
     ALERT_CUE(5),
     AWAIT_CUE(6),
     HALT,
@@ -532,14 +524,14 @@ static const struct ScriptCommand s_gs198_g6_s0_station_sref_script[] = { /* 0x8
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     SELECT_MAP(MAP_FROSTY_FOREST_ENTRY),
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(36),
+    BGM_SWITCH(MUS_ESCAPE_THROUGH_THE_SNOW),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     CALL_STATION(  2,  0),
     RET,
 };
 
-static const struct ScriptRef s_gs198_g6_s0_station_sref = { 402, 7, NULL /* EVENT_STATION */, s_gs198_g6_s0_station_sref_script }; /* 0x824dec8 */
+static const struct ScriptRef s_gs198_g6_s0_station_sref = { EVENT_STATION , 7, NULL, s_gs198_g6_s0_station_sref_script }; /* 0x824dec8 */
 
 static const struct ScriptCommand s_gs198_g6_s0_lives0_dlg0[] = { /* 0x824ded4 */
     DEBUGINFO_O(545),
@@ -550,7 +542,7 @@ static const struct ScriptCommand s_gs198_g6_s0_lives0_dlg0[] = { /* 0x824ded4 *
     CALL_SCRIPT(WAKEUP_FUNC),
     CALL_SCRIPT(LOOK_AROUND_RIGHT_FUNC),
     AWAIT_CUE(5),
-    { 0x93, 0x04,  0x000a,  0x00000022,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 34),
     PORTRAIT(PLACEMENT_LEFT_, 0x0001, 0x00000002),
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
     VARIANT(/* == */  1, _(" Urrggh...{WAIT_PRESS}\nWe couldn't get through...")),
@@ -579,7 +571,7 @@ static const struct ScriptCommand s_gs198_g6_s0_lives1_dlg0[] = { /* 0x824e0f8 *
     CALL_SCRIPT(LOOK_AROUND_FUNC),
     ALERT_CUE(5),
     AWAIT_CUE(6),
-    { 0x93, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 0),
     ALERT_CUE(5),
     AWAIT_CUE(6),
     HALT,
@@ -788,4 +780,4 @@ static const struct GroundLink s_gs198_links[] = { /* 0x824e6f8 */
     /* link   0 */ { { /*x*/  17, /*y*/  27, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
 };
 
-/*extern*/ const struct GroundScriptHeader gGroundScript_gs198 = { LPARRAY(s_gs198_groups), s_gs198_links }; /* 0x824e700 */
+const GroundScriptHeader gGroundScript_gs198 = { LPARRAY(s_gs198_groups), s_gs198_links }; /* 0x824e700 */

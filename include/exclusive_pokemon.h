@@ -1,29 +1,29 @@
 #ifndef GUARD_EXCLUSIVE_POKEMON_H
 #define GUARD_EXCLUSIVE_POKEMON_H
 
+#include "constants/cutscenes.h"
+#include "constants/tutorial_id.h"
 #include "data_serializer.h"
-
 
 #define NUM_EXCLUSIVE_POKEMON 12
 
+// Size: 0x4
 struct ExclusivePokemon
 {
-    s16 poke_id;
-    bool8 in_rrt; // red rescue team
-    bool8 in_brt; // blue rescue team
+    /* 0x0 */ s16 poke_id;
+    /* 0x2 */ bool8 in_rrt; // red rescue team
+    /* 0x3 */ bool8 in_brt; // blue rescue team
 };
 
-struct ExclusivePokemonData
+typedef struct ExclusivePokemonData
 {
-    u8 unk0;
-    u32 unk4[1];
-    u8 fill8[0x3C - 8];
-    u32 unk3C[1];
-    u8 fill40[8];
-    u32 unk48[3];
-    u32 unk54[1];
-    /* 0x58 */ bool8 Exclusives[NUM_EXCLUSIVE_POKEMON];
-};
+    /* 0x00 */ bool8 unk0; // Initialized?
+    /* 0x04 */ u32 monSeenFlags[MONSTER_FLAGS_U32STORAGE];
+    /* 0x3C */ u32 cutsceneFlags[CUTSCENE_FLAGS_U32STORAGE];
+    /* 0x48 */ u32 tempCutsceneFlags[CUTSCENE_FLAGS_U32STORAGE];
+    /* 0x54 */ u32 tutorialFlags[TUTORIAL_FLAGS_U32STORAGE];
+    /* 0x58 */ bool8 exclusives[NUM_EXCLUSIVE_POKEMON];
+} ExclusivePokemonData;
 
 #define RED_EXCLUSIVE(species)  \
 {                               \
@@ -39,22 +39,22 @@ struct ExclusivePokemonData
     .in_brt = TRUE,             \
 }
 
-extern struct ExclusivePokemonData *gUnknown_203B498;
+extern ExclusivePokemonData *gExclusiveMonPtr;
 
 void LoadExclusivePokemon(void);
-struct ExclusivePokemonData *GetExclusivePokemon(void);
+ExclusivePokemonData *GetExclusivePokemon(void);
 void InitializeExclusivePokemon(void);
-void sub_8097FA8(u8 param_1);
-void sub_8097FD0(u8 param_1);
-void sub_8097FF8(void);
-void sub_8098044(u8 param_1);
-void sub_8098080(void);
-u8 sub_80980A4(void);
-void sub_80980B4(s16 pokeID);
-bool8 sub_8098100(u8 param_1);
-bool8 sub_8098134(s16 pokeID);
-void SetTutorialFlag(s32 param_1);
-bool32 GetTutorialFlag(s32 param_1);
+void SetTempCutsceneFlag(u8 flag);
+void SetCutsceneFlag(u8 flag);
+void FlushTempCutsceneFlags(void);
+void UnsetCutsceneFlag(u8 flag);
+void ClearTempCutsceneFlags(void);
+bool8 sub_80980A4(void);
+void SetMonSeenFlag(s16 monID);
+bool8 GetCutsceneFlag(u8 flag);
+bool8 GetMonSeenFlag(s16 monID);
+void SetTutorialFlag(s32 flag);
+bool8 GetTutorialFlag(s32 flag);
 bool8 IsExclusivePokemonUnlocked(s32 pokeID);
 void UnlockExclusivePokemon(s16 pokeID);
 void WriteExclusivePokemon(DataSerializer *r0);

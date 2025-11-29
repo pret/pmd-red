@@ -72,8 +72,8 @@ u8 sub_80964E4();
 #define SCRIPT_LOCKS_ARR_COUNT 129
 
 static EWRAM_DATA s16 gCurrentMap = 0;
-static EWRAM_DATA s16 gUnknown_2039A32 = 0;
-static EWRAM_DATA s16 gUnknown_2039A34 = 0;
+static EWRAM_DATA s16 gUnknown_2039A32 = 0; // See enum "GroundMapID"
+static EWRAM_DATA s16 gUnknown_2039A34 = 0; // See enum "GroundMapID"
 static EWRAM_DATA u8 gAnyScriptLocked = 0;
 // Hard to say why the arrays are larger than SCRIPT_LOCKS_ARR_COUNT. Could be unused EWRAM variables or special case indexes.
 static ALIGNED(4) EWRAM_DATA u8 gScriptLocks[SCRIPT_LOCKS_ARR_COUNT + 7] = {0};
@@ -120,7 +120,7 @@ static const ScriptCommand gUnknown_81164E4[] = {
 
 static s32 ExecuteScriptCommand(Action *action);
 static s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3);
-static const ScriptCommand *FindLabel(Action *action, s32 r1);
+static const ScriptCommand *FindLabel(Action *action, s32 labelNum);
 static const ScriptCommand *ResolveJump(Action *action, s32 r1);
 static void sub_80A2500(s32 param_1, ActionUnkIds *param_2);
 static void sub_80A252C(s32 param_1, ActionUnkIds *param_2);
@@ -182,15 +182,16 @@ static void InitScriptData(ScriptData *a0)
     a0->script.ptr = 0;
     a0->savedScript.ptr2 = 0;
     a0->savedScript.ptr = 0;
-    a0->curScriptOp = 0;
+    a0->curScriptOp = CMD_BYTE_00;
     a0->curPtr = 0;
     a0->unk22 = -1;
     a0->unk24 = 0;
-    a0->unk26 = 0xFF;
+    a0->storedDir = -1;
     a0->branchDiscriminant = 0;
     a0->unk2A = 0;
     a0->unk2C = 0;
     a0->unk30 = 0;
+
     for (i = 0; i < 4; i++) {
         a0->localVars.val[i] = 0;
     }
@@ -301,9 +302,9 @@ bool8 GetPredefinedScript(Action *param_1, ScriptInfoSmall *script, s32 _index)
     return scriptPtr != NULL;
 }
 
-void GetFunctionScript(Action *param_1, ScriptInfoSmall *script, s16 index)
+void GetFunctionScript(Action *param_1, ScriptInfoSmall *script, s16 scriptID)
 {
-    s32 index_s32 = index;
+    s32 index_s32 = scriptID;
     script->ptr = gFunctionScriptTable[index_s32].script;
     script->state = 2;
     if (param_1 != NULL) {
@@ -387,7 +388,7 @@ bool8 GroundScript_ExecutePP(Action *action, ActionUnkIds *param_2, ScriptInfoSm
     action->scriptData.savedScript.ptr2 = NULL;
 
     if (action->callbacks->getDirection != 0) {
-        action->callbacks->getDirection(action->parentObject, &action->scriptData.unk26);
+        action->callbacks->getDirection(action->parentObject, &action->scriptData.storedDir);
     }
     return TRUE;
 }
@@ -400,7 +401,7 @@ bool8 ExecutePredefinedScript(Action *param_1, ActionUnkIds *param_2, s16 index,
     return GroundScript_ExecutePP(param_1, param_2, &auStack28, debug);
 }
 
-static u8 GroundScriptCheckLockCondition(Action *param_1, s16 param_2)
+static bool8 GroundScriptCheckLockCondition(Action *param_1, s16 param_2)
 {
     s32 param_2_s32;
 
@@ -408,13 +409,13 @@ static u8 GroundScriptCheckLockCondition(Action *param_1, s16 param_2)
 
     if ((param_2 == 0) && (IsTextboxOpen_809A750() == 0)) {
         param_1->scriptData.script.ptr = ResolveJump(param_1, 0);
-        return 0;
+        return FALSE;
     }
     else {
         param_1->scriptData.unk22 = param_2_s32;
         param_1->scriptData.savedState = 2;
         gAnyScriptLocked = 1;
-        return 1;
+        return TRUE;
     }
 }
 
@@ -503,14 +504,28 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                 case 2: {
                     switch (action->scriptData.curScriptOp) {
                         // handled cases (all hex)
-                        // 3, 4, 5, 6, 7, 22..28, 2c, 30..38, 39, 3a, 3b, 3c, 3d, 3e, 3f,
+                        // 03, 04, 05, 06, 07, 22..28, 2c, 30..38, 39, 3a, 3b, 3c, 3d, 3e, 3f,
                         // 58..5b, 5d, 5e, 60, 61..67, 68, 69..6f, 70, 71..76, 77..7c, 7d..82, 83..88,
                         // 89, 8a, 8b..90, 91..95, 98, 99, 9b..a3, cf, d2..d8, da, db, dc, dd, de, df,
                         // e0, e1, e2, e3, e5
                         // other cases up to 0xf1 immediately break (which breaks again and loops for ExScrCmd)
-                        case 0x58 ... 0x5b: case 0x5d: case 0x5e: case 0x60:
-                        case 0x8b ... 0x90: case 0x98: case 0x99:
-                        case 0xdb: case 0xdc: {
+                        case CMD_BYTE_58:
+                        case CMD_BYTE_59:
+                        case CMD_BYTE_5A:
+                        case CMD_BYTE_5B:
+                        case CMD_BYTE_5D:
+                        case CMD_BYTE_5E:
+                        case CMD_BYTE_60:
+                        case CMD_BYTE_8B: // SET_DIR_WAIT
+                        case CMD_BYTE_8C:
+                        case CMD_BYTE_8D:
+                        case CMD_BYTE_8E:
+                        case CMD_BYTE_8F:
+                        case CMD_BYTE_90:
+                        case CMD_BYTE_98:
+                        case CMD_BYTE_99:
+                        case CMD_BYTE_DB:
+                        case CMD_BYTE_DC: {
                             if (action->scriptData.unk2A > 0) {
                                 action->scriptData.unk2A--;
                                 loopContinue = FALSE;
@@ -520,78 +535,87 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                             }
                             break;
                         }
-                        case 0xdd: {
-                            if (action->callbacks->func4C_spriteRelatedCheck(action->parentObject)) {
+                        case CMD_BYTE_DD: {
+                            if (action->callbacks->func4C_spriteRelatedCheck(action->parentObject))
                                 loopContinue = FALSE;
-                            }
-                            else {
+                            else
                                 action->scriptData.savedState = 3;
-                            }
+
                             break;
                         }
-                        case 0xde: {
-                            if (action->callbacks->func50_spriteRelated(action->parentObject)) {
+                        case CMD_BYTE_DE: {
+                            if (action->callbacks->func50_spriteRelated(action->parentObject))
                                 loopContinue = FALSE;
-                            }
-                            else {
+                            else
                                 action->scriptData.savedState = 3;
-                            }
+
                             break;
                         }
-                        case 0x22 ... 0x28:
-                        case 0xdf: {
-                            if (sub_8099B94()) {
+                        case CMD_BYTE_22:
+                        case CMD_BYTE_23:
+                        case CMD_BYTE_24:
+                        case CMD_BYTE_25:
+                        case CMD_BYTE_26:
+                        case CMD_BYTE_27:
+                        case CMD_BYTE_28:
+                        case CMD_BYTE_DF: {
+                            if (sub_8099B94())
                                 loopContinue = FALSE;
-                            }
-                            else {
+                            else
                                 action->scriptData.savedState = 3;
-                            }
+
                             break;
                         }
-                        case 0xe0: {
+                        case CMD_BYTE_E0: {
                             cmd = *action->scriptData.curPtr;
                             if (IsEqualtoBGTrack(cmd.argShort)) {
-                                if (action->scriptData.unk2C++ < 10800) {
+                                if (action->scriptData.unk2C++ < 180 * 60)
                                     loopContinue = FALSE;
-                                }
-                                else {
+                                else
                                     action->scriptData.savedState = 3;
-                                }
                             }
                             else {
                                 action->scriptData.savedState = 3;
                             }
                             break;
                         }
-                        case 0xe1: case 0xe2: {
+                        case CMD_BYTE_E1: // WAIT_FANFARE1
+                        case CMD_BYTE_E2: { // WAIT_FANFARE2
                             cmd = *action->scriptData.curPtr;
                             if (IsSoundPlaying(cmd.argShort)) {
-                                if (action->scriptData.unk2C++ < 3600) {
+                                if (action->scriptData.unk2C++ < 60 * 60)
                                     loopContinue = FALSE;
-                                }
-                                else {
+                                else
                                     action->scriptData.savedState = 3;
-                                }
                             }
                             else {
                                 action->scriptData.savedState = 3;
                             }
                             break;
                         }
-                        case 0x61 ... 0x67: {
+                        case CMD_BYTE_61:
+                        case CMD_BYTE_62:
+                        case CMD_BYTE_63:
+                        case CMD_BYTE_64:
+                        case CMD_BYTE_65:
+                        case CMD_BYTE_66:
+                        case CMD_BYTE_67: {
                             PixelPos pos, pos2;
                             action->callbacks->getHitboxCenter(action->parentObject, &pos);
                             pos2.x = action->scriptData.pos2.x - pos.x;
                             pos2.y = action->scriptData.pos2.y - pos.y;
                             ClampPixelPos(&pos2, action->scriptData.unk30);
+
                             if (pos2.x == 0 && pos2.y == 0) {
                                 action->scriptData.savedState = 3;
                                 break;
                             }
+
                             if (action->callbacks->moveRelative(action->parentObject, &pos2) & 9) {
                                 action->scriptData.savedState = 3;
                                 break;
                             }
+
                             action->callbacks->setEventIndex(action->parentObject, 0x1000);
 
                             if (action->scriptData.unk2A >= 0) {
@@ -608,7 +632,13 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                             }
                             break;
                         }
-                        case 0x69 ... 0x6f: {
+                        case CMD_BYTE_69:
+                        case CMD_BYTE_6A:
+                        case CMD_BYTE_6B:
+                        case CMD_BYTE_6C:
+                        case CMD_BYTE_6D:
+                        case CMD_BYTE_6E:
+                        case CMD_BYTE_6F: {
                             PixelPos pos, pos2;
                             s32 res;
                             s32 dir;
@@ -624,9 +654,9 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                             }
                             res = action->callbacks->moveRelative(action->parentObject, &pos2);
                             dir = (s8) VecDirection8Radial(&pos2);
-                            dirBefore = action->scriptData.unk26;
+                            dirBefore = action->scriptData.storedDir;
                             dirS8 = dir;
-                            action->scriptData.unk26 = dirS8;
+                            action->scriptData.storedDir = dirS8;
                             action->callbacks->setDirection(action->parentObject, dir);
                             if (res & 9) {
                                 action->scriptData.savedState = 3;
@@ -648,8 +678,18 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                             }
                             break;
                         }
-                        case 0x71 ... 0x76:
-                        case 0x7d ... 0x82: {
+                        case CMD_BYTE_71:
+                        case CMD_BYTE_72:
+                        case CMD_BYTE_73:
+                        case CMD_BYTE_74:
+                        case CMD_BYTE_75:
+                        case CMD_BYTE_76:
+                        case CMD_BYTE_7D:
+                        case CMD_BYTE_7E:
+                        case CMD_BYTE_7F:
+                        case CMD_BYTE_80:
+                        case CMD_BYTE_81:
+                        case CMD_BYTE_82: {
                             if (action->scriptData.unk2A > 0) {
                                 PixelPos pos;
                                 InterpolatePixelPos(&pos, &action->scriptData.pos1, &action->scriptData.pos2, action->scriptData.unk2A, action->scriptData.unk2C);
@@ -664,8 +704,18 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                             }
                             break;
                         }
-                        case 0x77 ... 0x7c:
-                        case 0x83 ... 0x88: {
+                        case CMD_BYTE_77:
+                        case CMD_BYTE_78:
+                        case CMD_BYTE_79:
+                        case CMD_BYTE_7A:
+                        case CMD_BYTE_7B:
+                        case CMD_BYTE_7C:
+                        case CMD_BYTE_83:
+                        case CMD_BYTE_84:
+                        case CMD_BYTE_85:
+                        case CMD_BYTE_86:
+                        case CMD_BYTE_87:
+                        case CMD_BYTE_88: {
                             if (action->scriptData.unk2A > 0) {
                                 PixelPos pos1, pos2, pos3;
                                 s32 dir;
@@ -677,9 +727,9 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                                 pos3.x = pos2.x - pos1.x;
                                 pos3.y = pos2.y - pos1.y;
                                 dir = (s8) VecDirection8Radial(&pos3);
-                                dirBefore = action->scriptData.unk26;
+                                dirBefore = action->scriptData.storedDir;
                                 dirS8 = dir;
-                                action->scriptData.unk26 = dirS8;
+                                action->scriptData.storedDir = dirS8;
                                 action->callbacks->setDirection(action->parentObject, dir);
                                 action->callbacks->moveReal(action->parentObject, &pos2);
                                 action->callbacks->setEventIndex(action->parentObject, 0x1000);
@@ -692,7 +742,8 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                             }
                             break;
                         }
-                        case 0x68: case 0x70: {
+                        case CMD_BYTE_68:
+                        case CMD_BYTE_70: {
                             s32 height, unk;
                             s32 delta;
                             action->callbacks->getPosHeightAndUnk(action->parentObject, &height, &unk);
@@ -708,7 +759,8 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                             loopContinue = FALSE;
                             break;
                         }
-                        case 0x89: case 0x8a: {
+                        case CMD_BYTE_89:
+                        case CMD_BYTE_8A: {
                             PixelPos pos;
                             s8 dir;
                             action->callbacks->getDirection(action->parentObject, &dir);
@@ -729,7 +781,11 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                             }
                             break;
                         }
-                        case 0x91 ... 0x95: {
+                        case CMD_BYTE_91: // ROTATE_TO
+                        case CMD_BYTE_92: // CMD_UNK_92
+                        case CMD_BYTE_93: // CMD_UNK_93
+                        case CMD_BYTE_94: // CMD_UNK_94
+                        case CMD_BYTE_95: { // CMD_UNK_95
                             if (action->scriptData.unk2A > 0) {
                                 action->scriptData.unk2A--;
                                 loopContinue = FALSE;
@@ -747,11 +803,12 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                                 action->callbacks->getDirection(action->parentObject, &dir);
                                 // arg1h synthetic
                                 switch (cmd.op) {
-                                    case 0x91: case 0x92: {
+                                    case CMD_BYTE_91: // ROTATE_TO
+                                    case CMD_BYTE_92: { // CMD_UNK_92
                                         tmp2 = (s8) action->scriptData.unk4D;
                                         break;
                                     }
-                                    case 0x93: {
+                                    case CMD_BYTE_93: { // CMD_UNK_93
                                         s16 res;
                                         res = sub_80A7AE8((s16)cmd.arg1);
                                         if (res >= 0) {
@@ -761,7 +818,7 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                                         }
                                         break;
                                     }
-                                    case 0x94: {
+                                    case CMD_BYTE_94: { // CMD_UNK_94
                                         s32 res;
                                         res = (s16)sub_80A7AE8((s16)cmd.arg1);
                                         if (res >= 0) {
@@ -771,7 +828,7 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                                         }
                                         break;
                                     }
-                                    case 0x95: {
+                                    case CMD_BYTE_95: { // CMD_UNK_95
                                         flag = TRUE;
                                         action->callbacks->getHitboxCenter(action->parentObject, &pos1);
                                         action->callbacks->getSize(action->parentObject, &pos2);
@@ -793,22 +850,30 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                                 }
 
                                 ASM_MATCH_TRICK(dir);
-                                action->scriptData.unk26 = sub_8002A70(dir, tmp2, (u8)cmd.argShort);
-                                action->callbacks->setDirection(action->parentObject, action->scriptData.unk26);
+                                action->scriptData.storedDir = TransformDirection2(dir, tmp2, (u8)cmd.argShort);
+                                action->callbacks->setDirection(action->parentObject, action->scriptData.storedDir);
                                 action->scriptData.unk2A = cmd.argByte;
                             }
                             break;
                         }
-                        case 0x9b ... 0xa3: {
-                            if (sub_809D234()) {
+                        case CMD_BYTE_9B:
+                        case CMD_BYTE_9C:
+                        case CMD_BYTE_9D:
+                        case CMD_BYTE_9E:
+                        case CMD_BYTE_9F:
+                        case CMD_BYTE_A0:
+                        case CMD_BYTE_A1:
+                        case CMD_BYTE_A2:
+                        case CMD_BYTE_A3: {
+                            if (sub_809D234())
                                 loopContinue = FALSE;
-                            }
-                            else {
+                            else
                                 action->scriptData.savedState = 3;
-                            }
+
                             break;
                         }
-                        case 0xe3: case 0xe5: {
+                        case CMD_BYTE_E3:
+                        case CMD_BYTE_E5: { // CMD_UNK_E5
                             if (action->scriptData.unk22 != -1) {
                                 loopContinue = FALSE;
                             }
@@ -818,7 +883,16 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                             }
                             break;
                         }
-                        case 0x2c: case 0x30 ... 0x38: {
+                        case CMD_BYTE_2C:
+                        case CMD_BYTE_30:
+                        case CMD_BYTE_31:
+                        case CMD_BYTE_32:
+                        case CMD_BYTE_33: // MSG_QUIET
+                        case CMD_BYTE_34:
+                        case CMD_BYTE_35:
+                        case CMD_BYTE_36:
+                        case CMD_BYTE_37:
+                        case CMD_BYTE_38: {
                             if (action->scriptData.unk22 != -1) {
                                 loopContinue = FALSE;
                             }
@@ -828,7 +902,7 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                             }
                             break;
                         }
-                        case 0x39: {
+                        case CMD_BYTE_39: {
                             if (action->scriptData.unk22 != -1) {
                                 loopContinue = FALSE;
                             }
@@ -841,7 +915,7 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                             }
                             break;
                         }
-                        case 0x3b: {
+                        case CMD_BYTE_3B: {
                             s32 tmp;
                             cmd = *action->scriptData.curPtr;
                             tmp = sub_80A14E8(action, cmd.argByte, cmd.argShort, cmd.arg1);
@@ -854,7 +928,7 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                             }
                             break;
                         }
-                        case 0x3c: {
+                        case CMD_BYTE_3C: {
                             s32 val;
                             if (!sub_809B260(&val)) {
                                 loopContinue = FALSE;
@@ -866,7 +940,7 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                             }
                             break;
                         }
-                        case 0x03: {
+                        case CMD_BYTE_03: {
                             s32 val;
                             if (!sub_809B260(&val)) {
                                 loopContinue = FALSE;
@@ -881,7 +955,7 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                             sub_80A87AC(0, 0);
                             break;
                         }
-                        case 0x04: {
+                        case CMD_BYTE_04: {
                             if (action->scriptData.branchDiscriminant == 0) {
                                 s32 val;
                                 if (!sub_809B260(&val)) {
@@ -914,7 +988,7 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                             }
                             // fallthrough
                         }
-                        case 0x06: {
+                        case CMD_BYTE_06: {
                             if (action->scriptData.branchDiscriminant == 0) {
                                 s32 val;
                                 s16 disc;
@@ -923,7 +997,7 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                                     break;
                                 }
                                 if (val >= 0) {
-                                    SetScriptVarValue(NULL, 19, action->scriptData.curScriptOp == 4 ? RescueDungeonToScriptDungeonId(val) : (s16)val);
+                                    SetScriptVarValue(NULL, 19, action->scriptData.curScriptOp == CMD_BYTE_04 ? RescueDungeonToScriptDungeonId(val) : (s16)val);
                                     disc = 1;
                                 } else {
                                     disc = -1;
@@ -934,7 +1008,7 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                             }
                             // fallthrough
                         }
-                        case 0x07: {
+                        case CMD_BYTE_07: {
                             if (action->scriptData.branchDiscriminant == 1) {
                                 s32 dungeonEnter;
                                 u32 res;
@@ -943,13 +1017,13 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                                 if (sub_80990EC(&unkStruct, dungeonEnter)) {
                                     s32 val;
                                     sub_8099220(&unkStruct, dungeonEnter);
-                                    val = sub_80023E4(6);
+                                    val = CheckQuest(QUEST_REACHED_POSTGAME);
                                     res = BufferDungeonRequirementsText(unkStruct.sub0.unk0.id, 0, gUnknown_203B4B0, val, FALSE);
                                     gUnknown_2039DA4 = res;
                                     switch (res) {
                                         case 2: {
                                             action->scriptData.branchDiscriminant = 2;
-                                            sub_809B1C0(9, 1, gUnknown_203B4B0);
+                                            ScriptSpecialTextHandler2(SPECIAL_TEXT_YES_NO_WITH_LARGE_BOX, 1, STR_TO_MONORSTRPTR(gUnknown_203B4B0));
                                             if (GroundScriptCheckLockCondition(action, 1)) {
                                                 sub_80A87AC(0, 11);
                                             }
@@ -961,7 +1035,7 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                                         }
                                         case 1: {
                                             action->scriptData.branchDiscriminant = 4;
-                                            sub_809B1C0(10, 1, gUnknown_203B4B0);
+                                            ScriptSpecialTextHandler2(SPECIAL_TEXT_LARGE_TEXT_BOX, 1, STR_TO_MONORSTRPTR(gUnknown_203B4B0));
                                             if (GroundScriptCheckLockCondition(action, 1)) {
                                                 sub_80A87AC(0, 11);
                                             }
@@ -979,19 +1053,19 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                                     break;
                                 }
                             }
-                        case 0x05:
+                        case CMD_BYTE_05:
                             if (action->scriptData.branchDiscriminant == 1) {
                                 unkStruct_203B480 *ret;
                                 s32 val;
                                 u32 res;
                                 ret = GetMailatIndex(GetScriptVarValue(NULL, 20));
-                                val = sub_80023E4(6);
+                                val = CheckQuest(QUEST_REACHED_POSTGAME);
                                 res = BufferDungeonRequirementsText(ret->dungeonSeed.location.id, 0, gUnknown_203B4B0, val, TRUE);
                                 gUnknown_2039DA4 = res;
                                 switch (res) {
                                     case 2: {
                                         action->scriptData.branchDiscriminant = 2;
-                                        sub_809B1C0(9, 1, gUnknown_203B4B0);
+                                        ScriptSpecialTextHandler2(SPECIAL_TEXT_YES_NO_WITH_LARGE_BOX, 1, STR_TO_MONORSTRPTR(gUnknown_203B4B0));
                                         if (GroundScriptCheckLockCondition(action, 1)) {
                                             sub_80A87AC(0, 11);
                                         }
@@ -1003,7 +1077,7 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                                     }
                                     case 1: {
                                         action->scriptData.branchDiscriminant = 4;
-                                        sub_809B1C0(10, 1, gUnknown_203B4B0);
+                                        ScriptSpecialTextHandler2(SPECIAL_TEXT_LARGE_TEXT_BOX, 1, STR_TO_MONORSTRPTR(gUnknown_203B4B0));
                                         if (GroundScriptCheckLockCondition(action, 1)) {
                                             sub_80A87AC(0, 11);
                                         }
@@ -1040,7 +1114,7 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                                 cmd = *action->scriptData.curPtr;
                                 action->scriptData.savedState = 3;
                                 sub_80999FC(cmd.argShort);
-                                GroundMap_ExecuteEvent(0x70, 0);
+                                GroundMap_ExecuteEvent(EVENT_RESCUE, FALSE);
                                 if (action->unk8.unk0 == 0) continue;
                                 action->scriptData.script.ptr = ResolveJump(action, 1);
                                 break;
@@ -1063,7 +1137,7 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                             action->scriptData.savedState = 3;
                             break;
                         }
-                        case 0x3d: {
+                        case CMD_BYTE_3D: {
                             s32 val;
                             cmd = *action->scriptData.curPtr;
                             if (!sub_809B260(&val)) {
@@ -1085,7 +1159,7 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                             sub_80A87AC(0, 0);
                             break;
                         }
-                        case 0x3e: {
+                        case CMD_BYTE_3E: {
                             s32 val;
                             if (!sub_809B260(&val)) {
                                 loopContinue = FALSE;
@@ -1099,7 +1173,7 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                             sub_80A87AC(0, 0);
                             break;
                         }
-                        case 0x3f: {
+                        case CMD_BYTE_3F: {
                             s32 val;
                             const u8 *ptr;
                             cmd = *action->scriptData.curPtr;
@@ -1131,7 +1205,7 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                             }
                             break;
                         }
-                        case 0x3a: {
+                        case CMD_BYTE_3A: {
                             if (action->scriptData.unk2C == 0) {
                                 if (action->scriptData.unk22 != -1) {
                                     loopContinue = FALSE;
@@ -1156,18 +1230,18 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                             }
                             break;
                         }
-                        case 0xcf: {
+                        case CMD_BYTE_CF: {
                             cmd = *action->scriptData.curPtr;
                             if (action->scriptData.unk2C == 0) {
                                 bool8 flag = FALSE;
                                 if (action->scriptData.branchDiscriminant < 0) {
-                                    if (action->scriptData.script.ptr->op != 0xd1) {
+                                    if (action->scriptData.script.ptr->op != CMD_BYTE_D1) {
                                         action->scriptData.savedState = 3;
                                         break;
                                     }
                                 }
                                 else {
-                                    while (action->scriptData.script.ptr->op == 0xd0) {
+                                    while (action->scriptData.script.ptr->op == CMD_BYTE_D0) {
                                         if (action->scriptData.script.ptr->argShort == action->scriptData.branchDiscriminant) {
                                             flag = TRUE;
                                             break;
@@ -1175,15 +1249,15 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                                         action->scriptData.script.ptr++;
                                     }
                                     if (!flag) {
-                                        while (action->scriptData.script.ptr->op == 0xd1) {
+                                        while (action->scriptData.script.ptr->op == CMD_BYTE_D1) {
                                             action->scriptData.script.ptr++;
                                         }
                                         action->scriptData.savedState = 3;
                                         break;
                                     }
                                 }
-                                if (ScriptPrintText(cmd.argByte, (s16) cmd.arg1, action->scriptData.script.ptr->argPtr)) {
-                                    sub_80A87AC(0,10);
+                                if (ScriptPrintText(cmd.argByte, (s16)cmd.arg1, action->scriptData.script.ptr->argPtr)) {
+                                    sub_80A87AC(0, 10);
                                     if (GroundScriptCheckLockCondition(action, 0)) {
                                         action->scriptData.unk2C = 1;
                                     }
@@ -1201,7 +1275,13 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                             }
                             break;
                         }
-                        case 0xd2 ... 0xd8: {
+                        case CMD_BYTE_D2:
+                        case CMD_BYTE_D3:
+                        case CMD_BYTE_D4:
+                        case CMD_BYTE_D5:
+                        case CMD_BYTE_D6:
+                        case CMD_BYTE_D7:
+                        case CMD_BYTE_D8: {
                             s32 tmp;
                             if (action->scriptData.unk2C == 0) {
                                 if (action->scriptData.unk22 != -1) {
@@ -1224,7 +1304,7 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                             }
                             break;
                         }
-                        case 0xda: {
+                        case CMD_BYTE_DA: {
                             if (action->scriptData.unk22 != -1) {
                                 loopContinue = FALSE;
                             }
@@ -1235,8 +1315,125 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                             break;
                         }
                         default:
-                        case 0x08 ... 0x21: case 0x29 ... 0x2b: case 0x2d ... 0x2f: case 0x40 ... 0x57: case 0x5c: case 0x5f:
-                        case 0x96: case 0x97: case 0x9a: case 0xa4 ... 0xce: case 0xd0: case 0xd1: case 0xd9: case 0xe4: case 0xe6 ... 0xf0: {
+                        case CMD_BYTE_08:
+                        case CMD_BYTE_09:
+                        case CMD_BYTE_0A:
+                        case CMD_BYTE_0B:
+                        case CMD_BYTE_0C:
+                        case CMD_BYTE_0D:
+                        case CMD_BYTE_0E:
+                        case CMD_BYTE_0F:
+                        case CMD_BYTE_10:
+                        case CMD_BYTE_11:
+                        case CMD_BYTE_12:
+                        case CMD_BYTE_13:
+                        case CMD_BYTE_14:
+                        case CMD_BYTE_15:
+                        case CMD_BYTE_16:
+                        case CMD_BYTE_17:
+                        case CMD_BYTE_18:
+                        case CMD_BYTE_19:
+                        case CMD_BYTE_1A:
+                        case CMD_BYTE_1B:
+                        case CMD_BYTE_1C:
+                        case CMD_BYTE_1D:
+                        case CMD_BYTE_1E:
+                        case CMD_BYTE_1F:
+                        case CMD_BYTE_20:
+                        case CMD_BYTE_21:
+                        case CMD_BYTE_29:
+                        case CMD_BYTE_2A:
+                        case CMD_BYTE_2B:
+                        case CMD_BYTE_2D:
+                        case CMD_BYTE_2E:
+                        case CMD_BYTE_2F:
+                        case CMD_BYTE_40:
+                        case CMD_BYTE_41:
+                        case CMD_BYTE_42:
+                        case CMD_BYTE_43:
+                        case CMD_BYTE_44:
+                        case CMD_BYTE_45:
+                        case CMD_BYTE_46:
+                        case CMD_BYTE_47:
+                        case CMD_BYTE_48:
+                        case CMD_BYTE_49:
+                        case CMD_BYTE_4A:
+                        case CMD_BYTE_4B:
+                        case CMD_BYTE_4C:
+                        case CMD_BYTE_4D:
+                        case CMD_BYTE_4E:
+                        case CMD_BYTE_4F:
+                        case CMD_BYTE_50:
+                        case CMD_BYTE_51:
+                        case CMD_BYTE_52:
+                        case CMD_BYTE_53:
+                        case CMD_BYTE_54:
+                        case CMD_BYTE_55:
+                        case CMD_BYTE_56:
+                        case CMD_BYTE_57:
+                        case CMD_BYTE_5C:
+                        case CMD_BYTE_5F:
+                        case CMD_BYTE_96:
+                        case CMD_BYTE_97:
+                        case CMD_BYTE_9A:
+                        case CMD_BYTE_A4:
+                        case CMD_BYTE_A5:
+                        case CMD_BYTE_A6:
+                        case CMD_BYTE_A7:
+                        case CMD_BYTE_A8:
+                        case CMD_BYTE_A9:
+                        case CMD_BYTE_AA:
+                        case CMD_BYTE_AB:
+                        case CMD_BYTE_AC:
+                        case CMD_BYTE_AD:
+                        case CMD_BYTE_AE:
+                        case CMD_BYTE_AF:
+                        case CMD_BYTE_B0:
+                        case CMD_BYTE_B1:
+                        case CMD_BYTE_B2:
+                        case CMD_BYTE_B3:
+                        case CMD_BYTE_B4:
+                        case CMD_BYTE_B5:
+                        case CMD_BYTE_B6:
+                        case CMD_BYTE_B7:
+                        case CMD_BYTE_B8:
+                        case CMD_BYTE_B9:
+                        case CMD_BYTE_BA:
+                        case CMD_BYTE_BB:
+                        case CMD_BYTE_BC:
+                        case CMD_BYTE_BD:
+                        case CMD_BYTE_BE:
+                        case CMD_BYTE_BF:
+                        case CMD_BYTE_C0:
+                        case CMD_BYTE_C1:
+                        case CMD_BYTE_C2:
+                        case CMD_BYTE_C3:
+                        case CMD_BYTE_C4:
+                        case CMD_BYTE_C5:
+                        case CMD_BYTE_C6:
+                        case CMD_BYTE_C7:
+                        case CMD_BYTE_C8:
+                        case CMD_BYTE_C9:
+                        case CMD_BYTE_CA:
+                        case CMD_BYTE_CB:
+                        case CMD_BYTE_CC:
+                        case CMD_BYTE_CD:
+                        case CMD_BYTE_CE:
+                        case CMD_BYTE_D0:
+                        case CMD_BYTE_D1:
+                        case CMD_BYTE_D9:
+                        case CMD_BYTE_E4:
+                        case CMD_BYTE_E6:
+                        case CMD_BYTE_E7:
+                        case CMD_BYTE_E8:
+                        case CMD_BYTE_E9:
+                        case CMD_BYTE_EA:
+                        case CMD_BYTE_EB:
+                        case CMD_BYTE_EC:
+                        case CMD_BYTE_ED:
+                        case CMD_BYTE_EE:
+                        case CMD_BYTE_EF:
+                        case CMD_BYTE_F0: {
                             loopContinue = FALSE;
                             break;
                         }
@@ -1250,11 +1447,11 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                         case 0: {
                             if (action->scriptData2.savedState) {
                                 action->scriptData = action->scriptData2;
-                                if (action->callbacks->setDirection && action->scriptData.unk26 != -1) {
+                                if (action->callbacks->setDirection && action->scriptData.storedDir != -1) {
                                     u32 tmp;
                                     action->callbacks->getFlags(action->parentObject, &tmp);
                                     if (tmp & 0x400) {
-                                        action->callbacks->setDirection(action->parentObject, action->scriptData.unk26);
+                                        action->callbacks->setDirection(action->parentObject, action->scriptData.storedDir);
                                     }
                                 }
                                 if (action->callbacks->setEventIndex) {
@@ -1277,16 +1474,35 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                     }
                     break;
                 }
-                case 0: case 1: case 4: {
+                case 0:
+                case 1:
+                case 4: {
                     return action->scriptData.savedState;
                 }
             }
         }
         return 3;
     }
-    else {
-        return 0;
-    }
+
+    return 0;
+}
+
+#define MapValueOrDefault(curCmd, defaultVal, dst)                       \
+{                                                                        \
+    s32 tmp = (curCmd)->arg1 != -1 ? (s16)(curCmd)->arg1 : (defaultVal); \
+    *(dst) = tmp;                                                        \
+}
+
+#define SectorValueOrDefault(curCmd, defaultVal, dst)                              \
+{                                                                               \
+    s32 tmp = (s8)(curCmd)->argByte < 0 ? (defaultVal) : (s8)(curCmd)->argByte; \
+    *(dst) = tmp;                                                               \
+}
+
+#define GroupValueOrDefault(curCmd, defaultVal, dst)                       \
+{                                                                         \
+    s32 tmp = (curCmd)->argShort < 0 ? (defaultVal) : (curCmd)->argShort; \
+    *(dst) = tmp;                                                         \
 }
 
 // overlay_0000.bin::021497FC
@@ -1308,11 +1524,11 @@ static s32 ExecuteScriptCommand(Action *action)
     ScriptCommand curCmd;
     ScriptData *scriptData = &action->scriptData;
 
-    while (1) {
+    while (TRUE) {
         scriptData->curPtr = scriptData->script.ptr;
         curCmd = *scriptData->script.ptr++;
         switch (scriptData->curScriptOp = curCmd.op) {
-            case 0x01: {
+            case CMD_BYTE_01: {
                 u32 arg = (s16)curCmd.arg1;
                 u32 argCopy = arg;
                 u32 byte = (u8)curCmd.argByte;
@@ -1322,7 +1538,7 @@ static s32 ExecuteScriptCommand(Action *action)
                 GroundMainGroundRequest(argCopy, byte, curCmd.argShort);
                 break;
             }
-            case 0x02: {
+            case CMD_BYTE_02: {
                 s32 dungeonId = (s16)curCmd.arg1;
                 if (dungeonId == -1) dungeonId = (s16)GetScriptVarValue(NULL, DUNGEON_ENTER);
                 if (ScriptLoggingEnabled(TRUE)) {
@@ -1336,7 +1552,7 @@ static s32 ExecuteScriptCommand(Action *action)
                 }
                 break;
             }
-            case 0x03: {
+            case CMD_BYTE_03: {
                 if (sub_8021700(curCmd.arg1)) {
                     action->scriptData.script.ptr = ResolveJump(action, -1);
                 } else {
@@ -1345,9 +1561,9 @@ static s32 ExecuteScriptCommand(Action *action)
                 }
                 break;
             }
-            case 0x04: {
+            case CMD_BYTE_04: {
                 if (curCmd.arg1 == -1) {
-                    if (!HasZeroAvailableDungeons() && sub_809B1C0(12,0,NULL)) {
+                    if (!HasZeroAvailableDungeons() && ScriptSpecialTextHandler2(SPECIAL_TEXT_DUNGEON_LIST, 0, NULL_MONORSTRPTR)) {
                         sub_80A87AC(0, 11);
                         action->scriptData.branchDiscriminant = 0;
                     } else {
@@ -1361,9 +1577,9 @@ static s32 ExecuteScriptCommand(Action *action)
                 }
                 break;
             }
-            case 0x06: {
+            case CMD_BYTE_06: {
                 if (curCmd.arg1 == -1) {
-                    if (sub_809B1C0(36, 0, NULL)) {
+                    if (ScriptSpecialTextHandler2(SPECIAL_TEXT_DOJO_ENTER, 0, NULL_MONORSTRPTR)) {
                         sub_80A87AC(0, 11);
                         action->scriptData.branchDiscriminant = 0;
                         return 2;
@@ -1377,11 +1593,11 @@ static s32 ExecuteScriptCommand(Action *action)
                     return 2;
                 }
             }
-            case 0x05: {
+            case CMD_BYTE_05: {
                 action->scriptData.branchDiscriminant = 1;
                 return 2;
             }
-            case 0x07: {
+            case CMD_BYTE_07: {
                 s32 tmp = (s16)curCmd.arg1;
                 if (tmp == -1) {
                     tmp = (s16)GetScriptVarValue(NULL, DUNGEON_ENTER);
@@ -1399,23 +1615,23 @@ static s32 ExecuteScriptCommand(Action *action)
                     return 2;
                 }
             }
-            case 0x08: case 0x09: {
-                if (curCmd.op == 0x08) {
+            case CMD_BYTE_08: // SELECT_MAP
+            case CMD_BYTE_09: { // SELECT_GROUND
+                if (curCmd.op == CMD_BYTE_08) { // SELECT_MAP
                     gCurrentMap = curCmd.arg1;
                     gUnknown_2039A32 = GetAdjustedGroundMap((s16)curCmd.arg1);
                     gUnknown_2039A34 = gUnknown_2039A32;
-                    if (ScriptLoggingEnabled(TRUE)) {
-                        Log(1,"    map select %3d %3d[%s]",gCurrentMap,gUnknown_2039A32,
-                            gGroundMapConversionTable[gCurrentMap].text);
-                    }
-                } else {
+
+                    if (ScriptLoggingEnabled(TRUE))
+                        Log(1,"    map select %3d %3d[%s]", gCurrentMap, gUnknown_2039A32, gGroundMapConversionTable[gCurrentMap].text);
+                } else { // SELECT_GROUND
                     gUnknown_2039A32 = gCurrentMap = curCmd.arg1;
                     gUnknown_2039A34 = curCmd.arg1;
-                    if (ScriptLoggingEnabled(TRUE)) {
-                        Log(1,"    ground select %3d %3d[%s]",gCurrentMap,gUnknown_2039A32,
-                            gGroundMapConversionTable[gCurrentMap].text);
-                    }
+
+                    if (ScriptLoggingEnabled(TRUE))
+                        Log(1,"    ground select %3d %3d[%s]", gCurrentMap, gUnknown_2039A32, gGroundMapConversionTable[gCurrentMap].text);
                 }
+
                 SetScriptVarValue(NULL,GROUND_MAP,gCurrentMap);
                 SetScriptVarValue(NULL,GROUND_PLACE,gGroundMapConversionTable[gCurrentMap].groundPlaceId);
                 GroundSprite_Reset(gUnknown_2039A32);
@@ -1431,10 +1647,10 @@ static s32 ExecuteScriptCommand(Action *action)
                 GroundObject_Select(gUnknown_2039A32,0,0);
                 break;
             }
-            case 0x0a: {
+            case CMD_BYTE_0A: {
                 const DungeonInfo *tmp;
                 DungeonLocation loc;
-                tmp = GetDungeonInfo_80A2608((s16)curCmd.arg1);
+                tmp = GetScriptDungeonInfo((s16)curCmd.arg1);
                 gUnknown_2039A34 = gUnknown_2039A32 = gCurrentMap = (s16)curCmd.arg2;
                 if (ScriptLoggingEnabled(TRUE)) {
                     Log(1, "    dungeon select %3d %3d[%s]", gCurrentMap,gUnknown_2039A32,
@@ -1446,7 +1662,7 @@ static s32 ExecuteScriptCommand(Action *action)
                 DeleteGroundLives();
                 DeleteGroundObjects();
                 DeleteGroundEffects();
-                loc.id = tmp->dungeonIndex;
+                loc.id = tmp->dungeonID;
                 loc.floor = curCmd.argShort;
                 GroundMap_SelectDungeon(gUnknown_2039A32, &loc, curCmd.argByte);
                 GroundLink_Select(gUnknown_2039A32);
@@ -1454,84 +1670,89 @@ static s32 ExecuteScriptCommand(Action *action)
                 GroundObject_Select(gUnknown_2039A32,0,0);
                 break;
             }
-            case 0x0b: {
+            case CMD_BYTE_0B: {
                 GroundWeather_Select((s16)curCmd.arg1);
                 break;
             }
-            case 0x0c ... 0x15: {
+            case CMD_BYTE_0C: // SELECT_ENTITIES
+            case CMD_BYTE_0D:
+            case CMD_BYTE_0E:
+            case CMD_BYTE_0F:
+            case CMD_BYTE_10:
+            case CMD_BYTE_11: // CANCEL_ENTITIES
+            case CMD_BYTE_12:
+            case CMD_BYTE_13:
+            case CMD_BYTE_14:
+            case CMD_BYTE_15: {
                 s32 group;
                 s32 sector;
-                {
-                    s32 tmp = curCmd.argShort < 0 ? scriptData->script.group : curCmd.argShort;
-                    group = tmp;
-                }
-                {
-                    s32 tmp = (s8)curCmd.argByte < 0 ? scriptData->script.sector : (s8)curCmd.argByte;
-                    sector = tmp;
-                }
+
+                GroupValueOrDefault(&curCmd, scriptData->script.group, &group);
+                SectorValueOrDefault(&curCmd, scriptData->script.sector, &sector);
+
                 switch (curCmd.op) {
-                    case 0x0c: {
+                    case CMD_BYTE_0C: { // SELECT_ENTITIES
                         GroundLives_Select(gUnknown_2039A32, group, sector);
                         GroundObject_Select(gUnknown_2039A32, group, sector);
                         GroundEffect_Select(gUnknown_2039A32, group, sector);
                         GroundEvent_Select(gUnknown_2039A32, group, sector);
                         break;
                     }
-                    case 0x0d: {
+                    case CMD_BYTE_0D: {
                         GroundLives_Select(gUnknown_2039A32, group, sector);
                         break;
                     }
-                    case 0x0e: {
+                    case CMD_BYTE_0E: {
                         GroundObject_Select(gUnknown_2039A32, group, sector);
                         break;
                     }
-                    case 0x0f: {
+                    case CMD_BYTE_0F: {
                         GroundEffect_Select(gUnknown_2039A32, group, sector);
                         break;
                     }
-                    case 0x10: {
+                    case CMD_BYTE_10: {
                         GroundEvent_Select(gUnknown_2039A32, group, sector);
                         break;
                     }
-                    case 0x11: {
+                    case CMD_BYTE_11: { // CANCEL_ENTITIES
                         GroundLives_Cancel(group, sector);
                         GroundObject_Cancel(group, sector);
                         GroundEffect_Cancel(group, sector);
                         GroundEvent_Cancel(group, sector);
                         break;
                     }
-                    case 0x12: {
+                    case CMD_BYTE_12: {
                         GroundLives_Cancel(group, sector);
                         break;
                     }
-                    case 0x13: {
+                    case CMD_BYTE_13: {
                         GroundObject_Cancel(group, sector);
                         break;
                     }
-                    case 0x14: {
+                    case CMD_BYTE_14: {
                         GroundEffect_Cancel(group, sector);
                         break;
                     }
-                    case 0x15: {
+                    case CMD_BYTE_15: {
                         GroundEvent_Cancel(group, sector);
                         break;
                     }
                 }
                 break;
             }
-            case 0x16: {
+            case CMD_BYTE_16: {
                 GroundLives_CancelBlank_1();
                 break;
             }
-            case 0x17: {
+            case CMD_BYTE_17: {
                 GroundObject_CancelBlank();
                 break;
             }
-            case 0x18: {
+            case CMD_BYTE_18: { // CANCEL_OFFSCREEN_EFFECTS
                 GroundEffect_CancelBlank();
                 break;
             }
-            case 0x19: {
+            case CMD_BYTE_19: {
                 s8 unk[4];
                 GroundObjectData *obj;
                 PixelPos pos;
@@ -1543,7 +1764,7 @@ static s32 ExecuteScriptCommand(Action *action)
                     .unk1 = *unk,
                     .width = 1,
                     .height = 1,
-                    .pos = {},
+                    .pos = {0, 0, 0, 0},
                     .kind = curCmd.arg2,
                     .scripts = { [3] = gFunctionScriptTable[curCmd.arg1].script },
                     };
@@ -1558,7 +1779,7 @@ static s32 ExecuteScriptCommand(Action *action)
                 }
                 break;
             }
-            case 0x1a: {
+            case CMD_BYTE_1A: {
                 s8 unk;
                 GroundEffectData *eff;
                 PixelPos pos;
@@ -1570,7 +1791,7 @@ static s32 ExecuteScriptCommand(Action *action)
                     .unk1 = unk,
                     .width = 1,
                     .height = 1,
-                    .pos = {},
+                    .pos = {0, 0, 0, 0},
                     .kind = curCmd.arg2,
                     .script = gFunctionScriptTable[curCmd.arg1].script,
                     };
@@ -1585,33 +1806,28 @@ static s32 ExecuteScriptCommand(Action *action)
                 }
                 break;
             }
-            case 0x1c: {
-                GroundMap_ExecuteEvent(curCmd.argShort, 1);
+            case CMD_BYTE_1C: { // EXECUTE_SUBROUTINE
+                GroundMap_ExecuteEvent(curCmd.argShort, TRUE);
                 break;
             }
-            case 0x1b: {
-                GroundMap_ExecuteEvent(curCmd.argShort, 0);
+            case CMD_BYTE_1B: { // EXECUTE_FUNCTION
+                GroundMap_ExecuteEvent(curCmd.argShort, FALSE);
                 break;
             }
-            case 0x1d: case 0x1e: {
+            case CMD_BYTE_1D: // EXECUTE_STATION
+            case CMD_BYTE_1E: { // EXECUTE_SUBSTATION
                 s32 map;
-                s32 group, sector;
-                bool8 res;
-                {
-                    s32 tmp = curCmd.arg1 != -1 ? (s16)curCmd.arg1 : gCurrentMap;
-                    map = tmp;
-                }
-                {
-                    s32 tmp = curCmd.argShort < 0 ? scriptData->script.group : curCmd.argShort;
-                    group = tmp;
-                }
-                {
-                    s32 tmp = (s8)curCmd.argByte < 0 ? scriptData->script.sector : (s8)curCmd.argByte;
-                    sector = tmp;
-                }
+                s32 group;
+                s32 sector;
+                bool8 isSubStation;
+
+                MapValueOrDefault(&curCmd, gCurrentMap, &map);
+                GroupValueOrDefault(&curCmd, scriptData->script.group, &group);
+                SectorValueOrDefault(&curCmd, scriptData->script.sector, &sector);
+
                 map = GetAdjustedGroundMap(map);
-                res = curCmd.op == 0x1e;
-                GroundMap_ExecuteStation(map, group, sector, res);
+                isSubStation = curCmd.op == CMD_BYTE_1E;
+                GroundMap_ExecuteStation(map, group, sector, isSubStation);
                 if (gUnknown_2039A34 != map) {
                     gUnknown_2039A34 = map;
                     GroundCancelAllEntities();
@@ -1620,20 +1836,20 @@ static s32 ExecuteScriptCommand(Action *action)
                 }
                 break;
             }
-            case 0x1f: {
+            case CMD_BYTE_1F: { // RESCUE_SELECT
                 s32 a = (s16)GetScriptVarValue(NULL, DUNGEON_ENTER);
-                const DungeonInfo *ret1 = GetDungeonInfo_80A2608(a);
-                s32 thing = GetScriptVarArrayValue(NULL, DUNGEON_ENTER_LIST, (u16) a) == 0 ? ret1->unk6 : ret1->unk8;
+                const DungeonInfo *ret1 = GetScriptDungeonInfo(a);
+                s32 scriptIndex = GetScriptVarArrayValue(NULL, DUNGEON_ENTER_LIST, (u16)a) == 0 ? ret1->scriptID1 : ret1->scriptID2;
                 // fakematch: this is almost certainly a range check of the form 0x37 <= a && a < 0x48
-                // but that loses the s32 -> u16 cast. Inlines, macros, or other schenanigans are likely involved
+                // but that loses the s32 -> u16 cast. Inlines, macros, or other shenanigans are likely involved
                 if (!((u16)(a - 0x37) < 0x11) && (s16)sub_80A2750(a) == 1) {
-                    if (thing == -1) {
-                        if (ScriptLoggingEnabled(TRUE)) {
+                    if (scriptIndex == -1) {
+                        if (ScriptLoggingEnabled(TRUE))
                             Log(1, "    dungeon rescue select %3d", a);
-                        }
+
                         GroundMainRescueRequest(a, -1);
                     } else {
-                        GroundMap_ExecuteEvent(thing, 0);
+                        GroundMap_ExecuteEvent(scriptIndex, FALSE);
                         break;
                     }
                 } else {
@@ -1641,11 +1857,12 @@ static s32 ExecuteScriptCommand(Action *action)
                 }
                 break;
             }
-            case 0x20: {
+            case CMD_BYTE_20: {
                 switch (action->unkC.unk0) {
-                    case 0:
-                        GroundMap_ExecuteEvent(curCmd.argShort, 0);
+                    case 0: {
+                        GroundMap_ExecuteEvent(curCmd.argShort, FALSE);
                         break;
+                    }
                     case 1: {
                         ScriptInfoSmall info1;
                         GetFunctionScript(action, &info1, curCmd.argShort);
@@ -1667,7 +1884,7 @@ static s32 ExecuteScriptCommand(Action *action)
                 }
                 break;
             }
-            case 0x21: {
+            case CMD_BYTE_21: {
                 s32 ret;
                 u32 unk;
                 PixelPos pos1;
@@ -1693,71 +1910,80 @@ static s32 ExecuteScriptCommand(Action *action)
                 }
                 break;
             }
-            case 0x22: {
+            case CMD_BYTE_22: {
                 sub_80999E8(curCmd.argShort);
-                if (curCmd.argByte) return 2;
+                if (curCmd.argByte != 0)
+                    return 2;
                 break;
             }
-            case 0x23: {
+            case CMD_BYTE_23: {
                 sub_80999FC(curCmd.argShort);
-                if (curCmd.argByte) return 2;
+                if (curCmd.argByte != 0)
+                    return 2;
                 break;
             }
-            case 0x24: {
+            case CMD_BYTE_24: {
                 sub_8099A10(curCmd.argShort, curCmd.arg1, curCmd.arg2);
-                if (curCmd.argByte) return 2;
+                if (curCmd.argByte != 0)
+                    return 2;
                 break;
             }
-            case 0x25: {
+            case CMD_BYTE_25: {
                 sub_8099A34(curCmd.argShort);
-                if (curCmd.argByte) return 2;
+                if (curCmd.argByte != 0)
+                    return 2;
                 break;
             }
-            case 0x26: {
+            case CMD_BYTE_26: {
                 sub_8099A48(curCmd.argShort);
-                if (curCmd.argByte) return 2;
+                if (curCmd.argByte != 0)
+                    return 2;
                 break;
             }
-            case 0x27: case 0x28: {
+            case CMD_BYTE_27:
+            case CMD_BYTE_28: {
                 RGB_Array color = { curCmd.arg2 >> 16, curCmd.arg2 >> 8, curCmd.arg2, 0 };
                 switch (curCmd.op) {
-                    case 0x27:
+                    case CMD_BYTE_27:
                         sub_8099A5C(curCmd.argShort, curCmd.arg1, color);
                         break;
-                    case 0x28:
+                    case CMD_BYTE_28:
                         sub_8099AFC(curCmd.argShort, curCmd.arg1, color);
                         break;
                 }
-                if (curCmd.argByte) return 2;
+                if (curCmd.argByte != 0)
+                    return 2;
                 break;
             }
-            case 0x29: {
+            case CMD_BYTE_29: {
                 sub_809A6E4((u16)curCmd.argShort);
                 break;
             }
-            case 0x2a: {
+            case CMD_BYTE_2A: {
                 sub_809A6F8((u16)curCmd.argShort);
                 break;
             }
-            case 0x2b: {
+            case CMD_BYTE_2B: {
                 SetAutoPressTextboxMidEndMsgFrames(curCmd.arg1, curCmd.arg2);
                 break;
             }
-            case 0x2c: {
-                if (!sub_809A768()) break;
+            case CMD_BYTE_2C: {
+                if (!sub_809A768())
+                    break;
                 sub_80A87AC(0, 10);
-                if (GroundScriptCheckLockCondition(action, 0)) return 2;
+                if (GroundScriptCheckLockCondition(action, 0))
+                    return 2;
                 break;
             }
-            case 0x30: {
+            case CMD_BYTE_30: {
                 ScriptClearTextbox();
                 break;
             }
-            case 0x31: {
+            case CMD_BYTE_31: {
                 ScriptClearTextbox2();
                 break;
             }
-            case 0x2d: {
+            case CMD_BYTE_2D: {
                 switch ((u8)curCmd.argByte) {
                     case 0: {
                         ResetTextboxPortrait(curCmd.argShort);
@@ -1831,42 +2057,71 @@ static s32 ExecuteScriptCommand(Action *action)
                 }
                 break;
             }
-            case 0x2e: {
+            case CMD_BYTE_2E: {
                 ScriptSetPortraitInfo(curCmd.argShort, (s8)curCmd.arg1, (u8)curCmd.argByte);
                 break;
             }
-            case 0x2f: {
+            case CMD_BYTE_2F: {
                 PixelPos pos;
                 pos.x = curCmd.arg1;
                 pos.y = curCmd.arg2;
                 ScriptSetPortraitPosDelta(curCmd.argShort, &pos);
                 break;
             }
-            case 0x32 ... 0x38: {
-                s8 ret = 0;
+            case CMD_BYTE_32:
+            case CMD_BYTE_33: // MSG_QUIET
+            case CMD_BYTE_34:
+            case CMD_BYTE_35:
+            case CMD_BYTE_36: // MSG_OVERHEARD
+            case CMD_BYTE_37:
+            case CMD_BYTE_38: {
+                s8 ret = FALSE;
                 switch (scriptData->curScriptOp) {
-                    case 0x32: ret = ScriptPrintText(SCRIPT_TEXT_TYPE_INSTANT, curCmd.argShort, curCmd.argPtr); break;
-                    case 0x33: ret = ScriptPrintText(SCRIPT_TEXT_TYPE_PLAYER, curCmd.argShort, curCmd.argPtr); break;
-                    case 0x34: ret = ScriptPrintText(SCRIPT_TEXT_TYPE_NPC, curCmd.argShort, curCmd.argPtr); break;
-                    case 0x35: ret = ScriptPrintText(SCRIPT_TEXT_TYPE_LETTER, curCmd.argShort, curCmd.argPtr); break;
-                    case 0x36: ret = ScriptPrintText(SCRIPT_TEXT_TYPE_4, curCmd.argShort, curCmd.argPtr); break;
-                    case 0x37: ret = ScriptPrintTextOnBg(curCmd.argPtr); break;
-                    case 0x38: ret = ScriptPrintTextOnBg2(curCmd.argPtr); break;
+                    case CMD_BYTE_32: {
+                        ret = ScriptPrintText(SCRIPT_TEXT_TYPE_INSTANT, curCmd.argShort, curCmd.argPtr);
+                        break;
+                    }
+                    case CMD_BYTE_33: { // MSG_QUIET
+                        ret = ScriptPrintText(SCRIPT_TEXT_TYPE_QUIET, curCmd.argShort, curCmd.argPtr);
+                        break;
+                    }
+                    case CMD_BYTE_34: {
+                        ret = ScriptPrintText(SCRIPT_TEXT_TYPE_NPC, curCmd.argShort, curCmd.argPtr);
+                        break;
+                    }
+                    case CMD_BYTE_35: {
+                        ret = ScriptPrintText(SCRIPT_TEXT_TYPE_LETTER, curCmd.argShort, curCmd.argPtr);
+                        break;
+                    }
+                    case CMD_BYTE_36: { // MSG_OVERHEARD
+                        ret = ScriptPrintText(SCRIPT_TEXT_TYPE_OVERHEARD, curCmd.argShort, curCmd.argPtr);
+                        break;
+                    }
+                    case CMD_BYTE_37: {
+                        ret = ScriptPrintTextOnBg(curCmd.argPtr);
+                        break;
+                    }
+                    case CMD_BYTE_38: {
+                        ret = ScriptPrintTextOnBg2(curCmd.argPtr);
+                        break;
+                    }
                 }
                 if (ret) {
                     sub_80A87AC(0, 10);
-                    if (GroundScriptCheckLockCondition(action, 0)) return 2;
+                    if (GroundScriptCheckLockCondition(action, 0))
+                        return 2;
                 }
                 break;
             }
-            case 0x39: {
+            case CMD_BYTE_39: {
                 if ((s8)ScriptPrintTextOnBgAuto(curCmd.argShort, curCmd.argPtr) && curCmd.argShort >= 0) {
                     sub_80A87AC(0, 10);
-                    if (GroundScriptCheckLockCondition(action, 0)) return 2;
+                    if (GroundScriptCheckLockCondition(action, 0))
+                        return 2;
                 }
                 break;
             }
-            case 0x3a: {
+            case CMD_BYTE_3A: {
                 sub_809AFC8((u8)curCmd.argByte > 0, curCmd.arg1, (s16)curCmd.arg2, curCmd.argPtr);
                 if (GroundScriptCheckLockCondition(action, 1)) {
                     sub_80A87AC(0, 11);
@@ -1874,17 +2129,17 @@ static s32 ExecuteScriptCommand(Action *action)
                 }
                 break;
             }
-            case 0x3c: {
-                sub_809B1D4(curCmd.argByte, curCmd.arg1, curCmd.arg2, (void *) curCmd.argPtr);
+            case CMD_BYTE_3C: { // SPECIAL_TEXT
+                ScriptSpecialTextHandler(curCmd.argByte, curCmd.arg1, curCmd.arg2, STR_TO_MONORSTRPTR((u8*)curCmd.argPtr));
                 sub_80A87AC(0, 11);
                 return 2;
             }
-            case 0x3b: {
+            case CMD_BYTE_3B: {
                 scriptData->unk2A = 0;
                 return 2;
             }
-            case 0x3d: {
-                int i;
+            case CMD_BYTE_3D: {
+                s32 i;
                 if ((s16)curCmd.arg1 != -1) {
                     Pokemon *mon = sub_80A8D54((s16) curCmd.arg1);
                     if (mon != NULL) {
@@ -1892,94 +2147,97 @@ static s32 ExecuteScriptCommand(Action *action)
                             sPokeNameBuffer[i] = mon->name[i];
                         }
                         sPokeNameBuffer[POKEMON_NAME_LENGTH] = 0;
-                        sub_809B1C0(4, 0, sPokeNameBuffer);
+                        ScriptSpecialTextHandler2(SPECIAL_TEXT_PLAYER_NAME_INPUT, 0, STR_TO_MONORSTRPTR(sPokeNameBuffer));
                         sub_80A87AC(0, 11);
                         return 2;
                     }
                     break;
                 } else {
-                    sub_809B1C0(4, 1, sPokeNameBuffer);
+                    ScriptSpecialTextHandler2(SPECIAL_TEXT_PLAYER_NAME_INPUT, 1, STR_TO_MONORSTRPTR(sPokeNameBuffer));
                     sub_80A87AC(0, 11);
                     return 2;
                 }
             }
-            case 0x3e: {
+            case CMD_BYTE_3E: {
                 sub_80920B8(sPokeNameBuffer);
                 sPokeNameBuffer[10] = '\0';
-                sub_809B1C0(5, 0, sPokeNameBuffer);
+                ScriptSpecialTextHandler2(SPECIAL_TEXT_TEAM_NAME_INPUT, 0, STR_TO_MONORSTRPTR(sPokeNameBuffer));
                 sub_80A87AC(0, 11);
                 return 2;
             }
-            case 0x3f: {
-                int i;
-                for (i = 0; i < ARRAY_COUNT_INT(sPokeNameBuffer); i++) {
+            case CMD_BYTE_3F: {
+                s32 i;
+                for (i = 0; i < ARRAY_COUNT_INT(sPokeNameBuffer); i++)
                     sPokeNameBuffer[i] = '\0';
-                }
-                sub_809B1C0(6, (u8)curCmd.argByte, sPokeNameBuffer);
+
+                ScriptSpecialTextHandler2(SPECIAL_TEXT_PASSWORD_INPUT, (u8)curCmd.argByte, STR_TO_MONORSTRPTR(sPokeNameBuffer));
                 sub_80A87AC(0, 11);
                 return 2;
             }
-            case 0x42: {
+            case CMD_BYTE_42: {
                 StopAllMusic_1();
                 break;
             }
-            case 0x43: {
+            case CMD_BYTE_43: {
                 FadeOutAllMusic(curCmd.argShort < 0 ? 30 : curCmd.argShort);
                 break;
             }
-            case 0x44: {
+            case CMD_BYTE_44: {
                 u16 id = curCmd.argByte == 0 ? sub_80A25AC((u16)curCmd.arg1) : curCmd.arg1;
-                if (id != 999) {
+                if (id != 999)
                     StartNewBGM_(id);
-                } else {
+                else
                     StopBGMusic();
-                }
+
                 break;
             }
-            case 0x45: {
+            case CMD_BYTE_45: {
                 u16 id = curCmd.argByte == 0 ? sub_80A25AC((u16)curCmd.arg1) : curCmd.arg1;
-                if (id != 999) {
+                if (id != 999)
                     FadeInNewBGM_(id, curCmd.argShort);
-                } else {
+                else
                     StopBGMusic();
-                }
+
                 break;
             }
-            case 0x46: {
+            case CMD_BYTE_46: {
                 u16 id = curCmd.argByte == 0 ? sub_80A25AC((u16)curCmd.arg1) : curCmd.arg1;
-                if (id != 999) {
+                if (id != 999)
                     QueueBGM_((u16)id);
-                }
+
                 break;
             }
-            case 0x47: {
+            case CMD_BYTE_47: {
                 StopBGMusic();
                 break;
             }
-            case 0x48: {
+            case CMD_BYTE_48: {
                 FadeOutBGM_(curCmd.argShort < 0 ? 30 : (u16)curCmd.argShort);
                 break;
             }
-            case 0x49: case 0x4c: {
+            case CMD_BYTE_49:
+            case CMD_BYTE_4C: {
                 PlaySoundWithVolume((u16)curCmd.arg1, 256);
                 break;
             }
-            case 0x4a: case 0x4d: {
+            case CMD_BYTE_4A:
+            case CMD_BYTE_4D: {
                 StopSound((u16)curCmd.arg1);
                 break;
             }
-            case 0x4b: case 0x4e: {
+            case CMD_BYTE_4B:
+            case CMD_BYTE_4E: {
                 FadeOutSound((u16)curCmd.arg1, curCmd.argShort < 0 ? 30 : (u16)curCmd.argShort);
                 break;
             }
-            case 0x4f: {
-                if (action->scriptData2.state == 1) {
+            case CMD_BYTE_4F: {
+                if (action->scriptData2.state == 1)
                     InitScriptData(&action->scriptData2);
-                }
+
                 action->callbacks->setHitboxPos(action->parentObject, 0);
                 break;
             }
-            case 0x50: {
+            case CMD_BYTE_50: {
                 Action *ptr;
                 PixelPos pos;
                 s8 c;
@@ -1987,56 +2245,57 @@ static s32 ExecuteScriptCommand(Action *action)
                     Action *tmp = sub_809D52C(&action->unkC);
                     ptr = tmp;
                 }
-                if (ptr) {
+                if (ptr != NULL) {
                     ptr->callbacks->getHitboxCenter(action->parentObject, &pos);
                     ptr->callbacks->getDirection(action->parentObject, &c);
                     action->callbacks->moveReal(action->parentObject, &pos);
-                    action->scriptData.unk26 = c;
+                    action->scriptData.storedDir = c;
                     action->callbacks->setDirection(action->parentObject, c);
                 }
                 break;
             }
-            case 0x51: {
+            case CMD_BYTE_51: {
                 PixelPos posIn;
                 PixelPos posOut1;
                 PixelPos posOut2;
+
                 action->callbacks->getHitboxCenter(action->parentObject, &posIn);
                 GroundLink_GetArea(curCmd.argShort, &posOut1, &posOut2, &posIn);
                 action->callbacks->setPositionBounds(action->parentObject, &posOut1, &posOut2);
                 break;
             }
-            case 0x52: {
+            case CMD_BYTE_52: {
                 action->callbacks->setFlags(action->parentObject, curCmd.arg1);
                 break;
             }
-            case 0x53: {
-                if (curCmd.arg1 & 0x400 && action->scriptData2.state == 1) {
+            case CMD_BYTE_53: {
+                if (curCmd.arg1 & 0x400 && action->scriptData2.state == 1)
                     InitScriptData(&action->scriptData2);
-                }
+
                 action->callbacks->clearFlags(action->parentObject, curCmd.arg1);
                 break;
             }
-            case 0x54: {
-                action->callbacks->getDirection(action->parentObject, &action->scriptData.unk26);
-                if (curCmd.argShort) {
+            case CMD_BYTE_54: {
+                action->callbacks->getDirection(action->parentObject, &action->scriptData.storedDir);
+                if (curCmd.argShort != 0)
                     action->scriptData.unk24 = curCmd.argShort;
-                }
+
                 action->callbacks->setEventIndex(action->parentObject, (u16)curCmd.argShort);
                 break;
             }
-            case 0x55: {
+            case CMD_BYTE_55: {
                 action->callbacks->livesOnlyNullsub(action->parentObject, (u16)curCmd.argShort);
                 break;
             }
-            case 0x56: {
+            case CMD_BYTE_56: {
                 action->callbacks->func38(action->parentObject, (s16)curCmd.arg1, curCmd.argShort);
                 break;
             }
-            case 0x57: {
+            case CMD_BYTE_57: {
                 action->callbacks->func44_livesOnlySpriteRelated(action->parentObject, curCmd.argShort);
                 break;
             }
-            case 0x58: {
+            case CMD_BYTE_58: {
                 PixelPos unk;
                 unk.x = curCmd.arg1 << 8;
                 unk.y = curCmd.arg2 << 8;
@@ -2044,7 +2303,7 @@ static s32 ExecuteScriptCommand(Action *action)
                 scriptData->unk2A = (u8)curCmd.argByte;
                 return 2;
             }
-            case 0x59: {
+            case CMD_BYTE_59: {
                 PixelPos unk;
                 unk.x = curCmd.argShort << 8;
                 unk.y = curCmd.arg1 << 8;
@@ -2052,16 +2311,15 @@ static s32 ExecuteScriptCommand(Action *action)
                 scriptData->unk2A = (u8)curCmd.argByte;
                 return 2;
             }
-            case 0x5a: {
-                u32 unk[2];
-                unk[0] = OtherRandInt(curCmd.argShort) << 8;
-                unk[1] = OtherRandInt(curCmd.arg1) << 8;
-                action->callbacks->moveRelative(action->parentObject,
-                                                (PixelPos*)unk);
+            case CMD_BYTE_5A: {
+                PixelPos unk;
+                unk.x = OtherRandInt(curCmd.argShort) << 8;
+                unk.y = OtherRandInt(curCmd.arg1) << 8;
+                action->callbacks->moveRelative(action->parentObject, &unk);
                 scriptData->unk2A = (u8)curCmd.argByte;
                 return 2;
             }
-            case 0x5b: {
+            case CMD_BYTE_5B: {
                 PixelPos unk;
                 action->callbacks->getHitboxCenter(action->parentObject, &unk);
                 GroundLink_GetPos((s16)curCmd.arg1, &unk);
@@ -2069,7 +2327,7 @@ static s32 ExecuteScriptCommand(Action *action)
                 scriptData->unk2A = (u8)curCmd.argByte;
                 return 2;
             }
-            case 0x5c: {
+            case CMD_BYTE_5C: {
                 PixelPos pos, pos1, pos2;
                 action->callbacks->getHitboxCenter(action->parentObject, &pos);
                 GroundLink_GetArea((s16)curCmd.arg1, &pos1, &pos2, &pos);
@@ -2079,7 +2337,7 @@ static s32 ExecuteScriptCommand(Action *action)
                 scriptData->unk2A = (u8)curCmd.argByte;
                 return 2;
             }
-            case 0x5d: {
+            case CMD_BYTE_5D: {
                 PixelPos unk;
                 s16 res = sub_80A7AE8((s16)curCmd.arg1);
                 if (res >= 0) {
@@ -2090,7 +2348,7 @@ static s32 ExecuteScriptCommand(Action *action)
                 }
                 break;
             }
-            case 0x5e: {
+            case CMD_BYTE_5E: {
                 PixelPos pos;
                 s32 height;
                 s32 dir;
@@ -2100,12 +2358,12 @@ static s32 ExecuteScriptCommand(Action *action)
                 dir = (s8)GetScriptVarArrayValue(NULL, POSITION_DIRECTION, (u16)curCmd.arg1);
                 action->callbacks->moveReal(action->parentObject, &pos);
                 action->callbacks->setPosHeight(action->parentObject, height);
-                action->scriptData.unk26 = dir;
+                action->scriptData.storedDir = dir;
                 action->callbacks->setDirection(action->parentObject, dir);
                 scriptData->unk2A = (u8)curCmd.argByte;
                 return 2;
             }
-            case 0x5f: {
+            case CMD_BYTE_5F: {
                 PixelPos pos;
                 u32 height;
                 u32 wat;
@@ -2119,19 +2377,21 @@ static s32 ExecuteScriptCommand(Action *action)
                 SetScriptVarArrayValue(NULL, POSITION_DIRECTION, (u16)curCmd.arg1, dir);
                 break;
             }
-            case 0x60: {
+            case CMD_BYTE_60: {
                 action->callbacks->setPosHeight(action->parentObject, curCmd.arg1 << 8);
                 scriptData->unk2A = (u8)curCmd.argByte;
                 return 2;
             }
-            case 0x61: case 0x69: {
+            case CMD_BYTE_61:
+            case CMD_BYTE_69: {
                 scriptData->pos2.x = curCmd.arg1 << 8;
                 scriptData->pos2.y = curCmd.arg2 << 8;
                 scriptData->unk30 = curCmd.argShort;
                 scriptData->unk2A = -1;
                 return 2;
             }
-            case 0x62: case 0x6a: {
+            case CMD_BYTE_62:
+            case CMD_BYTE_6A: {
                 PixelPos pos;
                 action->callbacks->getHitboxCenter(action->parentObject, &pos);
                 scriptData->pos2.x = pos.x + (curCmd.arg1 << 8);
@@ -2140,28 +2400,34 @@ static s32 ExecuteScriptCommand(Action *action)
                 scriptData->unk2A = -1;
                 return 2;
             }
-            case 0x63: case 0x6b: {
+            case CMD_BYTE_63:
+            case CMD_BYTE_6B: {
                 action->callbacks->getHitboxCenter(action->parentObject, &scriptData->pos2);
                 GroundLink_GetPos((s16)curCmd.arg1, &scriptData->pos2);
                 scriptData->unk30 = curCmd.argShort;
                 scriptData->unk2A = -1;
                 return 2;
             }
-            case 0x64: case 0x6c: {
+            case CMD_BYTE_64:
+            case CMD_BYTE_6C: {
                 action->callbacks->getHitboxCenter(action->parentObject, &scriptData->pos2);
                 GroundLink_GetPos((s16)curCmd.arg1, &scriptData->pos2);
                 scriptData->unk30 = curCmd.argShort;
                 scriptData->unk2A = (u8)curCmd.argByte;
                 return 2;
             }
-            case 0x65: case 0x6d: {
+            case CMD_BYTE_65:
+            case CMD_BYTE_6D: {
                 action->callbacks->getHitboxCenter(action->parentObject, &scriptData->pos2);
                 GroundLink_GetPos((s16)curCmd.arg1, &scriptData->pos2);
                 scriptData->unk30 = curCmd.argShort;
                 scriptData->unk2A = OtherRandInt((u8)curCmd.argByte);
                 return 2;
             }
-            case 0x66: case 0x67: case 0x6e: case 0x6f: {
+            case CMD_BYTE_66:
+            case CMD_BYTE_67:
+            case CMD_BYTE_6E:
+            case CMD_BYTE_6F: {
                 s16 ret = sub_80A7AE8((s16)curCmd.arg1);
                 if (ret >= 0) {
                     sub_80A8FD8(ret, &scriptData->pos2);
@@ -2171,32 +2437,45 @@ static s32 ExecuteScriptCommand(Action *action)
                 }
                 break;
             }
-            case 0x71: case 0x77: case 0x7d: case 0x83: {
-#define HYPOT FP24_8_Hypot((s24_8){scriptData->pos2.x - scriptData->pos1.x}, (s24_8){scriptData->pos2.y - scriptData->pos1.y}) / curCmd.argShort
+            case CMD_BYTE_71:
+            case CMD_BYTE_77:
+            case CMD_BYTE_7D:
+            case CMD_BYTE_83: {
+
+#define HYPOT (FP24_8_Hypot((s24_8){scriptData->pos2.x - scriptData->pos1.x}, (s24_8){scriptData->pos2.y - scriptData->pos1.y}) / curCmd.argShort)
+
                 action->callbacks->getHitboxCenter(action->parentObject, &scriptData->pos1);
                 scriptData->pos2.x = curCmd.arg1 << 8;
                 scriptData->pos2.y = curCmd.arg2 << 8;
-                if (curCmd.op == 0x7d || curCmd.op == 0x83) {
+                if (curCmd.op == CMD_BYTE_7D || curCmd.op == CMD_BYTE_83) {
                     scriptData->unk2A = HYPOT;
-                    if (scriptData->unk2A <= 0) scriptData->unk2A = 1;
+                    if (scriptData->unk2A <= 0)
+                        scriptData->unk2A = 1;
                 } else {
                     scriptData->unk2A = curCmd.argShort;
                 }
                 return 2;
             }
-            case 0x72: case 0x78: case 0x7e: case 0x84: {
+            case CMD_BYTE_72:
+            case CMD_BYTE_78:
+            case CMD_BYTE_7E:
+            case CMD_BYTE_84: {
                 action->callbacks->getHitboxCenter(action->parentObject, &scriptData->pos1);
                 scriptData->pos2.x = scriptData->pos1.x + (curCmd.arg1 << 8);
                 scriptData->pos2.y = scriptData->pos1.y + (curCmd.arg2 << 8);
-                if (curCmd.op == 0x7e || curCmd.op == 0x84) {
+                if (curCmd.op == CMD_BYTE_7E || curCmd.op == CMD_BYTE_84) {
                     scriptData->unk2A = HYPOT;
-                    if (scriptData->unk2A <= 0) scriptData->unk2A = 1;
+                    if (scriptData->unk2A <= 0)
+                        scriptData->unk2A = 1;
                 } else {
                     scriptData->unk2A = curCmd.argShort;
                 }
                 return 2;
             }
-            case 0x73: case 0x79: case 0x7f: case 0x85: {
+            case CMD_BYTE_73:
+            case CMD_BYTE_79:
+            case CMD_BYTE_7F:
+            case CMD_BYTE_85: {
                 // BUG: (or two): these lines use the wrong script command arguments to calculate the position offset
                 // making the target position nonsense. But even if they were correct,
                 // the way the cap is calculated would make the random offset biased off-center.
@@ -2213,48 +2492,61 @@ static s32 ExecuteScriptCommand(Action *action)
                 scriptData->pos2.x = scriptData->pos1.x + ((OtherRandInt(curCmd.arg1 * 2 + 1) - curCmd.arg1) << 8);
                 scriptData->pos2.y = scriptData->pos1.y + ((OtherRandInt(curCmd.arg2 * 2 + 1) - curCmd.arg2) << 8);
 #endif
-                if (curCmd.op == 0x7f || curCmd.op == 0x85) {
+                if (curCmd.op == CMD_BYTE_7F || curCmd.op == CMD_BYTE_85) {
                     scriptData->unk2A = HYPOT;
-                    if (scriptData->unk2A <= 0) scriptData->unk2A = 1;
+                    if (scriptData->unk2A <= 0)
+                        scriptData->unk2A = 1;
                 } else {
                     scriptData->unk2A = curCmd.argShort;
                 }
                 return 2;
             }
-            case 0x74: case 0x7a: case 0x80: case 0x86: {
+            case CMD_BYTE_74:
+            case CMD_BYTE_7A:
+            case CMD_BYTE_80:
+            case CMD_BYTE_86: {
                 action->callbacks->getHitboxCenter(action->parentObject, &scriptData->pos1);
                 scriptData->pos2 = scriptData->pos1;
                 GroundLink_GetPos((s16)curCmd.arg1, &scriptData->pos2);
-                if (curCmd.op == 0x80 || curCmd.op == 0x86) {
+                if (curCmd.op == CMD_BYTE_80 || curCmd.op == CMD_BYTE_86) {
                     scriptData->unk2A = HYPOT;
-                    if (scriptData->unk2A <= 0) scriptData->unk2A = 1;
+                    if (scriptData->unk2A <= 0)
+                        scriptData->unk2A = 1;
                 } else {
                     scriptData->unk2A = curCmd.argShort;
                 }
                 return 2;
             }
-            case 0x75: case 0x7b: case 0x81: case 0x87: {
+            case CMD_BYTE_75:
+            case CMD_BYTE_7B:
+            case CMD_BYTE_81:
+            case CMD_BYTE_87: {
                 s32 cap = curCmd.arg1 * 2 - 1;
                 action->callbacks->getHitboxCenter(action->parentObject, &scriptData->pos2);
                 GroundLink_GetPos((s16)curCmd.arg2, &scriptData->pos2);
                 scriptData->pos2.x = scriptData->pos2.x + ((OtherRandInt(cap) - curCmd.argShort) << 8);
                 scriptData->pos2.y = scriptData->pos2.y + ((OtherRandInt(cap) - curCmd.argShort) << 8);
-                if (curCmd.op == 0x81 || curCmd.op == 0x87) {
+                if (curCmd.op == CMD_BYTE_81 || curCmd.op == CMD_BYTE_87) {
                     scriptData->unk2A = HYPOT;
-                    if (scriptData->unk2A <= 0) scriptData->unk2A = 1;
+                    if (scriptData->unk2A <= 0)
+                        scriptData->unk2A = 1;
                 } else {
                     scriptData->unk2A = curCmd.argShort;
                 }
                 return 2;
             }
-            case 0x76: case 0x7c: case 0x82: case 0x88: {
+            case CMD_BYTE_76:
+            case CMD_BYTE_7C:
+            case CMD_BYTE_82:
+            case CMD_BYTE_88: {
                 s16 ret = sub_80A7AE8((s16)curCmd.arg1);
                 if (ret >= 0) {
                     action->callbacks->getHitboxCenter(action->parentObject, &scriptData->pos1);
                     sub_80A8FD8(ret, &scriptData->pos2);
-                    if (curCmd.op == 0x82 || curCmd.op == 0x88) {
+                    if (curCmd.op == CMD_BYTE_82 || curCmd.op == CMD_BYTE_88) {
                         scriptData->unk2A = HYPOT;
-                        if (scriptData->unk2A <= 0) scriptData->unk2A = 1;
+                        if (scriptData->unk2A <= 0)
+                            scriptData->unk2A = 1;
                     } else {
                         scriptData->unk2A = curCmd.argShort;
                     }
@@ -2262,59 +2554,62 @@ static s32 ExecuteScriptCommand(Action *action)
                 }
                 break;
             }
-            case 0x68: case 0x70: {
+            case CMD_BYTE_68:
+            case CMD_BYTE_70: {
                 scriptData->unk48 = curCmd.arg1 << 8;
                 scriptData->unk30 = curCmd.argShort;
                 scriptData->unk2A = -1;
                 return 2;
             }
-            case 0x89: {
-                action->scriptData.unk26 = curCmd.arg1;
+            case CMD_BYTE_89: {
+                action->scriptData.storedDir = curCmd.arg1;
                 action->callbacks->setDirection(action->parentObject, (s8) curCmd.arg1);
                 scriptData->unk30 = curCmd.argShort;
                 scriptData->unk2A = (u8)curCmd.argByte;
                 return 2;
             }
-            case 0x8a: {
+            case CMD_BYTE_8A: { // CMD_UNK_8A
                 s8 dir;
                 action->callbacks->getDirection(action->parentObject, &dir);
-                action->scriptData.unk26 = sub_8002984(dir, (u8)curCmd.arg1);
-                action->callbacks->setDirection(action->parentObject, action->scriptData.unk26);
+                action->scriptData.storedDir = TransformDirection1(dir, (u8)curCmd.arg1);
+                action->callbacks->setDirection(action->parentObject, action->scriptData.storedDir);
                 scriptData->unk30 = curCmd.argShort;
                 scriptData->unk2A = (u8)curCmd.argByte;
                 return 2;
             }
-            case 0x8b: {
-                action->scriptData.unk26 = curCmd.argShort;
-                action->callbacks->setDirection(action->parentObject, action->scriptData.unk26);
+            case CMD_BYTE_8B: { // SET_DIR_WAIT
+                action->scriptData.storedDir = curCmd.argShort;
+                action->callbacks->setDirection(action->parentObject, action->scriptData.storedDir);
                 scriptData->unk2A = (u8)curCmd.argByte;
                 return 2;
             }
-            case 0x8c: {
-                int ret = (s16)sub_80A7AE8((s16)curCmd.arg1);
+            case CMD_BYTE_8C: { // CMD_UNK_8C
+                s32 ret = (s16)sub_80A7AE8((s16)curCmd.arg1);
                 s8 dir;
                 if (ret >= 0) {
                     sub_80A9050(ret, &dir);
-                    action->scriptData.unk26 = sub_8002984(dir, (u8)curCmd.argShort);
-                    action->callbacks->setDirection(action->parentObject, action->scriptData.unk26);
+                    action->scriptData.storedDir = TransformDirection1(dir, (u8)curCmd.argShort);
+                    action->callbacks->setDirection(action->parentObject, action->scriptData.storedDir);
                 }
                 scriptData->unk2A = (u8)curCmd.argByte;
                 return 2;
             }
-            case 0x8d: {
+            case CMD_BYTE_8D: { // CMD_UNK_8D
                 s8 dir;
                 action->callbacks->getDirection(action->parentObject, &dir);
-                action->scriptData.unk26 = sub_8002984(dir, (u8)curCmd.argShort);
-                action->callbacks->setDirection(action->parentObject, action->scriptData.unk26);
+                action->scriptData.storedDir = TransformDirection1(dir, (u8)curCmd.argShort);
+                action->callbacks->setDirection(action->parentObject, action->scriptData.storedDir);
                 scriptData->unk2A = (u8)curCmd.argByte;
                 return 2;
             }
-            case 0x8e: case 0x8f: case 0x90: {
+            case CMD_BYTE_8E: // CMD_UNK_8E
+            case CMD_BYTE_8F: // CMD_UNK_8F
+            case CMD_BYTE_90: { // CMD_UNK_90
                 bool8 flag = FALSE;
                 s8 dir;
                 PixelPos pos1, pos2, pos3, pos4;
                 switch (curCmd.op) {
-                    case 0x8e: {
+                    case CMD_BYTE_8E: { // CMD_UNK_8E
                         s32 val = (s16)sub_80A7AE8((s16)curCmd.arg1);
                         if (val >= 0) {
                             flag = TRUE;
@@ -2323,7 +2618,7 @@ static s32 ExecuteScriptCommand(Action *action)
                         }
                         break;
                     }
-                    case 0x8f: {
+                    case CMD_BYTE_8F: { // CMD_UNK_8F
                         s32 val = (s16)sub_80A7AE8((s16)curCmd.arg1);
                         if (val >= 0) {
                             flag = TRUE;
@@ -2332,7 +2627,7 @@ static s32 ExecuteScriptCommand(Action *action)
                         }
                         break;
                     }
-                    case 0x90: {
+                    case CMD_BYTE_90: { // CMD_UNK_90
                         flag = TRUE;
                         action->callbacks->getHitboxCenter(action->parentObject, &pos1);
                         action->callbacks->getSize(action->parentObject, &pos2);
@@ -2342,7 +2637,7 @@ static s32 ExecuteScriptCommand(Action *action)
                 }
                 if (flag) {
                     s8 ret;
-                    int tmp;
+                    s32 tmp;
                     action->callbacks->getHitboxCenter(action->parentObject, &pos3);
                     action->callbacks->getSize(action->parentObject, &pos4);
                     ret = SizedDeltaDirection8(&pos3, &pos4, &pos1, &pos2); // wtf
@@ -2355,33 +2650,35 @@ static s32 ExecuteScriptCommand(Action *action)
                     if (dir == tmp) {
                         action->callbacks->getDirection(action->parentObject, &dir);
                     }
-                    action->scriptData.unk26 = sub_8002984(dir, (u8)curCmd.argShort);
-                    action->callbacks->setDirection(action->parentObject, action->scriptData.unk26);
+                    action->scriptData.storedDir = TransformDirection1(dir, (u8)curCmd.argShort);
+                    action->callbacks->setDirection(action->parentObject, action->scriptData.storedDir);
                 }
                 scriptData->unk2A = (u8)curCmd.argByte;
                 return 2;
             }
-            case 0x93: case 0x94: case 0x95: {
+            case CMD_BYTE_93: // CMD_UNK_93
+            case CMD_BYTE_94: // CMD_UNK_94
+            case CMD_BYTE_95: { // CMD_UNK_95
                 scriptData->unk2A = 0;
                 return 2;
             }
-            case 0x91: {
+            case CMD_BYTE_91: { // ROTATE_TO
                 action->scriptData.unk4D = (s8)curCmd.arg1;
                 scriptData->unk2A = 0;
                 return 2;
             }
-            case 0x92: {
+            case CMD_BYTE_92: { // CMD_UNK_92
                 s8 unk;
                 action->callbacks->getDirection(action->parentObject, &unk);
-                action->scriptData.unk4D = sub_8002984(unk, (u8)curCmd.arg1);
+                action->scriptData.unk4D = TransformDirection1(unk, (u8)curCmd.arg1);
                 scriptData->unk2A = 0;
                 return 2;
             }
-            case 0x97: {
+            case CMD_BYTE_97: {
                 sub_809D124(curCmd.argShort, curCmd.arg1, curCmd.arg2);
                 break;
             }
-            case 0x98: {
+            case CMD_BYTE_98: {
                 s32 id = action->callbacks->getIndex(action->parentObject);
                 switch (action->unk8.unk0) {
                     case 1:
@@ -2396,7 +2693,7 @@ static s32 ExecuteScriptCommand(Action *action)
                 }
                 break;
             }
-            case 0x99: {
+            case CMD_BYTE_99: {
                 s32 id = action->callbacks->getIndex(action->parentObject);
                 PixelPos unk;
                 switch (action->unk8.unk0) {
@@ -2415,13 +2712,14 @@ static s32 ExecuteScriptCommand(Action *action)
                 }
                 break;
             }
-            case 0x9a: {
+            case CMD_BYTE_9A: {
                 sub_809D170(1, 0);
                 break;
             }
-            case 0x9b: {
+            case CMD_BYTE_9B: {
                 s32 id = action->callbacks->getIndex(action->parentObject);
-                if (id < 0) break;
+                if (id < 0)
+                    break;
                 switch (action->unk8.unk0) {
                     case 1:
                         sub_809D1A8(1, id, curCmd.argShort);
@@ -2435,7 +2733,7 @@ static s32 ExecuteScriptCommand(Action *action)
                 }
                 break;
             }
-            case 0x9c: {
+            case CMD_BYTE_9C: {
                 s32 id = action->callbacks->getIndex(action->parentObject);
                 PixelPos unk;
                 switch (action->unk8.unk0) {
@@ -2454,14 +2752,15 @@ static s32 ExecuteScriptCommand(Action *action)
                 }
                 break;
             }
-            case 0x9d: {
+            case CMD_BYTE_9D: {
                 sub_809D1A8(1, 0, curCmd.argShort);
                 return 2;
             }
-            case 0x9e: {
+            case CMD_BYTE_9E: {
                 s32 id = action->callbacks->getIndex(action->parentObject);
-                if (id < 0) break;
-                switch(action->unk8.unk0) {
+                if (id < 0)
+                    break;
+                switch (action->unk8.unk0) {
                     case 1:
                         sub_809D1E4(1, id, curCmd.argShort);
                         return 2;
@@ -2474,10 +2773,10 @@ static s32 ExecuteScriptCommand(Action *action)
                 }
                 break;
             }
-            case 0x9f: {
+            case CMD_BYTE_9F: {
                 s32 id = action->callbacks->getIndex(action->parentObject);
                 PixelPos unk;
-                switch(action->unk8.unk0) {
+                switch (action->unk8.unk0) {
                     case 1:
                         sub_80A8FD8(id, &unk);
                         sub_809D1CC(0, &unk, curCmd.argShort);
@@ -2493,14 +2792,15 @@ static s32 ExecuteScriptCommand(Action *action)
                 }
                 break;
             }
-            case 0xa0: {
+            case CMD_BYTE_A0: {
                 sub_809D1E4(1, 0, curCmd.argShort);
                 return 2;
             }
-            case 0xa1: {
+            case CMD_BYTE_A1: {
                 s32 id = action->callbacks->getIndex(action->parentObject);
-                if (id < 0) break;
-                switch(action->unk8.unk0) {
+                if (id < 0)
+                    break;
+                switch (action->unk8.unk0) {
                     case 1:
                         sub_809D220(1, id, curCmd.argShort);
                         return 2;
@@ -2513,7 +2813,7 @@ static s32 ExecuteScriptCommand(Action *action)
                 }
                 break;
             }
-            case 0xa2: {
+            case CMD_BYTE_A2: {
                 s32 id = action->callbacks->getIndex(action->parentObject);
                 PixelPos unk;
                 switch (action->unk8.unk0) {
@@ -2532,204 +2832,207 @@ static s32 ExecuteScriptCommand(Action *action)
                 }
                 break;
             }
-            case 0xa3: {
+            case CMD_BYTE_A3: {
                 sub_809D220(1, 0, curCmd.argShort);
                 return 2;
             }
-            case 0xa4: {
+            case CMD_BYTE_A4: {
                 ResetScriptVarArray(scriptData->localVars.buf, curCmd.argShort);
                 break;
             }
-            case 0xa5: {
+            case CMD_BYTE_A5: {
                 ClearScriptVarArray(scriptData->localVars.buf, curCmd.argShort);
                 break;
             }
-            case 0xa6: {
+            case CMD_BYTE_A6: {
                 UpdateScriptVarWithImmediate(scriptData->localVars.buf, curCmd.argShort, curCmd.arg1, curCmd.argByte);
                 break;
             }
-            case 0xa7: {
+            case CMD_BYTE_A7: {
                 UpdateScriptVarWithVar(scriptData->localVars.buf, curCmd.argShort, (s16)curCmd.arg1, curCmd.argByte);
                 break;
             }
-            case 0xa8: {
+            case CMD_BYTE_A8: { // SET_ARRAYVAL
                 SetScriptVarArrayValue(scriptData->localVars.buf, curCmd.argShort, (u16)curCmd.arg1, curCmd.arg2);
                 break;
             }
-            case 0xa9: {
+            case CMD_BYTE_A9: { // SCENARIO_CALC
                 ScenarioCalc(curCmd.argShort, curCmd.arg1, curCmd.arg2);
                 break;
             }
-            case 0xaa: {
+            case CMD_BYTE_AA: { // SCENARIO_ADVANCE
                 s32 a, b;
                 GetScriptVarScenario(curCmd.argShort, &a, &b);
-                ScenarioCalc(curCmd.argShort, a, b+1);
+                ScenarioCalc(curCmd.argShort, a, b + 1);
                 break;
             }
-            case 0xab: {
+            case CMD_BYTE_AB: { // SET_DUNGEON_RES
                 SetScriptVarValue(NULL, DUNGEON_ENTER, curCmd.arg1);
                 SetScriptVarValue(NULL, DUNGEON_RESULT, curCmd.argShort);
                 break;
             }
-            case 0xac: {
+            case CMD_BYTE_AC: { // SET_PLAYER_KIND
                 SetScriptVarValue(NULL, PLAYER_KIND, curCmd.argShort);
                 break;
             }
-            case 0xad: {
-                sub_80026E8(curCmd.argShort, (u8)curCmd.argByte > 0);
+            case CMD_BYTE_AD: { // UNLOCK_FRIEND_AREA
+                ScriptUnlockFriendArea(curCmd.argShort, (u8)curCmd.argByte > 0);
                 break;
             }
-            case 0xae: {
+            case CMD_BYTE_AE: { // CMD_UNK_AE
                 sub_809733C(curCmd.argShort, (u8)curCmd.argByte > 0);
                 break;
             }
-            case 0xaf: {
+            case CMD_BYTE_AF: { // CMD_UNK_AF
                 sub_80973A8(curCmd.argShort, (u8)curCmd.argByte > 0);
                 break;
             }
-            case 0xb0: {
-                sub_8097418(curCmd.argShort, (u8)curCmd.argByte > 0);
+            case CMD_BYTE_B0: { // SET_RESCUE_CONQUERED
+                SetRescueScenarioConquered(curCmd.argShort, (u8)curCmd.argByte > 0);
                 break;
             }
-            case 0xb1: {
+            case CMD_BYTE_B1: {
                 sub_80975A8(curCmd.argShort, (u8)curCmd.argByte > 0);
                 break;
             }
-            case 0xb2: {
+            case CMD_BYTE_B2: {
                 SetAdventureAchievement(curCmd.argShort);
                 break;
             }
-            case 0xb3: {
-                if (JudgeVarWithImmediate(NULL, curCmd.argShort, curCmd.arg1, JUDGE_EQ)) {
+            case CMD_BYTE_B3: {
+                if (JudgeVarWithImmediate(NULL, curCmd.argShort, curCmd.arg1, JUDGE_EQ))
                     scriptData->script.ptr = FindLabel(action, (u8)curCmd.argByte);
-                }
+
                 break;
             }
-            case 0xb4: {
-                if (JudgeVarWithImmediate(scriptData->localVars.buf, (s16)curCmd.arg1, curCmd.arg2, (u8)curCmd.argByte)) {
+            case CMD_BYTE_B4: {
+                if (JudgeVarWithImmediate(scriptData->localVars.buf, (s16)curCmd.arg1, curCmd.arg2, (u8)curCmd.argByte))
                     scriptData->script.ptr = FindLabel(action, curCmd.argShort);
-                }
+
                 break;
             }
-            case 0xb5: {
-                if (JudgeVarWithVar(scriptData->localVars.buf, (s16)curCmd.arg1, (s16)curCmd.arg2, (u8)curCmd.argByte)) {
+            case CMD_BYTE_B5: {
+                if (JudgeVarWithVar(scriptData->localVars.buf, (s16)curCmd.arg1, (s16)curCmd.arg2, (u8)curCmd.argByte))
                     scriptData->script.ptr = FindLabel(action, curCmd.argShort);
-                }
+
                 break;
             }
-            case 0xb6: {
-                if (GetScriptVarArrayValue(scriptData->localVars.buf, (s16)curCmd.arg1, (u16)curCmd.arg2)) {
+            case CMD_BYTE_B6: {
+                if (GetScriptVarArrayValue(scriptData->localVars.buf, (s16)curCmd.arg1, (u16)curCmd.arg2))
                     scriptData->script.ptr = FindLabel(action, curCmd.argShort);
-                }
+
                 break;
             }
-            case 0xb7: {
-                if (FlagJudge(GetScriptVarArraySum(scriptData->localVars.buf, (s16)curCmd.arg1), curCmd.arg2, (u8)curCmd.argByte)) {
+            case CMD_BYTE_B7: {
+                if (FlagJudge(GetScriptVarArraySum(scriptData->localVars.buf, (s16)curCmd.arg1), curCmd.arg2, (u8)curCmd.argByte))
                     scriptData->script.ptr = FindLabel(action, curCmd.argShort);
-                }
+
                 break;
             }
-            case 0xb8: {
-                if (ScriptVarScenarioBefore(curCmd.argShort, curCmd.arg1, curCmd.arg2)) {
+            case CMD_BYTE_B8: {
+                if (ScriptVarScenarioBefore(curCmd.argShort, curCmd.arg1, curCmd.arg2))
                     scriptData->script.ptr = FindLabel(action, (u8)curCmd.argByte);
-                }
+
                 break;
             }
-            case 0xb9: {
-                if (ScriptVarScenarioEqual(curCmd.argShort, curCmd.arg1, curCmd.arg2)) {
+            case CMD_BYTE_B9: {
+                if (ScriptVarScenarioEqual(curCmd.argShort, curCmd.arg1, curCmd.arg2))
                     scriptData->script.ptr = FindLabel(action, (u8)curCmd.argByte);
-                }
+
                 break;
             }
-            case 0xba: {
-                if (ScriptVarScenarioAfter(curCmd.argShort, curCmd.arg1, curCmd.arg2)) {
+            case CMD_BYTE_BA: { // JUMPIF_SCENE_GT
+                if (ScriptVarScenarioAfter(curCmd.argShort, curCmd.arg1, curCmd.arg2))
                     scriptData->script.ptr = FindLabel(action, (u8)curCmd.argByte);
-                }
+
                 break;
             }
-            case 0xbb: {
-                if (sub_80023E4(curCmd.argShort)) {
+            case CMD_BYTE_BB: { // JUMPIF_SCENARIOCHECK
+                if (CheckQuest(curCmd.argShort))
                     scriptData->script.ptr = FindLabel(action, (u8)curCmd.argByte);
-                }
+
                 break;
             }
-            case 0xbc: {
-                if (sub_8098100(curCmd.argShort)) {
+            case CMD_BYTE_BC: { // JUMPIF_CUTSCENE_FLAG
+                if (GetCutsceneFlag(curCmd.argShort))
                     scriptData->script.ptr = FindLabel(action, (u8)curCmd.argByte);
-                }
+
                 break;
             }
-            case 0xbd: {
-                if (sub_80026CC(curCmd.arg1)) {
+            case CMD_BYTE_BD: {
+                if (sub_80026CC(curCmd.arg1))
                     scriptData->script.ptr = FindLabel(action, (u8)curCmd.argByte);
-                }
+
                 break;
             }
-            case 0xbf: {
-                if (HasItemInInventory(curCmd.argShort) > 0) {
+            case CMD_BYTE_BF: {
+                if (HasItemInInventory(curCmd.argShort) > 0)
                     scriptData->script.ptr = FindLabel(action, (u8)curCmd.argByte);
-                }
+
                 break;
             }
-            case 0xbe: {
-                if (action->unk8.unk0 == 1) {
-                    if (GroundLives_IsStarterMon(action->unk8.unk2)) {
-                        scriptData->script.ptr = FindLabel(action, (u8)curCmd.argByte);
-                    }
-                }
+            case CMD_BYTE_BE: {
+                if (action->unk8.unk0 == 1 && GroundLives_IsStarterMon(action->unk8.unk2))
+                    scriptData->script.ptr = FindLabel(action, (u8)curCmd.argByte);
+
                 break;
             }
-            case 0x41: {
-                s32 val;
-                val = FindItemInInventory(curCmd.argShort);
-                if ( val >= 0) ShiftItemsDownFrom(val);
+            case CMD_BYTE_41: {
+                s32 val = FindItemInInventory(curCmd.argShort);
+                if (val >= 0)
+                    ShiftItemsDownFrom(val);
                 break;
             }
-            case 0xc0 ... 0xcb: {
+            case CMD_BYTE_C0:
+            case CMD_BYTE_C1:
+            case CMD_BYTE_C2:
+            case CMD_BYTE_C3:
+            case CMD_BYTE_C4:
+            case CMD_BYTE_C5:
+            case CMD_BYTE_C6:
+            case CMD_BYTE_C7:
+            case CMD_BYTE_C8:
+            case CMD_BYTE_C9:
+            case CMD_BYTE_CA:
+            case CMD_BYTE_CB: {
                 s32 val;
                 PixelPos pos, pos2, pos3;
                 switch (curCmd.op) {
-                    case 0xc0: {
+                    case CMD_BYTE_C0: {
                         val = GetScriptVarValue(scriptData->localVars.buf, curCmd.argShort);
                         break;
                     }
-                    case 0xc1: {
-                        val = FlagCalc(
-                            GetScriptVarValue(scriptData->localVars.buf, curCmd.argShort),
-                            curCmd.arg1,
-                            (u8)curCmd.argByte);
+                    case CMD_BYTE_C1: {
+                        val = FlagCalc(GetScriptVarValue(scriptData->localVars.buf, curCmd.argShort), curCmd.arg1, (u8)curCmd.argByte);
                         break;
                     }
-                    case 0xc2: {
-                        val = FlagCalc(
-                            GetScriptVarValue(scriptData->localVars.buf, curCmd.argShort),
-                            GetScriptVarValue(scriptData->localVars.buf, (s16)curCmd.arg1),
-                            (u8)curCmd.argByte);
+                    case CMD_BYTE_C2: {
+                        val = FlagCalc(GetScriptVarValue(scriptData->localVars.buf, curCmd.argShort), GetScriptVarValue(scriptData->localVars.buf, (s16)curCmd.arg1), (u8)curCmd.argByte);
                         break;
                     }
-                    case 0xc3: {
+                    case CMD_BYTE_C3: {
                         val = OtherRandInt(curCmd.argShort);
                         break;
                     }
-                    case 0xc4: {
+                    case CMD_BYTE_C4: {
                         val = GetScriptVarArrayValue(NULL, curCmd.argShort, 0);
                         break;
                     }
-                    case 0xc5: {
+                    case CMD_BYTE_C5: {
                         val = GetScriptVarArrayValue(NULL, curCmd.argShort, 1);
                         break;
                     }
-                    case 0xc6: {
+                    case CMD_BYTE_C6: { // CJUMP_UNK_C6
                         val = (s16)sub_80A8C2C((s16)curCmd.arg1);
                         break;
                     }
-                    case 0xc7: {
+                    case CMD_BYTE_C7: {
                         s8 dir;
                         action->callbacks->getDirection(action->parentObject, &dir);
                         val = dir;
                         break;
                     }
-                    case 0xca: {
+                    case CMD_BYTE_CA: {
                         action->callbacks->getHitboxCenter(action->parentObject, &pos);
                         pos2 = pos;
                         GroundLink_GetPos((s16)curCmd.arg1, &pos2);
@@ -2738,7 +3041,7 @@ static s32 ExecuteScriptCommand(Action *action)
                         val = (s8) VecDirection8Radial(&pos3);
                         break;
                     }
-                    case 0xc8: {
+                    case CMD_BYTE_C8: {
                         s16 tmp = (s16)sub_80A7AE8((s16)curCmd.arg1);
                         if (tmp >= 0) {
                             PixelPos pos1, pos2, pos3, pos4;
@@ -2747,15 +3050,14 @@ static s32 ExecuteScriptCommand(Action *action)
                             sub_80A8FD8(tmp, &pos3);
                             sub_80A8F9C(tmp, &pos4);
                             val = SizedDeltaDirection8(&pos1, &pos2, &pos3, &pos4);
-                            if (val == -1) {
+                            if (val == -1)
                                 val = SizedDeltaDirection4(&pos1, &sPixelPosZero, &pos3, &sPixelPosZero);
-                            }
                         } else {
                             val = -1;
                         }
                         break;
                     }
-                    case 0xc9: {
+                    case CMD_BYTE_C9: {
                         s16 tmp = (s16)sub_80A7AE8((s16)curCmd.arg1);
                         if (tmp >= 0) {
                             PixelPos pos1, pos2, pos3;
@@ -2763,15 +3065,14 @@ static s32 ExecuteScriptCommand(Action *action)
                             action->callbacks->getSize(action->parentObject, &pos2);
                             sub_80A8FD8(tmp, &pos3);
                             val = SizedDeltaDirection8(&pos1, &pos2, &pos3, &sPixelPosZero);
-                            if (val == -1) {
+                            if (val == -1)
                                 val = SizedDeltaDirection4(&pos1, &sPixelPosZero, &pos3, &sPixelPosZero);
-                            }
                         } else {
                             val = -1;
                         }
                         break;
                     }
-                    case 0xcb: {
+                    case CMD_BYTE_CB: {
                         val = CheckScriptItemSpace(curCmd.argShort);
                         break;
                     }
@@ -2783,55 +3084,71 @@ static s32 ExecuteScriptCommand(Action *action)
                 scriptData->script.ptr = ResolveJump(action, val);
                 break;
             }
-            case 0xcf: {
+            case CMD_BYTE_CF: {
                 scriptData->branchDiscriminant = GetScriptVarValue(scriptData->localVars.buf, curCmd.argShort);
-                while (scriptData->script.ptr->op == 0xd0) {
+                while (scriptData->script.ptr->op == CMD_BYTE_D0) {
                     if (scriptData->script.ptr->argShort == scriptData->branchDiscriminant)
                         return 2;
                     scriptData->script.ptr++;
                 }
-                if (scriptData->script.ptr->op == 0xd1) {
+                if (scriptData->script.ptr->op == CMD_BYTE_D1) {
                     scriptData->branchDiscriminant = -1;
                     return 2;
                 }
                 break;
             }
-            case 0xd2 ... 0xd8: {
+            case CMD_BYTE_D2:
+            case CMD_BYTE_D3:
+            case CMD_BYTE_D4:
+            case CMD_BYTE_D5:
+            case CMD_BYTE_D6:
+            case CMD_BYTE_D7:
+            case CMD_BYTE_D8: {
                 // DS: Assert(TRUE, "Script command call error SWITCH MENY") [sic]
-                const char *out = curCmd.argPtr;
+                const u8 *out = curCmd.argPtr;
                 sNumChoices = 0;
                 scriptData->branchDiscriminant = 0;
-                switch(curCmd.op) {
-                    case 0xd6: case 0xd7: case 0xd8: {
+
+                switch (curCmd.op) {
+                    case CMD_BYTE_D6:
+                    case CMD_BYTE_D7:
+                    case CMD_BYTE_D8: {
                         s32 disc = GetScriptVarValue(scriptData->localVars.buf, (s16)curCmd.arg2);
-                        for (; scriptData->script.ptr->op == 0xd0; scriptData->script.ptr++, scriptData->branchDiscriminant++) {
+                        for (; scriptData->script.ptr->op == CMD_BYTE_D0; scriptData->script.ptr++, scriptData->branchDiscriminant++) {
                             if (scriptData->script.ptr->argShort == disc)
                                 out = scriptData->script.ptr->argPtr;
                         }
-                        for (; scriptData->script.ptr->op == 0xd1; scriptData->script.ptr++, scriptData->branchDiscriminant++) {
-                            if (!out) out = scriptData->script.ptr->argPtr;
+                        for (; scriptData->script.ptr->op == CMD_BYTE_D1; scriptData->script.ptr++, scriptData->branchDiscriminant++) {
+                            if (out == NULL)
+                                out = scriptData->script.ptr->argPtr;
                         }
                     }
                 }
-                if (!out) out = "";
-                for (; scriptData->script.ptr->op == 0xd9; scriptData->script.ptr++) {
+                if (out == NULL)
+                    out = "";
+                for (; scriptData->script.ptr->op == CMD_BYTE_D9; scriptData->script.ptr++) {
                     gChoices[sNumChoices].text = scriptData->script.ptr->argPtr;
                     gChoices[sNumChoices].menuAction = sNumChoices + 1;
                     sNumChoices++;
                 }
-                if (sNumChoices <= 0) break;
+                if (sNumChoices <= 0)
+                    break;
                 gChoices[sNumChoices].text = NULL;
                 gChoices[sNumChoices].menuAction = curCmd.argShort;
                 switch (curCmd.op) {
-                    case 0xd2: case 0xd3: case 0xd6: {
+                    case CMD_BYTE_D2:
+                    case CMD_BYTE_D3:
+                    case CMD_BYTE_D6: {
                         sub_809B028(gChoices, (u8)curCmd.argByte > 0, -1, 0, (s16)curCmd.arg1, out);
                         break;
                     }
-                    case 0xd4: case 0xd7: {
+                    case CMD_BYTE_D4:
+                    case CMD_BYTE_D7: {
                         sub_809B028(gChoices, (u8)curCmd.argByte > 0, -1, 1, (s16)curCmd.arg1, out);
                         break;
                     }
-                    case 0xd5: case 0xd8: {
+                    case CMD_BYTE_D5:
+                    case CMD_BYTE_D8: {
                         sub_809B028(gChoices, (u8)curCmd.argByte > 0, -1, 2, (s16)curCmd.arg1, out);
                         break;
                     }
@@ -2842,70 +3159,75 @@ static s32 ExecuteScriptCommand(Action *action)
                 }
                 break;
             }
-            case 0xda: {
-                if (GroundScriptCheckLockCondition(action, 1)) {
+            case CMD_BYTE_DA: {
+                if (GroundScriptCheckLockCondition(action, 1))
                     return 2;
-                }
+
                 break;
             }
-            case 0xdb: {
+            case CMD_BYTE_DB: { // WAIT
                 scriptData->unk2A = curCmd.argShort;
                 return 2;
             }
-            case 0xdc: {
+            case CMD_BYTE_DC: {
                 scriptData->unk2A = curCmd.argShort + OtherRandInt(curCmd.arg1 - curCmd.argShort);
                 return 2;
             }
-            case 0xdd ... 0xe2: {
-                return 2; // do action
+            case CMD_BYTE_DD:
+            case CMD_BYTE_DE:
+            case CMD_BYTE_DF:
+            case CMD_BYTE_E0:
+            case CMD_BYTE_E1: // WAIT_FANFARE1
+            case CMD_BYTE_E2: { // WAIT_FANFARE2
+                return 2;
             }
-            case 0xe3: {
+            case CMD_BYTE_E3: {
                 scriptData->branchDiscriminant = curCmd.argShort;
-                if (GroundScriptCheckLockCondition(action, curCmd.argShort)) {
+
+                if (GroundScriptCheckLockCondition(action, curCmd.argShort))
                     return 2;
-                }
+
                 break;
             }
-            case 0xe4: {
+            case CMD_BYTE_E4: { // ALERT_CUE
                 GroundScriptLockJumpZero(curCmd.argShort);
                 break;
             }
-            case 0xe5: {
+            case CMD_BYTE_E5: { // CMD_UNK_E5
                 scriptData->branchDiscriminant = curCmd.argShort;
-                if (GroundScriptLockCond(action, curCmd.argShort, curCmd.argByte)) {
+
+                if (GroundScriptLockCond(action, curCmd.argShort, curCmd.argByte))
                     return 2;
-                }
+
                 break;
             }
-            case 0xe6: {
+            case CMD_BYTE_E6: { // CALL_LABEL
                 scriptData->savedScript = scriptData->script;
-            } //fallthrough
-            case 0xe7: {
+                // Fallthrough
+            }
+            case CMD_BYTE_E7: { // JUMP_LABEL
                 scriptData->script.ptr = FindLabel(action, curCmd.argShort);
                 break;
             }
-            case 0xe8: {
+            case CMD_BYTE_E8: { // CALL_SCRIPT
                 scriptData->savedScript = scriptData->script;
-            } // fallthrough
-            case 0xe9: {
+                // Fallthrough
+            }
+            case CMD_BYTE_E9: { // JUMP_SCRIPT
                 scriptData->script.ptr2 = scriptData->script.ptr = gFunctionScriptTable[curCmd.argShort].script;
                 break;
             }
-            case 0xea: {
+            case CMD_BYTE_EA: { // CALL_STATION
                 scriptData->savedScript = scriptData->script;
-            } // fallthrough
-            case 0xeb: {
+                // Fallthrough
+            }
+            case CMD_BYTE_EB: { // JUMP_STATION
                 ScriptInfoSmall info;
                 u32 group, sector;
                 u32 tmp = gUnknown_2039A34;
-                {
-                    s32 tmp = curCmd.argShort < 0 ? scriptData->script.group : curCmd.argShort;
-                    group = tmp;
-                }
-                {
-                    s32 tmp = (s8)curCmd.argByte < 0 ? scriptData->script.sector : (s8)curCmd.argByte;
-                    sector = tmp;
-                }
+                GroupValueOrDefault(&curCmd, scriptData->script.group, &group);
+                SectorValueOrDefault(&curCmd, scriptData->script.sector, &sector);
+
                 GroundMap_GetStationScript(&info, tmp, group, sector);
                 scriptData->script.ptr = info.ptr;
                 scriptData->script.ptr2 = info.ptr;
@@ -2913,36 +3235,41 @@ static s32 ExecuteScriptCommand(Action *action)
                 scriptData->script.sector = sector;
                 break;
             }
-            case 0xec: {
+            case CMD_BYTE_EC: { // EXECUTE_MAP_VAR
                 gUnknown_2039A34 = GetAdjustedGroundMap((s16)GetScriptVarValue(scriptData->localVars.buf, curCmd.argShort));
                 GroundCancelAllEntities();
                 GroundMap_ExecuteEnter(gUnknown_2039A34);
                 break;
             }
-            case 0xed: {
+            case CMD_BYTE_ED: { // RESET_CALLER
                 // DS: if (scriptData->savedScript.ptr == NULL) Assert(FALSE, "Script flash stack error");
                 scriptData->savedScript.ptr = NULL;
                 scriptData->savedScript.ptr2 = NULL;
                 break;
             }
-            case 0xee: {
+            case CMD_BYTE_EE: { // RET_DIRECT
                 if (scriptData->savedScript.ptr == NULL) {
                     // DS: Assert(FALSE, "Script return stack error");
                     return 0;
                 }
+
                 scriptData->script = scriptData->savedScript;
                 scriptData->savedScript.ptr = NULL;
                 scriptData->savedScript.ptr2 = NULL;
                 break;
             }
-            case 0xef:
+            case CMD_BYTE_EF: // RET
                 // DS: if (scriptData->savedScript.ptr != NULL) Assert(FALSE, "Script end stack error");
                 return 0;
-            case 0xf0:
+            case CMD_BYTE_F0: // HALT
                 return 1;
-            case 0xf1:
+            case CMD_BYTE_F1: // END_DELETE
                 return 4; // fatal error?
-            case 0xf2: case 0xf3: case 0xf4: case 0xf5: case 0xf6: {
+            case CMD_BYTE_F2: // CMD_F2
+            case CMD_BYTE_F3: // CMD_F3
+            case CMD_BYTE_F4: // LABEL
+            case CMD_BYTE_F5: // CMD_F5
+            case CMD_BYTE_F6: { // DEBUGINFO
                 // Debug, not in release ROM
                 break;
             }
@@ -2955,19 +3282,20 @@ UNUSED static u32 sub_80A1440(s32 r0, s32 r1, s32 r2)
    return sub_80A14E8(NULL, r0, r1, r2);
 }
 
-UNUSED static bool8 GroundScript_ExecuteTrigger(s16 r0)
+UNUSED static bool8 GroundScript_ExecuteTrigger(s16 scriptID)
 {
     s32 ret;
     ScriptInfoSmall scriptInfo;
     Action action;
     const ScriptRef *ptr;
 
-    ptr = &gFunctionScriptTable[r0];
+    ptr = &gFunctionScriptTable[scriptID];
 
-    if(ptr->type != 0xB)
+    if (ptr->type != 11)
         return FALSE;
+
     InitActionWithParams(&action, &sNullCallbackData, NULL, 0, 0);
-    GetFunctionScript(NULL, &scriptInfo, r0);
+    GetFunctionScript(NULL, &scriptInfo, scriptID);
     GroundScript_ExecutePP(&action, NULL, &scriptInfo, DEBUG_LOC_PTR("../ground/ground_script.c", 4553, "GroundScript_ExecuteTrigger"));
 
     action.scriptData.savedScript = action.scriptData.script;
@@ -2975,10 +3303,11 @@ UNUSED static bool8 GroundScript_ExecuteTrigger(s16 r0)
     action.scriptData.savedScript.ptr2 = gUnknown_81164E4;
     ret = HandleAction(&action, DEBUG_LOC_PTR("../ground/ground_script.c", 4558, "GroundScript_ExecuteTrigger"));
     InitAction2(&action);
-    if(ret == 0)
+
+    if (ret == 0)
         return TRUE;
-    else
-        return FALSE;
+
+    return FALSE;
 }
 
 static s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
@@ -3014,7 +3343,7 @@ static s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
         case 9:
             {
                 u8 var;
-                if (sub_80023E4(8) == 0) {
+                if (CheckQuest(QUEST_CAN_CHANGE_LEADER) == 0) {
                     var = sub_808D4B0();
                 }
                 else {
@@ -3040,14 +3369,14 @@ static s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
 
                         dialogueId = GetFriendAreaDialogueId(action->unkC.unk2);
                         InlineStrcpy(text, gFriendAreaDialogue[dialogueId]);
-                        if (ScriptPrintText(0, 1, text) != 0)
+                        if (ScriptPrintText(SCRIPT_TEXT_TYPE_INSTANT, 1, text) != 0)
                             return 1;
                     }
                 }
             }
             return 0;
         case 0xB:
-            return (CountJobsinDungeon(ScriptDungeonIdToDungeonId(GetScriptVarValue(0, DUNGEON_ENTER_INDEX))) > 0);
+            return (CountJobsinDungeon(ScriptDungeonIdToDungeonId(GetScriptVarValue(NULL, DUNGEON_ENTER_INDEX))) > 0);
         case 0xC:
             {
                 u8 sp_104;
@@ -3070,7 +3399,7 @@ static s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
                 {
                     if (IsMazeCompleted((s16) index)) {
                         if (!GetScriptVarArrayValue(0, TRAINING_PRESENT_LIST, (u16) index)) {
-                            SetScriptVarArrayValue(0, TRAINING_PRESENT_LIST, (u16) index, 1);
+                            SetScriptVarArrayValue(NULL, TRAINING_PRESENT_LIST, (u16) index, 1);
                             return index - 0x10;
                         }
                     }
@@ -3232,7 +3561,7 @@ static s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
                     return 0;
             }
         case 0x1E:
-             sub_80A8F50(sPokeNameBuffer, 0x7C, POKEMON_NAME_LENGTH);
+             sub_80A8F50(sPokeNameBuffer, 124, POKEMON_NAME_LENGTH);
              return 0;
 
         case 0x1F:
@@ -3267,7 +3596,7 @@ static s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
             }
             break;
         case 0x20:
-            sub_80026E8(0x9E, 0x1);
+            ScriptUnlockFriendArea(MAP_FRIEND_AREA_LEGENDARY_ISLAND, TRUE);
             if (GetRecruitedMonBySpecies(MONSTER_ZAPDOS, 0) == NULL) {
                 static const DungeonLocation zapdosLoc = {.id = DUNGEON_MT_THUNDER_PEAK, .floor = 99};
                 if (TryAddLevel1PokemonToRecruited(MONSTER_ZAPDOS, NULL, ITEM_NOTHING, &zapdosLoc, NULL))
@@ -3290,7 +3619,7 @@ static s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
             return 0;
         case 0x22:
             {
-                Pokemon *pokemon = GetPlayerPokemonStruct();
+                Pokemon *pokemon = GetLeaderMon1();
 
                 if (pokemon->speciesNum != MONSTER_ARTICUNO && pokemon->speciesNum != MONSTER_ZAPDOS && pokemon->speciesNum != MONSTER_MOLTRES)
                     return 1;
@@ -3299,10 +3628,10 @@ static s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
          case 0x23:
             {
                 Pokemon *pokemon;
-                pokemon = GetPlayerPokemonStruct();
+                pokemon = GetLeaderMon1();
                 if (pokemon != NULL && pokemon->speciesNum == MONSTER_HO_OH)
                     return 2;
-                else if (sub_8098134(MONSTER_HO_OH) != 0)
+                else if (GetMonSeenFlag(MONSTER_HO_OH))
                     return 1;
             }
             return 0;
@@ -3398,7 +3727,7 @@ static s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
                 s32 r7 = 0x1A4;
                 s32 r6 = 0;
 
-                while (1)
+                while (TRUE)
                 {
                     s16 indexS16;
                     index = (s16)(index + 1);
@@ -3467,7 +3796,7 @@ static s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
             }
         case 0x2A:
             {
-                s32 id = (s16) GetScriptVarValue(0, NEW_FRIEND_KIND);
+                s32 id = (s16) GetScriptVarValue(NULL, NEW_FRIEND_KIND);
                 WriteFriendAreaName(gFormatBuffer_FriendArea,(GetFriendArea(id)), FALSE);
                 if (id == 0)
                     return 0;
@@ -3486,7 +3815,7 @@ static s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
                 s32 index;
                 if (r2 != 0) {
                     static const DungeonLocation dungLoc = {.id = DUNGEON_RESCUE_TEAM_BASE_2, .floor = 0};
-                    s32 id = (s16) GetScriptVarValue(0, NEW_FRIEND_KIND);
+                    s32 id = (s16) GetScriptVarValue(NULL, NEW_FRIEND_KIND);
                     s32 id_ = id;
                     WriteFriendAreaName(gFormatBuffer_FriendArea,(GetFriendArea((s16)id)), FALSE);
                     if (id == 0)
@@ -3525,7 +3854,7 @@ static s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
                     rankAfter = GetRescueTeamRank();
                     InlineStrcpy(gFormatBuffer_Items[0], GetTeamRankString(rankBefore));
                     InlineStrcpy(gFormatBuffer_Items[1], GetTeamRankString(rankAfter));
-                    if (ScriptPrintText(0, -1, _("{CENTER_ALIGN}The rescue rank went up from\n{CENTER_ALIGN}{MOVE_ITEM_0} to {MOVE_ITEM_1}!")) != 0)
+                    if (ScriptPrintText(SCRIPT_TEXT_TYPE_INSTANT, -1, _("{CENTER_ALIGN}The rescue rank went up from\n{CENTER_ALIGN}{MOVE_ITEM_0} to {MOVE_ITEM_1}!")) != 0)
                         return 1;
                 }
                 else {
@@ -3536,52 +3865,49 @@ static s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
         case 0x2F:
             AddToTeamMoney(10000);
             return 0;
-        case 0x30:
-            if (sub_808D278(MONSTER_GARDEVOIR) == 0)
+        case 0x30: { // Checks if Gardevoir can join the party (if it has space in its friend area)
+            if (sub_808D278(MONSTER_GARDEVOIR) == NULL)
                 return 1;
-            else
-                return 0;
-        case 0x31:
-            sub_80A8F50(sPokeNameBuffer, 0x52, POKEMON_NAME_LENGTH);
             return 0;
+        }
+        case 0x31: { // Sets Gardevoir's name
+            sub_80A8F50(sPokeNameBuffer, 82, POKEMON_NAME_LENGTH);
+            return 0;
+        }
+        case 0x32: { // Tries to recruit Gardevoir
+            struct StoryMonData gardevoirData = {
+                .name = sPokeNameBuffer,
+                .speciesNum = MONSTER_GARDEVOIR,
+                .itemID = ITEM_NOTHING,
+                .dungeonLocation = {.id = DUNGEON_RESCUE_TEAM_BASE_2, .floor = 0},
+                .moveID = {MOVE_CONFUSION, MOVE_DOUBLE_TEAM, MOVE_TELEPORT, MOVE_GROWL},
+                .pokeHP = 53,
+                .level = 5,
+                .IQ = 1,
+                .offenseAtk = {18, 18},
+                .offenseDef = {11, 10},
+                .currExp = 2800,
+            };
+            Pokemon gardevoirMon;
 
-        case 0x32:
-            {
-                struct StoryMonData gardevoirData = {
-                    .name = sPokeNameBuffer,
-                    .speciesNum = MONSTER_GARDEVOIR,
-                    .itemID = ITEM_NOTHING,
-                    .dungeonLocation = {.id = DUNGEON_RESCUE_TEAM_BASE_2, .floor = 0},
-                    .moveID = {MOVE_CONFUSION, MOVE_DOUBLE_TEAM, MOVE_TELEPORT, MOVE_GROWL},
-                    .pokeHP = 53,
-                    .level = 5,
-                    .IQ = 1,
-                    .offenseAtk = {18, 18},
-                    .offenseDef = {11, 10},
-                    .currExp = 2800,
-                };
-                Pokemon gardevoirMon;
+            ConvertStoryMonToPokemon(&gardevoirMon, &gardevoirData);
+            if (TryAddPokemonToRecruited(&gardevoirMon) == NULL)
+                return 1;
 
-                ConvertStoryMonToPokemon(&gardevoirMon, &gardevoirData);
-                if (TryAddPokemonToRecruited(&gardevoirMon) == 0) {
-                    return 1;
-                }
-                else {
-                    IncrementAdventureNumJoined();
-                    return 0;
-                }
-            }
+            IncrementAdventureNumJoined();
+            return 0;
+        }
         case 0x33:
             if (ScriptVarScenarioAfter(SCENARIO_MAIN, 0x12, -1)
-               && GetScriptVarValue(0, GROUND_GETOUT) != 4
+               && GetScriptVarValue(NULL, GROUND_GETOUT) != 4
                && GetScriptVarArrayValue(0, EVENT_GONBE, 0) <= 0)
             {
                 if (OtherRandInt(0x100) == 0) {
-                    SetScriptVarArrayValue(0, EVENT_GONBE, 0, 4);
+                    SetScriptVarArrayValue(NULL, EVENT_GONBE, 0, 4);
                     return 1;
                 }
                 else {
-                    SetScriptVarArrayValue(0, EVENT_GONBE, 0, 1);
+                    SetScriptVarArrayValue(NULL, EVENT_GONBE, 0, 1);
                 }
             }
             return 0;
@@ -3604,11 +3930,11 @@ static s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
             return 0;
         case 0x35:
             {
-                Pokemon *pokemon = GetPlayerPokemonStruct();
+                Pokemon *pokemon = GetLeaderMon1();
                 if(pokemon != NULL && pokemon->speciesNum == MONSTER_CHANSEY)
                     return 2;
                 else
-                    if(sub_8098134(MONSTER_CHANSEY) != 0)
+                    if(GetMonSeenFlag(MONSTER_CHANSEY))
                         return 1;
                     else
                         return 0;
@@ -3676,7 +4002,7 @@ static s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
                 sp_308.width = 1;
                 sp_308.height = 1;
                 sp_308.pos = (CompactPos) {0};
-                sp_308.script = gFunctionScriptTable[406].script; // MOVE_DEBUG_CAMERA
+                sp_308.script = gFunctionScriptTable[MOVE_DEBUG_CAMERA].script;
                 ret = (s16) GroundEffect_Add(-1, &sp_308, (s16) r2, (s8) r3);
                 if(ret < 0) break;
                 r7 = sub_80AD158(ret);
@@ -3788,7 +4114,7 @@ static s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
             sub_80997F4(r2, r3);
             return 0;
         case 0x48:
-            sub_80997F4(0x1E, r2);
+            sub_80997F4(30, r2);
             return 0;
         case 0x49:
             GroundSprite_ExtendPaletteAdd(0, r2);
@@ -3834,7 +4160,7 @@ void GroundScript_Unlock(void)
     }
 }
 
-static const ScriptCommand *FindLabel(Action *action, s32 r1)
+static const ScriptCommand *FindLabel(Action *action, s32 labelNum)
 {
     ScriptCommand script;
     const ScriptCommand *scriptPtr2;
@@ -3843,20 +4169,22 @@ static const ScriptCommand *FindLabel(Action *action, s32 r1)
     scriptPtr2 = action->scriptData.script.ptr2;
     scriptPtr = scriptPtr2 + 1;
 
-    while(1) {
+    while (TRUE) {
         script = *scriptPtr;
         scriptPtr++;
 
-        if (script.op == 0xF4 && r1 == script.argShort) break;
+        if (script.op == CMD_BYTE_F4 && labelNum == script.argShort)
+            break;
 
         {
             UNUSED static const u8 maybeFuncName[] = "_SearchScriptLabel";
             UNUSED static const DebugLocation unusedDebugLoc = {"../ground/ground_script.c", 5822, maybeFuncName};
             UNUSED static const u8 scrLabelError[] = "Script label search error %d";
         }
-        // DS: Assert(script.op != 0, "script search label error %d", label)
-        // DS: Assert(script.op != 0xF6, "script search label error %d", label)
+        // DS: Assert(script.op != CMD_BYTE_00, "script search label error %d", label)
+        // DS: Assert(script.op != CMD_BYTE_F6, "script search label error %d", label)
     }
+
     return scriptPtr;
 }
 
@@ -3868,29 +4196,26 @@ static const ScriptCommand *ResolveJump(Action *action, s32 r1)
 
     scriptPtr = action->scriptData.script.ptr;
 
-    while(1) {
+    while (TRUE) {
         script = *scriptPtr;
 
-        if (script.op == 0xCC)
-        {
-            if(FlagJudge(r1, script.arg1, JUDGE_EQ))
+        if (script.op == CMD_BYTE_CC) {
+            if (FlagJudge(r1, script.arg1, JUDGE_EQ))
                 return FindLabel(action, script.argShort);
         }
-        else if (script.op == 0xCD)
-        {
-            if(FlagJudge(r1, script.arg1, script.argByte))
+        else if (script.op == CMD_BYTE_CD) {
+            if (FlagJudge(r1, script.arg1, script.argByte))
                 return FindLabel(action, script.argShort);
         }
-        else if (script.op == 0xCE)
-        {
+        else if (script.op == CMD_BYTE_CE) {
             temp = GetScriptVarValue(action->scriptData.localVars.buf, (s16)script.arg1);
-            if(FlagJudge(r1, temp, script.argByte))
+            if (FlagJudge(r1, temp, script.argByte))
                 return FindLabel(action, script.argShort);
         }
-        else
-        {
+        else {
             return scriptPtr;
         }
+
         scriptPtr++;
     }
 }
@@ -3936,9 +4261,9 @@ static u32 sub_80A25AC(u16 param_1)
         return param_1;
     if (param_1 == 50)
         return 50;
-    if (!sub_80023E4(12))
+    if (!CheckQuest(QUEST_UNK12))
         return 999;
-    if (sub_80023E4(13))
+    if (CheckQuest(QUEST_IN_WORLD_CALAMITY))
         return 19;
     if (param_1 != 1)
         return param_1;

@@ -17,13 +17,13 @@ static const struct ScriptCommand s_gs181_g0_s0_station_sref_script[] = { /* 0x8
     JUMP_SCRIPT(COMMON_ENTER),
 };
 
-static const struct ScriptRef s_gs181_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs181_g0_s0_station_sref_script }; /* 0x8231cdc */
+static const struct ScriptRef s_gs181_g0_s0_station_sref = { ENTER_CONTROL , 1, NULL, s_gs181_g0_s0_station_sref_script }; /* 0x8231cdc */
 
 static const struct ScriptCommand s_gs181_g1_s0_station_sref_script[] = { /* 0x8231ce8 */
     DEBUGINFO_O(23),
     SELECT_MAP(181),
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(114),
+    BGM_SWITCH(MUS_IN_THE_DEPTHS_OF_THE_PIT),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     BGM_FADEOUT(120),
@@ -31,7 +31,7 @@ static const struct ScriptCommand s_gs181_g1_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs181_g1_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs181_g1_s0_station_sref_script }; /* 0x8231d78 */
+static const struct ScriptRef s_gs181_g1_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs181_g1_s0_station_sref_script }; /* 0x8231d78 */
 
 static const struct ScriptCommand s_gs181_g1_s0_lives0_dlg0[] = { /* 0x8231d84 */
     DEBUGINFO_O(37),
@@ -50,7 +50,7 @@ static const struct ScriptCommand s_gs181_g1_s0_lives0_dlg0[] = { /* 0x8231d84 *
     ALERT_CUE(3),
     WAIT(1),
     WALK_GRID(204, 1),
-    ROTATE(4, 10, DIRECTION_NORTHEAST),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_NORTHEAST),
     HALT,
 };
 
@@ -63,7 +63,7 @@ static const struct ScriptCommand s_gs181_g1_s0_lives1_dlg0[] = { /* 0x8231f0c *
     WALK_GRID(256, 2),
     AWAIT_CUE(6),
     WALK_GRID(204, 3),
-    ROTATE(4, 10, DIRECTION_NORTHWEST),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_NORTHWEST),
     HALT,
 };
 
@@ -125,4 +125,4 @@ static const struct GroundLink s_gs181_links[] = { /* 0x82320f0 */
     /* link   3 */ { { /*x*/  24, /*y*/  19, /*flags*/ CPOS_HALFTILE, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
 };
 
-/*extern*/ const struct GroundScriptHeader gGroundScript_gs181 = { LPARRAY(s_gs181_groups), s_gs181_links }; /* 0x8232110 */
+const GroundScriptHeader gGroundScript_gs181 = { LPARRAY(s_gs181_groups), s_gs181_links }; /* 0x8232110 */

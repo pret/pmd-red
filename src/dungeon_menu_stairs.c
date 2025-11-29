@@ -29,17 +29,17 @@ static void ShowStairsDescription(DungeonPos *pos);
 // Pretty much a copy of ShowDungeonTileMenu
 void ShowDungeonStairsMenu(Entity *mon)
 {
-    while (1) {
+    while (TRUE) {
         s32 inputAction = 0;
         WindowHeader header;
         WindowTemplates windows = {
             .id = {
                 [0] = {
                     .type = WINDOW_TYPE_WITH_HEADER,
-                    .pos = {2, 2},
+                    .pos = { 2, 2 },
                     .width = 18,
                     .height = 4,
-                    .unk10 = 16,
+                    .totalHeight = 16,
                     .unk12 = 0,
                     .header = &header,
                 },
@@ -57,7 +57,7 @@ void ShowDungeonStairsMenu(Entity *mon)
         gDungeonMenu.cursorArrowPos.y = 0;
         CreateDungeonMenuSubWindow(&windows.id[0], 22);
 
-        while (1) {
+        while (TRUE) {
             AddMenuCursorSprite(&gDungeonMenu);
             DungeonRunFrameActions(0x2E);
             if (gRealInputs.repeated & DPAD_DOWN) {
@@ -146,7 +146,7 @@ static void AddStairsSubMenuOptions(Entity *mon)
 // Again, almost identical to its Tile counterpart.
 static void ShowStairsDescription(DungeonPos *pos)
 {
-    while (1) {
+    while (TRUE) {
         u8 floorType;
         bool8 bPress;
         STATUSTEXTS(statuses);
@@ -156,10 +156,10 @@ static void ShowStairsDescription(DungeonPos *pos)
             .id = {
                 [0] = {
                     .type = WINDOW_TYPE_WITH_HEADER,
-                    .pos = {2, 2},
+                    .pos = { 2, 2 },
                     .width = 26,
                     .height = 12,
-                    .unk10 = 12,
+                    .totalHeight = 12,
                     .unk12 = 0,
                     .header = &header,
                 },
@@ -183,7 +183,7 @@ static void ShowStairsDescription(DungeonPos *pos)
         PrintStringOnWindow(8, 24, gUnknown_80F7F70[floorType], 0, '\0');
         sub_80073E0(0);
         statusesCount = PrepareStatusStringArrays(gUnknown_80F7F70[floorType], statuses);
-        while (1) {
+        while (TRUE) {
             if (statusesCount != 0) {
                 ShowStatusDescriptionMenuArrow();
             }
@@ -205,7 +205,7 @@ static void ShowStairsDescription(DungeonPos *pos)
 
         for (i = 0; i < statusesCount; i++) {
             ShowStatusDescriptionMenu(statuses[i], &menuSub);
-            while (1) {
+            while (TRUE) {
                 if (i < statusesCount - 1) {
                     ShowStatusDescriptionMenuArrow();
                 }

@@ -5,7 +5,7 @@
 #include "structs/str_text.h"
 #include "structs/str_position.h"
 
-// size: R=0xC | NDS=0xA?
+// size: R=0xC | NDS=0xA
 typedef struct TouchScreenMenuInput
 {
     /* R=0x0 | B=0x0 */ u8 unk0;
@@ -20,24 +20,24 @@ typedef struct TouchScreenMenuInput
 #define DEFAULT_MENU_ENTRY_HEIGHT   12
 #define TWO_LINES_MENU_ENTRY_HEIGHT 24
 
-// size: R=0x34 | NDS=0x32?
+// size: R=0x34 | B=0x30
 typedef struct MenuInputStruct
 {
-    /* 0x0  */ s32 windowId;
-    /* 0x4  */ u16 unk4;
-    /* 0x6  */ s16 firstEntryY;
-    /* 0x8  */ DungeonPos cursorArrowPos;
-    /* 0xC  */ DungeonPos leftRightArrowsPos;
-    /* 0x10 */ s32 entryHeight; // Either 12, or 24 when each entry has text on two lines.
-    /* 0x14 */ DungeonPos unk14;
-    /* 0x18 */ s16 menuIndex;
-    /* 0x1A */ s16 currPageEntries;
-    /* 0x1C */ s16 entriesPerPage;
-    /* 0x1E */ s16 currPage;
-    /* 0x20 */ s16 pagesCount;
-    /* 0x22 */ s16 totalEntriesCount;
-    /* 0x24 */ u16 unk24;
-    /* 0x28 */ TouchScreenMenuInput touchScreen; // For obvious reason unused on GBA
+    /* 0x00 | B=0x00 */ s32 windowId;
+    /* 0x04 | B=0x04 */ u16 unk4;
+    /* 0x06 | B=0x06 */ s16 firstEntryY;
+    /* 0x08 | B=0x08 */ DungeonPos cursorArrowPos;
+    /* 0x0C | B=0x0C */ DungeonPos leftRightArrowsPos;
+    /* 0x10 | B=0x10 */ s32 entryHeight; // Either 12, or 24 when each entry has text on two lines.
+    /* 0x14 | B=0x14 */ DungeonPos unk14;
+    /* 0x18 | B=0x18 */ s16 menuIndex;
+    /* 0x1A | B=0x1A */ s16 currPageEntries;
+    /* 0x1C | B=0x1C */ s16 entriesPerPage;
+    /* 0x1E | B=0x1E */ s16 currPage;
+    /* 0x20 | B=0x20 */ s16 pagesCount;
+    /* 0x22 | B=0x22 */ s16 totalEntriesCount;
+    /* 0x24 | B=0x24 */ u16 unk24;
+    /* 0x28 | B=0x26 */ TouchScreenMenuInput touchScreen; // For obvious reason unused on GBA
 } MenuInputStruct;
 
 // size: 0x8
@@ -81,66 +81,67 @@ typedef struct unkStructFor8013AA0
 } unkStructFor8013AA0;
 
 // Used for creating windows with an input menu.
-// size: R=0x9C | B=?
+// size: R=0x9C | B=0x98
 typedef struct MenuWindow
 {
-    /* 0x0 */ MenuInputStruct input;
-    /* 0x34 */ u32 menuWinId;
-    /* 0x38 */ WindowTemplate *menuWindow;
-    /* 0x3C */ WindowTemplates windows;
+    /* R=0x00 | B=0x00 */ MenuInputStruct input;
+    /* R=0x34 | B=0x30 */ u32 menuWinId;
+    /* R=0x38 | B=0x34 */ WindowTemplate *menuWindow;
+    /* R=0x3C | B=0x38 */ WindowTemplates windows;
 } MenuWindow;
 
-// Same as above, but has one additional WindowHeader field.
-// size: R=0xA0 | B=0x9C?
+// Same as MenuWindow, but has one additional WindowHeader field.
+// size: R=0xA0 | B=0x9C
 typedef struct MenuHeaderWindow
 {
-    /* 0x0 */ MenuWindow m; // short name so it's easier to write. 'm' standing for 'menu' or 'menuWindow'
-    /* 0x9C */ WindowHeader header;
+    /* R=0x00 | B=0x00 */ MenuWindow m; // short name so it's easier to write. 'm' standing for 'menu' or 'menuWindow'
+    /* R=0x9C | B=0x98 */ WindowHeader header;
 } MenuHeaderWindow;
+
+// I think the `+ 2`s below are actually `+ WINDOW_HEADER_HEIGHT`...
 
 // These macros are used for updating menu windows, as the last page can have less entries than other pages, so the window's height needs to reflect that.
 // Note: In order to get matching ASM, this macro had to be created.
 // It's probable the code below is not exactly how it was originally written, but it generates the same asm.
-#define UPDATE_MENU_WINDOW_HEIGHT_INTERNAL(ptr, _newHeight)                             \
-{                                                                                       \
-    UNUSED s32 new10;                                                                   \
-    s16 newHeight;                                                                      \
-    s16 newHeightVal = (_newHeight);                                                    \
-    UNUSED s32 dummyMatch = newHeightVal;                                               \
-    UNUSED s16 oldHeight = (ptr).windows.id[(ptr).menuWinId].height;                    \
-    dummyMatch = 0;                                                                     \
-    new10 = newHeightVal + 2;                                                           \
-    newHeight = newHeightVal;                                                           \
-                                                                                        \
-    (ptr).windows.id[(ptr).menuWinId].height = newHeight;                               \
-    (ptr).windows.id[(ptr).menuWinId].unk10 = newHeightVal + 2;                         \
-                                                                                        \
-    ResetUnusedInputStruct();                                                           \
-    ShowWindows(&(ptr).windows, TRUE, TRUE);                                            \
+#define UPDATE_MENU_WINDOW_HEIGHT_INTERNAL(ptr, _newHeight)             \
+{                                                                       \
+    UNUSED s32 newtotalHeight;                                          \
+    s16 newHeight;                                                      \
+    s16 newHeightVal = (_newHeight);                                    \
+    UNUSED s32 dummyMatch = newHeightVal;                               \
+    UNUSED s16 oldHeight = (ptr).windows.id[(ptr).menuWinId].height;    \
+    dummyMatch = 0;                                                     \
+    newtotalHeight = newHeightVal + 2;                                  \
+    newHeight = newHeightVal;                                           \
+                                                                        \
+    (ptr).windows.id[(ptr).menuWinId].height = newHeight;               \
+    (ptr).windows.id[(ptr).menuWinId].totalHeight = newHeightVal + 2;   \
+                                                                        \
+    ResetUnusedInputStruct();                                           \
+    ShowWindows(&(ptr).windows, TRUE, TRUE);                            \
 }
 
-#define UPDATE_MENU_WINDOW_HEIGHT(ptr)                                                  \
-{                                                                                       \
+#define UPDATE_MENU_WINDOW_HEIGHT(ptr)                                                                                          \
+{                                                                                                                               \
     UPDATE_MENU_WINDOW_HEIGHT_INTERNAL(ptr, CalcEntriesTotalHeight((ptr).input.currPageEntries, DEFAULT_MENU_ENTRY_HEIGHT) + 2) \
 }
 
-// For Windows where height is the same as unk10.
-#define UPDATE_MENU_WINDOW_HEIGHT_2(ptr)                                                \
-{                                                                                       \
-    s32 newHeightVal = CalcEntriesTotalHeight((ptr).input.currPageEntries, DEFAULT_MENU_ENTRY_HEIGHT) + 2;                \
-    UNUSED s16 oldHeight = (ptr).windows.id[(ptr).menuWinId].height;                    \
-    s16 newHeight = newHeightVal;                                                       \
-                                                                                        \
-    (ptr).windows.id[(ptr).menuWinId].height = newHeight;                               \
-    (ptr).windows.id[(ptr).menuWinId].unk10 = newHeight;                                \
-                                                                                        \
-    ResetUnusedInputStruct();                                                           \
-    ShowWindows(&(ptr).windows, TRUE, TRUE);                                            \
+#define UPDATE_MENU_WINDOW_HEIGHT_2(ptr)                                                                   \
+{                                                                                                          \
+    s32 newHeightVal = CalcEntriesTotalHeight((ptr).input.currPageEntries, DEFAULT_MENU_ENTRY_HEIGHT) + 2; \
+    UNUSED s16 oldHeight = (ptr).windows.id[(ptr).menuWinId].height;                                       \
+    s16 newHeight = newHeightVal;                                                                          \
+                                                                                                           \
+    (ptr).windows.id[(ptr).menuWinId].height = newHeight;                                                  \
+    (ptr).windows.id[(ptr).menuWinId].totalHeight = newHeight;                                             \
+                                                                                                           \
+    ResetUnusedInputStruct();                                                                              \
+    ShowWindows(&(ptr).windows, TRUE, TRUE);                                                               \
 }
 
 // For menu windows with two lines entries(for example job mail)
-#define UPDATE_TWO_LINES_MENU_WINDOW_HEIGHT(ptr)                                        \
-{                                                                                       \
+#define UPDATE_TWO_LINES_MENU_WINDOW_HEIGHT(ptr)                                                                                          \
+{                                                                                                                                         \
     UPDATE_MENU_WINDOW_HEIGHT_INTERNAL(ptr, CalcTwoLinesEntriesTotalHeight((ptr).input.currPageEntries, TWO_LINES_MENU_ENTRY_HEIGHT) + 2) \
 }
 

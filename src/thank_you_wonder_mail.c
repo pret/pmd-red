@@ -1245,7 +1245,7 @@ void UpdateThankYouMailText(void)
 
   switch(sUnknown_203B2C4->state) {
     case 5:
-        pokeStruct = GetPlayerPokemonStruct();
+        pokeStruct = GetLeaderMon1();
         StrncpyCustom(buffer1,pokeStruct->name, POKEMON_NAME_LENGTH);
         sprintfStatic(sUnknown_203B2C4->formattedString,gUnknown_80DF250,buffer1);
         CreateDialogueBoxAndPortrait(sUnknown_203B2C4->formattedString,0,&sUnknown_203B2C4->monPortrait,0x10d);
@@ -1403,7 +1403,7 @@ void UpdateThankYouMailText(void)
         CreateMenuDialogueBoxAndPortrait(gUnknown_80DF5E4,0,7,gUnknown_80DEE44,0,4,0,&sUnknown_203B2C4->monPortrait,0xc);
         break;
     case THANK_YOU_MAIL_COMMS_CLEANUP:
-        pokeStruct2 = GetPlayerPokemonStruct();
+        pokeStruct2 = GetLeaderMon1();
         StrncpyCustom(buffer2, pokeStruct2->name, POKEMON_NAME_LENGTH);
         sprintfStatic(sUnknown_203B2C4->formattedString,gUnknown_80DF63C,buffer2);
         CreateDialogueBoxAndPortrait(sUnknown_203B2C4->formattedString,0,&sUnknown_203B2C4->monPortrait,0x10d);

@@ -22,10 +22,10 @@ static const struct ScriptCommand s_gs196_g0_s0_station_sref_script[] = { /* 0x8
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     JUMP_LABEL(2),
   LABEL(2), /* = 0x02 */
-    JUMPIF_EQUAL(START_MODE, 1, /* to label */ 3),
-    JUMPIF_EQUAL(START_MODE, 3, /* to label */ 4),
-    JUMPIF_EQUAL(START_MODE, 2, /* to label */ 5),
-    JUMPIF_EQUAL(START_MODE, 9, /* to label */ 5),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_CONTINUE_GAME, /* to label */ 3),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_3, /* to label */ 4),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_GROUND, /* to label */ 5),
+    JUMPIF_EQUAL(START_MODE, STARTMODE_DUNGEON_WON, /* to label */ 5),
     JUMP_LABEL(3),
   LABEL(5), /* = 0x05 */
     CJUMP_VAR(GROUND_GETOUT),
@@ -41,11 +41,11 @@ static const struct ScriptCommand s_gs196_g0_s0_station_sref_script[] = { /* 0x8
     SELECT_LIVES(0, 1),
     JUMP_LABEL(7),
   LABEL(7), /* = 0x07 */
-    BGM_SWITCH(25),
+    BGM_SWITCH(MUS_MT_BLAZE),
     JUMP_SCRIPT(COMMON_ENTER),
 };
 
-static const struct ScriptRef s_gs196_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs196_g0_s0_station_sref_script }; /* 0x8248cc0 */
+static const struct ScriptRef s_gs196_g0_s0_station_sref = { ENTER_CONTROL , 1, NULL, s_gs196_g0_s0_station_sref_script }; /* 0x8248cc0 */
 
 static const struct ScriptCommand s_gs196_g0_s0_evt0_sref_script[] = { /* 0x8248ccc */
     DEBUGINFO_O(51),
@@ -62,11 +62,11 @@ static const struct ScriptCommand s_gs196_g0_s0_evt0_sref_script[] = { /* 0x8248
     HALT,
 };
 
-static const struct ScriptRef s_gs196_g0_s0_evt0_sref = { 357, 2, NULL /* GETOUT_NORMAL */, s_gs196_g0_s0_evt0_sref_script }; /* 0x8248da8 */
+static const struct ScriptRef s_gs196_g0_s0_evt0_sref = { GETOUT_NORMAL, 2, NULL, s_gs196_g0_s0_evt0_sref_script }; /* 0x8248da8 */
 
 static const struct ScriptCommand s_gs196_g0_s0_evt1_sref_script[] = { /* 0x8248db4 */
     DEBUGINFO_O(68),
-    JUMPIF_SCENARIOCHECK(5, /* to label */ 0),
+    JUMPIF_SCENARIOCHECK(QUEST_UNK5, /* to label */ 0),
     ASK1(FALSE, /*default*/ 0, /* speaker */ -1, _("Return to the rescue team base?")),
     CHOICE(/* label */  1, _("Yes.")),
     CHOICE(/* label */  2, _("*No.")),
@@ -78,7 +78,7 @@ static const struct ScriptCommand s_gs196_g0_s0_evt1_sref_script[] = { /* 0x8248
     { 0x23, 0x01, -0x0001,  0x00000000,  0x00000000, NULL },
     CALL_SCRIPT(DISMISSAL_SALLY_MEMBER4_FUNC),
     SET_DUNGEON_RES(/* result */ 10, /* enter */ -1),
-    EXECUTE_STATION(12, 4, 0),
+    EXECUTE_STATION(MAP_TEAM_BASE_INSIDE, 4, 0),
     HALT,
   LABEL(0), /* = 0x00 */
     ASK1(FALSE, /*default*/ 0, /* speaker */ -1, _("Return to the entrance?")),
@@ -92,7 +92,7 @@ static const struct ScriptCommand s_gs196_g0_s0_evt1_sref_script[] = { /* 0x8248
     HALT,
 };
 
-static const struct ScriptRef s_gs196_g0_s0_evt1_sref = { 357, 2, NULL /* GETOUT_NORMAL */, s_gs196_g0_s0_evt1_sref_script }; /* 0x8248f7c */
+static const struct ScriptRef s_gs196_g0_s0_evt1_sref = { GETOUT_NORMAL, 2, NULL, s_gs196_g0_s0_evt1_sref_script }; /* 0x8248f7c */
 
 static const struct ScriptCommand s_gs196_g0_s0_obj0_dlg2[] = { /* 0x8248f88 */
     DEBUGINFO_O(98),
@@ -148,14 +148,14 @@ static const struct ScriptCommand s_gs196_g1_s0_station_sref_script[] = { /* 0x8
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     SELECT_MAP(MAP_MT_BLAZE_MID),
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(25),
+    BGM_SWITCH(MUS_MT_BLAZE),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     SELECT_EVENTS(0, 0),
     RET,
 };
 
-static const struct ScriptRef s_gs196_g1_s0_station_sref = { 402, 7, NULL /* EVENT_STATION */, s_gs196_g1_s0_station_sref_script }; /* 0x82491d8 */
+static const struct ScriptRef s_gs196_g1_s0_station_sref = { EVENT_STATION , 7, NULL, s_gs196_g1_s0_station_sref_script }; /* 0x82491d8 */
 
 static const struct ScriptCommand s_gs196_g1_s0_lives0_dlg0[] = { /* 0x82491e4 */
     DEBUGINFO_O(161),
@@ -190,7 +190,7 @@ static const struct ScriptCommand s_gs196_g1_s0_lives1_dlg0[] = { /* 0x8249404 *
     WAIT(15),
     CALL_SCRIPT(WAKEUP_FUNC),
     CALL_SCRIPT(LOOK_AROUND_FUNC),
-    ROTATE(4, 10, DIRECTION_EAST),
+    ROTATE_TO(4, DIR_TRANS_10, DIRECTION_EAST),
     ALERT_CUE(5),
     AWAIT_CUE(6),
     { 0x52, 0x00,  0x0000,  0x00001000,  0x00000000, NULL },
@@ -278,4 +278,4 @@ static const struct GroundLink s_gs196_links[] = { /* 0x82496e0 */
     {},
 };
 
-/*extern*/ const struct GroundScriptHeader gGroundScript_gs196 = { LPARRAY(s_gs196_groups), s_gs196_links }; /* 0x82496e8 */
+const GroundScriptHeader gGroundScript_gs196 = { LPARRAY(s_gs196_groups), s_gs196_links }; /* 0x82496e8 */

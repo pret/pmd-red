@@ -75,7 +75,7 @@ void TryWakeSleepingWildPokemon(void)
     }
 }
 
-void TriggerMonsterHouse(Entity *entity, bool8 forcedMonsterHouse)
+void TriggerMonsterHouse_Async(Entity *entity, bool8 forcedMonsterHouse)
 {
     u8 monsterHouseRoomId;
     DungeonPos positions[100];
@@ -170,7 +170,7 @@ void TriggerMonsterHouse(Entity *entity, bool8 forcedMonsterHouse)
                         if (newMonster->unk1C < IntToF248(1)) {
                             break;
                         }
-                        DungeonRunFrameActions(0x57);
+                        DungeonRunFrameActions(87);
                     }
                     newMonster->unk1C = IntToF248(0);
                 }
@@ -179,6 +179,6 @@ void TriggerMonsterHouse(Entity *entity, bool8 forcedMonsterHouse)
 
     }
 
-    sub_804178C(1);
+    sub_804178C_Async(1);
 }
 

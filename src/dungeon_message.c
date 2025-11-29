@@ -35,7 +35,7 @@ static EWRAM_DATA SpriteOAM sUnknown_202F1F0 = {0};
 EWRAM_INIT bool8 gUnknown_203B434 = TRUE;
 
 static bool8 sub_8052DC0(Entity *);
-static void DisplayMessageAddToLog(Entity *pokemon, const u8 *str, bool8 r2);
+static void DisplayMessageAddToLog_Async(Entity *pokemon, const u8 *str, bool8 r2);
 
 void sub_80521D0(void)
 {
@@ -74,26 +74,26 @@ void sub_805229C(void)
     return sub_80526D0(0x50);
 }
 
-void LogMessageByIdWithPopupCheckUser(Entity *pokemon, const u8 *str)
+void LogMessageByIdWithPopupCheckUser_Async(Entity *pokemon, const u8 *str)
 {
     if (ShouldDisplayEntity(pokemon)){
-        DisplayMessageAddToLog(pokemon, str, TRUE);
+        DisplayMessageAddToLog_Async(pokemon, str, TRUE);
     }
 }
 
-UNUSED void TryDisplayDungeonLoggableMessage2(Entity *pokemon, const u8 *str)
+UNUSED void TryDisplayDungeonLoggableMessage2_Async(Entity *pokemon, const u8 *str)
 {
     if (ShouldDisplayEntity(pokemon)){
-        DisplayMessageAddToLog(pokemon, str, FALSE);
+        DisplayMessageAddToLog_Async(pokemon, str, FALSE);
     }
 }
 
-void DisplayDungeonLoggableMessageFalse(Entity *pokemon, const u8 *str)
+void DisplayDungeonLoggableMessageFalse_Async(Entity *pokemon, const u8 *str)
 {
-    DisplayMessageAddToLog(pokemon, str, FALSE);
+    DisplayMessageAddToLog_Async(pokemon, str, FALSE);
 }
 
-void TryDisplayDungeonLoggableMessage3(Entity *attacker, Entity *target, const u8 *str)
+void TryDisplayDungeonLoggableMessage3_Async(Entity *attacker, Entity *target, const u8 *str)
 {
     u8 flag;
     flag = ShouldDisplayEntity(attacker) ? TRUE : FALSE;
@@ -103,11 +103,11 @@ void TryDisplayDungeonLoggableMessage3(Entity *attacker, Entity *target, const u
     }
     if(flag)
     {
-        DisplayMessageAddToLog(attacker, str, TRUE);
+        DisplayMessageAddToLog_Async(attacker, str, TRUE);
     }
 }
 
-void TryDisplayDungeonLoggableMessage4(Entity *attacker, Entity *target, const u8 *str)
+void TryDisplayDungeonLoggableMessage4_Async(Entity *attacker, Entity *target, const u8 *str)
 {
     u8 flag;
     flag = ShouldDisplayEntity(attacker) ? TRUE : FALSE;
@@ -117,11 +117,11 @@ void TryDisplayDungeonLoggableMessage4(Entity *attacker, Entity *target, const u
     }
     if(flag)
     {
-        DisplayMessageAddToLog(attacker, str, FALSE);
+        DisplayMessageAddToLog_Async(attacker, str, FALSE);
     }
 }
 
-void LogMessageByIdWithPopupCheckUserUnknown(Entity *pokemon, DungeonPos *pos, const u8 *str)
+void LogMessageByIdWithPopupCheckUserUnknown_Async(Entity *pokemon, DungeonPos *pos, const u8 *str)
 {
     u8 flag;
     flag = ShouldDisplayEntity(pokemon) ? TRUE : FALSE;
@@ -131,16 +131,16 @@ void LogMessageByIdWithPopupCheckUserUnknown(Entity *pokemon, DungeonPos *pos, c
     }
     if(flag)
     {
-        DisplayMessageAddToLog(pokemon, str, TRUE);
+        DisplayMessageAddToLog_Async(pokemon, str, TRUE);
     }
 }
 
-void DisplayDungeonLoggableMessageTrue(Entity *pokemon, const u8 *str)
+void DisplayDungeonLoggableMessageTrue_Async(Entity *pokemon, const u8 *str)
 {
-    DisplayMessageAddToLog(pokemon, str, TRUE);
+    DisplayMessageAddToLog_Async(pokemon, str, TRUE);
 }
 
-static void DisplayMessageAddToLog(Entity *pokemon, const u8 *str, bool8 r2)
+static void DisplayMessageAddToLog_Async(Entity *pokemon, const u8 *str, bool8 r2)
 {
     u8 txt[64];
     bool8 r7;
@@ -157,8 +157,8 @@ static void DisplayMessageAddToLog(Entity *pokemon, const u8 *str, bool8 r2)
     sLastLogMsgEntity = pokemon;
     gUnknown_203B434 = FALSE;
     r9 = FALSE;
-    while (1) {
-        while (1) {
+    while (TRUE) {
+        while (TRUE) {
             s32 val = gDungeon->unk1BDD4.unk1C060;
             if (++val == UNK_1BBD4_STR_COUNT) {
                 val = 0;
@@ -190,7 +190,7 @@ static void DisplayMessageAddToLog(Entity *pokemon, const u8 *str, bool8 r2)
     }
 
     if (r9) {
-        gDungeon->unk1BDD4.unk1C064 = 0xF0;
+        gDungeon->unk1BDD4.unk1C064 = 240;
         if (gDungeon->unk1BDD4.unk1C06C == 0) {
             gDungeon->unk1BDD4.unk1C06C = 1;
         }
@@ -229,7 +229,7 @@ void xxx_draw_string_80524F0(void)
                     AddDoubleUnderScoreHighlight(0, 0, strPtr->unk1C066 - 1, 0xE0, 7);
                 }
 
-                while (1) {
+                while (TRUE) {
                     txtPtr = HandleSpecialCharFormat(txtPtr, &sp);
                     if (*txtPtr == '\0' || *txtPtr == '\r' || *txtPtr == '\n')
                         break;
@@ -298,18 +298,18 @@ void sub_8052740(s32 a0)
 }
 
 // Prints string in dialogue box and waits for A/B button press
-#define PRINT_STRING_WAIT_PRESS(chosenMenuIndex)   \
+#define PRINT_STRING_WAIT_PRESS_ASYNC(chosenMenuIndex)   \
 {                                           \
     s32 unkPrintRet;                        \
                                             \
     do {                                    \
-        DrawDialogueBoxString();            \
+        DrawDialogueBoxString_Async();            \
         DungeonRunFrameActions(9);                     \
         unkPrintRet = sub_80144A4(chosenMenuIndex);\
     } while (unkPrintRet != 0);             \
 }
 
-void DisplayDungeonMessage(struct MonDialogueSpriteInfo *monSpriteInfo, const u8 *str, bool8 a2)
+void DisplayDungeonMessage_Async(struct MonDialogueSpriteInfo *monSpriteInfo, const u8 *str, bool8 a2)
 {
     MonPortraitMsg monPortrait, *monPortraitPtr;
     s32 chosenMenuIndex;
@@ -341,7 +341,7 @@ void DisplayDungeonMessage(struct MonDialogueSpriteInfo *monSpriteInfo, const u8
 
     CreateMenuDialogueBoxAndPortrait(str, 0, 0, NULL, NULL, 3, 0, monPortraitPtr, (a2 != FALSE) ? 0x701 : 0x400);
     gDungeon->unk1BDD4.unk1C05F = 1;
-    PRINT_STRING_WAIT_PRESS(&chosenMenuIndex);
+    PRINT_STRING_WAIT_PRESS_ASYNC(&chosenMenuIndex);
     gDungeon->unk1BDD4.unk1C05F = 0;
 
     if (monPortrait.faceFile != NULL) {
@@ -359,18 +359,18 @@ void DisplayDungeonMessage(struct MonDialogueSpriteInfo *monSpriteInfo, const u8
         }
     }
 
-    sub_803E708(8, 9);
+    DungeonWaitFrames_Async(8, 9);
 }
 
 void DisplayDungeonLoggableMessage(Entity *pokemon, const u8 *str)
 {
-    DisplayDungeonMessage(NULL, str, TRUE);
-    DisplayDungeonLoggableMessageFalse(pokemon, str);
+    DisplayDungeonMessage_Async(NULL, str, TRUE);
+    DisplayDungeonLoggableMessageFalse_Async(pokemon, str);
 }
 
 static const u16 sUnknownDialogueFlags[] = {0x30D, 0x10D, 0x30D, 0x10D, 0x301, 1, 0x11};
 
-void DisplayDungeonDialogue(const struct DungeonDialogueStruct *dialogueInfo)
+void DisplayDungeonDialogue_Async(const struct DungeonDialogueStruct *dialogueInfo)
 {
     MonPortraitMsg monPortrait;
     s32 leaderId, partnerId, dialogueMonId;
@@ -426,7 +426,7 @@ void DisplayDungeonDialogue(const struct DungeonDialogueStruct *dialogueInfo)
         InlineStrcpy(gSpeakerNameBuffer, _("{COLOR YELLOW}{SPEECH_BUBBLE}{RESET}"));
     }
 
-    while (1) {
+    while (TRUE) {
         if (dialogueInfo->allowType == DIALOGUE_ALLOW_ALL)
             break;
         if (dialogueInfo->allowType == DIALOGUE_ONLY_SQUIRTLE_TOTODILE   && (dialogueMonId == MONSTER_SQUIRTLE || dialogueMonId == MONSTER_TOTODILE))
@@ -468,7 +468,7 @@ void DisplayDungeonDialogue(const struct DungeonDialogueStruct *dialogueInfo)
     sub_803EAF0(2, NULL);
     sub_8052210(FALSE);
     CreateDialogueBoxAndPortrait(dialogueInfo->str, 0, monPortraitPtr, sUnknownDialogueFlags[dialogueInfo->type]);
-    PRINT_STRING_WAIT_PRESS(&chosenMenuIndex);
+    PRINT_STRING_WAIT_PRESS_ASYNC(&chosenMenuIndex);
 
     if (monPortraitPtr != NULL) {
         CloseFile(monPortraitPtr->faceFile);
@@ -478,10 +478,10 @@ void DisplayDungeonDialogue(const struct DungeonDialogueStruct *dialogueInfo)
         LoadDungeonMapPalette();
         sub_803EAF0(0, NULL);
     }
-    sub_803E708(8, 9);
+    DungeonWaitFrames_Async(8, 9);
 }
 
-bool32 DisplayDungeonYesNoMessage(struct MonDialogueSpriteInfo *monSpriteInfo, const u8 *str, bool32 defaultYes)
+bool32 DisplayDungeonYesNoMessage_Async(struct MonDialogueSpriteInfo *monSpriteInfo, const u8 *str, bool32 defaultYes)
 {
     MonPortraitMsg monPortrait, *monPortraitPtr;
     s32 chosenMenuIndex;
@@ -515,7 +515,7 @@ bool32 DisplayDungeonYesNoMessage(struct MonDialogueSpriteInfo *monSpriteInfo, c
         CreateYesNoDialogueBoxAndPortrait_DefaultNo(str, monPortraitPtr, 0x300); // Yes/No - cursor starts at NO
     }
 
-    PRINT_STRING_WAIT_PRESS(&chosenMenuIndex);
+    PRINT_STRING_WAIT_PRESS_ASYNC(&chosenMenuIndex);
 
     if (monPortrait.faceFile != NULL) {
         CloseFile(monPortrait.faceFile);
@@ -558,7 +558,7 @@ s32 DisplayDungeonMenuMessage(struct MonDialogueSpriteInfo *monSpriteInfo, const
     }
 
     CreateMenuDialogueBoxAndPortrait(str, 0, -1, menuItems, NULL, 3, 0, monPortraitPtr, unkArg);
-    PRINT_STRING_WAIT_PRESS(&chosenMenuIndex);
+    PRINT_STRING_WAIT_PRESS_ASYNC(&chosenMenuIndex);
 
     if (monPortrait.faceFile != NULL) {
         CloseFile(monPortrait.faceFile);
@@ -569,24 +569,24 @@ s32 DisplayDungeonMenuMessage(struct MonDialogueSpriteInfo *monSpriteInfo, const
     return chosenMenuIndex;
 }
 
-void sub_8052D44(s16 *ids, Entity *leader, Entity *partner)
+void BufferCutsceneProtagonists(s16 destIDs[2], Entity *leader, Entity *partner)
 {
     if (EntityIsValid(leader)) {
-        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], leader, 0);
-        ids[0] = GetEntInfo(leader)->apparentID;
+        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], leader, COLOR_WHITE);
+        destIDs[0] = GetEntInfo(leader)->apparentID;
     }
     else {
         InlineStrcpy(gFormatBuffer_Monsters[0], "??");
-        ids[0] = 0;
+        destIDs[0] = 0;
     }
 
     if (EntityIsValid(partner)) {
-        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], partner, 0);
-        ids[1] = GetEntInfo(partner)->apparentID;
+        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], partner, COLOR_WHITE);
+        destIDs[1] = GetEntInfo(partner)->apparentID;
     }
     else {
         InlineStrcpy(gFormatBuffer_Monsters[1], "??");
-        ids[1] = 0;
+        destIDs[1] = 0;
     }
 }
 
@@ -595,7 +595,7 @@ static bool8 sub_8052DC0(Entity *entity)
     return ShouldDisplayEntity(entity);
 }
 
-static inline bool32 DislayTutorialMsg(Entity *leader, const struct TutorialFlagMsg *tutorial, bool32 unkFunctionCall)
+static inline bool32 DislayTutorialMsg(Entity *leader, const TutorialFlagMsg *tutorial, bool32 unkFunctionCall)
 {
     const u8 *str;
     s32 flag = tutorial->flagId;
@@ -605,9 +605,9 @@ static inline bool32 DislayTutorialMsg(Entity *leader, const struct TutorialFlag
         SetTutorialFlag(flag);
         sub_8083E28();
         str = tutorial->str;
-        DisplayDungeonMessage(NULL, str, TRUE);
+        DisplayDungeonMessage_Async(NULL, str, TRUE);
         if (unkFunctionCall) {
-            DisplayDungeonLoggableMessageFalse(leader, str);
+            DisplayDungeonLoggableMessageFalse_Async(leader, str);
         }
         return TRUE;
     }
@@ -662,10 +662,10 @@ void DisplayItemTip(u8 itemId)
 void DisplayYouReachedDestFloorStr(void)
 {
     if (gDungeon->unkA != 0) {
-        DisplayDungeonMessage(NULL, gUnknown_80FF6F8, 1); // But the pokemon you seek isn't here...
+        DisplayDungeonMessage_Async(NULL, gUnknown_80FF6F8, 1); // But the pokemon you seek isn't here...
     }
     else {
-        DisplayDungeonMessage(NULL, gUnknown_80FF6A4, 1);
+        DisplayDungeonMessage_Async(NULL, gUnknown_80FF6A4, 1);
     }
 }
 
@@ -682,7 +682,7 @@ void sub_8052FB8(const u8 *str)
 
     CreateMenuDialogueBoxAndPortrait(str, 0, 0, NULL, NULL, 2, 0, NULL, 0x30);
     r9 = 0;
-    while (1) {
+    while (TRUE) {
         if (r8 < 62) {
             r8++;
             for (j = 0; j < 8; j++) {
@@ -711,7 +711,7 @@ void sub_8052FB8(const u8 *str)
             if (gRealInputs.pressed & AB_BUTTONS)
                 break;
         }
-        DrawDialogueBoxString();
+        DrawDialogueBoxString_Async();
         DungeonRunFrameActions(9);
     }
 
@@ -719,7 +719,7 @@ void sub_8052FB8(const u8 *str)
         for (j = 0; j < 8; j++) {
             SetBGPaletteBufferColorRGB(240 + j, &gFontPalette[j], r8 / 2, NULL);
         }
-        DrawDialogueBoxString();
+        DrawDialogueBoxString_Async();
         DungeonRunFrameActions(9);
         r8--;
     }
@@ -730,12 +730,12 @@ void sub_8052FB8(const u8 *str)
     for (j = 0; j < 8; j++) {
         SetBGPaletteBufferColorArray(240 + j, &gFontPalette[j]);
     }
-    sub_803E708(8, 9);
+    DungeonWaitFrames_Async(8, 9);
 }
 
 const u8 *GetCurrentDungeonName(void)
 {
-    if (gDungeon->unk644.unk34 == 1) {
+    if (gDungeon->unk644.missionKind == DUNGEON_MISSION_OUTONRESCUE) {
         return GetDungeonName1(DUNGEON_OUT_ON_RESCUE);
     }
     else {

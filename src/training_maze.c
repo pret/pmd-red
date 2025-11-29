@@ -23,7 +23,7 @@ UNUSED static void nullsub_208(void)
 
 bool8 sub_8097504(s16 mazeIndex)
 {
-    s32 uVar3;
+    s32 questID;
     s32 mazeIndex_ = Self_s16(mazeIndex); // Needed to match
     if (mazeIndex < 17) {
         switch (mazeIndex) {
@@ -31,7 +31,7 @@ bool8 sub_8097504(s16 mazeIndex)
             case 10:
             case 11:
             case 12:
-                uVar3 = 14;
+                questID = QUEST_MAZE_14;
                 break;
             case 0:
             case 1:
@@ -39,7 +39,7 @@ bool8 sub_8097504(s16 mazeIndex)
             case 7:
             case 9:
             case 14:
-                uVar3 = 15;
+                questID = QUEST_MAZE_15;
                 break;
             case 3:
             case 4:
@@ -47,7 +47,7 @@ bool8 sub_8097504(s16 mazeIndex)
             case 8:
                 return TRUE;
             case 13:
-                uVar3 = 6;
+                questID = QUEST_REACHED_POSTGAME;
                 break;
             default:
                 return TRUE;
@@ -57,15 +57,13 @@ bool8 sub_8097504(s16 mazeIndex)
         if (mazeIndex_ > 22)  return FALSE;
         if (mazeIndex_ == 22) return FALSE;
         if (mazeIndex_ == 21) return FALSE;
-        uVar3 = 6;
+        questID = QUEST_REACHED_POSTGAME;
     }
 
-    if (!sub_80023E4(uVar3)) {
+    if (!CheckQuest(questID))
         return FALSE;
-    }
-    else {
-        return TRUE;
-    }
+
+    return TRUE;
 }
 
 bool8 IsMazeCompleted(s16 mazeIndex)

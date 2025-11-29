@@ -21,10 +21,10 @@ static const struct ScriptCommand s_gs5_g0_s0_station_sref_script[] = { /* 0x819
     JUMP_LABEL(1),
   LABEL(1), /* = 0x01 */
     CJUMP_VAR(START_MODE),
-    COND_EQUAL(12, /* to label */ 2),
-    COND_EQUAL(11, /* to label */ 2),
-    COND_EQUAL(10, /* to label */ 3),
-    COND_EQUAL(9, /* to label */ 4),
+    COND_EQUAL(STARTMODE_DUNGEON_LOST, /* to label */ 2),
+    COND_EQUAL(STARTMODE_11, /* to label */ 2),
+    COND_EQUAL(STARTMODE_10, /* to label */ 3),
+    COND_EQUAL(STARTMODE_DUNGEON_WON, /* to label */ 4),
     SELECT_LIVES(0, 1),
     JUMP_LABEL(6),
   LABEL(2), /* = 0x02 */
@@ -41,11 +41,11 @@ static const struct ScriptCommand s_gs5_g0_s0_station_sref_script[] = { /* 0x819
     RET,
   LABEL(6), /* = 0x06 */
     SET_DUNGEON_RES(/* result */ 0, /* enter */ -1),
-    BGM_SWITCH(7),
+    BGM_SWITCH(MUS_POKEMON_SQUARE),
     JUMP_SCRIPT(COMMON_ENTER),
 };
 
-static const struct ScriptRef s_gs5_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs5_g0_s0_station_sref_script }; /* 0x8197c28 */
+static const struct ScriptRef s_gs5_g0_s0_station_sref = { ENTER_CONTROL , 1, NULL, s_gs5_g0_s0_station_sref_script }; /* 0x8197c28 */
 
 
 static const struct ScriptCommand s_gs5_g0_s0_evt0_sref_script[] = { /* 0x8197c34 */
@@ -54,7 +54,7 @@ static const struct ScriptCommand s_gs5_g0_s0_evt0_sref_script[] = { /* 0x8197c3
     HALT,
 };
 
-static const struct ScriptRef s_gs5_g0_s0_evt0_sref = { 357, 2, NULL /* GETOUT_NORMAL */, s_gs5_g0_s0_evt0_sref_script }; /* 0x8197c64 */
+static const struct ScriptRef s_gs5_g0_s0_evt0_sref = { GETOUT_NORMAL, 2, NULL, s_gs5_g0_s0_evt0_sref_script }; /* 0x8197c64 */
 
 static const struct ScriptCommand s_gs5_g0_s1_lives0_dlg0[] = { /* 0x8197c70 */
     DEBUGINFO_O(60),
@@ -79,7 +79,7 @@ static const struct ScriptCommand s_gs5_g1_s0_station_sref_script[] = { /* 0x819
     RET_DIRECT,
 };
 
-static const struct ScriptRef s_gs5_g1_s0_station_sref = { 403, 8, NULL /* STATION_CONTROL */, s_gs5_g1_s0_station_sref_script }; /* 0x8197d50 */
+static const struct ScriptRef s_gs5_g1_s0_station_sref = { STATION_CONTROL , 8, NULL, s_gs5_g1_s0_station_sref_script }; /* 0x8197d50 */
 
 static const struct ScriptCommand s_gs5_g1_s0_lives0_dlg2[] = { /* 0x8197d5c */
     DEBUGINFO_O(85),
@@ -128,7 +128,7 @@ static const struct ScriptCommand s_gs5_g2_s0_station_sref_script[] = { /* 0x819
     CALL_SCRIPT(DISMISSAL_SALLY_MEMBER_FUNC),
     CALL_STATION(  1,  0),
     SELECT_ENTITIES(-1, -1),
-    BGM_SWITCH(7),
+    BGM_SWITCH(MUS_POKEMON_SQUARE),
     { 0x22, 0x01, -0x0001,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     CALL_STATION(  1,  0),
@@ -136,7 +136,7 @@ static const struct ScriptCommand s_gs5_g2_s0_station_sref_script[] = { /* 0x819
     RET,
 };
 
-static const struct ScriptRef s_gs5_g2_s0_station_sref = { 402, 7, NULL /* EVENT_STATION */, s_gs5_g2_s0_station_sref_script }; /* 0x8197fdc */
+static const struct ScriptRef s_gs5_g2_s0_station_sref = { EVENT_STATION , 7, NULL, s_gs5_g2_s0_station_sref_script }; /* 0x8197fdc */
 
 static const struct ScriptCommand s_gs5_g2_s0_lives0_dlg0[] = { /* 0x8197fe8 */
     DEBUGINFO_O(142),
@@ -178,7 +178,7 @@ static const struct ScriptCommand s_gs5_g3_s0_station_sref_script[] = { /* 0x819
     CALL_SCRIPT(DISMISSAL_SALLY_MEMBER2_FUNC),
     CALL_STATION(  1,  0),
     SELECT_ENTITIES(-1, -1),
-    BGM_SWITCH(7),
+    BGM_SWITCH(MUS_POKEMON_SQUARE),
     { 0x22, 0x01, -0x0001,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     CALL_STATION(  1,  0),
@@ -186,7 +186,7 @@ static const struct ScriptCommand s_gs5_g3_s0_station_sref_script[] = { /* 0x819
     RET,
 };
 
-static const struct ScriptRef s_gs5_g3_s0_station_sref = { 402, 7, NULL /* EVENT_STATION */, s_gs5_g3_s0_station_sref_script }; /* 0x8198228 */
+static const struct ScriptRef s_gs5_g3_s0_station_sref = { EVENT_STATION , 7, NULL, s_gs5_g3_s0_station_sref_script }; /* 0x8198228 */
 
 static const struct ScriptCommand s_gs5_g3_s0_lives0_dlg0[] = { /* 0x8198234 */
     DEBUGINFO_O(192),
@@ -231,7 +231,7 @@ static const struct ScriptCommand s_gs5_g4_s0_station_sref_script[] = { /* 0x819
     CALL_SCRIPT(DISMISSAL_SALLY_MEMBER3_FUNC),
     CALL_STATION(  1,  0),
     SELECT_ENTITIES(-1, -1),
-    BGM_SWITCH(7),
+    BGM_SWITCH(MUS_POKEMON_SQUARE),
     { 0x22, 0x01, -0x0001,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     CALL_STATION(  1,  0),
@@ -239,7 +239,7 @@ static const struct ScriptCommand s_gs5_g4_s0_station_sref_script[] = { /* 0x819
     RET,
 };
 
-static const struct ScriptRef s_gs5_g4_s0_station_sref = { 402, 7, NULL /* EVENT_STATION */, s_gs5_g4_s0_station_sref_script }; /* 0x81985ec */
+static const struct ScriptRef s_gs5_g4_s0_station_sref = { EVENT_STATION , 7, NULL, s_gs5_g4_s0_station_sref_script }; /* 0x81985ec */
 
 static const struct ScriptCommand s_gs5_g4_s0_lives0_dlg0[] = { /* 0x81985f8 */
     DEBUGINFO_O(245),
@@ -282,14 +282,14 @@ static const struct ScriptCommand s_gs5_g5_s0_station_sref_script[] = { /* 0x819
     DEBUGINFO_O(282),
     SELECT_MAP(5),
     SELECT_ENTITIES(-1, -1),
-    BGM_SWITCH(40),
+    BGM_SWITCH(MUS_INTRO),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     { 0x23, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     RET,
 };
 
-static const struct ScriptRef s_gs5_g5_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs5_g5_s0_station_sref_script }; /* 0x8198868 */
+static const struct ScriptRef s_gs5_g5_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs5_g5_s0_station_sref_script }; /* 0x8198868 */
 
 static const struct ScriptCommand s_gs5_g5_s0_eff0_script[] = { /* 0x8198874 */
     DEBUGINFO_O(295),
@@ -317,7 +317,7 @@ static const struct ScriptCommand s_gs5_g5_s0_lives0_dlg0[] = { /* 0x81988f4 */
     ALERT_CUE(4),
     { 0x53, 0x00,  0x0000,  0x01000000,  0x00000000, NULL },
     { 0x80, 0x00,  0x0080,  0x00000002,  0x00000000, NULL },
-    ROTATE(8, 10, DIRECTION_EAST),
+    ROTATE_TO(8, DIR_TRANS_10, DIRECTION_EAST),
     { 0x80, 0x00,  0x0100,  0x00000003,  0x00000000, NULL },
     ALERT_CUE(3),
     { 0x80, 0x00,  0x0100,  0x00000004,  0x00000000, NULL },
@@ -329,7 +329,7 @@ static const struct ScriptCommand s_gs5_g5_s0_lives1_dlg0[] = { /* 0x8198a24 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(6),
-    ROTATE(8, 10, DIRECTION_WEST),
+    ROTATE_TO(8, DIR_TRANS_10, DIRECTION_WEST),
     HALT,
 };
 
@@ -471,4 +471,4 @@ static const struct GroundLink s_gs5_links[] = { /* 0x8198ddc */
     /* link   5 */ { { /*x*/  31, /*y*/  37, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
 };
 
-/*extern*/ const struct GroundScriptHeader gGroundScript_gs5 = { LPARRAY(s_gs5_groups), s_gs5_links }; /* 0x8198e0c */
+const GroundScriptHeader gGroundScript_gs5 = { LPARRAY(s_gs5_groups), s_gs5_links }; /* 0x8198e0c */

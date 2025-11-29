@@ -255,7 +255,7 @@ void sub_806B168(void)
         }
     }
 
-    if (gDungeon->unk644.unk18 == 0) {
+    if (!gDungeon->unk644.canChangeLeader) {
         for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
             DungeonMon *currMonPtr = monPtrs[i];
             if (currMonPtr != NULL && currMonPtr->dungeonLocation.id == DUNGEON_JOIN_LOCATION_PARTNER) {
@@ -292,7 +292,7 @@ void sub_806B168(void)
 
             skipSecondLoop = FALSE;
             j = 0;
-            while (1) {
+            while (TRUE) {
                 unkPosition = gUnknown_80F4598[j];
                 if (unkPosition.x == 99)
                     break;
@@ -310,7 +310,7 @@ void sub_806B168(void)
                 continue;
 
             j = 0;
-            while (1) {
+            while (TRUE) {
                 unkPosition = gUnknown_80F4598[j];
                 if (unkPosition.x == 99)
                     break;
@@ -371,7 +371,7 @@ void sub_806B404(void)
             currMonPtr->recruitedPokemonId = UNK_RECRUITED_POKEMON_ID_5AA5;
             skipNextLoop = FALSE;
             j = 0;
-            while (1) {
+            while (TRUE) {
                 unkPosition = gUnknown_80F4598[j];
                 if (unkPosition.x == 99)
                     break;
@@ -390,7 +390,7 @@ void sub_806B404(void)
 
             skipNextLoop = FALSE;
             j = 0;
-            while (1) {
+            while (TRUE) {
                 unkPosition = gUnknown_80F4598[j];
                 if (unkPosition.x == 99)
                     break;
@@ -444,7 +444,7 @@ void SpawnWildMonsOnFloor(void)
     s32 x, y;
     bool8 r8 = (gDungeon->unk644.unk44 != 0);
 
-    if (sub_80860A8(ITEM_MUSIC_BOX) && !HasRecruitedMon(MONSTER_MEW)) {
+    if (ItemInInventoryOrHeld(ITEM_MUSIC_BOX) && !HasRecruitedMon(MONSTER_MEW)) {
         gDungeon->unk37FF = FALSE;
     }
     else {

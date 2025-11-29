@@ -50,7 +50,7 @@
 #include "dungeon_tilemap.h"
 #include "effect_main.h"
 
-static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struct DamageStruct *r5, bool32 isFalseSwipe, bool32 giveExp, s16 dungeonExitReason_, s32 arg8);
+static bool8 HandleDealingDamageInternal_Async(Entity *attacker, Entity *target, struct DamageStruct *r5, bool32 isFalseSwipe, bool32 giveExp, s16 dungeonExitReason_, s32 arg8);
 static bool8 sub_806E100(s48_16 *param_1, Entity *pokemon, Entity *target, u8 type, DamageStruct *dmgStruct);
 static void sub_806F500(void);
 static void sub_806F63C(Entity *param_1);
@@ -67,14 +67,14 @@ static const s48_16 gUnknown_8106F3C = {0x0, 0x8000};
 static const s48_16 gUnknown_8106F44 = {0x0, 0xE666};
 static const s48_16 gUnknown_8106F4C = {0x0, 0x18000};
 
-void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *dmgStruct, bool32 isFalseSwipe, bool32 giveExp, s16 dungeonExitReason_, bool32 arg8, s32 argC)
+void HandleDealingDamage_Async(Entity *attacker, Entity *target, struct DamageStruct *dmgStruct, bool32 isFalseSwipe, bool32 giveExp, s16 dungeonExitReason_, bool32 arg8, s32 argC)
 {
     bool32 r9;
     // Some compiler weirdness, because it won't match without creating dungeonExitReason_ again
     s32 dungeonExitReason = dungeonExitReason_;
     s32 returnDmg = 0;
 
-    if (HandleDealingDamageInternal(attacker, target, dmgStruct, isFalseSwipe, giveExp, dungeonExitReason, argC))
+    if (HandleDealingDamageInternal_Async(attacker, target, dmgStruct, isFalseSwipe, giveExp, dungeonExitReason, argC))
         return;
     if (dmgStruct->tookNoDamage)
         return;
@@ -127,7 +127,7 @@ void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *
         if (returnDmg) {
             struct DamageStruct sp;
 
-            TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80FCFA4);
+            TryDisplayDungeonLoggableMessage3_Async(attacker, target, gUnknown_80FCFA4);
             sp.dmg = (dmgStruct->dmg * returnDmg) / 4;
             sp.type = dmgStruct->type;
             sp.residualDmgType = RESIDUAL_DAMAGE_COUNTERATTACK;
@@ -135,7 +135,7 @@ void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *
             sp.isCrit = FALSE;
             sp.unkE = 0;
             sp.tookNoDamage = FALSE;
-            HandleDealingDamageInternal(target, attacker, &sp, FALSE, giveExp, dungeonExitReason, argC);
+            HandleDealingDamageInternal_Async(target, attacker, &sp, FALSE, giveExp, dungeonExitReason, argC);
         }
     }
     if (!EntityIsValid(attacker) || !EntityIsValid(target))
@@ -224,7 +224,7 @@ void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *
             }
             else {
                 sub_8041D00(destBondTarget, target);
-                DealDamageToEntity(destBondTarget, dmgStruct->dmg, RESIDUAL_DAMAGE_DESTINY_BOND, DUNGEON_EXIT_FAINTED_FROM_DESTINY_BOND);
+                DealDamageToEntity_Async(destBondTarget, dmgStruct->dmg, RESIDUAL_DAMAGE_DESTINY_BOND, DUNGEON_EXIT_FAINTED_FROM_DESTINY_BOND);
             }
         }
     }
@@ -235,7 +235,7 @@ static inline u32 ItemId(Item *item)
     return item->id;
 }
 
-static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struct DamageStruct *dmgStruct, bool32 isFalseSwipe, bool32 giveExp, s16 dungeonExitReason_, s32 arg8)
+static bool8 HandleDealingDamageInternal_Async(Entity *attacker, Entity *target, struct DamageStruct *dmgStruct, bool32 isFalseSwipe, bool32 giveExp, s16 dungeonExitReason_, s32 arg8)
 {
     s32 hpBefore, hpChange;
     EntityInfo *targetData;
@@ -263,14 +263,14 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
 
     if (dungeonExitReason != DUNGEON_EXIT_FAINTED_FROM_PERISH_SONG && AbilityIsActive(target, ABILITY_STURDY) && dmgStruct->dmg == 9999) {
         SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], target, 0);
-        TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80FCA90);
+        TryDisplayDungeonLoggableMessage3_Async(attacker, target, gUnknown_80FCA90);
         sub_8042238(attacker, target);
         dmgStruct->tookNoDamage = TRUE;
         return FALSE;
     }
     if (targetData->frozenClassStatus.status == STATUS_FROZEN) {
         SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], target, 0);
-        TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80F9600);
+        TryDisplayDungeonLoggableMessage3_Async(attacker, target, gUnknown_80F9600);
         sub_8042238(attacker, target);
         dmgStruct->tookNoDamage = TRUE;
         return FALSE;
@@ -295,17 +295,17 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
 
     if (targetData->unk152 == 0) {
         if (dmgStruct->isCrit) {
-            TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80F9614);
+            TryDisplayDungeonLoggableMessage3_Async(attacker, target, gUnknown_80F9614);
         }
         switch (dmgStruct->typeEffectiveness) {
             case EFFECTIVENESS_IMMUNE:
-                TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80F9630);
+                TryDisplayDungeonLoggableMessage3_Async(attacker, target, gUnknown_80F9630);
                 break;
             case EFFECTIVENESS_RESIST:
-                TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80F9654);
+                TryDisplayDungeonLoggableMessage3_Async(attacker, target, gUnknown_80F9654);
                 break;
             case EFFECTIVENESS_SUPER:
-                TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80F9670);
+                TryDisplayDungeonLoggableMessage3_Async(attacker, target, gUnknown_80F9670);
                 break;
         }
     }
@@ -315,15 +315,15 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
     if (dmgStruct->dmg == 0) {
         if (ShouldDisplayEntity(attacker) && ShouldDisplayEntity(target)) {
             if (targetData->unk152 == 0) {
-                TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80F9688);
+                TryDisplayDungeonLoggableMessage3_Async(attacker, target, gUnknown_80F9688);
             }
             sub_8042238(attacker, target);
         }
         else {
             if (targetData->unk152 == 0) {
-                TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80F9688);
+                TryDisplayDungeonLoggableMessage3_Async(attacker, target, gUnknown_80F9688);
             }
-            sub_803E708(0x1E, 0x18);
+            DungeonWaitFrames_Async(0x1E, 0x18);
         }
         dmgStruct->tookNoDamage = TRUE;
         return FALSE;
@@ -331,12 +331,12 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
     else if (dmgStruct->dmg == 9999) {
         if (arg8 != 0 && ShouldDisplayEntity(target)) {
             unkTile = GetTileAtEntitySafe(target);
-            sub_803E708(0x14, 0x18);
+            DungeonWaitFrames_Async(0x14, 0x18);
             unkTile->spawnOrVisibilityFlags.spawn |= SPAWN_FLAG_TRAP;
             UpdateTrapsVisibility();
         }
         if (targetData->unk152 == 0) {
-            TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80F96A8);
+            TryDisplayDungeonLoggableMessage3_Async(attacker, target, gUnknown_80F96A8);
         }
         targetData->unkA0 = 999;
     }
@@ -357,12 +357,12 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
                 sub_803ED30(-dmgStruct->dmg, target, 1, -1);
             }
             if (targetData->unk152 == 0 && str != NULL) {
-                TryDisplayDungeonLoggableMessage3(attacker, target, str);
+                TryDisplayDungeonLoggableMessage3_Async(attacker, target, str);
             }
         }
         else {
             if (targetData->unk152 == 0 && str != NULL) {
-                TryDisplayDungeonLoggableMessage3(attacker, target, str);
+                TryDisplayDungeonLoggableMessage3_Async(attacker, target, str);
             }
         }
     }
@@ -404,12 +404,12 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
     if (targetData->reflectClassStatus.status == STATUS_ENDURING) {
         if (targetData->HP == 0) {
             targetData->HP = 1;
-            TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_8100548);
+            TryDisplayDungeonLoggableMessage3_Async(attacker, target, gUnknown_8100548);
         }
     }
     else if (isFalseSwipe == TRUE && targetData->HP == 0) {
         targetData->HP = 1;
-        TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_810056C);
+        TryDisplayDungeonLoggableMessage3_Async(attacker, target, gUnknown_810056C);
     }
 
     hpChange = hpBefore - targetData->HP;
@@ -417,7 +417,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
         hpChange = 0;
 
     if (var_24 || unkTile != NULL)
-        sub_803E708(0xA, 0x18);
+        DungeonWaitFrames_Async(0xA, 0x18);
 
     if (targetData->HP != 0) {
         if (var_24) {
@@ -441,15 +441,15 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
     }
 
     if (unkTile != NULL) {
-        sub_803E708(0x14, 0x18);
+        DungeonWaitFrames_Async(0x14, 0x18);
         target->unk22 = 2;
-        sub_803E708(0xA, 0x18);
+        DungeonWaitFrames_Async(0xA, 0x18);
         unkTile->spawnOrVisibilityFlags.spawn &= ~(SPAWN_FLAG_TRAP);
         UpdateTrapsVisibility();
     }
     else if (var_24) {
         target->unk22 = 1;
-        sub_803E708(0x1E, 0x18);
+        DungeonWaitFrames_Async(0x1E, 0x18);
     }
 
     r8 = 1;
@@ -461,42 +461,42 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], target, 0);
     if (dmgStruct->residualDmgType == RESIDUAL_DAMAGE_MOVE_FAIL || dmgStruct->residualDmgType == RESIDUAL_DAMAGE_RECOIL) {
         if (targetData->isNotTeamMember) {
-            TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80F9E44);
+            TryDisplayDungeonLoggableMessage3_Async(attacker, target, gUnknown_80F9E44);
         }
         else {
-            DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80F9E44);
+            DisplayDungeonLoggableMessageTrue_Async(attacker, gUnknown_80F9E44);
         }
     }
     else if (targetData->isNotTeamMember)
     {
         if (targetData->monsterBehavior == BEHAVIOR_RESCUE_TARGET) {
-            DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80F9DF0[r8]);
+            DisplayDungeonLoggableMessageTrue_Async(attacker, gUnknown_80F9DF0[r8]);
         }
         else {
-            TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80F9CC0[r8]);
+            TryDisplayDungeonLoggableMessage3_Async(attacker, target, gUnknown_80F9CC0[r8]);
         }
     }
     else {
         DungeonMon *recruitedMon = &gRecruitedPokemonRef->dungeonTeam[targetData->teamIndex];
-        if (targetData->isTeamLeader || (targetData->joinedAt.id == DUNGEON_JOIN_LOCATION_PARTNER && gDungeon->unk644.unk18 == 0)) {
-            DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80F9CEC[r8]);
+        if (targetData->isTeamLeader || (targetData->joinedAt.id == DUNGEON_JOIN_LOCATION_PARTNER && !gDungeon->unk644.canChangeLeader)) {
+            DisplayDungeonLoggableMessageTrue_Async(attacker, gUnknown_80F9CEC[r8]);
         }
         else if (IsExperienceLocked(targetData->joinedAt.id)) {
-            DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80F9DAC[r8]);
+            DisplayDungeonLoggableMessageTrue_Async(attacker, gUnknown_80F9DAC[r8]);
         }
         else if (targetData->monsterBehavior == BEHAVIOR_RESCUE_TARGET) {
-            DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80F9DF0[r8]);
+            DisplayDungeonLoggableMessageTrue_Async(attacker, gUnknown_80F9DF0[r8]);
         }
         else if (sub_806A58C(recruitedMon->recruitedPokemonId)) {
             if (gDungeon->unk644.unk19 != 0) {
-                DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80F9D8C[r8]);
+                DisplayDungeonLoggableMessageTrue_Async(attacker, gUnknown_80F9D8C[r8]);
             }
             else {
-                DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80F9D84[r8]);
+                DisplayDungeonLoggableMessageTrue_Async(attacker, gUnknown_80F9D84[r8]);
             }
         }
         else {
-            DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80F9D28[r8]);
+            DisplayDungeonLoggableMessageTrue_Async(attacker, gUnknown_80F9D28[r8]);
         }
     }
 
@@ -534,7 +534,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
                 sub_806CCB4(target, sub_806CEBC(target));
                 UpdateStatusIconFlags(target);
                 SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], target, 0);
-                DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80FD46C);
+                DisplayDungeonLoggableMessageTrue_Async(attacker, gUnknown_80FD46C);
                 sub_806F63C(target);
                 return FALSE;
             }
@@ -564,7 +564,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
                 sub_8042148(target);
 
                 monPos = teamMember->pos;
-                HandleFaint(teamMember, DUNGEON_EXIT_WAS_POSSESSED, target);
+                HandleFaint_Async(teamMember, DUNGEON_EXIT_WAS_POSSESSED, target);
                 sub_80694C0(target, monPos.x, monPos.y, 1);
                 UpdateEntityPixelPos(target, NULL);
                 target->unk22 = 0;
@@ -592,7 +592,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
                 UpdateStatusIconFlags(target);
                 SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], target, 0);
                 SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], teamMember, 0);
-                DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80FD484);
+                DisplayDungeonLoggableMessageTrue_Async(attacker, gUnknown_80FD484);
                 sub_806F63C(target);
                 return FALSE;
             }
@@ -645,7 +645,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
             sub_806CCB4(target, sub_806CEBC(target));
             UpdateStatusIconFlags(target);
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], target, 0);
-            DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80FD46C);
+            DisplayDungeonLoggableMessageTrue_Async(attacker, gUnknown_80FD46C);
             sub_806F63C(target);
             return FALSE;
         }
@@ -676,7 +676,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
         if (exp == 0)
             exp = 1;
         if (attackerData->isTeamLeader) {
-            sub_80980B4(targetData->id);
+            SetMonSeenFlag(targetData->id);
         }
         if (targetData->grudge) {
             attackerData->unk14B = 1;
@@ -714,19 +714,19 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
 
         sub_8069D4C(&sp, target);
         if (TryRecruitMonster(attacker, target)) {
-            if (!HandleMonsterJoinSequence(attacker, target, &sp)) {
-                HandleFaint(target, DUNGEON_EXIT_LEFT_WITHOUT_BEING_BEFRIENDED, attacker);
+            if (!MonsterJoinSequence_Async(attacker, target, &sp)) {
+                HandleFaint_Async(target, DUNGEON_EXIT_LEFT_WITHOUT_BEING_BEFRIENDED, attacker);
             }
             else {
                 gUnknown_202F221 = 1;
             }
         }
         else {
-            HandleFaint(target, dungeonExitReason, attacker);
+            HandleFaint_Async(target, dungeonExitReason, attacker);
         }
     }
     else {
-        HandleFaint(target, dungeonExitReason, attacker);
+        HandleFaint_Async(target, dungeonExitReason, attacker);
     }
 
     return TRUE;
@@ -826,7 +826,7 @@ static bool8 sub_806E100(s48_16 *param_1, Entity *pokemon, Entity *target, u8 ty
       }
       if (torrentVisualFlag) {
         sub_80428EC(pokemon);
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FEDA8);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FEDA8);
       }
     }
     if ((type == TYPE_GRASS) && (AbilityIsActive(pokemon, ABILITY_OVERGROW))) {
@@ -838,7 +838,7 @@ static bool8 sub_806E100(s48_16 *param_1, Entity *pokemon, Entity *target, u8 ty
       }
       if (overgrowVisualFlag) {
         sub_80428D8(pokemon);
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FED88);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FED88);
       }
     }
     if ((type == TYPE_BUG) && (AbilityIsActive(pokemon, ABILITY_SWARM))) {
@@ -850,7 +850,7 @@ static bool8 sub_806E100(s48_16 *param_1, Entity *pokemon, Entity *target, u8 ty
       }
       if (swarmVisualFlag) {
         sub_8042978(pokemon);
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FEDC8);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FEDC8);
       }
     }
     if ((type == TYPE_FIRE) && (AbilityIsActive(pokemon, ABILITY_BLAZE))) {
@@ -862,7 +862,7 @@ static bool8 sub_806E100(s48_16 *param_1, Entity *pokemon, Entity *target, u8 ty
       }
       if (blazeVisualFlag) {
         sub_804298C(pokemon);
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FEDE8);
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FEDE8);
       }
     }
     if (!(F48_16_IsZero(param_1)) && (MonsterIsType(pokemon, type))) {
@@ -1034,7 +1034,7 @@ static void ApplyAtkDefStatBoosts(Entity *attacker, Entity *target, u8 moveType,
         }
         if (visFlags_attacker_1) {
             sub_80428B0(attacker);
-            TryDisplayDungeonLoggableMessage3(attacker,target, gUnknown_80FEE04); // Guts boosted its power
+            TryDisplayDungeonLoggableMessage3_Async(attacker,target, gUnknown_80FEE04); // Guts boosted its power
         }
     }
 
@@ -1049,7 +1049,7 @@ static void ApplyAtkDefStatBoosts(Entity *attacker, Entity *target, u8 moveType,
         }
         if (visFlags_attacker_2) {
             sub_80428C4(attacker);
-            TryDisplayDungeonLoggableMessage3(attacker,target, gUnknown_80FEE2C); // It's special ability boosted Attack
+            TryDisplayDungeonLoggableMessage3_Async(attacker,target, gUnknown_80FEE2C); // It's special ability boosted Attack
         }
     }
 
@@ -1090,7 +1090,7 @@ static void ApplyAtkDefStatBoosts(Entity *attacker, Entity *target, u8 moveType,
         }
         if (visFlags_target) {
             sub_8042940(target);
-            TryDisplayDungeonLoggableMessage3(attacker,target, gUnknown_80FEE54); // Its special ability quickened attacks!
+            TryDisplayDungeonLoggableMessage3_Async(attacker,target, gUnknown_80FEE54); // Its special ability quickened attacks!
         }
     }
 
@@ -1286,10 +1286,10 @@ void CalcDamage(Entity *attacker, Entity *target, u8 moveType, s32 movePower, s3
                 targetInfo->unk152 = 1;
                 SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], target, 0);
                 if (flashFireStatus == FLASH_FIRE_STATUS_MAXED) {
-                    TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80FAE00); // Fire moves won't become stronger!
+                    TryDisplayDungeonLoggableMessage3_Async(attacker, target, gUnknown_80FAE00); // Fire moves won't become stronger!
                 }
                 else {
-                    TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80FADD8); // m1 used Flash Fire to absorb fire!
+                    TryDisplayDungeonLoggableMessage3_Async(attacker, target, gUnknown_80FADD8); // m1 used Flash Fire to absorb fire!
                 }
             }
         }
@@ -1395,7 +1395,7 @@ void sub_806F2BC(Entity *attacker, Entity *target, u8 moveType, s32 a2, struct D
     dmgStruct->residualDmgType = RESIDUAL_DAMAGE_REGULAR;
 }
 
-void DealDamageToEntity(Entity *entity, s32 dmg, s32 residualDmgType, s32 dungeonExitReason_)
+void DealDamageToEntity_Async(Entity *entity, s32 dmg, s32 residualDmgType, s32 dungeonExitReason_)
 {
     Entity spEntity;
     struct DamageStruct dmgStruct;
@@ -1409,10 +1409,10 @@ void DealDamageToEntity(Entity *entity, s32 dmg, s32 residualDmgType, s32 dungeo
     dmgStruct.isCrit = FALSE;
     dmgStruct.unkE = 0;
     dmgStruct.tookNoDamage = FALSE;
-    HandleDealingDamage(&spEntity, entity, &dmgStruct, FALSE, FALSE, dungeonExitReason, FALSE, 0);
+    HandleDealingDamage_Async(&spEntity, entity, &dmgStruct, FALSE, FALSE, dungeonExitReason, FALSE, 0);
 }
 
-void sub_806F370(Entity *pokemon, Entity *target, s32 dmg, s32 giveExp, bool8 *tookNoDamage, u8 moveType, s16 dungeonExitReason_, s32 residualDmgType, s32 arg_10, s32 arg_14)
+void sub_806F370_Async(Entity *pokemon, Entity *target, s32 dmg, s32 giveExp, bool8 *tookNoDamage, u8 moveType, s16 dungeonExitReason_, s32 residualDmgType, s32 arg_10, s32 arg_14)
 {
     s32 i;
     struct DamageStruct dmgStruct;
@@ -1447,7 +1447,7 @@ void sub_806F370(Entity *pokemon, Entity *target, s32 dmg, s32 giveExp, bool8 *t
         dmgStruct.tookNoDamage = FALSE;
     }
 
-    HandleDealingDamage(pokemon, target, &dmgStruct, FALSE, giveExp, dungeonExitReason, arg_10, arg_14);
+    HandleDealingDamage_Async(pokemon, target, &dmgStruct, FALSE, giveExp, dungeonExitReason, arg_10, arg_14);
     if (tookNoDamage != NULL) {
         *tookNoDamage = dmgStruct.tookNoDamage;
     }

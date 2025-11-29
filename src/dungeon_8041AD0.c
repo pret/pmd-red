@@ -206,7 +206,7 @@ static s32 sub_8041550(Entity *entity, s32 a1, u8 a2, u8 a3, s32 a4, u8 a5)
         return -1;
 
     if (a4 != 0) {
-        sub_804178C(a4 == 2);
+        sub_804178C_Async(a4 == 2);
     }
 
     sub_800569C(&pos, &entity->axObj.axdata, a3);
@@ -296,7 +296,7 @@ static u32 sub_8041764(unkStruct_80416E0 *param_1, bool8 param_2)
     return sub_800E890(param_1);
 }
 
-void sub_804178C(u8 param_1)
+void sub_804178C_Async(u8 param_1)
 {
   u32 temp;
   s32 counter;
@@ -1099,7 +1099,7 @@ void sub_804225C(Entity *entity, DungeonPos *pos, u8 trapId)
 
     sub_800EF28(trapId);
     sub_800EF64();
-    sub_803E708(4,0x42);
+    DungeonWaitFrames_Async(4,0x42);
 
     x = X_POS_TO_PIXELPOS(pos->x);
     newPos.x = x / 256;
@@ -1110,7 +1110,7 @@ void sub_804225C(Entity *entity, DungeonPos *pos, u8 trapId)
     uVar6 = sub_800E448(trapId,&newPos);
     if (trapId == TRAP_SUMMON_TRAP) {
         sub_80421C0(0,0x193);
-        sub_803E708(0x28,0x33);
+        DungeonWaitFrames_Async(0x28,0x33);
     }
     else if (trapId == TRAP_SPIN_TRAP) {
         EntityInfo *info = GetEntInfo(entity);
@@ -1119,14 +1119,14 @@ void sub_804225C(Entity *entity, DungeonPos *pos, u8 trapId)
             direction--;
             direction &= DIRECTION_MASK;
             sub_806CDD4(entity,0,direction);
-            sub_803E708(2,0x33);
+            DungeonWaitFrames_Async(2,0x33);
             if (!sub_800E9A8(uVar6))
                 break;
         }
         info->action.direction = direction & DIRECTION_MASK;
     }
     else {
-        sub_803E708(0x28,0x33);
+        DungeonWaitFrames_Async(0x28,0x33);
     }
 
     for (i = 0; i < 1000; i++) {
@@ -1149,7 +1149,7 @@ void sub_8042390(Entity *entity, Item *item)
         id = !ItemSticky(item) ? item->id : ITEM_NOTHING;
         sub_800EF40(id, 0);
         sub_800EF64();
-        sub_803E708(4,0x42);
+        DungeonWaitFrames_Async(4,0x42);
         local_14.x = (entity->pixelPos).x / 256;
         local_14.y = (entity->pixelPos).y / 256;
 
@@ -1177,7 +1177,7 @@ void sub_804245C(Entity *entity, Item *item)
     if (sub_8042768(entity)) {
         id = !ItemSticky(item) ? item->id : ITEM_NOTHING;
         sub_800EF64();
-        sub_803E708(4,0x42);
+        DungeonWaitFrames_Async(4,0x42);
         local_14.x = (entity->pixelPos).x / 256;
         local_14.y = (entity->pixelPos).y / 256;
 
@@ -1328,7 +1328,7 @@ void sub_80427AC(void)
                 sub_80429A0(entity);
                 if (!enInfo->isNotTeamMember) {
                     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], entity, 0);
-                    DisplayDungeonLoggableMessageTrue(entity, gPtrFeralFoundItemMessage);
+                    DisplayDungeonLoggableMessageTrue_Async(entity, gPtrFeralFoundItemMessage);
                 }
             }
         }
@@ -1418,7 +1418,7 @@ void sub_8042940(Entity *r0)
 void sub_8042950(Entity *r0)
 {
     sub_804151C(r0, 0xD8 << 1, 1);
-    sub_803E708(0xA, 0x42);
+    DungeonWaitFrames_Async(0xA, 0x42);
 }
 
 void sub_8042968(Entity *r0)
@@ -1513,7 +1513,7 @@ static void sub_8042A84(s16 param_1, Entity *entity, u32 param_3)
   r6 = IntToF248(2);
   if (sub_8042768(entity)) {
     sub_804151C(entity,param_1_s16,0);
-    sub_803E708(param_3,0x42);
+    DungeonWaitFrames_Async(param_3,0x42);
     do {
       if (entity->unk1C > IntToF248(199.999)) break;
       DungeonRunFrameActions(0x42);
@@ -1522,7 +1522,7 @@ static void sub_8042A84(s16 param_1, Entity *entity, u32 param_3)
       iVar3 = (entity->pixelPos.y - entity->unk1C) / 256;
     } while (-8 <= iVar3 - gDungeon->unk181e8.cameraPixelPos.y);
     entity->isVisible = 0;
-    sub_804178C(0);
+    sub_804178C_Async(0);
   }
 }
 

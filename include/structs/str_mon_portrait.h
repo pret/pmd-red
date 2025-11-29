@@ -8,7 +8,7 @@
 // size: 0x8
 typedef struct PortraitGfxSub
 {
-    /* 0x0 */ const RGB *pal;
+    /* 0x0 */ const RGB_Struct *pal;
     /* 0x4 */ const u8 *gfx;
 } PortraitGfxSub;
 

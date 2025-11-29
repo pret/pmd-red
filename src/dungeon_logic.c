@@ -382,7 +382,7 @@ s32 sub_8070828(Entity *pokemon, bool8 displayMessage)
         }
         if (displayMessage && SetVisualFlags(GetEntInfo(pokemon), 0x40, flag)) {
             sub_80429B4(pokemon);
-            LogMessageByIdWithPopupCheckUser(pokemon, gUnknown_80FEE80);
+            LogMessageByIdWithPopupCheckUser_Async(pokemon, gUnknown_80FEE80);
         }
         if (flag) {
             return 2;
@@ -1206,7 +1206,7 @@ bool8 SafeguardIsActive(Entity * pokemon, Entity * target, bool8 displayMessage)
   if (GetEntInfo(target)->reflectClassStatus.status == STATUS_SAFEGUARD) {
     if (displayMessage) {
       SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
-      TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FC2FC);
+      TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FC2FC);
     }
     return TRUE;
   }
@@ -1218,7 +1218,7 @@ bool8 IsProtectedFromStatDrops(Entity * pokemon, Entity * target, bool8 displayM
   if (GetEntInfo(target)->reflectClassStatus.status == STATUS_MIST) {
     if (displayMessage) {
       SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], target, 0);
-      TryDisplayDungeonLoggableMessage3(pokemon, target, gUnknown_80FC31C);
+      TryDisplayDungeonLoggableMessage3_Async(pokemon, target, gUnknown_80FC31C);
     }
     return TRUE;
   }
@@ -1226,7 +1226,7 @@ bool8 IsProtectedFromStatDrops(Entity * pokemon, Entity * target, bool8 displayM
     if (AbilityIsActive(target, ABILITY_CLEAR_BODY) || AbilityIsActive(target, ABILITY_WHITE_SMOKE)) {
         if (displayMessage) {
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], target, 0);
-            TryDisplayDungeonLoggableMessage3(pokemon, target, gUnknown_80FCEFC);
+            TryDisplayDungeonLoggableMessage3_Async(pokemon, target, gUnknown_80FCEFC);
         }
         return TRUE;
     }

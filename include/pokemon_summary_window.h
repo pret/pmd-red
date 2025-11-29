@@ -14,6 +14,8 @@ enum
     SUB_WINDOW_INFO,
 };
 
+#define MON_SUMMARY_UNK58_COUNT 12
+
 struct MonSummaryInfo
 {
     // size: 0x64
@@ -45,7 +47,7 @@ struct MonSummaryInfo
     u8 tactic;
     u8 fill55[1];
     s16 unk56;
-    u8 unk58[12];
+    u8 unk58[MON_SUMMARY_UNK58_COUNT];
 };
 
 struct UnkInfoTabStruct
@@ -55,6 +57,6 @@ struct UnkInfoTabStruct
 };
 
 void ShowPokemonSummaryWindow(s32 which, s32 currSubWindowId, struct MonSummaryInfo *monInfo, struct UnkInfoTabStruct *param_4, u32 windowId);
-void SetMonSummaryInfo(struct MonSummaryInfo *dst, struct Pokemon *pokemon, bool8 param_3);
+void SetMonSummaryInfo(struct MonSummaryInfo *dst, struct Pokemon *pokemon, bool8 unlockedEvolutions);
 
 #endif // GUARD_POKEMON_SUMMARY_WINDOW_H

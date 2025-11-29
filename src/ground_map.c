@@ -290,21 +290,21 @@ static void GroundMap_GetFirstStationScript(ScriptInfoSmall *script, s16 r1)
 }
 
 // overlay_0000.bin::02155DD0
-void GroundMap_ExecuteEvent(s16 scriptIndex, u32 param_2)
+void GroundMap_ExecuteEvent(s16 scriptID, bool32 a1)
 {
     ScriptInfoSmall script;
-    s32 index_s32;
-    u8 iVar2;
+    s32 scriptID_;
+    bool8 a1_;
 
-    index_s32 = scriptIndex;
-    iVar2 = param_2;
+    scriptID_ = scriptID;
+    a1_ = a1;
 
-    Log(0, "GroundMap ExecuteEvent %3d %d ==================", index_s32, iVar2);
-    GetFunctionScript(NULL, &script, index_s32);
-    if (iVar2 != 0)
+    Log(0, "GroundMap ExecuteEvent %3d %d ==================", scriptID_, a1_);
+    GetFunctionScript(NULL, &script, scriptID_);
+    if (a1_)
         script.state = 5;
 
-    GroundScript_ExecutePP(&gGroundMapAction->action, 0, &script, DEBUG_LOC_PTR("../ground/ground_map.c", 0x17D, "GroundMap_ExecuteEvent"));
+    GroundScript_ExecutePP(&gGroundMapAction->action, 0, &script, DEBUG_LOC_PTR("../ground/ground_map.c", 381, "GroundMap_ExecuteEvent"));
 }
 
 void GroundMap_ExecuteStation(s32 _map, s32 _group, s32 _sector, bool32 _setScriptState)
@@ -372,7 +372,7 @@ s16 GetAdjustedGroundMap(s32 mapId)
             retMapId = (s16)(retMapId + ((GetScriptVarValue(NULL, BASE_KIND) * TEAM_BASE_MAPS_PER_SPECIES) + GetScriptVarValue(NULL, BASE_LEVEL)));
             break;
         case MAP_WHISCASH_POND:
-            if (sub_80023E4(6)) {
+            if (CheckQuest(QUEST_REACHED_POSTGAME)) {
                 retMapId = MAP_WHISCASH_POND_OPEN;
             }
             break;

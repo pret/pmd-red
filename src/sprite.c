@@ -28,7 +28,7 @@ EWRAM_INIT static unkStruct_20266B0 *sUnknown_203B074 = {0};
 
 static void AxResInitUnoriented(axdata *, EfoFileData *, u32, u32, u32, bool8);
 static void RegisterSpriteParts_80052BC(const ax_sprite *spritesPtr);
-static void sub_800561C(const EfoFileData *, s32 vramIdx, s32 brightness, const RGB *ramp);
+static void sub_800561C(const EfoFileData *, s32 vramIdx, s32 brightness, const RGB_Struct *ramp);
 
 // arm9.bin::0200265C
 void InitSprites(void)
@@ -603,13 +603,13 @@ void DoAxFrame_800558C(axdata *a0, s32 spriteX, s32 spriteY, u32 a3, u32 palette
 }
 
 // arm9.bin::020019E4
-void sub_8005610(OpenedFile *a0, s32 vramIdx, s32 brightness, const RGB *ramp)
+void sub_8005610(OpenedFile *a0, s32 vramIdx, s32 brightness, const RGB_Struct *ramp)
 {
     sub_800561C((const EfoFileData *)a0->data, vramIdx, brightness, ramp);
 }
 
 // arm9.bin::02001970
-static void sub_800561C(const EfoFileData *a0, s32 vramIdx, s32 brightness, const RGB *ramp)
+static void sub_800561C(const EfoFileData *a0, s32 vramIdx, s32 brightness, const RGB_Struct *ramp)
 {
     s32 i;
 
@@ -623,14 +623,14 @@ static void sub_800561C(const EfoFileData *a0, s32 vramIdx, s32 brightness, cons
 }
 
 #if (GAME_VERSION == VERSION_RED)
-UNUSED static const RGB *sub_8005668(OpenedFile *a0, s32 vramIdx)
+UNUSED static const RGB_Struct *sub_8005668(OpenedFile *a0, s32 vramIdx)
 {
     return sub_8005674((const EfoFileData *)a0->data, vramIdx);
 }
 #endif
 
 // arm9.bin::0200193C
-const RGB *sub_8005674(const EfoFileData *a0, s32 vramIdx)
+const RGB_Struct *sub_8005674(const EfoFileData *a0, s32 vramIdx)
 {
     if (a0->tiles != NULL)
         CpuCopy(OBJ_VRAM0 + vramIdx * 0x20, a0->tiles, a0->tileCount * 0x20);
@@ -696,14 +696,14 @@ void sub_8005700(DungeonPos *dstPos, axdata *axData)
 }
 
 #if (GAME_VERSION == VERSION_RED)
-UNUSED static void sub_8005764(s32 a0, OpenedFile *file, s32 a2, const RGB *a3)
+UNUSED static void sub_8005764(s32 a0, OpenedFile *file, s32 a2, const RGB_Struct *a3)
 {
-    sub_8005770(a0, (const RGB*)file->data, a2, a3);
+    sub_8005770(a0, (const RGB_Struct*)file->data, a2, a3);
 }
 #endif
 
 // arm9.bin::02001794
-void sub_8005770(s32 param_1, const RGB *color, s32 brightness, const RGB *ramp)
+void sub_8005770(s32 param_1, const RGB_Struct *color, s32 brightness, const RGB_Struct *ramp)
 {
     s32 i;
 

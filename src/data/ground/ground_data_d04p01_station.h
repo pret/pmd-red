@@ -15,20 +15,20 @@ static const struct ScriptCommand s_gs184_g0_s0_station_sref_script[] = { /* 0x8
     JUMP_SCRIPT(COMMON_ENTER),
 };
 
-static const struct ScriptRef s_gs184_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs184_g0_s0_station_sref_script }; /* 0x8234360 */
+static const struct ScriptRef s_gs184_g0_s0_station_sref = { ENTER_CONTROL , 1, NULL, s_gs184_g0_s0_station_sref_script }; /* 0x8234360 */
 
 static const struct ScriptCommand s_gs184_g1_s0_station_sref_script[] = { /* 0x823436c */
     DEBUGINFO_O(21),
     SELECT_MAP(MAP_SINISTER_WOODS_ENTRY),
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(15),
+    BGM_SWITCH(MUS_SINISTER_WOODS),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     NEXT_DUNGEON(30, SCRIPT_DUNGEON_SINISTER_WOODS),
     RET,
 };
 
-static const struct ScriptRef s_gs184_g1_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs184_g1_s0_station_sref_script }; /* 0x82343ec */
+static const struct ScriptRef s_gs184_g1_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs184_g1_s0_station_sref_script }; /* 0x82343ec */
 
 static const struct ScriptCommand s_gs184_g1_s0_lives0_dlg0[] = { /* 0x82343f8 */
     DEBUGINFO_O(34),
@@ -39,7 +39,7 @@ static const struct ScriptCommand s_gs184_g1_s0_lives0_dlg0[] = { /* 0x82343f8 *
     { 0xdf, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(30),
     ALERT_CUE(6),
-    { 0x93, 0x04,  0x000a,  0x00000022,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 34),
     WAIT(20),
     PORTRAIT(PLACEMENT_RIGHT, 0x0001, 0x00000000),
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
@@ -67,7 +67,7 @@ static const struct ScriptCommand s_gs184_g1_s0_lives1_dlg0[] = { /* 0x8234714 *
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(6),
-    { 0x93, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_10, 0),
     AWAIT_CUE(6),
     { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
     WALK_GRID(384, 1),
@@ -78,14 +78,14 @@ static const struct ScriptCommand s_gs184_g2_s0_station_sref_script[] = { /* 0x8
     DEBUGINFO_O(78),
     SELECT_MAP(MAP_SINISTER_WOODS_ENTRY),
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(15),
+    BGM_SWITCH(MUS_SINISTER_WOODS),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     NEXT_DUNGEON(30, SCRIPT_DUNGEON_SINISTER_WOODS),
     RET,
 };
 
-static const struct ScriptRef s_gs184_g2_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs184_g2_s0_station_sref_script }; /* 0x8234824 */
+static const struct ScriptRef s_gs184_g2_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs184_g2_s0_station_sref_script }; /* 0x8234824 */
 
 static const struct ScriptCommand s_gs184_g2_s0_lives0_dlg0[] = { /* 0x8234830 */
     DEBUGINFO_O(91),
@@ -180,4 +180,4 @@ static const struct GroundLink s_gs184_links[] = { /* 0x8234c6c */
     /* link   1 */ { { /*x*/  30, /*y*/   9, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
 };
 
-/*extern*/ const struct GroundScriptHeader gGroundScript_gs184 = { LPARRAY(s_gs184_groups), s_gs184_links }; /* 0x8234c7c */
+const GroundScriptHeader gGroundScript_gs184 = { LPARRAY(s_gs184_groups), s_gs184_links }; /* 0x8234c7c */

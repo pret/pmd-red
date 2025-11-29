@@ -68,7 +68,7 @@ void ThoroughlyResetScriptVars(void)
     SetScriptVarValue(NULL,START_MODE,0);
     SetScriptVarValue(NULL,CLEAR_COUNT,0);
     SetScriptVarValue(NULL,WEATHER_KIND,-1);
-    SetScriptVarValue(NULL,PLAYER_KIND,0);
+    SetScriptVarValue(NULL, PLAYER_KIND, 0);
     SetScriptVarValue(NULL,PARTNER1_KIND,0);
     SetScriptVarValue(NULL,PARTNER2_KIND,0);
     SetScriptVarValue(NULL,NEW_FRIEND_KIND,0);
@@ -440,10 +440,10 @@ UNUSED static void ScriptVarStringPopFirstChar(s16 varId,u32 param_2,s32 maxLen)
 #endif
 
 // arm9.bin::0200F508
-void GetScriptVarScenario(s32 param_1,u32 *param_2,u32 *param_3)
+void GetScriptVarScenario(s32 varID, u32 *outMain, u32 *outSub)
 {
-  *param_2 = GetScriptVarArrayValue(NULL, (s16)param_1, 0);
-  *param_3 = GetScriptVarArrayValue(NULL, (s16)param_1, 1);
+  *outMain = GetScriptVarArrayValue(NULL, (s16)varID, 0);
+  *outSub = GetScriptVarArrayValue(NULL, (s16)varID, 1);
 }
 
 // arm9.bin::0200F36C
@@ -478,15 +478,15 @@ void ScenarioCalc(s16 param_1,s32 param_2,s32 param_3)
         }
         break;
       case 4:
-        if (ScriptVarScenarioBefore(SCENARIO_SUB1,31,0) == 0) {
+        if (!ScriptVarScenarioBefore(SCENARIO_SUB1,31,0)) {
             SetAdventureAchievement(AA_TEAM_BASE_DONE);
         }
-        if (ScriptVarScenarioBefore(SCENARIO_SUB1,32,0) == 0) {
+        if (!ScriptVarScenarioBefore(SCENARIO_SUB1,32,0)) {
             SetAdventureAchievement(AA_SMEARGLE);
         }
         break;
       case 0xC:
-        if(ScriptVarScenarioBefore(SCENARIO_SUB9,55,2) == 0) {
+        if(!ScriptVarScenarioBefore(SCENARIO_SUB9,55,2)) {
             SetAdventureAchievement(AA_BROKE_CURSE);
         }
         break;
@@ -529,14 +529,14 @@ bool8 ScriptVarScenarioEqual(s16 varId,u32 pMain,s32 pSub)
 }
 
 // arm9.bin::0200F1d8
-bool8 ScriptVarScenarioAfter(s16 varId,u32 pMain,s32 pSub)
+bool8 ScriptVarScenarioAfter(s16 varId, u32 pMain, s32 pSub)
 {
   s32 sMain;
   s32 sSub;
 
   sMain = GetScriptVarArrayValue(NULL, varId, 0);
   sSub = GetScriptVarArrayValue(NULL, varId, 1);
-  if (sMain == 0x3a) {
+  if (sMain == 58) {
     // DS: Assert(FALSE, "debug mode scenario comp %3d %3d %3d", varId, pMain, pSub)
     return FALSE;
   } else if (sMain > pMain) {
@@ -551,17 +551,17 @@ bool8 ScriptVarScenarioAfter(s16 varId,u32 pMain,s32 pSub)
 // arm9.bin::0200ECE0
 void sub_8001D88(void)
 {
-    u32 local_c;
-    u32 auStack8;
+    u32 sMain_sub;
+    u32 sMain_main;
 
-    GetScriptVarScenario(3, &auStack8, &local_c);
-    if (auStack8 < 1 || auStack8 > 0x1b)
+    GetScriptVarScenario(SCENARIO_MAIN, &sMain_main, &sMain_sub);
+    if (sMain_main < 1 || sMain_main > 0x1b)
         return;
 
-    if (ScriptVarScenarioBefore(SCENARIO_SUB1,0x1f,0) != 0) {
+    if (ScriptVarScenarioBefore(SCENARIO_SUB1,31,0) != 0) {
         if (ScriptVarScenarioAfter(SCENARIO_MAIN,0xf,7) != 0) {
-            ScenarioCalc(SCENARIO_SUB1,0x1f,0);
-            sub_8097418(0xe,1);
+            ScenarioCalc(SCENARIO_SUB1,31,0);
+            SetRescueScenarioConquered(RESCUE_DUNGEON_UPROAR_FOREST, TRUE);
             SetScriptVarValue(NULL,BASE_LEVEL,2);
         }
         else {
@@ -572,32 +572,31 @@ void sub_8001D88(void)
     }
     if ((ScriptVarScenarioEqual(SCENARIO_SUB1,0x1f,0)) && (GetFriendAreaStatus(SKY_BLUE_PLAINS))) {
         ScenarioCalc(SCENARIO_SUB1,0x1f,1);
-        sub_809733C(0xf,1);
+        sub_809733C(RESCUE_DUNGEON_HOWLING_FOREST, TRUE);
     }
-    if (auStack8 > 0x11) {
-        sub_80973A8(0x25,1);
-        if (((FindItemInInventory(ITEM_HM_DIVE) != -1) || (gTeamInventoryRef->teamStorage[ITEM_HM_DIVE] != 0)) ||
-             (ScriptVarScenarioAfter(SCENARIO_SUB2,0x21,3) != 0)) {
-            sub_80973A8(0x22,1);
+    if (sMain_main > 0x11) {
+        sub_80973A8(RESCUE_DUNGEON_WATERFALL_POND, TRUE);
+        if (FindItemInInventory(ITEM_HM_DIVE) != -1 || gTeamInventoryRef->teamStorage[ITEM_HM_DIVE] != 0 || ScriptVarScenarioAfter(SCENARIO_SUB2,0x21,3)) {
+            sub_80973A8(RESCUE_DUNGEON_SOLAR_CAVE, TRUE);
         }
         if (GetFriendAreaStatus(FURNACE_DESERT) != 0) {
-            sub_80973A8(0x1f,1);
+            sub_80973A8(RESCUE_DUNGEON_DESERT_REGION, TRUE);
         }
         if (GetFriendAreaStatus(BOULDER_CAVE)) {
-            sub_80973A8(0x20,1);
+            sub_80973A8(RESCUE_DUNGEON_SOUTHERN_CAVERN, TRUE);
         }
         if (GetFriendAreaStatus(DRAGON_CAVE)) {
-            sub_80973A8(0x21,1);
+            sub_80973A8(RESCUE_DUNGEON_WYVERN_HILL, TRUE);
         }
         if (GetFriendAreaStatus(SECRETIVE_FOREST)) {
-            sub_80973A8(0x23,1);
+            sub_80973A8(RESCUE_DUNGEON_DARKNIGHT_RELIC, TRUE);
         }
         if (GetFriendAreaStatus(SERENE_SEA)) {
-            sub_80973A8(0x24,1);
-            sub_80973A8(0x28,1);
+            sub_80973A8(RESCUE_DUNGEON_GRAND_SEA, TRUE);
+            sub_80973A8(RESCUE_DUNGEON_FAR_OFF_SEA, TRUE);
         }
-        if ((GetFriendAreaStatus(AGED_CHAMBER_AN)) && (GetFriendAreaStatus(AGED_CHAMBER_O_EXCLAIM))) {
-            sub_80973A8(0x26,1);
+        if (GetFriendAreaStatus(AGED_CHAMBER_AN) && GetFriendAreaStatus(AGED_CHAMBER_O_EXCLAIM)) {
+            sub_80973A8(RESCUE_DUNGEON_UNOWN_RELIC, TRUE);
         }
         if (ScriptVarScenarioEqual(SCENARIO_SUB2,0,0)) {
             ScenarioCalc(SCENARIO_SUB2,0x21,1);
@@ -611,24 +610,24 @@ void sub_8001D88(void)
             }
         }
         if (!ScriptVarScenarioBefore(SCENARIO_SUB6,0x30,0)) {
-            if ((ScriptVarScenarioEqual(SCENARIO_SUB2,0x22,0)) && HasRecruitedMon(MONSTER_ARTICUNO) && HasRecruitedMon(MONSTER_ZAPDOS) && HasRecruitedMon(MONSTER_MOLTRES)) {
+            if (ScriptVarScenarioEqual(SCENARIO_SUB2,0x22,0) && HasRecruitedMon(MONSTER_ARTICUNO) && HasRecruitedMon(MONSTER_ZAPDOS) && HasRecruitedMon(MONSTER_MOLTRES)) {
                 ScenarioCalc(SCENARIO_SUB2,0x22,1);
             }
-            if (((ScriptVarScenarioEqual(SCENARIO_SUB8,0,0)) && (ScriptVarScenarioAfter(SCENARIO_SUB2,0x21,3) != 0)) &&
+            if ((ScriptVarScenarioEqual(SCENARIO_SUB8,0,0) && (ScriptVarScenarioAfter(SCENARIO_SUB2,0x21,3))) &&
                  (GetFriendAreaStatus(SKY_BLUE_PLAINS))) {
                 ScenarioCalc(SCENARIO_SUB8,0x33,1);
             }
             if (GetFriendAreaStatus(SKY_BLUE_PLAINS)) {
-                sub_80973A8(0x27,1);
+                sub_80973A8(RESCUE_DUNGEON_JOYOUS_TOWER, TRUE);
             }
             if (GetFriendAreaStatus(SKY_BLUE_PLAINS)) {
-                sub_80973A8(0x29,1);
+                sub_80973A8(RESCUE_DUNGEON_PURITY_FOREST, TRUE);
             }
         }
         if (!ScriptVarScenarioBefore(SCENARIO_SUB2,0x22,0)) {
             if (ScriptVarScenarioEqual(SCENARIO_SUB7,0,0)) {
                 ScenarioCalc(SCENARIO_SUB7,0x31,1);
-                sub_809733C(0x1b,1);
+                sub_809733C(RESCUE_DUNGEON_BURIED_RELIC, TRUE);
             }
             if ((ScriptVarScenarioEqual(SCENARIO_SUB9,0,0)) && (!ScriptVarScenarioBefore(SCENARIO_SUB8,0x34,0))) {
                 ScenarioCalc(SCENARIO_SUB9,0x35,1);
@@ -773,7 +772,7 @@ bool8 JudgeVarWithVar(u8 *param_1, s16 param_2, s16 param_3, enum FlagJudgeOpera
 #if (GAME_VERSION == VERSION_RED)
 UNUSED static s32 sub_8002354(u32 param_1)
 {
-  if (param_1 < 0x3b) {
+  if (param_1 < 59) {
     return gUnknown_80B6D90[param_1].num;
   }
   else {
@@ -783,7 +782,7 @@ UNUSED static s32 sub_8002354(u32 param_1)
 
 UNUSED static const u8 *sub_8002374(u32 param_1)
 {
-  if (param_1 < 0x3b) {
+  if (param_1 < 59) {
     return gUnknown_80B6D90[param_1].text;
   }
   else {
@@ -793,10 +792,10 @@ UNUSED static const u8 *sub_8002374(u32 param_1)
 
 UNUSED static const u8 *sub_8002394(u32 param_1)
 {
-  if (param_1 - 0x12 < 9) {
-    return  gUnknown_80B714C[param_1 - 0x12];
+  if (param_1 - 18 < 9) {
+    return  gUnknown_80B714C[param_1 - 18];
   }
-  else if (param_1 == 0xf) {
+  else if (param_1 == 15) {
     return "1-1"; // 1-1
   }
   else {
@@ -816,69 +815,68 @@ UNUSED static const u8 *sub_80023C4(u32 param_1)
 #endif
 
 // arm9.bin::0200E654
-// 6 checks for post game being reached
-bool8 sub_80023E4(u32 param_1)
+bool8 CheckQuest(s32 questID)
 {
-  switch(param_1) {
-    case 0:
-        return ScriptVarScenarioAfter(SCENARIO_MAIN,2,-1);
-    case 1:
-        return ScriptVarScenarioAfter(SCENARIO_MAIN,3,3);
-    case 2:
-        return ScriptVarScenarioAfter(SCENARIO_MAIN,4,3);
-    case 3:
-        return ScriptVarScenarioAfter(SCENARIO_MAIN,5,0);
-    case 4:
-        return (ScriptVarScenarioAfter(SCENARIO_MAIN,0xb,0) && ScriptVarScenarioBefore(SCENARIO_MAIN,0xd,0));
-    case 5:
-        return (ScriptVarScenarioAfter(SCENARIO_MAIN,0xb,3) && ScriptVarScenarioBefore(SCENARIO_MAIN,0xf,0));
-    case 6:
-        return ScriptVarScenarioAfter(SCENARIO_MAIN,0x11,-1);
-    case 7:
-        return ScriptVarScenarioAfter(SCENARIO_MAIN,0x12,2);
-    case 8:
-        return ScriptVarScenarioAfter(SCENARIO_MAIN,0x12,3);
-    case 9:
-        return ScriptVarScenarioAfter(SCENARIO_MAIN,0x12,-1);
-    case 10:
-        return ScriptVarScenarioAfter(SCENARIO_MAIN,5,4);
-    case 0xb:
-        return ScriptVarScenarioAfter(SCENARIO_MAIN,5,4);
-    case 0xc:
-        return (!ScriptVarScenarioEqual(SCENARIO_MAIN,0xb,2) && !ScriptVarScenarioEqual(SCENARIO_MAIN,0xb,3));
-    case 0xd:
-        return ScriptVarScenarioEqual(SCENARIO_MAIN,0x10,2);
-    case 0xe:
-        return !ScriptVarScenarioBefore(SCENARIO_MAIN,5,7);
-    case 0xf:
-        return !ScriptVarScenarioBefore(SCENARIO_MAIN,0xf,0);
-    case 0x10:
-        return ScriptVarScenarioAfter(SCENARIO_MAIN,7,-1);
-    case 0x11:
-        return ScriptVarScenarioAfter(SCENARIO_MAIN,0xc,-1);
-    case 0x12:
-        return ScriptVarScenarioAfter(SCENARIO_MAIN,0xd,-1);
-    case 0x13:
-        return ScriptVarScenarioAfter(SCENARIO_MAIN,0xf,-1);
-    case 0x14:
-        return ScriptVarScenarioAfter(SCENARIO_MAIN,0x10,-1);
-    case 0x15:
-        return ScriptVarScenarioAfter(SCENARIO_SUB2,0x21,-1);
-    case 0x16:
-        return ScriptVarScenarioAfter(SCENARIO_SUB2,0x22,-1);
-    case 0x17:
-        return ScriptVarScenarioAfter(SCENARIO_SUB3,0x24,-1);
-    case 0x18:
-        return ScriptVarScenarioAfter(SCENARIO_SUB4,0x2a,-1);
-    case 0x19:
-        return ScriptVarScenarioAfter(SCENARIO_SUB5,0x2c,-1);
-    case 0x1a:
-        return ScriptVarScenarioAfter(SCENARIO_SUB7,0x31,-1);
-    case 0x1b:
-        return RescueScenarioConquered(0x29);
-    case 0x1c:
+  switch (questID) {
+    case QUEST_SET_TEAM_NAME:
+        return ScriptVarScenarioAfter(SCENARIO_MAIN, 2, -1);
+    case QUEST_UNK1:
+        return ScriptVarScenarioAfter(SCENARIO_MAIN, 3, 3);
+    case QUEST_CAN_ACCESS_JOBS:
+        return ScriptVarScenarioAfter(SCENARIO_MAIN, 4, 3);
+    case QUEST_CAN_RECRUIT:
+        return ScriptVarScenarioAfter(SCENARIO_MAIN, 5, 0);
+    case QUEST_SQUARE_ASLEEP:
+        return (ScriptVarScenarioAfter(SCENARIO_MAIN, 11, 0) && ScriptVarScenarioBefore(SCENARIO_MAIN, 13, 0));
+    case QUEST_UNK5:
+        return (ScriptVarScenarioAfter(SCENARIO_MAIN, 11, 3) && ScriptVarScenarioBefore(SCENARIO_MAIN, 15, 0));
+    case QUEST_REACHED_POSTGAME:
+        return ScriptVarScenarioAfter(SCENARIO_MAIN, 17, -1);
+    case QUEST_UNLOCKED_EVOLUTIONS:
+        return ScriptVarScenarioAfter(SCENARIO_MAIN, 18, 2);
+    case QUEST_CAN_CHANGE_LEADER:
+        return ScriptVarScenarioAfter(SCENARIO_MAIN, 18, 3);
+    case QUEST_CAN_DEPOSIT_PARTNER:
+        return ScriptVarScenarioAfter(SCENARIO_MAIN, 18, -1);
+    case QUEST_UNK10:
+        return ScriptVarScenarioAfter(SCENARIO_MAIN, 5, 4);
+    case QUEST_UNK11: // Never checked? Same as above.
+        return ScriptVarScenarioAfter(SCENARIO_MAIN, 5, 4);
+    case QUEST_UNK12:
+        return (!ScriptVarScenarioEqual(SCENARIO_MAIN, 11, 2) && !ScriptVarScenarioEqual(SCENARIO_MAIN, 11, 3));
+    case QUEST_IN_WORLD_CALAMITY:
+        return ScriptVarScenarioEqual(SCENARIO_MAIN, 16, 2);
+    case QUEST_MAZE_14:
+        return !ScriptVarScenarioBefore(SCENARIO_MAIN, 5, 7);
+    case QUEST_MAZE_15:
+        return !ScriptVarScenarioBefore(SCENARIO_MAIN, 15, 0);
+    case QUEST_LEGEND_ZAPDOS:
+        return ScriptVarScenarioAfter(SCENARIO_MAIN, 7, -1);
+    case QUEST_LEGEND_MOLTRES:
+        return ScriptVarScenarioAfter(SCENARIO_MAIN, 12, -1);
+    case QUEST_LEGEND_ARTICUNO:
+        return ScriptVarScenarioAfter(SCENARIO_MAIN, 13, -1);
+    case QUEST_LEGEND_GROUDON:
+        return ScriptVarScenarioAfter(SCENARIO_MAIN, 15, -1);
+    case QUEST_LEGEND_RAYQUAZA:
+        return ScriptVarScenarioAfter(SCENARIO_MAIN, 16, -1);
+    case QUEST_LEGEND_KYOGRE:
+        return ScriptVarScenarioAfter(SCENARIO_SUB2, 33, -1);
+    case QUEST_LEGEND_LUGIA:
+        return ScriptVarScenarioAfter(SCENARIO_SUB2, 34, -1);
+    case QUEST_LEGEND_DEOXYS:
+        return ScriptVarScenarioAfter(SCENARIO_SUB3, 36, -1);
+    case QUEST_LEGEND_HO_OH:
+        return ScriptVarScenarioAfter(SCENARIO_SUB4, 42, -1);
+    case QUEST_LEGEND_MEWTWO:
+        return ScriptVarScenarioAfter(SCENARIO_SUB5, 44, -1);
+    case QUEST_LEGEND_MEW:
+        return ScriptVarScenarioAfter(SCENARIO_SUB7, 49, -1);
+    case QUEST_LEGEND_CELEBI:
+        return RescueScenarioConquered(RESCUE_DUNGEON_PURITY_FOREST);
+    case QUEST_LUCARIO_RANK: // Never checked?
         return GetRescueTeamRank() == LUCARIO_RANK;
-    case 0x1d:
+    case QUEST_COMPLETED_ALL_MAZES:
         return HasCompletedAllMazes();
     default:
         return FALSE;
@@ -923,7 +921,7 @@ bool8 sub_80026CC(s16 r0)
 }
 
 // arm9.bin::0200E568
-void sub_80026E8(s16 r0, bool8 r1)
+void ScriptUnlockFriendArea(s16 r0, bool8 r1)
 {
     UnlockFriendArea(MapIdToFriendAreaId(r0));
 }

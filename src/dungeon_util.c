@@ -601,12 +601,12 @@ s32 GetTeamMemberEntityIndex(Entity *pokemon)
   return -1;
 }
 
-void SubstitutePlaceholderStringTags(u8 *buffer, Entity *entity, u32 param_3)
+void SubstitutePlaceholderStringTags(u8 *buffer, Entity *entity, u32 monsterColorNum)
 {
   switch(GetEntityType(entity))
   {
     case ENTITY_MONSTER:
-        SetMessageArgument_2(buffer, GetEntInfo(entity), param_3);
+        SetMessageArgument_2(buffer, GetEntInfo(entity), monsterColorNum);
         break;
     case ENTITY_ITEM:
         sub_8045BF8(buffer, GetItemData_1(entity));

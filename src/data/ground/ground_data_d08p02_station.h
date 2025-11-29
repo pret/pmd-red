@@ -15,13 +15,13 @@ static const struct ScriptCommand s_gs194_g0_s0_station_sref_script[] = { /* 0x8
     JUMP_SCRIPT(COMMON_ENTER),
 };
 
-static const struct ScriptRef s_gs194_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs194_g0_s0_station_sref_script }; /* 0x8245580 */
+static const struct ScriptRef s_gs194_g0_s0_station_sref = { ENTER_CONTROL , 1, NULL, s_gs194_g0_s0_station_sref_script }; /* 0x8245580 */
 
 static const struct ScriptCommand s_gs194_g1_s0_station_sref_script[] = { /* 0x824558c */
     DEBUGINFO_O(21),
     SELECT_MAP(194),
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(10),
+    BGM_SWITCH(MUS_THERES_TROUBLE),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     { 0x23, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
@@ -36,7 +36,7 @@ static const struct ScriptCommand s_gs194_g1_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs194_g1_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs194_g1_s0_station_sref_script }; /* 0x8245728 */
+static const struct ScriptRef s_gs194_g1_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs194_g1_s0_station_sref_script }; /* 0x8245728 */
 
 
 
@@ -48,12 +48,12 @@ static const struct ScriptCommand s_gs194_g1_s0_lives0_dlg0[] = { /* 0x8245734 *
     ALERT_CUE(6),
     WAIT(15),
     WALK_GRID(153, 0),
-    ROTATE(4, 11, DIRECTION_NORTHWEST),
+    ROTATE_TO(4, DIR_TRANS_11, DIRECTION_NORTHWEST),
     { 0x52, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
     WAIT(45),
     ALERT_CUE(6),
     AWAIT_CUE(5),
-    { 0x93, 0x04,  0x000b,  0x00000022,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_11, 34),
     PORTRAIT(PLACEMENT_RIGHT, 0x0001, 0x00000000),
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
     VARIANT(/* == */  1, _(" Whew...\nWe finally got through that cave.")),
@@ -71,7 +71,7 @@ static const struct ScriptCommand s_gs194_g1_s0_lives0_dlg0[] = { /* 0x8245734 *
     MSG_NPC(-1, _(" Catch {NAME_0}!")),
     TEXTBOX_CLEAR,
     ALERT_CUE(6),
-    ROTATE(4, 11, DIRECTION_NORTHWEST),
+    ROTATE_TO(4, DIR_TRANS_11, DIRECTION_NORTHWEST),
     PORTRAIT_REP(0x0001, 0x0000000c),
     MSG_NPC(1, _(" Whoa! Here they come!\nRun!")),
     TEXTBOX_CLEAR,
@@ -92,10 +92,10 @@ static const struct ScriptCommand s_gs194_g1_s0_lives1_dlg0[] = { /* 0x8245ab0 *
     AWAIT_CUE(6),
     { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
     WALK_GRID(153, 1),
-    ROTATE(4, 11, DIRECTION_NORTHWEST),
+    ROTATE_TO(4, DIR_TRANS_11, DIRECTION_NORTHWEST),
     { 0x52, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
     AWAIT_CUE(6),
-    { 0x93, 0x04,  0x000b,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_11, 0),
     ALERT_CUE(5),
     AWAIT_CUE(6),
     CALL_SCRIPT(LOOK_AROUND_FUNC),
@@ -103,7 +103,7 @@ static const struct ScriptCommand s_gs194_g1_s0_lives1_dlg0[] = { /* 0x8245ab0 *
     AWAIT_CUE(6),
     CALL_SCRIPT(JUMP_SURPRISE_FUNC),
     AWAIT_CUE(6),
-    ROTATE(4, 11, DIRECTION_NORTHWEST),
+    ROTATE_TO(4, DIR_TRANS_11, DIRECTION_NORTHWEST),
     AWAIT_CUE(6),
     { 0x89, 0x50,  0x0200,  0x00000002,  0x00000000, NULL },
     HALT,
@@ -145,4 +145,4 @@ static const struct GroundLink s_gs194_links[] = { /* 0x8245ca4 */
     /* link   1 */ { { /*x*/  19, /*y*/  24, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
 };
 
-/*extern*/ const struct GroundScriptHeader gGroundScript_gs194 = { LPARRAY(s_gs194_groups), s_gs194_links }; /* 0x8245cb4 */
+const GroundScriptHeader gGroundScript_gs194 = { LPARRAY(s_gs194_groups), s_gs194_links }; /* 0x8245cb4 */

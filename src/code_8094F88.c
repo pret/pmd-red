@@ -275,8 +275,8 @@ void sub_809542C(DungeonMailSeed *param_1)
   gUnknown_203B480->dungeonSeed = *param_1;
   MersenneTwister_InitializeState(Rand32Bit());
   gUnknown_203B480->unk10.unk10 = Random32MersenneTwister();
-  gUnknown_203B480->clientSpecies = GetPlayerPokemonStruct()->speciesNum;
-  PrintPokeNameToBuffer(buffer, GetPlayerPokemonStruct());
+  gUnknown_203B480->clientSpecies = GetLeaderMon1()->speciesNum;
+  PrintPokeNameToBuffer(buffer, GetLeaderMon1());
   CopyStringtoBuffer(gUnknown_203B480->playerName, buffer);
   gUnknown_203B480->unk24 = sub_8011C34();
   gUnknown_203B480->rescuesAllowed = GetRescuesAllowed(gUnknown_203B480->dungeonSeed.location.id);

@@ -1,4 +1,4 @@
-const RGB gFlag112Pal[] = { INCBIN_RGB("graphics/ornament/pal/flag112.pmdpal") };
+const RGB_Struct gFlag112Pal[] = { INCBIN_RGB("graphics/ornament/pal/flag112.pmdpal") };
 
 static const axmain sAxMainFlag112;
 const SiroArchive gAxFlag112 = {"SIRO", &sAxMainFlag112};

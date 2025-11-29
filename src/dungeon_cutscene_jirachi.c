@@ -35,8 +35,8 @@
 #include "dungeon_8041AD0.h"
 
 
-static void sub_808B50C(void);
-static void JirachiWish(void);
+static void sub_808B50C_Async(void);
+static void JirachiWish_Async(void);
 static void JirachiWishGrantFlash(void);
 static void sub_808BB3C(DungeonPos *pos1);
 static void sub_808BBA8(Entity *jirachiEntity);
@@ -78,7 +78,7 @@ void sub_808B35C(void)
   sub_8085930(DIRECTION_NORTH);
   sub_80855E4(sub_8086A3C);
   if (HasRecruitedMon(MONSTER_JIRACHI)) {
-    HandleFaint(jirachiEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
+    HandleFaint_Async(jirachiEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
   }
   else {
     SetFacingDirection(jirachiEntity, DIRECTION_SOUTH);
@@ -91,29 +91,24 @@ void sub_808B35C(void)
   CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_JIRACHI);
 }
 
-void sub_808B3E4(u8 param_1, u8 param_2, u8 param_3)
+void HandleJirachiBossFaint_Async(u8 monsterBehavior, u8 cutscene, bool8 transformedIntoFriend)
 {
-  u8 uVar1;
-  if ((param_2 == 0x31 || param_2 == 0x32) && (param_1 == 0x1A)) {
-    sub_8097FA8(0x1E);
-    if(param_3 != 0)
-    {
-        gDungeon->unk2 = 1;
-    }
-    else {
-        uVar1 = gDungeon->unk1356C;
-        if(sub_80860A8(0x36) != 0)
-        {
-            JirachiWish();
+    if ((cutscene == CUTSCENE_JIRACHI || cutscene == CUTSCENE_JIRACHI_POSTSTORY) && monsterBehavior == BEHAVIOR_JIRACHI) {
+        SetTempCutsceneFlag(CUTSCENE_FLAG_JIRACHI_COMPLETE);
+        if (transformedIntoFriend)
+            gDungeon->unk2 = DUNGEON_UNK2_1;
+        else {
+            bool8 b = gDungeon->unk1356C;
+
+            if (ItemInInventoryOrHeld(ITEM_WISH_STONE))
+                JirachiWish_Async();
+            else
+                sub_808B50C_Async();
+
+            gDungeon->unk1356C = b;
+            UpdateMinimap();
         }
-        else
-        {
-            sub_808B50C();
-        }
-        gDungeon->unk1356C = uVar1;
-        UpdateMinimap();
     }
-  }
 }
 
 void JirachiPreFightDialogue(void)
@@ -124,26 +119,26 @@ void JirachiPreFightDialogue(void)
   leaderEntity = CutsceneGetLeader();
   jirachiEntity = GetEntityFromMonsterBehavior(BEHAVIOR_JIRACHI);
   sub_8086448();
-  sub_803E708(0x40,70);
-  DisplayDungeonDialogue(&gJirachiPreFightDialogue_1);
-  sub_803E708(10,70);
-  SpriteLookAroundEffect(leaderEntity);
-  sub_803E708(10,70);
-  DisplayDungeonDialogue(&gJirachiPreFightDialogue_2);
+  DungeonWaitFrames_Async(0x40,70);
+  DisplayDungeonDialogue_Async(&gJirachiPreFightDialogue_1);
+  DungeonWaitFrames_Async(10,70);
+  CutsceneLookAroundEffect_Async(leaderEntity);
+  DungeonWaitFrames_Async(10,70);
+  DisplayDungeonDialogue_Async(&gJirachiPreFightDialogue_2);
   sub_80861F8(0x37,jirachiEntity,1);
   sub_80855E4(SpriteShockEffect);
-  sub_803E708(0x3c,70);
+  DungeonWaitFrames_Async(0x3c,70);
   JirachiDropInEffect(jirachiEntity);
-  sub_803E708(0x5a,70);
-  DisplayDungeonDialogue(&gJirachiPreFightDialogue_3);
-  sub_803E708(10,70);
-  DisplayDungeonDialogue(&gJirachiPreFightDialogue_4);
-  sub_803E708(10,70);
+  DungeonWaitFrames_Async(0x5a,70);
+  DisplayDungeonDialogue_Async(&gJirachiPreFightDialogue_3);
+  DungeonWaitFrames_Async(10,70);
+  DisplayDungeonDialogue_Async(&gJirachiPreFightDialogue_4);
+  DungeonWaitFrames_Async(10,70);
   SetupBossFightHP(jirachiEntity,0x15e,MUS_BATTLE_WITH_RAYQUAZA);
   ShiftCameraToPosition(&leaderEntity->pixelPos,0x10);
 }
 
-static void sub_808B50C(void)
+static void sub_808B50C_Async(void)
 {
   Entity * jirachiEntity;
 
@@ -156,24 +151,24 @@ static void sub_808B50C(void)
   GetEntInfo(jirachiEntity)->unk15E = 0;
   sub_80861B8(jirachiEntity,0xe,DIRECTION_SOUTH);
   DungeonFadeOutBGM(0x1e);
-  sub_803E708(0x1e,70);
+  DungeonWaitFrames_Async(0x1e,70);
   // Fwaaaahhhh
-  DisplayDungeonDialogue(&gUnknown_810554C);
+  DisplayDungeonDialogue_Async(&gUnknown_810554C);
   DungeonStartNewBGM(MUS_FRIEND_AREA_FOREST);
   // I think I had a dream, and I was fighting in it
   // Did I imagine it?
   // I'm sleepy so I'm going back to sleep.
-  DisplayDungeonDialogue(&gUnknown_8105558);
-  sub_803E708(10,70);
+  DisplayDungeonDialogue_Async(&gUnknown_8105558);
+  DungeonWaitFrames_Async(10,70);
   JirachiSpinEffect(jirachiEntity);
-  DisplayDungeonDialogue(&gUnknown_81055F4);
-  sub_803E708(10,70);
-  gDungeon->unk2 = 1;
+  DisplayDungeonDialogue_Async(&gUnknown_81055F4);
+  DungeonWaitFrames_Async(10,70);
+  gDungeon->unk2 = DUNGEON_UNK2_1;
 }
 
 static const u8 sJirachiItems[] = {ITEM_PROTEIN, ITEM_CALCIUM, ITEM_IRON, ITEM_ZINC, ITEM_JOY_SEED, ITEM_GINSENG, ITEM_LIFE_SEED, ITEM_SITRUS_BERRY};
 
-static void JirachiWish(void)
+static void JirachiWish_Async(void)
 {
   Entity *jirachiEntity;
   DungeonPos *LeaderPos;
@@ -189,37 +184,37 @@ static void JirachiWish(void)
   GetEntInfo(jirachiEntity)->unk15E = 0;
   sub_80861B8(jirachiEntity,0xe,DIRECTION_SOUTH);
   sub_80855E4(sub_80861A8);
-  gDungeon->unk1356C = 1;
+  gDungeon->unk1356C = TRUE;
   DungeonFadeOutBGM(0x1e);
-  sub_803E708(0x1e,0x46);
-  DisplayDungeonDialogue(&gUnknown_8105668);
-  sub_803E708(10,0x46);
+  DungeonWaitFrames_Async(0x1e,0x46);
+  DisplayDungeonDialogue_Async(&gUnknown_8105668);
+  DungeonWaitFrames_Async(10,0x46);
   PlaySoundEffect(0x1a7);
-  sub_803E708(0x96,0x46);
+  DungeonWaitFrames_Async(0x96,0x46);
   SpriteShockEffect(jirachiEntity);
-  DisplayDungeonDialogue(&gUnknown_8105674);
+  DisplayDungeonDialogue_Async(&gUnknown_8105674);
   DungeonStartNewBGM(MUS_FRIEND_AREA_FOREST);
-  sub_803E708(10,0x46);
+  DungeonWaitFrames_Async(10,0x46);
   sub_80856E0(jirachiEntity, DIRECTION_SOUTH);
   PlaySoundEffect(0x16a);
-  DisplayDungeonDialogue(&gUnknown_81056B8);
-  sub_803E708(10,0x46);
-  SpriteLookAroundEffect(jirachiEntity);
-  DisplayDungeonDialogue(&gUnknown_81056DC);
-  sub_803E708(10,0x46);
+  DisplayDungeonDialogue_Async(&gUnknown_81056B8);
+  DungeonWaitFrames_Async(10,0x46);
+  CutsceneLookAroundEffect_Async(jirachiEntity);
+  DisplayDungeonDialogue_Async(&gUnknown_81056DC);
+  DungeonWaitFrames_Async(10,0x46);
   while( 1 ) {
-    while (1) {
+    while (TRUE) {
         wishChoice = DisplayDungeonMenuMessage(NULL,gUnknown_8105798,gUnknown_810579C,0x705);
         if (wishChoice >= 1) break;
     }
-    sub_803E708(10,0x46);
+    DungeonWaitFrames_Async(10,0x46);
     if (wishChoice == 1) {
       s32 counter, index;
       DungeonPos pos;
       Item moneyItems [9];
       // Lots of Money
-      DisplayDungeonDialogue(&gUnknown_810581C);
-      sub_803E708(10,0x46);
+      DisplayDungeonDialogue_Async(&gUnknown_810581C);
+      DungeonWaitFrames_Async(10,0x46);
       JirachiWishGrantDialogue(jirachiEntity);
 
       for(counter = 0; counter < 6; counter++)
@@ -243,8 +238,8 @@ static void JirachiWish(void)
       DungeonPos pos;
       Item items [9];
       // Lots of Items
-      DisplayDungeonDialogue(&gUnknown_8105974);
-      sub_803E708(10,0x46);
+      DisplayDungeonDialogue_Async(&gUnknown_8105974);
+      DungeonWaitFrames_Async(10,0x46);
       JirachiWishGrantDialogue(jirachiEntity);
 
       for(counter = 0; counter < 6; counter++)
@@ -272,25 +267,25 @@ static void JirachiWish(void)
         if (friendArea == NUM_FRIEND_AREAS)
         {
             // You want a friend area? But you already have many friend areas...
-            DisplayDungeonDialogue(&gUnknown_8105A08);
-            sub_803E708(10,0x46);
+            DisplayDungeonDialogue_Async(&gUnknown_8105A08);
+            DungeonWaitFrames_Async(10,0x46);
             continue;
         }
         else
         {
         // You want a friend area? As you wish..
-          DisplayDungeonDialogue(&gUnknown_8105AD4);
-          sub_803E708(10,0x46);
+          DisplayDungeonDialogue_Async(&gUnknown_8105AD4);
+          DungeonWaitFrames_Async(10,0x46);
           JirachiWishGrantDialogue(jirachiEntity);
           GetEntInfo(jirachiEntity)->unk15D  = 0;
-          DisplayDungeonDialogue(&gUnknown_8105B20);
+          DisplayDungeonDialogue_Async(&gUnknown_8105B20);
           UnlockFriendArea(friendArea);
           PlaySoundEffect(0xd4);
           leaderEntity = GetLeader();
           SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],leaderEntity,0);
           WriteFriendAreaName(gFormatBuffer_Items[0],friendArea,FALSE);
           // Obtained the friend area!
-          DisplayDungeonDialogue(&gUnknown_8105B68);
+          DisplayDungeonDialogue_Async(&gUnknown_8105B68);
         }
     }
     if (wishChoice == 4) {
@@ -298,8 +293,8 @@ static void JirachiWish(void)
         DungeonPos pos;
         Item strengthItems [9];
         // More Strength..
-        DisplayDungeonDialogue(&gUnknown_8105BA8);
-        sub_803E708(10,0x46);
+        DisplayDungeonDialogue_Async(&gUnknown_8105BA8);
+        DungeonWaitFrames_Async(10,0x46);
         JirachiWishGrantDialogue(jirachiEntity);
 
         for(counter = 0; counter < 5; counter++)
@@ -320,34 +315,34 @@ static void JirachiWish(void)
           }
         }
         GetEntInfo(jirachiEntity)->unk15D  = 0;
-        DisplayDungeonDialogue(&gUnknown_8105BF4);
-        sub_803E708(10,0x46);
+        DisplayDungeonDialogue_Async(&gUnknown_8105BF4);
+        DungeonWaitFrames_Async(10,0x46);
     }
     if (wishChoice == 5) {
         s32 direction;
         // Something Good...
-        DisplayDungeonDialogue(&gUnknown_8105D2C);
-        sub_803E708(10,0x46);
+        DisplayDungeonDialogue_Async(&gUnknown_8105D2C);
+        DungeonWaitFrames_Async(10,0x46);
         JirachiWishGrantDialogue(jirachiEntity);
         GetEntInfo(jirachiEntity)->unk15D  = 0;
-        DisplayDungeonDialogue(&gUnknown_8105D80);
-        sub_803E708(10,0x46);
+        DisplayDungeonDialogue_Async(&gUnknown_8105D80);
+        DungeonWaitFrames_Async(10,0x46);
         LeaderPos = &GetLeader()->pos;
         direction = GetDirectionTowardsPosition(&jirachiEntity->pos,LeaderPos);
         SetFacingDirection(jirachiEntity,direction);
-        sub_803E708(10,0x46);
-        DisplayDungeonDialogue(&gUnknown_8105D9C);
-        sub_803E708(10,0x46);
+        DungeonWaitFrames_Async(10,0x46);
+        DisplayDungeonDialogue_Async(&gUnknown_8105D9C);
+        DungeonWaitFrames_Async(10,0x46);
         gDungeon->unk644.unk30 = 1;
     }
     break;
   }
 
-  DisplayDungeonDialogue(&gUnknown_81058E0);
+  DisplayDungeonDialogue_Async(&gUnknown_81058E0);
   JirachiSpinEffect(jirachiEntity);
-  sub_803E708(10,0x46);
-  DisplayDungeonDialogue(&gUnknown_810593C);
-  sub_803E708(10,0x46);
+  DungeonWaitFrames_Async(10,0x46);
+  DisplayDungeonDialogue_Async(&gUnknown_810593C);
+  DungeonWaitFrames_Async(10,0x46);
   EnableJirachiWishWarpTile();
 }
 
@@ -376,21 +371,21 @@ static void JirachiWishGrantFlash(void)
     SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,1);
     DungeonRunFrameActions(0x46);
   }
-  sub_803E708(10,0x46);
+  DungeonWaitFrames_Async(10,0x46);
 
   for(iVar1 = 0xFA; iVar1 > 0xC7; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,1);
     DungeonRunFrameActions(0x46);
   }
-  sub_803E708(10,0x46);
+  DungeonWaitFrames_Async(10,0x46);
 
   for(iVar1 = 0xFA; iVar1 >= 0; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,1);
     DungeonRunFrameActions(0x46);
   }
-  sub_803E708(10,0x46);
+  DungeonWaitFrames_Async(10,0x46);
   sub_8085EB0();
 }
 
@@ -424,7 +419,7 @@ static void JirachiDropInEffect(Entity *jirachiEntity)
   iVar1 = IntToF248(160);
   iVar2 = IntToF248(2);
   PlaySoundEffect(0x1f8);
-  while (1) {
+  while (TRUE) {
     iVar1 -= iVar2;
     if (F248LessThanInt(iVar1, 24)) {
       iVar2 = IntToF248(1);
@@ -443,7 +438,7 @@ static void JirachiSpinEffect(Entity * jirachiEntity)
   PlaySoundEffect(0x298);
   for(uVar1 = 0; uVar1 < 25; uVar1++){
     SetFacingDirection(jirachiEntity, uVar1 & DIRECTION_MASK);
-    sub_803E708(3,0x46);
+    DungeonWaitFrames_Async(3,0x46);
   }
   GetEntInfo(jirachiEntity)->unk15E = 1;
   PlaySoundEffect(0x27f);
@@ -456,17 +451,17 @@ static void JirachiWishGrantDialogue(Entity *jirachiEntity)
 
   GetEntInfo(jirachiEntity)->unk15D = 1;
   // Nnnnnnnnnn!
-  DisplayDungeonDialogue(&gUnknown_81058A8);
+  DisplayDungeonDialogue_Async(&gUnknown_81058A8);
   PlaySoundEffect(0x375);
   sub_80861F8(0x67,jirachiEntity,1);
   PlaySoundEffect(0x2a8);
   uVar2 = sub_80861F8(0x68,jirachiEntity,0);
   // Taaaaaaaah!
-  DisplayDungeonDialogue(&gUnknown_81058C4);
+  DisplayDungeonDialogue_Async(&gUnknown_81058C4);
   if (sub_800E9A8(uVar2)) {
     sub_800DC14(uVar2);
   }
-  sub_803E708(10,0x46);
+  DungeonWaitFrames_Async(10,0x46);
   JirachiWishGrantFlash();
 }
 

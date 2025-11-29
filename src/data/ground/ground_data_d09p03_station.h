@@ -14,20 +14,20 @@ static const struct ScriptCommand s_gs197_g0_s0_station_sref_script[] = { /* 0x8
     JUMP_SCRIPT(COMMON_ENTER),
 };
 
-static const struct ScriptRef s_gs197_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs197_g0_s0_station_sref_script }; /* 0x8249768 */
+static const struct ScriptRef s_gs197_g0_s0_station_sref = { ENTER_CONTROL , 1, NULL, s_gs197_g0_s0_station_sref_script }; /* 0x8249768 */
 
 static const struct ScriptCommand s_gs197_g1_s0_station_sref_script[] = { /* 0x8249774 */
     DEBUGINFO_O(20),
     SELECT_MAP(MAP_MT_BLAZE_END),
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(114),
+    BGM_SWITCH(MUS_IN_THE_DEPTHS_OF_THE_PIT),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     { 0x23, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     RET,
 };
 
-static const struct ScriptRef s_gs197_g1_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs197_g1_s0_station_sref_script }; /* 0x82497f4 */
+static const struct ScriptRef s_gs197_g1_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs197_g1_s0_station_sref_script }; /* 0x82497f4 */
 
 static const struct ScriptCommand s_gs197_g1_s0_eff0_script[] = { /* 0x8249800 */
     DEBUGINFO_O(33),
@@ -115,7 +115,7 @@ static const struct ScriptCommand s_gs197_g1_s0_lives0_dlg0[] = { /* 0x82498b0 *
     TEXTBOX_CLEAR,
     WAIT(15),
     ALERT_CUE(7),
-    { 0x36, 0x00, -0x0001,  0x00000000,  0x00000000, _("Gyaaaaaah!") },
+    MSG_OVERHEARD(_("Gyaaaaaah!")),
     WAIT(10),
     ALERT_CUE(6),
     CALL_SCRIPT(JUMP_SURPRISE_FUNC),
@@ -170,7 +170,7 @@ static const struct ScriptCommand s_gs197_g1_s0_lives0_dlg0[] = { /* 0x82498b0 *
     VARIANT_DEFAULT(_(" ...Of course, that's not\npossible right now, but...")),
     TEXTBOX_CLEAR,
     ALERT_CUE(7),
-    { 0x36, 0x00, -0x0001,  0x00000000,  0x00000000, _("Gyaaaaah!") },
+    MSG_OVERHEARD(_("Gyaaaaah!")),
     WAIT(10),
     ALERT_CUE(6),
     CALL_SCRIPT(JUMP_SURPRISE_FUNC),
@@ -213,7 +213,7 @@ static const struct ScriptCommand s_gs197_g1_s0_lives0_dlg0[] = { /* 0x82498b0 *
     WAIT(15),
     ALERT_CUE(7),
     FANFARE_PLAY2(474),
-    { 0x36, 0x00, -0x0001,  0x00000000,  0x00000000, _("Gyaaaaaaaaaah!") },
+    MSG_OVERHEARD(_("Gyaaaaaaaaaah!")),
     WAIT(10),
     ALERT_CUE(6),
     CALL_SCRIPT(JUMP_SURPRISE_FUNC),
@@ -234,14 +234,14 @@ static const struct ScriptCommand s_gs197_g1_s0_lives0_dlg0[] = { /* 0x82498b0 *
     CALL_SCRIPT(SWEAT_FUNC),
     WAIT(15),
     PORTRAIT_REP(0x0001, 0x00000002),
-    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Oh...\n(Does it need to do that?)") },
+    MSG_NPC(1, _(" Oh...\n(Does it need to do that?)")),
     TEXTBOX_CLEAR,
     WAIT(30),
     MSG_NPC(2, _(" Farewell!")),
     TEXTBOX_CLEAR,
     ALERT_CUE(7),
     AWAIT_CUE(5),
-    { 0x36, 0x00, -0x0001,  0x00000000,  0x00000000, _("Gyaaaaaaaah!") },
+    MSG_OVERHEARD(_("Gyaaaaaaaah!")),
     FANFARE_PLAY2(459),
     ALERT_CUE(7),
     ALERT_CUE(4),
@@ -254,7 +254,7 @@ static const struct ScriptCommand s_gs197_g1_s0_lives0_dlg0[] = { /* 0x82498b0 *
     FANFARE_PLAY2(470),
     ALERT_CUE(6),
     AWAIT_CUE(5),
-    ROTATE(4, 11, DIRECTION_WEST),
+    ROTATE_TO(4, DIR_TRANS_11, DIRECTION_WEST),
     PORTRAIT_REP(0x0001, 0x00000002),
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
     MSG_NPC(1, _(" Whew...")),
@@ -330,7 +330,7 @@ static const struct ScriptCommand s_gs197_g1_s0_lives1_dlg0[] = { /* 0x824b53c *
     AWAIT_CUE(6),
     CALL_SCRIPT(SWEAT_FUNC),
     WAIT(30),
-    { 0x93, 0x04,  0x000b,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_11, 0),
     ALERT_CUE(5),
     AWAIT_CUE(6),
     CALL_SCRIPT(JUMP_SURPRISE_FUNC),
@@ -448,4 +448,4 @@ static const struct GroundLink s_gs197_links[] = { /* 0x824bbe0 */
     /* link   0 */ { { /*x*/  21, /*y*/  26, /*flags*/ CPOS_HALFTILE, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
 };
 
-/*extern*/ const struct GroundScriptHeader gGroundScript_gs197 = { LPARRAY(s_gs197_groups), s_gs197_links }; /* 0x824bbe8 */
+const GroundScriptHeader gGroundScript_gs197 = { LPARRAY(s_gs197_groups), s_gs197_links }; /* 0x824bbe8 */

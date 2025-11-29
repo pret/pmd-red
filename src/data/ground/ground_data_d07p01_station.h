@@ -18,20 +18,20 @@ static const struct ScriptCommand s_gs191_g0_s0_station_sref_script[] = { /* 0x8
     JUMP_SCRIPT(COMMON_ENTER),
 };
 
-static const struct ScriptRef s_gs191_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs191_g0_s0_station_sref_script }; /* 0x823d848 */
+static const struct ScriptRef s_gs191_g0_s0_station_sref = { ENTER_CONTROL , 1, NULL, s_gs191_g0_s0_station_sref_script }; /* 0x823d848 */
 
 static const struct ScriptCommand s_gs191_g1_s0_station_sref_script[] = { /* 0x823d854 */
     DEBUGINFO_O(24),
     SELECT_MAP(MAP_GREAT_CANYON_ENTRY),
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(20),
+    BGM_SWITCH(MUS_GREAT_CANYON),
     { 0x22, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     NEXT_DUNGEON(0, SCRIPT_DUNGEON_GREAT_CANYON),
     RET,
 };
 
-static const struct ScriptRef s_gs191_g1_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs191_g1_s0_station_sref_script }; /* 0x823d8d4 */
+static const struct ScriptRef s_gs191_g1_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs191_g1_s0_station_sref_script }; /* 0x823d8d4 */
 
 static const struct ScriptCommand s_gs191_g1_s0_lives0_dlg0[] = { /* 0x823d8e0 */
     DEBUGINFO_O(37),
@@ -51,7 +51,7 @@ static const struct ScriptCommand s_gs191_g1_s0_lives0_dlg0[] = { /* 0x823d8e0 *
     MSG_NPC(1, _(" The peak is called the\n{COLOR CYAN}Hill of the Ancients{RESET}.")),
     ALERT_CUE(6),
     WAIT(10),
-    ROTATE(4, 1, DIRECTION_NORTHEAST),
+    ROTATE_TO(4, DIR_TRANS_SPINRIGHT1, DIRECTION_NORTHEAST),
     { 0x2d, 0x0a,  0x0000,  0x00000009,  0x00000000, NULL },
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
     VARIANT(/* == */  1, _(" {NAME_2} said that\nthe {COLOR CYAN}Hill of the Ancients{RESET} is on {VALUE_0}F.")),
@@ -81,7 +81,7 @@ static const struct ScriptCommand s_gs191_g1_s0_lives1_dlg0[] = { /* 0x823dc10 *
     WAIT(20),
     ALERT_CUE(5),
     AWAIT_CUE(6),
-    ROTATE(4, 2, DIRECTION_SOUTHWEST),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_SOUTHWEST),
     AWAIT_CUE(6),
     WALK_GRID(128, 3),
     HALT,
@@ -91,14 +91,14 @@ static const struct ScriptCommand s_gs191_g2_s0_station_sref_script[] = { /* 0x8
     DEBUGINFO_O(91),
     SELECT_MAP(MAP_GREAT_CANYON_ENTRY),
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(20),
+    BGM_SWITCH(MUS_GREAT_CANYON),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     NEXT_DUNGEON(0, SCRIPT_DUNGEON_GREAT_CANYON),
     RET,
 };
 
-static const struct ScriptRef s_gs191_g2_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs191_g2_s0_station_sref_script }; /* 0x823dda0 */
+static const struct ScriptRef s_gs191_g2_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs191_g2_s0_station_sref_script }; /* 0x823dda0 */
 
 static const struct ScriptCommand s_gs191_g2_s0_lives0_dlg0[] = { /* 0x823ddac */
     DEBUGINFO_O(104),
@@ -110,7 +110,7 @@ static const struct ScriptCommand s_gs191_g2_s0_lives0_dlg0[] = { /* 0x823ddac *
     WAIT(30),
     WALK_GRID(256, 1),
     WAIT(30),
-    ROTATE(4, 1, DIRECTION_EAST),
+    ROTATE_TO(4, DIR_TRANS_SPINRIGHT1, DIRECTION_EAST),
     PORTRAIT(PLACEMENT_RIGHT, 0x0001, 0x00000000),
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
     VARIANT(/* == */  1, _(" {NAME_0}!\nThis time we'll make it to the peak,\nall right?")),
@@ -135,7 +135,7 @@ static const struct ScriptCommand s_gs191_g2_s0_lives1_dlg0[] = { /* 0x823e038 *
     WAIT(30),
     WALK_GRID(256, 0),
     WAIT(30),
-    ROTATE(4, 2, DIRECTION_WEST),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_WEST),
     AWAIT_CUE(6),
     WALK_GRID(204, 4),
     WALK_GRID(204, 3),
@@ -200,4 +200,4 @@ static const struct GroundLink s_gs191_links[] = { /* 0x823e20c */
     /* link   4 */ { { /*x*/  30, /*y*/  11, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
 };
 
-/*extern*/ const struct GroundScriptHeader gGroundScript_gs191 = { LPARRAY(s_gs191_groups), s_gs191_links }; /* 0x823e234 */
+const GroundScriptHeader gGroundScript_gs191 = { LPARRAY(s_gs191_groups), s_gs191_links }; /* 0x823e234 */

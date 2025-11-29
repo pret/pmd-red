@@ -51,7 +51,7 @@ static void HandleSleepTalk(void);
 static void HandleSnore(void);
 static void HandleFlashFire(void);
 
-bool8 ExecuteEntityDungeonAction(Entity *entity)
+bool8 ExecuteEntityDungeonAction_Async(Entity *entity)
 {
     bool8 bVar4;
     bool8 bVar5;
@@ -62,7 +62,7 @@ bool8 ExecuteEntityDungeonAction(Entity *entity)
     DungeonPos pos;
     DungeonPos pos1;
 
-    sub_804178C(1);
+    sub_804178C_Async(1);
     gUnknown_203B434 = TRUE;
     info = GetEntInfo(entity);
     info->useHeldItem = FALSE;
@@ -76,7 +76,7 @@ bool8 ExecuteEntityDungeonAction(Entity *entity)
             sub_8075BA4(entity,gUnknown_80F58F4[(info->action).action][1]);
         }
     }
-    if ((CannotAttack(entity, FALSE)) && (IsChargingAnyTwoTurnMove(entity, TRUE))) {
+    if (CannotAttack(entity, FALSE) && IsChargingAnyTwoTurnMove(entity, TRUE)) {
         sub_8079764(entity);
     }
 
@@ -88,7 +88,7 @@ bool8 ExecuteEntityDungeonAction(Entity *entity)
         }
     }
     if (!IsNotAttacking(entity, FALSE)) {
-        if (DisplayActions(entity)) {
+        if (DisplayActions_Async(entity)) {
             if (IsFloorOver()) {
                 return FALSE;
             }
@@ -169,12 +169,12 @@ bool8 ExecuteEntityDungeonAction(Entity *entity)
             break;
         case ACTION_STAIRS:
             if ((gDungeon->unk644.dungeonLocation.id == DUNGEON_METEOR_CAVE) && (!gDungeon->deoxysDefeat)) {
-                LogMessageByIdWithPopupCheckUser(entity,gUnknown_80FA5B4); // It's impossible to go down the stairs now!
+                LogMessageByIdWithPopupCheckUser_Async(entity,gUnknown_80FA5B4); // It's impossible to go down the stairs now!
             }
             else
             {
                 PlayStairsSound();
-                gDungeon->unk2 = 1;
+                gDungeon->unk2 = DUNGEON_UNK2_1;
                 gUnknown_202F32C = (info->action).direction;
             }
             break;
@@ -184,34 +184,34 @@ bool8 ExecuteEntityDungeonAction(Entity *entity)
             sub_8067110(entity);
             break;
         case ACTION_USE_ORB:
-            HandleUseOrbAction(entity);
+            HandleUseOrbAction_Async(entity);
             break;
         case ACTION_PICK_UP_PLAYER:
-            HandlePickUpPlayerAction(entity);
+            HandlePickUpPlayerAction_Async(entity);
             break;
         case ACTION_GIVE_ITEM:
-            HandleGiveItemAction(entity);
+            HandleGiveItemAction_Async(entity);
             break;
         case ACTION_TAKE_ITEM:
-            HandleTakeItemAction(entity);
+            HandleTakeItemAction_Async(entity);
             break;
         case 0x3e:
-            sub_8066BD4(entity); // ITEM_SWITCH_TOOLBOX (When you switch item in Toolbox)
+            sub_8066BD4_Async(entity); // ITEM_SWITCH_TOOLBOX (When you switch item in Toolbox)
             break;
         case ACTION_USE_ITEM:
             HandleUseItemAction(entity);
             break;
         case ACTION_SET_ITEM:
-            HandleSetItemAction(entity, TRUE);
+            HandleSetItemAction_Async(entity, TRUE);
             break;
         case ACTION_UNSET_ITEM:
-            HandleUnsetItemAction(entity, TRUE);
+            HandleUnsetItemAction_Async(entity, TRUE);
             break;
         case 0x3b:
             gDungeon->unkBC = gDungeon->teamPokemon[(info->action).actionParameters[0].actionUseIndex];
             break;
         case ACTION_PLACE_ITEM:
-            HandlePlaceItemAction(entity);
+            HandlePlaceItemAction_Async(entity);
             break;
         case 10: // Switch with Item on Ground
             sub_8066E14(entity);
@@ -228,7 +228,7 @@ bool8 ExecuteEntityDungeonAction(Entity *entity)
                 break;
             }
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],entity,0);
-            LogMessageByIdWithPopupCheckUser(entity,gUnknown_80FE6D4);
+            LogMessageByIdWithPopupCheckUser_Async(entity,gUnknown_80FE6D4);
             break;
         case ACTION_TALK_FIELD:
             HandleTalkFieldAction(entity);
@@ -256,7 +256,7 @@ bool8 ExecuteEntityDungeonAction(Entity *entity)
             break;
         case ACTION_SECOND_THOUGHTS:
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],entity,0);
-            LogMessageByIdWithPopupCheckUser(entity,gUnknown_80FE478);
+            LogMessageByIdWithPopupCheckUser_Async(entity,gUnknown_80FE478);
             break;
         default:
             info->action.action = ACTION_PASS_TURN;
@@ -270,7 +270,7 @@ bool8 ExecuteEntityDungeonAction(Entity *entity)
         }
         sub_8041888(0);
         if (EntityIsValid(entity)) {
-            sub_8085140();
+            sub_8085140_Async();
             if (info->unk14B != 0) {
                 bVar4 = FALSE;
                 info->unk14B = 0;
@@ -284,7 +284,7 @@ bool8 ExecuteEntityDungeonAction(Entity *entity)
                     }
                 }
                 if (bVar4) {
-                    LogMessageByIdWithPopupCheckUser(entity,gUnknown_80FD2CC);
+                    LogMessageByIdWithPopupCheckUser_Async(entity,gUnknown_80FD2CC);
                 }
             }
             HandleFlashFire();
@@ -302,14 +302,14 @@ bool8 ExecuteEntityDungeonAction(Entity *entity)
             }
             if (EntityIsValid(entity)) {
                 if (!sub_8044B84()) {
-                    sub_8046D20();
+                    PotentiallyCreateMusicBox_Async();
                 }
                 sub_8041888(0);
                 if (((EntityIsValid(entity)) && (!info->aiAllySkip)) && (!bVar14)) {
                     if (sub_80706A4(entity,&entity->pos) != '\0') {
                         WarpTarget(entity,entity,0,0);
                     }
-                    ApplyEndOfTurnEffects(entity);
+                    DoEndOfTurnEffects_Async(entity);
                     EnemyEvolution(entity);
                 }
             }
@@ -374,7 +374,7 @@ static void HandleSleepTalk(void)
                                 }
                             }
                             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], entity, 0);
-                            LogMessageByIdWithPopupCheckUser(entity, gUnknown_80FCF38); // {ARG_POKEMON_0} uttered its sleep talk!
+                            LogMessageByIdWithPopupCheckUser_Async(entity, gUnknown_80FCF38); // {ARG_POKEMON_0} uttered its sleep talk!
                             info->action.direction = sl & DIRECTION_MASK;
                             TryUseChosenMove(entity, 0, ITEM_NOTHING, 1, FALSE, &moveStack);
                             flag = TRUE;
@@ -440,7 +440,7 @@ static void HandleSnore(void)
                         }
                     }
                     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],pokemon,0);
-                    LogMessageByIdWithPopupCheckUser(pokemon,gUnknown_80FCF50);
+                    LogMessageByIdWithPopupCheckUser_Async(pokemon,gUnknown_80FCF50);
                     info->action.direction = r8 & DIRECTION_MASK;
                     TryUseChosenMove(pokemon,0,ITEM_NOTHING,1,FALSE,&chosenMove);
                     info->unk165 |= 0xff;

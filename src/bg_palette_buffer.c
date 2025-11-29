@@ -23,7 +23,7 @@ void InitBGPaletteBuffer(void)
 }
 
 // arm9.bin::020011A0
-void SetBGPaletteBufferColorRGB(s32 index, const RGB *color, s32 brightnessRaw, const RGB *ramp)
+void SetBGPaletteBufferColorRGB(s32 index, const RGB_Struct *color, s32 brightnessRaw, const RGB_Struct *ramp)
 {
     s32 brightness = brightnessRaw;
 
@@ -47,7 +47,7 @@ void SetBGPaletteBufferColorRGB(s32 index, const RGB *color, s32 brightnessRaw, 
 }
 
 // arm9.bin::02001130
-void SetBGPaletteBufferColorArray(s32 index, const RGB *color32)
+void SetBGPaletteBufferColorArray(s32 index, const RGB_Struct *color32)
 {
     sBGPaletteRowDirty[index / BG_PALETTE_ROW_SIZE] = TRUE;
     sBGPaletteBuffer[index] = RGB2(color32->r >> 3, color32->g >> 3, color32->b >> 3);
@@ -61,12 +61,12 @@ void SetBGPaletteBufferColor(s32 index, u16 *color)
 }
 
 // arm9.bin::02000FC8
-void nullsub_4(s32 index, const RGB *colorArray, s32 brightness, const RGB *ramp)
+void nullsub_4(s32 index, const RGB_Struct *colorArray, s32 brightness, const RGB_Struct *ramp)
 {
 }
 
 // arm9.bin::02000F58
-void nullsub_5(s32 index, const RGB *colorArray)
+void nullsub_5(s32 index, const RGB_Struct *colorArray)
 {
 }
 

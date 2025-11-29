@@ -74,8 +74,8 @@ void sub_808729C(void)
   sub_80854D4();
   sub_8085930(4);
   sub_80855E4(sub_8086A3C);
-  if (sub_8086AE4(0x91) != 0) {
-    HandleFaint(zapdosEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
+  if (sub_8086AE4(MONSTER_ZAPDOS)) {
+    HandleFaint_Async(zapdosEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
   }
   else {
     LevelUpTarget(zapdosEntity,zapdosEntity,gZapdosConfigLevel,0,0);
@@ -87,11 +87,11 @@ void sub_808729C(void)
   CopyMonsterNameToBuffer(gFormatBuffer_Monsters[3], MONSTER_ZAPDOS);
 }
 
-void sub_8087334(u8 param_1, u8 param_2)
+void HandleZapdosBossFaint(u8 monsterBehavior, u8 cutscene)
 {
-  if ((param_2 == 7 || param_2 == 8 || param_2 == 9) && (param_1 == 8)) {
-    sub_8097FA8(5);
-    gDungeon->unk2 = 1;
+  if ((cutscene == CUTSCENE_MT_THUNDER_PEAK_ATTEMPT1 || cutscene == CUTSCENE_MT_THUNDER_PEAK_ATTEMPT2 || cutscene == CUTSCENE_MT_THUNDER_PEAK_POSTSTORY) && monsterBehavior == BEHAVIOR_ZAPDOS) {
+    SetTempCutsceneFlag(CUTSCENE_FLAG_MT_THUNDER_PEAK_COMPLETE);
+    gDungeon->unk2 = DUNGEON_UNK2_1;
   }
 }
 
@@ -113,27 +113,27 @@ void ZapdosPreFightDialogue(void)
     partnerEntity = CutsceneGetPartner();
     zapdosEntity = GetEntityFromMonsterBehavior(BEHAVIOR_ZAPDOS);
     sub_8086448();
-    sub_803E708(10,0x46);
-    SpriteLookAroundEffect(partnerEntity);
-    sub_803E708(10,0x46);
-    sub_80869E4(partnerEntity,4,1,DIRECTION_EAST);
-    sub_80869E4(leaderEntity,4,2,DIRECTION_WEST);
-    DisplayDungeonDialogue(gUnknown_81014B0);
-    sub_803E708(10,0x46);
-    sub_80869E4(partnerEntity,4,2,DIRECTION_NORTH);
-    sub_80869E4(leaderEntity,4,1,DIRECTION_NORTH);
-    DisplayDungeonDialogue(gUnknown_8101504);
-    sub_803E708(10,0x46);
+    DungeonWaitFrames_Async(10,0x46);
+    CutsceneLookAroundEffect_Async(partnerEntity);
+    DungeonWaitFrames_Async(10,0x46);
+    CutsceneLookDir_Async(partnerEntity,4,DIR_TRANS_SPINRIGHT1,DIRECTION_EAST);
+    CutsceneLookDir_Async(leaderEntity,4,DIR_TRANS_SPINLEFT1,DIRECTION_WEST);
+    DisplayDungeonDialogue_Async(gUnknown_81014B0);
+    DungeonWaitFrames_Async(10,0x46);
+    CutsceneLookDir_Async(partnerEntity,4,DIR_TRANS_SPINLEFT1,DIRECTION_NORTH);
+    CutsceneLookDir_Async(leaderEntity,4,DIR_TRANS_SPINRIGHT1,DIRECTION_NORTH);
+    DisplayDungeonDialogue_Async(gUnknown_8101504);
+    DungeonWaitFrames_Async(10,0x46);
     ZapdosScreenFlash(3);
     DungeonStopBGM();
     PlaySoundEffect(0x1da);
-    DisplayDungeonDialogue(&gUnknown_81015A0);
+    DisplayDungeonDialogue_Async(&gUnknown_81015A0);
     ZapdosDropInEffect(zapdosEntity);
     DungeonStartNewBGM(MUS_RISING_FEAR);
     sub_806CDD4(partnerEntity,6,DIRECTION_NORTH);
-    DisplayDungeonDialogue(&gUnknown_81015D4); //  Waah!
-    sub_803E708(10,0x46);
-    sub_80869E4(partnerEntity,2,1,DIRECTION_SOUTHEAST);
+    DisplayDungeonDialogue_Async(&gUnknown_81015D4); //  Waah!
+    DungeonWaitFrames_Async(10,0x46);
+    CutsceneLookDir_Async(partnerEntity,2,DIR_TRANS_SPINRIGHT1,DIRECTION_SOUTHEAST);
 
     puStack_38 = (struct Zapdos1) {1, 2, 12, 0, 1, 0, 0, 0, 0, 9, 9, 0};
     puStack_34[0] = puStack_38.unk0;
@@ -146,13 +146,13 @@ void ZapdosPreFightDialogue(void)
 
     GetEntInfo(partnerEntity)->unk15F = 0;
     GetEntInfo(partnerEntity)->unk15D = 1;
-    sub_80869E4(partnerEntity,2,2,DIRECTION_NORTH);
-    DisplayDungeonDialogue(&gUnknown_81015E8); // I warned you! I have no mercy for meddlers
-    sub_803E708(0x3c,0x46);
-    DisplayDungeonDialogue(&gUnknown_8101624);
-    sub_803E708(10,0x46);
+    CutsceneLookDir_Async(partnerEntity,2,DIR_TRANS_SPINLEFT1,DIRECTION_NORTH);
+    DisplayDungeonDialogue_Async(&gUnknown_81015E8); // I warned you! I have no mercy for meddlers
+    DungeonWaitFrames_Async(0x3c,0x46);
+    DisplayDungeonDialogue_Async(&gUnknown_8101624);
+    DungeonWaitFrames_Async(10,0x46);
     GetEntInfo(partnerEntity)->unk15D = 0;
-    sub_80869E4(partnerEntity,2,2,DIRECTION_NORTHWEST);
+    CutsceneLookDir_Async(partnerEntity,2,DIR_TRANS_SPINLEFT1,DIRECTION_NORTHWEST);
 
     puStack_30 = (struct Zapdos2) {5, 2, 12, 0, 4, 2, 12, 0, 4, 0, 0, 0, 0, 8, 7, 0};
     puStack_4c[0] = puStack_30.unk0;
@@ -162,18 +162,18 @@ void ZapdosPreFightDialogue(void)
         DungeonRunFrameActions(0x46);
     }
 
-    sub_80869E4(partnerEntity,2,1,DIRECTION_NORTHEAST);
-    DisplayDungeonDialogue(gUnknown_810165C);
-    sub_803E708(10,0x46);
+    CutsceneLookDir_Async(partnerEntity,2,DIR_TRANS_SPINRIGHT1,DIRECTION_NORTHEAST);
+    DisplayDungeonDialogue_Async(gUnknown_810165C);
+    DungeonWaitFrames_Async(10,0x46);
     ZapdosScreenFlash(3);
-    DisplayDungeonDialogue(&gUnknown_8101750);
-    sub_803E708(10,0x46);
+    DisplayDungeonDialogue_Async(&gUnknown_8101750);
+    DungeonWaitFrames_Async(10,0x46);
     ZapdosScreenFlash(1);
-    DisplayDungeonDialogue(&gUnknown_810178C);
-    sub_803E708(10,0x46);
+    DisplayDungeonDialogue_Async(&gUnknown_810178C);
+    DungeonWaitFrames_Async(10,0x46);
     ZapdosScreenFlash(2);
-    DisplayDungeonDialogue(&gUnknown_81017B4);
-    sub_803E708(10,0x46);
+    DisplayDungeonDialogue_Async(&gUnknown_81017B4);
+    DungeonWaitFrames_Async(10,0x46);
     SetupBossFightHP(zapdosEntity,300, MUS_BOSS_BATTLE);
     ShiftCameraToPosition(&leaderEntity->pixelPos,0x10);
 }
@@ -186,19 +186,19 @@ void ZapdosReFightDialogue(void)
   leaderEntity = CutsceneGetLeader();
   zapdosEntity = GetEntityFromMonsterBehavior(BEHAVIOR_ZAPDOS);
   sub_8086448();
-  sub_803E708(10,0x46);
-  DisplayDungeonDialogue(gZapdosReFightDialogue_1);
-  sub_803E708(10,0x46);
+  DungeonWaitFrames_Async(10,0x46);
+  DisplayDungeonDialogue_Async(gZapdosReFightDialogue_1);
+  DungeonWaitFrames_Async(10,0x46);
   PlaySoundEffect(0x1da);
-  DisplayDungeonDialogue(&gUnknown_81015A0);
-  sub_803E708(10,0x46);
+  DisplayDungeonDialogue_Async(&gUnknown_81015A0);
+  DungeonWaitFrames_Async(10,0x46);
   ZapdosDropInEffect(zapdosEntity);
-  sub_803E708(10,0x46);
-  DisplayDungeonDialogue(&gZapdosReFightDialogue_2);
+  DungeonWaitFrames_Async(10,0x46);
+  DisplayDungeonDialogue_Async(&gZapdosReFightDialogue_2);
   ZapdosScreenFlash(1);
-  DisplayDungeonDialogue(&gZapdosReFightDialogue_3);
+  DisplayDungeonDialogue_Async(&gZapdosReFightDialogue_3);
   ZapdosScreenFlash(2);
-  DisplayDungeonDialogue(&gZapdosReFightDialogue_4);
+  DisplayDungeonDialogue_Async(&gZapdosReFightDialogue_4);
   SetupBossFightHP(zapdosEntity,300,MUS_BOSS_BATTLE);
   ShiftCameraToPosition(&leaderEntity->pixelPos,0x10);
 }
@@ -217,16 +217,16 @@ void ZapdosPostStoryPreFightDialogue(void)
   else {
     ZapdosScreenFlash(1);
     PlaySoundEffect(0x1da);
-    DisplayDungeonDialogue(&gZapdosPostStoryPreFightDialogue_1);
+    DisplayDungeonDialogue_Async(&gZapdosPostStoryPreFightDialogue_1);
     ZapdosDropInEffect(zapdosEntity);
-    DisplayDungeonDialogue(&gZapdosPostStoryPreFightDialogue_2);
+    DisplayDungeonDialogue_Async(&gZapdosPostStoryPreFightDialogue_2);
     ZapdosScreenFlash(1);
-    DisplayDungeonDialogue(&gZapdosPostStoryPreFightDialogue_3);
+    DisplayDungeonDialogue_Async(&gZapdosPostStoryPreFightDialogue_3);
     ZapdosScreenFlash(2);
-    DisplayDungeonDialogue(&gZapdosPostStoryPreFightDialogue_4);
+    DisplayDungeonDialogue_Async(&gZapdosPostStoryPreFightDialogue_4);
     ZapdosScreenFlash(2);
-    DisplayDungeonDialogue(&gZapdosPostStoryPreFightDialogue_5);
-    sub_803E708(10,0x46);
+    DisplayDungeonDialogue_Async(&gZapdosPostStoryPreFightDialogue_5);
+    DungeonWaitFrames_Async(10,0x46);
     SetupBossFightHP(zapdosEntity,300,MUS_BOSS_BATTLE);
     ShiftCameraToPosition(&leaderEntity->pixelPos,0x10);
   }
@@ -245,7 +245,7 @@ static void ZapdosDropInEffect(Entity *zapdosEntity)
     GetEntInfo(zapdosEntity)->unk174 = IntToF248(iVar1);
     DungeonRunFrameActions(0x46);
   }
-  sub_803E708(0x1e,0x46);
+  DungeonWaitFrames_Async(0x1e,0x46);
 }
 
 static void ZapdosScreenFlash(s32 numFlashes)

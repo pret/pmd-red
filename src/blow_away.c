@@ -42,25 +42,25 @@ void BlowAwayTarget(Entity *pokemon, Entity *target, u32 direction)
 
     counter = 10;
     if (IsCurrentFixedRoomBossFight()) {
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FC9E8); // It couldn't be knocked flying!
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FC9E8); // It couldn't be knocked flying!
         return;
     }
 
     if (pokemon == target) {
         SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FCA10); // {POKEMON_0} couldn't be knocked flying!
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FCA10); // {POKEMON_0} couldn't be knocked flying!
         return;
     }
     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
     if (AbilityIsActive(target,ABILITY_SUCTION_CUPS)) {
-        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FCBCC); // {POKEMON_0} is anchored! It can't be knocked flying!
+        TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FCBCC); // {POKEMON_0} is anchored! It can't be knocked flying!
         return;
     }
 
     GetEntInfo(target)->action.direction = (direction + 4) & DIRECTION_MASK;
     sub_806CDD4(target, 6, (direction + 4) & DIRECTION_MASK);
     sub_80421C0(target,0x1a3);
-    TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80F8A0C); // {POKEMON_0} was blown away!
+    TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80F8A0C); // {POKEMON_0} was blown away!
     flag = TRUE;
     entity = NULL;
 
@@ -104,7 +104,7 @@ void BlowAwayTarget(Entity *pokemon, Entity *target, u32 direction)
 
     if (!flag) {
         sub_807D068(target,&target->pos);
-        sub_806F370(pokemon,target,gBlowAwayDmgValue,0,0,0,DUNGEON_EXIT_FAINTED_FROM_BEING_KNOCKED,RESIDUAL_DAMAGE_REGULAR,0,0);
+        sub_806F370_Async(pokemon,target,gBlowAwayDmgValue,0,0,0,DUNGEON_EXIT_FAINTED_FROM_BEING_KNOCKED,RESIDUAL_DAMAGE_REGULAR,0,0);
     }
     if (IsFloorOver()) {
         return;
@@ -115,7 +115,7 @@ void BlowAwayTarget(Entity *pokemon, Entity *target, u32 direction)
         InitPokemonMove(&move, MOVE_REGULAR_ATTACK);
         if (!sub_80571F0(entity,&move)) {
             TrySendImmobilizeSleepEndMsg(pokemon,entity);
-            sub_806F370(pokemon,entity,gBlowAwayDmgValue,0,0,0,DUNGEON_EXIT_FELLED_BY_POKEMON_FLYING,RESIDUAL_DAMAGE_REGULAR,0,0);
+            sub_806F370_Async(pokemon,entity,gBlowAwayDmgValue,0,0,0,DUNGEON_EXIT_FELLED_BY_POKEMON_FLYING,RESIDUAL_DAMAGE_REGULAR,0,0);
         }
     }
     if (IsFloorOver())
@@ -138,7 +138,7 @@ void BlowAwayTarget(Entity *pokemon, Entity *target, u32 direction)
         sub_807EC28(FALSE);
     }
     sub_806A5B8(target);
-    TryTriggerMonsterHouseWithMsg(target,gDungeon->forceMonsterHouse);
+    TryTriggerMonsterHouseWithMsg_Async(target,gDungeon->forceMonsterHouse);
 }
 
 void sub_807D068(Entity *pokemon, DungeonPos *pos)

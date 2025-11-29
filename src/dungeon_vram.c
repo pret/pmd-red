@@ -46,7 +46,7 @@ struct DungeonPalFile
 
 extern struct DungeonPalFile *gDungeonPaletteFile;
 extern struct DungeonPalFile *gUnknown_202EC94;
-extern RGB gUnknown_202ECA4[];
+extern RGB_Struct gUnknown_202ECA4[33];
 extern OpenedFile *gUnknown_202EC9C;
 
 static void sub_803E490(u32);
@@ -260,7 +260,7 @@ void sub_803E668(u32 unused)
     sUnknown_202EDD4--;
 }
 
-void sub_803E708(s32 numFrames, u32 a1)
+void DungeonWaitFrames_Async(s32 numFrames, u32 a1)
 {
     while (numFrames != 0) {
         DungeonRunFrameActions(a1);
@@ -354,12 +354,12 @@ void sub_803E830(void)
     gUnknown_203B40D = 0;
 }
 
-static const RGB sBlackRgb = {0, 0, 0};
+static const RGB_Struct sBlackRgb = {0, 0, 0};
 
 void sub_803E874(bool8 r10, s32 r9)
 {
     s32 i, index, count;
-    const RGB *color;
+    const RGB_Struct *color;
 
     color = gDungeonPaletteFile->unk4;
     SetBGPaletteBufferColorRGB(0, &sBlackRgb, gDungeonBrightness, gDungeon->colorRamp);
@@ -412,7 +412,7 @@ void sub_803E874(bool8 r10, s32 r9)
 void BgColorCallNullsub4(void)
 {
     s32 i, index, count;
-    const RGB *color;
+    const RGB_Struct *color;
 
     color = ((struct DungeonPalFile*) gDungeon->paletFile)->unk4;
     index = 256;
@@ -427,7 +427,7 @@ void BgColorCallNullsub4(void)
 void sub_803EA10(void)
 {
     s32 i, index, count;
-    const RGB *color;
+    const RGB_Struct *color;
 
     color= gDungeonPaletteFile->unk4;
     SetBGPaletteBufferColorRGB(0, &sBlackRgb, gDungeonBrightness, gDungeon->colorRamp);
@@ -461,10 +461,10 @@ static const WindowTemplates gUnknown_80F62B0 =
     .id = {
         [0] = {
             .type = WINDOW_TYPE_0,
-            .pos = {2, 15},
+            .pos = { 2, 15 },
             .width = 26,
             .height = 5,
-            .unk10 = 7,
+            .totalHeight = 7,
             .unk12 = 0,
             .header = NULL,
         },
@@ -479,10 +479,10 @@ static const WindowTemplates gUnknown_80F6310 =
     .id = {
         [0] = {
             .type = WINDOW_TYPE_NORMAL,
-            .pos = {2, 3},
+            .pos = { 2, 3 },
             .width = 6,
             .height = 7,
-            .unk10 = 7,
+            .totalHeight = 7,
             .unk12 = 0,
             .header = NULL,
         },
@@ -497,28 +497,28 @@ static const WindowTemplates gUnknown_80F6370 =
     .id = {
         [0] = {
             .type = WINDOW_TYPE_NORMAL,
-            .pos = {2, 3},
+            .pos = { 2, 3 },
             .width = 6,
             .height = 7,
-            .unk10 = 7,
+            .totalHeight = 7,
             .unk12 = 0,
             .header = NULL,
         },
         [1] = {
             .type = WINDOW_TYPE_NORMAL,
-            .pos = {10, 4},
+            .pos = { 10, 4 },
             .width = 17,
             .height = 2,
-            .unk10 = 2,
+            .totalHeight = 2,
             .unk12 = 0,
             .header = NULL,
         },
         [2] = {
             .type = WINDOW_TYPE_NORMAL,
-            .pos = {2, 13},
+            .pos = { 2, 13 },
             .width = 26,
             .height = 6,
-            .unk10 = 6,
+            .totalHeight = 6,
             .unk12 = 0,
             .header = NULL,
         },
@@ -531,10 +531,10 @@ static const WindowTemplates gUnknown_80F63D0 =
     .id = {
         [0] = {
             .type = WINDOW_TYPE_NORMAL,
-            .pos = {2, 3},
+            .pos = { 2, 3 },
             .width = 26,
             .height = 14,
-            .unk10 = 18,
+            .totalHeight = 18,
             .unk12 = 2,
             .header = NULL,
         },

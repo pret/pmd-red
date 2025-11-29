@@ -13,13 +13,13 @@ static const struct ScriptCommand s_gs200_g0_s0_station_sref_script[] = { /* 0x8
     JUMP_SCRIPT(COMMON_ENTER),
 };
 
-static const struct ScriptRef s_gs200_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs200_g0_s0_station_sref_script }; /* 0x824fa90 */
+static const struct ScriptRef s_gs200_g0_s0_station_sref = { ENTER_CONTROL , 1, NULL, s_gs200_g0_s0_station_sref_script }; /* 0x824fa90 */
 
 static const struct ScriptCommand s_gs200_g1_s0_station_sref_script[] = { /* 0x824fa9c */
     DEBUGINFO_O(19),
     SELECT_MAP(MAP_FROSTY_FOREST_END),
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(114),
+    BGM_SWITCH(MUS_IN_THE_DEPTHS_OF_THE_PIT),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     { 0x3b, 0x39,  0x0001,  0x00000000,  0x00000000, NULL },
@@ -40,7 +40,7 @@ static const struct ScriptCommand s_gs200_g1_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs200_g1_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs200_g1_s0_station_sref_script }; /* 0x824fca8 */
+static const struct ScriptRef s_gs200_g1_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs200_g1_s0_station_sref_script }; /* 0x824fca8 */
 
 
 static const struct ScriptCommand s_gs200_g1_s0_lives0_dlg0[] = { /* 0x824fcb4 */
@@ -233,7 +233,7 @@ static const struct ScriptCommand s_gs200_g1_s0_lives0_dlg0[] = { /* 0x824fcb4 *
     MSG_NPC(1, _(" Thank you.{WAIT_PRESS}\nYou saved us.")),
     TEXTBOX_CLEAR,
     ALERT_CUE(8),
-    ROTATE(4, 1, DIRECTION_NORTHEAST),
+    ROTATE_TO(4, DIR_TRANS_SPINRIGHT1, DIRECTION_NORTHEAST),
     WAIT(30),
     PORTRAIT(PLACEMENT_MIDDLE_TOP_LEFT, 0x0003, 0x00000000),
     MSG_NPC(3, _(" ..................")),
@@ -284,7 +284,7 @@ static const struct ScriptCommand s_gs200_g1_s0_lives0_dlg0[] = { /* 0x824fcb4 *
     BGM_STOP,
     FANFARE_PLAY(204),
     MSG_INSTANT(_("{CENTER_ALIGN}{NAME_3} joined the team!")),
-    { 0xe1, 0x00,  0x00cc,  0x00000000,  0x00000000, NULL },
+    WAIT_FANFARE1(204),
     TEXTBOX_CLEAR,
     { 0x3b, 0x1a,  0x0000,  0x00000000,  0x00000000, NULL },
     ASK1(FALSE, /*default*/ -1, /* speaker */ -1, _("Give a nickname to {NAME_3}?")),
@@ -347,7 +347,7 @@ static const struct ScriptCommand s_gs200_g1_s0_lives1_dlg0[] = { /* 0x825174c *
     ALERT_CUE(5),
     AWAIT_CUE(6),
     SELECT_ANIMATION(2),
-    ROTATE(4, 2, DIRECTION_NORTHWEST),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_NORTHWEST),
     ALERT_CUE(5),
     AWAIT_CUE(6),
     CALL_SCRIPT(JUMP_SURPRISE_FUNC),
@@ -431,18 +431,18 @@ static const struct ScriptCommand s_gs200_g1_s1_lives0_dlg0[] = { /* 0x8251cac *
     SELECT_ANIMATION(23),
     WAIT(32),
     SELECT_ANIMATION(2),
-    ROTATE(8, 2, DIRECTION_NORTH),
+    ROTATE_TO(8, DIR_TRANS_SPINLEFT1, DIRECTION_NORTH),
     ALERT_CUE(5),
     AWAIT_CUE(8),
-    ROTATE(4, 1, DIRECTION_SOUTH),
+    ROTATE_TO(4, DIR_TRANS_SPINRIGHT1, DIRECTION_SOUTH),
     AWAIT_CUE(8),
-    ROTATE(8, 1, DIRECTION_NORTH),
+    ROTATE_TO(8, DIR_TRANS_SPINRIGHT1, DIRECTION_NORTH),
     ALERT_CUE(5),
     AWAIT_CUE(8),
-    ROTATE(4, 1, DIRECTION_SOUTH),
+    ROTATE_TO(4, DIR_TRANS_SPINRIGHT1, DIRECTION_SOUTH),
     ALERT_CUE(5),
     AWAIT_CUE(8),
-    ROTATE(4, 2, DIRECTION_SOUTHEAST),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_SOUTHEAST),
     ALERT_CUE(5),
     AWAIT_CUE(8),
     HALT,
@@ -493,4 +493,4 @@ static const struct GroundLink s_gs200_links[] = { /* 0x8251f28 */
     {},
 };
 
-/*extern*/ const struct GroundScriptHeader gGroundScript_gs200 = { LPARRAY(s_gs200_groups), s_gs200_links }; /* 0x8251f30 */
+const GroundScriptHeader gGroundScript_gs200 = { LPARRAY(s_gs200_groups), s_gs200_links }; /* 0x8251f30 */

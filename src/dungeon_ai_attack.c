@@ -901,7 +901,7 @@ void HandleUseMoveAIAction(Entity *target)
     sub_806A1B0(target);
 }
 
-void HandleUseOrbAction(Entity *pokemon)
+void HandleUseOrbAction_Async(Entity *pokemon)
 {
     bool8 r4;
     Item *item;
@@ -918,14 +918,14 @@ void HandleUseOrbAction(Entity *pokemon)
 
     if (item->flags & ITEM_FLAG_STICKY) {
         sub_8045BF8(gFormatBuffer_Items[0], item);
-        LogMessageByIdWithPopupCheckUser(pokemon, gItemStickyDoesntWorkText);
+        LogMessageByIdWithPopupCheckUser_Async(pokemon, gItemStickyDoesntWorkText);
         return;
     }
 
     act = entityInfo->action;
 
     if (IsFloorwideFixedRoom()) {
-        LogMessageByIdWithPopupCheckUser(pokemon, gPtrMysteriousPowerPreventedUseMessage);
+        LogMessageByIdWithPopupCheckUser_Async(pokemon, gPtrMysteriousPowerPreventedUseMessage);
         r4 = TRUE;
     }
     else {
@@ -945,20 +945,20 @@ void HandleUseOrbAction(Entity *pokemon)
 
         if (entityInfo->cringeClassStatus.status == 1) {
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], pokemon, 0);
-            LogMessageByIdWithPopupCheckUser(pokemon, gUnknown_80FC714);
+            LogMessageByIdWithPopupCheckUser_Async(pokemon, gUnknown_80FC714);
             r4 = FALSE;
             r8 = FALSE;
         }
         else if (entityInfo->cringeClassStatus.status == 7) {
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], pokemon, 0);
-            LogMessageByIdWithPopupCheckUser(pokemon, gUnknown_80FC718);
+            LogMessageByIdWithPopupCheckUser_Async(pokemon, gUnknown_80FC718);
             r4 = FALSE;
             r8 = FALSE;
         }
         else if (entityInfo->burnClassStatus.status == 4)
         {
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], pokemon, 0);
-            LogMessageByIdWithPopupCheckUser(pokemon, gUnknown_80FC6A8);
+            LogMessageByIdWithPopupCheckUser_Async(pokemon, gUnknown_80FC6A8);
             r4 = FALSE;
             r8 = FALSE;
         }
@@ -995,7 +995,7 @@ void HandleUseOrbAction(Entity *pokemon)
         }
 
         sub_806A5B8(pokemon);
-        TryTriggerMonsterHouseWithMsg(pokemon, gDungeon->forceMonsterHouse);
+        TryTriggerMonsterHouseWithMsg_Async(pokemon, gDungeon->forceMonsterHouse);
     }
     else if (r4)
         sub_8044D40(&act, 0);

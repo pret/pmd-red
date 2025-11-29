@@ -34,7 +34,7 @@ bool8 sub_809D678(Action *action);
 bool8 sub_809D684(Action *action, ScriptInfoSmall *scriptInfo);
 void SetPredefinedScript(Action *param_1, s16 index, const ScriptCommand *param_3);
 bool8 GetPredefinedScript(Action *param_1, ScriptInfoSmall *script, s32 _index);
-void GetFunctionScript(Action *param_1, ScriptInfoSmall *script, s16 index);
+void GetFunctionScript(Action *param_1, ScriptInfoSmall *script, s16 scriptID);
 bool8 ActionResetScriptData(Action *param_1, const DebugLocation *unused);
 bool8 GroundScript_ExecutePP(Action *action, ActionUnkIds *param_2, ScriptInfoSmall *param_3, const DebugLocation *unused);
 bool8 ExecutePredefinedScript(Action *param_1, ActionUnkIds *param_2, s16 index, const DebugLocation *debug);

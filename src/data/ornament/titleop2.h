@@ -92,4 +92,4 @@ static const axmain sAxMainTitleop2 = {
 	.spriteData = sAxSpritesTitleop2,
 	.positions = NULL,
 };
-const RGB gTitleopPal[] = { INCBIN_RGB("graphics/ornament/pal/titleop.pmdpal") };
+const RGB_Struct gTitleopPal[] = { INCBIN_RGB("graphics/ornament/pal/titleop.pmdpal") };

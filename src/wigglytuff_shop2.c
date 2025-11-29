@@ -156,7 +156,7 @@ static void sub_8021A60(void)
     }
 
     for (index = 0; index < MONSTER_MAX; index++) {
-        if (!sub_8098134(index))
+        if (!GetMonSeenFlag(index))
             continue;
 
         areaIndex = CheckSpeciesinWigglytuffFriendArea(index);

@@ -1025,64 +1025,64 @@ const u8 *const gUnknown_80FEF98 = _("Cute Charm caused infatuation!");
 const u8 *const gUnknown_80FEFD0 = _("A horrid stench billowed out!\n{POKEMON_0} became terrified!");
 const u8 *const gUnknown_80FEFF4 = _("Transform can't be used here!");
 const u8 *const gUnknown_80FF01C = _("{POKEMON_0}'s Synchronize took effect!");
-const struct TutorialFlagMsg gUnknown_80FF020 = {
-    0x00, _("Head for the destination while attacking\nfoes with {A_BUTTON}.\nTry not to let a partner faint!")
+const TutorialFlagMsg gUnknown_80FF020 = {
+    TUTORIAL_FLAG_STAIRS_AND_SURVIVE, _("Head for the destination while attacking\nfoes with {A_BUTTON}.\nTry not to let a partner faint!")
 };
 
-const struct TutorialFlagMsg gUnknown_80FF080 = {
-    0x01, _("Foes won't move until you do.\nOpen the menu with {B_BUTTON} and\nthink before you act!")
+const TutorialFlagMsg gUnknown_80FF080 = {
+    TUTORIAL_FLAG_OPEN_MENU, _("Foes won't move until you do.\nOpen the menu with {B_BUTTON} and\nthink before you act!")
 };
 
-const struct TutorialFlagMsg gUnknown_80FF0D8 = {
-    0x02, _("Your team regains HP as it moves.\nHold {B_BUTTON} then press {A_BUTTON} to recover\nHP quickly on the spot.")
+const TutorialFlagMsg gUnknown_80FF0D8 = {
+    TUTORIAL_FLAG_REGAIN_HP, _("Your team regains HP as it moves.\nHold {B_BUTTON} then press {A_BUTTON} to recover\nHP quickly on the spot.")
 };
 
-const struct TutorialFlagMsg gUnknown_80FF13C = {
-    0x0c, _("Defeat foes using moves instead of\n{A_BUTTON} attacks for more Exp. Points.\nChoose and set the move you want to use.")
+const TutorialFlagMsg gUnknown_80FF13C = {
+    TUTORIAL_FLAG_MOVES, _("Defeat foes using moves instead of\n{A_BUTTON} attacks for more Exp. Points.\nChoose and set the move you want to use.")
 };
 
-const struct TutorialFlagMsg gUnknown_80FF1B4 = {
-    0x0d, _("Choose a partner with the Team command\nand set its tactics and IQ skills.\nCooperation with partners is the key!")
+const TutorialFlagMsg gUnknown_80FF1B4 = {
+    TUTORIAL_FLAG_TEAM_MANAGEMENT, _("Choose a partner with the Team command\nand set its tactics and IQ skills.\nCooperation with partners is the key!")
 };
 
-const struct TutorialFlagMsg gMovementTutorial = {
-    0x0e, _("Hold {B_BUTTON} then press {DPAD} to speed up\nmovement. Hold {R_BUTTON} then press {DPAD}\nto move only diagonally.")
+const TutorialFlagMsg gMovementTutorial = {
+    TUTORIAL_FLAG_MOVEMENT, _("Hold {B_BUTTON} then press {DPAD} to speed up\nmovement. Hold {R_BUTTON} then press {DPAD}\nto move only diagonally.")
 };
 
-const struct TutorialFlagMsg gHungerTutorial = {
-    0x0f, _("Eat an Apple or Gummi when your Belly\ngoes down. Being famished can cause\nfainting, so check your Belly in the menu.")
+const TutorialFlagMsg gHungerTutorial = {
+    TUTORIAL_FLAG_MANAGE_BELLY2, _("Eat an Apple or Gummi when your Belly\ngoes down. Being famished can cause\nfainting, so check your Belly in the menu.")
 };
 
-const struct TutorialFlagMsg gFoodTutorial = {
-    0x03, _("Eating an Apple or Gummi fills your Belly.\nChoose them under Items in the menu\nand eat one before your Belly gets empty.")
+const TutorialFlagMsg gFoodTutorial = {
+    TUTORIAL_FLAG_MANAGE_BELLY1, _("Eating an Apple or Gummi fills your Belly.\nChoose them under Items in the menu\nand eat one before your Belly gets empty.")
 };
 
-const struct TutorialFlagMsg gOranTutorial = {
-    0x04, _("An Oran Berry restores HP.\nOpen the menu with {B_BUTTON} and\nselect it under Items.")
+const TutorialFlagMsg gOranTutorial = {
+    TUTORIAL_FLAG_ORAN_BERRY, _("An Oran Berry restores HP.\nOpen the menu with {B_BUTTON} and\nselect it under Items.")
 };
 
-const struct TutorialFlagMsg gCheriTutorial = {
-    0x05, _("A Cheri Berry heals paralysis.\nOpen the menu with {B_BUTTON} and\nselect it under Items.")
+const TutorialFlagMsg gCheriTutorial = {
+    TUTORIAL_FLAG_CHERI_BERRY, _("A Cheri Berry heals paralysis.\nOpen the menu with {B_BUTTON} and\nselect it under Items.")
 };
 
-const struct TutorialFlagMsg gBlastSeedTutorial = {
-    0x06, _("A Blast Seed flames the foe you\nare facing.\nTurn to face the foe, then use the item.")
+const TutorialFlagMsg gBlastSeedTutorial = {
+    TUTORIAL_FLAG_BLAST_SEED, _("A Blast Seed flames the foe you\nare facing.\nTurn to face the foe, then use the item.")
 };
 
-const struct TutorialFlagMsg gUnknown_80FF4A0 = {
-    0x07, _("Gravelerocks can be lobbed at distant foes.\nSet them for use under Items.\nHold {L_BUTTON} then press {R_BUTTON} to throw them.")
+const TutorialFlagMsg gUnknown_80FF4A0 = {
+    TUTORIAL_FLAG_GRAVELEROCK, _("Gravelerocks can be lobbed at distant foes.\nSet them for use under Items.\nHold {L_BUTTON} then press {R_BUTTON} to throw them.")
 };
 
-const struct TutorialFlagMsg gPechaTutorial = {
-    0x09, _("A Pecha Berry heals any kind of poisoning.\nOpen the menu with {B_BUTTON} and\nselect it under Items.")
+const TutorialFlagMsg gPechaTutorial = {
+    TUTORIAL_FLAG_PECHA_BERRY, _("A Pecha Berry heals any kind of poisoning.\nOpen the menu with {B_BUTTON} and\nselect it under Items.")
 };
 
-const struct TutorialFlagMsg gSleepSeedTutorial = {
-    0x0a, _("Throw a Sleep Seed at a foe to put it\nto sleep for a little while.\nEating it will put you to sleep!")
+const TutorialFlagMsg gSleepSeedTutorial = {
+    TUTORIAL_FLAG_SLEEP_SEED, _("Throw a Sleep Seed at a foe to put it\nto sleep for a little while.\nEating it will put you to sleep!")
 };
 
-const struct TutorialFlagMsg gMoneyTutorial = {
-    0x0b, _("{POKE} is the money in this world.\nCollect and save it to buy useful\nitems.")
+const TutorialFlagMsg gMoneyTutorial = {
+    TUTORIAL_FLAG_MONEY, _("{POKE} is the money in this world.\nCollect and save it to buy useful\nitems.")
 };
 
 const u8 *const gUnknown_80FF674 = _("You're a thief!\nYou're not recognized as a rescuer!");

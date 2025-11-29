@@ -30,18 +30,24 @@ static EWRAM_INIT struct WorldMap *sWorldMapPtr = NULL;
 static EWRAM_INIT WindowTemplates sWorldMapWindows = {
     .id = {
         [0] = {
+            .flags = WINTEMPLATE_FLAG_NONE,
             .type = WINDOW_TYPE_NORMAL,
-            .pos = {2, 10},
+            .pos = { 2, 10 },
             .width = 26,
             .height = 9,
-            .unk10 = 9,
+            .totalHeight = 9,
+            .unk12 = 0,
+            .header = NULL,
         },
         [1] = {
+            .flags = WINTEMPLATE_FLAG_NONE,
             .type = WINDOW_TYPE_NORMAL,
-            .pos = {23, 6},
+            .pos = { 23, 6 },
             .width = 5,
             .height = 3,
-            .unk10 = 3,
+            .totalHeight = 3,
+            .unk12 = 0,
+            .header = NULL,
         },
         [2] = WIN_TEMPLATE_DUMMY,
         [3] = WIN_TEMPLATE_DUMMY,
@@ -98,7 +104,7 @@ void ShowWorldMap_Async(struct WorldMapSetupStruct *setupPtr)
         speciesId = 0;
     }
 
-    dungeonEnter = BufferDungeonRequirementsText(setupPtr->info.unk4.unk0.id, speciesId, text, setupPtr->info.unk6C, FALSE);
+    dungeonEnter = BufferDungeonRequirementsText(setupPtr->info.unk4.unk0.id, speciesId, text, setupPtr->info.canChangeLeader, FALSE);
     if (dungeonEnter == DUNGEON_REQUIREMENTS_PASS) {
         setupPtr->dungeonEntered = TRUE;
     }
@@ -273,7 +279,7 @@ static void sub_801059C(void)
     u8 filename[0xC];
     s32 i, size;
 
-    Pokemon *pokeStruct = GetPlayerPokemonStruct();
+    Pokemon *pokeStruct = GetLeaderMon1();
     OpenedFile *file = OpenFileAndGetFileDataPtr(gUnknown_80D4014[0], &gTitleMenuFileArchive);
     OpenedFile *file2 = OpenFileAndGetFileDataPtr(gUnknown_80D4014[1], &gTitleMenuFileArchive);
 
@@ -424,7 +430,7 @@ static bool8 FadeScreen(void)
 
     if (sWorldMapPtr->brightness < 31) {
         s32 i;
-        RGB *color = (void *) sWorldMapPtr->unk1100[0]->data;
+        RGB_Struct *color = (void *) sWorldMapPtr->unk1100[0]->data;
 
         if (++sWorldMapPtr->brightness >= 31) {
             sWorldMapPtr->brightness = 31;
@@ -478,11 +484,14 @@ static void PrintDungeonName(DungeonLocation *dungLocation)
     WindowTemplates windows = {
         .id = {
             [0] = {
+                .flags = WINTEMPLATE_FLAG_NONE,
                 .type = WINDOW_TYPE_NORMAL,
-                .pos = {12, 2},
+                .pos = { 12, 2 },
                 .width = 16,
                 .height = 2,
-                .unk10 = 2,
+                .totalHeight = 2,
+                .unk12 = 0,
+                .header = NULL,
             },
             [1] = WIN_TEMPLATE_DUMMY,
             [2] = WIN_TEMPLATE_DUMMY,
@@ -511,7 +520,7 @@ static void PrintDialogueMessage_Async(const u8 *text)
     CreateMenuDialogueBoxAndPortrait(text, NULL, 0, NULL, NULL, 3, 0, NULL, 0x301);
 
     do {
-        DrawDialogueBoxString();
+        DrawDialogueBoxString_Async();
         WorldMap_RunFrameActions();
     } while (sub_80144A4(&a) != 0);
 
@@ -533,7 +542,7 @@ static bool8 PlayerEnterDungeonPrompt_Async(u8 *str)
     height /= 8;
 
     sWorldMapWindows.id[0].pos.y = 19 - height;
-    sWorldMapWindows.id[0].unk10 = height;
+    sWorldMapWindows.id[0].totalHeight = height;
     sWorldMapWindows.id[0].height = height;
     sWorldMapWindows.id[1].pos.y = 14 - height;
     ShowWindows(&sWorldMapWindows, TRUE, TRUE);

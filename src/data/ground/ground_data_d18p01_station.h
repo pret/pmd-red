@@ -13,13 +13,13 @@ static const struct ScriptCommand s_gs214_g0_s0_station_sref_script[] = { /* 0x8
     JUMP_SCRIPT(COMMON_ENTER),
 };
 
-static const struct ScriptRef s_gs214_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs214_g0_s0_station_sref_script }; /* 0x826653c */
+static const struct ScriptRef s_gs214_g0_s0_station_sref = { ENTER_CONTROL , 1, NULL, s_gs214_g0_s0_station_sref_script }; /* 0x826653c */
 
 static const struct ScriptCommand s_gs214_g1_s0_station_sref_script[] = { /* 0x8266548 */
     DEBUGINFO_O(19),
     SELECT_MAP(214),
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(114),
+    BGM_SWITCH(MUS_IN_THE_DEPTHS_OF_THE_PIT),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     BGM_FADEOUT(60),
@@ -28,7 +28,7 @@ static const struct ScriptCommand s_gs214_g1_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs214_g1_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs214_g1_s0_station_sref_script }; /* 0x82665e8 */
+static const struct ScriptRef s_gs214_g1_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs214_g1_s0_station_sref_script }; /* 0x82665e8 */
 
 static const struct ScriptCommand s_gs214_g1_s0_eff0_script[] = { /* 0x82665f4 */
     DEBUGINFO_O(34),
@@ -53,13 +53,13 @@ static const struct ScriptCommand s_gs214_g1_s0_lives0_dlg0[] = { /* 0x8266664 *
     ALERT_CUE(7),
     { 0x28, 0x01,  0x0005,  0x00000005,  0x00005077, NULL },
     { 0x27, 0x01,  0x0005,  0x00000005,  0x00005077, NULL },
-    { 0xe2, 0x00,  0x01f1,  0x00000000,  0x00000000, NULL },
+    WAIT_FANFARE2(497),
     WAIT(20),
     FANFARE_PLAY2(497),
     ALERT_CUE(7),
     { 0x28, 0x01,  0x0005,  0x00000005,  0x00005077, NULL },
     { 0x27, 0x01,  0x0005,  0x00000005,  0x00005077, NULL },
-    { 0xe2, 0x00,  0x01f1,  0x00000000,  0x00000000, NULL },
+    WAIT_FANFARE2(497),
     WAIT(20),
     ALERT_CUE(7),
     AWAIT_CUE(5),
@@ -107,8 +107,8 @@ static const struct ScriptCommand s_gs214_g1_s0_lives0_dlg0[] = { /* 0x8266664 *
     CANCEL_OBJECTS(1, 1),
     SELECT_EFFECTS(1, 1),
     { 0x27, 0x01,  0x0001,  0x0000003c,  0x00ffffff, NULL },
-    { 0xe2, 0x00,  0x01fb,  0x00000000,  0x00000000, NULL },
-    BGM_SWITCH(114),
+    WAIT_FANFARE2(507),
+    BGM_SWITCH(MUS_IN_THE_DEPTHS_OF_THE_PIT),
     WAIT(60),
     MSG_INSTANT(_("{CENTER_ALIGN}Glittering in the seven colors\n{CENTER_ALIGN}of the rainbow, this wing is\n{CENTER_ALIGN}beautiful beyond description!")),
     TEXTBOX_CLEAR,
@@ -127,13 +127,13 @@ static const struct ScriptCommand s_gs214_g1_s0_lives0_dlg0[] = { /* 0x8266664 *
     BGM_STOP,
     FANFARE_PLAY(212),
     MSG_INSTANT(_("{CENTER_ALIGN}{NAME_0} received\n{CENTER_ALIGN}the {COLOR GREEN_I}Rainbow Wing{RESET}.")),
-    { 0xe1, 0x00,  0x00d4,  0x00000000,  0x00000000, NULL },
+    WAIT_FANFARE1(212),
     TEXTBOX_CLEAR,
     WAIT(20),
     MSG_INSTANT(_("{CENTER_ALIGN}And...")),
     FANFARE_PLAY(205),
     MSG_INSTANT(_("{CENTER_ALIGN}Gained access to\n{CENTER_ALIGN}{COLOR YELLOW_D}Mt. Faraway{RESET}!")),
-    { 0xe1, 0x00,  0x00cd,  0x00000000,  0x00000000, NULL },
+    WAIT_FANFARE1(205),
     TEXTBOX_CLEAR,
     WAIT(30),
     ALERT_CUE(3),
@@ -165,7 +165,7 @@ static const struct ScriptCommand s_gs214_g1_s0_lives1_dlg0[] = { /* 0x8266f30 *
     AWAIT_CUE(7),
     FANFARE_PLAY2(465),
     CALL_SCRIPT(NOTICE_FUNC),
-    { 0xe2, 0x00,  0x01d1,  0x00000000,  0x00000000, NULL },
+    WAIT_FANFARE2(465),
     AWAIT_CUE(7),
     SELECT_ANIMATION(9),
     ALERT_CUE(5),
@@ -173,7 +173,7 @@ static const struct ScriptCommand s_gs214_g1_s0_lives1_dlg0[] = { /* 0x8266f30 *
     FANFARE_PLAY2(664),
     { 0x56, 0x00,  0x0000,  0x00000053,  0x00000000, NULL },
     { 0xde, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
-    { 0xe2, 0x00,  0x0298,  0x00000000,  0x00000000, NULL },
+    WAIT_FANFARE2(664),
     SELECT_ANIMATION(22),
     WAIT(10),
     STOP_ANIMATION_ON_CURRENT_FRAME,
@@ -257,4 +257,4 @@ static const struct GroundLink s_gs214_links[] = { /* 0x82673ac */
     {},
 };
 
-/*extern*/ const struct GroundScriptHeader gGroundScript_gs214 = { LPARRAY(s_gs214_groups), s_gs214_links }; /* 0x82673b4 */
+const GroundScriptHeader gGroundScript_gs214 = { LPARRAY(s_gs214_groups), s_gs214_links }; /* 0x82673b4 */

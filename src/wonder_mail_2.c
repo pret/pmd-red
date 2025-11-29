@@ -14,6 +14,7 @@
 #include "menu_input.h"
 #include "pokemon.h"
 #include "pokemon_mail.h"
+#include "rescue_team_info.h"
 #include "save.h"
 #include "save_write.h"
 #include "string_format.h"
@@ -40,7 +41,6 @@ enum States {
 
 static EWRAM_INIT struct unkStruct_203B2C8 *sUnknown_203B2C8 = {NULL};
 
-extern void sub_80920D8(u8 *buffer);
 extern void sub_802B548(u32);
 
 extern void sub_802B560(void);
@@ -145,7 +145,7 @@ void sub_802B3E0(void)
 
   switch(sUnknown_203B2C8->currState) {
       case INIT_STATE:
-        if (sub_80023E4(0)) {
+        if (CheckQuest(QUEST_SET_TEAM_NAME)) {
             // Copy Team Name to buffer
             sub_80920D8(teamNameBuffer);
         }

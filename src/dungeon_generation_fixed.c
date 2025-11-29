@@ -295,7 +295,7 @@ static const struct FixedRoomEntitiesInfo sFixedRoomEntities[204] = {
     },
     [34] = {
         .speciesId = MONSTER_DEOXYS_NORMAL,
-        .monsterBehavior = BEHAVIOR_29,
+        .monsterBehavior = BEHAVIOR_DEOXYS_NORMAL,
         .trapId = NUM_TRAPS,
         .roomId = 0,
     },
@@ -988,7 +988,7 @@ void sub_8051E7C(Entity *pokemon)
     Tile *tile = GetTileMut(pokemon->pos.x, pokemon->pos.y - 1);
 
     if (!(tile->terrainFlags & TERRAIN_TYPE_UNK_x1000)) {
-        LogMessageByIdWithPopupCheckUser(pokemon, gUnknown_80FDDF0); // It can't be used here!
+        LogMessageByIdWithPopupCheckUser_Async(pokemon, gUnknown_80FDDF0); // It can't be used here!
     }
     else if (!gDungeon->unk3A09) {
         s32 x, y;
@@ -1048,11 +1048,11 @@ void sub_8051E7C(Entity *pokemon)
         sub_8049B8C();
         UpdateTrapsVisibility();
         sub_80429FC(&pos);
-        LogMessageByIdWithPopupCheckUser(pokemon, gUnknown_80FDDD0); // The closed corridor was opened!
-        sub_803E708(0x14, 0x3C);
+        LogMessageByIdWithPopupCheckUser_Async(pokemon, gUnknown_80FDDD0); // The closed corridor was opened!
+        DungeonWaitFrames_Async(0x14, 0x3C);
     }
     else {
-        LogMessageByIdWithPopupCheckUser(pokemon, gUnknown_80FDDF0); // It can't be used here!
+        LogMessageByIdWithPopupCheckUser_Async(pokemon, gUnknown_80FDDF0); // It can't be used here!
     }
 }
 

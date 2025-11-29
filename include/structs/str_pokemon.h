@@ -113,7 +113,7 @@ typedef struct MonsterDataEntry
     /* 0x9 */ u8 bodySize;
     /* 0xC */ s32 movementSpeed;
     /* 0x10 */ u16 dialogueSprites; // Bitwise flags for whether a dialogue sprite/portrait is available for each emotion.
-    bool8 unk12;
+    bool8 unk12; // Appears to control whether the "has friend area" check is skipped
     /* 0x13 */ u8 types[2];
     /* 0x15 */ u8 movementType;
     /* 0x16 */ u8 friendArea;

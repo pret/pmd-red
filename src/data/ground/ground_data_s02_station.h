@@ -24,7 +24,7 @@ static const struct ScriptCommand s_gs224_g0_s0_station_sref_script[] = { /* 0x8
     JUMP_SCRIPT(COMMON_ENTER),
 };
 
-static const struct ScriptRef s_gs224_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs224_g0_s0_station_sref_script }; /* 0x826e308 */
+static const struct ScriptRef s_gs224_g0_s0_station_sref = { ENTER_CONTROL , 1, NULL, s_gs224_g0_s0_station_sref_script }; /* 0x826e308 */
 
 static const struct ScriptCommand s_gs224_g1_s0_obj0_dlg1[] = { /* 0x826e314 */
     DEBUGINFO_O(30),
@@ -43,7 +43,7 @@ static const struct ScriptCommand s_gs224_g2_s0_station_sref_script[] = { /* 0x8
     SELECT_MAP(224),
     SELECT_ENTITIES(1, 0),
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(46),
+    BGM_SWITCH(MUS_OPENING_TITLE),
     WAIT(60),
     { 0x22, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
     WAIT(480),
@@ -52,14 +52,14 @@ static const struct ScriptCommand s_gs224_g2_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs224_g2_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs224_g2_s0_station_sref_script }; /* 0x826e454 */
+static const struct ScriptRef s_gs224_g2_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs224_g2_s0_station_sref_script }; /* 0x826e454 */
 
 static const struct ScriptCommand s_gs224_g3_s0_station_sref_script[] = { /* 0x826e460 */
     DEBUGINFO_O(58),
     SELECT_MAP(224),
     SELECT_ENTITIES(1, 0),
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(43),
+    BGM_SWITCH(MUS_TITLE_SCREEN),
     { 0x27, 0x01,  0x0001,  0x0000003c,  0x00ffffff, NULL },
     SELECT_ENTITIES(-1, 1),
     SELECT_ENTITIES(-1, 2),
@@ -74,7 +74,7 @@ static const struct ScriptCommand s_gs224_g3_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs224_g3_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs224_g3_s0_station_sref_script }; /* 0x826e570 */
+static const struct ScriptRef s_gs224_g3_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs224_g3_s0_station_sref_script }; /* 0x826e570 */
 
 static const struct ScriptCommand s_gs224_g3_s0_eff0_script[] = { /* 0x826e57c */
     DEBUGINFO_O(80),
@@ -98,7 +98,7 @@ static const struct ScriptCommand s_gs224_g3_s1_lives0_dlg0[] = { /* 0x826e60c *
     { 0x52, 0x00,  0x0000,  0x00400000,  0x00000000, NULL },
     AWAIT_CUE(5),
     { 0x53, 0x00,  0x0000,  0x00400000,  0x00000000, NULL },
-    { 0x8b, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    SET_DIR_WAIT(DIRECTION_WEST, 0),
     { 0x80, 0x00,  0x0200,  0x00000004,  0x00000000, NULL },
     ALERT_CUE(6),
     END_DELETE,
@@ -145,7 +145,7 @@ static const struct ScriptCommand s_gs224_g4_s0_station_sref_script[] = { /* 0x8
     SELECT_MAP(224),
     SELECT_ENTITIES(1, 0),
     SELECT_ENTITIES(-1, 0),
-    BGM_SWITCH(43),
+    BGM_SWITCH(MUS_TITLE_SCREEN),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     WAIT(120),
     ALERT_CUE(4),
@@ -155,7 +155,7 @@ static const struct ScriptCommand s_gs224_g4_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs224_g4_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs224_g4_s0_station_sref_script }; /* 0x826e97c */
+static const struct ScriptRef s_gs224_g4_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs224_g4_s0_station_sref_script }; /* 0x826e97c */
 
 static const struct ScriptCommand s_gs224_g4_s0_eff0_script[] = { /* 0x826e988 */
     DEBUGINFO_O(161),
@@ -256,4 +256,4 @@ static const struct GroundLink s_gs224_links[] = { /* 0x826ebec */
     /* link  10 */ { { /*x*/  26, /*y*/  12, /*flags*/ 0, 0 }, /*w*/  1, /*h*/  1, /*ret*/ 2, /*?*/ 1 },
 };
 
-/*extern*/ const struct GroundScriptHeader gGroundScript_gs224 = { LPARRAY(s_gs224_groups), s_gs224_links }; /* 0x826ec44 */
+const GroundScriptHeader gGroundScript_gs224 = { LPARRAY(s_gs224_groups), s_gs224_links }; /* 0x826ec44 */

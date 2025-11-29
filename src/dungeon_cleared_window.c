@@ -12,17 +12,18 @@
 #include "game_options.h"
 #include "constants/dungeon_exit.h"
 
-void ShowDungeonClearedWindow(void)
+void ShowDungeonClearedWindow_Async(void)
 {
     WindowHeader header;
     WindowTemplates windows = {
         .id = {
             [0] = {
+                .flags = WINTEMPLATE_FLAG_NONE,
                 .type = WINDOW_TYPE_WITH_HEADER,
-                .pos = {4, 3},
+                .pos = { 4, 3 },
                 .width = 22,
                 .height = 14,
-                .unk10 = 14,
+                .totalHeight = 14,
                 .unk12 = 0,
                 .header = &header,
             },
@@ -36,28 +37,35 @@ void ShowDungeonClearedWindow(void)
     header.currId = 0;
     header.width = 14;
     header.f3 = 0;
+
     windows.id[0].pos.y = 20;
+
     DungeonShowWindows(&windows, TRUE);
-    if (gDungeon->exitSummary.exitReason >= DUNGEON_EXIT_REASON_SUCCESS) {
+
+    if (gDungeon->exitSummary.exitReason >= DUNGEON_EXIT_REASON_SUCCESS)
         PlayDungeonCompleteBGM();
-    }
-    else {
+    else
         PlayDungeonFailBGM();
-    }
-    PrintOnDungeonFinishedWindow(0, gText_TheLastOuting,&gDungeon->exitSummary);
-    while(TRUE) {
-        sub_803E668(0x36);
+
+    PrintOnDungeonFinishedWindow(0, gText_TheLastOuting, &gDungeon->exitSummary);
+
+    while (TRUE) {
+        sub_803E668(54);
         UpdateDungeonMusic();
-        if (windows.id[0].pos.y >= 4){
+
+        if (windows.id[0].pos.y >= 4) {
             windows.id[0].pos.y--;
-            windows.id[0].unk0 = 0xa0;
+            windows.id[0].flags = WINTEMPLATE_FLAG_x20 | WINTEMPLATE_FLAG_x80;
             DungeonShowWindows(&windows, TRUE);
             continue;
         }
+
         if (sub_8094D14())
             break;
+
         if (gRealInputs.pressed & A_BUTTON)
             break;
     }
+
     PlayDungeonConfirmationSE();
 }

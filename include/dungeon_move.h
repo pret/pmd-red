@@ -25,7 +25,7 @@ void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move *move, 
 bool8 HandleRegularDamagingMove(Entity *attacker, Entity *target, Move *move, s32 itemId);
 s32 HandleDamagingMove(Entity *attacker, Entity *target, Move *move, s24_8 modifier, s32 itemId);
 s32 sub_80556BC(Entity *attacker, Entity *target, u8 moveType, Move *move, s24_8 modifier, s32 itemId);
-s32 sub_8055864(Entity *attacker, Entity *target, Move *move, s32 param_4, s32 itemId);
+s32 sub_8055864_Async(Entity *attacker, Entity *target, Move *move, s32 param_4, s32 itemId);
 bool8 sub_8055988(Entity *r2, Entity *r4);
 void sub_80559DC(Entity *entity1, Entity *entity2);
 

@@ -396,5 +396,5 @@ static const axmain sAxMainTitlebg1 = {
 	.spriteData = sAxSpritesTitlebg1,
 	.positions = NULL,
 };
-const RGB gTitlebgPal[] = { INCBIN_RGB("graphics/ornament/pal/titlebg.pmdpal") };
+const RGB_Struct gTitlebgPal[] = { INCBIN_RGB("graphics/ornament/pal/titlebg.pmdpal") };
 

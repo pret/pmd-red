@@ -1,4 +1,4 @@
-const RGB gFlag02Pal[] = { INCBIN_RGB("graphics/ornament/pal/flag02.pmdpal") };
+const RGB_Struct gFlag02Pal[] = { INCBIN_RGB("graphics/ornament/pal/flag02.pmdpal") };
 
 static const axmain sAxMainFlag02;
 const SiroArchive gAxFlag02 = {"SIRO", &sAxMainFlag02};

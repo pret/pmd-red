@@ -78,7 +78,7 @@ void sub_80886C4(void)
   sub_8085374();
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
-  HandleFaint(alakazamEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
+  HandleFaint_Async(alakazamEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
   SetFacingDirection(groudonEntity, DIRECTION_SOUTH);
   sub_8086A3C(groudonEntity);
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y);
@@ -102,9 +102,9 @@ void sub_808875C(void)
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
   sub_80855E4(sub_8086A3C);
-  HandleFaint(alakazamEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
+  HandleFaint_Async(alakazamEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
   if (sub_8086AE4(MONSTER_GROUDON)) {
-    HandleFaint(groudonEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
+    HandleFaint_Async(groudonEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
   }
   else {
     LevelUpTarget(groudonEntity,groudonEntity,gGroudonConfigLevel,0,0);
@@ -116,11 +116,11 @@ void sub_808875C(void)
   CopyMonsterNameToBuffer(gFormatBuffer_Monsters[3], MONSTER_ALAKAZAM);
 }
 
-void sub_8088818(u8 param_1, u8 param_2)
+void HandleGroudonBossFaint(u8 monsterBehavior, u8 cutscene)
 {
-  if ((param_2 == 0x12 || param_2 == 0x13 || param_2 == 0x14) && (param_1 == 0xE)) {
-    sub_8097FA8(0xC);
-    gDungeon->unk2 = 1;
+  if ((cutscene == CUTSCENE_MAGMA_CAVERN_PIT_ATTEMPT1 || cutscene == CUTSCENE_MAGMA_CAVERN_PIT_ATTEMPT2 || cutscene == CUTSCENE_MAGMA_CAVERN_PIT_POSTSTORY) && monsterBehavior == BEHAVIOR_GROUDON_2) {
+    SetTempCutsceneFlag(CUTSCENE_FLAG_MAGMA_CAVERN_PIT_COMPLETE);
+    gDungeon->unk2 = DUNGEON_UNK2_1;
   }
 }
 
@@ -141,69 +141,69 @@ void GroudonPreFightDialogue(void)
   alakazamEntity = GetEntityFromMonsterBehavior(BEHAVIOR_ALAKAZAM_1);
   groudonEntity = GetEntityFromMonsterBehavior(BEHAVIOR_GROUDON_2);
   sub_8086448();
-  DisplayDungeonDialogue(GroudonPreFightDialogue_1);
-  sub_803E708(10,0x46);
-  sub_803E708(0x3c,0x46);
-  DisplayDungeonDialogue(&GroudonPreFightDialogue_2);
-  sub_803E708(10,0x46);
+  DisplayDungeonDialogue_Async(GroudonPreFightDialogue_1);
+  DungeonWaitFrames_Async(10,0x46);
+  DungeonWaitFrames_Async(0x3c,0x46);
+  DisplayDungeonDialogue_Async(&GroudonPreFightDialogue_2);
+  DungeonWaitFrames_Async(10,0x46);
   sub_8086838(1,1,1);
   sub_808680C();
-  sub_803E708(0x3c,0x46);
+  DungeonWaitFrames_Async(0x3c,0x46);
   sub_808682C();
-  sub_803E708(0x1e,0x46);
-  DisplayDungeonDialogue(&GroudonPreFightDialogue_3);
-  sub_803E708(10,0x46);
+  DungeonWaitFrames_Async(0x1e,0x46);
+  DisplayDungeonDialogue_Async(&GroudonPreFightDialogue_3);
+  DungeonWaitFrames_Async(10,0x46);
   sub_8086838(1,1,1);
   sub_808680C();
-  sub_803E708(0x3c,0x46);
-  DisplayDungeonDialogue(&GroudonPreFightDialogue_4);
-  sub_803E708(10,0x46);
+  DungeonWaitFrames_Async(0x3c,0x46);
+  DisplayDungeonDialogue_Async(&GroudonPreFightDialogue_4);
+  DungeonWaitFrames_Async(10,0x46);
   GroudonScreenFlash();
-  DisplayDungeonDialogue(&GroudonPreFightDialogue_5);
-  sub_803E708(10,0x46);
-  DisplayDungeonDialogue(&GroudonPreFightDialogue_6);
-  sub_803E708(10,0x46);
+  DisplayDungeonDialogue_Async(&GroudonPreFightDialogue_5);
+  DungeonWaitFrames_Async(10,0x46);
+  DisplayDungeonDialogue_Async(&GroudonPreFightDialogue_6);
+  DungeonWaitFrames_Async(10,0x46);
   PlaySoundEffect(0x1d5);
-  SpriteLookAroundEffect(partnerEntity);
-  DisplayDungeonDialogue(&GroudonPreFightDialogue_7);
-  sub_803E708(10,0x46);
+  CutsceneLookAroundEffect_Async(partnerEntity);
+  DisplayDungeonDialogue_Async(&GroudonPreFightDialogue_7);
+  DungeonWaitFrames_Async(10,0x46);
   sub_808682C();
-  sub_803E708(0x3c,0x46);
+  DungeonWaitFrames_Async(0x3c,0x46);
   sub_80861B8(alakazamEntity,6,DIRECTION_NORTH);
   PlaySoundEffect(0x205);
   sub_8086738();
-  HandleFaint(alakazamEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
-  DisplayDungeonDialogue(&GroudonPreFightDialogue_8);
-  sub_803E708(10,0x46);
-  DisplayDungeonDialogue(&GroudonPreFightDialogue_9);
-  sub_803E708(10,0x46);
+  HandleFaint_Async(alakazamEntity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
+  DisplayDungeonDialogue_Async(&GroudonPreFightDialogue_8);
+  DungeonWaitFrames_Async(10,0x46);
+  DisplayDungeonDialogue_Async(&GroudonPreFightDialogue_9);
+  DungeonWaitFrames_Async(10,0x46);
   sub_8085930(DIRECTION_NORTH);
   sub_8086764();
-  sub_803E708(0x28,0x46);
+  DungeonWaitFrames_Async(0x28,0x46);
   PlaySoundEffect(0x1d5);
-  SpriteLookAroundEffect(partnerEntity);
-  DisplayDungeonDialogue(GroudonPreFightDialogue_10);
-  sub_803E708(10,0x46);
+  CutsceneLookAroundEffect_Async(partnerEntity);
+  DisplayDungeonDialogue_Async(GroudonPreFightDialogue_10);
+  DungeonWaitFrames_Async(10,0x46);
   sub_8086838(1,1,1);
   sub_808680C();
-  sub_803E708(0x3c,0x46);
-  DisplayDungeonDialogue(GroudonPreFightDialogue_11);
-  sub_803E708(10,0x46);
+  DungeonWaitFrames_Async(0x3c,0x46);
+  DisplayDungeonDialogue_Async(GroudonPreFightDialogue_11);
+  DungeonWaitFrames_Async(10,0x46);
   DungeonStopBGM();
   GroudonScreenFlash2();
-  sub_803E708(0x1e,0x46);
-  DisplayDungeonDialogue(&GroudonPreFightDialogue_12);
-  sub_803E708(10,0x46);
-  DisplayDungeonDialogue(&GroudonPreFightDialogue_13);
-  sub_803E708(10,0x46);
-  sub_803E708(0x1e,0x46);
+  DungeonWaitFrames_Async(0x1e,0x46);
+  DisplayDungeonDialogue_Async(&GroudonPreFightDialogue_12);
+  DungeonWaitFrames_Async(10,0x46);
+  DisplayDungeonDialogue_Async(&GroudonPreFightDialogue_13);
+  DungeonWaitFrames_Async(10,0x46);
+  DungeonWaitFrames_Async(0x1e,0x46);
   sub_808682C();
-  sub_803E708(0x3c,0x46);
+  DungeonWaitFrames_Async(0x3c,0x46);
   PlaySoundEffect(0x1fa);
   sub_8086738();
   sub_8085930(DIRECTION_NORTH);
-  DisplayDungeonDialogue(GroudonPreFightDialogue_14);
-  sub_803E708(10,0x46);
+  DisplayDungeonDialogue_Async(GroudonPreFightDialogue_14);
+  DungeonWaitFrames_Async(10,0x46);
   sub_8086A54(groudonEntity);
   sub_8085930(DIRECTION_NORTH);
   sub_8086764();
@@ -220,22 +220,22 @@ void GroudonReFightDialogue(void)
   groudonEntity = GetEntityFromMonsterBehavior(BEHAVIOR_GROUDON_2);
   sub_8086838(1,1,1);
   sub_808680C();
-  sub_803E708(0x3c,0x46);
-  DisplayDungeonDialogue(gGroudonReFightDialogue_1);
-  sub_803E708(10,0x46);
+  DungeonWaitFrames_Async(0x3c,0x46);
+  DisplayDungeonDialogue_Async(gGroudonReFightDialogue_1);
+  DungeonWaitFrames_Async(10,0x46);
   GroudonScreenFlash();
-  sub_803E708(0x1e,0x46);
-  DisplayDungeonDialogue(gGroudonReFightDialogue_2);
-  sub_803E708(10,0x46);
-  DisplayDungeonDialogue(&gGroudonReFightDialogue_3);
-  sub_803E708(10,0x46);
+  DungeonWaitFrames_Async(0x1e,0x46);
+  DisplayDungeonDialogue_Async(gGroudonReFightDialogue_2);
+  DungeonWaitFrames_Async(10,0x46);
+  DisplayDungeonDialogue_Async(&gGroudonReFightDialogue_3);
+  DungeonWaitFrames_Async(10,0x46);
   sub_808682C();
-  sub_803E708(0x3c,0x46);
+  DungeonWaitFrames_Async(0x3c,0x46);
   DungeonStopBGM();
   PlaySoundEffect(0x1fa);
   sub_8086738();
-  DisplayDungeonDialogue(gGroudonReFightDialogue_4);
-  sub_803E708(10,0x46);
+  DisplayDungeonDialogue_Async(gGroudonReFightDialogue_4);
+  DungeonWaitFrames_Async(10,0x46);
   sub_8086A54(groudonEntity);
   sub_8085930(DIRECTION_NORTH);
   sub_8086764();
@@ -255,18 +255,18 @@ void GroudonPostStoryPreFightDialogue(void)
       sub_80866C4(&gUnknown_8103488);
   }
   else{
-    DisplayDungeonDialogue(&gGroudonPostStoryPreFightDialogue_1);
-    sub_803E708(10,0x46);
+    DisplayDungeonDialogue_Async(&gGroudonPostStoryPreFightDialogue_1);
+    DungeonWaitFrames_Async(10,0x46);
     SceneGroudonMovement(groudonEntity);
     SceneGroudonMovement(groudonEntity);
-    DisplayDungeonDialogue(&gGroudonPostStoryPreFightDialogue_2);
+    DisplayDungeonDialogue_Async(&gGroudonPostStoryPreFightDialogue_2);
     PlaySoundEffect(0x1f6);
     GroudonScreenFlash();
-    DisplayDungeonDialogue(&gGroudonPostStoryPreFightDialogue_3);
+    DisplayDungeonDialogue_Async(&gGroudonPostStoryPreFightDialogue_3);
     PlaySoundEffect(0x1f6);
     GroudonScreenFlash();
-    DisplayDungeonDialogue(&gGroudonPostStoryPreFightDialogue_4);
-    sub_803E708(10,0x46);
+    DisplayDungeonDialogue_Async(&gGroudonPostStoryPreFightDialogue_4);
+    DungeonWaitFrames_Async(10,0x46);
     SetupBossFightHP(groudonEntity,500,MUS_BOSS_BATTLE);
     ShiftCameraToPosition(&leaderEntity->pixelPos,0x10);
   }
@@ -293,10 +293,10 @@ static void SceneGroudonMovement(Entity * groudonEntity)
   }
   sub_80856C8(groudonEntity,groudonEntity->pos.x,groudonEntity->pos.y + 1);
   sub_80861D4(groudonEntity,0xf,DIRECTION_SOUTH);
-  sub_803E708(10,0x46);
+  DungeonWaitFrames_Async(10,0x46);
   sub_808682C();
   sub_8085930(DIRECTION_NORTH);
-  sub_803E708(0x22,0x46);
+  DungeonWaitFrames_Async(0x22,0x46);
 }
 
 static void GroudonScreenFlash(void)
@@ -308,21 +308,21 @@ static void GroudonScreenFlash(void)
     SetDungeonBGColorRGB(iVar1,iVar1 / 2,iVar1 / 2,1,1);
     DungeonRunFrameActions(0x46);
   }
-  sub_803E708(10,0x46);
+  DungeonWaitFrames_Async(10,0x46);
 
   for(iVar1 = 250; iVar1 > 199; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1,iVar1 / 2,0,1,1);
     DungeonRunFrameActions(0x46);
   }
-  sub_803E708(10,0x46);
+  DungeonWaitFrames_Async(10,0x46);
 
   for(iVar1 = 250; iVar1 >= 0; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1,iVar1 / 2,iVar1 / 2,1,1);
     DungeonRunFrameActions(0x46);
   }
-  sub_803E708(10,0x46);
+  DungeonWaitFrames_Async(10,0x46);
   sub_8085EB0();
 }
 
@@ -335,21 +335,21 @@ static void GroudonScreenFlash2(void)
     SetDungeonBGColorRGB(iVar1,iVar1 / 2,iVar1 / 2,1,1);
     DungeonRunFrameActions(0x46);
   }
-  sub_803E708(10,0x46);
+  DungeonWaitFrames_Async(10,0x46);
 
   for(iVar1 = 250; iVar1 > 199; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1,iVar1 / 2,0,1,1);
     DungeonRunFrameActions(0x46);
   }
-  sub_803E708(10,0x46);
+  DungeonWaitFrames_Async(10,0x46);
 
   for(iVar1 = 250; iVar1 >= 0; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1,iVar1 / 2,iVar1 / 2,1,1);
     DungeonRunFrameActions(0x46);
   }
-  sub_803E708(10,0x46);
+  DungeonWaitFrames_Async(10,0x46);
   sub_8085EB0();
 }
 

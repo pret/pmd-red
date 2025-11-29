@@ -15,7 +15,7 @@ static const struct ScriptCommand s_gs166_g0_s0_station_sref_script[] = { /* 0x8
     JUMP_SCRIPT(COMMON_ENTER),
 };
 
-static const struct ScriptRef s_gs166_g0_s0_station_sref = { 404, 1, NULL /* ENTER_CONTROL */, s_gs166_g0_s0_station_sref_script }; /* 0x8218c28 */
+static const struct ScriptRef s_gs166_g0_s0_station_sref = { ENTER_CONTROL , 1, NULL, s_gs166_g0_s0_station_sref_script }; /* 0x8218c28 */
 
 static const struct ScriptCommand s_gs166_g1_s0_station_sref_script[] = { /* 0x8218c34 */
     DEBUGINFO_O(21),
@@ -27,7 +27,7 @@ static const struct ScriptCommand s_gs166_g1_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs166_g1_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs166_g1_s0_station_sref_script }; /* 0x8218ca4 */
+static const struct ScriptRef s_gs166_g1_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs166_g1_s0_station_sref_script }; /* 0x8218ca4 */
 
 static const struct ScriptCommand s_gs166_g1_s0_lives0_dlg0[] = { /* 0x8218cb0 */
     DEBUGINFO_O(33),
@@ -36,7 +36,7 @@ static const struct ScriptCommand s_gs166_g1_s0_lives0_dlg0[] = { /* 0x8218cb0 *
     ALERT_CUE(6),
     WALK_GRID(512, 0),
     WAIT(15),
-    ROTATE(4, 11, DIRECTION_WEST),
+    ROTATE_TO(4, DIR_TRANS_11, DIRECTION_WEST),
     BGM_FADEOUT(60),
     WAIT(20),
     PORTRAIT(PLACEMENT_LEFT_, 0x0001, 0x00000002),
@@ -47,8 +47,8 @@ static const struct ScriptCommand s_gs166_g1_s0_lives0_dlg0[] = { /* 0x8218cb0 *
     PORTRAIT_REP(0x0001, 0x0000000c),
     MSG_NPC(1, _(" Oh, no! Look!")),
     TEXTBOX_CLEAR,
-    BGM_SWITCH(38),
-    ROTATE(4, 11, DIRECTION_EAST),
+    BGM_SWITCH(MUS_THE_MOUNTAIN_OF_FIRE),
+    ROTATE_TO(4, DIR_TRANS_11, DIRECTION_EAST),
     WAIT(20),
     ALERT_CUE(3),
     HALT,
@@ -61,9 +61,9 @@ static const struct ScriptCommand s_gs166_g1_s0_lives1_dlg0[] = { /* 0x8218e38 *
     { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(6),
     WALK_GRID(512, 1),
-    ROTATE(4, 2, DIRECTION_WEST),
+    ROTATE_TO(4, DIR_TRANS_SPINLEFT1, DIRECTION_WEST),
     AWAIT_CUE(6),
-    ROTATE(4, 1, DIRECTION_EAST),
+    ROTATE_TO(4, DIR_TRANS_SPINRIGHT1, DIRECTION_EAST),
     WAIT(20),
     FANFARE_PLAY2(455),
     CALL_SCRIPT(JUMP_SURPRISE_FUNC),
@@ -95,7 +95,7 @@ static const struct ScriptCommand s_gs166_g2_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs166_g2_s0_station_sref = { 400, 7, NULL /* EVENT_CONTROL */, s_gs166_g2_s0_station_sref_script }; /* 0x8219150 */
+static const struct ScriptRef s_gs166_g2_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs166_g2_s0_station_sref_script }; /* 0x8219150 */
 
 
 static const struct ScriptCommand s_gs166_g2_s0_lives0_dlg0[] = { /* 0x821915c */
@@ -118,7 +118,7 @@ static const struct ScriptCommand s_gs166_g2_s0_lives0_dlg0[] = { /* 0x821915c *
     WAIT(20),
     ALERT_CUE(6),
     AWAIT_CUE(5),
-    ROTATE(4, 11, DIRECTION_SOUTHEAST),
+    ROTATE_TO(4, DIR_TRANS_11, DIRECTION_SOUTHEAST),
     PORTRAIT_REP(0x0001, 0x00000005),
     MSG_NPC(1, _(" What'll we do,\n{NAME_0}?")),
     TEXTBOX_CLEAR,
@@ -128,7 +128,7 @@ static const struct ScriptCommand s_gs166_g2_s0_lives0_dlg0[] = { /* 0x821915c *
     FANFARE_PLAY2(465),
     ALERT_CUE(6),
     CALL_SCRIPT(NOTICE_FUNC),
-    ROTATE(4, 11, DIRECTION_WEST),
+    ROTATE_TO(4, DIR_TRANS_11, DIRECTION_WEST),
     MSG_NPC(-1, _(" Get them!")),
     TEXTBOX_CLEAR,
     ALERT_CUE(6),
@@ -152,16 +152,16 @@ static const struct ScriptCommand s_gs166_g2_s0_lives1_dlg0[] = { /* 0x821952c *
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(6),
-    ROTATE(4, 11, DIRECTION_WEST),
+    ROTATE_TO(4, DIR_TRANS_11, DIRECTION_WEST),
     ALERT_CUE(5),
     AWAIT_CUE(6),
-    { 0x93, 0x04,  0x000b,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_11, 0),
     ALERT_CUE(5),
     AWAIT_CUE(6),
     CALL_SCRIPT(JUMP_SURPRISE_FUNC),
-    ROTATE(4, 11, DIRECTION_WEST),
+    ROTATE_TO(4, DIR_TRANS_11, DIRECTION_WEST),
     AWAIT_CUE(6),
-    { 0x93, 0x04,  0x000b,  0x00000000,  0x00000000, NULL },
+    CMD_UNK_93(4, DIR_TRANS_11, 0),
     ALERT_CUE(5),
     AWAIT_CUE(6),
     { 0x89, 0x50,  0x0200,  0x00000002,  0x00000000, NULL },
@@ -223,4 +223,4 @@ static const struct GroundLink s_gs166_links[] = { /* 0x8219760 */
     /* link   1 */ { { /*x*/  32, /*y*/  27, /*flags*/ 0, CPOS_HALFTILE }, /*w*/  1, /*h*/  1, /*ret*/ 1, /*?*/ 0 },
 };
 
-/*extern*/ const struct GroundScriptHeader gGroundScript_gs166 = { LPARRAY(s_gs166_groups), s_gs166_links }; /* 0x8219770 */
+const GroundScriptHeader gGroundScript_gs166 = { LPARRAY(s_gs166_groups), s_gs166_links }; /* 0x8219770 */
