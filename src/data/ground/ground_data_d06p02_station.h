@@ -151,7 +151,7 @@ static const struct ScriptCommand s_gs189_g1_s0_lives0_dlg0[] = { /* 0x823a4d8 *
     CALL_SCRIPT(LOOK_AROUND_LEFT_FUNC),
     AWAIT_CUE(5),
     WAIT(10),
-    PORTRAIT(PLACEMENT_LEFT_, 0x0001, 0x00000002),
+    PORTRAIT(PLACEMENT_LEFT_BOTTOM_2, 0x0001, 0x00000002),
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
     VARIANT(/* == */  1, _(" Hmm...{WAIT_PRESS}\nThings didn't go right for us...")),
     VARIANT_DEFAULT(_(" Hmm...{WAIT_PRESS}\nThings didn't turn out in our favor...")),

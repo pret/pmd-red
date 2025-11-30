@@ -150,7 +150,7 @@ static const struct ScriptCommand s_gs205_g1_s0_lives0_dlg0[] = { /* 0x825e344 *
     CALL_SCRIPT(WAKEUP_FUNC),
     CALL_SCRIPT(LOOK_AROUND_LEFT_FUNC),
     AWAIT_CUE(5),
-    PORTRAIT(PLACEMENT_LEFT_, 0x0001, 0x00000002),
+    PORTRAIT(PLACEMENT_LEFT_BOTTOM_2, 0x0001, 0x00000002),
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
     VARIANT(/* == */  1, _(" Hmm...{WAIT_PRESS}\nWell, that didn't go well.")),
     VARIANT_DEFAULT(_(" Hmm...{WAIT_PRESS}\nThat didn't work out...")),

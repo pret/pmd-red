@@ -54,7 +54,7 @@ static const struct ScriptCommand s_gs194_g1_s0_lives0_dlg0[] = { /* 0x8245734 *
     ALERT_CUE(6),
     AWAIT_CUE(5),
     CMD_UNK_93(4, DIR_TRANS_11, 34),
-    PORTRAIT(PLACEMENT_RIGHT, 0x0001, 0x00000000),
+    PORTRAIT(PLACEMENT_RIGHT_BOTTOM_FLIP, 0x0001, 0x00000000),
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
     VARIANT(/* == */  1, _(" Whew...\nWe finally got through that cave.")),
     VARIANT(/* == */  1, _(" Where are the Pokémon\nwho are chasing us?")),

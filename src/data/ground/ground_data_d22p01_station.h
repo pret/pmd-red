@@ -97,7 +97,7 @@ static const struct ScriptCommand s_gs218_g1_s0_lives0_dlg0[] = { /* 0x826a108 *
     WAIT(20),
     WALK_GRID(256, 1),
     WAIT(30),
-    PORTRAIT(PLACEMENT_TOP_RIGHT, 0x0002, 0x00000000),
+    PORTRAIT(PLACEMENT_RIGHT_MIDTOP_FLIP, 0x0002, 0x00000000),
     MSG_NPC(2, _(" ............{WAIT_PRESS}\nYes, I'll be fine.")),
     MSG_NPC(2, _(" My wing is still damaged\na little, but...{WAIT_PRESS}\nI can go.")),
     TEXTBOX_CLEAR,

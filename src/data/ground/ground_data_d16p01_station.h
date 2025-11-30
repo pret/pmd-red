@@ -63,7 +63,7 @@ static const struct ScriptCommand s_gs212_g1_s0_lives0_dlg0[] = { /* 0x82649c8 *
     WAIT(20),
     ALERT_CUE(7),
     AWAIT_CUE(5),
-    PORTRAIT(PLACEMENT_TOP_RIGHT, 0x0002, 0x00000000),
+    PORTRAIT(PLACEMENT_RIGHT_MIDTOP_FLIP, 0x0002, 0x00000000),
     MSG_NPC(2, _(" Gwooooooh!")),
     TEXTBOX_CLEAR,
     ALERT_CUE(7),

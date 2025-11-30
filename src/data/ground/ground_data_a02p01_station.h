@@ -47,7 +47,7 @@ static const struct ScriptCommand s_gs164_g1_s0_lives0_dlg0[] = { /* 0x821833c *
     ALERT_CUE(6),
     CAMERA_PAN(256, 0),
     ALERT_CUE(6),
-    PORTRAIT(PLACEMENT_LEFT_, 0x0001, 0x0000000c),
+    PORTRAIT(PLACEMENT_LEFT_BOTTOM_2, 0x0001, 0x0000000c),
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
     VARIANT(/* == */  1, _(" Whoa!\nThese cracks go down deep!")),
     VARIANT_DEFAULT(_(" Wow!\nAren't these fissures amazing?!")),
