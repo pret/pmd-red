@@ -10,6 +10,7 @@
 #include "input.h"
 #include "memory.h"
 #include "menu_input.h"
+#include "palette_util.h"
 #include "pokemon.h"
 #include "string_format.h"
 #include "text_1.h"
@@ -565,11 +566,11 @@ static void sub_80226F0(void)
     switch (sWigglytuffShop3Work->unk130) {
         case 1:
         case 3:
-            sub_8099AFC(5, 2, unkStr);
+            sub_8099AFC(PALUTIL_KIND_05, 2, unkStr);
             break;
         case 2:
         case 4:
-            sub_8099A5C(5, 2, unkStr);
+            sub_8099A5C(PALUTIL_KIND_05, 2, unkStr);
             break;
         case 0:
         default:

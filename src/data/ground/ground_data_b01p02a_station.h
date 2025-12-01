@@ -227,9 +227,9 @@ static const struct ScriptCommand s_gs12_g2_s0_station_sref_script[] = { /* 0x81
     SELECT_MAP(MAP_TEAM_BASE_INSIDE),
     SELECT_ENTITIES(-1, 0),
     BGM_STOP,
-    { 0x27, 0x01,  0x000d,  0x0000003c,  0x00000000, NULL },
+    FLASH_FROM(TRUE, PALUTIL_KIND_13, 60, RGB_U32(0x00, 0x00, 0x00)),
     AWAIT_CUE(3),
-    { 0x28, 0x01,  0x000d,  0x0000003c,  0x00000000, NULL },
+    FLASH_TO(TRUE, PALUTIL_KIND_13, 60, RGB_U32(0x00, 0x00, 0x00)),
     RET,
 };
 
@@ -2458,10 +2458,10 @@ static const struct ScriptCommand s_gs12_g42_s0_station_sref_script[] = { /* 0x8
     SELECT_MAP(MAP_TEAM_BASE_INSIDE),
     { 0x3b, 0x48,  0x0002,  0x00000000,  0x00000000, NULL },
     SELECT_ENTITIES(-1, -1),
-    { 0x27, 0x01,  0x000d,  0x0000003c,  0x00000000, NULL },
+    FLASH_FROM(TRUE, PALUTIL_KIND_13, 60, RGB_U32(0x00, 0x00, 0x00)),
     AWAIT_CUE(3),
     FANFARE_FADEOUT2(90, 484),
-    { 0x28, 0x01,  0x000d,  0x0000003c,  0x00000000, NULL },
+    FLASH_TO(TRUE, PALUTIL_KIND_13, 60, RGB_U32(0x00, 0x00, 0x00)),
     { 0x3b, 0x48,  0x0000,  0x00000000,  0x00000000, NULL },
     RET,
 };

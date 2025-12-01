@@ -60,7 +60,7 @@ static const struct ScriptCommand s_gs163_g2_s0_station_sref_script[] = { /* 0x8
     SELECT_ENTITIES(-1, -1),
     { 0x22, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
-    { 0x28, 0x01,  0x0005,  0x0000003c,  0x00ffffff, NULL },
+    FLASH_TO(TRUE, PALUTIL_KIND_05, 60, RGB_U32(0xFF, 0xFF, 0xFF)),
     RET,
 };
 
@@ -94,7 +94,7 @@ static const struct ScriptCommand s_gs163_g3_s0_station_sref_script[] = { /* 0x8
     AWAIT_CUE(3),
     FANFARE_PLAY2(506),
     BGM_FADEOUT(90),
-    { 0x28, 0x01,  0x0005,  0x0000001e,  0x00ffffff, NULL },
+    FLASH_TO(TRUE, PALUTIL_KIND_05, 30, RGB_U32(0xFF, 0xFF, 0xFF)),
     WAIT(60),
     RET,
 };

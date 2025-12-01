@@ -62,12 +62,9 @@ extern void sub_8095494(DungeonMailSeed *param_1, u8 index);
 
 // TODO: Move these externs to headers
 extern bool8 sub_80048BC(void);
-extern bool8 sub_8099B94(void);
 extern void sub_8099768(void);
 extern void sub_809975C(void);
 extern void sub_8099BE4(void);
-extern void sub_8099744(void);
-extern void sub_8099750(void);
 extern void nullsub_16(void);
 extern void sub_80060EC(void);
 extern void sub_809977C(void);

@@ -20,7 +20,7 @@ typedef struct PaletteFadeEntry
 #define MAX_FADE_AMOUNT 256
 
 #define PALETTE_COLOR_COUNT 0x200
-#define PALETTE_FADE_ENTRY_COUNT 0x21
+#define PALETTE_FADE_ENTRY_COUNT 33
 
 static IWRAM_DATA RGB_Union sRGBPaletteBuffer[PALETTE_COLOR_COUNT] = {0};
 static IWRAM_DATA PaletteFadeEntry sPaletteFadeTable[PALETTE_FADE_ENTRY_COUNT] = {0};
@@ -64,21 +64,21 @@ void InitPaletteFadeTable(void)
 
     for (i = 0; i < PALETTE_COLOR_COUNT; it2++, i++)
     {
-        it2->asArr.c[0] = zero;
-        it2->asArr.c[1] = zero;
-        it2->asArr.c[2] = zero;
-        it2->asArr.c[3] = zero;
+        it2->asArr.c[RGB_R] = zero;
+        it2->asArr.c[RGB_G] = zero;
+        it2->asArr.c[RGB_B] = zero;
+        it2->asArr.c[RGB_UNK] = zero;
     }
 
     for (i = 0; i < PALETTE_FADE_ENTRY_COUNT; i++, it1++)
     {
         it1->active = FALSE;
         it1->fadeAmount = 256;
-        it1->fadeColor.c[0] = 0;
-        it1->fadeColor.c[1] = 0;
-        it1->fadeColor.c[2] = 0;
-        it1->fadeColor.c[3] = 0;
-        it1->fadeColorArray = 0;
+        it1->fadeColor.c[RGB_R] = 0;
+        it1->fadeColor.c[RGB_G] = 0;
+        it1->fadeColor.c[RGB_B] = 0;
+        it1->fadeColor.c[RGB_UNK] = 0;
+        it1->fadeColorArray = NULL;
         it1->applyFadeToSingle = &ApplySinglePalette;
         it1->applyFadeToRow = &ApplyRowPalette;
     }
@@ -92,11 +92,11 @@ void SetPaletteFade_Brightness(u16 idx, s32 fadeAmount)
 
     ptr->active = TRUE;
     ptr->fadeAmount = fadeAmount;
-    ptr->fadeColor.c[0] = 0;
-    ptr->fadeColor.c[1] = 0;
-    ptr->fadeColor.c[2] = 0;
-    ptr->fadeColor.c[3] = 0;
-    ptr->fadeColorArray = 0;
+    ptr->fadeColor.c[RGB_R] = 0;
+    ptr->fadeColor.c[RGB_G] = 0;
+    ptr->fadeColor.c[RGB_B] = 0;
+    ptr->fadeColor.c[RGB_UNK] = 0;
+    ptr->fadeColorArray = NULL;
     ptr->applyFadeToSingle = &ApplySinglePaletteBrightness;
     ptr->applyFadeToRow = &ApplyRowPaletteBrightness;
 
@@ -110,7 +110,7 @@ void SetPaletteFade_Blend(u16 idx, s32 fadeAmount, RGB_Array param_3)
     ptr->active = TRUE;
     ptr->fadeAmount = fadeAmount;
     ptr->fadeColor = param_3;
-    ptr->fadeColorArray = 0;
+    ptr->fadeColorArray = NULL;
     ptr->applyFadeToSingle = &BlendSinglePalette;
     ptr->applyFadeToRow = &BlendRowPalette;
 
@@ -124,7 +124,7 @@ void SetPaletteFade_FadeToBlack(u16 idx, s32 fadeAmount, RGB_Array param_3)
     ptr->active = TRUE;
     ptr->fadeAmount = fadeAmount;
     ptr->fadeColor = param_3;
-    ptr->fadeColorArray = 0;
+    ptr->fadeColorArray = NULL;
     ptr->applyFadeToSingle = &FadeToBlackSingle;
     ptr->applyFadeToRow = &FadeToBlackRow;
 
@@ -137,10 +137,10 @@ static UNUSED void SetPaletteFade_PerEntryBlend(u16 idx, s32 fadeAmount, RGB_Arr
 
     ptr->active = TRUE;
     ptr->fadeAmount = fadeAmount;
-    ptr->fadeColor.c[0] = 0;
-    ptr->fadeColor.c[1] = 0;
-    ptr->fadeColor.c[2] = 0;
-    ptr->fadeColor.c[3] = 0;
+    ptr->fadeColor.c[RGB_R] = 0;
+    ptr->fadeColor.c[RGB_G] = 0;
+    ptr->fadeColor.c[RGB_B] = 0;
+    ptr->fadeColor.c[RGB_UNK] = 0;
     ptr->fadeColorArray = param_3;
     ptr->applyFadeToSingle = &PerEntryBlendSingle;
     ptr->applyFadeToRow = &PerEntryBlendRow;
@@ -155,7 +155,7 @@ void SetPaletteFade_Desaturate(u16 idx, s32 fadeAmount, RGB_Array param_3)
     ptr->active = TRUE;
     ptr->fadeAmount = fadeAmount;
     ptr->fadeColor = param_3;
-    ptr->fadeColorArray = 0;
+    ptr->fadeColorArray = NULL;
     ptr->applyFadeToSingle = &DesaturateSingle;
     ptr->applyFadeToRow = &DesaturateRow;
 
@@ -169,7 +169,7 @@ void SetPaletteFade_Modulate(u16 idx, s32 fadeAmount, RGB_Array param_3)
     ptr->active = TRUE;
     ptr->fadeAmount = fadeAmount;
     ptr->fadeColor = param_3;
-    ptr->fadeColorArray = 0;
+    ptr->fadeColorArray = NULL;
     ptr->applyFadeToSingle = &ModulatePaletteSingle;
     ptr->applyFadeToRow = &ModulatePaletteRow;
 

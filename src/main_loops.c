@@ -31,6 +31,7 @@
 #include "memory.h"
 #include "moves.h"
 #include "music.h"
+#include "palette_util.h"
 #include "play_time.h"
 #include "pokemon.h"
 #include "pokemon_3.h"

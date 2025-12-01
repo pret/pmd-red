@@ -7,6 +7,7 @@
 #include "constants/event_flag.h"
 #include "constants/ground_map.h"
 #include "constants/item.h"
+#include "constants/palette_util.h"
 #include "constants/rescue_dungeon_id.h"
 #include "constants/script_dungeon_id.h"
 #include "constants/script_cmd.h"
@@ -108,9 +109,17 @@
 
 // TODO: CMD_BYTE_26
 
-// TODO: CMD_BYTE_27
+// a0: Some bool
+// kind: See enum "PaletteUtilUnk0Kind"
+// a2: ?
+// rgb: (R << 16) | (G << 8) | (B)
+#define FLASH_FROM(a0, kind, a2, rgb)   { CMD_BYTE_27, a0, kind, a2, rgb, NULL }
 
-// TODO: CMD_BYTE_28
+// a0: Some bool
+// kind: See enum "PaletteUtilUnk0Kind"
+// a2: ?
+// rgb: (R << 16) | (G << 8) | (B)
+#define FLASH_TO(a0, kind, a2, rgb)     { CMD_BYTE_28, a0, kind, a2, rgb, NULL }
 
 // TODO: CMD_BYTE_29
 
@@ -118,7 +127,7 @@
 
 // Waits specified number of frames, then automatically does a button press without waiting for player's input.
 // -1 disables it.
-#define TEXTBOX_AUTO_PRESS(endF, midF)  { CMD_BYTE_2B, 0, 0, endF, midF, NULL}
+#define TEXTBOX_AUTO_PRESS(endF, midF)  { CMD_BYTE_2B, 0, 0, endF, midF, NULL }
 
 // TODO: CMD_BYTE_2C
 
