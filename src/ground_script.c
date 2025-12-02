@@ -57,34 +57,29 @@
 #include "code_809D148.h"
 #include "training_maze.h"
 #include "dungeon_list_menu.h"
-
-// Beware of the declarations without specified arguments, returning u32 or s32, these were quickly hacked in to get the code to compile and link
-// The return values are almost certainly NOT correct and will need to be rechecked when moving to header files
-bool8 sub_8099B94(void);
-bool8 sub_80961D8(void);
-void ResetMailbox(void);
-void sub_80963FC(void);
-void sub_8096488(void);
-bool8 sub_80964B4(void);
-u8 sub_80964E4();
+#include "data_script.h"
 
 // For gScriptLocks, gScriptLockConds, gUnlockBranchLabels
 #define SCRIPT_LOCKS_ARR_COUNT 129
+
+#define BUF_LEN 0x400
+
+#define FAKE_FILENAME "../ground/ground_script.c"
 
 static EWRAM_DATA s16 gCurrentMap = 0;
 static EWRAM_DATA s16 gUnknown_2039A32 = 0; // See enum "GroundMapID"
 static EWRAM_DATA s16 gUnknown_2039A34 = 0; // See enum "GroundMapID"
 static EWRAM_DATA u8 gAnyScriptLocked = 0;
 // Hard to say why the arrays are larger than SCRIPT_LOCKS_ARR_COUNT. Could be unused EWRAM variables or special case indexes.
-static ALIGNED(4) EWRAM_DATA u8 gScriptLocks[SCRIPT_LOCKS_ARR_COUNT + 7] = {0};
-static ALIGNED(4) EWRAM_DATA u8 gScriptLockConds[SCRIPT_LOCKS_ARR_COUNT + 7] = {0};
-static EWRAM_DATA u32 gUnlockBranchLabels[SCRIPT_LOCKS_ARR_COUNT + 1] = {0};
-static EWRAM_DATA MenuItem gChoices[9] = {0};
-static EWRAM_DATA char sPokeNameBuffer[POKEMON_NAME_LENGTH + 2] = {0};
+static ALIGNED(4) EWRAM_DATA u8 gScriptLocks[SCRIPT_LOCKS_ARR_COUNT + 7] = { 0 };
+static ALIGNED(4) EWRAM_DATA u8 gScriptLockConds[SCRIPT_LOCKS_ARR_COUNT + 7] = { 0 };
+static EWRAM_DATA u32 gUnlockBranchLabels[SCRIPT_LOCKS_ARR_COUNT + 1] = { 0 };
+static EWRAM_DATA MenuItem gChoices[9] = { 0 };
+static EWRAM_DATA u8 sPokeNameBuffer[POKEMON_NAME_LENGTH + 2] = { 0 };
 static EWRAM_DATA u32 gUnknown_2039DA4 = 0;
 static EWRAM_DATA u16 gUnknown_2039DA8 = 0;
 
-static EWRAM_INIT int sNumChoices = 0;
+static EWRAM_INIT s32 sNumChoices = 0;
 static EWRAM_INIT u8 *gUnknown_203B4B0 = NULL;
 
 static const CallbackData sNullCallbackData = {
@@ -111,17 +106,18 @@ static const CallbackData sNullCallbackData = {
     .func50_spriteRelated = NULL,
 };
 
-static const PixelPos sPixelPosZero = {0, 0};
+static const PixelPos sPixelPosZero = { 0, 0 };
 
 static const ScriptCommand gUnknown_81164E4[] = {
-    {0xF6, 0, 0xC5, 0, 0, "../ground/ground_script.c"},
-    {0xEF, 0, 0,    0, 0, NULL},
+    DEBUGINFO_O(197),
+    RET,
 };
 
 static s32 ExecuteScriptCommand(Action *action);
-static s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3);
 static const ScriptCommand *FindLabel(Action *action, s32 labelNum);
 static const ScriptCommand *ResolveJump(Action *action, s32 r1);
+
+static s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3);
 static void sub_80A2500(s32 param_1, ActionUnkIds *param_2);
 static void sub_80A252C(s32 param_1, ActionUnkIds *param_2);
 static void sub_80A2558(s32 param_1, ActionUnkIds *param_2);
@@ -132,7 +128,7 @@ static u32 sub_80A25AC(u16 param_1);
 void sub_809D490(void)
 {
     UNUSED void *oldPtr = gUnknown_203B4B0; // Needed to match
-    gUnknown_203B4B0 = MemoryAlloc(0x400, 6);
+    gUnknown_203B4B0 = MemoryAlloc(BUF_LEN, 6);
     sub_809D4B0();
 }
 
@@ -556,8 +552,8 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                         case CMD_BYTE_24:
                         case CMD_BYTE_25:
                         case CMD_BYTE_26:
-                        case CMD_BYTE_27:
-                        case CMD_BYTE_28:
+                        case CMD_BYTE_27: // FLASH_FROM
+                        case CMD_BYTE_28: // FLASH_TO
                         case CMD_BYTE_DF: {
                             if (sub_8099B94())
                                 loopContinue = FALSE;
@@ -1940,18 +1936,18 @@ static s32 ExecuteScriptCommand(Action *action)
                     return 2;
                 break;
             }
-            case CMD_BYTE_27:
-            case CMD_BYTE_28: {
+            case CMD_BYTE_27: // FLASH_FROM
+            case CMD_BYTE_28: { // FLASH_TO
                 RGB_Array color = { curCmd.arg2 >> 16, curCmd.arg2 >> 8, curCmd.arg2, 0 };
                 switch (curCmd.op) {
-                    case CMD_BYTE_27:
+                    case CMD_BYTE_27: // FLASH_FROM
                         sub_8099A5C(curCmd.argShort, curCmd.arg1, color);
                         break;
-                    case CMD_BYTE_28:
+                    case CMD_BYTE_28: // FLASH_TO
                         sub_8099AFC(curCmd.argShort, curCmd.arg1, color);
                         break;
                 }
-                if (curCmd.argByte != 0)
+                if (curCmd.argByte != FALSE)
                     return 2;
                 break;
             }
@@ -3139,17 +3135,17 @@ static s32 ExecuteScriptCommand(Action *action)
                     case CMD_BYTE_D2:
                     case CMD_BYTE_D3:
                     case CMD_BYTE_D6: {
-                        sub_809B028(gChoices, (u8)curCmd.argByte > 0, -1, 0, (s16)curCmd.arg1, out);
+                        sub_809B028(gChoices, (u8)curCmd.argByte > 0, -1, SCRIPT_TEXT_TYPE_INSTANT, (s16)curCmd.arg1, out);
                         break;
                     }
                     case CMD_BYTE_D4:
                     case CMD_BYTE_D7: {
-                        sub_809B028(gChoices, (u8)curCmd.argByte > 0, -1, 1, (s16)curCmd.arg1, out);
+                        sub_809B028(gChoices, (u8)curCmd.argByte > 0, -1, SCRIPT_TEXT_TYPE_QUIET, (s16)curCmd.arg1, out);
                         break;
                     }
                     case CMD_BYTE_D5:
                     case CMD_BYTE_D8: {
-                        sub_809B028(gChoices, (u8)curCmd.argByte > 0, -1, 2, (s16)curCmd.arg1, out);
+                        sub_809B028(gChoices, (u8)curCmd.argByte > 0, -1, SCRIPT_TEXT_TYPE_NPC, (s16)curCmd.arg1, out);
                         break;
                     }
                 }

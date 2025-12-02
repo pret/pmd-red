@@ -31,7 +31,7 @@ static const struct ScriptCommand s_gs171_g1_s0_station_sref_script[] = { /* 0x8
     SELECT_MAP(171),
     SELECT_ENTITIES(-1, 0),
     BGM_SWITCH(MUS_WORLD_CALAMITY),
-    { 0x27, 0x00,  0x0005,  0x00000020,  0x00ffffff, NULL },
+    FLASH_FROM(FALSE, PALUTIL_KIND_05, 32, RGB_U32(0xFF, 0xFF, 0xFF)),
     AWAIT_CUE(3),
     { 0x23, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     RET,
@@ -77,7 +77,7 @@ static const struct ScriptCommand s_gs171_g2_s0_station_sref_script[] = { /* 0x8
     BGM_SWITCH(MUS_WORLD_CALAMITY),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
-    { 0x28, 0x01,  0x0005,  0x00000020,  0x00ffffff, NULL },
+    FLASH_TO(TRUE, PALUTIL_KIND_05, 32, RGB_U32(0xFF, 0xFF, 0xFF)),
     RET,
 };
 
@@ -606,7 +606,7 @@ static const struct ScriptCommand s_gs171_g5_s0_lives0_dlg0[] = { /* 0x8221f00 *
     MSG_NPC(-1, _(" ...Hey, can you hear...")),
     MSG_NPC(2, _(" Snap out of it!")),
     TEXTBOX_CLEAR,
-    { 0x27, 0x01,  0x0005,  0x0000003c,  0x00ffffff, NULL },
+    FLASH_FROM(TRUE, PALUTIL_KIND_05, 60, RGB_U32(0xFF, 0xFF, 0xFF)),
     WAIT(60),
     PORTRAIT(PLACEMENT_LEFT_BOTTOM_2, 0x0000, 0x00000000),
     MSG_QUIET(0, _("(...{WAIT_PRESS}Huh...?{WAIT_PRESS} This place...)")),

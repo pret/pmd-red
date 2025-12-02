@@ -7475,9 +7475,9 @@ static const struct ScriptCommand s_gs9_g52_s0_station_sref_script[] = { /* 0x81
     SELECT_MAP(MAP_TEAM_BASE),
     SELECT_ENTITIES(-1, -1),
     BGM_SWITCH(MUS_THE_ESCAPE),
-    { 0x27, 0x01,  0x000e,  0x0000001e,  0x00000000, NULL },
+    FLASH_FROM(TRUE, PALUTIL_KIND_14, 30, RGB_U32(0x00, 0x00, 0x00)),
     AWAIT_CUE(3),
-    { 0x28, 0x01,  0x000e,  0x0000001e,  0x00000000, NULL },
+    FLASH_TO(TRUE, PALUTIL_KIND_14, 30, RGB_U32(0x00, 0x00, 0x00)),
     RET,
 };
 
@@ -8907,14 +8907,14 @@ static const struct ScriptCommand s_gs9_g68_s0_station_sref_script[] = { /* 0x81
     DEBUGINFO_O(9048),
     SELECT_MAP(MAP_TEAM_BASE),
     SELECT_ENTITIES(-1, -1),
-    { 0x27, 0x01,  0x000d,  0x0000001e,  0x00000000, NULL },
+    FLASH_FROM(TRUE, PALUTIL_KIND_13, 30, RGB_U32(0x00, 0x00, 0x00)),
     AWAIT_CUE(3),
     WAIT(0),
-    { 0x28, 0x01,  0x000d,  0x00000023,  0x00000000, NULL },
+    FLASH_TO(TRUE, PALUTIL_KIND_13, 35, RGB_U32(0x00, 0x00, 0x00)),
     WAIT(90),
     RET,
   LABEL(0), /* = 0x00 */
-    { 0x28, 0x01,  0x000d,  0x00000078,  0x00000000, NULL },
+    FLASH_TO(TRUE, PALUTIL_KIND_13, 120, RGB_U32(0x00, 0x00, 0x00)),
     WAIT(80),
     RET,
 };

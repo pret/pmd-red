@@ -62,7 +62,8 @@
 
 #define TOTAL_OBJ_TILE_COUNT 1024
 
-#define RGB_U32(r, g, b) ((r) | ((g) << 8) | ((b) << 16)) // 32 bit RGB color
+// 32 bit RGB color
+#define RGB_U32(r, g, b) (((r) << 16) | ((g) << 8) | (b))
 #define RGB(r, g, b) ((r) | ((g) << 5) | ((b) << 10))
 #define RGB2(r, g, b) (((b) << 10) | ((g) << 5) | (r))
 

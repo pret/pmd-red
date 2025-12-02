@@ -1550,9 +1550,9 @@ static const struct ScriptCommand s_gs2_g18_s0_station_sref_script[] = { /* 0x81
     DEBUGINFO_O(1550),
     SELECT_MAP(2),
     SELECT_ENTITIES(-1, 0),
-    { 0x27, 0x01,  0x000e,  0x0000001e,  0x00000000, NULL },
+    FLASH_FROM(TRUE, PALUTIL_KIND_14, 30, RGB_U32(0x00, 0x00, 0x00)),
     AWAIT_CUE(3),
-    { 0x28, 0x01,  0x000e,  0x0000001e,  0x00000000, NULL },
+    FLASH_TO(TRUE, PALUTIL_KIND_14, 30, RGB_U32(0x00, 0x00, 0x00)),
     RET,
 };
 

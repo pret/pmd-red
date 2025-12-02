@@ -279,10 +279,10 @@ void sub_80A2FBC(GroundBg *groundBg, s32 mapFileId_)
     rgbPal = bplData;
     r5 = groundBg->unk52C.unk0 * 16;
     str2 = (RGB_Array) {0};
-    str1.c[0] = 0xff;
-    str1.c[1] = 0xff;
-    str1.c[2] = 0xff;
-    str1.c[3] = 0;
+    str1.c[RGB_R] = 0xff;
+    str1.c[RGB_G] = 0xff;
+    str1.c[RGB_B] = 0xff;
+    str1.c[RGB_UNK] = 0;
     for (i = 0; i < bplHeader->numPalettes && i < groundBg->unk52C.unk2; i++) {
         sub_8003810(r5++, str2);
         sub_809971C(r5, rgbPal, 15);
@@ -479,10 +479,10 @@ void sub_80A3440(GroundBg *groundBg, s32 mapFileId_, const DungeonLocation *dung
         RGB_Array str0 = {0};
         RGB_Array str1;
 
-        str1.c[0] = 0xff;
-        str1.c[1] = 0xff;
-        str1.c[2] = 0xff;
-        str1.c[3] = 0;
+        str1.c[RGB_R] = 0xff;
+        str1.c[RGB_G] = 0xff;
+        str1.c[RGB_B] = 0xff;
+        str1.c[RGB_UNK] = 0;
 
         for (i = 0; i < 12 && i < groundBg->unk52C.unk2; i++) {
             sub_8003810(r7++, str0);

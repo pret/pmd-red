@@ -4,36 +4,47 @@
 #include "bg_palette_buffer.h"
 #include "palette_fade_util.h"
 
-extern void TransferBGPaletteBuffer(void);
-
-struct UnkStruct_2039958
+enum PU_SomeStateID
 {
-    s32 unk0;
-    s16 unk4;
-    s16 unk6;
-    u16 unk8;
-    u16 unkA;
-    u16 unkC;
+    PU_SOMESTATE_0,
+    PU_SOMESTATE_1,
+    PU_SOMESTATE_2,
+    PU_SOMESTATE_3,
+    PU_SOMESTATE_4,
+    PU_SOMESTATE_5,
 };
 
-struct UnkStruct_2039978
-{
-    u32 unk0;
-    RGB_Array unk4;
-    struct UnkStruct_2039958 unk8;
-};
+#define ARR_COUNT_2039998 33
 
-static EWRAM_DATA struct UnkStruct_2039958 gUnknown_2039958 = {0};
-static EWRAM_DATA struct UnkStruct_2039958 gUnknown_2039968 = {0};
-static EWRAM_DATA struct UnkStruct_2039978 gUnknown_2039978 = {0};
-static EWRAM_DATA u8 gUnknown_2039990 = FALSE;
+// Size: R=0x10 | B=0xE
+typedef struct UnkStruct_2039958
+{
+    /* 0x0 */ s32 unk0; // See enum "PU_SomeStateID"
+    /* 0x4 */ s16 unk4;
+    /* 0x6 */ s16 unk6;
+    /* 0x8 */ u16 unk8;
+    /* 0xA */ u16 unkA;
+    /* 0xC */ u16 unkC;
+} UnkStruct_2039958;
+
+// Size: R=0x18 | B=16
+typedef struct UnkStruct_2039978
+{
+    /* 0x0 */ u32 unk0; // See enum "PaletteUtilUnk0Kind"
+    /* 0x4 */ RGB_Array unk4;
+    /* 0x8 */ UnkStruct_2039958 unk8;
+} UnkStruct_2039978;
+
+static EWRAM_DATA UnkStruct_2039958 gUnknown_2039958 = { 0 };
+static EWRAM_DATA UnkStruct_2039958 gUnknown_2039968 = { 0 };
+static EWRAM_DATA UnkStruct_2039978 gUnknown_2039978 = { 0 };
+static EWRAM_DATA bool8 gUnknown_2039990 = FALSE;
 static EWRAM_DATA s16 gUnknown_2039992 = 0;
 UNUSED static EWRAM_DATA s32 sUnused = 0;
-#define ARR_COUNT_2039998 33
-static EWRAM_DATA u16 gUnknown_2039998[ARR_COUNT_2039998] = {0};
+static EWRAM_DATA u16 gUnknown_2039998[ARR_COUNT_2039998] = { 0 };
 
-static void sub_8099838(struct UnkStruct_2039958 *a0);
-static void sub_8099848(struct UnkStruct_2039958 *a0);
+static void sub_8099838(UnkStruct_2039958 *a0);
+static void sub_8099848(UnkStruct_2039958 *a0);
 static void sub_8099DD0(u16 a0);
 static void sub_8099E58(u16 a0);
 static void sub_8099E80(u16 a0, RGB_Array a1);
@@ -69,12 +80,13 @@ void sub_809977C(void)
     sub_8099838(&gUnknown_2039958);
     sub_8099838(&gUnknown_2039968);
     sub_8099838(&gUnknown_2039978.unk8);
-    gUnknown_2039978.unk0 = 0;
+    gUnknown_2039978.unk0 = PALUTIL_KIND_00;
     gUnknown_2039978.unk8.unkC = 0x100;
     gUnknown_2039958.unkC = 0;
     sub_8099DD0(0);
     gUnknown_2039968.unkC = 0x100;
     sub_8099E58(0x100);
+
     for (i = 0; i < ARR_COUNT_2039998; i++) {
         gUnknown_2039998[i] = 0;
     }
@@ -93,75 +105,75 @@ UNUSED static u32 sub_8099828(u16 a0)
     return gUnknown_2039998[a0];
 }
 
-static void sub_8099838(struct UnkStruct_2039958 *a0)
+static void sub_8099838(UnkStruct_2039958 *a0)
 {
-    a0->unk0 = 1;
+    a0->unk0 = PU_SOMESTATE_1;
     a0->unkC = 0;
     a0->unk4 = 0;
     a0->unk6 = 0;
 }
 
-static void sub_8099848(struct UnkStruct_2039958 *a0)
+static void sub_8099848(UnkStruct_2039958 *a0)
 {
-    if (a0->unk0 == 0) {
-        a0->unk0 = 1;
-    }
+    if (a0->unk0 == PU_SOMESTATE_0)
+        a0->unk0 = PU_SOMESTATE_1;
 }
 
-static void sub_809985C(struct UnkStruct_2039958 *a0, s32 a1)
+static void sub_809985C(UnkStruct_2039958 *a0, s32 a1)
 {
     if (a1 >= 0) {
         if (a1 == 0) {
             a0->unkC = 0x100;
-            a0->unk0 = 1;
+            a0->unk0 = PU_SOMESTATE_1;
         }
         else {
-            a0->unk0 = 2;
+            a0->unk0 = PU_SOMESTATE_2;
         }
     }
     else {
         a1 = 30;
-        a0->unk0 = 2;
+        a0->unk0 = PU_SOMESTATE_2;
     }
 
     a0->unk4 = a1;
     a0->unk6 = a1;
 }
 
-static void sub_8099880(struct UnkStruct_2039958 *a0, s32 a1)
+static void sub_8099880(UnkStruct_2039958 *a0, s32 a1)
 {
     if (a1 >= 0) {
         if (a1 == 0) {
             a0->unkC = a1;
-            a0->unk0 = 1;
+            a0->unk0 = PU_SOMESTATE_1;
         }
         else {
-            a0->unk0 = 3;
+            a0->unk0 = PU_SOMESTATE_3;
         }
     }
     else {
         a1 = 30;
-        a0->unk0 = 3;
+        a0->unk0 = PU_SOMESTATE_3;
     }
 
     a0->unk4 = a1;
     a0->unk6 = a1;
 }
 
-static void sub_80998A0(struct UnkStruct_2039958 *a0, s32 a1, u16 a2, u16 a3)
+static void sub_80998A0(UnkStruct_2039958 *a0, s32 a1, u16 a2, u16 a3)
 {
-    if (a1 < 0) a1 = 30;
+    if (a1 < 0)
+        a1 = 30;
 
     if (a2 > a3) {
-        a0->unk0 = 5;
+        a0->unk0 = PU_SOMESTATE_5;
         a0->unkA = a2 - a3;
     }
     else if (a2 < a3) {
-        a0->unk0 = 4;
+        a0->unk0 = PU_SOMESTATE_4;
         a0->unkA = a3 - a2;
     }
     else {
-        a0->unk0 = 1;
+        a0->unk0 = PU_SOMESTATE_1;
         a0->unkA = 0;
     }
 
@@ -171,15 +183,15 @@ static void sub_80998A0(struct UnkStruct_2039958 *a0, s32 a1, u16 a2, u16 a3)
     a0->unk8 = a3;
 }
 
-static bool8 sub_80998E0(struct UnkStruct_2039958 *a0)
+static bool8 sub_80998E0(UnkStruct_2039958 *a0)
 {
     switch (a0->unk0) {
-        case 0:
+        case PU_SOMESTATE_0:
             break;
-        case 1:
-            a0->unk0 = 0;
+        case PU_SOMESTATE_1:
+            a0->unk0 = PU_SOMESTATE_0;
             return TRUE;
-        case 2:
+        case PU_SOMESTATE_2:
             if (--a0->unk4 > 0) {
                 u16 var = 0x100 - ((a0->unk4 << 8) / a0->unk6);
                 if (a0->unkC < var) {
@@ -188,10 +200,10 @@ static bool8 sub_80998E0(struct UnkStruct_2039958 *a0)
             }
             else {
                 a0->unkC = 0x100;
-                a0->unk0 = 0;
+                a0->unk0 = PU_SOMESTATE_0;
             }
             return TRUE;
-        case 3:
+        case PU_SOMESTATE_3:
             if (--a0->unk4 > 0) {
                 u16 var = (a0->unk4 << 8) / a0->unk6;
                 if (a0->unkC > var) {
@@ -200,25 +212,25 @@ static bool8 sub_80998E0(struct UnkStruct_2039958 *a0)
             }
             else {
                 a0->unkC = 0;
-                a0->unk0 = 0;
+                a0->unk0 = PU_SOMESTATE_0;
             }
             return TRUE;
-        case 4:
+        case PU_SOMESTATE_4:
             if (--a0->unk4 > 0) {
                 a0->unkC = a0->unk8 - ((a0->unk4 * a0->unkA) / a0->unk6);
             }
             else {
                 a0->unkC = a0->unk8;
-                a0->unk0 = 0;
+                a0->unk0 = PU_SOMESTATE_0;
             }
             return TRUE;
-        case 5:
+        case PU_SOMESTATE_5:
             if (--a0->unk4 > 0) {
                 a0->unkC = a0->unk8 + ((a0->unk4 * a0->unkA) / a0->unk6);
             }
             else {
                 a0->unkC = a0->unk8;
-                a0->unk0 = 0;
+                a0->unk0 = PU_SOMESTATE_0;
             }
             return TRUE;
     }
@@ -257,53 +269,53 @@ void sub_8099A48(s32 a0)
     sub_8099880(&gUnknown_2039968, a0);
 }
 
-void sub_8099A5C(s32 a0, s32 a1, RGB_Array a2)
+void sub_8099A5C(s32 kind, s32 a1, RGB_Array a2)
 {
-    gUnknown_2039978.unk0 = a0;
+    gUnknown_2039978.unk0 = kind;
     gUnknown_2039978.unk4 = a2;
     gUnknown_2039978.unk8.unkC = 0;
     sub_809985C(&gUnknown_2039978.unk8, a1);
 
-    switch (a0) {
-        case 1:
-        case 3:
+    switch (kind) {
+        case PALUTIL_KIND_01:
+        case PALUTIL_KIND_03:
             gUnknown_2039968.unkC = 0x100;
             gUnknown_2039958.unkC = 0x100;
             break;
-        case 9:
-        case 11:
+        case PALUTIL_KIND_09:
+        case PALUTIL_KIND_11:
             gUnknown_2039968.unkC = 0x100;
             break;
-        case 5:
-        case 7:
-        case 13:
-        case 14:
+        case PALUTIL_KIND_05:
+        case PALUTIL_KIND_07:
+        case PALUTIL_KIND_13:
+        case PALUTIL_KIND_14:
             gUnknown_2039958.unkC = 0x100;
             break;
     }
 }
 
-void sub_8099AFC(s32 a0, s32 a1, RGB_Array a2)
+void sub_8099AFC(s32 kind, s32 a1, RGB_Array a2)
 {
-    gUnknown_2039978.unk0 = a0;
+    gUnknown_2039978.unk0 = kind;
     gUnknown_2039978.unk4 = a2;
     gUnknown_2039978.unk8.unkC = 0x100;
     sub_8099880(&gUnknown_2039978.unk8, a1);
 
-    switch (a0) {
-        case 2:
-        case 4:
+    switch (kind) {
+        case PALUTIL_KIND_02:
+        case PALUTIL_KIND_04:
             gUnknown_2039968.unkC = 0;
             gUnknown_2039958.unkC = 0;
             break;
-        case 10:
-        case 12:
+        case PALUTIL_KIND_10:
+        case PALUTIL_KIND_12:
             gUnknown_2039968.unkC = 0;
             break;
-        case 6:
-        case 8:
-        case 13:
-        case 14:
+        case PALUTIL_KIND_06:
+        case PALUTIL_KIND_08:
+        case PALUTIL_KIND_13:
+        case PALUTIL_KIND_14:
             gUnknown_2039958.unkC = 0;
             break;
     }
@@ -313,58 +325,71 @@ bool8 sub_8099B94(void)
 {
     if (gUnknown_2039990)
         return TRUE;
-    if (gUnknown_2039978.unk0 != 0) {
-        return (gUnknown_2039978.unk8.unk0 != 0);
-    }
-    return (gUnknown_2039958.unk0 != 0 || gUnknown_2039968.unk0 != 0);
+
+    if (gUnknown_2039978.unk0 != PALUTIL_KIND_00)
+        return (gUnknown_2039978.unk8.unk0 != PU_SOMESTATE_0);
+
+    return (gUnknown_2039958.unk0 != PU_SOMESTATE_0 || gUnknown_2039968.unk0 != PU_SOMESTATE_0);
 }
 
 void sub_8099BE4(void)
 {
-    if (gUnknown_2039978.unk0 != 0 || gUnknown_2039978.unk8.unk0 != 0) {
+    if (gUnknown_2039978.unk0 != PALUTIL_KIND_00 || gUnknown_2039978.unk8.unk0 != PU_SOMESTATE_0) {
         if (sub_80998E0(&gUnknown_2039978.unk8)) {
             sub_8099E80(gUnknown_2039978.unk8.unkC, gUnknown_2039978.unk4);
         }
-        else if (gUnknown_2039978.unk8.unk0 == 0) {
+        else if (gUnknown_2039978.unk8.unk0 == PU_SOMESTATE_0) {
             switch (gUnknown_2039978.unk0) {
-                case 0:
+                case PALUTIL_KIND_00:
                     break;
-                case 1:
-                case 3:
-                case 5:
-                case 7:
-                case 9:
-                case 11:
-                    if (gUnknown_2039978.unk8.unkC >= 256) {
-                        gUnknown_2039978.unk0 = 0;
+                case PALUTIL_KIND_01:
+                case PALUTIL_KIND_03:
+                case PALUTIL_KIND_05:
+                case PALUTIL_KIND_07:
+                case PALUTIL_KIND_09:
+                case PALUTIL_KIND_11:
+                    if (gUnknown_2039978.unk8.unkC >= 0x100) {
+                        gUnknown_2039978.unk0 = PALUTIL_KIND_00;
                     }
                     else if (gUnknown_2039990) {
-                        s32 var = 0;
+                        s32 kind = PALUTIL_KIND_00;
+
                         switch (gUnknown_2039978.unk0) {
-                            case 1: var = 2; break;
-                            case 3: var = 4; break;
-                            case 5: var = 6; break;
-                            case 7: var = 8; break;
+                            case PALUTIL_KIND_01: {
+                                kind = PALUTIL_KIND_02;
+                                break;
+                            }
+                            case PALUTIL_KIND_03: {
+                                kind = PALUTIL_KIND_04;
+                                break;
+                            }
+                            case PALUTIL_KIND_05: {
+                                kind = PALUTIL_KIND_06;
+                                break;
+                            }
+                            case PALUTIL_KIND_07: {
+                                kind = PALUTIL_KIND_08;
+                                break;
+                            }
                         }
 
-                        if (var != 0) {
-                            sub_8099AFC(var, gUnknown_2039992, gUnknown_2039978.unk4);
-                        }
-                        else {
-                            gUnknown_2039978.unk0 = 0;
-                        }
+                        if (kind != PALUTIL_KIND_00)
+                            sub_8099AFC(kind, gUnknown_2039992, gUnknown_2039978.unk4);
+                        else
+                            gUnknown_2039978.unk0 = PALUTIL_KIND_00;
+
                     }
                     break;
-                case 2:
-                case 4:
-                case 6:
-                case 8:
-                case 10:
-                case 12:
-                case 13:
-                case 14:
+                case PALUTIL_KIND_02:
+                case PALUTIL_KIND_04:
+                case PALUTIL_KIND_06:
+                case PALUTIL_KIND_08:
+                case PALUTIL_KIND_10:
+                case PALUTIL_KIND_12:
+                case PALUTIL_KIND_13:
+                case PALUTIL_KIND_14:
                     if (gUnknown_2039978.unk8.unkC == 0) {
-                        gUnknown_2039978.unk0 = 0;
+                        gUnknown_2039978.unk0 = PALUTIL_KIND_00;
                     }
                     else if (gUnknown_2039990) {
                         sub_8099AFC(gUnknown_2039978.unk0, gUnknown_2039992, gUnknown_2039978.unk4);
@@ -375,18 +400,18 @@ void sub_8099BE4(void)
     }
     else if (gUnknown_2039990) {
         bool8 r5 = TRUE;
-        if (gUnknown_2039958.unkC != 0 || gUnknown_2039958.unk0 != 0) {
+        if (gUnknown_2039958.unkC != 0 || gUnknown_2039958.unk0 != PU_SOMESTATE_0) {
             r5 = FALSE;
-            if (gUnknown_2039958.unk0 != 3) {
+            if (gUnknown_2039958.unk0 != PU_SOMESTATE_3) {
                 sub_8099880(&gUnknown_2039958, gUnknown_2039992);
             }
             if (sub_80998E0(&gUnknown_2039958)) {
                 sub_8099DD0(gUnknown_2039958.unkC);
             }
         }
-        if (gUnknown_2039968.unkC != 0 || gUnknown_2039968.unk0 != 0) {
+        if (gUnknown_2039968.unkC != 0 || gUnknown_2039968.unk0 != PU_SOMESTATE_0) {
             r5 = FALSE;
-            if (gUnknown_2039968.unk0 != 3) {
+            if (gUnknown_2039968.unk0 != PU_SOMESTATE_3) {
                 sub_8099880(&gUnknown_2039968, gUnknown_2039992);
             }
             if (sub_80998E0(&gUnknown_2039968)) {
@@ -445,270 +470,272 @@ static void sub_8099E80(u16 param_1,RGB_Array param_2)
     s32 i;
 
     switch (gUnknown_2039978.unk0) {
-        case 0:
+        case PALUTIL_KIND_00:
             break;
-        case 1:
+        case PALUTIL_KIND_01:
             for (i = 0; i < 16; i++) {
                 if (gUnknown_2039998[i] & 2) {
-                    SetPaletteFade_Brightness(i,0x100);
+                    SetPaletteFade_Brightness(i, 0x100);
                 }
                 else {
-                    SetPaletteFade_Blend(i,param_1,param_2);
+                    SetPaletteFade_Blend(i, param_1, param_2);
                 }
             }
 
             for (i = 16; i < 32; i++) {
                 if (gUnknown_2039998[i] & 2) {
-                    SetPaletteFade_Brightness(i,0x100);
+                    SetPaletteFade_Brightness(i, 0x100);
                 }
                 else {
-                    SetPaletteFade_Blend(i,param_1,param_2);
+                    SetPaletteFade_Blend(i, param_1, param_2);
                 }
             }
             break;
-        case 9:
+        case PALUTIL_KIND_09:
             for (i = 14; i < 16; i++) {
                 if (gUnknown_2039998[i] & 2) {
-                    SetPaletteFade_Brightness(i,0x100);
+                    SetPaletteFade_Brightness(i, 0x100);
                 }
                 else {
-                    SetPaletteFade_Blend(i,param_1,param_2);
+                    SetPaletteFade_Blend(i, param_1, param_2);
                 }
             }
 
             for (i = 31; i < 32; i++) {
                 if (gUnknown_2039998[i] & 2) {
-                    SetPaletteFade_Brightness(i,0x100);
+                    SetPaletteFade_Brightness(i, 0x100);
                 }
                 else {
-                    SetPaletteFade_Blend(i,param_1,param_2);
+                    SetPaletteFade_Blend(i, param_1, param_2);
                 }
             }
             break;
-         case 5:
+         case PALUTIL_KIND_05:
             for (i = 0; i < 14; i++) {
                 if (gUnknown_2039998[i] & 2) {
-                    SetPaletteFade_Brightness(i,0x100);
+                    SetPaletteFade_Brightness(i, 0x100);
                 }
                 else {
-                    SetPaletteFade_Blend(i,param_1,param_2);
+                    SetPaletteFade_Blend(i, param_1, param_2);
                 }
             }
 
             for (i = 16; i < 31; i++) {
                 if (gUnknown_2039998[i] & 2) {
-                    SetPaletteFade_Brightness(i,0x100);
+                    SetPaletteFade_Brightness(i, 0x100);
                 }
                 else {
-                    SetPaletteFade_Blend(i,param_1,param_2);
+                    SetPaletteFade_Blend(i, param_1, param_2);
                 }
             }
             break;
-        case 2:
+        case PALUTIL_KIND_02:
             for (i = 0; i < 16; i++) {
                 if (gUnknown_2039998[i] & 2) {
-                    SetPaletteFade_Brightness(i,0x100);
+                    SetPaletteFade_Brightness(i, 0x100);
                 }
                 else {
-                    SetPaletteFade_FadeToBlack(i,param_1,param_2);
+                    SetPaletteFade_FadeToBlack(i, param_1, param_2);
                 }
             }
 
             for (i = 16; i < 32; i++) {
                 if (gUnknown_2039998[i] & 2) {
-                    SetPaletteFade_Brightness(i,0x100);
+                    SetPaletteFade_Brightness(i, 0x100);
                 }
                 else {
-                    SetPaletteFade_FadeToBlack(i,param_1,param_2);
+                    SetPaletteFade_FadeToBlack(i, param_1, param_2);
                 }
             }
             break;
-        case 10:
+        case PALUTIL_KIND_10:
             for (i = 14; i < 16; i++) {
                 if (gUnknown_2039998[i] & 2) {
-                    SetPaletteFade_Brightness(i,0x100);
+                    SetPaletteFade_Brightness(i, 0x100);
                 }
                 else {
-                    SetPaletteFade_FadeToBlack(i,param_1,param_2);
+                    SetPaletteFade_FadeToBlack(i, param_1, param_2);
                 }
             }
 
             for (i = 31; i < 32; i++) {
                 if (gUnknown_2039998[i] & 2) {
-                    SetPaletteFade_Brightness(i,0x100);
+                    SetPaletteFade_Brightness(i, 0x100);
                 }
                 else {
-                    SetPaletteFade_FadeToBlack(i,param_1,param_2);
+                    SetPaletteFade_FadeToBlack(i, param_1, param_2);
                 }
             }
             break;
-        case 6:
+        case PALUTIL_KIND_06:
             for (i = 0; i < 14; i++) {
                 if (gUnknown_2039998[i] & 2) {
-                    SetPaletteFade_Brightness(i,0x100);
+                    SetPaletteFade_Brightness(i, 0x100);
                 }
                 else {
-                    SetPaletteFade_FadeToBlack(i,param_1,param_2);
+                    SetPaletteFade_FadeToBlack(i, param_1, param_2);
                 }
             }
 
             for (i = 16; i < 31; i++) {
                 if (gUnknown_2039998[i] & 2) {
-                    SetPaletteFade_Brightness(i,0x100);
+                    SetPaletteFade_Brightness(i, 0x100);
                 }
                 else {
-                    SetPaletteFade_FadeToBlack(i,param_1,param_2);
+                    SetPaletteFade_FadeToBlack(i, param_1, param_2);
                 }
             }
             break;
-        case 3:
+        case PALUTIL_KIND_03:
             for (i = 0; i < 16; i++) {
                 if (gUnknown_2039998[i] & 2) {
-                    SetPaletteFade_Brightness(i,0x100);
+                    SetPaletteFade_Brightness(i, 0x100);
                 }
                 else {
-                    SetPaletteFade_Desaturate(i,param_1,param_2);
+                    SetPaletteFade_Desaturate(i, param_1, param_2);
                 }
             }
 
             for (i = 16; i < 32; i++) {
                 if (gUnknown_2039998[i] & 2) {
-                    SetPaletteFade_Brightness(i,0x100);
+                    SetPaletteFade_Brightness(i, 0x100);
                 }
                 else {
-                    SetPaletteFade_Desaturate(i,param_1,param_2);
+                    SetPaletteFade_Desaturate(i, param_1, param_2);
                 }
             }
             break;
-        case 11:
+        case PALUTIL_KIND_11:
             for (i = 14; i < 16; i++) {
                 if (gUnknown_2039998[i] & 2) {
-                    SetPaletteFade_Brightness(i,0x100);
+                    SetPaletteFade_Brightness(i, 0x100);
                 }
                 else {
-                    SetPaletteFade_Desaturate(i,param_1,param_2);
+                    SetPaletteFade_Desaturate(i, param_1, param_2);
                 }
             }
 
             for (i = 31; i < 32; i++) {
                 if (gUnknown_2039998[i] & 2) {
-                    SetPaletteFade_Brightness(i,0x100);
+                    SetPaletteFade_Brightness(i, 0x100);
                 }
                 else {
-                    SetPaletteFade_Desaturate(i,param_1,param_2);
+                    SetPaletteFade_Desaturate(i, param_1, param_2);
                 }
             }
             break;
-        case 7:
+        case PALUTIL_KIND_07:
             for (i = 0; i < 14; i++) {
                 if (gUnknown_2039998[i] & 2) {
-                    SetPaletteFade_Brightness(i,0x100);
+                    SetPaletteFade_Brightness(i, 0x100);
                 }
                 else {
-                    SetPaletteFade_Desaturate(i,param_1,param_2);
+                    SetPaletteFade_Desaturate(i, param_1, param_2);
                 }
             }
 
             for (i = 16; i < 31; i++) {
                 if (gUnknown_2039998[i] & 2) {
-                    SetPaletteFade_Brightness(i,0x100);
+                    SetPaletteFade_Brightness(i, 0x100);
                 }
                 else {
-                    SetPaletteFade_Desaturate(i,param_1,param_2);
+                    SetPaletteFade_Desaturate(i, param_1, param_2);
                 }
             }
             break;
-         case 4:
+         case PALUTIL_KIND_04:
             for (i = 0; i < 16; i ++) {
                 if (gUnknown_2039998[i] & 1) {
-                    SetPaletteFade_Brightness(i,0x100);
+                    SetPaletteFade_Brightness(i, 0x100);
                 }
                 else if (gUnknown_2039998[i] & 2) {
                     SetPaletteFade_Brightness(i,param_1);
                 }
                 else {
-                    SetPaletteFade_Modulate(i,param_1,param_2);
+                    SetPaletteFade_Modulate(i, param_1, param_2);
                 }
             }
 
             for (i = 16; i < 32; i ++) {
                 if (gUnknown_2039998[i] & 1) {
-                    SetPaletteFade_Brightness(i,0x100);
+                    SetPaletteFade_Brightness(i, 0x100);
                 }
                 else if (gUnknown_2039998[i] & 2) {
                     SetPaletteFade_Brightness(i,param_1);
                 }
                 else {
-                    SetPaletteFade_Modulate(i,param_1,param_2);
+                    SetPaletteFade_Modulate(i, param_1, param_2);
                 }
             }
             break;
-        case 12:
+        case PALUTIL_KIND_12:
             for (i = 14; i < 16; i ++) {
                 if (gUnknown_2039998[i] & 1) {
-                    SetPaletteFade_Brightness(i,0x100);
+                    SetPaletteFade_Brightness(i, 0x100);
                 }
                 else if (gUnknown_2039998[i] & 2) {
                     SetPaletteFade_Brightness(i,param_1);
                 }
                 else {
-                    SetPaletteFade_Modulate(i,param_1,param_2);
+                    SetPaletteFade_Modulate(i, param_1, param_2);
                 }
             }
 
             for (i = 31; i < 32; i ++) {
                 if (gUnknown_2039998[i] & 1) {
-                    SetPaletteFade_Brightness(i,0x100);
+                    SetPaletteFade_Brightness(i, 0x100);
                 }
                 else if (gUnknown_2039998[i] & 2) {
                     SetPaletteFade_Brightness(i,param_1);
                 }
                 else {
-                    SetPaletteFade_Modulate(i,param_1,param_2);
+                    SetPaletteFade_Modulate(i, param_1, param_2);
                 }
             }
             break;
-        case 13:
-        case 14:
+        case PALUTIL_KIND_13:
+        case PALUTIL_KIND_14: {
             switch (gUnknown_2039978.unk0) {
-                case 13:
-                    param_2.c[0] = 0x90;
-                    param_2.c[1] = 0x90;
-                    param_2.c[2] = 0xFF;
-                    param_2.c[3] = 0xFF;
+                case PALUTIL_KIND_13:
+                    param_2.c[RGB_R] = 0x90;
+                    param_2.c[RGB_G] = 0x90;
+                    param_2.c[RGB_B] = 0xFF;
+                    param_2.c[RGB_UNK] = 0xFF;
                     break;
-                case 14:
-                    param_2.c[0] = 0xFF;
-                    param_2.c[1] = 0xC0;
-                    param_2.c[2] = 0x80;
-                    param_2.c[3] = 0xFF;
+                case PALUTIL_KIND_14:
+                    param_2.c[RGB_R] = 0xFF;
+                    param_2.c[RGB_G] = 0xC0;
+                    param_2.c[RGB_B] = 0x80;
+                    param_2.c[RGB_UNK] = 0xFF;
                     break;
             }
-        // NOTE: fallthrough needed here
-        case 8:
+            // Fallthrough
+        }
+        case PALUTIL_KIND_08: {
             for (i = 0; i < 14; i ++) {
                 if (gUnknown_2039998[i] & 1) {
-                    SetPaletteFade_Brightness(i,0x100);
+                    SetPaletteFade_Brightness(i, 0x100);
                 }
                 else if (gUnknown_2039998[i] & 2) {
-                    SetPaletteFade_Brightness(i,param_1);
+                    SetPaletteFade_Brightness(i, param_1);
                 }
                 else {
-                    SetPaletteFade_Modulate(i,param_1,param_2);
+                    SetPaletteFade_Modulate(i, param_1, param_2);
                 }
             }
 
             for (i = 16; i < 31; i ++) {
                 if (gUnknown_2039998[i] & 1) {
-                    SetPaletteFade_Brightness(i,0x100);
+                    SetPaletteFade_Brightness(i, 0x100);
                 }
                 else if (gUnknown_2039998[i] & 2) {
-                    SetPaletteFade_Brightness(i,param_1);
+                    SetPaletteFade_Brightness(i, param_1);
                 }
                 else {
-                    SetPaletteFade_Modulate(i,param_1,param_2);
+                    SetPaletteFade_Modulate(i, param_1, param_2);
                 }
             }
             break;
+        }
     }
 }

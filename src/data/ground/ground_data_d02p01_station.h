@@ -241,7 +241,7 @@ static const struct ScriptCommand s_gs180_g3_s0_station_sref_script[] = { /* 0x8
     SELECT_ENTITIES(-1, 0),
     BGM_SWITCH(MUS_A_SUCCESSFUL_RESCUE),
     WAIT(30),
-    { 0x27, 0x01,  0x0001,  0x0000003c,  0x00ffffff, NULL },
+    FLASH_FROM(TRUE, PALUTIL_KIND_01, 60, RGB_U32(0xFF, 0xFF, 0xFF)),
     AWAIT_CUE(3),
     { 0x23, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
     WAIT(30),

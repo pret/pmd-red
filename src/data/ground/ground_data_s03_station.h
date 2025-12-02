@@ -40,7 +40,7 @@ static const struct ScriptCommand s_gs225_g1_s0_station_sref_script[] = { /* 0x8
     WAIT(40),
     { 0x3b, 0x38,  0x0000,  0x00000001,  0x00000000, NULL },
     AWAIT_CUE(3),
-    { 0x28, 0x01,  0x0001,  0x0000003c,  0x00ffffff, NULL },
+    FLASH_TO(TRUE, PALUTIL_KIND_01, 60, RGB_U32(0xFF, 0xFF, 0xFF)),
     { 0xe0, 0x00,  0x0028,  0x00000000,  0x00000000, NULL },
     RET,
 };

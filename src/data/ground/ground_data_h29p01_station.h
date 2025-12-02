@@ -252,24 +252,24 @@ static const struct ScriptCommand s_gs158_g2_s0_lives0_dlg0[] = { /* 0x820d22c *
     WAIT(60),
     ALERT_CUE(8), // Moltres attack
     AWAIT_CUE(5),
-    { 0x28, 0x01,  0x0001,  0x00000005,  0x00ff1010, NULL }, // Flash to red?
+    FLASH_TO(TRUE, PALUTIL_KIND_01, 5, RGB_U32(0xFF, 0x10, 0x10)), // Flash to red
     FANFARE_PLAY2(502),
-    { 0x27, 0x01,  0x0001,  0x00000005,  0x00ff1010, NULL }, // Flash from red?
+    FLASH_FROM(TRUE, PALUTIL_KIND_01, 5, RGB_U32(0xFF, 0x10, 0x10)), // Flash from red
     ALERT_CUE(7), // Zapdos attack
     AWAIT_CUE(5),
-    { 0x28, 0x01,  0x0001,  0x00000005,  0x00ffff10, NULL }, // Flash to yellow?
+    FLASH_TO(TRUE, PALUTIL_KIND_01, 5, RGB_U32(0xFF, 0xFF, 0x10)), // Flash to yellow
     FANFARE_PLAY2(502),
-    { 0x27, 0x01,  0x0001,  0x00000005,  0x00ffff10, NULL }, // Flash from yellow?
+    FLASH_FROM(TRUE, PALUTIL_KIND_01, 5, RGB_U32(0xFF, 0xFF, 0x10)), // Flash from yellow
     ALERT_CUE(6), // Articuno attack
     AWAIT_CUE(5),
     FANFARE_PLAY2(506),
-    { 0x28, 0x01,  0x0001,  0x00000005,  0x00ffffff, NULL }, // Flash to white?
+    FLASH_TO(TRUE, PALUTIL_KIND_01, 5, RGB_U32(0xFF, 0xFF, 0xFF)), // Flash to white
     ALERT_CUE(6), // Articuno something?
     ALERT_CUE(7), // Zapdos something?
     ALERT_CUE(8), // Moltres something?
     ALERT_CUE(10), // Vortex stone or circle?
     WAIT(60),
-    { 0x27, 0x01,  0x0001,  0x0000003c,  0x00ffffff, NULL }, // Flash from white?
+    FLASH_FROM(TRUE, PALUTIL_KIND_01, 60, RGB_U32(0xFF, 0xFF, 0xFF)), // Flash from white
     ALERT_CUE(10), // Vortex stone or circle?
     AWAIT_CUE(5),
     WAIT(60),

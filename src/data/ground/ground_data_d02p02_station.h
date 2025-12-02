@@ -27,7 +27,7 @@ static const struct ScriptCommand s_gs181_g1_s0_station_sref_script[] = { /* 0x8
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(3),
     BGM_FADEOUT(120),
-    { 0x28, 0x01,  0x0001,  0x0000003c,  0x00ffffff, NULL },
+    FLASH_TO(TRUE, PALUTIL_KIND_01, 60, RGB_U32(0xFF, 0xFF, 0xFF)),
     RET,
 };
 
