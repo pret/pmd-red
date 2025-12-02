@@ -1083,7 +1083,7 @@ bool8 IsChargingAnyTwoTurnMove(Entity *pokemon, bool8 checkCharge)
     else
     {
         EntityInfo *pokemonInfo = GetEntInfo(pokemon);
-        int i = 0;
+        s32 i = 0;
         u8 *bideClassStatusPointer = &pokemonInfo->bideClassStatus.status;
         u8 *bideClassStatusPointer2;
         u8 chargeStatus = STATUS_CHARGING;
@@ -1114,7 +1114,7 @@ bool8 IsChargingAnyTwoTurnMove(Entity *pokemon, bool8 checkCharge)
 u32 sub_8057144(Entity * pokemon)
 {
     Move *moveStack[80];
-    int i, j, nMoves;
+    s32 i, j, nMoves;
 
     nMoves = 0;
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++)

@@ -38,7 +38,7 @@ struct unkStruct_203B0D0 {
 
 static EWRAM_INIT struct unkStruct_203B0D0 *gUnknown_203B0D0 = NULL;
 
-extern void sub_809971C(u16 a0, const RGB_Struct *a1, int a2);
+extern void sub_809971C(u16 a0, const RGB_Struct *a1, s32 a2);
 
 void sub_800ED38(s32 r0)
 {

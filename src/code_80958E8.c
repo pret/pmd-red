@@ -487,8 +487,8 @@ void ResetMailboxSlot(u8 index)
 
 void ShiftMailboxSlotsDown(void)
 {
-  int counter1; // r5
-  int counter2;
+  s32 counter1; // r5
+  s32 counter2;
 
 
   counter1 = 0;
@@ -787,8 +787,8 @@ void ResetPelipperBoardSlot(u8 index)
 
 void ShiftPelipperJobsDown(void)
 {
-  int counter1; // r5
-  int counter2;
+  s32 counter1; // r5
+  s32 counter2;
 
 
   counter1 = 0;
@@ -1165,8 +1165,8 @@ void ResetJobSlot(u8 index)
 
 void ShiftJobSlotsDown(void)
 {
-  int counter1; // r5
-  int counter2;
+  s32 counter1; // r5
+  s32 counter2;
 
 
   counter1 = 0;

@@ -696,7 +696,7 @@ bool8 sub_8048950(Entity *param_1,Item *item)
     Entity *entity2;
     Entity *entity;
     EntityInfo *entityInfo;
-    int index;
+    s32 index;
 
     moveID = GetItemMoveID(item->id);
     if ((item->flags & ITEM_FLAG_STICKY)) {

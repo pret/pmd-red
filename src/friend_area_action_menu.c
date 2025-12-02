@@ -234,7 +234,7 @@ void sub_8027274(void)
 
 void CreateFriendActionMenu(void)
 {
-  int index;
+  s32 index;
   s32 loopMax;
   Pokemon *pokeStruct;
 
@@ -324,7 +324,7 @@ void CreateFriendActionMenu(void)
 
 void sub_80276A8(void)
 {
-  int index;
+  s32 index;
   s32 loopMax;
 
   loopMax = 0;

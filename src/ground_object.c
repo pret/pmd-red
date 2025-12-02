@@ -271,12 +271,12 @@ s32 GroundObject_Add(s32 id_, const GroundObjectData *objectData, s32 group_, s3
       s32 sVar3;
       s32 sVar4;
 
-      int index;
+      s32 index;
       s32 kind;
       GroundObject *parent;
-      register s32 id;
-      register s32 group;
-      register s32 sector;
+      s32 id;
+      s32 group;
+      s32 sector;
       bool8 bVar12;
       struct GroundObjectTypeData *typeDataPtr;
 
@@ -953,7 +953,7 @@ void GroundObject_Action(void)
 void sub_80ACAD4(void)
 {
     GroundObject *objectPtr;
-    int i;
+    s32 i;
     // s16 memes
     s32 minus1;
 

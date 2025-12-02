@@ -224,8 +224,8 @@ bool8 PsychUpMoveAction(Entity * pokemon, Entity * target, Move * move, s32 item
 
 bool8 sub_8058E5C(Entity *pokemon, Entity *target, Move *move, s32 itemId)
 {
-  int iVar2;
-  int iVar3;
+  s32 iVar2;
+  s32 iVar3;
   bool8 flag;
 
   flag = FALSE;

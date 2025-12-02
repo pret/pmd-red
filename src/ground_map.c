@@ -18,7 +18,7 @@
 IWRAM_INIT GroundMapAction *gGroundMapAction = {NULL};
 IWRAM_INIT GroundBg *gGroundMapDungeon_3001B70 = {NULL};
 
-static void sub_80A5204(void *, const void *, BmaHeader *, s32);
+static u8* sub_80A5204(void *, const u8 *, BmaHeader *, s32);
 static void sub_80A56D8(const PixelPos *pos);
 
 static const SubStruct_52C gUnknown_8117324 = {
@@ -535,7 +535,7 @@ void GroundMap_SelectDungeon(s32 mapId_, const DungeonLocation *loc, u32 param_2
 }
 
 NAKED
-static void sub_80A5204(void *a, const void *b, BmaHeader *c, s32 d)
+static u8* sub_80A5204(void *a, const u8 *b, BmaHeader *c, s32 d)
 {
     asm_unified(
 "	push {r4-r7,lr}     \n"
@@ -1305,7 +1305,7 @@ bool8 sub_80A579C(PixelPos *pos1, PixelPos *pos2)
 bool8 CheckMapCollision_80A585C(PixelPos *pixPos1, PixelPos *boundary)
 {
     u8 *currPtr;
-    int i, j;
+    s32 i, j;
     u8 *ptr;
 
     ptr = (void *)gGroundMapDungeon_3001B70->unk544 + ((pixPos1->y * 256) + pixPos1->x + 0x405);
@@ -1329,7 +1329,7 @@ bool8 CheckMapCollision_80A585C(PixelPos *pixPos1, PixelPos *boundary)
 bool8 sub_80A58C8(PixelPos *pixPos1, PixelPos *boundary)
 {
     u8 *currPtr;
-    int i, j;
+    s32 i, j;
     u8 *ptr;
 
     ptr = (void *)gGroundMapDungeon_3001B70->unk544 + ((pixPos1->y * 256) + pixPos1->x + 0x405);

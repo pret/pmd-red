@@ -20,7 +20,7 @@ extern const FileArchive gGroundFileArchive;
 
 static void CloseOpenedFiles(GroundBg *groundBg);
 static void CallMapTilemapRenderFunc(MapRender *mapRender);
-static const u8 *BmaLayerNrlDecompressor(u16 **dstArray, const void *bmaData, SubStruct_52C *a2, BmaHeader *bmaHeader);
+static const u8 *BmaLayerNrlDecompressor(u16 **dstArray, const u8 *bmaData, SubStruct_52C *a2, BmaHeader *bmaHeader);
 static void CopyBpcTilesToVram(void *vramDst, const u16 *src_, SubStruct_52C *a2, LayerSpecs *a3);
 static void _UncompressCell(void * a0, u16 *a1, const void * a2, SubStruct_52C *a3, LayerSpecs *a4);
 static void InitMapTilemapRenderContext(MapRender *mapRender, GroundBg *groundBg, s32 a2, s32 numBgs, bool8 a4);
@@ -68,7 +68,7 @@ void GroundBg_Init(GroundBg *groundBg, const SubStruct_52C *a1)
     groundBg->unk440 = NULL;
     groundBg->unk52A = 0;
     groundBg->mapFileId = -1;
-    groundBg->unk468 = 0;
+    groundBg->decompressedBMAData = NULL;
     groundBg->bmaHeader.mapWidthTiles = 0;
     groundBg->bmaHeader.mapHeightTiles = 0;
     groundBg->bmaHeader.tilingWidth = 0;
@@ -134,7 +134,7 @@ void sub_80A2D88(GroundBg *groundBg)
     if (groundBg->unk52C.unk14 != NULL) {
         BmaHeader *bmaHeader = &groundBg->bmaHeader;
         groundBg->unk544 = MemoryAlloc(groundBg->unk52C.unkE * 256, 6);
-        groundBg->unk52C.unk14(groundBg->unk544, groundBg->unk468, bmaHeader, groundBg->unk52C.unkE);
+        groundBg->unk52C.unk14(groundBg->unk544, groundBg->decompressedBMAData, bmaHeader, groundBg->unk52C.unkE);
     }
 }
 
@@ -222,7 +222,7 @@ void sub_80A2FBC(GroundBg *groundBg, s32 mapFileId_)
     BplHeader *bplHeader;
     LayerSpecs *layerSpecs;
     const u16 *bpcData;
-    const void *bmaData;
+    const u8 *bmaData;
     const void *bplData;
     BmaHeader *bmaHeader;
     RGB_Array str2;
@@ -266,15 +266,15 @@ void sub_80A2FBC(GroundBg *groundBg, s32 mapFileId_)
     }
     layerSpecs->numChunks = *bpcData++;
 
-    bmaHeader->mapWidthTiles = *(u8 *)(bmaData); bmaData += 1;
-    bmaHeader->mapHeightTiles = *(u8 *)(bmaData); bmaData += 1;
-    bmaHeader->tilingWidth = *(u8 *)(bmaData); bmaData += 1;
-    bmaHeader->tilingHeight = *(u8 *)(bmaData); bmaData += 1;
-    bmaHeader->mapWidthChunks = *(u8 *)(bmaData); bmaData += 1;
-    bmaHeader->mapHeightChunks = *(u8 *)(bmaData); bmaData += 1;
-    bmaHeader->numLayers = *(u8 *)(bmaData); bmaData += 2;
-    bmaHeader->hasDataLayer = *(u8 *)(bmaData); bmaData += 2;
-    bmaHeader->hasCollision = *(u8 *)(bmaData); bmaData += 2;
+    bmaHeader->mapWidthTiles = *bmaData; bmaData += 1;
+    bmaHeader->mapHeightTiles = *bmaData; bmaData += 1;
+    bmaHeader->tilingWidth = *bmaData; bmaData += 1;
+    bmaHeader->tilingHeight = *bmaData; bmaData += 1;
+    bmaHeader->mapWidthChunks = *bmaData; bmaData += 1;
+    bmaHeader->mapHeightChunks = *bmaData; bmaData += 1;
+    bmaHeader->numLayers = *bmaData; bmaData += 2;
+    bmaHeader->hasDataLayer = *bmaData; bmaData += 2;
+    bmaHeader->hasCollision = *bmaData; bmaData += 2;
 
     rgbPal = bplData;
     r5 = groundBg->unk52C.unk0 * 16;
@@ -299,7 +299,7 @@ void sub_80A2FBC(GroundBg *groundBg, s32 mapFileId_)
     CopyBpcTilesToVram((void *)(VRAM + 0x8000 + groundBg->unk52C.unk4 * 32), bpcData, &groundBg->unk52C, &groundBg->layerSpecs);
     _UncompressCell(groundBg->tileMappings, &groundBg->chunkDimensions, bpcData + ((layerSpecs->numTiles - 1) * 16), &groundBg->unk52C, &groundBg->layerSpecs);
     bmaData = BmaLayerNrlDecompressor(groundBg->chunkMappings, bmaData, &groundBg->unk52C, &groundBg->bmaHeader);
-    groundBg->unk468 = bmaData;
+    groundBg->decompressedBMAData = bmaData;
     if (groundBg->unk544 != NULL) {
         groundBg->unk52C.unk14(groundBg->unk544, bmaData, bmaHeader, groundBg->unk52C.unkE);
     }
@@ -457,7 +457,7 @@ void sub_80A3440(GroundBg *groundBg, s32 mapFileId_, const DungeonLocation *dung
     unkPtrArray[0] = groundBg->unk544;
     unkPtrArray[1] = NULL;
     bmaData = BmaLayerNrlDecompressor(unkPtrArray, bmaData, &groundBg->unk52C, &groundBg->bmaHeader);
-    groundBg->unk468 = bmaData;
+    groundBg->decompressedBMAData = bmaData;
     sub_80ADD9C(&groundBg->unk43C, &groundBg->unk440, (void *)(VRAM + 0x8000), groundBg->tileMappings, groundBg->chunkMappings[0], dungLoc, a3, 0x40, bmaHeader->mapHeightChunks, groundBg->unk544, 0);
     // Unused return values
     GetFileDataPtr(groundBg->unk43C, 0);
@@ -599,7 +599,7 @@ static void _UncompressCell(void *dst_, u16 *chunkDimensions, const void *src_, 
     }
 }
 
-static const u8 *BmaLayerNrlDecompressor(u16 **dstArray, const void *bmaData, SubStruct_52C *a2, BmaHeader *bmaHeader)
+static const u8 *BmaLayerNrlDecompressor(u16 **dstArray, const u8 *bmaData, SubStruct_52C *a2, BmaHeader *bmaHeader)
 {
     s32 i, k, j, l;
     const u8 *src = bmaData;

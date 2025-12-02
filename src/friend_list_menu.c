@@ -316,7 +316,7 @@ static void sub_8025518(void)
 
 static void sub_8025728(void)
 {
-    int index;
+    s32 index;
     Pokemon *pokeStruct;
     s32 loopMax = 0;
 
@@ -389,7 +389,7 @@ static void sub_8025728(void)
 
 static void sub_802591C(void)
 {
-  int index;
+  s32 index;
   s32 loopMax = 0;
 
 

@@ -31,10 +31,10 @@ struct ProjectileHitEntry
 void HandleStraightProjectileThrow(Entity *thrower, Item *item, DungeonPos *pos, s32 dir, struct ProjectileThrowInfo *a4)
 {
     const Tile *tile;
-    int i;
+    s32 i;
     u32 stepResult;
-    int remainingSteps;
-    int count;
+    s32 remainingSteps;
+    s32 count;
     bool8 hallucinating = gDungeon->unk181e8.hallucinating;
     struct ProjectileHitEntry hitList[64];
     bool8 lockOnActive;

@@ -213,7 +213,7 @@ void AllocGroundLives(void)
 
 void DeleteGroundLives(void)
 {
-    int i;
+    s32 i;
     struct GroundLive *iVar4;
 
     iVar4 = &gGroundLives->array[0];

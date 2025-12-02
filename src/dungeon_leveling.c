@@ -69,7 +69,7 @@ void AddExpPoints(Entity *pokemon, Entity *target, s32 exp)
 
 void EnemyEvolution(Entity *entity)
 {
-  int counter;
+  s32 counter;
   s16 *id;
   Entity EStack_f4;
   u8 tacticsBuffer1[NUM_TACTICS];
@@ -737,8 +737,8 @@ void sub_8072AC8(s16 *param_1, s32 species, s32 param_3)
 
 static void sub_8072B24(Entity *entity, Move *moves)
 {
-    int index;
-    int count;
+    s32 index;
+    s32 count;
 
     count = 0;
     for(index = 0; index < 8; index++)
@@ -766,7 +766,7 @@ static void sub_8072B78(Entity *pokemon, Entity *target, s16 id)
 {
   OpenedFile *file;
   const Tile *tile;
-  int index;
+  s32 index;
   s32 id_s32;
   EntityInfo *entityInfo;
   LevelData levelData;

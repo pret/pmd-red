@@ -13,6 +13,6 @@ void sub_806F370_Async(Entity *pokemon, Entity *target, s32 dmg, s32 giveExp, bo
 void SetShopkeeperAggression(Entity *pokemon, Entity *target);
 void sub_806F480(Entity *pokemon, bool8 attackEnemies);
 u8 sub_806F4A4(Entity *pokemon, u8 type);
-s32 sub_806F62C(int param_1);
+s32 sub_806F62C(s32 param_1);
 
 #endif

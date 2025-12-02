@@ -143,16 +143,16 @@ void BlowAwayTarget(Entity *pokemon, Entity *target, u32 direction)
 
 void sub_807D068(Entity *pokemon, DungeonPos *pos)
 {
-    int pixelX;
-    int posY;
-    int pixelY;
-    int posX;
-    int counter;
-    int iVar8;
+    s32 pixelX;
+    s32 posY;
+    s32 pixelY;
+    s32 posX;
+    s32 counter;
+    s32 iVar8;
     s32 diff;
     PixelPos local_34;
-    int incrementX;
-    int incrementY;
+    s32 incrementX;
+    s32 incrementY;
 
     posX = X_POS_TO_PIXELPOS(pos->x);
     posY = Y_POS_TO_PIXELPOS(pos->y);

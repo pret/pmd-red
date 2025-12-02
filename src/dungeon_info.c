@@ -2452,7 +2452,7 @@ s16 GetRandomMovementChance(u8 dungeon)
 bool8 sub_809017C(DungeonLocation* a1)
 {
     DungeonLocation location;
-    int i;
+    s32 i;
     GeneralizeMazeDungeonLoc(&location, a1);
     for (i = 0; i < 999 && gUnknown_8107828[i].id != DUNGEON_OUT_ON_RESCUE; ++i) {
         if (location.id == gUnknown_8107828[i].id &&

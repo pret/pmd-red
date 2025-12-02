@@ -167,7 +167,7 @@ void sub_80498A8(s32 x,s32 y)
   volatile u32 sp_0x1C;
   u32 r1;
   u16 sp_0x20; // sp 0x20
-  int r4;
+  s32 r4;
   s32 r7; // r7
 
   if (x < 0) {
@@ -956,8 +956,8 @@ void sub_804AAD4(void)
     struct RoomData *room1;
     struct RoomData *room2;
     s32 roomIndex;
-    int x;
-    int y;
+    s32 x;
+    s32 y;
     s32 maxRooms;
     s32 index;
 

@@ -693,8 +693,8 @@ static void sub_803FF18(s32 a0, u16 *a1, bool8 a2)
 
 void HandleLuminousOrbAction(Entity *pokemon)
 {
-  int XCoord;
-  int YCoord;
+  s32 XCoord;
+  s32 YCoord;
 
   gDungeon->unk181e8.allTilesRevealed = TRUE;
 

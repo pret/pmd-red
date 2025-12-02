@@ -306,7 +306,7 @@ static void MoltresScreenFlash2(s32 xArg, s32 yArg)
 
 static void MoltresScreenFlash3(void)
 {
-  int iVar1;
+  s32 iVar1;
 
   PlaySoundEffect(0x1ed);
   iVar1 = 0xfa;

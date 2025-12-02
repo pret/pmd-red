@@ -63,23 +63,24 @@ typedef struct MapRender
     PixelPos bgRegOffsets; // Either bg2 or bg3
 } MapRender;
 
+// Size: 0xC
 typedef struct BmaHeader
 {
     // Map width/height that the camera in game will travel in tiles. Also the width/height of the collision and unknown data layers! For most maps (Map Width Chunks) * (Tiling Width) = (Map Width Camera).
-    u8 mapWidthTiles;
-    u8 mapHeightTiles;
+    /* 0x0 */ u8 mapWidthTiles;
+    /* 0x1 */ u8 mapHeightTiles;
 
     // Width/Height of chunks in tiles. Always 3, the value is ignored for these.
-    u8 tilingWidth;
-    u8 tilingHeight;
+    /* 0x2 */ u8 tilingWidth;
+    /* 0x3 */ u8 tilingHeight;
 
     // Map width/height in chunks. Also the width/height of the chunk mappings.
-    u8 mapWidthChunks;
-    u8 mapHeightChunks;
+    /* 0x4 */ u8 mapWidthChunks;
+    /* 0x5 */ u8 mapHeightChunks;
 
-    u16 numLayers; // Number of layers in this map. Must match BPC layer size. Allowed values are only 1 or 2.
-    u16 hasDataLayer; // Seems to be a boolean flag (0 or 1). If >0, the Unknown Data Layer exists.
-    u16 hasCollision; // Number of Collision layers. 0, 1 or 2.
+    /* 0x6 */ u16 numLayers; // Number of layers in this map. Must match BPC layer size. Allowed values are only 1 or 2.
+    /* 0x8 */ s16 hasDataLayer; // Seems to be a boolean flag (0 or 1). If >0, the Unknown Data Layer exists.
+    /* 0xA */ u16 hasCollision; // Number of Collision layers. 0, 1 or 2.
 } BmaHeader;
 
 // size: 0x18?
@@ -95,7 +96,7 @@ typedef struct SubStruct_52C
     s16 unkE; // 0x53A
     s16 unk10; // 0x53C
     s16 unk12; // 0x53E
-    void (*unk14)(void *, const void *, BmaHeader *, s32); // TODO: fix void * to proper ptr types 0x540
+    u8* (*unk14)(void *, const u8 *, BmaHeader *, s32); // TODO: fix void * to proper ptr types 0x540
 } SubStruct_52C;
 
 typedef struct LayerSpecs
@@ -144,7 +145,7 @@ typedef struct GroundBg
     BmaHeader bmaHeader;
     LayerSpecs layerSpecs;
     BplHeader bplHeader;
-    const void *unk468;
+    const u8 *decompressedBMAData;
     const AnimationSpecification *animationSpecifications;
     u8 unk470;
     u8 unk471;
