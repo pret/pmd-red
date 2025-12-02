@@ -17,7 +17,7 @@ static const struct ScriptCommand s_gs181_g0_s0_station_sref_script[] = { /* 0x8
     JUMP_SCRIPT(COMMON_ENTER),
 };
 
-static const struct ScriptRef s_gs181_g0_s0_station_sref = { ENTER_CONTROL , 1, NULL, s_gs181_g0_s0_station_sref_script }; /* 0x8231cdc */
+static const ScriptRef s_gs181_g0_s0_station_sref = { ENTER_CONTROL, SCRIPT_TYPE_01, NULL, s_gs181_g0_s0_station_sref_script }; /* 0x8231cdc */
 
 static const struct ScriptCommand s_gs181_g1_s0_station_sref_script[] = { /* 0x8231ce8 */
     DEBUGINFO_O(23),
@@ -31,7 +31,7 @@ static const struct ScriptCommand s_gs181_g1_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs181_g1_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs181_g1_s0_station_sref_script }; /* 0x8231d78 */
+static const ScriptRef s_gs181_g1_s0_station_sref = { EVENT_CONTROL, SCRIPT_TYPE_07, NULL, s_gs181_g1_s0_station_sref_script }; /* 0x8231d78 */
 
 static const struct ScriptCommand s_gs181_g1_s0_lives0_dlg0[] = { /* 0x8231d84 */
     DEBUGINFO_O(37),
@@ -100,7 +100,7 @@ static const struct GroundEffectData s_gs181_g1_s0_effs[] = { /* 0x823207c */
     /*  0 */ {   0,   0,   1,   1, {  22,  20, CPOS_HALFTILE, CPOS_HALFTILE }, NULL },
 };
 
-static const struct ScriptRef * const (sStationScripts[]) = { /* 0x8232088 */
+static const ScriptRef * const (sStationScripts[]) = { /* 0x8232088 */
     &s_gs181_g0_s0_station_sref,
     &s_gs181_g1_s0_station_sref,
 };

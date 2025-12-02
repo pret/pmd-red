@@ -79,10 +79,10 @@ static const struct ItemWithQuantity sScriptItemsTable[] = {
 
 static bool8 TryAddItemWithText(const struct ItemWithQuantity *itemToAdd, const u8 *maxMoneyStr, const u8 *noItemSpaceStr, const u8 *itemGivenStr)
 {
-    char buffer[80];
+    u8 buffer[80];
 
     if (itemToAdd->id == ITEM_POKE) {
-        int newMoneyAmount;
+        s32 newMoneyAmount;
         sprintfStatic(buffer,_("{COLOR CYAN_G}%d{RESET} %s"),itemToAdd->quantity,gItemParametersData[ITEM_POKE].name);
         newMoneyAmount = gTeamInventoryRef->teamMoney + itemToAdd->quantity;
         if (newMoneyAmount > MAX_TEAM_MONEY) {

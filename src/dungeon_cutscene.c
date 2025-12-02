@@ -1181,7 +1181,7 @@ void sub_8085B4C(struct_8085B80 a0[], s16 *a1[], Entity *a2[], s32 a3)
 bool8 sub_8085B80(struct_8085B80 *a0)
 {
     s16 *unkCPtr;
-    int i;
+    s32 i;
     bool8 ret = FALSE;
 
     for (i = 0; i < gUnknown_202F3D8; i++) {

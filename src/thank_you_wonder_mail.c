@@ -225,10 +225,10 @@ extern u32 sub_8039068(u32, u8 *r1, unkStruct_203B480 *r0);
 
 bool8 CreateThankYouMailPelipper(void)
 {
-  char *monName;
+  u8 *monName;
   OpenedFile *faceFile;
   s32 index;
-  int counter;
+  s32 counter;
   unkStruct_203B480 *mail;
 
   ResetUnusedInputStruct();
@@ -845,7 +845,7 @@ void sub_802A68C(void)
 
 void sub_802A6B4(void)
 {
-  int saveStatus;
+  s32 saveStatus;
   u32 temp;
 
   if (sub_80144A4(&temp) == 0) {

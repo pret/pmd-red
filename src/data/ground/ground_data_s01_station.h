@@ -13,7 +13,7 @@ static const struct ScriptCommand s_gs223_g0_s0_station_sref_script[] = { /* 0x8
     JUMP_SCRIPT(COMMON_ENTER),
 };
 
-static const struct ScriptRef s_gs223_g0_s0_station_sref = { ENTER_CONTROL , 1, NULL, s_gs223_g0_s0_station_sref_script }; /* 0x826dfec */
+static const ScriptRef s_gs223_g0_s0_station_sref = { ENTER_CONTROL, SCRIPT_TYPE_01, NULL, s_gs223_g0_s0_station_sref_script }; /* 0x826dfec */
 
 static const struct ScriptCommand s_gs223_g1_s0_station_sref_script[] = { /* 0x826dff8 - PART 1 0:00:31-0:00:45 - New game intro to personality test */
     DEBUGINFO_O(19),
@@ -35,12 +35,12 @@ static const struct ScriptCommand s_gs223_g1_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs223_g1_s0_station_sref = { EVENT_CONTROL, 7, NULL, s_gs223_g1_s0_station_sref_script }; /* 0x826e200 */
+static const ScriptRef s_gs223_g1_s0_station_sref = { EVENT_CONTROL, SCRIPT_TYPE_07, NULL, s_gs223_g1_s0_station_sref_script }; /* 0x826e200 */
 static const struct GroundEffectData s_gs223_g1_s0_effs[] = { /* 0x826e20c */
     /*  0 */ {   0,   0,   1,   1, {  30,  19, CPOS_HALFTILE, CPOS_HALFTILE }, NULL },
 };
 
-static const struct ScriptRef * const (sStationScripts[]) = { /* 0x826e218 */
+static const ScriptRef * const (sStationScripts[]) = { /* 0x826e218 */
     &s_gs223_g0_s0_station_sref,
     &s_gs223_g1_s0_station_sref,
 };

@@ -70,7 +70,7 @@ void BoundedCopyStringtoBuffer(u8 *buffer, u8 *string, s32 size)
             *buffer = '\0'; // append a terminating char and break
             break;
         }
-        // NOTE: *buffer++ = *string++ cases register flip
+        // NOTE: *buffer++ = *string++ causes register flip
         *buffer = *string;
         buffer++;
         string++;

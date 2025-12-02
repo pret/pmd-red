@@ -199,7 +199,7 @@ void sub_8044DF0(Entity *entity, s32 index, u32 unused)
   }
 }
 
-void sub_8044E24(Entity *entity,int index,u32 unused)
+void sub_8044E24(Entity *entity,s32 index,u32 unused)
 {
   Item *itemPtr;
   EntityInfo *info;
@@ -257,7 +257,7 @@ bool8 CanSubMenuItemBeChosen(s32 itemId)
 
 void AddActionToDungeonSubMenu(u16 actionId, u8 param_2)
 {
-  int index;
+  s32 index;
 
   if (gDungeonSubMenuItemsCount < 10) {
     for(index = 0; index < gDungeonSubMenuItemsCount; index++)
@@ -275,7 +275,7 @@ void AddActionToDungeonSubMenu(u16 actionId, u8 param_2)
 
 s32 ActionToDungeonSubMenuId(u16 actionId)
 {
-    int index;
+    s32 index;
 
     for(index = 0; index < gDungeonSubMenuItemsCount; index++)
     {
@@ -288,7 +288,7 @@ s32 ActionToDungeonSubMenuId(u16 actionId)
 
 void SetActionUnusableInDungeonSubMenu(u16 actionId)
 {
-    int index;
+    s32 index;
 
     for(index = 0; index < gDungeonSubMenuItemsCount; index++)
     {

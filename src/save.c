@@ -314,9 +314,9 @@ bool8 IsSaveCorrupted(void)
 u32 WriteSavetoPak(s32 *param_1, u32 param_2)
 {
   struct UnkStruct_sub_8011DAC *playerSave;
-  const char *gameName;
-  int saveStatus1;
-  int saveStatus2;
+  const u8 *gameName;
+  s32 saveStatus1;
+  s32 saveStatus2;
   u8 *array_ptr;
 
   playerSave = MemoryAlloc(sizeof(struct UnkStruct_sub_8011DAC),5);

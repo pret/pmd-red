@@ -400,7 +400,7 @@ _increase:
 
 static void HandleSnore(void)
 {
-    int index;
+    s32 index;
     s32 moveIndex;
     Move *move;
     EntityInfo *info;

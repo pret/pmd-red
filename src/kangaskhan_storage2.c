@@ -225,7 +225,7 @@ static void sub_8018280(void)
 
 static void BuildKangaskhanStorage2MainMenu(void)
 {
-    int index;
+    s32 index;
     s32 loopMax;
 
     loopMax = 0;

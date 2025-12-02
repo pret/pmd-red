@@ -58,7 +58,7 @@ void sub_807E5AC(void)
 
 void sub_807E5E4(u8 weather)
 {
-  int index;
+  s32 index;
   u8 *preload;
 
   gDungeon->weather.unkE265 = weather;

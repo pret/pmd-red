@@ -29,8 +29,8 @@ void sub_807D3CC(Entity *param_1)
 {
     u32 room;
     u8 flag;
-    int x;
-    int y;
+    s32 x;
+    s32 y;
     s32 range;
     RoomData *roomData;
 

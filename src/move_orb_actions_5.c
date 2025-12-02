@@ -23,9 +23,9 @@ bool8 FillInOrbAction(Entity *pokemon,Entity *target, Move *move, s32 itemId)
 {
     Tile *tileToFill;
     EntityInfo *targetInfo;
-    int y;
+    s32 y;
     bool8 filledInTile;
-    int x;
+    s32 x;
     DungeonPos tileCoords;
 
     filledInTile = FALSE;

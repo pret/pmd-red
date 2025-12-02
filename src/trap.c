@@ -153,7 +153,7 @@ bool8 LayTrap(DungeonPos *pos, u8 trapID, u8 param_3)
 {
     Tile *tile;
     Entity *entity;
-    int counter;
+    s32 counter;
     u16 terrainFlags;
 
     tile = GetTileMut(pos->x, pos->y);
@@ -214,7 +214,7 @@ bool8 sub_807FD84(Entity *entity)
     return flag;
 }
 
-bool8 sub_807FE04(DungeonPos *pos, char param_2)
+bool8 sub_807FE04(DungeonPos *pos, u8 param_2)
 {
     Tile *tile;
 
@@ -232,7 +232,7 @@ bool8 sub_807FE04(DungeonPos *pos, char param_2)
     }
 }
 
-bool8 sub_807FE44(DungeonPos *pos, char param_2)
+bool8 sub_807FE44(DungeonPos *pos, u8 param_2)
 {
     const Tile *tile;
 
@@ -254,7 +254,7 @@ void GetTrapName(u8 *buffer, u8 trapIndex)
     strcpy(buffer, gTrapNames[trapIndex]);
 }
 
-void TryTriggerTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4)
+void TryTriggerTrap(Entity *pokemon, DungeonPos *pos, s32 param_3, u8 param_4)
 {
     Tile *tile;
     bool8 flag1;
@@ -402,7 +402,7 @@ void TryTriggerTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4)
 
 void HandleMudTrap(Entity *pokemon, Entity *target)
 {
-    int rand, randDef;
+    s32 rand, randDef;
 
     if (target == NULL)
         return;
@@ -426,9 +426,9 @@ void HandleMudTrap(Entity *pokemon, Entity *target)
 void HandleStickyTrap(Entity *pokemon,Entity *target)
 {
     EntityInfo *info;
-    int index;
-    int itemCount;
-    int newIndex;
+    s32 index;
+    s32 itemCount;
+    s32 newIndex;
     Item *itemStack[21];
 
     info = GetEntInfo(target);
@@ -516,10 +516,10 @@ void HandleGrimyTrap(Entity *pokemon, Entity *target)
 {
     Item *item;
     Item *heldItem;
-    int counter;
-    int index;
+    s32 counter;
+    s32 index;
     EntityInfo *info;
-    int badFoodCount;
+    s32 badFoodCount;
     Item *itemStack [22];
 
     badFoodCount = 0;
@@ -613,7 +613,7 @@ void HandleSummonTrap(Entity *pokemon,DungeonPos *pos)
 {
   s32 r4;
   u32 direction;
-  int pokemonSummonCount;
+  s32 pokemonSummonCount;
   s16 species;
   struct MonSpawnInfo stack;
   s32 i;

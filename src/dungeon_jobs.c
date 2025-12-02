@@ -82,7 +82,7 @@ void sub_8084424(void)
 
 void sub_8084448(Entity *pokemon)
 {
-    int i;
+    s32 i;
     const u8 *str;
     EntityInfo *entInfo = GetEntInfo(pokemon);
 
@@ -144,7 +144,7 @@ void sub_8084448(Entity *pokemon)
 
 void sub_80845E0(Entity *pokemon)
 {
-    int i;
+    s32 i;
     EntityInfo *info1 = GetEntInfo(pokemon);
     Entity *entity = NULL;
     EntityInfo *info2 = NULL;

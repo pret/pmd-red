@@ -145,7 +145,7 @@ void CreateFloorItems(void)
 void TryLeaderItemPickUp_Async(struct DungeonPos *pos, bool8 printMsg)
 {
     Item *tileItem;
-    int inventoryIds[INVENTORY_SIZE + 1];
+    s32 inventoryIds[INVENTORY_SIZE + 1];
     Item *inventoryItems[INVENTORY_SIZE + 1];
     Entity *leader = GetLeader();
     EntityInfo *leaderInfo = GetEntInfo(leader);

@@ -275,7 +275,7 @@ void GroudonPostStoryPreFightDialogue(void)
 // Moves Groudon down in a walking fashion
 static void SceneGroudonMovement(Entity * groudonEntity)
 {
-  int iVar1;
+  s32 iVar1;
 
   sub_8086848(0x18,0x10);
   sub_806CDD4(groudonEntity,0,DIRECTION_SOUTH);

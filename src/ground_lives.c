@@ -213,7 +213,7 @@ void AllocGroundLives(void)
 
 void DeleteGroundLives(void)
 {
-    int i;
+    s32 i;
     struct GroundLive *iVar4;
 
     iVar4 = &gGroundLives->array[0];
@@ -841,7 +841,7 @@ static s32 GroundLives_Add(s32 id_, const GroundLivesData *ptr, s32 group_, s32 
             u16 *ptrToUnk24;
             s8 *ptrToStoredDir;
 
-            if (livesPtr->action.scriptData2.savedState != 0) {
+            if (livesPtr->action.scriptData2.savedState != ESC_RET_00) {
                 bakUnk24 = livesPtr->action.scriptData2.unk24;
                 bakStoredDir = livesPtr->action.scriptData2.storedDir;
 
@@ -1023,7 +1023,7 @@ UNUSED static bool8 sub_80A88A0(s32 id_)
     struct GroundLive *livesPtr = &gGroundLives->array[id];
 
     if (livesPtr->unk2 != -1) {
-        return sub_809D678(&livesPtr->action);
+        return Action_SavedStateIsNot0(&livesPtr->action);
     }
 
     return FALSE;
@@ -2699,12 +2699,14 @@ void GroundLives_Action(void)
 
     for (livesPtr = &gGroundLives->array[0], i = 0; i < UNK_3001B84_ARR_COUNT; i = (s16)(i + 1), livesPtr++) {
         if (livesPtr->unk2 != -1) {
-            s32 actionResult = (s16) HandleAction(&livesPtr->action, DEBUG_LOC_PTR("../ground/ground_lives.c", 4514, "GroundLives_Action"));
+            s32 actionResult = (s16)HandleAction(&livesPtr->action, DEBUG_LOC_PTR("../ground/ground_lives.c", 4514, "GroundLives_Action"));
+
             switch (actionResult) {
-                case 4:
+                case ESC_RET_04: {
                     GroundLives_Delete(i);
                     continue;
-                case 0:
+                }
+                case ESC_RET_00: {
                     if (livesPtr->flags & 0x800) {
                         PixelPos var_44;
                         u32 var_4C = actionResult;
@@ -2772,6 +2774,7 @@ void GroundLives_Action(void)
                         ExecutePredefinedScript(&livesPtr->action, NULL, 1, DEBUG_LOC_PTR("../ground/ground_lives.c", 4622, "GroundLives_Action"));
                     }
                     break;
+                }
             }
             if (livesPtr->directionRelated) {
                 livesPtr->directionRelated = FALSE;

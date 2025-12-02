@@ -650,7 +650,7 @@ void PerishSongTarget(Entity * pokemon, Entity * target)
 void EncoreStatusTarget(Entity *pokemon,Entity *target)
 {
   Move *movePtr;
-  int index;
+  s32 index;
   EntityInfo *EntityInfo;
 
   EntityInfo = GetEntInfo(target);

@@ -306,7 +306,7 @@ bool8 ShowDungeonItemsMenu(Entity * a0, struct UnkMenuBitsStruct *a1)
             if (inputAction != 1 || var_30 != 0) {
                 if (a0Info->action.action == ACTION_TAKE_ITEM || a0Info->action.action == ACTION_USE_ITEM || a0Info->action.action == ACTION_UNK3E) {
                     // Hm...
-                    int newAction = sUnknownActionUnk4.actionUseIndex - 0x90;
+                    s32 newAction = sUnknownActionUnk4.actionUseIndex - 0x90;
                     a0Info->action.actionParameters[0].actionUseIndex = newAction;
                     sub_803EAF0(0, NULL);
                     inputAction = 0;

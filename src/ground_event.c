@@ -155,14 +155,16 @@ static s32 GroundEvent_Add(s32 id, const GroundEventData *eventData, s32 group, 
     ptr->unk4 = group_s32;
     ptr->unk6 = sector_s32;
     switch (script->type) {
-        case 1:
-        case 2:
+        case SCRIPT_TYPE_01:
+        case SCRIPT_TYPE_02: {
             ptr->unk8 = 0x60;
             break;
-        case 7:
-        default:
+        }
+        case SCRIPT_TYPE_07:
+        default: {
             ptr->unk8 = 0x20;
             break;
+        }
     }
 
     pos = (PixelPos) {eventData->kind << 11, eventData->unk1 << 11};

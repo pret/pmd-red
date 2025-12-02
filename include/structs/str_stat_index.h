@@ -9,7 +9,7 @@
 // Needed to match in Blue/Sky. I wonder what was the reason for making it a struct as opposed to a simple int...
 typedef struct StatIndex
 {
-    int id;
+    s32 id;
 } StatIndex;
 
 #endif // GUARD_STR_STAT_INDEX_X

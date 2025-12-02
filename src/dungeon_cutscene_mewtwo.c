@@ -162,7 +162,7 @@ static void MewtwoDropInEffect(Entity *mewtwoEntity)
 
 static void MewtwoScreenFlash(void)
 {
-  int iVar1;
+  s32 iVar1;
 
   PlaySoundEffect(0x1f6);
   for(iVar1 = 250; iVar1 > 149; iVar1 -= 10)

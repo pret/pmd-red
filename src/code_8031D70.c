@@ -108,7 +108,7 @@ void sub_8031E58(void)
 
 void DrawSOSPasswordScreen(void)
 {
-  int rowIndex;
+  s32 rowIndex;
   u32 x;
   u32 y;
   u32 color;

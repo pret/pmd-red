@@ -259,7 +259,7 @@ static s32 sub_80416A4(DungeonPos *pos_1, u32 param_2, bool8 param_3)
 
 s32 sub_80416E0(PixelPos *pos, u32 param_2, bool8 param_3)
 {
-  int counter;
+  s32 counter;
   s32 ret;
   unkStruct_80416E0 auStack_10;
 

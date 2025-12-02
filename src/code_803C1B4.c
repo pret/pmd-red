@@ -45,7 +45,7 @@ u32 GetDungeonTeamRankPts(DungeonLocation *dungeon, u8 r1)
 
 void sub_803C21C(WonderMail *param_1, unkStruct_802F204 *param_2)
 {
-    int index;
+    s32 index;
     u32 uVar2;
 
     uVar2 = sub_803C1D0(&param_1->dungeonSeed.location,param_1->missionType);

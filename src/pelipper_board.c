@@ -212,7 +212,7 @@ void sub_802EA58(void)
 
 void CreatePelipperBoardMenu(void)
 {
-  int index;
+  s32 index;
   s32 loopMax;
 
   loopMax = 0;

@@ -1559,7 +1559,7 @@ static void sub_806F500(void)
 
 static const s32 gUnknown_8106F7C[] = {0, 0, 0, 1};
 
-s32 sub_806F62C(int param_1)
+s32 sub_806F62C(s32 param_1)
 {
     return gUnknown_8106F7C[param_1];
 }

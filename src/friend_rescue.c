@@ -589,8 +589,8 @@ extern bool8 sub_8031D70(u32 mailIndex, s32);
 
 u32 CreateFriendRescueMenu(void)
 {
-  char *monName;
-  int counter;
+  u8 *monName;
+  s32 counter;
 
   ResetUnusedInputStruct();
   ShowWindows(NULL, TRUE, TRUE);

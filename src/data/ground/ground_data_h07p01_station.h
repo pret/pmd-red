@@ -60,7 +60,7 @@ static const struct ScriptCommand s_gs122_g0_s0_station_sref_script[] = { /* 0x8
     JUMP_SCRIPT(COMMON_ENTER),
 };
 
-static const struct ScriptRef s_gs122_g0_s0_station_sref = { ENTER_CONTROL , 1, NULL, s_gs122_g0_s0_station_sref_script }; /* 0x81f81ac */
+static const ScriptRef s_gs122_g0_s0_station_sref = { ENTER_CONTROL, SCRIPT_TYPE_01, NULL, s_gs122_g0_s0_station_sref_script }; /* 0x81f81ac */
 
 static const struct ScriptCommand s_gs122_g0_s1_lives0_dlg0[] = { /* 0x81f81b8 */
     DEBUGINFO_O(66),
@@ -349,7 +349,7 @@ static const struct GroundEventData s_gs122_g0_s0_evts[] = { /* 0x81f8958 */
     /*  3 */ {   1,  39,   0,   0, {  54,   0, 0, 0 }, &gFunctionScriptTable[GETOUT_HABITAT] },
 };
 
-static const struct ScriptRef * const (sStationScripts[]) = { /* 0x81f8988 */
+static const ScriptRef * const (sStationScripts[]) = { /* 0x81f8988 */
     &s_gs122_g0_s0_station_sref,
 };
 

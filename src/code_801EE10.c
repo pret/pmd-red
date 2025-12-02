@@ -272,7 +272,7 @@ void sub_801F214(void)
 
 void sub_801F280(bool8 param_1)
 {
-    int i;
+    s32 i;
     u8 buffer[20];
 
     CallPrepareTextbox_8008C54(gUnknown_203B270->unk50);
@@ -331,7 +331,7 @@ void sub_801F280(bool8 param_1)
 s32 sub_801F3F8(void)
 {
   Move *move;
-  int index;
+  s32 index;
   s32 counter;
 
   counter = 0;
