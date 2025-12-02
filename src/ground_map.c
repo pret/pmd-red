@@ -345,7 +345,7 @@ void GroundMap_ExecuteEnter(s16 param_1)
 
 UNUSED static bool8 sub_80A4D14(void)
 {
-    return sub_809D678(&gGroundMapAction->action);
+    return Action_SavedStateIsNot0(&gGroundMapAction->action);
 }
 
 bool8 GroundMapNotifyAll(s16 param_1)
@@ -1373,7 +1373,7 @@ void sub_80A59A0(s32 param_1, PixelPos *param_2, u16 param_3)
 void GroundMap_Action(void)
 {
     nullsub_123();
-    HandleAction(&gGroundMapAction->action, DEBUG_LOC_PTR("../ground/ground_map.c", 0x57F, "GroundMap_Action"));
+    HandleAction(&gGroundMapAction->action, DEBUG_LOC_PTR("../ground/ground_map.c", 1407, "GroundMap_Action"));
 }
 
 void sub_80A59DC(void)

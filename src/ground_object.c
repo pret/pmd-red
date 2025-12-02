@@ -926,25 +926,25 @@ void GroundObject_Action(void)
 {
     GroundObject *objectPtr;
     s32 i;
-    s32 ret;
 
-    for (objectPtr = &gGroundObjects[0], i = 0; i < NUM_GROUND_OBJECTS; i = (s16)(i + 1), objectPtr++)
-    {
+    for (objectPtr = &gGroundObjects[0], i = 0; i < NUM_GROUND_OBJECTS; i = (s16)(i + 1), objectPtr++) {
         if (objectPtr->kind != -1) {
-            ret = HandleAction(&objectPtr->action, DEBUG_LOC_PTR(gGroundObjectFileName, 0x60D, "GroundObject_Action"));
-            switch(ret)
-            {
-                case 4:
+            s32 ret = HandleAction(&objectPtr->action, DEBUG_LOC_PTR(gGroundObjectFileName, 1549, "GroundObject_Action"));
+
+            switch (ret) {
+                case ESC_RET_04: {
                     GroundObject_Delete(i);
                     continue;
-                case 0:
-                    ExecutePredefinedScript(&objectPtr->action, NULL, 1, DEBUG_LOC_PTR(gGroundObjectFileName, 0x617, "GroundObject_Action"));
+                }
+                case ESC_RET_00: {
+                    ExecutePredefinedScript(&objectPtr->action, NULL, 1, DEBUG_LOC_PTR(gGroundObjectFileName, 1559, "GroundObject_Action"));
                     break;
+                }
             }
 
             if (objectPtr->directionRelated) {
                 objectPtr->directionRelated = FALSE;
-                sub_80A6EFC(&objectPtr->unk144,objectPtr->unk13E & 0x1f00,(s8)objectPtr->unk13E);
+                sub_80A6EFC(&objectPtr->unk144, objectPtr->unk13E & 0x1F00, (s8)objectPtr->unk13E);
             }
         }
     }
@@ -964,7 +964,7 @@ void sub_80ACAD4(void)
             s32 num = objectPtr->unk134.x + objectPtr->unk134.y;
             if ((sub_80A66D4(&objectPtr->unk144))) {
                 objectPtr->directionRelated = 0;
-                sub_80A6EFC(&objectPtr->unk144,objectPtr->unk13E & 0x1f00,(s8)objectPtr->unk13E);
+                sub_80A6EFC(&objectPtr->unk144,objectPtr->unk13E & 0x1F00,(s8)objectPtr->unk13E);
             }
             if (objectPtr->unk140 != 0) {
                 sub_80A7040(&objectPtr->unk144,objectPtr->unk140,objectPtr->direction,0);

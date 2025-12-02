@@ -739,25 +739,25 @@ void GroundEffect_Action(void)
 {
     GroundEffect *objectPtr;
     s32 i;
-    s32 ret;
 
-    for (objectPtr = &gGroundEffects[0], i = 0; i < NUM_GROUND_EFFECTS; i = (s16)(i + 1), objectPtr++)
-    {
+    for (objectPtr = &gGroundEffects[0], i = 0; i < NUM_GROUND_EFFECTS; i = (s16)(i + 1), objectPtr++) {
         if (objectPtr->kind != -1) {
-            ret = HandleAction(&objectPtr->action, DEBUG_LOC_PTR(gUnknown_81185D8, 0x560, "GroundEffect_Action"));
-            switch(ret)
-            {
-                case 4:
+            s32 ret = HandleAction(&objectPtr->action, DEBUG_LOC_PTR(gUnknown_81185D8, 1376, "GroundEffect_Action"));
+
+            switch (ret) {
+                case ESC_RET_04: {
                     GroundEffect_Delete(i);
                     continue;
-                case 0:
-                    ExecutePredefinedScript(&objectPtr->action, NULL, 1, DEBUG_LOC_PTR(gUnknown_81185D8, 0x56A, "GroundEffect_Action"));
+                }
+                case ESC_RET_00: {
+                    ExecutePredefinedScript(&objectPtr->action, NULL, 1, DEBUG_LOC_PTR(gUnknown_81185D8, 1386, "GroundEffect_Action"));
                     break;
+                }
             }
 
             if (objectPtr->directionRelated) {
                 objectPtr->directionRelated = FALSE;
-                sub_80A6EFC(&objectPtr->unk144,objectPtr->unk13E & 0x1f00,(s8)objectPtr->unk13E);
+                sub_80A6EFC(&objectPtr->unk144, objectPtr->unk13E & 0x1F00, (s8)objectPtr->unk13E);
             }
         }
     }

@@ -5,6 +5,27 @@
 #include "constants/script_cmd.h"
 #include "structs/str_position.h"
 
+enum ESC_RetID
+{
+    // Indicates a RET on script engine level, HandleAction copies action->scriptData2 onto action->scriptData, and reinitializes scriptData2.
+    // If there is no active scriptData2 it clears and reinits scriptData.
+    // Ultimately returns ESC_RET_03 to the script engine caller.
+    // Caveat: If the scripting engine is in state 0, HandleAction will immediately return ESC_RET_00 without performing any work.
+    ESC_RET_00,
+    // A terminal state (script success? error?), no further scripting progress will happen.
+    // This code is always returned to the caller from now on.
+    ESC_RET_01,
+    // Gives control back to the HandleAction function (entry point into the scripting engine state machine).
+    // This is the only return value that does not return to the script engine caller.
+    // Async commands?
+    ESC_RET_02,
+    // Returns to the caller, but will give control back to ExecuteScriptCommand when reentering the script ("script not finished").
+    ESC_RET_03,
+    // Some kind of fatal error state, no further scripting progress will happen.
+    // This code is always returned to the caller from now on.
+    ESC_RET_04,
+};
+
 // size: 0x10
 typedef struct ScriptCommand
 {
@@ -44,7 +65,7 @@ typedef struct ActionUnkIds {
 typedef struct ScriptData
 {
     /* 0x00 */ s16 state;
-    /* 0x02 */ s16 savedState;
+    /* 0x02 */ s16 savedState; // See enum "ESC_RetID"
     /* 0x04 */ ScriptInfo script;
     /* 0x10 */ ScriptInfo savedScript;
     /* 0x1C */ const ScriptCommand *curPtr;

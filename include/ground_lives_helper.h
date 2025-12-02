@@ -9,6 +9,8 @@ void nullsub_118(void);
 void sub_809CD68(struct GroundLives_Sub120 *dst);
 void sub_809CD8C(struct GroundLives_Sub120 *dst, s32 a1);
 s32 sub_809CDB8(struct GroundLives_Sub120 *dst);
+// r6 is enum "ESC_RetID" ?
+// param_4 is enum "ESC_RetID" ?
 u32 sub_809CDC8(struct GroundLives_Sub120 *strPtr, u32 *r6, s8 *direction, s32 *param_4, PixelPos *unused, u32 flags);
 s32 DpadToDirection(u16 dpad);
 
