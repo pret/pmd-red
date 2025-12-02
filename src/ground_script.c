@@ -3283,7 +3283,7 @@ UNUSED static bool8 GroundScript_ExecuteTrigger(s16 scriptID)
 
     ptr = &gFunctionScriptTable[scriptID];
 
-    if (ptr->type != 11)
+    if (ptr->type != SCRIPT_TYPE_11)
         return FALSE;
 
     InitActionWithParams(&action, &sNullCallbackData, NULL, 0, 0);

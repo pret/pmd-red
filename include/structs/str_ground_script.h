@@ -26,6 +26,45 @@ enum ESC_RetID
     ESC_RET_04,
 };
 
+enum ScriptRefType
+{
+    // Unused?
+    // Sets GroundEvent Unk8 to 0x20
+    SCRIPT_TYPE_00,
+    // Seems to be "enter" scripts.
+    // Sets GroundEvent Unk8 to 0x60
+    SCRIPT_TYPE_01,
+    // Seems to be "exit" (GETOUT) scripts.
+    // Sets GroundEvent Unk8 to 0x60
+    SCRIPT_TYPE_02,
+    // Unused?
+    // Sets GroundEvent Unk8 to 0x20
+    SCRIPT_TYPE_03,
+    // Seems to be related to speaking.
+    // Sets GroundEvent Unk8 to 0x20
+    SCRIPT_TYPE_04,
+    // Sets GroundEvent Unk8 to 0x20
+    SCRIPT_TYPE_05,
+    // Unused?
+    // Sets GroundEvent Unk8 to 0x20
+    SCRIPT_TYPE_06,
+    // Sets GroundEvent Unk8 to 0x20
+    SCRIPT_TYPE_07,
+    // Sets GroundEvent Unk8 to 0x20
+    SCRIPT_TYPE_08,
+    // Seems to be for emote/looking effects.
+    // Sets GroundEvent Unk8 to 0x20
+    SCRIPT_TYPE_09,
+    // Seems to be debug scripts that are only used from a debug menu.
+    // Sets GroundEvent Unk8 to 0x20
+    SCRIPT_TYPE_10,
+    // Seems to indicate sub-scenarios beginning/continuing/ending.
+    // Sets GroundEvent Unk8 to 0x20
+    SCRIPT_TYPE_11,
+    // Sets GroundEvent Unk8 to 0x20
+    SCRIPT_TYPE_12,
+};
+
 // size: 0x10
 typedef struct ScriptCommand
 {
@@ -154,7 +193,7 @@ typedef struct GroundMapAction
 typedef struct ScriptRef
 {
     /* 0x0 */ s16 id; // See enum "ScriptID"
-    /* 0x2 */ s16 type;
+    /* 0x2 */ s16 type; // See enum "ScriptRefType"
     /* 0x4 */ const u8 *name;
     /* 0x8 */ const ScriptCommand *script;
 } ScriptRef;

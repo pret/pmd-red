@@ -45,7 +45,7 @@ static const struct ScriptCommand s_gs196_g0_s0_station_sref_script[] = { /* 0x8
     JUMP_SCRIPT(COMMON_ENTER),
 };
 
-static const struct ScriptRef s_gs196_g0_s0_station_sref = { ENTER_CONTROL , 1, NULL, s_gs196_g0_s0_station_sref_script }; /* 0x8248cc0 */
+static const ScriptRef s_gs196_g0_s0_station_sref = { ENTER_CONTROL, SCRIPT_TYPE_01, NULL, s_gs196_g0_s0_station_sref_script }; /* 0x8248cc0 */
 
 static const struct ScriptCommand s_gs196_g0_s0_evt0_sref_script[] = { /* 0x8248ccc */
     DEBUGINFO_O(51),
@@ -62,7 +62,7 @@ static const struct ScriptCommand s_gs196_g0_s0_evt0_sref_script[] = { /* 0x8248
     HALT,
 };
 
-static const struct ScriptRef s_gs196_g0_s0_evt0_sref = { GETOUT_NORMAL, 2, NULL, s_gs196_g0_s0_evt0_sref_script }; /* 0x8248da8 */
+static const ScriptRef s_gs196_g0_s0_evt0_sref = { GETOUT_NORMAL, SCRIPT_TYPE_02, NULL, s_gs196_g0_s0_evt0_sref_script }; /* 0x8248da8 */
 
 static const struct ScriptCommand s_gs196_g0_s0_evt1_sref_script[] = { /* 0x8248db4 */
     DEBUGINFO_O(68),
@@ -92,7 +92,7 @@ static const struct ScriptCommand s_gs196_g0_s0_evt1_sref_script[] = { /* 0x8248
     HALT,
 };
 
-static const struct ScriptRef s_gs196_g0_s0_evt1_sref = { GETOUT_NORMAL, 2, NULL, s_gs196_g0_s0_evt1_sref_script }; /* 0x8248f7c */
+static const ScriptRef s_gs196_g0_s0_evt1_sref = { GETOUT_NORMAL, SCRIPT_TYPE_02, NULL, s_gs196_g0_s0_evt1_sref_script }; /* 0x8248f7c */
 
 static const struct ScriptCommand s_gs196_g0_s0_obj0_dlg2[] = { /* 0x8248f88 */
     DEBUGINFO_O(98),
@@ -155,7 +155,7 @@ static const struct ScriptCommand s_gs196_g1_s0_station_sref_script[] = { /* 0x8
     RET,
 };
 
-static const struct ScriptRef s_gs196_g1_s0_station_sref = { EVENT_STATION , 7, NULL, s_gs196_g1_s0_station_sref_script }; /* 0x82491d8 */
+static const ScriptRef s_gs196_g1_s0_station_sref = { EVENT_STATION, SCRIPT_TYPE_07, NULL, s_gs196_g1_s0_station_sref_script }; /* 0x82491d8 */
 
 static const struct ScriptCommand s_gs196_g1_s0_lives0_dlg0[] = { /* 0x82491e4 */
     DEBUGINFO_O(161),
@@ -252,7 +252,7 @@ static const struct GroundEventData s_gs196_g0_s0_evts[] = { /* 0x82495c0 */
     /*  1 */ {  15,   3,   0,   0, {  21,  42, 0, 0 }, &s_gs196_g0_s0_evt1_sref },
 };
 
-static const struct ScriptRef * const (sStationScripts[]) = { /* 0x82495d8 */
+static const ScriptRef * const (sStationScripts[]) = { /* 0x82495d8 */
     &s_gs196_g0_s0_station_sref,
     &s_gs196_g1_s0_station_sref,
 };

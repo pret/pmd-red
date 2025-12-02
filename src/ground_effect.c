@@ -779,7 +779,7 @@ void sub_80AD7AC(void)
 
             if ((sub_80A66D4(&objectPtr->unk144))) {
                 objectPtr->directionRelated = FALSE;
-                sub_80A6EFC(&objectPtr->unk144,objectPtr->unk13E & 0x1f00,(s8)objectPtr->unk13E);
+                sub_80A6EFC(&objectPtr->unk144,objectPtr->unk13E & 0x1F00,(s8)objectPtr->unk13E);
             }
             if (objectPtr->unk140 != 0) {
                 sub_80A7040(&objectPtr->unk144,objectPtr->unk140,objectPtr->direction,0);
