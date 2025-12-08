@@ -4,6 +4,7 @@
 #include "constants/colors.h"
 #include "structs/str_dungeon.h"
 #include "music_util.h"
+#include "code_8031D70.h"
 #include "code_803D0D8.h"
 #include "code_8094F88.h"
 #include "input.h"
@@ -50,7 +51,6 @@ const WindowTemplate gUnknown_80E1FC4 = {
 
 ALIGNED(4) const u8 gUnknown_80E1FDC[] = "Password";
 
-void sub_8031E00(void);
 void sub_8031E58(void);
 void DrawSOSPasswordScreen(void);
 

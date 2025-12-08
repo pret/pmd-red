@@ -6,6 +6,7 @@
 #include "constants/iq_skill.h"
 #include "constants/status.h"
 #include "constants/weather.h"
+#include "code_8040094_1.h"
 #include "dungeon_move_util.h"
 #include "effect_main.h"
 #include "effect_data.h"
@@ -43,8 +44,6 @@
 #include "dungeon_engine.h"
 #include "warp_target.h"
 #include "dungeon_ai_attack.h"
-
-extern void sub_8041168(Entity *entity, Entity *entity2, Move *,DungeonPos *);
 
 static s32 TryHitTarget_Async(Entity *attacker, Entity *target, Move *move, struct DamageStruct *dmgStruct, s16 unk_);
 

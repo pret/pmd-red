@@ -10,6 +10,7 @@
 #include "code_800558C.h"
 #include "effect_main.h"
 #include "effect_sub_1.h"
+#include "effect_sub_2.h"
 #include "dungeon_vram.h"
 #include "dungeon_tilemap.h"
 #include "dungeon_mon_sprite_render.h"
@@ -34,13 +35,6 @@
 #include "dungeon_strings.h"
 
 // Unknown dungeon file. File split is correct.
-
-extern void sub_800DBBC(void);
-extern void sub_800EF28(u8);
-extern void sub_800F15C(s32);
-extern void sub_800EF40(u8 r0, u8 r1);
-extern s32 sub_800E6D8(s32);
-extern void sub_800EB24(s32 param_1, DungeonPos *param_2, DungeonPos *param_3, s32 param_4, s32 param_5);
 
 struct UnkStruct_80F6624
 {

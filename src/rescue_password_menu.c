@@ -2,6 +2,7 @@
 #include "globaldata.h"
 #include "constants/main_menu.h"
 #include "code_803D0D8.h"
+#include "code_8031D70.h"
 #include "code_8094F88.h"
 #include "dungeon_info.h"
 #include "input.h"
@@ -243,15 +244,9 @@ const MenuItem gUnknown_80E75A0[4] = {
 ALIGNED(4) const u8 sUnknown_80E75C0[] = _("{CENTER_ALIGN}new mail.");
 ALIGNED(4) const u8 sUnknown_80E75CC[] = _("{CENTER_ALIGN}There is no space for receiving");
 
-extern void sub_8031D70(u32, u32);
-extern void sub_8031E10(void);
-extern u32 sub_8031DCC(void);
-extern void sub_8031E00(void);
-
 void DisplayRescuePasswordError(u32 error);
 void sub_8039174(void);
 void DisplayPasswordAcceptScreen(void);
-u32 sub_8039068(u32, u8 *passwordBuffer, unkStruct_203B480 *r0);
 void sub_80391F8(void);
 u32 ConvertMenutoRescuePasswordState(u32);
 

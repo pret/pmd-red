@@ -5,6 +5,7 @@
 #include "constants/iq_skill.h"
 #include "constants/status.h"
 #include "constants/weather.h"
+#include "code_8040094_1.h"
 #include "dungeon_move_util.h"
 #include "effect_main.h"
 #include "effect_data.h"
@@ -47,7 +48,6 @@
 extern bool8 sub_8040BB0(Entity *entity, Move *move, bool8);
 extern void sub_8040DA0(Entity *entity, Move *move);
 extern u16 GetEffectiveMoveId(u16 moveId, u8 weather, u8 hasSpecialEffect);
-extern void sub_8041168(Entity *entity, Entity *entity2, Move *,DungeonPos *);
 
 static u8 ToItemID(u32 itemID);
 

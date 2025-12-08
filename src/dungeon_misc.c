@@ -194,7 +194,7 @@ void SetDungeonMonsFromTeam(void)
         if (PokemonExists(pokeStruct) && PokemonIsOnTeam(pokeStruct)) {
             RecruitedPokemonToDungeonMon(&gRecruitedPokemonRef->dungeonTeam[index],recruitedId);
             if (IsLevelResetDungeon(gDungeon->unk644.dungeonLocation.id)) {
-                struct DungeonLocation dungeonLoc = {.id = DUNGEON_TINY_WOODS, .floor = 1};
+                DungeonLocation dungeonLoc = { .id = DUNGEON_TINY_WOODS, .floor = 1 };
                 CreateLevel1Pokemon(&lvl1Mon,pokeStruct->speciesNum,0,0,&dungeonLoc,0);
                 gRecruitedPokemonRef->dungeonTeam[index].level = lvl1Mon.level;
                 gRecruitedPokemonRef->dungeonTeam[index].IQ = lvl1Mon.IQ;

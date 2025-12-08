@@ -117,9 +117,6 @@ ALIGNED(4) const u8 gUnknown_80E7178[] = _("{CENTER_ALIGN}The data could not be 
 static void sub_8038830(void);
 static void sub_80388C4(void);
 
-extern void sub_8038440(void);
-extern void sub_80140F8(void);
-
 void CreateSaveMenu(s32 currMenu)
 {
   s32 index;

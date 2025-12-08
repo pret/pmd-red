@@ -6,35 +6,28 @@
 #include "structs/dungeon_entity.h"
 #include "structs/str_dungeon.h"
 #include "code_800558C.h"
-#include "graphics_memory.h"
-#include "effect_data.h"
-#include "effect_sub_1.h"
-#include "dungeon_vram.h"
+#include "code_8040094_1.h"
+#include "dungeon_8041AD0.h"
 #include "dungeon_info.h"
+#include "dungeon_logic.h"
+#include "dungeon_map_access.h"
 #include "dungeon_message.h"
+#include "dungeon_mon_sprite_render.h"
 #include "dungeon_move.h"
 #include "dungeon_move_util.h"
 #include "dungeon_music.h"
 #include "dungeon_random.h"
+#include "dungeon_strings.h"
+#include "dungeon_tilemap.h"
 #include "dungeon_util.h"
-#include "dungeon_logic.h"
+#include "dungeon_vram.h"
+#include "effect_data.h"
+#include "effect_main.h"
+#include "effect_sub_1.h"
+#include "graphics_memory.h"
+#include "move_orb_actions_3.h"
 #include "sprite.h"
 #include "weather.h"
-#include "dungeon_map_access.h"
-#include "dungeon_strings.h"
-#include "dungeon_mon_sprite_render.h"
-#include "dungeon_8041AD0.h"
-#include "effect_main.h"
-
-extern u8 sub_800EC94(s32 param_1);
-extern void sub_800EEC8(u16 r0);
-extern bool8 sub_800E9A8(s32 a0);
-extern void sub_800EEF8(u16 a0);
-extern bool8 sub_803F428(DungeonPos *pos);
-extern void sub_800EEE0(u16 a0);
-extern bool8 EffectiveMoveHasSineWobble(s32 moveId);
-
-extern const s32 gUnknown_8106A8C[];
 
 u16 GetEffectiveMoveId(u16 moveId, u8 weather, bool32 hasSpecialEffect);
 static bool32 MoveHasSpecialEffect(Entity *entity, Move *move);

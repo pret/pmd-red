@@ -21,7 +21,7 @@ s32 sub_803C1B4(DungeonLocation *dungeon, u8 missionType)
     return temp;
 }
 
-u8 sub_803C1D0(struct DungeonLocation *dungeon, u8 missionType)
+u8 sub_803C1D0(DungeonLocation *dungeon, u8 missionType)
 {
     s32 a = sub_803C1B4(dungeon, missionType);
     a /= 2;
@@ -32,7 +32,7 @@ u8 sub_803C1D0(struct DungeonLocation *dungeon, u8 missionType)
     return a;
 }
 
-u8 *GetMissionRankText(u8 index)
+const u8 *GetMissionRankText(u8 index)
 {
     return gMissionRankText[index];
 }

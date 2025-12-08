@@ -6,6 +6,8 @@
 #include "code_801B3C0.h"
 #include "code_801C8C4.h"
 #include "code_802F204.h"
+#include "code_8031D70.h"
+#include "code_803C1B4.h"
 #include "code_8094F88.h"
 #include "cpu.h"
 #include "input.h"
@@ -25,7 +27,6 @@
 #include "wonder_mail_4.h"
 #include "wonder_mail_5.h"
 #include "naming_screen.h"
-#include "code_803C1B4.h"
 
 static EWRAM_INIT WonderMailStruct_203B2C4 *sUnknown_203B2C4 = {NULL};
 
@@ -172,8 +173,6 @@ const MenuItem gUnknown_80DEEE4[] =
 #include "data/thank_you_wonder_mail.h"
 
 
-extern u32 sub_8031DCC(void);
-extern void sub_8031E00(void);
 extern void HandleThankYouMailPelipperMainMenu();
 extern void sub_802AAC8();
 extern void ReturnToThankYouMailMainMenu();
@@ -214,13 +213,10 @@ extern void HandleThankYouMailPasswordMenu();
 extern void sub_802A9FC();
 extern void sub_802A828();
 extern void sub_802A850();
-extern void sub_8031E10();
 extern void SetThankYouMailMenuState(u32);
 extern u8 sub_800D588(void);
-extern void sub_8031D70(u8, u32);
 
 extern void sub_8011C28(u32);
-extern u32 sub_8039068(u32, u8 *r1, unkStruct_203B480 *r0);
 
 
 bool8 CreateThankYouMailPelipper(void)

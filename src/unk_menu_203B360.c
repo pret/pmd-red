@@ -56,8 +56,7 @@ ALIGNED(4) const u8 StorageEmpty_80E6EE4[] = _("{CENTER_ALIGN}The storage space 
 ALIGNED(4) const u8 Caution_80E6F04[] = _("{CENTER_ALIGN}{COLOR RED}Caution!{RESET} ");
 static const u8 fill0[] = "pksdir0";
 
-extern void sub_8038440();
-
+void sub_8038440(void);
 static void sub_80384D0(void);
 
 void sub_80382E4(s32 currMenu)

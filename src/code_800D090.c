@@ -158,6 +158,7 @@ EWRAM_DATA u32 gUnknown_202DBB8[80] = {0};
 
 EWRAM_DATA struct UnkStruct_202DCF8 gUnknown_202DCF8 = {0};
 
+// arm_funcs.s
 extern u32 sub_80001E8(void);
 extern void sub_8000228(void);
 

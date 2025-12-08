@@ -44,4 +44,6 @@ void CreateRescuePasswordMenu(u32 currMenu);
 s32 UpdateRescuePasswordMenu(void);
 void CleanRescuePasswordMenu(void);
 
-#endif
+u32 sub_8039068(u32 mailMode, u8 *passwordBuffer, unkStruct_203B480 *param_3);
+
+#endif // GUARD_RESCUE_PASSWORD_MENU_H
