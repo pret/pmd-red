@@ -20,6 +20,8 @@ void ScheduleBgTilemapCopy(u32);
 void DoScheduledMemCopies(void);
 void CopyBgTilemaps0And1(void);
 void SetFontsBaseColor(RGB_Struct);
+
 bool8 sub_8009A7C(struct EfbFileData *a0, s32 a1, s32 a2, s32 a3, bool8 a4, s32 *a5, s16 *a6);
+void sub_8009BE4(void);
 
 #endif // GUARD_GRAPHICS_MEMORY_H

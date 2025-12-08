@@ -1,5 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
+#include "code_8099360.h"
 #include "ground_bg.h"
 #include "ground_map.h"
 #include "text_1.h"
@@ -32,8 +33,6 @@ static void RenderChunksToBgTilemapWrapAround_3x3(MapRender *mapRender);
 static void ClearDoubleBgTilemaps(MapRender *mapRender);
 static void RenderChunksToBgTilemaps_2x2(MapRender *mapRender);
 static void RenderChunksToBgTilemaps_3x3(MapRender *mapRender);
-
-extern void sub_809971C(u16 idx, const RGB_Array *strPtrs, s32 n);
 
 static const PixelPos sPositionZero = {0, 0};
 
@@ -285,7 +284,7 @@ void sub_80A2FBC(GroundBg *groundBg, s32 mapFileId_)
     str1.c[RGB_UNK] = 0;
     for (i = 0; i < bplHeader->numPalettes && i < groundBg->unk52C.unk2; i++) {
         sub_8003810(r5++, str2);
-        sub_809971C(r5, rgbPal, 15);
+        sub_809971C(r5, (RGB_Array*)rgbPal, 15);
         r5 += 15;
         rgbPal += 15;
     }
@@ -1362,7 +1361,7 @@ void sub_80A4764(GroundBg *groundBg)
                 if (sub0Ptr->unk8 != NULL) {
                     RGB_Array empty = {0};
                     sub_8003810(r6, empty);
-                    sub_809971C(r6 + 1, sub0Ptr->unk8, 15);
+                    sub_809971C(r6 + 1, (RGB_Array*)sub0Ptr->unk8, 15);
                     sub0Ptr->unk8 += 60;
                 }
             }

@@ -3,7 +3,6 @@
 #include "constants/move_id.h"
 #include "constants/type.h"
 #include "constants/weather.h"
-#include "structs/dungeon_entity.h"
 #include "structs/str_dungeon.h"
 #include "code_800558C.h"
 #include "code_8040094_1.h"
@@ -29,7 +28,6 @@
 #include "sprite.h"
 #include "weather.h"
 
-u16 GetEffectiveMoveId(u16 moveId, u8 weather, bool32 hasSpecialEffect);
 static bool32 MoveHasSpecialEffect(Entity *entity, Move *move);
 static bool8 sub_80414C0(Entity *entity, Move *move);
 static bool8 MoveHasSineWobble(u16 moveId, u8 weather, bool32 hasSpecialEffect);

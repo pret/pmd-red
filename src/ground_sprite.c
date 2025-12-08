@@ -1,5 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
+#include "code_8099360.h"
 #include "ground_sprite.h"
 #include "structs/axdata.h"
 #include "effect_main.h"
@@ -12,6 +13,7 @@
 #include "memory.h"
 #include "sprite.h"
 #include "effect_sub_1.h"
+#include "palette_util.h"
 #include "pokemon.h"
 #include "ground_effect.h"
 #include "ground_object.h"
@@ -42,8 +44,6 @@ typedef struct unkStruct_3001B7C
     unkStruct_3001B7C_sub108 unk108[UNK_3001B7C_SUB108_COUNT];
 } unkStruct_3001B7C;
 
-static IWRAM_INIT unkStruct_3001B7C *gUnknown_3001B7C = {NULL};
-
 static EWRAM_DATA unkStruct_2039DB0 gUnknown_2039DB0 = {0};
 UNUSED static EWRAM_DATA u32 sUnknown_2039DBC = {0}; // Unused, for alignment
 static EWRAM_DATA unkStruct_2039DB0 gUnknown_2039DC0 = {0};
@@ -55,10 +55,7 @@ static EWRAM_DATA PixelPos gUnknown_2039DD8 = {0};
 
 static EWRAM_INIT OpenedFile *gUnknown_203B4B4 = {NULL};
 
-// code_8098BDC.s
-extern void sub_809971C(u16, const u8 *, s16);
-extern void sub_80997F4(u16, u16);
-extern void sub_800E970(void);
+static IWRAM_INIT unkStruct_3001B7C *gUnknown_3001B7C = {NULL};
 
 static bool8 sub_80A68F8(struct UnkGroundSpriteStruct *ptr, struct UnkGroundSpriteSubStructx48 *a1, s32 a2);
 static bool8 sub_80A6CF4(struct UnkGroundSpriteSubStructx48 *a0);
@@ -143,7 +140,7 @@ static void sub_80A6460(void)
     data = file->data;
 
     for (i = 0; i < 13; i++) {
-        sub_809971C(something, data, 0x10);
+        sub_809971C(something, (RGB_Array*)data, 0x10);
         something += 0x10;
         data += 0x40;
     }
@@ -192,7 +189,7 @@ UNUSED static void sub_80A64A4(void)
             if (flag)
                 r4 |= 2;
 
-            sub_809971C(r9, r2, 16);
+            sub_809971C(r9, (RGB_Array*)r2, 16);
             sub_80997F4(sl, r4);
 
             if (file != NULL)
@@ -545,7 +542,7 @@ void GroundSprite_ExtendPaletteAdd(struct UnkGroundSpriteStruct *ptr, u16 a1)
         }
 
         sub_80997F4(var_28, r6);
-        sub_809971C(var_24, r7, 16);
+        sub_809971C(var_24, (RGB_Array*)r7, 16);
         sub108Ptr->unk0 = a1;
         sub108Ptr->unk2 = 1;
         r2 = var_28 - 16;

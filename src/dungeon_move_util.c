@@ -45,13 +45,9 @@
 #include "dungeon_damage.h"
 #include "dungeon_leveling.h"
 
-extern bool8 sub_8040BB0(Entity *entity, Move *move, bool8);
-extern void sub_8040DA0(Entity *entity, Move *move);
-extern u16 GetEffectiveMoveId(u16 moveId, u8 weather, u8 hasSpecialEffect);
+static EWRAM_INIT Entity *gUnknown_203B438 = NULL;
 
 static u8 ToItemID(u32 itemID);
-
-static EWRAM_INIT Entity *gUnknown_203B438 = NULL;
 
 bool32 sub_8055A00(Entity *attacker, s32 firstMoveId, s32 var_34, s32 itemId, s32 arg_0)
 {

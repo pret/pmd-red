@@ -31,8 +31,6 @@
 #include "code_803C1B4.h"
 #include "code_8031D70.h"
 
-extern void SetFriendRescueMenuState(u32);
-
 // NOTE: MenuItems and WindowTemplate defined in here..
 #include "data/friend_rescue_menus.h"
 
@@ -581,6 +579,8 @@ void sub_8035424(void);
 void sub_8035430(void);
 
 extern u8 sub_800D588(void);
+
+static void SetFriendRescueMenuState(u32 newState);
 
 u32 CreateFriendRescueMenu(void)
 {
@@ -1603,8 +1603,7 @@ void sub_8032828(void)
     }
 }
 
-
-void SetFriendRescueMenuState(u32 newState)
+static void SetFriendRescueMenuState(u32 newState)
 {
     gUnknown_203B33C->state = newState;
     nullsub_40();
