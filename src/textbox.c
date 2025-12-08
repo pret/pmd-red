@@ -1959,7 +1959,7 @@ static void sub_809C478(void)
     sub_8035758();
 
     GetScriptVarScenario(SCENARIO_MAIN, &temp, &temp1);
-    sub_80993C0(0);
+    sub_80993C0(FALSE);
 }
 
 static void sub_809C4B0(void)

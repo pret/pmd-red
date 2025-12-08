@@ -63,6 +63,7 @@
 #include "ground_main.h"
 #include "dungeon_mon_sprite_render.h"
 #include "adventure_info.h"
+#include "decompress_sir.h"
 
 EWRAM_INIT struct UnkStruct_203B414 *gUnknown_203B414 = NULL;
 EWRAM_INIT Dungeon *gDungeon = NULL;
@@ -75,7 +76,6 @@ extern void sub_8043D60(void);
 extern void sub_80840A4(void);
 extern void sub_806AB2C(void);
 extern void sub_807E5AC(void);
-extern void nullsub_16(void);
 extern void sub_80521D0(void);
 extern void sub_8068A84(Pokemon *pokemon);
 extern void sub_806AA70(void);

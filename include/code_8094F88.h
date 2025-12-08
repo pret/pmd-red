@@ -49,5 +49,6 @@ s32 GetFirstIndexofMailType(u8 mailType);
 void sub_8095824(DataSerializer *a, unkStruct_203B480 *b);
 void sub_8095774(DataSerializer *a, unkStruct_203B480 *b);
 void sub_809542C(DungeonMailSeed *param_1);
+void sub_8095494(DungeonMailSeed *param_1, u8 index);
 
 #endif // GUARD_CODE_8094F88_H

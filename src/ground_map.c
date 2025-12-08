@@ -493,6 +493,7 @@ void GroundMap_Select(s32 mapId_)
     sub_80A56D8(&(const PixelPos) {0});
 }
 
+// overlay_0000.bin::0215556C
 void GroundMap_SelectDungeon(s32 mapId_, const DungeonLocation *loc, u32 param_2)
 {
     const GroundConversionStruct *ptr;
@@ -534,6 +535,7 @@ void GroundMap_SelectDungeon(s32 mapId_, const DungeonLocation *loc, u32 param_2
     sub_80A56D8(&(const PixelPos) {0, 0});
 }
 
+// overlay_0000.bin::02154FAC
 NAKED
 static u8* sub_80A5204(void *a, const u8 *b, BmaHeader *c, s32 d)
 {

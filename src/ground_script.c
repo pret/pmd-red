@@ -1006,13 +1006,13 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                         }
                         case CMD_BYTE_07: {
                             if (action->scriptData.branchDiscriminant == 1) {
-                                s32 dungeonEnter;
+                                s32 scriptDungeon;
                                 u32 res;
-                                struct DungeonSetupInfo unkStruct;
-                                dungeonEnter = (s16)GetScriptVarValue(NULL, 19);
-                                if (sub_80990EC(&unkStruct, dungeonEnter)) {
+                                DungeonSetupInfo unkStruct;
+                                scriptDungeon = (s16)GetScriptVarValue(NULL, 19);
+                                if (sub_80990EC(&unkStruct, scriptDungeon)) {
                                     s32 val;
-                                    sub_8099220(&unkStruct, dungeonEnter);
+                                    sub_8099220(&unkStruct, scriptDungeon);
                                     val = CheckQuest(QUEST_REACHED_POSTGAME);
                                     res = BufferDungeonRequirementsText(unkStruct.sub0.unk0.id, 0, gUnknown_203B4B0, val, FALSE);
                                     gUnknown_2039DA4 = res;
@@ -1127,7 +1127,7 @@ s16 HandleAction(Action *action, const DebugLocation *debug)
                                 break;
                             }
 
-                            sub_8099220(0, 0);
+                            sub_8099220(0, SCRIPT_DUNGEON_TINY_WOODS);
                             SetScriptVarValue(NULL, 19, -1);
                             action->scriptData.script.ptr = ResolveJump(action, -1);
                             action->scriptData.savedState = ESC_RET_03;
@@ -1521,25 +1521,33 @@ static s32 ExecuteScriptCommand(Action *action)
         curCmd = *scriptData->script.ptr++;
         switch (scriptData->curScriptOp = curCmd.op) {
             case CMD_BYTE_01: {
-                u32 arg = (s16)curCmd.arg1;
-                u32 argCopy = arg;
+                u32 groundMap_ = (s16)curCmd.arg1;
+                u32 groundMap = groundMap_;
                 u32 byte = (u8)curCmd.argByte;
+
                 if (ScriptLoggingEnabled(TRUE)) {
-                    Log(1, "    ground select %3d[%s] %3d", arg, gGroundMapConversionTable[arg].text, byte);
+                    Log(1, "    ground select %3d[%s] %3d",
+                        groundMap_, gGroundMapConversionTable[groundMap_].text, byte);
                 }
-                GroundMainGroundRequest(argCopy, byte, curCmd.argShort);
+
+                GroundMainGroundRequest(groundMap, byte, curCmd.argShort);
                 break;
             }
             case CMD_BYTE_02: {
-                s32 dungeonId = (s16)curCmd.arg1;
-                if (dungeonId == -1) dungeonId = (s16)GetScriptVarValue(NULL, DUNGEON_ENTER);
+                s32 scriptDungeon = (s16)curCmd.arg1;
+
+                if (scriptDungeon == -1)
+                    scriptDungeon = (s16)GetScriptVarValue(NULL, DUNGEON_ENTER);
+
                 if (ScriptLoggingEnabled(TRUE)) {
-                    Log(1, "    dungeon select %3d", dungeonId);
+                    Log(1, "    dungeon select %3d", scriptDungeon);
                 }
-                if (dungeonId != -1) {
-                    GroundMainRescueRequest(dungeonId, curCmd.argShort);
+
+                if (scriptDungeon != -1) {
+                    GroundMainRescueRequest(scriptDungeon, curCmd.argShort);
                     action->scriptData.script.ptr = ResolveJump(action, 1);
-                } else {
+                }
+                else {
                     action->scriptData.script.ptr = ResolveJump(action, 0);
                 }
                 break;
@@ -1832,9 +1840,9 @@ static s32 ExecuteScriptCommand(Action *action)
                 s32 a = (s16)GetScriptVarValue(NULL, DUNGEON_ENTER);
                 const DungeonInfo *ret1 = GetScriptDungeonInfo(a);
                 s32 scriptIndex = GetScriptVarArrayValue(NULL, DUNGEON_ENTER_LIST, (u16)a) == 0 ? ret1->scriptID1 : ret1->scriptID2;
-                // fakematch: this is almost certainly a range check of the form 0x37 <= a && a < 0x48
+                // fakematch: this is almost certainly a range check of the form SCRIPT_DUNGEON_NORMAL_MAZE_2 <= a && a <= SCRIPT_DUNGEON_STEEL_MAZE
                 // but that loses the s32 -> u16 cast. Inlines, macros, or other shenanigans are likely involved
-                if (!((u16)(a - 0x37) < 0x11) && (s16)sub_80A2750(a) == 1) {
+                if (!((u16)(a - SCRIPT_DUNGEON_NORMAL_MAZE_2) < 17) && (s16)sub_80A2750(a) == 1) {
                     if (scriptIndex == -1) {
                         if (ScriptLoggingEnabled(TRUE))
                             Log(1, "    dungeon rescue select %3d", a);
@@ -4062,7 +4070,7 @@ static s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
             break;
 
         case 0x40:
-            sub_80993C0(r2 == 0 ? 0 : 1);
+            sub_80993C0(r2 != 0);
             return 0;
         case 0x42:
             sub_8011C28(1);
