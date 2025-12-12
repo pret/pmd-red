@@ -155,7 +155,7 @@ static void nullsub_96(Entity *pokemon,Entity *target)
 static void sub_806F910(void)
 {
     s32 i, j;
-    int totalSize;
+    s32 totalSize;
     s32 unkMaybeTimer;
 
     totalSize = 0;
@@ -225,7 +225,7 @@ bool8 IsMonsterRecruitable(s32 species)
 bool8 MonsterJoinSequence_Async(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *param_3)
 {
     DungeonMon *dungeonMon;
-    int pokeIndex;
+    s32 pokeIndex;
     Entity *local_2c;
     s32 i;
 
@@ -367,7 +367,7 @@ bool8 HandleSpecialEntityJoinSequence(Entity *entity1,Entity *entity2,Entity **e
 {
     u8 friendArea;
     DungeonMon *dungeonMon;
-    int index;
+    s32 index;
     struct unkStruct_8069D4C local_74;
     Entity *local_2c;
     s32 i;

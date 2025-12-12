@@ -9,6 +9,7 @@
 #include "text_1.h"
 #include "wonder_mail_4.h"
 #include "wonder_mail_5.h"
+#include "wonder_mail_6.h"
 
 struct unkStruct_203B328
 {
@@ -137,7 +138,7 @@ bool8 sub_8030F58(u32 wonderMailType)
   return TRUE;
 }
 
-s32 sub_8031050(void)
+u32 sub_8031050(void)
 {
     switch(gUnknown_203B328->state)
     {

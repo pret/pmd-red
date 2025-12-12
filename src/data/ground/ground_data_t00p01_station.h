@@ -40,7 +40,7 @@ static const struct ScriptCommand s_gs0_g0_s0_station_sref_script[] = { /* 0x813
     JUMP_SCRIPT(COMMON_ENTER),
 };
 
-static const struct ScriptRef s_gs0_g0_s0_station_sref = { ENTER_CONTROL , 1, NULL, s_gs0_g0_s0_station_sref_script }; /* 0x8132918 */
+static const ScriptRef s_gs0_g0_s0_station_sref = { ENTER_CONTROL, SCRIPT_TYPE_01, NULL, s_gs0_g0_s0_station_sref_script }; /* 0x8132918 */
 
 
 
@@ -50,21 +50,21 @@ static const struct ScriptCommand s_gs0_g0_s0_evt0_sref_script[] = { /* 0x813292
     RET,
 };
 
-static const struct ScriptRef s_gs0_g0_s0_evt0_sref = { GETOUT_NORMAL, 2, NULL, s_gs0_g0_s0_evt0_sref_script }; /* 0x8132944 */
+static const ScriptRef s_gs0_g0_s0_evt0_sref = { GETOUT_NORMAL, SCRIPT_TYPE_02, NULL, s_gs0_g0_s0_evt0_sref_script }; /* 0x8132944 */
 
 static const struct ScriptCommand s_gs0_g0_s0_evt1_sref_script[] = { /* 0x8132950 */
     DEBUGINFO_O(56),
     RET,
 };
 
-static const struct ScriptRef s_gs0_g0_s0_evt1_sref = { GETOUT_NORMAL, 2, NULL, s_gs0_g0_s0_evt1_sref_script }; /* 0x8132970 */
+static const ScriptRef s_gs0_g0_s0_evt1_sref = { GETOUT_NORMAL, SCRIPT_TYPE_02, NULL, s_gs0_g0_s0_evt1_sref_script }; /* 0x8132970 */
 
 static const struct ScriptCommand s_gs0_g0_s0_evt2_sref_script[] = { /* 0x813297c */
     DEBUGINFO_O(63),
     RET,
 };
 
-static const struct ScriptRef s_gs0_g0_s0_evt2_sref = { GETOUT_NORMAL, 2, NULL, s_gs0_g0_s0_evt2_sref_script }; /* 0x813299c */
+static const ScriptRef s_gs0_g0_s0_evt2_sref = { GETOUT_NORMAL, SCRIPT_TYPE_02, NULL, s_gs0_g0_s0_evt2_sref_script }; /* 0x813299c */
 
 static const struct ScriptCommand s_gs0_g0_s1_lives0_dlg0[] = { /* 0x81329a8 */
     DEBUGINFO_O(70),
@@ -1454,7 +1454,7 @@ static const struct GroundEventData s_gs0_g0_s0_evts[] = { /* 0x813805c */
     /*  2 */ {   6,  12,   0,   0, { 138,  30, 0, 0 }, &s_gs0_g0_s0_evt2_sref },
 };
 
-static const struct ScriptRef * const (sStationScripts[]) = { /* 0x8138080 */
+static const ScriptRef * const (sStationScripts[]) = { /* 0x8138080 */
     &s_gs0_g0_s0_station_sref,
 };
 

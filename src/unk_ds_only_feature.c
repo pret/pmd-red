@@ -120,7 +120,7 @@ void sub_809C6CC(u16 param_1)
 
 void sub_809C6EC(void)
 {
-    if (sub_8098F88() == 0) {
+    if (!sub_8098F88()) {
         if (gGameOptionsRef->unkC == 0) {
             sub_809C6CC(4);
         }

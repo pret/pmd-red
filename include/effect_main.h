@@ -27,6 +27,8 @@ struct UnkStruct_8040094
     s32 unk10;
 };
 
+bool8 EffectiveMoveHasSineWobble(s32 moveId);
+
 void sub_800DAC0(u32 fileSelection);
 void sub_800DB7C(void);
 void sub_800DBBC(void);

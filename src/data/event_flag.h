@@ -95,7 +95,7 @@ const u8 *const gUnknown_80B71A0[4] = {
 
 struct MapIdToFriendAreaIdStruct
 {
-    s16 mapId;
+    s16 mapId; // See enum "GroundMapID"
     u8 friendAreaId;
 };
 

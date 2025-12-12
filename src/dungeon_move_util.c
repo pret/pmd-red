@@ -5,6 +5,7 @@
 #include "constants/iq_skill.h"
 #include "constants/status.h"
 #include "constants/weather.h"
+#include "code_8040094_1.h"
 #include "dungeon_move_util.h"
 #include "effect_main.h"
 #include "effect_data.h"
@@ -44,14 +45,9 @@
 #include "dungeon_damage.h"
 #include "dungeon_leveling.h"
 
-extern bool8 sub_8040BB0(Entity *entity, Move *move, bool8);
-extern void sub_8040DA0(Entity *entity, Move *move);
-extern u16 GetEffectiveMoveId(u16 moveId, u8 weather, u8 hasSpecialEffect);
-extern void sub_8041168(Entity *entity, Entity *entity2, Move *,DungeonPos *);
+static EWRAM_INIT Entity *gUnknown_203B438 = NULL;
 
 static u8 ToItemID(u32 itemID);
-
-static EWRAM_INIT Entity *gUnknown_203B438 = NULL;
 
 bool32 sub_8055A00(Entity *attacker, s32 firstMoveId, s32 var_34, s32 itemId, s32 arg_0)
 {
@@ -1083,7 +1079,7 @@ bool8 IsChargingAnyTwoTurnMove(Entity *pokemon, bool8 checkCharge)
     else
     {
         EntityInfo *pokemonInfo = GetEntInfo(pokemon);
-        int i = 0;
+        s32 i = 0;
         u8 *bideClassStatusPointer = &pokemonInfo->bideClassStatus.status;
         u8 *bideClassStatusPointer2;
         u8 chargeStatus = STATUS_CHARGING;
@@ -1114,7 +1110,7 @@ bool8 IsChargingAnyTwoTurnMove(Entity *pokemon, bool8 checkCharge)
 u32 sub_8057144(Entity * pokemon)
 {
     Move *moveStack[80];
-    int i, j, nMoves;
+    s32 i, j, nMoves;
 
     nMoves = 0;
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++)

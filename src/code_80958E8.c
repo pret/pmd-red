@@ -1,5 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
+#include "code_803C1B4.h"
 #include "code_803C1D0.h"
 #include "code_80958E8.h"
 #include "code_80A26CC.h"
@@ -17,28 +18,30 @@
 #include "pokemon_mail.h"
 #include "event_flag.h"
 #include "rescue_team_info.h"
-#include "code_803C1B4.h"
 
-bool8 sub_8095E38(WonderMail *mail, u8 dungeon, u32 floor, u8 param_4);
-u8 sub_8095F28(u8 param_1);
-bool8 GenerateMailJobDungeonInfo(WonderMail *mail);
-bool8 GenerateMailJobInfo(WonderMail *);
-bool8 sub_8096E80(u8);
-u8 sub_8095E78(void);
-bool8 sub_80963B4(void);
-s32 CalculateMailChecksum(WonderMail *mail);
+static const u8 sPossibleMissionTypes[8] = {
+    MISSION_TYPE_FRIEND_RESCUE,
+    MISSION_TYPE_FIND_ITEM,
+    MISSION_TYPE_DELIVER_ITEM,
+    MISSION_TYPE_RESCUE_CLIENT,
+    MISSION_TYPE_RESCUE_TARGET,
+    MISSION_TYPE_DELIVER_ITEM,
+    MISSION_TYPE_FIND_ITEM,
+    MISSION_TYPE_FRIEND_RESCUE
+};
 
-extern void sub_803C4F0(WonderMail *);
-extern void sub_803C3E0(WonderMail *);
-extern void sub_803C45C(WonderMail *);
-extern void sub_803C610(WonderMail *);
-extern void sub_803C580(WonderMail *);
+static EWRAM_DATA unkStruct_203B490 sUnknown_2039448 = { 0 };
 
-static const u8 sPossibleMissionTypes[] = {MISSION_TYPE_FRIEND_RESCUE, MISSION_TYPE_FIND_ITEM, MISSION_TYPE_DELIVER_ITEM, MISSION_TYPE_RESCUE_CLIENT, MISSION_TYPE_RESCUE_TARGET, MISSION_TYPE_DELIVER_ITEM, MISSION_TYPE_FIND_ITEM, MISSION_TYPE_FRIEND_RESCUE};
+EWRAM_INIT unkStruct_203B490 *gUnknown_203B490 = { NULL };
 
-static EWRAM_DATA unkStruct_203B490 sUnknown_2039448 = {0};
-
-EWRAM_INIT unkStruct_203B490 *gUnknown_203B490 = {0};
+static bool8 sub_8095E38(WonderMail *mail, u8 dungeon, u32 floor, u8 param_4);
+static u8 sub_8095F28(u8 param_1);
+static bool8 GenerateMailJobDungeonInfo(WonderMail *mail);
+static bool8 GenerateMailJobInfo(WonderMail *);
+static bool8 sub_8096E80(u8);
+static u8 sub_8095E78(void);
+static bool8 sub_80963B4(void);
+static s32 CalculateMailChecksum(WonderMail *mail);
 
 void LoadMailInfo(void)
 {
@@ -169,7 +172,7 @@ bool8 ValidateWonderMail(WonderMail *data)
     }
 }
 
-bool8 GenerateMailJobInfo(struct WonderMail *mail)
+static bool8 GenerateMailJobInfo(WonderMail *mail)
 {
     s32 missionType;
     s32 i;
@@ -262,7 +265,7 @@ bool8 GenerateMailJobInfo(struct WonderMail *mail)
     return TRUE;
 }
 
-bool8 GenerateMailJobDungeonInfo(WonderMail *mail)
+static bool8 GenerateMailJobDungeonInfo(WonderMail *mail)
 {
   s32 counter;
   s32 floor;
@@ -342,7 +345,7 @@ bool8 GenerateMailJobDungeonInfo(WonderMail *mail)
   } while( TRUE );
 }
 
-bool8 sub_8095E38(WonderMail *mail, u8 dungeon, u32 floor, u8 param_4)
+static bool8 sub_8095E38(WonderMail *mail, u8 dungeon, u32 floor, u8 param_4)
 {
     if (mail->mailType != MAIL_TYPE_NONE) {
         if ((mail->missionType == WONDER_MAIL_MISSION_TYPE_ESCORT_CLIENT) && (param_4 == 1)) {
@@ -357,7 +360,7 @@ bool8 sub_8095E38(WonderMail *mail, u8 dungeon, u32 floor, u8 param_4)
     return FALSE;
 }
 
-u8 sub_8095E78(void)
+static u8 sub_8095E78(void)
 {
   bool8 flag;
   s32 index;
@@ -401,7 +404,7 @@ u8 sub_8095E78(void)
   }
 }
 
-u8 sub_8095F28(u8 param_1)
+static u8 sub_8095F28(u8 param_1)
 {
   s32 itemID;
   s32 counter;
@@ -487,8 +490,8 @@ void ResetMailboxSlot(u8 index)
 
 void ShiftMailboxSlotsDown(void)
 {
-  int counter1; // r5
-  int counter2;
+  s32 counter1; // r5
+  s32 counter2;
 
 
   counter1 = 0;
@@ -613,7 +616,8 @@ _0809638E:
         if(GenerateMailJobInfo(slot))
         {
             friendAreaReward = sub_8095E78();
-            if(!sub_803C1D0(&slot->dungeonSeed.location, slot->missionType)) friendAreaReward = FRIEND_AREA_NONE;
+            if (sub_803C1D0(&slot->dungeonSeed.location, slot->missionType) == 0)
+                friendAreaReward = FRIEND_AREA_NONE;
             slot->rewardType = RandRange(MONEY1, END_REWARDS);
             if(slot->rewardType == FRIEND_AREA)
             {
@@ -643,7 +647,7 @@ _08096392:
     return flag;
 }
 
-bool8 sub_80963B4(void)
+static bool8 sub_80963B4(void)
 {
     u8 floor;
     s32 num;
@@ -787,8 +791,8 @@ void ResetPelipperBoardSlot(u8 index)
 
 void ShiftPelipperJobsDown(void)
 {
-  int counter1; // r5
-  int counter2;
+  s32 counter1; // r5
+  s32 counter2;
 
 
   counter1 = 0;
@@ -1165,8 +1169,8 @@ void ResetJobSlot(u8 index)
 
 void ShiftJobSlotsDown(void)
 {
-  int counter1; // r5
-  int counter2;
+  s32 counter1; // r5
+  s32 counter2;
 
 
   counter1 = 0;
@@ -1257,12 +1261,13 @@ u8 sub_8096E2C(void)
 
     for(index = floor; index < 0x32; index++)
     {
-        if(!gUnknown_203B490->PKMNNewsReceived[index]) return index;
+        if(!gUnknown_203B490->PKMNNewsReceived[index])
+            return index;
     }
     return 0x38;
 }
 
-bool8 sub_8096E80(u8 floor)
+static bool8 sub_8096E80(u8 floor)
 {
     s32 index;
     for(index = 0; index < NUM_MAILBOX_SLOTS; index++)
@@ -1276,7 +1281,7 @@ bool8 sub_8096E80(u8 floor)
     return FALSE;
 }
 
-s32 CalculateMailChecksum(WonderMail *mail)
+static s32 CalculateMailChecksum(WonderMail *mail)
 {
     s32 sum;
 

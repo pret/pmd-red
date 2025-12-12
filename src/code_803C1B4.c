@@ -21,7 +21,7 @@ s32 sub_803C1B4(DungeonLocation *dungeon, u8 missionType)
     return temp;
 }
 
-u8 sub_803C1D0(struct DungeonLocation *dungeon, u8 missionType)
+u8 sub_803C1D0(DungeonLocation *dungeon, u8 missionType)
 {
     s32 a = sub_803C1B4(dungeon, missionType);
     a /= 2;
@@ -32,7 +32,7 @@ u8 sub_803C1D0(struct DungeonLocation *dungeon, u8 missionType)
     return a;
 }
 
-u8 *GetMissionRankText(u8 index)
+const u8 *GetMissionRankText(u8 index)
 {
     return gMissionRankText[index];
 }
@@ -45,7 +45,7 @@ u32 GetDungeonTeamRankPts(DungeonLocation *dungeon, u8 r1)
 
 void sub_803C21C(WonderMail *param_1, unkStruct_802F204 *param_2)
 {
-    int index;
+    s32 index;
     u32 uVar2;
 
     uVar2 = sub_803C1D0(&param_1->dungeonSeed.location,param_1->missionType);

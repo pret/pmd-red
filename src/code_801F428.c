@@ -138,7 +138,7 @@ void sub_801F690(void)
 void sub_801F700(void)
 {
     u32 y;
-    int index;
+    s32 index;
     u8 buffer2 [48];
     u8 buffer1 [128];
 

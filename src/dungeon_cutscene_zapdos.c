@@ -234,7 +234,7 @@ void ZapdosPostStoryPreFightDialogue(void)
 
 static void ZapdosDropInEffect(Entity *zapdosEntity)
 {
-  int iVar1;
+  s32 iVar1;
 
   GetEntInfo(zapdosEntity)->unk15C = 1;
   GetEntInfo(zapdosEntity)->unk15E = 0;

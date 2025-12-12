@@ -53,10 +53,9 @@ const WindowTemplate gUnknown_80E091C = {
 const u8 gUnknown_80E0934[] = "ID:";
 const u8 gUnknown_80E0938[] = "%-4d";
 
-extern void sub_8030DD4(void);
-
-void sub_8030E2C(void);
-void sub_8030E48(void);
+static void sub_8030DD4(void);
+static void sub_8030E2C(void);
+static void sub_8030E48(void);
 
 bool8 sub_8030D40(u8 mailIndex, s32 windowID)
 {
@@ -86,7 +85,7 @@ u32 sub_8030DA0(void)
   }
 }
 
-void sub_8030DD4(void)
+static void sub_8030DD4(void)
 {
     sub_8030E2C();
     sub_8030E48();
@@ -104,13 +103,13 @@ void sub_8030DE4(void)
   }
 }
 
-void sub_8030E2C(void)
+static void sub_8030E2C(void)
 {
     ResetUnusedInputStruct();
     ShowWindows(&gUnknown_203B324->unk18, TRUE, TRUE);
 }
 
-void sub_8030E48(void)
+static void sub_8030E48(void)
 {
   u16 uVar2;
   unkStruct_203B480 *mail;

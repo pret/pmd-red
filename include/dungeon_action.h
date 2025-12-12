@@ -23,7 +23,7 @@ Item *sub_8044D90(Entity *entity, s32 index, s32 unused);
 Entity *sub_8044DA4(Entity *entity, s32 index);
 u16 sub_8044DC8(Item *param_1);
 void sub_8044DF0(Entity *entity, s32 index, u32 unused);
-void sub_8044E24(Entity *entity,int index,u32 unused);
+void sub_8044E24(Entity *entity,s32 index,u32 unused);
 const u8 *GetDungeonSubMenuItemString(s32 param_1);
 bool8 CanSubMenuItemBeChosen(s32 itemId);
 void AddActionToDungeonSubMenu(u16 actionId, u8 param_2);

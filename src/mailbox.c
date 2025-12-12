@@ -225,7 +225,7 @@ void sub_802E1AC(void)
 
 void CreateMailboxMenu(void)
 {
-    int index;
+    s32 index;
     s32 loopMax;
 
     loopMax = 0;

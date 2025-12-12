@@ -144,7 +144,7 @@ bool8 sub_803B050(void)
 
     for (i = 0, max = NUM_SCRIPT_IDS - 1; i <= max; i = (s16)(i + 1)) {
         const ScriptRef *info = &gFunctionScriptTable[i];
-        if (info->type == 10) {
+        if (info->type == SCRIPT_TYPE_10) {
             gUnknown_203B3FC->scriptIDs[count++] = i;
         }
     }

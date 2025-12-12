@@ -192,7 +192,7 @@ void sub_802F300(void)
 
 void HandleMissionReward(void)
 {
-  int moneyReward;
+  s32 moneyReward;
   const u8 *rankString;
   u8 itemID;
   struct unkStruct_8090F58 local_20;

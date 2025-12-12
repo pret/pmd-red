@@ -315,7 +315,7 @@ bool8 DisplayActions_Async(Entity *a0)
 void sub_8075680(bool8 unused)
 {
     u32 direction;
-    int i;
+    s32 i;
 
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
         Entity *entity = gDungeon->activePokemon[i];

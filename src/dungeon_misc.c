@@ -184,8 +184,8 @@ void CloseAllSpriteFiles(void)
 
 void SetDungeonMonsFromTeam(void)
 {
-    int index;
-    int recruitedId;
+    s32 index;
+    s32 recruitedId;
 
     index = 0;
     for (recruitedId = 0; recruitedId < NUM_MONSTERS; recruitedId++) {
@@ -194,7 +194,7 @@ void SetDungeonMonsFromTeam(void)
         if (PokemonExists(pokeStruct) && PokemonIsOnTeam(pokeStruct)) {
             RecruitedPokemonToDungeonMon(&gRecruitedPokemonRef->dungeonTeam[index],recruitedId);
             if (IsLevelResetDungeon(gDungeon->unk644.dungeonLocation.id)) {
-                struct DungeonLocation dungeonLoc = {.id = DUNGEON_TINY_WOODS, .floor = 1};
+                DungeonLocation dungeonLoc = { .id = DUNGEON_TINY_WOODS, .floor = 1 };
                 CreateLevel1Pokemon(&lvl1Mon,pokeStruct->speciesNum,0,0,&dungeonLoc,0);
                 gRecruitedPokemonRef->dungeonTeam[index].level = lvl1Mon.level;
                 gRecruitedPokemonRef->dungeonTeam[index].IQ = lvl1Mon.IQ;
@@ -685,7 +685,7 @@ void sub_80694C0(Entity *target,s32 x,s32 y,u8 param_4)
     return;
 }
 
-void sub_80695EC(Entity *param_1,int x,int y)
+void sub_80695EC(Entity *param_1,s32 x,s32 y)
 {
     EntityInfo *info;
 
@@ -788,7 +788,7 @@ Entity * sub_806977C(Entity *target)
 
 void SetMonSummaryInfoFromEntity(struct MonSummaryInfo *param_1, Entity *target)
 {
-    int index;
+    s32 index;
     u8 *atkPtr;
     u8 *spAtkPtr;
     u8 *defPtr;

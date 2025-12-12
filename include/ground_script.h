@@ -30,7 +30,7 @@ void sub_809D4B0(void);
 void sub_809D508(void);
 void InitActionWithParams(Action *action, const CallbackData *callbacks, void *parent, s32 group, s32 sector);
 void InitAction2(Action *action);
-bool8 sub_809D678(Action *action);
+bool8 Action_SavedStateIsNot0(Action *action);
 bool8 sub_809D684(Action *action, ScriptInfoSmall *scriptInfo);
 void SetPredefinedScript(Action *param_1, s16 index, const ScriptCommand *param_3);
 bool8 GetPredefinedScript(Action *param_1, ScriptInfoSmall *script, s32 _index);
@@ -42,6 +42,7 @@ bool8 GroundScript_Cancel(Action *r0);
 bool8 GroundScriptNotify(Action *param_1, s32 param_2);
 void GroundScriptLockJumpZero(s16 index);
 void GroundScriptLock(s16 index, s32 r1);
+// Return value is enum "ESC_RetID"
 s16 HandleAction(Action *action, const DebugLocation *debug);
 void GroundScript_Unlock(void);
 

@@ -87,9 +87,9 @@ void HandleExplosion(Entity *pokemon,Entity *target,DungeonPos *param_3,s32 para
     Tile *tile;
     Entity * entity1;
     Entity *entity2;
-    int x;
-    int y;
-    int index;
+    s32 x;
+    s32 y;
+    s32 index;
     DungeonPos pos;
 
     u32 dungeonExitReason;

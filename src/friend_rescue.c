@@ -29,8 +29,7 @@
 #include "wonder_mail_5.h"
 #include "naming_screen.h"
 #include "code_803C1B4.h"
-
-extern void SetFriendRescueMenuState(u32);
+#include "code_8031D70.h"
 
 // NOTE: MenuItems and WindowTemplate defined in here..
 #include "data/friend_rescue_menus.h"
@@ -579,18 +578,14 @@ void sub_80353BC(void);
 void sub_8035424(void);
 void sub_8035430(void);
 
-extern u32 sub_8031DCC(void);
-extern void sub_8031E00(void);
-extern u32 sub_8039068(u32, u8 *passwordBuffer, unkStruct_203B480 *r0);
-
-extern void sub_8031E10(void);
 extern u8 sub_800D588(void);
-extern bool8 sub_8031D70(u32 mailIndex, s32);
+
+static void SetFriendRescueMenuState(u32 newState);
 
 u32 CreateFriendRescueMenu(void)
 {
-  char *monName;
-  int counter;
+  u8 *monName;
+  s32 counter;
 
   ResetUnusedInputStruct();
   ShowWindows(NULL, TRUE, TRUE);
@@ -1608,8 +1603,7 @@ void sub_8032828(void)
     }
 }
 
-
-void SetFriendRescueMenuState(u32 newState)
+static void SetFriendRescueMenuState(u32 newState)
 {
     gUnknown_203B33C->state = newState;
     nullsub_40();

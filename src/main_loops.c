@@ -83,7 +83,7 @@ static u8 sub_8001170(void);
 static void RemoveMoneyAndRandomItems(void);
 static void RemoveAllMoneyAndItems(void);
 static void LoadAndRunDungeon_Async(DungeonSetupStruct *r0);
-static u32 xxx_script_related_8001334(u32 r0);
+static u32 xxx_script_related_8001334(u32 startMode);
 static void MainLoops_RunFrameActions(u32 unused);
 
 extern bool8 sub_8096A08(u8 dungeon, Pokemon *pokemon);
@@ -153,13 +153,13 @@ void GameLoop_Async(void)
     if (ReadSaveFromPak(&tmp))
         ThoroughlyResetScriptVars();
 
-    xxx_script_related_8001334(14);
-    xxx_script_related_8001334(15);
+    xxx_script_related_8001334(STARTMODE_14);
+    xxx_script_related_8001334(STARTMODE_15);
     ClearScriptVarArray(NULL, EVENT_LOCAL);
-    xxx_script_related_8001334(16);
+    xxx_script_related_8001334(STARTMODE_16);
 
     if (GetScriptVarValue(NULL, EVENT_LOCAL) == 0)
-        xxx_script_related_8001334(17);
+        xxx_script_related_8001334(STARTMODE_17);
 
     while (TRUE) {
         sUnknown_203B03C = 0;
@@ -570,7 +570,7 @@ static u32 RunGameMode_Async(u32 a0)
         struct FriendAreasMapSetupStruct friendAreasSetup;
         struct WorldMapSetupStruct worldMapSetup;
         DungeonSetupStruct dungeonSetup;
-        s16 sp552;
+        s16 scriptDungeon;
 
         if (mode == STARTMODE_FRIEND_AREAS) {
             u8 friendAreaId = MapIdToFriendAreaId(GetScriptVarValue(NULL,GROUND_ENTER));
@@ -639,7 +639,7 @@ static u32 RunGameMode_Async(u32 a0)
             SetScriptVarValue(NULL, DUNGEON_ENTER, scriptDungeonId);
             sUnknown_203B03C = 2;
             sub_800A8F8(4);
-            r5 = xxx_script_related_8001334(5);
+            r5 = xxx_script_related_8001334(STARTMODE_DUNGEON_FROM_WORLD_MAP);
         }
         else if (mode == STARTMODE_8) {
             r5 = 0;
@@ -675,13 +675,13 @@ static u32 RunGameMode_Async(u32 a0)
         MemoryFill8(&dungeonSetup.info.mon, 0, sizeof(dungeonSetup.info.mon));
         dungeonSetup.info.mon.speciesNum = 0;
         if (r5 == 7) {
-            if (!sub_80991E0(&dungeonSetup.info, &sp552)) {
+            if (!sub_80991E0(&dungeonSetup.info, &scriptDungeon)) {
                 r5 = 13;
                 mode = STARTMODE_DUNGEON_WON;
             }
         }
         else if (r5 == 8) {
-            if (!sub_80991E0(&dungeonSetup.info, &sp552)) {
+            if (!sub_80991E0(&dungeonSetup.info, &scriptDungeon)) {
                 r5 = 13;
                 mode = STARTMODE_DUNGEON_WON;
             }
@@ -690,13 +690,13 @@ static u32 RunGameMode_Async(u32 a0)
             }
         }
         else if (r5 == 10) {
-            if (!sub_80991E0(&dungeonSetup.info, &sp552)) {
+            if (!sub_80991E0(&dungeonSetup.info, &scriptDungeon)) {
                 r5 = 13;
                 mode = STARTMODE_DUNGEON_WON;
             }
         }
         else if (r5 == 9) {
-            if (!sub_80991E0(&dungeonSetup.info, &sp552)) {
+            if (!sub_80991E0(&dungeonSetup.info, &scriptDungeon)) {
                 r5 = 11;
                 mode = STARTMODE_DUNGEON_LOST;
             }
@@ -1096,9 +1096,10 @@ static void nullsub_2(DungeonSetupStruct *r0)
 }
 
 // arm9.bin::0200CAD0
-static u32 xxx_script_related_8001334(u32 r0)
+// startMode: See enum "StartModeVal"
+static u32 xxx_script_related_8001334(u32 startMode)
 {
-    return xxx_script_related_8098468(r0);
+    return xxx_script_related_8098468(startMode);
 }
 
 // arm9.bin::0200CA1C

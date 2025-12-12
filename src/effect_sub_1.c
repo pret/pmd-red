@@ -1,5 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
+#include "code_8099360.h"
 #include "effect_sub_1.h"
 #include "effect_sub_2.h"
 #include "bg_control.h"
@@ -37,8 +38,6 @@ struct unkStruct_203B0D0 {
 };
 
 static EWRAM_INIT struct unkStruct_203B0D0 *gUnknown_203B0D0 = NULL;
-
-extern void sub_809971C(u16 a0, const RGB_Struct *a1, int a2);
 
 void sub_800ED38(s32 r0)
 {
@@ -198,7 +197,7 @@ void sub_800EF64(void)
                 switch (gUnknown_203B0D0->unk0) {
                     case 1: {
                         const RGB_Struct *pal = sub->fileData->pal;
-                        sub_809971C((sub->unkC + 16) * 16, pal, 0x10);
+                        sub_809971C((sub->unkC + 16) * 16, (RGB_Array*)pal, 0x10);
                         break;
                     }
                     case 0: {

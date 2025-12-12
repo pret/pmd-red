@@ -18,7 +18,7 @@
 IWRAM_INIT GroundMapAction *gGroundMapAction = {NULL};
 IWRAM_INIT GroundBg *gGroundMapDungeon_3001B70 = {NULL};
 
-static void sub_80A5204(void *, const void *, BmaHeader *, s32);
+static u8* sub_80A5204(void *, const u8 *, BmaHeader *, s32);
 static void sub_80A56D8(const PixelPos *pos);
 
 static const SubStruct_52C gUnknown_8117324 = {
@@ -345,7 +345,7 @@ void GroundMap_ExecuteEnter(s16 param_1)
 
 UNUSED static bool8 sub_80A4D14(void)
 {
-    return sub_809D678(&gGroundMapAction->action);
+    return Action_SavedStateIsNot0(&gGroundMapAction->action);
 }
 
 bool8 GroundMapNotifyAll(s16 param_1)
@@ -493,6 +493,7 @@ void GroundMap_Select(s32 mapId_)
     sub_80A56D8(&(const PixelPos) {0});
 }
 
+// overlay_0000.bin::0215556C
 void GroundMap_SelectDungeon(s32 mapId_, const DungeonLocation *loc, u32 param_2)
 {
     const GroundConversionStruct *ptr;
@@ -534,8 +535,9 @@ void GroundMap_SelectDungeon(s32 mapId_, const DungeonLocation *loc, u32 param_2
     sub_80A56D8(&(const PixelPos) {0, 0});
 }
 
+// overlay_0000.bin::02154FAC
 NAKED
-static void sub_80A5204(void *a, const void *b, BmaHeader *c, s32 d)
+static u8* sub_80A5204(void *a, const u8 *b, BmaHeader *c, s32 d)
 {
     asm_unified(
 "	push {r4-r7,lr}     \n"
@@ -1305,7 +1307,7 @@ bool8 sub_80A579C(PixelPos *pos1, PixelPos *pos2)
 bool8 CheckMapCollision_80A585C(PixelPos *pixPos1, PixelPos *boundary)
 {
     u8 *currPtr;
-    int i, j;
+    s32 i, j;
     u8 *ptr;
 
     ptr = (void *)gGroundMapDungeon_3001B70->unk544 + ((pixPos1->y * 256) + pixPos1->x + 0x405);
@@ -1329,7 +1331,7 @@ bool8 CheckMapCollision_80A585C(PixelPos *pixPos1, PixelPos *boundary)
 bool8 sub_80A58C8(PixelPos *pixPos1, PixelPos *boundary)
 {
     u8 *currPtr;
-    int i, j;
+    s32 i, j;
     u8 *ptr;
 
     ptr = (void *)gGroundMapDungeon_3001B70->unk544 + ((pixPos1->y * 256) + pixPos1->x + 0x405);
@@ -1373,7 +1375,7 @@ void sub_80A59A0(s32 param_1, PixelPos *param_2, u16 param_3)
 void GroundMap_Action(void)
 {
     nullsub_123();
-    HandleAction(&gGroundMapAction->action, DEBUG_LOC_PTR("../ground/ground_map.c", 0x57F, "GroundMap_Action"));
+    HandleAction(&gGroundMapAction->action, DEBUG_LOC_PTR("../ground/ground_map.c", 1407, "GroundMap_Action"));
 }
 
 void sub_80A59DC(void)

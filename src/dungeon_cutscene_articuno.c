@@ -239,7 +239,7 @@ void ArticunoPostStoryPreFightDialogue(void)
 
 static void sub_8088484(Entity *param_1)
 {
-  int iVar1;
+  s32 iVar1;
 
   GetEntInfo(param_1)->unk15C = 1;
   GetEntInfo(param_1)->unk15E = 0;
@@ -254,7 +254,7 @@ static void sub_8088484(Entity *param_1)
 
 static void ArticunoScreenFlash(void)
 {
-  int iVar1;
+  s32 iVar1;
 
   PlaySoundEffect(0x2ad);
   for(iVar1 = 250; iVar1 > 0x95; iVar1 -= 10)
@@ -280,7 +280,7 @@ static void ArticunoScreenFlash(void)
 
 static void sub_8088574(void)
 {
-  int iVar1;
+  s32 iVar1;
 
   for(iVar1 = 0; iVar1 <= 80; iVar1 += 8)
   {

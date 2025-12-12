@@ -581,8 +581,8 @@ UNUSED static s32 unk_SetMoveToFirstInLinkedSequence8(Move *moves, s32 index)
     Move* move;
     Move linkedSequence[8][8];
     s32 startIndex, prevIndex;
-    int result;
-    int i;
+    s32 result;
+    s32 i;
 
     result = index;
 
@@ -1137,8 +1137,8 @@ static void unk_GetLinkedSequences8_v2(Move *moves, Move linkedSequences[8][8])
 // instead of [4][4] linkedSequences
 static void unk_LinkedSequencesToMoves8(Move *moves, Move linkedSequences[8][8])
 {
-    int i, j;
-    int movesCopied;
+    s32 i, j;
+    s32 movesCopied;
 
     bool8 moveFlags8[8];
     bool8 moveFlags4[8];

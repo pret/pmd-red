@@ -563,9 +563,9 @@ static void sub_805A7D4(Entity * pokemon, Entity * target, Item *item,
 
 bool8 SplashMoveAction(Entity * pokemon, Entity * target, Move *move, s32 itemId)
 {
-  int x;
-  int y;
-  int counter;
+  s32 x;
+  s32 y;
+  s32 counter;
   DungeonPos *r9;
   DungeonPos pos1;
   Move stackMove;

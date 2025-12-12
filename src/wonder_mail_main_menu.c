@@ -2,15 +2,17 @@
 #include "globaldata.h"
 #include "constants/communication_error_codes.h"
 #include "constants/wonder_mail.h"
-#include "music_util.h"
 #include "code_801B3C0.h"
 #include "code_801C8C4.h"
+#include "code_8031D70.h"
 #include "code_803B050.h"
 #include "code_803D0D8.h"
 #include "code_8094F88.h"
 #include "cpu.h"
 #include "input.h"
 #include "memory.h"
+#include "music_util.h"
+#include "naming_screen.h"
 #include "other_menus2.h"
 #include "save.h"
 #include "save_write.h"
@@ -20,7 +22,6 @@
 #include "wonder_mail_5.h"
 #include "wonder_mail_802D098.h"
 #include "wonder_mail_main_menu.h"
-#include "naming_screen.h"
 
 #define SELECT_WONDER_MAIL_MODE_MAIN_SCREEN 0
 #define SEND_WONDER_MAIL_MAIN_SCREEN 1
@@ -71,7 +72,6 @@ EWRAM_INIT struct unkStruct_203B3E8 *gUnknown_203B3E8 = {NULL};
 #include "data/wonder_mail_main_menu.h"
 
 extern void SetWonderMailMainMenuState(u8);
-extern void sub_8031E10(void);
 extern u8 sub_800D588(void);
 extern void sub_802EF48(void);
 

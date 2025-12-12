@@ -4,6 +4,8 @@
 #include "structs/dungeon_entity.h"
 #include "structs/str_stat_index.h"
 
+extern const s32 gUnknown_8106A8C[];
+
 bool8 PoisonStingMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId);
 bool8 TriAttackMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId);
 bool8 TrickMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemId);

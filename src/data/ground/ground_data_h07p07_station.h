@@ -52,21 +52,21 @@ static const struct ScriptCommand s_gs128_g0_s0_station_sref_script[] = { /* 0x8
     JUMP_SCRIPT(COMMON_ENTER),
 };
 
-static const struct ScriptRef s_gs128_g0_s0_station_sref = { ENTER_CONTROL , 1, NULL, s_gs128_g0_s0_station_sref_script }; /* 0x81fbdf4 */
+static const ScriptRef s_gs128_g0_s0_station_sref = { ENTER_CONTROL, SCRIPT_TYPE_01, NULL, s_gs128_g0_s0_station_sref_script }; /* 0x81fbdf4 */
 
 static const struct ScriptCommand s_gs128_g0_s0_evt2_sref_script[] = { /* 0x81fbe00 */
     DEBUGINFO_O(58),
     JUMP_SCRIPT(GETOUT_HABITAT),
 };
 
-static const struct ScriptRef s_gs128_g0_s0_evt2_sref = { GETOUT_HABITAT, 2, NULL, s_gs128_g0_s0_evt2_sref_script }; /* 0x81fbe20 */
+static const ScriptRef s_gs128_g0_s0_evt2_sref = { GETOUT_HABITAT, SCRIPT_TYPE_02, NULL, s_gs128_g0_s0_evt2_sref_script }; /* 0x81fbe20 */
 
 static const struct ScriptCommand s_gs128_g0_s0_evt3_sref_script[] = { /* 0x81fbe2c */
     DEBUGINFO_O(65),
     JUMP_SCRIPT(GETOUT_HABITAT),
 };
 
-static const struct ScriptRef s_gs128_g0_s0_evt3_sref = { GETOUT_HABITAT, 2, NULL, s_gs128_g0_s0_evt3_sref_script }; /* 0x81fbe4c */
+static const ScriptRef s_gs128_g0_s0_evt3_sref = { GETOUT_HABITAT, SCRIPT_TYPE_02, NULL, s_gs128_g0_s0_evt3_sref_script }; /* 0x81fbe4c */
 
 static const struct ScriptCommand s_gs128_g0_s1_lives0_dlg0[] = { /* 0x81fbe58 */
     DEBUGINFO_O(72),
@@ -228,7 +228,7 @@ static const struct GroundEventData s_gs128_g0_s0_evts[] = { /* 0x81fc288 */
     /*  3 */ {   3,  39,   0,   0, {  57,   0, 0, 0 }, &s_gs128_g0_s0_evt3_sref },
 };
 
-static const struct ScriptRef * const (sStationScripts[]) = { /* 0x81fc2b8 */
+static const ScriptRef * const (sStationScripts[]) = { /* 0x81fc2b8 */
     &s_gs128_g0_s0_station_sref,
 };
 

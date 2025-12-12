@@ -41,13 +41,11 @@ static const WindowTemplate sUnknown_80DC2F8 = {
     NULL
 };
 
-const u8 gUnknown_80DC310[] = _("{POKEMON_0}");
-
-extern void sub_801F918(s32);
-extern void sub_801FA58(void);
-extern void sub_801FAD4(void);
-extern void sub_801F930(void);
-extern void sub_801F9A4(void);
+static void sub_801F918(s32);
+static void sub_801FA58(void);
+static void sub_801FAD4(void);
+static void sub_801F930(void);
+static void sub_801F9A4(void);
 
 bool8 sub_801F808(u16 *moveIDs)
 {
@@ -102,14 +100,14 @@ void sub_801F8D0(void)
     }
 }
 
-void sub_801F918(s32 newState)
+static void sub_801F918(s32 newState)
 {
     gUnknown_203B278->state = newState;
     sub_801F930();
     sub_801F9A4();
 }
 
-void sub_801F930(void)
+static void sub_801F930(void)
 {
     sub_80140B4(&gUnknown_203B278->windows);
     switch(gUnknown_203B278->state)
@@ -132,7 +130,7 @@ void sub_801F930(void)
     }
 }
 
-void sub_801F9A4(void)
+static void sub_801F9A4(void)
 {
     switch (gUnknown_203B278->state) {
         case 0:
@@ -145,7 +143,7 @@ void sub_801F9A4(void)
             CallPrepareTextbox_8008C54(gUnknown_203B278->unk5C);
             sub_80073B8(gUnknown_203B278->unk5C);
             InlineStrcpy(gFormatBuffer_Monsters[0], gUnknown_203B278->unk14[gUnknown_203B278->unkC]->name);
-            PrintFormattedStringOnWindow(0x10,0,gUnknown_80DC310,gUnknown_203B278->unk5C,0); // $m0
+            PrintFormattedStringOnWindow(0x10,0,_("{POKEMON_0}"),gUnknown_203B278->unk5C,0);
             PrintFormattedStringOnWindow(4,0x10,gUnknown_203B278->unk14[gUnknown_203B278->unkC]->desc,gUnknown_203B278->unk5C,0);
             sub_80073E0(gUnknown_203B278->unk5C);
             break;
@@ -154,7 +152,7 @@ void sub_801F9A4(void)
     }
 }
 
-void sub_801FA58(void)
+static void sub_801FA58(void)
 {
     if(gUnknown_203B278->unk10 != 0)
     {
@@ -190,7 +188,7 @@ void sub_801FA58(void)
     }
 }
 
-void sub_801FAD4(void)
+static void sub_801FAD4(void)
 {
     if(gUnknown_203B278->unkC < gUnknown_203B278->unk10 - 1)
     {

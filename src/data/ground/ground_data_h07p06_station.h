@@ -47,21 +47,21 @@ static const struct ScriptCommand s_gs127_g0_s0_station_sref_script[] = { /* 0x8
     JUMP_SCRIPT(COMMON_ENTER),
 };
 
-static const struct ScriptRef s_gs127_g0_s0_station_sref = { ENTER_CONTROL , 1, NULL, s_gs127_g0_s0_station_sref_script }; /* 0x81fb764 */
+static const ScriptRef s_gs127_g0_s0_station_sref = { ENTER_CONTROL, SCRIPT_TYPE_01, NULL, s_gs127_g0_s0_station_sref_script }; /* 0x81fb764 */
 
 static const struct ScriptCommand s_gs127_g0_s0_evt1_sref_script[] = { /* 0x81fb770 */
     DEBUGINFO_O(53),
     JUMP_SCRIPT(GETOUT_HABITAT),
 };
 
-static const struct ScriptRef s_gs127_g0_s0_evt1_sref = { GETOUT_HABITAT, 2, NULL, s_gs127_g0_s0_evt1_sref_script }; /* 0x81fb790 */
+static const ScriptRef s_gs127_g0_s0_evt1_sref = { GETOUT_HABITAT, SCRIPT_TYPE_02, NULL, s_gs127_g0_s0_evt1_sref_script }; /* 0x81fb790 */
 
 static const struct ScriptCommand s_gs127_g0_s0_evt2_sref_script[] = { /* 0x81fb79c */
     DEBUGINFO_O(60),
     JUMP_SCRIPT(GETOUT_HABITAT),
 };
 
-static const struct ScriptRef s_gs127_g0_s0_evt2_sref = { GETOUT_HABITAT, 2, NULL, s_gs127_g0_s0_evt2_sref_script }; /* 0x81fb7bc */
+static const ScriptRef s_gs127_g0_s0_evt2_sref = { GETOUT_HABITAT, SCRIPT_TYPE_02, NULL, s_gs127_g0_s0_evt2_sref_script }; /* 0x81fb7bc */
 
 static const struct ScriptCommand s_gs127_g0_s1_lives0_dlg0[] = { /* 0x81fb7c8 */
     DEBUGINFO_O(67),
@@ -155,7 +155,7 @@ static const struct GroundEventData s_gs127_g0_s0_evts[] = { /* 0x81fba20 */
     /*  3 */ {  60,   3,   0,   0, {   0,   0, 0, 0 }, &gFunctionScriptTable[GETOUT_HABITAT] },
 };
 
-static const struct ScriptRef * const (sStationScripts[]) = { /* 0x81fba50 */
+static const ScriptRef * const (sStationScripts[]) = { /* 0x81fba50 */
     &s_gs127_g0_s0_station_sref,
 };
 

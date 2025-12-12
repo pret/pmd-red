@@ -21,7 +21,7 @@ static const struct ScriptCommand s_gs8_g0_s0_station_sref_script[] = { /* 0x819
     JUMP_SCRIPT(COMMON_ENTER),
 };
 
-static const struct ScriptRef s_gs8_g0_s0_station_sref = { ENTER_CONTROL , 1, NULL, s_gs8_g0_s0_station_sref_script }; /* 0x819a83c */
+static const ScriptRef s_gs8_g0_s0_station_sref = { ENTER_CONTROL, SCRIPT_TYPE_01, NULL, s_gs8_g0_s0_station_sref_script }; /* 0x819a83c */
 
 
 static const struct ScriptCommand s_gs8_g0_s0_evt0_sref_script[] = { /* 0x819a848 */
@@ -30,7 +30,7 @@ static const struct ScriptCommand s_gs8_g0_s0_evt0_sref_script[] = { /* 0x819a84
     HALT,
 };
 
-static const struct ScriptRef s_gs8_g0_s0_evt0_sref = { GETOUT_NORMAL, 2, NULL, s_gs8_g0_s0_evt0_sref_script }; /* 0x819a878 */
+static const ScriptRef s_gs8_g0_s0_evt0_sref = { GETOUT_NORMAL, SCRIPT_TYPE_02, NULL, s_gs8_g0_s0_evt0_sref_script }; /* 0x819a878 */
 
 static const struct ScriptCommand s_gs8_g0_s1_lives0_dlg0[] = { /* 0x819a884 */
     DEBUGINFO_O(36),
@@ -57,7 +57,7 @@ static const struct ScriptCommand s_gs8_g1_s0_station_sref_script[] = { /* 0x819
     RET,
 };
 
-static const struct ScriptRef s_gs8_g1_s0_station_sref = { EVENT_STATION , 7, NULL, s_gs8_g1_s0_station_sref_script }; /* 0x819a984 */
+static const ScriptRef s_gs8_g1_s0_station_sref = { EVENT_STATION, SCRIPT_TYPE_07, NULL, s_gs8_g1_s0_station_sref_script }; /* 0x819a984 */
 
 static const struct ScriptCommand s_gs8_g1_s0_eff0_script[] = { /* 0x819a990 */
     DEBUGINFO_O(63),
@@ -88,7 +88,7 @@ static const struct ScriptCommand s_gs8_g1_s1_station_sref_script[] = { /* 0x819
     RET,
 };
 
-static const struct ScriptRef s_gs8_g1_s1_station_sref = { EVENT_WAKEUP, 7, NULL, s_gs8_g1_s1_station_sref_script }; /* 0x819aad0 */
+static const ScriptRef s_gs8_g1_s1_station_sref = { EVENT_WAKEUP, SCRIPT_TYPE_07, NULL, s_gs8_g1_s1_station_sref_script }; /* 0x819aad0 */
 
 static const struct ScriptCommand s_gs8_g1_s1_eff0_script[] = { /* 0x819aadc */
     DEBUGINFO_O(94),
@@ -143,7 +143,7 @@ static const struct GroundEventData s_gs8_g0_s0_evts[] = { /* 0x819ac34 */
     /*  0 */ {   9,   3,   0,   0, {  21,  30, 0, 0 }, &s_gs8_g0_s0_evt0_sref },
 };
 
-static const struct ScriptRef * const (sStationScripts[]) = { /* 0x819ac40 */
+static const ScriptRef * const (sStationScripts[]) = { /* 0x819ac40 */
     &s_gs8_g0_s0_station_sref,
     &s_gs8_g1_s0_station_sref,
     &s_gs8_g1_s1_station_sref,

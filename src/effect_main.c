@@ -1,5 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
+#include "code_8099360.h"
 #include "effect_main.h"
 #include "effect_sub_1.h"
 #include "effect_sub_2.h"
@@ -78,10 +79,6 @@ struct unkStruct_800F18C
 };
 
 extern s16 gUnknown_2026E4E;
-
-
-extern void sub_8009BE4(void);
-extern void sub_809971C(u16 a0, const RGB_Struct *a1, int a2);
 
 static s32 sub_800E900(s32 a0);
 static s32 sub_800E2C0(s32);
@@ -514,7 +511,7 @@ static bool8 sub_800DE8C(struct unkStruct_203B0CC_sub *a0, DungeonPos *unused)
             if (r8->unk20 != 0) {
                 switch (gUnknown_203B0CC->fileSelection) {
                     case 1:
-                        sub_809971C(224, &GetFileEfo(a0)->unk10->pal[224],16);
+                        sub_809971C(224, (RGB_Array*)&GetFileEfo(a0)->unk10->pal[224],16);
                         break;
                     case 0: {
                         s32 i;

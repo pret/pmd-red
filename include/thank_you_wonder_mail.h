@@ -20,7 +20,7 @@ typedef struct WonderMailStruct_203B2C4
     u8 filler48[0x1B8 - 0x48];
     unkStruct_203B480 unk1B8;
     unkStruct_203B480 unk1E8;
-    /* 0x218 */ s8 mailIndex;
+    /* 0x218 */ u8 mailIndex;
     MenuStruct unk21C[4];
     WindowTemplates unk35C;
     WindowTemplates unk3BC;
