@@ -33,6 +33,8 @@ typedef struct WonderMailStruct_203B2C4
     unkStruct_802F204 unk53C;
 } WonderMailStruct_203B2C4;
 
+void CleanThankYouMailPelipper(void);
 bool8 CreateThankYouMailPelipper(void);
+u32 ThankYouMailPelipperCallback(void);
 
 #endif // GUARD_THANK_YOU_WONDER_MAIL_H

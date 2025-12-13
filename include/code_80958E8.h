@@ -2,6 +2,7 @@
 #define GUARD_CODE_80958E8_H
 
 #include "constants/mailbox.h"
+#include "structs/str_pokemon.h"
 #include "structs/str_wonder_mail.h"
 #include "data_serializer.h"
 
@@ -59,6 +60,8 @@ void ResetJobSlot(u8 index);
 void ResetMailbox(void);
 void ResetMailboxSlot(u8 index);
 void ResetPelipperBoardSlot(u8);
+u32 RestoreMailInfo(u8 *r0, u32 size);
+u32 SaveMailInfo(u8 *r0, u32 size);
 void ShiftJobSlotsDown(void);
 void ShiftMailboxSlotsDown(void);
 void ShiftPelipperJobsDown(void);
@@ -70,7 +73,9 @@ void sub_8096488(void);
 bool8 sub_80964B4(void);
 bool8 sub_80964E4(void);
 bool8 sub_809693C(WonderMail *mail);
+bool8 sub_8096A08(u8 dungeon, Pokemon *pokemon);
 void sub_8096AF8(struct unkStruct_8096AF8 *, u8 slotIndex, u8 dungeon);
+void sub_8096BD0(void);
 bool8 sub_8096C08(u8 *jobIndex);
 u8 *sub_8096DD8(void);
 u8 *sub_8096DE8(void);

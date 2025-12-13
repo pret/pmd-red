@@ -36,5 +36,7 @@ typedef struct WonderMailStruct_203B2C0
 
 u8 sub_8027F88(void);
 u32 sub_8028078(void);
+s32 sub_80282DC(u8 *r0);
+void sub_80282FC(void);
 
 #endif // GUARD_WONDER_MAIL_H

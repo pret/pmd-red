@@ -1,5 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
+#include "structs/str_text.h"
 #include "code_8099360.h"
 #include "credits1.h"
 #include "event_flag.h"
@@ -8,6 +9,15 @@
 #include "palette_util.h"
 #include "text_1.h"
 #include "text_3.h"
+
+// Dize: 0x6C
+typedef struct Credits1Work
+{
+    WindowTemplates unk0;
+    s32 unk60;
+    s32 unk64;
+    /* 0x68 */ s32 creditsCategoryIndex;
+} Credits1Work;
 
 EWRAM_INIT static Credits1Work *sCredits1Work = { NULL };
 
@@ -161,7 +171,7 @@ bool8 DrawCredits(s32 creditsCategoryIndex, s32 param_2)
     return TRUE;
 }
 
-s32 sub_8035574(void)
+u32 sub_8035574(void)
 {
     switch (sCredits1Work->unk60) {
         case 0:
