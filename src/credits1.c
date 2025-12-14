@@ -10,7 +10,7 @@
 #include "text_1.h"
 #include "text_3.h"
 
-// Dize: 0x6C
+// Size: 0x6C
 typedef struct Credits1Work
 {
     WindowTemplates unk0;
