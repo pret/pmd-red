@@ -2,13 +2,15 @@
 #include "globaldata.h"
 #include "constants/item.h"
 #include "constants/wonder_mail.h"
+#include "adventure_info.h"
 #include "code_800D090.h"
 #include "code_802F204.h"
+#include "code_803C1B4.h"
 #include "code_8094F88.h"
-#include "adventure_info.h"
 #include "code_8099360.h"
 #include "event_flag.h"
 #include "game_options.h"
+#include "ground_main.h"
 #include "input.h"
 #include "memory.h"
 #include "menu_input.h"
@@ -19,8 +21,7 @@
 #include "save_write.h"
 #include "string_format.h"
 #include "text_1.h"
-#include "ground_main.h"
-#include "code_803C1B4.h"
+#include "wonder_mail_2.h"
 
 struct unkStruct_203B2C8
 {

@@ -43,5 +43,8 @@ enum PelipperBoardActions
 };
 
 bool8 sub_802E864(void);
+u32 sub_802E890(void);
+u32 sub_802E90C(void);
+void sub_802E918(void);
 
 #endif // GUARD_PELIPPER_BOARD_H

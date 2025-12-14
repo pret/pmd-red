@@ -22,9 +22,6 @@ struct unkStruct_203B304
     WindowTemplates unk10C;
 };
 
-u8 sub_802DFB0(void);
-void SetMailboxState(u32);
-
 enum MailBoxStates
 {
     INITIALIZE_MAILBOX,
@@ -40,5 +37,10 @@ enum MailBoxStates
     PKMN_NEWS_MENU_1,
     DISPLAY_SEL_PKMN_NEWS,
 };
+
+void SetMailboxState(u32);
+u8 sub_802DFB0(void);
+u32 sub_802DFD8(void);
+void sub_802E06C(void);
 
 #endif // GUARD_MAILBOX_H

@@ -1,36 +1,39 @@
 #include "global.h"
 #include "globaldata.h"
 #include "constants/bg_music.h"
+#include "constants/friend_area.h"
+#include "constants/ground_map.h"
 #include "constants/main_menu.h"
 #include "structs/str_dungeon_setup.h"
+#include "adventure_info.h"
 #include "bg_control.h"
 #include "bg_palette_buffer.h"
 #include "code_800558C.h"
-#include "graphics_memory.h"
 #include "code_800C9CC.h"
 #include "code_800D090_1.h"
-#include "music_util.h"
-#include "run_dungeon.h"
 #include "code_8094F88.h"
 #include "code_80958E8.h"
-#include "adventure_info.h"
 #include "code_8099360.h"
 #include "code_80A26CC.h"
 #include "cpu.h"
 #include "debug.h"
+#include "decompress_at.h"
 #include "def_filearchives.h"
+#include "dungeon_info.h"
 #include "event_flag.h"
 #include "exclusive_pokemon.h"
 #include "friend_area.h"
+#include "friend_areas_map.h"
 #include "game_options.h"
+#include "graphics_memory.h"
 #include "ground_main.h"
 #include "main_loops.h"
 #include "main_menu1.h"
 #include "main_menu2.h"
-#include "dungeon_info.h"
 #include "memory.h"
 #include "moves.h"
 #include "music.h"
+#include "music_util.h"
 #include "palette_util.h"
 #include "play_time.h"
 #include "pokemon.h"
@@ -39,6 +42,7 @@
 #include "quick_save_write.h"
 #include "random.h"
 #include "rescue_team_info.h"
+#include "run_dungeon.h"
 #include "save.h"
 #include "save_read.h"
 #include "sprite.h"
@@ -47,12 +51,7 @@
 #include "text_2.h"
 #include "text_3.h"
 #include "text_util.h"
-#include "decompress_at.h"
 #include "world_map.h"
-#include "friend_areas_map.h"
-#include "structs/str_dungeon_setup.h"
-#include "constants/friend_area.h"
-#include "constants/ground_map.h"
 
 typedef struct unkTalkTable
 {
@@ -73,40 +72,24 @@ static EWRAM_INIT TeamBasicInfo sTeamBasicInfo_203B040 = {
     .PartnerNick = {""},
 };
 
-static void LoadTitleScreen(void);
-static void NDS_LoadOverlay_GroundMain();
-static u32 RunGameMode_Async(u32 param_1);
-static void sub_80011CC(DungeonSetupSubstruct *info, u8 dungId);
-static void sub_80011E8(DungeonSetupSubstruct *info);
-static void LoadAndRunQuickSaveDungeon_Async(DungeonSetupStruct *param_1);
-static u8 sub_8001170(void);
-static void RemoveMoneyAndRandomItems(void);
-static void RemoveAllMoneyAndItems(void);
-static void LoadAndRunDungeon_Async(DungeonSetupStruct *r0);
-static u32 xxx_script_related_8001334(u32 startMode);
-static void MainLoops_RunFrameActions(u32 unused);
-
-extern bool8 sub_8096A08(u8 dungeon, Pokemon *pokemon);
-extern void sub_8096BD0(void);
-
 static const unkTalkTable sBaseKindTable[17] = {
-    [0] = { .unk0 = 0, .species = MONSTER_PIKACHU },
-    [1] = { .unk0 = 1, .species = MONSTER_MEOWTH },
-    [2] = { .unk0 = 2, .species = MONSTER_EEVEE },
-    [3] = { .unk0 = 3, .species = MONSTER_SKITTY },
-    [4] = { .unk0 = 4, .species = MONSTER_SQUIRTLE },
-    [5] = { .unk0 = 5, .species = MONSTER_TOTODILE },
-    [6] = { .unk0 = 6, .species = MONSTER_MUDKIP },
-    [7] = { .unk0 = 7, .species = MONSTER_PSYDUCK },
-    [8] = { .unk0 = 8, .species = MONSTER_CHARMANDER },
-    [9] = { .unk0 = 9, .species = MONSTER_TORCHIC },
+    [ 0] = { .unk0 =  0, .species = MONSTER_PIKACHU },
+    [ 1] = { .unk0 =  1, .species = MONSTER_MEOWTH },
+    [ 2] = { .unk0 =  2, .species = MONSTER_EEVEE },
+    [ 3] = { .unk0 =  3, .species = MONSTER_SKITTY },
+    [ 4] = { .unk0 =  4, .species = MONSTER_SQUIRTLE },
+    [ 5] = { .unk0 =  5, .species = MONSTER_TOTODILE },
+    [ 6] = { .unk0 =  6, .species = MONSTER_MUDKIP },
+    [ 7] = { .unk0 =  7, .species = MONSTER_PSYDUCK },
+    [ 8] = { .unk0 =  8, .species = MONSTER_CHARMANDER },
+    [ 9] = { .unk0 =  9, .species = MONSTER_TORCHIC },
     [10] = { .unk0 = 10, .species = MONSTER_CYNDAQUIL },
     [11] = { .unk0 = 11, .species = MONSTER_CUBONE },
     [12] = { .unk0 = 12, .species = MONSTER_MACHOP },
     [13] = { .unk0 = 13, .species = MONSTER_BULBASAUR },
     [14] = { .unk0 = 14, .species = MONSTER_CHIKORITA },
     [15] = { .unk0 = 15, .species = MONSTER_TREECKO },
-    [16] = { .unk0 = 0, .species = MONSTER_NONE },
+    [16] = { .unk0 =  0, .species = MONSTER_NONE },
 };
 
 static const unkTalkTable sTalkKindTable[5] = {
@@ -116,6 +99,19 @@ static const unkTalkTable sTalkKindTable[5] = {
     [3] = { .unk0 = 3, .species = MONSTER_CHIKORITA },
     [4] = { .unk0 = 2, .species = MONSTER_NONE },
 };
+
+static void LoadAndRunDungeon_Async(DungeonSetupStruct *r0);
+static void LoadAndRunQuickSaveDungeon_Async(DungeonSetupStruct *param_1);
+static void LoadTitleScreen(void);
+static void MainLoops_RunFrameActions(u32 unused);
+static void NDS_LoadOverlay_GroundMain();
+static void RemoveAllMoneyAndItems(void);
+static void RemoveMoneyAndRandomItems(void);
+static u32 RunGameMode_Async(u32 param_1);
+static u32 xxx_script_related_8001334(u32 startMode);
+static u8 sub_8001170(void);
+static void sub_80011CC(DungeonSetupSubstruct *info, u8 dungId);
+static void sub_80011E8(DungeonSetupSubstruct *info);
 
 // arm9.bin::0200E0A8
 void GameLoop_Async(void)

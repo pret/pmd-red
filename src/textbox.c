@@ -1,30 +1,32 @@
 #include "global.h"
 #include "globaldata.h"
-#include "textbox.h"
 #include "constants/dungeon.h"
 #include "constants/monster.h"
+#include "structs/menu.h"
+#include "structs/str_file_system.h"
+#include "structs/str_mon_portrait.h"
 #include "code_800558C.h"
 #include "code_800D090.h"
-#include "confirm_name_menu.h"
+#include "code_8015080.h"
 #include "code_801B60C.h"
-#include "code_802DB28.h"
-#include "code_80958E8.h"
-#include "code_80A26CC.h"
-#include "luminous_cave.h"
-#include "makuhita_dojo1.h"
-#include "makuhita_dojo2.h"
-#include "music_util.h"
 #include "code_801D014.h"
+#include "code_802DB28.h"
 #include "code_803B050.h"
+#include "code_80958E8.h"
 #include "code_8099360.h"
+#include "code_80A26CC.h"
+#include "confirm_name_menu.h"
+#include "credits1.h"
 #include "credits2.h"
+#include "dungeon_list_menu.h"
 #include "event_flag.h"
 #include "felicity_bank.h"
 #include "flash.h"
 #include "friend_list_menu.h"
+#include "game_options.h"
 #include "ground_lives.h"
-#include "ground_map.h"
 #include "ground_main.h"
+#include "ground_map.h"
 #include "ground_script.h"
 #include "gulpin_shop_801FB50.h"
 #include "input.h"
@@ -32,30 +34,49 @@
 #include "kangaskhan_storage2.h"
 #include "kecleon_bros1.h"
 #include "kecleon_bros4.h"
+#include "luminous_cave.h"
+#include "mailbox.h"
 #include "main_loops.h"
+#include "makuhita_dojo1.h"
+#include "makuhita_dojo2.h"
 #include "memory.h"
+#include "music_util.h"
+#include "naming_screen.h"
 #include "palette_util.h"
+#include "pelipper_board.h"
 #include "personality_test1.h"
-#include "portrait_placement.h"
 #include "pokemon.h"
+#include "portrait_placement.h"
+#include "post_office_guide1.h"
+#include "save.h"
 #include "save_write.h"
+#include "script_item.h"
 #include "string_format.h"
 #include "text_1.h"
 #include "text_2.h"
 #include "text_3.h"
+#include "textbox.h"
+#include "thank_you_wonder_mail.h"
 #include "wigglytuff_shop1.h"
 #include "wigglytuff_shop3.h"
 #include "wonder_mail.h"
-#include "naming_screen.h"
-#include "dungeon_list_menu.h"
-#include "thank_you_wonder_mail.h"
-#include "game_options.h"
-#include "pelipper_board.h"
-#include "script_item.h"
-#include "mailbox.h"
-#include "structs/menu.h"
-#include "structs/str_file_system.h"
-#include "structs/str_mon_portrait.h"
+#include "wonder_mail_2.h"
+
+#define TEXTBOX_FLAG_NONE 0x0
+#define TEXTBOX_FLAG_x1 (1 << 0)
+// Unused, but set for almost all flag sets
+#define TEXTBOX_FLAG_UNUSED_x2 (1 << 1)
+#define TEXTBOX_FLAG_x4 (1 << 2)
+#define TEXTBOX_FLAG_x8 (1 << 3)
+#define TEXTBOX_FLAG_UNUSED_x10 (1 << 4)
+#define TEXTBOX_FLAG_INSTANT_TEXT (1 << 5)
+// Both need to be set to wait for the player's button press. One flag would be sufficient in my opinion, but what can you do?
+#define TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS_2 (1 << 6)
+#define TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS (1 << 7)
+// Speaker's name + dialogue sound
+#define TEXTBOX_FLAG_SPEAKER (1 << 8)
+// Only dialogue sound
+#define TEXTBOX_FLAG_DIALOGUE_SOUND (1 << 9)
 
 // Size: 0x24
 typedef struct TextboxPortrait
@@ -122,48 +143,8 @@ typedef struct Textbox
 
 static IWRAM_INIT Textbox *sTextbox = { NULL };
 
-void sub_809B028(const MenuItem *, s32 a1_, s32 a2, s32 a3, s32 a4_, const u8 *text);
-bool8 sub_809B18C(s32 *sp);
-extern u8 sub_802B2D4(void);
-extern void sub_802B3B8(void);
-extern u32 sub_802B358(void);
-void sub_8096BD0(void);
-bool8 DrawCredits(s32 creditsCategoryIndex, s32);
-u32 sub_8035574();
-void sub_803565C(void);
-bool8 sub_8015080(u8 *buffer, const MenuItem *menuItems);
-s32 sub_801516C();
-void sub_80151A4();
-s32 sub_8015198();
-void sub_8011C28(u32);
-bool8 CreateHelperPelipperMenu(s16);
-u32 sub_802E90C();
-void sub_802E918();
-u32 sub_80282DC(u8 *r0);
-void sub_80282FC(void);
-extern void CleanThankYouMailPelipper(void);
-extern void CleanHelperPelipper(void);
-extern void sub_802E06C(void);
-extern u32 ThankYouMailPelipperCallback(void);
-extern u32 HelperPelipperCallback(void);
-extern u32 sub_802E890(void);
-extern u32 sub_802DFD8(void);
-
-#define TEXTBOX_FLAG_NONE 0x0
-#define TEXTBOX_FLAG_x1 (1 << 0)
-// Unused, but set for almost all flag sets
-#define TEXTBOX_FLAG_UNUSED_x2 (1 << 1)
-#define TEXTBOX_FLAG_x4 (1 << 2)
-#define TEXTBOX_FLAG_x8 (1 << 3)
-#define TEXTBOX_FLAG_UNUSED_x10 (1 << 4)
-#define TEXTBOX_FLAG_INSTANT_TEXT (1 << 5)
-// Both need to be set to wait for the player's button press. One flag would be sufficient in my opinion, but what can you do?
-#define TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS_2 (1 << 6)
-#define TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS (1 << 7)
-// Speaker's name + dialogue sound
-#define TEXTBOX_FLAG_SPEAKER (1 << 8)
-// Only dialogue sound
-#define TEXTBOX_FLAG_DIALOGUE_SOUND (1 << 9)
+EWRAM_DATA u16 gUnknown_20399DC = 0;
+EWRAM_DATA u16 gUnknown_20399DE = 0;
 
 #include "data/portrait_placements.h"
 
@@ -216,24 +197,21 @@ ALIGNED(4) static const u8 sSpeechBubbleText[] = _("{SPEECH_BUBBLE}");
 ALIGNED(4) static const u8 sYellowSpeechBubbleText[] = _("{COLOR YELLOW_N}{SPEECH_BUBBLE}{RESET}");
 ALIGNED(4) static const u8 sYellowStringText[] = _("{COLOR YELLOW_N}%s{RESET}");
 
-EWRAM_DATA u16 gUnknown_20399DC = 0;
-EWRAM_DATA u16 gUnknown_20399DE = 0;
-
+static bool8 IsTextboxOpen_809B40C(TextboxText *a0);
 static void ResetAllTextboxPortraits(void);
+static void ResetTextbox(void);
 static bool8 ScriptPrintTextInternal(TextboxText *ptr, u32 flags_, s32 a2_, const char *text);
 // textboxType: See enum "TextboxTypeID"
 static bool8 SetTextboxType(u32 textboxType, bool8 unused);
-static void ResetTextbox(void);
-static bool8 IsTextboxOpen_809B40C(TextboxText *a0);
 static u8 *sub_809B428(u8 *a0, s32 a1, u8 *a2);
 static bool8 sub_809B648(void);
 static void sub_809C39C(void);
 static void sub_809C3D8(void);
-static void sub_809C504(void);
+static void sub_809C414(void);
 static void sub_809C464(void);
 static void sub_809C478(void);
-static void sub_809C414(void);
 static void sub_809C4B0(void);
+static void sub_809C504(void);
 static void sub_809C550(void);
 
 void TextboxInit(void)

@@ -1,17 +1,6 @@
 #ifndef GUARD_CREDITS1_H
 #define GUARD_CREDITS1_H
 
-#include "structs/str_text.h"
-
-// size: 0x6C
-typedef struct Credits1Work
-{
-    WindowTemplates unk0;
-    s32 unk60;
-    s32 unk64;
-    /* 0x68 */ s32 creditsCategoryIndex;
-} Credits1Work;
-
 // size: 0xC
 typedef struct CreditsData
 {
@@ -23,7 +12,7 @@ typedef struct CreditsData
 
 bool8 DrawCredits(s32 creditsCategoryIndex, s32);
 
-s32 sub_8035574(void);
+u32 sub_8035574(void);
 void sub_803565C(void);
 
 #endif // GUARD_CREDITS1_H

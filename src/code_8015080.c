@@ -1,18 +1,19 @@
 #include "global.h"
 #include "globaldata.h"
+#include "constants/input.h"
 #include "code_800D090.h"
-#include "music_util.h"
+#include "code_8015080.h"
 #include "code_803D0D8.h"
 #include "input.h"
 #include "memory.h"
 #include "menu_input.h"
+#include "music_util.h"
 #include "sprite.h"
 #include "string_format.h"
 #include "text_1.h"
 #include "text_2.h"
 #include "text_3.h"
 #include "text_util.h"
-#include "constants/input.h"
 
 struct unkStruct_203B1F8
 {

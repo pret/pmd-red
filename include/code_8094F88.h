@@ -50,5 +50,8 @@ void sub_8095824(DataSerializer *a, unkStruct_203B480 *b);
 void sub_8095774(DataSerializer *a, unkStruct_203B480 *b);
 void sub_809542C(DungeonMailSeed *param_1);
 void sub_8095494(DungeonMailSeed *param_1, u8 index);
+void sub_80958E4(u32 *a, u32 b);
+u32 sub_8095624(u8 *buffer, u32 b);
+u32 sub_80954CC(u8 *buffer, u32 size);
 
 #endif // GUARD_CODE_8094F88_H
