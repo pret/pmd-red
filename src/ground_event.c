@@ -7,6 +7,8 @@
 #include "memory.h"
 #include "ground_script_file.h"
 
+#define NUM_GROUND_EVENTS 32
+
 typedef struct GroundEvent
 {
     s16 unk0;
@@ -26,14 +28,14 @@ static void GroundEvent_Delete(s32 id);
 
 void AllocGroundEvents(void)
 {
-    s32 ind;
+    s32 i;
     GroundEvent *ptr;
-    gGroundEvents = MemoryAlloc(sizeof(GroundEvent) * 0x20, 0x6);
+    gGroundEvents = MemoryAlloc(sizeof(GroundEvent) * NUM_GROUND_EVENTS, MEMALLOC_GROUP_6);
 
-    for(ind = 0, ptr = &gGroundEvents[ind]; ind < 0x20; ind = (s16)(ind + 1), ptr++)
-    {
+    for (i = 0, ptr = &gGroundEvents[i]; i < NUM_GROUND_EVENTS; i = (s16)(i + 1), ptr++) {
         ptr->unk2 |= -1;
     }
+
     DeleteGroundEvents();
 }
 
@@ -43,7 +45,7 @@ void DeleteGroundEvents(void)
     GroundEvent* current;
 
     current = &gGroundEvents[0];
-    for (v1 = 0; v1 < 0x20; v1 = (s16) (v1 + 0x1), current++) {
+    for (v1 = 0; v1 < NUM_GROUND_EVENTS; v1 = (s16) (v1 + 0x1), current++) {
         if(current->unk2 != -1)
             GroundEvent_Delete(v1);
     }
@@ -55,15 +57,6 @@ void FreeGroundEvents(void)
     MemoryFree(gGroundEvents);
     gGroundEvents = NULL;
 }
-
-ALIGNED(4) static const char sFileName[] = "../ground/ground_event.c";
-ALIGNED(4) static const char sFuncName[] = "GroundEvent_Select";
-
-static const DebugLocation sGroundEvent_DebugLoc = {
-    .file = sFileName,
-    .line = 160, // Nice, the line here is 63...
-    .func = sFuncName,
-};
 
 void GroundEvent_Select(s32 scriptID, s32 group, s32 sector)
 {
@@ -81,17 +74,18 @@ void GroundEvent_Select(s32 scriptID, s32 group, s32 sector)
     scriptID_s32 = (s16)scriptID;
     group_s32 = (s16)group;
     sector_s32 = (s8)sector;
-    scriptPtr = GetGroundScript(scriptID_s32, &sGroundEvent_DebugLoc);
-    Log('\0',"GroundEvent Select %3d  %3d  %3d", scriptID_s32, group_s32, sector_s32);
+    scriptPtr = GetGroundScript(scriptID_s32, DEBUG_LOC_PTR("../ground/ground_event.c", 160, "GroundEvent_Select"));
+
+    Log(0, "GroundEvent Select %3d  %3d  %3d",
+        scriptID_s32, group_s32, sector_s32);
 
     groupPtr = &scriptPtr->groups[group_s32];
     sectorPtr = &groupPtr->sectors[sector_s32];
     eventData = sectorPtr->events;
 
     size = sectorPtr->nEvents;
-    for (i = 0; i < size; i++, eventData++)
-    {
-        GroundEvent_Add(-1,eventData,group_s32,sector_s32);
+    for (i = 0; i < size; i++, eventData++) {
+        GroundEvent_Add(-1, eventData, group_s32, sector_s32);
     }
 }
 
@@ -103,13 +97,14 @@ void GroundEvent_Cancel(s32 scriptID, s32 sector)
     s32 scriptID_s32;
 
     scriptID_s32 = (s16)scriptID;
-    sector_s32 = (s8) sector;
+    sector_s32 = (s8)sector;
 
-    Log('\0',"GroundEvent Cancel %3d  %3d", scriptID_s32, sector_s32);
+    Log(0, "GroundEvent Cancel %3d  %3d",
+        scriptID_s32, sector_s32);
 
     index = 0;
     ptr = &gGroundEvents[0];
-    for(; index < 0x20; index = (s16)(index + 1), ptr++)
+    for(; index < NUM_GROUND_EVENTS; index = (s16)(index + 1), ptr++)
     {
         if((ptr->unk2 != -1) && (ptr->unk4 == scriptID_s32))
             if(sector_s32 < 0 || ptr->unk6 == sector_s32)
@@ -134,7 +129,7 @@ static s32 GroundEvent_Add(s32 id, const GroundEventData *eventData, s32 group, 
 
     if (scriptID_s32 < 0) {
         ptr = &gGroundEvents[0];
-        for (i = 0; i < 0x20; i = (s16)(i + 1), ptr++) {
+        for (i = 0; i < NUM_GROUND_EVENTS; i = (s16)(i + 1), ptr++) {
             if (ptr->unk2 == -1) {
                 scriptID_s32 = i;
                 break;
@@ -148,7 +143,8 @@ static s32 GroundEvent_Add(s32 id, const GroundEventData *eventData, s32 group, 
         ptr = &gGroundEvents[scriptID_s32];
     }
 
-    Log(0, "GroundEvent Add id %3d  kind %3d  group %3d  sector %3d  script %p\0", scriptID_s32, script->id, group_s32, sector_s32, eventData->script->script);
+    Log(0, "GroundEvent Add id %3d  kind %3d  group %3d  sector %3d  script %p\0",
+        scriptID_s32, script->id, group_s32, sector_s32, eventData->script->script);
 
     ptr->unk0 = scriptID_s32;
     ptr->unk2 = script->id;
@@ -182,9 +178,10 @@ static s32 GroundEvent_Add(s32 id, const GroundEventData *eventData, s32 group, 
 
 static void GroundEvent_Delete(s32 id)
 {
-    s32 scriptID_s32 = (s16) id;
+    s32 scriptID_s32 = (s16)id;
     GroundEvent *ptr = &gGroundEvents[scriptID_s32];
-    Log(0, "GroundEvent Delete id %3d\0", scriptID_s32);
+    Log(0, "GroundEvent Delete id %3d\0",
+        scriptID_s32);
     ptr->unk2 = -1;
 }
 
@@ -209,7 +206,7 @@ s16 FindGroundEvent(u32 flags, PixelPos *arg1, PixelPos *arg2)
 {
     s32 i;
     GroundEvent *ptr = &gGroundEvents[0];
-    for (i = 0; i < 0x20; i = (s16)(i + 1), ptr++) {
+    for (i = 0; i < NUM_GROUND_EVENTS; i = (s16)(i + 1), ptr++) {
         if (ptr->unk2 != -1
             && (ptr->unk8 & flags)
             && ptr->unkC.x < arg2->x
@@ -228,7 +225,7 @@ UNUSED static s16 UnusedFindGroundEvent(u32 flags, PixelPos *arg1, PixelPos *arg
 {
     s32 i;
     GroundEvent *ptr = &gGroundEvents[0];
-    for (i = 0; i < 0x20; i = (s16)(i + 1), ptr++) {
+    for (i = 0; i < NUM_GROUND_EVENTS; i = (s16)(i + 1), ptr++) {
         if (ptr->unk2 != -1 && (ptr->unk8 & flags)) {
             PixelPos resultPos = {0};
             resultPos.x = (ptr->unkC.x + ptr->unk14.x) / 2;
@@ -246,4 +243,6 @@ UNUSED static s16 UnusedFindGroundEvent(u32 flags, PixelPos *arg1, PixelPos *arg
     return -1;
 }
 
-void nullsub_124(void) {}
+void nullsub_124(void)
+{
+}

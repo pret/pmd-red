@@ -39,7 +39,7 @@ bool8 sub_8023144(s32 a0, s32 index, DungeonPos *sub, u32 a3)
         return FALSE;
 
     if (gUnknown_3001B5C == NULL)
-        gUnknown_3001B5C = MemoryAlloc(sizeof(unkStruct_3001B5C), 8);
+        gUnknown_3001B5C = MemoryAlloc(sizeof(unkStruct_3001B5C), MEMALLOC_GROUP_8);
 
     gUnknown_3001B5C->unk0 = param_1_u8;
     gUnknown_3001B5C->unk4 = gUnknown_203B298;
@@ -78,13 +78,13 @@ u32 sub_8023278(bool8 a0)
 
     switch (GetKeyPress(&gUnknown_3001B5C->s35C.m.input)) {
         case INPUT_B_BUTTON:
-            PlayMenuSoundEffect(1);
+            PlayMenuSoundEffect(MENU_SFX_BACK);
             return 2;
         case INPUT_A_BUTTON:
-            PlayMenuSoundEffect(0);
+            PlayMenuSoundEffect(MENU_SFX_ACCEPT);
             return 3;
         case INPUT_SELECT_BUTTON:
-            PlayMenuSoundEffect(5);
+            PlayMenuSoundEffect(MENU_SFX_SORT);
             if (temp = gUnknown_3001B5C->unk4, iVar3 = 1, temp < 2)
                 iVar3 = temp + 1;
 

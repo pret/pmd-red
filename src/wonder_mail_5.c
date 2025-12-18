@@ -59,7 +59,7 @@ static void sub_8030E48(void);
 
 bool8 sub_8030D40(u8 mailIndex, s32 windowID)
 {
-  gUnknown_203B324 = MemoryAlloc(sizeof(struct unkStruct_203B324), 8);
+  gUnknown_203B324 = MemoryAlloc(sizeof(struct unkStruct_203B324), MEMALLOC_GROUP_8);
   gUnknown_203B324->mailIndex = mailIndex;
   ResetTouchScreenMenuInput(&gUnknown_203B324->unk0);
   gUnknown_203B324->windowID = windowID;
@@ -75,10 +75,10 @@ u32 sub_8030DA0(void)
   switch(sub_8012A64(&gUnknown_203B324->unk0, gUnknown_203B324->windowID))
   {
     case INPUT_B_BUTTON:
-        PlayMenuSoundEffect(1);
+        PlayMenuSoundEffect(MENU_SFX_BACK);
         return 2;
     case INPUT_A_BUTTON:
-        PlayMenuSoundEffect(0);
+        PlayMenuSoundEffect(MENU_SFX_ACCEPT);
         return 3;
     default:
         return 0;

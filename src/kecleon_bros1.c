@@ -126,7 +126,7 @@ bool8 CreateKecleonBros(u32 mode)
     u8 *monName;
     OpenedFile *faceFile;
 
-    sKecleonBrosWork1 = MemoryAlloc(sizeof(KecleonBrosWork1), 8);
+    sKecleonBrosWork1 = MemoryAlloc(sizeof(KecleonBrosWork1), MEMALLOC_GROUP_8);
     sKecleonBrosWork1->menuAction1 = 0;
     sKecleonBrosWork1->menuAction2 = 0;
     sKecleonBrosWork1->menuAction3 = 0;
@@ -412,7 +412,7 @@ static void UpdateKecleonStoreDialogue(void)
             break;
         case KECLEON_STORE_BUY_ITEM_RECEIPT:
             if (CountKecleonItems() == 0) {
-                if (sKecleonBrosWork1->isKecleonItemShop != FALSE)
+                if (sKecleonBrosWork1->isKecleonItemShop)
                     sub_801A010();
                 else
                     sub_801A3DC();
@@ -420,7 +420,7 @@ static void UpdateKecleonStoreDialogue(void)
             }
             else {
                 if (GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE) {
-                    if (sKecleonBrosWork1->isKecleonItemShop != FALSE)
+                    if (sKecleonBrosWork1->isKecleonItemShop)
                         sub_801A010();
                     else
                         sub_801A3DC();

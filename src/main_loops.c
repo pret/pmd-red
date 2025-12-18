@@ -63,7 +63,7 @@ static EWRAM_DATA s32 sTitleBrightness = 0; // NDS=210FAC0
 // TODO: I think there's a 2nd s32 here for the bottom screen TitleBrightness.
 
 static EWRAM_INIT OpenedFile *sTitlePaletteFile = NULL;
-static EWRAM_INIT u32 sUnknown_203B03C = 0;
+static EWRAM_INIT u32 sMainLoopsUnk = MAINLOOPS_UNK_0;
 static EWRAM_INIT TeamBasicInfo sTeamBasicInfo_203B040 = {
     .unk0 = 0,
     .StarterID = MONSTER_CHARMANDER,
@@ -108,7 +108,7 @@ static void NDS_LoadOverlay_GroundMain();
 static void RemoveAllMoneyAndItems(void);
 static void RemoveMoneyAndRandomItems(void);
 static u32 RunGameMode_Async(u32 param_1);
-static u32 xxx_script_related_8001334(u32 startMode);
+static u32 xxx_script_related_8001334_Async(u32 startMode);
 static u8 sub_8001170(void);
 static void sub_80011CC(DungeonSetupSubstruct *info, u8 dungId);
 static void sub_80011E8(DungeonSetupSubstruct *info);
@@ -149,17 +149,17 @@ void GameLoop_Async(void)
     if (ReadSaveFromPak(&tmp))
         ThoroughlyResetScriptVars();
 
-    xxx_script_related_8001334(STARTMODE_14);
-    xxx_script_related_8001334(STARTMODE_15);
+    xxx_script_related_8001334_Async(STARTMODE_14);
+    xxx_script_related_8001334_Async(STARTMODE_15);
     ClearScriptVarArray(NULL, EVENT_LOCAL);
-    xxx_script_related_8001334(STARTMODE_16);
+    xxx_script_related_8001334_Async(STARTMODE_16);
 
     if (GetScriptVarValue(NULL, EVENT_LOCAL) == 0)
-        xxx_script_related_8001334(STARTMODE_17);
+        xxx_script_related_8001334_Async(STARTMODE_17);
 
     while (TRUE) {
-        sUnknown_203B03C = 0;
-        sub_800A8F8(2);
+        sMainLoopsUnk = MAINLOOPS_UNK_0;
+        SetFileSystemUnk(FILESYSTEM_UNK_2);
         ResetSprites(TRUE);
         UpdateFadeInTile(0);
         InitFontPalette();
@@ -309,7 +309,7 @@ static void LoadTitleScreen(void)
     const u8 * renPal[3] = {"titlen0p", "titlen1p", "titlen2p"};
     OpenedFile *bgFile;
     s32 i, j;
-    TitleMenuFile *stru = MemoryAlloc(sizeof(TitleMenuFile), 0);
+    TitleMenuFile *stru = MemoryAlloc(sizeof(TitleMenuFile), MEMALLOC_GROUP_0);
     s32 rnd = RandInt(3);
 
     sTitlePaletteFile = OpenFileAndGetFileDataPtr(renPal[rnd], &gTitleMenuFileArchive);
@@ -335,9 +335,9 @@ static void LoadTitleScreen(void)
 #include "data/main_loops.h"
 
 // arm9.bin::0200ED08
-s32 sub_8000728(void)
+s32 GetMainLoopsUnk(void)
 {
-    return sUnknown_203B03C;
+    return sMainLoopsUnk;
 }
 
 // arm9.bin::0200DB58
@@ -571,7 +571,7 @@ static u32 RunGameMode_Async(u32 a0)
         if (mode == STARTMODE_FRIEND_AREAS) {
             u8 friendAreaId = MapIdToFriendAreaId(GetScriptVarValue(NULL,GROUND_ENTER));
 
-            friendAreasSetup.friendAreasMapPtr = MemoryAlloc(sizeof(*friendAreasSetup.friendAreasMapPtr),8);
+            friendAreasSetup.friendAreasMapPtr = MemoryAlloc(sizeof(*friendAreasSetup.friendAreasMapPtr), MEMALLOC_GROUP_8);
             friendAreasSetup.startingFriendAreaId = friendAreaId;
             friendAreasSetup.unk5 = CheckQuest(QUEST_CAN_DEPOSIT_PARTNER);
             ShowFriendAreasMap_Async(&friendAreasSetup);
@@ -625,7 +625,7 @@ static u32 RunGameMode_Async(u32 a0)
                     break;
             }
 
-            worldMapSetup.worldMap = MemoryAlloc(sizeof(*worldMapSetup.worldMap), 8);
+            worldMapSetup.worldMap = MemoryAlloc(sizeof(*worldMapSetup.worldMap), MEMALLOC_GROUP_8);
             ShowWorldMap_Async(&worldMapSetup);
             MemoryFree(worldMapSetup.worldMap);
             if (!worldMapSetup.dungeonEntered) {
@@ -633,9 +633,9 @@ static u32 RunGameMode_Async(u32 a0)
                 continue;
             }
             SetScriptVarValue(NULL, DUNGEON_ENTER, scriptDungeonId);
-            sUnknown_203B03C = 2;
-            sub_800A8F8(4);
-            r5 = xxx_script_related_8001334(STARTMODE_DUNGEON_FROM_WORLD_MAP);
+            sMainLoopsUnk = MAINLOOPS_UNK_2;
+            SetFileSystemUnk(FILESYSTEM_UNK_4);
+            r5 = xxx_script_related_8001334_Async(STARTMODE_DUNGEON_FROM_WORLD_MAP);
         }
         else if (mode == STARTMODE_8) {
             r5 = 0;
@@ -650,9 +650,9 @@ static u32 RunGameMode_Async(u32 a0)
             else if (mode == STARTMODE_DUNGEON_LOST) {
                 RemoveMoneyAndRandomItems();
             }
-            sUnknown_203B03C = 2;
-            sub_800A8F8(4);
-            r5 = xxx_script_related_8001334(mode);
+            sMainLoopsUnk = MAINLOOPS_UNK_2;
+            SetFileSystemUnk(FILESYSTEM_UNK_4);
+            r5 = xxx_script_related_8001334_Async(mode);
             if (r5 == 14) {
                 break;
             }
@@ -806,8 +806,8 @@ static u32 RunGameMode_Async(u32 a0)
                 }
             }
 
-            sUnknown_203B03C = 1;
-            sub_800A8F8(3);
+            sMainLoopsUnk = MAINLOOPS_UNK_1;
+            SetFileSystemUnk(FILESYSTEM_UNK_3);
             dungeonSetup.unk0 = 1;
             sub_80011E8(&dungeonSetup.info.sub0);
             LoadAndRunQuickSaveDungeon_Async(&dungeonSetup);
@@ -861,14 +861,14 @@ static void LoadAndRunQuickSaveDungeon_Async(DungeonSetupStruct *setupStr)
     s32 dungeonStructSize; // sizeof(Dungeon)
 
     quickSaveValid = TRUE;
-    sUnknown_203B03C = 1;
+    sMainLoopsUnk = MAINLOOPS_UNK_1;
 
-    sub_800A8F8(3);
+    SetFileSystemUnk(FILESYSTEM_UNK_3);
     ResetDialogueBox();
     sub_8043D50(&local_1c, &dungeonStructSize);
 
-    setupStr->info.unk74 = MemoryAlloc(local_1c, 7); // size: 0x4800
-    setupStr->info.dungeon = MemoryAlloc(dungeonStructSize, 7); // size: sizeof(Dungeon)
+    setupStr->info.unk74 = MemoryAlloc(local_1c, MEMALLOC_GROUP_7); // size: 0x4800
+    setupStr->info.dungeon = MemoryAlloc(dungeonStructSize, MEMALLOC_GROUP_7); // size: sizeof(Dungeon)
 
     if (setupStr->info.sub0.unk4) {
         PrepareQuickSaveRead(setupStr->info.unk74, local_1c);
@@ -1093,9 +1093,9 @@ static void nullsub_2(DungeonSetupStruct *r0)
 
 // arm9.bin::0200CAD0
 // startMode: See enum "StartModeVal"
-static u32 xxx_script_related_8001334(u32 startMode)
+static u32 xxx_script_related_8001334_Async(u32 startMode)
 {
-    return xxx_script_related_8098468(startMode);
+    return xxx_script_related_8098468_Async(startMode);
 }
 
 // arm9.bin::0200CA1C

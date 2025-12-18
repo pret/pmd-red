@@ -1,6 +1,18 @@
 #ifndef GUARD_MUSIC_UTIL_H
 #define GUARD_MUSIC_UTIL_H
 
+enum MenuSFXID
+{
+    MENU_SFX_ACCEPT,
+    MENU_SFX_BACK,
+    MENU_SFX_FAIL,
+    MENU_SFX_NAVIGATE,
+    MENU_SFX_INFO,
+    MENU_SFX_SORT,
+    MENU_SFX_TOGGLE,
+    MENU_SFX_COUNT
+};
+
 void ResetSoundEffectCounters(void);
 void StopBGMResetSoundEffectCounters(void);
 void StartBGMusic(void);
@@ -18,7 +30,8 @@ void PlaySound(u16 songIndex);
 void StopSound(u16 songIndex);
 void FadeOutSound(u16 songIndex, u16 speed);
 bool8 IsSoundPlaying(u16 songIndex);
-void PlayMenuSoundEffect(u32 arrId);
+// id: See enum "MenuSFXID"
+void PlayMenuSoundEffect(u32 id);
 void PlayDialogueTextSound(void);
 
 #endif // GUARD_MUSIC_UTIL_H

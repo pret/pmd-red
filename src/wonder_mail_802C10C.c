@@ -26,7 +26,7 @@ bool8 sub_802C10C(s32 a0, DungeonPos *a1, s32 a2)
         return FALSE;
 
     if (gUnknown_203B2E0 == NULL)
-        gUnknown_203B2E0 = MemoryAlloc(sizeof(struct unkStruct_203B2E0), 8);
+        gUnknown_203B2E0 = MemoryAlloc(sizeof(struct unkStruct_203B2E0), MEMALLOC_GROUP_8);
 
     gUnknown_203B2E0->unk8.m.menuWinId = a0;
     gUnknown_203B2E0->unk8.m.menuWindow = &gUnknown_203B2E0->unk8.m.windows.id[a0];
@@ -58,13 +58,13 @@ u32 sub_802C1E4(bool8 a0)
 
     switch (GetKeyPress(&gUnknown_203B2E0->unk8.m.input)) {
         case INPUT_B_BUTTON:
-            PlayMenuSoundEffect(1);
+            PlayMenuSoundEffect(MENU_SFX_BACK);
             return 2;
         case INPUT_A_BUTTON:
-            PlayMenuSoundEffect(0);
+            PlayMenuSoundEffect(MENU_SFX_ACCEPT);
             return 3;
         case INPUT_START_BUTTON:
-            PlayMenuSoundEffect(4);
+            PlayMenuSoundEffect(MENU_SFX_INFO);
             return 4;
         default:
             if (MenuCursorUpdate(&gUnknown_203B2E0->unk8.m.input, 1)) {

@@ -4,11 +4,10 @@
 #include "code_801B3C0.h"
 #include "code_801EE10.h"
 #include "code_801EE10_mid.h"
-#include "friend_list.h"
-#include "code_8024458.h"
 #include "code_8099360.h"
 #include "common_strings.h"
 #include "event_flag.h"
+#include "friend_list.h"
 #include "friend_area_action_menu.h"
 #include "input.h"
 #include "iq_skill_menu.h"
@@ -19,6 +18,7 @@
 #include "moves.h"
 #include "pokemon.h"
 #include "pokemon_3.h"
+#include "recruited_mon_summary_menu.h"
 #include "sprite.h"
 #include "string_format.h"
 #include "text_1.h"
@@ -59,7 +59,7 @@ void sub_8027EB8(void);
 u32 sub_8027074(void)
 {
     ResetSprites(FALSE);
-    sUnknown_203B2BC = MemoryAlloc(sizeof(struct unkStruct_203B2BC), 8);
+    sUnknown_203B2BC = MemoryAlloc(sizeof(struct unkStruct_203B2BC), MEMALLOC_GROUP_8);
     sUnknown_203B2BC->menuAction1 = 0;
     sUnknown_203B2BC->menuAction2 = 0;
     sUnknown_203B2BC->menuAction3 = 0;
@@ -183,7 +183,7 @@ void sub_8027274(void)
             sub_8012D60(&sUnknown_203B2BC->unk7C, sUnknown_203B2BC->menuItems, 0, sUnknown_203B2BC->unk16C, sUnknown_203B2BC->menuAction1, 2);
             break;
         case FRIEND_AREA_ACTION_MENU_SUMMARY:
-            sub_8024458(sUnknown_203B2BC->targetPoke, 2);
+            RecruitedMonSummaryMenu_Create(sUnknown_203B2BC->targetPoke, 2);
             break;
         case FRIEND_AREA_ACTION_MENU_CHECK_IQ:
             CreateIQSkillMenu(sUnknown_203B2BC->targetPoke);
@@ -478,16 +478,17 @@ void sub_80278B4(void)
 
 void sub_8027A40(void)
 {
-    switch(sub_80244E4())
-    {
-        case 2:
-        case 3:
-            sub_802453C();
+    switch (RecruitedMonSummaryMenu_Input()) {
+        case RecruitedMonSummaryMenu_INPUTRET_BACK:
+        case RecruitedMonSummaryMenu_INPUTRET_ACCEPT: {
+            RecruitedMonSummaryMenu_Destroy();
             SetFriendAreaActionMenuState(FRIEND_AREA_ACTION_MENU_MAIN_2);
             break;
-        case 0:
-        case 1:
+        }
+        case RecruitedMonSummaryMenu_INPUTRET_NONE:
+        case RecruitedMonSummaryMenu_INPUTRET_LEFTRIGHT: {
             break;
+        }
     }
 }
 

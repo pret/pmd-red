@@ -36,7 +36,7 @@ bool8 sub_80227B8(Pokemon *pkmn)
     ResetUnusedInputStruct();
     ShowWindows(NULL, TRUE, TRUE);
 
-    sUnknown_203B294 = MemoryAlloc(sizeof(unkStruct_203B294), 8);
+    sUnknown_203B294 = MemoryAlloc(sizeof(unkStruct_203B294), MEMALLOC_GROUP_8);
     sUnknown_203B294->menuAction = 0;
     sUnknown_203B294->pokeStruct = pkmn;
 

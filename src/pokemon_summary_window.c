@@ -16,7 +16,7 @@
 #include "constants/type.h"
 #include "constants/colors.h"
 
-void ShowPokemonSummaryWindow(s32 which, s32 currSubWindowId, struct MonSummaryInfo *monInfo, struct UnkInfoTabStruct *param_4, u32 windowId)
+void ShowPokemonSummaryWindow(s32 which, s32 currSubWindowId, MonSummaryInfo *monInfo, UnkInfoTabStruct *param_4, u32 windowId)
 {
     s32 i, y;
     s32 j;
@@ -123,7 +123,7 @@ void ShowPokemonSummaryWindow(s32 which, s32 currSubWindowId, struct MonSummaryI
             y += 10;
             break;
         }
-        case SUB_WINDOW_FEATUERS: {
+        case SUB_WINDOW_FEATURES: {
             PrintFormattedStringOnWindow((currSubWindowId * 8) + 16, 0, _("Features"), windowId, '\0');
 
             PrintFormattedStringOnWindow(4, y, _("Type:"), windowId, '\0');
@@ -251,7 +251,7 @@ void ShowPokemonSummaryWindow(s32 which, s32 currSubWindowId, struct MonSummaryI
     sub_80073E0(windowId);
 }
 
-void SetMonSummaryInfo(struct MonSummaryInfo *dst, struct Pokemon *pokemon, bool8 unlockedEvolutions)
+void SetMonSummaryInfo(MonSummaryInfo *dst, Pokemon *pokemon, bool8 unlockedEvolutions)
 {
     s32 index;
 

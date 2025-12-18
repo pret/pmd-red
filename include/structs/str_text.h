@@ -58,7 +58,7 @@ typedef struct WindowHeader
     /* 0x0 */ u8 count; // How many headers there are, it's used for windows which can be scrolled left/right
     /* 0x1 */ u8 currId; // Id of the current header
     /* 0x2 */ u8 width;
-    /* 0x3 */ u8 f3;
+    /* 0x3 */ u8 f3; // Always set to 0?
 } WindowHeader;
 
 // size: 0x18

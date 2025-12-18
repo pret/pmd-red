@@ -172,7 +172,7 @@ UNUSED static bool8 sub_8011DA8(void)
 
 u32 ReadSaveFromPak(u32 *a)
 {
-    struct UnkStruct_sub_8011DAC *playerSave = MemoryAlloc(sizeof(struct UnkStruct_sub_8011DAC), 5);
+    struct UnkStruct_sub_8011DAC *playerSave = MemoryAlloc(sizeof(struct UnkStruct_sub_8011DAC), MEMALLOC_GROUP_5);
     u8 *r4 = playerSave->unk448;
     u32 saveStatus = ReadSaveSector(a, (u8*)playerSave, sizeof(struct UnkStruct_sub_8011DAC));
     u32 r1;
@@ -270,7 +270,7 @@ u32 sub_8011FA8(void)
     u32 saveStatus;
     u32 temp3;
     u32 temp;
-    struct unk_struct *r5 = MemoryAlloc(sizeof(struct unk_struct), 5);
+    struct unk_struct *r5 = MemoryAlloc(sizeof(struct unk_struct), MEMALLOC_GROUP_5);
     temp = 0x1F;
     saveStatus = ReadSaveSector(&temp, (u8 *)r5, sizeof(struct unk_struct));
     if( saveStatus == READ_SAVE_VALID)
@@ -293,7 +293,7 @@ bool8 IsSaveCorrupted(void)
 {
     u32 temp;
     bool8 isCorrupted;
-    struct unk_struct *r5 = MemoryAlloc(sizeof(struct unk_struct), 5);
+    struct unk_struct *r5 = MemoryAlloc(sizeof(struct unk_struct), MEMALLOC_GROUP_5);
     temp = 0x1F;
     isCorrupted = FALSE;
     if(ReadSaveSector(&temp, (u8 *)r5, sizeof(struct unk_struct)) == READ_SAVE_VALID)
@@ -315,7 +315,7 @@ u32 WriteSavetoPak(s32 *param_1, u32 param_2)
   s32 saveStatus2;
   u8 *array_ptr;
 
-  playerSave = MemoryAlloc(sizeof(struct UnkStruct_sub_8011DAC),5);
+  playerSave = MemoryAlloc(sizeof(struct UnkStruct_sub_8011DAC), MEMALLOC_GROUP_5);
   array_ptr = playerSave->unk448;
   if (gUnknown_203B184 == NULL) {
     playerSave->unk41C = param_2;
@@ -375,7 +375,7 @@ u32 sub_80121E0(u32 r0)
     u32 temp;
     const char *gameName;
     u32 saveStatus;
-    struct unk_struct *r4 = MemoryAlloc(sizeof(struct unk_struct), 5);
+    struct unk_struct *r4 = MemoryAlloc(sizeof(struct unk_struct), MEMALLOC_GROUP_5);
     temp = 0x1F;
 
     r4->unk18 = r0;
@@ -393,7 +393,7 @@ u32 sub_80121E0(u32 r0)
 u32 sub_8012240(void)
 {
     s32 status;
-    struct unk_struct *r5 = MemoryAlloc(sizeof(struct unk_struct), 5);
+    struct unk_struct *r5 = MemoryAlloc(sizeof(struct unk_struct), MEMALLOC_GROUP_5);
     MemoryFill8(r5, 0xFF, 0x4);
     StopBGMResetSoundEffectCounters();
     status = WriteFlashData(0x1F, (u8 *)r5, sizeof(struct unk_struct));

@@ -127,14 +127,14 @@ typedef struct Textbox
     /* 0x004 */ s32 endMsgFrames;
     /* 0x008 */ s32 midMsgFrames;
     /* 0x00C */ TextboxText text;
-    /* 0x414 */ u32 unk414; // See enum "SpecialTextKind"
+    /* 0x414 */ u32 specialTextKind; // See enum "SpecialTextKind"
     /* 0x418 */ const unkStruct_3001B64_unk418 *unk418;
     /* 0x41C */ const MenuItem *unk41C;
     /* 0x420 */ u32 unk420;
     /* 0x424 */ u32 unk424;
     /* 0x428 */ u32 unk428;
     /* 0x42C */ MonOrStringPtr unk42C;
-    /* 0x430 */ s32 unk430; // See enum "ScriptID"
+    /* 0x430 */ s32 unk430; // See enum "ScriptID". Could also be a friend area ID...
     /* 0x434 */ s32 unk434;
     /* 0x438 */ u32 unused438;
     /* 0x43C */ TextboxPortrait portraits[MAX_TEXTBOX_PORTRAITS];
@@ -143,8 +143,8 @@ typedef struct Textbox
 
 static IWRAM_INIT Textbox *sTextbox = { NULL };
 
-EWRAM_DATA u16 gUnknown_20399DC = 0;
-EWRAM_DATA u16 gUnknown_20399DE = 0;
+EWRAM_DATA u16 gUnknown_20399DC = 0; // Some flags
+EWRAM_DATA u16 gUnknown_20399DE = 0; // Some flags (set but never read)
 
 #include "data/portrait_placements.h"
 
@@ -217,7 +217,7 @@ static void sub_809C550(void);
 void TextboxInit(void)
 {
     ResetDialogueBox();
-    sTextbox = MemoryAlloc(sizeof(Textbox), 6);
+    sTextbox = MemoryAlloc(sizeof(Textbox), MEMALLOC_GROUP_6);
     sTextbox->type = 0;
     sTextbox->endMsgFrames = -1;
     sTextbox->midMsgFrames = -1;
@@ -227,7 +227,7 @@ void TextboxInit(void)
     ShowWindows(0,1,1);
     sub_8009408(0,0x14);
     ResetTextbox();
-    sTextbox->unk414 = 0;
+    sTextbox->specialTextKind = SPECIAL_TEXT_UNK_0;
     sTextbox->unk418 = NULL;
     sTextbox->unk41C = 0;
     sTextbox->unk420 = 0;
@@ -258,7 +258,7 @@ void TextboxResetAll(void)
     for (index = 0; index < MAX_TEXTBOX_PORTRAITS; index++) {
         ResetTextboxPortrait(index);
     }
-    sTextbox->unk414 = 0;
+    sTextbox->specialTextKind = SPECIAL_TEXT_UNK_0;
     SetTextboxType(TEXTBOX_TYPE_0, TRUE);
 }
 
@@ -782,7 +782,7 @@ void sub_809B028(const MenuItem * menuItems, s32 a1_, s32 a2, s32 a3, s32 a4_, c
     s32 a4 = (s16) a4_;
 
     SetTextboxType(sScriptTextboxTypes[a3], FALSE);
-    sTextbox->unk414 = 1;
+    sTextbox->specialTextKind = SPECIAL_TEXT_UNK_1;
     sTextbox->unk418 = NULL;
     sTextbox->unk41C = menuItems;
     sTextbox->unk420 = 2;
@@ -839,7 +839,7 @@ bool8 ScriptSpecialTextHandler(s32 kind, u32 a1, s32 a2, MonOrStrPtr_Arg monOrSt
     }
 
     SetTextboxType(TEXTBOX_TYPE_4, FALSE);
-    sTextbox->unk414 = kind;
+    sTextbox->specialTextKind = kind;
     sTextbox->unk418 = NULL;
     sTextbox->unk41C = NULL;
     sTextbox->unk420 = 1;
@@ -949,7 +949,7 @@ static u8 *sub_809B428(u8 *a0, s32 a1, u8 *a2)
     }
 }
 
-void sub_809B474(void)
+void sub_809B474_Async(void)
 {
     const unkStruct_3001B64_unk418 *unkStructPtr;
 
@@ -1005,12 +1005,13 @@ void sub_809B474(void)
             }
             break;
     }
-    sub_809B57C();
+    sub_809B57C_Async();
 }
 
-void sub_809B57C(void)
+void sub_809B57C_Async(void)
 {
     DrawDialogueBoxString_Async();
+
     switch (sTextbox->type) {
         case 1:
         case 2:
@@ -1050,7 +1051,7 @@ void sub_809B614(void)
 {
     sub_80060EC();
     gUnknown_20399DE = gUnknown_20399DC;
-    gUnknown_20399DC &= 0xFFFD;
+    gUnknown_20399DC &= ~2;
 }
 
 void sub_809B638(void)
@@ -1258,8 +1259,8 @@ static const unkStruct_3001B64_unk418 gUnknown_8116318 =
 
 static bool8 sub_809B648(void)
 {
-    switch (sTextbox->unk414) {
-        case 2:
+    switch (sTextbox->specialTextKind) {
+        case SPECIAL_TEXT_WAITING:
             if (sTextbox->unk420 != 1) {
                 u32 pressed = gRealInputs.pressed;
                 if ((pressed & AB_BUTTONS) != 0) {
@@ -1277,7 +1278,7 @@ static bool8 sub_809B648(void)
             }
             ResetTextbox();
             return 1;
-        case 3:
+        case SPECIAL_TEXT_UNK_3:
             if (sTextbox->unk420 == 1) {
                 ResetTextbox();
                 return 1;
@@ -1291,7 +1292,7 @@ static bool8 sub_809B648(void)
                 return 0;
              }
             break;
-        case 4:
+        case SPECIAL_TEXT_PLAYER_NAME_INPUT:
              if (sTextbox->unk420 == 1) {
                 ResetTextbox();
                 if (sTextbox->unk424 == 0) {
@@ -1321,7 +1322,7 @@ static bool8 sub_809B648(void)
                 }
              }
              break;
-          case 5:
+          case SPECIAL_TEXT_TEAM_NAME_INPUT:
             if (sTextbox->unk420 == 1) {
                 ResetTextbox();
                 CreateConfirmNameMenu(1, sTextbox->unk42C.str);
@@ -1343,7 +1344,7 @@ static bool8 sub_809B648(void)
                 }
             }
             return 1;
-        case 6:
+        case SPECIAL_TEXT_PASSWORD_INPUT:
             if (sTextbox->unk420 == 1) {
                 ResetTextbox();
                 NamingScreen_Init(4,sTextbox->unk42C.str);
@@ -1367,17 +1368,17 @@ static bool8 sub_809B648(void)
                 }
             }
             return 1;
-          case 7:
+          case SPECIAL_TEXT_FRIEND_MENU:
             sub_801D014(sTextbox->unk42C.mon);
             sTextbox->unk418 = &gUnknown_81161A8;
-            PlayMenuSoundEffect(4);
+            PlayMenuSoundEffect(MENU_SFX_INFO);
             return 1;
-          case 8:
+          case SPECIAL_TEXT_MENU:
             sub_801D014(sTextbox->unk42C.mon);
             sTextbox->unk418 = &gUnknown_81161B8;
-            PlayMenuSoundEffect(4);
+            PlayMenuSoundEffect(MENU_SFX_INFO);
             return 1;
-          case 9:
+          case SPECIAL_TEXT_YES_NO_WITH_LARGE_BOX:
             ResetTextbox();
             if (sTextbox->unk420 == 1) {
                 ResetTextbox();
@@ -1385,7 +1386,7 @@ static bool8 sub_809B648(void)
                     sTextbox->unk430 = -1;
                     return 0;
                 }
-                PlayMenuSoundEffect(4);
+                PlayMenuSoundEffect(MENU_SFX_INFO);
             }
             else {
                 switch( sub_801516C())
@@ -1401,7 +1402,7 @@ static bool8 sub_809B648(void)
                 }
             }
             return 1;
-          case 10:
+          case SPECIAL_TEXT_LARGE_TEXT_BOX:
             ResetTextbox();
             if (sTextbox->unk420 == 1) {
                 ResetTextbox();
@@ -1409,7 +1410,7 @@ static bool8 sub_809B648(void)
                     sTextbox->unk430 = -1;
                     return 0;
                 }
-                PlayMenuSoundEffect(4);
+                PlayMenuSoundEffect(MENU_SFX_INFO);
             }
             else {
                 switch( sub_801516C()) {
@@ -1424,19 +1425,19 @@ static bool8 sub_809B648(void)
                 }
             }
             return 1;
-          case 11:
+          case SPECIAL_TEXT_BUY_FRIEND_AREAS:
             if (sTextbox->unk420 == 1) {
                 ResetTextbox();
                 if (!sub_80211AC(sTextbox->unk424,3)) {
                     sTextbox->unk430 = -1;
                     return 0;
                 }
-                PlayMenuSoundEffect(4);
+                PlayMenuSoundEffect(MENU_SFX_INFO);
             }
             else {
-                switch(sub_8021274(1)) {
+                switch (sub_8021274(1)) {
                     case 3:
-                        sTextbox->unk430 =  sub_802132C();
+                        sTextbox->unk430 = sub_802132C();
                         sub_80213A0();
                         return 0;
                     case 2:
@@ -1446,7 +1447,7 @@ static bool8 sub_809B648(void)
                 }
             }
             return 1;
-        case 0xc:
+        case SPECIAL_TEXT_DUNGEON_LIST:
             if (sTextbox->unk420 == 1) {
                 s32 rescueDungeonID = ScriptDungeonIDToRescueDungeonID(GetScriptVarValue(NULL, DUNGEON_SELECT));
                 ResetTextbox();
@@ -1457,7 +1458,7 @@ static bool8 sub_809B648(void)
                 if (rescueDungeonID != -1 && !DungeonListMenu_MoveMenuTo(rescueDungeonID)) {
                     SetScriptVarValue(NULL, DUNGEON_SELECT, -1);
                 }
-                PlayMenuSoundEffect(4);
+                PlayMenuSoundEffect(MENU_SFX_INFO);
             }
             else {
                 switch (DungeonListMenu_GetInput(1)) {
@@ -1475,14 +1476,14 @@ static bool8 sub_809B648(void)
                 }
             }
             return 1;
-          case 0xd:
+          case SPECIAL_TEXT_DOJO_LIST:
             if (sTextbox->unk420 == 1) {
                 ResetTextbox();
                 if (!sub_80302E8(3,0,10)) {
                     sTextbox->unk430 = -1;
                     return 0;
                 }
-                PlayMenuSoundEffect(4);
+                PlayMenuSoundEffect(MENU_SFX_INFO);
             }
             else {
                 switch(sub_80303AC(1)) {
@@ -1497,11 +1498,11 @@ static bool8 sub_809B648(void)
                 }
             }
             return 1;
-          case 0xe:
-          case 0xf:
+          case SPECIAL_TEXT_SAVE_1:
+          case SPECIAL_TEXT_SAVE_2:
             if (sTextbox->unk420 == 1) {
                 ResetTextbox();
-                if (sTextbox->unk414 == 0xe) {
+                if (sTextbox->specialTextKind == SPECIAL_TEXT_SAVE_1) {
                     SetScriptVarValue(NULL,0x18,1);
                 }
                 sub_8011C28(1);
@@ -1514,23 +1515,23 @@ static bool8 sub_809B648(void)
             }
             FinishWriteSavePak();
             return 0;
-          case 0x10: {
-            bool8 unkBool = (CheckQuest(QUEST_SQUARE_ASLEEP) != FALSE);
+          case SPECIAL_TEXT_STORAGE_WITH_DIALOG: {
+            u32 mode = CheckQuest(QUEST_SQUARE_ASLEEP) ? 1 : 0;
             ResetTextbox();
-            if (CreateKangaskhanStorage(unkBool)) {
+            if (CreateKangaskhanStorage(mode)) {
                 sTextbox->unk418 = &gUnknown_81161C8;
                 return 1;
             }
             sTextbox->unk430 = -1;
             return 0;
           }
-          case 0x11:
+          case SPECIAL_TEXT_STORAGE:
             sTextbox->unk418 = &gUnknown_81161D8;
             return 1;
-          case 0x13: {
-            bool8 unkBool = (CheckQuest(QUEST_SQUARE_ASLEEP) != FALSE);
+          case SPECIAL_TEXT_BANK: {
+            u32 mode = CheckQuest(QUEST_SQUARE_ASLEEP) ? 1 : 0;
             ResetTextbox();
-            if (CreateFelicityBank(unkBool)) {
+            if (CreateFelicityBank(mode)) {
                 sTextbox->unk418 = &gUnknown_81161E8;
                 return 1;
             }
@@ -1539,12 +1540,12 @@ static bool8 sub_809B648(void)
                 return 0;
             }
           }
-          case 0x17:
-          case 0x18: {
+          case SPECIAL_TEXT_GREEN_KECLEON_SHOP:
+          case SPECIAL_TEXT_PURPLE_KECLEON_SHOP: {
             u8 var;
             bool8 unkBool = CheckQuest(QUEST_SQUARE_ASLEEP);
             ResetTextbox();
-            if (sTextbox->unk414 == 0x17) {
+            if (sTextbox->specialTextKind == SPECIAL_TEXT_GREEN_KECLEON_SHOP) {
                 var = (unkBool == 0) ? 0 : 1;
             }
             else {
@@ -1563,10 +1564,10 @@ static bool8 sub_809B648(void)
                 return 0;
             }
           }
-          case 0x19: {
-            bool8 unkBool = (CheckQuest(QUEST_SQUARE_ASLEEP) != FALSE);
+          case SPECIAL_TEXT_LINK_SHOP: {
+            u32 mode = CheckQuest(QUEST_SQUARE_ASLEEP) ? 1 : 0;
             ResetTextbox();
-            if (sub_801FB50(unkBool)) {
+            if (sub_801FB50(mode)) {
                 sTextbox->unk418 = &gUnknown_8116208;
                 return 1;
             }
@@ -1575,7 +1576,7 @@ static bool8 sub_809B648(void)
                 return 0;
             }
           }
-        case 0x1a:
+        case SPECIAL_TEXT_LUMINOUS_CAVE:
             if (sTextbox->unk420 == 1) {
                 ResetTextbox();
                 ClearScriptVarArray(0,0x39);
@@ -1604,42 +1605,42 @@ static bool8 sub_809B648(void)
                 }
             }
            return 0;
-        case 0x1b: {
-            bool8 unk = CheckQuest(QUEST_SQUARE_ASLEEP) != FALSE;
+        case SPECIAL_TEXT_FRIEND_SHOP: {
+            u32 mode = CheckQuest(QUEST_SQUARE_ASLEEP) ? 1 : 0;
             ResetTextbox();
-            if (CreateWigglytuffShop(unk)) {
+            if (CreateWigglytuffShop(mode)) {
                 sTextbox->unk418 = &gUnknown_8116218;
                 return 1;
             }
             sTextbox->unk430 = -1;
             return 0;
         }
-          case 0x1c:
+          case SPECIAL_TEXT_FRIEND_RESCUE:
             sTextbox->unk418 = &gUnknown_8116228;
             return 1;
-          case 0x1d:
+          case SPECIAL_TEXT_UNK_1D:
             sTextbox->unk418 = &gUnknown_8116238;
             return 1;
-          case 0x1e:
+          case SPECIAL_TEXT_THANK_YOU_MAIL:
             sTextbox->unk418 = &gUnknown_8116248;
             return 1;
-          case 0x1f:
+          case SPECIAL_TEXT_PPO_HELP_COUNTER:
             ResetTextbox();
-            if (!CreateHelperPelipperMenu(0x130)) {
+            if (!CreateHelperPelipperMenu(MONSTER_PELIPPER)) {
                 sTextbox->unk430 = -1;
                 return 0;
             }
             sTextbox->unk418 = &gUnknown_8116258;
             return 1;
-          case 0x20:
-            PlayMenuSoundEffect(4);
+          case SPECIAL_TEXT_BULLETIN_BOARD_JOBS:
+            PlayMenuSoundEffect(MENU_SFX_INFO);
             sTextbox->unk418 = &gUnknown_8116268;
             return 1;
-          case 0x21:
-            PlayMenuSoundEffect(4);
+          case SPECIAL_TEXT_BULLETIN_BOARD:
+            PlayMenuSoundEffect(MENU_SFX_INFO);
             sTextbox->unk418 = &gUnknown_8116278;
             return 1;
-          case 0x22: {
+          case SPECIAL_TEXT_UNK_22: {
             u8 local_34;
             u32 local_30;
             s32 local_2c;
@@ -1668,7 +1669,7 @@ static bool8 sub_809B648(void)
             ScenarioCalc(2,0,0);
             return 0;
           }
-          case 0x23: {
+          case SPECIAL_TEXT_UNK_23: {
             u32 local_20;
             u32 local_1c;
             struct unkStruct_8096AF8 local_18;
@@ -1696,7 +1697,7 @@ static bool8 sub_809B648(void)
                 return 1;
             }
           }
-          case 0x24:
+          case SPECIAL_TEXT_DOJO_ENTER:
             if (sTextbox->unk420 == 1) {
               u32 uVar19 = CheckQuest(QUEST_SQUARE_ASLEEP) == FALSE ? 0 : 4;
               ResetTextbox();
@@ -1727,7 +1728,7 @@ static bool8 sub_809B648(void)
                 }
             }
             return 0;
-          case 0x25: {
+          case SPECIAL_TEXT_DOJO_SUCCESS: {
             s32 var = 1;
             if (CheckQuest(QUEST_SQUARE_ASLEEP)) {
                 var = 5;
@@ -1742,7 +1743,7 @@ static bool8 sub_809B648(void)
                 return 0;
             }
           }
-          case 0x26: {
+          case SPECIAL_TEXT_DOJO_FAILURE: {
             s32 var = 2;
             if (CheckQuest(QUEST_SQUARE_ASLEEP)) {
                 var = 6;
@@ -1757,7 +1758,7 @@ static bool8 sub_809B648(void)
                 return 0;
             }
           }
-          case 0x27: {
+          case SPECIAL_TEXT_DOJO_ALL_CLEARED: {
             s32 var = 3;
             if (CheckQuest(QUEST_SQUARE_ASLEEP)) {
                 var = 7;
@@ -1772,13 +1773,13 @@ static bool8 sub_809B648(void)
                 return 0;
             }
           }
-        case 0x28:
+        case SPECIAL_TEXT_PERSONALITY_QUIZ:
             sTextbox->unk418 = &gUnknown_81162C8;
             return 1;
-        case 0x29:
+        case SPECIAL_TEXT_UNK_29:
             sTextbox->unk418 = &gUnknown_81162D8;
             return 1;
-        case 0x2a:
+        case SPECIAL_TEXT_SCRIPTING_MENU:
             ResetTextbox();
             if (sub_803B050()) {
                 sub_803B100(sTextbox->unk5A4);
@@ -1787,11 +1788,11 @@ static bool8 sub_809B648(void)
             }
             sTextbox->unk430 = -1;
             return 0;
-        case 0x12:
+        case SPECIAL_TEXT_UNK_12:
             sTextbox->unk430 = 1;
             break;
-        case 0x14:
-        case 0x15:
+        case SPECIAL_TEXT_UNK_14:
+        case SPECIAL_TEXT_UNK_15:
             ResetTextbox();
             return 0;
           case 0x16:
@@ -1801,11 +1802,11 @@ static bool8 sub_809B648(void)
             }
             sTextbox->unk430 = -2;
             return 0;
-        case 0x2b:
-            sTextbox->unk430 = TryGiveScriptItem(sTextbox->unk424,sTextbox->unk428);
+        case SPECIAL_TEXT_ITEM_REWARD:
+            sTextbox->unk430 = TryGiveScriptItem(sTextbox->unk424, sTextbox->unk428);
             sTextbox->unk418 = &gUnknown_8116308;
             return 1;
-        case 0x2c: {
+        case SPECIAL_TEXT_UNK_2C: {
             s32 uVar13 = sTextbox->unk428;
             u8 uVar1 = sTextbox->unk424;
             ResetTextbox();
@@ -1818,7 +1819,7 @@ static bool8 sub_809B648(void)
                 return 0;
             }
         }
-        case 0x2d:
+        case SPECIAL_TEXT_TOOL_BOX:
             if (sTextbox->unk420 == 1) {
                 ResetTextbox();
                 ShowWindows(NULL, 1, 1);
@@ -1847,14 +1848,15 @@ static bool8 sub_809B648(void)
                         return 0;
                     }
                     case 2:
-                        sTextbox->unk430 = -1;sub_801A928();return 0;
+                        sTextbox->unk430 = -1;
+                        sub_801A928();
                         return 0;
                     default:
                         return 1;
                 }
             }
             break;
-        case 0x2E:
+        case SPECIAL_TEXT_CREDITS_NAME:
             if (sTextbox->unk420 == 1) {
                 ResetTextbox();
                 if (DrawCredits(sTextbox->unk424, sTextbox->unk428)) {

@@ -32,7 +32,7 @@ static void sub_8031A84(void);
 
 bool8 sub_80319A4(u8 dungeonMissionKind, u8 dungeon, s32 param_3)
 {
-    sUnknown_203B330 = MemoryAlloc(sizeof(unkStruct_203B330), 8);
+    sUnknown_203B330 = MemoryAlloc(sizeof(unkStruct_203B330), MEMALLOC_GROUP_8);
     sUnknown_203B330->dungeonMissionKind = dungeonMissionKind;
     sUnknown_203B330->dungeonIndex = dungeon;
     ResetTouchScreenMenuInput(&sUnknown_203B330->input);
@@ -46,10 +46,10 @@ u32 sub_80319F8(void)
 {
     switch (sub_8012A64(&sUnknown_203B330->input, sUnknown_203B330->unk10)) {
         case 2:
-            PlayMenuSoundEffect(1);
+            PlayMenuSoundEffect(MENU_SFX_BACK);
             return 2;
         case 1:
-            PlayMenuSoundEffect(0);
+            PlayMenuSoundEffect(MENU_SFX_ACCEPT);
             return 3;
         default:
             return 0;

@@ -4,22 +4,22 @@
 #include "constants/monster.h"
 #include "constants/wonder_mail.h"
 #include "code_800D090.h"
-#include "music_util.h"
 #include "code_801B3C0.h"
 #include "code_801C8C4.h"
-#include "friend_list.h"
-#include "code_8024458.h"
 #include "code_802F204.h"
 #include "code_8094F88.h"
 #include "cpu.h"
+#include "friend_list.h"
 #include "friend_rescue.h"
 #include "input.h"
 #include "items.h"
 #include "main_menu1.h"
 #include "memory.h"
 #include "menu_input.h"
+#include "music_util.h"
 #include "other_menus2.h"
 #include "pokemon.h"
+#include "recruited_mon_summary_menu.h"
 #include "rescue_password_menu.h"
 #include "save_write.h"
 #include "string_format.h"
@@ -589,7 +589,7 @@ u32 CreateFriendRescueMenu(void)
 
   ResetUnusedInputStruct();
   ShowWindows(NULL, TRUE, TRUE);
-  gUnknown_203B33C = MemoryAlloc(sizeof(WonderMailStruct_203B33C), 8);
+  gUnknown_203B33C = MemoryAlloc(sizeof(WonderMailStruct_203B33C), MEMALLOC_GROUP_8);
   MemoryFill8(gUnknown_203B33C, 0, sizeof(WonderMailStruct_203B33C));
   gUnknown_203B33C->unk530 = 0;
   gUnknown_203B33C->unk218 = -1;
@@ -965,7 +965,7 @@ void CleanFriendRescueMenu(void)
     sub_801CBB8();
     sub_802F2C0();
     sub_8030DE4();
-    sub_802453C();
+    RecruitedMonSummaryMenu_Destroy();
     FreeItemDescriptionWindow();
   }
 }
@@ -2150,7 +2150,7 @@ void sub_803418C(void)
             RestoreSavedWindows(&gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
             ShowWindows(NULL, TRUE, TRUE);
-            sub_8024458(gUnknown_203B33C->speciesNum, 0);
+            RecruitedMonSummaryMenu_Create(gUnknown_203B33C->speciesNum, 0);
             SetFriendRescueMenuState(0x28);
             break;
     }
@@ -2175,7 +2175,7 @@ void sub_8034254(void)
             RestoreSavedWindows(&gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
             ShowWindows(NULL, TRUE, TRUE);
-            sub_8024458(gUnknown_203B33C->speciesNum, 0);
+            RecruitedMonSummaryMenu_Create(gUnknown_203B33C->speciesNum, 0);
             SetFriendRescueMenuState(0x28);
             break;
         case 5:
@@ -2189,14 +2189,14 @@ void sub_8034254(void)
 
 void sub_8034310(void)
 {
-    switch(sub_80244E4())
-    {
-        case 1:
-            sub_802452C();
+    switch (RecruitedMonSummaryMenu_Input()) {
+        case RecruitedMonSummaryMenu_INPUTRET_LEFTRIGHT: {
+            RecruitedMonSummaryMenu_SetupAndShowWindows();
             break;
-        case 2:
-        case 3:
-            sub_802453C();
+        }
+        case RecruitedMonSummaryMenu_INPUTRET_BACK:
+        case RecruitedMonSummaryMenu_INPUTRET_ACCEPT: {
+            RecruitedMonSummaryMenu_Destroy();
             ResetUnusedInputStruct();
             ShowWindows(&gUnknown_203B33C->unk3BC, TRUE, TRUE);
             sub_8023B7C(1);
@@ -2208,8 +2208,10 @@ void sub_8034310(void)
             else
                 SetFriendRescueMenuState(gUnknown_203B33C->fallbackState);
             break;
-        default:
+        }
+        default: {
             break;
+        }
     }
 }
 

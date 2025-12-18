@@ -3,10 +3,10 @@
 #include "decompress_sir.h"
 #include "file_system.h"
 
-EWRAM_DATA u32 gUnknown_202D2A4 = {0};
-EWRAM_DATA OpenedFile gFileCache[64] = {0};
+static EWRAM_DATA u32 sFileSystemUnk = { FILESYSTEM_UNK_0 };
+EWRAM_DATA OpenedFile gFileCache[64] = { 0 };
 
-static EWRAM_INIT u32 sFileCacheCursorPosition = {0};
+static EWRAM_INIT u32 sFileCacheCursorPosition = { 0 };
 
 void InitFileSystem(void)
 {
@@ -18,13 +18,13 @@ void InitFileSystem(void)
     }
 
     sFileCacheCursorPosition = 0;
-    gUnknown_202D2A4 = 1;
+    sFileSystemUnk = FILESYSTEM_UNK_1;
 }
 
-u32 sub_800A8F8(u32 value)
+u32 SetFileSystemUnk(u32 value)
 {
-    u32 oldValue = gUnknown_202D2A4;
-    gUnknown_202D2A4 = value;
+    u32 oldValue = sFileSystemUnk;
+    sFileSystemUnk = value;
     return oldValue;
 }
 

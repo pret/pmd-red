@@ -60,7 +60,7 @@
 .include "src/code_80227B8.o"
 .include "src/code_8023144.o"
 .include "src/friend_list.o"
-.include "src/code_8024458.o"
+.include "src/recruited_mon_summary_menu.o"
 .include "src/luminous_cave.o"
 .include "src/friend_list_menu.o"
 .include "src/party_list_menu.o"

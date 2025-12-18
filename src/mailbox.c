@@ -84,7 +84,7 @@ void CreateMailAcceptedStatusBox(u32);
 
 u8 sub_802DFB0(void)
 {
-    gUnknown_203B304 = MemoryAlloc(sizeof(struct unkStruct_203B304), 8);
+    gUnknown_203B304 = MemoryAlloc(sizeof(struct unkStruct_203B304), MEMALLOC_GROUP_8);
     gUnknown_203B304->menuAction1 = 0;
     gUnknown_203B304->menuAction2 = 0;
     SetMailboxState(INITIALIZE_MAILBOX);
@@ -450,7 +450,7 @@ void HandleMailActionMenu(void)
 
         // Read
         case 7:
-            PlayMenuSoundEffect(0);
+            PlayMenuSoundEffect(MENU_SFX_ACCEPT);
             mail = GetMailboxSlotInfo(gUnknown_203B304->mailboxIndex);
             gUnknown_203B304->mailIndex = mail->dungeonSeed.location.floor;
             gUnknown_203B304->fallbackState = MAIL_MENU_1;

@@ -64,7 +64,7 @@ void sub_80382E4(s32 currMenu)
   s32 index;
 
   if (sUnknown_203B360 == NULL) {
-    sUnknown_203B360 = MemoryAlloc(sizeof(unkStruct_203B360), 8);
+    sUnknown_203B360 = MemoryAlloc(sizeof(unkStruct_203B360), MEMALLOC_GROUP_8);
     MemoryFill8(sUnknown_203B360, 0, sizeof(unkStruct_203B360));
   }
   for(index = 0; index < 4; index++){

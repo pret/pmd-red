@@ -81,7 +81,7 @@ static void SetPelipperBoardState(u32);
 
 bool8 sub_802E864(void)
 {
-    gPelipperBoard = MemoryAlloc(sizeof(struct unkStruct_203B308), 8);
+    gPelipperBoard = MemoryAlloc(sizeof(struct unkStruct_203B308), MEMALLOC_GROUP_8);
     gPelipperBoard->menuAction1 = 0;
     gPelipperBoard->menuAction2 = 0;
     gPelipperBoard->unk4 = 0;

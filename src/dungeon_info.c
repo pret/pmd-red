@@ -2562,7 +2562,7 @@ u32 BufferDungeonRequirementsText(u8 dungeonIndex, s32 speciesId_, u8 *buffer, b
     sp_0xf0 = 0;
 
     for (i = 0; i < NUM_MONSTERS; i++) {
-        struct Pokemon *mon = &gRecruitedPokemonRef->pokemon[i];
+        Pokemon *mon = &gRecruitedPokemonRef->pokemon[i];
         if (PokemonExists(mon) && PokemonIsOnTeam(mon)) {
             if (mon->heldItem.id != 0) {
                 sp_0xf0++;
@@ -2606,7 +2606,7 @@ u32 BufferDungeonRequirementsText(u8 dungeonIndex, s32 speciesId_, u8 *buffer, b
         }
         bodySize = GetBodySize(speciesId);
         for (i = 0; i < NUM_MONSTERS; i++) {
-            struct Pokemon *mon = &gRecruitedPokemonRef->pokemon[i];
+            Pokemon *mon = &gRecruitedPokemonRef->pokemon[i];
 
             if (PokemonExists(mon) && PokemonIsOnTeam(mon)){
                 bodySize += GetBodySize(mon->speciesNum);
@@ -2650,7 +2650,7 @@ u32 BufferDungeonRequirementsText(u8 dungeonIndex, s32 speciesId_, u8 *buffer, b
 
         if (otherSpeciesId == NUM_MONSTERS) {
             for (otherSpeciesId = 0; otherSpeciesId < NUM_MONSTERS; otherSpeciesId++) {
-                struct Pokemon *mon = &gRecruitedPokemonRef->pokemon[otherSpeciesId];
+                Pokemon *mon = &gRecruitedPokemonRef->pokemon[otherSpeciesId];
 
                 if (PokemonExists(mon) && PokemonIsOnTeam(mon)
                     && (GetPokemonType(mon->speciesNum,0) == TYPE_WATER || GetPokemonType(mon->speciesNum,1) == TYPE_WATER))

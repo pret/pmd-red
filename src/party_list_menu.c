@@ -2,12 +2,10 @@
 #include "globaldata.h"
 #include "constants/dungeon.h"
 #include "code_800D090.h"
-#include "music_util.h"
 #include "code_801B3C0.h"
 #include "code_801EE10.h"
 #include "code_801EE10_mid.h"
 #include "code_80227B8.h"
-#include "code_8024458.h"
 #include "code_8099360.h"
 #include "common_strings.h"
 #include "event_flag.h"
@@ -18,9 +16,11 @@
 #include "memory.h"
 #include "menu_input.h"
 #include "moves.h"
+#include "music_util.h"
 #include "party_list_menu.h"
 #include "pokemon.h"
 #include "pokemon_3.h"
+#include "recruited_mon_summary_menu.h"
 #include "string_format.h"
 #include "text_1.h"
 #include "text_2.h"
@@ -139,7 +139,7 @@ bool8 CreatePartyListMenu(Pokemon *pokeStruct)
 {
     s32 i;
 
-    sUnknown_203B2B8 = MemoryAlloc(sizeof(unkStruct_203B2B8), 8);
+    sUnknown_203B2B8 = MemoryAlloc(sizeof(unkStruct_203B2B8), MEMALLOC_GROUP_8);
     sUnknown_203B2B8->pokeStruct = pokeStruct;
 
     for (i = 0; i < NUM_MONSTERS; i++) {
@@ -280,7 +280,7 @@ static void HandlePartyListMenuCallback(void)
             sub_8012EA4(&sUnknown_203B2B8->unk7C,1);
             break;
         case PARTY_LIST_STATE_SUMMARY:
-            sub_8024458(sUnknown_203B2B8->pokeSpecies,2);
+            RecruitedMonSummaryMenu_Create(sUnknown_203B2B8->pokeSpecies,2);
             break;
         case PARTY_LIST_STATE_CHECK_IQ:
             CreateIQSkillMenu(sUnknown_203B2B8->pokeSpecies);
@@ -601,16 +601,17 @@ static void PartyListMenu_HandleMenu1(void)
 
 static void sub_8026A78(void)
 {
-    switch(sub_80244E4())
-    {
-        case 2:
-        case 3:
-            sub_802453C();
+    switch (RecruitedMonSummaryMenu_Input()) {
+        case RecruitedMonSummaryMenu_INPUTRET_BACK:
+        case RecruitedMonSummaryMenu_INPUTRET_ACCEPT: {
+            RecruitedMonSummaryMenu_Destroy();
             SetPartyListMenuState(PARTY_LIST_STATE_MAIN_MENU_1);
             break;
-        case 0:
-        case 1:
+        }
+        case RecruitedMonSummaryMenu_INPUTRET_NONE:
+        case RecruitedMonSummaryMenu_INPUTRET_LEFTRIGHT: {
             break;
+        }
     }
 }
 

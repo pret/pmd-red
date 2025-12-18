@@ -32,7 +32,7 @@ bool8 CreateIQSkillInfoMenu(u8 iqSkill)
 {
     ResetSprites(TRUE);
 
-    sIQSkillInfoMenu = MemoryAlloc(sizeof(struct IQSkillInfoMenu), 8);
+    sIQSkillInfoMenu = MemoryAlloc(sizeof(struct IQSkillInfoMenu), MEMALLOC_GROUP_8);
     sIQSkillInfoMenu->chosenIQSkill = iqSkill;
     ResetTouchScreenMenuInput(&sIQSkillInfoMenu->unk88);
     sIQSkillInfoMenu->unk24 = 0;
@@ -116,7 +116,7 @@ static void sub_801C7D4(void)
 
     switch (sub_8012A64(&sIQSkillInfoMenu->unk88, sIQSkillInfoMenu->unk24)) {
         case 1:
-            PlayMenuSoundEffect(0);
+            PlayMenuSoundEffect(MENU_SFX_ACCEPT);
 
             if (sIQSkillInfoMenu->unkC != 0) {
                 sIQSkillInfoMenu->unk8 = 0;
@@ -126,7 +126,7 @@ static void sub_801C7D4(void)
                 SetIQSkillInfoMenuState(IQ_SKILL_INFO_MENU_EXIT);
             break;
         case 2:
-            PlayMenuSoundEffect(1);
+            PlayMenuSoundEffect(MENU_SFX_BACK);
             SetIQSkillInfoMenuState(2);
             break;
     }
@@ -143,7 +143,7 @@ static void sub_801C848(void)
 
     switch (sub_8012A64(&sIQSkillInfoMenu->unk88, sIQSkillInfoMenu->unk24)) {
         case 1:
-            PlayMenuSoundEffect(0);
+            PlayMenuSoundEffect(MENU_SFX_ACCEPT);
             sIQSkillInfoMenu->unk8++;
 
             if (sIQSkillInfoMenu->unk8 < sIQSkillInfoMenu->unkC)
@@ -152,7 +152,7 @@ static void sub_801C848(void)
                 SetIQSkillInfoMenuState(IQ_SKILL_INFO_MENU_INIT);
             break;
         case 2:
-            PlayMenuSoundEffect(1);
+            PlayMenuSoundEffect(MENU_SFX_BACK);
             SetIQSkillInfoMenuState(2);
             break;
     }

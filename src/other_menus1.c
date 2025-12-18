@@ -41,7 +41,7 @@ void sub_8036FDC(s32 param_1)
     ResetSprites(FALSE);
 
     if (sUnknown_203B35C == NULL) {
-        sUnknown_203B35C = MemoryAlloc(sizeof(unkStruct_203B35C), 8);
+        sUnknown_203B35C = MemoryAlloc(sizeof(unkStruct_203B35C), MEMALLOC_GROUP_8);
         MemoryFill8(sUnknown_203B35C, 0, sizeof(unkStruct_203B35C));
     }
 
@@ -105,7 +105,7 @@ UNUSED static u32 sub_80370F0(void)
                 sub_8013114(&sUnknown_203B35C->unk1C[0], &local_10);
 
             if (local_10 != 4) {
-                PlayMenuSoundEffect(3);
+                PlayMenuSoundEffect(MENU_SFX_NAVIGATE);
                 nextMenu = sub_8037798();
                 sUnknown_203B35C->state = 4;
             }

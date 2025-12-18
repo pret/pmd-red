@@ -7,11 +7,9 @@
 #define NUM_SOUND_EFFECTS 639
 #define SOUND_EFFECTS_START_INDEX 300
 
-#define STOP_SOUND_EFFECT 997
-#define STOP_FANFARE 998
-#define STOP_BGM 999
-
 #define MAX_VOLUME 256
+
+#include "constants/bg_music.h"
 
 enum MusicPlayerIndex
 {

@@ -70,7 +70,7 @@ void sub_80A62F0(void)
     unkStruct_3001B7C_sub108 *sub108;
     s32 r6;
 
-    gUnknown_3001B7C = MemoryAlloc(sizeof(unkStruct_3001B7C), 6);
+    gUnknown_3001B7C = MemoryAlloc(sizeof(unkStruct_3001B7C), MEMALLOC_GROUP_6);
     gUnknown_203B4B4 = OpenFileAndGetFileDataPtr("etcfonta", &gDungeonFileArchive);
 
     sub_800DAC0(1);

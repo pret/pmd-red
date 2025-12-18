@@ -1,12 +1,10 @@
 #include "global.h"
 #include "globaldata.h"
-#include "music_util.h"
 #include "code_801EE10.h"
 #include "code_801EE10_mid.h"
-#include "friend_list.h"
-#include "code_8024458.h"
 #include "common_strings.h"
 #include "felicity_bank.h"
+#include "friend_list.h"
 #include "gulpin_shop.h"
 #include "gulpin_shop_801FB50.h"
 #include "input.h"
@@ -14,8 +12,10 @@
 #include "memory.h"
 #include "menu_input.h"
 #include "moves.h"
+#include "music_util.h"
 #include "pokemon_3.h"
 #include "pokemon.h"
+#include "recruited_mon_summary_menu.h"
 #include "string_format.h"
 #include "text_1.h"
 
@@ -79,7 +79,7 @@ bool8 sub_801FB50(u32 mode)
 
     ResetUnusedInputStruct();
     ShowWindows(NULL, TRUE, TRUE);
-    gUnknown_203B27C = MemoryAlloc(sizeof(unkStruct_203B27C), 0x8);
+    gUnknown_203B27C = MemoryAlloc(sizeof(unkStruct_203B27C), MEMALLOC_GROUP_8);
     gUnknown_203B27C->menuAction2 = 0;
     gUnknown_203B27C->menuAction3 = 0;
     gUnknown_203B27C->menuAction4 = 0;
@@ -315,7 +315,7 @@ static void sub_801FF28(void)
             sub_8012D60(&gUnknown_203B27C->unkCC,gUnknown_203B27C->unk7C,0,gUnknown_203B27C->unkBC,gUnknown_203B27C->menuAction2,2);
             break;
         case 0x12:
-            sub_8024458(gUnknown_203B27C->speciesNum,2);
+            RecruitedMonSummaryMenu_Create(gUnknown_203B27C->speciesNum,2);
             break;
         case 0x13:
             CreateIQSkillMenu(gUnknown_203B27C->speciesNum);
@@ -754,16 +754,17 @@ static void sub_8020B38(void)
 
 static void sub_8020C2C(void)
 {
-    switch(sub_80244E4())
-    {
-        case 2:
-        case 3:
-            sub_802453C();
-            sub_801FDA8(0x10);
+    switch (RecruitedMonSummaryMenu_Input()) {
+        case RecruitedMonSummaryMenu_INPUTRET_BACK:
+        case RecruitedMonSummaryMenu_INPUTRET_ACCEPT: {
+            RecruitedMonSummaryMenu_Destroy();
+            sub_801FDA8(16);
             break;
-        case 0:
-        case 1:
+        }
+        case RecruitedMonSummaryMenu_INPUTRET_NONE:
+        case RecruitedMonSummaryMenu_INPUTRET_LEFTRIGHT: {
             break;
+        }
     }
 }
 
@@ -945,7 +946,7 @@ static void sub_8020EB4(void)
             }
             else
             {
-                PlayMenuSoundEffect(2);
+                PlayMenuSoundEffect(MENU_SFX_FAIL);
                 sub_801FDA8(0x1F);
             }
             break;
@@ -962,19 +963,19 @@ static void sub_8020EB4(void)
             }
             else
             {
-                PlayMenuSoundEffect(2);
+                PlayMenuSoundEffect(MENU_SFX_FAIL);
             }
             sub_801FDA8(0x1F);
             break;
         case LINK_ACTION:
             if(gTeamInventoryRef->teamMoney < 150)
             {
-                PlayMenuSoundEffect(2);
+                PlayMenuSoundEffect(MENU_SFX_FAIL);
                 sub_801FDA8(0x3);
             }
             else if(!sub_8093318(gUnknown_203B27C->moveIndex, gUnknown_203B27C->moves))
             {
-                PlayMenuSoundEffect(2);
+                PlayMenuSoundEffect(MENU_SFX_FAIL);
                 sub_801FDA8(0x4);
             }
             else
@@ -995,7 +996,7 @@ static void sub_8020EB4(void)
         case DE_LINK_ACTION:
             if(!sub_809333C(gUnknown_203B27C->moveIndex, gUnknown_203B27C->moves))
             {
-                PlayMenuSoundEffect(2);
+                PlayMenuSoundEffect(MENU_SFX_FAIL);
                 sub_801FDA8(0x5);
             }
             else
@@ -1012,7 +1013,7 @@ static void sub_8020EB4(void)
         case FORGET_ACTION:
             if(!IsAnyMoveLinked(gUnknown_203B27C->moveIndex, gUnknown_203B27C->moves))
             {
-                PlayMenuSoundEffect(2);
+                PlayMenuSoundEffect(MENU_SFX_FAIL);
                 sub_801FDA8(0x6);
             }
             else

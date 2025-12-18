@@ -375,8 +375,8 @@ static void sub_8067F00(u8 a0, Pokemon **a1, s32 a2_, s32 a3, s32 a4)
 
 static void ShowPokemonSummary(Pokemon *a0)
 {
-    struct MonSummaryInfo unkStruct;
-    struct UnkInfoTabStruct var_C8;
+    MonSummaryInfo unkStruct;
+    UnkInfoTabStruct var_C8;
     WindowTemplates winTemplates = {0};
     s32 r7;
 
@@ -402,7 +402,7 @@ static void ShowPokemonSummary(Pokemon *a0)
 
     while (TRUE) {
         bool32 loopBreak = FALSE;
-        s32 spF8[4] = {2, 3, 4, 5};
+        s32 spF8[4] = { SUB_WINDOW_STATS, SUB_WINDOW_FEATURES, SUB_WINDOW_IQ, SUB_WINDOW_INFO };
 
         sReleaseMenuWinHeader.count = 4;
         sReleaseMenuWinHeader.currId = r7;

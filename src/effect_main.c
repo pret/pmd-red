@@ -42,7 +42,7 @@ struct unkStruct_203B0CC_sub
     s32 unk40;
     s32 unk44;
     s32 unk48;
-    u32 unk4C;
+    u32 unk4C; // Some sound
     s32 unk50;
     u8 unk54;
     u8 unk55;
@@ -72,12 +72,6 @@ struct unkStruct_203B0CC
 
 static EWRAM_INIT struct unkStruct_203B0CC *gUnknown_203B0CC = NULL;
 
-struct unkStruct_800F18C
-{
-    s32 effectID;
-    u32 counter;
-};
-
 extern s16 gUnknown_2026E4E;
 
 static s32 sub_800E900(s32 a0);
@@ -100,7 +94,7 @@ void sub_800DAC0(u32 fileSelection)
     if (gUnknown_203B0CC != NULL) {
         sub_800DB7C();
     }
-    gUnknown_203B0CC = MemoryAlloc(sizeof(struct unkStruct_203B0CC), 0xb);
+    gUnknown_203B0CC = MemoryAlloc(sizeof(struct unkStruct_203B0CC), MEMALLOC_GROUP_11);
     MemoryClear8(gUnknown_203B0CC, sizeof(struct unkStruct_203B0CC));
     gUnknown_203B0CC->fileSelection = fileSelection;
     for (i = 0, ptr = &gUnknown_203B0CC->unk0[i]; i < UNK_203B0CC_ARR_COUNT; i++, ptr++) {
@@ -173,7 +167,7 @@ void sub_800DC14(s32 param_1)
         struct unkStruct_203B0CC_sub *ptr = &gUnknown_203B0CC->unk0[index1];
         if (ptr->unk34 == 4) {
             sub_8009BE4();
-            if (sub_8000728() == 1) {
+            if (GetMainLoopsUnk() == MAINLOOPS_UNK_1) {
                 LoadDungeonMapPalette();
                 sub_803EAF0(0, NULL);
                 sub_800CD64(0x8000,0);
@@ -182,7 +176,7 @@ void sub_800DC14(s32 param_1)
         if (ptr->unk34 == 3) {
             s32 i;
             for (i = 0; i < 2; i = i + 1) {
-                struct unkStruct_800F18C *piVar3 = sub_800F18C(i);
+                unkStruct_800F18C *piVar3 = sub_800F18C(i);
                 if (piVar3->effectID == ptr->effectID) {
                     piVar3->counter--;
                     break;
@@ -190,7 +184,7 @@ void sub_800DC14(s32 param_1)
             }
         }
         else {
-            struct unkStruct_800F18C *puVar4 = sub_800F18C(1);
+            unkStruct_800F18C *puVar4 = sub_800F18C(1);
             puVar4->counter  = 0;
             puVar4->effectID  = -1;
         }
@@ -216,7 +210,7 @@ static void sub_800DCA8(struct unkStruct_203B0CC_sub *param_1)
 static void sub_800DCD0(struct unkStruct_203B0CC_sub *param_1)
 {
     if (param_1->unk4C != -1 && param_1->unk50 == 0) {
-        if (sub_8000728() != 2) {
+        if (GetMainLoopsUnk() != MAINLOOPS_UNK_2) {
             PlaySound(param_1->unk4C);
         }
         param_1->unk4C = -1;
@@ -238,7 +232,7 @@ static bool8 sub_800DD0C(struct unkStruct_203B0CC_sub *param_1, DungeonPos *posA
         if (param_1->unk34 == 3) {
             s32 i;
             for (i = 0; i < 2; i++) {
-                struct unkStruct_800F18C *puVar4 = sub_800F18C(i);
+                unkStruct_800F18C *puVar4 = sub_800F18C(i);
                 if (puVar4->effectID == param_1->effectID) {
                     puVar4->counter--;
                     break;
@@ -464,7 +458,7 @@ static bool8 sub_800DE38(struct unkStruct_203B0CC_sub *a1)
         sub_800DCA8(a1);
         if (a1->unk34 == 3) {
             for (i = 0; i < 2; i++) {
-                struct unkStruct_800F18C *strPtr = sub_800F18C(i);
+                unkStruct_800F18C *strPtr = sub_800F18C(i);
                 if (strPtr->effectID == a1->effectID) {
                     strPtr->counter--;
                     break;
@@ -535,11 +529,11 @@ static bool8 sub_800DE8C(struct unkStruct_203B0CC_sub *a0, DungeonPos *unused)
             }
         }
         else {
-            struct unkStruct_800F18C *strPtr;
+            unkStruct_800F18C *strPtr;
 
             sub_8009BE4();
             sub_800DCA8(a0);
-            if (sub_8000728() == 1) {
+            if (GetMainLoopsUnk() == MAINLOOPS_UNK_1) {
                 LoadDungeonMapPalette();
                 sub_803EAF0(0, 0);
                 sub_800CD64(0x8000, FALSE);
@@ -732,10 +726,10 @@ void sub_800E3AC(s32 a0, DungeonPos *pos, s32 a2)
     ptr->unkC.unk18 = a2;
 }
 
-s32 sub_800E448(u8 a0, DungeonPos *pos)
+s32 sub_800E448(u8 trapID, DungeonPos *pos)
 {
     unkStruct_80416E0 sp = {
-        .unk0 = sub_800ECE4(a0),
+        .unk0 = GetTrapEffect(trapID),
         .unk4 = 0,
         .dir = -1,
         .pos1 = *pos,

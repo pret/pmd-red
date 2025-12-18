@@ -187,7 +187,7 @@ void CreateLoadScreen(u32 currMenu)
     s32 i;
 
     if (gLoadScreen == NULL) {
-        gLoadScreen = MemoryAlloc(sizeof(struct LoadScreen), 8);
+        gLoadScreen = MemoryAlloc(sizeof(struct LoadScreen), MEMALLOC_GROUP_8);
         MemoryFill8(gLoadScreen, 0, sizeof(struct LoadScreen));
     }
 

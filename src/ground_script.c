@@ -69,10 +69,10 @@
 static EWRAM_DATA s16 gCurrentMap = 0;
 static EWRAM_DATA s16 gUnknown_2039A32 = 0; // See enum "GroundMapID"
 static EWRAM_DATA s16 gUnknown_2039A34 = 0; // See enum "GroundMapID"
-static EWRAM_DATA u8 gAnyScriptLocked = 0;
+static EWRAM_DATA bool8 gAnyScriptLocked = FALSE;
 // Hard to say why the arrays are larger than SCRIPT_LOCKS_ARR_COUNT. Could be unused EWRAM variables or special case indexes.
-static ALIGNED(4) EWRAM_DATA u8 gScriptLocks[SCRIPT_LOCKS_ARR_COUNT + 7] = { 0 };
-static ALIGNED(4) EWRAM_DATA u8 gScriptLockConds[SCRIPT_LOCKS_ARR_COUNT + 7] = { 0 };
+static ALIGNED(4) EWRAM_DATA bool8 gScriptLocks[SCRIPT_LOCKS_ARR_COUNT + 7] = { FALSE };
+static ALIGNED(4) EWRAM_DATA bool8 gScriptLockConds[SCRIPT_LOCKS_ARR_COUNT + 7] = { FALSE };
 static EWRAM_DATA u32 gUnlockBranchLabels[SCRIPT_LOCKS_ARR_COUNT + 1] = { 0 };
 static EWRAM_DATA MenuItem gChoices[9] = { 0 };
 static EWRAM_DATA u8 sPokeNameBuffer[POKEMON_NAME_LENGTH + 2] = { 0 };
@@ -115,6 +115,7 @@ static const ScriptCommand gUnknown_81164E4[] = {
 
 static s32 ExecuteScriptCommand(Action *action);
 static const ScriptCommand *FindLabel(Action *action, s32 labelNum);
+static u32 GroundScriptModifyBGM(u16 bgm);
 static const ScriptCommand *ResolveJump(Action *action, s32 r1);
 
 static s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3);
@@ -123,12 +124,11 @@ static void sub_80A252C(s32 param_1, ActionUnkIds *param_2);
 static void sub_80A2558(s32 param_1, ActionUnkIds *param_2);
 static void sub_80A2584(s16 r0, s16 r1);
 static void sub_80A2598(s16 r0, s16 r1);
-static u32 sub_80A25AC(u16 param_1);
 
 void sub_809D490(void)
 {
     UNUSED void *oldPtr = gUnknown_203B4B0; // Needed to match
-    gUnknown_203B4B0 = MemoryAlloc(BUF_LEN, 6);
+    gUnknown_203B4B0 = MemoryAlloc(BUF_LEN, MEMALLOC_GROUP_6);
     sub_809D4B0();
 }
 
@@ -139,10 +139,10 @@ void sub_809D4B0(void)
     gCurrentMap = -1;
     gUnknown_2039A32 = -1;
     gUnknown_2039A34 = -1;
-    gAnyScriptLocked = 0;
+    gAnyScriptLocked = FALSE;
     for (i = 0; i < SCRIPT_LOCKS_ARR_COUNT; i++) {
-        gScriptLocks[i] = 0;
-        gScriptLockConds[i] = 0;
+        gScriptLocks[i] = FALSE;
+        gScriptLockConds[i] = FALSE;
         gUnlockBranchLabels[i] = 0;
     }
 }
@@ -410,7 +410,7 @@ static bool8 GroundScriptCheckLockCondition(Action *param_1, s16 param_2)
     else {
         param_1->scriptData.unk22 = param_2_s32;
         param_1->scriptData.savedState = ESC_RET_02;
-        gAnyScriptLocked = 1;
+        gAnyScriptLocked = TRUE;
         return TRUE;
     }
 }
@@ -453,20 +453,20 @@ bool8 GroundScriptNotify(Action *param_1, s32 param_2)
     return ret;
 }
 
-void GroundScriptLockJumpZero(s16 index)
+void GroundScriptLockJumpZero(s32 index)
 {
-    s32 index_s16 = index;
-    gScriptLocks[index_s16] = 1;
-    gUnlockBranchLabels[index_s16] = 0;
-    gAnyScriptLocked = 1;
+    s32 index_ = (s16)index;
+    gScriptLocks[index_] = TRUE;
+    gUnlockBranchLabels[index_] = 0;
+    gAnyScriptLocked = TRUE;
 }
 
-void GroundScriptLock(s16 index, s32 r1)
+void GroundScriptLock(s32 index, s32 unlockVal)
 {
-    s32 index_s16 = index;
-    gScriptLocks[index_s16] = 1;
-    gUnlockBranchLabels[index_s16] = r1;
-    gAnyScriptLocked = 1;
+    s32 index_ = (s16)index;
+    gScriptLocks[index_] = TRUE;
+    gUnlockBranchLabels[index_] = unlockVal;
+    gAnyScriptLocked = TRUE;
 }
 
 static bool8 GroundScriptLockCond(Action *param_1, s16 index, s32 param_3)
@@ -481,11 +481,11 @@ static bool8 GroundScriptLockCond(Action *param_1, s16 index, s32 param_3)
     }
     else {
         param_1->scriptData.unk22 = index_s32 | 0x80;
-        gScriptLocks[index_s32] = 1;
-        gScriptLockConds[index_s32] = 1;
+        gScriptLocks[index_s32] = TRUE;
+        gScriptLockConds[index_s32] = TRUE;
     }
     param_1->scriptData.savedState = ESC_RET_02;
-    gAnyScriptLocked = 1;
+    gAnyScriptLocked = TRUE;
     return TRUE;
 }
 
@@ -2183,8 +2183,8 @@ static s32 ExecuteScriptCommand(Action *action)
                 break;
             }
             case CMD_BYTE_44: {
-                u16 id = curCmd.argByte == 0 ? sub_80A25AC((u16)curCmd.arg1) : curCmd.arg1;
-                if (id != 999)
+                u16 id = curCmd.argByte == 0 ? GroundScriptModifyBGM((u16)curCmd.arg1) : curCmd.arg1;
+                if (id != STOP_BGM)
                     StartNewBGM_(id);
                 else
                     StopBGMusic();
@@ -2192,8 +2192,8 @@ static s32 ExecuteScriptCommand(Action *action)
                 break;
             }
             case CMD_BYTE_45: {
-                u16 id = curCmd.argByte == 0 ? sub_80A25AC((u16)curCmd.arg1) : curCmd.arg1;
-                if (id != 999)
+                u16 id = curCmd.argByte == 0 ? GroundScriptModifyBGM((u16)curCmd.arg1) : curCmd.arg1;
+                if (id != STOP_BGM)
                     FadeInNewBGM_(id, curCmd.argShort);
                 else
                     StopBGMusic();
@@ -2201,8 +2201,8 @@ static s32 ExecuteScriptCommand(Action *action)
                 break;
             }
             case CMD_BYTE_46: {
-                u16 id = curCmd.argByte == 0 ? sub_80A25AC((u16)curCmd.arg1) : curCmd.arg1;
-                if (id != 999)
+                u16 id = curCmd.argByte == 0 ? GroundScriptModifyBGM((u16)curCmd.arg1) : curCmd.arg1;
+                if (id != STOP_BGM)
                     QueueBGM_((u16)id);
 
                 break;
@@ -4132,29 +4132,32 @@ void GroundScript_Unlock(void)
     s32 index;
     bool8 cond;
 
-    if (gAnyScriptLocked == 0) return;
+    if (!gAnyScriptLocked)
+        return;
 
-    gAnyScriptLocked = 0;
+    gAnyScriptLocked = FALSE;
     index = 0;
     for (index = 0; index < SCRIPT_LOCKS_ARR_COUNT; index++) {
-        if (gScriptLocks[index] != 0) {
-            Log(1, "GroundScript unlock %3d", index);
+        if (gScriptLocks[index]) {
+            Log(1, "GroundScript unlock %3d",
+                index);
             cond  = GroundMapNotifyAll((s16) index);
             cond |= GroundLivesNotifyAll((s16) index);
             cond |= GroundObjectsNotifyAll((s16) index);
             cond |= GroundEffectsNotifyAll((s16) index);
 
-            if (gScriptLockConds[index] != 0) {
+            if (gScriptLockConds[index]) {
                if (cond) {
                     GroundMapNotifyAll((s16) (index | 0x80));
                     GroundLivesNotifyAll((s16) (index | 0x80));
                     GroundObjectsNotifyAll((s16) (index | 0x80));
                     GroundEffectsNotifyAll((s16) (index | 0x80));
-                    gScriptLocks[index] = gScriptLockConds[index] = 0;
+                    gScriptLockConds[index] = FALSE;
+                    gScriptLocks[index] = FALSE;
                }
             }
             else {
-               gScriptLocks[index] = 0;
+               gScriptLocks[index] = FALSE;
             }
         }
     }
@@ -4255,18 +4258,18 @@ static void sub_80A2598(s16 r0, s16 r1)
     sub_809AC18(iVar1, iVar2);
 }
 
-static u32 sub_80A25AC(u16 param_1)
+static u32 GroundScriptModifyBGM(u16 bgm)
 {
     if (sub_8098F88())
-        return param_1;
-    if (param_1 == 50)
-        return 50;
+        return bgm;
+    if (bgm == MUS_BLANK_50)
+        return MUS_BLANK_50;
     if (!CheckQuest(QUEST_UNK12))
-        return 999;
+        return STOP_BGM;
     if (CheckQuest(QUEST_IN_WORLD_CALAMITY))
-        return 19;
-    if (param_1 != 1)
-        return param_1;
+        return MUS_WORLD_CALAMITY;
+    if (bgm != 1)
+        return bgm;
     GetScriptVarValue(NULL, BASE_LEVEL); // wut???
-    return 1;
+    return MUS_RESCUE_TEAM_BASE;
 }

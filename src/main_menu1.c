@@ -44,7 +44,7 @@ static s32 sub_8035DB4(u32 currMenu);
 void InitMainMenu(void)
 {
     if (sMainMenu == NULL) {
-        sMainMenu = MemoryAlloc(sizeof(MainMenu1Work), 8);
+        sMainMenu = MemoryAlloc(sizeof(MainMenu1Work), MEMALLOC_GROUP_8);
         MemoryFill8(sMainMenu, 0, sizeof(MainMenu1Work));
     }
 

@@ -98,7 +98,7 @@ bool8 CreateWonderMailMenu(void)
   ResetUnusedInputStruct();
   ShowWindows(NULL, TRUE, TRUE);
 
-  gUnknown_203B3E8 = MemoryAlloc(sizeof(struct unkStruct_203B3E8), 8);
+  gUnknown_203B3E8 = MemoryAlloc(sizeof(struct unkStruct_203B3E8), MEMALLOC_GROUP_8);
   MemoryFill8(gUnknown_203B3E8, 0, sizeof(struct unkStruct_203B3E8));
 
   for(index = 0; index < PASSWORD_BUFFER_SIZE; index++){

@@ -30,7 +30,7 @@ void PrepareSavePakWrite(s16 pokemonID)
     id_s32 = pokemonID; // had to cast for asr shift
 
     sub_80993D8();
-    sSavePakWrite = MemoryAlloc(sizeof(SavePakWrite), 5);
+    sSavePakWrite = MemoryAlloc(sizeof(SavePakWrite), MEMALLOC_GROUP_5);
     sSavePakWrite->pokeID = id_s32;
     sSavePakWrite->monPortrait.faceFile = NULL;
     sSavePakWrite->monPortrait.faceData = NULL;

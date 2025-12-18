@@ -27,7 +27,7 @@ static s32 CheckSpeciesinWigglytuffFriendArea(s16 species);
 
 bool8 CreateWigglytuffShopFriendAreaMenu(u8 friendArea, bool8 a1, s32 a2)
 {
-    sWigglytuffShop2Work = MemoryAlloc(sizeof(WigglytuffShop2Work), 8);
+    sWigglytuffShop2Work = MemoryAlloc(sizeof(WigglytuffShop2Work), MEMALLOC_GROUP_8);
     sWigglytuffShop2Work->friendArea = friendArea;
     sWigglytuffShop2Work->unkD = a1;
     ResetTouchScreenMenuInput(&sWigglytuffShop2Work->unk0);
@@ -44,10 +44,10 @@ u32 HandleWigglytuffShopFriendAreaMenuInput(void)
 {
     switch (sub_8012A64(&sWigglytuffShop2Work->unk0, sWigglytuffShop2Work->unk74)) {
         case 2:
-            PlayMenuSoundEffect(1);
+            PlayMenuSoundEffect(MENU_SFX_BACK);
             return 2;
         case 1:
-            PlayMenuSoundEffect(0);
+            PlayMenuSoundEffect(MENU_SFX_ACCEPT);
             return 3;
         default:
             return 0;

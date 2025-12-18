@@ -1,62 +1,63 @@
 #ifndef GUARD_POKEMON_SUMMARY_WINDOW_H
 #define GUARD_POKEMON_SUMMARY_WINDOW_H
 
-#include "structs/str_dungeon_location.h"
 #include "structs/str_pokemon.h"
 
-enum
+enum MonSummarySubWindow
 {
     SUB_WINDOW_NONE,
     SUB_WINDOW_STATUS,
     SUB_WINDOW_STATS,
-    SUB_WINDOW_FEATUERS,
+    SUB_WINDOW_FEATURES,
     SUB_WINDOW_IQ,
     SUB_WINDOW_INFO,
 };
 
 #define MON_SUMMARY_UNK58_COUNT 12
 
-struct MonSummaryInfo
+// Size: R=0x64 | B=?
+typedef struct MonSummaryInfo
 {
-    // size: 0x64
-    s16 species;
-    u8 nameBuffer[0x14];
-    u8 types[2]; // 0x16
-    u8 abilities[2]; // 0x18
-    u8 fill1A[0x1C - 0x1A];
-    DungeonLocation dungeonLocation; // 0x1C
-    Item item; // 0x20
-    s32 HP1;
-    s32 HP2;
-    s32 level;
-    u32 exp;
-    Offense offense;
-    bool8 isTeamLeader;
-    u8 atkBoost;
-    u8 spAtkBoost;
-    u8 defBoost;
-    u8 spDefBoost;
-    u8 fill3D;
-    s16 IQ; // 0x3E
-    s16 unk40;
-    s16 fill42;
-    struct unkPokeSubStruct_C unk44[2];
-    u8 evoStringId;
-    u8 fill4D[3];
-    IqSkillFlags IQSkills; // 0x50
-    u8 tactic;
-    u8 fill55[1];
-    s16 unk56;
-    u8 unk58[MON_SUMMARY_UNK58_COUNT];
-};
+    /* R=0x00 | B=0x00 */ s16 species;
+    /* R=0x02 | B=0x02 */ u8 nameBuffer[20];
+    /* R=0x16 | B=0x16 */ u8 types[2];
+    /* R=0x18 | B=0x18 */ u8 abilities[2];
+    /* R=0x1A | B=???? */ u8 fill1A[0x1C - 0x1A];
+    /* R=0x1C | B=???? */ DungeonLocation dungeonLocation;
+    /* R=0x20 | B=???? */ Item item;
+    /* R=0x24 | B=???? */ s32 HP1;
+    /* R=0x28 | B=???? */ s32 HP2;
+    /* R=0x2C | B=???? */ s32 level;
+    /* R=0x30 | B=???? */ u32 exp;
+    /* R=0x34 | B=???? */ Offense offense;
+    /* R=0x38 | B=???? */ bool8 isTeamLeader;
+    /* R=0x39 | B=???? */ u8 atkBoost;
+    /* R=0x3A | B=???? */ u8 spAtkBoost;
+    /* R=0x3B | B=???? */ u8 defBoost;
+    /* R=0x3C | B=???? */ u8 spDefBoost;
+    /* R=0x3D | B=???? */ u8 fill3D;
+    /* R=0x3E | B=???? */ s16 IQ;
+    /* R=0x40 | B=???? */ s16 unk40;
+    /* R=0x42 | B=???? */ s16 fill42;
+    /* R=0x44 | B=???? */ unkPokeSubStruct_C unk44[2];
+    /* R=0x4C | B=???? */ u8 evoStringId;
+    /* R=0x4D | B=???? */ u8 fill4D[3];
+    /* R=0x50 | B=???? */ IqSkillFlags IQSkills;
+    /* R=0x54 | B=???? */ u8 tactic;
+    /* R=0x55 | B=???? */ u8 fill55;
+    /* R=0x56 | B=???? */ s16 unk56;
+    /* R=0x58 | B=???? */ u8 unk58[MON_SUMMARY_UNK58_COUNT];
+} MonSummaryInfo;
 
-struct UnkInfoTabStruct
+// Size: 0x30
+typedef struct UnkInfoTabStruct
 {
-    u8 unk0[0xC];
+    u8 unk0[12];
     s32 unkC[9];
-};
+} UnkInfoTabStruct;
 
-void ShowPokemonSummaryWindow(s32 which, s32 currSubWindowId, struct MonSummaryInfo *monInfo, struct UnkInfoTabStruct *param_4, u32 windowId);
-void SetMonSummaryInfo(struct MonSummaryInfo *dst, struct Pokemon *pokemon, bool8 unlockedEvolutions);
+// which: See enum "MonSummarySubWindow"
+void ShowPokemonSummaryWindow(s32 which, s32 currSubWindowId, MonSummaryInfo *monInfo, UnkInfoTabStruct *param_4, u32 windowId);
+void SetMonSummaryInfo(MonSummaryInfo *dst, Pokemon *pokemon, bool8 unlockedEvolutions);
 
 #endif // GUARD_POKEMON_SUMMARY_WINDOW_H

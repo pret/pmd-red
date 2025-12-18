@@ -5,15 +5,9 @@
 #include "memory.h"
 #include "file_system.h"
 
-struct unkStruct_800F18C
-{
-    s32 effectID;
-    u32 counter;
-};
-
 struct unkStruct_203B0D4
 {
-    struct unkStruct_800F18C unk0[2];
+    unkStruct_800F18C unk0[2];
 };
 
 static EWRAM_INIT struct unkStruct_203B0D4 *gUnknown_203B0D4 = NULL;
@@ -22,7 +16,7 @@ void sub_800F034(void)
 {
     s32 index;
     if (gUnknown_203B0D4 == NULL) {
-        gUnknown_203B0D4 = MemoryAlloc(sizeof(struct unkStruct_203B0D4), 0xB);
+        gUnknown_203B0D4 = MemoryAlloc(sizeof(struct unkStruct_203B0D4), MEMALLOC_GROUP_11);
         MemoryClear8(gUnknown_203B0D4, sizeof(struct unkStruct_203B0D4));
     }
 
@@ -88,7 +82,7 @@ void sub_800F15C(s32 effectID)
     }
 }
 
-struct unkStruct_800F18C *sub_800F18C(s32 index)
+unkStruct_800F18C *sub_800F18C(s32 index)
 {
    return &gUnknown_203B0D4->unk0[index];
 }

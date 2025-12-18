@@ -29,7 +29,7 @@ bool8 sub_80302E8(s32 param_1, DungeonPos *param_2, u32 param_3)
         return FALSE;
 
     if (sMakuhitaDojoWork2 == NULL)
-        sMakuhitaDojoWork2 = MemoryAlloc(sizeof(MakuhitaDojoWork2), 8);
+        sMakuhitaDojoWork2 = MemoryAlloc(sizeof(MakuhitaDojoWork2), MEMALLOC_GROUP_8);
 
     sMakuhitaDojoWork2->s30.m.menuWinId = param_1;
     sMakuhitaDojoWork2->s30.m.menuWindow = &sMakuhitaDojoWork2->s30.m.windows.id[param_1];
@@ -58,10 +58,10 @@ u32 sub_80303AC(bool8 param_1)
 
     switch (GetKeyPress(&sMakuhitaDojoWork2->s30.m.input)) {
         case INPUT_B_BUTTON:
-            PlayMenuSoundEffect(1);
+            PlayMenuSoundEffect(MENU_SFX_BACK);
             return 2;
         case INPUT_A_BUTTON:
-            PlayMenuSoundEffect(0);
+            PlayMenuSoundEffect(MENU_SFX_ACCEPT);
             return 3;
         default:
             if (MenuCursorUpdate(&sMakuhitaDojoWork2->s30.m.input, 1)) {

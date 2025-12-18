@@ -113,7 +113,7 @@ void AllocGroundEffects(void)
     s32 index;
     GroundEffect* current;
 
-    gGroundEffects = MemoryAlloc(NUM_GROUND_EFFECTS * sizeof(GroundEffect), 6);
+    gGroundEffects = MemoryAlloc(NUM_GROUND_EFFECTS * sizeof(GroundEffect), MEMALLOC_GROUP_6);
     current = gGroundEffects;
     for (index = 0; index < NUM_GROUND_EFFECTS; index = (s16) (index + 0x1), current++) {
         current->kind = -1;

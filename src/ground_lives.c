@@ -200,8 +200,8 @@ void AllocGroundLives(void)
     s32 index;
     struct GroundLive *ptr;
 
-    gGroundLivesMeta = MemoryAlloc(sizeof(*gGroundLivesMeta),6);
-    gGroundLives = MemoryAlloc(sizeof(*gGroundLives),6);
+    gGroundLivesMeta = MemoryAlloc(sizeof(*gGroundLivesMeta), MEMALLOC_GROUP_6);
+    gGroundLives = MemoryAlloc(sizeof(*gGroundLives), MEMALLOC_GROUP_6);
 
     for (index = 0, ptr = &gGroundLives->array[index]; index < UNK_3001B84_ARR_COUNT; index = (s16)(index + 1), ptr++) {
         ptr->unk2 = -1;

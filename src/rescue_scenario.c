@@ -131,7 +131,7 @@ bool8 RescueScenarioConquered(s32 rescueDungeonID_)
     if (rescueDungeonID == RESCUE_DUNGEON_DUMMY)
         return FALSE;
 
-    return (GetScriptVarArrayValue(NULL, RESCUE_SCENARIO_CONQUEST_LIST, (u16)rescueDungeonID) != FALSE);
+    return GetScriptVarArrayValue(NULL, RESCUE_SCENARIO_CONQUEST_LIST, (u16)rescueDungeonID) != FALSE;
 }
 
 void SetRescueScenarioConquered(s32 rescueDungeonID_, bool32 conquered)

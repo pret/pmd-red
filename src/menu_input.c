@@ -5,7 +5,6 @@
 #include "code_800D090.h"
 #include "music_util.h"
 #include "constants/colors.h"
-#include "constants/input.h"
 #include "input.h"
 #include "sprite.h"
 #include "string_format.h"
@@ -437,12 +436,12 @@ bool8 sub_8012FD8(MenuStruct *menu)
             case INPUT_DPAD_DOWN:
                 MoveMenuCursorDown(&menu->input);
                 if (prevMenuIndex != menu->input.menuIndex)
-                    PlayMenuSoundEffect(3);
+                    PlayMenuSoundEffect(MENU_SFX_NAVIGATE);
                 break;
             case INPUT_DPAD_UP:
                 MoveMenuCursorUp(&menu->input);
                 if (prevMenuIndex != menu->input.menuIndex)
-                    PlayMenuSoundEffect(3);
+                    PlayMenuSoundEffect(MENU_SFX_NAVIGATE);
                 break;
             case INPUT_A_BUTTON:
                 index = GetCurrMenuIndex(&menu->input);
@@ -455,20 +454,20 @@ bool8 sub_8012FD8(MenuStruct *menu)
                     menu->input.unk24 = 0;
                 }
                 else {
-                    PlayMenuSoundEffect(2);
+                    PlayMenuSoundEffect(MENU_SFX_FAIL);
                     break;
                 }
 
                 if (menu->unkC != NULL && menu->unkC[index] == 2)
-                    PlayMenuSoundEffect(2);
+                    PlayMenuSoundEffect(MENU_SFX_FAIL);
                 else
-                    PlayMenuSoundEffect(0);
+                    PlayMenuSoundEffect(MENU_SFX_ACCEPT);
                 break;
             case INPUT_B_BUTTON:
                 if (menu->menuItems[menu->input.currPageEntries].menuAction > -1) {
                     menu->menuAction = menu->menuItems[menu->input.currPageEntries].menuAction;
                     menu->unk4C = FALSE;
-                    PlayMenuSoundEffect(1);
+                    PlayMenuSoundEffect(MENU_SFX_BACK);
                 }
                 break;
         }
@@ -492,13 +491,13 @@ bool8 sub_80130A8(MenuStruct *menu)
                 menu->menuAction = menuItem->menuAction;
                 menu->unk4C = FALSE;
                 menu->input.unk24 = 0;
-                PlayMenuSoundEffect(0);
+                PlayMenuSoundEffect(MENU_SFX_ACCEPT);
                 break;
             case INPUT_B_BUTTON:
                 if (menu->menuItems[menu->input.currPageEntries].menuAction > -1) {
                     menu->menuAction = menu->menuItems[menu->input.currPageEntries].menuAction;
                     menu->unk4C = FALSE;
-                    PlayMenuSoundEffect(0);
+                    PlayMenuSoundEffect(MENU_SFX_ACCEPT);
                 }
                 break;
         }
@@ -856,12 +855,12 @@ bool8 MenuCursorUpdate(MenuInputStruct *menuInput, bool8 allowDpadPress)
             case INPUT_DPAD_UP:
                 MoveMenuCursorUp(menuInput);
                 if (oldIndex != menuInput->menuIndex)
-                    PlayMenuSoundEffect(3);
+                    PlayMenuSoundEffect(MENU_SFX_NAVIGATE);
                 break;
             case INPUT_DPAD_DOWN:
                 MoveMenuCursorDown(menuInput);
                 if (oldIndex != menuInput->menuIndex)
-                    PlayMenuSoundEffect(3);
+                    PlayMenuSoundEffect(MENU_SFX_NAVIGATE);
                 break;
             case INPUT_DPAD_LEFT:
                 MenuScrollLeft(menuInput);
@@ -873,7 +872,7 @@ bool8 MenuCursorUpdate(MenuInputStruct *menuInput, bool8 allowDpadPress)
     }
 
     if (pageBefore != menuInput->currPage) {
-        PlayMenuSoundEffect(4);
+        PlayMenuSoundEffect(MENU_SFX_INFO);
         return TRUE;
     }
     return FALSE;
@@ -897,7 +896,7 @@ bool8 MenuCursorUpdateOnlyLeftRight(MenuInputStruct *menuInput)
     }
 
     if (pageBefore != menuInput->currPage) {
-        PlayMenuSoundEffect(4);
+        PlayMenuSoundEffect(MENU_SFX_INFO);
         return TRUE;
     }
     return FALSE;
@@ -1019,10 +1018,10 @@ u32 sub_8013BBC(unkStructFor8013AA0 *a0)
 
     switch (GetMenuInput()) {
         case INPUT_B_BUTTON:
-            PlayMenuSoundEffect(1);
+            PlayMenuSoundEffect(MENU_SFX_BACK);
             return 2;
         case INPUT_A_BUTTON:
-            PlayMenuSoundEffect(0);
+            PlayMenuSoundEffect(MENU_SFX_ACCEPT);
             return 3;
     }
     return 0;
@@ -1072,7 +1071,7 @@ void sub_8013D10(unkStructFor8013AA0 *a0)
 
     if (uVar4 != a0->unk24) {
         a0->unk24 = uVar4;
-        PlayMenuSoundEffect(3);
+        PlayMenuSoundEffect(MENU_SFX_NAVIGATE);
         a0->unk26 = 8;
     }
 
@@ -1102,12 +1101,12 @@ static bool8 sub_8013DD0(unkStructFor8013AA0 *a0)
     switch (GetMenuInput()) {
         case INPUT_DPAD_UP:
             if (a0->unk0 == a0->unkC) {
-                PlayMenuSoundEffect(2);
+                PlayMenuSoundEffect(MENU_SFX_FAIL);
                 return FALSE;
             }
 
             iVar2 = a0->unk0 + sTenPowers[a0->unk24];
-            PlayMenuSoundEffect(3);
+            PlayMenuSoundEffect(MENU_SFX_NAVIGATE);
 
             if (iVar2 > a0->unkC)
                 a0->unk0 = a0->unkC;
@@ -1116,12 +1115,12 @@ static bool8 sub_8013DD0(unkStructFor8013AA0 *a0)
             return TRUE;
         case INPUT_DPAD_DOWN:
             if (a0->unk0 == a0->unk8) {
-                PlayMenuSoundEffect(2);
+                PlayMenuSoundEffect(MENU_SFX_FAIL);
                 return FALSE;
             }
 
             iVar2 = a0->unk0 - sTenPowers[a0->unk24];
-            PlayMenuSoundEffect(3);
+            PlayMenuSoundEffect(MENU_SFX_NAVIGATE);
 
             if (iVar2 < a0->unk8)
                 a0->unk0 = a0->unk8;

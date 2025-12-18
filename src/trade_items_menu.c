@@ -49,7 +49,7 @@ s32 CreateTradeItemsMenu(void)
 {
   ResetUnusedInputStruct();
   ShowWindows(NULL, TRUE, TRUE);
-  sTradeItemsMenu = MemoryAlloc(sizeof(struct TradeItemsMenu), 8);
+  sTradeItemsMenu = MemoryAlloc(sizeof(struct TradeItemsMenu), MEMALLOC_GROUP_8);
   MemoryFill8(sTradeItemsMenu, 0, sizeof(struct TradeItemsMenu));
   sub_8035C1C();
   sub_8035DA0();

@@ -43,10 +43,10 @@ void GroundBg_Init(GroundBg *groundBg, const SubStruct_52C *a1)
     s32 i;
 
     groundBg->unk52C = *a1;
-    groundBg->tileMappings = MemoryAlloc(groundBg->unk52C.unk8 * 18, 6);
+    groundBg->tileMappings = MemoryAlloc(groundBg->unk52C.unk8 * 18, MEMALLOC_GROUP_6);
     for (id = 0; id < groundBg->unk52C.numLayers; id++) {
         groundBg->bgTilemaps[id] = &gBgTilemaps[2 + groundBg->unk52C.unkA + id][0][0];
-        groundBg->chunkMappings[id] = MemoryAlloc(groundBg->unk52C.unk10 * 128, 6);
+        groundBg->chunkMappings[id] = MemoryAlloc(groundBg->unk52C.unk10 * 128, MEMALLOC_GROUP_6);
     }
     for (; id < NUM_LAYERS; id++) {
         groundBg->bgTilemaps[id] = NULL;
@@ -54,7 +54,7 @@ void GroundBg_Init(GroundBg *groundBg, const SubStruct_52C *a1)
     }
 
     if (groundBg->unk52C.unk14 != NULL) {
-        groundBg->unk544 = MemoryAlloc(groundBg->unk52C.unkE * 256, 6);
+        groundBg->unk544 = MemoryAlloc(groundBg->unk52C.unkE * 256, MEMALLOC_GROUP_6);
     }
     else {
         groundBg->unk544 = NULL;
@@ -132,7 +132,7 @@ void sub_80A2D88(GroundBg *groundBg)
 {
     if (groundBg->unk52C.unk14 != NULL) {
         BmaHeader *bmaHeader = &groundBg->bmaHeader;
-        groundBg->unk544 = MemoryAlloc(groundBg->unk52C.unkE * 256, 6);
+        groundBg->unk544 = MemoryAlloc(groundBg->unk52C.unkE * 256, MEMALLOC_GROUP_6);
         groundBg->unk52C.unk14(groundBg->unk544, groundBg->decompressedBMAData, bmaHeader, groundBg->unk52C.unkE);
     }
 }
@@ -729,7 +729,7 @@ void sub_80A3BB0(GroundBg *groundBg, s32 a0_)
                         mapRender[i].tilemapRenderFunc = RenderChunksToBgTilemap_2x2;
                         break;
                     case CHUNK_DIMENSIONS_3x3:
-                        mapRender[i].tilemapRenderFunc = (mapRender[i].wrapAround != FALSE) ? RenderChunksToBgTilemapWrapAround_3x3 : RenderChunksToBgTilemap_3x3;
+                        mapRender[i].tilemapRenderFunc = mapRender[i].wrapAround ? RenderChunksToBgTilemapWrapAround_3x3 : RenderChunksToBgTilemap_3x3;
                         break;
                 }
                 break;

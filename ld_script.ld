@@ -136,7 +136,7 @@ SECTIONS {
         src/code_80227B8.o(.text);
         src/code_8023144.o(.text);
         src/friend_list.o(.text);
-        src/code_8024458.o(.text);
+        src/recruited_mon_summary_menu.o(.text);
         src/luminous_cave.o(.text);
         src/friend_list_menu.o(.text);
         src/party_list_menu.o(.text);
@@ -507,7 +507,7 @@ SECTIONS {
         src/code_80227B8.o(.rodata);
         src/code_8023144.o(.rodata);
         src/friend_list.o(.rodata);
-        src/code_8024458.o(.rodata);
+        src/recruited_mon_summary_menu.o(.rodata);
         src/luminous_cave.o(.rodata);
         src/friend_list_menu.o(.rodata);
         src/party_list_menu.o(.rodata);

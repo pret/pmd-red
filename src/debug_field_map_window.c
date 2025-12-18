@@ -35,7 +35,7 @@ static void PrintCurrentPageText(void);
 
 bool8 DebugFieldMapWindow_Init(void)
 {
-    sDebugWindow = MemoryAlloc(sizeof(*sDebugWindow), 8);
+    sDebugWindow = MemoryAlloc(sizeof(*sDebugWindow), MEMALLOC_GROUP_8);
     sDebugWindow->m.menuWinId = WINDOW_ID_DEBUG;
     sDebugWindow->m.menuWindow = &sDebugWindow->m.windows.id[WINDOW_ID_DEBUG];
     RestoreSavedWindows(&sDebugWindow->m.windows);
@@ -61,7 +61,7 @@ u32 DebugFieldMapWindow_GetInput(void)
 {
     switch (GetKeyPress(&sDebugWindow->m.input)) {
         case INPUT_B_BUTTON:
-            PlayMenuSoundEffect(1);
+            PlayMenuSoundEffect(MENU_SFX_BACK);
             return MENU_INPUT_B_PRESS;
         case INPUT_A_BUTTON:
             return MENU_INPUT_A_PRESS;

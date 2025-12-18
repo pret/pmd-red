@@ -53,7 +53,7 @@ bool8 FriendList_Init(u32 r5, u32 windowId, DungeonPos *pos, u32 r10)
     }
 
     if (sFriendList == NULL) {
-        sFriendList = MemoryAlloc(sizeof(*sFriendList), 8);
+        sFriendList = MemoryAlloc(sizeof(*sFriendList), MEMALLOC_GROUP_8);
     }
 
     sFriendList->unk0 = r5;
@@ -130,16 +130,16 @@ u32 FriendList_HandleInput(bool8 a0)
 
     switch (GetKeyPress(&sFriendList->unk358.m.input)) {
         case INPUT_B_BUTTON:
-            PlayMenuSoundEffect(1);
+            PlayMenuSoundEffect(MENU_SFX_BACK);
             return 2;
         case INPUT_START_BUTTON:
-            PlayMenuSoundEffect(4);
+            PlayMenuSoundEffect(MENU_SFX_INFO);
             return 4;
         case INPUT_A_BUTTON:
-            PlayMenuSoundEffect(0);
+            PlayMenuSoundEffect(MENU_SFX_ACCEPT);
             return 3;
         case INPUT_SELECT_BUTTON:
-            PlayMenuSoundEffect(5);
+            PlayMenuSoundEffect(MENU_SFX_SORT);
             sFriendList->sortMethod = (sFriendList->sortMethod < 3) ? sFriendList->sortMethod + 1 : 1;
             sub_8023F8C();
             SetUpWindowHeader();

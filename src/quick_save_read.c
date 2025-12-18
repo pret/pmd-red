@@ -11,7 +11,7 @@ static EWRAM_INIT QuickSaveRead *sQuickSaveRead = { NULL };
 
 void PrepareQuickSaveRead(u8 *dest, u32 size)
 {
-    sQuickSaveRead = MemoryAlloc(sizeof(QuickSaveRead), 5);
+    sQuickSaveRead = MemoryAlloc(sizeof(QuickSaveRead), MEMALLOC_GROUP_5);
     sQuickSaveRead->dest = dest;
     sQuickSaveRead->size = size;
     sQuickSaveRead->saveValid = FALSE;

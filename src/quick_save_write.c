@@ -12,7 +12,7 @@ static EWRAM_INIT QuickSaveWrite *sQuickSaveWrite = {NULL};
 
 void PrepareQuickSaveWrite(u8 *r0, u32 r1, u8 r2)
 {
-    sQuickSaveWrite = MemoryAlloc(sizeof(QuickSaveWrite), 5);
+    sQuickSaveWrite = MemoryAlloc(sizeof(QuickSaveWrite), MEMALLOC_GROUP_5);
     sQuickSaveWrite->unk4 = r0;
     sQuickSaveWrite->unk8 = r1;
     sQuickSaveWrite->unkC = r2;

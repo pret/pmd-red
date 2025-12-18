@@ -34,7 +34,7 @@ bool8 sub_802DB28(u8 jobSlotIndex, u8 dungeon)
     ResetUnusedInputStruct();
     ShowWindows(NULL, TRUE, TRUE);
 
-    sUnknown_203B2FC = MemoryAlloc(sizeof(struct unkStruct_203B2FC), 8);
+    sUnknown_203B2FC = MemoryAlloc(sizeof(struct unkStruct_203B2FC), MEMALLOC_GROUP_8);
     sUnknown_203B2FC->jobSlotIndex = jobSlotIndex;
     sUnknown_203B2FC->jobInfo = GetJobSlotInfo(jobSlotIndex);
     sub_8096EEC(sUnknown_203B2FC->jobInfo);

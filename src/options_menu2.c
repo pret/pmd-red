@@ -20,7 +20,7 @@ static void nullsub_38(void);
 
 bool8 sub_801E198(GameOptions *optionsMenu)
 {
-    sUnknown_203B260 = MemoryAlloc(sizeof(struct unkStruct_203B260), 8);
+    sUnknown_203B260 = MemoryAlloc(sizeof(struct unkStruct_203B260), MEMALLOC_GROUP_8);
     sUnknown_203B260->optionsMenu = optionsMenu;
     ResetTouchScreenMenuInput(&sUnknown_203B260->unk4);
     sUnknown_203B260->unk44 = 0;
@@ -44,10 +44,10 @@ u32 sub_801E218(void)
 
     switch (GetMenuInput()) {
         case INPUT_B_BUTTON:
-            PlayMenuSoundEffect(1);
+            PlayMenuSoundEffect(MENU_SFX_BACK);
             return 2;
         case INPUT_A_BUTTON:
-            PlayMenuSoundEffect(0);
+            PlayMenuSoundEffect(MENU_SFX_ACCEPT);
             return 3;
         case INPUT_DPAD_LEFT:
             if (sUnknown_203B260->input.menuIndex == 0) {
@@ -56,7 +56,7 @@ u32 sub_801E218(void)
                 else
                     sUnknown_203B260->optionsMenu->windowColor--;
 
-                PlayMenuSoundEffect(3);
+                PlayMenuSoundEffect(MENU_SFX_NAVIGATE);
                 flag = TRUE;
             }
             break;
@@ -67,7 +67,7 @@ u32 sub_801E218(void)
                 else
                     sUnknown_203B260->optionsMenu->windowColor++;
 
-                PlayMenuSoundEffect(3);
+                PlayMenuSoundEffect(MENU_SFX_NAVIGATE);
                 flag = TRUE;
             }
             break;

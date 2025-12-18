@@ -11,7 +11,7 @@ EWRAM_INIT SavePakRead *gSavePakRead = {NULL};
 
 void PrepareSavePakRead(void)
 {
-    gSavePakRead = MemoryAlloc(sizeof(SavePakRead), 5);
+    gSavePakRead = MemoryAlloc(sizeof(SavePakRead), MEMALLOC_GROUP_5);
     gSavePakRead->state = 1;
 }
 

@@ -131,7 +131,7 @@ bool8 sub_803B050(void)
     s32 count;
     s32 max;
 
-    gUnknown_203B3FC = MemoryAlloc(sizeof(unkStruct_203B3FC), 8);
+    gUnknown_203B3FC = MemoryAlloc(sizeof(unkStruct_203B3FC), MEMALLOC_GROUP_8);
     gUnknown_203B3FC->mh.m.menuWinId = 3;
     gUnknown_203B3FC->mh.m.menuWindow = &gUnknown_203B3FC->mh.m.windows.id[gUnknown_203B3FC->mh.m.menuWinId];
     RestoreSavedWindows(&gUnknown_203B3FC->mh.m.windows);
@@ -169,7 +169,7 @@ u32 sub_803B120(void)
 {
     switch (GetKeyPress(&gUnknown_203B3FC->mh.m.input)) {
         case 2:
-            PlayMenuSoundEffect(1);
+            PlayMenuSoundEffect(MENU_SFX_BACK);
             return 2;
         case 1:
             return 3;

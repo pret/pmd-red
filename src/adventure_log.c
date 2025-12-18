@@ -21,7 +21,7 @@ static void sub_8032084();
 
 bool8 CreateAdventureLogScreen(u32 kind)
 {
-    sAdventureLog = MemoryAlloc(sizeof(*sAdventureLog), 8);
+    sAdventureLog = MemoryAlloc(sizeof(*sAdventureLog), MEMALLOC_GROUP_8);
     sAdventureLog->m.menuWinId = kind;
     sAdventureLog->m.menuWindow = &sAdventureLog->m.windows.id[kind];
     RestoreSavedWindows(&sAdventureLog->m.windows);
@@ -45,10 +45,10 @@ u32 HandleAdventureLogInput(bool8 a0)
 
     switch (GetKeyPress(&sAdventureLog->m.input)) {
         case INPUT_B_BUTTON:
-            PlayMenuSoundEffect(1);
+            PlayMenuSoundEffect(MENU_SFX_BACK);
             return 2;
         case INPUT_A_BUTTON:
-            PlayMenuSoundEffect(0);
+            PlayMenuSoundEffect(MENU_SFX_ACCEPT);
             return 3;
         default:
             if (MenuCursorUpdateOnlyLeftRight(&sAdventureLog->m.input)) {

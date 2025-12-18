@@ -36,7 +36,7 @@ void sub_800DC14(s32 param_1);
 s32 sub_800DC9C(s32 a0);
 s32 sub_800E308(struct UnkStruct_8040094 *a0, DungeonPos *a1);
 void sub_800E3AC(s32 a0, DungeonPos *pos, s32 a2);
-s32 sub_800E448(u8 a0, DungeonPos *pos);
+s32 sub_800E448(u8 trapID, DungeonPos *pos);
 s32 sub_800E49C(u8 a0, DungeonPos *pos, DungeonPos posArray[4], bool8 a3, s32 a4);
 s32 sub_800E52C(struct UnkStruct_8040094 *a0);
 s32 sub_800E6D8(s32 a0);

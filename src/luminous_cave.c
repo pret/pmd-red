@@ -92,7 +92,7 @@ u32 sub_802465C(void)
 
     ResetUnusedInputStruct();
     ShowWindows(NULL, TRUE, TRUE);
-    sLuminousCaveWork = MemoryAlloc(sizeof(LuminousCaveWork), 8);
+    sLuminousCaveWork = MemoryAlloc(sizeof(LuminousCaveWork), MEMALLOC_GROUP_8);
     sLuminousCaveWork->menuAction1 = 0;
     sLuminousCaveWork->menuAction2 = 0;
     sLuminousCaveWork->menuAction3 = 0;
@@ -597,7 +597,7 @@ static void sub_8025058(void)
                 UpdateLuminousCaveState(0xD);
             }
             else
-                PlayMenuSoundEffect(2);
+                PlayMenuSoundEffect(MENU_SFX_FAIL);
             break;
         case 4:
             sLuminousCaveWork->chosenItem = gTeamInventoryRef->teamItems[sub_801A8AC()];

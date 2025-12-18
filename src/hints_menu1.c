@@ -21,7 +21,7 @@ static void sub_801E594(void);
 bool8 sub_801E3F0(u32 a0)
 {
     if (sUnknown_203B264 == NULL)
-        sUnknown_203B264 = MemoryAlloc(sizeof(*sUnknown_203B264), 8);
+        sUnknown_203B264 = MemoryAlloc(sizeof(*sUnknown_203B264), MEMALLOC_GROUP_8);
 
     sUnknown_203B264->menuWinId = a0;
     sUnknown_203B264->menuWindow = &sUnknown_203B264->windows.id[a0];
@@ -46,13 +46,13 @@ u32 sub_801E474(bool8 a0)
     switch(GetKeyPress(&sUnknown_203B264->input))
     {
         case 2:
-            PlayMenuSoundEffect(1);
+            PlayMenuSoundEffect(MENU_SFX_BACK);
             return 2;
         case 1:
-            PlayMenuSoundEffect(0);
+            PlayMenuSoundEffect(MENU_SFX_ACCEPT);
             return 3;
         case 4:
-            PlayMenuSoundEffect(4);
+            PlayMenuSoundEffect(MENU_SFX_INFO);
             return 4;
         default:
             if(MenuCursorUpdate(&sUnknown_203B264->input, 1))

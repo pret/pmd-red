@@ -114,7 +114,7 @@ bool8 DrawCredits(s32 creditsCategoryIndex, s32 param_2)
     u8 curChar;
     u8 buffer[128];
 
-    sCredits1Work = MemoryAlloc(sizeof(Credits1Work), 8);
+    sCredits1Work = MemoryAlloc(sizeof(Credits1Work), MEMALLOC_GROUP_8);
     sCredits1Work->unk60 = 0;
     sCredits1Work->unk64 = param_2;
     sCredits1Work->creditsCategoryIndex = creditsCategoryIndex;
