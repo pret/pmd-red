@@ -629,7 +629,7 @@ static void TryCreateModeArrows(Entity *leader)
         if (unkPtr->rotateModeDirection < NUM_DIRECTIONS) {
             s32 x, xMul, x2;
             s32 y, yMul, y2;
-            s32 to = (sShowThreeArrows2 != FALSE && sShowThreeArrows1 != FALSE) ? 3 : 1;
+            s32 to = (sShowThreeArrows2 && sShowThreeArrows1) ? 3 : 1;
 
             xMul = sRotateArrowsInfo[direction].x * 10;
             x2 = (sArrowsFrames / 2) & 7;

@@ -132,7 +132,7 @@ void sub_803C37C(DungeonLocation *location, u8 r1, u8 *itemReward)
             flag = GetScriptVarArrayValue(0, EVENT_B01P01, 1) ? TRUE : FALSE;
         if(r4 == ITEM_MIME_JR_FIG)
             if(GetScriptVarArrayValue(0, EVENT_B01P01, 0)) flag = TRUE;
-    } while(flag != FALSE);
+    } while(flag);
 
     *itemReward = r4;
 }

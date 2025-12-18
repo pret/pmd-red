@@ -70,7 +70,7 @@ u32 sub_8019EDC(bool8 r0)
             PlayMenuSoundEffect(MENU_SFX_INFO);
             return 4;
         default:
-            if (MenuCursorUpdate(&gUnknown_203B214->m.input, 1) != FALSE) {
+            if (MenuCursorUpdate(&gUnknown_203B214->m.input, 1)) {
                 sub_801A064();
                 sub_801A0D8();
                 return 1;

@@ -144,7 +144,7 @@ void sub_803E178(void)
             gDungeon->unk3A12 = 28;
         }
         else {
-            gDungeon->unk3A12 = (IsStairDirectionUp(gDungeon->unk644.dungeonLocation.id) != FALSE) ? 23 : 22;
+            gDungeon->unk3A12 = IsStairDirectionUp(gDungeon->unk644.dungeonLocation.id) ? 23 : 22;
         }
     }
     else if (val == 1) {

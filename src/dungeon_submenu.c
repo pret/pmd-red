@@ -61,7 +61,7 @@ void CreateDungeonMenuSubWindow(WindowTemplate *mainWindow, s32 subWindowX)
         s32 colorId, y;
         u8 text[20];
 
-        colorId = (CanSubMenuItemBeChosen(i) != FALSE) ? 7 : 2;
+        colorId = CanSubMenuItemBeChosen(i) ? 7 : 2;
         sprintfStatic(text, _("{COLOR}%c%s"), colorId, GetDungeonSubMenuItemString(i));
         y = GetMenuEntryYCoord(&gDungeonMenu, i);
         PrintStringOnWindow(8, y, text, 1, 0);

@@ -339,7 +339,7 @@ void DisplayDungeonMessage_Async(struct MonDialogueSpriteInfo *monSpriteInfo, co
         monPortraitPtr = &monPortrait;
     }
 
-    CreateMenuDialogueBoxAndPortrait(str, 0, 0, NULL, NULL, 3, 0, monPortraitPtr, (a2 != FALSE) ? 0x701 : 0x400);
+    CreateMenuDialogueBoxAndPortrait(str, 0, 0, NULL, NULL, 3, 0, monPortraitPtr, a2 ? 0x701 : 0x400);
     gDungeon->unk1BDD4.unk1C05F = 1;
     PRINT_STRING_WAIT_PRESS_ASYNC(&chosenMenuIndex);
     gDungeon->unk1BDD4.unk1C05F = 0;

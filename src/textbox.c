@@ -1516,9 +1516,9 @@ static bool8 sub_809B648(void)
             FinishWriteSavePak();
             return 0;
           case SPECIAL_TEXT_STORAGE_WITH_DIALOG: {
-            bool8 unkBool = (CheckQuest(QUEST_SQUARE_ASLEEP) != FALSE);
+            u32 mode = CheckQuest(QUEST_SQUARE_ASLEEP) ? 1 : 0;
             ResetTextbox();
-            if (CreateKangaskhanStorage(unkBool)) {
+            if (CreateKangaskhanStorage(mode)) {
                 sTextbox->unk418 = &gUnknown_81161C8;
                 return 1;
             }
@@ -1529,9 +1529,9 @@ static bool8 sub_809B648(void)
             sTextbox->unk418 = &gUnknown_81161D8;
             return 1;
           case SPECIAL_TEXT_BANK: {
-            bool8 unkBool = (CheckQuest(QUEST_SQUARE_ASLEEP) != FALSE);
+            u32 mode = CheckQuest(QUEST_SQUARE_ASLEEP) ? 1 : 0;
             ResetTextbox();
-            if (CreateFelicityBank(unkBool)) {
+            if (CreateFelicityBank(mode)) {
                 sTextbox->unk418 = &gUnknown_81161E8;
                 return 1;
             }
@@ -1565,9 +1565,9 @@ static bool8 sub_809B648(void)
             }
           }
           case SPECIAL_TEXT_LINK_SHOP: {
-            bool8 unkBool = (CheckQuest(QUEST_SQUARE_ASLEEP) != FALSE);
+            u32 mode = CheckQuest(QUEST_SQUARE_ASLEEP) ? 1 : 0;
             ResetTextbox();
-            if (sub_801FB50(unkBool)) {
+            if (sub_801FB50(mode)) {
                 sTextbox->unk418 = &gUnknown_8116208;
                 return 1;
             }
@@ -1606,9 +1606,9 @@ static bool8 sub_809B648(void)
             }
            return 0;
         case SPECIAL_TEXT_FRIEND_SHOP: {
-            bool8 unk = CheckQuest(QUEST_SQUARE_ASLEEP) != FALSE;
+            u32 mode = CheckQuest(QUEST_SQUARE_ASLEEP) ? 1 : 0;
             ResetTextbox();
-            if (CreateWigglytuffShop(unk)) {
+            if (CreateWigglytuffShop(mode)) {
                 sTextbox->unk418 = &gUnknown_8116218;
                 return 1;
             }

@@ -729,7 +729,7 @@ void sub_80A3BB0(GroundBg *groundBg, s32 a0_)
                         mapRender[i].tilemapRenderFunc = RenderChunksToBgTilemap_2x2;
                         break;
                     case CHUNK_DIMENSIONS_3x3:
-                        mapRender[i].tilemapRenderFunc = (mapRender[i].wrapAround != FALSE) ? RenderChunksToBgTilemapWrapAround_3x3 : RenderChunksToBgTilemap_3x3;
+                        mapRender[i].tilemapRenderFunc = mapRender[i].wrapAround ? RenderChunksToBgTilemapWrapAround_3x3 : RenderChunksToBgTilemap_3x3;
                         break;
                 }
                 break;

@@ -273,7 +273,7 @@ static void CreateMessageLogArrow(bool8 upArrow, s32 y)
         SpriteSetObjMode(&sMessageLogArrowSpriteOAM, 0);
         SpriteSetMosaic(&sMessageLogArrowSpriteOAM, 0);
         SpriteSetBpp(&sMessageLogArrowSpriteOAM, 0);
-        SpriteSetMatrixNum(&sMessageLogArrowSpriteOAM, (upArrow != FALSE) ? (16) : 0);
+        SpriteSetMatrixNum(&sMessageLogArrowSpriteOAM, upArrow ? 16 : 0);
         SpriteSetPalNum(&sMessageLogArrowSpriteOAM, 15);
         SpriteSetY(&sMessageLogArrowSpriteOAM, (window->y * 8) + y);
         SpriteSetX(&sMessageLogArrowSpriteOAM, (window->x * 8) + 92);

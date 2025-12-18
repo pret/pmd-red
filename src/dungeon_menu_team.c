@@ -268,7 +268,7 @@ static void PrintOnDungeonTeamMenu(struct UnkFieldTeamMenuStruct *a0, WindowTemp
     gDungeonMenu.currPage = 0;
     gDungeonMenu.pagesCount = 0;
     gDungeonMenu.unk4 = 0;
-    gDungeonMenu.firstEntryY = (withHeader != FALSE) * 16;
+    gDungeonMenu.firstEntryY = withHeader ? 16 : 0;
     gDungeonMenu.leftRightArrowsPos.x = 0;
     gDungeonMenu.leftRightArrowsPos.y = 0;
     gDungeonMenu.unk14.x = 0;
