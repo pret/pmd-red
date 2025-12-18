@@ -24,7 +24,7 @@ static void sub_801B590(void);
 bool8 InitItemDescriptionWindow(Item *item)
 {
     ResetSprites(TRUE);
-    sUnknown_203B230 = MemoryAlloc(sizeof(unkStruct_203B230), 8);
+    sUnknown_203B230 = MemoryAlloc(sizeof(unkStruct_203B230), MEMALLOC_GROUP_8);
     sUnknown_203B230->item = *item;
     ResetTouchScreenMenuInput(&sUnknown_203B230->unk88);
     sUnknown_203B230->unk24 = 0;
@@ -105,7 +105,7 @@ static void sub_801B51C(void)
 
     switch (sub_8012A64(&sUnknown_203B230->unk88, sUnknown_203B230->unk24)) {
         case 1:
-            PlayMenuSoundEffect(0);
+            PlayMenuSoundEffect(MENU_SFX_ACCEPT);
 
             if (sUnknown_203B230->unkC != 0) {
                 sUnknown_203B230->unk8 = 0;
@@ -115,7 +115,7 @@ static void sub_801B51C(void)
                 sub_801B46C(3);
             break;
         case 2:
-            PlayMenuSoundEffect(1);
+            PlayMenuSoundEffect(MENU_SFX_BACK);
             sub_801B46C(2);
             break;
         default:
@@ -134,7 +134,7 @@ static void sub_801B590(void)
 
     switch (sub_8012A64(&sUnknown_203B230->unk88,sUnknown_203B230->unk24)) {
         case 1:
-            PlayMenuSoundEffect(0);
+            PlayMenuSoundEffect(MENU_SFX_ACCEPT);
 
             sUnknown_203B230->unk8++;
             if (sUnknown_203B230->unk8 < sUnknown_203B230->unkC)
@@ -143,7 +143,7 @@ static void sub_801B590(void)
                 sub_801B46C(0);
             break;
         case 2:
-            PlayMenuSoundEffect(1);
+            PlayMenuSoundEffect(MENU_SFX_BACK);
             sub_801B46C(2);
             break;
     }

@@ -35,7 +35,7 @@ bool8 CreateGulpinShop(u32 mode, s16 pokeSpecies, Move *moves)
 
     species_32 = pokeSpecies; // dumb cast needed to get lsr/asr combo
 
-    sGulpinShopWork = MemoryAlloc(sizeof(GulpinShopWork), 8);
+    sGulpinShopWork = MemoryAlloc(sizeof(GulpinShopWork), MEMALLOC_GROUP_8);
     sGulpinShopWork->mode = mode;
     sGulpinShopWork->speciesNum = species_32;
     sGulpinShopWork->moves = moves;

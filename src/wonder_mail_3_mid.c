@@ -66,7 +66,7 @@ enum MenuActions {
 
 u32 sub_802EF48(void)
 {
-    gUnknown_203B30C = MemoryAlloc(sizeof(struct unkStruct_203B30C), 8);
+    gUnknown_203B30C = MemoryAlloc(sizeof(struct unkStruct_203B30C), MEMALLOC_GROUP_8);
     sub_802EFEC(0);
     return 1;
 }

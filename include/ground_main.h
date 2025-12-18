@@ -5,7 +5,7 @@
 #include "structs/str_dungeon_setup.h"
 
 // startMode: See enum "StartModeVal"
-u32 xxx_script_related_8098468(s32 startMode);
+u32 xxx_script_related_8098468_Async(s32 startMode);
 void sub_8098C58(void);
 void sub_8098CC8(void);
 bool8 GroundMainGroundRequest(s32 r0, s32 r1, s32 r2);

@@ -25,7 +25,7 @@ bool8 CreateIQSkillListMenu(s16 species, u32 index, u32 a2)
         return FALSE;
 
     if (sIQSkillListMenu == NULL)
-        sIQSkillListMenu = MemoryAlloc(sizeof(struct IQSkillListMenu), 8);
+        sIQSkillListMenu = MemoryAlloc(sizeof(struct IQSkillListMenu), MEMALLOC_GROUP_8);
 
     sIQSkillListMenu->species = species_s32;
     sIQSkillListMenu->pokeStruct = &gRecruitedPokemonRef->pokemon[species_s32];
@@ -53,13 +53,13 @@ u32 HandleIQSkillListMenuInput(bool8 a0)
 
     switch (GetKeyPress(&sIQSkillListMenu->s24.m.input)) {
         case INPUT_B_BUTTON:
-            PlayMenuSoundEffect(1);
+            PlayMenuSoundEffect(MENU_SFX_BACK);
             return 2;
         case INPUT_A_BUTTON:
-            PlayMenuSoundEffect(0);
+            PlayMenuSoundEffect(MENU_SFX_ACCEPT);
             return 3;
         case INPUT_START_BUTTON:
-            PlayMenuSoundEffect(4);
+            PlayMenuSoundEffect(MENU_SFX_INFO);
             return 4;
         default:
             if (MenuCursorUpdate(&sIQSkillListMenu->s24.m.input, 1) != 0) {

@@ -786,7 +786,7 @@ Entity * sub_806977C(Entity *target)
     return NULL;
 }
 
-void SetMonSummaryInfoFromEntity(struct MonSummaryInfo *param_1, Entity *target)
+void SetMonSummaryInfoFromEntity(MonSummaryInfo *param_1, Entity *target)
 {
     s32 index;
     u8 *atkPtr;

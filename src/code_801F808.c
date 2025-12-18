@@ -52,7 +52,7 @@ bool8 sub_801F808(u16 *moveIDs)
     s32 index;
 
     ResetSprites(TRUE);
-    gUnknown_203B278 = MemoryAlloc(sizeof(struct unkStruct_203B278), 8);
+    gUnknown_203B278 = MemoryAlloc(sizeof(struct unkStruct_203B278), MEMALLOC_GROUP_8);
     gUnknown_203B278->unk5C = 0;
     gUnknown_203B278->unk60 = &gUnknown_203B278->windows.id[0];
     sub_80140B4(&gUnknown_203B278->windows);
@@ -165,7 +165,7 @@ static void sub_801FA58(void)
     switch(sub_8012A64(&gUnknown_203B278->unkC8, gUnknown_203B278->unk5C))
     {
         case 1:
-            PlayMenuSoundEffect(0);
+            PlayMenuSoundEffect(MENU_SFX_ACCEPT);
             if(gUnknown_203B278->unk10 != 0)
             {
                 gUnknown_203B278->unkC = 0;
@@ -177,7 +177,7 @@ static void sub_801FA58(void)
             }
             break;
         case 2:
-            PlayMenuSoundEffect(1);
+            PlayMenuSoundEffect(MENU_SFX_BACK);
             sub_801F918(2);
             break;
         default:
@@ -201,7 +201,7 @@ static void sub_801FAD4(void)
     switch(sub_8012A64(&gUnknown_203B278->unkC8, gUnknown_203B278->unk5C))
     {
         case 1:
-            PlayMenuSoundEffect(0);
+            PlayMenuSoundEffect(MENU_SFX_ACCEPT);
             gUnknown_203B278->unkC++;
             if(gUnknown_203B278->unkC < gUnknown_203B278->unk10)
             {
@@ -212,7 +212,7 @@ static void sub_801FAD4(void)
             }
             break;
         case 2:
-            PlayMenuSoundEffect(1);
+            PlayMenuSoundEffect(MENU_SFX_BACK);
             sub_801F918(2);
             break;
     }

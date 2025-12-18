@@ -36,7 +36,7 @@ static void sub_801BEC8(void);
 
 bool8 sub_801B60C(u32 r0, u8 id, u8 quantity)
 {
-    sUnknown_203B234 = MemoryAlloc(sizeof(unkStruct_203B234), 8);
+    sUnknown_203B234 = MemoryAlloc(sizeof(unkStruct_203B234), MEMALLOC_GROUP_8);
     sUnknown_203B234->menuAction = 0;
     sUnknown_203B234->unk0 = r0;
     sUnknown_203B234->unk10.id = id;

@@ -44,7 +44,7 @@ bool8 sub_8017E1C(void)
 {
     ResetUnusedInputStruct();
     ShowWindows(NULL, TRUE, TRUE);
-    sUnknown_203B20C = MemoryAlloc(sizeof(unkStruct_203B20C), 8);
+    sUnknown_203B20C = MemoryAlloc(sizeof(unkStruct_203B20C), MEMALLOC_GROUP_8);
     sUnknown_203B20C->menuAction1 = 0;
     sUnknown_203B20C->menuAction2 = 0;
     sUnknown_203B20C->menuAction3 = 0;

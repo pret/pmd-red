@@ -634,8 +634,8 @@ static void PrintMonTactics(s32 firstId, u8 *tacticIds, EntityInfo *mon, s32 win
 void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
 {
     s32 subWindowIds[6];
-    struct MonSummaryInfo monSummaryInfo;
-    struct UnkInfoTabStruct unkInfoTabStruct;
+    MonSummaryInfo monSummaryInfo;
+    UnkInfoTabStruct unkInfoTabStruct;
     WindowTemplates windows = {
         .id = {
             [0] = {
@@ -684,7 +684,7 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
     else {
         subWindowIds[0] = SUB_WINDOW_STATS;
         subWindowIds[1] = SUB_WINDOW_STATUS;
-        subWindowIds[2] = SUB_WINDOW_FEATUERS;
+        subWindowIds[2] = SUB_WINDOW_FEATURES;
         subWindowIds[3] = SUB_WINDOW_INFO;
         subWindowIds[4] = SUB_WINDOW_NONE;
         subWindowIds[5] = SUB_WINDOW_NONE;

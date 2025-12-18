@@ -23,7 +23,7 @@ static void sub_802CF5C(void);
 bool8 sub_802CDD4(u32 a0)
 {
     if (sUnknown_203B2F4 == NULL)
-        sUnknown_203B2F4 = MemoryAlloc(sizeof(MenuHeaderWindow), 8);
+        sUnknown_203B2F4 = MemoryAlloc(sizeof(MenuHeaderWindow), MEMALLOC_GROUP_8);
 
     sUnknown_203B2F4->m.menuWinId = a0;
     sUnknown_203B2F4->m.menuWindow = &sUnknown_203B2F4->m.windows.id[sUnknown_203B2F4->m.menuWinId];
@@ -48,7 +48,7 @@ u32 sub_802CE5C(bool8 a0)
 
     switch (GetKeyPress(&sUnknown_203B2F4->m.input)) {
         case INPUT_B_BUTTON:
-            PlayMenuSoundEffect(1);
+            PlayMenuSoundEffect(MENU_SFX_BACK);
             return 2;
         case INPUT_A_BUTTON:
             return 3;

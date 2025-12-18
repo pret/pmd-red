@@ -43,7 +43,7 @@ bool8 MakuhitaDojo_New(u32 mode)
     ResetUnusedInputStruct();
     ShowWindows(NULL, TRUE, TRUE);
 
-    sMakuhitaDojoWork1 = MemoryAlloc(sizeof(MakuhitaDojoWork1), 8);
+    sMakuhitaDojoWork1 = MemoryAlloc(sizeof(MakuhitaDojoWork1), MEMALLOC_GROUP_8);
     sMakuhitaDojoWork1->unk10 = -1;
     sMakuhitaDojoWork1->mode = mode;
 

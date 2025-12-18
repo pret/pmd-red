@@ -1,6 +1,7 @@
 #ifndef GUARD_STR_DUNGEON_H
 #define GUARD_STR_DUNGEON_H
 
+#include "constants/bg_music.h"
 #include "constants/monster.h"
 #include "structs/dungeon_entity.h"
 #include "file_system.h"

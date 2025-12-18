@@ -10,6 +10,8 @@
 #include "text_2.h"
 #include "text_3.h"
 
+// This file might be the kangaskhan storage "store" menu
+
 EWRAM_INIT static struct unkStruct_203B244 *sUnknown_203B244 = { NULL };
 EWRAM_INIT static u32 sUnknown_203B248 = {0};
 EWRAM_INIT static u16 sUnknown_203B24C = {0};
@@ -26,7 +28,7 @@ bool8 sub_801C8C4(s32 a0, s32 a1, DungeonPos *a2, u32 a3)
         return FALSE;
 
     if (sUnknown_203B244 == NULL)
-        sUnknown_203B244 = MemoryAlloc(sizeof(struct unkStruct_203B244), 8);
+        sUnknown_203B244 = MemoryAlloc(sizeof(struct unkStruct_203B244), MEMALLOC_GROUP_8);
 
     sUnknown_203B244->unk0 = a0;
     sub_801CF94();
@@ -68,10 +70,10 @@ u32 sub_801CA08(bool8 a0)
 
     switch (GetKeyPress(&sUnknown_203B244->unk4B4.m.input)) {
         case 2:
-            PlayMenuSoundEffect(1);
+            PlayMenuSoundEffect(MENU_SFX_BACK);
             return 2;
         case 1:
-            PlayMenuSoundEffect(0);
+            PlayMenuSoundEffect(MENU_SFX_ACCEPT);
             return 3;
         case 5:
         case 6:
@@ -82,17 +84,17 @@ u32 sub_801CA08(bool8 a0)
             temp = sub_801CFE0(index);
             flag = FALSE;
             if (temp != 0 || (flag = (INVENTORY_SIZE > GetNumberOfFilledInventorySlots() + sub_801CFB8())) || flag) {
-                PlayMenuSoundEffect(6);
+                PlayMenuSoundEffect(MENU_SFX_TOGGLE);
                 sUnknown_203B244->unkF4[index] = sUnknown_203B244->unkF4[index] ^ 1;
                 MenuCursorUpdate(&sUnknown_203B244->unk4B4.m.input,0);
                 sub_801CCD8();
                 return 1;
             }
 
-            PlayMenuSoundEffect(2);
+            PlayMenuSoundEffect(MENU_SFX_FAIL);
             goto _0801CAF2;
         case 4:
-            PlayMenuSoundEffect(4);
+            PlayMenuSoundEffect(MENU_SFX_INFO);
             return 4;
         default:
     _0801CAF2:

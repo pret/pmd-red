@@ -68,7 +68,7 @@ static void DoFree(HeapDescriptor *, void *);
 static void DoInitHeap(HeapDescriptor *, struct HeapSettings *, struct HeapFreeListElement *, u32);
 static void InitSubHeap(HeapDescriptor *, struct HeapMemoryBlock2 *, u32);
 static HeapDescriptor *DoCreateSubHeap(struct unkMemoryStruct *a, u32 b);
-static void *DoAlloc(HeapDescriptor *heap, s32 size, u32 a2);
+static void *DoAlloc(HeapDescriptor *heap, s32 size, u32 group);
 static void InitHeapInternal(void);
 
 void InitHeap(void)
@@ -511,9 +511,10 @@ UNUSED static void xxx_unused_memory_free(HeapDescriptor *a1)
     }
 }
 
-static void *DoAlloc(HeapDescriptor *heap, s32 size, u32 a2)
+// group: See enum "MemAllocGroup"
+static void *DoAlloc(HeapDescriptor *heap, s32 size, u32 group)
 {
-    return _LocateSet(heap, size, a2 | 0x100);
+    return _LocateSet(heap, size, group | 0x100);
 }
 
 static void DoFree(HeapDescriptor *heapDescriptior, void *ptrToFree)

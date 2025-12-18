@@ -42,7 +42,7 @@ Entity * sub_8069660(Entity *target);
 Entity * sub_80696A8(Entity *target);
 Entity * sub_80696FC(Entity *target);
 Entity * sub_806977C(Entity *target);
-void SetMonSummaryInfoFromEntity(struct MonSummaryInfo *param_1, Entity *target);
+void SetMonSummaryInfoFromEntity(MonSummaryInfo *param_1, Entity *target);
 bool8 sub_8069D18(DungeonPos *pos,Entity *entity);
 void sub_8069D4C(struct unkStruct_8069D4C *r0, Entity *target);
 void TargetTileInFront(Entity *pokemon);

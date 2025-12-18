@@ -1,17 +1,15 @@
 #include "global.h"
 #include "globaldata.h"
-#include "friend_list_menu.h"
 #include "constants/dungeon.h"
-#include "music_util.h"
-#include "confirm_name_menu.h"
 #include "code_801B3C0.h"
 #include "code_801EE10.h"
 #include "code_801EE10_mid.h"
-#include "friend_list.h"
-#include "code_8024458.h"
 #include "code_8099360.h"
 #include "common_strings.h"
+#include "confirm_name_menu.h"
 #include "event_flag.h"
+#include "friend_list.h"
+#include "friend_list_menu.h"
 #include "ground_map.h"
 #include "input.h"
 #include "iq_skill_menu.h"
@@ -20,8 +18,10 @@
 #include "memory.h"
 #include "menu_input.h"
 #include "moves.h"
+#include "music_util.h"
 #include "pokemon.h"
 #include "pokemon_3.h"
+#include "recruited_mon_summary_menu.h"
 #include "string_format.h"
 #include "text_1.h"
 #include "text_2.h"
@@ -120,7 +120,7 @@ bool8 CreateFriendListMenu(s32 param_1)
     return FALSE;
   }
   else {
-    gUnknown_203B2B4 = MemoryAlloc(sizeof(unkStruct_203B2B4),8);
+    gUnknown_203B2B4 = MemoryAlloc(sizeof(unkStruct_203B2B4), MEMALLOC_GROUP_8);
     gUnknown_203B2B4->menuAction1 = 0;
     gUnknown_203B2B4->unk0 = param_1;
     gUnknown_203B2B4->unkC = MapIdToFriendAreaId(GetGroundMapID());
@@ -259,7 +259,7 @@ static void sub_8025518(void)
         sub_8012D60(&gUnknown_203B2B4->unk78,gUnknown_203B2B4->unkC8,0,gUnknown_203B2B4->unk108,gUnknown_203B2B4->menuAction1,2);
         break;
     case FRIEND_LIST_MENU_STATE_SUMMARY:
-        sub_8024458(gUnknown_203B2B4->species,2);
+        RecruitedMonSummaryMenu_Create(gUnknown_203B2B4->species,2);
         break;
     case FRIEND_LIST_MENU_STATE_CHECK_IQ:
         CreateIQSkillMenu(gUnknown_203B2B4->species);
@@ -511,16 +511,17 @@ static void sub_8025A84(void)
 
 static void sub_8025BCC(void)
 {
-    switch(sub_80244E4())
-    {
-        case 2:
-        case 3:
-            sub_802453C();
+    switch (RecruitedMonSummaryMenu_Input()) {
+        case RecruitedMonSummaryMenu_INPUTRET_BACK:
+        case RecruitedMonSummaryMenu_INPUTRET_ACCEPT: {
+            RecruitedMonSummaryMenu_Destroy();
             SetFriendListMenuState(2);
             break;
-        case 0:
-        case 1:
+        }
+        case RecruitedMonSummaryMenu_INPUTRET_NONE:
+        case RecruitedMonSummaryMenu_INPUTRET_LEFTRIGHT: {
             break;
+        }
     }
 }
 

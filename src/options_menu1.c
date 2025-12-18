@@ -51,7 +51,7 @@ static void sub_801E0FC(void);
 
 bool8 sub_801DCC4(void)
 {
-    sUnknown_203B25C = MemoryAlloc(sizeof(struct unkStruct_203B25C), 8);
+    sUnknown_203B25C = MemoryAlloc(sizeof(struct unkStruct_203B25C), MEMALLOC_GROUP_8);
     SetOptionsMenuState(OPTIONS_MENU_INIT);
     return TRUE;
 }

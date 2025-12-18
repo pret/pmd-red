@@ -27,7 +27,7 @@ void DrawMainMenu(void)
     s32 i;
 
     if (sUnknown_203B34C == NULL) {
-        sUnknown_203B34C = MemoryAlloc(sizeof(MainMenu2Work), 8);
+        sUnknown_203B34C = MemoryAlloc(sizeof(MainMenu2Work), MEMALLOC_GROUP_8);
         MemoryFill8(sUnknown_203B34C, 0, sizeof(MainMenu2Work));
     }
 

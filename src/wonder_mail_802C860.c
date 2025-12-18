@@ -33,7 +33,7 @@ bool8 InitializeJobListMenu(u32 a0)
     if (HasNoAcceptedJobs())
         return FALSE;
 
-    sUnknown_203B2F0 = MemoryAlloc(sizeof(struct unkStruct_203B2F0), 8);
+    sUnknown_203B2F0 = MemoryAlloc(sizeof(struct unkStruct_203B2F0), MEMALLOC_GROUP_8);
     sUnknown_203B2F0->menuAction = 0;
     sUnknown_203B2F0->unk0 = a0;
     SetJobListState(0);

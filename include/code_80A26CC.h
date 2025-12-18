@@ -9,11 +9,11 @@
 typedef struct DungeonInfo
 {
     /* 0x0 */ s16 mapID1; // See enum "GroundMapID". -1 if nothing
-    /* 0x2 */ s16 mapID2; // See enum "GroundMapID". -1 if nothing
-    /* 0x4 */ s16 mapID3; // See enum "GroundMapID". -1 if nothing
+    /* 0x2 */ s16 mapID2; // See enum "GroundMapID". -1 if nothing. Success map?
+    /* 0x4 */ s16 mapID3; // See enum "GroundMapID". -1 if nothing. Failure map?
     /* 0x6 */ s16 scriptID1; // See enum "ScriptID". -1 if nothing
     /* 0x8 */ s16 scriptID2; // See enum "ScriptID". -1 if nothing
-    /* 0xA */ s16 scriptID3; // See enum "ScriptID"
+    /* 0xA */ s16 scriptID3; // See enum "ScriptID". Exit script?
     /* 0xC */ u8 dungeonID; // See enum "DungeonID"
     /* 0xE */ s16 rescueDungeonID; // See enum "RescueDungeonId"
     /* 0x10 */ u8 unk10; // Always 1

@@ -36,7 +36,7 @@ UNUSED static bool8 sub_803A888(void)
 {
     ResetUnusedInputStruct();
     ShowWindows(NULL, TRUE, TRUE);
-    sUnknown_203B3F4 = MemoryAlloc(sizeof(unkStruct_203B3F4), 8);
+    sUnknown_203B3F4 = MemoryAlloc(sizeof(unkStruct_203B3F4), MEMALLOC_GROUP_8);
     sub_803A924(0);
     return TRUE;
 }

@@ -123,4 +123,8 @@ enum DungeonMusicID
     DUNGEON_MUS_STORMY_SEA_B40F // same as Tiny Woods
 };
 
-#endif //GUARD_CONSTANTS_BG_MUSIC_H
+#define STOP_SOUND_EFFECT 997
+#define STOP_FANFARE 998
+#define STOP_BGM 999
+
+#endif // GUARD_CONSTANTS_BG_MUSIC_H

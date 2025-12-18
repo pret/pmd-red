@@ -40,8 +40,8 @@ bool8 GroundScript_ExecutePP(Action *action, ActionUnkIds *param_2, ScriptInfoSm
 bool8 ExecutePredefinedScript(Action *param_1, ActionUnkIds *param_2, s16 index, const DebugLocation *debug);
 bool8 GroundScript_Cancel(Action *r0);
 bool8 GroundScriptNotify(Action *param_1, s32 param_2);
-void GroundScriptLockJumpZero(s16 index);
-void GroundScriptLock(s16 index, s32 r1);
+void GroundScriptLockJumpZero(s32 index);
+void GroundScriptLock(s32 index, s32 unlockVal);
 // Return value is enum "ESC_RetID"
 s16 HandleAction(Action *action, const DebugLocation *debug);
 void GroundScript_Unlock(void);

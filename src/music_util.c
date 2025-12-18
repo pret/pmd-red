@@ -4,10 +4,10 @@
 #include "music.h"
 #include "constants/bg_music.h"
 
-static EWRAM_DATA u32 sUnknownUnused = {0}; // Unused, only set in an unused function R=202DE1C | B=2134218
-static EWRAM_DATA s16 sSoundEffectCounter1 = {0}; // R=202DE20 | B=213420C
-static EWRAM_DATA s16 sSoundEffectCounter2 = {0}; // R=202DE22 | B=2134210
-static EWRAM_DATA s16 sUnusedCounter = {0}; // Contrary to the variables above, this one is never effectively checked. R=202DE24 | B=2134214
+static EWRAM_DATA u32 sUnknownUnused = { 0 }; // Unused, only set in an unused function R=202DE1C | B=2134218
+static EWRAM_DATA s16 sSoundEffectCounter1 = { 0 }; // R=202DE20 | B=213420C
+static EWRAM_DATA s16 sSoundEffectCounter2 = { 0 }; // R=202DE22 | B=2134210
+static EWRAM_DATA s16 sUnusedCounter = { 0 }; // Contrary to the variables above, this one is never effectively checked. R=202DE24 | B=2134214
 
 void ResetSoundEffectCounters(void)
 {
@@ -84,8 +84,7 @@ void FadeOutBGM_(u16 speed)
 
 bool8 IsEqualtoBGTrack(u16 songIndex)
 {
-    u32 currBGSong;
-    currBGSong = GetCurrentBGSong();
+    u32 currBGSong = GetCurrentBGSong();
 
     if (songIndex == STOP_BGM)
         return currBGSong != STOP_BGM;
@@ -118,15 +117,23 @@ bool8 IsSoundPlaying(u16 songIndex)
     return IsFanfareSEPlaying(songIndex);
 }
 
-static const u16 sMenuSoundEffects[] = {302, 303, 303, 301, 304, 306, 307};
+static const u16 sMenuSoundEffects[MENU_SFX_COUNT] = {
+    [MENU_SFX_ACCEPT] = 302,
+    [MENU_SFX_BACK] = 303,
+    [MENU_SFX_FAIL] = 303,
+    [MENU_SFX_NAVIGATE] = 301,
+    [MENU_SFX_INFO] = 304,
+    [MENU_SFX_SORT] = 306,
+    [MENU_SFX_TOGGLE] = 307
+};
 
-void PlayMenuSoundEffect(u32 arrId)
+void PlayMenuSoundEffect(u32 id)
 {
     if (sSoundEffectCounter1 > 0)
         return;
 
-    PlayFanfareSE(sMenuSoundEffects[arrId], MAX_VOLUME);
-    sSoundEffectCounter1 = 4;
+    PlayFanfareSE(sMenuSoundEffects[id], MAX_VOLUME);
+    sSoundEffectCounter1 = 4; // 4 frames
 }
 
 void PlayDialogueTextSound(void)
@@ -134,11 +141,11 @@ void PlayDialogueTextSound(void)
     if (sSoundEffectCounter2 > 0)
         return;
 
-    sSoundEffectCounter2 = 3;
+    sSoundEffectCounter2 = 3; // 3 frames
     PlayFanfareSE(305, MAX_VOLUME);
 }
 
-UNUSED static void sub_8011A2C(u32 a0)
+UNUSED static void sub_8011A2C(u32 val)
 {
-    sUnknownUnused = a0;
+    sUnknownUnused = val;
 }

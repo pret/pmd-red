@@ -62,7 +62,7 @@ u16 HandlePartnerSelectionInput(void)
     gUnknown_203B404->unk16 = 0;
 
     if (GetKeyPress(&gUnknown_203B404->s18.m.input) == INPUT_A_BUTTON) {
-        PlayMenuSoundEffect(0);
+        PlayMenuSoundEffect(MENU_SFX_ACCEPT);
         return gUnknown_203B404->PartnerArray[gUnknown_203B404->s18.m.input.menuIndex];
     }
 
@@ -99,7 +99,7 @@ void sub_803CE6C(void)
 
 static void sub_803CEAC(void)
 {
-    gUnknown_203B404 = MemoryAlloc(sizeof(struct PersonalityStruct_203B404), 8);
+    gUnknown_203B404 = MemoryAlloc(sizeof(struct PersonalityStruct_203B404), MEMALLOC_GROUP_8);
     nullsub_135();
 }
 

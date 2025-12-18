@@ -42,7 +42,7 @@ void CreateDebugMenu(void)
     s32 i;
 
     if (sDebugMenu == NULL) {
-        sDebugMenu = MemoryAlloc(sizeof(struct DebugMenu), 8);
+        sDebugMenu = MemoryAlloc(sizeof(struct DebugMenu), MEMALLOC_GROUP_8);
         MemoryFill8(sDebugMenu, 0, sizeof(struct DebugMenu));
     }
 

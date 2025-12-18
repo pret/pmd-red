@@ -28,7 +28,7 @@ bool8 sub_80211AC(u32 mode, u32 a1)
     if (sub_8021700(mode))
         return FALSE;
 
-    sWigglytuffShop1Work = MemoryAlloc(sizeof(WigglytuffShop1Work), 8);
+    sWigglytuffShop1Work = MemoryAlloc(sizeof(WigglytuffShop1Work), MEMALLOC_GROUP_8);
     sWigglytuffShop1Work->mode = mode;
     sWigglytuffShop1Work->s40.m.menuWinId = a1;
     sWigglytuffShop1Work->s40.m.menuWindow = &sWigglytuffShop1Work->s40.m.windows.id[sWigglytuffShop1Work->s40.m.menuWinId];
@@ -59,16 +59,16 @@ u32 sub_8021274(bool8 a0)
 
     switch (GetKeyPress(&sWigglytuffShop1Work->s40.m.input)) {
         case INPUT_B_BUTTON:
-            PlayMenuSoundEffect(1);
+            PlayMenuSoundEffect(MENU_SFX_BACK);
             return 2;
         case INPUT_A_BUTTON:
             if (sWigglytuffShop1Work->mode == 2 && GetFriendAreaPrice(sub_802132C()) > gTeamInventoryRef->teamMoney)
-                PlayMenuSoundEffect(2);
+                PlayMenuSoundEffect(MENU_SFX_FAIL);
             else
-                PlayMenuSoundEffect(0);
+                PlayMenuSoundEffect(MENU_SFX_ACCEPT);
             return 3;
         case INPUT_START_BUTTON:
-            PlayMenuSoundEffect(4);
+            PlayMenuSoundEffect(MENU_SFX_INFO);
             return 4;
         default:
             if (MenuCursorUpdate(&sWigglytuffShop1Work->s40.m.input, 1) != 0) {

@@ -13,6 +13,8 @@
 #include "text_2.h"
 #include "text_util.h"
 
+// This is a gulpin menu
+
 EWRAM_INIT unkStruct_203B270 *gUnknown_203B270 = { NULL };
 
 const WindowTemplate gUnknown_80DC240 = WIN_TEMPLATE_DUMMY;
@@ -52,7 +54,7 @@ u8 sub_801EE10(u32 param_1, s16 species, Move *moves, u32 param_4, const u8 *tex
 
     species_s32 = species;
     param_4_u8 = param_4;
-    gUnknown_203B270 = MemoryAlloc(sizeof(unkStruct_203B270), 8);
+    gUnknown_203B270 = MemoryAlloc(sizeof(unkStruct_203B270), MEMALLOC_GROUP_8);
     gUnknown_203B270->unk4 = param_4_u8;
     gUnknown_203B270->unk5 = 1;
     gUnknown_203B270->unk6 = 1;
@@ -111,26 +113,26 @@ u32 sub_801EF38(char param_1)
     }
     switch(GetKeyPress(&gUnknown_203B270->input)) {
         case INPUT_B_BUTTON:
-            PlayMenuSoundEffect(1);
+            PlayMenuSoundEffect(MENU_SFX_BACK);
             return 2;
         case INPUT_A_BUTTON:
-            PlayMenuSoundEffect(0);
+            PlayMenuSoundEffect(MENU_SFX_ACCEPT);
             return 3;
         case INPUT_START_BUTTON:
-            PlayMenuSoundEffect(4);
+            PlayMenuSoundEffect(MENU_SFX_INFO);
             return 4;
         case INPUT_DPAD_DOWN:
             index = gUnknown_203B270->input.menuIndex;
             sub_8013780(&gUnknown_203B270->input, unk_FindMoveEnabledForAIAfter8_v2(gUnknown_203B270->moves, index));
             if (index != gUnknown_203B270->input.menuIndex) {
-                PlayMenuSoundEffect(3);
+                PlayMenuSoundEffect(MENU_SFX_NAVIGATE);
             }
             break;
         case INPUT_DPAD_UP:
             index = gUnknown_203B270->input.menuIndex;
             sub_8013780(&gUnknown_203B270->input,unk_FindMoveEnabledForAIBefore8_v2(gUnknown_203B270->moves,index));
             if (index != gUnknown_203B270->input.menuIndex) {
-                PlayMenuSoundEffect(3);
+                PlayMenuSoundEffect(MENU_SFX_NAVIGATE);
             }
             break;
         case INPUT_R_DPAD_DOWN_BUTTONS:
@@ -138,7 +140,7 @@ u32 sub_801EF38(char param_1)
             moveIndex = gUnknown_203B270->input.menuIndex;
             newIndex = gUnknown_203B270->input.menuIndex = unk_SetMoveToLastInLinkedSequence8_v2(gUnknown_203B270->moves, moveIndex);
             if (moveIndex != newIndex) {
-                PlayMenuSoundEffect(3);
+                PlayMenuSoundEffect(MENU_SFX_NAVIGATE);
             }
             else {
                 goto _134;
@@ -150,11 +152,11 @@ u32 sub_801EF38(char param_1)
             moveIndex = gUnknown_203B270->input.menuIndex;
             newIndex = gUnknown_203B270->input.menuIndex = unk_SetMoveToFirstInLinkedSequence8_v2(gUnknown_203B270->moves,moveIndex);
             if (moveIndex != newIndex) {
-                PlayMenuSoundEffect(3);
+                PlayMenuSoundEffect(MENU_SFX_NAVIGATE);
             }
             else {
 _134:
-                    PlayMenuSoundEffect(2);
+                    PlayMenuSoundEffect(MENU_SFX_FAIL);
             }
             sub_801F280(TRUE);
             return 1;
@@ -163,20 +165,20 @@ _134:
                 if ((gTeamInventoryRef->teamMoney > 0x95) && (sub_8093318(gUnknown_203B270->input.menuIndex,gUnknown_203B270->moves)))
                 {
                     TryLinkMovesAfter(gUnknown_203B270->input.menuIndex,gUnknown_203B270->moves);
-                    PlayMenuSoundEffect(6);
+                    PlayMenuSoundEffect(MENU_SFX_TOGGLE);
                     flag = TRUE;
                     if (!gUnknown_203B270->unk4) {
                         gUnknown_203B270->unk4 = TRUE;
-                        PlaySound(0x14c);
+                        PlaySound(332); // money sound
                     }
                     break;
                 }
                 else if (UnlinkMovesAfter(gUnknown_203B270->input.menuIndex,gUnknown_203B270->moves)) {
-                    PlayMenuSoundEffect(6);
+                    PlayMenuSoundEffect(MENU_SFX_TOGGLE);
                     goto _ret;
                 }
                 else {
-                    PlayMenuSoundEffect(2);
+                    PlayMenuSoundEffect(MENU_SFX_FAIL);
                     break;
                 }
             }
@@ -185,20 +187,20 @@ _134:
             if (gUnknown_203B270->unk7 != 0) {
                 if (gUnknown_203B270->isTeamLeader) {
                     if (!ToggleSetMove(gUnknown_203B270->input.menuIndex,gUnknown_203B270->moves)) {
-                        PlayMenuSoundEffect(2);
+                        PlayMenuSoundEffect(MENU_SFX_FAIL);
                         break;
                     }
                     else {
-                        PlayMenuSoundEffect(6);
+                        PlayMenuSoundEffect(MENU_SFX_TOGGLE);
                         goto _ret;
                     }
                 }
                 else if (ToggleMoveEnabled(gUnknown_203B270->input.menuIndex,gUnknown_203B270->moves)) {
-                    PlayMenuSoundEffect(6);
+                    PlayMenuSoundEffect(MENU_SFX_TOGGLE);
                     goto _ret;
                 }
                 else {
-                    PlayMenuSoundEffect(2);
+                    PlayMenuSoundEffect(MENU_SFX_FAIL);
                     break;
                 }
             }

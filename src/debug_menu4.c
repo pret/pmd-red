@@ -33,7 +33,7 @@ static void sub_803B034(void);
 
 UNUSED static bool8 sub_803AC24(void)
 {
-    sUnknown_203B3F8 = MemoryAlloc(sizeof(unkStruct_203B3F8), 8);
+    sUnknown_203B3F8 = MemoryAlloc(sizeof(unkStruct_203B3F8), MEMALLOC_GROUP_8);
     sub_803ACD0(0);
     return TRUE;
 }

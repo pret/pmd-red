@@ -321,7 +321,7 @@ u32 NamingScreen_Init(u32 type, u8 *defaultText)
     s32 index;
     s32 i;
 
-    sNamingScreen = MemoryAlloc(sizeof(*sNamingScreen), 8);
+    sNamingScreen = MemoryAlloc(sizeof(*sNamingScreen), MEMALLOC_GROUP_8);
     sNamingScreen->type = type;
     sNamingScreen->inputCursorArrId = 0;
     sNamingScreen->insOvr = MODE_OVR;
@@ -454,20 +454,20 @@ u32 NamingScreen_HandleInput(void)
     switch (GetMenuInput()) {
         case INPUT_L_BUTTON:
             if (sNamingScreen->letterCursorPos == 0) {
-                PlayMenuSoundEffect(2);
+                PlayMenuSoundEffect(MENU_SFX_FAIL);
             }
             else {
                 sNamingScreen->letterCursorPos--;
-                PlayMenuSoundEffect(3);
+                PlayMenuSoundEffect(MENU_SFX_NAVIGATE);
             }
             break;
         case INPUT_R_BUTTON:
             if (sNamingScreen->letterCursorPos != sNamingScreen->maxLetters - 1 && sNamingScreen->letterCursorPos < GetEnteredNameLength()) {
                 sNamingScreen->letterCursorPos++;
-                PlayMenuSoundEffect(3);
+                PlayMenuSoundEffect(MENU_SFX_NAVIGATE);
             }
             else {
-                PlayMenuSoundEffect(2);
+                PlayMenuSoundEffect(MENU_SFX_FAIL);
             }
             break;
         case INPUT_A_BUTTON:
@@ -478,7 +478,7 @@ u32 NamingScreen_HandleInput(void)
             }
             break;
         case INPUT_START_BUTTON:
-            PlayMenuSoundEffect(3);
+            PlayMenuSoundEffect(MENU_SFX_NAVIGATE);
             sNamingScreen->inputCursorPosition = 5;
             break;
     }
@@ -501,7 +501,7 @@ static u32 HandleAPress(void)
     switch (letter) {
         case NAMING_LETTER_INS_OVR:
             sNamingScreen->insOvr = (sNamingScreen->insOvr == 0); // Flip
-            PlayMenuSoundEffect(4);
+            PlayMenuSoundEffect(MENU_SFX_INFO);
             UpdateInputWindow(FALSE);
             break;
         case NAMING_LETTER_DEL:
@@ -511,17 +511,17 @@ static u32 HandleAPress(void)
             break;
         case NAMING_LETTER_END:
             if (GetEnteredNameLength() == 0 || (sNamingScreen->isPassword && GetEnteredNameLength() != sNamingScreen->maxLetters)) {
-                PlayMenuSoundEffect(2);
+                PlayMenuSoundEffect(MENU_SFX_FAIL);
             }
             else {
-                PlayMenuSoundEffect(0);
+                PlayMenuSoundEffect(MENU_SFX_ACCEPT);
                 MemoryCopy8(sNamingScreen->defaultText, sNamingScreen->textPtr, sNamingScreen->maxLetters);
                 return 3;
             }
             break;
         default:
             if (sNamingScreen->isPassword && sub_803D0F0(letter) == 0xFF) {
-                PlayMenuSoundEffect(2);
+                PlayMenuSoundEffect(MENU_SFX_FAIL);
             }
             else {
                 if (sNamingScreen->insOvr == MODE_INS) {
@@ -540,7 +540,7 @@ static u32 HandleAPress(void)
                     sNamingScreen->inputCursorPosition = 5;
                 }
 
-                PlayMenuSoundEffect(0);
+                PlayMenuSoundEffect(MENU_SFX_ACCEPT);
                 UpdateNameWindow();
                 UpdateLetterWidths();
             }
@@ -554,13 +554,13 @@ static bool8 HandleBPress(void)
 {
     if (sNamingScreen->textPtr[sNamingScreen->letterCursorPos] == '\0') {
         if (sNamingScreen->letterCursorPos == 0) {
-            PlayMenuSoundEffect(2);
+            PlayMenuSoundEffect(MENU_SFX_FAIL);
             return TRUE;
         }
         else {
             sNamingScreen->letterCursorPos--;
             sNamingScreen->textPtr[sNamingScreen->letterCursorPos] = '\0';
-            PlayMenuSoundEffect(1);
+            PlayMenuSoundEffect(MENU_SFX_BACK);
             UpdateNameWindow();
             UpdateLetterWidths();
         }
@@ -574,7 +574,7 @@ static bool8 HandleBPress(void)
             ptr[0] = ptr[1];
         }
         sNamingScreen->textPtr[n] = 0;
-        PlayMenuSoundEffect(1);
+        PlayMenuSoundEffect(MENU_SFX_BACK);
         UpdateNameWindow();
         UpdateLetterWidths();
     }
@@ -642,7 +642,7 @@ static void HandleInputCursor(void)
 
     if (newPosition != sNamingScreen->inputCursorPosition) {
         sNamingScreen->inputCursorPosition = newPosition;
-        PlayMenuSoundEffect(3);
+        PlayMenuSoundEffect(MENU_SFX_NAVIGATE);
         sNamingScreen->inputCursorFrames = 8;
     }
 

@@ -11,7 +11,7 @@ static EWRAM_INIT Credits2Work *sCredits2Work = {NULL};
 
 bool8 sub_8035678(void)
 {
-    sCredits2Work = MemoryAlloc(sizeof(Credits2Work), 8);
+    sCredits2Work = MemoryAlloc(sizeof(Credits2Work), MEMALLOC_GROUP_8);
     sCredits2Work->state = 0;
     sCredits2Work->unk4 = 0;
     ClearScriptVarArray(NULL, EVENT_LOCAL);

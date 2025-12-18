@@ -59,7 +59,7 @@ static EWRAM_DATA s32 sUnknown_20398AC = { 0 };
 static EWRAM_DATA u32 sUnknown_20398B0 = { 0 };
 static EWRAM_DATA u32 sUnknown_20398B4 = { STARTMODE_NEW_GAME }; // See enum "StartModeVal"
 static EWRAM_DATA bool8 sUnknown_20398B8 = { FALSE };
-static EWRAM_DATA bool8 sUnknown_20398B9 = { FALSE };
+static EWRAM_DATA bool8 sUnknown_20398B9 = { FALSE }; // Music-related
 static EWRAM_DATA bool8 sScriptMode = { FALSE };
 UNUSED static EWRAM_DATA u8 sUnused1 = { 0 };
 static EWRAM_DATA u16 sUnknown_20398BC = { MAP_SQUARE }; // See enum "GroundMapID". Set but never read
@@ -72,7 +72,7 @@ static EWRAM_DATA u8 sUnknown_2039950 = 0; // Related to DUNGEON_ENTER_INDEX
 static EWRAM_INIT bool8 sUnknown_203B49C = { FALSE };
 static EWRAM_INIT bool8 sUnknown_203B49D = { FALSE };
 
-static s16 sub_8098FCC(u32 unused);
+static s16 GetReturnMap(u32 unusedStartMode);
 
 UNUSED static const u8 sUnusedConstData[154] = {
     0,  0,  0,  0,
@@ -116,7 +116,7 @@ UNUSED static const u8 sUnusedConstData[154] = {
     0,  0
 };
 
-u32 xxx_script_related_8098468(s32 startMode)
+u32 xxx_script_related_8098468_Async(s32 startMode)
 {
     s32 scriptID;
     s32 varE;
@@ -225,7 +225,7 @@ u32 xxx_script_related_8098468(s32 startMode)
                 UpdateScriptVarWithImmediate(0,DUNGEON_ENTER_FREQUENCY,1,2);
                 scriptVar13 = (s16)GetScriptVarValue(NULL,DUNGEON_ENTER);
                 if (scriptVar13 != -1) {
-                    s32 var;
+                    s32 returnMapID;
                     const DungeonInfo *dungInfo;
                     if (scriptVar13 == 81) {
                         dungInfo = GetScriptDungeonInfo((s16)GetScriptVarValue(NULL,DUNGEON_ENTER_INDEX));
@@ -237,9 +237,9 @@ u32 xxx_script_related_8098468(s32 startMode)
                     if (sUnknown_20398B4 == STARTMODE_DUNGEON_WON) {
                         SetScriptVarArrayValue(NULL,DUNGEON_CLEAR_LIST,(u16) scriptVar13,1);
                     }
-                    var = sub_8098FCC(sUnknown_20398B4);
-                    if (var != -1) {
-                        sUnknown_20398BE = var;
+                    returnMapID = GetReturnMap(sUnknown_20398B4);
+                    if (returnMapID != -1) {
+                        sUnknown_20398BE = returnMapID;
                         sUnknown_20398C0 = 0;
                     }
                 }
@@ -340,7 +340,7 @@ u32 xxx_script_related_8098468(s32 startMode)
             GroundObject_Action();
             GroundEffect_Action();
             nullsub_105();
-            sub_809B474();
+            sub_809B474_Async();
             GroundScript_Unlock();
             sub_809D25C();
             sub_80A59DC();
@@ -454,7 +454,7 @@ u32 xxx_script_related_8098468(s32 startMode)
 
 UNUSED static void sub_8098BDC(void)
 {
-    sub_809B57C();
+    sub_809B57C_Async();
     GroundScript_Unlock();
     sub_809D25C();
     sub_80A59DC();
@@ -539,7 +539,7 @@ void sub_8098CC8(void)
 // r0: enum "GroundMapID"
 bool8 GroundMainGroundRequest(s32 r0, s32 r1, s32 r2)
 {
-    s32 temp = (s16) r0; // force a asr shift
+    s32 temp = (s16)r0;
 
     if (sUnknown_20398A8 == Unk_20398A8_UNK0) {
         Log(0, "GroundMain ground request %3d %3d", temp, r2);
@@ -684,7 +684,7 @@ const char *GetCurrentGroundPlaceName(void)
 }
 
 // Returns an enum GroundMapID
-static s16 sub_8098FCC(u32 unused)
+static s16 GetReturnMap(u32 unusedStartMode)
 {
     s32 scriptDungeon;
     s32 scriptDungeon__;
@@ -728,7 +728,7 @@ static s16 sub_8098FCC(u32 unused)
 
 UNUSED static const char *sub_80990B8(void)
 {
-    s16 index = sub_8098FCC(11);
+    s16 index = GetReturnMap(STARTMODE_11);
     if (index != -1) {
         return GetGroundPlaceName(gGroundMapConversionTable[index].groundPlaceId);
     }

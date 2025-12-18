@@ -218,7 +218,7 @@ static const struct MapToDungeonStruct sMapToDungeonTable[] = {
 
 void AllocGroundMapAction(void)
 {
-    gGroundMapAction = MemoryAlloc(sizeof(GroundMapAction), 6);
+    gGroundMapAction = MemoryAlloc(sizeof(GroundMapAction), MEMALLOC_GROUP_6);
     gGroundMapAction->groundMapId = -1;
     InitActionWithParams(&gGroundMapAction->action, &sGroundScriptNullCallbacks, 0, -1, -1);
     sub_80A5E8C(0);
@@ -394,7 +394,7 @@ void GroundMap_Select(s32 mapId_)
         GroundBg_FreeAll(gGroundMapDungeon_3001B70);
         FREE_AND_SET_NULL(gGroundMapDungeon_3001B70);
     }
-    gGroundMapDungeon_3001B70 = MemoryAlloc(sizeof(*gGroundMapDungeon_3001B70),6);
+    gGroundMapDungeon_3001B70 = MemoryAlloc(sizeof(*gGroundMapDungeon_3001B70), MEMALLOC_GROUP_6);
     gGroundMapAction->groundMapId = mapId;
     if (mapId == -1) {
         GroundBg_Init(gGroundMapDungeon_3001B70, &gUnknown_8117324);
@@ -508,7 +508,7 @@ void GroundMap_SelectDungeon(s32 mapId_, const DungeonLocation *loc, u32 param_2
         FREE_AND_SET_NULL(gGroundMapDungeon_3001B70);
     }
 
-    gGroundMapDungeon_3001B70 = MemoryAlloc(sizeof(*gGroundMapDungeon_3001B70),6);
+    gGroundMapDungeon_3001B70 = MemoryAlloc(sizeof(*gGroundMapDungeon_3001B70), MEMALLOC_GROUP_6);
     gGroundMapAction->groundMapId = mapId;
     if (mapId == -1 || loc->id == DUNGEON_INVALID) {
         GroundBg_Init(gGroundMapDungeon_3001B70, &gUnknown_8117324);

@@ -34,7 +34,7 @@ EWRAM_INIT static const char *sItemReceivedStrings[3] = {
 
 void InitInternalScriptItemsData(void)
 {
-    sScriptItemsData = MemoryAlloc(sizeof(struct ScriptItemsData), 6);
+    sScriptItemsData = MemoryAlloc(sizeof(struct ScriptItemsData), MEMALLOC_GROUP_6);
     sScriptItemsData->tableId = -1;
     sScriptItemsData->unk8 = 0;
 }
@@ -64,7 +64,7 @@ struct ItemWithQuantity
     s16 quantity;
 };
 
-static const struct ItemWithQuantity sScriptItemsTable[] = {
+static const struct ItemWithQuantity sScriptItemsTable[10] = {
     {ITEM_ORAN_BERRY, 0},
     {ITEM_PECHA_BERRY, 0},
     {ITEM_RAWST_BERRY, 0},

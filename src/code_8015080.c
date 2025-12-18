@@ -50,7 +50,7 @@ bool8 sub_8015080(u8 *buffer, const MenuItem *menuItems)
 {
     s32 index;
 
-    gUnknown_203B1F8 = MemoryAlloc(sizeof(struct unkStruct_203B1F8), 8);
+    gUnknown_203B1F8 = MemoryAlloc(sizeof(struct unkStruct_203B1F8), MEMALLOC_GROUP_8);
     gUnknown_203B1F8->menuAction = 0;
 
     for(index = 0; index < MAX_WINDOWS; index++)

@@ -58,7 +58,7 @@ u32 CreateConfirmNameMenu(u32 mode, u8 *name)
     ResetUnusedInputStruct();
     ShowWindows(NULL, TRUE, TRUE);
 
-    sConfirmMenu = MemoryAlloc(sizeof(struct ConfirmMenuStruct), 8);
+    sConfirmMenu = MemoryAlloc(sizeof(struct ConfirmMenuStruct), MEMALLOC_GROUP_8);
     sConfirmMenu->unk0 = mode;
     sConfirmMenu->pokeName = name;
 

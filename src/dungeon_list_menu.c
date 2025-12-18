@@ -60,7 +60,7 @@ bool8 DungeonListMenu_Init(u32 windowId, DungeonPos *winPos, s32 perPageCount, b
         return FALSE;
 
     if (sDungeonListMenu == NULL)
-        sDungeonListMenu = MemoryAlloc(sizeof(struct DungeonListMenu), 8);
+        sDungeonListMenu = MemoryAlloc(sizeof(struct DungeonListMenu), MEMALLOC_GROUP_8);
 
     sDungeonListMenu->showIcons = showIcons;
     sDungeonListMenu->m.m.menuWinId = windowId;
@@ -112,10 +112,10 @@ u32 DungeonListMenu_GetInput(u8 arrowType)
     else {
         switch (GetKeyPress(&sDungeonListMenu->m.m.input)) {
             case INPUT_B_BUTTON:
-                PlayMenuSoundEffect(1);
+                PlayMenuSoundEffect(MENU_SFX_BACK);
                 return MENU_INPUT_B_PRESS;
             case INPUT_A_BUTTON:
-                PlayMenuSoundEffect(0);
+                PlayMenuSoundEffect(MENU_SFX_ACCEPT);
                 return MENU_INPUT_A_PRESS;
             default:
                 if (MenuCursorUpdate(&sDungeonListMenu->m.m.input, TRUE)) {

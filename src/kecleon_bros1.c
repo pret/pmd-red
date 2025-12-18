@@ -126,7 +126,7 @@ bool8 CreateKecleonBros(u32 mode)
     u8 *monName;
     OpenedFile *faceFile;
 
-    sKecleonBrosWork1 = MemoryAlloc(sizeof(KecleonBrosWork1), 8);
+    sKecleonBrosWork1 = MemoryAlloc(sizeof(KecleonBrosWork1), MEMALLOC_GROUP_8);
     sKecleonBrosWork1->menuAction1 = 0;
     sKecleonBrosWork1->menuAction2 = 0;
     sKecleonBrosWork1->menuAction3 = 0;

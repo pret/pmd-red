@@ -25,7 +25,7 @@ static void sub_801B2D8(void);
 
 bool8 sub_801AFA4(u32 index)
 {
-    sUnknown_203B22C = MemoryAlloc(sizeof(unkStruct_203B22C), 8);
+    sUnknown_203B22C = MemoryAlloc(sizeof(unkStruct_203B22C), MEMALLOC_GROUP_8);
     sUnknown_203B22C->teamItemIndex = index;
     sUnknown_203B22C->id = gTeamInventoryRef->teamItems[index].id;
     sUnknown_203B22C->moveID = GetItemMoveID(sUnknown_203B22C->id);

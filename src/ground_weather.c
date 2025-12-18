@@ -42,7 +42,7 @@ static const SubStruct_52C gUnknown_8117784 = {
 
 void sub_80A5E8C(bool8 param_1)
 {
-    gUnknown_3001B74 = MemoryAlloc(sizeof(unkStruct_3001B74), 6);
+    gUnknown_3001B74 = MemoryAlloc(sizeof(unkStruct_3001B74), MEMALLOC_GROUP_6);
     gUnknown_3001B74->unk0 = -1;
     gUnknown_3001B74->unk2 = 0;
     sub_80A5EDC(param_1);
@@ -67,7 +67,7 @@ void sub_80A5EDC(bool8 param_1)
     }
 
     if (param_1) {
-        gUnknown_3001B78 = MemoryAlloc(sizeof(GroundBg), 6);
+        gUnknown_3001B78 = MemoryAlloc(sizeof(GroundBg), MEMALLOC_GROUP_6);
         GroundBg_Init(gUnknown_3001B78, &gUnknown_8117784);
         sub_80A2FBC(gUnknown_3001B78, -1);
     }

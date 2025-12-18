@@ -1141,7 +1141,7 @@ void sub_8042390(Entity *entity, Item *item)
 
     if (sub_8042768(entity)) {
         id = !ItemSticky(item) ? item->id : ITEM_NOTHING;
-        sub_800EF40(id, 0);
+        sub_800EF40(id, FALSE);
         sub_800EF64();
         DungeonWaitFrames_Async(4,0x42);
         local_14.x = (entity->pixelPos).x / 256;
@@ -1538,7 +1538,7 @@ static void sub_8042B34(s32 a0, s32 a1, s32 a2)
     s32 i;
     s32 r8 = 0;
     Entity *leader = CutsceneGetLeader();
-    gUnknown_203B414 = MemoryAlloc(sizeof(*gUnknown_203B414), 7);
+    gUnknown_203B414 = MemoryAlloc(sizeof(*gUnknown_203B414), MEMALLOC_GROUP_7);
 
     gUnknown_203B414->unk0 = a0;
     gUnknown_203B414->unk8 = (a1 + 1) * 4;

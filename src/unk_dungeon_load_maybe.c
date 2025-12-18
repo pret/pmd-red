@@ -23,7 +23,7 @@ void sub_80ADD9C(OpenedFile **a0, OpenedFile **a1, u32 *a2, void *a3, u16 *a4, c
     u8 dungId;
     s32 dungFloor;
     struct DungeonMapParam1 *strPtr;
-    void *r10 = MemoryAlloc(0x930, 7);
+    void *r10 = MemoryAlloc(0x930, MEMALLOC_GROUP_7);
     OpenedFile *mapParamFile = OpenFileAndGetFileDataPtr("mapparam", &gDungeonFileArchive);
 
     GeneralizeMazeDungeonLoc(&dungLoc, a5);

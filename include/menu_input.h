@@ -1,6 +1,7 @@
 #ifndef GUARD_MENU_INPUT_H
 #define GUARD_MENU_INPUT_H
 
+#include "constants/input.h"
 #include "structs/menu.h"
 #include "structs/str_text.h"
 

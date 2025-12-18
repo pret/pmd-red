@@ -104,7 +104,7 @@ bool8 sub_8030F58(u32 wonderMailType)
   ResetUnusedInputStruct();
   ShowWindows(NULL, TRUE, TRUE);
   if (gUnknown_203B328 == NULL) {
-    gUnknown_203B328 = MemoryAlloc(sizeof(struct unkStruct_203B328),8);
+    gUnknown_203B328 = MemoryAlloc(sizeof(struct unkStruct_203B328), MEMALLOC_GROUP_8);
     MemoryFill8(gUnknown_203B328,0,sizeof(struct unkStruct_203B328));
   }
   gUnknown_203B328->wonderMailType = wonderMailType;

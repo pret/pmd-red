@@ -647,7 +647,7 @@ void HandleBossFaint_Async(Entity *entity, u8 monsterBehavior, bool8 transformed
     }
 
     if (!transformedIntoFriend && gDungeon->unk2 != DUNGEON_UNK2_0)
-        DungeonStartNewBGM(999);
+        DungeonStartNewBGM(STOP_BGM);
 }
 
 void sub_8085140_Async(void)

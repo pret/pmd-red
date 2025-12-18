@@ -762,13 +762,13 @@ s32 RestorePoke2s(u8* a1, s32 size)
 }
 
 // arm9.bin::0205C454
-void ReadPoke1LevelBits(DataSerializer* a1, struct unkPokeSubStruct_C* unkC)
+void ReadPoke1LevelBits(DataSerializer* a1, unkPokeSubStruct_C* unkC)
 {
     ReadBits(a1, &unkC->level, 7);
 }
 
 // arm9.bin::0205C444
-void WritePoke1LevelBits(DataSerializer* a1, struct unkPokeSubStruct_C* unkC)
+void WritePoke1LevelBits(DataSerializer* a1, unkPokeSubStruct_C* unkC)
 {
     WriteBits(a1, &unkC->level, 7);
 }

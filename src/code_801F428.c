@@ -50,7 +50,7 @@ void sub_801F700(void);
 bool8 sub_801F428(s16 index, s32 param_2)
 {
     s32 index_s32 = index;
-    gUnknown_203B274 = MemoryAlloc(sizeof(struct unkStruct_203B274), 0x8);
+    gUnknown_203B274 = MemoryAlloc(sizeof(struct unkStruct_203B274), MEMALLOC_GROUP_8);
     gUnknown_203B274->pokeStruct = &gRecruitedPokemonRef->pokemon[index_s32];
     gUnknown_203B274->unk4 = &gUnknown_203B274->unk8;
     gUnknown_203B274->s348.m.menuWinId = param_2;
@@ -80,13 +80,13 @@ u32 sub_801F520(u8 param_1)
         switch(GetKeyPress(&gUnknown_203B274->s348.m.input))
         {
             case 2:
-                PlayMenuSoundEffect(1);
+                PlayMenuSoundEffect(MENU_SFX_BACK);
                 return 2;
             case 1:
-                PlayMenuSoundEffect(0);
+                PlayMenuSoundEffect(MENU_SFX_ACCEPT);
                 return 3;
             case 4:
-                PlayMenuSoundEffect(4);
+                PlayMenuSoundEffect(MENU_SFX_INFO);
                 return 4;
             default:
                 break;

@@ -16,6 +16,8 @@
 #include "text_1.h"
 #include "text_2.h"
 
+// This file seems to be the kecleon "sell" menu
+
 // size: R=0xF4 | B=0xF0
 typedef struct unkStruct_203B224
 {
@@ -42,7 +44,7 @@ bool8 sub_801A5D8(u32 param_1, s32 param_2, DungeonPos *param_3, u32 param_4)
         return FALSE;
 
     if (gUnknown_203B224 == NULL)
-        gUnknown_203B224 = MemoryAlloc(sizeof(unkStruct_203B224), 8);
+        gUnknown_203B224 = MemoryAlloc(sizeof(unkStruct_203B224), MEMALLOC_GROUP_8);
 
     gUnknown_203B224->unk0 = param_1;
     FillInventoryGaps();
@@ -82,7 +84,7 @@ u32 sub_801A6E8(bool8 param_1)
 
     switch (GetKeyPress(&gUnknown_203B224->unk54.m.input)) {
         case INPUT_B_BUTTON:
-            PlayMenuSoundEffect(1);
+            PlayMenuSoundEffect(MENU_SFX_BACK);
             return 2;
         case INPUT_A_BUTTON:
             switch (gUnknown_203B224->unk0) {
@@ -90,31 +92,31 @@ u32 sub_801A6E8(bool8 param_1)
                 case 1:
                 case 2:
                     if (gUnknown_203B224->unk4[sub_801A8AC()] != 0)
-                        PlayMenuSoundEffect(2);
+                        PlayMenuSoundEffect(MENU_SFX_FAIL);
                     else
-                        PlayMenuSoundEffect(0);
+                        PlayMenuSoundEffect(MENU_SFX_ACCEPT);
                     break;
                 case 3:
                     if (sub_801AEA8() != 0 || sub_801ADA0(sub_801A8AC()))
-                        PlayMenuSoundEffect(0);
+                        PlayMenuSoundEffect(MENU_SFX_ACCEPT);
                     else
-                        PlayMenuSoundEffect(2);
+                        PlayMenuSoundEffect(MENU_SFX_FAIL);
                     break;
                 case 4:
                     item = gTeamInventoryRef->teamItems[sub_801A8AC()];
 
                     if (IsShoppableItem(item.id) && GetActualSellPrice(&item) + gTeamInventoryRef->teamMoney <= MAX_TEAM_MONEY)
-                        PlayMenuSoundEffect(0);
+                        PlayMenuSoundEffect(MENU_SFX_ACCEPT);
                     else
-                        PlayMenuSoundEffect(2);
+                        PlayMenuSoundEffect(MENU_SFX_FAIL);
                     break;
                 case 5:
-                    PlayMenuSoundEffect(0);
+                    PlayMenuSoundEffect(MENU_SFX_ACCEPT);
                     break;
             }
             return 3;
         case INPUT_START_BUTTON:
-            PlayMenuSoundEffect(4);
+            PlayMenuSoundEffect(MENU_SFX_INFO);
             return 4;
         case INPUT_L_BUTTON:
         case INPUT_R_BUTTON:
@@ -123,18 +125,18 @@ u32 sub_801A6E8(bool8 param_1)
 
             index = sub_801A8AC();
             if (gUnknown_203B224->unk4[index] != 0 || sub_801ADA0(index)) {
-                PlayMenuSoundEffect(6);
+                PlayMenuSoundEffect(MENU_SFX_TOGGLE);
                 gUnknown_203B224->unk4[index] ^= 1;
                 MenuCursorUpdate(&gUnknown_203B224->unk54.m.input, 0);
                 sub_801A9E0();
                 return 1;
             }
 
-            PlayMenuSoundEffect(2);
+            PlayMenuSoundEffect(MENU_SFX_FAIL);
             goto _0801A87C;
         case INPUT_SELECT_BUTTON:
             if (gUnknown_203B224->unk0 != 2) {
-                PlayMenuSoundEffect(5);
+                PlayMenuSoundEffect(MENU_SFX_SORT);
                 SortInventoryItems();
                 sub_801A9E0();
             }

@@ -55,7 +55,7 @@ bool8 CreateFelicityBank(s32 mode)
 
     ResetUnusedInputStruct();
     ShowWindows(NULL, TRUE, TRUE);
-    sFelicityBankWork = MemoryAlloc(sizeof(FelicityBankWork), 8);
+    sFelicityBankWork = MemoryAlloc(sizeof(FelicityBankWork), MEMALLOC_GROUP_8);
     sFelicityBankWork->menuAction = 0;
     sFelicityBankWork->mode = mode;
     CopyYellowMonsterNametoBuffer(gSpeakerNameBuffer, MONSTER_PERSIAN);

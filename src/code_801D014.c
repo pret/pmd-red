@@ -5,14 +5,13 @@
 #include "code_800D090.h"
 #include "code_801D014.h"
 #include "code_80227B8.h"
-#include "friend_list.h"
-#include "code_8024458.h"
 #include "code_80958E8.h"
 #include "common_strings.h"
 #include "def_filearchives.h"
 #include "event_flag.h"
 #include "friend_area.h"
 #include "friend_area_action_menu.h"
+#include "friend_list.h"
 #include "friend_list_menu.h"
 #include "ground_lives.h"
 #include "ground_main.h"
@@ -23,6 +22,7 @@
 #include "menu_input.h"
 #include "options_menu1.h"
 #include "party_list_menu.h"
+#include "recruited_mon_summary_menu.h"
 #include "rescue_team_info.h"
 #include "string_format.h"
 #include "text_1.h"
@@ -75,7 +75,7 @@ bool8 sub_801D014(Pokemon *a0)
     ResetUnusedInputStruct();
     ShowWindows(NULL, TRUE, TRUE);
 
-    sUnknown_203B250 = MemoryAlloc(sizeof(struct unk_203B250), 8);
+    sUnknown_203B250 = MemoryAlloc(sizeof(struct unk_203B250), MEMALLOC_GROUP_8);
     sUnknown_203B250->menuAction = sUnknown_203B254;
     sUnknown_203B250->pokeStruct = a0;
 
@@ -278,7 +278,7 @@ static void sub_801D3A8(void)
             CreateFriendListMenu(1);
             break;
         case 8:
-            sub_8024458(sUnknown_203B250->index, 2);
+            RecruitedMonSummaryMenu_Create(sUnknown_203B250->index, 2);
             break;
         case 9:
             CreateIQSkillMenu(sUnknown_203B250->index);
@@ -495,16 +495,18 @@ static void sub_801D7CC(void)
 
 static void sub_801D808(void)
 {
-    switch (sub_80244E4()) {
-        case 0:
-        case 1:
-        default:
+    switch (RecruitedMonSummaryMenu_Input()) {
+        case RecruitedMonSummaryMenu_INPUTRET_NONE:
+        case RecruitedMonSummaryMenu_INPUTRET_LEFTRIGHT:
+        default: {
             break;
-        case 2:
-        case 3:
-            sub_802453C();
+        }
+        case RecruitedMonSummaryMenu_INPUTRET_BACK:
+        case RecruitedMonSummaryMenu_INPUTRET_ACCEPT: {
+            RecruitedMonSummaryMenu_Destroy();
             sub_801D208(1);
             break;
+        }
     }
 }
 

@@ -20,7 +20,7 @@ static void sub_801E76C(void);
 
 bool8 CreateHintDisplayScreen(u32 index)
 {
-    sUnknown_203B268 = MemoryAlloc(sizeof(MenuHeaderWindow), 8);
+    sUnknown_203B268 = MemoryAlloc(sizeof(MenuHeaderWindow), MEMALLOC_GROUP_8);
     sUnknown_203B268->m.menuWinId = 0;
     sUnknown_203B268->m.menuWindow = &sUnknown_203B268->m.windows.id[0];
     RestoreSavedWindows(&sUnknown_203B268->m.windows);
@@ -39,10 +39,10 @@ u32 HandleHintDisplayScreenInput(void)
 {
     switch (GetKeyPress(&sUnknown_203B268->m.input)) {
         case 2:
-            PlayMenuSoundEffect(1);
+            PlayMenuSoundEffect(MENU_SFX_BACK);
             return 2;
         case 1:
-            PlayMenuSoundEffect(0);
+            PlayMenuSoundEffect(MENU_SFX_ACCEPT);
             return 3;
         default:
             if (MenuCursorUpdateOnlyLeftRight(&sUnknown_203B268->m.input)) {

@@ -30,7 +30,7 @@ bool8 CreateIQSkillMenu(s16 species)
     if (HasNoAvailIQSkills(species_s32))
         return FALSE;
 
-    sIQSkillMenu = MemoryAlloc(sizeof(struct IQSkillMenu), 8);
+    sIQSkillMenu = MemoryAlloc(sizeof(struct IQSkillMenu), MEMALLOC_GROUP_8);
     sIQSkillMenu->menuAction = 0;
     sIQSkillMenu->species = species_s32;
     sIQSkillMenu->pokeStruct = &gRecruitedPokemonRef->pokemon[species_s32];

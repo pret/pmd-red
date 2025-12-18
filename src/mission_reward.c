@@ -113,7 +113,7 @@ u32 sub_802F204(unkStruct_802F204 *r0, bool8 displayClientSprite)
 
     ResetUnusedInputStruct();
     ShowWindows(NULL, TRUE, TRUE);
-    gUnknown_203B310 = MemoryAlloc(sizeof(struct unkStruct_203B310), 8);
+    gUnknown_203B310 = MemoryAlloc(sizeof(struct unkStruct_203B310), MEMALLOC_GROUP_8);
     gUnknown_203B310->unk10 = r0;
     gUnknown_203B310->itemRewardIndex = 0;
     gUnknown_203B310->displayClientDialogueSprite = displayClientSprite;

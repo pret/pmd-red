@@ -25,7 +25,7 @@ bool8 sub_8019E40(u32 r0)
     if (CountKecleonShopItems() == 0)
         return FALSE;
 
-    gUnknown_203B214 = MemoryAlloc(sizeof(*gUnknown_203B214), 8);
+    gUnknown_203B214 = MemoryAlloc(sizeof(*gUnknown_203B214), MEMALLOC_GROUP_8);
     gUnknown_203B214->m.menuWinId = r0;
     gUnknown_203B214->m.menuWindow = &gUnknown_203B214->m.windows.id[gUnknown_203B214->m.menuWinId];
     RestoreSavedWindows(&gUnknown_203B214->m.windows);
@@ -54,7 +54,7 @@ u32 sub_8019EDC(bool8 r0)
 
     switch (GetKeyPress(&gUnknown_203B214->m.input)) {
         case INPUT_B_BUTTON:
-            PlayMenuSoundEffect(1);
+            PlayMenuSoundEffect(MENU_SFX_BACK);
             return 2;
         case INPUT_A_BUTTON:
             item = GetKecleonShopItem(sub_8019FB0());
@@ -62,12 +62,12 @@ u32 sub_8019EDC(bool8 r0)
             slot.quantity = item->quantity;
 
             if (GetActualBuyPrice(&slot) > gTeamInventoryRef->teamMoney)
-                PlayMenuSoundEffect(2);
+                PlayMenuSoundEffect(MENU_SFX_FAIL);
             else
-                PlayMenuSoundEffect(0);
+                PlayMenuSoundEffect(MENU_SFX_ACCEPT);
             return 3;
         case INPUT_START_BUTTON:
-            PlayMenuSoundEffect(4);
+            PlayMenuSoundEffect(MENU_SFX_INFO);
             return 4;
         default:
             if (MenuCursorUpdate(&gUnknown_203B214->m.input, 1) != FALSE) {

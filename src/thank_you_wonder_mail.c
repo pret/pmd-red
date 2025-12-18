@@ -229,7 +229,7 @@ bool8 CreateThankYouMailPelipper(void)
 
   ResetUnusedInputStruct();
   ShowWindows(NULL, TRUE, TRUE);
-  sUnknown_203B2C4 = MemoryAlloc(sizeof(WonderMailStruct_203B2C4), 8);
+  sUnknown_203B2C4 = MemoryAlloc(sizeof(WonderMailStruct_203B2C4), MEMALLOC_GROUP_8);
   MemoryFill8(sUnknown_203B2C4, 0, sizeof(WonderMailStruct_203B2C4));
 
   CopyYellowMonsterNametoBuffer(gSpeakerNameBuffer, MONSTER_PELIPPER);

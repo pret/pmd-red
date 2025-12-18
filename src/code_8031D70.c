@@ -56,7 +56,7 @@ void DrawSOSPasswordScreen(void);
 
 bool8 sub_8031D70(u32 mailIndex, s32 param_2)
 {
-  gUnknown_203B334 = MemoryAlloc(sizeof(struct unkStruct_203B334),8);
+  gUnknown_203B334 = MemoryAlloc(sizeof(struct unkStruct_203B334), MEMALLOC_GROUP_8);
   gUnknown_203B334->mailIndex = mailIndex;
   ResetTouchScreenMenuInput(&gUnknown_203B334->unk4);
   gUnknown_203B334->unk10 = param_2;
@@ -72,10 +72,10 @@ u32 sub_8031DCC(void)
     switch(sub_8012A64(&gUnknown_203B334->unk4, gUnknown_203B334->unk10))
     {
         case 2:
-            PlayMenuSoundEffect(1);
+            PlayMenuSoundEffect(MENU_SFX_BACK);
             return 2;
         case 1:
-            PlayMenuSoundEffect(0);
+            PlayMenuSoundEffect(MENU_SFX_ACCEPT);
             return 3;
         default:
             return 0;

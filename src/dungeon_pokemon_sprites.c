@@ -359,7 +359,7 @@ static void LoadStatusGraphics(s32 graphicIndex, bool8 queueLoad)
 void InitDungeonPokemonSprites(void)
 {
     if (sDungeonPokemonSprites == NULL) {
-        sDungeonPokemonSprites = MemoryAlloc(sizeof(DungeonPokemonSprites),12);
+        sDungeonPokemonSprites = MemoryAlloc(sizeof(DungeonPokemonSprites), MEMALLOC_GROUP_12);
         MemoryClear8(sDungeonPokemonSprites,sizeof(DungeonPokemonSprites));
     }
     sDungeonPokemonSprites->frame = 0;

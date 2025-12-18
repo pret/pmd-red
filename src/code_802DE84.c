@@ -18,7 +18,7 @@ static void sub_802DF88(void);
 
 bool8 sub_802DE84(unkStruct_802C39C *mail)
 {
-    sUnknown_203B300 = MemoryAlloc(sizeof(struct unkStruct_203B300), 8);
+    sUnknown_203B300 = MemoryAlloc(sizeof(struct unkStruct_203B300), MEMALLOC_GROUP_8);
     sUnknown_203B300->mail = mail;
     ResetTouchScreenMenuInput(&sUnknown_203B300->unk0);
     sUnknown_203B300->unk10 = sUnknown_203B300->mail->unk0[0];
@@ -33,10 +33,10 @@ u32 sub_802DEE0(void)
 {
     switch (sub_8012A64(&sUnknown_203B300->unk0, sUnknown_203B300->unk10)) {
         case 2:
-            PlayMenuSoundEffect(1);
+            PlayMenuSoundEffect(MENU_SFX_BACK);
             return 2;
         case 1:
-            PlayMenuSoundEffect(0);
+            PlayMenuSoundEffect(MENU_SFX_ACCEPT);
             return 3;
         default:
             return 0;

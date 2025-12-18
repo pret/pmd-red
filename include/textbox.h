@@ -59,8 +59,8 @@ bool8 ScriptSpecialTextHandler2(s32 kind, u32 a1, MonOrStrPtr_Arg monOrStr);
 // kind: See enum "SpecialTextKind"
 bool8 ScriptSpecialTextHandler(s32 kind, u32 a1, s32 a2, MonOrStrPtr_Arg monOrStr);
 bool8 sub_809B260(s32 *a0);
-void sub_809B474(void);
-void sub_809B57C(void);
+void sub_809B474_Async(void);
+void sub_809B57C_Async(void);
 void sub_809B614(void);
 void sub_809B638(void);
 

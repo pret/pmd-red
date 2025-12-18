@@ -122,7 +122,7 @@ void CreateSaveMenu(s32 currMenu)
   s32 index;
 
   if (sSaveMenuWork == NULL) {
-    sSaveMenuWork = MemoryAlloc(sizeof(SaveMenuWork),8);
+    sSaveMenuWork = MemoryAlloc(sizeof(SaveMenuWork), MEMALLOC_GROUP_8);
     MemoryFill8(sSaveMenuWork,0,sizeof(SaveMenuWork));
   }
   for(index = 0; index < 4; index++){

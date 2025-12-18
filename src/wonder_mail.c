@@ -1,7 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
 #include "constants/communication_error_codes.h"
-#include "code_8024458.h"
 #include "code_8031D70.h"
 #include "code_8094F88.h"
 #include "code_80A26CC.h"
@@ -17,6 +16,7 @@
 #include "naming_screen.h"
 #include "other_menus2.h"
 #include "pokemon.h"
+#include "recruited_mon_summary_menu.h"
 #include "rescue_password_menu.h"
 #include "save.h"
 #include "save_write.h"
@@ -169,7 +169,7 @@ u8 sub_8027F88(void)
 
     ResetUnusedInputStruct();
     ShowWindows(NULL, TRUE, TRUE);
-    sUnknown_203B2C0 = MemoryAlloc(sizeof(WonderMailStruct_203B2C0), 8);
+    sUnknown_203B2C0 = MemoryAlloc(sizeof(WonderMailStruct_203B2C0), MEMALLOC_GROUP_8);
     MemoryFill8(sUnknown_203B2C0, 0, sizeof(WonderMailStruct_203B2C0));
     sUnknown_203B2C0->unk53C = 0;
     sUnknown_203B2C0->mailIndex = -1;
@@ -385,7 +385,7 @@ void sub_80282FC(void)
         NamingScreen_Free();
         sub_80310B4();
         sub_8030DE4();
-        sub_802453C();
+        RecruitedMonSummaryMenu_Destroy();
     }
 }
 
@@ -1500,7 +1500,7 @@ static void sub_80297D4(void)
             RestoreSavedWindows(&sUnknown_203B2C0->unk3BC);
             ResetUnusedInputStruct();
             ShowWindows(NULL, TRUE, TRUE);
-            sub_8024458(sUnknown_203B2C0->speciesNum, 0);
+            RecruitedMonSummaryMenu_Create(sUnknown_203B2C0->speciesNum, 0);
             SetFriendRescueCounterState(0x35);
             break;
     }
@@ -1525,7 +1525,7 @@ static void sub_8029884(void)
             RestoreSavedWindows(&sUnknown_203B2C0->unk3BC);
             ResetUnusedInputStruct();
             ShowWindows(NULL, TRUE, TRUE);
-            sub_8024458(sUnknown_203B2C0->speciesNum, 0);
+            RecruitedMonSummaryMenu_Create(sUnknown_203B2C0->speciesNum, 0);
             SetFriendRescueCounterState(0x35);
             break;
         case 0x4:
@@ -1539,19 +1539,20 @@ static void sub_8029884(void)
 
 static void sub_8029944(void)
 {
-    u32 temp = sub_80244E4();
+    u32 inputRet = RecruitedMonSummaryMenu_Input();
 
-    if (temp == 1) {
-        sub_802452C();
+    if (inputRet == RecruitedMonSummaryMenu_INPUTRET_LEFTRIGHT) {
+        RecruitedMonSummaryMenu_SetupAndShowWindows();
         return;
     }
 
-    switch (temp) {
-        case 1:
+    switch (inputRet) {
+        case RecruitedMonSummaryMenu_INPUTRET_LEFTRIGHT: {
             break;
-        case 2:
-        case 3:
-            sub_802453C();
+        }
+        case RecruitedMonSummaryMenu_INPUTRET_BACK:
+        case RecruitedMonSummaryMenu_INPUTRET_ACCEPT: {
+            RecruitedMonSummaryMenu_Destroy();
             ResetUnusedInputStruct();
             ShowWindows(&sUnknown_203B2C0->unk3BC, TRUE, TRUE);
             sub_8023B7C(1);
@@ -1564,6 +1565,7 @@ static void sub_8029944(void)
                 SetFriendRescueCounterState(sUnknown_203B2C0->fallbackState);
             }
             break;
+        }
     }
 }
 

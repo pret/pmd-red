@@ -257,7 +257,7 @@ void CreateRescuePasswordMenu(u32 currMenu)
 
     if(gRescuePasswordMenu == NULL)
     {
-        gRescuePasswordMenu = MemoryAlloc(sizeof(struct RescuePasswordMenu), 8);
+        gRescuePasswordMenu = MemoryAlloc(sizeof(struct RescuePasswordMenu), MEMALLOC_GROUP_8);
         MemoryFill8(gRescuePasswordMenu, 0, sizeof(struct RescuePasswordMenu));
     }
 

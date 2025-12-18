@@ -147,7 +147,7 @@ void AllocGroundObjects(void)
     GroundObject *ptr;
     s32 index;
 
-    gGroundObjects = MemoryAlloc(sizeof(GroundObject) * NUM_GROUND_OBJECTS, 6);
+    gGroundObjects = MemoryAlloc(sizeof(GroundObject) * NUM_GROUND_OBJECTS, MEMALLOC_GROUP_6);
 
     for (index = 0,  ptr = &gGroundObjects[index]; index < NUM_GROUND_OBJECTS; index = (s16)(index + 1), ptr++) {
         ptr->kind = -1;

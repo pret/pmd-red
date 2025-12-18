@@ -65,7 +65,7 @@ static void UpdateNatureTotals(void);
 
 bool8 CreateTestTracker(void)
 {
-    sPersonalityTestTracker = MemoryAlloc(sizeof(PersonalityTestTracker), 8);
+    sPersonalityTestTracker = MemoryAlloc(sizeof(PersonalityTestTracker), MEMALLOC_GROUP_8);
     ResetTouchScreenMenuInput(&sPersonalityTestTracker->input);
     InitializeTestStats();
     sub_8099690(1);

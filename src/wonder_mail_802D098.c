@@ -67,7 +67,7 @@ static bool8 sub_802DADC(void);
 
 bool8 sub_802D098(unkSubStruct_203B2F8 *mail)
 {
-    sUnknown_203B2F8 = MemoryAlloc(sizeof(unkStruct_203B2F8), 8);
+    sUnknown_203B2F8 = MemoryAlloc(sizeof(unkStruct_203B2F8), MEMALLOC_GROUP_8);
     sUnknown_203B2F8->menuAction1 = 0;
     sUnknown_203B2F8->menuAction2 = 0;
     sUnknown_203B2F8->menuAction3 = 0;

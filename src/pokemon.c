@@ -70,7 +70,7 @@ void InitializeRecruitedPokemon(void)
 
 void CreateLeaderPartnerData(s16 _species, bool32 _isLeader, u8* name)
 {
-     struct Pokemon pokemon;
+     Pokemon pokemon;
      u8 name_buffer[20];
      u32 friendArea;
      s32 i;

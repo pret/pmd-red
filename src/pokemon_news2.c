@@ -24,7 +24,7 @@ static void sub_802BCC4(void);
 
 bool8 sub_802B9FC(u8 mailIndex)
 {
-    sUnknown_203B2D4 = MemoryAlloc(sizeof(struct unkStruct_203B2D4), 8);
+    sUnknown_203B2D4 = MemoryAlloc(sizeof(struct unkStruct_203B2D4), MEMALLOC_GROUP_8);
     sUnknown_203B2D4->currMailIndex = mailIndex;
     ResetTouchScreenMenuInput(&sUnknown_203B2D4->unk88);
     sUnknown_203B2D4->unk24 = 0;
@@ -105,14 +105,14 @@ static void sub_802BB98(void)
 
     switch (sub_8012A64(&sUnknown_203B2D4->unk88, sUnknown_203B2D4->unk24)) {
         case 1:
-            PlayMenuSoundEffect(0);
+            PlayMenuSoundEffect(MENU_SFX_ACCEPT);
             if (sUnknown_203B2D4->unkC != 0)
                 sub_802BB14(1);
             else
                 sub_802BB14(3);
             break;
         case 2:
-            PlayMenuSoundEffect(1);
+            PlayMenuSoundEffect(MENU_SFX_BACK);
             sub_802BB14(2);
             break;
     }
@@ -128,14 +128,14 @@ static void sub_802BC08(void)
 
     switch (sub_8012A64(&sUnknown_203B2D4->unk88, sUnknown_203B2D4->unk24)) {
         case 1:
-            PlayMenuSoundEffect(0);
+            PlayMenuSoundEffect(MENU_SFX_ACCEPT);
             if (sUnknown_203B2D4->unk8 < sUnknown_203B2D4->unkC)
                 sub_802BB14(1);
             else
                 sub_802BB14(3);
             break;
         case 2:
-            PlayMenuSoundEffect(1);
+            PlayMenuSoundEffect(MENU_SFX_BACK);
             sub_802BB14(2);
             break;
     }

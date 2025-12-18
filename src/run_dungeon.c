@@ -295,7 +295,7 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
             gDungeon->unk644.itemHoldersIdentified = 0;
             gDungeon->unk644.monsterHouseTriggered = 0;
             gDungeon->unk644.monsterHouseTriggeredEvent = 0;
-            gDungeon->unk644.bossSongIndex = 999;
+            gDungeon->unk644.bossSongIndex = STOP_BGM;
             gDungeon->unk644.unk44 = 0;
             gDungeon->unk644.unk46 = 0;
             gDungeon->unk644.unk40 = 99;

@@ -83,7 +83,7 @@ u32 sub_80306A8(u32 wonderMailType, u32 r1, DungeonPos *r2, u32 r3)
     if (HasNoWonderMailType(wonderMailType))
         return 0;
 
-    gUnknown_203B320 = MemoryAlloc(sizeof(struct unkStruct_203B320), 8);
+    gUnknown_203B320 = MemoryAlloc(sizeof(struct unkStruct_203B320), MEMALLOC_GROUP_8);
     gUnknown_203B320->wonderMailType = wonderMailType;
     gUnknown_203B320->s28.m.menuWinId = r1;
 
@@ -115,13 +115,13 @@ u32 sub_8030768(u8 r0)
     switch(GetKeyPress(&gUnknown_203B320->s28.m.input))
     {
         case INPUT_START_BUTTON:
-            PlayMenuSoundEffect(4);
+            PlayMenuSoundEffect(MENU_SFX_INFO);
             return 4;
         case INPUT_B_BUTTON:
-            PlayMenuSoundEffect(1);
+            PlayMenuSoundEffect(MENU_SFX_BACK);
             return 2;
         case INPUT_A_BUTTON:
-            PlayMenuSoundEffect(0);
+            PlayMenuSoundEffect(MENU_SFX_ACCEPT);
             return 3;
         default:
             if(MenuCursorUpdate(&gUnknown_203B320->s28.m.input, TRUE) != 0)

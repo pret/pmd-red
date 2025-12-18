@@ -48,7 +48,7 @@ static void nullsub_116();
 
 void sub_809C5C4(void)
 {
-    sUnknown_3001B68 = MemoryAlloc(sizeof(struct unkStruct_3001B68), 6);
+    sUnknown_3001B68 = MemoryAlloc(sizeof(struct unkStruct_3001B68), MEMALLOC_GROUP_6);
     sUnknown_3001B68->unk0 = 0;
     sUnknown_3001B68->unk4 = 0;
     sUnknown_3001B68->unk8 = 0;

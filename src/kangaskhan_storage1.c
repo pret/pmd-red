@@ -48,7 +48,7 @@ bool8 CreateKangaskhanStorage(u32 mode)
 
     ResetUnusedInputStruct();
     ShowWindows(NULL, TRUE, TRUE);
-    gKangaskhanStorageWork = MemoryAlloc(sizeof(struct KangaskhanStorageWork), 8);
+    gKangaskhanStorageWork = MemoryAlloc(sizeof(struct KangaskhanStorageWork), MEMALLOC_GROUP_8);
     gKangaskhanStorageWork->menuAction1 = 0;
     gKangaskhanStorageWork->menuAction2 = 0;
     gKangaskhanStorageWork->menuAction3 = 0;

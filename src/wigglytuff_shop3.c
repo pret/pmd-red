@@ -56,7 +56,7 @@ bool8 CreateWigglytuffShop(u32 mode)
     ResetUnusedInputStruct();
     ShowWindows(NULL, TRUE, TRUE);
 
-    sWigglytuffShop3Work = MemoryAlloc(sizeof(WigglytuffShop3Work), 8);
+    sWigglytuffShop3Work = MemoryAlloc(sizeof(WigglytuffShop3Work), MEMALLOC_GROUP_8);
     sWigglytuffShop3Work->menuAction1 = 0;
     sWigglytuffShop3Work->menuAction2 = 0;
     sWigglytuffShop3Work->mode = mode;
