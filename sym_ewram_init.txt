@@ -76,7 +76,7 @@
 .include "src/wonder_mail_802C860.o"
 .include "src/wonder_mail_802CDD4.o"
 .include "src/wonder_mail_802D098.o"
-.include "src/code_802DB28.o"
+.include "src/thank_you_messages.o"
 .include "src/code_802DE84.o"
 .include "src/mailbox.o"
 .include "src/pelipper_board.o"

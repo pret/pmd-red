@@ -6,7 +6,6 @@
 #include "code_800D090.h"
 #include "code_801B3C0.h"
 #include "code_801C8C4.h"
-#include "code_802F204.h"
 #include "code_8094F88.h"
 #include "cpu.h"
 #include "friend_list.h"
@@ -16,6 +15,7 @@
 #include "main_menu1.h"
 #include "memory.h"
 #include "menu_input.h"
+#include "mission_reward.h"
 #include "music_util.h"
 #include "other_menus2.h"
 #include "pokemon.h"
@@ -578,8 +578,6 @@ void sub_80353BC(void);
 void sub_8035424(void);
 void sub_8035430(void);
 
-extern u8 sub_800D588(void);
-
 static void SetFriendRescueMenuState(u32 newState);
 
 u32 CreateFriendRescueMenu(void)
@@ -963,7 +961,7 @@ void CleanFriendRescueMenu(void)
     FriendList_Free();
     NamingScreen_Free();
     sub_801CBB8();
-    sub_802F2C0();
+    MR_Destroy();
     sub_8030DE4();
     RecruitedMonSummaryMenu_Destroy();
     FreeItemDescriptionWindow();
@@ -974,7 +972,7 @@ void nullsub_40(void)
 {
 }
 
-void sub_8032828(void)
+static void sub_8032828(void)
 {
     unkStruct_203B480 *mail;
     u8 buffer[80];
@@ -1266,7 +1264,7 @@ void sub_8032828(void)
                         case 2:
                         case 3:
                             gUnknown_203B33C->status = sub_80381F4(gUnknown_203B33C->unk40, &gUnknown_203B33C->unk48, &gUnknown_203B33C->unk78);
-                            if (sub_800D588() != 0)
+                            if (sub_800D588())
                                 gUnknown_203B33C->unk420 = gUnknown_203B33C->unk78.unk10.unk10;
                             else
                                 gUnknown_203B33C->unk420 = gUnknown_203B33C->unk48.unk10.unk10;
@@ -1274,7 +1272,7 @@ void sub_8032828(void)
                         case 4:
                         case 5:
                             gUnknown_203B33C->status = sub_80381F4(gUnknown_203B33C->unk40, &gUnknown_203B33C->unkA8, &gUnknown_203B33C->unk130);
-                            if (sub_800D588() != 0)
+                            if (sub_800D588())
                                 gUnknown_203B33C->unk420 = gUnknown_203B33C->unk130.mail.unk10.unk10;
                             else
                                 gUnknown_203B33C->unk420 = gUnknown_203B33C->unkA8.mail.unk10.unk10;
@@ -1390,7 +1388,7 @@ void sub_8032828(void)
                     case 0x6:
                     case 0x7:
                         gUnknown_203B33C->status = sub_80381F4(gUnknown_203B33C->unk40, &gUnknown_203B33C->unk1B8, &gUnknown_203B33C->unk1E8);
-                        if (sub_800D588() != 0)
+                        if (sub_800D588())
                             gUnknown_203B33C->unk420 = gUnknown_203B33C->unk1E8.unk10.unk10;
                         else
                             gUnknown_203B33C->unk420 = gUnknown_203B33C->unk1B8.unk10.unk10;
@@ -1445,22 +1443,22 @@ void sub_8032828(void)
             break;
         case 0x6E:
             monName = GetMonSpecies(MONSTER_PELIPPER);
-            strcpy(gUnknown_203B33C->unk53C.clientName, monName);
-            gUnknown_203B33C->unk53C.clientSpecies = 0;
-            gUnknown_203B33C->unk53C.rewardType = 2;
-            gUnknown_203B33C->unk53C.moneyReward = 0;
+            strcpy(gUnknown_203B33C->rewards.clientName, monName);
+            gUnknown_203B33C->rewards.clientSpecies = 0;
+            gUnknown_203B33C->rewards.rewardType = 2;
+            gUnknown_203B33C->rewards.moneyReward = 0;
             mail = GetMailatIndex(GetMailIndex(6, gUnknown_203B33C->unk420));
-            // ABSOLUTELY GENIUS
+            // ABSOLUTELY GENIUS (probably is an inline/macro since this happens in other funcs too)
             if (mail->item.id != ITEM_NOTHING)
-                gUnknown_203B33C->unk53C.itemRewards[0] = mail->item.id;
+                gUnknown_203B33C->rewards.itemRewards[0] = mail->item.id;
             else
-                gUnknown_203B33C->unk53C.itemRewards[0] = ITEM_NOTHING;
-            gUnknown_203B33C->unk53C.quantity = 1;
-            gUnknown_203B33C->unk53C.teamRankPtsReward = GetDungeonTeamRankPts(&mail->dungeonSeed.location, 0);
-            gUnknown_203B33C->unk53C.itemRewards[1] = 0;
-            gUnknown_203B33C->unk53C.itemRewards[2] = 0;
-            gUnknown_203B33C->unk53C.friendAreaReward = 0;
-            sub_802F204(&gUnknown_203B33C->unk53C, 0);
+                gUnknown_203B33C->rewards.itemRewards[0] = ITEM_NOTHING;
+            gUnknown_203B33C->rewards.quantity = 1;
+            gUnknown_203B33C->rewards.teamRankPtsReward = GetDungeonTeamRankPts(&mail->dungeonSeed.location, 0);
+            gUnknown_203B33C->rewards.itemRewards[1] = 0;
+            gUnknown_203B33C->rewards.itemRewards[2] = 0;
+            gUnknown_203B33C->rewards.friendAreaReward = 0;
+            MR_Create(&gUnknown_203B33C->rewards, FALSE);
             break;
         case 0x62:
             nullsub_23(FALSE);
@@ -1853,7 +1851,7 @@ void sub_8033CAC(void)
                     SetFriendRescueMenuState(0x37);
                     break;
                 case 0x12:
-                    if(sub_800D588() != 0)
+                    if(sub_800D588())
                         speciesNum = gUnknown_203B33C->unk130.pokemon.speciesNum;
                     else
                         speciesNum = gUnknown_203B33C->unkA8.pokemon.speciesNum;
@@ -3192,8 +3190,8 @@ void sub_80352A4(void)
   u8 mailIndex;
   char *monName;
 
-  if ( sub_802F298() == 3) {
-    sub_802F2C0();
+  if ( MR_Update() == 3) {
+    MR_Destroy();
     CopyYellowMonsterNametoBuffer(gSpeakerNameBuffer, MONSTER_PELIPPER);
     monName = GetMonSpecies(MONSTER_PELIPPER);
     strcpy(gFormatBuffer_Monsters[0], monName);

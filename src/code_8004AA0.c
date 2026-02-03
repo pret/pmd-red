@@ -97,7 +97,7 @@ UNUSED static bool8 sub_8004B78(bool8 a0, unkStruct_202EE8C *a1, s32 a2, s32 a3,
     return ret;
 }
 
-bool8 sub_8004C00(unkStruct_202EE8C *a0, s32 a1, s32 a2, s32 brightness, const RGB_Struct *ramp, s16 *a5)
+bool8 sub_8004C00(unkStruct_202EE8C *a0, s32 a1, s32 a2, s32 brightness, const RGB_Struct *ramp, RGB_Struct16 *a5)
 {
     bool8 ret;
     s32 i;
@@ -123,9 +123,9 @@ bool8 sub_8004C00(unkStruct_202EE8C *a0, s32 a1, s32 a2, s32 brightness, const R
             ret = TRUE;
         }
 
-        r = a5[0] + a0->unk14.r;
-        g = a5[1] + a0->unk14.g;
-        b = a5[2] + a0->unk14.b;
+        r = a5->r + a0->unk14.r;
+        g = a5->g + a0->unk14.g;
+        b = a5->b + a0->unk14.b;
 
         if (r > 0xFF)
             r = 0xFF;

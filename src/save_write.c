@@ -131,8 +131,7 @@ u32 GetSavePakStatus(void)
 void FinishWriteSavePak(void)
 {
     if (sSavePakWrite != NULL) {
-        if (sSavePakWrite->monPortrait.faceFile != NULL)
-            CloseFile(sSavePakWrite->monPortrait.faceFile);
+        TRY_CLOSE_FILE(sSavePakWrite->monPortrait.faceFile);
         FREE_AND_SET_NULL(sSavePakWrite);
     }
     sub_80993E4();

@@ -32,9 +32,6 @@ extern const u8 IWRAM_INIT_ROM_START[];
 
 UNUSED static const char sStringRomUserData[] = "PKD ROM USER DATA 000000";
 
-// code_2.c
-extern void InitGraphics(void);
-
 extern void Hang(void);
 
 // arm9.bin::02000B88

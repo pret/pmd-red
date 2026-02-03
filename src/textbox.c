@@ -10,7 +10,6 @@
 #include "code_8015080.h"
 #include "code_801B60C.h"
 #include "code_801D014.h"
-#include "code_802DB28.h"
 #include "code_803B050.h"
 #include "code_80958E8.h"
 #include "code_8099360.h"
@@ -56,6 +55,7 @@
 #include "text_2.h"
 #include "text_3.h"
 #include "textbox.h"
+#include "thank_you_messages.h"
 #include "thank_you_wonder_mail.h"
 #include "wigglytuff_shop1.h"
 #include "wigglytuff_shop3.h"
@@ -1139,9 +1139,9 @@ static const unkStruct_3001B64_unk418 gUnknown_8116228 =
 static const unkStruct_3001B64_unk418 gUnknown_8116238 =
 {
     .unk0 = 1,
-    .unk4 = sub_802B2D4,
-    .unk8 = sub_802B3B8,
-    .unkC = sub_802B358,
+    .unk4 = WM2_Create,
+    .unk8 = WM2_Destroy,
+    .unkC = WM2_Update,
 };
 
 static const unkStruct_3001B64_unk418 gUnknown_8116248 =
@@ -1180,8 +1180,8 @@ static const unkStruct_3001B64_unk418 gUnknown_8116288 =
 {
     .unk0 = 1,
     .unk4 = NULL,
-    .unk8 = sub_802DC00,
-    .unkC = sub_802DBD4,
+    .unk8 = TYM_Destroy,
+    .unkC = TYM_Update,
 };
 
 // These 3 are identical
@@ -1683,7 +1683,7 @@ static bool8 sub_809B648(void)
             if (!local_18.unk0) {
                 return 0;
             }
-            else if (!sub_802DB28(local_1c,local_33)) {
+            else if (!TYM_Create(local_1c,local_33)) {
                 return 0;
             }
             else {

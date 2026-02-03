@@ -4,9 +4,9 @@
 #include "constants/wonder_mail.h"
 #include "structs/menu.h"
 #include "structs/str_items.h"
+#include "structs/str_mission_rewards.h"
 #include "structs/str_mon_portrait.h"
 #include "structs/str_text.h"
-#include "structs/str_wonder_mail.h"
 
 // size: 0x564
 typedef struct WonderMailStruct_203B2C4
@@ -30,7 +30,7 @@ typedef struct WonderMailStruct_203B2C4
     /* 0x434 */ u8 formattedString[0x100];
     /* 0x534 */ s32 wonderMailMethod;
     /* 0x538 */ u32 wonderMailMode;
-    unkStruct_802F204 unk53C;
+    /* 0x53C */ MissionRewards rewards;
 } WonderMailStruct_203B2C4;
 
 void CleanThankYouMailPelipper(void);

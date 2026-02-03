@@ -2,9 +2,8 @@
 #define GUARD_STR_WONDER_MAIL_H
 
 #include "constants/wonder_mail.h"
-#include "structs/str_dungeon.h"
-#include "structs/str_pokemon.h"
 #include "structs/str_dungeon_mail_seed.h"
+#include "structs/str_pokemon.h"
 
 // size: 0x14
 typedef struct WonderMail
@@ -20,20 +19,6 @@ typedef struct WonderMail
     /* 0x12 */ u8 itemReward;
     /* 0x13 */ u8 friendAreaReward;
 } WonderMail;
-
-// size: 0x28
-typedef struct unkStruct_802F204
-{
-    /* 0x0 */ u8 clientName[POKEMON_NAME_LENGTH];
-    /* 0xA */ u8 name2[POKEMON_NAME_LENGTH]; // target name?
-    /* 0x14 */ s16 clientSpecies;
-    u8 rewardType;
-    /* 0x18 */ s32 moneyReward;
-    /* 0x1C */ u8 itemRewards[MAX_ITEM_REWARDS];
-    /* 0x1F */ u8 quantity;
-    /* 0x20 */ u8 friendAreaReward;
-    /* 0x24 */ u32 teamRankPtsReward;
-} unkStruct_802F204;
 
 // size: 0xB4
 typedef struct unkStruct_803B344

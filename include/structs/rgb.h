@@ -10,6 +10,14 @@ typedef struct RGB_Struct
     u8 unk4; // Never read, always 0x80. Unused transparency/alpha flag?
 } RGB_Struct;
 
+// Size: R=0x8 | B=0x6
+typedef struct RGB_Struct16
+{
+    s16 r;
+    s16 g;
+    s16 b;
+} RGB_Struct16;
+
 #define RGB_R 0
 #define RGB_G 1
 #define RGB_B 2

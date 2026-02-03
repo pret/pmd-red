@@ -2,6 +2,7 @@
 #include "globaldata.h"
 #include "constants/communication_error_codes.h"
 #include "constants/wonder_mail.h"
+#include "code_800D090.h"
 #include "code_801B3C0.h"
 #include "code_801C8C4.h"
 #include "code_8031D70.h"
@@ -18,6 +19,7 @@
 #include "save_write.h"
 #include "string_format.h"
 #include "text_1.h"
+#include "wonder_mail_3_mid.h"
 #include "wonder_mail_4.h"
 #include "wonder_mail_5.h"
 #include "wonder_mail_802D098.h"
@@ -40,7 +42,7 @@
 #define PASSWORD_INVALID 19
 #define PASSWORD_ENTRY_SCREEN 18
 
-// size: 0x49C
+// Size: 0x49C
 struct unkStruct_203B3E8
 {
     /* 0x0 */ u8 state;
@@ -71,10 +73,7 @@ EWRAM_INIT struct unkStruct_203B3E8 *gUnknown_203B3E8 = {NULL};
 
 #include "data/wonder_mail_main_menu.h"
 
-extern void SetWonderMailMainMenuState(u8);
-extern u8 sub_800D588(void);
-extern void sub_802EF48(void);
-
+static void SetWonderMailMainMenuState(u8);
 void PrintWonderMailMainMenuError(u32);
 void HandleWonderMailMainScreen(void);
 void HandleGameLinkCableMenu(void);
@@ -543,7 +542,7 @@ void WonderMailMainMenuCallback(void)
                     case 9:
                     case 10:
                         gUnknown_203B3E8->wonderMailStatus = sub_80381F4(gUnknown_203B3E8->unk24C,&gUnknown_203B3E8->unk254,&gUnknown_203B3E8->unk308);
-                        if (sub_800D588() != 0) {
+                        if (sub_800D588()) {
                             gUnknown_203B3E8->unk3C0 = gUnknown_203B3E8->unk308;
                         }
                         else {
@@ -570,7 +569,7 @@ void WonderMailMainMenuCallback(void)
   }
 }
 
-void SetWonderMailMainMenuState(u8 newState)
+static void SetWonderMailMainMenuState(u8 newState)
 {
     gUnknown_203B3E8->state = newState;
     nullsub_54();

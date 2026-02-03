@@ -344,9 +344,7 @@ void DisplayDungeonMessage_Async(struct MonDialogueSpriteInfo *monSpriteInfo, co
     PRINT_STRING_WAIT_PRESS_ASYNC(&chosenMenuIndex);
     gDungeon->unk1BDD4.unk1C05F = 0;
 
-    if (monPortrait.faceFile != NULL) {
-        CloseFile(monPortrait.faceFile);
-    }
+    TRY_CLOSE_FILE(monPortrait.faceFile);
 
     if (a2) {
         sub_805E804();
@@ -517,9 +515,7 @@ bool32 DisplayDungeonYesNoMessage_Async(struct MonDialogueSpriteInfo *monSpriteI
 
     PRINT_STRING_WAIT_PRESS_ASYNC(&chosenMenuIndex);
 
-    if (monPortrait.faceFile != NULL) {
-        CloseFile(monPortrait.faceFile);
-    }
+    TRY_CLOSE_FILE(monPortrait.faceFile);
 
     LoadDungeonMapPalette();
     sub_803EAF0(0, NULL);
@@ -560,9 +556,7 @@ s32 DisplayDungeonMenuMessage(struct MonDialogueSpriteInfo *monSpriteInfo, const
     CreateMenuDialogueBoxAndPortrait(str, 0, -1, menuItems, NULL, 3, 0, monPortraitPtr, unkArg);
     PRINT_STRING_WAIT_PRESS_ASYNC(&chosenMenuIndex);
 
-    if (monPortrait.faceFile != NULL) {
-        CloseFile(monPortrait.faceFile);
-    }
+    TRY_CLOSE_FILE(monPortrait.faceFile);
 
     LoadDungeonMapPalette();
     sub_803EAF0(0, NULL);

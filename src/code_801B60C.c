@@ -34,12 +34,12 @@ static void sub_801BE30(void);
 static void sub_801BEAC(void);
 static void sub_801BEC8(void);
 
-bool8 sub_801B60C(u32 r0, u8 id, u8 quantity)
+bool8 sub_801B60C(u32 r0, u8 itemID, u8 quantity)
 {
     sUnknown_203B234 = MemoryAlloc(sizeof(unkStruct_203B234), MEMALLOC_GROUP_8);
     sUnknown_203B234->menuAction = 0;
     sUnknown_203B234->unk0 = r0;
-    sUnknown_203B234->unk10.id = id;
+    sUnknown_203B234->unk10.id = itemID;
 
     if (IsThrownItem(sUnknown_203B234->unk10.id)) {
         sUnknown_203B234->unk10.quantity = quantity;

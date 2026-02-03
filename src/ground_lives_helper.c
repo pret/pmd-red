@@ -1,16 +1,14 @@
 #include "global.h"
 #include "globaldata.h"
-#include "ground_lives_helper.h"
 #include "constants/direction.h"
-#include "input.h"
+#include "ground_lives_helper.h"
 #include "game_options.h"
 #include "ground_main.h"
-#include "ground_script.h"
 #include "ground_map.h"
+#include "ground_script.h"
+#include "input.h"
 #include "textbox.h"
-
-extern void nullsub_104(void);
-extern void sub_809C6CC(u16 param_1);
+#include "unk_ds_only_feature.h"
 
 void nullsub_117(void)
 {

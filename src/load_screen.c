@@ -316,7 +316,7 @@ static void DrawLoadScreenText(void)
 
     // Draw Team Name
     if (CheckQuest(QUEST_SET_TEAM_NAME))
-        sub_80920D8(teamNameBuffer);
+        StrncpyTeamName(teamNameBuffer);
     else
         InlineStrcpy(teamNameBuffer, _("？？？？"));
 

@@ -30,4 +30,6 @@ u32 SetFileSystemUnk(u32 value);
 
 #define TRY_CLOSE_FILE_AND_SET_NULL(filePtr) if (filePtr != NULL) CLOSE_FILE_AND_SET_NULL(filePtr)
 
+#define TRY_CLOSE_FILE(filePtr) if (filePtr != NULL) CloseFile(filePtr)
+
 #endif // GUARD_FILE_SYSTEM_H

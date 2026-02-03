@@ -1,11 +1,10 @@
 #include "global.h"
 #include "globaldata.h"
-#include "graphics_memory.h"
 #include "bg_palette_buffer.h"
-#include "structs/axdata.h"
 #include "cpu.h"
 #include "def_filearchives.h"
 #include "file_system.h"
+#include "graphics_memory.h"
 #include "text_1.h"
 
 struct FontData

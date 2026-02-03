@@ -14,6 +14,7 @@ struct unkStruct_8009A1C_ptr
 void ResetVramPalOAM(void);
 void sub_8009A1C(const EfoFileData *r0, u32 palId, u32 vramDstOffset, u32 r3);
 void InitFontPalette(void);
+void InitGraphics(void);
 void ResetScheduledMemCopies(void);
 void ScheduleMemCopy(u32 *, const u32 *, u32);
 void ScheduleBgTilemapCopy(u32);

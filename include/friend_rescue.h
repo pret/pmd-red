@@ -5,6 +5,7 @@
 #include "items.h"
 #include "pokemon.h"
 #include "structs/menu.h"
+#include "structs/str_mission_rewards.h"
 #include "structs/str_wonder_mail.h"
 
 // size: 0x568
@@ -36,7 +37,7 @@ typedef struct WonderMailStruct_203B33C
     u32 unk530;
     u32 unk534;
     /* 0x538 */ s16 speciesNum; // A7 << 3
-    unkStruct_802F204 unk53C;
+    /* 0x53C */ MissionRewards rewards;
     s32 unk564;
 } WonderMailStruct_203B33C;
 

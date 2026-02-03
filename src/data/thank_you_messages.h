@@ -1,11 +1,4 @@
-static const WindowTemplate sUnknown_80E016C = {
-    0,
-    3,
-    0, 0,
-    0, 0,
-    0, 0,
-    NULL
-};
+static const WindowTemplate sDummyWinTemplate = WIN_TEMPLATE_DUMMY;
 
 ALIGNED(4) static const u8 sThanksForRescuingMe[] = _(" Thank you for rescuing me!");
 
