@@ -1,20 +1,5 @@
 #ifndef GUARD_CONSTANTS_WONDER_MAIL_H
-#define GUARD_CONSTANTS_WONDER_MAIL_H 
-
-enum RewardType
-{
-    MONEY,
-    MONEY_EXTRA,
-    ITEM,
-    ITEM_EXTRA,
-    BLANK_4,
-    MONEY1,
-    MONEY1_EXTRA,
-    ITEM1,
-    ITEM1_EXTRA,
-    FRIEND_AREA,
-    END_REWARDS
-};
+#define GUARD_CONSTANTS_WONDER_MAIL_H
 
 enum WonderMailMode
 {
@@ -77,10 +62,8 @@ enum WonderMailMissionTypes
 
 #define MAIL_STATUS_SUSPENDED 0
 
-
 #define NUM_POKEMON_NEWS 56 // 50 normal + 6 special issues
 #define PASSWORD_BUFFER_SIZE 54
-#define MAX_ITEM_REWARDS 3
 
 
-#endif //GUARD_CONSTANTS_WONDER_MAIL_H
+#endif // GUARD_CONSTANTS_WONDER_MAIL_H

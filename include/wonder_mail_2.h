@@ -1,8 +1,8 @@
 #ifndef GUARD_WONDER_MAIL_2_H
 #define GUARD_WONDER_MAIL_2_H
 
-u8 sub_802B2D4(void);
-u32 sub_802B358(void);
-void sub_802B3B8(void);
+bool8 WM2_Create(void);
+void WM2_Destroy(void);
+u32 WM2_Update(void);
 
 #endif // GUARD_WONDER_MAIL_2_H

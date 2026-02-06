@@ -2159,7 +2159,7 @@ static s32 ExecuteScriptCommand(Action *action)
                 }
             }
             case CMD_BYTE_3E: {
-                sub_80920B8(sPokeNameBuffer);
+                CopyTeamNameToBuffer(sPokeNameBuffer);
                 sPokeNameBuffer[10] = '\0';
                 ScriptSpecialTextHandler2(SPECIAL_TEXT_TEAM_NAME_INPUT, 0, STR_TO_MONORSTRPTR(sPokeNameBuffer));
                 sub_80A87AC(0, 11);

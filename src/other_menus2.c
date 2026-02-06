@@ -1,5 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
+#include "code_800D090.h"
 #include "code_8094F88.h"
 #include "constants/communication_error_codes.h"
 #include "constants/dungeon.h"
@@ -36,7 +37,6 @@ extern void sub_800D494(void);
 extern void sub_800D510(void);
 extern void sub_800D520(void);
 extern void sub_800D570(void);
-extern u8 sub_800D588(void);
 extern void sub_800D59C(void *, u32);
 extern u8 sub_800D600(void);
 extern void sub_800D670(s32 idx, void *dst, s32 size);
@@ -312,7 +312,7 @@ static s32 sub_8037DF0(void)
     sub_800D670(0, &iStack_10, 4);
     sub_800D670(1, &iStack_c, 4);
     if ((iStack_10 != 0) || (iStack_c != 0)) {
-        linkStatus = (!sub_800D588()) ? iStack_c : iStack_10;
+        linkStatus = !sub_800D588() ? iStack_c : iStack_10;
         if (linkStatus == COMMS_GOOD) {
             linkStatus = 0xe;
         }
@@ -326,8 +326,8 @@ static void sub_8037E38(unkStruct_8035D94 *param_1,unkStruct_8035D94 *param_2)
     unkStruct_8035D94 *r4;
     u32 load;
 
-    r4 = sub_800D588() == 0 ? param_2 : param_1;
-    r3 = sub_800D588() == 0 ? param_1 : param_2;
+    r4 = !sub_800D588() ? param_2 : param_1;
+    r3 = !sub_800D588() ? param_1 : param_2;
 
     if (r4->itemIndex == r3->itemIndex) {
          load = gTeamInventoryRef->teamStorage[r4->itemIndex];
@@ -343,10 +343,9 @@ static void sub_8037E38(unkStruct_8035D94 *param_1,unkStruct_8035D94 *param_2)
 
 static void sub_8037E90(unkStruct_203B480 *param_1, unkStruct_203B480 *param_2)
 {
-    if(sub_800D588() == 0)
-    {
+    if (!sub_800D588())
         param_2 = param_1;
-    }
+
     param_2->mailType = 2;
     sub_80951BC(param_2);
     sub_8095274(param_2->unk10.unk10);
@@ -361,14 +360,11 @@ static void sub_8037EBC(WonderMailStruct_203B2C0_sub  *param_1, WonderMailStruct
     unkStruct_203B480 *mail;
     WonderMailStruct_203B2C0_sub *puVar2;
 
-    if(sub_800D588() == 0)
-    {
+    if (!sub_800D588())
         puVar2 = param_1;
-    }
     else
-    {
         puVar2 = param_2;
-    }
+
     mail = GetMailatIndex(GetMailIndex(1, (puVar2->mail).unk10.unk10));
     *mail = (*puVar2).mail;
     mail->mailType = 5;
@@ -394,10 +390,9 @@ static void sub_8037F4C(unkStruct_203B480 *param_1, unkStruct_203B480 *param_2)
     unkStruct_203B480 *mail;
     MainMenu1Work *mainMenu;
 
-    if(sub_800D588() == 0)
-    {
+    if (!sub_800D588())
         param_2 = param_1;
-    }
+
     mail = GetMailatIndex(GetMailIndex(4, param_2->unk10.unk10));
     *mail = *param_2;
     mail->mailType = 6;
@@ -438,8 +433,8 @@ static s32 sub_8038014(unkStruct_8035D94 *param_1,unkStruct_8035D94 *param_2)
     unkStruct_8035D94 *r3;
     unkStruct_8035D94 *r4;
 
-    r4 = sub_800D588() == 0 ? param_2 : param_1;
-    r3 = sub_800D588() == 0 ? param_1 : param_2;
+    r4 = !sub_800D588() ? param_2 : param_1;
+    r3 = !sub_800D588() ? param_1 : param_2;
 
     if (r4->itemIndex == r3->itemIndex) {
         r2 = gTeamInventoryRef->teamStorage[r4->itemIndex];
@@ -468,10 +463,10 @@ static s32 sub_8038078(unkStruct_203B480 *param_1,unkStruct_203B480 *param_2)
     u32 uVar2;
     u32 uVar3;
 
-    if (sub_800D588() == 0) {
+    if (!sub_800D588())
         param_2 = param_1;
-    }
-    uVar3 = (param_2->unk10).unk10;
+
+    uVar3 = param_2->unk10.unk10;
     if (gUnknown_203B184 != NULL) {
         uVar2 = gUnknown_203B184->unk050;
     }
@@ -491,9 +486,8 @@ static s32 sub_80380C4(unkStruct_203B480 *param_1,unkStruct_203B480 *param_2)
     u32 uVar2;
     unkStruct_203B480 *mail;
 
-    if (sub_800D588() == 0) {
+    if (!sub_800D588())
         mail = param_1;
-    }
     else
         mail = param_2;
 
@@ -518,9 +512,9 @@ static s32 sub_80380C4(unkStruct_203B480 *param_1,unkStruct_203B480 *param_2)
 
 static s32 sub_803812C(unkStruct_203B480 *param_1, unkStruct_203B480 *param_2)
 {
-    if (sub_800D588() == 0) {
+    if (!sub_800D588())
         param_2 = param_1;
-    }
+
     if (HasMail(1, (param_2->unk10).unk10)) {
         return COMMS_GOOD;
     }

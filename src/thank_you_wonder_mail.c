@@ -5,7 +5,6 @@
 #include "music_util.h"
 #include "code_801B3C0.h"
 #include "code_801C8C4.h"
-#include "code_802F204.h"
 #include "code_8031D70.h"
 #include "code_803C1B4.h"
 #include "code_8094F88.h"
@@ -15,6 +14,7 @@
 #include "main_menu1.h"
 #include "memory.h"
 #include "menu_input.h"
+#include "mission_reward.h"
 #include "other_menus2.h"
 #include "pokemon.h"
 #include "rescue_password_menu.h"
@@ -214,7 +214,6 @@ extern void sub_802A9FC();
 extern void sub_802A828();
 extern void sub_802A850();
 extern void SetThankYouMailMenuState(u32);
-extern u8 sub_800D588(void);
 
 extern void sub_8011C28(u32);
 
@@ -411,7 +410,7 @@ void CleanThankYouMailPelipper(void)
         sub_801CBB8();
         NamingScreen_Free();
         sub_8031E10();
-        sub_802F2C0();
+        MR_Destroy();
     }
 }
 
@@ -1208,10 +1207,10 @@ void sub_802AB7C(void)
 void sub_802AB98(void)
 {
     const char *monName;
-    switch(sub_802F298())
+    switch(MR_Update())
     {
         case 3:
-            sub_802F2C0();
+            MR_Destroy();
             CopyYellowMonsterNametoBuffer(gSpeakerNameBuffer, MONSTER_PELIPPER);
             monName = GetMonSpecies(MONSTER_PELIPPER);
             strcpy(gFormatBuffer_Monsters[0], monName);
@@ -1308,7 +1307,7 @@ void UpdateThankYouMailText(void)
                     case 6:
                     case 7:
                         sUnknown_203B2C4->linkError = sub_80381F4(sUnknown_203B2C4->unk40,&sUnknown_203B2C4->unk1B8,&sUnknown_203B2C4->unk1E8);
-                        if ( sub_800D588() != '\0') {
+                        if (sub_800D588()) {
                             sUnknown_203B2C4->unk430 = sUnknown_203B2C4->unk1E8.unk10.unk10;
                         }
                         else {
@@ -1365,26 +1364,27 @@ void UpdateThankYouMailText(void)
                 break;
         }
         break;
-    case 0x22:
+    case 0x22: {
         monName = GetMonSpecies(MONSTER_PELIPPER);
-        strcpy(sUnknown_203B2C4->unk53C.clientName,monName); // 0x53C
-        sUnknown_203B2C4->unk53C.clientSpecies = MONSTER_PELIPPER; // 0x550
-        sUnknown_203B2C4->unk53C.rewardType = 2; // 0x552
-        sUnknown_203B2C4->unk53C.moneyReward = 0; // 0x554
-        mailIndex = GetMailIndex(6,sUnknown_203B2C4->unk430);
+        strcpy(sUnknown_203B2C4->rewards.clientName, monName);
+        sUnknown_203B2C4->rewards.clientSpecies = MONSTER_PELIPPER;
+        sUnknown_203B2C4->rewards.rewardType = 2;
+        sUnknown_203B2C4->rewards.moneyReward = 0;
+        mailIndex = GetMailIndex(6, sUnknown_203B2C4->unk430);
         mail = GetMailatIndex(mailIndex);
         itemIndex = mail->item.id;
         if (itemIndex != ITEM_NOTHING)
-            sUnknown_203B2C4->unk53C.itemRewards[0] = itemIndex; // unk558
+            sUnknown_203B2C4->rewards.itemRewards[0] = itemIndex;
         else
-            sUnknown_203B2C4->unk53C.itemRewards[0] = ITEM_NOTHING; // unk558
-        sUnknown_203B2C4->unk53C.quantity = 1; // unk55B
-        sUnknown_203B2C4->unk53C.teamRankPtsReward = GetDungeonTeamRankPts(&mail->dungeonSeed.location, 0); // unk560
-        sUnknown_203B2C4->unk53C.itemRewards[1] = 0; // unk559
-        sUnknown_203B2C4->unk53C.itemRewards[2] = 0; // unk55A
-        sUnknown_203B2C4->unk53C.friendAreaReward = 0; // unk55C
-        sub_802F204(&sUnknown_203B2C4->unk53C,0); // unk53C
+            sUnknown_203B2C4->rewards.itemRewards[0] = ITEM_NOTHING;
+        sUnknown_203B2C4->rewards.quantity = 1;
+        sUnknown_203B2C4->rewards.teamRankPtsReward = GetDungeonTeamRankPts(&mail->dungeonSeed.location, 0);
+        sUnknown_203B2C4->rewards.itemRewards[1] = 0;
+        sUnknown_203B2C4->rewards.itemRewards[2] = 0;
+        sUnknown_203B2C4->rewards.friendAreaReward = 0;
+        MR_Create(&sUnknown_203B2C4->rewards, FALSE);
         break;
+    }
     case COMMUNICATING_THANK_YOU_MAIL:
         // Communicating..
         nullsub_23(FALSE);

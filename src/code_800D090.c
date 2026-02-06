@@ -1,7 +1,8 @@
 #include "global.h"
-#include "music.h"
-#include "memory.h"
+#include "code_800D090.h"
 #include "cpu.h"
+#include "memory.h"
+#include "music.h"
 
 void Hang(void)
 {
@@ -162,8 +163,6 @@ EWRAM_DATA struct UnkStruct_202DCF8 gUnknown_202DCF8 = {0};
 extern u32 sub_80001E8(void);
 extern void sub_8000228(void);
 
-void sub_800D6AC(void);
-void sub_800D7D0(void);
 static u32 sub_800D820(u16 *a0, u16 a1[2][8]);
 static void sub_800D7B8(void);
 static void sub_800D944(u16 *a0);
@@ -336,7 +335,7 @@ UNUSED static u8 sub_800D57C(void)
     return gUnknown_202DB70;
 }
 
-u8 sub_800D588(void)
+bool8 sub_800D588(void)
 {
     return (gUnknown_202DB68 & 0x80);
 }

@@ -713,7 +713,7 @@ const u8 *FormatString(const u8 *str, u8 *dst, u8 *dstMax, u16 flags)
                 case 't':
                     str++;
                     if (CheckQuest(QUEST_SET_TEAM_NAME)) {
-                        sub_80920D8(sFormatBuffer_TeamName);
+                        StrncpyTeamName(sFormatBuffer_TeamName);
                     }
                     else {
                         InlineStrcpy(sFormatBuffer_TeamName, "????");

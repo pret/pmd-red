@@ -13,28 +13,27 @@ enum TeamRanks
     MAX_TEAM_RANKS
 };
 
-struct RescueTeamData
+typedef struct RescueTeamData
 {
     u8 teamName[TEAM_NAME_LENGTH];
     s32 teamRankPts;
     bool8 isTeamRenamed;
-};
+} RescueTeamData;
 
-extern struct RescueTeamData *gRescueTeamInfoRef;
+extern RescueTeamData *gRescueTeamInfoRef;
 
 void LoadRescueTeamInfo(void);
-struct RescueTeamData *GetRescueTeamInfo(void);
+RescueTeamData *GetRescueTeamInfo(void);
 void InitializeRescueTeamInfo(void);
-void sub_80920B8(u8 *buffer);
-void sub_80920D8(u8 *buffer);
+void CopyTeamNameToBuffer(u8 *buffer);
+void StrncpyTeamName(u8 *buffer);
 void SetRescueTeamName(u8 *buffer);
 s32 GetTeamRankPts(void);
 s32 GetPtsToNextRank(void);
 void AddToTeamRankPts(s32 newPts);
 u8 GetRescueTeamRank(void);
 const u8 *GetTeamRankString(u32 index);
-u8 GetIsTeamRenamed(void);
-u32 SaveRescueTeamInfo(u8 *param_1,u32 param_2);
-u32 ReadRescueTeamInfo(u8 *param_1, u32 param_2);
+u32 SaveRescueTeamInfo(u8 *buffer, u32 bufLen);
+u32 ReadRescueTeamInfo(u8 *buffer, u32 bufLen);
 
 #endif // GUARD_RESCUE_TEAM_INFO_H

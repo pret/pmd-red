@@ -9,51 +9,39 @@
 #include "constants/weather.h"
 #include "structs/str_dungeon.h"
 #include "structs/sprite_oam.h"
-#include "dungeon_cutscenes.h"
-#include "dungeon_music.h"
-#include "dungeon_logic.h"
-#include "exclusive_pokemon.h"
-#include "weather.h"
-#include "pokemon.h"
-#include "dungeon_util.h"
-#include "dungeon_map_access.h"
-#include "dungeon_misc.h"
-#include "dungeon_vram.h"
-#include "dungeon_mon_sprite_render.h"
-#include "dungeon_range.h"
-#include "random.h"
-#include "math.h"
-#include "code_8004AA0.h"
 #include "bg_palette_buffer.h"
-#include "items.h"
+#include "code_8004AA0.h"
+#include "direction_util.h"
+#include "dungeon_boss_dialogue.h"
+#include "dungeon_cutscenes.h"
+#include "dungeon_engine.h"
+#include "dungeon_logic.h"
+#include "dungeon_map.h"
+#include "dungeon_map_access.h"
+#include "dungeon_message.h"
+#include "dungeon_misc.h"
+#include "dungeon_mon_spawn.h"
+#include "dungeon_mon_sprite_render.h"
+#include "dungeon_pos_data.h"
+#include "dungeon_range.h"
+#include "dungeon_music.h"
+#include "dungeon_tilemap.h"
+#include "dungeon_util.h"
+#include "dungeon_vram.h"
+#include "effect_data.h"
 #include "effect_main.h"
 #include "effect_sub_1.h"
-#include "sprite.h"
-#include "effect_data.h"
+#include "exclusive_pokemon.h"
+#include "items.h"
+#include "math.h"
+#include "pokemon.h"
 #include "pokemon_3.h"
-#include "dungeon_boss_dialogue.h"
-#include "dungeon_pos_data.h"
-#include "dungeon_engine.h"
-#include "dungeon_tilemap.h"
-#include "dungeon_map.h"
-#include "dungeon_mon_spawn.h"
-#include "dungeon_message.h"
-#include "direction_util.h"
-
-struct RgbS16
-{
-    s16 r;
-    s16 g;
-    s16 b;
-};
+#include "random.h"
+#include "sprite.h"
+#include "weather.h"
 
 extern OpenedFile *gDungeonPaletteFile;
 extern RGB_Struct gUnknown_202ECA4[33];
-
-extern bool8 sub_8004C00(unkStruct_202EE8C *a0, s32 a1, s32 a2, s32 brightness, const RGB_Struct *ramp, struct RgbS16 *a5);
-extern void sub_8088EE8(void);
-extern void sub_8088848(void);
-extern void sub_808A718(void);
 
 // Size: R=0x8 | B=0x6
 typedef struct FixedRoomCutsceneData
@@ -1219,7 +1207,7 @@ void SetDungeonBGColorRGB(s32 r, s32 g, s32 b, bool8 a3, bool8 a4)
     s32 i, palIndex, n;
     const RGB_Struct *colorPtr;
     RGB_Struct color;
-    struct RgbS16 colorS16;
+    RGB_Struct16 colorS16;
 
     n = 160;
     sub_8085E98();

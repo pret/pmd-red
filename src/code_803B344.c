@@ -70,34 +70,34 @@ void sub_803B35C(WonderMail *mail, unkStruct_802C39C *param_2)
 {
   u8 uVar2;
   
-  sub_803C21C(mail, &param_2->unk18);
+  sub_803C21C(mail, &param_2->rewards);
   switch(mail->unk2) {
-      case '\x01':
+      case 1:
         param_2->mailTitleType = 0;
         param_2->mailDescriptionType = 0;
         param_2->mailMissionType = MISSION_TYPE_SPECIAL_MISSION;
-        param_2->unk18.rewardType = 5;
+        param_2->rewards.rewardType = 5;
         break;
-      case '\x02':
+      case 2:
         param_2->mailTitleType = 1;
         param_2->mailDescriptionType = 1;
         param_2->mailMissionType = MISSION_TYPE_SPECIAL_MISSION;
-        param_2->unk18.rewardType = 5;
+        param_2->rewards.rewardType = 5;
         break;
-      case '\x03':
+      case 3:
         param_2->mailTitleType = 2;
         param_2->mailDescriptionType = 2;
         param_2->mailMissionType = MISSION_TYPE_SPECIAL_MISSION;
-        param_2->unk18.rewardType = 5;
+        param_2->rewards.rewardType = 5;
         break;
-      case '\x04':
+      case 4:
         param_2->mailTitleType = 3;
         param_2->mailDescriptionType = 3;
         param_2->mailMissionType = MISSION_TYPE_SPECIAL_MISSION;
         param_2->unk4C = sub_8096DD8();
         param_2->unk50 = sub_8096DE8();
         break;
-      case '\x05':
+      case 5:
         if (mail->missionType == MISSION_TYPE_RESCUE_CLIENT) {
           param_2->mailTitleType = '\v';
           param_2->mailMissionType = MISSION_TYPE_FIND_ITEM;
@@ -109,7 +109,7 @@ void sub_803B35C(WonderMail *mail, unkStruct_802C39C *param_2)
         
         param_2->mailDescriptionType = 4;
         break;
-      case '\x06':
+      case 6:
         if (mail->missionType == 3) {
           param_2->mailTitleType = '\v';
             param_2->mailMissionType = MISSION_TYPE_FIND_ITEM;
@@ -121,7 +121,7 @@ void sub_803B35C(WonderMail *mail, unkStruct_802C39C *param_2)
         
         param_2->mailDescriptionType = 5;
         break;
-      case '\a':
+      case 7:
         param_2->unk0[1] = sub_803B600(mail);
         if (param_2->unk0[1] == -1) {
             param_2->mailTitleType = 9;
@@ -133,7 +133,7 @@ void sub_803B35C(WonderMail *mail, unkStruct_802C39C *param_2)
         param_2->mailDescriptionType = 6;
         param_2->mailMissionType = MISSION_TYPE_RESCUE_TARGET;
         break;
-      case '\b':
+      case 8:
         param_2->unk0[1] = sub_803B628(mail);
         if (param_2->unk0[1] == -1) {
             param_2->mailTitleType = 9;
@@ -144,7 +144,7 @@ void sub_803B35C(WonderMail *mail, unkStruct_802C39C *param_2)
         param_2->mailDescriptionType = 7;
         param_2->mailMissionType = MISSION_TYPE_RESCUE_TARGET;
         break;
-      case '\t':
+      case 9:
         param_2->unk0[1] = sub_803B66C(mail);
         if (param_2->unk0[1] == -1) {
               param_2->mailTitleType = 0xA;

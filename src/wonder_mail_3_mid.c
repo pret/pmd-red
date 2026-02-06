@@ -1,7 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
 #include "structs/str_802C39C.h"
-#include "text_3.h"
 #include "code_802DE84.h"
 #include "code_803B050.h"
 #include "common_strings.h"
@@ -9,11 +8,20 @@
 #include "memory.h"
 #include "menu_input.h"
 #include "text_1.h"
+#include "text_3.h"
+#include "wonder_mail_3_mid.h"
 #include "wonder_mail_802CDD4.h"
 
+enum MenuActions
+{
+    CANCEL_ACTION = 1,
+    SEND_ACTION,
+    INFO_ACTION
+};
+
+// Size: 0x150
 struct unkStruct_203B30C
 {
-    // size: 0x150
     s32 state;
     u8 unk4;
     unkStruct_802C39C unk8;
@@ -21,24 +29,10 @@ struct unkStruct_203B30C
     MenuItem unkB0[8];
     WindowTemplates unkF0;
 };
-static EWRAM_INIT struct unkStruct_203B30C *gUnknown_203B30C = {NULL};
 
-extern void sub_802EFEC(u32);
-extern void sub_802F148(void);
-extern void sub_802F184(void);
-extern void sub_802F1E8(void);
-extern void sub_802F004();
-extern void sub_802F088();
-extern void sub_802F108(void);
+static EWRAM_INIT struct unkStruct_203B30C *gUnknown_203B30C = { NULL };
 
-const WindowTemplate gUnknown_80E03C4 = {
-    0,
-    0x03,
-    0x00, 0x00,
-    0x00, 0x00,
-    0x00, 0x00,
-    NULL
-};
+const WindowTemplate gUnknown_80E03C4 = WIN_TEMPLATE_DUMMY;
 const WindowTemplate gUnknown_80E03DC = {
     0,
     0x03,
@@ -58,11 +52,13 @@ const WindowTemplate gUnknown_80E03F4 = {
 
 const u8 gUnknown_80E040C[] = "Send";
 
-enum MenuActions {
-    CANCEL_ACTION = 1,
-    SEND_ACTION,
-    INFO_ACTION
-};
+static void sub_802EFEC(u32);
+static void sub_802F148(void);
+static void sub_802F184(void);
+static void sub_802F1E8(void);
+static void sub_802F004();
+static void sub_802F088();
+static void sub_802F108(void);
 
 u32 sub_802EF48(void)
 {
@@ -71,7 +67,7 @@ u32 sub_802EF48(void)
     return 1;
 }
 
-u32 sub_802EF6C(void)
+UNUSED static u32 sub_802EF6C(void)
 {
     switch(gUnknown_203B30C->state)
     {
@@ -94,28 +90,27 @@ u32 sub_802EF6C(void)
     return 0;
 }
 
-u8 sub_802EFC4(void)
+UNUSED static u8 sub_802EFC4(void)
 {
     return gUnknown_203B30C->unk4;
 }
 
-void sub_802EFD0(void)
+UNUSED static void sub_802EFD0(void)
 {
-    if(gUnknown_203B30C != NULL)
-    {
+    if (gUnknown_203B30C != NULL) {
         MemoryFree(gUnknown_203B30C);
         gUnknown_203B30C = NULL;
     }
 }
 
-void sub_802EFEC(u32 newState)
+static void sub_802EFEC(u32 newState)
 {
     gUnknown_203B30C->state = newState;
     sub_802F004();
     sub_802F088();
 }
 
-void sub_802F004(void)
+static void sub_802F004(void)
 {
     s32 index;
 
@@ -137,7 +132,7 @@ void sub_802F004(void)
     ShowWindows(&gUnknown_203B30C->unkF0, TRUE, TRUE);
 }
 
-void sub_802F088(void)
+static void sub_802F088(void)
 {
     unkStruct_803B344 *temp;
 
@@ -163,7 +158,7 @@ void sub_802F088(void)
     }
 }
 
-void sub_802F108(void)
+static void sub_802F108(void)
 {
     s32 loopMax = 0;
 
@@ -177,7 +172,7 @@ void sub_802F108(void)
     gUnknown_203B30C->unkB0[loopMax].menuAction = CANCEL_ACTION;
 }
 
-void sub_802F148(void)
+static void sub_802F148(void)
 {
     switch(sub_802CE5C(TRUE))
     {
@@ -195,7 +190,7 @@ void sub_802F148(void)
     }
 }
 
-void sub_802F184(void)
+static void sub_802F184(void)
 {
     s32 menuAction;
 
@@ -221,7 +216,7 @@ void sub_802F184(void)
     }
 }
 
-void sub_802F1E8(void)
+static void sub_802F1E8(void)
 {
     switch(sub_802DEE0())
     {

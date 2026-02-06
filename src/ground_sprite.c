@@ -192,8 +192,7 @@ UNUSED static void sub_80A64A4(void)
             sub_809971C(r9, (RGB_Array*)r2, 16);
             sub_80997F4(sl, r4);
 
-            if (file != NULL)
-                CloseFile(file);
+            TRY_CLOSE_FILE(file);
         }
     }
 }
@@ -358,10 +357,7 @@ void sub_80A68A0(struct UnkGroundSpriteStruct *ptr)
     if ((ptr->flags_0x50 & 0x200) && ptr->unk58 != 0 && ptr->unk5C != -1) {
         sub_800DC14(ptr->unk5C);
     }
-    if (ptr->unk54 != NULL) {
-        CloseFile(ptr->unk54);
-        ptr->unk54 = NULL;
-    }
+    TRY_CLOSE_FILE_AND_SET_NULL(ptr->unk54);
     sub_80A69FC(ptr);
 }
 
@@ -550,9 +546,7 @@ void GroundSprite_ExtendPaletteAdd(struct UnkGroundSpriteStruct *ptr, u16 a1)
             ptr->unk68 = r2;
         }
         Log(0, "extend palette %3d[%3d] %04x set %04x %04x", r8, var_28, r2, a1, r6);
-        if (file != NULL) {
-            CloseFile(file);
-        }
+        TRY_CLOSE_FILE(file);
     }
     else {
         if (ptr != NULL) {

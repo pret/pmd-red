@@ -1,0 +1,6 @@
+#ifndef GUARD_WONDER_MAIL_3_MID_H
+#define GUARD_WONDER_MAIL_3_MID_H
+
+u32 sub_802EF48(void);
+
+#endif // GUARD_WONDER_MAIL_3_MID_H

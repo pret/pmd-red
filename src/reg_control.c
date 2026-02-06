@@ -1,6 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "bg_control.h"
+#include "code_800D090.h"
 #include "crt0.h"
 #include "debug.h"
 #include "input.h"
@@ -29,10 +30,6 @@ EWRAM_INIT s16 gUnknown_203B0AC = {0};
 EWRAM_INIT s16 gUnknown_203B0AE = {-1};
 EWRAM_INIT s16 gUnknown_203B0B0 = {-1}; // Written to but never read
 EWRAM_INIT s16 gUnknown_203B0B2 = {-1}; // Written to but never read
-
-// code_800D090.s
-extern void sub_800D6AC(void);
-extern void sub_800D7D0(void);
 
 static void UpdateBGControlRegisters(void);
 static void VBlankIntr(void);

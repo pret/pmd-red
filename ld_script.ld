@@ -152,7 +152,7 @@ SECTIONS {
         src/wonder_mail_802C860.o(.text);
         src/wonder_mail_802CDD4.o(.text);
         src/wonder_mail_802D098.o(.text);
-        src/code_802DB28.o(.text);
+        src/thank_you_messages.o(.text);
         src/code_802DE84.o(.text);
         src/mailbox.o(.text);
         src/pelipper_board.o(.text);
@@ -523,7 +523,7 @@ SECTIONS {
         src/wonder_mail_802C860.o(.rodata);
         src/wonder_mail_802CDD4.o(.rodata);
         src/wonder_mail_802D098.o(.rodata);
-        src/code_802DB28.o(.rodata);
+        src/thank_you_messages.o(.rodata);
         src/code_802DE84.o(.rodata);
         src/mailbox.o(.rodata);
         src/pelipper_board.o(.rodata);

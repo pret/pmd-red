@@ -1,5 +1,6 @@
 #include "global.h"
 #include "code_803C1B4.h"
+#include "structs/str_mission_rewards.h"
 #include "structs/str_wonder_mail.h"
 #include "dungeon_info.h"
 #include "event_flag.h"
@@ -43,77 +44,77 @@ u32 GetDungeonTeamRankPts(DungeonLocation *dungeon, u8 r1)
     return gUnknown_80E80A0[index];
 }
 
-void sub_803C21C(WonderMail *param_1, unkStruct_802F204 *param_2)
+void sub_803C21C(WonderMail *param_1, MissionRewards *rewards)
 {
     s32 index;
     u32 uVar2;
 
     uVar2 = sub_803C1D0(&param_1->dungeonSeed.location,param_1->missionType);
-    param_2->moneyReward = 0;
+    rewards->moneyReward = 0;
 
-    for(index = 0; index < MAX_ITEM_REWARDS; index++)
-    {
-        param_2->itemRewards[index] = ITEM_NOTHING;
+    for (index = 0; index < MAX_ITEM_REWARDS; index++) {
+        rewards->itemRewards[index] = ITEM_NOTHING;
     }
-    param_2->friendAreaReward = 0;
-    param_2->quantity = 10;
+
+    rewards->friendAreaReward = 0;
+    rewards->quantity = 10;
     switch(param_1->rewardType) {
         case MONEY:
-            param_2->rewardType = 0;
-            param_2->moneyReward = (uVar2 + 1) * 100;
+            rewards->rewardType = 0;
+            rewards->moneyReward = (uVar2 + 1) * 100;
             break;
         case MONEY_EXTRA:
-            param_2->rewardType = 1;
-            param_2->moneyReward = (uVar2 + 1) * 100;
-            param_2->itemRewards[0] = param_1->itemReward;
+            rewards->rewardType = 1;
+            rewards->moneyReward = (uVar2 + 1) * 100;
+            rewards->itemRewards[0] = param_1->itemReward;
             break;
         case ITEM:
-            param_2->rewardType = 2;
-            param_2->itemRewards[0] = param_1->itemReward;
+            rewards->rewardType = 2;
+            rewards->itemRewards[0] = param_1->itemReward;
             break;
         case ITEM_EXTRA:
-            param_2->rewardType = 3;
-            param_2->itemRewards[0] = param_1->itemReward;
+            rewards->rewardType = 3;
+            rewards->itemRewards[0] = param_1->itemReward;
             do {
-                sub_803C37C(&param_1->dungeonSeed.location,param_1->missionType,&param_2->itemRewards[1]);
-            } while (param_2->itemRewards[0] == param_2->itemRewards[1]);
+                sub_803C37C(&param_1->dungeonSeed.location, param_1->missionType, &rewards->itemRewards[1]);
+            } while (rewards->itemRewards[0] == rewards->itemRewards[1]);
             break;
         case MONEY1:
-            param_2->rewardType = 0;
-            param_2->moneyReward = (uVar2 + 1) * 200;
+            rewards->rewardType = 0;
+            rewards->moneyReward = (uVar2 + 1) * 200;
             break;
         case MONEY1_EXTRA:
-            param_2->rewardType = 1;
-            param_2->moneyReward = (uVar2 + 1) * 200;
-            param_2->itemRewards[0] = param_1->itemReward;
+            rewards->rewardType = 1;
+            rewards->moneyReward = (uVar2 + 1) * 200;
+            rewards->itemRewards[0] = param_1->itemReward;
             break;
         case ITEM1: // ITEM1
-            param_2->rewardType = 2;
-            param_2->itemRewards[0] = param_1->itemReward;
+            rewards->rewardType = 2;
+            rewards->itemRewards[0] = param_1->itemReward;
             break;
         case ITEM1_EXTRA:
-            param_2->rewardType = 3;
-            param_2->itemRewards[0] = param_1->itemReward;
+            rewards->rewardType = 3;
+            rewards->itemRewards[0] = param_1->itemReward;
             do {
-                sub_803C37C(&param_1->dungeonSeed.location,param_1->missionType,&param_2->itemRewards[1]);
-            } while (param_2->itemRewards[0] == param_2->itemRewards[1]);
+                sub_803C37C(&param_1->dungeonSeed.location, param_1->missionType, &rewards->itemRewards[1]);
+            } while (rewards->itemRewards[0] == rewards->itemRewards[1]);
             do {
                 do {
-                    sub_803C37C(&param_1->dungeonSeed.location,param_1->missionType,&param_2->itemRewards[2]);
-                } while (param_2->itemRewards[0] == param_2->itemRewards[2]);
-            } while (param_2->itemRewards[1] == param_2->itemRewards[2]);
+                    sub_803C37C(&param_1->dungeonSeed.location, param_1->missionType, &rewards->itemRewards[2]);
+                } while (rewards->itemRewards[0] == rewards->itemRewards[2]);
+            } while (rewards->itemRewards[1] == rewards->itemRewards[2]);
             break;
         case FRIEND_AREA:
-            param_2->rewardType = 4;
-            param_2->friendAreaReward = param_1->friendAreaReward;
+            rewards->rewardType = 4;
+            rewards->friendAreaReward = param_1->friendAreaReward;
             break;
         default:
-            param_2->rewardType = 5;
+            rewards->rewardType = 5;
             break;
     }
-    CopyYellowMonsterNametoBuffer(param_2->clientName, param_1->clientSpecies);
-    param_2->clientSpecies = param_1->clientSpecies;
-    param_2->teamRankPtsReward = GetDungeonTeamRankPts(&param_1->dungeonSeed.location,param_1->missionType);
+    CopyYellowMonsterNametoBuffer(rewards->clientName, param_1->clientSpecies);
+    rewards->clientSpecies = param_1->clientSpecies;
+    rewards->teamRankPtsReward = GetDungeonTeamRankPts(&param_1->dungeonSeed.location,param_1->missionType);
 }
 
 void sub_803C37C(DungeonLocation *location, u8 r1, u8 *itemReward)

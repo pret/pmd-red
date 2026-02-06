@@ -1,73 +1,66 @@
 #include "global.h"
 #include "globaldata.h"
-#include "music_util.h"
 #include "code_801B60C.h"
-#include "code_802F204.h"
 #include "friend_area.h"
 #include "input.h"
 #include "items.h"
 #include "memory.h"
+#include "mission_reward.h"
+#include "music_util.h"
 #include "pokemon.h"
 #include "rescue_team_info.h"
 #include "string_format.h"
 #include "text_1.h"
 
-struct unkStruct_203B310
+enum MR_State
 {
-    // size: 0x84
-    /* 0x0 */ u32 state;
-    /* 0x4 */ u32 nextState;
-    /* 0x8 */ bool8 displayClientDialogueSprite; // true to display the dialogue sprite for the client
-    /* 0x9 */ u8 currTeamRank; // team rank
+    MR_STATE_PREP_MONEY_REWARD,
+    MR_STATE_MONEY_REWARD,
+    MR_STATE_PREP_FRIEND_AREA_REWARD,
+    MR_STATE_UNLOCK_FRIEND_AREA,
+    MR_STATE_PREP_ITEM_REWARD,
+    MR_STATE_GIVE_ITEM_REWARD,
+    MR_STATE_NEXT_ITEM,
+    MR_STATE_TEAM_PNTS_REWARD,
+    MR_STATE_NEW_TEAM_RANK,
+    MR_STATE_REWARD_EXIT,
+};
+
+// Size: 0x84
+typedef struct MR_Work
+{
+    /* 0x0 */ u32 state; // See enum "MR_State"
+    /* 0x4 */ u32 nextState; // See enum "MR_State"
+    /* 0x8 */ bool8 displayClientDialogueSprite;
+    /* 0x9 */ u8 currTeamRank;
     /* 0xC */ s32 itemRewardIndex;
-    unkStruct_802F204 *unk10;
+    /* 0x10 */ MissionRewards *rewards;
     /* 0x14 */ MonPortraitMsg monPortrait;
-    WindowTemplates unk24;
-};
+    /* 0x24 */ WindowTemplates windows;
+} MR_Work;
 
-EWRAM_INIT struct unkStruct_203B310 *gUnknown_203B310 = {NULL};
+EWRAM_INIT MR_Work *sMRWork = { NULL };
 
-enum FriendRewardStates
-{
-    PREP_MONEY_REWARD,
-    MONEY_REWARD,
-    PREP_FRIEND_AREA_REWARD,
-    UNLOCK_FRIEND_AREA,
-    PREP_ITEM_REWARD,
-    GIVE_ITEM_REWARD,
-    NEXT_ITEM,
-    TEAM_PNTS_REWARD,
-    NEW_TEAM_RANK,
-    REWARD_EXIT,
-};
+static const WindowTemplate sWinTemplateDummy = WIN_TEMPLATE_DUMMY;
 
-const WindowTemplate gUnknown_80E041C = {
-    0,
-    0x03,
-    0x00, 0x00,
-    0x00, 0x00,
-    0x00, 0x00,
-    NULL
-};
-
-ALIGNED(4) const u8 gUnknown_80E0434[] = _(
+ALIGNED(4) static const u8 gUnknown_80E0434[] = _(
         " Here's your reward!\n"
         "{COLOR CYAN}{VALUE_0}{RESET} {POKE}!");
 
-ALIGNED(4) const u8 gUnknown_80E045C[] = _(
+ALIGNED(4) static const u8 gUnknown_80E045C[] = _(
         "{CENTER_ALIGN}{COLOR YELLOW_N}{POKEMON_0}{RESET} received\n"
         "{CENTER_ALIGN}{COLOR CYAN}{VALUE_0}{RESET} {POKE}.");
 
-ALIGNED(4) const u8 gUnknown_80E0484[] = _(
+ALIGNED(4) static const u8 gUnknown_80E0484[] = _(
         "{CENTER_ALIGN}{COLOR YELLOW_N}{POKEMON_0}{RESET}'s team received\n"
         "{CENTER_ALIGN}{COLOR CYAN}{VALUE_0}{RESET} {POKE}.");
 
-ALIGNED(4) const u8 gUnknown_80E04B4[]= _(
+ALIGNED(4) static const u8 gUnknown_80E04B4[]= _(
         " As your reward, you can\n"
         "now go to the Friend Area\n"
         "{COLOR GREEN}{FRIEND_AREA}{RESET}!");
 
-ALIGNED(4) const u8 gUnknown_80E04F4[] = _(
+ALIGNED(4) static const u8 gUnknown_80E04F4[] = _(
         "{CENTER_ALIGN}...Oh, wait, sorry.{EXTRA_MSG}"
         "{CENTER_ALIGN}You already have the \n"
         "{CENTER_ALIGN}{COLOR GREEN}{FRIEND_AREA} Friend Area{RESET}.{EXTRA_MSG}"
@@ -76,300 +69,315 @@ ALIGNED(4) const u8 gUnknown_80E04F4[] = _(
         "{CENTER_ALIGN}In its place, {COLOR YELLOW_N}{POKEMON_0}{RESET},\n"
         "{CENTER_ALIGN}you can have {COLOR CYAN_G}1,000{RESET} {POKE}.");
 
-ALIGNED(4) const u8 gUnknown_80E05C0[] = _(
+ALIGNED(4) static const u8 gUnknown_80E05C0[] = _(
         "{CENTER_ALIGN}{COLOR YELLOW_N}{POKEMON_0}{RESET} gained access\n"
         "{CENTER_ALIGN}to the Friend Area\n"
         "{CENTER_ALIGN}{COLOR GREEN}{FRIEND_AREA}{RESET}.");
 
-ALIGNED(4) const u8 gUnknown_80E05FC[] = _(
+ALIGNED(4) static const u8 gUnknown_80E05FC[] = _(
         "{CENTER_ALIGN}{COLOR YELLOW_N}{POKEMON_0}{RESET}'s team gained access\n"
         "{CENTER_ALIGN}to the Friend Area\n"
         "{CENTER_ALIGN}{COLOR GREEN}{FRIEND_AREA}{RESET}.");
 
-ALIGNED(4) const u8 gUnknown_80E0640[] = _(
+ALIGNED(4) static const u8 gUnknown_80E0640[] = _(
         " Here's your reward!\n"
         "The promised {COLOR GREEN}{MOVE_ITEM_1}{RESET}!");
 
-ALIGNED(4) const u8 gUnknown_80E0670[] = _(
+ALIGNED(4) static const u8 gUnknown_80E0670[] = _(
         "{CENTER_ALIGN}Rescue Team {COLOR CYAN_G}$t{RESET}\n"
         "{CENTER_ALIGN}gained {COLOR CYAN}{VALUE_0}{RESET} rescue points.");
 
-ALIGNED(4) const u8 gUnknown_80E06A8[] = _(
+ALIGNED(4) static const u8 gUnknown_80E06A8[] = _(
         "{CENTER_ALIGN}Congratulations!{EXTRA_MSG}"
         "{CENTER_ALIGN}{COLOR CYAN_G}$t{RESET} went up in rank\n"
         "{CENTER_ALIGN}from the {POKEMON_2}\n"
         "{CENTER_ALIGN}to the {POKEMON_3}!");
 
+static void MR_InitStateDialogue(void);
+static void MR_InitStateWindows(void);
+static void MR_SetState(u32 state);
+static void MR_ProceedToNextState(void);
+static void sub_802F6FC(void);
 
-void SetRewardSceneState(u32);
-void sub_802F6FC(void);
-void ProceedToNextRewardSceneState(void);
-void sub_802F300(void);
-void HandleMissionReward(void);
-
-u32 sub_802F204(unkStruct_802F204 *r0, bool8 displayClientSprite)
+bool8 MR_Create(MissionRewards *rewards, bool8 displayClientSprite)
 {
-    struct unkStruct_203B310 *preload;
+    MR_Work *preload;
 
     ResetUnusedInputStruct();
     ShowWindows(NULL, TRUE, TRUE);
-    gUnknown_203B310 = MemoryAlloc(sizeof(struct unkStruct_203B310), MEMALLOC_GROUP_8);
-    gUnknown_203B310->unk10 = r0;
-    gUnknown_203B310->itemRewardIndex = 0;
-    gUnknown_203B310->displayClientDialogueSprite = displayClientSprite;
+    sMRWork = MemoryAlloc(sizeof(MR_Work), MEMALLOC_GROUP_8);
+    sMRWork->rewards = rewards;
+    sMRWork->itemRewardIndex = 0;
+    sMRWork->displayClientDialogueSprite = displayClientSprite;
 
     // NOTE: dumb var to get correct ordering
-    preload = gUnknown_203B310;
-    strcpy(gSpeakerNameBuffer, preload->unk10->clientName);
+    preload = sMRWork;
+    strcpy(gSpeakerNameBuffer, preload->rewards->clientName);
     PrintPokeNameToBuffer(gFormatBuffer_Monsters[0], GetLeaderMon1());
 
-    gUnknown_203B310->monPortrait.faceFile = GetDialogueSpriteDataPtr(gUnknown_203B310->unk10->clientSpecies);
-    gUnknown_203B310->monPortrait.faceData = NULL;
+    sMRWork->monPortrait.faceFile = GetDialogueSpriteDataPtr(sMRWork->rewards->clientSpecies);
+    sMRWork->monPortrait.faceData = NULL;
 
-    gUnknown_203B310->monPortrait.spriteId = 0;
-    gUnknown_203B310->monPortrait.flip = FALSE;
-    gUnknown_203B310->monPortrait.unkE = 0;
-    gUnknown_203B310->monPortrait.pos.x = 2;
-    gUnknown_203B310->monPortrait.pos.y = 8;
+    sMRWork->monPortrait.spriteId = 0;
+    sMRWork->monPortrait.flip = FALSE;
+    sMRWork->monPortrait.unkE = 0;
+    sMRWork->monPortrait.pos.x = 2;
+    sMRWork->monPortrait.pos.y = 8;
 
-    if(gUnknown_203B310->monPortrait.faceFile != NULL)
-    {
-        gUnknown_203B310->monPortrait.faceData = (PortraitGfx *) gUnknown_203B310->monPortrait.faceFile->data;
-    }
+    if (sMRWork->monPortrait.faceFile != NULL)
+        sMRWork->monPortrait.faceData = (PortraitGfx *)sMRWork->monPortrait.faceFile->data;
 
-    SetRewardSceneState(PREP_MONEY_REWARD);
-    return 1;
+    MR_SetState(MR_STATE_PREP_MONEY_REWARD);
+    return TRUE;
 }
 
-u32 sub_802F298(void)
+u32 MR_Update(void)
 {
-    switch(gUnknown_203B310->state)
-    {
-        case REWARD_EXIT:
+    switch (sMRWork->state) {
+        case MR_STATE_REWARD_EXIT: {
             return 3;
-        case GIVE_ITEM_REWARD:
+        }
+        case MR_STATE_GIVE_ITEM_REWARD: {
             sub_802F6FC();
             return 0;
-        default:
-            ProceedToNextRewardSceneState();
+        }
+        default: {
+            MR_ProceedToNextState();
             return 0;
+        }
     }
 }
 
-void sub_802F2C0(void)
+void MR_Destroy(void)
 {
-    if (gUnknown_203B310 != NULL) {
-        if(gUnknown_203B310->monPortrait.faceFile != 0)
-            CloseFile(gUnknown_203B310->monPortrait.faceFile);
-        FREE_AND_SET_NULL(gUnknown_203B310);
+    if (sMRWork != NULL) {
+        TRY_CLOSE_FILE(sMRWork->monPortrait.faceFile);
+        FREE_AND_SET_NULL(sMRWork);
     }
 }
 
-void SetRewardSceneState(u32 newState)
+static void MR_SetState(u32 state)
 {
-    gUnknown_203B310->state = newState;
-    sub_802F300();
-    HandleMissionReward();
+    sMRWork->state = state;
+    MR_InitStateWindows();
+    MR_InitStateDialogue();
 }
 
-void sub_802F300(void)
+static void MR_InitStateWindows(void)
 {
-    s32 index;
-    switch(gUnknown_203B310->state)
-    {
-        case PREP_MONEY_REWARD:
-            RestoreSavedWindows(&gUnknown_203B310->unk24);
-            for(index = 0; index < 4; index++)
-            {
-                gUnknown_203B310->unk24.id[index] = gUnknown_80E041C;
+    switch (sMRWork->state) {
+        case MR_STATE_PREP_MONEY_REWARD: {
+            s32 i;
+
+            RestoreSavedWindows(&sMRWork->windows);
+
+            for (i = 0; i < MAX_WINDOWS; i++) {
+                sMRWork->windows.id[i] = sWinTemplateDummy;
             }
+
             ResetUnusedInputStruct();
-            ShowWindows(&gUnknown_203B310->unk24, TRUE, TRUE);
-        default:
+            ShowWindows(&sMRWork->windows, TRUE, TRUE);
             break;
+        }
+        default: {
+            break;
+        }
     }
 }
 
-void HandleMissionReward(void)
+static void MR_InitStateDialogue(void)
 {
-  s32 moneyReward;
-  const u8 *rankString;
-  u8 itemID;
-  struct unkStruct_8090F58 local_20;
-  Item item;
+    switch (sMRWork->state) {
+        case MR_STATE_PREP_MONEY_REWARD: {
+            s32 moneyReward = sMRWork->rewards->moneyReward;
 
-  switch(gUnknown_203B310->state) {
-    case PREP_MONEY_REWARD:
-        moneyReward = gUnknown_203B310->unk10->moneyReward;
-        if (moneyReward == 0) {
-            SetRewardSceneState(PREP_FRIEND_AREA_REWARD);
-        }
-        else {
-            gFormatArgs[0] = moneyReward;
-            if (gUnknown_203B310->displayClientDialogueSprite) {
-                CreateDialogueBoxAndPortrait(gUnknown_80E0434,0,&gUnknown_203B310->monPortrait,0x10d);
-                gUnknown_203B310->nextState = MONEY_REWARD;
+            if (moneyReward == 0) {
+                MR_SetState(MR_STATE_PREP_FRIEND_AREA_REWARD);
             }
             else {
-                SetRewardSceneState(MONEY_REWARD);
+                gFormatArgs[0] = moneyReward;
+
+                if (sMRWork->displayClientDialogueSprite) {
+                    CreateDialogueBoxAndPortrait(gUnknown_80E0434, 0, &sMRWork->monPortrait, 0x10d);
+                    sMRWork->nextState = MR_STATE_MONEY_REWARD;
+                }
+                else {
+                    MR_SetState(MR_STATE_MONEY_REWARD);
+                }
             }
+            break;
         }
-        break;
-    case MONEY_REWARD:
-        PlaySound(0xcb);
-        AddToTeamMoney(gUnknown_203B310->unk10->moneyReward);
-        if (GetUnitSum_808D544(0) < 2) {
-            CreateDialogueBoxAndPortrait(gUnknown_80E045C,0,0,0x101);
+        case MR_STATE_MONEY_REWARD: {
+            PlaySound(203);
+            AddToTeamMoney(sMRWork->rewards->moneyReward);
+
+            if (GetUnitSum_808D544(0) < 2)
+                CreateDialogueBoxAndPortrait(gUnknown_80E045C, 0, 0, 0x101);
+            else
+                CreateDialogueBoxAndPortrait(gUnknown_80E0484, 0, 0, 0x101);
+
+            sMRWork->nextState = MR_STATE_PREP_FRIEND_AREA_REWARD;
+            break;
         }
-        else {
-            CreateDialogueBoxAndPortrait(gUnknown_80E0484,0,0,0x101);
-        }
-        gUnknown_203B310->nextState = PREP_FRIEND_AREA_REWARD;
-        break;
-    case PREP_FRIEND_AREA_REWARD:
-        if (gUnknown_203B310->unk10->friendAreaReward == 0) {
-            SetRewardSceneState(PREP_ITEM_REWARD);
-        }
-        else {
-            WriteFriendAreaName(gFormatBuffer_FriendArea,gUnknown_203B310->unk10->friendAreaReward,FALSE);
-            if (gUnknown_203B310->displayClientDialogueSprite) {
-                CreateDialogueBoxAndPortrait(gUnknown_80E04B4,0,&gUnknown_203B310->monPortrait,0x10d);
-                gUnknown_203B310->nextState = UNLOCK_FRIEND_AREA;
+        case MR_STATE_PREP_FRIEND_AREA_REWARD: {
+            if (sMRWork->rewards->friendAreaReward == 0) {
+                MR_SetState(MR_STATE_PREP_ITEM_REWARD);
             }
             else {
-                SetRewardSceneState(UNLOCK_FRIEND_AREA);
+                WriteFriendAreaName(gFormatBuffer_FriendArea, sMRWork->rewards->friendAreaReward, FALSE);
+
+                if (sMRWork->displayClientDialogueSprite) {
+                    CreateDialogueBoxAndPortrait(gUnknown_80E04B4, 0, &sMRWork->monPortrait, 0x10d);
+                    sMRWork->nextState = MR_STATE_UNLOCK_FRIEND_AREA;
+                }
+                else {
+                    MR_SetState(MR_STATE_UNLOCK_FRIEND_AREA);
+                }
             }
+            break;
         }
-        break;
-    case UNLOCK_FRIEND_AREA:
-        if (GetFriendAreaStatus(gUnknown_203B310->unk10->friendAreaReward)) {
-            // We already have the friend area
-            AddToTeamMoney(1000);
-            CreateDialogueBoxAndPortrait(gUnknown_80E04F4,0,0,0x101);
-        }
-        else
-        {
-            if (GetUnitSum_808D544(0) < 2) {
-                UnlockFriendArea(gUnknown_203B310->unk10->friendAreaReward);
-                PlaySound(0xce);
-                CreateDialogueBoxAndPortrait(gUnknown_80E05C0,0,0,0x101);
+        case MR_STATE_UNLOCK_FRIEND_AREA: {
+            if (GetFriendAreaStatus(sMRWork->rewards->friendAreaReward)) {
+                // We already have the friend area
+                AddToTeamMoney(1000);
+                CreateDialogueBoxAndPortrait(gUnknown_80E04F4, 0, 0, 0x101);
             }
             else
             {
-                UnlockFriendArea(gUnknown_203B310->unk10->friendAreaReward);
-                PlaySound(0xce);
-                CreateDialogueBoxAndPortrait(gUnknown_80E05FC,0,0,0x101);
-            }
-        }
-        gUnknown_203B310->nextState = PREP_ITEM_REWARD;
-        break;
-    case PREP_ITEM_REWARD:
-        itemID = gUnknown_203B310->unk10->itemRewards[0];
-        if (itemID != ITEM_NOTHING)
-        {
-            if (gUnknown_203B310->unk10->moneyReward == 0) {
-                item.id = itemID;
-                if (IsThrownItem(item.id)) {
-                    item.quantity = gUnknown_203B310->unk10->quantity;
-                }
-                else {
-                    item.quantity = 0;
-                }
-                item.flags = ITEM_FLAG_EXISTS;
-                local_20.unk0 = 0;
-                local_20.unk4 = 0;
-                local_20.unk8 = 1;
-                sub_8090E14(gFormatBuffer_Items[1],&item,&local_20);
-                if (gUnknown_203B310->displayClientDialogueSprite) {
-                    CreateDialogueBoxAndPortrait(gUnknown_80E0640,0,&gUnknown_203B310->monPortrait,0x10d);
-                    gUnknown_203B310->nextState = GIVE_ITEM_REWARD;
+                if (GetUnitSum_808D544(0) < 2) {
+                    UnlockFriendArea(sMRWork->rewards->friendAreaReward);
+                    PlaySound(0xce);
+                    CreateDialogueBoxAndPortrait(gUnknown_80E05C0, 0, 0, 0x101);
                 }
                 else
                 {
-                    SetRewardSceneState(GIVE_ITEM_REWARD);
+                    UnlockFriendArea(sMRWork->rewards->friendAreaReward);
+                    PlaySound(0xce);
+                    CreateDialogueBoxAndPortrait(gUnknown_80E05FC, 0, 0, 0x101);
                 }
             }
-            else
-            {
-                SetRewardSceneState(GIVE_ITEM_REWARD);
-            }
+            sMRWork->nextState = MR_STATE_PREP_ITEM_REWARD;
+            break;
         }
-        else
-            SetRewardSceneState(TEAM_PNTS_REWARD);
-        break;
-    case GIVE_ITEM_REWARD:
-        if ((gUnknown_203B310->unk10->itemRewards[gUnknown_203B310->itemRewardIndex]) == 0) {
-            SetRewardSceneState(NEXT_ITEM);
-        }
-        else {
-            if ((gUnknown_203B310->itemRewardIndex == 0) && (gUnknown_203B310->unk10->moneyReward == 0)) {
-                sub_801B60C(0,gUnknown_203B310->unk10->itemRewards[0],gUnknown_203B310->unk10->quantity);
-            }
-            else {
-                sub_801B60C(1,gUnknown_203B310->unk10->itemRewards[gUnknown_203B310->itemRewardIndex],gUnknown_203B310->unk10->quantity);
-            }
-        }
-        break;
-    case NEXT_ITEM:
-        gUnknown_203B310->itemRewardIndex++;
-        if(gUnknown_203B310->itemRewardIndex < MAX_ITEM_REWARDS)
-            SetRewardSceneState(GIVE_ITEM_REWARD);
-        else
-            SetRewardSceneState(TEAM_PNTS_REWARD);
-        break;
-    case TEAM_PNTS_REWARD:
-        if (gUnknown_203B310->unk10->teamRankPtsReward == 0) {
-            SetRewardSceneState(REWARD_EXIT);
-        }
-        else {
-            gUnknown_203B310->currTeamRank = GetRescueTeamRank();
-            AddToTeamRankPts(gUnknown_203B310->unk10->teamRankPtsReward);
-            PlaySound(0xcb);
-            if (gUnknown_203B310->currTeamRank != GetRescueTeamRank()) {
-                gUnknown_203B310->nextState = NEW_TEAM_RANK;
-            }
-            else {
-                gUnknown_203B310->nextState = REWARD_EXIT;
-            }
-            gFormatArgs[0] = gUnknown_203B310->unk10->teamRankPtsReward;
-            CreateDialogueBoxAndPortrait(gUnknown_80E0670,0,0,0x101);
-        }
-        break;
-    case NEW_TEAM_RANK:
-        PlaySound(0xc9);
-        gUnknown_203B310->nextState = REWARD_EXIT;
-        rankString = GetTeamRankString(gUnknown_203B310->currTeamRank);
-        strcpy(gFormatBuffer_Monsters[2],rankString);
-        rankString = GetTeamRankString(GetRescueTeamRank());
-        strcpy(gFormatBuffer_Monsters[3],rankString);
-        CreateDialogueBoxAndPortrait(gUnknown_80E06A8,0,0,0x101);
-        break;
-    case REWARD_EXIT:
-        break;
-  }
-}
+        case MR_STATE_PREP_ITEM_REWARD: {
+            u8 itemID = sMRWork->rewards->itemRewards[0];
 
-void sub_802F6FC(void)
-{
-    switch(sub_801B6AC())
-    {
-        case 2:
-        case 3:
-            sub_801B72C();
-            SetRewardSceneState(NEXT_ITEM);
+            if (itemID != ITEM_NOTHING) {
+                if (sMRWork->rewards->moneyReward == 0) {
+                    struct unkStruct_8090F58 local_20;
+                    Item item;
+
+                    item.id = itemID;
+                    if (IsThrownItem(item.id))
+                        item.quantity = sMRWork->rewards->quantity;
+                    else
+                        item.quantity = 0;
+
+                    item.flags = ITEM_FLAG_EXISTS;
+                    local_20.unk0 = 0;
+                    local_20.unk4 = 0;
+                    local_20.unk8 = 1;
+                    sub_8090E14(gFormatBuffer_Items[1], &item, &local_20);
+
+                    if (sMRWork->displayClientDialogueSprite) {
+                        CreateDialogueBoxAndPortrait(gUnknown_80E0640, 0, &sMRWork->monPortrait, 0x10d);
+                        sMRWork->nextState = MR_STATE_GIVE_ITEM_REWARD;
+                    }
+                    else {
+                        MR_SetState(MR_STATE_GIVE_ITEM_REWARD);
+                    }
+                }
+                else {
+                    MR_SetState(MR_STATE_GIVE_ITEM_REWARD);
+                }
+            }
+            else {
+                MR_SetState(MR_STATE_TEAM_PNTS_REWARD);
+            }
             break;
-        case 0:
-        case 1:
+        }
+        case MR_STATE_GIVE_ITEM_REWARD: {
+            if (sMRWork->rewards->itemRewards[sMRWork->itemRewardIndex] == ITEM_NOTHING) {
+                MR_SetState(MR_STATE_NEXT_ITEM);
+            }
+            else if (sMRWork->itemRewardIndex == 0 && sMRWork->rewards->moneyReward == 0) {
+                sub_801B60C(0, sMRWork->rewards->itemRewards[0], sMRWork->rewards->quantity);
+            }
+            else {
+                sub_801B60C(1, sMRWork->rewards->itemRewards[sMRWork->itemRewardIndex], sMRWork->rewards->quantity);
+            }
             break;
+        }
+        case MR_STATE_NEXT_ITEM: {
+            sMRWork->itemRewardIndex++;
+
+            if (sMRWork->itemRewardIndex < MAX_ITEM_REWARDS)
+                MR_SetState(MR_STATE_GIVE_ITEM_REWARD);
+            else
+                MR_SetState(MR_STATE_TEAM_PNTS_REWARD);
+            break;
+        }
+        case MR_STATE_TEAM_PNTS_REWARD: {
+            if (sMRWork->rewards->teamRankPtsReward == 0) {
+                MR_SetState(MR_STATE_REWARD_EXIT);
+            }
+            else {
+                sMRWork->currTeamRank = GetRescueTeamRank();
+                AddToTeamRankPts(sMRWork->rewards->teamRankPtsReward);
+                PlaySound(203);
+
+                if (sMRWork->currTeamRank != GetRescueTeamRank())
+                    sMRWork->nextState = MR_STATE_NEW_TEAM_RANK;
+                else
+                    sMRWork->nextState = MR_STATE_REWARD_EXIT;
+
+                gFormatArgs[0] = sMRWork->rewards->teamRankPtsReward;
+                CreateDialogueBoxAndPortrait(gUnknown_80E0670, 0, 0, 0x101);
+            }
+            break;
+        }
+        case MR_STATE_NEW_TEAM_RANK: {
+            const u8 *rankString;
+
+            PlaySound(201);
+            sMRWork->nextState = MR_STATE_REWARD_EXIT;
+
+            rankString = GetTeamRankString(sMRWork->currTeamRank);
+            strcpy(gFormatBuffer_Monsters[2], rankString);
+
+            rankString = GetTeamRankString(GetRescueTeamRank());
+            strcpy(gFormatBuffer_Monsters[3], rankString);
+
+            CreateDialogueBoxAndPortrait(gUnknown_80E06A8, 0, 0, 0x101);
+            break;
+        }
+        case MR_STATE_REWARD_EXIT: {
+            break;
+        }
     }
 }
 
-void ProceedToNextRewardSceneState(void)
+static void sub_802F6FC(void)
+{
+    switch (sub_801B6AC()) {
+        case 2:
+        case 3: {
+            sub_801B72C();
+            MR_SetState(MR_STATE_NEXT_ITEM);
+            break;
+        }
+        case 0:
+        case 1: {
+            break;
+        }
+    }
+}
+
+static void MR_ProceedToNextState(void)
 {
     s32 temp;
 
-    if (sub_80144A4(&temp) == 0) {
-        SetRewardSceneState(gUnknown_203B310->nextState);
-    }
+    if (sub_80144A4(&temp) == 0)
+        MR_SetState(sMRWork->nextState);
 }
 

@@ -241,7 +241,7 @@ void FriendList_ShowWindow(void)
     sub_80073B8(sFriendList->unk358.m.menuWinId);
     switch (sFriendList->unk0) {
         case 2:
-            sub_80920D8(winTxtBuff);
+            StrncpyTeamName(winTxtBuff);
             PrintStringOnWindow(10, 0, winTxtBuff, sFriendList->unk358.m.menuWinId, '\0');
             break;
         case 4:

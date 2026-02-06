@@ -1,6 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "dungeon_cutscene.h"
+#include "dungeon_cutscenes.h"
 #include "effect_main.h"
 #include "dungeon_vram.h"
 #include "dungeon_8041AD0.h"

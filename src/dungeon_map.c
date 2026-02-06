@@ -125,9 +125,7 @@ void InitDungeonMap(bool8 a0)
 
 void CloseDungeonMapFile(void)
 {
-    if (sDungeonMapGfxFile != NULL) {
-        CloseFile(sDungeonMapGfxFile);
-    }
+    TRY_CLOSE_FILE(sDungeonMapGfxFile);
     SetDungeonMapToNotShown();
 }
 
