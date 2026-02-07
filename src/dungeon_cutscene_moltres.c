@@ -289,13 +289,13 @@ static void MoltresScreenFlash2(s32 xArg, s32 yArg)
     PlaySoundEffect(0x1EC);
 
     for (i = 250; i >= 20; i -= 10) {
-        SetDungeonBGColorRGB(i, 0, 0, 1, 1);
+        SetDungeonBGColorRGB(i, 0, 0, TRUE, TRUE);
         DungeonRunFrameActions(0x46);
     }
     DungeonWaitFrames_Async(0xA, 0x46);
 
     for (i = 250; i >= 0; i -= 10) {
-        SetDungeonBGColorRGB(i, 0, 0, 1, 1);
+        SetDungeonBGColorRGB(i, 0, 0, TRUE, TRUE);
         DungeonRunFrameActions(0x46);
     }
     DungeonWaitFrames_Async(0xA, 0x46);
@@ -312,14 +312,14 @@ static void MoltresScreenFlash3(void)
   iVar1 = 0xfa;
   for(iVar1 = 250; iVar1 > 9; iVar1 -= 10)
   {
-    SetDungeonBGColorRGB(iVar1,iVar1,iVar1 / 2,1,1);
+    SetDungeonBGColorRGB(iVar1,iVar1,iVar1 / 2,TRUE,TRUE);
     DungeonRunFrameActions(0x46);
   }
   DungeonWaitFrames_Async(0x1e,0x46);
   PlaySoundEffect(0x1ed);
   for(iVar1 = 250; iVar1 >= 0; iVar1 -= 10)
   {
-    SetDungeonBGColorRGB(iVar1,iVar1,iVar1 / 2,1,1);
+    SetDungeonBGColorRGB(iVar1,iVar1,iVar1 / 2,TRUE,TRUE);
     DungeonRunFrameActions(0x46);
   }
   DungeonWaitFrames_Async(0x1e,0x46);
@@ -332,7 +332,7 @@ static void MoltresScreenDarken(void)
 
   for(iVar1 = 0; iVar1 >= -80; iVar1 -= 8)
   {
-    SetDungeonBGColorRGB(iVar1,iVar1,iVar1,0,0);
+    SetDungeonBGColorRGB(iVar1,iVar1,iVar1,FALSE,FALSE);
     DungeonRunFrameActions(0x46);
   }
 }

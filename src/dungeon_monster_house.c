@@ -179,6 +179,6 @@ void TriggerMonsterHouse_Async(Entity *entity, bool8 forcedMonsterHouse)
 
     }
 
-    sub_804178C_Async(1);
+    sub_804178C_Async(TRUE);
 }
 

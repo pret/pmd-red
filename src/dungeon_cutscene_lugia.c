@@ -96,7 +96,7 @@ void LugiaPreFightDialogue(void)
     LugiaScreenFlash();
     DisplayDungeonDialogue_Async(&gLugiaPreFightDialogue_6);
     LugiaScreenFlash2();
-    SetDungeonBGColorRGB(-250,-250,-250,1,0);
+    SetDungeonBGColorRGB(-250,-250,-250,TRUE,FALSE);
     DungeonStopBGM();
     sub_80861D4(lugiaEntity,7,DIRECTION_SOUTH);
     DisplayDungeonDialogue_Async(&gLugiaPreFightDialogue_7);
@@ -113,17 +113,17 @@ static void LugiaScreenFlash(void)
 
   PlaySoundEffect(0x1f6);
   for(iVar1 = 250; iVar1 > 149; iVar1 -= 10){
-    SetDungeonBGColorRGB(0,0,iVar1,1,1);
+    SetDungeonBGColorRGB(0,0,iVar1,TRUE,TRUE);
     DungeonRunFrameActions(0x46);
   }
   DungeonWaitFrames_Async(10,0x46);
   for(iVar1 = 250; iVar1 > 199; iVar1 -= 10){
-    SetDungeonBGColorRGB(0,iVar1,iVar1,1,1);
+    SetDungeonBGColorRGB(0,iVar1,iVar1,TRUE,TRUE);
     DungeonRunFrameActions(0x46);
   }
   DungeonWaitFrames_Async(10,0x46);
   for(iVar1 = 250; iVar1 >= 0; iVar1 -= 10){
-    SetDungeonBGColorRGB(0,0,iVar1,1,1);
+    SetDungeonBGColorRGB(0,0,iVar1,TRUE,TRUE);
     DungeonRunFrameActions(0x46);
   }
   DungeonWaitFrames_Async(10,0x46);
@@ -137,24 +137,24 @@ static void LugiaScreenFlash2(void)
   PlaySoundEffect(0x1f6);
 
   for(iVar1 = 0; iVar1 < 200; iVar1 += 100){
-    SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,0);
+    SetDungeonBGColorRGB(iVar1,iVar1,iVar1,TRUE,FALSE);
     DungeonRunFrameActions(0x46);
   }
 
   for(iVar1 = 200; iVar1 >= 0; iVar1 -= 100){
-    SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,0);
+    SetDungeonBGColorRGB(iVar1,iVar1,iVar1,TRUE,FALSE);
     DungeonRunFrameActions(0x46);
   }
 
   DungeonWaitFrames_Async(4,0x46);
 
   for(iVar1 = 0; iVar1 < 200; iVar1 += 100){
-    SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,0);
+    SetDungeonBGColorRGB(iVar1,iVar1,iVar1,TRUE,FALSE);
     DungeonRunFrameActions(0x46);
   }
 
   for(iVar1 = 200; iVar1 >= 0; iVar1 -= 100){
-    SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,0);
+    SetDungeonBGColorRGB(iVar1,iVar1,iVar1,TRUE,FALSE);
     DungeonRunFrameActions(0x46);
   }
 
@@ -165,7 +165,7 @@ static void LugiaScreenFlash2(void)
 static void sub_808C0CC(void)
 {
   gDungeonBrightness = 0x1f;
-  SetDungeonBGColorRGB(0,0,0,1,1);
+  SetDungeonBGColorRGB(0,0,0,TRUE,TRUE);
   BgColorCallNullsub4();
   DungeonRunFrameActions(0x46);
   gDungeon->unk7 = 0;

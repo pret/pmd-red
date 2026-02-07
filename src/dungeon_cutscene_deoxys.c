@@ -98,17 +98,17 @@ static void DeoxysScreenFlash(void)
 
   PlaySoundEffect(0x2c1);
   for(iVar1 = 250; iVar1 > 149; iVar1 -= 10){
-    SetDungeonBGColorRGB(iVar1,0,0,1,1);
+    SetDungeonBGColorRGB(iVar1,0,0,TRUE,TRUE);
     DungeonRunFrameActions(0x46);
   }
   DungeonWaitFrames_Async(10,0x46);
   for(iVar1 = 250; iVar1 > 199; iVar1 -= 10){
-    SetDungeonBGColorRGB(iVar1,iVar1,0,1,1);
+    SetDungeonBGColorRGB(iVar1,iVar1,0,TRUE,TRUE);
     DungeonRunFrameActions(0x46);
   }
   DungeonWaitFrames_Async(10,0x46);
   for(iVar1 = 250; iVar1 >= 0; iVar1 -= 10){
-    SetDungeonBGColorRGB(iVar1,0,0,1,1);
+    SetDungeonBGColorRGB(iVar1,0,0,TRUE,TRUE);
     DungeonRunFrameActions(0x46);
   }
   DungeonWaitFrames_Async(10,0x46);
@@ -118,7 +118,7 @@ static void DeoxysScreenFlash(void)
 static void sub_808C550(void)
 {
   gDungeonBrightness = 0x1f;
-  SetDungeonBGColorRGB(0,0,0,1,1);
+  SetDungeonBGColorRGB(0,0,0,TRUE,TRUE);
   BgColorCallNullsub4();
   DungeonRunFrameActions(0x46);
   gDungeon->unk7 = 0;

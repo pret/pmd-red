@@ -56,7 +56,7 @@ u8 sub_800EA44(s32 monsterId_, s32 param_2);
 s32 sub_800EA84(struct UnkStruct_8040094 *a0);
 void sub_800EB24(s32 param_1, DungeonPos *param_2, DungeonPos *param_3, s32 r5, s32 r4);
 s32 sub_800EBC8(struct UnkStruct_8040094 *a0);
-u8 sub_800EC74(void);
+bool8 sub_800EC74(void);
 bool8 sub_800EC84(s32 moveId);
 u8 sub_800EC94(s32 param_1);
 

@@ -22,8 +22,8 @@
 #include "dungeon_8041AD0.h"
 
 EWRAM_DATA OpenedFile *gDungeonPaletteFile = {0};
-EWRAM_DATA unkStruct_202EE8C gUnknown_202EE8C[32] = {0};
-EWRAM_DATA OpenedFile *gUnknown_202F18C = {0};
+EWRAM_DATA AnimatedColor gDungeonAnimatedColors[32] = {0};
+EWRAM_DATA OpenedFile *gDungeonAnimatedColorsFile = {0};
 EWRAM_DATA Tile gOutOfBoundsTileData = {0};
 
 EWRAM_INIT const Tile *gCurTilesetOobTile = {NULL};
@@ -107,8 +107,8 @@ void LoadDungeonTilesetAssets(void)
     CloseFile(file);
   }
   sprintf(fileName,"b%02dcanm",gDungeon->tileset);
-  gUnknown_202F18C = OpenFileAndGetFileDataPtr(fileName,&gDungeonFileArchive);
-  sub_8004AA4(gUnknown_202EE8C,gUnknown_202F18C,0x20);
+  gDungeonAnimatedColorsFile = OpenFileAndGetFileDataPtr(fileName,&gDungeonFileArchive);
+  ReadAnimatedColorData(gDungeonAnimatedColors,gDungeonAnimatedColorsFile,0x20);
   gWalkableTileToCrossableTerrain[0] = CROSSABLE_TERRAIN_REGULAR;
   gWalkableTileToCrossableTerrain[1] = CROSSABLE_TERRAIN_LIQUID;
   gWalkableTileToCrossableTerrain[MOVEMENT_TYPE_CHASM] = CROSSABLE_TERRAIN_CREVICE;
@@ -128,7 +128,7 @@ void LoadDungeonTilesetAssets(void)
 
 void sub_8049820(void)
 {
-    CloseFile(gUnknown_202F18C);
+    CloseFile(gDungeonAnimatedColorsFile);
     CloseFile(gDungeonPaletteFile);
 }
 

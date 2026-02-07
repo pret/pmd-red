@@ -7,97 +7,97 @@ void nullsub_6(void)
 {
 }
 
-void sub_8004AA4(unkStruct_202EE8C *a0, OpenedFile *a1, s32 a2)
+void ReadAnimatedColorData(AnimatedColor *destColors, OpenedFile *file, s32 numColors)
 {
-    unkDataFor8004AA4 **data;
-    unkDataFor8004AA4 *ptr;
+    AnimatedColorData **data;
+    AnimatedColorData *colorData;
     s32 i;
 
-    data = (unkDataFor8004AA4 **)a1->data;
-    for (i = 0; i < a2; i++) {
-        ptr = *data++;
+    data = (AnimatedColorData **)file->data;
+    for (i = 0; i < numColors; i++) {
+        colorData = *data++;
 
-        if (ptr->colorCount != 0) {
-            a0->unk0 = 0x80000000;
-            a0->unk6 = ptr->unk2;
-            a0->unk4 = ptr->unk2;
-            a0->unk8 = ptr->colors;
-            a0->unkC = ptr->colors;
-            a0->unk10 = &ptr->colors[ptr->colorCount];
-            a0->unk14 = ptr->colors[0];
+        if (colorData->colorCount != 0) {
+            destColors->flags = 0x80000000;
+            destColors->timer = colorData->duration;
+            destColors->duration = colorData->duration;
+            destColors->colorsStart = colorData->colors;
+            destColors->currentColor = colorData->colors;
+            destColors->colorsEnd = &colorData->colors[colorData->colorCount];
+            destColors->color = colorData->colors[0];
         }
         else
-            a0->unk0 = 0;
+            destColors->flags = 0;
 
-        a0++;
+        destColors++;
     }
 }
 
-bool8 sub_8004AF0(bool8 a0, unkStruct_202EE8C *a1, s32 a2, s32 a3, s32 a4, const RGB_Struct *a5)
+bool8 UpdateAnimatedColors(bool8 forcePaletteUpdate, AnimatedColor *animatedColors, s32 index, s32 numAnimatedColors, s32 brightness, const RGB_Struct *ramp)
 {
-    bool8 bVar3;
+    bool8 update;
     bool8 ret;
     s32 i;
 
     ret = FALSE;
 
-    for (i = 0; i < a3; i++, a1++, a2++) {
-        if (!sub_8004D14(a1, 1) || sub_8004D40(a1, 1))
+    for (i = 0; i < numAnimatedColors; i++, animatedColors++, index++) {
+        if (!sub_8004D14(animatedColors, 1) || sub_8004D40(animatedColors, 1))
             continue;
 
-        bVar3 = a0;
-        a1->unk6--;
+        update = forcePaletteUpdate;
+        animatedColors->timer--;
 
-        if (a1->unk6 <= 0) {
-            a1->unk6 = a1->unk4;
-            if (a1->unkC >= a1->unk10)
-                a1->unkC = a1->unk8;
+        if (animatedColors->timer <= 0) {
+            animatedColors->timer = animatedColors->duration;
+            if (animatedColors->currentColor >= animatedColors->colorsEnd)
+                animatedColors->currentColor = animatedColors->colorsStart;
 
-            a1->unk14 = *a1->unkC++;
-            bVar3 = TRUE;
+            animatedColors->color = *animatedColors->currentColor++;
+            update = TRUE;
             ret = TRUE;
         }
 
-        if (bVar3)
-            SetBGPaletteBufferColorRGB(a2, &a1->unk14, a4, a5);
+        if (update)
+            SetBGPaletteBufferColorRGB(index, &animatedColors->color, brightness, ramp);
     }
 
     return ret;
 }
 
-UNUSED static bool8 sub_8004B78(bool8 a0, unkStruct_202EE8C *a1, s32 a2, s32 a3, s32 a4, const RGB_Struct *a5)
+UNUSED static bool8 sub_8004B78(bool8 forcePaletteUpdate, AnimatedColor *animatedColors, s32 index, s32 numAnimatedColors, s32 brightness, const RGB_Struct *ramp)
 {
-    bool8 bVar3;
+    bool8 update;
     bool8 ret;
     s32 i;
 
     ret = FALSE;
 
-    for (i = 0; i < a3; i++, a1++, a2++) {
-        if (!sub_8004D14(a1, 1) || sub_8004D40(a1, 1))
+    for (i = 0; i < numAnimatedColors; i++, animatedColors++, index++) {
+        if (!sub_8004D14(animatedColors, 1) || sub_8004D40(animatedColors, 1))
             continue;
 
-        bVar3 = a0;
-        a1->unk6--;
+        update = forcePaletteUpdate;
+        animatedColors->timer--;
 
-        if (a1->unk6 <= 0) {
-            a1->unk6 = a1->unk4;
-            if (a1->unkC >= a1->unk10)
-                a1->unkC = a1->unk8;
+        if (animatedColors->timer <= 0) {
+            animatedColors->timer = animatedColors->duration;
+            if (animatedColors->currentColor >= animatedColors->colorsEnd)
+                animatedColors->currentColor = animatedColors->colorsStart;
 
-            a1->unk14 = *a1->unkC++;
-            bVar3 = TRUE;
+            animatedColors->color = *animatedColors->currentColor++;
+            update = TRUE;
             ret = TRUE;
         }
 
-        if (bVar3)
-            nullsub_4(a2, &a1->unk14, a4, a5);
+        if (update)
+            nullsub_4(index, &animatedColors->color, brightness, ramp);
     }
 
     return ret;
 }
 
-bool8 sub_8004C00(unkStruct_202EE8C *a0, s32 a1, s32 a2, s32 brightness, const RGB_Struct *ramp, RGB_Struct16 *a5)
+bool8 sub_8004C00(AnimatedColor *animatedColors, s32 index, s32 numAnimatedColors, s32 brightness, const RGB_Struct *ramp, RGB_Struct16 *a5)
 {
     bool8 ret;
     s32 i;
@@ -108,24 +108,24 @@ bool8 sub_8004C00(unkStruct_202EE8C *a0, s32 a1, s32 a2, s32 brightness, const R
 
     ret = FALSE;
 
-    for (i = 0; i < a2; i++, a0++, a1++) {
-        if (!sub_8004D14(a0, 1) || sub_8004D40(a0, 1))
+    for (i = 0; i < numAnimatedColors; i++, animatedColors++, index++) {
+        if (!sub_8004D14(animatedColors, 1) || sub_8004D40(animatedColors, 1))
             continue;
 
-        a0->unk6--;
+        animatedColors->timer--;
 
-        if (a0->unk6 <= 0) {
-            a0->unk6 = a0->unk4;
-            if (a0->unkC >= a0->unk10)
-                a0->unkC = a0->unk8;
+        if (animatedColors->timer <= 0) {
+            animatedColors->timer = animatedColors->duration;
+            if (animatedColors->currentColor >= animatedColors->colorsEnd)
+                animatedColors->currentColor = animatedColors->colorsStart;
 
-            a0->unk14 = *a0->unkC++;
+            animatedColors->color = *animatedColors->currentColor++;
             ret = TRUE;
         }
 
-        r = a5->r + a0->unk14.r;
-        g = a5->g + a0->unk14.g;
-        b = a5->b + a0->unk14.b;
+        r = a5->r + animatedColors->color.r;
+        g = a5->g + animatedColors->color.g;
+        b = a5->b + animatedColors->color.b;
 
         if (r > 0xFF)
             r = 0xFF;
@@ -144,42 +144,47 @@ bool8 sub_8004C00(unkStruct_202EE8C *a0, s32 a1, s32 a2, s32 brightness, const R
         color.g = g;
         color.b = b;
 
-        SetBGPaletteBufferColorRGB(a1, &color, brightness, ramp);
+        SetBGPaletteBufferColorRGB(index, &color, brightness, ramp);
     }
 
     return ret;
 }
 
-UNUSED static void sub_8004CFC(unkStruct_202EE8C *a0, s32 a1)
+UNUSED static void sub_8004CFC(AnimatedColor *animatedColors, s32 numAnimatedColors)
 {
     s32 i;
 
-    for (i = 0; i < a1; a0++, i++) {
-        a0->unk0 = 0;
+    for (i = 0; i < numAnimatedColors; animatedColors++, i++) {
+        animatedColors->flags = 0;
     }
 }
 
-bool8 sub_8004D14(unkStruct_202EE8C *a0, s32 a1)
+bool8 sub_8004D14(AnimatedColor *animatedColors, s32 numAnimatedColors)
 {
     s32 i;
 
-    for (i = 0; i < a1; i++) {
-        if (a0->unk0 & 0x80000000)
+    for (i = 0; i < numAnimatedColors; i++) {
+        if (animatedColors->flags & 0x80000000)
             return TRUE;
-        a0++;
+        animatedColors++;
     }
     return FALSE;
 }
 
-bool8 sub_8004D40(unkStruct_202EE8C *a0, s32 a1)
+bool8 sub_8004D40(AnimatedColor *animatedColors, s32 numAnimatedColors)
 {
     s32 i;
 
-    for (i = 0; i < a1; i++) {
-        if (a0->unk0 & 0x80000000) {
-            if (!(a0->unk0 & 0x20000000))
+    for (i = 0; i < numAnimatedColors; i++) {
+        if (animatedColors->flags & 0x80000000) {
+            if (!(animatedColors->flags & 0x20000000))
                 return FALSE;
-            a0++;
+            // BUG: this increment should be in outer scope.
+            // if this function is called with numAnimatedColors > 1
+            // and first color has flag not set, then
+            // this for loop will keep checking the same flags.
+            // luckily this function is only used with numAnimatedColors = 1
+            animatedColors++;
         }
     }
     return TRUE;

@@ -157,13 +157,13 @@ static void LatiosScreenFlash(void)
   gDungeonBrightness = 0x1f;
   for(iVar1 = 250; iVar1 > 149; iVar1 -= 10)
   {
-    SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,1);
+    SetDungeonBGColorRGB(iVar1,iVar1,iVar1,TRUE,TRUE);
     DungeonRunFrameActions(70);
   }
   DungeonWaitFrames_Async(10,70);
   for(iVar1 = 250; iVar1 >= 0; iVar1 -= 10)
   {
-    SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,1);
+    SetDungeonBGColorRGB(iVar1,iVar1,iVar1,TRUE,TRUE);
     DungeonRunFrameActions(70);
   }
   DungeonWaitFrames_Async(10,70);

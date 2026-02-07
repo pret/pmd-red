@@ -76,7 +76,7 @@ struct FriendAreasMap
     u8 unk4A2C;
     axdata arrowSprites[NUM_DIRECTIONS];
     axdata monAxSprite;
-    unkStruct_202EE8C unk4C4C[16];
+    AnimatedColor unk4C4C[16];
     s32 brightness;
     u32 unk4DD0;
     DungeonPos bgPos;

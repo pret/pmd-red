@@ -1256,7 +1256,7 @@ void TryPointCameraToMonster(Entity *pokemon, u8 param_2)
 {
   if ((EntityIsValid(pokemon)) && (GetEntityType(pokemon) == ENTITY_MONSTER) && (gDungeon->unk181e8.cameraTarget != pokemon)) {
     if (param_2 != '\0') {
-      sub_804178C_Async(1);
+      sub_804178C_Async(TRUE);
       while (gDungeon->unk12 < 0x3c) {
         DungeonRunFrameActions(0x34);
       }

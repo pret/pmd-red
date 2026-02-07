@@ -57,7 +57,7 @@ bool8 sub_8040BB0(Entity *entity, Move *move, bool8 a2)
 
 static void sub_8040C4C(Entity *entity, Move *move, bool32 hasSpecialEffect)
 {
-    u8 savedUnkVar;
+    bool8 savedUnkVar;
     s32 r4;
     struct UnkStruct_8040094 sp;
     u16 r9 = GetEffectiveMoveId(move->id, GetApparentWeather(entity), hasSpecialEffect);
@@ -92,7 +92,7 @@ static void sub_8040C4C(Entity *entity, Move *move, bool32 hasSpecialEffect)
         if (!r8)
             break;
 
-        gUnknown_203B40D = 1;
+        gUnknown_203B40D = TRUE;
         if (gUnknown_2026E4E != 0x1010) {
             gUnknown_2026E4E += 0x101;
         }

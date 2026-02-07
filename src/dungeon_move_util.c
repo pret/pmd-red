@@ -170,7 +170,7 @@ bool32 sub_8055A00(Entity *attacker, s32 firstMoveId, s32 var_34, s32 itemId, s3
             }
         }
 
-        sub_804178C_Async(1);
+        sub_804178C_Async(TRUE);
         if (!EntityIsValid(attacker) || IsFloorOver())
             break;
         if (++moveId >= MAX_MON_MOVES)
@@ -197,7 +197,7 @@ bool32 sub_8055A00(Entity *attacker, s32 firstMoveId, s32 var_34, s32 itemId, s3
                     }
                     TryUseChosenMove(attacker, 0, itemId, arg_0, isLinkedMove, movePtr);
                 }
-                sub_804178C_Async(1);
+                sub_804178C_Async(TRUE);
             }
         }
     }
@@ -288,14 +288,14 @@ bool8 TryUseChosenMove(struct Entity *attacker, u32 r6, s32 itemId, u32 var_30, 
     msg = NULL;
     targetsArray[0] = NULL;
 
-    sub_804178C_Async(1);
+    sub_804178C_Async(TRUE);
     if (move->id == MOVE_METRONOME) {
         gMetronomeCalledArrayId = DungeonRandInt(METRONOME_AVAILABLE_CALLED_MOVES);
         InitPokemonMove(&metronomeMove, gMetronomeCalledMoves[gMetronomeCalledArrayId].moveID);
         metronomeMove.moveFlags = move->moveFlags;
         metronomeMove.moveFlags2 = move->moveFlags2;
         sub_8056468(attacker, move, gUnknown_80FECBC, targetsArray, itemId, TRUE, FALSE);
-        sub_804178C_Async(1);
+        sub_804178C_Async(TRUE);
         move = &metronomeMove;
     }
     else if (move->id == MOVE_NATURE_POWER)
@@ -311,7 +311,7 @@ bool8 TryUseChosenMove(struct Entity *attacker, u32 r6, s32 itemId, u32 var_30, 
         naturePwrMove.moveFlags = move->moveFlags;
         naturePwrMove.moveFlags2 = move->moveFlags2;
         sub_8056468(attacker, move, gUnknown_80FECE0, targetsArray, itemId, TRUE, FALSE);
-        sub_804178C_Async(1);
+        sub_804178C_Async(TRUE);
         move = &naturePwrMove;
     }
 
@@ -722,7 +722,7 @@ void sub_80566F8(Entity *attacker, Move *move, s32 a2, bool8 a3, s32 itemId, s32
     if (var_34 >= 0) {
         sub_800DC14(var_34);
     }
-    sub_804178C_Async(1);
+    sub_804178C_Async(TRUE);
     gDungeon->unk1BDD4.unk1C05E = 0;
 
     if (targetArrId > 0) {

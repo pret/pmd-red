@@ -194,19 +194,19 @@ static void HoOhScreenFlash(void)
   PlaySoundEffect(0x1ed);
   for(iVar1 = 250; iVar1 > 149; iVar1 -= 10)
   {
-    SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,1);
+    SetDungeonBGColorRGB(iVar1,iVar1,iVar1,TRUE,TRUE);
     DungeonRunFrameActions(70);
   }
   DungeonWaitFrames_Async(10,70);
   for(iVar1 = 250; iVar1 > 199; iVar1 -= 10)
   {
-    SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,1);
+    SetDungeonBGColorRGB(iVar1,iVar1,iVar1,TRUE,TRUE);
     DungeonRunFrameActions(70);
   }
   DungeonWaitFrames_Async(10,70);
   for(iVar1 = 250; iVar1 >= 0; iVar1 -= 10)
   {
-    SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,1);
+    SetDungeonBGColorRGB(iVar1,iVar1,iVar1,TRUE,TRUE);
     DungeonRunFrameActions(70);
   }
   DungeonWaitFrames_Async(10,70);

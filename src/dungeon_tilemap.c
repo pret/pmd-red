@@ -82,7 +82,7 @@ void sub_803F27C(bool8 a0)
     strPtr->rotateModeDirection = 0;
     strPtr->prevRotateModeDirection = 0;
     strPtr->inFloorMapMode = 0;
-    strPtr->unk18215 = 1;
+    strPtr->unk18215 = TRUE;
     sub_803F38C();
 
     gUnknown_202EDFC = 0xFFFF;

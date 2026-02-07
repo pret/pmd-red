@@ -294,7 +294,7 @@ static void sub_801059C(void)
     sub_8005610(sWorldMapPtr->unk1100[2], 0x40, 0x1F, 0);
 
     DecompressATGlobalFile((u32 *)(VRAM + 0x8000), 0x0, file);
-    sub_8004AA4(sWorldMapPtr->unk5150, sWorldMapPtr->unk1100[4], 0x10);
+    ReadAnimatedColorData(sWorldMapPtr->unk5150, sWorldMapPtr->unk1100[4], 0x10);
     size = 0x4000;
     DecompressATFile(&sWorldMapPtr->unk1114, size, file2);
 

@@ -68,7 +68,7 @@ UNUSED static EWRAM_DATA s32 sUnused = 0;
 EWRAM_DATA struct UnkStruct_202EDE8 gUnknown_202EDE8 = {0};
 
 EWRAM_INIT u8 gUnknown_203B40C = 0;
-EWRAM_INIT u8 gUnknown_203B40D = 0;
+EWRAM_INIT u8 gUnknown_203B40D = FALSE;
 
 static const DungeonPos gUnknown_80F61EC[2][6] = {
     [0] = {{-4, -4}, {-8, -4}, {-16, -4}, {-16, -4}, {-16, -4}, {-16, -4}},
@@ -93,7 +93,7 @@ void sub_803E250(void)
 
     gUnknown_202EDD0 = 999;
     sUnknown_202EDD4 = 0;
-    gUnknown_203B40D = 0;
+    gUnknown_203B40D = FALSE;
     gUnknown_202EDE8.unk0 = 0;
 
     SpriteSetY(&gUnknown_202EDC0, 0);
@@ -200,8 +200,8 @@ static void sub_803E490(u32 unused)
     sub_803EDF0();
 
 
-    if(gDungeon->unk181e8.unk18215 != 0 && gDungeon->unk1BDD4.unk1C06C != 3)
-        sub_8004AF0(gUnknown_203B40D, gUnknown_202EE8C, 0xA0, 0x20, gDungeonBrightness, gDungeon->colorRamp);
+    if(gDungeon->unk181e8.unk18215 && gDungeon->unk1BDD4.unk1C06C != 3)
+        UpdateAnimatedColors(gUnknown_203B40D, gDungeonAnimatedColors, 0xA0, 0x20, gDungeonBrightness, gDungeon->colorRamp);
 
     nullsub_8(gGameOptionsRef->touchScreen);
     sub_8005180();
@@ -282,7 +282,7 @@ void sub_803E748(void)
     s32 index2;
 
     index2 = 0x1F;
-    gUnknown_203B40D = 1;
+    gUnknown_203B40D = TRUE;
     gDungeonBrightness = 0;
 
     sub_803E874(1, 0x1F);
@@ -305,7 +305,7 @@ void sub_803E748(void)
         sub_803E874(1, index2);
         DungeonRunFrameActions(5);
     }
-    gUnknown_203B40D = 0;
+    gUnknown_203B40D = FALSE;
     gDungeonBrightness = 0x1F;
 }
 
@@ -315,7 +315,7 @@ void sub_803E7C8(void)
     s32 index2;
 
     index2 = 0x1F;
-    gUnknown_203B40D = 1;
+    gUnknown_203B40D = TRUE;
     gDungeonBrightness = 0;
 
     DungeonRunFrameActions(5);
@@ -335,14 +335,14 @@ void sub_803E7C8(void)
         }
         DungeonRunFrameActions(5);
     }
-    gUnknown_203B40D = 0;
+    gUnknown_203B40D = FALSE;
 }
 
 void sub_803E830(void)
 {
     s32 index;
 
-    gUnknown_203B40D = 1;
+    gUnknown_203B40D = TRUE;
     for(index = 0; index < 0x20; index++)
     {
         sub_803E874(0, 0);
@@ -351,7 +351,7 @@ void sub_803E830(void)
             gDungeonBrightness--;
     }
     gDungeonBrightness = 0;
-    gUnknown_203B40D = 0;
+    gUnknown_203B40D = FALSE;
 }
 
 static const RGB_Struct sBlackRgb = {0, 0, 0};
@@ -372,8 +372,8 @@ void sub_803E874(bool8 r10, s32 r9)
         index++;
     }
 
-    if (gDungeon->unk181e8.unk18215 == 0 || gDungeon->unk1BDD4.unk1C06C == 3) {
-        sub_8004AF0(TRUE, gUnknown_202EE8C, 0xA0, 0x20, gDungeonBrightness, gDungeon->colorRamp);
+    if (!gDungeon->unk181e8.unk18215 || gDungeon->unk1BDD4.unk1C06C == 3) {
+        UpdateAnimatedColors(TRUE, gDungeonAnimatedColors, 0xA0, 0x20, gDungeonBrightness, gDungeon->colorRamp);
     }
 
     index += 32;
@@ -440,8 +440,8 @@ void sub_803EA10(void)
         index++;
     }
 
-    if (gDungeon->unk181e8.unk18215 == 0 || gDungeon->unk1BDD4.unk1C06C == 3) {
-        sub_8004AF0(TRUE, gUnknown_202EE8C, 0xA0, 0x20, gDungeonBrightness, gDungeon->colorRamp);
+    if (!gDungeon->unk181e8.unk18215 || gDungeon->unk1BDD4.unk1C06C == 3) {
+        UpdateAnimatedColors(TRUE, gDungeonAnimatedColors, 0xA0, 0x20, gDungeonBrightness, gDungeon->colorRamp);
     }
 
     index += 32;

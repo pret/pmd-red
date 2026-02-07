@@ -95,7 +95,7 @@ typedef struct UnkDungeonGlobal_unk181E8_sub
     u8 unk18212; // x2A
     bool8 unk18213; // x2B
     bool8 inFloorMapMode; // x2C
-    u8 unk18215; // x2D
+    bool8 unk18215; // x2D
     u8 unk18216; // x2E
     u8 unk18217; // x2F
     u8 unk18218; // x30
