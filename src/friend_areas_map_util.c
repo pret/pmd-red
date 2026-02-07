@@ -70,7 +70,7 @@ void FriendAreasMap_InitGfx(void)
     sub_8005610(gFriendAreasMapPtr->unk0[2], 0x40, 0x1F, 0);
 
     DecompressATGlobalFile((u32 *)(VRAM + 0x8000), 0x0, file);
-    sub_8004AA4(gFriendAreasMapPtr->unk4C4C, gFriendAreasMapPtr->unk0[4], 0x10);
+    ReadAnimatedColorData(gFriendAreasMapPtr->unk4C4C, gFriendAreasMapPtr->unk0[4], 0x10);
     size = 0x4000;
     DecompressATFile(&gFriendAreasMapPtr->unk14, size, file2);
 
@@ -372,7 +372,7 @@ void FriendAreasMap_RunFrameActions(void)
     SetBG2RegOffsets(gFriendAreasMapPtr->bgPos.x, gFriendAreasMapPtr->bgPos.y);
     SetBG3RegOffsets(gFriendAreasMapPtr->bgPos.x, gFriendAreasMapPtr->bgPos.y);
     AnimateSprites();
-    sub_8004AF0(FadeScreen(), gFriendAreasMapPtr->unk4C4C, 0xB0, 16, gFriendAreasMapPtr->brightness, NULL);
+    UpdateAnimatedColors(FadeScreen(), gFriendAreasMapPtr->unk4C4C, 0xB0, 16, gFriendAreasMapPtr->brightness, NULL);
     sub_8005838(NULL, 0);
     nullsub_8(gGameOptionsRef->touchScreen);
     sub_8005180();

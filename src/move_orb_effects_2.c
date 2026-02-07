@@ -593,7 +593,7 @@ void HandleStockpile(Entity * pokemon, Entity * target)
     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
     if (entityInfo->stockpileStage < MAX_STOCKPILE_STAGE) {
       entityInfo->stockpileStage++;
-      sub_804178C_Async(1);
+      sub_804178C_Async(TRUE);
       sub_8041D5C(target);
       gFormatArgs[0] = entityInfo->stockpileStage;
       TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FBA38);

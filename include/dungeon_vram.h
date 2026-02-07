@@ -45,6 +45,6 @@ extern s32 gUnknown_202EDD0;
 extern struct UnkStruct_202EDE8 gUnknown_202EDE8;
 
 extern u8 gUnknown_203B40C;
-extern u8 gUnknown_203B40D;
+extern bool8 gUnknown_203B40D;
 
 #endif // GUARD_DUNGEON_VRAM_H

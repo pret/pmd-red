@@ -305,21 +305,21 @@ static void GroudonScreenFlash(void)
 
   for(iVar1 = 250; iVar1 > 0x95; iVar1 -= 10)
   {
-    SetDungeonBGColorRGB(iVar1,iVar1 / 2,iVar1 / 2,1,1);
+    SetDungeonBGColorRGB(iVar1,iVar1 / 2,iVar1 / 2,TRUE,TRUE);
     DungeonRunFrameActions(0x46);
   }
   DungeonWaitFrames_Async(10,0x46);
 
   for(iVar1 = 250; iVar1 > 199; iVar1 -= 10)
   {
-    SetDungeonBGColorRGB(iVar1,iVar1 / 2,0,1,1);
+    SetDungeonBGColorRGB(iVar1,iVar1 / 2,0,TRUE,TRUE);
     DungeonRunFrameActions(0x46);
   }
   DungeonWaitFrames_Async(10,0x46);
 
   for(iVar1 = 250; iVar1 >= 0; iVar1 -= 10)
   {
-    SetDungeonBGColorRGB(iVar1,iVar1 / 2,iVar1 / 2,1,1);
+    SetDungeonBGColorRGB(iVar1,iVar1 / 2,iVar1 / 2,TRUE,TRUE);
     DungeonRunFrameActions(0x46);
   }
   DungeonWaitFrames_Async(10,0x46);
@@ -332,21 +332,21 @@ static void GroudonScreenFlash2(void)
 
   for(iVar1 = 250; iVar1 > 0x95; iVar1 -= 10)
   {
-    SetDungeonBGColorRGB(iVar1,iVar1 / 2,iVar1 / 2,1,1);
+    SetDungeonBGColorRGB(iVar1,iVar1 / 2,iVar1 / 2,TRUE,TRUE);
     DungeonRunFrameActions(0x46);
   }
   DungeonWaitFrames_Async(10,0x46);
 
   for(iVar1 = 250; iVar1 > 199; iVar1 -= 10)
   {
-    SetDungeonBGColorRGB(iVar1,iVar1 / 2,0,1,1);
+    SetDungeonBGColorRGB(iVar1,iVar1 / 2,0,TRUE,TRUE);
     DungeonRunFrameActions(0x46);
   }
   DungeonWaitFrames_Async(10,0x46);
 
   for(iVar1 = 250; iVar1 >= 0; iVar1 -= 10)
   {
-    SetDungeonBGColorRGB(iVar1,iVar1 / 2,iVar1 / 2,1,1);
+    SetDungeonBGColorRGB(iVar1,iVar1 / 2,iVar1 / 2,TRUE,TRUE);
     DungeonRunFrameActions(0x46);
   }
   DungeonWaitFrames_Async(10,0x46);

@@ -26,7 +26,7 @@ struct WorldMap
     u16 unk1114[64][64];
     u16 unk3114[64][64];
     axdata monAxSprite;
-    unkStruct_202EE8C unk5150[16];
+    AnimatedColor unk5150[16];
     s32 brightness;
     s32 unk52D4;
     DungeonPos bgPos;

@@ -134,7 +134,7 @@ typedef struct BplHeader
 typedef struct GroundBg
 {
     SubStruct_0 unk0[UNK_0_ARR_COUNT];
-    unkStruct_202EE8C unkE0[UNK_E0_ARR_COUNT];
+    AnimatedColor unkE0[UNK_E0_ARR_COUNT];
     SubStruct_3E0 unk3E0[UNK_3E0_ARR_COUNT];
     OpenedFile *bplFile;
     OpenedFile *bpcFile;

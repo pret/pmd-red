@@ -502,7 +502,7 @@ void sub_80A3440(GroundBg *groundBg, s32 mapFileId_, const DungeonLocation *dung
 
     sub0Ptr = groundBg->unk0;
     if (groundBg->unk440 != NULL) {
-        sub_8004AA4(groundBg->unkE0, groundBg->unk440, UNK_E0_ARR_COUNT);
+        ReadAnimatedColorData(groundBg->unkE0, groundBg->unk440, UNK_E0_ARR_COUNT);
     }
     groundBg->animationSpecifications = NULL;
     groundBg->unk470 = 0;
@@ -1371,19 +1371,19 @@ void sub_80A4764(GroundBg *groundBg)
     }
     else if (groundBg->unk440 != NULL) {
         s32 i;
-        unkStruct_202EE8C *unkE0Ptr = groundBg->unkE0;
+        AnimatedColor *unkE0Ptr = groundBg->unkE0;
         s32 r6 = 160;
 
         for (i = 0; i < 32; i++, unkE0Ptr++, r6++) {
             RGB_Array color;
 
-            if (sub_8004D14(unkE0Ptr, 1) && !sub_8004D40(unkE0Ptr, 1) && --unkE0Ptr->unk6 <= 0) {
-                unkE0Ptr->unk6 = unkE0Ptr->unk4;
-                if (unkE0Ptr->unkC >= unkE0Ptr->unk10) {
-                    unkE0Ptr->unkC = unkE0Ptr->unk8;
+            if (sub_8004D14(unkE0Ptr, 1) && !sub_8004D40(unkE0Ptr, 1) && --unkE0Ptr->timer <= 0) {
+                unkE0Ptr->timer = unkE0Ptr->duration;
+                if (unkE0Ptr->currentColor >= unkE0Ptr->colorsEnd) {
+                    unkE0Ptr->currentColor = unkE0Ptr->colorsStart;
                 }
-                unkE0Ptr->unk14 = *unkE0Ptr->unkC++;
-                color = (RGB_Array) {unkE0Ptr->unk14.r, unkE0Ptr->unk14.g, unkE0Ptr->unk14.b, unkE0Ptr->unk14.unk4};
+                unkE0Ptr->color = *unkE0Ptr->currentColor++;
+                color = (RGB_Array) {unkE0Ptr->color.r, unkE0Ptr->color.g, unkE0Ptr->color.b, unkE0Ptr->color.unk4};
                 sub_8003810(r6, color);
             }
         }

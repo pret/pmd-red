@@ -290,27 +290,27 @@ static u32 sub_8041764(unkStruct_80416E0 *param_1, bool8 param_2)
     return sub_800E890(param_1);
 }
 
-void sub_804178C_Async(u8 param_1)
+void sub_804178C_Async(bool8 param_1)
 {
-  u32 temp;
+  bool8 temp;
   s32 counter;
 
   counter = 0;
   gDungeon->unk181e8.unk18204 = 0;
-  if (sub_800E9FC(param_1) != 0) {
-    while ((counter < 1000 && (sub_800E9FC(param_1) != 0))) {
+  if (sub_800E9FC(param_1)) {
+    while ((counter < 1000 && sub_800E9FC(param_1))) {
       DungeonRunFrameActions(0x4a);
       counter++;
     }
     DungeonRunFrameActions(0x4a);
     DungeonRunFrameActions(0x4a);
   }
-  if ((counter == 1000) || (param_1 != 0)) {
+  if ((counter == 1000) || param_1) {
     sub_800DBBC();
   }
   if (gDungeonBrightness < 0x1f) {
     temp = gUnknown_203B40D;
-    gUnknown_203B40D = 1;
+    gUnknown_203B40D = TRUE;
     for(counter = 0; counter < 1000; counter++)
     {
       if (gDungeonBrightness < 0x1f) {
@@ -1516,7 +1516,7 @@ static void sub_8042A84(s16 param_1, Entity *entity, u32 param_3)
       iVar3 = (entity->pixelPos.y - entity->unk1C) / 256;
     } while (-8 <= iVar3 - gDungeon->unk181e8.cameraPixelPos.y);
     entity->isVisible = 0;
-    sub_804178C_Async(0);
+    sub_804178C_Async(FALSE);
   }
 }
 

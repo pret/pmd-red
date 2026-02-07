@@ -127,7 +127,7 @@ void sub_8084448(Entity *pokemon)
     sub_80843BC(entInfo->id);
     sub_8042A34(&pokemon->pos);
     HandleFaint_Async(pokemon,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
-    sub_804178C_Async(1);
+    sub_804178C_Async(TRUE);
     while (TRUE) {
         if (DisplayDungeonYesNoMessage_Async(0,str,1) == 1) {
             if (DisplayDungeonYesNoMessage_Async(0,gUnknown_80FA394,0) == 1) {
@@ -187,7 +187,7 @@ void sub_80845E0(Entity *pokemon)
     sub_8042A34(&entity->pos);
     HandleFaint_Async(pokemon,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
     HandleFaint_Async(entity,DUNGEON_EXIT_DELETED_FOR_EVENT,0);
-    sub_804178C_Async(1);
+    sub_804178C_Async(TRUE);
     while (TRUE) {
         if (DisplayDungeonYesNoMessage_Async(0,gUnknown_80FA4D8,1) == 1) {
             if (DisplayDungeonYesNoMessage_Async(0,gUnknown_80FA394,0) == 1) {

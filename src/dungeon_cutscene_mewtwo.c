@@ -167,19 +167,19 @@ static void MewtwoScreenFlash(void)
   PlaySoundEffect(0x1f6);
   for(iVar1 = 250; iVar1 > 149; iVar1 -= 10)
   {
-    SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,1);
+    SetDungeonBGColorRGB(iVar1,iVar1,iVar1,TRUE,TRUE);
     DungeonRunFrameActions(0x46);
   }
   DungeonWaitFrames_Async(10,0x46);
   for(iVar1 = 250; iVar1 > 199; iVar1 -= 10)
   {
-    SetDungeonBGColorRGB(iVar1,iVar1,0,1,1);
+    SetDungeonBGColorRGB(iVar1,iVar1,0,TRUE,TRUE);
     DungeonRunFrameActions(0x46);
   }
   DungeonWaitFrames_Async(10,0x46);
   for(iVar1 = 250; iVar1 >= 0; iVar1 -= 10)
   {
-    SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,1);
+    SetDungeonBGColorRGB(iVar1,iVar1,iVar1,TRUE,TRUE);
     DungeonRunFrameActions(0x46);
   }
   DungeonWaitFrames_Async(10,0x46);

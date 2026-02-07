@@ -806,7 +806,7 @@ static void MusicBoxCreation_Async(void)
         PlaySoundEffect(0xd4);
         DisplayDungeonMessage_Async(0,gUnknown_8105434,1);
         DungeonWaitFrames_Async(10,0x41);
-        sub_804178C_Async(1);
+        sub_804178C_Async(TRUE);
         gDungeon->unk1356C = FALSE;
         UpdateMinimap();
     }

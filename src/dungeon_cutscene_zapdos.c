@@ -256,20 +256,20 @@ static void ZapdosScreenFlash(s32 numFlashes)
   if (2 < numFlashes) {
     for(index = 250; index > 199; index -= 10)
     {
-      SetDungeonBGColorRGB(index,index,index / 2,1,1);
+      SetDungeonBGColorRGB(index,index,index / 2,TRUE,TRUE);
       DungeonRunFrameActions(0x46);
     }
   }
   if (1 < numFlashes) {
     for(index = 250; index > 199; index -= 10)
     {
-      SetDungeonBGColorRGB(index,index,index / 2,1,1);
+      SetDungeonBGColorRGB(index,index,index / 2,TRUE,TRUE);
       DungeonRunFrameActions(0x46);
     }
   }
   for(index = 250; index >= 0; index -= 10)
   {
-    SetDungeonBGColorRGB(index,index,index / 4,1,1);
+    SetDungeonBGColorRGB(index,index,index / 4,TRUE,TRUE);
     DungeonRunFrameActions(0x46);
   }
   sub_8085EB0();

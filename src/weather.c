@@ -91,9 +91,9 @@ static void sub_807E698(bool8 arg0)
 
     sub_8042818(GetApparentWeather(NULL), arg0);
     DungeonRunFrameActions(0x25);
-    sub_804178C_Async(1);
+    sub_804178C_Async(TRUE);
     savedByte = gUnknown_203B40D;
-    gUnknown_203B40D = 1;
+    gUnknown_203B40D = TRUE;
 
     for (i = 0; i < 64; i++) {
         bool8 r7 = FALSE;

@@ -62,7 +62,7 @@ bool8 ExecuteEntityDungeonAction_Async(Entity *entity)
     DungeonPos pos;
     DungeonPos pos1;
 
-    sub_804178C_Async(1);
+    sub_804178C_Async(TRUE);
     gUnknown_203B434 = TRUE;
     info = GetEntInfo(entity);
     info->useHeldItem = FALSE;

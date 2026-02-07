@@ -237,17 +237,17 @@ void ArticunoPostStoryPreFightDialogue(void)
   }
 }
 
-static void sub_8088484(Entity *param_1)
+static void sub_8088484(Entity *entity)
 {
   s32 iVar1;
 
-  GetEntInfo(param_1)->unk15C = 1;
-  GetEntInfo(param_1)->unk15E = 0;
+  GetEntInfo(entity)->unk15C = 1;
+  GetEntInfo(entity)->unk15E = 0;
   PlaySoundEffect(0x1ea);
   for(iVar1 = 250; iVar1 >= 0; iVar1 -= 5)
   {
-    GetEntInfo(param_1)->unk174 = IntToF248(iVar1);
-    SetDungeonBGColorRGB(iVar1,iVar1,iVar1 / 2,1,0);
+    GetEntInfo(entity)->unk174 = IntToF248(iVar1);
+    SetDungeonBGColorRGB(iVar1,iVar1,iVar1 / 2,TRUE,FALSE);
     DungeonRunFrameActions(0x46);
   }
 }
@@ -259,19 +259,19 @@ static void ArticunoScreenFlash(void)
   PlaySoundEffect(0x2ad);
   for(iVar1 = 250; iVar1 > 0x95; iVar1 -= 10)
   {
-    SetDungeonBGColorRGB(iVar1 / 2,iVar1,iVar1,1,1);
+    SetDungeonBGColorRGB(iVar1 / 2,iVar1,iVar1,TRUE,TRUE);
     DungeonRunFrameActions(0x46);
   }
   DungeonWaitFrames_Async(4,0x46);
   for(iVar1 = 250; iVar1 > 199; iVar1 -= 10)
   {
-    SetDungeonBGColorRGB(0,iVar1,iVar1,1,1);
+    SetDungeonBGColorRGB(0,iVar1,iVar1,TRUE,TRUE);
     DungeonRunFrameActions(0x46);
   }
   DungeonWaitFrames_Async(4,0x46);
   for(iVar1 = 250; iVar1 >= 0; iVar1 -= 10)
   {
-    SetDungeonBGColorRGB(iVar1 / 2,iVar1,iVar1,1,1);
+    SetDungeonBGColorRGB(iVar1 / 2,iVar1,iVar1,TRUE,TRUE);
     DungeonRunFrameActions(0x46);
   }
   DungeonWaitFrames_Async(4,0x46);
@@ -284,7 +284,7 @@ static void sub_8088574(void)
 
   for(iVar1 = 0; iVar1 <= 80; iVar1 += 8)
   {
-    SetDungeonBGColorRGB(iVar1,iVar1,iVar1,0,0);
+    SetDungeonBGColorRGB(iVar1,iVar1,iVar1,FALSE,FALSE);
     DungeonRunFrameActions(0x46);
   }
 }

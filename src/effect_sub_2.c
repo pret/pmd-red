@@ -87,11 +87,11 @@ unkStruct_800F18C *sub_800F18C(s32 index)
    return &gUnknown_203B0D4->unk0[index];
 }
 
-s32 sub_800F19C(s32 index)
+bool8 sub_800F19C(s32 index)
 {
     if (gUnknown_203B0D4->unk0[index].counter == 0)
-        return 0;
+        return FALSE;
     else
-        return 1;
+        return TRUE;
 }
 

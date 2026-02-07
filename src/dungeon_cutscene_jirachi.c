@@ -368,21 +368,21 @@ static void JirachiWishGrantFlash(void)
 
   for(iVar1 = 0xFA; iVar1 > 0x95; iVar1 -= 10)
   {
-    SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,1);
+    SetDungeonBGColorRGB(iVar1,iVar1,iVar1,TRUE,TRUE);
     DungeonRunFrameActions(0x46);
   }
   DungeonWaitFrames_Async(10,0x46);
 
   for(iVar1 = 0xFA; iVar1 > 0xC7; iVar1 -= 10)
   {
-    SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,1);
+    SetDungeonBGColorRGB(iVar1,iVar1,iVar1,TRUE,TRUE);
     DungeonRunFrameActions(0x46);
   }
   DungeonWaitFrames_Async(10,0x46);
 
   for(iVar1 = 0xFA; iVar1 >= 0; iVar1 -= 10)
   {
-    SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,1);
+    SetDungeonBGColorRGB(iVar1,iVar1,iVar1,TRUE,TRUE);
     DungeonRunFrameActions(0x46);
   }
   DungeonWaitFrames_Async(10,0x46);

@@ -1038,13 +1038,13 @@ bool8 sub_800E9E4(u32 param_1)
     }
 }
 
-bool8 sub_800E9FC(u8 a0)
+bool8 sub_800E9FC(bool8 a0)
 {
     s32 i;
     struct unkStruct_203B0CC_sub *ptr = gUnknown_203B0CC->unk0;
     for (i = 0; i < UNK_203B0CC_ARR_COUNT; i++, ptr++) {
         if (ptr->unk4 != -1) {
-            if (a0 != 0)
+            if (a0)
                 return TRUE;
             if (ptr->unk54 == 0)
                 return TRUE;
@@ -1177,7 +1177,7 @@ static s32 sub_800EC68(s32 param_1)
     return ret->unk1c;
 }
 
-u8 sub_800EC74(void)
+bool8 sub_800EC74(void)
 {
     return sub_800F19C(1);
 }

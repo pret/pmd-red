@@ -1250,7 +1250,7 @@ void SetDungeonBGColorRGB(s32 r, s32 g, s32 b, bool8 a3, bool8 a4)
     colorS16.r = r;
     colorS16.g = g;
     colorS16.b = b;
-    sub_8004C00(gUnknown_202EE8C, 160, 32, gDungeonBrightness, gDungeon->colorRamp, &colorS16);
+    sub_8004C00(gDungeonAnimatedColors, 160, 32, gDungeonBrightness, gDungeon->colorRamp, &colorS16);
     palIndex += 32;
 
     colorPtr = gUnknown_202ECA4;
@@ -1305,12 +1305,12 @@ void SetDungeonBGColorRGB(s32 r, s32 g, s32 b, bool8 a3, bool8 a4)
 
 void sub_8085E98(void)
 {
-    gDungeon->unk181e8.unk18215 = 0;
+    gDungeon->unk181e8.unk18215 = FALSE;
 }
 
 void sub_8085EB0(void)
 {
-    gDungeon->unk181e8.unk18215 = 1;
+    gDungeon->unk181e8.unk18215 = TRUE;
 }
 
 static const unkStruct_2039DB0 sDefaultSpriteMasks = DEFAULT_UNK_2039DB0_MASKS;
@@ -1762,7 +1762,7 @@ UNUSED static void sub_80866FC(void)
     s32 i;
 
     for (i = 0; i >= -250; i -= 10) {
-        SetDungeonBGColorRGB(i, i, i, 1, 0);
+        SetDungeonBGColorRGB(i, i, i, TRUE, FALSE);
         DungeonRunFrameActions(70);
     }
 }
@@ -1777,7 +1777,7 @@ void sub_8086738(void)
     s32 i;
 
     for (i = 0; i < 250; i += 10) {
-        SetDungeonBGColorRGB(i, i, i, 1, 0);
+        SetDungeonBGColorRGB(i, i, i, TRUE, FALSE);
         DungeonRunFrameActions(70);
     }
 }
@@ -1787,7 +1787,7 @@ void sub_8086764(void)
     s32 i;
 
     for (i = 250; i >= 0; i -= 5) {
-        SetDungeonBGColorRGB(i, i, i, 1, 0);
+        SetDungeonBGColorRGB(i, i, i, TRUE, FALSE);
         DungeonRunFrameActions(70);
     }
 
@@ -1801,7 +1801,7 @@ void sub_8086794(void)
     gDungeonBrightness = 0;
 
     for (i = 0; i < 200; i++) {
-        SetDungeonBGColorRGB(0, 0, 0, 1, 0);
+        SetDungeonBGColorRGB(0, 0, 0, TRUE, FALSE);
         BgColorCallNullsub4();
         DungeonRunFrameActions(70);
 

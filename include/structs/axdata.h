@@ -92,7 +92,7 @@ typedef struct axmain
 typedef struct axObject
 {
     /* 0x0 */ axdata axdata;
-    /* 0x3C */ OpenedFile *spriteFile; // This might be a unkStruct_202EE8C instead and unkStruct_202EE8C.unk0 might be a OpenedFile* etc. See friend_areas_map_util.AnimateSprites()
+    /* 0x3C */ OpenedFile *spriteFile;
     s16 unk40_maybeAnimTimer;
     u8 unk42_animId1;
     u8 unk43_animId2;
