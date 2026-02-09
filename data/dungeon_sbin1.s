@@ -9,736 +9,793 @@ gDungeonFileArchive: @ 83B0000
 
 .global StartOfDungeonTable
 StartOfDungeonTable:
-.4byte gUnknown_83B1CBC @ Pointer to b00canm
-.4byte gUnknown_83B1CCC
-.4byte gUnknown_83B1CB4 @ Pointer to b00cel
-.4byte gUnknown_83B235C @ Pointer to AT4PX string (yay compression)
-.4byte gUnknown_83B1CAC @ Pointer to b00cex
-.4byte gUnknown_83B2A64 @ Pointer to SIRO header
-.4byte gUnknown_83B1CA4 @ Pointer to b00fon
-.4byte gUnknown_83B2D3C @ Pointer to AT4PX string
-.4byte gUnknown_83B1C9C @ Pointer to gUnknown_83B49D1
-.4byte gUnknown_83B49D1
+.4byte gUnknown_83B1CBC @ "b00canm"
+.4byte gUnknown_83B1CCC @ b00canm SIRO
+.4byte gUnknown_83B1CB4 @ "b00cel"
+.4byte gUnknown_83B235C @ b00cel AT4PX
+.4byte gUnknown_83B1CAC @ "b00cex"
+.4byte gUnknown_83B2A64 @ b00cex SIRO
+.4byte gUnknown_83B1CA4 @ "b00fon"
+.4byte gUnknown_83B2D3C @ b00fon AT4PX
+.4byte gUnknown_83B1C9C @ "b00pal"
+.4byte gUnknown_83B49D1 @ b00pal palette
 
+.4byte gUnknown_83B1C94 @ "b01canm"
+.4byte gUnknown_83B4CD0 @ b01canm SIRO
+.4byte gUnknown_83B1C8C @ "b01cel"
+.4byte gUnknown_83B5220 @ b01cel AT4PX
+.4byte gUnknown_83B1C84 @ "b01cex"
+.4byte gUnknown_83B5918 @ b01cex SIRO
+.4byte gUnknown_83B1C7C @ "b01fon"
+.4byte gUnknown_83B5C4F @ b01fon AT4PX
+.4byte gUnknown_83B1C74 @ "b01pal"
+.4byte gUnknown_83B8538 @ b01pal palette
 
-.4byte gUnknown_83B1C94 @ Pointer to b01canm
-.4byte gUnknown_83B4CD0 @ Pointer to SIRO header
-.4byte gUnknown_83B1C8C @ Pointer to b01cel 
-.4byte gUnknown_83B5220 @ Pointer to AT4PX 
-.4byte gUnknown_83B1C84 @ Pointer to b01cex
-.4byte gUnknown_83B5918 @ Pointer to SIRO header
-.4byte gUnknown_83B1C7C @ Pointer to b01fon
-.4byte gUnknown_83B5C4F @ Pointer to AT4PX 
-.4byte gUnknown_83B1C74 @ Pointer to b01pal
-.4byte gUnknown_83B8538 @ Start of palette
+.4byte gUnknown_83B1C6C @ "b02canm"
+.4byte gUnknown_83B8838 @ b02canm SIRO
+.4byte gUnknown_83B1C64 @ "b02cel"
+.4byte gUnknown_83B8C88 @ b02cel AT4PX
+.4byte gUnknown_83B1C5C @ "b02cex"
+.4byte gUnknown_83B9530 @ b02cex SIRO
+.4byte gUnknown_83B1C54 @ "b02fon"
+.4byte gUnknown_83B98C6 @ b02fon AT4PX
+.4byte gUnknown_83B1C4C @ "b02pal"
+.4byte gUnknown_83BBD08 @ b02pal palette
 
-.4byte gUnknown_83B1C6C @ Pointer to b02can 
-.4byte gUnknown_83B8838 @ Pointer to SIRO header
-.4byte gUnknown_83B1C64 @ Pointer to b02cel
-.4byte gUnknown_83B8C88 @ Pointer to AT4PX 
-.4byte gUnknown_83B1C5C @ Pointer to b02cex
-.4byte gUnknown_83B9530 @ Pointer to SIRO header
-.4byte gUnknown_83B1C54 @ Pointer to b02fon
-.4byte gUnknown_83B98C6 @ Pointer to AT4PX 
-.4byte gUnknown_83B1C4C @ Pointer to b02pal
-.4byte gUnknown_83BBD08 @ Start of palette
+.4byte gUnknown_83B1C44 @ "b03canm"
+.4byte gUnknown_83BC008 @ b03canm SIRO
+.4byte gUnknown_83B1C3C @ "b03cel"
+.4byte gUnknown_83BC458 @ b03cel AT4PX
+.4byte gUnknown_83B1C34 @ "b03cex"
+.4byte gUnknown_83BCBCC @ b03cex SIRO
+.4byte gUnknown_83B1C2C @ "b03fon"
+.4byte gUnknown_83BCF01 @ b03fon AT4PX
+.4byte gUnknown_83B1C24 @ "b03pal"
+.4byte gUnknown_83BF124 @ b03pal palette
 
-.4byte gUnknown_83B1C44 @ Pointer to b03can 
-.4byte gUnknown_83BC008 @ Pointer to SIRO header
-.4byte gUnknown_83B1C3C @ Pointer to b03cel
-.4byte gUnknown_83BC458 @ Pointer to AT4PX 
-.4byte gUnknown_83B1C34 @ Pointer to b03cex
-.4byte gUnknown_83BCBCC @ Pointer to SIRO header
-.4byte gUnknown_83B1C2C @ Pointer to b03fon
-.4byte gUnknown_83BCF01 @ Pointer to AT4PX 
-.4byte gUnknown_83B1C24 @ Pointer to b03pal
-.4byte gUnknown_83BF124 @ Start of palette
+.4byte gUnknown_83B1C1C @ "b04canm"
+.4byte gUnknown_83BF424 @ b04canm SIRO
+.4byte gUnknown_83B1C14 @ "b04cel"
+.4byte gUnknown_83BF974 @ b04cel AT4PX
+.4byte gUnknown_83B1C0C @ "b04cex"
+.4byte gUnknown_83C0088 @ b04cex SIRO
+.4byte gUnknown_83B1C04 @ "b04fon"
+.4byte gUnknown_83C03D8 @ b04fon AT4PX
+.4byte gUnknown_83B1BFC @ "b04pal"
+.4byte gUnknown_83C2670 @ b04pal palette
 
-.4byte gUnknown_83B1C1C
-.4byte gUnknown_83BF424
-.4byte gUnknown_83B1C14
-.4byte gUnknown_83BF974
-.4byte gUnknown_83B1C0C
-.4byte gUnknown_83C0088
-.4byte gUnknown_83B1C04
-.4byte gUnknown_83C03D8
-.4byte gUnknown_83B1BFC
-.4byte gUnknown_83C2670
+.4byte gUnknown_83B1BF4 @ "b05canm"
+.4byte gUnknown_83C2970 @ b05canm SIRO
+.4byte gUnknown_83B1BEC @ "b05cel"
+.4byte gUnknown_83C2EC0 @ b05cel AT4PX
+.4byte gUnknown_83B1BE4 @ "b05cex"
+.4byte gUnknown_83C35C0 @ b05cex SIRO
+.4byte gUnknown_83B1BDC @ "b05fon"
+.4byte gUnknown_83C38FE @ b05fon AT4PX
+.4byte gUnknown_83B1BD4 @ "b05pal"
+.4byte gUnknown_83C53E4 @ b05pal palette
 
-.4byte gUnknown_83B1BF4
-.4byte gUnknown_83C2970
-.4byte gUnknown_83B1BEC
-.4byte gUnknown_83C2EC0
-.4byte gUnknown_83B1BE4
-.4byte gUnknown_83C35C0
-.4byte gUnknown_83B1BDC
-.4byte gUnknown_83C38FE
-.4byte gUnknown_83B1BD4
-.4byte gUnknown_83C53E4
+.4byte gUnknown_83B1BCC @ "b06canm"
+.4byte gUnknown_83C56E4 @ b06canm SIRO
+.4byte gUnknown_83B1BC4 @ "b06cel"
+.4byte gUnknown_83C5B34 @ b06cel AT4PX
+.4byte gUnknown_83B1BBC @ "b06cex"
+.4byte gUnknown_83C6304 @ b06cex SIRO
+.4byte gUnknown_83B1BB4 @ "b06fon"
+.4byte gUnknown_83C6645 @ b06fon AT4PX
+.4byte gUnknown_83B1BAC @ "b06pal"
+.4byte gUnknown_83C97EC @ b06pal palette
 
-.4byte gUnknown_83B1BCC
-.4byte gUnknown_83C56E4
-.4byte gUnknown_83B1BC4
-.4byte gUnknown_83C5B34
-.4byte gUnknown_83B1BBC
-.4byte gUnknown_83C6304
-.4byte gUnknown_83B1BB4
-.4byte gUnknown_83C6645
-.4byte gUnknown_83B1BAC
-.4byte gUnknown_83C97EC
+.4byte gUnknown_83B1BA4 @ "b07canm"
+.4byte gUnknown_83C9AEC @ b07canm SIRO
+.4byte gUnknown_83B1B9C @ "b07cel"
+.4byte gUnknown_83C9F3C @ b07cel AT4PX
+.4byte gUnknown_83B1B94 @ "b07cex"
+.4byte gUnknown_83CA70C @ b07cex SIRO
+.4byte gUnknown_83B1B8C @ "b07fon"
+.4byte gUnknown_83CAAA2 @ b07fon AT4PX
+.4byte gUnknown_83B1B84 @ "b07pal"
+.4byte gUnknown_83CC9A4 @ b07pal palette
 
-.4byte gUnknown_83B1BA4
-.4byte gUnknown_83C9AEC
-.4byte gUnknown_83B1B9C
-.4byte gUnknown_83C9F3C
-.4byte gUnknown_83B1B94
-.4byte gUnknown_83CA70C
-.4byte gUnknown_83B1B8C
-.4byte gUnknown_83CAAA2
-.4byte gUnknown_83B1B84
-.4byte gUnknown_83CC9A4
+.4byte gUnknown_83B1B7C @ "b08canm"
+.4byte gUnknown_83CCCA4 @ b08canm SIRO
+.4byte gUnknown_83B1B74 @ "b08cel"
+.4byte gUnknown_83CD0F4 @ b08cel AT4PX
+.4byte gUnknown_83B1B6C @ "b08cex"
+.4byte gUnknown_83CD8B0 @ b08cex SIRO
+.4byte gUnknown_83B1B64 @ "b08fon"
+.4byte gUnknown_83CDBFD @ b08fon AT4PX
+.4byte gUnknown_83B1B5C @ "b08pal"
+.4byte gUnknown_83D0C3C @ b08pal palette
 
-.4byte gUnknown_83B1B7C
-.4byte gUnknown_83CCCA4
-.4byte gUnknown_83B1B74
-.4byte gUnknown_83CD0F4
-.4byte gUnknown_83B1B6C
-.4byte gUnknown_83CD8B0
-.4byte gUnknown_83B1B64
-.4byte gUnknown_83CDBFD
-.4byte gUnknown_83B1B5C
-.4byte gUnknown_83D0C3C
+.4byte gUnknown_83B1B54 @ "b09canm"
+.4byte gUnknown_83D0F3C @ b09canm SIRO
+.4byte gUnknown_83B1B4C @ "b09cel"
+.4byte gUnknown_83D1394 @ b09cel AT4PX
+.4byte gUnknown_83B1B44 @ "b09cex"
+.4byte gUnknown_83D1AB4 @ b09cex SIRO
+.4byte gUnknown_83B1B3C @ "b09fon"
+.4byte gUnknown_83D1E19 @ b09fon AT4PX
+.4byte gUnknown_83B1B34 @ "b09pal"
+.4byte gUnknown_83D3FC4 @ b09pal palette
 
-.4byte gUnknown_83B1B54
-.4byte gUnknown_83D0F3C
-.4byte gUnknown_83B1B4C
-.4byte gUnknown_83D1394
-.4byte gUnknown_83B1B44
-.4byte gUnknown_83D1AB4
-.4byte gUnknown_83B1B3C
-.4byte gUnknown_83D1E19
-.4byte gUnknown_83B1B34
-.4byte gUnknown_83D3FC4
+.4byte gUnknown_83B1B2C @ "b10canm"
+.4byte gUnknown_83D42C4 @ b10canm SIRO
+.4byte gUnknown_83B1B24 @ "b10cel"
+.4byte gUnknown_83D4714 @ b10cel AT4PX
+.4byte gUnknown_83B1B1C @ "b10cex"
+.4byte gUnknown_83D4F1C @ b10cex SIRO
+.4byte gUnknown_83B1B14 @ "b10fon"
+.4byte gUnknown_83D5253 @ b10fon AT4PX
+.4byte gUnknown_83B1B0C @ "b10pal"
+.4byte gUnknown_83D7A14 @ b10pal palette
 
-.4byte gUnknown_83B1B2C
-.4byte gUnknown_83D42C4
-.4byte gUnknown_83B1B24
-.4byte gUnknown_83D4714
-.4byte gUnknown_83B1B1C
-.4byte gUnknown_83D4F1C
-.4byte gUnknown_83B1B14
-.4byte gUnknown_83D5253
-.4byte gUnknown_83B1B0C
-.4byte gUnknown_83D7A14
+.4byte gUnknown_83B1B04 @ "b11canm"
+.4byte gUnknown_83D7D14 @ b11canm SIRO
+.4byte gUnknown_83B1AFC @ "b11cel"
+.4byte gUnknown_83D8164 @ b11cel AT4PX
+.4byte gUnknown_83B1AF4 @ "b11cex"
+.4byte gUnknown_83D88F4 @ b11cex SIRO
+.4byte gUnknown_83B1AEC @ "b11fon"
+.4byte gUnknown_83D8C2B @ b11fon AT4PX
+.4byte gUnknown_83B1AE4 @ "b11pal"
+.4byte gUnknown_83DB640 @ b11pal palette
 
-.4byte gUnknown_83B1B04
-.4byte gUnknown_83D7D14
-.4byte gUnknown_83B1AFC
-.4byte gUnknown_83D8164
-.4byte gUnknown_83B1AF4
-.4byte gUnknown_83D88F4
-.4byte gUnknown_83B1AEC
-.4byte gUnknown_83D8C2B
-.4byte gUnknown_83B1AE4
-.4byte gUnknown_83DB640
+.4byte gUnknown_83B1ADC @ "b12canm"
+.4byte gUnknown_83DB940 @ b12canm SIRO
+.4byte gUnknown_83B1AD4 @ "b12cel"
+.4byte gUnknown_83DBFD0 @ b12cel AT4PX
+.4byte gUnknown_83B1ACC @ "b12cex"
+.4byte gUnknown_83DC7BC @ b12cex SIRO
+.4byte gUnknown_83B1AC4 @ "b12fon"
+.4byte gUnknown_83DCAD0 @ b12fon AT4PX
+.4byte gUnknown_83B1ABC @ "b12pal"
+.4byte gUnknown_83DF0A0 @ b12pal palette
 
-.4byte gUnknown_83B1ADC
-.4byte gUnknown_83DB940
-.4byte gUnknown_83B1AD4
-.4byte gUnknown_83DBFD0
-.4byte gUnknown_83B1ACC
-.4byte gUnknown_83DC7BC
-.4byte gUnknown_83B1AC4
-.4byte gUnknown_83DCAD0
-.4byte gUnknown_83B1ABC
-.4byte gUnknown_83DF0A0
+.4byte gUnknown_83B1AB4 @ "b13canm"
+.4byte gUnknown_83DF3A0 @ b13canm SIRO
+.4byte gUnknown_83B1AAC @ "b13cel"
+.4byte gUnknown_83DF7F0 @ b13cel AT4PX
+.4byte gUnknown_83B1AA4 @ "b13cex"
+.4byte gUnknown_83DFF64 @ b13cex SIRO
+.4byte gUnknown_83B1A9C @ "b13fon"
+.4byte gUnknown_83E0298 @ b13fon AT4PX
+.4byte gUnknown_83B1A94 @ "b13pal"
+.4byte gUnknown_83E2190 @ b13pal palette
 
-.4byte gUnknown_83B1AB4
-.4byte gUnknown_83DF3A0
-.4byte gUnknown_83B1AAC
-.4byte gUnknown_83DF7F0
-.4byte gUnknown_83B1AA4
-.4byte gUnknown_83DFF64
-.4byte gUnknown_83B1A9C
-.4byte gUnknown_83E0298
-.4byte gUnknown_83B1A94
-.4byte gUnknown_83E2190
+.4byte gUnknown_83B1A8C @ "b14canm"
+.4byte gUnknown_83E2490 @ b14canm SIRO
+.4byte gUnknown_83B1A84 @ "b14cel"
+.4byte gUnknown_83E29E0 @ b14cel AT4PX
+.4byte gUnknown_83B1A7C @ "b14cex"
+.4byte gUnknown_83E31C8 @ b14cex SIRO
+.4byte gUnknown_83B1A74 @ "b14fon"
+.4byte gUnknown_83E355F @ b14fon AT4PX
+.4byte gUnknown_83B1A6C @ "b14pal"
+.4byte gUnknown_83E55A8 @ b14pal palette
 
-.4byte gUnknown_83B1A8C
-.4byte gUnknown_83E2490
-.4byte gUnknown_83B1A84
-.4byte gUnknown_83E29E0
-.4byte gUnknown_83B1A7C
-.4byte gUnknown_83E31C8
-.4byte gUnknown_83B1A74
-.4byte gUnknown_83E355F
-.4byte gUnknown_83B1A6C
-.4byte gUnknown_83E55A8
+.4byte gUnknown_83B1A64 @ "b15canm"
+.4byte gUnknown_83E58A8 @ b15canm SIRO
+.4byte gUnknown_83B1A5C @ "b15cel"
+.4byte gUnknown_83E5CF8 @ b15cel AT4PX
+.4byte gUnknown_83B1A54 @ "b15cex"
+.4byte gUnknown_83E63E0 @ b15cex SIRO
+.4byte gUnknown_83B1A4C @ "b15fon"
+.4byte gUnknown_83E674E @ b15fon AT4PX
+.4byte gUnknown_83B1A44 @ "b15pal"
+.4byte gUnknown_83E84EC @ b15pal palette
 
-.4byte gUnknown_83B1A64
-.4byte gUnknown_83E58A8
-.4byte gUnknown_83B1A5C
-.4byte gUnknown_83E5CF8
-.4byte gUnknown_83B1A54
-.4byte gUnknown_83E63E0
-.4byte gUnknown_83B1A4C
-.4byte gUnknown_83E674E
-.4byte gUnknown_83B1A44
-.4byte gUnknown_83E84EC
+.4byte gUnknown_83B1A3C @ "b16canm"
+.4byte gUnknown_83E87EC @ b16canm SIRO
+.4byte gUnknown_83B1A34 @ "b16cel"
+.4byte gUnknown_83E8E7C @ b16cel AT4PX
+.4byte gUnknown_83B1A2C @ "b16cex"
+.4byte gUnknown_83E95C0 @ b16cex SIRO
+.4byte gUnknown_83B1A24 @ "b16fon"
+.4byte gUnknown_83E98EA @ b16fon AT4PX
+.4byte gUnknown_83B1A1C @ "b16pal"
+.4byte gUnknown_83EB52C @ b16pal palette
 
-.4byte gUnknown_83B1A3C
-.4byte gUnknown_83E87EC
-.4byte gUnknown_83B1A34
-.4byte gUnknown_83E8E7C
-.4byte gUnknown_83B1A2C
-.4byte gUnknown_83E95C0
-.4byte gUnknown_83B1A24
-.4byte gUnknown_83E98EA
-.4byte gUnknown_83B1A1C
-.4byte gUnknown_83EB52C
+.4byte gUnknown_83B1A14 @ "b17canm"
+.4byte gUnknown_83EB82C @ b17canm SIRO
+.4byte gUnknown_83B1A0C @ "b17cel"
+.4byte gUnknown_83EBD40 @ b17cel AT4PX
+.4byte gUnknown_83B1A04 @ "b17cex"
+.4byte gUnknown_83EC570 @ b17cex SIRO
+.4byte gUnknown_83B19FC @ "b17fon"
+.4byte gUnknown_83EC90A @ b17fon AT4PX
+.4byte gUnknown_83B19F4 @ "b17pal"
+.4byte gUnknown_83EEA4C @ b17pal palette
 
-.4byte gUnknown_83B1A14
-.4byte gUnknown_83EB82C
-.4byte gUnknown_83B1A0C
-.4byte gUnknown_83EBD40
-.4byte gUnknown_83B1A04
-.4byte gUnknown_83EC570
-.4byte gUnknown_83B19FC
-.4byte gUnknown_83EC90A
-.4byte gUnknown_83B19F4
-.4byte gUnknown_83EEA4C
-.4byte gUnknown_83B19EC
-.4byte gUnknown_83EED4C
-.4byte gUnknown_83B19E4
-.4byte gUnknown_83EF19C
-.4byte gUnknown_83B19DC
-.4byte gUnknown_83EF954
-.4byte gUnknown_83B19D4
-.4byte gUnknown_83EFCBB
-.4byte gUnknown_83B19CC
-.4byte gUnknown_83F24EC
-.4byte gUnknown_83B19C4
-.4byte gUnknown_83F27EC
-.4byte gUnknown_83B19BC
-.4byte gUnknown_83F2D3C
-.4byte gUnknown_83B19B4
-.4byte gUnknown_83F3494
-.4byte gUnknown_83B19AC
-.4byte gUnknown_83F382C
-.4byte gUnknown_83B19A4
-.4byte gUnknown_83F5194
-.4byte gUnknown_83B199C
-.4byte gUnknown_83F5494
-.4byte gUnknown_83B1994
-.4byte gUnknown_83F59E4
-.4byte gUnknown_83B198C
-.4byte gUnknown_83F6188
-.4byte gUnknown_83B1984
-.4byte gUnknown_83F64A1
-.4byte gUnknown_83B197C
-.4byte gUnknown_83F8C68
-.4byte gUnknown_83B1974
-.4byte gUnknown_83F8F68
-.4byte gUnknown_83B196C
-.4byte gUnknown_83F95B8
-.4byte gUnknown_83B1964
-.4byte gUnknown_83F9CBC
-.4byte gUnknown_83B195C
-.4byte gUnknown_83FA051
-.4byte gUnknown_83B1954
-.4byte gUnknown_83FB4B0
-.4byte gUnknown_83B194C
-.4byte gUnknown_83FB7B0
-.4byte gUnknown_83B1944
-.4byte gUnknown_83FBD80
-.4byte gUnknown_83B193C
-.4byte gUnknown_83FC080
-.4byte gUnknown_83B1934
-.4byte gUnknown_83FC5D0
-.4byte gUnknown_83B192C
-.4byte gUnknown_83FCD4C
-.4byte gUnknown_83B1924
-.4byte gUnknown_83FD098
-.4byte gUnknown_83B191C
-.4byte gUnknown_83FF330
-.4byte gUnknown_83B1914
-.4byte gUnknown_83FF630
-.4byte gUnknown_83B190C
-.4byte gUnknown_83FFA80
-.4byte gUnknown_83B1904
-.4byte gUnknown_8400114
-.4byte gUnknown_83B18FC
-.4byte gUnknown_840044A
-.4byte gUnknown_83B18F4
-.4byte gUnknown_8401C98
-.4byte gUnknown_83B18EC
-.4byte gUnknown_8401F98
-.4byte gUnknown_83B18E4
-.4byte gUnknown_84023E8
-.4byte gUnknown_83B18DC
-.4byte gUnknown_8402BF0
-.4byte gUnknown_83B18D4
-.4byte gUnknown_8402F86
-.4byte gUnknown_83B18CC
-.4byte gUnknown_8404A44
-.4byte gUnknown_83B18C4
-.4byte gUnknown_8404D44
-.4byte gUnknown_83B18BC
-.4byte gUnknown_8405294
-.4byte gUnknown_83B18B4
-.4byte gUnknown_8405594
-.4byte gUnknown_83B18AC
-.4byte gUnknown_8405AE4
-.4byte gUnknown_83B18A4
-.4byte gUnknown_8405DE4
-.4byte gUnknown_83B189C
-.4byte gUnknown_8406434
-.4byte gUnknown_83B1894
-.4byte gUnknown_8406B5C
-.4byte gUnknown_83B188C
-.4byte gUnknown_8406E82
-.4byte gUnknown_83B1884
-.4byte gUnknown_840873C
-.4byte gUnknown_83B187C
-.4byte gUnknown_8408A3C
-.4byte gUnknown_83B1874
-.4byte gUnknown_8408F8C
-.4byte gUnknown_83B186C
-.4byte gUnknown_84096B8
-.4byte gUnknown_83B1864
-.4byte gUnknown_84099E9
-.4byte gUnknown_83B185C
-.4byte gUnknown_840BCA0
-.4byte gUnknown_83B1854
-.4byte gUnknown_840BFA0
-.4byte gUnknown_83B184C
-.4byte gUnknown_840C4F0
-.4byte gUnknown_83B1844
-.4byte gUnknown_840CBC4
-.4byte gUnknown_83B183C
-.4byte gUnknown_840CF0F
-.4byte gUnknown_83B1834
-.4byte gUnknown_840E5EC
-.4byte gUnknown_83B182C
-.4byte gUnknown_840E8EC
-.4byte gUnknown_83B1824
-.4byte gUnknown_840EE3C
-.4byte gUnknown_83B181C
-.4byte gUnknown_840F5E8
-.4byte gUnknown_83B1814
-.4byte gUnknown_840F920
-.4byte gUnknown_83B180C
-.4byte gUnknown_8411918
-.4byte gUnknown_83B1804
-.4byte gUnknown_8411C18
-.4byte gUnknown_83B17FC
-.4byte gUnknown_8412728
-.4byte gUnknown_83B17F4
-.4byte gUnknown_8412D88
-.4byte gUnknown_83B17EC
-.4byte gUnknown_84130A4
-.4byte gUnknown_83B17E4
-.4byte gUnknown_84141E4
-.4byte gUnknown_83B17DC
-.4byte gUnknown_84144E4
-.4byte gUnknown_83B17D4
-.4byte gUnknown_8414FF4
-.4byte gUnknown_83B17CC
-.4byte gUnknown_8415654
-.4byte gUnknown_83B17C4
-.4byte gUnknown_8415970
-.4byte gUnknown_83B17BC
-.4byte gUnknown_8416A54
-.4byte gUnknown_83B17B4
-.4byte gUnknown_8416D5C
-.4byte gUnknown_83B17AC
-.4byte gUnknown_84173AC
-.4byte gUnknown_83B17A4
-.4byte gUnknown_84176AC
-.4byte gUnknown_83B179C
-.4byte gUnknown_8417CBC
-.4byte gUnknown_83B1794
-.4byte gUnknown_84184A8
-.4byte gUnknown_83B178C
-.4byte gUnknown_84187DF
-.4byte gUnknown_83B1784
-.4byte gUnknown_841A980
-.4byte gUnknown_83B177C
-.4byte gUnknown_841AC80
-.4byte gUnknown_83B1774
-.4byte gUnknown_841B290
-.4byte gUnknown_83B176C
-.4byte gUnknown_841BA28
-.4byte gUnknown_83B1764
-.4byte gUnknown_841BDAD
-.4byte gUnknown_83B175C
-.4byte gUnknown_841E074
-.4byte gUnknown_83B1754
-.4byte gUnknown_841E374
-.4byte gUnknown_83B174C
-.4byte gUnknown_841E8C4
-.4byte gUnknown_83B1744
-.4byte gUnknown_841EFD4
-.4byte gUnknown_83B173C
-.4byte gUnknown_841F34F
-.4byte gUnknown_83B1734
-.4byte gUnknown_8420F9C
-.4byte gUnknown_83B172C
-.4byte gUnknown_842129C
-.4byte gUnknown_83B1724
-.4byte gUnknown_84217EC
-.4byte gUnknown_83B171C
-.4byte gUnknown_8421AEC
-.4byte gUnknown_83B1714
-.4byte gUnknown_842203C
-.4byte gUnknown_83B170C
-.4byte gUnknown_842272C
-.4byte gUnknown_83B1704
-.4byte gUnknown_8422ABC
-.4byte gUnknown_83B16FC
-.4byte gUnknown_8424088
-.4byte gUnknown_83B16F4
-.4byte gUnknown_8424388
-.4byte gUnknown_83B16EC
-.4byte gUnknown_84248D8
-.4byte gUnknown_83B16E4
-.4byte gUnknown_8424FD8
-.4byte gUnknown_83B16DC
-.4byte gUnknown_842534E
-.4byte gUnknown_83B16D4
-.4byte gUnknown_8426F84
-.4byte gUnknown_83B16CC
-.4byte gUnknown_8427284
-.4byte gUnknown_83B16C4
-.4byte gUnknown_84277D4
-.4byte gUnknown_83B16BC
-.4byte gUnknown_8427EE4
-.4byte gUnknown_83B16B4
-.4byte gUnknown_84281FD
-.4byte gUnknown_83B16AC
-.4byte gUnknown_842AA28
-.4byte gUnknown_83B16A4
-.4byte gUnknown_842AD28
-.4byte gUnknown_83B169C
-.4byte gUnknown_842B278
-.4byte gUnknown_83B1694
-.4byte gUnknown_842BA04
-.4byte gUnknown_83B168C
-.4byte gUnknown_842BD19
-.4byte gUnknown_83B1684
-.4byte gUnknown_842DEB4
-.4byte gUnknown_83B167C
-.4byte gUnknown_842E1B4
-.4byte gUnknown_83B1674
-.4byte gUnknown_842E704
-.4byte gUnknown_83B166C
-.4byte gUnknown_842EEDC
-.4byte gUnknown_83B1664
-.4byte gUnknown_842F273
-.4byte gUnknown_83B165C
-.4byte gUnknown_8431B30
-.4byte gUnknown_83B1654
-.4byte gUnknown_8431E30
-.4byte gUnknown_83B164C
-.4byte gUnknown_8432440
-.4byte gUnknown_83B1644
-.4byte gUnknown_8432C48
-.4byte gUnknown_83B163C
-.4byte gUnknown_8432F83
-.4byte gUnknown_83B1634
-.4byte gUnknown_8435188
-.4byte gUnknown_83B162C
-.4byte gUnknown_8435488
-.4byte gUnknown_83B1624
-.4byte gUnknown_84358D8
-.4byte gUnknown_83B161C
-.4byte gUnknown_8436058
-.4byte gUnknown_83B1614
-.4byte gUnknown_843638D
-.4byte gUnknown_83B160C
-.4byte gUnknown_8438AFC
-.4byte gUnknown_83B1604
-.4byte gUnknown_8438DFC
-.4byte gUnknown_83B15FC
-.4byte gUnknown_843950C
-.4byte gUnknown_83B15F4
-.4byte gUnknown_8439C30
-.4byte gUnknown_83B15EC
-.4byte gUnknown_8439F4C
-.4byte gUnknown_83B15E4
-.4byte gUnknown_843C16C
-.4byte gUnknown_83B15DC
-.4byte gUnknown_843C46C
-.4byte gUnknown_83B15D4
-.4byte gUnknown_843C8BC
-.4byte gUnknown_83B15CC
-.4byte gUnknown_843D094
-.4byte gUnknown_83B15C4
-.4byte gUnknown_843D42A
-.4byte gUnknown_83B15BC
-.4byte gUnknown_843F768
-.4byte gUnknown_83B15B4
-.4byte gUnknown_843FA68
-.4byte gUnknown_83B15AC
-.4byte gUnknown_8440638
-.4byte gUnknown_83B15A4
-.4byte gUnknown_8440DA0
-.4byte gUnknown_83B159C
-.4byte gUnknown_8441101
-.4byte gUnknown_83B1594
-.4byte gUnknown_8443054
-.4byte gUnknown_83B158C
-.4byte gUnknown_844335C
-.4byte gUnknown_83B1584
-.4byte gUnknown_84438EC
-.4byte gUnknown_83B157C
-.4byte gUnknown_8443FF4
-.4byte gUnknown_83B1574
-.4byte gUnknown_84442CC
-.4byte gUnknown_83B156C
-.4byte gUnknown_8445F60
-.4byte gUnknown_83B1564
-.4byte gUnknown_8446260
-.4byte gUnknown_83B155C
-.4byte gUnknown_84467B0
-.4byte gUnknown_83B1554
-.4byte gUnknown_8446F2C
-.4byte gUnknown_83B154C
-.4byte gUnknown_844729F
-.4byte gUnknown_83B1544
-.4byte gUnknown_84495C4
-.4byte gUnknown_83B153C
-.4byte gUnknown_84498C4
-.4byte gUnknown_83B1534
-.4byte gUnknown_8449D14
-.4byte gUnknown_83B152C
-.4byte gUnknown_844A488
-.4byte gUnknown_83B1524
-.4byte gUnknown_844A7D7
-.4byte gUnknown_83B151C
-.4byte gUnknown_844CE80
-.4byte gUnknown_83B1514
-.4byte gUnknown_844D180
-.4byte gUnknown_83B150C
-.4byte gUnknown_844D6D0
-.4byte gUnknown_83B1504
-.4byte gUnknown_844DDE0
-.4byte gUnknown_83B14FC
-.4byte gUnknown_844E0F9
-.4byte gUnknown_83B14F4
-.4byte gUnknown_8450924
-.4byte gUnknown_83B14EC
-.4byte gUnknown_8450C24
-.4byte gUnknown_83B14E4
-.4byte gUnknown_8451174
-.4byte gUnknown_83B14DC
-.4byte gUnknown_84518B8
-.4byte gUnknown_83B14D4
-.4byte gUnknown_8451C08
-.4byte gUnknown_83B14CC
-.4byte gUnknown_845416C
-.4byte gUnknown_83B14C4
-.4byte gUnknown_845446C
-.4byte gUnknown_83B14BC
-.4byte gUnknown_84549BC
-.4byte gUnknown_83B14B4
-.4byte gUnknown_84550C4
-.4byte gUnknown_83B14AC
-.4byte gUnknown_845539C
-.4byte gUnknown_83B14A4
-.4byte gUnknown_8457030
-.4byte gUnknown_83B149C
-.4byte gUnknown_8457330
-.4byte gUnknown_83B1494
-.4byte gUnknown_8457780
-.4byte gUnknown_83B148C
-.4byte gUnknown_8457E98
-.4byte gUnknown_83B1484
-.4byte gUnknown_84581CC
-.4byte gUnknown_83B147C
-.4byte gUnknown_845ACCC
-.4byte gUnknown_83B1474
-.4byte gUnknown_845AFCC
-.4byte gUnknown_83B146C
-.4byte gUnknown_845B41C
-.4byte gUnknown_83B1464
-.4byte gUnknown_845BBA4
-.4byte gUnknown_83B145C
-.4byte gUnknown_845BEE7
-.4byte gUnknown_83B1454
-.4byte gUnknown_845E880
-.4byte gUnknown_83B144C
-.4byte gUnknown_845EB80
-.4byte gUnknown_83B1444
-.4byte gUnknown_845EFD0
-.4byte gUnknown_83B143C
-.4byte gUnknown_845F2D0
-.4byte gUnknown_83B1434
-.4byte gUnknown_845F720
-.4byte gUnknown_83B142C
-.4byte gUnknown_845FA20
-.4byte gUnknown_83B1424
-.4byte gUnknown_845FE30
-.4byte gUnknown_83B141C
-.4byte gUnknown_84604C0
-.4byte gUnknown_83B1414
-.4byte gUnknown_84607DB
-.4byte gUnknown_83B140C
-.4byte gUnknown_84627FC
-.4byte gUnknown_83B1404
-.4byte gUnknown_8462AFC
-.4byte gUnknown_83B13FC
-.4byte gUnknown_8462F4C
-.4byte gUnknown_83B13F4
-.4byte gUnknown_84636BC
-.4byte gUnknown_83B13EC
-.4byte gUnknown_84639F2
-.4byte gUnknown_83B13E4
-.4byte gUnknown_8465E6C
-.4byte gUnknown_83B13DC
-.4byte gUnknown_846616C
-.4byte gUnknown_83B13D4
-.4byte gUnknown_8466A7C
-.4byte gUnknown_83B13CC
-.4byte gUnknown_8466D7C
-.4byte gUnknown_83B13C4
-.4byte gUnknown_84671CC
-.4byte gUnknown_83B13BC
-.4byte gUnknown_8467950
-.4byte gUnknown_83B13B4
-.4byte gUnknown_8467C74
-.4byte gUnknown_83B13AC
-.4byte gUnknown_846A37C
-.4byte gUnknown_83B13A4
-.4byte gUnknown_846A67C
-.4byte gUnknown_83B139C
-.4byte gUnknown_846ACCC
-.4byte gUnknown_83B1394
-.4byte gUnknown_846B42C
-.4byte gUnknown_83B138C
-.4byte gUnknown_846B771
-.4byte gUnknown_83B1384
-.4byte gUnknown_846DB74
-.4byte gUnknown_83B137C
-.4byte gUnknown_846DE74
-.4byte gUnknown_83B1374
-.4byte gUnknown_846E444
-.4byte gUnknown_83B1368
-.4byte gUnknown_846F248
-.4byte gUnknown_83B1360
-.4byte gUnknown_846F418
-.4byte gUnknown_83B1358
-.4byte gUnknown_8470FBC
-.4byte gUnknown_83B1350
-.4byte gUnknown_84712BC
-.4byte gUnknown_83B1348
-.4byte gUnknown_847188C
-.4byte gUnknown_83B133C
-.4byte gUnknown_8472130
-.4byte gUnknown_83B1334
-.4byte gUnknown_84722F3
-.4byte gUnknown_83B132C
-.4byte gUnknown_8473608
-.4byte gUnknown_83B1324
-.4byte gUnknown_8473908
-.4byte gUnknown_83B131C
-.4byte gUnknown_8474298
-.4byte gUnknown_83B1310
-.4byte gUnknown_8474E60
-.4byte gUnknown_83B1308
-.4byte gUnknown_847500B
-.4byte gUnknown_83B1300
-.4byte gUnknown_847745C
-.4byte gUnknown_83B12F8
-.4byte gUnknown_847775C
-.4byte gUnknown_83B12F0
-.4byte gUnknown_8477BEC
-.4byte gUnknown_83B12E4
-.4byte gUnknown_84789A8
-.4byte gUnknown_83B12DC
-.4byte gUnknown_8478BA9
-.4byte gUnknown_83B12D4
-.4byte gUnknown_847A598
-.4byte gUnknown_83B12CC
-.4byte gUnknown_847A898
-.4byte gUnknown_83B12C4
-.4byte gUnknown_847AE68
-.4byte gUnknown_83B12B8
-.4byte gUnknown_847B910
-.4byte gUnknown_83B12B0
-.4byte gUnknown_847BB13
-.4byte gUnknown_83B12A8
-.4byte gUnknown_847DF24
-.4byte gUnknown_83B12A0
-.4byte gUnknown_847E224
-.4byte gUnknown_83B1298
-.4byte gUnknown_847E63C
-.4byte gUnknown_83B128C
-.4byte gUnknown_847F268
-.4byte gUnknown_83B1284
-.4byte gUnknown_847F420
-.4byte gUnknown_83B127C
-.4byte gUnknown_8481E08
-.4byte gUnknown_83B1274
-.4byte gUnknown_8482108
-.4byte gUnknown_83B126C
-.4byte gUnknown_8482618
-.4byte gUnknown_83B1260
-.4byte gUnknown_8482FF8
-.4byte gUnknown_83B1258
-.4byte gUnknown_848311F
-.4byte gUnknown_83B1250
-.4byte gUnknown_8485F50
-.4byte gUnknown_83B1248
-.4byte gUnknown_8486250
-.4byte gUnknown_83B1240
-.4byte gUnknown_84865A0
-.4byte gUnknown_83B1234
-.4byte gUnknown_848720C
-.4byte gUnknown_83B122C
-.4byte gUnknown_84873BA
-.4byte gUnknown_83B1224
-.4byte gUnknown_848979C
-.4byte gUnknown_83B121C
-.4byte gUnknown_8489A9C
-.4byte gUnknown_83B1214
-.4byte gUnknown_848A0AC
-.4byte gUnknown_83B1208
-.4byte gUnknown_848AD10
-.4byte gUnknown_83B1200
-.4byte gUnknown_848AEE5
-.4byte gUnknown_83B11F8
-.4byte gUnknown_848D5D8
-.4byte gUnknown_83B11F0
-.4byte gUnknown_848D8D8
-.4byte gUnknown_83B11E8
-.4byte gUnknown_848E028
-.4byte gUnknown_83B11DC
-.4byte gUnknown_848ED84
-.4byte gUnknown_83B11D4
-.4byte gUnknown_848EF18
-.4byte gUnknown_83B11CC
-.4byte gUnknown_8490BF0
-.4byte gUnknown_83B11C4
-.4byte gUnknown_8490EF0
-.4byte gUnknown_83B11BC
-.4byte gUnknown_8491480
-.4byte gUnknown_83B11B0
-.4byte gUnknown_84922D0
-.4byte gUnknown_83B11A8
-.4byte gUnknown_8492474
-.4byte gUnknown_83B11A0
-.4byte gUnknown_8494A68
-.4byte gUnknown_83B1198
-.4byte gUnknown_8494D68
-.4byte gUnknown_83B1190
-.4byte gUnknown_8494EF8
-.4byte gUnknown_83B1184
-.4byte gUnknown_8495DD0
-.4byte gUnknown_83B117C
-.4byte gUnknown_8495F6F
-.4byte gUnknown_83B1174
-.4byte gUnknown_8499554
+.4byte gUnknown_83B19EC @ "b18canm"
+.4byte gUnknown_83EED4C @ b18canm SIRO
+.4byte gUnknown_83B19E4 @ "b18cel"
+.4byte gUnknown_83EF19C @ b18cel AT4PX
+.4byte gUnknown_83B19DC @ "b18cex"
+.4byte gUnknown_83EF954 @ b18cex SIRO
+.4byte gUnknown_83B19D4 @ "b18fon"
+.4byte gUnknown_83EFCBB @ b18fon AT4PX
+.4byte gUnknown_83B19CC @ "b18pal"
+.4byte gUnknown_83F24EC @ b18pal palette
+
+.4byte gUnknown_83B19C4 @ "b19canm"
+.4byte gUnknown_83F27EC @ b19canm SIRO
+.4byte gUnknown_83B19BC @ "b19cel"
+.4byte gUnknown_83F2D3C @ b19cel AT4PX
+.4byte gUnknown_83B19B4 @ "b19cex"
+.4byte gUnknown_83F3494 @ b19cex SIRO
+.4byte gUnknown_83B19AC @ "b19fon"
+.4byte gUnknown_83F382C @ b19fon AT4PX
+.4byte gUnknown_83B19A4 @ "b19pal"
+.4byte gUnknown_83F5194 @ b19pal palette
+
+.4byte gUnknown_83B199C @ "b20canm"
+.4byte gUnknown_83F5494 @ b20canm SIRO
+.4byte gUnknown_83B1994 @ "b20cel"
+.4byte gUnknown_83F59E4 @ b20cel AT4PX
+.4byte gUnknown_83B198C @ "b20cex"
+.4byte gUnknown_83F6188 @ b20cex SIRO
+.4byte gUnknown_83B1984 @ "b20fon"
+.4byte gUnknown_83F64A1 @ b20fon AT4PX
+.4byte gUnknown_83B197C @ "b20pal"
+.4byte gUnknown_83F8C68 @ b20pal palette
+
+.4byte gUnknown_83B1974 @ "b21canm"
+.4byte gUnknown_83F8F68 @ b21canm SIRO
+.4byte gUnknown_83B196C @ "b21cel"
+.4byte gUnknown_83F95B8 @ b21cel AT4PX
+.4byte gUnknown_83B1964 @ "b21cex"
+.4byte gUnknown_83F9CBC @ b21cex SIRO
+.4byte gUnknown_83B195C @ "b21fon"
+.4byte gUnknown_83FA051 @ b21fon AT4PX
+.4byte gUnknown_83B1954 @ "b21pal"
+.4byte gUnknown_83FB4B0 @ b21pal palette
+
+.4byte gUnknown_83B194C @ "b22canm"
+.4byte gUnknown_83FB7B0 @ b22canm SIRO
+.4byte gUnknown_83B1944 @ "b22pal"
+.4byte gUnknown_83FBD80 @ b22pal palette
+
+.4byte gUnknown_83B193C @ "b23canm"
+.4byte gUnknown_83FC080 @ b23canm SIRO
+.4byte gUnknown_83B1934 @ "b23cel"
+.4byte gUnknown_83FC5D0 @ b23cel AT4PX
+.4byte gUnknown_83B192C @ "b23cex"
+.4byte gUnknown_83FCD4C @ b23cex SIRO
+.4byte gUnknown_83B1924 @ "b23fon"
+.4byte gUnknown_83FD098 @ b23fon AT4PX
+.4byte gUnknown_83B191C @ "b23pal"
+.4byte gUnknown_83FF330 @ b23pal palette
+
+.4byte gUnknown_83B1914 @ "b24canm"
+.4byte gUnknown_83FF630 @ b24canm SIRO
+.4byte gUnknown_83B190C @ "b24cel"
+.4byte gUnknown_83FFA80 @ b24cel AT4PX
+.4byte gUnknown_83B1904 @ "b24cex"
+.4byte gUnknown_8400114 @ b24cex SIRO
+.4byte gUnknown_83B18FC @ "b24fon"
+.4byte gUnknown_840044A @ b24fon AT4PX
+.4byte gUnknown_83B18F4 @ "b24pal"
+.4byte gUnknown_8401C98 @ b24pal palette
+
+.4byte gUnknown_83B18EC @ "b25canm"
+.4byte gUnknown_8401F98 @ b25canm SIRO
+.4byte gUnknown_83B18E4 @ "b25cel"
+.4byte gUnknown_84023E8 @ b25cel AT4PX
+.4byte gUnknown_83B18DC @ "b25cex"
+.4byte gUnknown_8402BF0 @ b25cex SIRO
+.4byte gUnknown_83B18D4 @ "b25fon"
+.4byte gUnknown_8402F86 @ b25fon AT4PX
+.4byte gUnknown_83B18CC @ "b25pal"
+.4byte gUnknown_8404A44 @ b25pal palette
+
+.4byte gUnknown_83B18C4 @ "b26canm"
+.4byte gUnknown_8404D44 @ b26canm SIRO
+.4byte gUnknown_83B18BC @ "b26pal"
+.4byte gUnknown_8405294 @ b26pal palette
+
+.4byte gUnknown_83B18B4 @ "b27canm"
+.4byte gUnknown_8405594 @ b27canm SIRO
+.4byte gUnknown_83B18AC @ "b27pal"
+.4byte gUnknown_8405AE4 @ b27pal palette
+
+.4byte gUnknown_83B18A4 @ "b28canm"
+.4byte gUnknown_8405DE4 @ b28canm SIRO
+.4byte gUnknown_83B189C @ "b28cel"
+.4byte gUnknown_8406434 @ b28cel AT4PX
+.4byte gUnknown_83B1894 @ "b28cex"
+.4byte gUnknown_8406B5C @ b28cex SIRO
+.4byte gUnknown_83B188C @ "b28fon"
+.4byte gUnknown_8406E82 @ b28fon AT4PX
+.4byte gUnknown_83B1884 @ "b28pal"
+.4byte gUnknown_840873C @ b28pal palette
+
+.4byte gUnknown_83B187C @ "b29canm"
+.4byte gUnknown_8408A3C @ b29canm SIRO
+.4byte gUnknown_83B1874 @ "b29cel"
+.4byte gUnknown_8408F8C @ b29cel AT4PX
+.4byte gUnknown_83B186C @ "b29cex"
+.4byte gUnknown_84096B8 @ b29cex SIRO
+.4byte gUnknown_83B1864 @ "b29fon"
+.4byte gUnknown_84099E9 @ b29fon AT4PX
+.4byte gUnknown_83B185C @ "b29pal"
+.4byte gUnknown_840BCA0 @ b29pal palette
+
+.4byte gUnknown_83B1854 @ "b30canm"
+.4byte gUnknown_840BFA0 @ b30canm SIRO
+.4byte gUnknown_83B184C @ "b30cel"
+.4byte gUnknown_840C4F0 @ b30cel AT4PX
+.4byte gUnknown_83B1844 @ "b30cex"
+.4byte gUnknown_840CBC4 @ b30cex SIRO
+.4byte gUnknown_83B183C @ "b30fon"
+.4byte gUnknown_840CF0F @ b30fon AT4PX
+.4byte gUnknown_83B1834 @ "b30pal"
+.4byte gUnknown_840E5EC @ b30pal palette
+
+.4byte gUnknown_83B182C @ "b31canm"
+.4byte gUnknown_840E8EC @ b31canm SIRO
+.4byte gUnknown_83B1824 @ "b31cel"
+.4byte gUnknown_840EE3C @ b31cel AT4PX
+.4byte gUnknown_83B181C @ "b31cex"
+.4byte gUnknown_840F5E8 @ b31cex SIRO
+.4byte gUnknown_83B1814 @ "b31fon"
+.4byte gUnknown_840F920 @ b31fon AT4PX
+.4byte gUnknown_83B180C @ "b31pal"
+.4byte gUnknown_8411918 @ b31pal palette
+
+.4byte gUnknown_83B1804 @ "b32canm"
+.4byte gUnknown_8411C18 @ b32canm SIRO
+.4byte gUnknown_83B17FC @ "b32cel"
+.4byte gUnknown_8412728 @ b32cel AT4PX
+.4byte gUnknown_83B17F4 @ "b32cex"
+.4byte gUnknown_8412D88 @ b32cex SIRO
+.4byte gUnknown_83B17EC @ "b32fon"
+.4byte gUnknown_84130A4 @ b32fon AT4PX
+.4byte gUnknown_83B17E4 @ "b32pal"
+.4byte gUnknown_84141E4 @ b32pal palette
+
+.4byte gUnknown_83B17DC @ "b33canm"
+.4byte gUnknown_84144E4 @ b33canm SIRO
+.4byte gUnknown_83B17D4 @ "b33cel"
+.4byte gUnknown_8414FF4 @ b33cel AT4PX
+.4byte gUnknown_83B17CC @ "b33cex"
+.4byte gUnknown_8415654 @ b33cex SIRO
+.4byte gUnknown_83B17C4 @ "b33fon"
+.4byte gUnknown_8415970 @ b33fon AT4PX
+.4byte gUnknown_83B17BC @ "b33pal"
+.4byte gUnknown_8416A54 @ b33pal palette
+
+.4byte gUnknown_83B17B4 @ "b34canm"
+.4byte gUnknown_8416D5C @ b34canm SIRO
+.4byte gUnknown_83B17AC @ "b34pal"
+.4byte gUnknown_84173AC @ b34pal palette
+
+.4byte gUnknown_83B17A4 @ "b35canm"
+.4byte gUnknown_84176AC @ b35canm SIRO
+.4byte gUnknown_83B179C @ "b35cel"
+.4byte gUnknown_8417CBC @ b35cel AT4PX
+.4byte gUnknown_83B1794 @ "b35cex"
+.4byte gUnknown_84184A8 @ b35cex SIRO
+.4byte gUnknown_83B178C @ "b35fon"
+.4byte gUnknown_84187DF @ b35fon AT4PX
+.4byte gUnknown_83B1784 @ "b35pal"
+.4byte gUnknown_841A980 @ b35pal palette
+
+.4byte gUnknown_83B177C @ "b36canm"
+.4byte gUnknown_841AC80 @ b36canm SIRO
+.4byte gUnknown_83B1774 @ "b36cel"
+.4byte gUnknown_841B290 @ b36cel AT4PX
+.4byte gUnknown_83B176C @ "b36cex"
+.4byte gUnknown_841BA28 @ b36cex SIRO
+.4byte gUnknown_83B1764 @ "b36fon"
+.4byte gUnknown_841BDAD @ b36fon AT4PX
+.4byte gUnknown_83B175C @ "b36pal"
+.4byte gUnknown_841E074 @ b36pal palette
+
+.4byte gUnknown_83B1754 @ "b37canm"
+.4byte gUnknown_841E374 @ b37canm SIRO
+.4byte gUnknown_83B174C @ "b37cel"
+.4byte gUnknown_841E8C4 @ b37cel AT4PX
+.4byte gUnknown_83B1744 @ "b37cex"
+.4byte gUnknown_841EFD4 @ b37cex SIRO
+.4byte gUnknown_83B173C @ "b37fon"
+.4byte gUnknown_841F34F @ b37fon AT4PX
+.4byte gUnknown_83B1734 @ "b37pal"
+.4byte gUnknown_8420F9C @ b37pal palette
+
+.4byte gUnknown_83B172C @ "b38canm"
+.4byte gUnknown_842129C @ b38canm SIRO
+.4byte gUnknown_83B1724 @ "b38pal"
+.4byte gUnknown_84217EC @ b38pal palette
+
+.4byte gUnknown_83B171C @ "b39canm"
+.4byte gUnknown_8421AEC @ b39canm SIRO
+.4byte gUnknown_83B1714 @ "b39cel"
+.4byte gUnknown_842203C @ b39cel AT4PX
+.4byte gUnknown_83B170C @ "b39cex"
+.4byte gUnknown_842272C @ b39cex SIRO
+.4byte gUnknown_83B1704 @ "b39fon"
+.4byte gUnknown_8422ABC @ b39fon AT4PX
+.4byte gUnknown_83B16FC @ "b39pal"
+.4byte gUnknown_8424088 @ b39pal palette
+
+.4byte gUnknown_83B16F4 @ "b40canm"
+.4byte gUnknown_8424388 @ b40canm SIRO
+.4byte gUnknown_83B16EC @ "b40cel"
+.4byte gUnknown_84248D8 @ b40cel AT4PX
+.4byte gUnknown_83B16E4 @ "b40cex"
+.4byte gUnknown_8424FD8 @ b40cex SIRO
+.4byte gUnknown_83B16DC @ "b40fon"
+.4byte gUnknown_842534E @ b40fon AT4PX
+.4byte gUnknown_83B16D4 @ "b40pal"
+.4byte gUnknown_8426F84 @ b40pal palette
+
+.4byte gUnknown_83B16CC @ "b41canm"
+.4byte gUnknown_8427284 @ b41canm SIRO
+.4byte gUnknown_83B16C4 @ "b41cel"
+.4byte gUnknown_84277D4 @ b41cel AT4PX
+.4byte gUnknown_83B16BC @ "b41cex"
+.4byte gUnknown_8427EE4 @ b41cex SIRO
+.4byte gUnknown_83B16B4 @ "b41fon"
+.4byte gUnknown_84281FD @ b41fon AT4PX
+.4byte gUnknown_83B16AC @ "b41pal"
+.4byte gUnknown_842AA28 @ b41pal palette
+
+.4byte gUnknown_83B16A4 @ "b42canm"
+.4byte gUnknown_842AD28 @ b42canm SIRO
+.4byte gUnknown_83B169C @ "b42cel"
+.4byte gUnknown_842B278 @ b42cel AT4PX
+.4byte gUnknown_83B1694 @ "b42cex"
+.4byte gUnknown_842BA04 @ b42cex SIRO
+.4byte gUnknown_83B168C @ "b42fon"
+.4byte gUnknown_842BD19 @ b42fon AT4PX
+.4byte gUnknown_83B1684 @ "b42pal"
+.4byte gUnknown_842DEB4 @ b42pal palette
+
+.4byte gUnknown_83B167C @ "b43canm"
+.4byte gUnknown_842E1B4 @ b43canm SIRO
+.4byte gUnknown_83B1674 @ "b43cel"
+.4byte gUnknown_842E704 @ b43cel AT4PX
+.4byte gUnknown_83B166C @ "b43cex"
+.4byte gUnknown_842EEDC @ b43cex SIRO
+.4byte gUnknown_83B1664 @ "b43fon"
+.4byte gUnknown_842F273 @ b43fon AT4PX
+.4byte gUnknown_83B165C @ "b43pal"
+.4byte gUnknown_8431B30 @ b43pal palette
+
+.4byte gUnknown_83B1654 @ "b44canm"
+.4byte gUnknown_8431E30 @ b44canm SIRO
+.4byte gUnknown_83B164C @ "b44cel"
+.4byte gUnknown_8432440 @ b44cel AT4PX
+.4byte gUnknown_83B1644 @ "b44cex"
+.4byte gUnknown_8432C48 @ b44cex SIRO
+.4byte gUnknown_83B163C @ "b44fon"
+.4byte gUnknown_8432F83 @ b44fon AT4PX
+.4byte gUnknown_83B1634 @ "b44pal"
+.4byte gUnknown_8435188 @ b44pal palette
+
+.4byte gUnknown_83B162C @ "b45canm"
+.4byte gUnknown_8435488 @ b45canm SIRO
+.4byte gUnknown_83B1624 @ "b45cel"
+.4byte gUnknown_84358D8 @ b45cel AT4PX
+.4byte gUnknown_83B161C @ "b45cex"
+.4byte gUnknown_8436058 @ b45cex SIRO
+.4byte gUnknown_83B1614 @ "b45fon"
+.4byte gUnknown_843638D @ b45fon AT4PX
+.4byte gUnknown_83B160C @ "b45pal"
+.4byte gUnknown_8438AFC @ b45pal palette
+
+.4byte gUnknown_83B1604 @ "b46canm"
+.4byte gUnknown_8438DFC @ b46canm SIRO
+.4byte gUnknown_83B15FC @ "b46cel"
+.4byte gUnknown_843950C @ b46cel AT4PX
+.4byte gUnknown_83B15F4 @ "b46cex"
+.4byte gUnknown_8439C30 @ b46cex SIRO
+.4byte gUnknown_83B15EC @ "b46fon"
+.4byte gUnknown_8439F4C @ b46fon AT4PX
+.4byte gUnknown_83B15E4 @ "b46pal"
+.4byte gUnknown_843C16C @ b46pal palette
+
+.4byte gUnknown_83B15DC @ "b47canm"
+.4byte gUnknown_843C46C @ b47canm SIRO
+.4byte gUnknown_83B15D4 @ "b47cel"
+.4byte gUnknown_843C8BC @ b47cel AT4PX
+.4byte gUnknown_83B15CC @ "b47cex"
+.4byte gUnknown_843D094 @ b47cex SIRO
+.4byte gUnknown_83B15C4 @ "b47fon"
+.4byte gUnknown_843D42A @ b47fon AT4PX
+.4byte gUnknown_83B15BC @ "b47pal"
+.4byte gUnknown_843F768 @ b47pal palette
+
+.4byte gUnknown_83B15B4 @ "b48canm"
+.4byte gUnknown_843FA68 @ b48canm SIRO
+.4byte gUnknown_83B15AC @ "b48cel"
+.4byte gUnknown_8440638 @ b48cel AT4PX
+.4byte gUnknown_83B15A4 @ "b48cex"
+.4byte gUnknown_8440DA0 @ b48cex SIRO
+.4byte gUnknown_83B159C @ "b48fon"
+.4byte gUnknown_8441101 @ b48fon AT4PX
+.4byte gUnknown_83B1594 @ "b48pal"
+.4byte gUnknown_8443054 @ b48pal palette
+
+.4byte gUnknown_83B158C @ "b49canm"
+.4byte gUnknown_844335C @ b49canm SIRO
+.4byte gUnknown_83B1584 @ "b49cel"
+.4byte gUnknown_84438EC @ b49cel AT4PX
+.4byte gUnknown_83B157C @ "b49cex"
+.4byte gUnknown_8443FF4 @ b49cex SIRO
+.4byte gUnknown_83B1574 @ "b49fon"
+.4byte gUnknown_84442CC @ b49fon AT4PX
+.4byte gUnknown_83B156C @ "b49pal"
+.4byte gUnknown_8445F60 @ b49pal palette
+
+.4byte gUnknown_83B1564 @ "b50canm"
+.4byte gUnknown_8446260 @ b50canm SIRO
+.4byte gUnknown_83B155C @ "b50cel"
+.4byte gUnknown_84467B0 @ b50cel AT4PX
+.4byte gUnknown_83B1554 @ "b50cex"
+.4byte gUnknown_8446F2C @ b50cex SIRO
+.4byte gUnknown_83B154C @ "b50fon"
+.4byte gUnknown_844729F @ b50fon AT4PX
+.4byte gUnknown_83B1544 @ "b50pal"
+.4byte gUnknown_84495C4 @ b50pal palette
+
+.4byte gUnknown_83B153C @ "b51canm"
+.4byte gUnknown_84498C4 @ b51canm SIRO
+.4byte gUnknown_83B1534 @ "b51cel"
+.4byte gUnknown_8449D14 @ b51cel AT4PX
+.4byte gUnknown_83B152C @ "b51cex"
+.4byte gUnknown_844A488 @ b51cex SIRO
+.4byte gUnknown_83B1524 @ "b51fon"
+.4byte gUnknown_844A7D7 @ b51fon AT4PX
+.4byte gUnknown_83B151C @ "b51pal"
+.4byte gUnknown_844CE80 @ b51pal palette
+
+.4byte gUnknown_83B1514 @ "b52canm"
+.4byte gUnknown_844D180 @ b52canm SIRO
+.4byte gUnknown_83B150C @ "b52cel"
+.4byte gUnknown_844D6D0 @ b52cel AT4PX
+.4byte gUnknown_83B1504 @ "b52cex"
+.4byte gUnknown_844DDE0 @ b52cex SIRO
+.4byte gUnknown_83B14FC @ "b52fon"
+.4byte gUnknown_844E0F9 @ b52fon AT4PX
+.4byte gUnknown_83B14F4 @ "b52pal"
+.4byte gUnknown_8450924 @ b52pal palette
+
+.4byte gUnknown_83B14EC @ "b53canm"
+.4byte gUnknown_8450C24 @ b53canm SIRO
+.4byte gUnknown_83B14E4 @ "b53cel"
+.4byte gUnknown_8451174 @ b53cel AT4PX
+.4byte gUnknown_83B14DC @ "b53cex"
+.4byte gUnknown_84518B8 @ b53cex SIRO
+.4byte gUnknown_83B14D4 @ "b53fon"
+.4byte gUnknown_8451C08 @ b53fon AT4PX
+.4byte gUnknown_83B14CC @ "b53pal"
+.4byte gUnknown_845416C @ b53pal palette
+
+.4byte gUnknown_83B14C4 @ "b54canm"
+.4byte gUnknown_845446C @ b54canm SIRO
+.4byte gUnknown_83B14BC @ "b54cel"
+.4byte gUnknown_84549BC @ b54cel AT4PX
+.4byte gUnknown_83B14B4 @ "b54cex"
+.4byte gUnknown_84550C4 @ b54cex SIRO
+.4byte gUnknown_83B14AC @ "b54fon"
+.4byte gUnknown_845539C @ b54fon AT4PX
+.4byte gUnknown_83B14A4 @ "b54pal"
+.4byte gUnknown_8457030 @ b54pal palette
+
+.4byte gUnknown_83B149C @ "b55canm"
+.4byte gUnknown_8457330 @ b55canm SIRO
+.4byte gUnknown_83B1494 @ "b55cel"
+.4byte gUnknown_8457780 @ b55cel AT4PX
+.4byte gUnknown_83B148C @ "b55cex"
+.4byte gUnknown_8457E98 @ b55cex SIRO
+.4byte gUnknown_83B1484 @ "b55fon"
+.4byte gUnknown_84581CC @ b55fon AT4PX
+.4byte gUnknown_83B147C @ "b55pal"
+.4byte gUnknown_845ACCC @ b55pal palette
+
+.4byte gUnknown_83B1474 @ "b56canm"
+.4byte gUnknown_845AFCC @ b56canm SIRO
+.4byte gUnknown_83B146C @ "b56cel"
+.4byte gUnknown_845B41C @ b56cel AT4PX
+.4byte gUnknown_83B1464 @ "b56cex"
+.4byte gUnknown_845BBA4 @ b56cex SIRO
+.4byte gUnknown_83B145C @ "b56fon"
+.4byte gUnknown_845BEE7 @ b56fon AT4PX
+.4byte gUnknown_83B1454 @ "b56pal"
+.4byte gUnknown_845E880 @ b56pal palette
+
+.4byte gUnknown_83B144C @ "b57canm"
+.4byte gUnknown_845EB80 @ b57canm SIRO
+.4byte gUnknown_83B1444 @ "b57pal"
+.4byte gUnknown_845EFD0 @ b57pal palette
+
+.4byte gUnknown_83B143C @ "b58canm"
+.4byte gUnknown_845F2D0 @ b58canm SIRO
+.4byte gUnknown_83B1434 @ "b58pal"
+.4byte gUnknown_845F720 @ b58pal palette
+
+.4byte gUnknown_83B142C @ "b59canm"
+.4byte gUnknown_845FA20 @ b59canm SIRO
+.4byte gUnknown_83B1424 @ "b59cel"
+.4byte gUnknown_845FE30 @ b59cel AT4PX
+.4byte gUnknown_83B141C @ "b59cex"
+.4byte gUnknown_84604C0 @ b59cex SIRO
+.4byte gUnknown_83B1414 @ "b59fon"
+.4byte gUnknown_84607DB @ b59fon AT4PX
+.4byte gUnknown_83B140C @ "b59pal"
+.4byte gUnknown_84627FC @ b59pal palette
+
+.4byte gUnknown_83B1404 @ "b60canm"
+.4byte gUnknown_8462AFC @ b60canm SIRO
+.4byte gUnknown_83B13FC @ "b60cel"
+.4byte gUnknown_8462F4C @ b60cel AT4PX
+.4byte gUnknown_83B13F4 @ "b60cex"
+.4byte gUnknown_84636BC @ b60cex SIRO
+.4byte gUnknown_83B13EC @ "b60fon"
+.4byte gUnknown_84639F2 @ b60fon AT4PX
+.4byte gUnknown_83B13E4 @ "b60pal"
+.4byte gUnknown_8465E6C @ b60pal palette
+
+.4byte gUnknown_83B13DC @ "b61canm"
+.4byte gUnknown_846616C @ b61canm SIRO
+.4byte gUnknown_83B13D4 @ "b61pal"
+.4byte gUnknown_8466A7C @ b61pal palette
+
+.4byte gUnknown_83B13CC @ "b62canm"
+.4byte gUnknown_8466D7C @ b62canm SIRO
+.4byte gUnknown_83B13C4 @ "b62cel"
+.4byte gUnknown_84671CC @ b62cel AT4PX
+.4byte gUnknown_83B13BC @ "b62cex"
+.4byte gUnknown_8467950 @ b62cex SIRO
+.4byte gUnknown_83B13B4 @ "b62fon"
+.4byte gUnknown_8467C74 @ b62fon AT4PX
+.4byte gUnknown_83B13AC @ "b62pal"
+.4byte gUnknown_846A37C @ b62pal palette
+
+.4byte gUnknown_83B13A4 @ "b63canm"
+.4byte gUnknown_846A67C @ b63canm SIRO
+.4byte gUnknown_83B139C @ "b63cel"
+.4byte gUnknown_846ACCC @ b63cel AT4PX
+.4byte gUnknown_83B1394 @ "b63cex"
+.4byte gUnknown_846B42C @ b63cex SIRO
+.4byte gUnknown_83B138C @ "b63fon"
+.4byte gUnknown_846B771 @ b63fon AT4PX
+.4byte gUnknown_83B1384 @ "b63pal"
+.4byte gUnknown_846DB74 @ b63pal palette
+
+.4byte gUnknown_83B137C @ "b64canm"
+.4byte gUnknown_846DE74 @ b64canm SIRO
+.4byte gUnknown_83B1374 @ "b64cel"
+.4byte gUnknown_846E444 @ b64cel AT4PX
+.4byte gUnknown_83B1368 @ "b64emap0"
+.4byte gUnknown_846F248 @ b64emap0 SIRO
+.4byte gUnknown_83B1360 @ "b64fon"
+.4byte gUnknown_846F418 @ b64fon AT4PX
+.4byte gUnknown_83B1358 @ "b64pal"
+.4byte gUnknown_8470FBC @ b64pal palette
+
+.4byte gUnknown_83B1350 @ "b65canm"
+.4byte gUnknown_84712BC @ b65canm SIRO
+.4byte gUnknown_83B1348 @ "b65cel"
+.4byte gUnknown_847188C @ b65cel AT4PX
+.4byte gUnknown_83B133C @ "b65emap0"
+.4byte gUnknown_8472130 @ b65emap0 SIRO
+.4byte gUnknown_83B1334 @ "b65fon"
+.4byte gUnknown_84722F3 @ b65fon AT4PX
+.4byte gUnknown_83B132C @ "b65pal"
+.4byte gUnknown_8473608 @ b65pal palette
+
+.4byte gUnknown_83B1324 @ "b66canm"
+.4byte gUnknown_8473908 @ b66canm SIRO
+.4byte gUnknown_83B131C @ "b66cel"
+.4byte gUnknown_8474298 @ b66cel AT4PX
+.4byte gUnknown_83B1310 @ "b66emap0"
+.4byte gUnknown_8474E60 @ b66emap0 SIRO
+.4byte gUnknown_83B1308 @ "b66fon"
+.4byte gUnknown_847500B @ b66fon AT4PX
+.4byte gUnknown_83B1300 @ "b66pal"
+.4byte gUnknown_847745C @ b66pal palette
+
+.4byte gUnknown_83B12F8 @ "b67canm"
+.4byte gUnknown_847775C @ b67canm SIRO
+.4byte gUnknown_83B12F0 @ "b67cel"
+.4byte gUnknown_8477BEC @ b67cel AT4PX
+.4byte gUnknown_83B12E4 @ "b67emap0"
+.4byte gUnknown_84789A8 @ b67emap0 SIRO
+.4byte gUnknown_83B12DC @ "b67fon"
+.4byte gUnknown_8478BA9 @ b67fon AT4PX
+.4byte gUnknown_83B12D4 @ "b67pal"
+.4byte gUnknown_847A598 @ b67pal palette
+
+.4byte gUnknown_83B12CC @ "b68canm"
+.4byte gUnknown_847A898 @ b68canm SIRO
+.4byte gUnknown_83B12C4 @ "b68cel"
+.4byte gUnknown_847AE68 @ b68cel AT4PX
+.4byte gUnknown_83B12B8 @ "b68emap0"
+.4byte gUnknown_847B910 @ b68emap0 SIRO
+.4byte gUnknown_83B12B0 @ "b68fon"
+.4byte gUnknown_847BB13 @ b68fon AT4PX
+.4byte gUnknown_83B12A8 @ "b68pal"
+.4byte gUnknown_847DF24 @ b68pal palette
+
+.4byte gUnknown_83B12A0 @ "b69canm"
+.4byte gUnknown_847E224 @ b69canm SIRO
+.4byte gUnknown_83B1298 @ "b69cel"
+.4byte gUnknown_847E63C @ b69cel AT4PX
+.4byte gUnknown_83B128C @ "b69emap0"
+.4byte gUnknown_847F268 @ b69emap0 SIRO
+.4byte gUnknown_83B1284 @ "b69fon"
+.4byte gUnknown_847F420 @ b69fon AT4PX
+.4byte gUnknown_83B127C @ "b69pal"
+.4byte gUnknown_8481E08 @ b69pal palette
+
+.4byte gUnknown_83B1274 @ "b70canm"
+.4byte gUnknown_8482108 @ b70canm SIRO
+.4byte gUnknown_83B126C @ "b70cel"
+.4byte gUnknown_8482618 @ b70cel AT4PX
+.4byte gUnknown_83B1260 @ "b70emap0"
+.4byte gUnknown_8482FF8 @ b70emap0 SIRO
+.4byte gUnknown_83B1258 @ "b70fon"
+.4byte gUnknown_848311F @ b70fon AT4PX
+.4byte gUnknown_83B1250 @ "b70pal"
+.4byte gUnknown_8485F50 @ b70pal palette
+
+.4byte gUnknown_83B1248 @ "b71canm"
+.4byte gUnknown_8486250 @ b71canm SIRO
+.4byte gUnknown_83B1240 @ "b71cel"
+.4byte gUnknown_84865A0 @ b71cel AT4PX
+.4byte gUnknown_83B1234 @ "b71emap0"
+.4byte gUnknown_848720C @ b71emap0 SIRO
+.4byte gUnknown_83B122C @ "b71fon"
+.4byte gUnknown_84873BA @ b71fon AT4PX
+.4byte gUnknown_83B1224 @ "b71pal"
+.4byte gUnknown_848979C @ b71pal palette
+
+.4byte gUnknown_83B121C @ "b72canm"
+.4byte gUnknown_8489A9C @ b72canm SIRO
+.4byte gUnknown_83B1214 @ "b72cel"
+.4byte gUnknown_848A0AC @ b72cel AT4PX
+.4byte gUnknown_83B1208 @ "b72emap0"
+.4byte gUnknown_848AD10 @ b72emap0 SIRO
+.4byte gUnknown_83B1200 @ "b72fon"
+.4byte gUnknown_848AEE5 @ b72fon AT4PX
+.4byte gUnknown_83B11F8 @ "b72pal"
+.4byte gUnknown_848D5D8 @ b72pal palette
+
+.4byte gUnknown_83B11F0 @ "b73canm"
+.4byte gUnknown_848D8D8 @ b73canm SIRO
+.4byte gUnknown_83B11E8 @ "b73cel"
+.4byte gUnknown_848E028 @ b73cel AT4PX
+.4byte gUnknown_83B11DC @ "b73emap0"
+.4byte gUnknown_848ED84 @ b73emap0 SIRO
+.4byte gUnknown_83B11D4 @ "b73fon"
+.4byte gUnknown_848EF18 @ b73fon AT4PX
+.4byte gUnknown_83B11CC @ "b73pal"
+.4byte gUnknown_8490BF0 @ b73pal palette
+
+.4byte gUnknown_83B11C4 @ "b74canm"
+.4byte gUnknown_8490EF0 @ b74canm SIRO
+.4byte gUnknown_83B11BC @ "b74cel"
+.4byte gUnknown_8491480 @ b74cel AT4PX
+.4byte gUnknown_83B11B0 @ "b74emap0"
+.4byte gUnknown_84922D0 @ b74emap0 SIRO
+.4byte gUnknown_83B11A8 @ "b74fon"
+.4byte gUnknown_8492474 @ b74fon AT4PX
+.4byte gUnknown_83B11A0 @ "b74pal"
+.4byte gUnknown_8494A68 @ b74pal palette
+
+.4byte gUnknown_83B1198 @ "b75canm"
+.4byte gUnknown_8494D68 @ b75canm SIRO
+.4byte gUnknown_83B1190 @ "b75cel"
+.4byte gUnknown_8494EF8 @ b75cel AT4PX
+.4byte gUnknown_83B1184 @ "b75emap0"
+.4byte gUnknown_8495DD0 @ b75emap0 SIRO
+.4byte gUnknown_83B117C @ "b75fon"
+.4byte gUnknown_8495F6F @ b75fon AT4PX
+.4byte gUnknown_83B1174 @ "b75pal"
+.4byte gUnknown_8499554 @ b75pal palette
 
 .4byte gUnknown_83B116C
 .4byte banfont_SIRO
