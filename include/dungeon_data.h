@@ -28,7 +28,7 @@ typedef struct DungeonDataEntry
     /* 0xA */ bool8 enterWithoutGameSave; // If false, the dungeon will force a quicksave before entering.
     /* 0xB */ u8 HMMask; // HM mask for dungeon entry requirements (Fly, Dive, Waterfall, Surf, Water).
     /* 0xC */ s16 turnLimit;
-    // The chance that a wild Pok�mon's moveRandomly flag will be set when spawning,
+    // The chance that a wild Pokémon's moveRandomly flag will be set when spawning,
     // causing them to move randomly inside a room instead of exploring rooms.
     /* 0xE */ s16 randomMovementChance;
 } DungeonDataEntry;
