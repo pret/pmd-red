@@ -166,294 +166,294 @@ const s16 gUnknown_810A808[NUM_TYPES][NUMBER_OF_GUMMIS] =
     [TYPE_STEEL] = {0x00, 0x14, 0x1e, 0x19, 0x14, 0x19, 0x14, 0x1e, 0x05, 0x1e, 0x14, 0x14, 0x14, 0x14, 0x14, 0x14, 0x14, 0x3c},
 };
 
-const FriendAreaSettings gFriendAreaSettings[NUM_FRIEND_AREAS] =
+const FriendAreaSettings gFriendAreaSettings[FRIEND_AREA_COUNT] =
 {
     [FRIEND_AREA_NONE] = {
         .num_pokemon = 0,
         .unlock_condition = UNLOCK_SHOP_STORY,
         .price = 0,
     },
-    [BOUNTIFUL_SEA] = {
+    [FRIEND_AREA_BOUNTIFUL_SEA] = {
         .num_pokemon = 9,
         .unlock_condition = UNLOCK_SHOP_POST_GAME,
         .price = 5500,
     },
-    [TREASURE_SEA] = {
+    [FRIEND_AREA_TREASURE_SEA] = {
         .num_pokemon = 10,
         .unlock_condition = UNLOCK_SHOP_POST_GAME,
         .price = 4500,
     },
-    [SERENE_SEA] = {
+    [FRIEND_AREA_SERENE_SEA] = {
         .num_pokemon = 4,
         .unlock_condition = UNLOCK_SHOP_POST_GAME,
         .price = 8000,
     },
-    [DEEP_SEA_FLOOR] = {
+    [FRIEND_AREA_DEEP_SEA_FLOOR] = {
         .num_pokemon = 12,
         .unlock_condition = UNLOCK_SHOP_POST_GAME,
         .price = 5500,
     },
-    [DEEP_SEA_CURRENT] = {
+    [FRIEND_AREA_DEEP_SEA_CURRENT] = {
         .num_pokemon = 1,
         .unlock_condition = UNLOCK_LEGENDARY_REQUEST,
         .price = 0,
     },
-    [SEAFLOOR_CAVE] = {
+    [FRIEND_AREA_SEAFLOOR_CAVE] = {
         .num_pokemon = 1,
         .unlock_condition = UNLOCK_LEGENDARY_REQUEST,
         .price = 0,
     },
-    [SHALLOW_BEACH] = {
+    [FRIEND_AREA_SHALLOW_BEACH] = {
         .num_pokemon = 5,
         .unlock_condition = UNLOCK_SHOP_POST_GAME,
         .price = 5000,
     },
-    [MT_DEEPGREEN] = {
+    [FRIEND_AREA_MT_DEEPGREEN] = {
         .num_pokemon = 12,
         .unlock_condition = UNLOCK_SHOP_STORY,
         .price = 130,
     },
-    [MT_CLEFT] = {
+    [FRIEND_AREA_MT_CLEFT] = {
         .num_pokemon = 9,
         .unlock_condition = UNLOCK_SHOP_POST_GAME,
         .price = 5000,
     },
-    [MT_MOONVIEW] = {
+    [FRIEND_AREA_MT_MOONVIEW] = {
         .num_pokemon = 6,
         .unlock_condition = UNLOCK_WONDER_MAIL,
         .price = 0,
     },
-    [RAINBOW_PEAK] = {
+    [FRIEND_AREA_RAINBOW_PEAK] = {
         .num_pokemon = 1,
         .unlock_condition = UNLOCK_SHOP_POST_GAME,
         .price = 6500,
     },
-    [WILD_PLAINS] = {
+    [FRIEND_AREA_WILD_PLAINS] = {
         .num_pokemon = 13,
         .unlock_condition = UNLOCK_SHOP_STORY,
         .price = 100,
     },
-    [BEAU_PLAINS] = {
+    [FRIEND_AREA_BEAU_PLAINS] = {
         .num_pokemon = 12,
         .unlock_condition = UNLOCK_SHOP_STORY,
         .price = 600,
     },
-    [SKY_BLUE_PLAINS] = {
+    [FRIEND_AREA_SKY_BLUE_PLAINS] = {
         .num_pokemon = 13,
         .unlock_condition = UNLOCK_WONDER_MAIL,
         .price = 0,
     },
-    [SAFARI] = {
+    [FRIEND_AREA_SAFARI] = {
         .num_pokemon = 15,
         .unlock_condition = UNLOCK_SHOP_STORY,
         .price = 700,
     },
-    [SCORCHED_PLAINS] = {
+    [FRIEND_AREA_SCORCHED_PLAINS] = {
         .num_pokemon = 10,
         .unlock_condition = UNLOCK_SHOP_POST_GAME,
         .price = 5000,
     },
-    [SACRED_FIELD] =  {
+    [FRIEND_AREA_SACRED_FIELD] =  {
         .num_pokemon = 3,
         .unlock_condition = UNLOCK_SHOP_POST_GAME,
         .price = 6500
     },
-    [MIST_RISE_FOREST] = {
+    [FRIEND_AREA_MIST_RISE_FOREST] = {
         .num_pokemon = 14,
         .unlock_condition = UNLOCK_SHOP_STORY,
         .price = 150
     },
-    [FLYAWAY_FOREST] = {
+    [FRIEND_AREA_FLYAWAY_FOREST] = {
         .num_pokemon = 12,
         .unlock_condition = UNLOCK_SHOP_STORY,
         .price = 550
     },
-    [OVERGROWN_FOREST] = {
+    [FRIEND_AREA_OVERGROWN_FOREST] = {
         .num_pokemon = 9,
         .unlock_condition = UNLOCK_SHOP_STORY,
         .price = 600
     },
-    [ENERGETIC_FOREST] = {
+    [FRIEND_AREA_ENERGETIC_FOREST] = {
         .num_pokemon = 15,
         .unlock_condition = UNLOCK_SHOP_POST_GAME,
         .price = 5000
     },
-    [MUSHROOM_FOREST] = {
+    [FRIEND_AREA_MUSHROOM_FOREST] = {
         .num_pokemon = 7,
         .unlock_condition = UNLOCK_SHOP_STORY,
         .price = 500
     },
-    [HEALING_FOREST] = {
+    [FRIEND_AREA_HEALING_FOREST] = {
         .num_pokemon = 1,
         .unlock_condition = UNLOCK_LEGENDARY_REQUEST,
         .price = 0
     },
-    [TRANSFORM_FOREST] = {
+    [FRIEND_AREA_TRANSFORM_FOREST] = {
         .num_pokemon = 6,
         .unlock_condition = UNLOCK_SHOP_STORY,
         .price = 500
     },
-    [SECRETIVE_FOREST] = {
+    [FRIEND_AREA_SECRETIVE_FOREST] = {
         .num_pokemon = 9,
         .unlock_condition = UNLOCK_SHOP_POST_GAME,
         .price = 6500
     },
-    [RUB_A_DUB_RIVER] = {
+    [FRIEND_AREA_RUB_A_DUB_RIVER] = {
         .num_pokemon = 7,
         .unlock_condition = UNLOCK_SHOP_STORY,
         .price = 500
     },
-    [TADPOLE_POND] = {
+    [FRIEND_AREA_TADPOLE_POND] = {
         .num_pokemon = 9,
         .unlock_condition = UNLOCK_SHOP_STORY,
         .price = 500
     },
-    [TURTLESHELL_POND] = {
+    [FRIEND_AREA_TURTLESHELL_POND] = {
         .num_pokemon = 10,
         .unlock_condition = UNLOCK_SHOP_POST_GAME,
         .price = 5500
     },
-    [MYSTIC_LAKE] = {
+    [FRIEND_AREA_MYSTIC_LAKE] = {
         .num_pokemon = 4,
         .unlock_condition = UNLOCK_SHOP_POST_GAME,
         .price = 2500
     },
-    [WATERFALL_LAKE] = {
+    [FRIEND_AREA_WATERFALL_LAKE] = {
         .num_pokemon = 4,
         .unlock_condition = UNLOCK_SHOP_POST_GAME,
         .price = 3500
     },
-    [PEANUT_SWAMP] = {
+    [FRIEND_AREA_PEANUT_SWAMP] = {
         .num_pokemon = 7,
         .unlock_condition = UNLOCK_SHOP_STORY,
         .price = 2500
     },
-    [POISON_SWAMP] = {
+    [FRIEND_AREA_POISON_SWAMP] = {
         .num_pokemon = 6,
         .unlock_condition = UNLOCK_SHOP_POST_GAME,
         .price = 8500
     },
-    [ECHO_CAVE] = {
+    [FRIEND_AREA_ECHO_CAVE] = {
         .num_pokemon = 11,
         .unlock_condition = UNLOCK_SHOP_POST_GAME,
         .price = 7500
     },
-    [CRYPTIC_CAVE] = {
+    [FRIEND_AREA_CRYPTIC_CAVE] = {
         .num_pokemon = 1,
         .unlock_condition = UNLOCK_SHOP_POST_GAME,
         .price = 6500
     },
-    [DRAGON_CAVE] = {
+    [FRIEND_AREA_DRAGON_CAVE] = {
         .num_pokemon = 3,
         .unlock_condition = UNLOCK_WONDER_MAIL,
         .price = 0
     },
-    [BOULDER_CAVE] = {
+    [FRIEND_AREA_BOULDER_CAVE] = {
         .num_pokemon = 4,
         .unlock_condition = UNLOCK_WONDER_MAIL,
         .price = 0
     },
-    [JUNGLE] = {
+    [FRIEND_AREA_JUNGLE] = {
         .num_pokemon = 13,
         .unlock_condition = UNLOCK_SHOP_STORY,
         .price = 800
     },
-    [DECREPIT_LAB] = {
+    [FRIEND_AREA_DECREPIT_LAB] = {
         .num_pokemon = 7,
         .unlock_condition = UNLOCK_SHOP_STORY,
         .price = 1000
     },
-    [MT_DISCIPLINE] = {
+    [FRIEND_AREA_MT_DISCIPLINE] = {
         .num_pokemon = 11,
         .unlock_condition = UNLOCK_SHOP_STORY,
         .price = 1200
     },
-    [THUNDER_MEADOW] = {
+    [FRIEND_AREA_THUNDER_MEADOW] = {
         .num_pokemon = 11,
         .unlock_condition = UNLOCK_SHOP_STORY,
         .price = 1000
     },
-    [POWER_PLANT] = {
+    [FRIEND_AREA_POWER_PLANT] = {
         .num_pokemon = 6,
         .unlock_condition = UNLOCK_SHOP_STORY,
         .price = 600
     },
-    [CRATER] = {
+    [FRIEND_AREA_CRATER] = {
         .num_pokemon = 7,
         .unlock_condition = UNLOCK_SHOP_POST_GAME,
         .price = 7500
     },
-    [FURNACE_DESERT] = {
+    [FRIEND_AREA_FURNACE_DESERT] = {
         .num_pokemon = 7,
         .unlock_condition = UNLOCK_SHOP_POST_GAME,
         .price = 8500
     },
-    [AGED_CHAMBER_AN] = {
+    [FRIEND_AREA_AGED_CHAMBER_AN] = {
         .num_pokemon = 14,
         .unlock_condition = UNLOCK_SHOP_POST_GAME,
         .price = 5500
     },
-    [AGED_CHAMBER_O_EXCLAIM] = {
+    [FRIEND_AREA_AGED_CHAMBER_O_EXCLAIM] = {
         .num_pokemon = 14,
         .unlock_condition = UNLOCK_SHOP_POST_GAME,
         .price = 5500
     },
-    [ANCIENT_RELIC] = {
+    [FRIEND_AREA_ANCIENT_RELIC] = {
         .num_pokemon = 6,
         .unlock_condition = UNLOCK_SHOP_POST_GAME,
         .price = 8000
     },
-    [DARKNESS_RIDGE] = {
+    [FRIEND_AREA_DARKNESS_RIDGE] = {
         .num_pokemon = 13,
         .unlock_condition = UNLOCK_LEGENDARY_REQUEST,
         .price = 0
     },
-    [FRIGID_CAVERN] = {
+    [FRIEND_AREA_FRIGID_CAVERN] = {
         .num_pokemon = 7,
         .unlock_condition = UNLOCK_SHOP_POST_GAME,
         .price = 9000
     },
-    [ICE_FLOE_BEACH] = {
+    [FRIEND_AREA_ICE_FLOE_BEACH] = {
         .num_pokemon = 5,
         .unlock_condition = UNLOCK_SHOP_POST_GAME,
         .price = 9500
     },
-    [VOLCANIC_PIT] = {
+    [FRIEND_AREA_VOLCANIC_PIT] = {
         .num_pokemon = 1,
         .unlock_condition = UNLOCK_LEGENDARY_REQUEST,
         .price = 0
     },
-    [STRATOS_LOOKOUT] = {
+    [FRIEND_AREA_STRATOS_LOOKOUT] = {
         .num_pokemon = 1,
         .unlock_condition = UNLOCK_LEGENDARY_REQUEST,
         .price = 0
     },
-    [RAVAGED_FIELD] = {
+    [FRIEND_AREA_RAVAGED_FIELD] = {
         .num_pokemon = 5,
         .unlock_condition = UNLOCK_SHOP_STORY,
         .price = 1000
     },
-    [MAGNETIC_QUARRY] = {
+    [FRIEND_AREA_MAGNETIC_QUARRY] = {
         .num_pokemon = 3,
         .unlock_condition = UNLOCK_SHOP_STORY,
         .price = 1000
     },
-    [LEGENDARY_ISLAND] = {
+    [FRIEND_AREA_LEGENDARY_ISLAND] = {
         .num_pokemon = 3,
         .unlock_condition = UNLOCK_LEGENDARY_REQUEST,
         .price = 7500
     },
-    [SOUTHERN_ISLAND] = {
+    [FRIEND_AREA_SOUTHERN_ISLAND] = {
         .num_pokemon = 2,
         .unlock_condition = UNLOCK_SHOP_POST_GAME,
         .price = 9500
     },
-    [ENCLOSED_ISLAND] = {
+    [FRIEND_AREA_ENCLOSED_ISLAND] = {
         .num_pokemon = 1,
         .unlock_condition = UNLOCK_LEGENDARY_REQUEST,
         .price = 0
     },
-    [FINAL_ISLAND] = {
+    [FRIEND_AREA_FINAL_ISLAND] = {
         .num_pokemon = 1,
         .unlock_condition = UNLOCK_SHOP_POST_GAME,
         .price = 8500

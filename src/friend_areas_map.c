@@ -334,7 +334,7 @@ static void InitMapLocations(u8 startingFriendAreaId)
 
 bool8 IsFriendAreaShownOnMap(u8 friendAreaId)
 {
-    if (friendAreaId >= NUM_FRIEND_AREAS) return FALSE;
+    if (friendAreaId >= FRIEND_AREA_COUNT) return FALSE;
     if (friendAreaId == 0) return TRUE;
     if (gFriendAreas[friendAreaId]) return TRUE;
 

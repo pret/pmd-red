@@ -3477,8 +3477,8 @@ static s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
             }
             return 0;
         case 0x17:
-            UnlockFriendArea(WILD_PLAINS);
-            UnlockFriendArea(MIST_RISE_FOREST);
+            UnlockFriendArea(FRIEND_AREA_WILD_PLAINS);
+            UnlockFriendArea(FRIEND_AREA_MIST_RISE_FOREST);
             return 0;
         case 0x18:
             sub_80A8F50(sPokeNameBuffer, 0x3C, POKEMON_NAME_LENGTH);

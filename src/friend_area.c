@@ -10,7 +10,7 @@
 #include "strings.h"
 #include "dungeon_data.h"
 
-EWRAM_DATA static bool8 sBoughtFriendAreas[NUM_FRIEND_AREAS] = {0};
+EWRAM_DATA static bool8 sBoughtFriendAreas[FRIEND_AREA_COUNT] = {0};
 
 EWRAM_INIT bool8 *gFriendAreas = {NULL};
 
@@ -28,7 +28,7 @@ void InitializeFriendAreas(void)
 {
     s32 i;
 
-    for (i = 0; i < NUM_FRIEND_AREAS; i++)
+    for (i = 0; i < FRIEND_AREA_COUNT; i++)
         gFriendAreas[i] = FALSE;
 }
 
@@ -37,7 +37,7 @@ u8 sub_80923D4(s32 target)
     s32 i;
     s32 sum = 0;
 
-    for (i = 0; i < NUM_FRIEND_AREAS; i++) {
+    for (i = 0; i < FRIEND_AREA_COUNT; i++) {
         sum += gFriendAreaSettings[i].num_pokemon;
         if (sum > target)
             return i;
@@ -142,7 +142,7 @@ bool8 HasAllFriendAreas(void)
 {
     s32 i;
 
-    for (i = 1; i < NUM_FRIEND_AREAS; i++) {
+    for (i = 1; i < FRIEND_AREA_COUNT; i++) {
         if (!gFriendAreas[i])
             return FALSE;
     }
@@ -228,7 +228,7 @@ u32 SaveFriendAreas(u8 *r0, u32 size)
 
     InitBitWriter(&unk, r0, size);
 
-    for (i = 0; i < NUM_FRIEND_AREAS; i++) {
+    for (i = 0; i < FRIEND_AREA_COUNT; i++) {
         if (gFriendAreas[i] != 0)
             temp = -1;
         else
@@ -248,7 +248,7 @@ u32 ReadSavedFriendAreas(u8 *r0, s32 size)
 
     InitBitReader(&unk, r0, size);
 
-    for (i = 0; i < NUM_FRIEND_AREAS; i++) {
+    for (i = 0; i < FRIEND_AREA_COUNT; i++) {
         ReadBits(&unk, &temp, 1);
         // It's setting whether we have the friend area or not
         if (temp & 1)

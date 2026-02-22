@@ -264,7 +264,7 @@ static void JirachiWish_Async(void)
     {
         // A Friend Area
         s32 friendArea = JirachiFriendAreaSearch();
-        if (friendArea == NUM_FRIEND_AREAS)
+        if (friendArea == FRIEND_AREA_COUNT)
         {
             // You want a friend area? But you already have many friend areas...
             DisplayDungeonDialogue_Async(&gUnknown_8105A08);
@@ -501,13 +501,13 @@ static u8 JirachiFriendAreaSearch(void)
   u8 unlockCondition;
   s32 friendAreaCounter;
   s32 numUnlockableAreas;
-  u8 friendAreas[NUM_FRIEND_AREAS];
+  u8 friendAreas[FRIEND_AREA_COUNT];
   u32 friendAreaIndex;
 
   // Build a copy of friend area list and keep track of
   // how many are only Story Unlockable
   numUnlockableAreas = 0;
-  for(friendAreaCounter = 1; friendAreaCounter < NUM_FRIEND_AREAS; friendAreaCounter++){
+  for(friendAreaCounter = 1; friendAreaCounter < FRIEND_AREA_COUNT; friendAreaCounter++){
     unlockCondition = GetFriendAreaUnlockCondition(friendAreaCounter);
     if (!(unlockCondition == UNLOCK_LEGENDARY_REQUEST)){
         if (!(unlockCondition == UNLOCK_WONDER_MAIL)){
@@ -520,7 +520,7 @@ static u8 JirachiFriendAreaSearch(void)
   }
 
   if (numUnlockableAreas == 0) {
-    return NUM_FRIEND_AREAS;
+    return FRIEND_AREA_COUNT;
   }
   else {
       // Randomly pick 1
