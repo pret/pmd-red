@@ -158,7 +158,7 @@ bool8 ValidateWonderMail(WonderMail *data)
             return FALSE;
 
         // Friend Area Reward
-        if(data->friendAreaReward > FINAL_ISLAND)
+        if(data->friendAreaReward > FRIEND_AREA_FINAL_ISLAND)
             return FALSE;
 
         if(data->rewardType == FRIEND_AREA)
@@ -367,10 +367,10 @@ static u8 sub_8095E78(void)
   s32 friendAreaIndex;
   s32 counter;
 
-  u8 friendAreaStack[NUM_FRIEND_AREAS];
+  u8 friendAreaStack[FRIEND_AREA_COUNT];
 
   counter = 0;
-  for(friendAreaIndex = BOUNTIFUL_SEA; friendAreaIndex < NUM_FRIEND_AREAS; friendAreaIndex++)
+  for(friendAreaIndex = FRIEND_AREA_BOUNTIFUL_SEA; friendAreaIndex < FRIEND_AREA_COUNT; friendAreaIndex++)
   {
     if ((!gFriendAreas[friendAreaIndex]) &&
        (GetFriendAreaUnlockCondition(friendAreaIndex) == UNLOCK_WONDER_MAIL)) {

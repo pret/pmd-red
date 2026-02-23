@@ -174,13 +174,13 @@ static s32 sub_8021664(void)
 
     switch (sWigglytuffShop1Work->mode) {
         case 0:
-            for (i = BOUNTIFUL_SEA; i < NUM_FRIEND_AREAS; i++) {
+            for (i = FRIEND_AREA_BOUNTIFUL_SEA; i < FRIEND_AREA_COUNT; i++) {
                 sWigglytuffShop1Work->friendAreas[counter] = i;
                 counter++;
             }
             break;
         case 1:
-            for (i = BOUNTIFUL_SEA; i < NUM_FRIEND_AREAS; i++) {
+            for (i = FRIEND_AREA_BOUNTIFUL_SEA; i < FRIEND_AREA_COUNT; i++) {
                 if (gFriendAreas[i]) {
                     sWigglytuffShop1Work->friendAreas[counter] = i;
                     counter++;
@@ -188,7 +188,7 @@ static s32 sub_8021664(void)
             }
             break;
         case 2:
-            for (i = BOUNTIFUL_SEA; i < NUM_FRIEND_AREAS; i++) {
+            for (i = FRIEND_AREA_BOUNTIFUL_SEA; i < FRIEND_AREA_COUNT; i++) {
                 if (gFriendAreas[i])
                     continue;
 
@@ -219,13 +219,13 @@ bool8 sub_8021700(u32 kind)
         case 0:
             return FALSE;
         case 1:
-            for (i = BOUNTIFUL_SEA; i < NUM_FRIEND_AREAS; i++) {
+            for (i = FRIEND_AREA_BOUNTIFUL_SEA; i < FRIEND_AREA_COUNT; i++) {
                 if (gFriendAreas[i])
                     return FALSE;
             }
             break;
         case 2:
-            for (i = BOUNTIFUL_SEA; i < NUM_FRIEND_AREAS; i++) {
+            for (i = FRIEND_AREA_BOUNTIFUL_SEA; i < FRIEND_AREA_COUNT; i++) {
                 if (gFriendAreas[i])
                     continue;
 

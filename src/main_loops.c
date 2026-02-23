@@ -576,7 +576,7 @@ static u32 RunGameMode_Async(u32 a0)
             friendAreasSetup.unk5 = CheckQuest(QUEST_CAN_DEPOSIT_PARTNER);
             ShowFriendAreasMap_Async(&friendAreasSetup);
             MemoryFree(friendAreasSetup.friendAreasMapPtr);
-            if (friendAreasSetup.chosenAreaId != NUM_FRIEND_AREAS) {
+            if (friendAreasSetup.chosenAreaId != FRIEND_AREA_COUNT) {
                 s32 mapId;
                 u32 areaId = friendAreasSetup.chosenAreaId;
                 if (areaId != FRIEND_AREA_NONE) {

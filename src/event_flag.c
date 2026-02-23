@@ -570,7 +570,7 @@ void sub_8001D88(void)
             }
         }
     }
-    if ((ScriptVarScenarioEqual(SCENARIO_SUB1,0x1f,0)) && (GetFriendAreaStatus(SKY_BLUE_PLAINS))) {
+    if ((ScriptVarScenarioEqual(SCENARIO_SUB1,0x1f,0)) && (GetFriendAreaStatus(FRIEND_AREA_SKY_BLUE_PLAINS))) {
         ScenarioCalc(SCENARIO_SUB1,0x1f,1);
         sub_809733C(RESCUE_DUNGEON_HOWLING_FOREST, TRUE);
     }
@@ -579,23 +579,23 @@ void sub_8001D88(void)
         if (FindItemInInventory(ITEM_HM_DIVE) != -1 || gTeamInventoryRef->teamStorage[ITEM_HM_DIVE] != 0 || ScriptVarScenarioAfter(SCENARIO_SUB2,0x21,3)) {
             sub_80973A8(RESCUE_DUNGEON_SOLAR_CAVE, TRUE);
         }
-        if (GetFriendAreaStatus(FURNACE_DESERT) != 0) {
+        if (GetFriendAreaStatus(FRIEND_AREA_FURNACE_DESERT) != 0) {
             sub_80973A8(RESCUE_DUNGEON_DESERT_REGION, TRUE);
         }
-        if (GetFriendAreaStatus(BOULDER_CAVE)) {
+        if (GetFriendAreaStatus(FRIEND_AREA_BOULDER_CAVE)) {
             sub_80973A8(RESCUE_DUNGEON_SOUTHERN_CAVERN, TRUE);
         }
-        if (GetFriendAreaStatus(DRAGON_CAVE)) {
+        if (GetFriendAreaStatus(FRIEND_AREA_DRAGON_CAVE)) {
             sub_80973A8(RESCUE_DUNGEON_WYVERN_HILL, TRUE);
         }
-        if (GetFriendAreaStatus(SECRETIVE_FOREST)) {
+        if (GetFriendAreaStatus(FRIEND_AREA_SECRETIVE_FOREST)) {
             sub_80973A8(RESCUE_DUNGEON_DARKNIGHT_RELIC, TRUE);
         }
-        if (GetFriendAreaStatus(SERENE_SEA)) {
+        if (GetFriendAreaStatus(FRIEND_AREA_SERENE_SEA)) {
             sub_80973A8(RESCUE_DUNGEON_GRAND_SEA, TRUE);
             sub_80973A8(RESCUE_DUNGEON_FAR_OFF_SEA, TRUE);
         }
-        if (GetFriendAreaStatus(AGED_CHAMBER_AN) && GetFriendAreaStatus(AGED_CHAMBER_O_EXCLAIM)) {
+        if (GetFriendAreaStatus(FRIEND_AREA_AGED_CHAMBER_AN) && GetFriendAreaStatus(FRIEND_AREA_AGED_CHAMBER_O_EXCLAIM)) {
             sub_80973A8(RESCUE_DUNGEON_UNOWN_RELIC, TRUE);
         }
         if (ScriptVarScenarioEqual(SCENARIO_SUB2,0,0)) {
@@ -605,7 +605,7 @@ void sub_8001D88(void)
             if (ScriptVarScenarioEqual(SCENARIO_SUB4,0,0)) {
                 ScenarioCalc(SCENARIO_SUB4,0x26,1);
             }
-            if ((ScriptVarScenarioEqual(SCENARIO_SUB6,0,0)) && (GetFriendAreaStatus(SOUTHERN_ISLAND))) {
+            if ((ScriptVarScenarioEqual(SCENARIO_SUB6,0,0)) && (GetFriendAreaStatus(FRIEND_AREA_SOUTHERN_ISLAND))) {
                 ScenarioCalc(SCENARIO_SUB6,0x2e,1);
             }
         }
@@ -614,13 +614,13 @@ void sub_8001D88(void)
                 ScenarioCalc(SCENARIO_SUB2,0x22,1);
             }
             if ((ScriptVarScenarioEqual(SCENARIO_SUB8,0,0) && (ScriptVarScenarioAfter(SCENARIO_SUB2,0x21,3))) &&
-                 (GetFriendAreaStatus(SKY_BLUE_PLAINS))) {
+                 (GetFriendAreaStatus(FRIEND_AREA_SKY_BLUE_PLAINS))) {
                 ScenarioCalc(SCENARIO_SUB8,0x33,1);
             }
-            if (GetFriendAreaStatus(SKY_BLUE_PLAINS)) {
+            if (GetFriendAreaStatus(FRIEND_AREA_SKY_BLUE_PLAINS)) {
                 sub_80973A8(RESCUE_DUNGEON_JOYOUS_TOWER, TRUE);
             }
-            if (GetFriendAreaStatus(SKY_BLUE_PLAINS)) {
+            if (GetFriendAreaStatus(FRIEND_AREA_SKY_BLUE_PLAINS)) {
                 sub_80973A8(RESCUE_DUNGEON_PURITY_FOREST, TRUE);
             }
         }

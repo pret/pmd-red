@@ -133,7 +133,7 @@ static void sub_803A3BC(void)
     s32 sp_0x80;
     s32 i;
 
-    for (i = 1; i < NUM_FRIEND_AREAS; i++) {
+    for (i = 1; i < FRIEND_AREA_COUNT; i++) {
         UnlockFriendArea(i);
     }
 

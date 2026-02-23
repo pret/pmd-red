@@ -8,7 +8,7 @@
 
 typedef struct WigglytuffShop1Work
 {
-    /* 0x0 */ u8 friendAreas[NUM_FRIEND_AREAS];
+    /* 0x0 */ u8 friendAreas[FRIEND_AREA_COUNT];
     /* 0x3C */ u32 mode;
     MenuHeaderWindow s40;
 

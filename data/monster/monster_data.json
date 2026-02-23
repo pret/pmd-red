@@ -53,7 +53,7 @@
             "TYPE_GRASS",
             "TYPE_POISON"
         ],
-        "friendArea": "BEAU_PLAINS",
+        "friendArea": "FRIEND_AREA_BEAU_PLAINS",
         "abilities": [
             "ABILITY_OVERGROW"
         ],
@@ -97,7 +97,7 @@
             "TYPE_GRASS",
             "TYPE_POISON"
         ],
-        "friendArea": "BEAU_PLAINS",
+        "friendArea": "FRIEND_AREA_BEAU_PLAINS",
         "abilities": [
             "ABILITY_OVERGROW"
         ],
@@ -148,7 +148,7 @@
             "TYPE_GRASS",
             "TYPE_POISON"
         ],
-        "friendArea": "BEAU_PLAINS",
+        "friendArea": "FRIEND_AREA_BEAU_PLAINS",
         "abilities": [
             "ABILITY_OVERGROW"
         ],
@@ -200,7 +200,7 @@
             "TYPE_FIRE"
         ],
         "movementType": "MOVEMENT_TYPE_LAVA",
-        "friendArea": "MT_CLEFT",
+        "friendArea": "FRIEND_AREA_MT_CLEFT",
         "abilities": [
             "ABILITY_BLAZE"
         ],
@@ -244,7 +244,7 @@
             "TYPE_FIRE"
         ],
         "movementType": "MOVEMENT_TYPE_LAVA",
-        "friendArea": "MT_CLEFT",
+        "friendArea": "FRIEND_AREA_MT_CLEFT",
         "abilities": [
             "ABILITY_BLAZE"
         ],
@@ -297,7 +297,7 @@
             "TYPE_FLYING"
         ],
         "movementType": "MOVEMENT_TYPE_LAVA",
-        "friendArea": "MT_CLEFT",
+        "friendArea": "FRIEND_AREA_MT_CLEFT",
         "abilities": [
             "ABILITY_BLAZE"
         ],
@@ -349,7 +349,7 @@
             "TYPE_WATER"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "TURTLESHELL_POND",
+        "friendArea": "FRIEND_AREA_TURTLESHELL_POND",
         "abilities": [
             "ABILITY_TORRENT"
         ],
@@ -393,7 +393,7 @@
             "TYPE_WATER"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "TURTLESHELL_POND",
+        "friendArea": "FRIEND_AREA_TURTLESHELL_POND",
         "abilities": [
             "ABILITY_TORRENT"
         ],
@@ -445,7 +445,7 @@
             "TYPE_WATER"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "TURTLESHELL_POND",
+        "friendArea": "FRIEND_AREA_TURTLESHELL_POND",
         "abilities": [
             "ABILITY_TORRENT"
         ],
@@ -496,7 +496,7 @@
         "types": [
             "TYPE_BUG"
         ],
-        "friendArea": "MIST_RISE_FOREST",
+        "friendArea": "FRIEND_AREA_MIST_RISE_FOREST",
         "abilities": [
             "ABILITY_SHIELD_DUST"
         ],
@@ -540,7 +540,7 @@
         "types": [
             "TYPE_BUG"
         ],
-        "friendArea": "MIST_RISE_FOREST",
+        "friendArea": "FRIEND_AREA_MIST_RISE_FOREST",
         "abilities": [
             "ABILITY_SHED_SKIN"
         ],
@@ -593,7 +593,7 @@
             "TYPE_FLYING"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "MIST_RISE_FOREST",
+        "friendArea": "FRIEND_AREA_MIST_RISE_FOREST",
         "abilities": [
             "ABILITY_COMPOUNDEYES"
         ],
@@ -644,7 +644,7 @@
             "TYPE_BUG",
             "TYPE_POISON"
         ],
-        "friendArea": "MIST_RISE_FOREST",
+        "friendArea": "FRIEND_AREA_MIST_RISE_FOREST",
         "abilities": [
             "ABILITY_SHIELD_DUST"
         ],
@@ -688,7 +688,7 @@
             "TYPE_BUG",
             "TYPE_POISON"
         ],
-        "friendArea": "MIST_RISE_FOREST",
+        "friendArea": "FRIEND_AREA_MIST_RISE_FOREST",
         "abilities": [
             "ABILITY_SHED_SKIN"
         ],
@@ -740,7 +740,7 @@
             "TYPE_POISON"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "MIST_RISE_FOREST",
+        "friendArea": "FRIEND_AREA_MIST_RISE_FOREST",
         "abilities": [
             "ABILITY_SWARM"
         ],
@@ -791,7 +791,7 @@
             "TYPE_NORMAL",
             "TYPE_FLYING"
         ],
-        "friendArea": "FLYAWAY_FOREST",
+        "friendArea": "FRIEND_AREA_FLYAWAY_FOREST",
         "abilities": [
             "ABILITY_KEEN_EYE"
         ],
@@ -835,7 +835,7 @@
             "TYPE_NORMAL",
             "TYPE_FLYING"
         ],
-        "friendArea": "FLYAWAY_FOREST",
+        "friendArea": "FRIEND_AREA_FLYAWAY_FOREST",
         "abilities": [
             "ABILITY_KEEN_EYE"
         ],
@@ -886,7 +886,7 @@
             "TYPE_NORMAL",
             "TYPE_FLYING"
         ],
-        "friendArea": "FLYAWAY_FOREST",
+        "friendArea": "FRIEND_AREA_FLYAWAY_FOREST",
         "abilities": [
             "ABILITY_KEEN_EYE"
         ],
@@ -936,7 +936,7 @@
         "types": [
             "TYPE_NORMAL"
         ],
-        "friendArea": "WILD_PLAINS",
+        "friendArea": "FRIEND_AREA_WILD_PLAINS",
         "abilities": [
             "ABILITY_RUN_AWAY",
             "ABILITY_GUTS"
@@ -980,7 +980,7 @@
         "types": [
             "TYPE_NORMAL"
         ],
-        "friendArea": "WILD_PLAINS",
+        "friendArea": "FRIEND_AREA_WILD_PLAINS",
         "abilities": [
             "ABILITY_RUN_AWAY",
             "ABILITY_GUTS"
@@ -1032,7 +1032,7 @@
             "TYPE_NORMAL",
             "TYPE_FLYING"
         ],
-        "friendArea": "RAVAGED_FIELD",
+        "friendArea": "FRIEND_AREA_RAVAGED_FIELD",
         "abilities": [
             "ABILITY_KEEN_EYE"
         ],
@@ -1076,7 +1076,7 @@
             "TYPE_NORMAL",
             "TYPE_FLYING"
         ],
-        "friendArea": "RAVAGED_FIELD",
+        "friendArea": "FRIEND_AREA_RAVAGED_FIELD",
         "abilities": [
             "ABILITY_KEEN_EYE"
         ],
@@ -1127,7 +1127,7 @@
         "types": [
             "TYPE_POISON"
         ],
-        "friendArea": "WILD_PLAINS",
+        "friendArea": "FRIEND_AREA_WILD_PLAINS",
         "abilities": [
             "ABILITY_INTIMIDATE",
             "ABILITY_SHED_SKIN"
@@ -1171,7 +1171,7 @@
         "types": [
             "TYPE_POISON"
         ],
-        "friendArea": "WILD_PLAINS",
+        "friendArea": "FRIEND_AREA_WILD_PLAINS",
         "abilities": [
             "ABILITY_INTIMIDATE",
             "ABILITY_SHED_SKIN"
@@ -1223,7 +1223,7 @@
         "types": [
             "TYPE_ELECTRIC"
         ],
-        "friendArea": "ENERGETIC_FOREST",
+        "friendArea": "FRIEND_AREA_ENERGETIC_FOREST",
         "abilities": [
             "ABILITY_STATIC"
         ],
@@ -1273,7 +1273,7 @@
         "types": [
             "TYPE_ELECTRIC"
         ],
-        "friendArea": "ENERGETIC_FOREST",
+        "friendArea": "FRIEND_AREA_ENERGETIC_FOREST",
         "abilities": [
             "ABILITY_STATIC"
         ],
@@ -1323,7 +1323,7 @@
         "types": [
             "TYPE_GROUND"
         ],
-        "friendArea": "FURNACE_DESERT",
+        "friendArea": "FRIEND_AREA_FURNACE_DESERT",
         "abilities": [
             "ABILITY_SAND_VEIL"
         ],
@@ -1366,7 +1366,7 @@
         "types": [
             "TYPE_GROUND"
         ],
-        "friendArea": "FURNACE_DESERT",
+        "friendArea": "FRIEND_AREA_FURNACE_DESERT",
         "abilities": [
             "ABILITY_SAND_VEIL"
         ],
@@ -1416,7 +1416,7 @@
         "types": [
             "TYPE_POISON"
         ],
-        "friendArea": "SAFARI",
+        "friendArea": "FRIEND_AREA_SAFARI",
         "abilities": [
             "ABILITY_POISON_POINT"
         ],
@@ -1459,7 +1459,7 @@
         "types": [
             "TYPE_POISON"
         ],
-        "friendArea": "SAFARI",
+        "friendArea": "FRIEND_AREA_SAFARI",
         "abilities": [
             "ABILITY_POISON_POINT"
         ],
@@ -1510,7 +1510,7 @@
             "TYPE_POISON",
             "TYPE_GROUND"
         ],
-        "friendArea": "SAFARI",
+        "friendArea": "FRIEND_AREA_SAFARI",
         "abilities": [
             "ABILITY_POISON_POINT"
         ],
@@ -1560,7 +1560,7 @@
         "types": [
             "TYPE_POISON"
         ],
-        "friendArea": "SAFARI",
+        "friendArea": "FRIEND_AREA_SAFARI",
         "abilities": [
             "ABILITY_POISON_POINT"
         ],
@@ -1603,7 +1603,7 @@
         "types": [
             "TYPE_POISON"
         ],
-        "friendArea": "SAFARI",
+        "friendArea": "FRIEND_AREA_SAFARI",
         "abilities": [
             "ABILITY_POISON_POINT"
         ],
@@ -1654,7 +1654,7 @@
             "TYPE_POISON",
             "TYPE_GROUND"
         ],
-        "friendArea": "SAFARI",
+        "friendArea": "FRIEND_AREA_SAFARI",
         "abilities": [
             "ABILITY_POISON_POINT"
         ],
@@ -1704,7 +1704,7 @@
         "types": [
             "TYPE_NORMAL"
         ],
-        "friendArea": "MT_MOONVIEW",
+        "friendArea": "FRIEND_AREA_MT_MOONVIEW",
         "abilities": [
             "ABILITY_CUTE_CHARM"
         ],
@@ -1754,7 +1754,7 @@
         "types": [
             "TYPE_NORMAL"
         ],
-        "friendArea": "MT_MOONVIEW",
+        "friendArea": "FRIEND_AREA_MT_MOONVIEW",
         "abilities": [
             "ABILITY_CUTE_CHARM"
         ],
@@ -1805,7 +1805,7 @@
             "TYPE_FIRE"
         ],
         "movementType": "MOVEMENT_TYPE_LAVA",
-        "friendArea": "DARKNESS_RIDGE",
+        "friendArea": "FRIEND_AREA_DARKNESS_RIDGE",
         "abilities": [
             "ABILITY_FLASH_FIRE"
         ],
@@ -1850,7 +1850,7 @@
             "TYPE_FIRE"
         ],
         "movementType": "MOVEMENT_TYPE_LAVA",
-        "friendArea": "DARKNESS_RIDGE",
+        "friendArea": "FRIEND_AREA_DARKNESS_RIDGE",
         "abilities": [
             "ABILITY_FLASH_FIRE"
         ],
@@ -1900,7 +1900,7 @@
         "types": [
             "TYPE_NORMAL"
         ],
-        "friendArea": "SKY_BLUE_PLAINS",
+        "friendArea": "FRIEND_AREA_SKY_BLUE_PLAINS",
         "abilities": [
             "ABILITY_CUTE_CHARM"
         ],
@@ -1951,7 +1951,7 @@
         "types": [
             "TYPE_NORMAL"
         ],
-        "friendArea": "SKY_BLUE_PLAINS",
+        "friendArea": "FRIEND_AREA_SKY_BLUE_PLAINS",
         "abilities": [
             "ABILITY_CUTE_CHARM"
         ],
@@ -2003,7 +2003,7 @@
             "TYPE_FLYING"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "ECHO_CAVE",
+        "friendArea": "FRIEND_AREA_ECHO_CAVE",
         "abilities": [
             "ABILITY_INNER_FOCUS"
         ],
@@ -2048,7 +2048,7 @@
             "TYPE_FLYING"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "ECHO_CAVE",
+        "friendArea": "FRIEND_AREA_ECHO_CAVE",
         "abilities": [
             "ABILITY_INNER_FOCUS"
         ],
@@ -2099,7 +2099,7 @@
             "TYPE_GRASS",
             "TYPE_POISON"
         ],
-        "friendArea": "JUNGLE",
+        "friendArea": "FRIEND_AREA_JUNGLE",
         "abilities": [
             "ABILITY_CHLOROPHYLL"
         ],
@@ -2143,7 +2143,7 @@
             "TYPE_GRASS",
             "TYPE_POISON"
         ],
-        "friendArea": "JUNGLE",
+        "friendArea": "FRIEND_AREA_JUNGLE",
         "abilities": [
             "ABILITY_CHLOROPHYLL"
         ],
@@ -2194,7 +2194,7 @@
             "TYPE_GRASS",
             "TYPE_POISON"
         ],
-        "friendArea": "JUNGLE",
+        "friendArea": "FRIEND_AREA_JUNGLE",
         "abilities": [
             "ABILITY_CHLOROPHYLL"
         ],
@@ -2245,7 +2245,7 @@
             "TYPE_BUG",
             "TYPE_GRASS"
         ],
-        "friendArea": "MUSHROOM_FOREST",
+        "friendArea": "FRIEND_AREA_MUSHROOM_FOREST",
         "abilities": [
             "ABILITY_EFFECT_SPORE"
         ],
@@ -2289,7 +2289,7 @@
             "TYPE_BUG",
             "TYPE_GRASS"
         ],
-        "friendArea": "MUSHROOM_FOREST",
+        "friendArea": "FRIEND_AREA_MUSHROOM_FOREST",
         "abilities": [
             "ABILITY_EFFECT_SPORE"
         ],
@@ -2340,7 +2340,7 @@
             "TYPE_BUG",
             "TYPE_POISON"
         ],
-        "friendArea": "SECRETIVE_FOREST",
+        "friendArea": "FRIEND_AREA_SECRETIVE_FOREST",
         "abilities": [
             "ABILITY_COMPOUNDEYES"
         ],
@@ -2385,7 +2385,7 @@
             "TYPE_POISON"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "SECRETIVE_FOREST",
+        "friendArea": "FRIEND_AREA_SECRETIVE_FOREST",
         "abilities": [
             "ABILITY_SHIELD_DUST"
         ],
@@ -2436,7 +2436,7 @@
         "types": [
             "TYPE_GROUND"
         ],
-        "friendArea": "BOULDER_CAVE",
+        "friendArea": "FRIEND_AREA_BOULDER_CAVE",
         "abilities": [
             "ABILITY_SAND_VEIL",
             "ABILITY_ARENA_TRAP"
@@ -2481,7 +2481,7 @@
         "types": [
             "TYPE_GROUND"
         ],
-        "friendArea": "BOULDER_CAVE",
+        "friendArea": "FRIEND_AREA_BOULDER_CAVE",
         "abilities": [
             "ABILITY_SAND_VEIL",
             "ABILITY_ARENA_TRAP"
@@ -2533,7 +2533,7 @@
         "types": [
             "TYPE_NORMAL"
         ],
-        "friendArea": "ENERGETIC_FOREST",
+        "friendArea": "FRIEND_AREA_ENERGETIC_FOREST",
         "abilities": [
             "ABILITY_PICKUP"
         ],
@@ -2577,7 +2577,7 @@
         "types": [
             "TYPE_NORMAL"
         ],
-        "friendArea": "ENERGETIC_FOREST",
+        "friendArea": "FRIEND_AREA_ENERGETIC_FOREST",
         "abilities": [
             "ABILITY_LIMBER"
         ],
@@ -2629,7 +2629,7 @@
             "TYPE_WATER"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "TURTLESHELL_POND",
+        "friendArea": "FRIEND_AREA_TURTLESHELL_POND",
         "abilities": [
             "ABILITY_DAMP",
             "ABILITY_CLOUD_NINE"
@@ -2674,7 +2674,7 @@
             "TYPE_WATER"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "TURTLESHELL_POND",
+        "friendArea": "FRIEND_AREA_TURTLESHELL_POND",
         "abilities": [
             "ABILITY_DAMP",
             "ABILITY_CLOUD_NINE"
@@ -2726,7 +2726,7 @@
         "types": [
             "TYPE_FIGHTING"
         ],
-        "friendArea": "ENERGETIC_FOREST",
+        "friendArea": "FRIEND_AREA_ENERGETIC_FOREST",
         "abilities": [
             "ABILITY_VITAL_SPIRIT"
         ],
@@ -2769,7 +2769,7 @@
         "types": [
             "TYPE_FIGHTING"
         ],
-        "friendArea": "ENERGETIC_FOREST",
+        "friendArea": "FRIEND_AREA_ENERGETIC_FOREST",
         "abilities": [
             "ABILITY_VITAL_SPIRIT"
         ],
@@ -2820,7 +2820,7 @@
             "TYPE_FIRE"
         ],
         "movementType": "MOVEMENT_TYPE_LAVA",
-        "friendArea": "SCORCHED_PLAINS",
+        "friendArea": "FRIEND_AREA_SCORCHED_PLAINS",
         "abilities": [
             "ABILITY_INTIMIDATE",
             "ABILITY_FLASH_FIRE"
@@ -2865,7 +2865,7 @@
             "TYPE_FIRE"
         ],
         "movementType": "MOVEMENT_TYPE_LAVA",
-        "friendArea": "SCORCHED_PLAINS",
+        "friendArea": "FRIEND_AREA_SCORCHED_PLAINS",
         "abilities": [
             "ABILITY_INTIMIDATE",
             "ABILITY_FLASH_FIRE"
@@ -2917,7 +2917,7 @@
             "TYPE_WATER"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "TADPOLE_POND",
+        "friendArea": "FRIEND_AREA_TADPOLE_POND",
         "abilities": [
             "ABILITY_WATER_ABSORB",
             "ABILITY_DAMP"
@@ -2962,7 +2962,7 @@
             "TYPE_WATER"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "TADPOLE_POND",
+        "friendArea": "FRIEND_AREA_TADPOLE_POND",
         "abilities": [
             "ABILITY_WATER_ABSORB",
             "ABILITY_DAMP"
@@ -3015,7 +3015,7 @@
             "TYPE_FIGHTING"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "TADPOLE_POND",
+        "friendArea": "FRIEND_AREA_TADPOLE_POND",
         "abilities": [
             "ABILITY_WATER_ABSORB",
             "ABILITY_DAMP"
@@ -3067,7 +3067,7 @@
             "TYPE_PSYCHIC"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "DECREPIT_LAB",
+        "friendArea": "FRIEND_AREA_DECREPIT_LAB",
         "abilities": [
             "ABILITY_SYNCHRONIZE",
             "ABILITY_INNER_FOCUS"
@@ -3111,7 +3111,7 @@
         "types": [
             "TYPE_PSYCHIC"
         ],
-        "friendArea": "DECREPIT_LAB",
+        "friendArea": "FRIEND_AREA_DECREPIT_LAB",
         "abilities": [
             "ABILITY_SYNCHRONIZE",
             "ABILITY_INNER_FOCUS"
@@ -3163,7 +3163,7 @@
         "types": [
             "TYPE_PSYCHIC"
         ],
-        "friendArea": "DECREPIT_LAB",
+        "friendArea": "FRIEND_AREA_DECREPIT_LAB",
         "abilities": [
             "ABILITY_SYNCHRONIZE",
             "ABILITY_INNER_FOCUS"
@@ -3216,7 +3216,7 @@
         "types": [
             "TYPE_FIGHTING"
         ],
-        "friendArea": "MT_DISCIPLINE",
+        "friendArea": "FRIEND_AREA_MT_DISCIPLINE",
         "abilities": [
             "ABILITY_GUTS"
         ],
@@ -3259,7 +3259,7 @@
         "types": [
             "TYPE_FIGHTING"
         ],
-        "friendArea": "MT_DISCIPLINE",
+        "friendArea": "FRIEND_AREA_MT_DISCIPLINE",
         "abilities": [
             "ABILITY_GUTS"
         ],
@@ -3309,7 +3309,7 @@
         "types": [
             "TYPE_FIGHTING"
         ],
-        "friendArea": "MT_DISCIPLINE",
+        "friendArea": "FRIEND_AREA_MT_DISCIPLINE",
         "abilities": [
             "ABILITY_GUTS"
         ],
@@ -3362,7 +3362,7 @@
             "TYPE_GRASS",
             "TYPE_POISON"
         ],
-        "friendArea": "JUNGLE",
+        "friendArea": "FRIEND_AREA_JUNGLE",
         "abilities": [
             "ABILITY_CHLOROPHYLL"
         ],
@@ -3406,7 +3406,7 @@
             "TYPE_GRASS",
             "TYPE_POISON"
         ],
-        "friendArea": "JUNGLE",
+        "friendArea": "FRIEND_AREA_JUNGLE",
         "abilities": [
             "ABILITY_CHLOROPHYLL"
         ],
@@ -3457,7 +3457,7 @@
             "TYPE_GRASS",
             "TYPE_POISON"
         ],
-        "friendArea": "JUNGLE",
+        "friendArea": "FRIEND_AREA_JUNGLE",
         "abilities": [
             "ABILITY_CHLOROPHYLL"
         ],
@@ -3509,7 +3509,7 @@
             "TYPE_POISON"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "BOUNTIFUL_SEA",
+        "friendArea": "FRIEND_AREA_BOUNTIFUL_SEA",
         "abilities": [
             "ABILITY_CLEAR_BODY",
             "ABILITY_LIQUID_OOZE"
@@ -3555,7 +3555,7 @@
             "TYPE_POISON"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "BOUNTIFUL_SEA",
+        "friendArea": "FRIEND_AREA_BOUNTIFUL_SEA",
         "abilities": [
             "ABILITY_CLEAR_BODY",
             "ABILITY_LIQUID_OOZE"
@@ -3607,7 +3607,7 @@
             "TYPE_ROCK",
             "TYPE_GROUND"
         ],
-        "friendArea": "MT_DEEPGREEN",
+        "friendArea": "FRIEND_AREA_MT_DEEPGREEN",
         "abilities": [
             "ABILITY_ROCK_HEAD",
             "ABILITY_STURDY"
@@ -3652,7 +3652,7 @@
             "TYPE_ROCK",
             "TYPE_GROUND"
         ],
-        "friendArea": "MT_DEEPGREEN",
+        "friendArea": "FRIEND_AREA_MT_DEEPGREEN",
         "abilities": [
             "ABILITY_ROCK_HEAD",
             "ABILITY_STURDY"
@@ -3705,7 +3705,7 @@
             "TYPE_ROCK",
             "TYPE_GROUND"
         ],
-        "friendArea": "MT_DEEPGREEN",
+        "friendArea": "FRIEND_AREA_MT_DEEPGREEN",
         "abilities": [
             "ABILITY_ROCK_HEAD",
             "ABILITY_STURDY"
@@ -3758,7 +3758,7 @@
             "TYPE_FIRE"
         ],
         "movementType": "MOVEMENT_TYPE_LAVA",
-        "friendArea": "SCORCHED_PLAINS",
+        "friendArea": "FRIEND_AREA_SCORCHED_PLAINS",
         "abilities": [
             "ABILITY_RUN_AWAY",
             "ABILITY_FLASH_FIRE"
@@ -3803,7 +3803,7 @@
             "TYPE_FIRE"
         ],
         "movementType": "MOVEMENT_TYPE_LAVA",
-        "friendArea": "SCORCHED_PLAINS",
+        "friendArea": "FRIEND_AREA_SCORCHED_PLAINS",
         "abilities": [
             "ABILITY_RUN_AWAY",
             "ABILITY_FLASH_FIRE"
@@ -3856,7 +3856,7 @@
             "TYPE_PSYCHIC"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "BOUNTIFUL_SEA",
+        "friendArea": "FRIEND_AREA_BOUNTIFUL_SEA",
         "abilities": [
             "ABILITY_OBLIVIOUS",
             "ABILITY_OWN_TEMPO"
@@ -3902,7 +3902,7 @@
             "TYPE_PSYCHIC"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "BOUNTIFUL_SEA",
+        "friendArea": "FRIEND_AREA_BOUNTIFUL_SEA",
         "abilities": [
             "ABILITY_OBLIVIOUS",
             "ABILITY_OWN_TEMPO"
@@ -3956,7 +3956,7 @@
             "TYPE_STEEL"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "POWER_PLANT",
+        "friendArea": "FRIEND_AREA_POWER_PLANT",
         "abilities": [
             "ABILITY_MAGNET_PULL",
             "ABILITY_STURDY"
@@ -4002,7 +4002,7 @@
             "TYPE_STEEL"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "POWER_PLANT",
+        "friendArea": "FRIEND_AREA_POWER_PLANT",
         "abilities": [
             "ABILITY_MAGNET_PULL",
             "ABILITY_STURDY"
@@ -4054,7 +4054,7 @@
             "TYPE_NORMAL",
             "TYPE_FLYING"
         ],
-        "friendArea": "WILD_PLAINS",
+        "friendArea": "FRIEND_AREA_WILD_PLAINS",
         "abilities": [
             "ABILITY_KEEN_EYE",
             "ABILITY_INNER_FOCUS"
@@ -4099,7 +4099,7 @@
             "TYPE_NORMAL",
             "TYPE_FLYING"
         ],
-        "friendArea": "SAFARI",
+        "friendArea": "FRIEND_AREA_SAFARI",
         "abilities": [
             "ABILITY_RUN_AWAY",
             "ABILITY_EARLY_BIRD"
@@ -4144,7 +4144,7 @@
             "TYPE_NORMAL",
             "TYPE_FLYING"
         ],
-        "friendArea": "SAFARI",
+        "friendArea": "FRIEND_AREA_SAFARI",
         "abilities": [
             "ABILITY_RUN_AWAY",
             "ABILITY_EARLY_BIRD"
@@ -4196,7 +4196,7 @@
             "TYPE_WATER"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "ICE_FLOE_BEACH",
+        "friendArea": "FRIEND_AREA_ICE_FLOE_BEACH",
         "abilities": [
             "ABILITY_THICK_FAT"
         ],
@@ -4241,7 +4241,7 @@
             "TYPE_ICE"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "ICE_FLOE_BEACH",
+        "friendArea": "FRIEND_AREA_ICE_FLOE_BEACH",
         "abilities": [
             "ABILITY_THICK_FAT"
         ],
@@ -4291,7 +4291,7 @@
         "types": [
             "TYPE_POISON"
         ],
-        "friendArea": "POISON_SWAMP",
+        "friendArea": "FRIEND_AREA_POISON_SWAMP",
         "abilities": [
             "ABILITY_STENCH",
             "ABILITY_STICKY_HOLD"
@@ -4335,7 +4335,7 @@
         "types": [
             "TYPE_POISON"
         ],
-        "friendArea": "POISON_SWAMP",
+        "friendArea": "FRIEND_AREA_POISON_SWAMP",
         "abilities": [
             "ABILITY_STENCH",
             "ABILITY_STICKY_HOLD"
@@ -4387,7 +4387,7 @@
             "TYPE_WATER"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "BOUNTIFUL_SEA",
+        "friendArea": "FRIEND_AREA_BOUNTIFUL_SEA",
         "abilities": [
             "ABILITY_SHELL_ARMOR"
         ],
@@ -4432,7 +4432,7 @@
             "TYPE_ICE"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "BOUNTIFUL_SEA",
+        "friendArea": "FRIEND_AREA_BOUNTIFUL_SEA",
         "abilities": [
             "ABILITY_SHELL_ARMOR"
         ],
@@ -4484,7 +4484,7 @@
             "TYPE_POISON"
         ],
         "movementType": "MOVEMENT_TYPE_WALL",
-        "friendArea": "DARKNESS_RIDGE",
+        "friendArea": "FRIEND_AREA_DARKNESS_RIDGE",
         "abilities": [
             "ABILITY_LEVITATE"
         ],
@@ -4529,7 +4529,7 @@
             "TYPE_POISON"
         ],
         "movementType": "MOVEMENT_TYPE_WALL",
-        "friendArea": "DARKNESS_RIDGE",
+        "friendArea": "FRIEND_AREA_DARKNESS_RIDGE",
         "abilities": [
             "ABILITY_LEVITATE"
         ],
@@ -4582,7 +4582,7 @@
             "TYPE_POISON"
         ],
         "movementType": "MOVEMENT_TYPE_WALL",
-        "friendArea": "DARKNESS_RIDGE",
+        "friendArea": "FRIEND_AREA_DARKNESS_RIDGE",
         "abilities": [
             "ABILITY_LEVITATE"
         ],
@@ -4634,7 +4634,7 @@
             "TYPE_ROCK",
             "TYPE_GROUND"
         ],
-        "friendArea": "BOULDER_CAVE",
+        "friendArea": "FRIEND_AREA_BOULDER_CAVE",
         "abilities": [
             "ABILITY_ROCK_HEAD",
             "ABILITY_STURDY"
@@ -4678,7 +4678,7 @@
         "types": [
             "TYPE_PSYCHIC"
         ],
-        "friendArea": "WILD_PLAINS",
+        "friendArea": "FRIEND_AREA_WILD_PLAINS",
         "abilities": [
             "ABILITY_INSOMNIA"
         ],
@@ -4721,7 +4721,7 @@
         "types": [
             "TYPE_PSYCHIC"
         ],
-        "friendArea": "WILD_PLAINS",
+        "friendArea": "FRIEND_AREA_WILD_PLAINS",
         "abilities": [
             "ABILITY_INSOMNIA"
         ],
@@ -4772,7 +4772,7 @@
             "TYPE_WATER"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "SHALLOW_BEACH",
+        "friendArea": "FRIEND_AREA_SHALLOW_BEACH",
         "abilities": [
             "ABILITY_HYPER_CUTTER",
             "ABILITY_SHELL_ARMOR"
@@ -4817,7 +4817,7 @@
             "TYPE_WATER"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "SHALLOW_BEACH",
+        "friendArea": "FRIEND_AREA_SHALLOW_BEACH",
         "abilities": [
             "ABILITY_HYPER_CUTTER",
             "ABILITY_SHELL_ARMOR"
@@ -4868,7 +4868,7 @@
         "types": [
             "TYPE_ELECTRIC"
         ],
-        "friendArea": "POWER_PLANT",
+        "friendArea": "FRIEND_AREA_POWER_PLANT",
         "abilities": [
             "ABILITY_SOUNDPROOF",
             "ABILITY_STATIC"
@@ -4912,7 +4912,7 @@
         "types": [
             "TYPE_ELECTRIC"
         ],
-        "friendArea": "POWER_PLANT",
+        "friendArea": "FRIEND_AREA_POWER_PLANT",
         "abilities": [
             "ABILITY_SOUNDPROOF",
             "ABILITY_STATIC"
@@ -4964,7 +4964,7 @@
             "TYPE_GRASS",
             "TYPE_PSYCHIC"
         ],
-        "friendArea": "JUNGLE",
+        "friendArea": "FRIEND_AREA_JUNGLE",
         "abilities": [
             "ABILITY_CHLOROPHYLL"
         ],
@@ -5008,7 +5008,7 @@
             "TYPE_GRASS",
             "TYPE_PSYCHIC"
         ],
-        "friendArea": "JUNGLE",
+        "friendArea": "FRIEND_AREA_JUNGLE",
         "abilities": [
             "ABILITY_CHLOROPHYLL"
         ],
@@ -5059,7 +5059,7 @@
         "types": [
             "TYPE_GROUND"
         ],
-        "friendArea": "MT_DEEPGREEN",
+        "friendArea": "FRIEND_AREA_MT_DEEPGREEN",
         "abilities": [
             "ABILITY_ROCK_HEAD",
             "ABILITY_LIGHTNINGROD"
@@ -5103,7 +5103,7 @@
         "types": [
             "TYPE_GROUND"
         ],
-        "friendArea": "MT_DEEPGREEN",
+        "friendArea": "FRIEND_AREA_MT_DEEPGREEN",
         "abilities": [
             "ABILITY_ROCK_HEAD",
             "ABILITY_LIGHTNINGROD"
@@ -5154,7 +5154,7 @@
         "types": [
             "TYPE_FIGHTING"
         ],
-        "friendArea": "MT_DISCIPLINE",
+        "friendArea": "FRIEND_AREA_MT_DISCIPLINE",
         "abilities": [
             "ABILITY_LIMBER"
         ],
@@ -5205,7 +5205,7 @@
         "types": [
             "TYPE_FIGHTING"
         ],
-        "friendArea": "MT_DISCIPLINE",
+        "friendArea": "FRIEND_AREA_MT_DISCIPLINE",
         "abilities": [
             "ABILITY_KEEN_EYE"
         ],
@@ -5256,7 +5256,7 @@
         "types": [
             "TYPE_NORMAL"
         ],
-        "friendArea": "SKY_BLUE_PLAINS",
+        "friendArea": "FRIEND_AREA_SKY_BLUE_PLAINS",
         "abilities": [
             "ABILITY_OWN_TEMPO",
             "ABILITY_OBLIVIOUS"
@@ -5301,7 +5301,7 @@
             "TYPE_POISON"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "POISON_SWAMP",
+        "friendArea": "FRIEND_AREA_POISON_SWAMP",
         "abilities": [
             "ABILITY_LEVITATE"
         ],
@@ -5345,7 +5345,7 @@
             "TYPE_POISON"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "POISON_SWAMP",
+        "friendArea": "FRIEND_AREA_POISON_SWAMP",
         "abilities": [
             "ABILITY_LEVITATE"
         ],
@@ -5396,7 +5396,7 @@
             "TYPE_GROUND",
             "TYPE_ROCK"
         ],
-        "friendArea": "SAFARI",
+        "friendArea": "FRIEND_AREA_SAFARI",
         "abilities": [
             "ABILITY_LIGHTNINGROD",
             "ABILITY_ROCK_HEAD"
@@ -5441,7 +5441,7 @@
             "TYPE_GROUND",
             "TYPE_ROCK"
         ],
-        "friendArea": "SAFARI",
+        "friendArea": "FRIEND_AREA_SAFARI",
         "abilities": [
             "ABILITY_LIGHTNINGROD",
             "ABILITY_ROCK_HEAD"
@@ -5492,7 +5492,7 @@
         "types": [
             "TYPE_NORMAL"
         ],
-        "friendArea": "SKY_BLUE_PLAINS",
+        "friendArea": "FRIEND_AREA_SKY_BLUE_PLAINS",
         "abilities": [
             "ABILITY_NATURAL_CURE",
             "ABILITY_SERENE_GRACE"
@@ -5536,7 +5536,7 @@
         "types": [
             "TYPE_GRASS"
         ],
-        "friendArea": "JUNGLE",
+        "friendArea": "FRIEND_AREA_JUNGLE",
         "abilities": [
             "ABILITY_CHLOROPHYLL"
         ],
@@ -5580,7 +5580,7 @@
         "types": [
             "TYPE_NORMAL"
         ],
-        "friendArea": "SAFARI",
+        "friendArea": "FRIEND_AREA_SAFARI",
         "abilities": [
             "ABILITY_EARLY_BIRD"
         ],
@@ -5624,7 +5624,7 @@
             "TYPE_WATER"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "TREASURE_SEA",
+        "friendArea": "FRIEND_AREA_TREASURE_SEA",
         "abilities": [
             "ABILITY_SWIFT_SWIM"
         ],
@@ -5668,7 +5668,7 @@
             "TYPE_WATER"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "TREASURE_SEA",
+        "friendArea": "FRIEND_AREA_TREASURE_SEA",
         "abilities": [
             "ABILITY_POISON_POINT"
         ],
@@ -5719,7 +5719,7 @@
             "TYPE_WATER"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "RUB_A_DUB_RIVER",
+        "friendArea": "FRIEND_AREA_RUB_A_DUB_RIVER",
         "abilities": [
             "ABILITY_SWIFT_SWIM",
             "ABILITY_WATER_VEIL"
@@ -5764,7 +5764,7 @@
             "TYPE_WATER"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "RUB_A_DUB_RIVER",
+        "friendArea": "FRIEND_AREA_RUB_A_DUB_RIVER",
         "abilities": [
             "ABILITY_SWIFT_SWIM",
             "ABILITY_WATER_VEIL"
@@ -5816,7 +5816,7 @@
             "TYPE_WATER"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "BOUNTIFUL_SEA",
+        "friendArea": "FRIEND_AREA_BOUNTIFUL_SEA",
         "abilities": [
             "ABILITY_ILLUMINATE",
             "ABILITY_NATURAL_CURE"
@@ -5862,7 +5862,7 @@
             "TYPE_PSYCHIC"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "BOUNTIFUL_SEA",
+        "friendArea": "FRIEND_AREA_BOUNTIFUL_SEA",
         "abilities": [
             "ABILITY_ILLUMINATE",
             "ABILITY_NATURAL_CURE"
@@ -5913,7 +5913,7 @@
         "types": [
             "TYPE_PSYCHIC"
         ],
-        "friendArea": "DECREPIT_LAB",
+        "friendArea": "FRIEND_AREA_DECREPIT_LAB",
         "abilities": [
             "ABILITY_SOUNDPROOF"
         ],
@@ -5957,7 +5957,7 @@
             "TYPE_BUG",
             "TYPE_FLYING"
         ],
-        "friendArea": "OVERGROWN_FOREST",
+        "friendArea": "FRIEND_AREA_OVERGROWN_FOREST",
         "abilities": [
             "ABILITY_SWARM"
         ],
@@ -6001,7 +6001,7 @@
             "TYPE_ICE",
             "TYPE_PSYCHIC"
         ],
-        "friendArea": "FRIGID_CAVERN",
+        "friendArea": "FRIEND_AREA_FRIGID_CAVERN",
         "abilities": [
             "ABILITY_OBLIVIOUS"
         ],
@@ -6051,7 +6051,7 @@
         "types": [
             "TYPE_ELECTRIC"
         ],
-        "friendArea": "POWER_PLANT",
+        "friendArea": "FRIEND_AREA_POWER_PLANT",
         "abilities": [
             "ABILITY_STATIC"
         ],
@@ -6102,7 +6102,7 @@
             "TYPE_FIRE"
         ],
         "movementType": "MOVEMENT_TYPE_LAVA",
-        "friendArea": "CRATER",
+        "friendArea": "FRIEND_AREA_CRATER",
         "abilities": [
             "ABILITY_FLAME_BODY"
         ],
@@ -6152,7 +6152,7 @@
         "types": [
             "TYPE_BUG"
         ],
-        "friendArea": "OVERGROWN_FOREST",
+        "friendArea": "FRIEND_AREA_OVERGROWN_FOREST",
         "abilities": [
             "ABILITY_HYPER_CUTTER"
         ],
@@ -6195,7 +6195,7 @@
         "types": [
             "TYPE_NORMAL"
         ],
-        "friendArea": "SAFARI",
+        "friendArea": "FRIEND_AREA_SAFARI",
         "abilities": [
             "ABILITY_INTIMIDATE"
         ],
@@ -6239,7 +6239,7 @@
             "TYPE_WATER"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "WATERFALL_LAKE",
+        "friendArea": "FRIEND_AREA_WATERFALL_LAKE",
         "abilities": [
             "ABILITY_SWIFT_SWIM"
         ],
@@ -6284,7 +6284,7 @@
             "TYPE_FLYING"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "WATERFALL_LAKE",
+        "friendArea": "FRIEND_AREA_WATERFALL_LAKE",
         "abilities": [
             "ABILITY_INTIMIDATE"
         ],
@@ -6336,7 +6336,7 @@
             "TYPE_ICE"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "MYSTIC_LAKE",
+        "friendArea": "FRIEND_AREA_MYSTIC_LAKE",
         "abilities": [
             "ABILITY_WATER_ABSORB",
             "ABILITY_SHELL_ARMOR"
@@ -6380,7 +6380,7 @@
         "types": [
             "TYPE_NORMAL"
         ],
-        "friendArea": "DECREPIT_LAB",
+        "friendArea": "FRIEND_AREA_DECREPIT_LAB",
         "abilities": [
             "ABILITY_LIMBER"
         ],
@@ -6424,7 +6424,7 @@
         "types": [
             "TYPE_NORMAL"
         ],
-        "friendArea": "TRANSFORM_FOREST",
+        "friendArea": "FRIEND_AREA_TRANSFORM_FOREST",
         "abilities": [
             "ABILITY_RUN_AWAY"
         ],
@@ -6468,7 +6468,7 @@
             "TYPE_WATER"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "TRANSFORM_FOREST",
+        "friendArea": "FRIEND_AREA_TRANSFORM_FOREST",
         "abilities": [
             "ABILITY_WATER_ABSORB"
         ],
@@ -6518,7 +6518,7 @@
         "types": [
             "TYPE_ELECTRIC"
         ],
-        "friendArea": "TRANSFORM_FOREST",
+        "friendArea": "FRIEND_AREA_TRANSFORM_FOREST",
         "abilities": [
             "ABILITY_VOLT_ABSORB"
         ],
@@ -6569,7 +6569,7 @@
             "TYPE_FIRE"
         ],
         "movementType": "MOVEMENT_TYPE_LAVA",
-        "friendArea": "TRANSFORM_FOREST",
+        "friendArea": "FRIEND_AREA_TRANSFORM_FOREST",
         "abilities": [
             "ABILITY_FLASH_FIRE"
         ],
@@ -6620,7 +6620,7 @@
             "TYPE_NORMAL"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "DECREPIT_LAB",
+        "friendArea": "FRIEND_AREA_DECREPIT_LAB",
         "abilities": [
             "ABILITY_TRACE"
         ],
@@ -6665,7 +6665,7 @@
             "TYPE_WATER"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "DEEP_SEA_FLOOR",
+        "friendArea": "FRIEND_AREA_DEEP_SEA_FLOOR",
         "abilities": [
             "ABILITY_SWIFT_SWIM",
             "ABILITY_SHELL_ARMOR"
@@ -6711,7 +6711,7 @@
             "TYPE_WATER"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "DEEP_SEA_FLOOR",
+        "friendArea": "FRIEND_AREA_DEEP_SEA_FLOOR",
         "abilities": [
             "ABILITY_SWIFT_SWIM",
             "ABILITY_SHELL_ARMOR"
@@ -6764,7 +6764,7 @@
             "TYPE_WATER"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "DEEP_SEA_FLOOR",
+        "friendArea": "FRIEND_AREA_DEEP_SEA_FLOOR",
         "abilities": [
             "ABILITY_SWIFT_SWIM",
             "ABILITY_BATTLE_ARMOR"
@@ -6810,7 +6810,7 @@
             "TYPE_WATER"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "DEEP_SEA_FLOOR",
+        "friendArea": "FRIEND_AREA_DEEP_SEA_FLOOR",
         "abilities": [
             "ABILITY_SWIFT_SWIM",
             "ABILITY_BATTLE_ARMOR"
@@ -6863,7 +6863,7 @@
             "TYPE_FLYING"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "ANCIENT_RELIC",
+        "friendArea": "FRIEND_AREA_ANCIENT_RELIC",
         "abilities": [
             "ABILITY_ROCK_HEAD",
             "ABILITY_PRESSURE"
@@ -6907,7 +6907,7 @@
         "types": [
             "TYPE_NORMAL"
         ],
-        "friendArea": "ENERGETIC_FOREST",
+        "friendArea": "FRIEND_AREA_ENERGETIC_FOREST",
         "abilities": [
             "ABILITY_IMMUNITY",
             "ABILITY_THICK_FAT"
@@ -6962,7 +6962,7 @@
             "TYPE_FLYING"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "LEGENDARY_ISLAND",
+        "friendArea": "FRIEND_AREA_LEGENDARY_ISLAND",
         "abilities": [
             "ABILITY_PRESSURE"
         ],
@@ -7009,7 +7009,7 @@
             "TYPE_FLYING"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "LEGENDARY_ISLAND",
+        "friendArea": "FRIEND_AREA_LEGENDARY_ISLAND",
         "abilities": [
             "ABILITY_PRESSURE"
         ],
@@ -7056,7 +7056,7 @@
             "TYPE_FLYING"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "LEGENDARY_ISLAND",
+        "friendArea": "FRIEND_AREA_LEGENDARY_ISLAND",
         "abilities": [
             "ABILITY_PRESSURE"
         ],
@@ -7100,7 +7100,7 @@
             "TYPE_DRAGON"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "MYSTIC_LAKE",
+        "friendArea": "FRIEND_AREA_MYSTIC_LAKE",
         "abilities": [
             "ABILITY_SHED_SKIN"
         ],
@@ -7144,7 +7144,7 @@
             "TYPE_DRAGON"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "MYSTIC_LAKE",
+        "friendArea": "FRIEND_AREA_MYSTIC_LAKE",
         "abilities": [
             "ABILITY_SHED_SKIN"
         ],
@@ -7196,7 +7196,7 @@
             "TYPE_FLYING"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "MYSTIC_LAKE",
+        "friendArea": "FRIEND_AREA_MYSTIC_LAKE",
         "abilities": [
             "ABILITY_INNER_FOCUS"
         ],
@@ -7247,7 +7247,7 @@
         "types": [
             "TYPE_PSYCHIC"
         ],
-        "friendArea": "CRYPTIC_CAVE",
+        "friendArea": "FRIEND_AREA_CRYPTIC_CAVE",
         "abilities": [
             "ABILITY_PRESSURE"
         ],
@@ -7291,7 +7291,7 @@
             "TYPE_PSYCHIC"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "FINAL_ISLAND",
+        "friendArea": "FRIEND_AREA_FINAL_ISLAND",
         "abilities": [
             "ABILITY_SYNCHRONIZE"
         ],
@@ -7335,7 +7335,7 @@
         "types": [
             "TYPE_GRASS"
         ],
-        "friendArea": "BEAU_PLAINS",
+        "friendArea": "FRIEND_AREA_BEAU_PLAINS",
         "abilities": [
             "ABILITY_OVERGROW"
         ],
@@ -7378,7 +7378,7 @@
         "types": [
             "TYPE_GRASS"
         ],
-        "friendArea": "BEAU_PLAINS",
+        "friendArea": "FRIEND_AREA_BEAU_PLAINS",
         "abilities": [
             "ABILITY_OVERGROW"
         ],
@@ -7428,7 +7428,7 @@
         "types": [
             "TYPE_GRASS"
         ],
-        "friendArea": "BEAU_PLAINS",
+        "friendArea": "FRIEND_AREA_BEAU_PLAINS",
         "abilities": [
             "ABILITY_OVERGROW"
         ],
@@ -7480,7 +7480,7 @@
             "TYPE_FIRE"
         ],
         "movementType": "MOVEMENT_TYPE_LAVA",
-        "friendArea": "SCORCHED_PLAINS",
+        "friendArea": "FRIEND_AREA_SCORCHED_PLAINS",
         "abilities": [
             "ABILITY_BLAZE"
         ],
@@ -7524,7 +7524,7 @@
             "TYPE_FIRE"
         ],
         "movementType": "MOVEMENT_TYPE_LAVA",
-        "friendArea": "SCORCHED_PLAINS",
+        "friendArea": "FRIEND_AREA_SCORCHED_PLAINS",
         "abilities": [
             "ABILITY_BLAZE"
         ],
@@ -7575,7 +7575,7 @@
             "TYPE_FIRE"
         ],
         "movementType": "MOVEMENT_TYPE_LAVA",
-        "friendArea": "SCORCHED_PLAINS",
+        "friendArea": "FRIEND_AREA_SCORCHED_PLAINS",
         "abilities": [
             "ABILITY_BLAZE"
         ],
@@ -7627,7 +7627,7 @@
             "TYPE_WATER"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "RUB_A_DUB_RIVER",
+        "friendArea": "FRIEND_AREA_RUB_A_DUB_RIVER",
         "abilities": [
             "ABILITY_TORRENT"
         ],
@@ -7671,7 +7671,7 @@
             "TYPE_WATER"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "RUB_A_DUB_RIVER",
+        "friendArea": "FRIEND_AREA_RUB_A_DUB_RIVER",
         "abilities": [
             "ABILITY_TORRENT"
         ],
@@ -7722,7 +7722,7 @@
             "TYPE_WATER"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "RUB_A_DUB_RIVER",
+        "friendArea": "FRIEND_AREA_RUB_A_DUB_RIVER",
         "abilities": [
             "ABILITY_TORRENT"
         ],
@@ -7772,7 +7772,7 @@
         "types": [
             "TYPE_NORMAL"
         ],
-        "friendArea": "THUNDER_MEADOW",
+        "friendArea": "FRIEND_AREA_THUNDER_MEADOW",
         "abilities": [
             "ABILITY_RUN_AWAY",
             "ABILITY_KEEN_EYE"
@@ -7816,7 +7816,7 @@
         "types": [
             "TYPE_NORMAL"
         ],
-        "friendArea": "THUNDER_MEADOW",
+        "friendArea": "FRIEND_AREA_THUNDER_MEADOW",
         "abilities": [
             "ABILITY_RUN_AWAY",
             "ABILITY_KEEN_EYE"
@@ -7868,7 +7868,7 @@
             "TYPE_NORMAL",
             "TYPE_FLYING"
         ],
-        "friendArea": "FLYAWAY_FOREST",
+        "friendArea": "FRIEND_AREA_FLYAWAY_FOREST",
         "abilities": [
             "ABILITY_INSOMNIA",
             "ABILITY_KEEN_EYE"
@@ -7913,7 +7913,7 @@
             "TYPE_NORMAL",
             "TYPE_FLYING"
         ],
-        "friendArea": "FLYAWAY_FOREST",
+        "friendArea": "FRIEND_AREA_FLYAWAY_FOREST",
         "abilities": [
             "ABILITY_INSOMNIA",
             "ABILITY_KEEN_EYE"
@@ -7966,7 +7966,7 @@
             "TYPE_FLYING"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "MIST_RISE_FOREST",
+        "friendArea": "FRIEND_AREA_MIST_RISE_FOREST",
         "abilities": [
             "ABILITY_SWARM",
             "ABILITY_EARLY_BIRD"
@@ -8012,7 +8012,7 @@
             "TYPE_FLYING"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "MIST_RISE_FOREST",
+        "friendArea": "FRIEND_AREA_MIST_RISE_FOREST",
         "abilities": [
             "ABILITY_SWARM",
             "ABILITY_EARLY_BIRD"
@@ -8064,7 +8064,7 @@
             "TYPE_BUG",
             "TYPE_POISON"
         ],
-        "friendArea": "SECRETIVE_FOREST",
+        "friendArea": "FRIEND_AREA_SECRETIVE_FOREST",
         "abilities": [
             "ABILITY_SWARM",
             "ABILITY_INSOMNIA"
@@ -8109,7 +8109,7 @@
             "TYPE_BUG",
             "TYPE_POISON"
         ],
-        "friendArea": "SECRETIVE_FOREST",
+        "friendArea": "FRIEND_AREA_SECRETIVE_FOREST",
         "abilities": [
             "ABILITY_SWARM",
             "ABILITY_INSOMNIA"
@@ -8162,7 +8162,7 @@
             "TYPE_FLYING"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "ECHO_CAVE",
+        "friendArea": "FRIEND_AREA_ECHO_CAVE",
         "abilities": [
             "ABILITY_INNER_FOCUS"
         ],
@@ -8214,7 +8214,7 @@
             "TYPE_ELECTRIC"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "DEEP_SEA_FLOOR",
+        "friendArea": "FRIEND_AREA_DEEP_SEA_FLOOR",
         "abilities": [
             "ABILITY_VOLT_ABSORB",
             "ABILITY_ILLUMINATE"
@@ -8260,7 +8260,7 @@
             "TYPE_ELECTRIC"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "DEEP_SEA_FLOOR",
+        "friendArea": "FRIEND_AREA_DEEP_SEA_FLOOR",
         "abilities": [
             "ABILITY_VOLT_ABSORB",
             "ABILITY_ILLUMINATE"
@@ -8311,7 +8311,7 @@
         "types": [
             "TYPE_ELECTRIC"
         ],
-        "friendArea": "ENERGETIC_FOREST",
+        "friendArea": "FRIEND_AREA_ENERGETIC_FOREST",
         "abilities": [
             "ABILITY_STATIC"
         ],
@@ -8354,7 +8354,7 @@
         "types": [
             "TYPE_NORMAL"
         ],
-        "friendArea": "MT_MOONVIEW",
+        "friendArea": "FRIEND_AREA_MT_MOONVIEW",
         "abilities": [
             "ABILITY_CUTE_CHARM"
         ],
@@ -8397,7 +8397,7 @@
         "types": [
             "TYPE_NORMAL"
         ],
-        "friendArea": "SKY_BLUE_PLAINS",
+        "friendArea": "FRIEND_AREA_SKY_BLUE_PLAINS",
         "abilities": [
             "ABILITY_CUTE_CHARM"
         ],
@@ -8440,7 +8440,7 @@
         "types": [
             "TYPE_NORMAL"
         ],
-        "friendArea": "FLYAWAY_FOREST",
+        "friendArea": "FRIEND_AREA_FLYAWAY_FOREST",
         "abilities": [
             "ABILITY_HUSTLE",
             "ABILITY_SERENE_GRACE"
@@ -8485,7 +8485,7 @@
             "TYPE_NORMAL",
             "TYPE_FLYING"
         ],
-        "friendArea": "FLYAWAY_FOREST",
+        "friendArea": "FRIEND_AREA_FLYAWAY_FOREST",
         "abilities": [
             "ABILITY_HUSTLE",
             "ABILITY_SERENE_GRACE"
@@ -8537,7 +8537,7 @@
             "TYPE_PSYCHIC",
             "TYPE_FLYING"
         ],
-        "friendArea": "FLYAWAY_FOREST",
+        "friendArea": "FRIEND_AREA_FLYAWAY_FOREST",
         "abilities": [
             "ABILITY_SYNCHRONIZE",
             "ABILITY_EARLY_BIRD"
@@ -8583,7 +8583,7 @@
             "TYPE_PSYCHIC",
             "TYPE_FLYING"
         ],
-        "friendArea": "FLYAWAY_FOREST",
+        "friendArea": "FRIEND_AREA_FLYAWAY_FOREST",
         "abilities": [
             "ABILITY_SYNCHRONIZE",
             "ABILITY_EARLY_BIRD"
@@ -8634,7 +8634,7 @@
         "types": [
             "TYPE_ELECTRIC"
         ],
-        "friendArea": "THUNDER_MEADOW",
+        "friendArea": "FRIEND_AREA_THUNDER_MEADOW",
         "abilities": [
             "ABILITY_STATIC"
         ],
@@ -8677,7 +8677,7 @@
         "types": [
             "TYPE_ELECTRIC"
         ],
-        "friendArea": "THUNDER_MEADOW",
+        "friendArea": "FRIEND_AREA_THUNDER_MEADOW",
         "abilities": [
             "ABILITY_STATIC"
         ],
@@ -8727,7 +8727,7 @@
         "types": [
             "TYPE_ELECTRIC"
         ],
-        "friendArea": "THUNDER_MEADOW",
+        "friendArea": "FRIEND_AREA_THUNDER_MEADOW",
         "abilities": [
             "ABILITY_STATIC"
         ],
@@ -8777,7 +8777,7 @@
         "types": [
             "TYPE_GRASS"
         ],
-        "friendArea": "JUNGLE",
+        "friendArea": "FRIEND_AREA_JUNGLE",
         "abilities": [
             "ABILITY_CHLOROPHYLL"
         ],
@@ -8828,7 +8828,7 @@
             "TYPE_WATER"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "TURTLESHELL_POND",
+        "friendArea": "FRIEND_AREA_TURTLESHELL_POND",
         "abilities": [
             "ABILITY_THICK_FAT",
             "ABILITY_HUGE_POWER"
@@ -8880,7 +8880,7 @@
             "TYPE_WATER"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "TURTLESHELL_POND",
+        "friendArea": "FRIEND_AREA_TURTLESHELL_POND",
         "abilities": [
             "ABILITY_THICK_FAT",
             "ABILITY_HUGE_POWER"
@@ -8931,7 +8931,7 @@
         "types": [
             "TYPE_ROCK"
         ],
-        "friendArea": "OVERGROWN_FOREST",
+        "friendArea": "FRIEND_AREA_OVERGROWN_FOREST",
         "abilities": [
             "ABILITY_STURDY",
             "ABILITY_ROCK_HEAD"
@@ -8976,7 +8976,7 @@
             "TYPE_WATER"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "TADPOLE_POND",
+        "friendArea": "FRIEND_AREA_TADPOLE_POND",
         "abilities": [
             "ABILITY_WATER_ABSORB",
             "ABILITY_DAMP"
@@ -9029,7 +9029,7 @@
             "TYPE_GRASS",
             "TYPE_FLYING"
         ],
-        "friendArea": "BEAU_PLAINS",
+        "friendArea": "FRIEND_AREA_BEAU_PLAINS",
         "abilities": [
             "ABILITY_CHLOROPHYLL"
         ],
@@ -9073,7 +9073,7 @@
             "TYPE_GRASS",
             "TYPE_FLYING"
         ],
-        "friendArea": "BEAU_PLAINS",
+        "friendArea": "FRIEND_AREA_BEAU_PLAINS",
         "abilities": [
             "ABILITY_CHLOROPHYLL"
         ],
@@ -9125,7 +9125,7 @@
             "TYPE_GRASS",
             "TYPE_FLYING"
         ],
-        "friendArea": "BEAU_PLAINS",
+        "friendArea": "FRIEND_AREA_BEAU_PLAINS",
         "abilities": [
             "ABILITY_CHLOROPHYLL"
         ],
@@ -9175,7 +9175,7 @@
         "types": [
             "TYPE_NORMAL"
         ],
-        "friendArea": "ENERGETIC_FOREST",
+        "friendArea": "FRIEND_AREA_ENERGETIC_FOREST",
         "abilities": [
             "ABILITY_RUN_AWAY",
             "ABILITY_PICKUP"
@@ -9219,7 +9219,7 @@
         "types": [
             "TYPE_GRASS"
         ],
-        "friendArea": "JUNGLE",
+        "friendArea": "FRIEND_AREA_JUNGLE",
         "abilities": [
             "ABILITY_CHLOROPHYLL"
         ],
@@ -9262,7 +9262,7 @@
         "types": [
             "TYPE_GRASS"
         ],
-        "friendArea": "JUNGLE",
+        "friendArea": "FRIEND_AREA_JUNGLE",
         "abilities": [
             "ABILITY_CHLOROPHYLL"
         ],
@@ -9314,7 +9314,7 @@
             "TYPE_FLYING"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "MIST_RISE_FOREST",
+        "friendArea": "FRIEND_AREA_MIST_RISE_FOREST",
         "abilities": [
             "ABILITY_SPEED_BOOST",
             "ABILITY_COMPOUNDEYES"
@@ -9360,7 +9360,7 @@
             "TYPE_GROUND"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "PEANUT_SWAMP",
+        "friendArea": "FRIEND_AREA_PEANUT_SWAMP",
         "abilities": [
             "ABILITY_DAMP",
             "ABILITY_WATER_ABSORB"
@@ -9406,7 +9406,7 @@
             "TYPE_GROUND"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "PEANUT_SWAMP",
+        "friendArea": "FRIEND_AREA_PEANUT_SWAMP",
         "abilities": [
             "ABILITY_DAMP",
             "ABILITY_WATER_ABSORB"
@@ -9457,7 +9457,7 @@
         "types": [
             "TYPE_PSYCHIC"
         ],
-        "friendArea": "TRANSFORM_FOREST",
+        "friendArea": "FRIEND_AREA_TRANSFORM_FOREST",
         "abilities": [
             "ABILITY_SYNCHRONIZE"
         ],
@@ -9508,7 +9508,7 @@
         "types": [
             "TYPE_DARK"
         ],
-        "friendArea": "TRANSFORM_FOREST",
+        "friendArea": "FRIEND_AREA_TRANSFORM_FOREST",
         "abilities": [
             "ABILITY_SYNCHRONIZE"
         ],
@@ -9560,7 +9560,7 @@
             "TYPE_DARK",
             "TYPE_FLYING"
         ],
-        "friendArea": "FLYAWAY_FOREST",
+        "friendArea": "FRIEND_AREA_FLYAWAY_FOREST",
         "abilities": [
             "ABILITY_INSOMNIA"
         ],
@@ -9605,7 +9605,7 @@
             "TYPE_PSYCHIC"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "BOUNTIFUL_SEA",
+        "friendArea": "FRIEND_AREA_BOUNTIFUL_SEA",
         "abilities": [
             "ABILITY_OBLIVIOUS",
             "ABILITY_OWN_TEMPO"
@@ -9658,7 +9658,7 @@
             "TYPE_GHOST"
         ],
         "movementType": "MOVEMENT_TYPE_WALL",
-        "friendArea": "DARKNESS_RIDGE",
+        "friendArea": "FRIEND_AREA_DARKNESS_RIDGE",
         "abilities": [
             "ABILITY_LEVITATE"
         ],
@@ -9702,7 +9702,7 @@
             "TYPE_PSYCHIC"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "AGED_CHAMBER_AN",
+        "friendArea": "FRIEND_AREA_AGED_CHAMBER_AN",
         "abilities": [
             "ABILITY_LEVITATE"
         ],
@@ -9746,7 +9746,7 @@
             "TYPE_PSYCHIC"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "AGED_CHAMBER_AN",
+        "friendArea": "FRIEND_AREA_AGED_CHAMBER_AN",
         "abilities": [
             "ABILITY_LEVITATE"
         ],
@@ -9790,7 +9790,7 @@
             "TYPE_PSYCHIC"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "AGED_CHAMBER_AN",
+        "friendArea": "FRIEND_AREA_AGED_CHAMBER_AN",
         "abilities": [
             "ABILITY_LEVITATE"
         ],
@@ -9834,7 +9834,7 @@
             "TYPE_PSYCHIC"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "AGED_CHAMBER_AN",
+        "friendArea": "FRIEND_AREA_AGED_CHAMBER_AN",
         "abilities": [
             "ABILITY_LEVITATE"
         ],
@@ -9878,7 +9878,7 @@
             "TYPE_PSYCHIC"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "AGED_CHAMBER_AN",
+        "friendArea": "FRIEND_AREA_AGED_CHAMBER_AN",
         "abilities": [
             "ABILITY_LEVITATE"
         ],
@@ -9922,7 +9922,7 @@
             "TYPE_PSYCHIC"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "AGED_CHAMBER_AN",
+        "friendArea": "FRIEND_AREA_AGED_CHAMBER_AN",
         "abilities": [
             "ABILITY_LEVITATE"
         ],
@@ -9966,7 +9966,7 @@
             "TYPE_PSYCHIC"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "AGED_CHAMBER_AN",
+        "friendArea": "FRIEND_AREA_AGED_CHAMBER_AN",
         "abilities": [
             "ABILITY_LEVITATE"
         ],
@@ -10010,7 +10010,7 @@
             "TYPE_PSYCHIC"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "AGED_CHAMBER_AN",
+        "friendArea": "FRIEND_AREA_AGED_CHAMBER_AN",
         "abilities": [
             "ABILITY_LEVITATE"
         ],
@@ -10054,7 +10054,7 @@
             "TYPE_PSYCHIC"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "AGED_CHAMBER_AN",
+        "friendArea": "FRIEND_AREA_AGED_CHAMBER_AN",
         "abilities": [
             "ABILITY_LEVITATE"
         ],
@@ -10098,7 +10098,7 @@
             "TYPE_PSYCHIC"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "AGED_CHAMBER_AN",
+        "friendArea": "FRIEND_AREA_AGED_CHAMBER_AN",
         "abilities": [
             "ABILITY_LEVITATE"
         ],
@@ -10142,7 +10142,7 @@
             "TYPE_PSYCHIC"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "AGED_CHAMBER_AN",
+        "friendArea": "FRIEND_AREA_AGED_CHAMBER_AN",
         "abilities": [
             "ABILITY_LEVITATE"
         ],
@@ -10186,7 +10186,7 @@
             "TYPE_PSYCHIC"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "AGED_CHAMBER_AN",
+        "friendArea": "FRIEND_AREA_AGED_CHAMBER_AN",
         "abilities": [
             "ABILITY_LEVITATE"
         ],
@@ -10230,7 +10230,7 @@
             "TYPE_PSYCHIC"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "AGED_CHAMBER_AN",
+        "friendArea": "FRIEND_AREA_AGED_CHAMBER_AN",
         "abilities": [
             "ABILITY_LEVITATE"
         ],
@@ -10274,7 +10274,7 @@
             "TYPE_PSYCHIC"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "AGED_CHAMBER_AN",
+        "friendArea": "FRIEND_AREA_AGED_CHAMBER_AN",
         "abilities": [
             "ABILITY_LEVITATE"
         ],
@@ -10318,7 +10318,7 @@
             "TYPE_PSYCHIC"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "AGED_CHAMBER_O_EXCLAIM",
+        "friendArea": "FRIEND_AREA_AGED_CHAMBER_O_EXCLAIM",
         "abilities": [
             "ABILITY_LEVITATE"
         ],
@@ -10362,7 +10362,7 @@
             "TYPE_PSYCHIC"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "AGED_CHAMBER_O_EXCLAIM",
+        "friendArea": "FRIEND_AREA_AGED_CHAMBER_O_EXCLAIM",
         "abilities": [
             "ABILITY_LEVITATE"
         ],
@@ -10406,7 +10406,7 @@
             "TYPE_PSYCHIC"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "AGED_CHAMBER_O_EXCLAIM",
+        "friendArea": "FRIEND_AREA_AGED_CHAMBER_O_EXCLAIM",
         "abilities": [
             "ABILITY_LEVITATE"
         ],
@@ -10450,7 +10450,7 @@
             "TYPE_PSYCHIC"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "AGED_CHAMBER_O_EXCLAIM",
+        "friendArea": "FRIEND_AREA_AGED_CHAMBER_O_EXCLAIM",
         "abilities": [
             "ABILITY_LEVITATE"
         ],
@@ -10494,7 +10494,7 @@
             "TYPE_PSYCHIC"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "AGED_CHAMBER_O_EXCLAIM",
+        "friendArea": "FRIEND_AREA_AGED_CHAMBER_O_EXCLAIM",
         "abilities": [
             "ABILITY_LEVITATE"
         ],
@@ -10538,7 +10538,7 @@
             "TYPE_PSYCHIC"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "AGED_CHAMBER_O_EXCLAIM",
+        "friendArea": "FRIEND_AREA_AGED_CHAMBER_O_EXCLAIM",
         "abilities": [
             "ABILITY_LEVITATE"
         ],
@@ -10582,7 +10582,7 @@
             "TYPE_PSYCHIC"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "AGED_CHAMBER_O_EXCLAIM",
+        "friendArea": "FRIEND_AREA_AGED_CHAMBER_O_EXCLAIM",
         "abilities": [
             "ABILITY_LEVITATE"
         ],
@@ -10626,7 +10626,7 @@
             "TYPE_PSYCHIC"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "AGED_CHAMBER_O_EXCLAIM",
+        "friendArea": "FRIEND_AREA_AGED_CHAMBER_O_EXCLAIM",
         "abilities": [
             "ABILITY_LEVITATE"
         ],
@@ -10670,7 +10670,7 @@
             "TYPE_PSYCHIC"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "AGED_CHAMBER_O_EXCLAIM",
+        "friendArea": "FRIEND_AREA_AGED_CHAMBER_O_EXCLAIM",
         "abilities": [
             "ABILITY_LEVITATE"
         ],
@@ -10714,7 +10714,7 @@
             "TYPE_PSYCHIC"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "AGED_CHAMBER_O_EXCLAIM",
+        "friendArea": "FRIEND_AREA_AGED_CHAMBER_O_EXCLAIM",
         "abilities": [
             "ABILITY_LEVITATE"
         ],
@@ -10758,7 +10758,7 @@
             "TYPE_PSYCHIC"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "AGED_CHAMBER_O_EXCLAIM",
+        "friendArea": "FRIEND_AREA_AGED_CHAMBER_O_EXCLAIM",
         "abilities": [
             "ABILITY_LEVITATE"
         ],
@@ -10802,7 +10802,7 @@
             "TYPE_PSYCHIC"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "AGED_CHAMBER_O_EXCLAIM",
+        "friendArea": "FRIEND_AREA_AGED_CHAMBER_O_EXCLAIM",
         "abilities": [
             "ABILITY_LEVITATE"
         ],
@@ -10846,7 +10846,7 @@
         "types": [
             "TYPE_PSYCHIC"
         ],
-        "friendArea": "ECHO_CAVE",
+        "friendArea": "FRIEND_AREA_ECHO_CAVE",
         "abilities": [
             "ABILITY_SHADOW_TAG"
         ],
@@ -10897,7 +10897,7 @@
             "TYPE_NORMAL",
             "TYPE_PSYCHIC"
         ],
-        "friendArea": "SKY_BLUE_PLAINS",
+        "friendArea": "FRIEND_AREA_SKY_BLUE_PLAINS",
         "abilities": [
             "ABILITY_INNER_FOCUS",
             "ABILITY_EARLY_BIRD"
@@ -10941,7 +10941,7 @@
         "types": [
             "TYPE_BUG"
         ],
-        "friendArea": "SECRETIVE_FOREST",
+        "friendArea": "FRIEND_AREA_SECRETIVE_FOREST",
         "abilities": [
             "ABILITY_STURDY"
         ],
@@ -10985,7 +10985,7 @@
             "TYPE_BUG",
             "TYPE_STEEL"
         ],
-        "friendArea": "SECRETIVE_FOREST",
+        "friendArea": "FRIEND_AREA_SECRETIVE_FOREST",
         "abilities": [
             "ABILITY_STURDY"
         ],
@@ -11035,7 +11035,7 @@
         "types": [
             "TYPE_NORMAL"
         ],
-        "friendArea": "ECHO_CAVE",
+        "friendArea": "FRIEND_AREA_ECHO_CAVE",
         "abilities": [
             "ABILITY_SERENE_GRACE",
             "ABILITY_RUN_AWAY"
@@ -11081,7 +11081,7 @@
             "TYPE_FLYING"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "MT_DEEPGREEN",
+        "friendArea": "FRIEND_AREA_MT_DEEPGREEN",
         "abilities": [
             "ABILITY_HYPER_CUTTER",
             "ABILITY_SAND_VEIL"
@@ -11126,7 +11126,7 @@
             "TYPE_STEEL",
             "TYPE_GROUND"
         ],
-        "friendArea": "BOULDER_CAVE",
+        "friendArea": "FRIEND_AREA_BOULDER_CAVE",
         "abilities": [
             "ABILITY_ROCK_HEAD",
             "ABILITY_STURDY"
@@ -11179,7 +11179,7 @@
         "types": [
             "TYPE_NORMAL"
         ],
-        "friendArea": "SKY_BLUE_PLAINS",
+        "friendArea": "FRIEND_AREA_SKY_BLUE_PLAINS",
         "abilities": [
             "ABILITY_INTIMIDATE",
             "ABILITY_RUN_AWAY"
@@ -11224,7 +11224,7 @@
         "types": [
             "TYPE_NORMAL"
         ],
-        "friendArea": "SKY_BLUE_PLAINS",
+        "friendArea": "FRIEND_AREA_SKY_BLUE_PLAINS",
         "abilities": [
             "ABILITY_INTIMIDATE"
         ],
@@ -11276,7 +11276,7 @@
             "TYPE_POISON"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "SERENE_SEA",
+        "friendArea": "FRIEND_AREA_SERENE_SEA",
         "abilities": [
             "ABILITY_POISON_POINT",
             "ABILITY_SWIFT_SWIM"
@@ -11321,7 +11321,7 @@
             "TYPE_BUG",
             "TYPE_STEEL"
         ],
-        "friendArea": "OVERGROWN_FOREST",
+        "friendArea": "FRIEND_AREA_OVERGROWN_FOREST",
         "abilities": [
             "ABILITY_SWARM"
         ],
@@ -11373,7 +11373,7 @@
             "TYPE_BUG",
             "TYPE_ROCK"
         ],
-        "friendArea": "MT_DEEPGREEN",
+        "friendArea": "FRIEND_AREA_MT_DEEPGREEN",
         "abilities": [
             "ABILITY_STURDY"
         ],
@@ -11417,7 +11417,7 @@
             "TYPE_BUG",
             "TYPE_FIGHTING"
         ],
-        "friendArea": "OVERGROWN_FOREST",
+        "friendArea": "FRIEND_AREA_OVERGROWN_FOREST",
         "abilities": [
             "ABILITY_SWARM",
             "ABILITY_GUTS"
@@ -11462,7 +11462,7 @@
             "TYPE_DARK",
             "TYPE_ICE"
         ],
-        "friendArea": "DARKNESS_RIDGE",
+        "friendArea": "FRIEND_AREA_DARKNESS_RIDGE",
         "abilities": [
             "ABILITY_INNER_FOCUS",
             "ABILITY_KEEN_EYE"
@@ -11506,7 +11506,7 @@
         "types": [
             "TYPE_NORMAL"
         ],
-        "friendArea": "MT_DEEPGREEN",
+        "friendArea": "FRIEND_AREA_MT_DEEPGREEN",
         "abilities": [
             "ABILITY_PICKUP"
         ],
@@ -11549,7 +11549,7 @@
         "types": [
             "TYPE_NORMAL"
         ],
-        "friendArea": "MT_DEEPGREEN",
+        "friendArea": "FRIEND_AREA_MT_DEEPGREEN",
         "abilities": [
             "ABILITY_GUTS"
         ],
@@ -11600,7 +11600,7 @@
             "TYPE_FIRE"
         ],
         "movementType": "MOVEMENT_TYPE_LAVA",
-        "friendArea": "CRATER",
+        "friendArea": "FRIEND_AREA_CRATER",
         "abilities": [
             "ABILITY_MAGMA_ARMOR",
             "ABILITY_FLAME_BODY"
@@ -11646,7 +11646,7 @@
             "TYPE_ROCK"
         ],
         "movementType": "MOVEMENT_TYPE_LAVA",
-        "friendArea": "CRATER",
+        "friendArea": "FRIEND_AREA_CRATER",
         "abilities": [
             "ABILITY_MAGMA_ARMOR",
             "ABILITY_FLAME_BODY"
@@ -11698,7 +11698,7 @@
             "TYPE_ICE",
             "TYPE_GROUND"
         ],
-        "friendArea": "FRIGID_CAVERN",
+        "friendArea": "FRIEND_AREA_FRIGID_CAVERN",
         "abilities": [
             "ABILITY_OBLIVIOUS"
         ],
@@ -11742,7 +11742,7 @@
             "TYPE_ICE",
             "TYPE_GROUND"
         ],
-        "friendArea": "FRIGID_CAVERN",
+        "friendArea": "FRIEND_AREA_FRIGID_CAVERN",
         "abilities": [
             "ABILITY_OBLIVIOUS"
         ],
@@ -11794,7 +11794,7 @@
             "TYPE_ROCK"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "SHALLOW_BEACH",
+        "friendArea": "FRIEND_AREA_SHALLOW_BEACH",
         "abilities": [
             "ABILITY_HUSTLE",
             "ABILITY_NATURAL_CURE"
@@ -11839,7 +11839,7 @@
             "TYPE_WATER"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "TREASURE_SEA",
+        "friendArea": "FRIEND_AREA_TREASURE_SEA",
         "abilities": [
             "ABILITY_HUSTLE"
         ],
@@ -11884,7 +11884,7 @@
             "TYPE_WATER"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "TREASURE_SEA",
+        "friendArea": "FRIEND_AREA_TREASURE_SEA",
         "abilities": [
             "ABILITY_SUCTION_CUPS"
         ],
@@ -11935,7 +11935,7 @@
             "TYPE_ICE",
             "TYPE_FLYING"
         ],
-        "friendArea": "FRIGID_CAVERN",
+        "friendArea": "FRIEND_AREA_FRIGID_CAVERN",
         "abilities": [
             "ABILITY_VITAL_SPIRIT",
             "ABILITY_HUSTLE"
@@ -11981,7 +11981,7 @@
             "TYPE_FLYING"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "SERENE_SEA",
+        "friendArea": "FRIEND_AREA_SERENE_SEA",
         "abilities": [
             "ABILITY_SWIFT_SWIM",
             "ABILITY_WATER_ABSORB"
@@ -12027,7 +12027,7 @@
             "TYPE_STEEL",
             "TYPE_FLYING"
         ],
-        "friendArea": "RAVAGED_FIELD",
+        "friendArea": "FRIEND_AREA_RAVAGED_FIELD",
         "abilities": [
             "ABILITY_KEEN_EYE",
             "ABILITY_STURDY"
@@ -12073,7 +12073,7 @@
             "TYPE_FIRE"
         ],
         "movementType": "MOVEMENT_TYPE_LAVA",
-        "friendArea": "RAVAGED_FIELD",
+        "friendArea": "FRIEND_AREA_RAVAGED_FIELD",
         "abilities": [
             "ABILITY_EARLY_BIRD",
             "ABILITY_FLASH_FIRE"
@@ -12119,7 +12119,7 @@
             "TYPE_FIRE"
         ],
         "movementType": "MOVEMENT_TYPE_LAVA",
-        "friendArea": "RAVAGED_FIELD",
+        "friendArea": "FRIEND_AREA_RAVAGED_FIELD",
         "abilities": [
             "ABILITY_EARLY_BIRD",
             "ABILITY_FLASH_FIRE"
@@ -12172,7 +12172,7 @@
             "TYPE_DRAGON"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "TREASURE_SEA",
+        "friendArea": "FRIEND_AREA_TREASURE_SEA",
         "abilities": [
             "ABILITY_SWIFT_SWIM"
         ],
@@ -12223,7 +12223,7 @@
         "types": [
             "TYPE_GROUND"
         ],
-        "friendArea": "SAFARI",
+        "friendArea": "FRIEND_AREA_SAFARI",
         "abilities": [
             "ABILITY_PICKUP"
         ],
@@ -12266,7 +12266,7 @@
         "types": [
             "TYPE_GROUND"
         ],
-        "friendArea": "SAFARI",
+        "friendArea": "FRIEND_AREA_SAFARI",
         "abilities": [
             "ABILITY_STURDY"
         ],
@@ -12317,7 +12317,7 @@
             "TYPE_NORMAL"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "DECREPIT_LAB",
+        "friendArea": "FRIEND_AREA_DECREPIT_LAB",
         "abilities": [
             "ABILITY_TRACE"
         ],
@@ -12368,7 +12368,7 @@
         "types": [
             "TYPE_NORMAL"
         ],
-        "friendArea": "ENERGETIC_FOREST",
+        "friendArea": "FRIEND_AREA_ENERGETIC_FOREST",
         "abilities": [
             "ABILITY_INTIMIDATE"
         ],
@@ -12412,7 +12412,7 @@
         "types": [
             "TYPE_NORMAL"
         ],
-        "friendArea": "SKY_BLUE_PLAINS",
+        "friendArea": "FRIEND_AREA_SKY_BLUE_PLAINS",
         "abilities": [
             "ABILITY_OWN_TEMPO"
         ],
@@ -12455,7 +12455,7 @@
         "types": [
             "TYPE_FIGHTING"
         ],
-        "friendArea": "MT_DISCIPLINE",
+        "friendArea": "FRIEND_AREA_MT_DISCIPLINE",
         "abilities": [
             "ABILITY_GUTS"
         ],
@@ -12498,7 +12498,7 @@
         "types": [
             "TYPE_FIGHTING"
         ],
-        "friendArea": "MT_DISCIPLINE",
+        "friendArea": "FRIEND_AREA_MT_DISCIPLINE",
         "abilities": [
             "ABILITY_INTIMIDATE"
         ],
@@ -12550,7 +12550,7 @@
             "TYPE_ICE",
             "TYPE_PSYCHIC"
         ],
-        "friendArea": "FRIGID_CAVERN",
+        "friendArea": "FRIEND_AREA_FRIGID_CAVERN",
         "abilities": [
             "ABILITY_OBLIVIOUS"
         ],
@@ -12593,7 +12593,7 @@
         "types": [
             "TYPE_ELECTRIC"
         ],
-        "friendArea": "POWER_PLANT",
+        "friendArea": "FRIEND_AREA_POWER_PLANT",
         "abilities": [
             "ABILITY_STATIC"
         ],
@@ -12637,7 +12637,7 @@
             "TYPE_FIRE"
         ],
         "movementType": "MOVEMENT_TYPE_LAVA",
-        "friendArea": "CRATER",
+        "friendArea": "FRIEND_AREA_CRATER",
         "abilities": [
             "ABILITY_FLAME_BODY"
         ],
@@ -12680,7 +12680,7 @@
         "types": [
             "TYPE_NORMAL"
         ],
-        "friendArea": "SAFARI",
+        "friendArea": "FRIEND_AREA_SAFARI",
         "abilities": [
             "ABILITY_THICK_FAT"
         ],
@@ -12723,7 +12723,7 @@
         "types": [
             "TYPE_NORMAL"
         ],
-        "friendArea": "SKY_BLUE_PLAINS",
+        "friendArea": "FRIEND_AREA_SKY_BLUE_PLAINS",
         "abilities": [
             "ABILITY_NATURAL_CURE",
             "ABILITY_SERENE_GRACE"
@@ -12775,7 +12775,7 @@
         "types": [
             "TYPE_ELECTRIC"
         ],
-        "friendArea": "SACRED_FIELD",
+        "friendArea": "FRIEND_AREA_SACRED_FIELD",
         "abilities": [
             "ABILITY_PRESSURE"
         ],
@@ -12820,7 +12820,7 @@
             "TYPE_FIRE"
         ],
         "movementType": "MOVEMENT_TYPE_LAVA",
-        "friendArea": "SACRED_FIELD",
+        "friendArea": "FRIEND_AREA_SACRED_FIELD",
         "abilities": [
             "ABILITY_PRESSURE"
         ],
@@ -12865,7 +12865,7 @@
             "TYPE_WATER"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "SACRED_FIELD",
+        "friendArea": "FRIEND_AREA_SACRED_FIELD",
         "abilities": [
             "ABILITY_PRESSURE"
         ],
@@ -12909,7 +12909,7 @@
             "TYPE_ROCK",
             "TYPE_GROUND"
         ],
-        "friendArea": "MT_CLEFT",
+        "friendArea": "FRIEND_AREA_MT_CLEFT",
         "abilities": [
             "ABILITY_GUTS"
         ],
@@ -12953,7 +12953,7 @@
             "TYPE_ROCK",
             "TYPE_GROUND"
         ],
-        "friendArea": "MT_CLEFT",
+        "friendArea": "FRIEND_AREA_MT_CLEFT",
         "abilities": [
             "ABILITY_SHED_SKIN"
         ],
@@ -13005,7 +13005,7 @@
             "TYPE_ROCK",
             "TYPE_DARK"
         ],
-        "friendArea": "MT_CLEFT",
+        "friendArea": "FRIEND_AREA_MT_CLEFT",
         "abilities": [
             "ABILITY_SAND_STREAM"
         ],
@@ -13059,7 +13059,7 @@
             "TYPE_FLYING"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "DEEP_SEA_CURRENT",
+        "friendArea": "FRIEND_AREA_DEEP_SEA_CURRENT",
         "abilities": [
             "ABILITY_PRESSURE"
         ],
@@ -13105,7 +13105,7 @@
             "TYPE_FLYING"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "RAINBOW_PEAK",
+        "friendArea": "FRIEND_AREA_RAINBOW_PEAK",
         "abilities": [
             "ABILITY_PRESSURE"
         ],
@@ -13151,7 +13151,7 @@
             "TYPE_GRASS"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "HEALING_FOREST",
+        "friendArea": "FRIEND_AREA_HEALING_FOREST",
         "abilities": [
             "ABILITY_NATURAL_CURE"
         ],
@@ -13195,7 +13195,7 @@
         "types": [
             "TYPE_GRASS"
         ],
-        "friendArea": "OVERGROWN_FOREST",
+        "friendArea": "FRIEND_AREA_OVERGROWN_FOREST",
         "abilities": [
             "ABILITY_OVERGROW"
         ],
@@ -13238,7 +13238,7 @@
         "types": [
             "TYPE_GRASS"
         ],
-        "friendArea": "OVERGROWN_FOREST",
+        "friendArea": "FRIEND_AREA_OVERGROWN_FOREST",
         "abilities": [
             "ABILITY_OVERGROW"
         ],
@@ -13288,7 +13288,7 @@
         "types": [
             "TYPE_GRASS"
         ],
-        "friendArea": "OVERGROWN_FOREST",
+        "friendArea": "FRIEND_AREA_OVERGROWN_FOREST",
         "abilities": [
             "ABILITY_OVERGROW"
         ],
@@ -13340,7 +13340,7 @@
             "TYPE_FIRE"
         ],
         "movementType": "MOVEMENT_TYPE_LAVA",
-        "friendArea": "SCORCHED_PLAINS",
+        "friendArea": "FRIEND_AREA_SCORCHED_PLAINS",
         "abilities": [
             "ABILITY_BLAZE"
         ],
@@ -13385,7 +13385,7 @@
             "TYPE_FIGHTING"
         ],
         "movementType": "MOVEMENT_TYPE_LAVA",
-        "friendArea": "SCORCHED_PLAINS",
+        "friendArea": "FRIEND_AREA_SCORCHED_PLAINS",
         "abilities": [
             "ABILITY_BLAZE"
         ],
@@ -13437,7 +13437,7 @@
             "TYPE_FIGHTING"
         ],
         "movementType": "MOVEMENT_TYPE_LAVA",
-        "friendArea": "SCORCHED_PLAINS",
+        "friendArea": "FRIEND_AREA_SCORCHED_PLAINS",
         "abilities": [
             "ABILITY_BLAZE"
         ],
@@ -13489,7 +13489,7 @@
             "TYPE_WATER"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "PEANUT_SWAMP",
+        "friendArea": "FRIEND_AREA_PEANUT_SWAMP",
         "abilities": [
             "ABILITY_TORRENT"
         ],
@@ -13534,7 +13534,7 @@
             "TYPE_GROUND"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "PEANUT_SWAMP",
+        "friendArea": "FRIEND_AREA_PEANUT_SWAMP",
         "abilities": [
             "ABILITY_TORRENT"
         ],
@@ -13586,7 +13586,7 @@
             "TYPE_GROUND"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "PEANUT_SWAMP",
+        "friendArea": "FRIEND_AREA_PEANUT_SWAMP",
         "abilities": [
             "ABILITY_TORRENT"
         ],
@@ -13636,7 +13636,7 @@
         "types": [
             "TYPE_DARK"
         ],
-        "friendArea": "WILD_PLAINS",
+        "friendArea": "FRIEND_AREA_WILD_PLAINS",
         "abilities": [
             "ABILITY_RUN_AWAY"
         ],
@@ -13679,7 +13679,7 @@
         "types": [
             "TYPE_DARK"
         ],
-        "friendArea": "WILD_PLAINS",
+        "friendArea": "FRIEND_AREA_WILD_PLAINS",
         "abilities": [
             "ABILITY_INTIMIDATE"
         ],
@@ -13729,7 +13729,7 @@
         "types": [
             "TYPE_NORMAL"
         ],
-        "friendArea": "WILD_PLAINS",
+        "friendArea": "FRIEND_AREA_WILD_PLAINS",
         "abilities": [
             "ABILITY_PICKUP"
         ],
@@ -13772,7 +13772,7 @@
         "types": [
             "TYPE_NORMAL"
         ],
-        "friendArea": "WILD_PLAINS",
+        "friendArea": "FRIEND_AREA_WILD_PLAINS",
         "abilities": [
             "ABILITY_PICKUP"
         ],
@@ -13822,7 +13822,7 @@
         "types": [
             "TYPE_BUG"
         ],
-        "friendArea": "MIST_RISE_FOREST",
+        "friendArea": "FRIEND_AREA_MIST_RISE_FOREST",
         "abilities": [
             "ABILITY_SHIELD_DUST"
         ],
@@ -13865,7 +13865,7 @@
         "types": [
             "TYPE_BUG"
         ],
-        "friendArea": "MIST_RISE_FOREST",
+        "friendArea": "FRIEND_AREA_MIST_RISE_FOREST",
         "abilities": [
             "ABILITY_SHED_SKIN"
         ],
@@ -13918,7 +13918,7 @@
             "TYPE_FLYING"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "MIST_RISE_FOREST",
+        "friendArea": "FRIEND_AREA_MIST_RISE_FOREST",
         "abilities": [
             "ABILITY_SWARM"
         ],
@@ -13968,7 +13968,7 @@
         "types": [
             "TYPE_BUG"
         ],
-        "friendArea": "MIST_RISE_FOREST",
+        "friendArea": "FRIEND_AREA_MIST_RISE_FOREST",
         "abilities": [
             "ABILITY_SHED_SKIN"
         ],
@@ -14021,7 +14021,7 @@
             "TYPE_POISON"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "MIST_RISE_FOREST",
+        "friendArea": "FRIEND_AREA_MIST_RISE_FOREST",
         "abilities": [
             "ABILITY_SHIELD_DUST"
         ],
@@ -14073,7 +14073,7 @@
             "TYPE_GRASS"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "TADPOLE_POND",
+        "friendArea": "FRIEND_AREA_TADPOLE_POND",
         "abilities": [
             "ABILITY_SWIFT_SWIM",
             "ABILITY_RAIN_DISH"
@@ -14120,7 +14120,7 @@
             "TYPE_GRASS"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "TADPOLE_POND",
+        "friendArea": "FRIEND_AREA_TADPOLE_POND",
         "abilities": [
             "ABILITY_SWIFT_SWIM",
             "ABILITY_RAIN_DISH"
@@ -14173,7 +14173,7 @@
             "TYPE_GRASS"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "TADPOLE_POND",
+        "friendArea": "FRIEND_AREA_TADPOLE_POND",
         "abilities": [
             "ABILITY_SWIFT_SWIM",
             "ABILITY_RAIN_DISH"
@@ -14224,7 +14224,7 @@
         "types": [
             "TYPE_GRASS"
         ],
-        "friendArea": "MUSHROOM_FOREST",
+        "friendArea": "FRIEND_AREA_MUSHROOM_FOREST",
         "abilities": [
             "ABILITY_CHLOROPHYLL",
             "ABILITY_EARLY_BIRD"
@@ -14269,7 +14269,7 @@
             "TYPE_GRASS",
             "TYPE_DARK"
         ],
-        "friendArea": "MUSHROOM_FOREST",
+        "friendArea": "FRIEND_AREA_MUSHROOM_FOREST",
         "abilities": [
             "ABILITY_CHLOROPHYLL",
             "ABILITY_EARLY_BIRD"
@@ -14322,7 +14322,7 @@
             "TYPE_GRASS",
             "TYPE_DARK"
         ],
-        "friendArea": "MUSHROOM_FOREST",
+        "friendArea": "FRIEND_AREA_MUSHROOM_FOREST",
         "abilities": [
             "ABILITY_CHLOROPHYLL",
             "ABILITY_EARLY_BIRD"
@@ -14374,7 +14374,7 @@
             "TYPE_NORMAL",
             "TYPE_FLYING"
         ],
-        "friendArea": "BEAU_PLAINS",
+        "friendArea": "FRIEND_AREA_BEAU_PLAINS",
         "abilities": [
             "ABILITY_GUTS"
         ],
@@ -14418,7 +14418,7 @@
             "TYPE_NORMAL",
             "TYPE_FLYING"
         ],
-        "friendArea": "BEAU_PLAINS",
+        "friendArea": "FRIEND_AREA_BEAU_PLAINS",
         "abilities": [
             "ABILITY_GUTS"
         ],
@@ -14470,7 +14470,7 @@
             "TYPE_FLYING"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "SHALLOW_BEACH",
+        "friendArea": "FRIEND_AREA_SHALLOW_BEACH",
         "abilities": [
             "ABILITY_KEEN_EYE"
         ],
@@ -14516,7 +14516,7 @@
             "TYPE_FLYING"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "SHALLOW_BEACH",
+        "friendArea": "FRIEND_AREA_SHALLOW_BEACH",
         "abilities": [
             "ABILITY_KEEN_EYE"
         ],
@@ -14566,7 +14566,7 @@
         "types": [
             "TYPE_PSYCHIC"
         ],
-        "friendArea": "SKY_BLUE_PLAINS",
+        "friendArea": "FRIEND_AREA_SKY_BLUE_PLAINS",
         "abilities": [
             "ABILITY_SYNCHRONIZE",
             "ABILITY_TRACE"
@@ -14610,7 +14610,7 @@
         "types": [
             "TYPE_PSYCHIC"
         ],
-        "friendArea": "SKY_BLUE_PLAINS",
+        "friendArea": "FRIEND_AREA_SKY_BLUE_PLAINS",
         "abilities": [
             "ABILITY_SYNCHRONIZE",
             "ABILITY_TRACE"
@@ -14662,7 +14662,7 @@
         "types": [
             "TYPE_PSYCHIC"
         ],
-        "friendArea": "SKY_BLUE_PLAINS",
+        "friendArea": "FRIEND_AREA_SKY_BLUE_PLAINS",
         "abilities": [
             "ABILITY_SYNCHRONIZE",
             "ABILITY_TRACE"
@@ -14715,7 +14715,7 @@
             "TYPE_WATER"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "TADPOLE_POND",
+        "friendArea": "FRIEND_AREA_TADPOLE_POND",
         "abilities": [
             "ABILITY_SWIFT_SWIM"
         ],
@@ -14760,7 +14760,7 @@
             "TYPE_FLYING"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "TADPOLE_POND",
+        "friendArea": "FRIEND_AREA_TADPOLE_POND",
         "abilities": [
             "ABILITY_INTIMIDATE"
         ],
@@ -14810,7 +14810,7 @@
         "types": [
             "TYPE_GRASS"
         ],
-        "friendArea": "MUSHROOM_FOREST",
+        "friendArea": "FRIEND_AREA_MUSHROOM_FOREST",
         "abilities": [
             "ABILITY_EFFECT_SPORE"
         ],
@@ -14854,7 +14854,7 @@
             "TYPE_GRASS",
             "TYPE_FIGHTING"
         ],
-        "friendArea": "MUSHROOM_FOREST",
+        "friendArea": "FRIEND_AREA_MUSHROOM_FOREST",
         "abilities": [
             "ABILITY_EFFECT_SPORE"
         ],
@@ -14904,7 +14904,7 @@
         "types": [
             "TYPE_NORMAL"
         ],
-        "friendArea": "ENERGETIC_FOREST",
+        "friendArea": "FRIEND_AREA_ENERGETIC_FOREST",
         "abilities": [
             "ABILITY_TRUANT"
         ],
@@ -14947,7 +14947,7 @@
         "types": [
             "TYPE_NORMAL"
         ],
-        "friendArea": "ENERGETIC_FOREST",
+        "friendArea": "FRIEND_AREA_ENERGETIC_FOREST",
         "abilities": [
             "ABILITY_VITAL_SPIRIT"
         ],
@@ -14997,7 +14997,7 @@
         "types": [
             "TYPE_NORMAL"
         ],
-        "friendArea": "ENERGETIC_FOREST",
+        "friendArea": "FRIEND_AREA_ENERGETIC_FOREST",
         "abilities": [
             "ABILITY_TRUANT"
         ],
@@ -15048,7 +15048,7 @@
             "TYPE_BUG",
             "TYPE_GROUND"
         ],
-        "friendArea": "SECRETIVE_FOREST",
+        "friendArea": "FRIEND_AREA_SECRETIVE_FOREST",
         "abilities": [
             "ABILITY_COMPOUNDEYES"
         ],
@@ -15093,7 +15093,7 @@
             "TYPE_FLYING"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "SECRETIVE_FOREST",
+        "friendArea": "FRIEND_AREA_SECRETIVE_FOREST",
         "abilities": [
             "ABILITY_SPEED_BOOST"
         ],
@@ -15145,7 +15145,7 @@
             "TYPE_GHOST"
         ],
         "movementType": "MOVEMENT_TYPE_WALL",
-        "friendArea": "SECRETIVE_FOREST",
+        "friendArea": "FRIEND_AREA_SECRETIVE_FOREST",
         "abilities": [
             "ABILITY_WONDER_GUARD"
         ],
@@ -15195,7 +15195,7 @@
         "types": [
             "TYPE_NORMAL"
         ],
-        "friendArea": "ECHO_CAVE",
+        "friendArea": "FRIEND_AREA_ECHO_CAVE",
         "abilities": [
             "ABILITY_SOUNDPROOF"
         ],
@@ -15238,7 +15238,7 @@
         "types": [
             "TYPE_NORMAL"
         ],
-        "friendArea": "ECHO_CAVE",
+        "friendArea": "FRIEND_AREA_ECHO_CAVE",
         "abilities": [
             "ABILITY_SOUNDPROOF"
         ],
@@ -15288,7 +15288,7 @@
         "types": [
             "TYPE_NORMAL"
         ],
-        "friendArea": "ECHO_CAVE",
+        "friendArea": "FRIEND_AREA_ECHO_CAVE",
         "abilities": [
             "ABILITY_SOUNDPROOF"
         ],
@@ -15339,7 +15339,7 @@
         "types": [
             "TYPE_FIGHTING"
         ],
-        "friendArea": "MT_DISCIPLINE",
+        "friendArea": "FRIEND_AREA_MT_DISCIPLINE",
         "abilities": [
             "ABILITY_THICK_FAT",
             "ABILITY_GUTS"
@@ -15383,7 +15383,7 @@
         "types": [
             "TYPE_FIGHTING"
         ],
-        "friendArea": "MT_DISCIPLINE",
+        "friendArea": "FRIEND_AREA_MT_DISCIPLINE",
         "abilities": [
             "ABILITY_THICK_FAT",
             "ABILITY_GUTS"
@@ -15435,7 +15435,7 @@
             "TYPE_NORMAL"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "TURTLESHELL_POND",
+        "friendArea": "FRIEND_AREA_TURTLESHELL_POND",
         "abilities": [
             "ABILITY_THICK_FAT",
             "ABILITY_HUGE_POWER"
@@ -15479,7 +15479,7 @@
         "types": [
             "TYPE_ROCK"
         ],
-        "friendArea": "ECHO_CAVE",
+        "friendArea": "FRIEND_AREA_ECHO_CAVE",
         "abilities": [
             "ABILITY_STURDY",
             "ABILITY_MAGNET_PULL"
@@ -15524,7 +15524,7 @@
         "types": [
             "TYPE_NORMAL"
         ],
-        "friendArea": "ENERGETIC_FOREST",
+        "friendArea": "FRIEND_AREA_ENERGETIC_FOREST",
         "abilities": [
             "ABILITY_CUTE_CHARM"
         ],
@@ -15567,7 +15567,7 @@
         "types": [
             "TYPE_NORMAL"
         ],
-        "friendArea": "ENERGETIC_FOREST",
+        "friendArea": "FRIEND_AREA_ENERGETIC_FOREST",
         "abilities": [
             "ABILITY_CUTE_CHARM"
         ],
@@ -15618,7 +15618,7 @@
             "TYPE_DARK",
             "TYPE_GHOST"
         ],
-        "friendArea": "DARKNESS_RIDGE",
+        "friendArea": "FRIEND_AREA_DARKNESS_RIDGE",
         "abilities": [
             "ABILITY_KEEN_EYE"
         ],
@@ -15661,7 +15661,7 @@
         "types": [
             "TYPE_STEEL"
         ],
-        "friendArea": "ECHO_CAVE",
+        "friendArea": "FRIEND_AREA_ECHO_CAVE",
         "abilities": [
             "ABILITY_HYPER_CUTTER",
             "ABILITY_INTIMIDATE"
@@ -15706,7 +15706,7 @@
             "TYPE_STEEL",
             "TYPE_ROCK"
         ],
-        "friendArea": "MT_CLEFT",
+        "friendArea": "FRIEND_AREA_MT_CLEFT",
         "abilities": [
             "ABILITY_STURDY",
             "ABILITY_ROCK_HEAD"
@@ -15751,7 +15751,7 @@
             "TYPE_STEEL",
             "TYPE_ROCK"
         ],
-        "friendArea": "MT_CLEFT",
+        "friendArea": "FRIEND_AREA_MT_CLEFT",
         "abilities": [
             "ABILITY_STURDY",
             "ABILITY_ROCK_HEAD"
@@ -15803,7 +15803,7 @@
             "TYPE_STEEL",
             "TYPE_ROCK"
         ],
-        "friendArea": "MT_CLEFT",
+        "friendArea": "FRIEND_AREA_MT_CLEFT",
         "abilities": [
             "ABILITY_STURDY",
             "ABILITY_ROCK_HEAD"
@@ -15856,7 +15856,7 @@
             "TYPE_PSYCHIC"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "MT_DISCIPLINE",
+        "friendArea": "FRIEND_AREA_MT_DISCIPLINE",
         "abilities": [
             "ABILITY_PURE_POWER"
         ],
@@ -15901,7 +15901,7 @@
             "TYPE_FIGHTING",
             "TYPE_PSYCHIC"
         ],
-        "friendArea": "MT_DISCIPLINE",
+        "friendArea": "FRIEND_AREA_MT_DISCIPLINE",
         "abilities": [
             "ABILITY_PURE_POWER"
         ],
@@ -15951,7 +15951,7 @@
         "types": [
             "TYPE_ELECTRIC"
         ],
-        "friendArea": "THUNDER_MEADOW",
+        "friendArea": "FRIEND_AREA_THUNDER_MEADOW",
         "abilities": [
             "ABILITY_STATIC",
             "ABILITY_LIGHTNINGROD"
@@ -15995,7 +15995,7 @@
         "types": [
             "TYPE_ELECTRIC"
         ],
-        "friendArea": "THUNDER_MEADOW",
+        "friendArea": "FRIEND_AREA_THUNDER_MEADOW",
         "abilities": [
             "ABILITY_STATIC",
             "ABILITY_LIGHTNINGROD"
@@ -16046,7 +16046,7 @@
         "types": [
             "TYPE_ELECTRIC"
         ],
-        "friendArea": "THUNDER_MEADOW",
+        "friendArea": "FRIEND_AREA_THUNDER_MEADOW",
         "abilities": [
             "ABILITY_PLUS"
         ],
@@ -16089,7 +16089,7 @@
         "types": [
             "TYPE_ELECTRIC"
         ],
-        "friendArea": "THUNDER_MEADOW",
+        "friendArea": "FRIEND_AREA_THUNDER_MEADOW",
         "abilities": [
             "ABILITY_MINUS"
         ],
@@ -16132,7 +16132,7 @@
         "types": [
             "TYPE_BUG"
         ],
-        "friendArea": "RUB_A_DUB_RIVER",
+        "friendArea": "FRIEND_AREA_RUB_A_DUB_RIVER",
         "abilities": [
             "ABILITY_ILLUMINATE",
             "ABILITY_SWARM"
@@ -16176,7 +16176,7 @@
         "types": [
             "TYPE_BUG"
         ],
-        "friendArea": "RUB_A_DUB_RIVER",
+        "friendArea": "FRIEND_AREA_RUB_A_DUB_RIVER",
         "abilities": [
             "ABILITY_OBLIVIOUS"
         ],
@@ -16220,7 +16220,7 @@
             "TYPE_GRASS",
             "TYPE_POISON"
         ],
-        "friendArea": "BEAU_PLAINS",
+        "friendArea": "FRIEND_AREA_BEAU_PLAINS",
         "abilities": [
             "ABILITY_NATURAL_CURE",
             "ABILITY_POISON_POINT"
@@ -16265,7 +16265,7 @@
         "types": [
             "TYPE_POISON"
         ],
-        "friendArea": "POISON_SWAMP",
+        "friendArea": "FRIEND_AREA_POISON_SWAMP",
         "abilities": [
             "ABILITY_LIQUID_OOZE",
             "ABILITY_STICKY_HOLD"
@@ -16309,7 +16309,7 @@
         "types": [
             "TYPE_POISON"
         ],
-        "friendArea": "POISON_SWAMP",
+        "friendArea": "FRIEND_AREA_POISON_SWAMP",
         "abilities": [
             "ABILITY_LIQUID_OOZE",
             "ABILITY_STICKY_HOLD"
@@ -16362,7 +16362,7 @@
             "TYPE_DARK"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "TREASURE_SEA",
+        "friendArea": "FRIEND_AREA_TREASURE_SEA",
         "abilities": [
             "ABILITY_ROUGH_SKIN"
         ],
@@ -16407,7 +16407,7 @@
             "TYPE_DARK"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "TREASURE_SEA",
+        "friendArea": "FRIEND_AREA_TREASURE_SEA",
         "abilities": [
             "ABILITY_ROUGH_SKIN"
         ],
@@ -16458,7 +16458,7 @@
             "TYPE_WATER"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "SERENE_SEA",
+        "friendArea": "FRIEND_AREA_SERENE_SEA",
         "abilities": [
             "ABILITY_WATER_VEIL",
             "ABILITY_OBLIVIOUS"
@@ -16503,7 +16503,7 @@
             "TYPE_WATER"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "SERENE_SEA",
+        "friendArea": "FRIEND_AREA_SERENE_SEA",
         "abilities": [
             "ABILITY_WATER_VEIL",
             "ABILITY_OBLIVIOUS"
@@ -16556,7 +16556,7 @@
             "TYPE_GROUND"
         ],
         "movementType": "MOVEMENT_TYPE_LAVA",
-        "friendArea": "CRATER",
+        "friendArea": "FRIEND_AREA_CRATER",
         "abilities": [
             "ABILITY_OBLIVIOUS"
         ],
@@ -16601,7 +16601,7 @@
             "TYPE_GROUND"
         ],
         "movementType": "MOVEMENT_TYPE_LAVA",
-        "friendArea": "CRATER",
+        "friendArea": "FRIEND_AREA_CRATER",
         "abilities": [
             "ABILITY_MAGMA_ARMOR"
         ],
@@ -16652,7 +16652,7 @@
             "TYPE_FIRE"
         ],
         "movementType": "MOVEMENT_TYPE_LAVA",
-        "friendArea": "CRATER",
+        "friendArea": "FRIEND_AREA_CRATER",
         "abilities": [
             "ABILITY_WHITE_SMOKE"
         ],
@@ -16695,7 +16695,7 @@
         "types": [
             "TYPE_PSYCHIC"
         ],
-        "friendArea": "MT_DEEPGREEN",
+        "friendArea": "FRIEND_AREA_MT_DEEPGREEN",
         "abilities": [
             "ABILITY_THICK_FAT",
             "ABILITY_OWN_TEMPO"
@@ -16739,7 +16739,7 @@
         "types": [
             "TYPE_PSYCHIC"
         ],
-        "friendArea": "MT_DEEPGREEN",
+        "friendArea": "FRIEND_AREA_MT_DEEPGREEN",
         "abilities": [
             "ABILITY_THICK_FAT",
             "ABILITY_OWN_TEMPO"
@@ -16791,7 +16791,7 @@
         "types": [
             "TYPE_NORMAL"
         ],
-        "friendArea": "MT_DEEPGREEN",
+        "friendArea": "FRIEND_AREA_MT_DEEPGREEN",
         "abilities": [
             "ABILITY_OWN_TEMPO"
         ],
@@ -16834,7 +16834,7 @@
         "types": [
             "TYPE_GROUND"
         ],
-        "friendArea": "FURNACE_DESERT",
+        "friendArea": "FRIEND_AREA_FURNACE_DESERT",
         "abilities": [
             "ABILITY_HYPER_CUTTER",
             "ABILITY_ARENA_TRAP"
@@ -16880,7 +16880,7 @@
             "TYPE_DRAGON"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "FURNACE_DESERT",
+        "friendArea": "FRIEND_AREA_FURNACE_DESERT",
         "abilities": [
             "ABILITY_LEVITATE"
         ],
@@ -16932,7 +16932,7 @@
             "TYPE_DRAGON"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "FURNACE_DESERT",
+        "friendArea": "FRIEND_AREA_FURNACE_DESERT",
         "abilities": [
             "ABILITY_LEVITATE"
         ],
@@ -16982,7 +16982,7 @@
         "types": [
             "TYPE_GRASS"
         ],
-        "friendArea": "FURNACE_DESERT",
+        "friendArea": "FRIEND_AREA_FURNACE_DESERT",
         "abilities": [
             "ABILITY_SAND_VEIL"
         ],
@@ -17026,7 +17026,7 @@
             "TYPE_GRASS",
             "TYPE_DARK"
         ],
-        "friendArea": "FURNACE_DESERT",
+        "friendArea": "FRIEND_AREA_FURNACE_DESERT",
         "abilities": [
             "ABILITY_SAND_VEIL"
         ],
@@ -17078,7 +17078,7 @@
             "TYPE_FLYING"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "FLYAWAY_FOREST",
+        "friendArea": "FRIEND_AREA_FLYAWAY_FOREST",
         "abilities": [
             "ABILITY_NATURAL_CURE"
         ],
@@ -17122,7 +17122,7 @@
             "TYPE_DRAGON",
             "TYPE_FLYING"
         ],
-        "friendArea": "FLYAWAY_FOREST",
+        "friendArea": "FRIEND_AREA_FLYAWAY_FOREST",
         "abilities": [
             "ABILITY_NATURAL_CURE"
         ],
@@ -17172,7 +17172,7 @@
         "types": [
             "TYPE_NORMAL"
         ],
-        "friendArea": "WILD_PLAINS",
+        "friendArea": "FRIEND_AREA_WILD_PLAINS",
         "abilities": [
             "ABILITY_IMMUNITY"
         ],
@@ -17215,7 +17215,7 @@
         "types": [
             "TYPE_POISON"
         ],
-        "friendArea": "WILD_PLAINS",
+        "friendArea": "FRIEND_AREA_WILD_PLAINS",
         "abilities": [
             "ABILITY_SHED_SKIN"
         ],
@@ -17260,7 +17260,7 @@
             "TYPE_PSYCHIC"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "MT_MOONVIEW",
+        "friendArea": "FRIEND_AREA_MT_MOONVIEW",
         "abilities": [
             "ABILITY_LEVITATE"
         ],
@@ -17305,7 +17305,7 @@
             "TYPE_PSYCHIC"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "MT_MOONVIEW",
+        "friendArea": "FRIEND_AREA_MT_MOONVIEW",
         "abilities": [
             "ABILITY_LEVITATE"
         ],
@@ -17350,7 +17350,7 @@
             "TYPE_GROUND"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "PEANUT_SWAMP",
+        "friendArea": "FRIEND_AREA_PEANUT_SWAMP",
         "abilities": [
             "ABILITY_OBLIVIOUS"
         ],
@@ -17396,7 +17396,7 @@
             "TYPE_GROUND"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "PEANUT_SWAMP",
+        "friendArea": "FRIEND_AREA_PEANUT_SWAMP",
         "abilities": [
             "ABILITY_OBLIVIOUS"
         ],
@@ -17447,7 +17447,7 @@
             "TYPE_WATER"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "TURTLESHELL_POND",
+        "friendArea": "FRIEND_AREA_TURTLESHELL_POND",
         "abilities": [
             "ABILITY_HYPER_CUTTER",
             "ABILITY_SHELL_ARMOR"
@@ -17493,7 +17493,7 @@
             "TYPE_DARK"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "TURTLESHELL_POND",
+        "friendArea": "FRIEND_AREA_TURTLESHELL_POND",
         "abilities": [
             "ABILITY_HYPER_CUTTER",
             "ABILITY_SHELL_ARMOR"
@@ -17546,7 +17546,7 @@
             "TYPE_PSYCHIC"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "ANCIENT_RELIC",
+        "friendArea": "FRIEND_AREA_ANCIENT_RELIC",
         "abilities": [
             "ABILITY_LEVITATE"
         ],
@@ -17591,7 +17591,7 @@
             "TYPE_PSYCHIC"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "ANCIENT_RELIC",
+        "friendArea": "FRIEND_AREA_ANCIENT_RELIC",
         "abilities": [
             "ABILITY_LEVITATE"
         ],
@@ -17642,7 +17642,7 @@
             "TYPE_ROCK",
             "TYPE_GRASS"
         ],
-        "friendArea": "DEEP_SEA_FLOOR",
+        "friendArea": "FRIEND_AREA_DEEP_SEA_FLOOR",
         "abilities": [
             "ABILITY_SUCTION_CUPS"
         ],
@@ -17686,7 +17686,7 @@
             "TYPE_ROCK",
             "TYPE_GRASS"
         ],
-        "friendArea": "DEEP_SEA_FLOOR",
+        "friendArea": "FRIEND_AREA_DEEP_SEA_FLOOR",
         "abilities": [
             "ABILITY_SUCTION_CUPS"
         ],
@@ -17737,7 +17737,7 @@
             "TYPE_ROCK",
             "TYPE_BUG"
         ],
-        "friendArea": "TREASURE_SEA",
+        "friendArea": "FRIEND_AREA_TREASURE_SEA",
         "abilities": [
             "ABILITY_BATTLE_ARMOR"
         ],
@@ -17781,7 +17781,7 @@
             "TYPE_ROCK",
             "TYPE_BUG"
         ],
-        "friendArea": "TREASURE_SEA",
+        "friendArea": "FRIEND_AREA_TREASURE_SEA",
         "abilities": [
             "ABILITY_BATTLE_ARMOR"
         ],
@@ -17832,7 +17832,7 @@
             "TYPE_WATER"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "WATERFALL_LAKE",
+        "friendArea": "FRIEND_AREA_WATERFALL_LAKE",
         "abilities": [
             "ABILITY_SWIFT_SWIM"
         ],
@@ -17876,7 +17876,7 @@
             "TYPE_WATER"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "WATERFALL_LAKE",
+        "friendArea": "FRIEND_AREA_WATERFALL_LAKE",
         "abilities": [
             "ABILITY_MARVEL_SCALE"
         ],
@@ -17927,7 +17927,7 @@
         "types": [
             "TYPE_NORMAL"
         ],
-        "friendArea": "THUNDER_MEADOW",
+        "friendArea": "FRIEND_AREA_THUNDER_MEADOW",
         "abilities": [
             "ABILITY_FORECAST"
         ],
@@ -17970,7 +17970,7 @@
         "types": [
             "TYPE_NORMAL"
         ],
-        "friendArea": "THUNDER_MEADOW",
+        "friendArea": "FRIEND_AREA_THUNDER_MEADOW",
         "abilities": [
             "ABILITY_FORECAST"
         ],
@@ -18013,7 +18013,7 @@
         "types": [
             "TYPE_NORMAL"
         ],
-        "friendArea": "THUNDER_MEADOW",
+        "friendArea": "FRIEND_AREA_THUNDER_MEADOW",
         "abilities": [
             "ABILITY_FORECAST"
         ],
@@ -18056,7 +18056,7 @@
         "types": [
             "TYPE_NORMAL"
         ],
-        "friendArea": "THUNDER_MEADOW",
+        "friendArea": "FRIEND_AREA_THUNDER_MEADOW",
         "abilities": [
             "ABILITY_FORECAST"
         ],
@@ -18100,7 +18100,7 @@
         "types": [
             "TYPE_NORMAL"
         ],
-        "friendArea": "OVERGROWN_FOREST",
+        "friendArea": "FRIEND_AREA_OVERGROWN_FOREST",
         "abilities": [
             "ABILITY_COLOR_CHANGE"
         ],
@@ -18144,7 +18144,7 @@
             "TYPE_GHOST"
         ],
         "movementType": "MOVEMENT_TYPE_WALL",
-        "friendArea": "DARKNESS_RIDGE",
+        "friendArea": "FRIEND_AREA_DARKNESS_RIDGE",
         "abilities": [
             "ABILITY_INSOMNIA"
         ],
@@ -18188,7 +18188,7 @@
             "TYPE_GHOST"
         ],
         "movementType": "MOVEMENT_TYPE_WALL",
-        "friendArea": "DARKNESS_RIDGE",
+        "friendArea": "FRIEND_AREA_DARKNESS_RIDGE",
         "abilities": [
             "ABILITY_INSOMNIA"
         ],
@@ -18239,7 +18239,7 @@
             "TYPE_GHOST"
         ],
         "movementType": "MOVEMENT_TYPE_WALL",
-        "friendArea": "DARKNESS_RIDGE",
+        "friendArea": "FRIEND_AREA_DARKNESS_RIDGE",
         "abilities": [
             "ABILITY_LEVITATE"
         ],
@@ -18282,7 +18282,7 @@
         "types": [
             "TYPE_GHOST"
         ],
-        "friendArea": "DARKNESS_RIDGE",
+        "friendArea": "FRIEND_AREA_DARKNESS_RIDGE",
         "abilities": [
             "ABILITY_PRESSURE"
         ],
@@ -18333,7 +18333,7 @@
             "TYPE_GRASS",
             "TYPE_FLYING"
         ],
-        "friendArea": "JUNGLE",
+        "friendArea": "FRIEND_AREA_JUNGLE",
         "abilities": [
             "ABILITY_CHLOROPHYLL"
         ],
@@ -18377,7 +18377,7 @@
             "TYPE_PSYCHIC"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "THUNDER_MEADOW",
+        "friendArea": "FRIEND_AREA_THUNDER_MEADOW",
         "abilities": [
             "ABILITY_LEVITATE"
         ],
@@ -18422,7 +18422,7 @@
         "types": [
             "TYPE_DARK"
         ],
-        "friendArea": "DARKNESS_RIDGE",
+        "friendArea": "FRIEND_AREA_DARKNESS_RIDGE",
         "abilities": [
             "ABILITY_PRESSURE"
         ],
@@ -18466,7 +18466,7 @@
         "types": [
             "TYPE_PSYCHIC"
         ],
-        "friendArea": "ECHO_CAVE",
+        "friendArea": "FRIEND_AREA_ECHO_CAVE",
         "abilities": [
             "ABILITY_SHADOW_TAG"
         ],
@@ -18509,7 +18509,7 @@
         "types": [
             "TYPE_ICE"
         ],
-        "friendArea": "FRIGID_CAVERN",
+        "friendArea": "FRIEND_AREA_FRIGID_CAVERN",
         "abilities": [
             "ABILITY_INNER_FOCUS"
         ],
@@ -18552,7 +18552,7 @@
         "types": [
             "TYPE_ICE"
         ],
-        "friendArea": "FRIGID_CAVERN",
+        "friendArea": "FRIEND_AREA_FRIGID_CAVERN",
         "abilities": [
             "ABILITY_INNER_FOCUS"
         ],
@@ -18604,7 +18604,7 @@
             "TYPE_WATER"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "ICE_FLOE_BEACH",
+        "friendArea": "FRIEND_AREA_ICE_FLOE_BEACH",
         "abilities": [
             "ABILITY_THICK_FAT"
         ],
@@ -18649,7 +18649,7 @@
             "TYPE_WATER"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "ICE_FLOE_BEACH",
+        "friendArea": "FRIEND_AREA_ICE_FLOE_BEACH",
         "abilities": [
             "ABILITY_THICK_FAT"
         ],
@@ -18701,7 +18701,7 @@
             "TYPE_WATER"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "ICE_FLOE_BEACH",
+        "friendArea": "FRIEND_AREA_ICE_FLOE_BEACH",
         "abilities": [
             "ABILITY_THICK_FAT"
         ],
@@ -18752,7 +18752,7 @@
             "TYPE_WATER"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "DEEP_SEA_FLOOR",
+        "friendArea": "FRIEND_AREA_DEEP_SEA_FLOOR",
         "abilities": [
             "ABILITY_SHELL_ARMOR"
         ],
@@ -18796,7 +18796,7 @@
             "TYPE_WATER"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "DEEP_SEA_FLOOR",
+        "friendArea": "FRIEND_AREA_DEEP_SEA_FLOOR",
         "abilities": [
             "ABILITY_SWIFT_SWIM"
         ],
@@ -18848,7 +18848,7 @@
             "TYPE_WATER"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "DEEP_SEA_FLOOR",
+        "friendArea": "FRIEND_AREA_DEEP_SEA_FLOOR",
         "abilities": [
             "ABILITY_SWIFT_SWIM"
         ],
@@ -18901,7 +18901,7 @@
             "TYPE_ROCK"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "DEEP_SEA_FLOOR",
+        "friendArea": "FRIEND_AREA_DEEP_SEA_FLOOR",
         "abilities": [
             "ABILITY_SWIFT_SWIM",
             "ABILITY_ROCK_HEAD"
@@ -18946,7 +18946,7 @@
             "TYPE_WATER"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "TREASURE_SEA",
+        "friendArea": "FRIEND_AREA_TREASURE_SEA",
         "abilities": [
             "ABILITY_SWIFT_SWIM"
         ],
@@ -18989,7 +18989,7 @@
         "types": [
             "TYPE_DRAGON"
         ],
-        "friendArea": "DRAGON_CAVE",
+        "friendArea": "FRIEND_AREA_DRAGON_CAVE",
         "abilities": [
             "ABILITY_ROCK_HEAD"
         ],
@@ -19032,7 +19032,7 @@
         "types": [
             "TYPE_DRAGON"
         ],
-        "friendArea": "DRAGON_CAVE",
+        "friendArea": "FRIEND_AREA_DRAGON_CAVE",
         "abilities": [
             "ABILITY_ROCK_HEAD"
         ],
@@ -19083,7 +19083,7 @@
             "TYPE_DRAGON",
             "TYPE_FLYING"
         ],
-        "friendArea": "DRAGON_CAVE",
+        "friendArea": "FRIEND_AREA_DRAGON_CAVE",
         "abilities": [
             "ABILITY_INTIMIDATE"
         ],
@@ -19135,7 +19135,7 @@
             "TYPE_PSYCHIC"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "MAGNETIC_QUARRY",
+        "friendArea": "FRIEND_AREA_MAGNETIC_QUARRY",
         "abilities": [
             "ABILITY_CLEAR_BODY"
         ],
@@ -19180,7 +19180,7 @@
             "TYPE_PSYCHIC"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "MAGNETIC_QUARRY",
+        "friendArea": "FRIEND_AREA_MAGNETIC_QUARRY",
         "abilities": [
             "ABILITY_CLEAR_BODY"
         ],
@@ -19231,7 +19231,7 @@
             "TYPE_STEEL",
             "TYPE_PSYCHIC"
         ],
-        "friendArea": "MAGNETIC_QUARRY",
+        "friendArea": "FRIEND_AREA_MAGNETIC_QUARRY",
         "abilities": [
             "ABILITY_CLEAR_BODY"
         ],
@@ -19281,7 +19281,7 @@
         "types": [
             "TYPE_ROCK"
         ],
-        "friendArea": "ANCIENT_RELIC",
+        "friendArea": "FRIEND_AREA_ANCIENT_RELIC",
         "abilities": [
             "ABILITY_CLEAR_BODY"
         ],
@@ -19324,7 +19324,7 @@
         "types": [
             "TYPE_ICE"
         ],
-        "friendArea": "ANCIENT_RELIC",
+        "friendArea": "FRIEND_AREA_ANCIENT_RELIC",
         "abilities": [
             "ABILITY_CLEAR_BODY"
         ],
@@ -19367,7 +19367,7 @@
         "types": [
             "TYPE_STEEL"
         ],
-        "friendArea": "ANCIENT_RELIC",
+        "friendArea": "FRIEND_AREA_ANCIENT_RELIC",
         "abilities": [
             "ABILITY_CLEAR_BODY"
         ],
@@ -19414,7 +19414,7 @@
             "TYPE_PSYCHIC"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "SOUTHERN_ISLAND",
+        "friendArea": "FRIEND_AREA_SOUTHERN_ISLAND",
         "abilities": [
             "ABILITY_LEVITATE"
         ],
@@ -19461,7 +19461,7 @@
             "TYPE_PSYCHIC"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "SOUTHERN_ISLAND",
+        "friendArea": "FRIEND_AREA_SOUTHERN_ISLAND",
         "abilities": [
             "ABILITY_LEVITATE"
         ],
@@ -19507,7 +19507,7 @@
             "TYPE_WATER"
         ],
         "movementType": "MOVEMENT_TYPE_WATER",
-        "friendArea": "SEAFLOOR_CAVE",
+        "friendArea": "FRIEND_AREA_SEAFLOOR_CAVE",
         "abilities": [
             "ABILITY_DRIZZLE"
         ],
@@ -19553,7 +19553,7 @@
             "TYPE_GROUND"
         ],
         "movementType": "MOVEMENT_TYPE_LAVA",
-        "friendArea": "VOLCANIC_PIT",
+        "friendArea": "FRIEND_AREA_VOLCANIC_PIT",
         "abilities": [
             "ABILITY_DROUGHT"
         ],
@@ -19600,7 +19600,7 @@
             "TYPE_FLYING"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "STRATOS_LOOKOUT",
+        "friendArea": "FRIEND_AREA_STRATOS_LOOKOUT",
         "abilities": [
             "ABILITY_AIR_LOCK"
         ],
@@ -19646,7 +19646,7 @@
             "TYPE_PSYCHIC"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "MT_MOONVIEW",
+        "friendArea": "FRIEND_AREA_MT_MOONVIEW",
         "abilities": [
             "ABILITY_SERENE_GRACE"
         ],
@@ -19692,7 +19692,7 @@
             "TYPE_PSYCHIC"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "ENCLOSED_ISLAND",
+        "friendArea": "FRIEND_AREA_ENCLOSED_ISLAND",
         "abilities": [
             "ABILITY_PRESSURE"
         ],
@@ -19736,7 +19736,7 @@
             "TYPE_PSYCHIC"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "AGED_CHAMBER_O_EXCLAIM",
+        "friendArea": "FRIEND_AREA_AGED_CHAMBER_O_EXCLAIM",
         "abilities": [
             "ABILITY_LEVITATE"
         ],
@@ -19780,7 +19780,7 @@
             "TYPE_PSYCHIC"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "AGED_CHAMBER_O_EXCLAIM",
+        "friendArea": "FRIEND_AREA_AGED_CHAMBER_O_EXCLAIM",
         "abilities": [
             "ABILITY_LEVITATE"
         ],
@@ -19825,7 +19825,7 @@
             "TYPE_PSYCHIC"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "ENCLOSED_ISLAND",
+        "friendArea": "FRIEND_AREA_ENCLOSED_ISLAND",
         "abilities": [
             "ABILITY_PRESSURE"
         ],
@@ -19870,7 +19870,7 @@
             "TYPE_PSYCHIC"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "ENCLOSED_ISLAND",
+        "friendArea": "FRIEND_AREA_ENCLOSED_ISLAND",
         "abilities": [
             "ABILITY_PRESSURE"
         ],
@@ -19915,7 +19915,7 @@
             "TYPE_PSYCHIC"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "ENCLOSED_ISLAND",
+        "friendArea": "FRIEND_AREA_ENCLOSED_ISLAND",
         "abilities": [
             "ABILITY_PRESSURE"
         ],
@@ -20091,7 +20091,7 @@
             "TYPE_FLYING"
         ],
         "movementType": "MOVEMENT_TYPE_CHASM",
-        "friendArea": "STRATOS_LOOKOUT",
+        "friendArea": "FRIEND_AREA_STRATOS_LOOKOUT",
         "abilities": [
             "ABILITY_AIR_LOCK"
         ],

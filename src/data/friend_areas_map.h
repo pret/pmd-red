@@ -1,4 +1,4 @@
-#define NO_AREA NUM_FRIEND_AREAS + 5
+#define NO_AREA FRIEND_AREA_COUNT + 5
 
  // ななし means 'without name'
 #define DUMMY_LOCATION                                                                      \
@@ -17,7 +17,7 @@ static const struct FriendAreaLocationInfo sFriendAreaLocations[2][NUM_FRIEND_AR
         {
             .name = "Mountain Range",
             .pos = {0x1C5, 0x71},
-            .areasIds = {MT_DEEPGREEN, MT_CLEFT, MT_MOONVIEW, MT_DISCIPLINE, DARKNESS_RIDGE, RAINBOW_PEAK, NO_AREA, NO_AREA},
+            .areasIds = {FRIEND_AREA_MT_DEEPGREEN, FRIEND_AREA_MT_CLEFT, FRIEND_AREA_MT_MOONVIEW, FRIEND_AREA_MT_DISCIPLINE, FRIEND_AREA_DARKNESS_RIDGE, FRIEND_AREA_RAINBOW_PEAK, NO_AREA, NO_AREA},
             .adjacentLocations = {
                 [DIRECTION_SOUTH] = LOCATION_EASTERN_FOREST,
                 [DIRECTION_SOUTHEAST] = -1,
@@ -33,7 +33,7 @@ static const struct FriendAreaLocationInfo sFriendAreaLocations[2][NUM_FRIEND_AR
         {
             .name = "Glacier",
             .pos = {0x1CD, 0x1C},
-            .areasIds = {FRIGID_CAVERN, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA},
+            .areasIds = {FRIEND_AREA_FRIGID_CAVERN, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA},
             .adjacentLocations = {
                 [DIRECTION_SOUTH] = -1,
                 [DIRECTION_SOUTHEAST] = -1,
@@ -49,7 +49,7 @@ static const struct FriendAreaLocationInfo sFriendAreaLocations[2][NUM_FRIEND_AR
         {
             .name = "Plains",
             .pos = {0x161, 0x78},
-            .areasIds = {BEAU_PLAINS, SKY_BLUE_PLAINS, SACRED_FIELD, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA},
+            .areasIds = {FRIEND_AREA_BEAU_PLAINS, FRIEND_AREA_SKY_BLUE_PLAINS, FRIEND_AREA_SACRED_FIELD, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA},
             .adjacentLocations = {
                 [DIRECTION_SOUTH] = LOCATION_TEAM_BASE,
                 [DIRECTION_SOUTHEAST] = LOCATION_RIVER,
@@ -65,7 +65,7 @@ static const struct FriendAreaLocationInfo sFriendAreaLocations[2][NUM_FRIEND_AR
         {
             .name = "South Plains",
             .pos = {0x162, 0x12D},
-            .areasIds = {SAFARI, WILD_PLAINS, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA},
+            .areasIds = {FRIEND_AREA_SAFARI, FRIEND_AREA_WILD_PLAINS, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA},
             .adjacentLocations = {
                 [DIRECTION_SOUTH] = -1,
                 [DIRECTION_SOUTHEAST] = -1,
@@ -81,7 +81,7 @@ static const struct FriendAreaLocationInfo sFriendAreaLocations[2][NUM_FRIEND_AR
         {
             .name = "Badlands",
             .pos = {0x194, 0x102},
-            .areasIds = {RAVAGED_FIELD, MAGNETIC_QUARRY, THUNDER_MEADOW, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA},
+            .areasIds = {FRIEND_AREA_RAVAGED_FIELD, FRIEND_AREA_MAGNETIC_QUARRY, FRIEND_AREA_THUNDER_MEADOW, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA},
             .adjacentLocations = {
                 [DIRECTION_SOUTH] = -1,
                 [DIRECTION_SOUTHEAST] = LOCATION_DESERT,
@@ -97,7 +97,7 @@ static const struct FriendAreaLocationInfo sFriendAreaLocations[2][NUM_FRIEND_AR
         {
             .name = "Eastern Forest",
             .pos = {0x1C7, 0x9D},
-            .areasIds = {MIST_RISE_FOREST, FLYAWAY_FOREST, OVERGROWN_FOREST, ENERGETIC_FOREST, NO_AREA, NO_AREA, NO_AREA, NO_AREA},
+            .areasIds = {FRIEND_AREA_MIST_RISE_FOREST, FRIEND_AREA_FLYAWAY_FOREST, FRIEND_AREA_OVERGROWN_FOREST, FRIEND_AREA_ENERGETIC_FOREST, NO_AREA, NO_AREA, NO_AREA, NO_AREA},
             .adjacentLocations = {
                 [DIRECTION_SOUTH] = LOCATION_EASTERN_LAKES,
                 [DIRECTION_SOUTHEAST] = -1,
@@ -113,7 +113,7 @@ static const struct FriendAreaLocationInfo sFriendAreaLocations[2][NUM_FRIEND_AR
         {
             .name = "Western Forest",
             .pos = {0x108, 0x9D},
-            .areasIds = {MUSHROOM_FOREST, HEALING_FOREST, TRANSFORM_FOREST, SECRETIVE_FOREST, NO_AREA, NO_AREA, NO_AREA, NO_AREA},
+            .areasIds = {FRIEND_AREA_MUSHROOM_FOREST, FRIEND_AREA_HEALING_FOREST, FRIEND_AREA_TRANSFORM_FOREST, FRIEND_AREA_SECRETIVE_FOREST, NO_AREA, NO_AREA, NO_AREA, NO_AREA},
             .adjacentLocations = {
                 [DIRECTION_SOUTH] = LOCATION_VOLCANO,
                 [DIRECTION_SOUTHEAST] = -1,
@@ -129,7 +129,7 @@ static const struct FriendAreaLocationInfo sFriendAreaLocations[2][NUM_FRIEND_AR
         {
             .name = "River",
             .pos = {0x197, 0xA0},
-            .areasIds = {RUB_A_DUB_RIVER, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA},
+            .areasIds = {FRIEND_AREA_RUB_A_DUB_RIVER, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA},
             .adjacentLocations = {
                 [DIRECTION_SOUTH] = LOCATION_EASTERN_PONDS,
                 [DIRECTION_SOUTHEAST] = LOCATION_EASTERN_LAKES,
@@ -145,7 +145,7 @@ static const struct FriendAreaLocationInfo sFriendAreaLocations[2][NUM_FRIEND_AR
         {
             .name = "Eastern Ponds",
             .pos = {0x198, 0xCF},
-            .areasIds = {TADPOLE_POND, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA},
+            .areasIds = {FRIEND_AREA_TADPOLE_POND, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA},
             .adjacentLocations = {
                 [DIRECTION_SOUTH] = LOCATION_BADLANDS,
                 [DIRECTION_SOUTHEAST] = -1,
@@ -161,7 +161,7 @@ static const struct FriendAreaLocationInfo sFriendAreaLocations[2][NUM_FRIEND_AR
         {
             .name = "Pond",
             .pos = {0x133, 0x79},
-            .areasIds = {TURTLESHELL_POND, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA},
+            .areasIds = {FRIEND_AREA_TURTLESHELL_POND, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA},
             .adjacentLocations = {
                 [DIRECTION_SOUTH] = -1,
                 [DIRECTION_SOUTHEAST] = LOCATION_TEAM_BASE,
@@ -177,7 +177,7 @@ static const struct FriendAreaLocationInfo sFriendAreaLocations[2][NUM_FRIEND_AR
         {
             .name = "Northern Lakes",
             .pos = {0x182, 0x1D},
-            .areasIds = {MYSTIC_LAKE, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA},
+            .areasIds = {FRIEND_AREA_MYSTIC_LAKE, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA},
             .adjacentLocations = {
                 [DIRECTION_SOUTH] = -1,
                 [DIRECTION_SOUTHEAST] = LOCATION_MARSH,
@@ -193,7 +193,7 @@ static const struct FriendAreaLocationInfo sFriendAreaLocations[2][NUM_FRIEND_AR
         {
             .name = "Eastern Lakes",
             .pos = {0x1C6, 0xD0},
-            .areasIds = {WATERFALL_LAKE, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA},
+            .areasIds = {FRIEND_AREA_WATERFALL_LAKE, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA},
             .adjacentLocations = {
                 [DIRECTION_SOUTH] = -1,
                 [DIRECTION_SOUTHEAST] = -1,
@@ -209,7 +209,7 @@ static const struct FriendAreaLocationInfo sFriendAreaLocations[2][NUM_FRIEND_AR
         {
             .name = "Marsh",
             .pos = {0x1A2, 0x46},
-            .areasIds = {PEANUT_SWAMP, POISON_SWAMP, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA},
+            .areasIds = {FRIEND_AREA_PEANUT_SWAMP, FRIEND_AREA_POISON_SWAMP, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA},
             .adjacentLocations = {
                 [DIRECTION_SOUTH] = LOCATION_RIVER,
                 [DIRECTION_SOUTHEAST] = LOCATION_MOUNTAIN_RANGE,
@@ -225,7 +225,7 @@ static const struct FriendAreaLocationInfo sFriendAreaLocations[2][NUM_FRIEND_AR
         {
             .name = "Cave",
             .pos = {0x160, 0x47},
-            .areasIds = {ECHO_CAVE, DRAGON_CAVE, BOULDER_CAVE, CRYPTIC_CAVE, NO_AREA, NO_AREA, NO_AREA, NO_AREA},
+            .areasIds = {FRIEND_AREA_ECHO_CAVE, FRIEND_AREA_DRAGON_CAVE, FRIEND_AREA_BOULDER_CAVE, FRIEND_AREA_CRYPTIC_CAVE, NO_AREA, NO_AREA, NO_AREA, NO_AREA},
             .adjacentLocations = {
                 [DIRECTION_SOUTH] = LOCATION_PLAINS,
                 [DIRECTION_SOUTHEAST] = -1,
@@ -241,7 +241,7 @@ static const struct FriendAreaLocationInfo sFriendAreaLocations[2][NUM_FRIEND_AR
         {
             .name = "Jungle",
             .pos = {0x163, 0x104},
-            .areasIds = {JUNGLE, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA},
+            .areasIds = {FRIEND_AREA_JUNGLE, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA},
             .adjacentLocations = {
                 [DIRECTION_SOUTH] = LOCATION_SOUTH_PLAINS,
                 [DIRECTION_SOUTHEAST] = -1,
@@ -257,7 +257,7 @@ static const struct FriendAreaLocationInfo sFriendAreaLocations[2][NUM_FRIEND_AR
         {
             .name = "Ruins",
             .pos = {0x136, 0x1C},
-            .areasIds = {DECREPIT_LAB, POWER_PLANT, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA},
+            .areasIds = {FRIEND_AREA_DECREPIT_LAB, FRIEND_AREA_POWER_PLANT, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA},
             .adjacentLocations = {
                 [DIRECTION_SOUTH] = LOCATION_POND,
                 [DIRECTION_SOUTHEAST] = LOCATION_CAVE,
@@ -273,7 +273,7 @@ static const struct FriendAreaLocationInfo sFriendAreaLocations[2][NUM_FRIEND_AR
         {
             .name = "Volcano",
             .pos = {0x107, 0xCB},
-            .areasIds = {SCORCHED_PLAINS, CRATER, VOLCANIC_PIT, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA},
+            .areasIds = {FRIEND_AREA_SCORCHED_PLAINS, FRIEND_AREA_CRATER, FRIEND_AREA_VOLCANIC_PIT, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA},
             .adjacentLocations = {
                 [DIRECTION_SOUTH] = -1,
                 [DIRECTION_SOUTHEAST] = LOCATION_RELICS,
@@ -289,7 +289,7 @@ static const struct FriendAreaLocationInfo sFriendAreaLocations[2][NUM_FRIEND_AR
         {
             .name = "Desert",
             .pos = {0x1C4, 0x12D},
-            .areasIds = {FURNACE_DESERT, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA},
+            .areasIds = {FRIEND_AREA_FURNACE_DESERT, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA},
             .adjacentLocations = {
                 [DIRECTION_SOUTH] = -1,
                 [DIRECTION_SOUTHEAST] = -1,
@@ -305,7 +305,7 @@ static const struct FriendAreaLocationInfo sFriendAreaLocations[2][NUM_FRIEND_AR
         {
             .name = "Relics",
             .pos = {0x131, 0x105},
-            .areasIds = {ANCIENT_RELIC, AGED_CHAMBER_AN, AGED_CHAMBER_O_EXCLAIM, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA},
+            .areasIds = {FRIEND_AREA_ANCIENT_RELIC, FRIEND_AREA_AGED_CHAMBER_AN, FRIEND_AREA_AGED_CHAMBER_O_EXCLAIM, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA},
             .adjacentLocations = {
                 [DIRECTION_SOUTH] = -1,
                 [DIRECTION_SOUTHEAST] = LOCATION_SOUTH_PLAINS,
@@ -321,7 +321,7 @@ static const struct FriendAreaLocationInfo sFriendAreaLocations[2][NUM_FRIEND_AR
         {
             .name = "Sky",
             .pos = {0x2F, 0x15},
-            .areasIds = {STRATOS_LOOKOUT, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA},
+            .areasIds = {FRIEND_AREA_STRATOS_LOOKOUT, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA},
             .adjacentLocations = {
                 [DIRECTION_SOUTH] = LOCATION_WESTERN_ISLES,
                 [DIRECTION_SOUTHEAST] = LOCATION_BEACH,
@@ -337,7 +337,7 @@ static const struct FriendAreaLocationInfo sFriendAreaLocations[2][NUM_FRIEND_AR
         {
             .name = "Northern Isles",
             .pos = {0x107, 0x47},
-            .areasIds = {LEGENDARY_ISLAND, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA},
+            .areasIds = {FRIEND_AREA_LEGENDARY_ISLAND, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA},
             .adjacentLocations = {
                 [DIRECTION_SOUTH] = 6,
                 [DIRECTION_SOUTHEAST] = 9,
@@ -353,7 +353,7 @@ static const struct FriendAreaLocationInfo sFriendAreaLocations[2][NUM_FRIEND_AR
         {
             .name = "Southern Isles",
             .pos = {0x5D, 0x10C},
-            .areasIds = {SOUTHERN_ISLAND, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA},
+            .areasIds = {FRIEND_AREA_SOUTHERN_ISLAND, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA},
             .adjacentLocations = {
                 [DIRECTION_SOUTH] = -1,
                 [DIRECTION_SOUTHEAST] = -1,
@@ -369,7 +369,7 @@ static const struct FriendAreaLocationInfo sFriendAreaLocations[2][NUM_FRIEND_AR
         {
             .name = "Southwest Isles",
             .pos = {0x2D, 0xCB},
-            .areasIds = {ENCLOSED_ISLAND, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA},
+            .areasIds = {FRIEND_AREA_ENCLOSED_ISLAND, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA},
             .adjacentLocations = {
                 [DIRECTION_SOUTH] = -1,
                 [DIRECTION_SOUTHEAST] = LOCATION_SOUTHERN_ISLES,
@@ -385,7 +385,7 @@ static const struct FriendAreaLocationInfo sFriendAreaLocations[2][NUM_FRIEND_AR
         {
             .name = "Western Isles",
             .pos = {0x2D, 0x70},
-            .areasIds = {FINAL_ISLAND, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA},
+            .areasIds = {FRIEND_AREA_FINAL_ISLAND, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA},
             .adjacentLocations = {
                 [DIRECTION_SOUTH] = LOCATION_SOUTHWEST_ISLES,
                 [DIRECTION_SOUTHEAST] = -1,
@@ -401,7 +401,7 @@ static const struct FriendAreaLocationInfo sFriendAreaLocations[2][NUM_FRIEND_AR
         {
             .name = "Northern Sea",
             .pos = {0xD0, 0x16},
-            .areasIds = {BOUNTIFUL_SEA, SERENE_SEA, DEEP_SEA_CURRENT, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA},
+            .areasIds = {FRIEND_AREA_BOUNTIFUL_SEA, FRIEND_AREA_SERENE_SEA, FRIEND_AREA_DEEP_SEA_CURRENT, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA},
             .adjacentLocations = {
                 [DIRECTION_SOUTH] = -1,
                 [DIRECTION_SOUTHEAST] = LOCATION_NORTHERN_ISLES,
@@ -417,7 +417,7 @@ static const struct FriendAreaLocationInfo sFriendAreaLocations[2][NUM_FRIEND_AR
         {
             .name = "Southern Sea",
             .pos = {0xB2, 0x10D},
-            .areasIds = {TREASURE_SEA, DEEP_SEA_FLOOR, SEAFLOOR_CAVE, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA},
+            .areasIds = {FRIEND_AREA_TREASURE_SEA, FRIEND_AREA_DEEP_SEA_FLOOR, FRIEND_AREA_SEAFLOOR_CAVE, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA},
             .adjacentLocations = {
                 [DIRECTION_SOUTH] = -1,
                 [DIRECTION_SOUTHEAST] = -1,
@@ -433,7 +433,7 @@ static const struct FriendAreaLocationInfo sFriendAreaLocations[2][NUM_FRIEND_AR
         {
             .name = "Beach",
             .pos = {0x81, 0x42},
-            .areasIds = {SHALLOW_BEACH, ICE_FLOE_BEACH, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA},
+            .areasIds = {FRIEND_AREA_SHALLOW_BEACH, FRIEND_AREA_ICE_FLOE_BEACH, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA, NO_AREA},
             .adjacentLocations = {
                 [DIRECTION_SOUTH] = -1,
                 [DIRECTION_SOUTHEAST] = LOCATION_WESTERN_FOREST,

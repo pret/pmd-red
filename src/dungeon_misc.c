@@ -292,14 +292,14 @@ static inline bool8 IsUnkDungeon(u8 joinedDungeon)
 
 void sub_8068BDC(bool8 a0)
 {
-    bool8 spArr[NUM_FRIEND_AREAS];
+    bool8 spArr[FRIEND_AREA_COUNT];
     Pokemon *monPointers[21];
     Pokemon mon1Structs[MAX_TEAM_MEMBERS];
     u16 arr2[18];
     FriendAreaCapacity areaCapacity;
     s32 i, j, id;
 
-    for (i = 0; i < NUM_FRIEND_AREAS; i++) {
+    for (i = 0; i < FRIEND_AREA_COUNT; i++) {
         spArr[i] = FALSE;
     }
 
@@ -337,7 +337,7 @@ void sub_8068BDC(bool8 a0)
         }
     }
 
-    for (i = 0; i < NUM_FRIEND_AREAS; i++) {
+    for (i = 0; i < FRIEND_AREA_COUNT; i++) {
         u8 friendAreaId = i;
         if (!spArr[friendAreaId])
             continue;
