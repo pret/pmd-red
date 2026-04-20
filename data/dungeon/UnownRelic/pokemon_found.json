@@ -1,7 +1,7 @@
 {
     "tables": [
         {
-            "name": "pokemon_found_out600",
+            "name": "UnownRelic_1F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_UNOWN_A",
@@ -56,7 +56,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out601",
+            "name": "UnownRelic_2F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_UNOWN_E",
@@ -116,7 +116,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out602",
+            "name": "UnownRelic_3F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_UNOWN_I",
@@ -171,7 +171,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out603",
+            "name": "UnownRelic_4F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_UNOWN_M",
@@ -216,7 +216,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out604",
+            "name": "UnownRelic_5F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_UNOWN_C",
@@ -276,7 +276,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out605",
+            "name": "UnownRelic_6F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_UNOWN_C",
@@ -331,7 +331,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out606",
+            "name": "UnownRelic_7F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_UNOWN_A",
@@ -386,7 +386,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out607",
+            "name": "UnownRelic_8F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_UNOWN_C",
@@ -441,7 +441,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out608",
+            "name": "UnownRelic_9F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_UNOWN_E",
@@ -496,7 +496,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out609",
+            "name": "UnownRelic_10F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_UNOWN_H",
@@ -551,7 +551,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out610",
+            "name": "UnownRelic_11F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_UNOWN_C",

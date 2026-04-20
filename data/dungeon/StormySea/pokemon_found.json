@@ -1,7 +1,7 @@
 {
     "tables": [
         {
-            "name": "pokemon_found_out112",
+            "name": "StormySea_1F_5F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_TENTACOOL",
@@ -51,7 +51,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out113",
+            "name": "StormySea_6F_8F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_TENTACOOL",
@@ -91,7 +91,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out114",
+            "name": "StormySea_9F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SEEL",
@@ -136,7 +136,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out115",
+            "name": "StormySea_10F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SEEL",
@@ -171,7 +171,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out116",
+            "name": "StormySea_11F_14F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SLOWPOKE",
@@ -216,7 +216,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out117",
+            "name": "StormySea_15F_17F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SLOWPOKE",
@@ -261,7 +261,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out118",
+            "name": "StormySea_18F_19F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SLOWPOKE",
@@ -301,7 +301,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out119",
+            "name": "StormySea_20F_24F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_GRIMER",
@@ -341,7 +341,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out120",
+            "name": "StormySea_25F_26F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_GRIMER",
@@ -371,7 +371,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out121",
+            "name": "StormySea_27F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_GRIMER",
@@ -406,7 +406,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out122",
+            "name": "StormySea_28F_29F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_GRIMER",
@@ -436,7 +436,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out123",
+            "name": "StormySea_30F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SEADRA",
@@ -471,7 +471,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out124",
+            "name": "StormySea_31F_33F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_TENTACRUEL",
@@ -511,7 +511,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out125",
+            "name": "StormySea_34F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_TENTACRUEL",
@@ -556,7 +556,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out126",
+            "name": "StormySea_35F_39F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_TENTACRUEL",
@@ -606,7 +606,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out127",
+            "name": "StormySea_40F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_KECLEON",

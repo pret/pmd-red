@@ -1,7 +1,7 @@
 {
     "tables": [
         {
-            "name": "pokemon_found_out715",
+            "name": "MtFaraway_1F_5F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_HITMONCHAN",
@@ -31,7 +31,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out716",
+            "name": "MtFaraway_6F_9F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_HITMONCHAN",
@@ -61,7 +61,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out717",
+            "name": "MtFaraway_10F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_GOLEM",
@@ -106,7 +106,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out718",
+            "name": "MtFaraway_11F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_GOLEM",
@@ -146,7 +146,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out719",
+            "name": "MtFaraway_12F_19F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_GOLEM",
@@ -176,7 +176,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out720",
+            "name": "MtFaraway_20F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PARASECT",
@@ -206,7 +206,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out721",
+            "name": "MtFaraway_21F_29F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PARASECT",
@@ -236,7 +236,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out722",
+            "name": "MtFaraway_30F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_DUGTRIO",
@@ -281,7 +281,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out723",
+            "name": "MtFaraway_31F_38F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_DUGTRIO",
@@ -316,7 +316,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out724",
+            "name": "MtFaraway_35F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_DUGTRIO",
@@ -356,7 +356,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out725",
+            "name": "MtFaraway_39F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_DUGTRIO",
@@ -386,7 +386,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out726",
+            "name": "MtFaraway_40F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_HO_OH",

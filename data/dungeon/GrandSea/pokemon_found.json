@@ -1,7 +1,7 @@
 {
     "tables": [
         {
-            "name": "pokemon_found_out460",
+            "name": "GrandSea_1F_4F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_TENTACOOL",
@@ -31,7 +31,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out461",
+            "name": "GrandSea_5F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_TENTACOOL",
@@ -71,7 +71,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out462",
+            "name": "GrandSea_6F_9F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_TENTACOOL",
@@ -111,7 +111,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out463",
+            "name": "GrandSea_10F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SLOWPOKE",
@@ -151,7 +151,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out464",
+            "name": "GrandSea_11F_13F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SLOWPOKE",
@@ -186,7 +186,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out465",
+            "name": "GrandSea_14F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SLOWPOKE",
@@ -216,7 +216,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out466",
+            "name": "GrandSea_15F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_KRABBY",
@@ -256,7 +256,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out467",
+            "name": "GrandSea_16F_19F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_KRABBY",
@@ -291,7 +291,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out468",
+            "name": "GrandSea_20F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_KRABBY",
@@ -336,7 +336,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out469",
+            "name": "GrandSea_21F_23F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_TENTACRUEL",
@@ -366,7 +366,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out470",
+            "name": "GrandSea_24F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_TENTACRUEL",
@@ -401,7 +401,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out471",
+            "name": "GrandSea_25F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_TENTACRUEL",
@@ -446,7 +446,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out472",
+            "name": "GrandSea_26F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_TENTACRUEL",
@@ -481,7 +481,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out473",
+            "name": "GrandSea_27F_29F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_TENTACRUEL",
@@ -521,7 +521,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out474",
+            "name": "GrandSea_30F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_TENTACRUEL",

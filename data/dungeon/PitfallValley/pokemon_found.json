@@ -1,7 +1,7 @@
 {
     "tables": [
         {
-            "name": "pokemon_found_out317",
+            "name": "PitfallValley_1F_3F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PIDGEOT",
@@ -36,7 +36,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out318",
+            "name": "PitfallValley_4F_6F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_BUTTERFREE",
@@ -91,7 +91,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out319",
+            "name": "PitfallValley_7F_8F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_BUTTERFREE",
@@ -136,7 +136,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out320",
+            "name": "PitfallValley_9F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_BUTTERFREE",
@@ -181,7 +181,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out321",
+            "name": "PitfallValley_10F_12F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_DODUO",
@@ -216,7 +216,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out322",
+            "name": "PitfallValley_13F_14F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SCYTHER",
@@ -246,7 +246,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out323",
+            "name": "PitfallValley_15F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SCYTHER",
@@ -281,7 +281,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out324",
+            "name": "PitfallValley_16F_18F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SCYTHER",
@@ -311,7 +311,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out325",
+            "name": "PitfallValley_19F_20F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_AERODACTYL",
@@ -336,7 +336,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out326",
+            "name": "PitfallValley_21F_25F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_AERODACTYL",

@@ -1,7 +1,7 @@
 {
     "tables": [
         {
-            "name": "pokemon_found_out395",
+            "name": "NorthwindField_1F_2F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_POLIWAG",
@@ -31,7 +31,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out396",
+            "name": "NorthwindField_3F_4F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_POLIWAG",
@@ -66,7 +66,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out397",
+            "name": "NorthwindField_5F_6F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_JYNX",
@@ -101,7 +101,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out398",
+            "name": "NorthwindField_7F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_AZUMARILL",
@@ -126,7 +126,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out399",
+            "name": "NorthwindField_8F_9F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_DELCATTY",
@@ -151,7 +151,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out400",
+            "name": "NorthwindField_10F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_POLIWHIRL",
@@ -186,7 +186,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out401",
+            "name": "NorthwindField_11F_16F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_POLIWHIRL",
@@ -211,7 +211,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out402",
+            "name": "NorthwindField_17F_18F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_MUK",
@@ -236,7 +236,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out403",
+            "name": "NorthwindField_19F_22F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_POLIWRATH",
@@ -266,7 +266,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out404",
+            "name": "NorthwindField_20F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_POLIWRATH",
@@ -301,7 +301,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out405",
+            "name": "NorthwindField_23F_24F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_GOLDUCK",
@@ -336,7 +336,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out406",
+            "name": "NorthwindField_25F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_GOLDUCK",
@@ -371,7 +371,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out407",
+            "name": "NorthwindField_26F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_GOLDUCK",
@@ -396,7 +396,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out408",
+            "name": "NorthwindField_27F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_WARTORTLE",
@@ -441,7 +441,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out409",
+            "name": "NorthwindField_28F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_WARTORTLE",
@@ -486,7 +486,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out410",
+            "name": "NorthwindField_29F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_WARTORTLE",
@@ -526,7 +526,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out411",
+            "name": "NorthwindField_30F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_CROCONAW",

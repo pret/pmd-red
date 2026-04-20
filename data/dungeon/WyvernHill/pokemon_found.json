@@ -1,7 +1,7 @@
 {
     "tables": [
         {
-            "name": "pokemon_found_out366",
+            "name": "WyvernHill_1F_3F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_DRATINI",
@@ -26,7 +26,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out367",
+            "name": "WyvernHill_4F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_DRATINI",
@@ -56,7 +56,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out368",
+            "name": "WyvernHill_5F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_DRATINI",
@@ -86,7 +86,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out369",
+            "name": "WyvernHill_6F_8F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_TOTODILE",
@@ -121,7 +121,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out370",
+            "name": "WyvernHill_9F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_TOTODILE",
@@ -161,7 +161,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out371",
+            "name": "WyvernHill_10F_11F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_TOTODILE",
@@ -201,7 +201,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out372",
+            "name": "WyvernHill_12F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_DRAGONAIR",
@@ -241,7 +241,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out373",
+            "name": "WyvernHill_13F_15F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ODDISH",
@@ -286,7 +286,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out374",
+            "name": "WyvernHill_16F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ODDISH",
@@ -326,7 +326,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out375",
+            "name": "WyvernHill_17F_20F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ODDISH",
@@ -356,7 +356,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out376",
+            "name": "WyvernHill_21F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_JUMPLUFF",
@@ -381,7 +381,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out377",
+            "name": "WyvernHill_22F_23F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_JUMPLUFF",
@@ -411,7 +411,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out378",
+            "name": "WyvernHill_24F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_FLYGON",
@@ -436,7 +436,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out379",
+            "name": "WyvernHill_25F_29F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_DRAGONITE",
@@ -466,7 +466,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out380",
+            "name": "WyvernHill_30F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_DRAGONITE",

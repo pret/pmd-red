@@ -1,7 +1,7 @@
 {
     "tables": [
         {
-            "name": "pokemon_found_out427",
+            "name": "LightningField_1F_5F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_MAGNEMITE",
@@ -46,7 +46,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out428",
+            "name": "LightningField_6F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PIKACHU",
@@ -86,7 +86,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out429",
+            "name": "LightningField_7F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PIKACHU",
@@ -141,7 +141,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out430",
+            "name": "LightningField_8F_10F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PIKACHU",
@@ -191,7 +191,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out431",
+            "name": "LightningField_11F_13F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_JOLTEON",
@@ -236,7 +236,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out432",
+            "name": "LightningField_14F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_JOLTEON",
@@ -271,7 +271,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out433",
+            "name": "LightningField_15F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ELECTRODE",
@@ -316,7 +316,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out434",
+            "name": "LightningField_16F_17F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ELECTRODE",
@@ -366,7 +366,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out435",
+            "name": "LightningField_18F_19F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ELECTRODE",
@@ -411,7 +411,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out436",
+            "name": "LightningField_20F_21F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_MAGNETON",
@@ -456,7 +456,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out437",
+            "name": "LightningField_22F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_MAGNETON",
@@ -491,7 +491,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out438",
+            "name": "LightningField_23F_24F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_MAGNETON",
@@ -516,7 +516,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out439",
+            "name": "LightningField_25F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_MAGNETON",
@@ -546,7 +546,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out440",
+            "name": "LightningField_26F_28F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_RAICHU",
@@ -581,7 +581,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out441",
+            "name": "LightningField_29F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_RAICHU",
@@ -611,7 +611,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out442",
+            "name": "LightningField_30F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_RAICHU",

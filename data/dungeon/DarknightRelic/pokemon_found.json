@@ -1,7 +1,7 @@
 {
     "tables": [
         {
-            "name": "pokemon_found_out443",
+            "name": "DarknightRelic_1F_5F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_GASTLY",
@@ -41,7 +41,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out444",
+            "name": "DarknightRelic_6F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_GASTLY",
@@ -81,7 +81,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out445",
+            "name": "DarknightRelic_7F_10F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_HAUNTER",
@@ -121,7 +121,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out446",
+            "name": "DarknightRelic_11F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_HAUNTER",
@@ -161,7 +161,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out447",
+            "name": "DarknightRelic_12F_15F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_GENGAR",

@@ -1,7 +1,7 @@
 {
     "tables": [
         {
-            "name": "pokemon_found_out345",
+            "name": "SouthernCavern_1F_4F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_DIGLETT",
@@ -36,7 +36,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out346",
+            "name": "SouthernCavern_5F_6F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_DIGLETT",
@@ -76,7 +76,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out347",
+            "name": "SouthernCavern_7F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_DIGLETT",
@@ -111,7 +111,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out348",
+            "name": "SouthernCavern_8F_9F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_NIDOKING",
@@ -141,7 +141,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out349",
+            "name": "SouthernCavern_10F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_NIDOKING",
@@ -171,7 +171,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out350",
+            "name": "SouthernCavern_11F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_NIDOKING",
@@ -196,7 +196,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out351",
+            "name": "SouthernCavern_12F_14F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_NIDOKING",
@@ -231,7 +231,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out352",
+            "name": "SouthernCavern_15F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_NIDOKING",
@@ -271,7 +271,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out353",
+            "name": "SouthernCavern_16F_19F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_NIDOKING",
@@ -317,7 +317,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out354",
+            "name": "SouthernCavern_20F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_DUGTRIO",
@@ -367,7 +367,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out355",
+            "name": "SouthernCavern_21F_22F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_DUGTRIO",
@@ -412,7 +412,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out356",
+            "name": "SouthernCavern_23F_24F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_DUGTRIO",
@@ -452,7 +452,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out357",
+            "name": "SouthernCavern_25F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_DUGTRIO",
@@ -497,7 +497,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out358",
+            "name": "SouthernCavern_26F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_DUGTRIO",
@@ -537,7 +537,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out359",
+            "name": "SouthernCavern_27F_30F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_DUGTRIO",
@@ -572,7 +572,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out360",
+            "name": "SouthernCavern_31F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_DUGTRIO",
@@ -612,7 +612,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out361",
+            "name": "SouthernCavern_32F_36F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_GRAVELER",
@@ -647,7 +647,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out362",
+            "name": "SouthernCavern_37F_39F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_RHYHORN",
@@ -687,7 +687,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out363",
+            "name": "SouthernCavern_40F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_GOLEM",
@@ -732,7 +732,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out364",
+            "name": "SouthernCavern_41F_45F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_GOLEM",
@@ -772,7 +772,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out365",
+            "name": "SouthernCavern_46F_50F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_GOLEM",

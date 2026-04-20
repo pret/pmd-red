@@ -1,7 +1,7 @@
 {
     "tables": [
         {
-            "name": "pokemon_found_out412",
+            "name": "SolarCave_1F_3F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ABRA",
@@ -56,7 +56,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out413",
+            "name": "SolarCave_4F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ABRA",
@@ -111,7 +111,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out414",
+            "name": "SolarCave_5F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ABRA",
@@ -156,7 +156,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out415",
+            "name": "SolarCave_6F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ABRA",
@@ -186,7 +186,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out416",
+            "name": "SolarCave_7F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ABRA",
@@ -216,7 +216,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out417",
+            "name": "SolarCave_8F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ABRA",
@@ -256,7 +256,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out418",
+            "name": "SolarCave_9F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_HYPNO",
@@ -291,7 +291,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out419",
+            "name": "SolarCave_10F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_HYPNO",
@@ -331,7 +331,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out420",
+            "name": "SolarCave_11F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_HYPNO",
@@ -376,7 +376,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out421",
+            "name": "SolarCave_12F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_HYPNO",
@@ -426,7 +426,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out422",
+            "name": "SolarCave_13F_14F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_KADABRA",
@@ -466,7 +466,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out423",
+            "name": "SolarCave_15F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_KADABRA",
@@ -506,7 +506,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out424",
+            "name": "SolarCave_16F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_KADABRA",
@@ -551,7 +551,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out425",
+            "name": "SolarCave_17F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_KADABRA",
@@ -591,7 +591,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out426",
+            "name": "SolarCave_18F_20F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_KADABRA",

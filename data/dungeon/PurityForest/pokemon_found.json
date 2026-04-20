@@ -1,7 +1,7 @@
 {
     "tables": [
         {
-            "name": "pokemon_found_out750",
+            "name": "PurityForest_1F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PIDGEY",
@@ -36,7 +36,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out751",
+            "name": "PurityForest_2F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_CATERPIE",
@@ -81,7 +81,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out752",
+            "name": "PurityForest_3F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_CATERPIE",
@@ -131,7 +131,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out753",
+            "name": "PurityForest_4F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_CATERPIE",
@@ -166,7 +166,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out754",
+            "name": "PurityForest_5F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_RATTATA",
@@ -201,7 +201,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out755",
+            "name": "PurityForest_6F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_RATTATA",
@@ -236,7 +236,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out756",
+            "name": "PurityForest_7F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_RATTATA",
@@ -286,7 +286,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out757",
+            "name": "PurityForest_8F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SPEAROW",
@@ -336,7 +336,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out758",
+            "name": "PurityForest_9F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_WEEDLE",
@@ -391,7 +391,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out759",
+            "name": "PurityForest_10F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_METAPOD",
@@ -446,7 +446,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out760",
+            "name": "PurityForest_11F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_WEEDLE",
@@ -491,7 +491,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out761",
+            "name": "PurityForest_12F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_WEEDLE",
@@ -546,7 +546,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out762",
+            "name": "PurityForest_13F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_GEODUDE",
@@ -591,7 +591,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out763",
+            "name": "PurityForest_14F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_GEODUDE",
@@ -641,7 +641,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out764",
+            "name": "PurityForest_15F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_EXEGGUTOR",
@@ -681,7 +681,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out765",
+            "name": "PurityForest_16F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_EXEGGUTOR",
@@ -726,7 +726,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out766",
+            "name": "PurityForest_17F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SCYTHER",
@@ -771,7 +771,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out767",
+            "name": "PurityForest_18F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ODDISH",
@@ -816,7 +816,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out768",
+            "name": "PurityForest_19F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ODDISH",
@@ -861,7 +861,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out769",
+            "name": "PurityForest_20F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ODDISH",
@@ -906,7 +906,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out770",
+            "name": "PurityForest_21F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ODDISH",
@@ -951,7 +951,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out771",
+            "name": "PurityForest_22F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ODDISH",
@@ -996,7 +996,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out772",
+            "name": "PurityForest_23F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ODDISH",
@@ -1041,7 +1041,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out773",
+            "name": "PurityForest_24F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ODDISH",
@@ -1091,7 +1091,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out774",
+            "name": "PurityForest_25F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ODDISH",
@@ -1141,7 +1141,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out775",
+            "name": "PurityForest_26F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_GROWLITHE",
@@ -1191,7 +1191,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out776",
+            "name": "PurityForest_27F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_POLIWAG",
@@ -1246,7 +1246,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out777",
+            "name": "PurityForest_28F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_WEEPINBELL",
@@ -1296,7 +1296,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out778",
+            "name": "PurityForest_29F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_WEEPINBELL",
@@ -1336,7 +1336,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out779",
+            "name": "PurityForest_30F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_WEEPINBELL",
@@ -1381,7 +1381,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out780",
+            "name": "PurityForest_31F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_BEEDRILL",
@@ -1436,7 +1436,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out781",
+            "name": "PurityForest_32F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_BEEDRILL",
@@ -1486,7 +1486,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out782",
+            "name": "PurityForest_33F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_BEEDRILL",
@@ -1536,7 +1536,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out783",
+            "name": "PurityForest_34F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_BEEDRILL",
@@ -1586,7 +1586,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out784",
+            "name": "PurityForest_35F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_BEEDRILL",
@@ -1636,7 +1636,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out785",
+            "name": "PurityForest_36F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_GLOOM",
@@ -1686,7 +1686,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out786",
+            "name": "PurityForest_37F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_GLOOM",
@@ -1736,7 +1736,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out787",
+            "name": "PurityForest_38F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_GLOOM",
@@ -1781,7 +1781,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out788",
+            "name": "PurityForest_39F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_GLOOM",
@@ -1836,7 +1836,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out789",
+            "name": "PurityForest_40F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_GLOOM",
@@ -1886,7 +1886,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out790",
+            "name": "MtFreezePeak2_1F_4F_Pokemon0",
             "pokemon": [
                 {
                     "species": "MONSTER_GLOOM",
@@ -1931,7 +1931,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out791",
+            "name": "MtFreezePeak2_1F_4F_Pokemon1",
             "pokemon": [
                 {
                     "species": "MONSTER_GLOOM",
@@ -1986,7 +1986,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out792",
+            "name": "MtFreezePeak2_1F_4F_Pokemon2",
             "pokemon": [
                 {
                     "species": "MONSTER_GLOOM",
@@ -2036,7 +2036,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out793",
+            "name": "MtFreezePeak2_1F_4F_Pokemon3",
             "pokemon": [
                 {
                     "species": "MONSTER_GLOOM",
@@ -2081,7 +2081,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out794",
+            "name": "MtFreezePeak2_1F_4F_Pokemon4",
             "pokemon": [
                 {
                     "species": "MONSTER_GLOOM",
@@ -2121,7 +2121,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out795",
+            "name": "MtFreezePeak2_1F_4F_Pokemon5",
             "pokemon": [
                 {
                     "species": "MONSTER_GOLBAT",
@@ -2161,7 +2161,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out796",
+            "name": "MtFreezePeak2_1F_4F_Pokemon6",
             "pokemon": [
                 {
                     "species": "MONSTER_NIDORINA",
@@ -2211,7 +2211,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out797",
+            "name": "MtFreezePeak2_1F_4F_Pokemon7",
             "pokemon": [
                 {
                     "species": "MONSTER_NIDORINA",
@@ -2266,7 +2266,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out798",
+            "name": "MtFreezePeak2_1F_4F_Pokemon8",
             "pokemon": [
                 {
                     "species": "MONSTER_NIDORINA",
@@ -2321,7 +2321,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out799",
+            "name": "MtFreezePeak2_1F_4F_Pokemon9",
             "pokemon": [
                 {
                     "species": "MONSTER_NIDORINA",
@@ -2366,7 +2366,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out800",
+            "name": "PurityForest_51F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_FEAROW",
@@ -2421,7 +2421,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out801",
+            "name": "PurityForest_52F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_FEAROW",
@@ -2476,7 +2476,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out802",
+            "name": "PurityForest_53F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_FEAROW",
@@ -2531,7 +2531,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out803",
+            "name": "PurityForest_54F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_FEAROW",
@@ -2586,7 +2586,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out804",
+            "name": "PurityForest_55F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ARCANINE",
@@ -2636,7 +2636,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out805",
+            "name": "PurityForest_56F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_HITMONLEE",
@@ -2686,7 +2686,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out806",
+            "name": "PurityForest_57F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_RAPIDASH",
@@ -2731,7 +2731,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out807",
+            "name": "PurityForest_58F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_RAPIDASH",
@@ -2786,7 +2786,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out808",
+            "name": "PurityForest_59F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_RAPIDASH",
@@ -2841,7 +2841,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out809",
+            "name": "PurityForest_60F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ARBOK",
@@ -2896,7 +2896,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out810",
+            "name": "PurityForest_61F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ARBOK",
@@ -2951,7 +2951,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out811",
+            "name": "PurityForest_62F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ARBOK",
@@ -3006,7 +3006,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out812",
+            "name": "PurityForest_63F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ARBOK",
@@ -3061,7 +3061,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out813",
+            "name": "PurityForest_64F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ARBOK",
@@ -3106,7 +3106,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out814",
+            "name": "PurityForest_65F_68F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_VILEPLUME",
@@ -3146,7 +3146,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out815",
+            "name": "PurityForest_69F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_VILEPLUME",
@@ -3181,7 +3181,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out816",
+            "name": "PurityForest_70F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_VILEPLUME",
@@ -3226,7 +3226,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out817",
+            "name": "PurityForest_71F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_VILEPLUME",
@@ -3276,7 +3276,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out818",
+            "name": "PurityForest_72F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_VILEPLUME",
@@ -3326,7 +3326,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out819",
+            "name": "PurityForest_73F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_VILEPLUME",
@@ -3381,7 +3381,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out820",
+            "name": "PurityForest_74F_75F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_NIDOQUEEN",
@@ -3436,7 +3436,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out821",
+            "name": "PurityForest_76F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_NIDOQUEEN",
@@ -3486,7 +3486,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out822",
+            "name": "PurityForest_77F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_NIDOKING",
@@ -3531,7 +3531,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out823",
+            "name": "PurityForest_78F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_NIDOKING",
@@ -3571,7 +3571,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out824",
+            "name": "PurityForest_79F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_NIDOKING",
@@ -3616,7 +3616,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out825",
+            "name": "PurityForest_80F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PARASECT",
@@ -3656,7 +3656,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out826",
+            "name": "PurityForest_81F_82F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PARASECT",
@@ -3696,7 +3696,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out827",
+            "name": "PurityForest_83F_84F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PARASECT",
@@ -3741,7 +3741,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out828",
+            "name": "PurityForest_85F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PARASECT",
@@ -3776,7 +3776,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out829",
+            "name": "PurityForest_86F_87F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PARASECT",
@@ -3821,7 +3821,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out830",
+            "name": "PurityForest_88F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PARASECT",
@@ -3871,7 +3871,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out831",
+            "name": "PurityForest_89F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PARASECT",
@@ -3911,7 +3911,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out832",
+            "name": "PurityForest_90F_92F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PARASECT",
@@ -3961,7 +3961,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out833",
+            "name": "PurityForest_93F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PARASECT",
@@ -4006,7 +4006,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out834",
+            "name": "PurityForest_94F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PARASECT",
@@ -4056,7 +4056,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out835",
+            "name": "PurityForest_95F_96F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PARASECT",
@@ -4106,7 +4106,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out836",
+            "name": "PurityForest_97F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PARASECT",
@@ -4156,7 +4156,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out837",
+            "name": "PurityForest_98F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PARASECT",
@@ -4201,7 +4201,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out838",
+            "name": "PurityForest_99F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PARASECT",

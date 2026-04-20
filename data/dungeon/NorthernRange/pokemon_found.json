@@ -1,7 +1,7 @@
 {
     "tables": [
         {
-            "name": "pokemon_found_out327",
+            "name": "NorthernRange_1F_5F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_DODRIO",
@@ -41,7 +41,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out328",
+            "name": "NorthernRange_6F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_DODRIO",
@@ -81,7 +81,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out329",
+            "name": "NorthernRange_7F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_DODRIO",
@@ -121,7 +121,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out330",
+            "name": "NorthernRange_8F_11F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PIDGEOT",
@@ -151,7 +151,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out331",
+            "name": "NorthernRange_12F_13F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PIDGEOT",
@@ -181,7 +181,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out332",
+            "name": "NorthernRange_14F_16F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PIDGEOT",
@@ -211,7 +211,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out333",
+            "name": "NorthernRange_17F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_FEAROW",
@@ -241,7 +241,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out334",
+            "name": "NorthernRange_18F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_FEAROW",
@@ -276,7 +276,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out335",
+            "name": "NorthernRange_19F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_FEAROW",
@@ -311,7 +311,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out336",
+            "name": "NorthernRange_20F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_FEAROW",
@@ -351,7 +351,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out337",
+            "name": "NorthernRange_21F_24F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_FEAROW",
@@ -386,7 +386,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out338",
+            "name": "NorthernRange_25F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SEVIPER",

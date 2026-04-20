@@ -1,7 +1,7 @@
 {
     "tables": [
         {
-            "name": "pokemon_found_out449",
+            "name": "MurkyCave_1F_2F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ZUBAT",
@@ -36,7 +36,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out450",
+            "name": "MurkyCave_3F_4F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ZUBAT",
@@ -76,7 +76,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out451",
+            "name": "MurkyCave_5F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ZUBAT",
@@ -121,7 +121,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out452",
+            "name": "MurkyCave_6F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_GOLBAT",
@@ -151,7 +151,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out453",
+            "name": "MurkyCave_7F_9F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_GOLBAT",
@@ -181,7 +181,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out454",
+            "name": "MurkyCave_10F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_GOLBAT",
@@ -216,7 +216,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out455",
+            "name": "MurkyCave_11F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_CROBAT",
@@ -256,7 +256,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out456",
+            "name": "MurkyCave_12F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_CROBAT",
@@ -291,7 +291,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out457",
+            "name": "MurkyCave_13F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_CROBAT",
@@ -326,7 +326,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out458",
+            "name": "MurkyCave_14F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_MUK",
@@ -366,7 +366,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out459",
+            "name": "MurkyCave_15F_19F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_MUK",

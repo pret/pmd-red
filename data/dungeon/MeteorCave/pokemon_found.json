@@ -1,7 +1,7 @@
 {
     "tables": [
         {
-            "name": "pokemon_found_out161",
+            "name": "MeteorCave_1F_19F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_KECLEON",
@@ -31,7 +31,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out162",
+            "name": "MeteorCave_20F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_KECLEON",

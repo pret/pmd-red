@@ -1,7 +1,7 @@
 {
     "tables": [
         {
-            "name": "pokemon_found_out611",
+            "name": "JoyousTower_1F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_BULBASAUR",
@@ -36,7 +36,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out612",
+            "name": "JoyousTower_2F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_BULBASAUR",
@@ -76,7 +76,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out613",
+            "name": "JoyousTower_3F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_BULBASAUR",
@@ -116,7 +116,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out614",
+            "name": "JoyousTower_4F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_BULBASAUR",
@@ -156,7 +156,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out615",
+            "name": "JoyousTower_5F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_BULBASAUR",
@@ -201,7 +201,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out616",
+            "name": "JoyousTower_6F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_DIGLETT",
@@ -241,7 +241,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out617",
+            "name": "JoyousTower_7F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_METAPOD",
@@ -276,7 +276,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out618",
+            "name": "JoyousTower_8F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_METAPOD",
@@ -311,7 +311,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out619",
+            "name": "JoyousTower_9F_10F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_KAKUNA",
@@ -351,7 +351,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out620",
+            "name": "JoyousTower_11F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_KAKUNA",
@@ -396,7 +396,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out621",
+            "name": "JoyousTower_12F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_KAKUNA",
@@ -436,7 +436,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out622",
+            "name": "JoyousTower_13F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_KAKUNA",
@@ -476,7 +476,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out623",
+            "name": "JoyousTower_14F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_CLEFAIRY",
@@ -516,7 +516,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out624",
+            "name": "JoyousTower_15F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SCYTHER",
@@ -556,7 +556,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out625",
+            "name": "JoyousTower_16F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SCYTHER",
@@ -591,7 +591,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out626",
+            "name": "JoyousTower_17F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_EXEGGUTOR",
@@ -631,7 +631,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out627",
+            "name": "JoyousTower_18F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_EXEGGUTOR",
@@ -666,7 +666,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out628",
+            "name": "JoyousTower_19F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_EXEGGUTOR",
@@ -706,7 +706,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out629",
+            "name": "JoyousTower_20F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_EXEGGUTOR",
@@ -741,7 +741,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out630",
+            "name": "JoyousTower_21F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_EXEGGUTOR",
@@ -781,7 +781,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out631",
+            "name": "JoyousTower_22F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_CLEFABLE",
@@ -831,7 +831,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out632",
+            "name": "JoyousTower_23F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_CLEFABLE",
@@ -876,7 +876,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out633",
+            "name": "JoyousTower_24F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_CLEFABLE",
@@ -926,7 +926,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out634",
+            "name": "JoyousTower_25F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_CLEFABLE",
@@ -976,7 +976,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out635",
+            "name": "JoyousTower_26F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_CLEFABLE",
@@ -1016,7 +1016,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out636",
+            "name": "JoyousTower_27F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_CLEFABLE",
@@ -1066,7 +1066,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out637",
+            "name": "JoyousTower_28F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_WEEDLE",
@@ -1106,7 +1106,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out638",
+            "name": "JoyousTower_29F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_WEEDLE",
@@ -1141,7 +1141,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out639",
+            "name": "JoyousTower_30F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_WEEDLE",
@@ -1186,7 +1186,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out640",
+            "name": "JoyousTower_31F_32F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_WEEDLE",
@@ -1236,7 +1236,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out641",
+            "name": "JoyousTower_33F_34F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_WEEDLE",
@@ -1286,7 +1286,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out642",
+            "name": "JoyousTower_35F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_BEEDRILL",
@@ -1336,7 +1336,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out643",
+            "name": "JoyousTower_36F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_DODUO",
@@ -1381,7 +1381,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out644",
+            "name": "JoyousTower_37F_38F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_DODUO",
@@ -1416,7 +1416,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out645",
+            "name": "JoyousTower_39F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_DODUO",
@@ -1451,7 +1451,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out646",
+            "name": "JoyousTower_40F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_IGGLYBUFF",
@@ -1486,7 +1486,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out647",
+            "name": "JoyousTower_41F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_TAUROS",
@@ -1526,7 +1526,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out648",
+            "name": "JoyousTower_42F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_TAUROS",
@@ -1576,7 +1576,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out649",
+            "name": "JoyousTower_43F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_TAUROS",
@@ -1626,7 +1626,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out650",
+            "name": "JoyousTower_44F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_DUGTRIO",
@@ -1681,7 +1681,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out651",
+            "name": "JoyousTower_45F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_DUGTRIO",
@@ -1731,7 +1731,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out652",
+            "name": "JoyousTower_46F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_DUGTRIO",
@@ -1781,7 +1781,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out653",
+            "name": "JoyousTower_47F_49F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_DUGTRIO",
@@ -1821,7 +1821,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out654",
+            "name": "JoyousTower_50F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_WIGGLYTUFF",
@@ -1876,7 +1876,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out655",
+            "name": "JoyousTower_51F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_FEAROW",
@@ -1926,7 +1926,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out656",
+            "name": "JoyousTower_52F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_FEAROW",
@@ -1971,7 +1971,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out657",
+            "name": "JoyousTower_53F_54F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_FEAROW",
@@ -2026,7 +2026,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out658",
+            "name": "JoyousTower_55F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PIDGEOT",
@@ -2081,7 +2081,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out659",
+            "name": "JoyousTower_56F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PIDGEOT",
@@ -2136,7 +2136,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out660",
+            "name": "JoyousTower_57F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PIDGEOT",
@@ -2196,7 +2196,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out661",
+            "name": "JoyousTower_58F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PONYTA",
@@ -2251,7 +2251,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out662",
+            "name": "JoyousTower_59F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PONYTA",
@@ -2306,7 +2306,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out663",
+            "name": "JoyousTower_60F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ARBOK",
@@ -2366,7 +2366,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out664",
+            "name": "JoyousTower_61F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ARBOK",
@@ -2421,7 +2421,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out665",
+            "name": "JoyousTower_62F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ARBOK",
@@ -2476,7 +2476,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out666",
+            "name": "JoyousTower_63F_64F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ARBOK",
@@ -2531,7 +2531,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out667",
+            "name": "JoyousTower_65F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_KOFFING",
@@ -2576,7 +2576,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out668",
+            "name": "JoyousTower_66F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_KOFFING",
@@ -2626,7 +2626,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out669",
+            "name": "JoyousTower_67F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_KOFFING",
@@ -2671,7 +2671,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out670",
+            "name": "JoyousTower_68F_69F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SANDSHREW",
@@ -2726,7 +2726,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out671",
+            "name": "JoyousTower_70F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SANDSHREW",
@@ -2781,7 +2781,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out672",
+            "name": "JoyousTower_71F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SANDSHREW",
@@ -2826,7 +2826,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out673",
+            "name": "JoyousTower_72F_73F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SANDSHREW",
@@ -2876,7 +2876,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out674",
+            "name": "JoyousTower_74F_75F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SANDSLASH",
@@ -2921,7 +2921,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out675",
+            "name": "JoyousTower_76F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SANDSLASH",
@@ -2971,7 +2971,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out676",
+            "name": "JoyousTower_77F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SANDSLASH",
@@ -3026,7 +3026,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out677",
+            "name": "JoyousTower_78F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SANDSLASH",
@@ -3076,7 +3076,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out678",
+            "name": "JoyousTower_79F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SANDSLASH",
@@ -3121,7 +3121,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out679",
+            "name": "JoyousTower_80F_82F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_GRIMER",
@@ -3156,7 +3156,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out680",
+            "name": "JoyousTower_83F_84F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_GRIMER",
@@ -3196,7 +3196,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out681",
+            "name": "JoyousTower_85F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_GRIMER",
@@ -3231,7 +3231,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out682",
+            "name": "JoyousTower_86F_87F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_WEEZING",
@@ -3266,7 +3266,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out683",
+            "name": "JoyousTower_88F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_WEEZING",
@@ -3301,7 +3301,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out684",
+            "name": "JoyousTower_89F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_WEEZING",
@@ -3336,7 +3336,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out685",
+            "name": "JoyousTower_90F_91F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_WEEZING",
@@ -3381,7 +3381,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out686",
+            "name": "JoyousTower_92F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_WEEZING",
@@ -3416,7 +3416,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out687",
+            "name": "JoyousTower_93F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_WEEZING",
@@ -3461,7 +3461,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out688",
+            "name": "JoyousTower_94F_99F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_WEEZING",

@@ -1,7 +1,7 @@
 {
     "tables": [
         {
-            "name": "pokemon_found_out526",
+            "name": "Autopilot_1F_2F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_WEEDLE",
@@ -51,7 +51,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out527",
+            "name": "Autopilot_3F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ODDISH",
@@ -91,7 +91,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out528",
+            "name": "Autopilot_4F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ODDISH",
@@ -151,7 +151,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out529",
+            "name": "Autopilot_5F_6F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_GASTLY",
@@ -196,7 +196,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out530",
+            "name": "Autopilot_7F_9F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_TANGELA",
@@ -246,7 +246,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out531",
+            "name": "Autopilot_10F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_FLAAFFY",
@@ -301,7 +301,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out532",
+            "name": "D51_3F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ODDISH",
@@ -341,7 +341,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out533",
+            "name": "D51_4F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ODDISH",
@@ -401,7 +401,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out534",
+            "name": "D51_14F_15F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PINECO",
@@ -446,7 +446,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out535",
+            "name": "D51_16F_19F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SWINUB",
@@ -496,7 +496,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out536",
+            "name": "D51_20F_21F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_MAGBY",
@@ -546,7 +546,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out537",
+            "name": "D51_22F_25F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SURSKIT",
@@ -601,7 +601,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out538",
+            "name": "D51_26F_30F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SABLEYE",
@@ -641,7 +641,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out539",
+            "name": "D51_31F_35F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_MANECTRIC",
@@ -681,7 +681,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out540",
+            "name": "D51_36F_40F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ROSELIA",
@@ -736,7 +736,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out541",
+            "name": "D51_41F_46F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ZANGOOSE",
@@ -781,7 +781,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out542",
+            "name": "D51_47F_50F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_KECLEON",

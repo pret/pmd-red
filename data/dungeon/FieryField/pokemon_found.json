@@ -1,7 +1,7 @@
 {
     "tables": [
         {
-            "name": "pokemon_found_out381",
+            "name": "FieryField_1F_3F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_VULPIX",
@@ -46,7 +46,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out382",
+            "name": "FieryField_4F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_VULPIX",
@@ -96,7 +96,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out383",
+            "name": "FieryField_5F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_CHARMANDER",
@@ -136,7 +136,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out384",
+            "name": "FieryField_6F_7F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_CHARMANDER",
@@ -171,7 +171,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out385",
+            "name": "FieryField_8F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_CHARMANDER",
@@ -201,7 +201,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out386",
+            "name": "FieryField_9F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_MAGBY",
@@ -226,7 +226,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out387",
+            "name": "FieryField_10F_14F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_RAPIDASH",
@@ -261,7 +261,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out388",
+            "name": "FieryField_15F_16F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_RAPIDASH",
@@ -301,7 +301,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out389",
+            "name": "FieryField_17F_20F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_MACHOKE",
@@ -341,7 +341,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out390",
+            "name": "FieryField_21F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_MACHOKE",
@@ -376,7 +376,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out391",
+            "name": "FieryField_22F_24F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_MACHOKE",
@@ -411,7 +411,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out392",
+            "name": "FieryField_25F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_MACHOKE",
@@ -441,7 +441,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out393",
+            "name": "FieryField_26F_29F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_CHARMELEON",
@@ -471,7 +471,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out394",
+            "name": "FieryField_30F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_CHARMELEON",
