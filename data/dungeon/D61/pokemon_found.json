@@ -1,7 +1,7 @@
 {
     "tables": [
         {
-            "name": "pokemon_found_out727",
+            "name": "D61_1F_4F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_JYNX",
@@ -51,7 +51,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out728",
+            "name": "D61_5F_9F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_JYNX",
@@ -96,7 +96,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out729",
+            "name": "D61_10F_12F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_HITMONLEE",
@@ -146,7 +146,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out730",
+            "name": "D61_13F_19F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_HITMONLEE",
@@ -186,7 +186,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out731",
+            "name": "D61_20F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_HITMONLEE",
@@ -236,7 +236,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out732",
+            "name": "D61_21F_29F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_MR_MIME",
@@ -276,7 +276,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out733",
+            "name": "D61_30F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_MR_MIME",
@@ -326,7 +326,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out734",
+            "name": "D61_31F_33F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_MR_MIME",
@@ -371,7 +371,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out735",
+            "name": "D61_34F_35F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_NATU",
@@ -411,7 +411,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out736",
+            "name": "D61_36F_39F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_AZUMARILL",
@@ -446,7 +446,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out737",
+            "name": "D61_40F_42F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_KANGASKHAN",
@@ -481,7 +481,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out738",
+            "name": "D61_43F_48F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_KANGASKHAN",
@@ -521,7 +521,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out739",
+            "name": "D61_49F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_KANGASKHAN",
@@ -556,7 +556,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out740",
+            "name": "D61_50F_52F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_KANGASKHAN",
@@ -596,7 +596,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out741",
+            "name": "D61_53F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_KANGASKHAN",
@@ -641,7 +641,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out742",
+            "name": "D61_54F_55F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_KANGASKHAN",
@@ -686,7 +686,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out743",
+            "name": "D61_56F_59F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_WOBBUFFET",
@@ -726,7 +726,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out744",
+            "name": "D61_60F_64F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_MAGBY",
@@ -761,7 +761,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out745",
+            "name": "D61_65F_66F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_MAGBY",
@@ -791,7 +791,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out746",
+            "name": "D61_67F_69F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_MAGBY",
@@ -816,7 +816,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out747",
+            "name": "D61_70F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_XATU",
@@ -846,7 +846,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out748",
+            "name": "D61_71F_90F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_XATU",
@@ -871,7 +871,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out749",
+            "name": "D61_91F_99F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_BLISSEY",

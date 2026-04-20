@@ -1,7 +1,7 @@
 {
     "tables": [
         {
-            "name": "pokemon_found_out509",
+            "name": "FantasyStrait_1F_4F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_TENTACOOL",
@@ -41,7 +41,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out510",
+            "name": "FantasyStrait_5F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_TENTACOOL",
@@ -91,7 +91,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out511",
+            "name": "FantasyStrait_6F_8F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_TENTACOOL",
@@ -146,7 +146,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out512",
+            "name": "FantasyStrait_9F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_TENTACOOL",
@@ -196,7 +196,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out513",
+            "name": "FantasyStrait_10F_13F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SLOWPOKE",
@@ -246,7 +246,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out514",
+            "name": "FantasyStrait_14F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SLOWPOKE",
@@ -291,7 +291,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out515",
+            "name": "FantasyStrait_15F_19F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_KRABBY",
@@ -336,7 +336,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out516",
+            "name": "FantasyStrait_20F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_GRIMER",
@@ -386,7 +386,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out517",
+            "name": "FantasyStrait_21F_23F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_GRIMER",
@@ -426,7 +426,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out518",
+            "name": "FantasyStrait_25F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_GRIMER",
@@ -461,7 +461,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out519",
+            "name": "FantasyStrait_26F_29F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_GRIMER",
@@ -496,7 +496,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out520",
+            "name": "FantasyStrait_30F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SLOWBRO",

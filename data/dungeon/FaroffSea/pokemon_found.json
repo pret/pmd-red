@@ -1,7 +1,7 @@
 {
     "tables": [
         {
-            "name": "pokemon_found_out689",
+            "name": "FaroffSea_1F_5F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SHELLDER",
@@ -31,7 +31,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out690",
+            "name": "FaroffSea_6F_8F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SLOWPOKE",
@@ -71,7 +71,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out691",
+            "name": "FaroffSea_9F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SLOWPOKE",
@@ -106,7 +106,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out692",
+            "name": "FaroffSea_10F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SLOWPOKE",
@@ -141,7 +141,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out693",
+            "name": "FaroffSea_11F_13F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SLOWPOKE",
@@ -171,7 +171,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out694",
+            "name": "FaroffSea_14F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SLOWPOKE",
@@ -206,7 +206,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out695",
+            "name": "FaroffSea_15F_19F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ANORITH",
@@ -231,7 +231,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out696",
+            "name": "FaroffSea_20F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_GRIMER",
@@ -266,7 +266,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out697",
+            "name": "FaroffSea_21F_23F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_GRIMER",
@@ -296,7 +296,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out698",
+            "name": "FaroffSea_24F_25F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_GRIMER",
@@ -321,7 +321,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out699",
+            "name": "FaroffSea_26F_29F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_GRIMER",
@@ -351,7 +351,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out700",
+            "name": "FaroffSea_30F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SLOWBRO",
@@ -386,7 +386,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out701",
+            "name": "FaroffSea_31F_34F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SLOWBRO",
@@ -416,7 +416,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out702",
+            "name": "FaroffSea_35F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SLOWBRO",
@@ -461,7 +461,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out703",
+            "name": "FaroffSea_36F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SLOWBRO",
@@ -501,7 +501,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out704",
+            "name": "FaroffSea_37F_39F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_STARMIE",
@@ -536,7 +536,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out705",
+            "name": "FaroffSea_40F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_STARMIE",
@@ -566,7 +566,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out706",
+            "name": "FaroffSea_41F_44F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_STARMIE",
@@ -601,7 +601,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out707",
+            "name": "FaroffSea_45F_49F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_LAPRAS",
@@ -631,7 +631,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out708",
+            "name": "FaroffSea_50F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_LAPRAS",
@@ -676,7 +676,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out709",
+            "name": "FaroffSea_51F_54F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_DRATINI",
@@ -706,7 +706,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out710",
+            "name": "FaroffSea_55F_59F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_DEWGONG",
@@ -741,7 +741,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out711",
+            "name": "FaroffSea_60F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_DEWGONG",
@@ -786,7 +786,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out712",
+            "name": "FaroffSea_65F_69F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_MUK",
@@ -821,7 +821,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out713",
+            "name": "FaroffSea_70F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_VAPOREON",
@@ -856,7 +856,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out714",
+            "name": "FaroffSea_71F_75F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_KINGDRA",

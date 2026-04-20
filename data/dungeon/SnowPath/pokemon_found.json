@@ -1,7 +1,7 @@
 {
     "tables": [
         {
-            "name": "pokemon_found_out522",
+            "name": "SnowPath_1F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_FURRET",
@@ -26,7 +26,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out523",
+            "name": "SnowPath_2F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_FURRET",
@@ -56,7 +56,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out524",
+            "name": "SnowPath_3F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_FURRET",
@@ -91,7 +91,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out525",
+            "name": "SnowPath_4F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_FURRET",

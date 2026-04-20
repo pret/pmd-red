@@ -1,7 +1,7 @@
 {
     "tables": [
         {
-            "name": "pokemon_found_out543",
+            "name": "DojoRegistration_1F_2F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_RATICATE",
@@ -26,7 +26,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out544",
+            "name": "DojoRegistration_3F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_RATICATE",
@@ -66,7 +66,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out545",
+            "name": "DojoRegistration_4F_6F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ABRA",
@@ -101,7 +101,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out546",
+            "name": "DojoRegistration_7F_66F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_POLIWAG",
@@ -126,7 +126,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out547",
+            "name": "DojoRegistration_10F_11F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ABRA",
@@ -156,7 +156,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out548",
+            "name": "DojoRegistration_12F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ABRA",
@@ -196,7 +196,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out549",
+            "name": "DojoRegistration_13F_14F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ABRA",
@@ -221,7 +221,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out550",
+            "name": "DojoRegistration_15F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ABRA",
@@ -251,7 +251,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out551",
+            "name": "DojoRegistration_16F_18F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ABRA",
@@ -286,7 +286,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out552",
+            "name": "DojoRegistration_19F_20F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ABRA",
@@ -316,7 +316,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out553",
+            "name": "DojoRegistration_21F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ABRA",
@@ -351,7 +351,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out554",
+            "name": "DojoRegistration_22F_24F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_DIGLETT",
@@ -382,7 +382,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out555",
+            "name": "DojoRegistration_25F_26F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PIDGEY",
@@ -407,7 +407,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out556",
+            "name": "DojoRegistration_27F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PIDGEY",
@@ -442,7 +442,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out557",
+            "name": "DojoRegistration_28F_30F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ABRA",
@@ -467,7 +467,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out558",
+            "name": "DojoRegistration_31F_32F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_NIDORAN_F",
@@ -492,7 +492,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out559",
+            "name": "DojoRegistration_33F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_NIDORAN_F",
@@ -522,7 +522,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out560",
+            "name": "DojoRegistration_34F_36F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_WEEDLE",
@@ -557,7 +557,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out561",
+            "name": "DojoRegistration_37F_38F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ABRA",
@@ -587,7 +587,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out562",
+            "name": "DojoRegistration_39F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ABRA",
@@ -622,7 +622,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out563",
+            "name": "DojoRegistration_40F_42F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ABRA",
@@ -647,7 +647,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out564",
+            "name": "DojoRegistration_43F_45F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ABRA",
@@ -677,7 +677,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out565",
+            "name": "DojoRegistration_46F_47F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ABRA",
@@ -702,7 +702,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out566",
+            "name": "DojoRegistration_48F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ABRA",
@@ -732,7 +732,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out567",
+            "name": "DojoRegistration_49F_51F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ABRA",
@@ -762,7 +762,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out568",
+            "name": "DojoRegistration_52F_53F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ABRA",
@@ -787,7 +787,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out569",
+            "name": "DojoRegistration_54F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ABRA",
@@ -817,7 +817,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out570",
+            "name": "DojoRegistration_55F_56F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ABRA",
@@ -842,7 +842,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out571",
+            "name": "DojoRegistration_57F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ABRA",
@@ -877,7 +877,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out572",
+            "name": "DojoRegistration_60F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_BLASTOISE",
@@ -912,7 +912,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out573",
+            "name": "DojoRegistration_61F_62F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ABRA",
@@ -937,7 +937,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out574",
+            "name": "DojoRegistration_63F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ABRA",
@@ -967,7 +967,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out575",
+            "name": "DojoRegistration_67F_69F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PIDGEY",

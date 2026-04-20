@@ -1,7 +1,7 @@
 {
     "tables": [
         {
-            "name": "pokemon_found_out163",
+            "name": "WesternCave_1F_2F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_BUTTERFREE",
@@ -41,7 +41,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out164",
+            "name": "WesternCave_3F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_BUTTERFREE",
@@ -86,7 +86,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out165",
+            "name": "WesternCave_4F_5F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_EKANS",
@@ -121,7 +121,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out166",
+            "name": "WesternCave_6F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_VENOMOTH",
@@ -161,7 +161,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out167",
+            "name": "WesternCave_7F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_VENOMOTH",
@@ -191,7 +191,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out168",
+            "name": "WesternCave_8F_9F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_VENOMOTH",
@@ -221,7 +221,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out169",
+            "name": "WesternCave_10F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_VENOMOTH",
@@ -266,7 +266,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out170",
+            "name": "WesternCave_11F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PRIMEAPE",
@@ -301,7 +301,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out171",
+            "name": "WesternCave_12F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PRIMEAPE",
@@ -341,7 +341,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out172",
+            "name": "WesternCave_13F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PRIMEAPE",
@@ -381,7 +381,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out173",
+            "name": "WesternCave_14F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ARBOK",
@@ -421,7 +421,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out174",
+            "name": "WesternCave_15F_16F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ARBOK",
@@ -466,7 +466,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out175",
+            "name": "WesternCave_17F_18F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ARBOK",
@@ -506,7 +506,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out176",
+            "name": "WesternCave_19F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_IVYSAUR",
@@ -546,7 +546,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out177",
+            "name": "WesternCave_20F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_IVYSAUR",
@@ -586,7 +586,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out178",
+            "name": "WesternCave_21F_26F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_IVYSAUR",
@@ -626,7 +626,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out179",
+            "name": "WesternCave_27F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_IVYSAUR",
@@ -666,7 +666,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out180",
+            "name": "WesternCave_28F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PERSIAN",
@@ -696,7 +696,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out181",
+            "name": "WesternCave_29F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PERSIAN",
@@ -721,7 +721,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out182",
+            "name": "WesternCave_30F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PERSIAN",
@@ -756,7 +756,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out183",
+            "name": "WesternCave_31F_35F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PERSIAN",
@@ -786,7 +786,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out184",
+            "name": "WesternCave_36F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_HARIYAMA",
@@ -811,7 +811,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out185",
+            "name": "WesternCave_37F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_LICKITUNG",
@@ -841,7 +841,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out186",
+            "name": "WesternCave_38F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_LICKITUNG",
@@ -881,7 +881,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out187",
+            "name": "WesternCave_39F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_LICKITUNG",
@@ -916,7 +916,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out188",
+            "name": "WesternCave_40F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_LICKITUNG",
@@ -961,7 +961,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out189",
+            "name": "WesternCave_41F_44F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_LICKITUNG",
@@ -1001,7 +1001,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out190",
+            "name": "WesternCave_45F_48F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SKARMORY",
@@ -1036,7 +1036,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out191",
+            "name": "WesternCave_49F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_FERALIGATR",
@@ -1076,7 +1076,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out192",
+            "name": "WesternCave_50F_53F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_VENUSAUR",
@@ -1116,7 +1116,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out193",
+            "name": "WesternCave_54F_58F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_VENUSAUR",
@@ -1151,7 +1151,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out194",
+            "name": "WesternCave_59F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_VENUSAUR",
@@ -1181,7 +1181,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out195",
+            "name": "WesternCave_60F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ARCANINE",
@@ -1211,7 +1211,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out196",
+            "name": "WesternCave_61F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ARCANINE",
@@ -1236,7 +1236,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out197",
+            "name": "WesternCave_62F_68F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ARCANINE",
@@ -1266,7 +1266,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out198",
+            "name": "WesternCave_69F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ARCANINE",
@@ -1296,7 +1296,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out199",
+            "name": "WesternCave_70F_78F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_NINETALES",
@@ -1326,7 +1326,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out200",
+            "name": "WesternCave_79F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_NINETALES",
@@ -1356,7 +1356,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out201",
+            "name": "WesternCave_80F_86F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_MACHAMP",
@@ -1391,7 +1391,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out202",
+            "name": "WesternCave_87F_88F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_MACHAMP",
@@ -1431,7 +1431,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out203",
+            "name": "WesternCave_89F_91F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_CHARIZARD",
@@ -1466,7 +1466,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out204",
+            "name": "WesternCave_92F_98F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_CHARIZARD",
@@ -1496,7 +1496,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out205",
+            "name": "WesternCave_99F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_MEWTWO",

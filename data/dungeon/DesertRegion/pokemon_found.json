@@ -1,7 +1,7 @@
 {
     "tables": [
         {
-            "name": "pokemon_found_out340",
+            "name": "DesertRegion_1F_6F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SANDSHREW",
@@ -46,7 +46,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out341",
+            "name": "DesertRegion_7F_11F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_NIDOQUEEN",
@@ -81,7 +81,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out342",
+            "name": "DesertRegion_12F_13F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_NIDOQUEEN",
@@ -116,7 +116,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out343",
+            "name": "DesertRegion_14F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_NIDOQUEEN",
@@ -146,7 +146,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out344",
+            "name": "DesertRegion_15F_20F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SANDSLASH",

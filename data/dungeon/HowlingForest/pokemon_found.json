@@ -1,7 +1,7 @@
 {
     "tables": [
         {
-            "name": "pokemon_found_out576",
+            "name": "HowlingForest_1F_3F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_HOUNDOUR",
@@ -41,7 +41,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out577",
+            "name": "HowlingForest_4F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_FURRET",
@@ -86,7 +86,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out578",
+            "name": "HowlingForest_5F_6F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_FURRET",
@@ -126,7 +126,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out579",
+            "name": "HowlingForest_7F_8F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_FURRET",
@@ -171,7 +171,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out580",
+            "name": "HowlingForest_9F_10F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PIDGEY",
@@ -216,7 +216,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out581",
+            "name": "HowlingForest_11F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PIDGEY",
@@ -266,7 +266,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out582",
+            "name": "HowlingForest_12F_13F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PIDGEY",
@@ -311,7 +311,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out583",
+            "name": "HowlingForest_14F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_EXEGGCUTE",
@@ -356,7 +356,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out584",
+            "name": "HowlingForest_15F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SMEARGLE",

@@ -1,7 +1,7 @@
 {
     "tables": [
         {
-            "name": "pokemon_found_out491",
+            "name": "RemainsIsland_1F_3F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PIDGEOT",
@@ -51,7 +51,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out492",
+            "name": "RemainsIsland_4F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_BUTTERFREE",
@@ -101,7 +101,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out493",
+            "name": "RemainsIsland_5F_6F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_BUTTERFREE",
@@ -151,7 +151,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out494",
+            "name": "RemainsIsland_7F_8F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_BUTTERFREE",
@@ -196,7 +196,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out495",
+            "name": "RemainsIsland_9F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_BUTTERFREE",
@@ -241,7 +241,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out496",
+            "name": "RemainsIsland_10F_12F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SPEAROW",
@@ -286,7 +286,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out497",
+            "name": "RemainsIsland_13F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SPEAROW",
@@ -326,7 +326,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out498",
+            "name": "RemainsIsland_14F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SCYTHER",
@@ -361,7 +361,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out499",
+            "name": "RemainsIsland_15F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SCYTHER",
@@ -391,7 +391,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out500",
+            "name": "RemainsIsland_16F_19F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SCYTHER",
@@ -426,7 +426,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out501",
+            "name": "RemainsIsland_20F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_DODRIO",

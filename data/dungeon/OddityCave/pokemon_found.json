@@ -1,7 +1,7 @@
 {
     "tables": [
         {
-            "name": "pokemon_found_out481",
+            "name": "OddityCave_1F_3F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_WEEDLE",
@@ -46,7 +46,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out482",
+            "name": "OddityCave_4F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_WEEDLE",
@@ -96,7 +96,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out483",
+            "name": "OddityCave_5F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PIDGEOTTO",
@@ -131,7 +131,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out484",
+            "name": "OddityCave_6F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_DITTO",
@@ -166,7 +166,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out485",
+            "name": "OddityCave_7F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_DITTO",
@@ -201,7 +201,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out486",
+            "name": "OddityCave_8F_9F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_RAPIDASH",
@@ -241,7 +241,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out487",
+            "name": "OddityCave_10F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_RAPIDASH",
@@ -276,7 +276,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out488",
+            "name": "OddityCave_11F_12F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_DITTO",
@@ -306,7 +306,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out489",
+            "name": "OddityCave_13F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_DITTO",
@@ -336,7 +336,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out490",
+            "name": "OddityCave_14F_15F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_DITTO",

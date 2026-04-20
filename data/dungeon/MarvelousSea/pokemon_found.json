@@ -1,7 +1,7 @@
 {
     "tables": [
         {
-            "name": "pokemon_found_out502",
+            "name": "MarvelousSea_1F_5F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_TENTACOOL",
@@ -36,7 +36,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out503",
+            "name": "MarvelousSea_6F_8F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_TENTACOOL",
@@ -76,7 +76,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out504",
+            "name": "MarvelousSea_9F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_TENTACOOL",
@@ -111,7 +111,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out505",
+            "name": "MarvelousSea_10F_13F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SLOWPOKE",
@@ -146,7 +146,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out506",
+            "name": "MarvelousSea_14F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SLOWPOKE",
@@ -186,7 +186,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out507",
+            "name": "MarvelousSea_15F_19F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_REMORAID",
@@ -216,7 +216,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out508",
+            "name": "MarvelousSea_20F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_GRIMER",

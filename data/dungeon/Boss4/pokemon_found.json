@@ -1,7 +1,7 @@
 {
     "tables": [
         {
-            "name": "pokemon_found_out207",
+            "name": "Boss4_1F_3F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PIDGEY",
@@ -41,7 +41,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out208",
+            "name": "Boss4_4F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PIDGEY",
@@ -86,7 +86,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out209",
+            "name": "Boss4_5F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PIDGEOTTO",
@@ -126,7 +126,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out210",
+            "name": "Boss4_6F_7F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PIDGEOTTO",
@@ -171,7 +171,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out211",
+            "name": "Boss4_8F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PIDGEOT",
@@ -211,7 +211,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out212",
+            "name": "Boss4_9F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PIDGEOT",
@@ -251,7 +251,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out213",
+            "name": "Boss4_10F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PIDGEOT",
@@ -286,7 +286,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out214",
+            "name": "Boss4_11F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SHEDINJA",

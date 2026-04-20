@@ -1,7 +1,7 @@
 {
     "tables": [
         {
-            "name": "pokemon_found_out585",
+            "name": "WaterfallPond_1F_2F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_POLIWAG",
@@ -41,7 +41,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out586",
+            "name": "WaterfallPond_3F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_POLIWAG",
@@ -86,7 +86,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out587",
+            "name": "WaterfallPond_4F_5F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_POLIWAG",
@@ -126,7 +126,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out588",
+            "name": "WaterfallPond_6F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_TOTODILE",
@@ -161,7 +161,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out589",
+            "name": "WaterfallPond_7F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_MAGIKARP",
@@ -196,7 +196,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out590",
+            "name": "WaterfallPond_8F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SQUIRTLE",
@@ -231,7 +231,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out591",
+            "name": "WaterfallPond_9F_10F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SQUIRTLE",
@@ -271,7 +271,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out592",
+            "name": "WaterfallPond_11F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SQUIRTLE",
@@ -306,7 +306,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out593",
+            "name": "WaterfallPond_12F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_SQUIRTLE",
@@ -341,7 +341,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out594",
+            "name": "WaterfallPond_13F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_POLIWHIRL",
@@ -376,7 +376,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out595",
+            "name": "WaterfallPond_14F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_MARSHTOMP",
@@ -406,7 +406,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out596",
+            "name": "WaterfallPond_15F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_QUAGSIRE",
@@ -441,7 +441,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out597",
+            "name": "WaterfallPond_16F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_POLIWRATH",
@@ -486,7 +486,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out598",
+            "name": "WaterfallPond_17F_18F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_POLIWRATH",
@@ -526,7 +526,7 @@
             ]
         },
         {
-            "name": "pokemon_found_out599",
+            "name": "WaterfallPond_19F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_POLIWRATH",

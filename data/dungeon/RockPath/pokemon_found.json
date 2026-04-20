@@ -1,7 +1,7 @@
 {
     "tables": [
         {
-            "name": "pokemon_found_out521",
+            "name": "RockPath_1F_4F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_PIDGEOT",
