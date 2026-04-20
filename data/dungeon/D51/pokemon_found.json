@@ -1,7 +1,7 @@
 {
     "tables": [
         {
-            "name": "D51_1F_2F_Pokemon",
+            "name": "Autopilot_1F_2F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_WEEDLE",
@@ -51,7 +51,7 @@
             ]
         },
         {
-            "name": "D51_3F_Pokemon",
+            "name": "Autopilot_3F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ODDISH",
@@ -91,7 +91,7 @@
             ]
         },
         {
-            "name": "D51_4F_Pokemon",
+            "name": "Autopilot_4F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_ODDISH",
@@ -151,7 +151,7 @@
             ]
         },
         {
-            "name": "D51_5F_6F_Pokemon",
+            "name": "Autopilot_5F_6F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_GASTLY",
@@ -196,7 +196,7 @@
             ]
         },
         {
-            "name": "D51_7F_9F_Pokemon",
+            "name": "Autopilot_7F_9F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_TANGELA",
@@ -246,7 +246,7 @@
             ]
         },
         {
-            "name": "D51_10F_Pokemon",
+            "name": "Autopilot_10F_Pokemon",
             "pokemon": [
                 {
                     "species": "MONSTER_FLAAFFY",
