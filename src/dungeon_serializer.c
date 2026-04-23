@@ -738,6 +738,10 @@ void ReadDungeonState(u8 *buffer, u32 bufLen)
     ReadDungeonFloor(&seri);
     ReadDungeonVisibility(&seri);
     ReadDungeonMusic(&seri);
+    //BUG: KECLEON INFINITE MONEY GLITCH. Upon loading a quicksave, the game erroneously re-adds the total value of the items you're planning to sell in Kecleon's shop in ReadDungeonItems, 
+    //which makes Kecleon give the player money whenever the player leaves the shop. Full technical explaination here: https://github.com/jtjanecek/rogue-rescue-team/issues/4
+    //Fix it by commenting out the line below. Proof that unk4C is the correct variable: https://github.com/pret/pmd-red/blob/master/src/dungeon_items.c#L316
+    //gDungeon->unk644.unk4C = 0;
     ReadDungeonItems(&seri);
     ReadDungeonTraps(&seri);
     ReadDungeonMonsters(&seri);
