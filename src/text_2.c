@@ -1177,7 +1177,7 @@ void sub_80089AC(const WindowTemplate *r4, DungeonPos *r5_Str)
 
         // BUG: The background array is 161 entries long, but this function will potentially write
         // up to index 160 + 12 = 172, overflowing the array.
-#ifdef BUGFIX
+#ifdef UBFIX
         if (r5 > 160 - 12) {
             r5 = 160 - 12;
         }

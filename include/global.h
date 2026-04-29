@@ -60,8 +60,14 @@ static inline bool8 AreStringsDifferent(const u8 *str1, const u8 *str2)
     return strcmp(str1, str2) != 0;
 }
 
+#ifdef BUGFIX
+#ifndef UBFIX
+#define UBFIX
+#endif
+#endif
+
 #ifdef MODERN
-#define BUGFIX
+#define UBFIX
 #define NONMATCHING
 
 #include "mini_printf.h"
