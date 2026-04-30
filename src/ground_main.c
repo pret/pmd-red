@@ -309,7 +309,7 @@ u32 xxx_script_related_8098468_Async(s32 startMode)
         }
         GroundMap_Action();
         sub_8005838(NULL,0);
-        sub_80060EC();
+        ToggleWindowBgBuffer();
         xxx_call_update_bg_sound_input();
         while ( 1 ) {
             xxx_call_update_bg_sound_input();

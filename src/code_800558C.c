@@ -474,7 +474,7 @@ UNUSED static void sub_80060A8(void)
 #endif
 
 // arm9.bin::020056C0
-void sub_80060EC(void)
+void ToggleWindowBgBuffer(void)
 {
     gWin0HPtr = sBufferPtr;
     sBufferIdx = !sBufferIdx;

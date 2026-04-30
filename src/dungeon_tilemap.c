@@ -716,7 +716,7 @@ void sub_8040094(u8 r0)
 {
     gDungeon->unk181e8.unk18217 = r0;
     sub_803F7BC();
-    sub_80060EC();
+    ToggleWindowBgBuffer();
     IncrementPlayTime(gPlayTimeRef);
     WaitForNextFrameAndAdvanceRNG();
     LoadBufferedInputs();

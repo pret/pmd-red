@@ -9,6 +9,6 @@ extern s16 *gWindowBgCopy;
 
 void sub_80057E8(void);
 void sub_8005838(s32 *, u8 kind);
-void sub_80060EC(void);
+void ToggleWindowBgBuffer(void);
 
 #endif // GUARD_CODE_800558C_H

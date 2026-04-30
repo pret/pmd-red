@@ -206,7 +206,7 @@ static void sub_803E490(u32 unused)
     nullsub_8(gGameOptionsRef->touchScreen);
     sub_8005180();
     nullsub_12();
-    sub_80060EC();
+    ToggleWindowBgBuffer();
 
     gDungeonFramesCounter++;
 
@@ -240,7 +240,7 @@ void sub_803E668(u32 unused)
     sub_8005180();
     nullsub_12();
     sub_8005838(NULL, 0);
-    sub_80060EC();
+    ToggleWindowBgBuffer();
     gDungeonFramesCounter++;
     IncrementPlayTime(gPlayTimeRef);
     WaitForNextFrameAndAdvanceRNG();

@@ -279,7 +279,7 @@ static void MainLoops_RunFrameActions(u32 unused)
     sub_8005180();
     // Extra call here in blue. Seems to be for 2nd screen sprites
 
-    sub_80060EC();
+    ToggleWindowBgBuffer();
     UpdateSoundEffectCounters();
     WaitForNextFrameAndAdvanceRNG();
     LoadBufferedInputs();
@@ -363,7 +363,7 @@ static void QuickSave_Async(u32 mode)
     sub_8099750();
     SetCharacterMask(3);
     sub_8005838(NULL, 0);
-    sub_80060EC();
+    ToggleWindowBgBuffer();
     CreateDialogueBoxAndPortrait(sSaveTextQuicksaving, 0, 0, 0x20);
 
     while (TRUE) {

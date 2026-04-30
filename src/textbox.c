@@ -1049,7 +1049,7 @@ void sub_809B57C_Async(void)
 
 void sub_809B614(void)
 {
-    sub_80060EC();
+    ToggleWindowBgBuffer();
     gUnknown_20399DE = gUnknown_20399DC;
     gUnknown_20399DC &= ~2;
 }
