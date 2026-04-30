@@ -37,7 +37,7 @@ EWRAM_INIT void (*ScrollUpWindowFunc)(s32 windowId) = ScrollUpWindow;
 EWRAM_INIT void (*gIwramTextFunc3)(s32 a0) = sub_82729A4;
 EWRAM_INIT void (*gIwramTextFunc4)(s32 a0) = sub_8272A78;
 
-IWRAM_DATA ALIGNED(4) s16 gUnknown_3000E94[161] = {0};
+IWRAM_DATA ALIGNED(4) s16 gWindowBg[161] = {0};
 
 const u32 gUnknown_80B853C[16] =
 {
@@ -160,7 +160,7 @@ void LoadCharmaps(void)
 
     gDrawTextShadow = 1;
     gTextShadowMask = 0x88888888;
-    gUnknown_203B078 = NULL;
+    gWindowBgCopy = NULL;
     gUnknown_20274A5 = FALSE;
     gUnknown_202B020 = 1;
     gUnknown_202B024 = 20;
@@ -266,18 +266,18 @@ static void ShowWindowsInternal(const WindowTemplates *winTemplates, bool8 a1, b
 
         if (winTemplates->id[i].width != 0) {
             AddWindow(gWindows, (u32 *)VRAM, sWindowGFXPool, gBgTilemaps, sUnknown_80B8804[i], &winTemplates->id[i], a1, startTileNum, positionModifier, FALSE);
-            sub_80089AC(&winTemplates->id[i], positionModifier);
+            DrawWindowBg(&winTemplates->id[i], positionModifier);
 
             startTileNum += winTemplates->id[i].width * winTemplates->id[i].totalHeight;
         }
     }
 
     // Needed to account for weird compiler LDRs
-    ASM_MATCH_TRICK(gUnknown_203B078);
-    ASM_MATCH_TRICK(gUnknown_3000E94[0]);
+    ASM_MATCH_TRICK(gWindowBgCopy);
+    ASM_MATCH_TRICK(gWindowBg[0]);
     ASM_MATCH_TRICK(gUnknown_20274A5);
 
-    gUnknown_203B078 = gUnknown_3000E94;
+    gWindowBgCopy = gWindowBg;
     gUnknown_20274A5 = TRUE;
 }
 

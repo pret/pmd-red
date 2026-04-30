@@ -80,11 +80,11 @@ void VBlank_CB(void)
     REG_WINOUT = WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR | WINOUT_WIN01_BG3 | WINOUT_WIN01_BG2 | WINOUT_WIN01_BG0;
     REG_BLDCNT = gBldCnt;
     REG_BLDALPHA = gBldAlpha;
-    if (gUnknown_2026E38) {
+    if (gDrawWindow) {
         // Very interesting use of DmaCopy16 here.
-        DmaSet(0, &gUnknown_2026E3C[2], REG_ADDR_WIN0H, ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_SRC_INC | DMA_DEST_RELOAD | DMA_16BIT) << 16) | 2);
-        REG_WIN0H = gUnknown_2026E3C[0];
-        REG_WIN1H = gUnknown_2026E3C[1];
+        DmaSet(0, &gWin0HPtr[2], REG_ADDR_WIN0H, ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_SRC_INC | DMA_DEST_RELOAD | DMA_16BIT) << 16) | 2);
+        REG_WIN0H = gWin0HPtr[0];
+        REG_WIN1H = gWin0HPtr[1];
         REG_WIN0V = DISPLAY_HEIGHT;
         REG_WIN1V = DISPLAY_HEIGHT;
     }

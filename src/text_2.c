@@ -1107,169 +1107,184 @@ void ResetWindowBgData(void)
 {
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT_INT(gUnknown_3000E94); i++) {
-        gUnknown_3000E94[i] = 0xF0F0;
+    for (i = 0; i < ARRAY_COUNT_INT(gWindowBg); i++) {
+        gWindowBg[i] = 0xF0F0;
     }
 }
 
-void sub_80089AC(const WindowTemplate *r4, DungeonPos *r5_Str)
+void DrawWindowBg(const WindowTemplate *window, DungeonPos *pos)
 {
-    u8 *r6;
+    const u8 WINH_DEFAULT = 0xF0;
+    const s32 Y_MAX = 160;
+    u8 *windowArr;
 
-    if (r4->flags & WINTEMPLATE_FLAG_x40)
+    if (window->flags & WINTEMPLATE_FLAG_x40)
         return;
 
-    r6 = (u8*) gUnknown_3000E94;
-    if (r4->type == WINDOW_TYPE_WITHOUT_BORDER) {
-        s32 r12 = (r4->pos.x + r5_Str->x) * 8;
-        s32 r5 = (r4->pos.y + r5_Str->y) * 8;
-        s32 r7 = (r4->pos.x + r5_Str->x + r4->width) * 8;
-        s32 r2 = (r4->pos.y + r5_Str->y + r4->height) * 8;
-        if (r4->height != 0) {
-            if (r5 < 0)
-                r5 = 0;
-            if (r2 < 0)
-                r2 = 0;
-            if (r5 > 160)
-                r5 = 160;
-            if (r2 > 160)
-                r2 = 160;
-            while (r5 < r2) {
-                s32 id = r5 * 2;
-                if (r6[id] == 240 && r6[id + 1] == 240) {
-                    r6[id++] = r7;
-                    r6[id] = r12;
+    windowArr = (u8*) gWindowBg;
+    if (window->type == WINDOW_TYPE_WITHOUT_BORDER) {
+        s32 xStart = (window->pos.x + pos->x) * 8;
+        s32 yStart = (window->pos.y + pos->y) * 8;
+        s32 xEnd = (window->pos.x + pos->x + window->width) * 8;
+        s32 yEnd = (window->pos.y + pos->y + window->height) * 8;
+        if (window->height != 0) {
+            if (yStart < 0)
+                yStart = 0;
+            if (yEnd < 0)
+                yEnd = 0;
+            if (yStart > Y_MAX)
+                yStart = Y_MAX;
+            if (yEnd > Y_MAX)
+                yEnd = Y_MAX;
+
+            // Draw window background
+            while (yStart < yEnd) {
+                s32 idx = yStart * 2;
+                if (windowArr[idx] == WINH_DEFAULT && windowArr[idx + 1] == WINH_DEFAULT) {
+                    windowArr[idx++] = xEnd;    // Right side of window
+                    windowArr[idx] = xStart;    // Left side of window
                 }
                 else {
-                    if (r6[id] < r7) {
-                        r6[id] = r7;
+                    // Only allow window to expand in size?
+                    // Right side of window
+                    if (windowArr[idx] < xEnd) {
+                        windowArr[idx] = xEnd;
                     }
-                    id++;
-                    if (r6[id] > r12) {
-                        r6[id] = r12;
+                    idx++;
+                    // Left side of window
+                    if (windowArr[idx] > xStart) {
+                        windowArr[idx] = xStart;
                     }
                 }
-                r5++;
+                yStart++;
             }
         }
     }
-    else if (r4->type == WINDOW_TYPE_WITH_HEADER) {
+    else if (window->type == WINDOW_TYPE_WITH_HEADER) {
         s32 i;
-        s32 r9 = ((r4->pos.x + r5_Str->x) * 8) - 5;
-        s32 r5 = ((r4->pos.y + r5_Str->y) * 8) - 4;
-        s32 var_24 = ((r4->pos.x + r5_Str->x + r4->width) * 8) + 5;
-        s32 r8 = ((r4->pos.y + r5_Str->y + r4->height) * 8) + 5;
-        s32 r12 = ((r4->pos.x + r5_Str->x) * 8) + 3;
-        const WindowHeader *r2 = r4->header;
-        s32 tmp = r2->width - 1;
-        s32 r10 = (((tmp + r2->count + 2) * 8) + r12) - 4;
-        s32 r4 = r9 + ((r2->currId + 1) * 8);
-        s32 r7 = (r4 + ((r2->width + 2) * 8)) - 4;
+        s32 xStart = ((window->pos.x + pos->x) * 8) - 5;
+        s32 yStart = ((window->pos.y + pos->y) * 8) - 4;
+        s32 xEnd = ((window->pos.x + pos->x + window->width) * 8) + 5;
+        s32 yEnd = ((window->pos.y + pos->y + window->height) * 8) + 5;
+        s32 allHeadersStart = ((window->pos.x + pos->x) * 8) + 3;
+        const WindowHeader *header = window->header;
+        s32 tmp = header->width - 1;
+        s32 allHeadersEnd = (((tmp + header->count + 2) * 8) + allHeadersStart) - 4;
+        s32 currHeaderStart = xStart + ((header->currId + 1) * 8);
+        s32 currHeaderEnd = (currHeaderStart + ((header->width + 2) * 8)) - 4;
 
-        if (r5 < 0)
-            r5 = 0;
-        if (r8 < 0)
-            r8 = 0;
-        if (r5 > 160)
-            r5 = 160;
-        if (r8 > 160)
-            r8 = 160;
+        if (yStart < 0)
+            yStart = 0;
+        if (yEnd < 0)
+            yEnd = 0;
+        if (yStart > Y_MAX)
+            yStart = Y_MAX;
+        if (yEnd > Y_MAX)
+            yEnd = Y_MAX;
 
         // BUG: The background array is 161 entries long, but this function will potentially write
         // up to index 160 + 12 = 172, overflowing the array.
 #ifdef UBFIX
-        if (r5 > 160 - 12) {
-            r5 = 160 - 12;
+        if (yStart > Y_MAX - 12) {
+            yStart = Y_MAX - 12;
         }
 #endif
 
+        // Draw extra header background for current tab
+        // For multi-tabbed windows, the current tab is taller, so need to draw an extra 4 pixels of BG
         for (i = 0; i < 4; i++) {
-            s32 id = r5 * 2;
-            if (r6[id] == 240 && r6[id + 1] == 240) {
-                r6[id++] = r7;
-                r6[id] = r4;
+            s32 idx = yStart * 2;
+            if (windowArr[idx] == WINH_DEFAULT && windowArr[idx + 1] == WINH_DEFAULT) {
+                windowArr[idx++] = currHeaderEnd;  // Right side of window
+                windowArr[idx] = currHeaderStart;    // Left side of window
             }
             else {
-                if (r6[id] < r7) {
-                    r6[id] = r7;
+                // Only allow window to expand in size?
+                // Right side of window
+                if (windowArr[idx] < currHeaderEnd) {
+                    windowArr[idx] = currHeaderEnd;
                 }
-                id++;
-                if (r6[id] > r4) {
-                    r6[id] = r4;
-                }
-            }
-            r5++;
-        }
-        for (i = 0; i < 8; i++) {
-            s32 id = r5 * 2;
-            if (r6[id] == 240 && r6[id + 1] == 240) {
-                r6[id++] = r10;
-                r6[id] = r12;
-            }
-            else {
-                if (r6[id] < r10) {
-                    r6[id] = r10;
-                }
-                id++;
-                if (r6[id] > r12) {
-                    r6[id] = r12;
+                idx++;
+                // Left side of window
+                if (windowArr[idx] > currHeaderStart) {
+                    windowArr[idx] = currHeaderStart;
                 }
             }
-            r5++;
+            yStart++;
         }
 
-        while (r5 < r8) {
-            s32 id = r5 * 2;
-            if (r6[id] == 240 && r6[id + 1] == 240) {
-                r6[id++] = var_24;
-                r6[id] = r9;
+        // Draw header background for all tabs
+        for (i = 0; i < 8; i++) {
+            s32 id = yStart * 2;
+            if (windowArr[id] == WINH_DEFAULT && windowArr[id + 1] == WINH_DEFAULT) {
+                windowArr[id++] = allHeadersEnd;  // Right side of window
+                windowArr[id] = allHeadersStart;    // Left side of window
             }
             else {
-                if (r6[id] < var_24) {
-                    r6[id] = var_24;
+                if (windowArr[id] < allHeadersEnd) {
+                    windowArr[id] = allHeadersEnd;
                 }
                 id++;
-                if (r6[id] > r9) {
-                    r6[id] = r9;
+                if (windowArr[id] > allHeadersStart) {
+                    windowArr[id] = allHeadersStart;
                 }
             }
-            r5++;
+            yStart++;
+        }
+
+        // Draw main window background
+        while (yStart < yEnd) {
+            s32 idx = yStart * 2;
+            if (windowArr[idx] == WINH_DEFAULT && windowArr[idx + 1] == WINH_DEFAULT) {
+                windowArr[idx++] = xEnd;    // Right side of window
+                windowArr[idx] = xStart;    // Left side of window
+            }
+            else {
+                if (windowArr[idx] < xEnd) {
+                    windowArr[idx] = xEnd;
+                }
+                idx++;
+                if (windowArr[idx] > xStart) {
+                    windowArr[idx] = xStart;
+                }
+            }
+            yStart++;
         }
     }
     else {
-        s32 r8 = ((r4->pos.x + r5_Str->x) * 8) - 5;
-        s32 r3 = ((r4->pos.y + r5_Str->y) * 8) - 5;
-        s32 r12 = ((r4->pos.x + r5_Str->x + r4->width) * 8) + 5;
-        s32 r5 = ((r4->pos.y + r5_Str->y + r4->height) * 8) + 5;
-        if (r4->height != 0) {
-            if (r4->type == 0) {
-                r3 += 8;
-                r5 = ((r4->pos.y + r5_Str->y + r4->height) * 8) - 3;
+        s32 xStart = ((window->pos.x + pos->x) * 8) - 5;
+        s32 yStart = ((window->pos.y + pos->y) * 8) - 5;
+        s32 xEnd = ((window->pos.x + pos->x + window->width) * 8) + 5;
+        s32 yEnd = ((window->pos.y + pos->y + window->height) * 8) + 5;
+        if (window->height != 0) {
+            if (window->type == WINDOW_TYPE_0) {
+                yStart += 8;
+                yEnd = ((window->pos.y + pos->y + window->height) * 8) - 3;
             }
-            if (r3 < 0)
-                r3 = 0;
-            if (r5 < 0)
-                r5 = 0;
-            if (r3 > 160)
-                r3 = 160;
-            if (r5 > 160)
-                r5 = 160;
-            while (r3 < r5) {
-                s32 id = r3 * 2;
-                if (r6[id] == 240 && r6[id + 1] == 240) {
-                    r6[id++] = r12;
-                    r6[id] = r8;
+            if (yStart < 0)
+                yStart = 0;
+            if (yEnd < 0)
+                yEnd = 0;
+            if (yStart > Y_MAX)
+                yStart = Y_MAX;
+            if (yEnd > Y_MAX)
+                yEnd = Y_MAX;
+            while (yStart < yEnd) {
+                s32 idx = yStart * 2;
+                if (windowArr[idx] == WINH_DEFAULT && windowArr[idx + 1] == WINH_DEFAULT) {
+                    windowArr[idx++] = xEnd;    // Right side of window
+                    windowArr[idx] = xStart;    // Left side of window
                 }
                 else {
-                    if (r6[id] < r12) {
-                        r6[id] = r12;
+                    if (windowArr[idx] < xEnd) {
+                        windowArr[idx] = xEnd;
                     }
-                    id++;
-                    if (r6[id] > r8) {
-                        r6[id] = r8;
+                    idx++;
+                    if (windowArr[idx] > xStart) {
+                        windowArr[idx] = xStart;
                     }
                 }
-                r3++;
+                yStart++;
             }
         }
     }

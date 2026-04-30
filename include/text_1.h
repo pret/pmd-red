@@ -43,7 +43,7 @@ extern void (*ScrollUpWindowFunc)(s32 windowId);
 extern void (*gIwramTextFunc3)(s32 a0);
 extern void (*gIwramTextFunc4)(s32 a0);
 
-extern s16 gUnknown_3000E94[161];
+extern s16 gWindowBg[161];
 
 extern const u32 gUnknown_80B853C[16];
 extern const unkShiftData gCharMasksOffsets[8];
