@@ -303,11 +303,11 @@ static void sub_803F7BC(void)
     u32 roomId = tile->room;
 
     if (strPtr->allTilesRevealed != 0 || strPtr->unk1820C != 0 || strPtr->unk18217 != 0) {
-        sub_8005838(NULL, 0);
+        CopyWindowBgBuffer(NULL, 0);
     }
     else if (roomId == CORRIDOR_ROOM) {
         u32 kind = (strPtr->visibilityRange == 2) ? 1 : 2;
-        sub_8005838(NULL, kind);
+        CopyWindowBgBuffer(NULL, kind);
     }
     else {
         s32 sp[4];
@@ -317,7 +317,7 @@ static void sub_803F7BC(void)
         sp[1] = room->unk10 - strPtr->cameraPixelPos.y;
         sp[2] = room->unk14 - strPtr->cameraPixelPos.x;
         sp[3] = room->unk18 - strPtr->cameraPixelPos.y;
-        sub_8005838(sp, 3);
+        CopyWindowBgBuffer(sp, 3);
     }
 }
 

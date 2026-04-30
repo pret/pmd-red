@@ -373,7 +373,7 @@ void FriendAreasMap_RunFrameActions(void)
     SetBG3RegOffsets(gFriendAreasMapPtr->bgPos.x, gFriendAreasMapPtr->bgPos.y);
     AnimateSprites();
     UpdateAnimatedColors(FadeScreen(), gFriendAreasMapPtr->unk4C4C, 0xB0, 16, gFriendAreasMapPtr->brightness, NULL);
-    sub_8005838(NULL, 0);
+    CopyWindowBgBuffer(NULL, 0);
     nullsub_8(gGameOptionsRef->touchScreen);
     sub_8005180();
     ToggleWindowBgBuffer();

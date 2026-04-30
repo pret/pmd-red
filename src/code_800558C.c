@@ -102,7 +102,7 @@ void sub_80057E8(void)
 }
 
 // arm9.bin::02005758
-void sub_8005838(s32 *a0, u8 kind)
+void CopyWindowBgBuffer(s32 *a0, u8 kind)
 {
     const s16 *src1, *src2;
     s16 *dst;

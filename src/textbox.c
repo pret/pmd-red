@@ -1040,10 +1040,10 @@ void sub_809B57C_Async(void)
     }
 
     if (sTextbox->unk434 < 0) {
-        sub_8005838(0, 0);
+        CopyWindowBgBuffer(0, 0);
     }
     else {
-        sub_8005838(0, 5);
+        CopyWindowBgBuffer(0, 5);
     }
 }
 

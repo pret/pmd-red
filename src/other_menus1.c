@@ -208,7 +208,7 @@ static void sub_80371B8(void)
 
 void sub_80373C4(void)
 {
-    sub_8005838(NULL, 0);
+    CopyWindowBgBuffer(NULL, 0);
     ToggleWindowBgBuffer();
     WaitForNextFrameAndAdvanceRNG();
     LoadBufferedInputs();

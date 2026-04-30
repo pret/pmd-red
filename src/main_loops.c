@@ -273,7 +273,7 @@ void GameLoop_Async(void)
 static void MainLoops_RunFrameActions(u32 unused)
 {
     DrawDialogueBoxString_Async();
-    sub_8005838(NULL, 0);
+    CopyWindowBgBuffer(NULL, 0);
     nullsub_8(gGameOptionsRef->touchScreen);
 
     sub_8005180();
@@ -362,7 +362,7 @@ static void QuickSave_Async(u32 mode)
     sub_8099744();
     sub_8099750();
     SetCharacterMask(3);
-    sub_8005838(NULL, 0);
+    CopyWindowBgBuffer(NULL, 0);
     ToggleWindowBgBuffer();
     CreateDialogueBoxAndPortrait(sSaveTextQuicksaving, 0, 0, 0x20);
 
