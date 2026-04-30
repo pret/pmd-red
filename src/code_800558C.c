@@ -7,7 +7,7 @@
 #define UNROLL16(x) do { x; x; x; x; x; x; x; x; x; x; x; x; x; x; x; x; } while (0)
 
 EWRAM_DATA bool8 gDrawWindow = FALSE;
-EWRAM_DATA s16 *gWin0HPtr = NULL;
+EWRAM_DATA s16 *gWinBufferPtr = NULL;
 EWRAM_DATA static s32 sUnknown_2026E40 = 0; // Read from but never written to
 EWRAM_DATA static s32 sUnknown_2026E44 = 0; // Read from but never written to
 EWRAM_DATA static s32 sUnknown_2026E48 = 0; // Read from but never written to
@@ -22,10 +22,12 @@ EWRAM_DATA static s16 sBuffer1[324] = {0};
 
 EWRAM_INIT s16 *gWindowBgCopy = NULL;
 
-static const s16 gUnknown_80B8008[17] = {16, 12, 9, 7, 6, 5, 4, 3, 2, 2, 1, 1, 1, 0, 0, 0, 0};
+// Rounded corners in low visibility rooms
+static const s16 sRoomCornerDim[17] = {16, 12, 9, 7, 6, 5, 4, 3, 2, 2, 1, 1, 1, 0, 0, 0, 0};
 
 #define Y_MAX 160
-// Dim edges of screen in corridors with 1 visibility
+#define X_MAX 240
+// In corridor with heavy darkness, dim everything except a small circle
 static const s16 sCorridorDim1[Y_MAX] = {
     0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100,
     0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100,
@@ -51,7 +53,7 @@ static const s16 sCorridorDim1[Y_MAX] = {
     0x100, 0x100, 0x100
 };
 
-// Dim edges of screen in corridors with 2 visibility
+// In corridor with light darkness, dim everything except a larger circle
 static const s16 sCorridorDim2[Y_MAX] = {
     0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100,
     0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100,
@@ -96,14 +98,14 @@ void WindowBgBufferInit(void)
     sBufferIdx = FALSE;
     sBoolUnk = TRUE;
     sBufferPtr = NULL;
-    gWin0HPtr = NULL;
+    gWinBufferPtr = NULL;
     gDrawWindow = FALSE;
     gUnknown_2026E4E = 0x60C;
     gWindowBgCopy = NULL;
 }
 
 // arm9.bin::02005758
-void CopyWindowBgBuffer(s32 *a0, u8 kind)
+void CopyWindowBgBuffer(s32 *pos, u8 kind)
 {
     const s16 *src1, *src2;
     s16 *dst;
@@ -123,68 +125,79 @@ void CopyWindowBgBuffer(s32 *a0, u8 kind)
     switch (kind) {
         case COPY_WINDOW_BG_BUFFER_DEFAULT:
             for (i = 0; i < 10; i++) {
-                UNROLL16(*dst++ = *src1++; *dst++ = 0;);
+                UNROLL16(
+                    *dst++ = *src1++;   // WIN0H
+                    *dst++ = 0;         // WIN1H (disabled)
+                );
             }
             break;
         case COPY_WINDOW_BG_BUFFER_DIM2:
             src2 = sCorridorDim2;
             for (i = 0; i < 10; i++) {
-                UNROLL16(*dst++ = *src1++; *dst++ = *src2++;);
+                UNROLL16(
+                    *dst++ = *src1++;   // WIN0H
+                    *dst++ = *src2++;   // WIN1H (dim)
+                );
             }
             break;
         case COPY_WINDOW_BG_BUFFER_DIM1:
             src2 = sCorridorDim1;
             for (i = 0; i < 10; i++) {
-                UNROLL16(*dst++ = *src1++; *dst++ = *src2++;);
+                UNROLL16(
+                    *dst++ = *src1++;   // WIN0H
+                    *dst++ = *src2++;   // WIN1H (dim)
+                );
             }
             break;
-        case COPY_WINDOW_BG_BUFFER_UNK3:
-            if ((a0[0] < 0 && a0[2] < 0)
-                || (a0[1] < 0 && a0[3] < 0)
-                || (a0[0] >= 240 && a0[2] >= 240)
-                || (a0[1] >= 160 && a0[3] >= 160)) {
+        case COPY_WINDOW_BG_BUFFER_ROOM_DIM:
+            if ((pos[0] < 0 && pos[2] < 0)
+                || (pos[1] < 0 && pos[3] < 0)
+                || (pos[0] >= X_MAX && pos[2] >= X_MAX)
+                || (pos[1] >= Y_MAX && pos[3] >= Y_MAX)) {
+                // If the camera is outside the room, dim the entire screen
                 for (i = 0; i < 10; i++) {
-                    UNROLL16(*dst++ = *src1++; *dst++ = 240;);
+                    UNROLL16(*dst++ = *src1++; *dst++ = 0xF0;);
                 }
             }
             else {
-                s32 iVar5;
-                s32 r4;
-                for (i = 0; i < 160; i++) {
-                    if (a0[1] > i) {
+                s32 left;
+                s32 right;
+                for (i = 0; i < Y_MAX; i++) {
+                    if (pos[1] > i) {
                         *dst++ = *src1++;
                         *dst++ = 256;
                     }
-                    else if (a0[3] <= i) {
+                    else if (pos[3] <= i) {
                         *dst++ = *src1++;
                         *dst++ = 256;
                     }
                     else {
-                        if (i - a0[1] < 16) {
-                            r4 = a0[0] + gUnknown_80B8008[i - a0[1]];
-                            iVar5 = a0[2] - gUnknown_80B8008[i - a0[1]];
+                        if (i - pos[1] < 16) {
+                            right = pos[0] + sRoomCornerDim[i - pos[1]];
+                            left = pos[2] - sRoomCornerDim[i - pos[1]];
                         }
-                        else if (a0[3] - i < 16) {
-                            r4 = a0[0] + gUnknown_80B8008[a0[3] - i];
-                            iVar5 = a0[2] - gUnknown_80B8008[a0[3] - i];
+                        else if (pos[3] - i < 16) {
+                            right = pos[0] + sRoomCornerDim[pos[3] - i];
+                            left = pos[2] - sRoomCornerDim[pos[3] - i];
                         }
                         else {
-                            r4 = a0[0];
-                            iVar5 = a0[2];
+                            right = pos[0];
+                            left = pos[2];
                         }
 
-                        if (r4 < 0)
-                            r4 = 0;
-                        if (r4 > 240 - 1)
-                            r4 = 240 - 1;
+                        if (right < 0)
+                            right = 0;
+                        if (right > X_MAX - 1)
+                            right = X_MAX - 1;
 
-                        if (iVar5 < 1)
-                            iVar5 = 1;
-                        if (iVar5 > 240)
-                            iVar5 = 240;
+                        if (left < 1)
+                            left = 1;
+                        if (left > X_MAX)
+                            left = X_MAX;
 
                         *dst++ = *src1++;
-                        *dst++ = (iVar5 << 8) | r4;
+                        // Note this is backwards so the dim window is drawn on the outside
+                        *dst++ = (left << 8) | right;
                     }
                 }
             }
@@ -281,7 +294,7 @@ void CopyWindowBgBuffer(s32 *a0, u8 kind)
 #if (GAME_VERSION == VERSION_RED)
 UNUSED static void sub_80060A8(void)
 {
-    gWin0HPtr = sBufferPtr;
+    gWinBufferPtr = sBufferPtr;
     sBufferIdx = !sBufferIdx;
     sBoolUnk = !sBoolUnk;
     gDrawWindow = FALSE;
@@ -291,7 +304,7 @@ UNUSED static void sub_80060A8(void)
 // arm9.bin::020056C0
 void ToggleWindowBgBuffer(void)
 {
-    gWin0HPtr = sBufferPtr;
+    gWinBufferPtr = sBufferPtr;
     sBufferIdx = !sBufferIdx;
     sBoolUnk = !sBoolUnk;
     SetBldAlphaReg((gUnknown_2026E4E & 0x1F00) >> 8, gUnknown_2026E4E & 0x1F);

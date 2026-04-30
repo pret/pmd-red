@@ -82,9 +82,9 @@ void VBlank_CB(void)
     REG_BLDALPHA = gBldAlpha;
     if (gDrawWindow) {
         // Very interesting use of DmaCopy16 here.
-        DmaSet(0, &gWin0HPtr[2], REG_ADDR_WIN0H, ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_SRC_INC | DMA_DEST_RELOAD | DMA_16BIT) << 16) | 2);
-        REG_WIN0H = gWin0HPtr[0];
-        REG_WIN1H = gWin0HPtr[1];
+        DmaSet(0, &gWinBufferPtr[2], REG_ADDR_WIN0H, ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_SRC_INC | DMA_DEST_RELOAD | DMA_16BIT) << 16) | 2);
+        REG_WIN0H = gWinBufferPtr[0];
+        REG_WIN1H = gWinBufferPtr[1];
         REG_WIN0V = DISPLAY_HEIGHT;
         REG_WIN1V = DISPLAY_HEIGHT;
     }
