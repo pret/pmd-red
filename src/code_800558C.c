@@ -4,24 +4,7 @@
 #include "code_800558C.h"
 #include "math.h"
 
-#define UNROLL16(x) do { \
-    x; \
-    x; \
-    x; \
-    x; \
-    x; \
-    x; \
-    x; \
-    x; \
-    x; \
-    x; \
-    x; \
-    x; \
-    x; \
-    x; \
-    x; \
-    x; \
-} while (0)
+#define UNROLL16(x) do { x; x; x; x; x; x; x; x; x; x; x; x; x; x; x; x; } while (0)
 
 EWRAM_DATA bool8 gDrawWindow = FALSE;
 EWRAM_DATA s16 *gWin0HPtr = NULL;
