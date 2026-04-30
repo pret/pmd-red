@@ -572,7 +572,7 @@ void TryResetDungeonMapTilesScheduledForCopy(void)
     s32 x, y;
     Dungeon *dungeon = gDungeon;
     if (dungeon->dungeonMap.resetTilesScheduledForCopy) {
-        #ifdef BUGFIX
+        #ifdef UBFIX
         for (y = 0; y < DUNGEON_MAP_MAX_Y; y++) {
             for (x = 0; x < DUNGEON_MAP_MAX_X; x++) {
                 dungeon->dungeonMap.tileScheduledForCopy[y][x] = FALSE;
@@ -584,7 +584,7 @@ void TryResetDungeonMapTilesScheduledForCopy(void)
                 dungeon->dungeonMap.tileScheduledForCopy[y][x] = FALSE;
             }
         }
-        #endif // BUGFIX
+        #endif // UBFIX
         dungeon->dungeonMap.resetTilesScheduledForCopy = FALSE;
     }
 }

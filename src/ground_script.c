@@ -2480,17 +2480,17 @@ static s32 ExecuteScriptCommand(Action *action)
                 // making the target position nonsense. But even if they were correct,
                 // the way the cap is calculated would make the random offset biased off-center.
                 // This doesn't affect the released version because these script commands are never used.
-#ifndef BUGFIX
+#ifdef BUGFIX
+                action->callbacks->getHitboxCenter(action->parentObject, &scriptData->pos1);
+                scriptData->pos2.x = scriptData->pos1.x + ((OtherRandInt(curCmd.arg1 * 2 + 1) - curCmd.arg1) << 8);
+                scriptData->pos2.y = scriptData->pos1.y + ((OtherRandInt(curCmd.arg2 * 2 + 1) - curCmd.arg2) << 8);
+#else
                 s32 cap1 = curCmd.arg1 * 2 - 1;
                 s32 cap2 = curCmd.arg2 * 2 - 1;
 
                 action->callbacks->getHitboxCenter(action->parentObject, &scriptData->pos1);
                 scriptData->pos2.x = scriptData->pos1.x + ((OtherRandInt(cap1) - curCmd.argShort) << 8);
                 scriptData->pos2.y = scriptData->pos1.y + ((OtherRandInt(cap2) - curCmd.arg1) << 8);
-#else
-                action->callbacks->getHitboxCenter(action->parentObject, &scriptData->pos1);
-                scriptData->pos2.x = scriptData->pos1.x + ((OtherRandInt(curCmd.arg1 * 2 + 1) - curCmd.arg1) << 8);
-                scriptData->pos2.y = scriptData->pos1.y + ((OtherRandInt(curCmd.arg2 * 2 + 1) - curCmd.arg2) << 8);
 #endif
                 if (curCmd.op == CMD_BYTE_7F || curCmd.op == CMD_BYTE_85) {
                     scriptData->unk2A = HYPOT;
