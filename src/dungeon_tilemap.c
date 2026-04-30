@@ -303,10 +303,10 @@ static void sub_803F7BC(void)
     u32 roomId = tile->room;
 
     if (strPtr->allTilesRevealed != 0 || strPtr->unk1820C != 0 || strPtr->unk18217 != 0) {
-        CopyWindowBgBuffer(NULL, 0);
+        CopyWindowBgBuffer(NULL, COPY_WINDOW_BG_BUFFER_DEFAULT);
     }
     else if (roomId == CORRIDOR_ROOM) {
-        u32 kind = (strPtr->visibilityRange == 2) ? 1 : 2;
+        u32 kind = (strPtr->visibilityRange == 2) ? COPY_WINDOW_BG_BUFFER_DIM2 : COPY_WINDOW_BG_BUFFER_DIM1;
         CopyWindowBgBuffer(NULL, kind);
     }
     else {

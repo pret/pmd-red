@@ -239,7 +239,7 @@ void sub_803E668(u32 unused)
     nullsub_8(gGameOptionsRef->touchScreen);
     sub_8005180();
     nullsub_12();
-    CopyWindowBgBuffer(NULL, 0);
+    CopyWindowBgBuffer(NULL, COPY_WINDOW_BG_BUFFER_DEFAULT);
     ToggleWindowBgBuffer();
     gDungeonFramesCounter++;
     IncrementPlayTime(gPlayTimeRef);

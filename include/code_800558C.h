@@ -7,8 +7,17 @@ extern s16 gUnknown_2026E4E;
 
 extern s16 *gWindowBgCopy;
 
-void sub_80057E8(void);
-void CopyWindowBgBuffer(s32 *, u8 kind);
+typedef enum CopyWindowBgBufferType {
+    COPY_WINDOW_BG_BUFFER_DEFAULT,
+    COPY_WINDOW_BG_BUFFER_DIM2,
+    COPY_WINDOW_BG_BUFFER_DIM1,
+    COPY_WINDOW_BG_BUFFER_UNK3,
+    COPY_WINDOW_BG_BUFFER_UNK4,
+    COPY_WINDOW_BG_BUFFER_UNK5,
+} CopyWindowBgBufferType;
+
+void WindowBgBufferInit(void);
+void CopyWindowBgBuffer(s32 *a0, u8 kind);
 void ToggleWindowBgBuffer(void);
 
 #endif // GUARD_CODE_800558C_H

@@ -4,6 +4,25 @@
 #include "code_800558C.h"
 #include "math.h"
 
+#define UNROLL16(x) do { \
+    x; \
+    x; \
+    x; \
+    x; \
+    x; \
+    x; \
+    x; \
+    x; \
+    x; \
+    x; \
+    x; \
+    x; \
+    x; \
+    x; \
+    x; \
+    x; \
+} while (0)
+
 EWRAM_DATA bool8 gDrawWindow = FALSE;
 EWRAM_DATA s16 *gWin0HPtr = NULL;
 EWRAM_DATA static s32 sUnknown_2026E40 = 0; // Read from but never written to
@@ -23,7 +42,6 @@ EWRAM_INIT s16 *gWindowBgCopy = NULL;
 static const s16 gUnknown_80B8008[17] = {16, 12, 9, 7, 6, 5, 4, 3, 2, 2, 1, 1, 1, 0, 0, 0, 0};
 
 #define Y_MAX 160
-
 // Dim edges of screen in corridors with 1 visibility
 static const s16 sCorridorDim1[Y_MAX] = {
     0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100,
@@ -89,7 +107,7 @@ static const s16 sDefaultBgH[Y_MAX] = {
 };
 
 // arm9.bin::02006154
-void sub_80057E8(void)
+void WindowBgBufferInit(void)
 {
     sInitialized = TRUE;
     sBufferIdx = FALSE;
@@ -109,7 +127,7 @@ void CopyWindowBgBuffer(s32 *a0, u8 kind)
     s32 i;
 
     if (!sInitialized)
-        kind = 0;
+        kind = COPY_WINDOW_BG_BUFFER_DEFAULT;
 
     dst = !sBufferIdx ? sBuffer0 : sBuffer1;
 
@@ -120,154 +138,30 @@ void CopyWindowBgBuffer(s32 *a0, u8 kind)
     sBufferPtr = dst;
 
     switch (kind) {
-        case 0:
+        case COPY_WINDOW_BG_BUFFER_DEFAULT:
             for (i = 0; i < 10; i++) {
-                *dst++ = *src1++;
-                *dst++ = 0;
-                *dst++ = *src1++;
-                *dst++ = 0;
-                *dst++ = *src1++;
-                *dst++ = 0;
-                *dst++ = *src1++;
-                *dst++ = 0;
-                *dst++ = *src1++;
-                *dst++ = 0;
-                *dst++ = *src1++;
-                *dst++ = 0;
-                *dst++ = *src1++;
-                *dst++ = 0;
-                *dst++ = *src1++;
-                *dst++ = 0;
-                *dst++ = *src1++;
-                *dst++ = 0;
-                *dst++ = *src1++;
-                *dst++ = 0;
-                *dst++ = *src1++;
-                *dst++ = 0;
-                *dst++ = *src1++;
-                *dst++ = 0;
-                *dst++ = *src1++;
-                *dst++ = 0;
-                *dst++ = *src1++;
-                *dst++ = 0;
-                *dst++ = *src1++;
-                *dst++ = 0;
-                *dst++ = *src1++;
-                *dst++ = 0;
+                UNROLL16(*dst++ = *src1++; *dst++ = 0;);
             }
             break;
-        case 1:
+        case COPY_WINDOW_BG_BUFFER_DIM2:
             src2 = sCorridorDim2;
             for (i = 0; i < 10; i++) {
-                *dst++ = *src1++;
-                *dst++ = *src2++;
-                *dst++ = *src1++;
-                *dst++ = *src2++;
-                *dst++ = *src1++;
-                *dst++ = *src2++;
-                *dst++ = *src1++;
-                *dst++ = *src2++;
-                *dst++ = *src1++;
-                *dst++ = *src2++;
-                *dst++ = *src1++;
-                *dst++ = *src2++;
-                *dst++ = *src1++;
-                *dst++ = *src2++;
-                *dst++ = *src1++;
-                *dst++ = *src2++;
-                *dst++ = *src1++;
-                *dst++ = *src2++;
-                *dst++ = *src1++;
-                *dst++ = *src2++;
-                *dst++ = *src1++;
-                *dst++ = *src2++;
-                *dst++ = *src1++;
-                *dst++ = *src2++;
-                *dst++ = *src1++;
-                *dst++ = *src2++;
-                *dst++ = *src1++;
-                *dst++ = *src2++;
-                *dst++ = *src1++;
-                *dst++ = *src2++;
-                *dst++ = *src1++;
-                *dst++ = *src2++;
+                UNROLL16(*dst++ = *src1++; *dst++ = *src2++;);
             }
             break;
-        case 2:
+        case COPY_WINDOW_BG_BUFFER_DIM1:
             src2 = sCorridorDim1;
             for (i = 0; i < 10; i++) {
-                *dst++ = *src1++;
-                *dst++ = *src2++;
-                *dst++ = *src1++;
-                *dst++ = *src2++;
-                *dst++ = *src1++;
-                *dst++ = *src2++;
-                *dst++ = *src1++;
-                *dst++ = *src2++;
-                *dst++ = *src1++;
-                *dst++ = *src2++;
-                *dst++ = *src1++;
-                *dst++ = *src2++;
-                *dst++ = *src1++;
-                *dst++ = *src2++;
-                *dst++ = *src1++;
-                *dst++ = *src2++;
-                *dst++ = *src1++;
-                *dst++ = *src2++;
-                *dst++ = *src1++;
-                *dst++ = *src2++;
-                *dst++ = *src1++;
-                *dst++ = *src2++;
-                *dst++ = *src1++;
-                *dst++ = *src2++;
-                *dst++ = *src1++;
-                *dst++ = *src2++;
-                *dst++ = *src1++;
-                *dst++ = *src2++;
-                *dst++ = *src1++;
-                *dst++ = *src2++;
-                *dst++ = *src1++;
-                *dst++ = *src2++;
+                UNROLL16(*dst++ = *src1++; *dst++ = *src2++;);
             }
             break;
-        case 3:
+        case COPY_WINDOW_BG_BUFFER_UNK3:
             if ((a0[0] < 0 && a0[2] < 0)
                 || (a0[1] < 0 && a0[3] < 0)
                 || (a0[0] >= 240 && a0[2] >= 240)
                 || (a0[1] >= 160 && a0[3] >= 160)) {
                 for (i = 0; i < 10; i++) {
-                    *dst++ = *src1++;
-                    *dst++ = 240;
-                    *dst++ = *src1++;
-                    *dst++ = 240;
-                    *dst++ = *src1++;
-                    *dst++ = 240;
-                    *dst++ = *src1++;
-                    *dst++ = 240;
-                    *dst++ = *src1++;
-                    *dst++ = 240;
-                    *dst++ = *src1++;
-                    *dst++ = 240;
-                    *dst++ = *src1++;
-                    *dst++ = 240;
-                    *dst++ = *src1++;
-                    *dst++ = 240;
-                    *dst++ = *src1++;
-                    *dst++ = 240;
-                    *dst++ = *src1++;
-                    *dst++ = 240;
-                    *dst++ = *src1++;
-                    *dst++ = 240;
-                    *dst++ = *src1++;
-                    *dst++ = 240;
-                    *dst++ = *src1++;
-                    *dst++ = 240;
-                    *dst++ = *src1++;
-                    *dst++ = 240;
-                    *dst++ = *src1++;
-                    *dst++ = 240;
-                    *dst++ = *src1++;
-                    *dst++ = 240;
+                    UNROLL16(*dst++ = *src1++; *dst++ = 240;);
                 }
             }
             else {
@@ -312,44 +206,13 @@ void CopyWindowBgBuffer(s32 *a0, u8 kind)
                 }
             }
             break;
-        case 4:
+        case COPY_WINDOW_BG_BUFFER_UNK4:
             src2 = gUnknown_80B82AA;
             for (i = 0; i < 15; i++) {
-                *dst++ = *src1++;
-                *dst++ = *src2++;
-                *dst++ = *src1++;
-                *dst++ = *src2++;
-                *dst++ = *src1++;
-                *dst++ = *src2++;
-                *dst++ = *src1++;
-                *dst++ = *src2++;
-                *dst++ = *src1++;
-                *dst++ = *src2++;
-                *dst++ = *src1++;
-                *dst++ = *src2++;
-                *dst++ = *src1++;
-                *dst++ = *src2++;
-                *dst++ = *src1++;
-                *dst++ = *src2++;
-                *dst++ = *src1++;
-                *dst++ = *src2++;
-                *dst++ = *src1++;
-                *dst++ = *src2++;
-                *dst++ = *src1++;
-                *dst++ = *src2++;
-                *dst++ = *src1++;
-                *dst++ = *src2++;
-                *dst++ = *src1++;
-                *dst++ = *src2++;
-                *dst++ = *src1++;
-                *dst++ = *src2++;
-                *dst++ = *src1++;
-                *dst++ = *src2++;
-                *dst++ = *src1++;
-                *dst++ = *src2++;
+                UNROLL16(*dst++ = *src1++; *dst++ = *src2++;);
             }
             break;
-        case 5: {
+        case COPY_WINDOW_BG_BUFFER_UNK5: {
             s32 r8;
             s32 sp14;
             s32 uVar7;
@@ -364,38 +227,7 @@ void CopyWindowBgBuffer(s32 *a0, u8 kind)
             s32 j, k;
 
             for (i = 0; i < 15; i++) {
-                *dst++ = *src1++;
-                *dst++ = 256;
-                *dst++ = *src1++;
-                *dst++ = 256;
-                *dst++ = *src1++;
-                *dst++ = 256;
-                *dst++ = *src1++;
-                *dst++ = 256;
-                *dst++ = *src1++;
-                *dst++ = 256;
-                *dst++ = *src1++;
-                *dst++ = 256;
-                *dst++ = *src1++;
-                *dst++ = 256;
-                *dst++ = *src1++;
-                *dst++ = 256;
-                *dst++ = *src1++;
-                *dst++ = 256;
-                *dst++ = *src1++;
-                *dst++ = 256;
-                *dst++ = *src1++;
-                *dst++ = 256;
-                *dst++ = *src1++;
-                *dst++ = 256;
-                *dst++ = *src1++;
-                *dst++ = 256;
-                *dst++ = *src1++;
-                *dst++ = 256;
-                *dst++ = *src1++;
-                *dst++ = 256;
-                *dst++ = *src1++;
-                *dst++ = 256;
+                UNROLL16(*dst++ = *src1++; *dst++ = 256;);
             }
 
             val1 = sUnknown_2026E40;

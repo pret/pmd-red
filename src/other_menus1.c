@@ -208,7 +208,7 @@ static void sub_80371B8(void)
 
 void sub_80373C4(void)
 {
-    CopyWindowBgBuffer(NULL, 0);
+    CopyWindowBgBuffer(NULL, COPY_WINDOW_BG_BUFFER_DEFAULT);
     ToggleWindowBgBuffer();
     WaitForNextFrameAndAdvanceRNG();
     LoadBufferedInputs();

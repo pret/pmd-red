@@ -38,7 +38,7 @@ UNUSED static void DebugMapViewer(void)
     sub_809975C();
     sub_809D0AC();
     ResetDialogueBox();
-    CopyWindowBgBuffer(NULL, 0);
+    CopyWindowBgBuffer(NULL, COPY_WINDOW_BG_BUFFER_DEFAULT);
     AllocGroundMapAction();
     while (TRUE) {
         bool8 quitMapView;
@@ -48,7 +48,7 @@ UNUSED static void DebugMapViewer(void)
         if (DebugFieldMapWindow_Init()) {
             DebugFieldMapWindow_MoveMenuTo(mapId);
             while (TRUE) {
-                CopyWindowBgBuffer(NULL, 0);
+                CopyWindowBgBuffer(NULL, COPY_WINDOW_BG_BUFFER_DEFAULT);
                 sub_8012A18(0);
                 switch (DebugFieldMapWindow_GetInput()) {
                     case MENU_INPUT_A_PRESS:
@@ -132,7 +132,7 @@ UNUSED static void DebugMapViewer(void)
             sub_809D25C();
             sub_80A59DC();
             DrawDialogueBoxString_Async();
-            CopyWindowBgBuffer(NULL, 0);
+            CopyWindowBgBuffer(NULL, COPY_WINDOW_BG_BUFFER_DEFAULT);
             ToggleWindowBgBuffer();
             nullsub_8(gGameOptionsRef->touchScreen);
             sub_8005180();

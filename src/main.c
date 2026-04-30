@@ -90,7 +90,7 @@ void AgbMain(void)
     nullsub_6();
     InitInput();
     InitBGPaletteBuffer();
-    sub_80057E8();
+    WindowBgBufferInit();
     InitFileSystem();
     LoadCharmaps();
     ResetScheduledMemCopies();
