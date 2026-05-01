@@ -8,7 +8,7 @@
 #include "adventure_info.h"
 #include "bg_control.h"
 #include "bg_palette_buffer.h"
-#include "code_800558C.h"
+#include "window_buffer.h"
 #include "code_800C9CC.h"
 #include "code_800D090_1.h"
 #include "code_8094F88.h"
@@ -273,13 +273,13 @@ void GameLoop_Async(void)
 static void MainLoops_RunFrameActions(u32 unused)
 {
     DrawDialogueBoxString_Async();
-    sub_8005838(NULL, 0);
+    CopyWindowBgBuffer(NULL, COPY_WINDOW_BG_BUFFER_WIN0);
     nullsub_8(gGameOptionsRef->touchScreen);
 
     sub_8005180();
     // Extra call here in blue. Seems to be for 2nd screen sprites
 
-    sub_80060EC();
+    ToggleWindowBgBuffer();
     UpdateSoundEffectCounters();
     WaitForNextFrameAndAdvanceRNG();
     LoadBufferedInputs();
@@ -362,8 +362,8 @@ static void QuickSave_Async(u32 mode)
     sub_8099744();
     sub_8099750();
     SetCharacterMask(3);
-    sub_8005838(NULL, 0);
-    sub_80060EC();
+    CopyWindowBgBuffer(NULL, COPY_WINDOW_BG_BUFFER_WIN0);
+    ToggleWindowBgBuffer();
     CreateDialogueBoxAndPortrait(sSaveTextQuicksaving, 0, 0, 0x20);
 
     while (TRUE) {

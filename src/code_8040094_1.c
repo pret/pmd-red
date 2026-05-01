@@ -4,7 +4,7 @@
 #include "constants/type.h"
 #include "constants/weather.h"
 #include "structs/str_dungeon.h"
-#include "code_800558C.h"
+#include "window_buffer.h"
 #include "code_8040094_1.h"
 #include "dungeon_8041AD0.h"
 #include "dungeon_info.h"

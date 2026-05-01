@@ -16,7 +16,7 @@
 #include "code_800C9CC.h"
 #include "bg_palette_buffer.h"
 #include "game_options.h"
-#include "code_800558C.h"
+#include "window_buffer.h"
 
 const u32 gDefaultMenuTextColors[3] = { COLOR_WHITE_2, COLOR_RED, COLOR_RED };
 
@@ -66,7 +66,7 @@ void sub_8012A18(s32 unused)
     DrawDialogueBoxString_Async();
     nullsub_8(gGameOptionsRef->touchScreen);
     sub_8005180();
-    sub_80060EC();
+    ToggleWindowBgBuffer();
     WaitForNextFrameAndAdvanceRNG();
     LoadBufferedInputs(); // Input related
     CopySpritesToOam();

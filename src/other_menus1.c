@@ -4,7 +4,7 @@
 #include "constants/main_menu.h"
 #include "structs/str_dungeon.h"
 #include "bg_palette_buffer.h"
-#include "code_800558C.h"
+#include "window_buffer.h"
 #include "graphics_memory.h"
 #include "code_800C9CC.h"
 #include "music_util.h"
@@ -208,8 +208,8 @@ static void sub_80371B8(void)
 
 void sub_80373C4(void)
 {
-    sub_8005838(NULL, 0);
-    sub_80060EC();
+    CopyWindowBgBuffer(NULL, COPY_WINDOW_BG_BUFFER_WIN0);
+    ToggleWindowBgBuffer();
     WaitForNextFrameAndAdvanceRNG();
     LoadBufferedInputs();
     TransferBGPaletteBuffer();

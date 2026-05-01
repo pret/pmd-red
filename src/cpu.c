@@ -1,6 +1,6 @@
 #include "global.h"
 #include "bg_control.h"
-#include "code_800558C.h"
+#include "window_buffer.h"
 #include "cpu.h"
 
 EWRAM_DATA u32 gUnknown_202D800 = {0};
@@ -80,11 +80,14 @@ void VBlank_CB(void)
     REG_WINOUT = WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR | WINOUT_WIN01_BG3 | WINOUT_WIN01_BG2 | WINOUT_WIN01_BG0;
     REG_BLDCNT = gBldCnt;
     REG_BLDALPHA = gBldAlpha;
-    if (gUnknown_2026E38) {
-        // Very interesting use of DmaCopy16 here.
-        DmaSet(0, &gUnknown_2026E3C[2], REG_ADDR_WIN0H, ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_SRC_INC | DMA_DEST_RELOAD | DMA_16BIT) << 16) | 2);
-        REG_WIN0H = gUnknown_2026E3C[0];
-        REG_WIN1H = gUnknown_2026E3C[1];
+    if (gDrawWindow) {
+        // Write the next 2 values from gWinBufferPtr to WIN0H/WIN1H every HBlank, allows for drawing
+        // non-rectangular windows
+        DmaSet(0, &gWinBufferPtr[2], REG_ADDR_WIN0H, ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_SRC_INC | DMA_DEST_RELOAD | DMA_16BIT) << 16) | 2);
+        // Manually set the first WIN0H and WIN1H values
+        REG_WIN0H = gWinBufferPtr[0];
+        REG_WIN1H = gWinBufferPtr[1];
+        // Set WIN0V/WIN1V to max screen dimensions
         REG_WIN0V = DISPLAY_HEIGHT;
         REG_WIN1V = DISPLAY_HEIGHT;
     }

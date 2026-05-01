@@ -16,7 +16,7 @@ void sub_8007B7C(u32 a0, s32 x, s32 y, s32 a3, u32 color);
 // srcGFX: Each u32 is 8 packed pixels, 4 bits per pixel.
 void WriteGFXToBG0Window(u32 winID, u32 x, u32 y, u32 w, u32 h, u32 *srcGFX, u32 palNum);
 void sub_80087EC(s32 a0, s32 a1, s32 a2, s32 a3, s32 a4);
-void sub_80089AC(const WindowTemplate *r4, DungeonPos *r5_Str);
+void DrawWindowBg(const WindowTemplate *window, DungeonPos *pos);
 u32 DrawCharOnWindow(s32 x, s32 y, u32 chr, u32 color, u32 windowId);
 bool8 xxx_call_update_bg_vram(void);
 u32 DrawCharOnWindowInternal(Window *windows, s32 x, s32 y, u32 chr, u32 color, u32 windowId);

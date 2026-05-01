@@ -6,7 +6,7 @@
 #include "bg_control.h"
 #include "bg_palette_buffer.h"
 #include "code_8004AA0.h"
-#include "code_800558C.h"
+#include "window_buffer.h"
 #include "graphics_memory.h"
 #include "effect_data.h"
 #include "confirm_name_menu.h"
@@ -303,11 +303,11 @@ static void sub_803F7BC(void)
     u32 roomId = tile->room;
 
     if (strPtr->allTilesRevealed != 0 || strPtr->unk1820C != 0 || strPtr->unk18217 != 0) {
-        sub_8005838(NULL, 0);
+        CopyWindowBgBuffer(NULL, COPY_WINDOW_BG_BUFFER_WIN0);
     }
     else if (roomId == CORRIDOR_ROOM) {
-        u32 kind = (strPtr->visibilityRange == 2) ? 1 : 2;
-        sub_8005838(NULL, kind);
+        u32 kind = (strPtr->visibilityRange == 2) ? COPY_WINDOW_BG_BUFFER_DIM2 : COPY_WINDOW_BG_BUFFER_DIM1;
+        CopyWindowBgBuffer(NULL, kind);
     }
     else {
         s32 sp[4];
@@ -317,7 +317,7 @@ static void sub_803F7BC(void)
         sp[1] = room->unk10 - strPtr->cameraPixelPos.y;
         sp[2] = room->unk14 - strPtr->cameraPixelPos.x;
         sp[3] = room->unk18 - strPtr->cameraPixelPos.y;
-        sub_8005838(sp, 3);
+        CopyWindowBgBuffer(sp, 3);
     }
 }
 
@@ -716,7 +716,7 @@ void sub_8040094(u8 r0)
 {
     gDungeon->unk181e8.unk18217 = r0;
     sub_803F7BC();
-    sub_80060EC();
+    ToggleWindowBgBuffer();
     IncrementPlayTime(gPlayTimeRef);
     WaitForNextFrameAndAdvanceRNG();
     LoadBufferedInputs();

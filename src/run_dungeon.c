@@ -10,7 +10,7 @@
 #include "structs/sprite_oam.h"
 #include "bg_control.h"
 #include "bg_palette_buffer.h"
-#include "code_800558C.h"
+#include "window_buffer.h"
 #include "graphics_memory.h"
 #include "effect_main.h"
 #include "effect_data.h"

@@ -5,7 +5,7 @@
 #include "bg_control.h"
 #include "bg_palette_buffer.h"
 #include "code_8004AA0.h"
-#include "code_800558C.h"
+#include "window_buffer.h"
 #include "graphics_memory.h"
 #include "code_800C9CC.h"
 #include "music_util.h"
@@ -206,7 +206,7 @@ static void sub_803E490(u32 unused)
     nullsub_8(gGameOptionsRef->touchScreen);
     sub_8005180();
     nullsub_12();
-    sub_80060EC();
+    ToggleWindowBgBuffer();
 
     gDungeonFramesCounter++;
 
@@ -239,8 +239,8 @@ void sub_803E668(u32 unused)
     nullsub_8(gGameOptionsRef->touchScreen);
     sub_8005180();
     nullsub_12();
-    sub_8005838(NULL, 0);
-    sub_80060EC();
+    CopyWindowBgBuffer(NULL, COPY_WINDOW_BG_BUFFER_WIN0);
+    ToggleWindowBgBuffer();
     gDungeonFramesCounter++;
     IncrementPlayTime(gPlayTimeRef);
     WaitForNextFrameAndAdvanceRNG();

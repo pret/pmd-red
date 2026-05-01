@@ -5,7 +5,7 @@
 #include "structs/menu.h"
 #include "structs/str_file_system.h"
 #include "structs/str_mon_portrait.h"
-#include "code_800558C.h"
+#include "window_buffer.h"
 #include "code_800D090.h"
 #include "code_8015080.h"
 #include "code_801B60C.h"
@@ -1040,16 +1040,16 @@ void sub_809B57C_Async(void)
     }
 
     if (sTextbox->unk434 < 0) {
-        sub_8005838(0, 0);
+        CopyWindowBgBuffer(0, COPY_WINDOW_BG_BUFFER_WIN0);
     }
     else {
-        sub_8005838(0, 5);
+        CopyWindowBgBuffer(0, 5);
     }
 }
 
 void sub_809B614(void)
 {
-    sub_80060EC();
+    ToggleWindowBgBuffer();
     gUnknown_20399DE = gUnknown_20399DC;
     gUnknown_20399DC &= ~2;
 }

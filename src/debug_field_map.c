@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "debug_field_map_window.h"
 #include "music_util.h"
-#include "code_800558C.h"
+#include "window_buffer.h"
 #include "code_8099360.h"
 #include "code_800C9CC.h"
 #include "graphics_memory.h"
@@ -38,7 +38,7 @@ UNUSED static void DebugMapViewer(void)
     sub_809975C();
     sub_809D0AC();
     ResetDialogueBox();
-    sub_8005838(NULL, 0);
+    CopyWindowBgBuffer(NULL, COPY_WINDOW_BG_BUFFER_WIN0);
     AllocGroundMapAction();
     while (TRUE) {
         bool8 quitMapView;
@@ -48,7 +48,7 @@ UNUSED static void DebugMapViewer(void)
         if (DebugFieldMapWindow_Init()) {
             DebugFieldMapWindow_MoveMenuTo(mapId);
             while (TRUE) {
-                sub_8005838(NULL, 0);
+                CopyWindowBgBuffer(NULL, COPY_WINDOW_BG_BUFFER_WIN0);
                 sub_8012A18(0);
                 switch (DebugFieldMapWindow_GetInput()) {
                     case MENU_INPUT_A_PRESS:
@@ -132,8 +132,8 @@ UNUSED static void DebugMapViewer(void)
             sub_809D25C();
             sub_80A59DC();
             DrawDialogueBoxString_Async();
-            sub_8005838(NULL, 0);
-            sub_80060EC();
+            CopyWindowBgBuffer(NULL, COPY_WINDOW_BG_BUFFER_WIN0);
+            ToggleWindowBgBuffer();
             nullsub_8(gGameOptionsRef->touchScreen);
             sub_8005180();
             sub_8099BE4();

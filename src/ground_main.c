@@ -5,7 +5,7 @@
 #include "structs/str_wonder_mail.h"
 #include "structs/str_dungeon_setup.h"
 #include "adventure_info.h"
-#include "code_800558C.h"
+#include "window_buffer.h"
 #include "code_800C9CC.h"
 #include "code_8094F88.h"
 #include "code_80958E8.h"
@@ -308,8 +308,8 @@ u32 xxx_script_related_8098468_Async(s32 startMode)
             GroundMap_ExecuteEvent(EVENT_DIVIDE, FALSE);
         }
         GroundMap_Action();
-        sub_8005838(NULL,0);
-        sub_80060EC();
+        CopyWindowBgBuffer(NULL, COPY_WINDOW_BG_BUFFER_WIN0);
+        ToggleWindowBgBuffer();
         xxx_call_update_bg_sound_input();
         while ( 1 ) {
             xxx_call_update_bg_sound_input();

@@ -1,7 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "ground_weather.h"
-#include "code_800558C.h"
+#include "window_buffer.h"
 #include "debug.h"
 #include "event_flag.h"
 #include "ground_bg.h"
