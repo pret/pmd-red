@@ -5,7 +5,7 @@
 #include "structs/menu.h"
 #include "structs/str_file_system.h"
 #include "structs/str_mon_portrait.h"
-#include "code_800558C.h"
+#include "window_buffer.h"
 #include "code_800D090.h"
 #include "code_8015080.h"
 #include "code_801B60C.h"

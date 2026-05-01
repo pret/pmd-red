@@ -1,7 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "bg_control.h"
-#include "code_800558C.h"
+#include "window_buffer.h"
 #include "math.h"
 
 #define UNROLL16(x) do { x; x; x; x; x; x; x; x; x; x; x; x; x; x; x; x; } while (0)

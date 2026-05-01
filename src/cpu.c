@@ -1,6 +1,6 @@
 #include "global.h"
 #include "bg_control.h"
-#include "code_800558C.h"
+#include "window_buffer.h"
 #include "cpu.h"
 
 EWRAM_DATA u32 gUnknown_202D800 = {0};

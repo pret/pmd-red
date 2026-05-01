@@ -7,7 +7,7 @@
 #include "structs/dungeon_entity.h"
 #include "structs/sprite_oam.h"
 #include "structs/str_dungeon.h"
-#include "code_800558C.h"
+#include "window_buffer.h"
 #include "effect_main.h"
 #include "effect_sub_1.h"
 #include "effect_sub_2.h"

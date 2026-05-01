@@ -10,7 +10,7 @@
 #include "ground_weather.h"
 #include "memory.h"
 #include "ground_map_conversion_table.h"
-#include "code_800558C.h"
+#include "window_buffer.h"
 #include "constants/dungeon.h"
 #include "constants/ground_map.h"
 #include "code_809D148.h"

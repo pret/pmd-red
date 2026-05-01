@@ -6,7 +6,7 @@
     .include "src/bg_palette_buffer.o"
     .include "src/input.o"
     .include "src/sprite.o"
-    .include "src/code_800558C.o"
+    .include "src/window_buffer.o"
     .include "src/text_1.o"
     .include "src/graphics_memory.o"
     .include "src/file_system.o"

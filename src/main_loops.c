@@ -8,7 +8,7 @@
 #include "adventure_info.h"
 #include "bg_control.h"
 #include "bg_palette_buffer.h"
-#include "code_800558C.h"
+#include "window_buffer.h"
 #include "code_800C9CC.h"
 #include "code_800D090_1.h"
 #include "code_8094F88.h"

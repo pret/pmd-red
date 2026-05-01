@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "debug_field_map_window.h"
 #include "music_util.h"
-#include "code_800558C.h"
+#include "window_buffer.h"
 #include "code_8099360.h"
 #include "code_800C9CC.h"
 #include "graphics_memory.h"

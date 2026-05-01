@@ -1,5 +1,5 @@
-#ifndef GUARD_CODE_800558C_H
-#define GUARD_CODE_800558C_H
+#ifndef GUARD_WINDOW_BUFFER_H
+#define GUARD_WINDOW_BUFFER_H
 
 extern bool8 gDrawWindow;
 extern s16 *gWinBufferPtr;
@@ -20,4 +20,4 @@ void WindowBgBufferInit(void);
 void CopyWindowBgBuffer(s32 *pos, u8 kind);
 void ToggleWindowBgBuffer(void);
 
-#endif // GUARD_CODE_800558C_H
+#endif // GUARD_WINDOW_BUFFER_H

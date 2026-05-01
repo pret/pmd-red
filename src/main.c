@@ -3,7 +3,7 @@
 #include "bg_control.h"
 #include "bg_palette_buffer.h"
 #include "code_8004AA0.h"
-#include "code_800558C.h"
+#include "window_buffer.h"
 #include "graphics_memory.h"
 #include "cpu.h"
 #include "crt0.h"

@@ -62,7 +62,7 @@ SECTIONS {
         src/input.o(.text);
         src/code_8004AA0.o(.text);
         src/sprite.o(.text);
-        src/code_800558C.o(.text);
+        src/window_buffer.o(.text);
         src/random.o(.text);
         src/text_1.o(.text);
         src/text_2.o(.text);
@@ -440,7 +440,7 @@ SECTIONS {
         src/input.o(.rodata);
         src/code_8004AA0.o(.rodata);
         src/sprite.o(.rodata);
-        src/code_800558C.o(.rodata);
+        src/window_buffer.o(.rodata);
         src/random.o(.rodata);
         src/text_1.o(.rodata);
         src/text_2.o(.rodata);
