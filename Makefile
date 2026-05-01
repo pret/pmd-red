@@ -100,7 +100,7 @@ ifeq ($(MODERN),0)
     LIB := -L ../../tools/agbcc/lib -lc -lgcc -L ../../libagbsyscall -lagbsyscall
   endif
   INCLUDE_PATHS   := -I include -I tools/agbcc/include
-  CPPFLAGS        := -iquote include -I tools/agbcc/include -nostdinc -undef
+  CPPFLAGS        := -iquote include -I tools/agbcc/include -nostdinc -undef -std=gnu89
 else
   MODERNCC := $(PREFIX)gcc
   PATH_MODERNCC := PATH="$(PATH)" $(MODERNCC)
