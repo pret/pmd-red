@@ -1494,8 +1494,8 @@ void ply_memacc(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *trac
 
 cond_true:
     {
-        void (*func)(struct MusicPlayerInfo *, struct MusicPlayerTrack *) = *(&gMPlayJumpTable[1]);
-        func(mplayInfo, track);
+        // *& is required for matching
+        (*&gMPlayJumpTable[1])(mplayInfo, track);
         return;
     }
 
@@ -1513,8 +1513,7 @@ void ply_xcmd(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *track)
 
 void ply_xxx(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *track)
 {
-    void (*func)(struct MusicPlayerInfo *, struct MusicPlayerTrack *) = *(&gMPlayJumpTable[0]);
-    func(mplayInfo, track);
+    gMPlayJumpTable[0](mplayInfo, track);
 }
 
 #define READ_XCMD_BYTE(var, n)       \
