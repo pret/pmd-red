@@ -8,7 +8,7 @@ extern s16 gUnknown_2026E4E;
 extern s16 *gWindowBgCopy;
 
 typedef enum CopyWindowBgBufferType {
-    COPY_WINDOW_BG_BUFFER_DEFAULT,
+    COPY_WINDOW_BG_BUFFER_WIN0,
     COPY_WINDOW_BG_BUFFER_DIM2,     // Dim while in light darkness corridor
     COPY_WINDOW_BG_BUFFER_DIM1,     // Same but for heavy darkness
     COPY_WINDOW_BG_BUFFER_ROOM_DIM, // While in a room, dim outside

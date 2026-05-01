@@ -81,10 +81,13 @@ void VBlank_CB(void)
     REG_BLDCNT = gBldCnt;
     REG_BLDALPHA = gBldAlpha;
     if (gDrawWindow) {
-        // Very interesting use of DmaCopy16 here.
+        // Write the next 2 values from gWinBufferPtr to WIN0H/WIN1H every HBlank, allows for drawing
+        // non-rectangular windows
         DmaSet(0, &gWinBufferPtr[2], REG_ADDR_WIN0H, ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_SRC_INC | DMA_DEST_RELOAD | DMA_16BIT) << 16) | 2);
+        // Manually set the first WIN0H and WIN1H values
         REG_WIN0H = gWinBufferPtr[0];
         REG_WIN1H = gWinBufferPtr[1];
+        // Set WIN0V/WIN1V to max screen dimensions
         REG_WIN0V = DISPLAY_HEIGHT;
         REG_WIN1V = DISPLAY_HEIGHT;
     }

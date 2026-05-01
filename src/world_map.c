@@ -406,7 +406,7 @@ static void WorldMap_RunFrameActions(void)
     SetBG3RegOffsets(sWorldMapPtr->bgPos.x, sWorldMapPtr->bgPos.y);
     AnimateSprites(TRUE);
     FadeScreen();
-    CopyWindowBgBuffer(NULL, COPY_WINDOW_BG_BUFFER_DEFAULT);
+    CopyWindowBgBuffer(NULL, COPY_WINDOW_BG_BUFFER_WIN0);
     nullsub_8(gGameOptionsRef->touchScreen);
     sub_8005180();
     ToggleWindowBgBuffer();

@@ -1040,7 +1040,7 @@ void sub_809B57C_Async(void)
     }
 
     if (sTextbox->unk434 < 0) {
-        CopyWindowBgBuffer(0, COPY_WINDOW_BG_BUFFER_DEFAULT);
+        CopyWindowBgBuffer(0, COPY_WINDOW_BG_BUFFER_WIN0);
     }
     else {
         CopyWindowBgBuffer(0, 5);

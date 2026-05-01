@@ -308,7 +308,7 @@ u32 xxx_script_related_8098468_Async(s32 startMode)
             GroundMap_ExecuteEvent(EVENT_DIVIDE, FALSE);
         }
         GroundMap_Action();
-        CopyWindowBgBuffer(NULL, COPY_WINDOW_BG_BUFFER_DEFAULT);
+        CopyWindowBgBuffer(NULL, COPY_WINDOW_BG_BUFFER_WIN0);
         ToggleWindowBgBuffer();
         xxx_call_update_bg_sound_input();
         while ( 1 ) {

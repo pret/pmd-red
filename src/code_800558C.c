@@ -112,7 +112,7 @@ void CopyWindowBgBuffer(s32 *pos, u8 kind)
     s32 i;
 
     if (!sInitialized)
-        kind = COPY_WINDOW_BG_BUFFER_DEFAULT;
+        kind = COPY_WINDOW_BG_BUFFER_WIN0;
 
     dst = !sBufferIdx ? sBuffer0 : sBuffer1;
 
@@ -123,7 +123,7 @@ void CopyWindowBgBuffer(s32 *pos, u8 kind)
     sBufferPtr = dst;
 
     switch (kind) {
-        case COPY_WINDOW_BG_BUFFER_DEFAULT:
+        case COPY_WINDOW_BG_BUFFER_WIN0:
             for (i = 0; i < 10; i++) {
                 UNROLL16(
                     *dst++ = *src1++;   // WIN0H
