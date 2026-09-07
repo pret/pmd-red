@@ -181,7 +181,7 @@ void HandleDealingDamage_Async(Entity *attacker, Entity *target, struct DamageSt
         }
         if (AbilityIsActive(target, ABILITY_EFFECT_SPORE)
             && isPhysical
-            && DungeonRandInt(100) < gEffectSproreActivateChance)
+            && DungeonRandInt(100) < gEffectSporeActivateChance)
         {
             s32 rnd = DungeonRandInt(3);
             if (rnd < 1)

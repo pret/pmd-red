@@ -70,7 +70,7 @@ extern const s16 gShadowTagActivateChance;
 extern const s16 gMagnetPullActivateChance;
 extern const s16 gStaticActivateChance;
 extern const s16 gPoisonPointActivateChance;
-extern const s16 gEffectSproreActivateChance;
+extern const s16 gEffectSporeActivateChance;
 extern const s16 gFlameBodyActivateChance;
 extern const s16 gCuteCharmActivateChance;
 extern const s16 gStenchActivateChance;
