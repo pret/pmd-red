@@ -884,7 +884,7 @@ void HandleUseMoveAIAction(Entity *target)
         if (counter >= sub_8070828(target, TRUE))
             break;
         entityInfo = GetEntInfo(target);
-        sub_8055A00(target, entityInfo->action.actionParameters[0].actionUseIndex, 1, 0, 0);
+        TryUseMoveInMoveset(target, entityInfo->action.actionParameters[0].actionUseIndex, 1, 0, 0);
         if (!EntityIsValid(target))
             break;
         if (IsFloorOver())

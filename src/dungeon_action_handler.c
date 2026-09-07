@@ -745,7 +745,7 @@ void HandleUseMovePlayerAction(Entity *entity)
     while (i < sub_8070828(entity, TRUE)) {
         EntityInfo *info = GetEntInfo(entity);
 
-        sub_8055A00(entity, info->action.actionParameters[1].actionUseIndex, 1, 0, 0);
+        TryUseMoveInMoveset(entity, info->action.actionParameters[1].actionUseIndex, 1, 0, 0);
         if (IsFloorOver()) {
             break;
         }
@@ -764,7 +764,7 @@ void HandleUseMovePlayerAction(Entity *entity)
     }
 }
 
-void sub_8067904(Entity *entity, u16 moveId)
+void UseTemporaryMove(Entity *entity, u16 moveId)
 {
     Move move;
     EntityInfo *info = GetEntInfo(entity);

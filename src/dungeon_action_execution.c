@@ -237,10 +237,10 @@ bool8 ExecuteEntityDungeonAction_Async(Entity *entity)
             HandleUseMovePlayerAction(entity);
             break;
         case ACTION_STRUGGLE:
-            sub_8067904(entity, MOVE_STRUGGLE);
+            UseTemporaryMove(entity, MOVE_STRUGGLE);
             break;
         case ACTION_REGULAR_ATTACK:
-            sub_8067904(entity, MOVE_REGULAR_ATTACK);
+            UseTemporaryMove(entity, MOVE_REGULAR_ATTACK);
             break;
         case ACTION_STEPPED_ON_TRAP:
             TryTriggerTrap(entity,&entity->pos,0,0);

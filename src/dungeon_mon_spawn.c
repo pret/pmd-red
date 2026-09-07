@@ -781,7 +781,7 @@ static void InitEntityFromSpawnInfo(bool8 a0, Entity *entity, struct MonSpawnInf
     entInfo->mobileTurnTimer = 0;
     entInfo->attacking = FALSE;
     entInfo->unk149 = FALSE;
-    entInfo->abilityEffectFlags = FALSE;
+    entInfo->abilityEffectFlags = 0;
     entInfo->terrifiedTurns = 0;
     entInfo->useHeldItem = 0;
     entInfo->unk14B = 0;

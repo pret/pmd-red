@@ -4,7 +4,7 @@
 #include "structs/str_moves.h"
 #include "structs/dungeon_entity.h"
 
-bool32 sub_8055A00(Entity *attacker, s32 firstMoveId, s32 var_34, s32 itemId, s32 arg_0);
+bool32 TryUseMoveInMoveset(Entity *attacker, s32 firstMoveId, s32 var_34, s32 itemId, s32 arg_0);
 void TriggerTargetAbilityEffect(Entity *attacker);
 bool8 TryUseChosenMove(struct Entity *attacker, u32 r6, s32 itemId, u32 var_30, bool32 isLinkedMove, struct Move *move);
 bool8 sub_8056468(Entity *entity, Move *move, const u8 *str, Entity **unkArray, bool32 itemId, bool8 arg_4, bool32 unused);

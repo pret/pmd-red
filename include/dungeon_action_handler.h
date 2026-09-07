@@ -19,6 +19,6 @@ void HandleTalkFieldAction(Entity *entity);
 void sub_806752C(ActionContainer *a0);
 void sub_8067768(ActionContainer *a0);
 void HandleUseMovePlayerAction(Entity *entity);
-void sub_8067904(Entity *entity, u16 moveId);
+void UseTemporaryMove(Entity *entity, u16 moveId);
 
 #endif // GUARD_DUNGEON_ACTION_HANDLER_H

@@ -49,7 +49,7 @@ static EWRAM_INIT Entity *gUnknown_203B438 = NULL;
 
 static u8 ToItemID(u32 itemID);
 
-bool32 sub_8055A00(Entity *attacker, s32 firstMoveId, s32 var_34, s32 itemId, s32 arg_0)
+bool32 TryUseMoveInMoveset(Entity *attacker, s32 firstMoveId, s32 var_34, s32 itemId, s32 arg_0)
 {
     s32 i, j;
     s32 moveId;
