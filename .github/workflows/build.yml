@@ -52,7 +52,7 @@ jobs:
 
       - name: Build via Makefile
         run: |
-          make -j${nproc} compare
+          make -j${nproc} compare syms
 
       - name: Modern
         run: |
