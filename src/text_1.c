@@ -137,6 +137,11 @@ void LoadCharmaps(void)
     sCharmapFiles[1] = OpenFileAndGetFileDataPtr(sKanjiB_file_string, &gSystemFileArchive);
     gCharmaps[0] = (CharMapStruct *)sCharmapFiles[0]->data;
     gCharmaps[1] = (CharMapStruct *)sCharmapFiles[1]->data;
+#ifdef PLATFORM_PC
+    fprintf(stderr, "host text: charmaps[0]=%p unk0=%d unk4=%p charmaps[1]=%p unk0=%d unk4=%p\n",
+            (const void *)gCharmaps[0], (int)gCharmaps[0]->unk0, (const void *)gCharmaps[0]->unk4,
+            (const void *)gCharmaps[1], (int)gCharmaps[1]->unk0, (const void *)gCharmaps[1]->unk4);
+#endif
     gCharHeight[0] = 11;
     gCharHeight[1] = 12;
 

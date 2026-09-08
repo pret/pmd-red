@@ -360,7 +360,11 @@ UNUSED static void sub_800BB44(void)
     REG_IME = 1;
 
     SoundBiasReset();
+#ifdef PLATFORM_PC
+    // No GBA sleep SWI on PC; the host frame loop owns idling.
+#else
     asm("swi 0x3");
+#endif
     SoundBiasSet();
 
     REG_IME = 0;

@@ -1,6 +1,10 @@
 #include "global.h"
 #include "globaldata.h"
 #include "debug.h"
+#ifdef PLATFORM_PC
+#include <stdio.h>
+#include <stdlib.h>
+#endif
 
 EWRAM_INIT static bool32 gNDS_DebugEnabled = {0}; // NDS=020EACE4
 EWRAM_INIT static u8 sUnknown_203B150 = {0};
@@ -255,10 +259,24 @@ void FatalError(const DebugLocation *debug, const char *text, ...)
     char buf[0x100];
     va_list vArgv;
 
+#ifdef PLATFORM_PC
+    // Host: the AGB fatal path below needs debug HW (and its mini_printf
+    // recursion overflows the stack). Report to stderr and abort instead.
+    va_start(vArgv, text);
+    vsnprintf(buf, sizeof(buf), text, vArgv);
+    va_end(vArgv);
+    fprintf(stderr, "game FATAL %s:%u %s: %s\n",
+            debug != NULL && debug->func != NULL ? (const char *)debug->func : "?",
+            debug != NULL ? (unsigned)debug->line : 0,
+            debug != NULL && debug->file != NULL ? (const char *)debug->file : "?",
+            buf);
+    abort();
+#else
     FatalErrorPrintFuncFileLine(gFatalText, debug);
     va_start(vArgv, text);
     vsprintf(buf, text, vArgv);
     va_end(vArgv);
     FatalErrorFormatMessage(gFatalErrorBufferPlaceholder, buf);
     FatalErrorHang();
+#endif
 }

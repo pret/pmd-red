@@ -7,7 +7,7 @@
 #include "gba/defines.h"
 #include "gba/types.h"
 
-#if (defined(__APPLE__) || defined(__CYGWIN__)) && !defined(_)
+#if (defined(__APPLE__) || defined(__CYGWIN__)) && !defined(_) && !defined(PLATFORM_PC)
 #define _(x) x
 #endif
 

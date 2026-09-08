@@ -139,6 +139,12 @@ u32 WriteSaveSector(s32 *a, u8 *src, s32 size)
 
 u32 ReadSaveSector(s32 *a, u8 *dest, s32 size)
 {
+#ifdef PLATFORM_PC
+    // No cartridge flash on host (save_pc.c backend owns persistence).
+    // Report "no readable save" so the game takes the new-game path.
+    (void)a; (void)dest; (void)size;
+    return READ_SAVE_FAILED;
+#else
     u32 r1;
     s32 sector = *a;
     sub_8011CA8(a, size);
@@ -163,6 +169,7 @@ u32 ReadSaveSector(s32 *a, u8 *dest, s32 size)
         return READ_SAVE_CHECKSUM_ERROR;
     }
     return READ_SAVE_VALID;
+#endif
 }
 
 UNUSED static bool8 sub_8011DA8(void)

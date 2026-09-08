@@ -1,0 +1,146 @@
+{
+  "gUnknown_8357B98": {
+    "ctype": "MonsterDataEntry",
+    "stride": 72,
+    "headers": [
+      "structs/str_pokemon.h"
+    ],
+    "fields": [
+      [
+        "species",
+        "ptr:u8 *"
+      ],
+      [
+        "category",
+        "ptr:u8 *"
+      ],
+      [
+        "overworldPalette",
+        "u8"
+      ],
+      [
+        "bodySize",
+        "u8"
+      ],
+      [
+        "_padA",
+        "pad:2"
+      ],
+      [
+        "movementSpeed",
+        "s32"
+      ],
+      [
+        "dialogueSprites",
+        "u16"
+      ],
+      [
+        "unk12",
+        "bool8"
+      ],
+      [
+        "types",
+        "u8[2]"
+      ],
+      [
+        "movementType",
+        "u8"
+      ],
+      [
+        "friendArea",
+        "u8"
+      ],
+      [
+        "abilities",
+        "u8[2]"
+      ],
+      [
+        "shadowSize",
+        "u8"
+      ],
+      [
+        "fill1A",
+        "u8"
+      ],
+      [
+        "regenSpeed",
+        "u8"
+      ],
+      [
+        "canMove",
+        "bool8"
+      ],
+      [
+        "chanceAsleep",
+        "u8"
+      ],
+      [
+        "baseHP",
+        "u16"
+      ],
+      [
+        "expYield",
+        "s32"
+      ],
+      [
+        "baseAtkSpAtk",
+        "u16[2]"
+      ],
+      [
+        "baseDefSpDef",
+        "u16[2]"
+      ],
+      [
+        "weight",
+        "u16"
+      ],
+      [
+        "size",
+        "u16"
+      ],
+      [
+        "unk30",
+        "u8"
+      ],
+      [
+        "unk31",
+        "u8"
+      ],
+      [
+        "unk32",
+        "u8"
+      ],
+      [
+        "canThrowItems",
+        "bool8"
+      ],
+      [
+        "preEvolution",
+        {
+          "evolveFrom": "s16",
+          "evolveType": "u16"
+        }
+      ],
+      [
+        "evolutionRequirements",
+        {
+          "mainRequirement": "s16",
+          "additionalRequirement": "u16"
+        }
+      ],
+      [
+        "dexInternal",
+        "s16[2]"
+      ],
+      [
+        "recruitRate",
+        "s16"
+      ],
+      [
+        "alphabetParent",
+        "s16[2]"
+      ]
+    ],
+    "tailpad": 2
+  }
+}

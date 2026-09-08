@@ -16,8 +16,9 @@
 #define VERSION_RED 1
 #define GAME_VERSION VERSION_RED
 
-// IDE support
-#if defined(__APPLE__) || defined(__CYGWIN__)
+// IDE support. Disabled for PLATFORM_PC host builds: the host pipeline runs
+// the real preproc (INCBIN expansion, charmap conversion) just like agbcc.
+#if (defined(__APPLE__) || defined(__CYGWIN__)) && !defined(PLATFORM_PC)
 #define _(x) x
 #define __(x) x
 #define INCBIN(...) {0}

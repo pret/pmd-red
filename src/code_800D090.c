@@ -6,10 +6,16 @@
 
 void Hang(void)
 {
+#ifdef PLATFORM_PC
+    // On PC there is no low-power SWI halt; AgbMain calls this after the
+    // (never-returning) game loop, so just return to the host entry instead.
+    return;
+#else
     while (TRUE)
     {
         asm("swi 0x2");
     }
+#endif
 }
 
 UNUSED static void sub_800D098(void)
@@ -47,7 +53,11 @@ UNUSED static void sub_800D098(void)
     REG_IME = 1;
 
     SoundBiasReset();
+#ifdef PLATFORM_PC
+    // No GBA sleep SWI on PC; the host frame loop owns idling.
+#else
     asm("swi 0x3");
+#endif
     SoundBiasSet();
 
     REG_IME = 0;

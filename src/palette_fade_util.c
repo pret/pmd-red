@@ -40,6 +40,13 @@ static void DesaturateRow(u16);
 static void ModulatePaletteRow(u16);
 static void ApplyRowPalette(u16);
 
+#ifdef PLATFORM_PC
+// Trivial return on ARM (`push {lr}; pop {r0}; bx r0`); plain C on host.
+UNUSED static void sub_80035F8(void)
+{
+    return;
+}
+#else
 NAKED
 UNUSED static void sub_80035F8(void)
 {
@@ -48,6 +55,7 @@ UNUSED static void sub_80035F8(void)
 "	pop {r0}\n"
 "	bx r0\n");
 }
+#endif
 
 void InitPaletteFadeTable(void)
 {

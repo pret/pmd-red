@@ -1113,3 +1113,120 @@ void nullsub_3(s32 yPos, s32 a1)
 {
 
 }
+
+#ifdef PLATFORM_PC
+// Host boot-stage hook: mirrors the GameLoop_Async() prefix (param loads,
+// save probe, script-mode inits) so the PC entry can run it without the
+// never-returning title/menu loop. Expanded toward the title screen next.
+#include <stdio.h>
+#include "gba_shim.h"
+void Pc_GameBootStage(void)
+{
+    u32 tmp = 0;
+
+    printf("boot-stage: InitHeap/Debug/Sound\n");
+    InitHeap();
+    NDS_DebugInit();
+    ResetSoundEffectCounters();
+    NDS_LoadOverlay_GroundMain();
+    ResetDialogueBox();
+    printf("boot-stage: monster/playtime/options\n");
+    LoadMonsterParameters();
+    sub_8097670();
+    InitializePlayTime();
+    LoadGameOptions();
+    SetWindowBGColor();
+    LoadExclusivePokemon();
+    printf("boot-stage: friendareas/items/rescue/waza\n");
+    printf("boot-stage: LoadFriendAreas\n");
+    LoadFriendAreas();
+    printf("boot-stage: LoadItemParameters\n");
+    LoadItemParameters();
+    printf("boot-stage: LoadRescueTeamInfo\n");
+    LoadRescueTeamInfo();
+    printf("boot-stage: LoadWazaParameters\n");
+    LoadWazaParameters();
+    printf("boot-stage: sub_80950BC\n");
+    sub_80950BC();
+    printf("boot-stage: LoadMailInfo\n");
+    LoadMailInfo();
+    printf("boot-stage: misc/save probe\n");
+    sub_800CD64(0x8000, FALSE);
+    sub_8012284();
+    InitializeGameOptions(TRUE);
+    SetWindowTitle(_("PKDi ver 1.0 [Apr 28 2006] 16:37:54"));
+    sub_800DAAC();
+    SetSavingIconCoords(NULL);
+
+    if (ReadSaveFromPak(&tmp))
+        ThoroughlyResetScriptVars();
+    printf("boot-stage: save probe done (tmp=%u)\n", tmp);
+
+    printf("boot-stage: script modes 14-17\n");
+    xxx_script_related_8001334_Async(STARTMODE_14);
+    xxx_script_related_8001334_Async(STARTMODE_15);
+    ClearScriptVarArray(NULL, EVENT_LOCAL);
+    xxx_script_related_8001334_Async(STARTMODE_16);
+
+    if (GetScriptVarValue(NULL, EVENT_LOCAL) == 0)
+        xxx_script_related_8001334_Async(STARTMODE_17);
+    printf("boot-stage: complete\n");
+}
+
+// Host frame pump: one tick of the real GBA frame actions.
+void Pc_FrameActions(void)
+{
+    MainLoops_RunFrameActions(0);
+}
+
+// Host title smoke test: one pass of the GameLoop title flow (setup, fade,
+// save read, BGM, main menu) with a bounded menu pump, then return so the
+// host can snapshot the framebuffer. Mirrors GameLoop_Async's title block.
+void Pc_TitleSmoke(int menuFrames)
+{
+    s32 i;
+    u8 tmp3 = 1;
+
+    sMainLoopsUnk = MAINLOOPS_UNK_0;
+    SetFileSystemUnk(FILESYSTEM_UNK_2);
+    ResetSprites(TRUE);
+    UpdateFadeInTile(0);
+    InitFontPalette();
+    sub_800CDA8(2);
+    ShowWindows(NULL, TRUE, TRUE);
+    gUnknown_2026E4E = 0x1000;
+    LoadTitleScreen();
+    SetBG2RegOffsets(0, 0);
+    SetBG3RegOffsets(0, 0);
+
+    sTitleBrightness = 0;
+    while (sTitleBrightness < 32) {
+        sTitleBrightness++;
+
+        for (i = 0; i < 240; i++) {
+            SetBGPaletteBufferColorRGB(i, &((RGB_Struct*)sTitlePaletteFile->data)[i], sTitleBrightness, NULL);
+        }
+
+        MainLoops_RunFrameActions(0);
+        Pc_VideoPresent();
+    }
+
+    PrepareSavePakRead();
+    while ((tmp3 = ReadSavePak()))
+        MainLoops_RunFrameActions(0);
+    FinishReadSavePak();
+
+    StartNewBGM(MUS_FILE_SELECT);
+    sub_80095CC(0, 20);
+    InitMainMenu();
+
+    for (i = 0; i < menuFrames; i++) {
+        SetUpMenu();
+        MainLoops_RunFrameActions(0);
+        Pc_VideoPresent();
+        UpdateMenu();
+        CleanUpMenu();
+    }
+    printf("host title: fade+save+menu done (%d menu frames)\n", menuFrames);
+}
+#endif // PLATFORM_PC

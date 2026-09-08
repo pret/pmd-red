@@ -1,0 +1,225 @@
+# platform/pc/Makefile.pc — native PC host build (GBA Makefile untouched).
+#
+# Layout per project convention:
+#   build in  build/bin/  (objects, linked binary, host tools)
+#   run from  build/      (staged exe + runtime files)
+#
+# Usage:
+#   make -f platform/pc/Makefile.pc pc          # build + stage (default)
+#   make -f platform/pc/Makefile.pc run         # build + stage + 60-frame smoke
+#   make -f platform/pc/Makefile.pc tools       # preproc + gbagfx host tools
+#   make -f platform/pc/Makefile.pc assets-pc   # derived assets for host compile
+#   make -f platform/pc/Makefile.pc pc-syntax   # all 544 src/*.c via preproc pipe
+#   make -f platform/pc/Makefile.pc clean-pc    # remove only PC outputs
+#
+# Toolchain: host clang (no arm-none-eabi, no agbcc, no cmake needed).
+# SDL2 is optional: if `sdl2-config` exists we link it and define HAVE_SDL2,
+# otherwise the binary runs headless (framebuffer + --dump frame.ppm).
+# libpng: needed for full gbagfx (PNG->4bpp). If missing, we download+build
+# libpng 1.6.x statically into build/deps/prefix (no sudo, no brew).
+ROOT := $(abspath $(dir $(lastword $(MAKEFILE_LIST)))../..)
+BUILD_DIR := $(ROOT)/build
+BIN_DIR := $(BUILD_DIR)/bin
+OBJ_DIR := $(BIN_DIR)/obj
+BIN := $(BIN_DIR)/pmd-red-pc
+STAGED := $(BUILD_DIR)/pmd-red-pc
+
+DEPS := $(BUILD_DIR)/deps
+PREFIX := $(DEPS)/prefix
+LIBPNG_VER := 1.6.47
+LIBPNG_SRC := $(DEPS)/src/libpng-$(LIBPNG_VER)
+LIBPNG_LIB := $(PREFIX)/lib/libpng.a
+LIBPNG_INC := $(PREFIX)/include/png.h
+
+PREPROC := $(ROOT)/tools/preproc/preproc
+GBAGFX_FULL := $(BIN_DIR)/gbagfx
+GBAGFX_NOPNG := $(BIN_DIR)/gbagfx-nopng
+
+CC := clang
+CFLAGS := -std=gnu89 -Wall -Wextra -O2 -DPLATFORM_PC -DMODERN=2
+CPPFLAGS := -I$(ROOT)/include -I$(ROOT)/platform/pc
+LDFLAGS := -lm
+
+HAVE_SDL := $(shell command -v sdl2-config >/dev/null 2>&1 && echo yes || echo no)
+ifeq ($(HAVE_SDL),yes)
+CFLAGS += -DHAVE_SDL2 $(shell sdl2-config --cflags)
+LDFLAGS += $(shell sdl2-config --libs)
+endif
+
+PC_SRCS := $(ROOT)/platform/pc/cpu_pc.c \
+           $(ROOT)/platform/pc/video_pc.c \
+           $(ROOT)/platform/pc/input_pc.c \
+           $(ROOT)/platform/pc/audio_pc.c \
+           $(ROOT)/platform/pc/save_pc.c \
+           $(ROOT)/platform/pc/stubs_pc.c \
+           $(ROOT)/platform/pc/main_pc.c
+PC_OBJS := $(patsubst $(ROOT)/%.c,$(OBJ_DIR)/%.o,$(PC_SRCS))
+# Game binary swaps the smoke entry for the real-init entry.
+GAME_PC_OBJS := $(filter-out $(OBJ_DIR)/platform/pc/main_pc.o,$(PC_OBJS)) $(OBJ_DIR)/platform/pc/main_game.o
+
+# Host compile flags for game sources (mirrors the GBA .c rule minus agbcc):
+# GBA: $(CPP) $(CPPFLAGS) $< | $(PREPROC) charmap.txt | $(CC1)
+# PC:  clang -E $(GAME_CPPFLAGS) $< | $(PREPROC) charmap.txt | clang -c -x c
+# NONMATCHING/NOMATCHING select the portable fallbacks for ARM register-bound
+# locals (see math.c, ground_*.c); PLATFORM_PC guards the remaining raw asm.
+GAME_CPPFLAGS := -std=gnu89 -DPLATFORM_PC -DMODERN=2 -DNONMATCHING -DNOMATCHING -iquote include -Iinclude -Iplatform/pc
+GAME_CFLAGS := -std=gnu89 -g -O2 -DPLATFORM_PC -DMODERN=2 -DNONMATCHING -DNOMATCHING
+# GAME_ASAN=1 builds the host binary with AddressSanitizer (macOS arm64 OK).
+# Slow rebuild, but pinpoints wild writes from GBA-isms (VRAM mirrors,
+# truncated pointers) with exact stack traces.
+ifeq ($(GAME_ASAN),1)
+GAME_CFLAGS += -fsanitize=address -fno-omit-frame-pointer
+GAME_LDFLAGS := -fsanitize=address
+endif
+
+# Game sources linked into the host binary (recursive: game logic + data tables).
+# Excluded: m4a.c (ARM mixer; audio_pc is mute-first until the sequencer lands),
+# main.c (AgbMain/Hang boot replaced by platform/pc/main_pc.c).
+GAME_EXCLUDE := $(ROOT)/src/m4a.c $(ROOT)/src/main.c
+GAME_SRCS := $(filter-out $(GAME_EXCLUDE),$(wildcard $(ROOT)/src/*.c) $(wildcard $(ROOT)/src/data/*.c) $(wildcard $(ROOT)/src/data/*/*.c))
+GAME_OBJ_DIR := $(OBJ_DIR)/game
+GAME_OBJS := $(patsubst $(ROOT)/%.c,$(GAME_OBJ_DIR)/%.o,$(GAME_SRCS))
+
+# Blob sources: data/*.s translated to host C by gen_blobs.py (typed File /
+# FileArchive / SiroArchive / byte-blob emission). sound_data.s waits for the
+# audio backend; pksdir_*.s carry no symbols.
+BLOB_S := dungeon_sbin system_sbin titlemenu_sbin credits1 unk_data \
+  unk_96BD7AC unk_98589A4 unk_9D02950 unk_9E7EB08 unk_9fbd5d0 \
+  data_80B9BB0 data_80E7D40 data_8109D10 data_810AE24_2 data_8115F5C_3_ \
+  monster_sbin
+GEN_DIR := $(BIN_DIR)/gen
+BLOB_IS := $(patsubst %,$(GEN_DIR)/%.i.s,$(BLOB_S))
+BLOB_CS := $(patsubst %,$(GEN_DIR)/blobs_%.c,$(BLOB_S))
+BLOB_OBJS := $(patsubst %,$(GAME_OBJ_DIR)/blobs_%.o,$(BLOB_S))
+ARM_TC := $(DEPS)/arm-gnu-toolchain-13.2.Rel1-darwin-arm64-arm-none-eabi/bin
+ARM_CPP := $(ARM_TC)/arm-none-eabi-cpp
+ARM_AS := $(ARM_TC)/arm-none-eabi-as
+
+.PHONY: pc build stage run tools assets-pc pc-syntax blobs game-link clean-pc
+
+pc: build stage
+
+build: $(BIN)
+
+$(OBJ_DIR)/%.o: $(ROOT)/%.c
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+
+$(BIN): $(PC_OBJS)
+	@mkdir -p $(BIN_DIR)
+	$(CC) $(PC_OBJS) -o $@ $(LDFLAGS)
+	@echo "built $@ (sdl: $(HAVE_SDL))"
+
+# ---- Full game link: real game objects + generated blobs + PC backends ----
+# game-link proves every game module links against the HAL. The smoke main
+# (main_pc.c) is still the entry; GameLoop_Async plugs in next.
+game-link: tools assets-pc blobs $(GAME_OBJS) $(BLOB_OBJS) $(GAME_PC_OBJS)
+	@mkdir -p $(BIN_DIR)
+	$(CC) $(GAME_OBJS) $(BLOB_OBJS) $(GAME_PC_OBJS) -o $(BIN_DIR)/pmd-red-game $(LDFLAGS) $(GAME_LDFLAGS)
+	@echo "linked $(BIN_DIR)/pmd-red-game"
+
+$(GAME_OBJ_DIR)/%.o: $(ROOT)/%.c $(PREPROC)
+	@mkdir -p $(dir $@)
+	@clang -E $(GAME_CPPFLAGS) -I$(ROOT)/include $< -o $(GAME_OBJ_DIR)/$*.i 2>/dev/null
+	@$(PREPROC) $(GAME_OBJ_DIR)/$*.i $(ROOT)/charmap.txt > $(GAME_OBJ_DIR)/$*.p
+	@$(CC) $(GAME_CFLAGS) -I$(ROOT)/include -I$(ROOT)/platform/pc -c -x c $(GAME_OBJ_DIR)/$*.p -o $@
+	@rm -f $(GAME_OBJ_DIR)/$*.i $(GAME_OBJ_DIR)/$*.p
+
+# Keep intermediates (cpp.s/i.s/arm.o): regenerating dungeon blobs is slow.
+.PRECIOUS: $(GEN_DIR)/%.cpp.s $(GEN_DIR)/%.i.s $(GEN_DIR)/arm/%.o
+
+# Blob pipeline per data/*.s: arm-cpp + preproc + arm-as, then gen_blobs.py.
+# GBA flags mirrored (agbcc include, nostdinc) so expansion matches the ROM.
+$(GEN_DIR)/%.cpp.s: $(ROOT)/data/%.s
+	@mkdir -p $(GEN_DIR)
+	$(ARM_CPP) -x assembler-with-cpp -iquote $(ROOT)/include -I$(ROOT)/tools/agbcc/include -nostdinc -undef -std=gnu89 $< -o $@
+$(GEN_DIR)/%.i.s: $(GEN_DIR)/%.cpp.s $(PREPROC)
+	@cd $(ROOT) && $(PREPROC) $(GEN_DIR)/$*.cpp.s charmap.txt > $(GEN_DIR)/$*.i.s
+$(GEN_DIR)/arm/%.o: $(GEN_DIR)/%.i.s
+	@mkdir -p $(GEN_DIR)/arm
+	$(ARM_AS) -mcpu=arm7tdmi --defsym MODERN=0 $< -o $@
+$(GEN_DIR)/blobs_%.c: $(GEN_DIR)/arm/%.o $(ROOT)/platform/pc/tools/gen_blobs.py $(ROOT)/platform/pc/tables.json
+	@cd $(ROOT) && python3 platform/pc/tools/gen_blobs.py $(GEN_DIR)/arm/$*.o -o $(GEN_DIR) --toolchain $(ARM_TC) --prefix '' --tables platform/pc/tables.json --fixup-log $(GEN_DIR)/fixups_$*.txt
+$(GAME_OBJ_DIR)/blobs_%.o: $(GEN_DIR)/blobs_%.c
+	@mkdir -p $(GAME_OBJ_DIR)
+	$(CC) $(GAME_CFLAGS) -I$(ROOT)/include -I$(ROOT)/platform/pc -c $< -o $@
+
+blobs: $(BLOB_CS)
+	@echo "blobs: $(words $(BLOB_CS)) generated (fixups: $(GEN_DIR)/fixups_*.txt)"
+
+# Stage: exe + anything it needs to run lands in build/.
+stage: build
+	@mkdir -p $(BUILD_DIR)
+	cp -f $(BIN) $(STAGED)
+	@mkdir -p $(BUILD_DIR)/assets
+	@echo "staged $(STAGED)"
+
+run: stage
+	$(STAGED) --frames 60 --dump $(BUILD_DIR)/frame.ppm
+	@echo "smoke frame -> $(BUILD_DIR)/frame.ppm"
+
+# ---- Host tools (same tools the GBA build uses, built for host) ----
+tools: $(PREPROC) $(GBAGFX_FULL)
+
+$(PREPROC):
+	@$(MAKE) -C $(ROOT)/tools/preproc
+
+$(LIBPNG_LIB):
+	@mkdir -p $(DEPS)/src
+	@if [ ! -f $(DEPS)/src/libpng.tar.gz ]; then \
+	  curl -sL -o $(DEPS)/src/libpng.tar.gz https://download.sourceforge.net/project/libpng/libpng16/$(LIBPNG_VER)/libpng-$(LIBPNG_VER).tar.gz; \
+	fi
+	@if [ ! -d $(LIBPNG_SRC) ]; then tar xzf $(DEPS)/src/libpng.tar.gz -C $(DEPS)/src; fi
+	@cd $(LIBPNG_SRC) && ./configure --prefix=$(PREFIX) --disable-shared --enable-static >/dev/null && make -j8 >/dev/null && make install >/dev/null
+	@echo "libpng -> $(PREFIX)"
+
+$(GBAGFX_FULL): $(LIBPNG_LIB)
+	@mkdir -p $(BIN_DIR)
+	$(CC) -O2 -std=c11 -DPNG_SKIP_SETJMP_CHECK -I$(PREFIX)/include -I$(ROOT)/tools/gbagfx \
+	  $(ROOT)/tools/gbagfx/main.c $(ROOT)/tools/gbagfx/convert_png.c $(ROOT)/tools/gbagfx/gfx.c \
+	  $(ROOT)/tools/gbagfx/jasc_pal.c $(ROOT)/tools/gbagfx/lz.c $(ROOT)/tools/gbagfx/rl.c \
+	  $(ROOT)/tools/gbagfx/util.c $(ROOT)/tools/gbagfx/font.c $(ROOT)/tools/gbagfx/huff.c \
+	  $(LIBPNG_LIB) -lz -o $@
+	@echo "built $@"
+
+# libpng-free gbagfx (palette/lz/rl/huff only) for machines without the dep yet.
+$(GBAGFX_NOPNG):
+	@mkdir -p $(BIN_DIR)
+	$(CC) -O2 -std=c11 -I$(ROOT)/tools/gbagfx -I$(ROOT)/platform/pc/tools \
+	  $(ROOT)/tools/gbagfx/main.c $(ROOT)/tools/gbagfx/gfx.c $(ROOT)/tools/gbagfx/jasc_pal.c \
+	  $(ROOT)/tools/gbagfx/lz.c $(ROOT)/tools/gbagfx/rl.c $(ROOT)/tools/gbagfx/util.c \
+	  $(ROOT)/tools/gbagfx/font.c $(ROOT)/tools/gbagfx/huff.c \
+	  $(ROOT)/platform/pc/tools/convert_png_stub.c -o $@
+
+# ---- Derived assets needed to compile src/*.c on host (all gitignored) ----
+# Generates only INCBIN-referenced .pmdpal/.gbapal (from .pal) and .4bpp/.8bpp
+# (from .png) under graphics/ax + graphics/ornament. Full-tree asset generation
+# (35k files) stays a later `assets-all` step.
+assets-pc: tools
+	@cd $(ROOT) && for i in 0 1 2 3 4 5 6 7 8 9 10 11 12 13; do \
+	  [ -f graphics/ax/pal/$$i.pmdpal ] || $(GBAGFX_FULL) graphics/ax/pal/$$i.pal graphics/ax/pal/$$i.pmdpal; \
+	done
+	@cd $(ROOT) && grep -rho 'INCBIN_[A-Z0-9]*("[^"]*")' src/data/ornament/ 2>/dev/null \
+	  | sed 's/.*("//; s/")//' | sort -u | while read -r f; do \
+	  if [ ! -f "$$f" ]; then case "$$f" in \
+	    *.pmdpal) s="$${f%.pmdpal}.pal"; [ -f "$$s" ] && $(GBAGFX_FULL) "$$s" "$$f";; \
+	    *.gbapal) s="$${f%.gbapal}.pal"; [ -f "$$s" ] && $(GBAGFX_FULL) "$$s" "$$f";; \
+	    *.4bpp) s="$${f%.4bpp}.png"; [ -f "$$s" ] && $(GBAGFX_FULL) "$$s" "$$f";; \
+	    *.8bpp) s="$${f%.8bpp}.png"; [ -f "$$s" ] && $(GBAGFX_FULL) "$$s" "$$f";; \
+	  esac; fi; done
+	@echo "assets-pc done"
+
+# ---- Compile check: every game source through the real preproc pipeline ----
+pc-syntax: tools assets-pc
+	@cd $(ROOT) && pass=0; fail=0; failed=""; \
+	for f in src/*.c; do \
+	  if ! clang -E $(GAME_CPPFLAGS) "$$f" -o $(BIN_DIR)/pc_t.i 2>/dev/null; then fail=$$((fail+1)); failed="$$failed $$f(E)"; continue; fi; \
+	  if ! $(PREPROC) $(BIN_DIR)/pc_t.i charmap.txt > $(BIN_DIR)/pc_t.p 2>/dev/null; then fail=$$((fail+1)); failed="$$failed $$f(P)"; continue; fi; \
+	  if clang -std=gnu89 -O2 -fsyntax-only -x c $(BIN_DIR)/pc_t.p -o /dev/null >/dev/null 2>&1; then pass=$$((pass+1)); else fail=$$((fail+1)); failed="$$failed $$f"; fi; \
+	done; \
+	echo "pc-syntax PASS:$$pass FAIL:$$fail"; \
+	rm -f $(BIN_DIR)/pc_t.i $(BIN_DIR)/pc_t.p; \
+	if [ -n "$$failed" ]; then echo "FAILED:$$failed"; exit 1; fi
+
+clean-pc:
+	rm -rf $(OBJ_DIR) $(BIN) $(STAGED) $(BUILD_DIR)/frame.ppm

@@ -145,7 +145,11 @@ void AGBAssert(const char *pFile, int nLine, const char *pExpression, int nStopP
     {
         AGBPrintf("ASSERTION FAILED  FILE=[%s] LINE=[%d]  EXP=[%s] \n", pFile, nLine, pExpression);
         AGBPrintFlush();
+#ifdef PLATFORM_PC
+        // No GBA debug breakpoint on PC.
+#else
         asm(".hword 0xEFFF");
+#endif
     }
     else
     {

@@ -254,6 +254,11 @@ void sub_80A2FBC(GroundBg *groundBg, s32 mapFileId_)
     bplHeader->numPalettes = *(u8 *)(bplData); bplData += 2;
     bplHeader->hasPalAnimations = *(u8 *)(bplData); bplData += 2;
 
+#ifdef PLATFORM_PC
+    fprintf(stderr, "host ground_bg: mapId=%d bpl='%s'->%p bpc='%s'->%p bma='%s'->%p\n",
+            mapFileId, mapFilesPtr->bplFileName, (const void *)bplData,
+            mapFilesPtr->bpcFileName, (const void *)bpcData, mapFilesPtr->bmaFileName, (const void *)bmaData);
+#endif
     layerSpecs->chunkWidth = *bpcData++;
     layerSpecs->chunkHeight = *bpcData++;
     layerSpecs->numTiles = *bpcData++;
@@ -434,6 +439,11 @@ void sub_80A3440(GroundBg *groundBg, s32 mapFileId_, const DungeonLocation *dung
     bplHeader->numPalettes = *(u8 *)(bplData); bplData += 2;
     bplHeader->hasPalAnimations = *(u8 *)(bplData); bplData += 2;
 
+#ifdef PLATFORM_PC
+    fprintf(stderr, "host ground_bg: mapId=%d bpl='%s'->%p bpc='%s'->%p bma='%s'->%p\n",
+            mapFileId, mapFilesPtr->bplFileName, (const void *)bplData,
+            mapFilesPtr->bpcFileName, (const void *)bpcData, mapFilesPtr->bmaFileName, (const void *)bmaData);
+#endif
     layerSpecs->chunkWidth = *bpcData++;
     layerSpecs->chunkHeight = *bpcData++;
     layerSpecs->numTiles = *bpcData++;
@@ -577,6 +587,13 @@ static void _UncompressCell(void *dst_, u16 *chunkDimensions, const void *src_, 
     }
     else {
         *chunkDimensions = CHUNK_DIMENSIONS_INVALID;
+#ifdef PLATFORM_PC
+        {
+            fprintf(stderr, "host ground_bg: src=%p [%04x %04x %04x %04x]\n",
+                    (const void *)src, (unsigned)src[0], (unsigned)src[1],
+                    (unsigned)src[2], (unsigned)src[3]);
+        }
+#endif
         FatalError(DEBUG_LOC_PTR("../ground/ground_bg.c", 1184, "_UncompressCell"), _("GroundBg cell type　error %d %d"), layerSpecs->chunkWidth, layerSpecs->chunkHeight);
     }
 

@@ -13,6 +13,12 @@ enum MainLoopsUnk
 void GameLoop_Async(void);
 void nullsub_3(s32 yPos, s32 a1);
 // Return: See enum "MainLoopsUnk"
+#ifdef PLATFORM_PC
+// Host hooks implemented at the bottom of src/main_loops.c.
+void Pc_GameBootStage(void);
+void Pc_FrameActions(void);
+void Pc_TitleSmoke(int menuFrames);
+#endif
 s32 GetMainLoopsUnk(void);
 void ReadTeamBasicInfo(TeamBasicInfo *dst);
 void WriteTeamBasicInfo(TeamBasicInfo *src);

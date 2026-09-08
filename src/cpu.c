@@ -70,10 +70,14 @@ void VBlank_CB(void)
     cnt |= DMA_ENABLE;
     cnt &= ~(DMA_START_HBLANK | DMA_START_VBLANK | DMA_REPEAT);
     REG_DMA0CNT_H = cnt;
+#ifdef PLATFORM_PC
+    // No timing padding needed on PC (replaces 4x ARM `mov r8, r8` NOPs).
+#else
     asm("mov \tr8, r8");
     asm("mov \tr8, r8");
     asm("mov \tr8, r8");
     asm("mov \tr8, r8");
+#endif
     REG_DMA0CNT_H = cnt & ~(DMA_ENABLE);
 
     REG_WININ = WININ_WIN0_ALL | WININ_WIN1_ALL;

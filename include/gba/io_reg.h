@@ -778,4 +778,136 @@
 #define WAITCNT_AGB (0 << 15)
 #define WAITCNT_CGB (1 << 15)
 
+#ifdef PLATFORM_PC
+// Native PC port: registers are shadow variables owned by platform/pc/cpu_pc.c.
+// Game code keeps reading/writing REG_* lvalues; video/input/audio backends
+// consume them each frame. GBA build above is untouched.
+typedef struct {
+    unsigned short DISPCNT, DISPSTAT, VCOUNT;
+    unsigned short BG0CNT, BG1CNT, BG2CNT, BG3CNT;
+    unsigned short BG0HOFS, BG0VOFS, BG1HOFS, BG1VOFS;
+    unsigned short BG2HOFS, BG2VOFS, BG3HOFS, BG3VOFS;
+    unsigned short BG2PA, BG2PB, BG2PC, BG2PD;
+    unsigned short BG3PA, BG3PB, BG3PC, BG3PD;
+    unsigned int BG2X, BG2Y, BG3X, BG3Y;
+    unsigned short WIN0H, WIN1H, WIN0V, WIN1V, WININ, WINOUT, MOSAIC;
+    unsigned short BLDCNT, BLDALPHA, BLDY;
+    unsigned short SOUNDCNT_L, SOUNDCNT_H, SOUNDCNT_X, SOUNDBIAS;
+    unsigned char WAVE_RAM[32];
+    unsigned int FIFO_A, FIFO_B;
+    unsigned int DMA0SAD, DMA0DAD, DMA0CNT;
+    unsigned int DMA1SAD, DMA1DAD, DMA1CNT;
+    unsigned int DMA2SAD, DMA2DAD, DMA2CNT;
+    unsigned int DMA3SAD, DMA3DAD, DMA3CNT;
+    unsigned short DMA0CNT_H, DMA1CNT_H, DMA2CNT_H, DMA3CNT_H;
+    unsigned short TM0CNT_L, TM0CNT_H, TM1CNT_L, TM1CNT_H;
+    unsigned short TM2CNT_L, TM2CNT_H, TM3CNT_L, TM3CNT_H;
+    unsigned short SIOCNT, KEYINPUT, KEYCNT, RCNT;
+    unsigned short IME, IE, IF, WAITCNT;
+} PcGbaRegs;
+extern PcGbaRegs gPcRegs;
+extern volatile int gPcVBlankFlag;
+
+#undef REG_DISPCNT
+#undef REG_DISPSTAT
+#undef REG_VCOUNT
+#undef REG_BG0CNT
+#undef REG_BG1CNT
+#undef REG_BG2CNT
+#undef REG_BG3CNT
+#undef REG_BG0HOFS
+#undef REG_BG0VOFS
+#undef REG_BG1HOFS
+#undef REG_BG1VOFS
+#undef REG_BG2HOFS
+#undef REG_BG2VOFS
+#undef REG_BG3HOFS
+#undef REG_BG3VOFS
+#undef REG_WIN0H
+#undef REG_WIN1H
+#undef REG_WIN0V
+#undef REG_WIN1V
+#undef REG_WININ
+#undef REG_WINOUT
+#undef REG_MOSAIC
+#undef REG_BLDCNT
+#undef REG_BLDALPHA
+#undef REG_BLDY
+#undef REG_SOUNDCNT_L
+#undef REG_SOUNDCNT_H
+#undef REG_SOUNDCNT_X
+#undef REG_SOUNDBIAS
+#undef REG_FIFO_A
+#undef REG_FIFO_B
+#undef REG_DMA0CNT_H
+#undef REG_DMA1CNT_H
+#undef REG_DMA2CNT_H
+#undef REG_DMA3CNT_H
+#undef REG_TM0CNT_L
+#undef REG_TM0CNT_H
+#undef REG_TM3CNT_L
+#undef REG_TM3CNT_H
+#undef REG_KEYINPUT
+#undef REG_KEYCNT
+#undef REG_IME
+#undef REG_IE
+#undef REG_IF
+#undef REG_WAITCNT
+#undef REG_ADDR_WIN0H
+#undef REG_ADDR_DMA0
+#undef REG_ADDR_DMA1
+#undef REG_ADDR_DMA2
+#undef REG_ADDR_DMA3
+#define REG_DISPCNT   (gPcRegs.DISPCNT)
+#define REG_DISPSTAT  (gPcRegs.DISPSTAT)
+#define REG_VCOUNT    (gPcRegs.VCOUNT)
+#define REG_BG0CNT    (gPcRegs.BG0CNT)
+#define REG_BG1CNT    (gPcRegs.BG1CNT)
+#define REG_BG2CNT    (gPcRegs.BG2CNT)
+#define REG_BG3CNT    (gPcRegs.BG3CNT)
+#define REG_BG0HOFS   (gPcRegs.BG0HOFS)
+#define REG_BG0VOFS   (gPcRegs.BG0VOFS)
+#define REG_BG1HOFS   (gPcRegs.BG1HOFS)
+#define REG_BG1VOFS   (gPcRegs.BG1VOFS)
+#define REG_BG2HOFS   (gPcRegs.BG2HOFS)
+#define REG_BG2VOFS   (gPcRegs.BG2VOFS)
+#define REG_BG3HOFS   (gPcRegs.BG3HOFS)
+#define REG_BG3VOFS   (gPcRegs.BG3VOFS)
+#define REG_WIN0H     (gPcRegs.WIN0H)
+#define REG_WIN1H     (gPcRegs.WIN1H)
+#define REG_WIN0V     (gPcRegs.WIN0V)
+#define REG_WIN1V     (gPcRegs.WIN1V)
+#define REG_WININ     (gPcRegs.WININ)
+#define REG_WINOUT    (gPcRegs.WINOUT)
+#define REG_MOSAIC    (gPcRegs.MOSAIC)
+#define REG_BLDCNT    (gPcRegs.BLDCNT)
+#define REG_BLDALPHA  (gPcRegs.BLDALPHA)
+#define REG_BLDY      (gPcRegs.BLDY)
+#define REG_SOUNDCNT_L (gPcRegs.SOUNDCNT_L)
+#define REG_SOUNDCNT_H (gPcRegs.SOUNDCNT_H)
+#define REG_SOUNDCNT_X (gPcRegs.SOUNDCNT_X)
+#define REG_SOUNDBIAS (gPcRegs.SOUNDBIAS)
+#define REG_FIFO_A    (gPcRegs.FIFO_A)
+#define REG_FIFO_B    (gPcRegs.FIFO_B)
+#define REG_DMA0CNT_H (gPcRegs.DMA0CNT_H)
+#define REG_DMA1CNT_H (gPcRegs.DMA1CNT_H)
+#define REG_DMA2CNT_H (gPcRegs.DMA2CNT_H)
+#define REG_DMA3CNT_H (gPcRegs.DMA3CNT_H)
+#define REG_TM0CNT_L  (gPcRegs.TM0CNT_L)
+#define REG_TM0CNT_H  (gPcRegs.TM0CNT_H)
+#define REG_TM3CNT_L  (gPcRegs.TM3CNT_L)
+#define REG_TM3CNT_H  (gPcRegs.TM3CNT_H)
+#define REG_KEYINPUT  (gPcRegs.KEYINPUT)
+#define REG_KEYCNT    (gPcRegs.KEYCNT)
+#define REG_IME       (gPcRegs.IME)
+#define REG_IE        (gPcRegs.IE)
+#define REG_IF        (gPcRegs.IF)
+#define REG_WAITCNT   (gPcRegs.WAITCNT)
+#define REG_ADDR_WIN0H ((unsigned)&gPcRegs.WIN0H)
+#define REG_ADDR_DMA0  ((unsigned)&gPcRegs.DMA0SAD)
+#define REG_ADDR_DMA1  ((unsigned)&gPcRegs.DMA1SAD)
+#define REG_ADDR_DMA2  ((unsigned)&gPcRegs.DMA2SAD)
+#define REG_ADDR_DMA3  ((unsigned)&gPcRegs.DMA3SAD)
+#endif // PLATFORM_PC
+
 #endif // GUARD_GBA_IO_REG_H

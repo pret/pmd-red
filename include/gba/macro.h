@@ -84,6 +84,31 @@
     dmaRegs[5];                                                 \
 }
 
+#ifdef PLATFORM_PC
+// Native PC port: DMA hardware does not exist. DMA copies in game logic become
+// plain host memcpy/memset via Pc_DmaCopy/Pc_DmaFill (platform/pc/cpu_pc.c);
+// control-only uses (HBlank window-table streaming in cpu.c:VBlank_CB, sound
+// FIFO streaming in m4a.c) are consumed by the video/audio backends instead.
+void Pc_DmaCopy(const void *src, void *dest, unsigned size);
+void Pc_DmaFill(unsigned value, void *dest, unsigned size);
+#undef DmaSet
+#undef DmaStop
+#undef DmaFill16
+#undef DmaFill32
+#undef DmaClear16
+#undef DmaClear32
+#undef DmaCopy16
+#undef DmaCopy32
+#define DmaSet(dmaNum, src, dest, control) ((void)0)
+#define DmaStop(dmaNum) ((void)0)
+#define DmaFill16(dmaNum, value, dest, size) Pc_DmaFill((unsigned)(value), (void *)(dest), (unsigned)(size))
+#define DmaFill32(dmaNum, value, dest, size) Pc_DmaFill((unsigned)(value), (void *)(dest), (unsigned)(size))
+#define DmaClear16(dmaNum, dest, size) Pc_DmaFill(0, (void *)(dest), (unsigned)(size))
+#define DmaClear32(dmaNum, dest, size) Pc_DmaFill(0, (void *)(dest), (unsigned)(size))
+#define DmaCopy16(dmaNum, src, dest, size) Pc_DmaCopy((const void *)(src), (void *)(dest), (unsigned)(size))
+#define DmaCopy32(dmaNum, src, dest, size) Pc_DmaCopy((const void *)(src), (void *)(dest), (unsigned)(size))
+#endif // PLATFORM_PC
+
 #define DmaCopyLarge(dmaNum, src, dest, size, block, bit) \
 {                                                         \
     const void *_src = src;                               \

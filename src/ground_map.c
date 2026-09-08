@@ -14,6 +14,9 @@
 #include "constants/dungeon.h"
 #include "constants/ground_map.h"
 #include "code_809D148.h"
+#ifdef PLATFORM_PC
+#include "cpu_pc.h"
+#endif
 
 IWRAM_INIT GroundMapAction *gGroundMapAction = {NULL};
 IWRAM_INIT GroundBg *gGroundMapDungeon_3001B70 = {NULL};
@@ -536,6 +539,19 @@ void GroundMap_SelectDungeon(s32 mapId_, const DungeonLocation *loc, u32 param_2
 }
 
 // overlay_0000.bin::02154FAC
+// BMA attribute-layer decoder, hand-written ARM asm (~660 lines).
+// TODO(port-video): faithful C port (needed for correct map attributes).
+// Host bypass: the sole call site (ground_bg.c) discards the return value and
+// only needs the unk544 buffer filled; zeros = "no attributes", which boots.
+#ifdef PLATFORM_PC
+static u8 *sub_80A5204(void *a, const u8 *b, BmaHeader *c, s32 d)
+{
+    (void)b; (void)c;
+    if (a != NULL && d > 0)
+        MemoryClear8(a, d * 256);
+    return (u8 *)a;
+}
+#else
 NAKED
 static u8* sub_80A5204(void *a, const u8 *b, BmaHeader *c, s32 d)
 {
@@ -1204,6 +1220,7 @@ static u8* sub_80A5204(void *a, const u8 *b, BmaHeader *c, s32 d)
 "	pop {r1}            \n"
 "	bx r1               ");
 }
+#endif // PLATFORM_PC
 
 void sub_80A56A0(u8 param_1, u8 param_2)
 {

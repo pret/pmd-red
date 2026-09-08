@@ -3,8 +3,19 @@
 #include "memory.h"
 #include "cpu.h"
 #include "debug.h"
+#ifdef PLATFORM_PC
+#include <stdio.h>
+#include "cpu_pc.h"
+#endif
 
 #define HEAP_SIZE 0x24000
+#ifdef PLATFORM_PC
+// Host heap is 4x the GBA 144KB while the port is under construction: several
+// asset decoders are still stubs, so transient heap demand differs from HW.
+// TODO(port): reinstate 0x24000 once title boots, then chase the delta via
+// Pc_HeapTraceDump. Peak usage is reported on alloc failure (see below).
+#define HOST_HEAP_SIZE 0x100000
+#endif
 
 // size: 0x8
 struct HeapSettings
@@ -62,7 +73,11 @@ UNUSED static EWRAM_DATA u32 sUnused1 = 0;
 static EWRAM_DATA HeapDescriptor sMainHeapDescriptor = {0};
 UNUSED static EWRAM_DATA u32 sUnused2 = 0;
 static EWRAM_DATA struct HeapFreeListElement sMainHeapFreeList[32] = {0};
+#ifdef PLATFORM_PC
+static EWRAM_DATA u8 sMainHeap[HOST_HEAP_SIZE] = {0};
+#else
 static EWRAM_DATA u8 sMainHeap[HEAP_SIZE] = {0};
+#endif
 
 static void DoFree(HeapDescriptor *, void *);
 static void DoInitHeap(HeapDescriptor *, struct HeapSettings *, struct HeapFreeListElement *, u32);
@@ -163,7 +178,11 @@ static void InitHeapInternal(void)
     struct HeapSettings settings;
 
     settings.start = sMainHeap;
+#ifdef PLATFORM_PC
+    settings.size = HOST_HEAP_SIZE;
+#else
     settings.size = HEAP_SIZE;
+#endif
     sHeapCount = 0;
     DoInitHeap(&sMainHeapDescriptor, &settings, sMainHeapFreeList, sizeof(sMainHeapFreeList) / sizeof(struct HeapFreeListElement));
 }
@@ -263,7 +282,7 @@ static s32 MemorySearchFromFront(HeapDescriptor *heap, s32 atb, s32 size)
     }
     else {
         s32 ret = -1;
-        s32 sizeMax = HEAP_SIZE + 1;
+        s32 sizeMax = heap->size + 1;
         i = 0;
         curr = &heap->freeList[0];
 
@@ -307,7 +326,7 @@ static s32 MemorySearchFromBack(HeapDescriptor *heap, s32 atb, s32 size)
     }
     else {
         s32 ret = -1;
-        s32 sizeMax = HEAP_SIZE + 1;
+        s32 sizeMax = heap->size + 1;
         i = heap->freeCount - 1;
         curr = &heap->freeList[i];
 
@@ -428,6 +447,25 @@ static void * _LocateSet(HeapDescriptor *heap, s32 size, s32 group)
     }
 
 error:
+#ifdef PLATFORM_PC
+    // Host diagnostic: the AGB fatal printer below needs debug HW.
+    {
+        s32 i;
+        s32 totalFree = 0;
+        for (i = 0; i < heap->freeCount; i++)
+            totalFree += heap->freeList[i].block.size;
+        fprintf(stderr, "host heap: LocateSet failed size=0x%x atb=0x%x grp=%d "
+                "(free blocks=%d, free bytes=0x%x of 0x%x)\n",
+                (unsigned)size, (unsigned)atb, (int)group,
+                (int)heap->freeCount, (unsigned)totalFree, (unsigned)heap->size);
+        for (i = 0; i < heap->freeCount; i++)
+            fprintf(stderr, "host heap:   [%d] start=%p size=0x%x atb=0x%x grp=%d\n",
+                    (int)i, (const void *)heap->freeList[i].block.start,
+                    (unsigned)heap->freeList[i].block.size,
+                    (unsigned)heap->freeList[i].atb, (int)heap->freeList[i].grp);
+        Pc_HeapTraceDump();
+    }
+#endif
     FATAL_ERROR_ARGS("../system/memory_locate.c", 812, "Memroy LocateSet [%p] buffer %8x size can't locate\n    atb %02x grp %3d ",
                      heap, size, atb, group);
 }
@@ -514,7 +552,11 @@ UNUSED static void xxx_unused_memory_free(HeapDescriptor *a1)
 // group: See enum "MemAllocGroup"
 static void *DoAlloc(HeapDescriptor *heap, s32 size, u32 group)
 {
-    return _LocateSet(heap, size, group | 0x100);
+    void *p = _LocateSet(heap, size, group | 0x100);
+#ifdef PLATFORM_PC
+    Pc_HeapTrace(p, size, group); // host ring log, dumped on alloc failure
+#endif
+    return p;
 }
 
 static void DoFree(HeapDescriptor *heapDescriptior, void *ptrToFree)
