@@ -84,7 +84,7 @@ static void Pc_CheckArchive(const char *label, const FileArchive *arc, const cha
 }
 
 int main(int argc, char **argv) {
-    int scale = 3, frames = 60, i;
+    int scale = 3, frames = 0, i;
     const char *dump = NULL;
     const char *romPath = NULL;
     for (i = 1; i < argc; i++) {
@@ -150,13 +150,18 @@ int main(int argc, char **argv) {
     // Title flow: setup, fade, save read, BGM, bounded menu pump.
     Pc_TitleSmoke(30);
 
-    for (i = 0; i < frames; i++) {
+    // Main loop: unbounded by default (runs until the window is closed or Esc is
+    // pressed). --frames N keeps a bounded/headless mode for CI and screenshots.
+    printf("boot: entering main loop (%s)\n", frames > 0 ? "bounded" : "unbounded");
+    for (i = 0; frames <= 0 || i < frames; i++) {
         Pc_InputPump();
         Pc_RequestVBlank();
         Pc_VBlankCommit();
         Pc_AudioFrame();
         Pc_FrameActions();   // real GBA frame pump (replaces VBlank_CB tail)
         Pc_VideoPresent();
+        if (frames <= 0 && Pc_QuitRequested())
+            break;
     }
     if (dump != NULL)
         Pc_VideoDumpPPM(dump);
