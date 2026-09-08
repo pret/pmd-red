@@ -1198,14 +1198,6 @@ void Pc_TitleSmoke(int menuFrames)
     LoadTitleScreen();
     SetBG2RegOffsets(0, 0);
     SetBG3RegOffsets(0, 0);
-#ifdef PLATFORM_PC
-    {
-        const u8 *pd = (const u8 *)sTitlePaletteFile->data;
-        fprintf(stderr, "title: pal file=%p bytes=%02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x\n",
-                (const void *)pd, pd[0], pd[1], pd[2], pd[3], pd[4], pd[5],
-                pd[6], pd[7], pd[8], pd[9], pd[10], pd[11]);
-    }
-#endif
 
     sTitleBrightness = 0;
     while (sTitleBrightness < 32) {

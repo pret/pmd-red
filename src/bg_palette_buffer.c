@@ -92,18 +92,6 @@ void TransferBGPaletteBuffer(void)
         {
             sBGPaletteRowDirty[i] = 0;
             CpuCopy(dest, &sBGPaletteBuffer[paletteBufferIndex], sizeof(u16) * BG_PALETTE_ROW_SIZE);
-#ifdef PLATFORM_PC
-            {
-                static int n = 0;
-                if (n < 6 && (i == 0 || i == 1))
-                    fprintf(stderr, "pal: dirty=%d src[%d..%d]=%04X %04X %04X %04X -> pltt=%04X %04X %04X %04X\n",
-                            (int)sBGPaletteRowDirty[i], paletteBufferIndex, paletteBufferIndex + 3,
-                            sBGPaletteBuffer[paletteBufferIndex], sBGPaletteBuffer[paletteBufferIndex + 1],
-                            sBGPaletteBuffer[paletteBufferIndex + 2], sBGPaletteBuffer[paletteBufferIndex + 3],
-                            dest[0], dest[1], dest[2], dest[3]);
-                n++;
-            }
-#endif
         }
         ++i;
         dest += BG_PALETTE_ROW_SIZE;

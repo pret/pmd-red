@@ -283,8 +283,6 @@ int Pc_RomLoad(const char *explicitPath) {
 
     for (i = 0; i < pcRomSliceCount; i++) {
         const PcRomSlice *s = &pcRomSliceTable[i];
-        fprintf(stderr, "romboot: slice %u dst=%p off=%x src=0x%x len=0x%x\n",
-                i, (void *)s->dst, s->dstOff, s->srcOff, s->len);
         memcpy(s->dst + s->dstOff, buf + s->srcOff, s->len);
     }
 

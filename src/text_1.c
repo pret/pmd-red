@@ -138,17 +138,9 @@ void LoadCharmaps(void)
     gCharmaps[0] = (CharMapStruct *)sCharmapFiles[0]->data;
     gCharmaps[1] = (CharMapStruct *)sCharmapFiles[1]->data;
 #ifdef PLATFORM_PC
-    {
-        const u8 *dbg = (const u8 *)gCharmaps[0];
-        fprintf(stderr,
-                "host text: charmaps[0]=%p unk0=%d unk4=%p\n"
-                "host text: charmaps[0] bytes:%02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x\n"
-                "host text: charmaps[0] files: f0=%p f1=%p\n",
-                (const void *)gCharmaps[0], (int)gCharmaps[0]->unk0, (const void *)gCharmaps[0]->unk4,
-                dbg[0], dbg[1], dbg[2], dbg[3], dbg[4], dbg[5], dbg[6], dbg[7],
-                dbg[8], dbg[9], dbg[10], dbg[11], dbg[12], dbg[13], dbg[14], dbg[15],
-                (const void *)sCharmapFiles[0], (const void *)sCharmapFiles[1]);
-    }
+    fprintf(stderr, "host text: charmaps[0]=%p unk0=%d unk4=%p charmaps[1]=%p unk0=%d unk4=%p\n",
+            (const void *)gCharmaps[0], (int)gCharmaps[0]->unk0, (const void *)gCharmaps[0]->unk4,
+            (const void *)gCharmaps[1], (int)gCharmaps[1]->unk0, (const void *)gCharmaps[1]->unk4);
 #endif
     gCharHeight[0] = 11;
     gCharHeight[1] = 12;
