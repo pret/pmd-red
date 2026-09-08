@@ -444,24 +444,29 @@ def main():
         lines.append('#include "structs/str_file_system.h"')
         lines.append('#include "decompress_sir.h"')
 
-        # Map baserom ROM slices (in source/.rodata order) onto the symbols that
-        # own them. `running` is the cumulative .rodata offset of each slice,
-        # which falls inside the owning symbol's [offset, offset+size) range.
+        # baserom ROM slices are filled at runtime by rom_load.c. gen_slices.py parsed
+        # the .s so each slice carries the exact owning symbol + within-symbol
+        # offset (symbol label address can skew from content start, and
+        # non-incbin objects can sit between incbins).
         slices = baserom.get(base, [])
-        manifest = []   # (cname, rel_off, rom_off, size)
-        writable = set()  # canonical symbol names that must be non-const arrays
-        running = 0
-        for rom_off, size in slices:
-            idx = bisect.bisect_right(offs, running) - 1
-            if idx < 0 or not (order[idx].offset <= running < order[idx].offset + order[idx].size):
-                raise ValueError(
-                    f'{base}: baserom slice rom={rom_off:x} size={size:x} @rodata+{running:x} '
-                    f'does not fall inside a symbol')
-            owner = order[idx]
-            cname = names[canon[owner.name]]
-            manifest.append((cname, running - owner.offset, rom_off, size))
-            writable.add(canon[owner.name])
-            running += size
+        manifest = []  # (cname, off_in_array, rom_off, size)
+        writable = set()  # canonical symbol names covered by slices -> writable
+        for item in slices:
+            rom_off, size, usym, usym_off = item[0], item[1], item[2], item[3]
+            # Only writable byte arrays are fill targets (typed objects like
+            # SIRO headers are emitted as const C structs; their trailing
+            # incbin bytes are alignment pads the game never reads).
+            if kinds.get(usym) != 'bytes':
+                print(f'gen_blobs: {base}: slice @0x{rom_off:x} owner {usym} '
+                      f'is {kinds.get(usym, "?")} — skipped (not a byte array)')
+                continue
+            if usym in canon:
+                cname = names[canon[usym]]
+                writable.add(canon[usym])
+                manifest.append((cname, usym_off, rom_off, size))
+            else:
+                print(f'gen_blobs: {base}: slice @0x{rom_off:x} owned by unknown symbol '
+                      f'"{usym}" — skipped (array not emitted)')
 
         for s in order:
             if kinds[s.name] == 'typed':
@@ -595,8 +600,8 @@ def main():
         for cname in sorted({m[0] for m in all_manifest}):
             c_lines.append(f'extern u8 {cname}[];')
         c_lines.append('const PcRomSlice pcRomSliceTable[] = {')
-        for cname, rel, rom_off, size in all_manifest:
-            c_lines.append(f'    {{ (u8 *){cname} + 0x{rel:x}, 0x{rom_off:x}, 0x{size:x} }},')
+        for cname, off_in_array, rom_off, size in all_manifest:
+            c_lines.append(f'    {{ (u8 *){cname} + 0x{off_in_array:x}, 0x0, 0x{rom_off:x}, 0x{size:x} }},')
         c_lines.append('};')
         c_lines.append(f'const unsigned pcRomSliceCount = {len(all_manifest)};')
         with open(os.path.join(outdir, 'rom_slices_all.c'), 'w') as f:

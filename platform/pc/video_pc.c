@@ -191,6 +191,33 @@ static void Pc_RenderFrame(void) {
 
     int y, x;
 
+    if (gPc_FrameNo < 4 || (gPc_FrameNo % 40) < 4) {
+        // One-time debug: dump the state the title background relies on
+        // (BG2/BG3 maps at screen blocks 14/15, tiles at char block 2,
+        // palettes, and the window stream for a few scanlines).
+        const u16 *pltt16 = (const u16 *)gPc_Pltt;
+        const u16 *m14 = (const u16 *)(gPc_Vram + 14 * 0x800);
+        const u16 *m15 = (const u16 *)(gPc_Vram + 15 * 0x800);
+        const u16 *m12 = (const u16 *)(gPc_Vram + 12 * 0x800);
+        const u8 *ch2 = (const u8 *)(gPc_Vram + 2 * 0x4000);
+        const s16 *win = (gDrawWindow && gWinBufferPtr) ? gWinBufferPtr : NULL;
+        fprintf(stderr,
+            "dbg[%u]: DISPCNT=%04X WININ=%04X WINOUT=%04X BLDCNT=%04X BLDALPHA=%04X drawWin=%d\n"
+            "dbg[%u]: BG0CNT=%04X BG1CNT=%04X BG2CNT=%04X BG3CNT=%04X\n"
+            "dbg[%u]: map12=%04X,%04X,%04X map14=%04X,%04X,%04X map15=%04X,%04X,%04X\n"
+            "dbg[%u]: pltt[0..7]=%04X %04X %04X %04X %04X %04X %04X %04X\n"
+            "dbg[%u]: ch2[0..15]=%02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X\n"
+            "dbg[%u]: win[0..5]=%04X %04X %04X %04X %04X %04X\n",
+            gPc_FrameNo, disp, winin, winout, bldcnt, bldalpha, gDrawWindow ? 1 : 0,
+            gPc_FrameNo, bgCnt[0], bgCnt[1], bgCnt[2], bgCnt[3],
+            gPc_FrameNo, m12[0], m12[1], m12[2], m14[0], m14[1], m14[2], m15[0], m15[1], m15[2],
+            gPc_FrameNo, pltt16[0], pltt16[1], pltt16[2], pltt16[3], pltt16[4], pltt16[5], pltt16[6], pltt16[7],
+            gPc_FrameNo, ch2[0], ch2[1], ch2[2], ch2[3], ch2[4], ch2[5], ch2[6], ch2[7],
+            ch2[8], ch2[9], ch2[10], ch2[11], ch2[12], ch2[13], ch2[14], ch2[15],
+            gPc_FrameNo, win ? win[0] : 0, win ? win[1] : 0, win ? win[2] : 0,
+            win ? win[3] : 0, win ? win[4] : 0, win ? win[5] : 0);
+    }
+
     if (disp & DISPCNT_FORCED_BLANK) {
         // Forced blank displays white lines.
         for (y = 0; y < PC_H; y++)
