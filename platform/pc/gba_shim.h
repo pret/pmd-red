@@ -10,6 +10,9 @@
 
 #ifdef PLATFORM_PC
 
+// ---- Crash diagnostics (crash_win.c) ----
+void Pc_InstallCrashHandler(void);
+
 // ---- BIOS syscall replacements (cpu_pc.c) ----
 // Signatures match libagbsyscall so game call sites need no edits.
 void Pc_MemInit(void);       // zero VRAM/PLTT/OAM + regs, KEYINPUT idle

@@ -47,6 +47,7 @@ static void Pc_CrashAction(int sig, siginfo_t *info, void *ctx)
 #include "gba/gba.h"
 #include "gba_shim.h"
 #include "cpu_pc.h"
+#include "rom_load.h"
 #include "file_system.h"
 #include "def_filearchives.h"
 #include "text_1.h"
@@ -85,6 +86,7 @@ static void Pc_CheckArchive(const char *label, const FileArchive *arc, const cha
 int main(int argc, char **argv) {
     int scale = 3, frames = 60, i;
     const char *dump = NULL;
+    const char *romPath = NULL;
     for (i = 1; i < argc; i++) {
         if (strcmp(argv[i], "--scale") == 0 && i + 1 < argc)
             scale = atoi(argv[++i]);
@@ -92,11 +94,14 @@ int main(int argc, char **argv) {
             frames = atoi(argv[++i]);
         else if (strcmp(argv[i], "--dump") == 0 && i + 1 < argc)
             dump = argv[++i];
+        else if (strcmp(argv[i], "--rom") == 0 && i + 1 < argc)
+            romPath = argv[++i];
     }
 
     Pc_MemInit();
     Pc_ApplyBootShadows();
     setvbuf(stdout, NULL, _IONBF, 0); // crash-debuggable boot log
+    Pc_InstallCrashHandler();
 #ifndef _WIN32
     {
         struct sigaction sa;
@@ -112,6 +117,12 @@ int main(int argc, char **argv) {
     Pc_InputInit();
     Pc_AudioInit();
     Pc_SaveInit(NULL);
+    // Fill the baserom-extracted blob arrays from the user's ROM dump, then
+    // mirror every blob into the GBA ROM window so baked 0x08 addresses work.
+    if (Pc_RomLoad(romPath) != 0) {
+        printf("boot: WARNING no baserom.gba loaded; title/ROM blob data will be blank\n");
+    }
+    Pc_SetupRomAddressSpace();
 
     // Real game init (AgbMain order, host-safe subset).
     printf("boot: InitFileSystem\n");

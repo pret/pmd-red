@@ -16,6 +16,7 @@ import argparse, glob, os, re, subprocess, sys
 from concurrent.futures import ThreadPoolExecutor
 
 SRC_FILES = glob.glob('src/**/*', recursive=True) + glob.glob('include/**/*', recursive=True)
+ASM_FILES = glob.glob('data/*.s')
 
 # derived extension -> source extension
 PAIRS = [('.4bpp', '.png'), ('.8bpp', '.png'), ('.1bpp', '.png'),
@@ -39,6 +40,7 @@ def collect_refs(text):
 def collect_missing():
     refs = set()
     jobs = []
+    # C/C++ INCBIN*(...) (multi-arg concat supported)
     for f in SRC_FILES:
         if not os.path.isfile(f):
             continue
@@ -47,6 +49,18 @@ def collect_missing():
         except Exception:
             continue
         refs |= collect_refs(t)
+    # Direct .incbin "file" references in the data assembly (baserom.gba is a
+    # raw offset/size extraction, not a named asset, and is skipped).
+    for f in ASM_FILES:
+        if not os.path.isfile(f):
+            continue
+        try:
+            t = open(f, encoding='latin-1').read()
+        except Exception:
+            continue
+        for m in re.finditer(r'\.incbin\s+"([^"]+)"', t):
+            if m.group(1) != 'baserom.gba' and not re.match(r'^[0-9a-fA-FxX]+', m.group(1)):
+                refs.add(m.group(1))
     for dst in sorted(refs):
         if os.path.exists(dst):
             continue

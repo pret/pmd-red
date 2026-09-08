@@ -114,6 +114,37 @@ def owner_of(syms, off):
             best = s
     return best
 
+
+_ADDR_RE = re.compile(r'^gUnknown_([0-9a-fA-F]+)$')
+
+
+def blob_addr_map(files, names, canon):
+    """Per-blob .rodata base GBA address + canonical-name->GBA address.
+
+    The .s data symbols are named by ROM address (gUnknown_830F66C is the u32
+    0x0830F66C); the first parseable gUnknown anchors each blob's base, and
+    every object's address = base + rodata offset.  Returns
+    (file_base, addr_of) where file_base maps base->base GBA addr (None if no
+    anchor) and addr_of maps canonical symbol name -> GBA addr.
+    """
+    file_base = {}
+    addr_of = {}
+    for base, syms, _, _ in files:
+        anchor = None
+        for s in sorted(syms, key=lambda x: x.offset):
+            m = _ADDR_RE.match(s.name)
+            if m:
+                anchor = (int(m.group(1), 16), s.offset)
+                break
+        if anchor is None:
+            continue
+        baddr, boff = anchor
+        baddr -= boff
+        file_base[base] = baddr
+        for s in syms:
+            addr_of.setdefault(canon[s.name], baddr + s.offset)
+    return file_base, addr_of
+
 _SCALAR_SIZES = {'u8': (1, False), 's8': (1, True), 'bool8': (1, False),
                  'u16': (2, False), 's16': (2, True),
                  'u32': (4, False), 's32': (4, True)}
@@ -169,11 +200,22 @@ def main():
     ap.add_argument('--prefix', default='')
     ap.add_argument('--tables', default=None, help='tables.json for typed struct tables')
     ap.add_argument('--fixup-log', default=None)
+    ap.add_argument('--baserom', default=None,
+                    help='JSON { base: [[romOff, size], ...] } in source/rodata order; '
+                         'those byte arrays are emitted writable and collected into '
+                         'rom_slices_all.c for the runtime ROM loader')
+    ap.add_argument('--addresses', default=None,
+                    help='emit ONLY a GBA-address->host-pointer registry '
+                         '(blob_addrs.c/.h) for every emitted object and exit')
     args = ap.parse_args()
 
     keep = set(args.keep.split(',')) if args.keep else set()
     externs = set(args.extern.split(',')) if args.extern else set()
     import json as _json
+    baserom = {}
+    if args.baserom:
+        with open(args.baserom) as _f:
+            baserom = _json.load(_f)
     typed = {}
     if args.tables:
         with open(args.tables) as f:
@@ -185,9 +227,15 @@ def main():
 
     # pass 1: read all objects
     files = []  # (base, syms, relocs, blob)
+    all_manifest = []
     for path in args.inputs:
         base = os.path.splitext(os.path.basename(path))[0]
         syms, relocs, blob = read_object(path, args.toolchain)
+        # Unlabeled baserom blobs (pure .incbin regions, no symbol) get a
+        # synthetic symbol so the runtime ROM loader has an array to fill.
+        if not syms and baserom.get(base):
+            syms.append(Obj(f'pcBlob_{base}', 0, len(blob), 'LOCAL'))
+            print(f'gen_blobs: {path}: no symbols; synthetic pcBlob_{base}')
         files.append((base, syms, relocs, blob))
         print(f'gen_blobs: {path}: {len(syms)} symbols, {len(relocs)} relocs, {len(blob)} bytes')
 
@@ -209,6 +257,95 @@ def main():
 
     defined = set(canon.keys())
 
+    if args.addresses:
+        # GBA-address -> host-pointer registry over every emitted object.
+        file_base, addr_of = blob_addr_map(files, names, canon)
+        entries = []  # (gba_addr, cname, size)
+        relocs = []   # (vec_expr for the word, gba) — BAKED address words inside
+                      # byte arrays, so the runtime can re-home them if the
+                      # fixed 0x08000000 window is unavailable.
+        externs_seen = set()
+        import bisect as _bisect
+        for base, syms, relocs_raw, blob in files:
+            if base not in file_base:
+                continue
+            seen_off = set()
+            for s in sorted(syms, key=lambda x: x.offset):
+                if s.offset in seen_off:
+                    continue
+                seen_off.add(s.offset)
+                cname = names[canon[s.name]]
+                if cname in externs_seen:
+                    continue
+                externs_seen.add(cname)
+                entries.append((file_base[base] + s.offset, cname, s.size))
+            # baked address words inside byte objects (raw bytes + reloc slots
+            # that are neither archive/siro/filetable/typed shapes)
+            syms_sorted = sorted(syms, key=lambda x: x.offset)
+            offs = [s.offset for s in syms_sorted]
+            by_owner = {}
+            for roff, target in relocs_raw:
+                idx = _bisect.bisect_right(offs, roff) - 1
+                if idx < 0:
+                    continue
+                owner = syms_sorted[idx].name
+                by_owner.setdefault(canon[owner], []).append((roff - syms_sorted[idx].offset, roff, target))
+            for s in syms_sorted:
+                can = canon[s.name]
+                slots = by_owner.get(can, [])
+                if not slots or can in typed:
+                    continue
+                raw_len = s.size - 4 * len(slots)
+                magic4 = blob[s.offset:s.offset + 4] if s.size >= 4 else b''
+                is_siro = (magic4 in (b'SIRO', b'SIR0') and len(slots) == 1 and
+                           slots[0][0] == 4 and raw_len <= 24)
+                is_archive = (raw_len >= 12 and len(slots) == 1 and slots[0][0] == 12)
+                if is_siro or is_archive or raw_len == 0:
+                    continue  # typed/pointer-table shapes; host ptrs, not baked
+                cname = names[can]
+                for rel_off, roff, target in slots:
+                    va = None
+                    addend = int.from_bytes(blob[roff:roff + 4], 'little')
+                    if target.startswith('.'):
+                        if file_base.get(base) is not None and addend < len(blob):
+                            va = file_base[base] + addend
+                    elif target in canon:
+                        va = addr_of.get(canon[target])
+                        if va is not None:
+                            va += addend
+                    if va is not None:
+                        relocs.append((f'(unsigned int *)((u8 *){cname} + 0x{rel_off:x})', va))
+        entries.sort(key=lambda e: e[0])
+        c_lines = ['/* generated by platform/pc/tools/gen_blobs.py — GBA address registry */']
+        c_lines.append('#include "global.h"')
+        c_lines.append('#include "rom_load.h"')
+        for _, cname, _sz in entries:
+            c_lines.append(f'extern u8 {cname}[];')
+        c_lines.append('const PcGbaAddr pcGbaAddrTable[] = {')
+        for gba, cname, sz in entries:
+            c_lines.append(f'    {{ 0x{gba:08x}, 0x{sz:x}, (const u8 *){cname} }},')
+        c_lines.append('};')
+        c_lines.append(f'const unsigned pcGbaAddrCount = {len(entries)};')
+        c_lines.append('')
+        c_lines.append('const unsigned int *const pcGbaRelocTable[] = {')
+        for ve, _ in sorted(relocs, key=lambda r: r[1]):
+            c_lines.append(f'    {ve},')
+        c_lines.append('};')
+        c_lines.append(f'const unsigned pcGbaRelocCount = {len(relocs)};')
+        out_c = args.addresses + '.c'
+        with open(out_c, 'w') as f:
+            f.write('\n'.join(c_lines) + '\n')
+        h_lines = ['#ifndef PMDRED_PC_BLOB_ADDRS_H']
+        h_lines.append('#define PMDRED_PC_BLOB_ADDRS_H')
+        h_lines.append('#include "rom_load.h"')
+        h_lines.append('extern const PcGbaAddr pcGbaAddrTable[];')
+        h_lines.append('extern const unsigned pcGbaAddrCount;')
+        h_lines.append('#endif')
+        with open(args.addresses + '.h', 'w') as f:
+            f.write('\n'.join(h_lines) + '\n')
+        print(f'gen_blobs: address registry: {len(entries)} objects -> {args.addresses}.c/.h')
+        return 0
+
     def slot_expr(base, syms, blob, off, target):
         """C pointer-valued expression for a reloc slot."""
         if target in canon:
@@ -228,6 +365,9 @@ def main():
     import bisect
     fixups = []
     file_ctx = []  # (base, syms, blob, order, kinds, slots_by_owner, table_targets)
+    # Blob .rodata base GBA addresses + canonical-name->address (for writing
+    # baked ROM-address reloc slots into byte objects; see bytes emission).
+    _file_base, _addr_of = blob_addr_map(files, names, canon)
     for base, syms, relocs, blob in files:
         offs = [s.offset for s in syms]
         slots_by_owner = {s.name: [] for s in syms}
@@ -303,6 +443,26 @@ def main():
         lines.append('#include "global.h"')
         lines.append('#include "structs/str_file_system.h"')
         lines.append('#include "decompress_sir.h"')
+
+        # Map baserom ROM slices (in source/.rodata order) onto the symbols that
+        # own them. `running` is the cumulative .rodata offset of each slice,
+        # which falls inside the owning symbol's [offset, offset+size) range.
+        slices = baserom.get(base, [])
+        manifest = []   # (cname, rel_off, rom_off, size)
+        writable = set()  # canonical symbol names that must be non-const arrays
+        running = 0
+        for rom_off, size in slices:
+            idx = bisect.bisect_right(offs, running) - 1
+            if idx < 0 or not (order[idx].offset <= running < order[idx].offset + order[idx].size):
+                raise ValueError(
+                    f'{base}: baserom slice rom={rom_off:x} size={size:x} @rodata+{running:x} '
+                    f'does not fall inside a symbol')
+            owner = order[idx]
+            cname = names[canon[owner.name]]
+            manifest.append((cname, running - owner.offset, rom_off, size))
+            writable.add(canon[owner.name])
+            running += size
+
         for s in order:
             if kinds[s.name] == 'typed':
                 for h in typed[s.name].get('headers', []):
@@ -324,7 +484,8 @@ def main():
             elif k == 'ptrs':
                 lines.append(f'extern const void *{cname}[];')
             else:
-                lines.append(f'extern const u8 {cname}[];')
+                # byte blobs are writable (runtime ROM-slice fill + reloc patch)
+                lines.append(f'extern u8 {cname}[];')
         lines.append('')
         for s in order:
             cname = names[canon[s.name]]
@@ -338,8 +499,10 @@ def main():
                 magic = bytes(raw[:8])
                 count = int.from_bytes(raw[8:12], 'little', signed=True)
                 entries = slots[0][1]
+                if entries.startswith('&'):
+                    entries = entries[1:]  # File tables decay; &T[] -> (const File *)T
                 m_esc = ''.join(f'\\x{b:02x}' for b in magic)
-                lines.append(f'const FileArchive {cname} = {{ "{m_esc}", {count}, {entries} }};')
+                lines.append(f'const FileArchive {cname} = {{ "{m_esc}", {count}, (const File *){entries} }};')
             elif k == 'siro':
                 magic = raw[:4].decode('ascii', 'replace')
                 target = slots[0][1]
@@ -385,10 +548,35 @@ def main():
                 lines.append('    ' + ',\n    '.join(entries))
                 lines.append('};')
             else:
-                for off, _, t in slots:
-                    fixups.append(f'{base}:{s.name}+{off:x} -> {t} (zeroed; needs typed port)')
+                # Byte blob: emitted writable so the runtime can fill baserom
+                # slices and re-home baked 0x08xxxxxx address words (the GBA
+                # ROM window may live somewhere other than 0x08000000).
+                # Reloc slots get the target's GBA ROM address written back as
+                # a 4-byte value; the runtime relocates them to the mirror.
+                img = bytearray(blob[s.offset:s.offset + s.size])
+                if _file_base.get(base) is not None:
+                    for off, _, t in slots:
+                        va = None
+                        addend = int.from_bytes(img[off:off + 4], 'little')
+                        if t.startswith('.'):
+                            basegba = _file_base[base]
+                            owner = owner_of(syms, addend)
+                            if owner is not None:
+                                inner = addend - owner.offset
+                                va = _addr_of[canon[owner.name]] + inner
+                        elif t in canon:
+                            va = _addr_of.get(canon[t]) if canon[t] in _addr_of else None
+                            if va is not None:
+                                va += addend
+                        if va is not None:
+                            img[off:off + 4] = va.to_bytes(4, 'little')
+                        else:
+                            fixups.append(f'{base}:{s.name}+{off:x} -> {t} (zeroed; needs typed port)')
+                else:
+                    for off, _, t in slots:
+                        fixups.append(f'{base}:{s.name}+{off:x} -> {t} (zeroed; no addr anchor)')
                 hexbytes = ', '.join(f'0x{b:02x}' for b in img)
-                lines.append(f'const u8 {cname}[{len(img)}] = {{ {hexbytes} }};')
+                lines.append(f'u8 {cname}[{len(img)}] = {{ {hexbytes} }};')
             lines.append('')
         # aliases
         for s in order:
@@ -398,6 +586,30 @@ def main():
         with open(out, 'w') as f:
             f.write('\n'.join(lines) + '\n')
         print(f'gen_blobs: {base}: {len(order)} objects -> {out}')
+        if manifest:
+            all_manifest.extend(manifest)
+    if all_manifest:
+        c_lines = ['/* generated by platform/pc/tools/gen_blobs.py — runtime ROM slices */']
+        c_lines.append('#include "global.h"')
+        c_lines.append('#include "rom_load.h"')
+        for cname in sorted({m[0] for m in all_manifest}):
+            c_lines.append(f'extern u8 {cname}[];')
+        c_lines.append('const PcRomSlice pcRomSliceTable[] = {')
+        for cname, rel, rom_off, size in all_manifest:
+            c_lines.append(f'    {{ (u8 *){cname} + 0x{rel:x}, 0x{rom_off:x}, 0x{size:x} }},')
+        c_lines.append('};')
+        c_lines.append(f'const unsigned pcRomSliceCount = {len(all_manifest)};')
+        with open(os.path.join(outdir, 'rom_slices_all.c'), 'w') as f:
+            f.write('\n'.join(c_lines) + '\n')
+        h_lines = ['#ifndef PMDRED_PC_ROM_SLICES_ALL_H']
+        h_lines.append('#define PMDRED_PC_ROM_SLICES_ALL_H')
+        h_lines.append('#include "rom_load.h"')
+        h_lines.append('extern const PcRomSlice pcRomSliceTable[];')
+        h_lines.append('extern const unsigned pcRomSliceCount;')
+        h_lines.append('#endif')
+        with open(os.path.join(outdir, 'rom_slices_all.h'), 'w') as f:
+            f.write('\n'.join(h_lines) + '\n')
+        print(f'gen_blobs: {len(all_manifest)} baserom slices -> rom_slices_all.c/.h')
     if args.fixup_log and fixups:
         with open(args.fixup_log, 'w') as f:
             f.write('\n'.join(fixups) + '\n')
