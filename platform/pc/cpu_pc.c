@@ -12,6 +12,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
+#ifdef HAVE_SDL2
+#include <SDL2/SDL.h>
+#endif
 
 #include "gba/gba.h"
 #include "gba_shim.h"
@@ -21,6 +25,20 @@ unsigned char gPc_Pltt[PC_PLTT_SIZE];
 unsigned char gPc_Oam[PC_OAM_SIZE];
 PcGbaRegs gPcRegs;
 volatile int gPcVBlankFlag = 0;
+
+// ~60Hz frame tick state for VBlankIntrWait pacing.
+static unsigned gPcFrameTick = 0;
+#ifndef HAVE_SDL2
+static clock_t gPcNextHeadlessTick = 0;
+#else
+static Uint32 gPcNextSdlTick = 0;
+#endif
+
+// When set, VBlankIntrWait renders+paces to ~60Hz (interactive game driver).
+// Boot-stage script pumps (pre-title demos) run unpaced so they finish fast.
+static int gPcPaced = 0;
+
+void Pc_SetPaced(int on) { gPcPaced = on ? 1 : 0; }
 
 void Pc_MemInit(void) {
     memset(gPc_Vram, 0, sizeof(gPc_Vram));
@@ -124,9 +142,41 @@ void CpuFastSet(const void *src, void *dest, u32 control) {
 }
 
 void VBlankIntrWait(void) {
-    // Headless/host: the 60Hz loop sets the flag via Pc_RequestVBlank().
-    // Spin without sleeping so logic depending on the wait still advances.
+    // Host vblank boundary. Any synchronous game pump (title, menu, ground,
+    // dungeon) blocks here once per logic frame. While pacing is enabled
+    // (gPcPaced) the host additionally refreshes the key state, composites+
+    // presents the frame the game has rendered, and throttles to ~60Hz so the
+    // game runs interactively. Boot-stage script pumps run unpaced (fast).
     gPcVBlankFlag = 0;
+    if (!gPcPaced)
+        return;
+
+    Pc_InputPump();
+    Pc_VideoPresent();
+    gPcFrameTick++;
+
+#ifdef HAVE_SDL2
+    {
+        // Drift-free-ish 16ms cadence; SDL_RenderPresent usually already
+        // vsync-blocks, this is a safety throttle when vsync is disabled.
+        Uint32 now = SDL_GetTicks();
+        if (gPcNextSdlTick == 0 || (s32)(now - gPcNextSdlTick) >= 0)
+            gPcNextSdlTick = now;
+        gPcNextSdlTick += 16;
+        SDL_Delay(gPcNextSdlTick - now);
+    }
+#else
+    // Headless: busy-pace on clock() so bounded --frames runs keep roughly
+    // real timings without a sleep dependency.
+    if (gPcNextHeadlessTick == 0)
+        gPcNextHeadlessTick = clock();
+    gPcNextHeadlessTick += CLOCKS_PER_SEC / 60;
+    while (clock() < gPcNextHeadlessTick) {}
+#endif
+}
+
+unsigned int Pc_VBlankFrameCount(void) {
+    return gPcFrameTick;
 }
 
 void RegisterRamReset(u32 resetFlags) {

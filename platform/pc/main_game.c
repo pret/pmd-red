@@ -84,9 +84,10 @@ static void Pc_CheckArchive(const char *label, const FileArchive *arc, const cha
 }
 
 int main(int argc, char **argv) {
-    int scale = 3, frames = 0, i;
+    int scale = 3, frames = 0, i, autoStart = -1;
     const char *dump = NULL;
     const char *romPath = NULL;
+    const char *autoSpec = NULL;
     for (i = 1; i < argc; i++) {
         if (strcmp(argv[i], "--scale") == 0 && i + 1 < argc)
             scale = atoi(argv[++i]);
@@ -96,6 +97,30 @@ int main(int argc, char **argv) {
             dump = argv[++i];
         else if (strcmp(argv[i], "--rom") == 0 && i + 1 < argc)
             romPath = argv[++i];
+        else if (strcmp(argv[i], "--autopress") == 0 && i + 1 < argc)
+            autoSpec = argv[++i];
+    }
+
+    // --autopress KEY@START holds a key from the given paced-vblank frame
+    // (e.g. "A@250") so CI can select menu items / advance text without a
+    // real keyboard.
+    {
+        u16 autoKeys = 0;
+        char keyName[16];
+        if (autoSpec != NULL && sscanf(autoSpec, "%15[^@]@%d", keyName, &autoStart) == 2) {
+            if (strcasecmp(keyName, "A") == 0) autoKeys = A_BUTTON;
+            else if (strcasecmp(keyName, "B") == 0) autoKeys = B_BUTTON;
+            else if (strcasecmp(keyName, "START") == 0) autoKeys = START_BUTTON;
+            else if (strcasecmp(keyName, "SELECT") == 0) autoKeys = SELECT_BUTTON;
+            else if (strcasecmp(keyName, "RIGHT") == 0) autoKeys = DPAD_RIGHT;
+            else if (strcasecmp(keyName, "LEFT") == 0) autoKeys = DPAD_LEFT;
+            else if (strcasecmp(keyName, "UP") == 0) autoKeys = DPAD_UP;
+            else if (strcasecmp(keyName, "DOWN") == 0) autoKeys = DPAD_DOWN;
+            else if (strcasecmp(keyName, "L") == 0) autoKeys = L_BUTTON;
+            else if (strcasecmp(keyName, "R") == 0) autoKeys = R_BUTTON;
+        }
+        if (autoKeys)
+            Pc_SetAutopress(autoStart, 60 * 60, autoKeys);
     }
 
     Pc_MemInit();
@@ -147,27 +172,21 @@ int main(int argc, char **argv) {
     // GameLoop_Async() prefix: heap, params, save probe, script inits.
     Pc_GameBootStage();
 
-    // Title flow: setup, fade, save read, BGM, bounded menu pump.
-    Pc_TitleSmoke(30);
+    // Full title -> interactive main menu -> real game flow with render,
+    // ~60Hz pacing and input sampling handled at the VBlankIntrWait boundary
+    // (boot-stage script demos above run unpaced so they finish fast).
+    // --frames caps total rendered frames (mostly for CI); 0 runs until the
+    // window is closed or Esc is pressed.
+    Pc_SetPaced(1);
+    printf("boot: entering title/game driver (%s)\n", frames > 0 ? "bounded" : "unbounded");
+    Pc_RunTitleAndGame(frames);
 
-    // Main loop: unbounded by default (runs until the window is closed or Esc is
-    // pressed). --frames N keeps a bounded/headless mode for CI and screenshots.
-    printf("boot: entering main loop (%s)\n", frames > 0 ? "bounded" : "unbounded");
-    for (i = 0; frames <= 0 || i < frames; i++) {
-        Pc_InputPump();
-        Pc_RequestVBlank();
-        Pc_VBlankCommit();
-        Pc_AudioFrame();
-        Pc_FrameActions();   // real GBA frame pump (replaces VBlank_CB tail)
-        Pc_VideoPresent();
-        if (frames <= 0 && Pc_QuitRequested())
-            break;
-    }
     if (dump != NULL)
         Pc_VideoDumpPPM(dump);
     Pc_SaveFlush();
 
-    printf("pmd-red-game: %d frame(s), DISPCNT=0x%04X BLDCNT=0x%04X\n", frames, gPcRegs.DISPCNT, gPcRegs.BLDCNT);
+    printf("pmd-red-game: %u frame(s), DISPCNT=0x%04X BLDCNT=0x%04X\n",
+           Pc_VBlankFrameCount(), gPcRegs.DISPCNT, gPcRegs.BLDCNT);
 
     Pc_AudioShutdown();
     Pc_InputShutdown();

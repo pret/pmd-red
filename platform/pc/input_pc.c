@@ -16,6 +16,20 @@
 
 volatile int gPcQuit = 0;
 
+// Optional scripted key hold for CI/smoke runs: while the paced-vblank frame
+// counter is in [start, start+dur) the given keys are treated as held, which
+// on the title allows a menu selection without a real keyboard.
+static int sAutoStart = -1;
+static int sAutoDur = 0;
+static u16 sAutoKeys = 0;
+
+void Pc_SetAutopress(int startFrame, int durFrames, u16 keys)
+{
+    sAutoStart = startFrame;
+    sAutoDur = durFrames < 1 ? 1 : durFrames;
+    sAutoKeys = keys;
+}
+
 void Pc_InputInit(void) {
     gPcRegs.KEYINPUT = KEYS_MASK; // all released
     gPcRegs.KEYCNT = 0;
@@ -59,6 +73,13 @@ void Pc_InputPump(void) {
         (void)i; // reserved for a later gamepad pass
     }
 #endif
+
+    // Scripted auto-hold (active-low: clearing a bit = pressing that key).
+    if (sAutoStart >= 0) {
+        int cur = (int)Pc_VBlankFrameCount();
+        if (cur >= sAutoStart && cur < sAutoStart + sAutoDur)
+            keys &= ~sAutoKeys;
+    }
 
     gPcRegs.KEYINPUT = keys;
 }

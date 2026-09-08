@@ -1120,6 +1120,8 @@ void nullsub_3(s32 yPos, s32 a1)
 // never-returning title/menu loop. Expanded toward the title screen next.
 #include <stdio.h>
 #include "gba_shim.h"
+static s32 Pc_MenuFrame(void);
+static void Pc_TitleIntro(void);
 void Pc_GameBootStage(void)
 {
     u32 tmp = 0;
@@ -1185,6 +1187,67 @@ void Pc_FrameActions(void)
 void Pc_TitleSmoke(int menuFrames)
 {
     s32 i;
+    s32 nextMenu;
+
+    Pc_TitleIntro();
+    for (i = 0; i < menuFrames; i++) {
+        nextMenu = Pc_MenuFrame();
+        if (nextMenu != MENU_NO_SCREEN_CHANGE)
+            break;
+    }
+    printf("host title: fade+save+menu done (%d menu frames)\n", menuFrames);
+}
+
+// One interactive main-menu frame. Mirrors GameLoop_Async's inner menu loop
+// (src/main_loops.c:199-227): the L-button BG-layer toggle, then
+// SetUpMenu/UpdateMenu/CleanUpMenu drive the menu. Returns a real selection
+// (2, 4 or MENU_NEW_GAME) or MENU_NO_SCREEN_CHANGE.
+static s32 Pc_MenuFrame(void)
+{
+    static bool8 sFlag = TRUE; // GameLoop_Async's local `flag`
+    s32 nextMenu;
+
+    if (sub_80363E0()) {
+        if (gRealInputs.pressed & L_BUTTON) {
+            sFlag = FALSE;
+            SetBGOBJEnableFlags(19);
+        }
+        else if (!sFlag && !(gRealInputs.held & L_BUTTON)) {
+            sFlag = TRUE;
+            SetBGOBJEnableFlags(0);
+        }
+
+        if (!sFlag) {
+            MainLoops_RunFrameActions(0);
+            return MENU_NO_SCREEN_CHANGE;
+        }
+    }
+
+    SetUpMenu();
+    MainLoops_RunFrameActions(0);
+    nextMenu = UpdateMenu();
+    CleanUpMenu();
+
+    if (nextMenu == 2)
+        return 2;
+    if (nextMenu == 4)
+        return 4;
+    if (nextMenu == MENU_NEW_GAME)
+        return MENU_NEW_GAME;
+    return MENU_NO_SCREEN_CHANGE;
+}
+
+s32 Pc_MenuStep(void)
+{
+    return Pc_MenuFrame();
+}
+
+// Mirrors GameLoop_Async's title block (main_loops.c:160-197): reset + title
+// load, fade-in, save read, file-select BGM, and main-menu init. Each frame
+// renders/paces itself at the VBlankIntrWait boundary.
+static void Pc_TitleIntro(void)
+{
+    s32 i;
     u8 tmp3 = 1;
 
     sMainLoopsUnk = MAINLOOPS_UNK_0;
@@ -1208,7 +1271,6 @@ void Pc_TitleSmoke(int menuFrames)
         }
 
         MainLoops_RunFrameActions(0);
-        Pc_VideoPresent();
     }
 
     PrepareSavePakRead();
@@ -1219,14 +1281,84 @@ void Pc_TitleSmoke(int menuFrames)
     StartNewBGM(MUS_FILE_SELECT);
     sub_80095CC(0, 20);
     InitMainMenu();
+}
 
-    for (i = 0; i < menuFrames; i++) {
-        SetUpMenu();
+// Mirrors the title teardown at main_loops.c:229-243: delete the menu, fade
+// the title back out, and close the palette file.
+static void Pc_TitleFadeOut(void)
+{
+    s32 i;
+
+    DeleteMainMenu();
+
+    while (sTitleBrightness > 0) {
+        sTitleBrightness--;
+
+        for (i = 0; i < 240; i++) {
+            SetBGPaletteBufferColorRGB(i, &((RGB_Struct*)sTitlePaletteFile->data)[i], sTitleBrightness, NULL);
+        }
+
         MainLoops_RunFrameActions(0);
-        Pc_VideoPresent();
-        UpdateMenu();
-        CleanUpMenu();
     }
-    printf("host title: fade+save+menu done (%d menu frames)\n", menuFrames);
+
+    CloseFile(sTitlePaletteFile);
+}
+
+// Mirrors GameLoop_Async's post-menu dispatch (main_loops.c:245-267). Enters
+// the real game-mode flow; returns when the mode ends (back at the title).
+static void Pc_DispatchGameMode(s32 nextMenu)
+{
+    switch (nextMenu) {
+        case 2: {
+            s32 mailIndex = GetFirstIndexofMailType(7);
+            if (mailIndex != -1) {
+                DeleteMailAtIndex(mailIndex);
+                RunGameMode_Async(2);
+            }
+            else
+                RunGameMode_Async(1);
+
+            break;
+        }
+        case 4: {
+            RunGameMode_Async(3);
+            break;
+        }
+        case MENU_NEW_GAME: {
+            sub_80122A8();
+            nullsub_33();
+            RunGameMode_Async(0);
+            break;
+        }
+    }
+}
+
+// Full PC game driver: title -> interactive main menu -> (on selection) the
+// real post-menu flow (title fade-out + RunGameMode_Async dispatch) -> title,
+// repeating like GameLoop_Async's outer loop. Renders/paces/inputs itself via
+// the VBlankIntrWait boundary, so no caller frame pump is needed. Returns on
+// quit (window close / Esc) or, in bounded mode, once --frames are consumed.
+void Pc_RunTitleAndGame(int maxFrames)
+{
+    for (;;) {
+        s32 nextMenu;
+
+        Pc_TitleIntro();
+
+        for (;;) {
+            if (Pc_QuitRequested())
+                return;
+            if (maxFrames > 0 && (s32)Pc_VBlankFrameCount() >= maxFrames)
+                return;
+
+            nextMenu = Pc_MenuFrame();
+            if (nextMenu != MENU_NO_SCREEN_CHANGE)
+                break;
+        }
+
+        printf("host menu: selection %d\n", nextMenu);
+        Pc_TitleFadeOut();
+        Pc_DispatchGameMode(nextMenu);
+    }
 }
 #endif // PLATFORM_PC

@@ -18,6 +18,8 @@ void Pc_InstallCrashHandler(void);
 void Pc_MemInit(void);       // zero VRAM/PLTT/OAM + regs, KEYINPUT idle
 void Pc_VBlankCommit(void);  // PC replacement for the VBlank_CB register reloads
 void Pc_RequestVBlank(void); // set by the host 60Hz loop; consumed by VBlankIntrWait
+void Pc_SetPaced(int on);    // enable 60Hz render/pacing inside VBlankIntrWait
+unsigned int Pc_VBlankFrameCount(void); // frames rendered via VBlankIntrWait
 
 // ---- Video backend (video_pc.c) ----
 void Pc_VideoInit(int scale);      // init framebuffer/window (SDL if HAVE_SDL2)
@@ -30,6 +32,7 @@ void Pc_InputInit(void);
 void Pc_InputPump(void); // refresh REG_KEYINPUT shadow (active-low, KEYS_MASK idle)
 void Pc_InputShutdown(void);
 int Pc_QuitRequested(void); // true when window close / Esc / quit requested
+void Pc_SetAutopress(int startFrame, int durFrames, u16 keys); // scripted key hold (CI)
 
 // ---- Audio backend (audio_pc.c, mute-first) ----
 void Pc_AudioInit(void);
