@@ -18,6 +18,13 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@master
 
+      - name: Checkout syms
+        if: ${{ github.event_name == 'push' }}
+        uses: actions/checkout@master
+        with:
+          path: symbols
+          ref: symbols
+
       - name: Checkout agbcc
         uses: actions/checkout@master
         with:
