@@ -14,17 +14,24 @@
 #include <string.h>
 #include <signal.h>
 #include <unistd.h>
+#ifndef _WIN32
 #include <execinfo.h>
+#endif
 
 static void Pc_CrashReport(int sig)
 {
+#ifndef _WIN32
     void *frames[32];
     int n = backtrace(frames, 32);
     fprintf(stderr, "pmd-red-game: fatal signal %d\n", sig);
     backtrace_symbols_fd(frames, n, 2);
+#else
+    fprintf(stderr, "pmd-red-game: fatal signal %d\n", sig);
+#endif
     _exit(139);
 }
 
+#ifndef _WIN32
 static void Pc_CrashAction(int sig, siginfo_t *info, void *ctx)
 {
     void *frames[32];
@@ -35,6 +42,7 @@ static void Pc_CrashAction(int sig, siginfo_t *info, void *ctx)
     backtrace_symbols_fd(frames, n, 2);
     _exit(139);
 }
+#endif
 
 #include "gba/gba.h"
 #include "gba_shim.h"
@@ -89,6 +97,7 @@ int main(int argc, char **argv) {
     Pc_MemInit();
     Pc_ApplyBootShadows();
     setvbuf(stdout, NULL, _IONBF, 0); // crash-debuggable boot log
+#ifndef _WIN32
     {
         struct sigaction sa;
         memset(&sa, 0, sizeof(sa));
@@ -98,6 +107,7 @@ int main(int argc, char **argv) {
         sigaction(SIGABRT, &sa, NULL);
         sigaction(SIGBUS, &sa, NULL);
     }
+#endif
     Pc_VideoInit(scale);
     Pc_InputInit();
     Pc_AudioInit();

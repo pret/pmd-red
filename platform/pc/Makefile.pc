@@ -36,6 +36,8 @@ GBAGFX_FULL := $(BIN_DIR)/gbagfx
 GBAGFX_NOPNG := $(BIN_DIR)/gbagfx-nopng
 
 CC := clang
+PYTHON ?= python3
+ASSET_JOBS ?= 1
 CFLAGS := -std=gnu89 -Wall -Wextra -O2 -DPLATFORM_PC -DMODERN=2
 CPPFLAGS := -I$(ROOT)/include -I$(ROOT)/platform/pc
 LDFLAGS := -lm
@@ -44,6 +46,19 @@ HAVE_SDL := $(shell command -v sdl2-config >/dev/null 2>&1 && echo yes || echo n
 ifeq ($(HAVE_SDL),yes)
 CFLAGS += -DHAVE_SDL2 $(shell sdl2-config --cflags)
 LDFLAGS += $(shell sdl2-config --libs)
+endif
+
+# libpng for the full gbagfx (PNG decode during asset generation). Prefer a
+# system/pkg-config install (e.g. MSYS2 mingw-w64-x86_64-libpng); only fall
+# back to downloading and building a static libpng under build/deps/prefix.
+ifeq ($(shell pkg-config --exists libpng 2>/dev/null && echo yes),yes)
+GBAGFX_PNG_CPPFLAGS := $(shell pkg-config --cflags libpng)
+GBAGFX_PNG_LDLIBS := $(shell pkg-config --libs libpng)
+GBAGFX_PNG_DEPS :=
+else
+GBAGFX_PNG_CPPFLAGS := -DPNG_SKIP_SETJMP_CHECK -I$(PREFIX)/include
+GBAGFX_PNG_LDLIBS := $(LIBPNG_LIB) -lz
+GBAGFX_PNG_DEPS := $(LIBPNG_LIB)
 endif
 
 PC_SRCS := $(ROOT)/platform/pc/cpu_pc.c \
@@ -91,9 +106,18 @@ GEN_DIR := $(BIN_DIR)/gen
 BLOB_IS := $(patsubst %,$(GEN_DIR)/%.i.s,$(BLOB_S))
 BLOB_CS := $(patsubst %,$(GEN_DIR)/blobs_%.c,$(BLOB_S))
 BLOB_OBJS := $(patsubst %,$(GAME_OBJ_DIR)/blobs_%.o,$(BLOB_S))
-ARM_TC := $(DEPS)/arm-gnu-toolchain-13.2.Rel1-darwin-arm64-arm-none-eabi/bin
+# ARM GNU toolchain used only to preprocess/assemble the data/*.s blobs into
+# .o files that gen_blobs.py turns into host C. Auto-detect any flavor under
+# build/deps (darwin-arm64, mingw-w64-i686, ...); override ARM_TC= on the
+# command line or install arm-none-eabi tools on PATH as a fallback.
+ARM_TC := $(firstword $(wildcard $(DEPS)/arm-gnu-toolchain-*/bin))
+ifneq ($(strip $(ARM_TC)),)
 ARM_CPP := $(ARM_TC)/arm-none-eabi-cpp
 ARM_AS := $(ARM_TC)/arm-none-eabi-as
+else
+ARM_CPP := arm-none-eabi-cpp
+ARM_AS := arm-none-eabi-as
+endif
 
 .PHONY: pc build stage run tools assets-pc pc-syntax blobs game-link clean-pc
 
@@ -101,9 +125,14 @@ pc: build stage
 
 build: $(BIN)
 
+# PC-backend objects. project include/ is added with -idirafter (not -I) so
+# the game's include/strings.h never shadows the host string.h/strings.h that
+# SDL's SDL_stdinc.h pulls in as <strings.h>. Game objects (below) still use
+# -I because they need the game's own cross-includes to win.
+PC_CPPFLAGS := $(filter-out -I$(ROOT)/include,$(CPPFLAGS)) -idirafter $(ROOT)/include
 $(OBJ_DIR)/%.o: $(ROOT)/%.c
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(PC_CPPFLAGS) -c $< -o $@
 
 $(BIN): $(PC_OBJS)
 	@mkdir -p $(BIN_DIR)
@@ -173,13 +202,13 @@ $(LIBPNG_LIB):
 	@cd $(LIBPNG_SRC) && ./configure --prefix=$(PREFIX) --disable-shared --enable-static >/dev/null && make -j8 >/dev/null && make install >/dev/null
 	@echo "libpng -> $(PREFIX)"
 
-$(GBAGFX_FULL): $(LIBPNG_LIB)
+$(GBAGFX_FULL): $(GBAGFX_PNG_DEPS)
 	@mkdir -p $(BIN_DIR)
-	$(CC) -O2 -std=c11 -DPNG_SKIP_SETJMP_CHECK -I$(PREFIX)/include -I$(ROOT)/tools/gbagfx \
+	$(CC) -O2 -std=c11 $(GBAGFX_PNG_CPPFLAGS) -I$(ROOT)/tools/gbagfx \
 	  $(ROOT)/tools/gbagfx/main.c $(ROOT)/tools/gbagfx/convert_png.c $(ROOT)/tools/gbagfx/gfx.c \
 	  $(ROOT)/tools/gbagfx/jasc_pal.c $(ROOT)/tools/gbagfx/lz.c $(ROOT)/tools/gbagfx/rl.c \
 	  $(ROOT)/tools/gbagfx/util.c $(ROOT)/tools/gbagfx/font.c $(ROOT)/tools/gbagfx/huff.c \
-	  $(LIBPNG_LIB) -lz -o $@
+	  $(GBAGFX_PNG_LDLIBS) -o $@
 	@echo "built $@"
 
 # libpng-free gbagfx (palette/lz/rl/huff only) for machines without the dep yet.
@@ -192,22 +221,12 @@ $(GBAGFX_NOPNG):
 	  $(ROOT)/platform/pc/tools/convert_png_stub.c -o $@
 
 # ---- Derived assets needed to compile src/*.c on host (all gitignored) ----
-# Generates only INCBIN-referenced .pmdpal/.gbapal (from .pal) and .4bpp/.8bpp
-# (from .png) under graphics/ax + graphics/ornament. Full-tree asset generation
-# (35k files) stays a later `assets-all` step.
-assets-pc: tools
-	@cd $(ROOT) && for i in 0 1 2 3 4 5 6 7 8 9 10 11 12 13; do \
-	  [ -f graphics/ax/pal/$$i.pmdpal ] || $(GBAGFX_FULL) graphics/ax/pal/$$i.pal graphics/ax/pal/$$i.pmdpal; \
-	done
-	@cd $(ROOT) && grep -rho 'INCBIN_[A-Z0-9]*("[^"]*")' src/data/ornament/ 2>/dev/null \
-	  | sed 's/.*("//; s/")//' | sort -u | while read -r f; do \
-	  if [ ! -f "$$f" ]; then case "$$f" in \
-	    *.pmdpal) s="$${f%.pmdpal}.pal"; [ -f "$$s" ] && $(GBAGFX_FULL) "$$s" "$$f";; \
-	    *.gbapal) s="$${f%.gbapal}.pal"; [ -f "$$s" ] && $(GBAGFX_FULL) "$$s" "$$f";; \
-	    *.4bpp) s="$${f%.4bpp}.png"; [ -f "$$s" ] && $(GBAGFX_FULL) "$$s" "$$f";; \
-	    *.8bpp) s="$${f%.8bpp}.png"; [ -f "$$s" ] && $(GBAGFX_FULL) "$$s" "$$f";; \
-	  esac; fi; done
-	@echo "assets-pc done"
+# Generates every INCBIN-referenced derived tilemap/palette asset across the
+# tree (graphics/ + data/): *.4bpp/.8bpp/.1bpp from .png and *.pmdpal/.gbapal
+# from .pal, via gbagfx. Idempotent; ~35k files the first time. ASSET_JOBS
+# controls the parallel conversion fan-out (default 1).
+assets-pc: tools $(GBAGFX_FULL)
+	@cd $(ROOT) && $(PYTHON) platform/pc/tools/gen_assets.py --gbagfx $(GBAGFX_FULL) --jobs $(ASSET_JOBS)
 
 # ---- Compile check: every game source through the real preproc pipeline ----
 pc-syntax: tools assets-pc
