@@ -85,9 +85,11 @@ static void Pc_CheckArchive(const char *label, const FileArchive *arc, const cha
 
 int main(int argc, char **argv) {
     int scale = 3, frames = 0, i, autoStart = -1;
+    int console = 1; // console output by default; --log FILE redirects instead
     const char *dump = NULL;
     const char *romPath = NULL;
     const char *autoSpec = NULL;
+    const char *logFile = NULL;
     for (i = 1; i < argc; i++) {
         if (strcmp(argv[i], "--scale") == 0 && i + 1 < argc)
             scale = atoi(argv[++i]);
@@ -99,6 +101,10 @@ int main(int argc, char **argv) {
             romPath = argv[++i];
         else if (strcmp(argv[i], "--autopress") == 0 && i + 1 < argc)
             autoSpec = argv[++i];
+        else if (strcmp(argv[i], "--console") == 0)
+            console = 1;
+        else if (strcmp(argv[i], "--log") == 0 && i + 1 < argc)
+            logFile = argv[++i];
     }
 
     // --autopress KEY@START holds a key from the given paced-vblank frame
@@ -126,6 +132,7 @@ int main(int argc, char **argv) {
     Pc_MemInit();
     Pc_ApplyBootShadows();
     setvbuf(stdout, NULL, _IONBF, 0); // crash-debuggable boot log
+    Pc_ConsoleOpen(logFile, logFile == NULL && console); // console by default, --log FILE otherwise
     Pc_InstallCrashHandler();
 #ifndef _WIN32
     {

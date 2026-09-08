@@ -10,6 +10,22 @@
 #ifdef _WIN32
 #include <windows.h>
 
+// Attach a console (or redirect to a log file) so the -mwindows exe shows its
+// stdout/stderr when launched by double-click. Call after setvbuf in main.
+void Pc_ConsoleOpen(const char *logFile, int wantConsole)
+{
+    if (wantConsole) {
+        AllocConsole();
+        freopen("CONOUT$", "w", stdout);
+        freopen("CONOUT$", "w", stderr);
+        return;
+    }
+    if (logFile != NULL && logFile[0] != '\0') {
+        freopen(logFile, "w", stdout);
+        freopen(logFile, "a", stderr);
+    }
+}
+
 static LONG WINAPI Pc_WinException(PEXCEPTION_POINTERS ep)
 {
     ULONG_PTR ip = 0;

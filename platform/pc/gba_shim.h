@@ -12,6 +12,7 @@
 
 // ---- Crash diagnostics (crash_win.c) ----
 void Pc_InstallCrashHandler(void);
+void Pc_ConsoleOpen(const char *logFile, int wantConsole); // --console / --log output
 
 // ---- BIOS syscall replacements (cpu_pc.c) ----
 // Signatures match libagbsyscall so game call sites need no edits.
