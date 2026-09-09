@@ -36,7 +36,7 @@ gUnknown_8388AD0:
 .incbin "baserom.gba", 0x388AD0, 0x380
 .global gUnknown_8388E50
 gUnknown_8388E50:
-.string "AT4PX"
+.ascii "AT4PX"
 .incbin "baserom.gba", 0x388E55, 0x4143
 .global gUnknown_838CF98
 gUnknown_838CF98:

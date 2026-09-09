@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "gba/gba.h"
 #include "gba_shim.h"
 
 static char sSaveDir[256];
