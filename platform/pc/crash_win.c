@@ -244,6 +244,31 @@ static LONG WINAPI Pc_WinException(PEXCEPTION_POINTERS ep)
     Pc_LogPrintf("=== unhandled exception 0x%08lX at %p (image base %p) ===\n",
                  (unsigned long)ep->ExceptionRecord->ExceptionCode,
                  (void *)ip, (void *)GetModuleHandleA(NULL));
+    if (ep->ExceptionRecord->ExceptionCode == EXCEPTION_ACCESS_VIOLATION) {
+        Pc_LogPrintf("faulting access: %p\n",
+                     (void *)ep->ExceptionRecord->ExceptionInformation[1]);
+    }
+#if defined(_M_IX86)
+    Pc_LogPrintf("regs eax=%08lX ebx=%08lX ecx=%08lX edx=%08lX esi=%08lX edi=%08lX ebp=%08lX esp=%08lX\n",
+                 (unsigned long)ep->ContextRecord->Eax,
+                 (unsigned long)ep->ContextRecord->Ebx,
+                 (unsigned long)ep->ContextRecord->Ecx,
+                 (unsigned long)ep->ContextRecord->Edx,
+                 (unsigned long)ep->ContextRecord->Esi,
+                 (unsigned long)ep->ContextRecord->Edi,
+                 (unsigned long)ep->ContextRecord->Ebp,
+                 (unsigned long)ep->ContextRecord->Esp);
+#elif defined(_M_X64)
+    Pc_LogPrintf("regs rax=%016llX rbx=%016llX rcx=%016llX rdx=%016llX rsi=%016llX rdi=%016llX rbp=%016llX rsp=%016llX\n",
+                 (unsigned long long)ep->ContextRecord->Rax,
+                 (unsigned long long)ep->ContextRecord->Rbx,
+                 (unsigned long long)ep->ContextRecord->Rcx,
+                 (unsigned long long)ep->ContextRecord->Rdx,
+                 (unsigned long long)ep->ContextRecord->Rsi,
+                 (unsigned long long)ep->ContextRecord->Rdi,
+                 (unsigned long long)ep->ContextRecord->Rbp,
+                 (unsigned long long)ep->ContextRecord->Rsp);
+#endif
     if (sLogFile != stderr) {
         fprintf(stderr, "pmd-red-game: unhandled exception 0x%08lX at %p (image base %p)\n",
                 (unsigned long)ep->ExceptionRecord->ExceptionCode,

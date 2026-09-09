@@ -11,3 +11,6 @@ const unsigned pcGbaAddrCount = 0;
 
 const unsigned int *const pcGbaRelocTable[1] = { NULL };
 const unsigned pcGbaRelocCount = 0;
+
+const unsigned int *const pcSliceRelocTable[1] = { NULL };
+const unsigned pcSliceRelocCount = 0;

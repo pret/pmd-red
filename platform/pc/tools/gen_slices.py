@@ -18,7 +18,7 @@ import sys
 
 INCBIN = re.compile(r'\.incbin\s+"baserom\.gba"\s*,\s*(0x[0-9A-Fa-f]+)\s*,\s*(0x[0-9A-Fa-f]+)')
 LABEL = re.compile(r'^([A-Za-z_][A-Za-z0-9_]*)\s*:')
-DIR = re.compile(r'^\.([A-Za-z_][A-Za-z0-9_]*)\s*(.*)$')
+DIR = re.compile(r'^\.([A-Za-z0-9_]+)\s*(.*)$')
 
 
 def strip_comment(line):

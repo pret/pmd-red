@@ -27,6 +27,8 @@ extern const PcGbaAddr pcGbaAddrTable[];
 extern const unsigned pcGbaAddrCount;
 extern const unsigned int *const pcGbaRelocTable[];
 extern const unsigned pcGbaRelocCount;
+extern const unsigned int *const pcSliceRelocTable[];
+extern const unsigned pcSliceRelocCount;
 
 const void *Pc_GbaToHost(unsigned gba)
 {
@@ -92,6 +94,8 @@ void Pc_SetupRomAddressSpace(void)
         return;
     base = Pc_MapRomSpace();
     if (base == NULL) {
+        Pc_LogPrintf("WARNING could not allocate GBA ROM window; "
+                     "baked 0x08xxxxxx data pointers will be invalid\n");
         fprintf(stderr, "pmd-red-pc: WARNING could not allocate GBA ROM window; "
                         "baked 0x08xxxxxx data pointers will be invalid\n");
         return;
@@ -105,7 +109,18 @@ void Pc_SetupRomAddressSpace(void)
             if ((gba & 0xF8000000u) == 0x08000000u)
                 *w = (unsigned)((unsigned char *)base + (gba - 0x08000000u));
         }
+        for (i = 0; i < pcSliceRelocCount; i++) {
+            unsigned int *w = pcSliceRelocTable[i];
+            unsigned int gba = *w;
+            if ((gba & 0xF8000000u) == 0x08000000u)
+                *w = (unsigned)((unsigned char *)base + (gba - 0x08000000u));
+        }
+        Pc_LogPrintf("GBA ROM window re-homed to %p (relocs %u, slice relocs %u)\n",
+                     (void *)base, pcGbaRelocCount, pcSliceRelocCount);
         fprintf(stdout, "pmd-red-pc: GBA ROM window re-homed to %p\n", (void *)base);
+    } else {
+        Pc_LogPrintf("GBA ROM window mapped at 0x08000000 (relocs %u, slice relocs %u)\n",
+                     pcGbaRelocCount, pcSliceRelocCount);
     }
     sRomSpaceMapped = 1;
     sRomMapBase = base;

@@ -28,6 +28,13 @@ typedef struct PcGbaAddr {
 extern const unsigned int *const pcGbaRelocTable[];
 extern const unsigned pcGbaRelocCount;
 
+// Additional baked-address candidates inside runtime ROM-slice regions
+// (rom_slices_all.c): raw .incbin data (e.g. the tail half of SIRO pointer
+// tables) carries 0x08xxxxxx words that reloc slots do not cover. Listed
+// per 4-aligned word so the same re-homing covers them.
+extern const unsigned int *const pcSliceRelocTable[];
+extern const unsigned pcSliceRelocCount;
+
 // Translate a baked GBA address to the host pointer of the owning blob array.
 // Returns NULL if the address is unknown or not ROM-backed (e.g. 0x0300xxxx
 // IWRAM pointers, which the PC build should never see as data addresses).
