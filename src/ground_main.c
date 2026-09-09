@@ -1,5 +1,8 @@
 #include "global.h"
 #include "globaldata.h"
+#ifdef PLATFORM_PC
+#include "boot_pc.h"
+#endif
 #include "constants/dungeon.h"
 #include "constants/move_id.h"
 #include "structs/str_wonder_mail.h"
@@ -314,6 +317,18 @@ u32 xxx_script_related_8098468_Async(s32 startMode)
         while ( 1 ) {
             xxx_call_update_bg_sound_input();
             sub_80A6E68();
+#ifdef PLATFORM_PC
+            // PC boot-scene hook: the DEMO boot scenes (warning / logos / intro)
+            // run paced through this loop. End the scene once the boot_pc.c frame
+            // budget is spent or A/Start is pressed, so a long script WAIT (the
+            // warning holds ~60s on the GBA) can't stall the port, and Skip* args
+            // / button presses advance the boot. Inert during normal gameplay.
+            if (Pc_BootTick((gRealInputs.pressed & (A_BUTTON | START_BUTTON)) != 0)) {
+                GroundMap_ExecuteEvent(DEMO_CANCEL, FALSE);
+                GroundMainGameCancelRequest(30);
+                FadeOutAllMusic(30);
+            }
+#endif
             if (sUnknown_20398A8 != Unk_20398A8_UNK0) {
                 if (sUnknown_20398AC > 0) {
                     sUnknown_20398AC--;

@@ -1132,6 +1132,7 @@ void nullsub_3(s32 yPos, s32 a1)
 // never-returning title/menu loop. Expanded toward the title screen next.
 #include <stdio.h>
 #include "gba_shim.h"
+#include "boot_pc.h"
 static s32 Pc_MenuFrame(void);
 static void Pc_TitleIntro(void);
 void Pc_GameBootStage(void)
@@ -1177,15 +1178,50 @@ void Pc_GameBootStage(void)
         ThoroughlyResetScriptVars();
     printf("boot-stage: save probe done (tmp=%u)\n", tmp);
 
-    printf("boot-stage: script modes 14-17\n");
-    xxx_script_related_8001334_Async(STARTMODE_14);
-    xxx_script_related_8001334_Async(STARTMODE_15);
-    ClearScriptVarArray(NULL, EVENT_LOCAL);
-    xxx_script_related_8001334_Async(STARTMODE_16);
-
-    if (GetScriptVarValue(NULL, EVENT_LOCAL) == 0)
-        xxx_script_related_8001334_Async(STARTMODE_17);
+    // NOTE: the DEMO boot scenes (warning / logos / intro) that GameLoop_Async
+    // runs here are owned by Pc_RunBootSequence on the PC port, so they render
+    // paced and honor the SkipWarning / SkipLogos / SkipIntro launch args.
     printf("boot-stage: complete\n");
+}
+
+// Mirrors GameLoop_Async's boot demos (main_loops.c:152-158): warning, logo,
+// intro (+ title) in that order, each rendered paced by the ground engine with
+// a frame budget + A/Start skip (boot_pc.c). Skip flags remove a stage entirely.
+// Afterward the caller drives the real title/menu (Pc_RunTitleAndGame).
+void Pc_RunBootSequence(const PcBootConfig *cfg)
+{
+    Pc_SetPaced(1);
+
+    if (!cfg->skipWarning) {
+        printf("boot: warning scene (DEMO_01)\n");
+        Pc_BootSceneBegin(480); // ~8s; the GBA script holds ~60s
+        xxx_script_related_8001334_Async(STARTMODE_14);
+        Pc_BootSceneEnd();
+    }
+
+    if (!cfg->skipLogos) {
+        printf("boot: logo scene (DEMO_02)\n");
+        Pc_BootSceneBegin(360); // ~6s, matches the script's 3 fade cycles
+        xxx_script_related_8001334_Async(STARTMODE_15);
+        Pc_BootSceneEnd();
+    }
+
+    ClearScriptVarArray(NULL, EVENT_LOCAL);
+    if (!cfg->skipIntro) {
+        printf("boot: intro scene (DEMO_03)\n");
+        Pc_BootSceneBegin(1800); // ~30s: post office -> Pelipper -> logo
+        xxx_script_related_8001334_Async(STARTMODE_16);
+        Pc_BootSceneEnd();
+
+        // GameLoop_Async re-shows the title if the intro demo didn't reach it.
+        if (GetScriptVarValue(NULL, EVENT_LOCAL) == 0) {
+            printf("boot: title re-show (DEMO_04)\n");
+            Pc_BootSceneBegin(360);
+            xxx_script_related_8001334_Async(STARTMODE_17);
+            Pc_BootSceneEnd();
+        }
+    }
+    printf("boot: sequence complete\n");
 }
 
 // Host frame pump: one tick of the real GBA frame actions.
@@ -1387,3 +1423,4 @@ void Pc_RunTitleAndGame(int maxFrames, int autoload)
     }
 }
 #endif // PLATFORM_PC
+

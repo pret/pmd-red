@@ -2,6 +2,9 @@
 #define GUARD_MAIN_LOOPS_H
 
 #include "personality_test1.h"
+#ifdef PLATFORM_PC
+#include "boot_pc.h"
+#endif
 
 enum MainLoopsUnk
 {
@@ -18,6 +21,10 @@ void nullsub_3(s32 yPos, s32 a1);
 void Pc_GameBootStage(void);
 void Pc_FrameActions(void);
 void Pc_TitleSmoke(int menuFrames);
+// Play the real boot sequence (health & safety warning, logos, intro/title
+// opening) before the title screen. Each stage renders paced via the ground
+// engine and is skippable via the PcBootConfig flags and A/Start.
+void Pc_RunBootSequence(const PcBootConfig *cfg);
 // One interactive title/menu frame. Returns a real selection (2, 4 or
 // MENU_NEW_GAME) when the player confirms a menu item, else MENU_NO_SCREEN_CHANGE.
 s32 Pc_MenuStep(void);

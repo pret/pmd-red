@@ -79,6 +79,7 @@ PC_SRCS := $(ROOT)/platform/pc/cpu_pc.c \
            $(ROOT)/platform/pc/rom_load_stubs.c \
            $(ROOT)/platform/pc/crash_win.c \
            $(ROOT)/platform/pc/stubs_pc.c \
+           $(ROOT)/platform/pc/boot_pc.c \
            $(ROOT)/platform/pc/main_pc.c
 PC_OBJS := $(patsubst $(ROOT)/%.c,$(OBJ_DIR)/%.o,$(PC_SRCS))
 # Game binary swaps the smoke entry for the real-init entry and links the

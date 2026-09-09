@@ -23,6 +23,7 @@
 #include "cpu_pc.h"
 #include "m4a_port.h"
 #include "rom_load.h"
+#include "boot_pc.h"
 #include "file_system.h"
 #include "def_filearchives.h"
 #include "text_1.h"
@@ -100,7 +101,11 @@ int main(int argc, char **argv) {
     const char *logFile = NULL;
     const char *wavPath = NULL;
     int wavSeconds = 0;
+    PcBootConfig bootCfg;
     char exeDir[1024 + 1];
+    bootCfg.skipWarning = 0;
+    bootCfg.skipLogos = 0;
+    bootCfg.skipIntro = 0;
     for (i = 1; i < argc; i++) {
         if (strcmp(argv[i], "--scale") == 0 && i + 1 < argc)
             scale = atoi(argv[++i]);
@@ -124,6 +129,12 @@ int main(int argc, char **argv) {
             wavPath = argv[++i];
             wavSeconds = atoi(argv[++i]);
         }
+        else if (strcasecmp(argv[i], "SkipWarning") == 0 || strcasecmp(argv[i], "--SkipWarning") == 0)
+            bootCfg.skipWarning = 1;
+        else if (strcasecmp(argv[i], "SkipLogos") == 0 || strcasecmp(argv[i], "--SkipLogos") == 0)
+            bootCfg.skipLogos = 1;
+        else if (strcasecmp(argv[i], "SkipIntro") == 0 || strcasecmp(argv[i], "--SkipIntro") == 0)
+            bootCfg.skipIntro = 1;
     }
 
     // --autopress KEY@START holds a key from the given paced-vblank frame
@@ -205,6 +216,13 @@ int main(int argc, char **argv) {
 
     // GameLoop_Async() prefix: heap, params, save probe, script inits.
     Pc_GameBootStage();
+
+    // Boot sequence: health & safety warning, logos, intro/title opening.
+    // Each stage honors its Skip* launch arg (SkipWarning/SkipLogos/SkipIntro)
+    // and advances on A/Start or a per-scene frame budget.
+    if (bootCfg.skipWarning && bootCfg.skipLogos && bootCfg.skipIntro)
+        printf("boot: all boot scenes skipped by launch args\n");
+    Pc_RunBootSequence(&bootCfg);
 
     // Full title -> interactive main menu -> real game flow with render,
     // ~60Hz pacing and input sampling handled at the VBlankIntrWait boundary
