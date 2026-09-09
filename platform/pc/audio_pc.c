@@ -21,6 +21,7 @@
 // them via SDL_QueueAudio (no callback thread, no locking). Without SDL2
 // the renderer compiles to a headless no-op (players still advance).
 #include <string.h>
+#include <time.h>
 
 #include "gba/gba.h"
 #include "gba_shim.h"
@@ -28,7 +29,8 @@
 #include "m4a_port.h"
 
 #define PC_AUDIO_RATE 44100
-#define PC_AUDIO_BLOCK (PC_AUDIO_RATE / 60) // 735 samples per 60 Hz tick
+#define PC_AUDIO_BLOCK_MAX 4096             // largest single render block
+#define PC_MASTER_GAIN 8.0f                 // 8-bit-scale mix -> 16-bit loudness
 #define PC_AUDIO_GBA_RATE 18157
 
 #ifdef HAVE_SDL2
@@ -343,9 +345,24 @@ void Pc_AudioInit(void)
 #endif
 }
 
+int Pc_AudioRate(void)
+{
+    return sAudioRate;
+}
+
+double Pc_TimeNow(void)
+{
+#ifdef HAVE_SDL2
+    return (double)SDL_GetPerformanceCounter()
+         / (double)SDL_GetPerformanceFrequency();
+#else
+    return (double)clock() / (double)CLOCKS_PER_SEC;
+#endif
+}
+
 void Pc_AudioFrame(void)
 {
-    // Game frames drive rendering via m4aSoundMain -> Pc_MixerRender;
+    // Game frames drive rendering via m4aSoundMain -> Pc_MixerRenderSamples;
     // nothing to do here (device idles silently when the queue is empty).
 }
 
@@ -360,50 +377,55 @@ void Pc_AudioShutdown(void)
 #endif
 }
 
-// Render one 60 Hz tick of all voices and queue it. Called from
-// m4aSoundMain after Pc_AudioTick (same order as the GBA: scheduler,
-// CgbSound envelopes, mixer). Headless (no device): no-op.
-void Pc_MixerRender(void)
+// Render n samples of all voices and queue them. Called from m4aSoundMain.
+// stepEnvelope != 0 performs one full 60 Hz tick (scheduler already advanced
+// via Pc_AudioTick): CgbSound envelopes + per-channel DS envelope, then the
+// mixer — mirroring the GBA order. stepEnvelope == 0 renders a partial
+// sub-tick with the current channel state so the host queue is fed in
+// lockstep with real elapsed time regardless of the game frame rate.
+// Headless (no device): no-op.
+void Pc_MixerRenderSamples(int n, int stepEnvelope)
 {
 #ifdef HAVE_SDL2
     unsigned int nchan;
     unsigned int ncgb;
     struct SoundChannel *chans;
     struct CgbChannel *cgbs;
-    float mixL[PC_AUDIO_BLOCK];
-    float mixR[PC_AUDIO_BLOCK];
-    short out[PC_AUDIO_BLOCK * 2];
+    float mixL[PC_AUDIO_BLOCK_MAX];
+    float mixR[PC_AUDIO_BLOCK_MAX];
+    short out[PC_AUDIO_BLOCK_MAX * 2];
     double revGain;
-    int block;
     int i;
     unsigned int ci;
     if (sAudioDev == 0)
         return;
-    block = sAudioRate / 60;
-    if (block < 1)
-        block = 1;
-    if (block > PC_AUDIO_BLOCK)
-        block = PC_AUDIO_BLOCK;
-    for (i = 0; i < block; i++)
+    if (n < 1)
+        return;
+    if (n > PC_AUDIO_BLOCK_MAX)
+        n = PC_AUDIO_BLOCK_MAX;
+    for (i = 0; i < n; i++)
         mixL[i] = mixR[i] = 0.0f;
     if (!Pc_AudioHalted())
     {
-        Pc_CgbFrame();
+        if (stepEnvelope)
+        {
+            Pc_CgbFrame();
+            chans = Pc_SoundChans(&nchan);
+            for (ci = 0; ci < nchan && ci < MAX_DIRECTSOUND_CHANNELS; ci++)
+                Pc_DsEnvelope(&chans[ci], (int)ci);
+        }
         chans = Pc_SoundChans(&nchan);
         for (ci = 0; ci < nchan && ci < MAX_DIRECTSOUND_CHANNELS; ci++)
-        {
-            Pc_DsEnvelope(&chans[ci], (int)ci);
-            Pc_RenderDs(&chans[ci], (int)ci, mixL, mixR, block, sAudioRate);
-        }
+            Pc_RenderDs(&chans[ci], (int)ci, mixL, mixR, n, sAudioRate);
         cgbs = Pc_CgbChans(&ncgb);
         for (ci = 0; ci < ncgb && ci < 4; ci++)
-            Pc_RenderCgb(&cgbs[ci], (int)ci, mixL, mixR, block, sAudioRate);
+            Pc_RenderCgb(&cgbs[ci], (int)ci, mixL, mixR, n, sAudioRate);
     }
     // Reverb: feedback comb approximating the GBA's 87 ms buffer echo.
     revGain = Pc_Reverb() * 4.0 / 512.0;
     if (revGain > 0.8)
         revGain = 0.8;
-    for (i = 0; i < block; i++)
+    for (i = 0; i < n; i++)
     {
         float l = mixL[i];
         float r = mixR[i];
@@ -417,6 +439,9 @@ void Pc_MixerRender(void)
             if (pcRevPos >= PC_REV_DELAY)
                 pcRevPos = 0;
         }
+        // Bring the GBA 8-bit-scale mix up to a normal 16-bit loudness.
+        l *= (float)PC_MASTER_GAIN;
+        r *= (float)PC_MASTER_GAIN;
         if (l > 32767.0f)
             l = 32767.0f;
         else if (l < -32768.0f)
@@ -431,7 +456,7 @@ void Pc_MixerRender(void)
     // Bound queue latency: drop (don't pile up) past ~1 s, e.g. during
     // unpaced boot pumps that run hundreds of frames per second.
     if (SDL_GetQueuedAudioSize(sAudioDev) <= (Uint32)(sAudioRate * 4))
-        SDL_QueueAudio(sAudioDev, out, (Uint32)(block * 4));
+        SDL_QueueAudio(sAudioDev, out, (Uint32)(n * 4));
 #endif
 }
 

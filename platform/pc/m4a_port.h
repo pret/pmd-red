@@ -12,9 +12,16 @@
 // Advance all players one 60 Hz frame (called by m4aSoundMain).
 void Pc_AudioTick(void);
 
-// Render one tick of audio (defined in audio_pc.c; called by m4aSoundMain
-// after Pc_AudioTick, mirroring scheduler -> mixer order).
-void Pc_MixerRender(void);
+// Render n samples of audio (defined in audio_pc.c; called by m4aSoundMain
+// after Pc_AudioTick, mirroring scheduler -> mixer order). stepEnvelope != 0
+// steps the envelopes for one 60 Hz tick; 0 renders a partial sub-tick with
+// the current channel state (keeps the host queue fed at the device rate
+// regardless of the game frame rate).
+void Pc_MixerRenderSamples(int n, int stepEnvelope);
+
+// Host audio device rate in samples/sec and a monotonic clock (seconds).
+int Pc_AudioRate(void);
+double Pc_TimeNow(void);
 
 // Nonzero while the sound engine is halted (VSync off: freeze + silence,
 // like halted GBA DMA).

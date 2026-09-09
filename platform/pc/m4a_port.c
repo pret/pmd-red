@@ -1704,10 +1704,53 @@ void m4aSoundInit(void)
     }
 }
 
+// m4aSoundMain drives the whole audio pipeline. On the GBA this runs once per
+// VBlank (~59.73 Hz). On the host the game loop does NOT run at a fixed 60 Hz
+// (software render cost + SDL_Delay oversleep put it anywhere from ~30-60 fps),
+// so rendering exactly one 60 Hz tick of samples per call starves the audio
+// queue (underrun -> crackle) and slows the music. Instead, advance the engine
+// and produce samples from the wall clock: each frame we render elapsed*rate
+// samples and step the players for elapsed*60 ticks (fractional accumulation),
+// so the SDL queue always receives real-time-rate audio at any game fps.
 void m4aSoundMain(void)
 {
-    Pc_AudioTick();
-    Pc_MixerRender();
+    double now;
+    double elapsed;
+    static double pcSoundLast = 0.0;
+    static double pcTickAcc = 0.0;
+    int rate;
+    int spp; // samples per 60 Hz tick
+    int need; // samples owed this call (real elapsed time)
+    int ticks;
+    int left;
+    now = Pc_TimeNow();
+    if (pcSoundLast <= 0.0)
+        pcSoundLast = now;
+    elapsed = now - pcSoundLast;
+    pcSoundLast = now;
+    if (elapsed < 0.0)
+        elapsed = 0.0;
+    if (elapsed > 0.1)
+        elapsed = 0.1; // clamp after stalls; never burst huge buffers
+    rate = Pc_AudioRate();
+    if (rate < 1)
+        rate = 1;
+    spp = rate / 60;
+    if (spp < 1)
+        spp = 1;
+    need = (int)(elapsed * (double)rate);
+    pcTickAcc += elapsed * 60.0;
+    ticks = 0;
+    while (pcTickAcc >= 1.0)
+    {
+        Pc_AudioTick();
+        Pc_MixerRenderSamples(spp, 1);
+        pcTickAcc -= 1.0;
+        ticks++;
+    }
+    left = need - ticks * spp;
+    if (left > 0)
+        Pc_MixerRenderSamples(left, 0);
 }
 
 int Pc_AudioHalted(void)
