@@ -15,6 +15,7 @@
 *.hwjpnfont
 *.fwjpnfont
 *.bat
+!builder/*.bat
 sound/**/*.bin
 tools/agbcc
 *.map

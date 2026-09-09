@@ -83,7 +83,7 @@ void LoadDungeonTilesetAssets(void)
 
   sprintf(fileName,"b%02dfon",gUnknown_8108EC0[gDungeon->tileset]);
   file = OpenFileAndGetFileDataPtr(fileName,&gDungeonFileArchive);
-  DecompressATGlobalFile((u32 *)0x06008000,0,file);
+  DecompressATGlobalFile((u32 *)((u8 *)VRAM + 0x8000),0,file);
   CloseFile(file);
 
   sprintf(fileName,"b%02dpal",gDungeon->tileset);
