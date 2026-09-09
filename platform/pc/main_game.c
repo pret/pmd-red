@@ -91,7 +91,7 @@ static void Pc_CheckArchive(const char *label, const FileArchive *arc, const cha
 
 int main(int argc, char **argv) {
     int scale = 3, frames = 0, i, autoStart = -1;
-    int console = 0; // client.log sink by default; --console allocates a console
+    int console = 1; // console on by default; --noconsole routes to client.log only
     const char *dump = NULL;
     const char *autoSpec = NULL;
     const char *logFile = NULL;
@@ -107,6 +107,8 @@ int main(int argc, char **argv) {
             autoSpec = argv[++i];
         else if (strcmp(argv[i], "--console") == 0)
             console = 1;
+        else if (strcmp(argv[i], "--noconsole") == 0)
+            console = 0;
         else if (strcmp(argv[i], "--log") == 0 && i + 1 < argc)
             logFile = argv[++i];
     }
