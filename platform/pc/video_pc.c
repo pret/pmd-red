@@ -384,11 +384,12 @@ static void Pc_RenderFrame(void) {
                         objSemi = 0;
                     }
                 }
-                // OBJ at this priority: top-most opaque pixel (highest OAM
-                // index wins among overlapping sprites).
+                // OBJ at this priority: top-most opaque pixel. Among
+                // overlapping sprites the lower OAM index is drawn on top
+                // (OBJ0 over OBJ1-127), matching the GBA hardware.
                 if ((layerBits & 16) && objOn) {
                     const struct OamData *winO = NULL;
-                    int winIdx = -1;
+                    int winIdx = 128;
                     int s;
                     for (s = 0; s < nAct; s++) {
                         unsigned pal;
@@ -399,7 +400,7 @@ static void Pc_RenderFrame(void) {
                         if (Pc_ObjPixel(vram, &oam[act[s].idx], act[s].ox, act[s].oy,
                                         act[s].w, act[s].h, x - act[s].ox,
                                         y - act[s].oy, &pal)) {
-                            if (winO == NULL || act[s].idx > winIdx) {
+                            if (winO == NULL || act[s].idx < winIdx) {
                                 winO = &oam[act[s].idx];
                                 winIdx = act[s].idx;
                                 under = (topLayer < 0) ? pltt[0] : top;
