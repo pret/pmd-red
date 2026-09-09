@@ -18,6 +18,13 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@master
 
+      - name: Checkout syms
+        if: ${{ github.event_name == 'push' }}
+        uses: actions/checkout@master
+        with:
+          path: symbols
+          ref: symbols
+
       - name: Checkout agbcc
         uses: actions/checkout@master
         with:
@@ -45,11 +52,26 @@ jobs:
 
       - name: Build via Makefile
         run: |
-          make -j${nproc} compare
+          make -j${nproc} compare syms
 
       - name: Modern
         run: |
           make -j${nproc} modern
+          
+      - name: Move symfiles
+        if: ${{ github.event_name == 'push' }}
+        run: |
+          cp -v *.sym symbols/
+          echo "SYMBOLS_COMMIT_MSG=$( git log --format=%s ${GITHUB_SHA} )" >> $GITHUB_ENV
+
+      - name: Update symfiles
+        if: ${{ github.event_name == 'push' }}
+        uses: EndBug/add-and-commit@v7
+        with:
+          branch: symbols
+          cwd: "./symbols"
+          add: "*.sym"
+          message: ${{ env.SYMBOLS_COMMIT_MSG }}
 
       # only run OK when pushed to master
       - name: Run OK webhook
