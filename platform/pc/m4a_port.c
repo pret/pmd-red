@@ -1185,6 +1185,15 @@ static void Pc_TickTracks(struct MusicPlayerInfo *info)
         }
         if (track->flags & MPT_FLG_START)
             Pc_TrackStartInit(track);
+        // GBA (m4a_1.s:_080AEA28): track->wait is checked BEFORE any command
+        // is read each tick. Without this a waiting track would fire its next
+        // note every tick (the W wait never gates the command stream), which
+        // makes notes repeat ~50-60x/sec instead of on their real schedule.
+        if (track->wait != 0)
+        {
+            track->wait--;
+            goto wait_done;
+        }
         for (;;)
         {
             if (*track->cmdPtr < 0x80)
@@ -1218,6 +1227,7 @@ static void Pc_TickTracks(struct MusicPlayerInfo *info)
             track->wait--;
             break;
         }
+    wait_done:
         if (track->lfoSpeed != 0 && track->mod != 0)
         {
             if (track->lfoDelayC != 0)

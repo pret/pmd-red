@@ -421,8 +421,9 @@ void Pc_MixerRenderSamples(int n, int stepEnvelope)
         for (ci = 0; ci < ncgb && ci < 4; ci++)
             Pc_RenderCgb(&cgbs[ci], (int)ci, mixL, mixR, n, sAudioRate);
     }
-    // Reverb: feedback comb approximating the GBA's 87 ms buffer echo.
-    revGain = Pc_Reverb() * 4.0 / 512.0;
+    // Reverb: feedback comb approximating the GBA's 87 ms buffer echo. Gain
+    // mirrors the GBA mixer (sum * reverb >> 9 = reverb/512; reverb is 7 bits).
+    revGain = Pc_Reverb() / 512.0;
     if (revGain > 0.8)
         revGain = 0.8;
     for (i = 0; i < n; i++)
