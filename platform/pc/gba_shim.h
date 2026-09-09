@@ -8,11 +8,18 @@
 #ifndef PMDRED_PC_GBA_SHIM_H
 #define PMDRED_PC_GBA_SHIM_H
 
+#include <stddef.h>
+
 #ifdef PLATFORM_PC
 
-// ---- Crash diagnostics (crash_win.c) ----
+// ---- Crash diagnostics + client.log (crash_win.c) ----
 void Pc_InstallCrashHandler(void);
-void Pc_ConsoleOpen(const char *logFile, int wantConsole); // --console / --log output
+void Pc_ExeDir(char *out, size_t cap, const char *argv0); // dir of running exe, trailing sep
+void Pc_LogOpen(const char *exeDir, int wantConsole, const char *logFile); // client.log sink
+int Pc_LogPrintf(const char *fmt, ...); // lifecycle/crash record, always flushed
+void Pc_LogFlush(void);
+void Pc_LogClose(const char *reason); // final "session end" line + close
+void Pc_FatalMessage(const char *msg); // log + native error dialog
 
 // ---- BIOS syscall replacements (cpu_pc.c) ----
 // Signatures match libagbsyscall so game call sites need no edits.

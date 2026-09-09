@@ -18,32 +18,6 @@
 #include <execinfo.h>
 #endif
 
-static void Pc_CrashReport(int sig)
-{
-#ifndef _WIN32
-    void *frames[32];
-    int n = backtrace(frames, 32);
-    fprintf(stderr, "pmd-red-game: fatal signal %d\n", sig);
-    backtrace_symbols_fd(frames, n, 2);
-#else
-    fprintf(stderr, "pmd-red-game: fatal signal %d\n", sig);
-#endif
-    _exit(139);
-}
-
-#ifndef _WIN32
-static void Pc_CrashAction(int sig, siginfo_t *info, void *ctx)
-{
-    void *frames[32];
-    int n = backtrace(frames, 32);
-    (void)ctx;
-    fprintf(stderr, "pmd-red-game: fatal signal %d at %p\n", sig,
-            info != NULL ? info->si_addr : NULL);
-    backtrace_symbols_fd(frames, n, 2);
-    _exit(139);
-}
-#endif
-
 #include "gba/gba.h"
 #include "gba_shim.h"
 #include "cpu_pc.h"
@@ -57,6 +31,38 @@ static void Pc_CrashAction(int sig, siginfo_t *info, void *ctx)
 #include "window_buffer.h"
 #include "graphics_memory.h"
 #include "main_loops.h"
+
+static void Pc_CrashReport(int sig)
+{
+    Pc_LogPrintf("=== fatal signal %d ===\n", sig);
+    fprintf(stderr, "pmd-red-game: fatal signal %d\n", sig);
+    Pc_LogFlush();
+    _exit(139);
+}
+
+#ifndef _WIN32
+static void Pc_CrashAction(int sig, siginfo_t *info, void *ctx)
+{
+    void *frames[32];
+    int n = backtrace(frames, 32);
+    char **syms;
+    int i;
+    (void)ctx;
+    Pc_LogPrintf("=== fatal signal %d at %p ===\n", sig,
+                 info != NULL ? info->si_addr : NULL);
+    syms = backtrace_symbols(frames, n);
+    if (syms != NULL) {
+        for (i = 0; i < n; i++)
+            Pc_LogPrintf("  %s\n", syms[i]);
+        free(syms);
+    }
+    fprintf(stderr, "pmd-red-game: fatal signal %d at %p\n", sig,
+            info != NULL ? info->si_addr : NULL);
+    backtrace_symbols_fd(frames, n, 2);
+    Pc_LogFlush();
+    _exit(139);
+}
+#endif
 
 static void Pc_ApplyBootShadows(void) {
     // Same values as src/main.c:65-78 so game code sees identical state.
@@ -85,11 +91,11 @@ static void Pc_CheckArchive(const char *label, const FileArchive *arc, const cha
 
 int main(int argc, char **argv) {
     int scale = 3, frames = 0, i, autoStart = -1;
-    int console = 1; // console output by default; --log FILE redirects instead
+    int console = 0; // client.log sink by default; --console allocates a console
     const char *dump = NULL;
-    const char *romPath = NULL;
     const char *autoSpec = NULL;
     const char *logFile = NULL;
+    char exeDir[1024 + 1];
     for (i = 1; i < argc; i++) {
         if (strcmp(argv[i], "--scale") == 0 && i + 1 < argc)
             scale = atoi(argv[++i]);
@@ -97,8 +103,6 @@ int main(int argc, char **argv) {
             frames = atoi(argv[++i]);
         else if (strcmp(argv[i], "--dump") == 0 && i + 1 < argc)
             dump = argv[++i];
-        else if (strcmp(argv[i], "--rom") == 0 && i + 1 < argc)
-            romPath = argv[++i];
         else if (strcmp(argv[i], "--autopress") == 0 && i + 1 < argc)
             autoSpec = argv[++i];
         else if (strcmp(argv[i], "--console") == 0)
@@ -131,8 +135,8 @@ int main(int argc, char **argv) {
 
     Pc_MemInit();
     Pc_ApplyBootShadows();
-    setvbuf(stdout, NULL, _IONBF, 0); // crash-debuggable boot log
-    Pc_ConsoleOpen(logFile, logFile == NULL && console); // console by default, --log FILE otherwise
+    Pc_ExeDir(exeDir, sizeof(exeDir), argv[0]);
+    Pc_LogOpen(exeDir, console, logFile); // stdout/stderr -> client.log (--console dev flag)
     Pc_InstallCrashHandler();
 #ifndef _WIN32
     {
@@ -149,10 +153,16 @@ int main(int argc, char **argv) {
     Pc_InputInit();
     Pc_AudioInit();
     Pc_SaveInit(NULL);
-    // Fill the baserom-extracted blob arrays from the user's ROM dump, then
-    // mirror every blob into the GBA ROM window so baked 0x08 addresses work.
-    if (Pc_RomLoad(romPath) != 0) {
-        printf("boot: WARNING no baserom.gba loaded; title/ROM blob data will be blank\n");
+    // baserom.gba is required next to the executable: no ROM dump, no game.
+    // Fail hard (log + dialog) instead of running with blank blob data.
+    if (Pc_RomLoad(exeDir) != 0) {
+        Pc_FatalMessage("baserom.gba was not found next to the executable.\n"
+                        "\n"
+                        "Place your Pokemon Mystery Dungeon: Red Rescue Team ROM\n"
+                        "(baserom.gba, sha1 9f4cfc5b5f4859d17169a485462e977c7aac2b89)\n"
+                        "in the same folder as this program and run it again.");
+        Pc_LogClose("fatal: baserom.gba not found");
+        return 1;
     }
     Pc_SetupRomAddressSpace();
 
@@ -198,5 +208,12 @@ int main(int argc, char **argv) {
     Pc_AudioShutdown();
     Pc_InputShutdown();
     Pc_VideoShutdown();
+
+    if (Pc_QuitRequested())
+        Pc_LogClose("user quit (window close / Esc)");
+    else if (frames > 0)
+        Pc_LogClose("bounded frames run complete");
+    else
+        Pc_LogClose("clean exit");
     return 0;
 }

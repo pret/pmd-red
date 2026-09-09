@@ -1,4 +1,4 @@
-// platform/pc/rom_load.h — runtime baserom.gba loader.
+// platform/pc/rom_load.h — runtime baserom.gba loader (required next to exe).
 #ifndef PMDRED_PC_ROM_LOAD_H
 #define PMDRED_PC_ROM_LOAD_H
 
@@ -37,14 +37,10 @@ const void *Pc_GbaToHost(unsigned gba);
 // game's baked 0x08xxxxxx addresses dereference. Call after Pc_RomLoad.
 void Pc_SetupRomAddressSpace(void);
 
-// Load baserom.gba and fill all slices. Resolution order:
-//   1. explicit path (argv --rom or PMD_RED_ROM env var)
-//   2. saved path from the per-user config file
-//   3. first launch: prompt the user once (native file dialog on Windows),
-//      remember the selection, and load.
-// Actual slices are filled only when a file was opened.
-// Returns 0 on success, nonzero if no usable ROM was found.
-int Pc_RomLoad(const char *explicitPath);
+// Load baserom.gba from the executable's directory and fill all slices.
+// baserom.gba MUST exist next to the executable; no other path is searched.
+// Returns 0 on success, nonzero if the ROM is absent or invalid.
+int Pc_RomLoad(const char *exeDir);
 
 // Path actually used ("" if none loaded yet).
 const char *Pc_RomPath(void);

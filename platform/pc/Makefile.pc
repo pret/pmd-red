@@ -288,6 +288,7 @@ $(STAGED_GAME): $(BIN_DIR)/pmd-red-game
 	@mkdir -p $(BUILD_DIR)
 	cp -f $(BIN_DIR)/pmd-red-game $(STAGED_GAME)
 	@if [ -n "$(SDL2_DLL)" ]; then cp -f "$(SDL2_DLL)" $(BUILD_DIR)/; fi
+	@if [ -f $(ROOT)/baserom.gba ]; then cp -f $(ROOT)/baserom.gba $(BUILD_DIR)/; echo "staged $(BUILD_DIR)/baserom.gba"; fi
 	@echo "staged $(STAGED_GAME)"
 
 # ---- Host tools (same tools the GBA build uses, built for host) ----

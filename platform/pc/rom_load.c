@@ -1,13 +1,11 @@
-// platform/pc/rom_load.c — runtime baserom.gba loader + first-launch prompt.
+// platform/pc/rom_load.c — runtime baserom.gba loader (required next to exe).
 //
 // The port never embeds ROM data at build time. Blobs whose data/*.s extract
 // from baserom.gba (.incbin "baserom.gba", off, size) are built from the .s
 // files with those directives replaced by .space (zero-filled), so the
-// generated arrays have the correct layout. At startup we locate the user's
-// own ROM dump and memcpy each slice into those arrays:
-//   PATH = --rom ARGV || PMD_RED_ROM || saved config || first-run prompt
-// The chosen path is remembered in a per-user config file so the prompt shows
-// only once.
+// generated arrays have the correct layout. At startup we open baserom.gba
+// from the executable's own directory and memcpy each slice into those arrays:
+//   PATH = <exe dir>/baserom.gba  (mandatory; fail if absent)
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -18,7 +16,6 @@
 
 #ifdef _WIN32
 #include <windows.h>
-#include <commdlg.h>
 #endif
 
 // Provided by gen_blobs.py: rom_slices_all.c (baserom slices) and blob_addrs.c
@@ -53,9 +50,7 @@ const void *Pc_GbaToHost(unsigned gba)
 // dereferenceable on a 64-bit host is to map the whole GamePak ROM window
 // [0x08000000, 0x0A000000) into user space and copy every blob array there.
 // Then a baked 0x08xxxxxx value is, verbatim, a valid pointer.
-#ifdef _WIN32
-#include <windows.h>
-#else
+#ifndef _WIN32
 #include <sys/mman.h>
 #include <limits.h>
 #endif
@@ -124,94 +119,13 @@ void Pc_SetupRomAddressSpace(void)
 static char sRomPath[1024 + 1] = "";
 static int sLoaded = 0;
 
-static const char *Pc_HomeDir(void) {
-    const char *home = getenv("USERPROFILE");
-    if (home == NULL || home[0] == '\0')
-        home = getenv("HOME");
-    return (home && home[0]) ? home : "";
-}
-
-static void Pc_ConfigPath(char *out, size_t cap) {
-    snprintf(out, cap, "%s/.pmd-red/rom_path.txt", Pc_HomeDir());
-}
-
-static void Pc_LoadSavedPath(void) {
-    char cfg[1032];
-    FILE *f;
-    Pc_ConfigPath(cfg, sizeof(cfg));
-    f = fopen(cfg, "r");
-    if (f != NULL) {
-        size_t n = fread(sRomPath, 1, sizeof(sRomPath) - 1, f);
-        if (n > 0) {
-            sRomPath[n] = '\0';
-            // trim trailing newline
-            while (n > 0 && (sRomPath[n - 1] == '\n' || sRomPath[n - 1] == '\r')) {
-                sRomPath[--n] = '\0';
-            }
-        }
-        fclose(f);
-    }
-}
-
-static void Pc_SaveSelectedPath(void) {
-    char cfg[1032], dir[1032];
-    FILE *f;
-    Pc_ConfigPath(cfg, sizeof(cfg));
-    snprintf(dir, sizeof(dir), "%s/.pmd-red", Pc_HomeDir());
-#ifdef _WIN32
-    CreateDirectoryA(dir, NULL);
-#else
-    // best-effort mkdir via shell-free approach; parent usually exists
-#endif
-    f = fopen(cfg, "w");
-    if (f != NULL) {
-        fputs(sRomPath, f);
-        fclose(f);
-    }
-}
-
-// First-launch prompt. On Windows use the native open-file dialog; otherwise
-// fall back to a console prompt. Writes the selection into sRomPath.
-static int Pc_PromptForRom(void) {
-#ifdef _WIN32
-    OPENFILENAMEA ofn;
-    char file[2048] = "";
-    memset(&ofn, 0, sizeof(ofn));
-    ofn.lStructSize = sizeof(ofn);
-    ofn.lpstrFilter = "Game Boy Advance ROM (*.gba)\0*.gba\0All files (*.*)\0*.*\0";
-    ofn.lpstrFile = file;
-    ofn.nMaxFile = sizeof(file);
-    ofn.Flags = OFN_FILEMUSTEXIST | OFN_PATHMUSTEXIST;
-    ofn.lpstrTitle = "Select Pokemon Mystery Dungeon: Red Rescue Team (baserom.gba)";
-    if (GetOpenFileNameA(&ofn)) {
-        strncpy(sRomPath, file, sizeof(sRomPath) - 1);
-        sRomPath[sizeof(sRomPath) - 1] = '\0';
-        return 1;
-    }
-    return 0;
-#else
-    fprintf(stdout,
-            "You are launching pmd-red for the first time.\n"
-            "Please provide a dump of Pokemon Mystery Dungeon: Red Rescue Team\n"
-            "(the original GBA ROM; sha1 9f4cfc5b5f4859d17169a485462e977c7aac2b89).\n"
-            "ROM path: ");
-    fflush(stdout);
-    if (fgets(sRomPath, sizeof(sRomPath), stdin) != NULL) {
-        int n = (int)strlen(sRomPath);
-        while (n > 0 && (sRomPath[n - 1] == '\n' || sRomPath[n - 1] == '\r'))
-            sRomPath[--n] = '\0';
-        if (n > 0)
-            return 1;
-    }
-    return 0;
-#endif
-}
-
 const char *Pc_RomPath(void) {
     return sRomPath;
 }
 
-int Pc_RomLoad(const char *explicitPath) {
+// baserom.gba MUST sit next to the executable; no other location is searched.
+// Returns 0 on success (slices filled), nonzero if the ROM is absent/invalid.
+int Pc_RomLoad(const char *exeDir) {
     FILE *f = NULL;
     unsigned char *buf = NULL;
     unsigned i, needEnd = 0;
@@ -219,31 +133,14 @@ int Pc_RomLoad(const char *explicitPath) {
     if (sLoaded)
         return 0;
 
-    if (explicitPath != NULL && explicitPath[0] != '\0') {
-        strncpy(sRomPath, explicitPath, sizeof(sRomPath) - 1);
-        sRomPath[sizeof(sRomPath) - 1] = '\0';
-    } else {
-        const char *env = getenv("PMD_RED_ROM");
-        if (env != NULL && env[0] != '\0') {
-            strncpy(sRomPath, env, sizeof(sRomPath) - 1);
-            sRomPath[sizeof(sRomPath) - 1] = '\0';
-        } else {
-            sRomPath[0] = '\0';
-            Pc_LoadSavedPath();
-            if (sRomPath[0] == '\0') {
-                if (!Pc_PromptForRom())
-                    return 1;
-                Pc_SaveSelectedPath();
-            }
-        }
-    }
-
-    if (sRomPath[0] == '\0')
-        return 1;
+    if (exeDir != NULL && exeDir[0] != '\0')
+        snprintf(sRomPath, sizeof(sRomPath), "%sbaserom.gba", exeDir);
+    else
+        snprintf(sRomPath, sizeof(sRomPath), "baserom.gba");
 
     f = fopen(sRomPath, "rb");
     if (f == NULL) {
-        fprintf(stderr, "pmd-red-pc: cannot open selected ROM: %s\n", sRomPath);
+        fprintf(stderr, "pmd-red-pc: required file not found: %s\n", sRomPath);
         return 1;
     }
 
