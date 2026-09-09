@@ -57,7 +57,11 @@ struct MusicPlayerInfo gMPlayInfo_SE4 = {0};
 struct MusicPlayerInfo gMPlayInfo_SE5 = {0};
 struct MusicPlayerInfo gMPlayInfo_SE6 = {0};
 
-static u8 gMPlayMemAccArea[0x10] = {0};
+u8 gMPlayMemAccArea[0x10] = {0};
+
+// Declared nowhere in headers (m4a_1.s referenced it straight from the
+// object); defined in src/m4a_tables.c which the host links.
+extern const u8 gClockTable[];
 
 // Track counts per player (sound/music_player_table.inc).
 static struct MusicPlayerTrack pcTracks[27];
@@ -89,6 +93,8 @@ static u8 pcMaxChans = 8;
 static u8 pcMasterVolume = 15;
 static u8 pcFreqIdx = 6;
 static u16 pcSamplesPerVBlank = 304;
+static s32 pcPcmFreq = 18157;
+static s32 pcDivFreq = 462;
 
 struct SoundChannel *Pc_SoundChans(unsigned *n)
 {
@@ -122,6 +128,16 @@ u8 Pc_Reverb(void)
 u8 Pc_FreqIdx(void)
 {
     return pcFreqIdx;
+}
+
+s32 Pc_PcmFreq(void)
+{
+    return pcPcmFreq;
+}
+
+s32 Pc_DivFreq(void)
+{
+    return pcDivFreq;
 }
 
 static unsigned pcSongCount = 0;
@@ -1582,6 +1598,8 @@ void SampleFreqSet(u32 freq)
     freq = (freq & SOUND_MODE_FREQ) >> SOUND_MODE_FREQ_SHIFT;
     pcFreqIdx = (u8)freq;
     pcSamplesPerVBlank = gPcmSamplesPerVBlankTable[freq - 1];
+    pcPcmFreq = (597275 * pcSamplesPerVBlank + 5000) / 10000;
+    pcDivFreq = (16777216 / pcPcmFreq + 1) >> 1;
     m4aSoundVSyncOn();
 }
 
@@ -1689,6 +1707,12 @@ void m4aSoundInit(void)
 void m4aSoundMain(void)
 {
     Pc_AudioTick();
+    Pc_MixerRender();
+}
+
+int Pc_AudioHalted(void)
+{
+    return pcIdent != ID_NUMBER;
 }
 
 // Chunk 3 fills this in with the mixer feed (replaces SoundMainBTM's DMA).

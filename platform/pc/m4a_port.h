@@ -12,6 +12,14 @@
 // Advance all players one 60 Hz frame (called by m4aSoundMain).
 void Pc_AudioTick(void);
 
+// Render one tick of audio (defined in audio_pc.c; called by m4aSoundMain
+// after Pc_AudioTick, mirroring scheduler -> mixer order).
+void Pc_MixerRender(void);
+
+// Nonzero while the sound engine is halted (VSync off: freeze + silence,
+// like halted GBA DMA).
+int Pc_AudioHalted(void);
+
 // Live channel state for the renderer.
 struct SoundChannel *Pc_SoundChans(unsigned *countOut);
 struct CgbChannel *Pc_CgbChans(unsigned *countOut);
@@ -26,6 +34,8 @@ u8 Pc_MasterVolume(void);
 u16 Pc_SamplesPerVBlank(void);
 u8 Pc_Reverb(void);
 u8 Pc_FreqIdx(void);
+s32 Pc_PcmFreq(void);
+s32 Pc_DivFreq(void);
 
 // Pitch helpers (adapted from m4a.c).
 u32 Pc_MidiKeyToFreq(const PcWave *wav, u8 key, u8 fineAdjust);

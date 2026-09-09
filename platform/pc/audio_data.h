@@ -25,6 +25,7 @@ typedef struct PcWave
     unsigned int loopStart; // inclusive sample index
     unsigned int loopEnd;   // exclusive sample index; validated: start<=end<=length
     unsigned int length;    // total s8 PCM samples
+    unsigned int loop;      // nonzero when status & 0xC0 (WAVE_DATA_FLAG_LOOP)
     const signed char *data;
 } PcWave;
 

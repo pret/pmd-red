@@ -361,6 +361,7 @@ def main():
         waves[names[0]] = {
             'type': vals[0], 'status': vals[1], 'freq': vals[2],
             'loopStart': vals[3], 'loopEnd': vals[4], 'data': data,
+            'loop': 1 if ((vals[1] >> 8) & 0xC0) != 0 else 0,
         }
         w = waves[names[0]]
         if not (0 <= w['loopStart'] <= w['loopEnd'] <= len(data)):
@@ -838,9 +839,9 @@ def emit_c(path, table, songs, groups, group_index, keymaps, map_index,
     w('static const PcWave pcWaves[] = {')
     for name in sorted(waves):
         wd = waves[name]
-        w('    { %d, %d, %du, %du, %du, %du, pcWaveData_%s },' %
+        w('    { %d, %d, %du, %du, %du, %du, %d, pcWaveData_%s },' %
           (wd['type'], wd['status'], wd['freq'], wd['loopStart'],
-           wd['loopEnd'], len(wd['data']), name))
+           wd['loopEnd'], len(wd['data']), wd['loop'], name))
     w('};')
     w('const PcWave *Pc_Waves(unsigned int *n)'
       ' { if (n) *n = %d; return pcWaves; }' % len(waves))

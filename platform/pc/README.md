@@ -13,7 +13,9 @@ Pixel-perfect first: internal framebuffer stays **240x160**, integer-scaled by S
 | `gba_shim.h` | `include/gba/{defines,io_reg,syscall}.h` fixed addrs, section attrs, `REG_*` | DONE (header-only, no SDL needed) |
 | `cpu_pc.c` / `cpu_pc.h` | `libagbsyscall` `CpuSet/FastSet`, `src/cpu.c` `CpuCopy/Clear/Fill`, LZ/RL/Huff BIOS | TODO (port `tools/gbagfx/{lz,rl,huff}.c`) |
 | `video_pc.c` | `DISPCNT/BGCNT/WIN/BLD/VRAM/PLTT/OAM`, `VBlank_CB` commit, `bg_control/sprite/window_buffer/bg_palette_buffer/graphics_memory/dungeon_vram` | TODO (SDL2 compositor) |
-| `audio_pc.c` | `src/m4a*.c/s`, `music*.c`, `SoundDriver*` syscalls | TODO (mute-first, then SDL_Audio sequencer) |
+| `audio_pc.c` | SDL2 sample renderer (DS wavetable + CGB synth + envelopes) | DONE (push model via `SDL_QueueAudio`, headless no-op without SDL2) |
+| `m4a_port.c` / `m4a_port.h` | `src/m4a.c` player logic + `src/m4a_1.s` scheduler/note setup, minus HW | DONE (native C port; game calls `m4aSongNumStart`/`m4aSoundMain` unchanged) |
+| `audio_data.h` + `tools/gen_audio.py` | `sound/song_table.inc`, `sound/songs`, `sound/voicegroups`, `sound/wave` | DONE (build-time parse to `build/bin/gen/audio_data.c`: 940-song table + voices/waves) |
 | `input_pc.c` | `src/input.c`, `code_800C9CC.c`, KEYCNT sleep loops | TODO (SDL keyboard+pad) |
 | `save_pc.c` | `agb_flash*.c`, `flash.c`, `save*.c`, `file_system.c` flash/SRAM side | TODO (host FS, keep GBA save format) |
 | `main_pc.c` | `src/crt0.s`, `rom_header.s`, `main.c:AgbMain` boot + `Hang()` | SKETCH (documents init order) |
@@ -58,4 +60,5 @@ libpng auto-builds static into `build/deps/prefix` (no sudo/brew) for full `gbag
 2. Boot reaches `GameLoop_Async` (input/timing stubs).
 3. Title + ground + dungeon render at 240x160 (video_pc).
 4. Save/load round-trips (save_pc).
-5. Audio unmuted (audio_pc).
+5. Audio unmuted (audio_pc + m4a_port + gen_audio): BGM/fanfare/SE play the
+   game's own song data through SDL2; reverb is an approximation.

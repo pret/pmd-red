@@ -309,7 +309,19 @@ static void LoadTitleScreen(void)
     const u8 * renPal[3] = {"titlen0p", "titlen1p", "titlen2p"};
     OpenedFile *bgFile;
     s32 i, j;
+#ifdef PLATFORM_PC
+    // The title AT-compressed BG decompresses to a few KB more than the
+    // TitleMenuFile struct holds (0x6F77 decoded vs 0x5B20 struct). The
+    // decoder writes that overshoot past the allocation, landing past the top
+    // of the host heap and corrupting the heap free-list (fatal on the title
+    // path). Reserve headroom so the surplus stays inside the block; the game
+    // only ever reads sizeof(TitleMenuFile), so the padding is inert. PC-only:
+    // this must not perturb the GBA build/heap layout.
+#define TITLE_HEADROOM 0x4000
+    TitleMenuFile *stru = MemoryAlloc(sizeof(TitleMenuFile) + TITLE_HEADROOM, MEMALLOC_GROUP_0);
+#else
     TitleMenuFile *stru = MemoryAlloc(sizeof(TitleMenuFile), MEMALLOC_GROUP_0);
+#endif
     s32 rnd = RandInt(3);
 
     sTitlePaletteFile = OpenFileAndGetFileDataPtr(renPal[rnd], &gTitleMenuFileArchive);
@@ -1130,6 +1142,7 @@ void Pc_GameBootStage(void)
     InitHeap();
     NDS_DebugInit();
     ResetSoundEffectCounters();
+    InitMusic(); // PC host: sub_800B540 (its only GBA caller) is skipped on host
     NDS_LoadOverlay_GroundMain();
     ResetDialogueBox();
     printf("boot-stage: monster/playtime/options\n");
