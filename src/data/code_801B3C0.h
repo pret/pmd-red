@@ -1,1 +1,0 @@
-ALIGNED(4) static const u8 sFmtPkmn0[] = _("{POKEMON_0}");
