@@ -83,7 +83,9 @@ PC_SRCS := $(ROOT)/platform/pc/cpu_pc.c \
 PC_OBJS := $(patsubst $(ROOT)/%.c,$(OBJ_DIR)/%.o,$(PC_SRCS))
 # Game binary swaps the smoke entry for the real-init entry and links the
 # generated rom_slices_all.o/blob_addrs.o instead of the stub tables.
-GAME_PC_OBJS := $(filter-out $(OBJ_DIR)/platform/pc/main_pc.o $(OBJ_DIR)/platform/pc/rom_load_stubs.o,$(PC_OBJS)) $(OBJ_DIR)/platform/pc/main_game.o
+# m4a_port.o (the real m4a player) is game-link only: the smoke binary has no
+# song data (audio_data.o) for it to reference.
+GAME_PC_OBJS := $(filter-out $(OBJ_DIR)/platform/pc/main_pc.o $(OBJ_DIR)/platform/pc/rom_load_stubs.o,$(PC_OBJS)) $(OBJ_DIR)/platform/pc/main_game.o $(OBJ_DIR)/platform/pc/m4a_port.o
 
 # Host compile flags for game sources (mirrors the GBA .c rule minus agbcc):
 # GBA: $(CPP) $(CPPFLAGS) $< | $(PREPROC) charmap.txt | $(CC1)
@@ -137,6 +139,16 @@ ALL_BLOB_ARM := $(BLOB_ARM) $(BASEROM_ARM)
 BLOBADDRS_C := $(GEN_DIR)/blob_addrs.c
 BLOBADDRS_H := $(GEN_DIR)/blob_addrs.h
 BLOBADDRS_OBJ := $(GAME_OBJ_DIR)/blob_addrs.o
+# Host audio data: songs/voices/waves parsed from sound/ by gen_audio.py
+# (pure-python text parse of the m4a DSL; no ARM toolchain needed).
+AUDIO_GEN_C := $(GEN_DIR)/audio_data.c
+AUDIO_GEN_OBJ := $(GAME_OBJ_DIR)/audio_data.o
+AUDIO_SRCS := $(ROOT)/MPlayDef.s $(ROOT)/VoiceDef.s \
+  $(ROOT)/sound/song_table.inc $(ROOT)/sound/voice_groups.inc \
+  $(ROOT)/sound/waves.inc $(ROOT)/sound/gb_waves.inc \
+  $(wildcard $(ROOT)/sound/songs/*.s) \
+  $(wildcard $(ROOT)/sound/voicegroups/*.s) \
+  $(wildcard $(ROOT)/sound/wave/*.s)
 # ARM GNU toolchain used only to preprocess/assemble the data/*.s blobs into
 # .o files that gen_blobs.py turns into host C. Auto-detect any flavor under
 # build/deps (darwin-arm64, mingw-w64-i686, ...); override ARM_TC= on the
@@ -150,7 +162,7 @@ ARM_CPP := arm-none-eabi-cpp
 ARM_AS := arm-none-eabi-as
 endif
 
-.PHONY: pc build stage run tools assets-pc pc-syntax blobs game-link stage-game clean-pc
+.PHONY: pc build stage run tools assets-pc pc-syntax blobs audio-data game-link stage-game clean-pc
 
 pc: build stage
 
@@ -176,12 +188,26 @@ $(BIN): $(PC_OBJS)
 # a response file (`@...rsp`) because 700+ objects exceed the Windows command
 # line limit (~32k chars); cygpath converts the MSYS paths to mixed form that
 # the native mingw clang driver can parse directly.
-GAME_LINK_OBJS := $(GAME_OBJS) $(BLOB_OBJS) $(BASEROM_OBJS) $(ROMSLICES_OBJ) $(BLOBADDRS_OBJ) $(GAME_PC_OBJS)
-game-link: tools assets-pc blobs $(GAME_OBJS) $(BLOB_OBJS) $(BASEROM_OBJS) $(ROMSLICES_OBJ) $(BLOBADDRS_OBJ) $(GAME_PC_OBJS)
+GAME_LINK_OBJS := $(GAME_OBJS) $(BLOB_OBJS) $(BASEROM_OBJS) $(ROMSLICES_OBJ) $(BLOBADDRS_OBJ) $(AUDIO_GEN_OBJ) $(GAME_PC_OBJS)
+game-link: tools assets-pc blobs audio-data $(GAME_OBJS) $(BLOB_OBJS) $(BASEROM_OBJS) $(ROMSLICES_OBJ) $(BLOBADDRS_OBJ) $(AUDIO_GEN_OBJ) $(GAME_PC_OBJS)
 	@mkdir -p $(BIN_DIR)
 	@printf '%s\n' $(GAME_LINK_OBJS) | sed 's|^/\([a-zA-Z]\)/|\1:/|' > $(BIN_DIR)/game_link.rsp
 	$(CC) @$(BIN_DIR)/game_link.rsp -o $(BIN_DIR)/pmd-red-game $(LDFLAGS) $(GAME_LDFLAGS)
 	@echo "linked $(BIN_DIR)/pmd-red-game"
+
+# ---- Host audio data (chunk 1 of PC audio) ----
+# gen_audio.py parses sound/ (m4a DSL) into $(GEN_DIR)/audio_data.c, which
+# defines the real gSongTable (940 entries) + song/voice/wave tables for the
+# host player (platform/pc/audio_data.h). Regenerates only when sound/ or the
+# script changes.
+audio-data: $(AUDIO_GEN_C)
+	@echo "audio-data: $(AUDIO_GEN_C)"
+$(AUDIO_GEN_C): $(ROOT)/platform/pc/tools/gen_audio.py $(ROOT)/platform/pc/audio_data.h $(AUDIO_SRCS)
+	@mkdir -p $(GEN_DIR)
+	@cd $(ROOT) && $(PYTHON) platform/pc/tools/gen_audio.py --root . --out $(AUDIO_GEN_C)
+$(AUDIO_GEN_OBJ): $(AUDIO_GEN_C)
+	@mkdir -p $(GAME_OBJ_DIR)
+	$(CC) $(GAME_CFLAGS) -I$(ROOT)/include -I$(ROOT)/platform/pc -c $< -o $@
 
 $(GAME_OBJ_DIR)/%.o: $(ROOT)/%.c $(PREPROC)
 	@mkdir -p $(dir $@)
