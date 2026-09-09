@@ -20,6 +20,7 @@
 // the driver. Push model: each 60 Hz tick renders 735 samples and queues
 // them via SDL_QueueAudio (no callback thread, no locking). Without SDL2
 // the renderer compiles to a headless no-op (players still advance).
+#include <stdio.h>
 #include <string.h>
 #include <time.h>
 
@@ -36,6 +37,9 @@
 #ifdef HAVE_SDL2
 #include <SDL2/SDL.h>
 static SDL_AudioDeviceID sAudioDev = 0;
+static FILE *sWavFile = NULL;
+static long sWavDataBytes = 0;
+static int sWavMaxSamples = 0;
 #endif
 static int sAudioRate = PC_AUDIO_RATE;
 
@@ -458,6 +462,77 @@ void Pc_MixerRenderSamples(int n, int stepEnvelope)
     // unpaced boot pumps that run hundreds of frames per second.
     if (SDL_GetQueuedAudioSize(sAudioDev) <= (Uint32)(sAudioRate * 4))
         SDL_QueueAudio(sAudioDev, out, (Uint32)(n * 4));
+    if (sWavFile != NULL)
+    {
+        int nw = n;
+        if (nw > sWavMaxSamples)
+            nw = sWavMaxSamples;
+        if (nw > 0)
+        {
+            fwrite(out, 2, (size_t)nw * 2, sWavFile);
+            sWavDataBytes += (long)nw * 4;
+            sWavMaxSamples -= nw;
+        }
+        if (sWavMaxSamples <= 0)
+        {
+            long total = sWavDataBytes + 36;
+            fseek(sWavFile, 4, SEEK_SET);
+            fputc((int)(total & 0xFF), sWavFile);
+            fputc((int)((total >> 8) & 0xFF), sWavFile);
+            fputc((int)((total >> 16) & 0xFF), sWavFile);
+            fputc((int)((total >> 24) & 0xFF), sWavFile);
+            fseek(sWavFile, 40, SEEK_SET);
+            fputc((int)(sWavDataBytes & 0xFF), sWavFile);
+            fputc((int)((sWavDataBytes >> 8) & 0xFF), sWavFile);
+            fputc((int)((sWavDataBytes >> 16) & 0xFF), sWavFile);
+            fputc((int)((sWavDataBytes >> 24) & 0xFF), sWavFile);
+            fclose(sWavFile);
+            sWavFile = NULL;
+        }
+    }
+#endif
+}
+
+void Pc_AudioWavDump(const char *path, int maxSeconds)
+{
+#ifdef HAVE_SDL2
+    unsigned char hdr[44];
+    unsigned int br;
+    if (sWavFile != NULL)
+    {
+        fclose(sWavFile);
+        sWavFile = NULL;
+    }
+    if (path == NULL || maxSeconds <= 0)
+        return;
+    sWavFile = fopen(path, "wb");
+    if (sWavFile == NULL)
+        return;
+    sWavMaxSamples = sAudioRate * maxSeconds;
+    sWavDataBytes = 0;
+    memset(hdr, 0, sizeof(hdr));
+    memcpy(hdr, "RIFF", 4);
+    memcpy(hdr + 8, "WAVEfmt ", 8);
+    hdr[16] = 16;
+    hdr[20] = 1;
+    hdr[22] = 2;
+    br = (unsigned int)sAudioRate;
+    hdr[24] = (unsigned char)(br & 0xFF);
+    hdr[25] = (unsigned char)((br >> 8) & 0xFF);
+    hdr[26] = (unsigned char)((br >> 16) & 0xFF);
+    hdr[27] = (unsigned char)((br >> 24) & 0xFF);
+    br *= 4;
+    hdr[28] = (unsigned char)(br & 0xFF);
+    hdr[29] = (unsigned char)((br >> 8) & 0xFF);
+    hdr[30] = (unsigned char)((br >> 16) & 0xFF);
+    hdr[31] = (unsigned char)((br >> 24) & 0xFF);
+    hdr[32] = 4;
+    hdr[34] = 16;
+    memcpy(hdr + 36, "data", 4);
+    fwrite(hdr, 1, 44, sWavFile);
+#else
+    (void)path;
+    (void)maxSeconds;
 #endif
 }
 

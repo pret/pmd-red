@@ -21,6 +21,7 @@
 #include "gba/gba.h"
 #include "gba_shim.h"
 #include "cpu_pc.h"
+#include "m4a_port.h"
 #include "rom_load.h"
 #include "file_system.h"
 #include "def_filearchives.h"
@@ -96,6 +97,8 @@ int main(int argc, char **argv) {
     const char *dump = NULL;
     const char *autoSpec = NULL;
     const char *logFile = NULL;
+    const char *wavPath = NULL;
+    int wavSeconds = 0;
     char exeDir[1024 + 1];
     for (i = 1; i < argc; i++) {
         if (strcmp(argv[i], "--scale") == 0 && i + 1 < argc)
@@ -114,6 +117,10 @@ int main(int argc, char **argv) {
             logFile = argv[++i];
         else if (strcmp(argv[i], "--fps") == 0)
             fpsLog = 1;
+        else if (strcmp(argv[i], "--wavdump") == 0 && i + 2 < argc) {
+            wavPath = argv[++i];
+            wavSeconds = atoi(argv[++i]);
+        }
     }
 
     // --autopress KEY@START holds a key from the given paced-vblank frame
@@ -157,6 +164,8 @@ int main(int argc, char **argv) {
     Pc_VideoInit(scale);
     Pc_InputInit();
     Pc_AudioInit();
+    if (wavPath != NULL)
+        Pc_AudioWavDump(wavPath, wavSeconds > 0 ? wavSeconds : 30);
     Pc_SaveInit(exeDir);
     // baserom.gba is required next to the executable: no ROM dump, no game.
     // Fail hard (log + dialog) instead of running with blank blob data.

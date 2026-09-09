@@ -658,7 +658,7 @@ def resolve_voice_ref(v, wave_index, gbwave_index, group_index, map_index):
             raise AudioGenError('%s: KeySplit bank %r' % (v['w1src'], v['w1']))
         if k2 != 'sym' or n2 not in map_index:
             raise AudioGenError('%s: KeySplit map %r' % (v['w2src'], v['w2']))
-        return (1, group_index[n1], map_index[n2], (0, 0, 0, 0))  # KEYMAP
+        return (3, group_index[n1], map_index[n2], (0, 0, 0, 0))  # KEYMAP (PC_VOICE_KEYMAP=3)
     if t == 0x80:  # DrumTable
         k1, n1 = word_target(v['w1'], v['w1src'])
         if k1 != 'sym' or n1 not in group_index:
@@ -675,7 +675,7 @@ def resolve_voice_ref(v, wave_index, gbwave_index, group_index, map_index):
     if n1 in wave_index:
         return (0, wave_index[n1], 0, tuple(v['adsr']))  # WAVE
     if n1 in gbwave_index:
-        return (3, gbwave_index[n1], 0, tuple(v['adsr']))  # GBWAVE
+        return (1, gbwave_index[n1], 0, tuple(v['adsr']))  # GBWAVE (PC_VOICE_GBWAVE=1)
     raise AudioGenError('%s: voice wave %r resolves to nothing' %
                         (v['w1src'], v['w1']))
 

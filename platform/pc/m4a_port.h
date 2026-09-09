@@ -23,6 +23,9 @@ void Pc_MixerRenderSamples(int n, int stepEnvelope);
 int Pc_AudioRate(void);
 double Pc_TimeNow(void);
 
+// Capture the rendered mix to a 16-bit stereo WAV (path NULL disables).
+void Pc_AudioWavDump(const char *path, int maxSeconds);
+
 // Nonzero while the sound engine is halted (VSync off: freeze + silence,
 // like halted GBA DMA).
 int Pc_AudioHalted(void);
