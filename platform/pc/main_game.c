@@ -154,7 +154,7 @@ int main(int argc, char **argv) {
     Pc_VideoInit(scale);
     Pc_InputInit();
     Pc_AudioInit();
-    Pc_SaveInit(NULL);
+    Pc_SaveInit(exeDir);
     // baserom.gba is required next to the executable: no ROM dump, no game.
     // Fail hard (log + dialog) instead of running with blank blob data.
     if (Pc_RomLoad(exeDir) != 0) {

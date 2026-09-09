@@ -48,8 +48,11 @@ void Pc_AudioFrame(void); // called once per 60Hz tick; noop until sequencer lan
 void Pc_AudioShutdown(void);
 
 // ---- Save backend (save_pc.c) ----
-void Pc_SaveInit(const char *dir); // host save dir (default ~/.pmd-red)
+void Pc_SaveInit(const char *dir); // host save dir (default: exe dir / cwd)
 void Pc_SaveFlush(void);
+int Pc_SaveRead(s32 sector, u8 *dest, s32 size);      // read flash sector range
+int Pc_SaveWrite(s32 sector, u8 *src, s32 size);      // erase+write flash sector range
+int Pc_SaveEraseChip(void);                           // reset image to all-0xFF
 
 #endif // PLATFORM_PC
 #endif // PMDRED_PC_GBA_SHIM_H

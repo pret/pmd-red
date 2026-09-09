@@ -25,11 +25,13 @@ if not defined MSYS_ROOT (
     echo [win_rebuild_pc] MSYS2 not found at C:\msys64 or C:\msys2.
     echo Pass the install dir as the first argument, e.g.:
     echo   win_rebuild_pc.bat "D:\msys64"
-    exit /b 1
+    set "RC=1"
+    goto :end
 )
 if not exist "%MSYS_ROOT%\msys2_shell.cmd" (
     echo [win_rebuild_pc] msys2_shell.cmd not found in %MSYS_ROOT%
-    exit /b 1
+    set "RC=1"
+    goto :end
 )
 
 rem ---- convert windows path to an MSYS path (/c/Users/...) ----
@@ -49,7 +51,12 @@ echo [win_rebuild_pc] targets=%TARGETS%
 set "RC=%ERRORLEVEL%"
 if not "%RC%"=="0" (
     echo [win_rebuild_pc] build FAILED ^(exit %RC%^).
-    exit /b %RC%
+    goto :end
 )
 echo [win_rebuild_pc] build OK - build\pmd-red-game.exe is ready.
-exit /b 0
+
+:end
+echo.
+echo [win_rebuild_pc] Press any button to close...
+pause >nul
+exit /b %RC%

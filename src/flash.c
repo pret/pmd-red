@@ -2,6 +2,9 @@
 #include "gba/flash.h"
 #include "flash.h"
 #include "memory.h"
+#ifdef PLATFORM_PC
+#include "gba_shim.h"
+#endif
 
 EWRAM_INIT bool8 gFlashEnabled = {0};
 
@@ -17,12 +20,19 @@ void InitFlash(void)
 
 void ClearFlashData(void)
 {
+#ifdef PLATFORM_PC
+    Pc_SaveEraseChip();
+#else
     if (gFlashEnabled)
         EraseFlashChip();
+#endif
 }
 
 s32 ReadFlashData(s32 sector, u8 *dest, s32 size)
 {
+#ifdef PLATFORM_PC
+    return Pc_SaveRead(sector, dest, size);
+#else
     if (gFlashEnabled)
     {
         u8 *_dest = dest;
@@ -41,10 +51,14 @@ s32 ReadFlashData(s32 sector, u8 *dest, s32 size)
     }
 
     return 3;
+#endif
 }
 
 s32 WriteFlashData(s32 sector, u8 *src, s32 size)
 {
+#ifdef PLATFORM_PC
+    return Pc_SaveWrite(sector, src, size);
+#else
     u8 buffer[0x1000];
 
     if (gFlashEnabled)
@@ -76,6 +90,7 @@ s32 WriteFlashData(s32 sector, u8 *src, s32 size)
     }
 
     return 3;
+#endif
 }
 
 static u8 TryProgramSector(s32 sector, u8 *src)
