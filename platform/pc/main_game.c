@@ -92,6 +92,7 @@ static void Pc_CheckArchive(const char *label, const FileArchive *arc, const cha
 int main(int argc, char **argv) {
     int scale = 3, frames = 0, i, autoStart = -1;
     int console = 1; // console on by default; --noconsole routes to client.log only
+    int fpsLog = 0;
     const char *dump = NULL;
     const char *autoSpec = NULL;
     const char *logFile = NULL;
@@ -111,6 +112,8 @@ int main(int argc, char **argv) {
             console = 0;
         else if (strcmp(argv[i], "--log") == 0 && i + 1 < argc)
             logFile = argv[++i];
+        else if (strcmp(argv[i], "--fps") == 0)
+            fpsLog = 1;
     }
 
     // --autopress KEY@START holds a key from the given paced-vblank frame
@@ -197,6 +200,7 @@ int main(int argc, char **argv) {
     // --frames caps total rendered frames (mostly for CI); 0 runs until the
     // window is closed or Esc is pressed.
     Pc_SetPaced(1);
+    Pc_EnableFpsLog(fpsLog);
     printf("boot: entering title/game driver (%s)\n", frames > 0 ? "bounded" : "unbounded");
     Pc_RunTitleAndGame(frames);
 
@@ -206,6 +210,8 @@ int main(int argc, char **argv) {
 
     printf("pmd-red-game: %u frame(s), DISPCNT=0x%04X BLDCNT=0x%04X\n",
            Pc_VBlankFrameCount(), gPcRegs.DISPCNT, gPcRegs.BLDCNT);
+    if (fpsLog)
+        printf("pmd-red-game: measured fps=%.2f\n", Pc_MeasuredFps());
 
     Pc_AudioShutdown();
     Pc_InputShutdown();

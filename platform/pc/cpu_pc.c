@@ -17,6 +17,9 @@
 #include <SDL2/SDL.h>
 #endif
 
+#define PC_TARGET_FPS 60.0
+#define PC_FRAME_MS (Uint32)(1000.0 / PC_TARGET_FPS) // ~16.667 ms per frame
+
 #include "gba/gba.h"
 #include "gba_shim.h"
 #include "cpu_pc.h"
@@ -34,11 +37,22 @@ static clock_t gPcNextHeadlessTick = 0;
 static Uint32 gPcNextSdlTick = 0;
 #endif
 
+// Measured frame-rate instrumentation (--fps enables the rolling printf).
+static int gPcFpsLog = 0;
+static Uint32 gPcFpsLastTick = 0;
+static Uint32 gPcFpsWindowStart = 0;
+static unsigned gPcFpsWindowFrames = 0;
+static double gPcMeasuredFps = 0.0;
+
 // When set, VBlankIntrWait renders+paces to ~60Hz (interactive game driver).
 // Boot-stage script pumps (pre-title demos) run unpaced so they finish fast.
 static int gPcPaced = 0;
 
 void Pc_SetPaced(int on) { gPcPaced = on ? 1 : 0; }
+
+void Pc_EnableFpsLog(int on) { gPcFpsLog = on ? 1 : 0; }
+
+double Pc_MeasuredFps(void) { return gPcMeasuredFps; }
 
 void Pc_MemInit(void) {
     memset(gPc_Vram, 0, sizeof(gPc_Vram));
@@ -157,13 +171,36 @@ void VBlankIntrWait(void) {
 
 #ifdef HAVE_SDL2
     {
-        // Drift-free-ish 16ms cadence; SDL_RenderPresent usually already
-        // vsync-blocks, this is a safety throttle when vsync is disabled.
+        // True 60Hz cadence via a deadline accumulator (~16.667ms per frame).
+        // Render time (Pc_VideoPresent above) is spent before this block and
+        // just fills part of the slot; the delay only sleeps the remainder so
+        // the renderer's cost never stretches the game-logic frame period.
+        // NOTE: SDL_Delay may oversleep by a few ms; a hard deadline keeps us
+        // bounded (never faster than 60Hz) which is the safe direction.
         Uint32 now = SDL_GetTicks();
         if (gPcNextSdlTick == 0 || (s32)(now - gPcNextSdlTick) >= 0)
             gPcNextSdlTick = now;
-        gPcNextSdlTick += 16;
-        SDL_Delay(gPcNextSdlTick - now);
+        gPcNextSdlTick += PC_FRAME_MS;
+        if ((s32)(gPcNextSdlTick - now) > 0)
+            SDL_Delay(gPcNextSdlTick - now);
+
+        // Rolling 60-frame FPS measurement (only active with --fps).
+        if (gPcFpsLog) {
+            now = SDL_GetTicks();
+            if (gPcFpsWindowStart == 0)
+                gPcFpsWindowStart = now;
+            gPcFpsWindowFrames++;
+            if (gPcFpsWindowFrames >= 60) {
+                Uint32 dt = now - gPcFpsWindowStart;
+                gPcMeasuredFps = dt ? (gPcFpsWindowFrames * 1000.0 / dt) : 0.0;
+                printf("fps: %.2f (%u frames in %ums)\n",
+                       gPcMeasuredFps, gPcFpsWindowFrames, dt);
+                gPcFpsWindowStart = 0;
+                gPcFpsWindowFrames = 0;
+            }
+        } else if (gPcFpsWindowFrames == 0) {
+            gPcFpsLastTick = now;
+        }
     }
 #else
     // Headless: busy-pace on clock() so bounded --frames runs keep roughly
