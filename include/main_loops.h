@@ -24,7 +24,8 @@ s32 Pc_MenuStep(void);
 // Full PC game driver: title -> interactive main menu -> (on selection) the
 // real post-menu flow (title fade-out + RunGameMode_Async dispatch) -> title,
 // repeating until quit or --frames is exhausted. Renders/paces/inputs itself.
-void Pc_RunTitleAndGame(int maxFrames);
+// With autoload set, a valid save skips the menu once at launch and continues.
+void Pc_RunTitleAndGame(int maxFrames, int autoload);
 #endif
 s32 GetMainLoopsUnk(void);
 void ReadTeamBasicInfo(TeamBasicInfo *dst);

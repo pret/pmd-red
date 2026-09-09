@@ -1,0 +1,40 @@
+=== pmd-red-game session start 2026-09-09 23:23:54 ===
+pmd-red-pc: loaded baserom from C:\Users\luke\OneDrive\Documents\GitHub\pmd-red\build/baserom.gba (75 slices)
+GBA ROM window re-homed to 11070000 (relocs 7309, slice relocs 23)
+pmd-red-pc: GBA ROM window re-homed to 11070000
+pmd-red-pc: mirrored 14514 blob arrays into the GBA ROM window
+boot: InitFileSystem
+boot: archive dungeon  count=455  probe 'itempat' -> found (00580130)
+boot: archive system   count=431  probe 'kanji_a' -> found (006CD808)
+boot: archive system   count=431  probe 'wazapara' -> found (00677980)
+boot: LoadCharmaps
+host text: charmaps[0]=006CD808 unk0=473 unk4=11387B84 charmaps[1]=006C8910 unk0=231 unk4=0831D2C0
+boot: InitSprites
+boot: InitInput
+boot: InitBGPaletteBuffer
+boot: WindowBgBufferInit
+boot: InitGraphics
+boot: init complete
+boot-stage: InitHeap/Debug/Sound
+boot-stage: monster/playtime/options
+boot-stage: friendareas/items/rescue/waza
+boot-stage: LoadFriendAreas
+boot-stage: LoadItemParameters
+boot-stage: LoadRescueTeamInfo
+boot-stage: LoadWazaParameters
+boot-stage: sub_80950BC
+boot-stage: LoadMailInfo
+boot-stage: misc/save probe
+boot-stage: save probe done (tmp=12)
+boot-stage: script modes 14-17
+host ground_bg: mapId=236 bpl='S05'->00CBD064 bpc='S05c'->00CB9D40 bma='S05m'->00CB9C20
+host ground_bg: mapId=235 bpl='S04'->00CC0424 bpc='S04c'->00CBD1C0 bma='S04m'->00CBD0A0
+host ground_bg: mapId=5 bpl='T01P04'->009706A4 bpc='T01P04c'->00968B20 bma='T01P04m'->009688A0
+host ground_bg: mapId=4 bpl='T01P03'->0097DE24 bpc='T01P03c'->00970D40 bma='T01P03m'->00970900
+host ground_bg: mapId=234 bpl='S03'->00CC6884 bpc='S03c'->00CC06C0 bma='S03m'->00CC05E0
+host ground_bg: mapId=233 bpl='S02'->00CD71A4 bpc='S02c'->00CD21E0 bma='S02m'->00CD1FA0
+boot-stage: complete
+boot: entering title/game driver (bounded)
+host menu: autoload -> continue
+host menu: selection 2
+host ground_bg: mapId=37 bpl='B05P02A'->009BB3C4 bpc='B05P02c'->009AB8E0 bma='B05P02Am'->009BB1E0

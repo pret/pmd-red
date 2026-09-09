@@ -1351,22 +1351,34 @@ static void Pc_DispatchGameMode(s32 nextMenu)
 // repeating like GameLoop_Async's outer loop. Renders/paces/inputs itself via
 // the VBlankIntrWait boundary, so no caller frame pump is needed. Returns on
 // quit (window close / Esc) or, in bounded mode, once --frames are consumed.
-void Pc_RunTitleAndGame(int maxFrames)
+// With autoload set, a valid save (sub_8011C34 != -1) skips the menu once at
+// launch and continues directly; later visits to the title use the normal menu.
+void Pc_RunTitleAndGame(int maxFrames, int autoload)
 {
     for (;;) {
-        s32 nextMenu;
+        s32 nextMenu = MENU_NO_SCREEN_CHANGE;
 
         Pc_TitleIntro();
 
-        for (;;) {
-            if (Pc_QuitRequested())
-                return;
-            if (maxFrames > 0 && (s32)Pc_VBlankFrameCount() >= maxFrames)
-                return;
+        if (autoload) {
+            autoload = 0; // one-shot: only auto-continue at launch
+            if (sub_8011C34() != -1) {
+                printf("host menu: autoload -> continue\n");
+                nextMenu = 2;
+            }
+        }
 
-            nextMenu = Pc_MenuFrame();
-            if (nextMenu != MENU_NO_SCREEN_CHANGE)
-                break;
+        if (nextMenu == MENU_NO_SCREEN_CHANGE) {
+            for (;;) {
+                if (Pc_QuitRequested())
+                    return;
+                if (maxFrames > 0 && (s32)Pc_VBlankFrameCount() >= maxFrames)
+                    return;
+
+                nextMenu = Pc_MenuFrame();
+                if (nextMenu != MENU_NO_SCREEN_CHANGE)
+                    break;
+            }
         }
 
         printf("host menu: selection %d\n", nextMenu);
