@@ -136,8 +136,8 @@ static unsigned Pc_ObjPixel(const u8 *vram, const struct OamData *o,
                             int pdx, int pdy, unsigned *palOut) {
     (void)ox;
     (void)oy;
-    int flipH = (o->matrixNum >> 8) & 1; // attr1 bit 12 (bit4 of matrixNum)
-    int flipV = (o->matrixNum >> 9) & 1; // attr1 bit 13
+    int flipH = (o->matrixNum >> 3) & 1; // attr1 bit 12 (matrixNum bit 3)
+    int flipV = (o->matrixNum >> 4) & 1; // attr1 bit 13 (matrixNum bit 4)
     if (flipH) pdx = w - 1 - pdx;
     if (flipV) pdy = h - 1 - pdy;
 
