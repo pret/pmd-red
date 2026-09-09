@@ -1,6 +1,0 @@
-#ifndef GUARD_CODE_809447C_H
-#define GUARD_CODE_809447C_H
-
-
-
-#endif // GUARD_CODE_809447C_H
