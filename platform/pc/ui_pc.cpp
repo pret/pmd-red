@@ -195,6 +195,43 @@ static void Pc_UiBootTab(void) {
     ImGui::TextDisabled("These mirror launch arguments (e.g. --noconsole, SkipIntro)\nand take effect the next time the game starts (Game > Restart).");
 }
 
+static const char *const kPlayerNames[PC_AUDIO_PLAYERS] = {
+    "BGM", "Fanfare", "SE1", "SE2", "SE3", "SE4", "SE5", "SE6"
+};
+
+// One row per m4a player: tempo (%) and pitch (semitones) sliders.
+static void Pc_UiAudioPlayerTable(PcAudioPrefs *ap)
+{
+    if (ImGui::BeginTable("player_tempo", 3, ImGuiTableFlags_Borders | ImGuiTableFlags_RowBg))
+    {
+        ImGui::TableSetupColumn("Player", ImGuiTableColumnFlags_WidthFixed, 90.0f);
+        ImGui::TableSetupColumn("Tempo", ImGuiTableColumnFlags_WidthStretch);
+        ImGui::TableSetupColumn("Pitch", ImGuiTableColumnFlags_WidthStretch);
+        ImGui::TableHeadersRow();
+        for (int i = 0; i < PC_AUDIO_PLAYERS; i++)
+        {
+            int t = ap->tempoScale[i];
+            int p = ap->pitchShift[i];
+            ImGui::TableNextRow();
+            ImGui::TableSetColumnIndex(0);
+            ImGui::TextUnformatted(kPlayerNames[i]);
+            ImGui::TableSetColumnIndex(1);
+            if (ImGui::SliderInt("##tempo", &t, 50, 200, "%d%%"))
+            {
+                ap->tempoScale[i] = t;
+                Pc_ConfigSave();
+            }
+            ImGui::TableSetColumnIndex(2);
+            if (ImGui::SliderInt("##pitch", &p, -12, 12, "%+d st"))
+            {
+                ap->pitchShift[i] = p;
+                Pc_ConfigSave();
+            }
+        }
+        ImGui::EndTable();
+    }
+}
+
 static void Pc_UiAudioTab(void) {
     PcAudioPrefs *ap = Pc_ConfigAudioPrefs();
     int v;
@@ -232,6 +269,31 @@ static void Pc_UiAudioTab(void) {
         Pc_ConfigSave();
     }
     ImGui::TextDisabled("DirectSound = sample voices, PSG = the 4 CGB channels.\nLower the limiter threshold for a softer, compressed sound.");
+
+    ImGui::Spacing();
+    ImGui::Separator();
+    ImGui::TextUnformatted("Equalizer");
+    v = ap->bassDb;
+    if (ImGui::SliderInt("Bass", &v, -15, 15, "%+d dB")) {
+        ap->bassDb = v;
+        Pc_ConfigSave();
+    }
+    v = ap->trebleDb;
+    if (ImGui::SliderInt("Treble", &v, -15, 15, "%+d dB")) {
+        ap->trebleDb = v;
+        Pc_ConfigSave();
+    }
+    ImGui::TextDisabled("Shelving EQ on the final mix: bass at 200 Hz, treble at 4 kHz.");
+
+    ImGui::Spacing();
+    ImGui::Separator();
+    ImGui::TextUnformatted("Stereo");
+    v = ap->stereoWidth;
+    if (ImGui::SliderInt("Width", &v, 0, 200, "%d%%")) {
+        ap->stereoWidth = v;
+        Pc_ConfigSave();
+    }
+    ImGui::TextDisabled("100% is normal; 0% is mono; 200% doubles the spread.");
 
     ImGui::Spacing();
     ImGui::Separator();
@@ -274,8 +336,18 @@ static void Pc_UiAudioTab(void) {
 
     ImGui::Spacing();
     ImGui::Separator();
+    ImGui::TextUnformatted("Tempo & Pitch");
+    ImGui::TextDisabled("Per m4a player; SE players are single-shot effects.");
+    if (ImGui::BeginChild("player_prefs", ImVec2(0.0f, 230.0f), true)) {
+        Pc_UiAudioPlayerTable(ap);
+    }
+    ImGui::EndChild();
+
+    ImGui::Spacing();
+    ImGui::Separator();
     if (ImGui::Button("Reset to Defaults")) {
         PcAudioPrefs d;
+        int i;
         memset(&d, 0, sizeof(d));
         d.masterVolume = 100;
         d.dsVolume = 100;
@@ -285,6 +357,13 @@ static void Pc_UiAudioTab(void) {
         d.reverbOverride = 60;
         d.lowPass = 1;
         d.lowPassCutoff = 2200;
+        d.bassDb = 0;
+        d.trebleDb = 0;
+        d.stereoWidth = 100;
+        for (i = 0; i < PC_AUDIO_PLAYERS; i++) {
+            d.tempoScale[i] = 100;
+            d.pitchShift[i] = 0;
+        }
         *ap = d;
         Pc_ConfigSave();
     }
@@ -300,7 +379,7 @@ static void Pc_UiAudioTab(void) {
 }
 
 static void Pc_UiSettingsWindow(void) {
-    ImGui::SetNextWindowSize(ImVec2(560, 420), ImGuiCond_FirstUseEver);
+    ImGui::SetNextWindowSize(ImVec2(640, 560), ImGuiCond_FirstUseEver);
     if (!ImGui::Begin("Settings", &gSettingsOpen)) {
         ImGui::End();
         return;

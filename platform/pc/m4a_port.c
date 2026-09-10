@@ -30,6 +30,7 @@
 #include "music.h"
 #include "audio_data.h"
 #include "m4a_port.h"
+#include "config_pc.h"
 #include "gba_shim.h"
 
 // Forward declaration (defined below; m4a.h does not declare it).
@@ -96,6 +97,11 @@ static u8 pcFreqIdx = 6;
 static u16 pcSamplesPerVBlank = 304;
 static s32 pcPcmFreq = 18157;
 static s32 pcDivFreq = 462;
+
+// Per-player user prefs (synced from PcAudioPrefs by Pc_AudioTick).
+// Tempo is 8.8 fixed (256 = 100%); pitch is in semitones.
+static u16 gPcTempoScale[MUSIC_PLAYERS_COUNT];
+static s16 gPcPitchShift[MUSIC_PLAYERS_COUNT];
 
 struct SoundChannel *Pc_SoundChans(unsigned *n)
 {
@@ -1300,8 +1306,14 @@ static void Pc_VolPitPass(struct MusicPlayerInfo *info)
 {
     u8 remaining = info->trackCount;
     struct MusicPlayerTrack *track = info->tracks;
+    int pi = Pc_PlayerIndex(info);
+    s16 pshift = (pi >= 0) ? gPcPitchShift[pi] : 0;
     while (remaining > 0)
     {
+        // A nonzero per-player pitch shift keeps PITCHG set so already-playing
+        // notes are retuned live (their flags are cleared below each pass).
+        if (pshift != 0 && (track->flags & MPT_FLG_EXIST) != 0)
+            track->flags |= MPT_FLG_PITCHG;
         if ((track->flags & MPT_FLG_EXIST) != 0
             && (track->flags & (MPT_FLG_VOLCHG | MPT_FLG_PITCHG)) != 0)
         {
@@ -1327,7 +1339,7 @@ static void Pc_VolPitPass(struct MusicPlayerInfo *info)
                     }
                     if (track->flags & MPT_FLG_PITCHG)
                     {
-                        int k = (int)chan->key + (s8)track->keyM;
+                        int k = (int)chan->key + (s8)track->keyM + (int)pshift;
                         if (k < 0)
                             k = 0;
                         if (cgb)
@@ -1380,7 +1392,15 @@ void MPlayMain(struct MusicPlayerInfo *info)
         info->ident = ID_NUMBER;
         return;
     }
-    info->tempoC = (u16)(info->tempoC + info->tempoI);
+    {
+        // Per-player user tempo scale (256 = 100%), applied to the m4a
+        // 150-tick clock accumulation like the GBA's m4aMPlayTempoControl.
+        int pi = Pc_PlayerIndex(info);
+        u32 tstep = info->tempoI;
+        if (pi >= 0)
+            tstep = ((u32)info->tempoI * gPcTempoScale[pi]) >> 8;
+        info->tempoC = (u16)(info->tempoC + tstep);
+    }
     while (info->tempoC >= 150)
     {
         Pc_TickTracks(info);
@@ -1394,9 +1414,25 @@ void MPlayMain(struct MusicPlayerInfo *info)
 void Pc_AudioTick(void)
 {
     int i;
+    PcAudioPrefs *ap = Pc_ConfigAudioPrefs();
     if (pcIdent != ID_NUMBER)
         return;
     pcIdent++;
+    for (i = 0; i < MUSIC_PLAYERS_COUNT; i++)
+    {
+        int t = ap->tempoScale[i];
+        int p = ap->pitchShift[i];
+        if (t < 50)
+            t = 50;
+        if (t > 200)
+            t = 200;
+        if (p < -12)
+            p = -12;
+        if (p > 12)
+            p = 12;
+        gPcTempoScale[i] = (u16)((t * 256) / 100);
+        gPcPitchShift[i] = (s16)p;
+    }
     for (i = 0; i < MUSIC_PLAYERS_COUNT; i++)
         MPlayMain(gMPlayTable[i].info);
     pcIdent = ID_NUMBER;

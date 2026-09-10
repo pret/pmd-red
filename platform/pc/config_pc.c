@@ -118,6 +118,7 @@ PcBootPrefs *Pc_ConfigBootPrefs(void)
 
 static void Pc_ResetAudioDefault(void)
 {
+    int i;
     memset(&sAudio, 0, sizeof(sAudio));
     sAudio.masterVolume = 100;
     sAudio.dsVolume = 100;
@@ -129,6 +130,13 @@ static void Pc_ResetAudioDefault(void)
     // than the hardware, so the low-pass starts on by default.
     sAudio.lowPass = 1;
     sAudio.lowPassCutoff = 2200;
+    sAudio.bassDb = 0;
+    sAudio.trebleDb = 0;
+    sAudio.stereoWidth = 100;
+    for (i = 0; i < PC_AUDIO_PLAYERS; i++) {
+        sAudio.tempoScale[i] = 100;
+        sAudio.pitchShift[i] = 0;
+    }
 }
 
 PcAudioPrefs *Pc_ConfigAudioPrefs(void)
@@ -288,6 +296,7 @@ void Pc_ConfigLoad(const char *exeDir)
             else if (strcmp(key, "FpsLog") == 0) sBoot.fpsLog = b;
         } else if (strcmp(section, "Audio") == 0) {
             int v = atoi(val);
+            int p;
             if (strcmp(key, "MasterVolume") == 0) sAudio.masterVolume = v;
             else if (strcmp(key, "Muted") == 0) sAudio.muted = v;
             else if (strcmp(key, "DsVolume") == 0) sAudio.dsVolume = v;
@@ -297,6 +306,15 @@ void Pc_ConfigLoad(const char *exeDir)
             else if (strcmp(key, "ReverbOverride") == 0) sAudio.reverbOverride = v;
             else if (strcmp(key, "LowPass") == 0) sAudio.lowPass = v;
             else if (strcmp(key, "LowPassCutoff") == 0) sAudio.lowPassCutoff = v;
+            else if (strcmp(key, "BassDb") == 0) sAudio.bassDb = v;
+            else if (strcmp(key, "TrebleDb") == 0) sAudio.trebleDb = v;
+            else if (strcmp(key, "StereoWidth") == 0) sAudio.stereoWidth = v;
+            else if (strncmp(key, "Tempo", 5) == 0
+                     && (p = atoi(key + 5)) >= 0 && p < PC_AUDIO_PLAYERS)
+                sAudio.tempoScale[p] = v;
+            else if (strncmp(key, "Pitch", 5) == 0
+                     && (p = atoi(key + 5)) >= 0 && p < PC_AUDIO_PLAYERS)
+                sAudio.pitchShift[p] = v;
         }
     }
     fclose(f);
@@ -343,5 +361,12 @@ void Pc_ConfigSave(void)
     fprintf(f, "ReverbOverride=%d\n", sAudio.reverbOverride);
     fprintf(f, "LowPass=%d\n", sAudio.lowPass);
     fprintf(f, "LowPassCutoff=%d\n", sAudio.lowPassCutoff);
+    fprintf(f, "BassDb=%d\n", sAudio.bassDb);
+    fprintf(f, "TrebleDb=%d\n", sAudio.trebleDb);
+    fprintf(f, "StereoWidth=%d\n", sAudio.stereoWidth);
+    for (a = 0; a < PC_AUDIO_PLAYERS; a++) {
+        fprintf(f, "Tempo%d=%d\n", a, sAudio.tempoScale[a]);
+        fprintf(f, "Pitch%d=%d\n", a, sAudio.pitchShift[a]);
+    }
     fclose(f);
 }

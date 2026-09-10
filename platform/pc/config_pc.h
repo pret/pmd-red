@@ -60,6 +60,9 @@ typedef struct PcBootPrefs
     int fpsLog;      // --fps
 } PcBootPrefs;
 
+// Number of m4a music players (INDEX_BGM..INDEX_SE6; must match music.h).
+#define PC_AUDIO_PLAYERS 8
+
 // Live audio settings (applied by audio_pc.c every render; saved to [Audio]).
 typedef struct PcAudioPrefs
 {
@@ -72,6 +75,11 @@ typedef struct PcAudioPrefs
     int reverbOverride; // 0-127 used when reverbMode == 2
     int lowPass;        // 0/1 GBA analog low-pass filter
     int lowPassCutoff;  // Hz cutoff (when lowPass != 0)
+    int bassDb;         // -15..+15 low-shelf EQ gain (dB)
+    int trebleDb;       // -15..+15 high-shelf EQ gain (dB)
+    int stereoWidth;    // 0-200 stereo width (% of normal)
+    int tempoScale[PC_AUDIO_PLAYERS]; // 50-200 per-player tempo (%)
+    int pitchShift[PC_AUDIO_PLAYERS]; // -12..+12 per-player pitch (semitones)
 } PcAudioPrefs;
 
 // Load pmd-red.ini from the exe directory (trailing sep optional; NULL -> cwd).

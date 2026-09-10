@@ -103,6 +103,12 @@ static unsigned pcRevPos = 0;
 static float pcLpX1L = 0.0f, pcLpX2L = 0.0f, pcLpY1L = 0.0f, pcLpY2L = 0.0f;
 static float pcLpX1R = 0.0f, pcLpX2R = 0.0f, pcLpY1R = 0.0f, pcLpY2R = 0.0f;
 
+// User EQ shelf filter state (RBJ low/high-shelf, applied on the final mix).
+static float pcBsX1L = 0.0f, pcBsX2L = 0.0f, pcBsY1L = 0.0f, pcBsY2L = 0.0f;
+static float pcBsX1R = 0.0f, pcBsX2R = 0.0f, pcBsY1R = 0.0f, pcBsY2R = 0.0f;
+static float pcTsX1L = 0.0f, pcTsX2L = 0.0f, pcTsY1L = 0.0f, pcTsY2L = 0.0f;
+static float pcTsX1R = 0.0f, pcTsX2R = 0.0f, pcTsY1R = 0.0f, pcTsY2R = 0.0f;
+
 // Reset all CGB hardware state and (re)derive the reverb geometry.
 static void Pc_CgbHardwareReset(void)
 {
@@ -709,6 +715,52 @@ void Pc_AudioShutdown(void)
 }
 
 // Render n samples of all voices and queue them. Called from m4aSoundMain.
+// RBJ shelf coefficients (S = 1), normalized by a0. kind 0 = low shelf,
+// 1 = high shelf. dBgain == 0 yields identity: returns 0 and zeroes the
+// coefficients (caller skips the filter and clears its state).
+static int Pc_ShelfCoeffs(int kind, float dB, float f0, int rate,
+                          float *b0, float *b1, float *b2,
+                          float *a1, float *a2)
+{
+    float A, w0, alpha, c, sa;
+    float nb0, nb1, nb2, na0, na1, na2;
+    if (dB == 0.0f)
+    {
+        *b0 = *b1 = *b2 = 0.0f;
+        *a1 = *a2 = 0.0f;
+        return 0;
+    }
+    A = powf(10.0f, dB / 40.0f);
+    w0 = 2.0f * 3.14159265358979323846f * f0 / (float)rate;
+    alpha = 0.5f * sinf(w0) * sqrtf(2.0f);
+    c = cosf(w0);
+    sa = sqrtf(A);
+    if (kind == 0)
+    {
+        nb0 = A * ((A + 1) - (A - 1) * c + 2 * sa * alpha);
+        nb1 = 2 * A * ((A - 1) - (A + 1) * c);
+        nb2 = A * ((A + 1) - (A - 1) * c - 2 * sa * alpha);
+        na0 = (A + 1) + (A - 1) * c + 2 * sa * alpha;
+        na1 = -2 * ((A - 1) + (A + 1) * c);
+        na2 = (A + 1) + (A - 1) * c - 2 * sa * alpha;
+    }
+    else
+    {
+        nb0 = A * ((A + 1) + (A - 1) * c + 2 * sa * alpha);
+        nb1 = -2 * A * ((A - 1) + (A + 1) * c);
+        nb2 = A * ((A + 1) + (A - 1) * c - 2 * sa * alpha);
+        na0 = (A + 1) - (A - 1) * c + 2 * sa * alpha;
+        na1 = 2 * ((A - 1) - (A + 1) * c);
+        na2 = (A + 1) - (A - 1) * c - 2 * sa * alpha;
+    }
+    *b0 = nb0 / na0;
+    *b1 = nb1 / na0;
+    *b2 = nb2 / na0;
+    *a1 = na1 / na0;
+    *a2 = na2 / na0;
+    return 1;
+}
+
 // stepEnvelope != 0 performs one full 60 Hz tick (scheduler already advanced
 // via Pc_AudioTick): CgbSound envelopes + per-channel DS envelope, then the
 // mixer — mirroring the GBA order. stepEnvelope == 0 renders a partial
@@ -777,6 +829,9 @@ void Pc_MixerRenderSamples(int n, int stepEnvelope)
         float psgScale = (float)ap->psgVolume / 100.0f;
         float sat = (float)ap->saturate / 100.0f;
         float b0 = 0.0f, b1 = 0.0f, b2 = 0.0f, a1 = 0.0f, a2 = 0.0f;
+        float bs0 = 0.0f, bs1 = 0.0f, bs2 = 0.0f, ba1 = 0.0f, ba2 = 0.0f;
+        float ts0 = 0.0f, ts1 = 0.0f, ts2 = 0.0f, ta1 = 0.0f, ta2 = 0.0f;
+        float stw = (float)ap->stereoWidth / 100.0f;
         if (ap->lowPass)
         {
             // 2nd-order Butterworth low-pass (RBJ cookbook) to model the GBA's
@@ -800,6 +855,24 @@ void Pc_MixerRenderSamples(int n, int stepEnvelope)
         {
             pcLpX1L = pcLpX2L = pcLpY1L = pcLpY2L = 0.0f;
             pcLpX1R = pcLpX2R = pcLpY1R = pcLpY2R = 0.0f;
+        }
+        // User EQ: RBJ low-shelf (bass) + high-shelf (treble) on the final
+        // mix. Gain 0 disables each filter (identity) and clears its state.
+        if (ap->bassDb != 0)
+            Pc_ShelfCoeffs(0, (float)ap->bassDb, 200.0f, sAudioRate,
+                           &bs0, &bs1, &bs2, &ba1, &ba2);
+        else
+        {
+            pcBsX1L = pcBsX2L = pcBsY1L = pcBsY2L = 0.0f;
+            pcBsX1R = pcBsX2R = pcBsY1R = pcBsY2R = 0.0f;
+        }
+        if (ap->trebleDb != 0)
+            Pc_ShelfCoeffs(1, (float)ap->trebleDb, 4000.0f, sAudioRate,
+                           &ts0, &ts1, &ts2, &ta1, &ta2);
+        else
+        {
+            pcTsX1L = pcTsX2L = pcTsY1L = pcTsY2L = 0.0f;
+            pcTsX1R = pcTsX2R = pcTsY1R = pcTsY2R = 0.0f;
         }
     for (i = 0; i < n; i++)
     {
@@ -858,6 +931,33 @@ void Pc_MixerRenderSamples(int n, int stepEnvelope)
                 float yr = b0 * r + b1 * pcLpX1R + b2 * pcLpX2R - a1 * pcLpY1R - a2 * pcLpY2R;
                 pcLpX2R = pcLpX1R; pcLpX1R = r;
                 pcLpY2R = pcLpY1R; pcLpY1R = yr; r = yr;
+            }
+            // User EQ: bass (low shelf) then treble (high shelf).
+            if (bs0 != 0.0f || ba1 != 0.0f)
+            {
+                float yl = bs0 * l + bs1 * pcBsX1L + bs2 * pcBsX2L - ba1 * pcBsY1L - ba2 * pcBsY2L;
+                pcBsX2L = pcBsX1L; pcBsX1L = l;
+                pcBsY2L = pcBsY1L; pcBsY1L = yl; l = yl;
+                float yr = bs0 * r + bs1 * pcBsX1R + bs2 * pcBsX2R - ba1 * pcBsY1R - ba2 * pcBsY2R;
+                pcBsX2R = pcBsX1R; pcBsX1R = r;
+                pcBsY2R = pcBsY1R; pcBsY1R = yr; r = yr;
+            }
+            if (ts0 != 0.0f || ta1 != 0.0f)
+            {
+                float yl = ts0 * l + ts1 * pcTsX1L + ts2 * pcTsX2L - ta1 * pcTsY1L - ta2 * pcTsY2L;
+                pcTsX2L = pcTsX1L; pcTsX1L = l;
+                pcTsY2L = pcTsY1L; pcTsY1L = yl; l = yl;
+                float yr = ts0 * r + ts1 * pcTsX1R + ts2 * pcTsX2R - ta1 * pcTsY1R - ta2 * pcTsY2R;
+                pcTsX2R = pcTsX1R; pcTsX1R = r;
+                pcTsY2R = pcTsY1R; pcTsY1R = yr; r = yr;
+            }
+            // Stereo width via mid/side (stw == 1 is identity).
+            if (stw != 1.0f)
+            {
+                float m = 0.5f * (l + r);
+                float s = 0.5f * (l - r);
+                l = m + s * stw;
+                r = m - s * stw;
             }
             if (l > 32767.0f)
                 l = 32767.0f;
