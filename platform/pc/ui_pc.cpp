@@ -245,7 +245,7 @@ static void Pc_UiAudioTab(void) {
             Pc_ConfigSave();
         }
         v = ap->lowPassCutoff;
-        if (ImGui::SliderInt("Cutoff", &v, 4000, 16000, "%d Hz")) {
+        if (ImGui::SliderInt("Cutoff", &v, 1000, 16000, "%d Hz")) {
             ap->lowPassCutoff = v;
             Pc_ConfigSave();
         }
@@ -260,7 +260,8 @@ static void Pc_UiAudioTab(void) {
         d.masterVolume = 100;
         d.reverbMode = 1;
         d.reverbOverride = 60;
-        d.lowPassCutoff = 9000;
+        d.lowPass = 1;
+        d.lowPassCutoff = 2200;
         *ap = d;
         Pc_ConfigSave();
     }

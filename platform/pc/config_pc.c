@@ -122,7 +122,10 @@ static void Pc_ResetAudioDefault(void)
     sAudio.masterVolume = 100;
     sAudio.reverbMode = 1;   // follow the song
     sAudio.reverbOverride = 60;
-    sAudio.lowPassCutoff = 9000;
+    // Model the GBA's band-limited analog output: the raw mix is much brighter
+    // than the hardware, so the low-pass starts on by default.
+    sAudio.lowPass = 1;
+    sAudio.lowPassCutoff = 2200;
 }
 
 PcAudioPrefs *Pc_ConfigAudioPrefs(void)

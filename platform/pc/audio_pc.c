@@ -99,9 +99,9 @@ static int pcRevLen = 0;                // delay line length in host samples
 static int pcRevFrame = 0;              // "other" tap offset (one VBlank frame)
 static unsigned pcRevPos = 0;
 
-// User low-pass filter state (one-pole IIR, applied on the final mix).
-static float pcLpL = 0.0f;
-static float pcLpR = 0.0f;
+// User low-pass filter state (2nd-order Butterworth, applied on the final mix).
+static float pcLpX1L = 0.0f, pcLpX2L = 0.0f, pcLpY1L = 0.0f, pcLpY2L = 0.0f;
+static float pcLpX1R = 0.0f, pcLpX2R = 0.0f, pcLpY1R = 0.0f, pcLpY2R = 0.0f;
 
 // Reset all CGB hardware state and (re)derive the reverb geometry.
 static void Pc_CgbHardwareReset(void)
@@ -751,21 +751,30 @@ void Pc_MixerRenderSamples(int n, int stepEnvelope)
     {
         PcAudioPrefs *ap = Pc_ConfigAudioPrefs();
         float vol = ap->muted ? 0.0f : ((float)ap->masterVolume / 100.0f);
-        float lpA = 0.0f;
+        float b0 = 0.0f, b1 = 0.0f, b2 = 0.0f, a1 = 0.0f, a2 = 0.0f;
         if (ap->lowPass)
         {
+            // 2nd-order Butterworth low-pass (RBJ cookbook) to model the GBA's
+            // band-limited analog output.
             float fc = (float)ap->lowPassCutoff;
+            float w0, alpha, a0;
             if (fc < 50.0f)
                 fc = 50.0f;
             if (fc > (float)sAudioRate * 0.45f)
                 fc = (float)sAudioRate * 0.45f;
-            lpA = 1.0f - expf(-2.0f * 3.14159265358979323846f * fc
-                              / (float)sAudioRate);
+            w0 = 2.0f * 3.14159265358979323846f * fc / (float)sAudioRate;
+            alpha = sinf(w0) / 1.41421356237f;
+            a0 = 1.0f + alpha;
+            b0 = ((1.0f - cosf(w0)) * 0.5f) / a0;
+            b1 = (1.0f - cosf(w0)) / a0;
+            b2 = b0;
+            a1 = (-2.0f * cosf(w0)) / a0;
+            a2 = (1.0f - alpha) / a0;
         }
-        if (lpA == 0.0f)
+        else
         {
-            pcLpL = 0.0f;
-            pcLpR = 0.0f;
+            pcLpX1L = pcLpX2L = pcLpY1L = pcLpY2L = 0.0f;
+            pcLpX1R = pcLpX2R = pcLpY1R = pcLpY2R = 0.0f;
         }
     for (i = 0; i < n; i++)
     {
@@ -816,12 +825,14 @@ void Pc_MixerRenderSamples(int n, int stepEnvelope)
             else if (r < -32768.0f * PC_SATURATE)
                 r = -32768.0f * PC_SATURATE - (32768.0f - 32768.0f * PC_SATURATE)
                     * tanhf((-r - 32768.0f * PC_SATURATE) / (32768.0f * (1.0f - PC_SATURATE)));
-            if (lpA > 0.0f)
+            if (a1 != 0.0f || b0 != 0.0f)
             {
-                l = pcLpL + lpA * (l - pcLpL);
-                pcLpL = l;
-                r = pcLpR + lpA * (r - pcLpR);
-                pcLpR = r;
+                float yl = b0 * l + b1 * pcLpX1L + b2 * pcLpX2L - a1 * pcLpY1L - a2 * pcLpY2L;
+                pcLpX2L = pcLpX1L; pcLpX1L = l;
+                pcLpY2L = pcLpY1L; pcLpY1L = yl; l = yl;
+                float yr = b0 * r + b1 * pcLpX1R + b2 * pcLpX2R - a1 * pcLpY1R - a2 * pcLpY2R;
+                pcLpX2R = pcLpX1R; pcLpX1R = r;
+                pcLpY2R = pcLpY1R; pcLpY1R = yr; r = yr;
             }
             if (l > 32767.0f)
                 l = 32767.0f;
