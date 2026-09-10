@@ -45,6 +45,15 @@ void Pc_VideoDumpPPM(const char *path); // headless framebuffer dump (no SDL nee
 void *Pc_VideoGetSdlWindow(void);   // SDL_Window* or NULL (headless / no SDL2)
 void *Pc_VideoGetSdlRenderer(void); // SDL_Renderer* or NULL (headless / no SDL2)
 
+// Live graphics settings (no-op when built headless). Called by the ImGui
+// settings window after the config prefs are edited; vsync has no live path
+// (renderer flag) and is applied at the next Pc_VideoInit instead.
+void Pc_VideoSetFullscreen(int on); // toggle fullscreen on the current window
+void Pc_VideoSetScaleMode(int mode); // PC_SCALE_INTEGER/FIT/STRETCH
+void Pc_VideoSetSmoothing(int on);  // 0 nearest, 1 bilinear texture scaling
+void Pc_VideoSetLetterbox(int r, int g, int b); // backdrop color (0-255 each)
+void Pc_VideoResizeScale(int scale); // resize the window to 240*scale x 160*scale
+
 // ---- Input backend (input_pc.c) ----
 void Pc_InputInit(void);
 void Pc_InputPump(void); // refresh REG_KEYINPUT shadow (active-low, KEYS_MASK idle)

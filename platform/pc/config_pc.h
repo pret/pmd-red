@@ -60,6 +60,32 @@ typedef struct PcBootPrefs
     int fpsLog;      // --fps
 } PcBootPrefs;
 
+// Window-scale bounds for the 240x160 internal framebuffer.
+#define PC_VIDEO_SCALE_MIN 1
+#define PC_VIDEO_SCALE_MAX 8
+
+// Scale-to-window modes for PcVideoPrefs.scaleMode.
+enum PcVideoScaleMode
+{
+    PC_SCALE_INTEGER = 0, // largest integer multiple that fits, centered
+    PC_SCALE_FIT,         // fractional fit, aspect preserved, centered
+    PC_SCALE_STRETCH      // fill the whole window (aspect not preserved)
+};
+
+// Live video settings (applied by video_pc.c; saved to [Video]). vsync only
+// takes effect when the renderer is (re)created, i.e. at the next restart.
+typedef struct PcVideoPrefs
+{
+    int windowScale;   // 1-8 initial window multiplier (240x160 base)
+    int fullscreen;    // 0/1 start (and live-toggle) fullscreen
+    int scaleMode;     // PC_SCALE_*: how the frame maps into the window
+    int smoothing;     // 0 = nearest (pixelated), 1 = bilinear
+    int vsync;         // 0/1 present-vsync (renderer flag; needs restart)
+    int letterboxR;    // 0-255 backdrop color around the scaled frame
+    int letterboxG;    // 0-255
+    int letterboxB;    // 0-255
+} PcVideoPrefs;
+
 // Number of m4a music players (INDEX_BGM..INDEX_SE6; must match music.h).
 #define PC_AUDIO_PLAYERS 8
 
@@ -101,6 +127,9 @@ void Pc_ConfigRemoveBind(int action, int kind, int code);
 
 // Current boot-launch toggles (mutable — call Pc_ConfigSave to persist).
 PcBootPrefs *Pc_ConfigBootPrefs(void);
+
+// Current video settings (mutable — call Pc_ConfigSave to persist).
+PcVideoPrefs *Pc_ConfigVideoPrefs(void);
 
 // Current audio settings (mutable — call Pc_ConfigSave to persist).
 PcAudioPrefs *Pc_ConfigAudioPrefs(void);

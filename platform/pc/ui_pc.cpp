@@ -378,6 +378,98 @@ static void Pc_UiAudioTab(void) {
     ImGui::TextDisabled("Audio is rendered natively (GBA sample math at the host rate).\nChanges apply immediately.");
 }
 
+static void Pc_UiGraphicsTab(void) {
+    PcVideoPrefs *vp = Pc_ConfigVideoPrefs();
+    int v;
+    bool b;
+
+    ImGui::TextUnformatted("Window");
+    v = vp->windowScale;
+    if (ImGui::SliderInt("Scale", &v, PC_VIDEO_SCALE_MIN, PC_VIDEO_SCALE_MAX, "%dx")) {
+        vp->windowScale = v;
+        Pc_VideoResizeScale(v);
+        Pc_ConfigSave();
+    }
+    ImGui::TextDisabled("Multiplier of the 240x160 internal frame.\nResizes the window immediately.");
+
+    b = vp->fullscreen != 0;
+    if (ImGui::Checkbox("Fullscreen", &b)) {
+        vp->fullscreen = b ? 1 : 0;
+        Pc_VideoSetFullscreen(b ? 1 : 0);
+        Pc_ConfigSave();
+    }
+
+    ImGui::Spacing();
+    ImGui::Separator();
+    ImGui::TextUnformatted("Scaling");
+    {
+        static const char *modes[] = { "Integer", "Fit", "Stretch" };
+        v = vp->scaleMode;
+        if (v < 0 || v > 2)
+            v = PC_SCALE_INTEGER;
+        if (ImGui::Combo("Mode", &v, modes, 3)) {
+            vp->scaleMode = v;
+            Pc_VideoSetScaleMode(v);
+            Pc_ConfigSave();
+        }
+        ImGui::TextDisabled("Integer = sharp pixels, Fit = fills the window\npreserving ratio, Stretch = fills ignoring ratio.");
+    }
+
+    b = vp->smoothing != 0;
+    if (ImGui::Checkbox("Bilinear smoothing", &b)) {
+        vp->smoothing = b ? 1 : 0;
+        Pc_VideoSetSmoothing(b ? 1 : 0);
+        Pc_ConfigSave();
+    }
+    ImGui::TextDisabled("Nearest is crisp and pixelated; bilinear blurs when upscaled.");
+
+    ImGui::Spacing();
+    ImGui::Separator();
+    ImGui::TextUnformatted("Backdrop");
+    {
+        float col[3];
+        col[0] = (float)vp->letterboxR / 255.0f;
+        col[1] = (float)vp->letterboxG / 255.0f;
+        col[2] = (float)vp->letterboxB / 255.0f;
+        if (ImGui::ColorEdit3("Letterbox", col)) {
+            vp->letterboxR = (int)(col[0] * 255.0f + 0.5f);
+            vp->letterboxG = (int)(col[1] * 255.0f + 0.5f);
+            vp->letterboxB = (int)(col[2] * 255.0f + 0.5f);
+            Pc_VideoSetLetterbox(vp->letterboxR, vp->letterboxG, vp->letterboxB);
+            Pc_ConfigSave();
+        }
+        ImGui::TextDisabled("Color shown around the frame when the window\ndoesn't match the 3:2 ratio.");
+    }
+
+    ImGui::Spacing();
+    ImGui::Separator();
+    b = vp->vsync != 0;
+    if (ImGui::Checkbox("Vertical sync", &b)) {
+        vp->vsync = b ? 1 : 0;
+        Pc_ConfigSave();
+    }
+    ImGui::TextDisabled("Waits for the display refresh to avoid tearing.\nTakes effect the next time the game starts (Game > Restart).");
+
+    ImGui::Spacing();
+    ImGui::Separator();
+    if (ImGui::Button("Reset to Defaults")) {
+        PcVideoPrefs d;
+        memset(&d, 0, sizeof(d));
+        d.windowScale = 3;
+        d.scaleMode = PC_SCALE_INTEGER;
+        d.vsync = 1;
+        *vp = d;
+        Pc_VideoSetScaleMode(vp->scaleMode);
+        Pc_VideoSetSmoothing(vp->smoothing);
+        Pc_VideoSetFullscreen(vp->fullscreen);
+        Pc_VideoSetLetterbox(vp->letterboxR, vp->letterboxG, vp->letterboxB);
+        Pc_VideoResizeScale(vp->windowScale);
+        Pc_ConfigSave();
+    }
+    ImGui::SameLine();
+    ImGui::TextDisabled("Most changes apply immediately.");
+}
+
 static void Pc_UiSettingsWindow(void) {
     ImGui::SetNextWindowSize(ImVec2(640, 560), ImGuiCond_FirstUseEver);
     if (!ImGui::Begin("Settings", &gSettingsOpen)) {
@@ -388,7 +480,7 @@ static void Pc_UiSettingsWindow(void) {
     if (ImGui::BeginTabBar("settings_tabs")) {
         if (ImGui::BeginTabItem("Graphics")) {
             ImGui::Spacing();
-            ImGui::TextWrapped("Graphics settings (scaling, fullscreen, etc.) are planned but not implemented yet.");
+            Pc_UiGraphicsTab();
             ImGui::EndTabItem();
         }
         if (ImGui::BeginTabItem("Audio")) {

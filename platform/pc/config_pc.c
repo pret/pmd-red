@@ -24,6 +24,7 @@
 static char sConfigPath[1024 + 1];
 static PcActionBinds sBinds[PC_ACT_COUNT];
 static PcBootPrefs sBoot;
+static PcVideoPrefs sVideo;
 static PcAudioPrefs sAudio;
 
 static const char *const kActionNames[PC_ACT_COUNT] = {
@@ -114,6 +115,24 @@ void Pc_ConfigRemoveBind(int action, int kind, int code)
 PcBootPrefs *Pc_ConfigBootPrefs(void)
 {
     return &sBoot;
+}
+
+static void Pc_ResetVideoDefault(void)
+{
+    memset(&sVideo, 0, sizeof(sVideo));
+    sVideo.windowScale = 3;
+    sVideo.fullscreen = 0;
+    sVideo.scaleMode = PC_SCALE_INTEGER;
+    sVideo.smoothing = 0;
+    sVideo.vsync = 1;
+    sVideo.letterboxR = 0;
+    sVideo.letterboxG = 0;
+    sVideo.letterboxB = 0;
+}
+
+PcVideoPrefs *Pc_ConfigVideoPrefs(void)
+{
+    return &sVideo;
 }
 
 static void Pc_ResetAudioDefault(void)
@@ -243,6 +262,7 @@ void Pc_ConfigLoad(const char *exeDir)
 
     Pc_ResetBindsDefault();
     memset(&sBoot, 0, sizeof(sBoot));
+    Pc_ResetVideoDefault();
     Pc_ResetAudioDefault();
 
     f = fopen(sConfigPath, "r");
@@ -294,6 +314,16 @@ void Pc_ConfigLoad(const char *exeDir)
             else if (strcmp(key, "SkipIntro") == 0) sBoot.skipIntro = b;
             else if (strcmp(key, "Autoload") == 0) sBoot.autoload = b;
             else if (strcmp(key, "FpsLog") == 0) sBoot.fpsLog = b;
+        } else if (strcmp(section, "Video") == 0) {
+            int v = atoi(val);
+            if (strcmp(key, "WindowScale") == 0) sVideo.windowScale = v;
+            else if (strcmp(key, "Fullscreen") == 0) sVideo.fullscreen = v;
+            else if (strcmp(key, "ScaleMode") == 0) sVideo.scaleMode = v;
+            else if (strcmp(key, "Smoothing") == 0) sVideo.smoothing = v;
+            else if (strcmp(key, "Vsync") == 0) sVideo.vsync = v;
+            else if (strcmp(key, "LetterboxR") == 0) sVideo.letterboxR = v;
+            else if (strcmp(key, "LetterboxG") == 0) sVideo.letterboxG = v;
+            else if (strcmp(key, "LetterboxB") == 0) sVideo.letterboxB = v;
         } else if (strcmp(section, "Audio") == 0) {
             int v = atoi(val);
             int p;
@@ -351,6 +381,15 @@ void Pc_ConfigSave(void)
     fprintf(f, "SkipIntro=%d\n", sBoot.skipIntro);
     fprintf(f, "Autoload=%d\n", sBoot.autoload);
     fprintf(f, "FpsLog=%d\n", sBoot.fpsLog);
+    fprintf(f, "[Video]\n");
+    fprintf(f, "WindowScale=%d\n", sVideo.windowScale);
+    fprintf(f, "Fullscreen=%d\n", sVideo.fullscreen);
+    fprintf(f, "ScaleMode=%d\n", sVideo.scaleMode);
+    fprintf(f, "Smoothing=%d\n", sVideo.smoothing);
+    fprintf(f, "Vsync=%d\n", sVideo.vsync);
+    fprintf(f, "LetterboxR=%d\n", sVideo.letterboxR);
+    fprintf(f, "LetterboxG=%d\n", sVideo.letterboxG);
+    fprintf(f, "LetterboxB=%d\n", sVideo.letterboxB);
     fprintf(f, "[Audio]\n");
     fprintf(f, "MasterVolume=%d\n", sAudio.masterVolume);
     fprintf(f, "Muted=%d\n", sAudio.muted);

@@ -32,6 +32,9 @@ __attribute__((weak)) s16 *gWinBufferPtr = NULL;
 
 static unsigned int gPc_Frame[PC_W * PC_H];
 static int gPc_Scale = 3;
+static int gPc_ScaleMode = PC_SCALE_INTEGER;
+static int gPc_Smoothing = 0;
+static int gPc_Letterbox[3] = { 0, 0, 0 };
 static unsigned gPc_FrameNo = 0;
 
 #ifdef HAVE_SDL2
@@ -90,15 +93,34 @@ static inline unsigned short Pc_BlendRgb555(unsigned short top, unsigned short u
 }
 
 void Pc_VideoInit(int scale) {
-    gPc_Scale = (scale > 0) ? scale : 3;
+    PcVideoPrefs *vp = Pc_ConfigVideoPrefs();
+
+    gPc_Scale = (scale > 0) ? scale : vp->windowScale;
+    if (gPc_Scale < PC_VIDEO_SCALE_MIN)
+        gPc_Scale = PC_VIDEO_SCALE_MIN;
+    if (gPc_Scale > PC_VIDEO_SCALE_MAX)
+        gPc_Scale = PC_VIDEO_SCALE_MAX;
+    gPc_ScaleMode = vp->scaleMode;
+    gPc_Smoothing = vp->smoothing ? 1 : 0;
+    gPc_Letterbox[0] = vp->letterboxR;
+    gPc_Letterbox[1] = vp->letterboxG;
+    gPc_Letterbox[2] = vp->letterboxB;
     gPc_FrameNo = 0;
     memset(gPc_Frame, 0, sizeof(gPc_Frame));
 #ifdef HAVE_SDL2
     SDL_Init(SDL_INIT_VIDEO);
-    sWin = SDL_CreateWindow("pmd-red-pc", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-                            PC_W * gPc_Scale, PC_H * gPc_Scale, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
-    sRen = SDL_CreateRenderer(sWin, -1, SDL_RENDERER_ACCELERATED);
-    sTex = SDL_CreateTexture(sRen, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STREAMING, PC_W, PC_H);
+    {
+        Uint32 rflags = SDL_RENDERER_ACCELERATED;
+        if (vp->vsync)
+            rflags |= SDL_RENDERER_PRESENTVSYNC;
+        sWin = SDL_CreateWindow("pmd-red-pc", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+                                PC_W * gPc_Scale, PC_H * gPc_Scale, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
+        sRen = SDL_CreateRenderer(sWin, -1, rflags);
+        sTex = SDL_CreateTexture(sRen, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STREAMING, PC_W, PC_H);
+    }
+    Pc_VideoSetSmoothing(gPc_Smoothing);
+    if (vp->fullscreen)
+        Pc_VideoSetFullscreen(1);
     Pc_UiInit(); // ImGui overlay needs the live window + renderer
 #endif
 }
@@ -118,6 +140,60 @@ void *Pc_VideoGetSdlRenderer(void) {
     return sRen;
 #else
     return NULL;
+#endif
+}
+
+// ---- Live graphics settings (called by the ImGui settings window) ----
+
+void Pc_VideoSetFullscreen(int on) {
+#ifdef HAVE_SDL2
+    if (sWin != NULL)
+        SDL_SetWindowFullscreen(sWin, on ? SDL_WINDOW_FULLSCREEN_DESKTOP : 0);
+#else
+    (void)on;
+#endif
+}
+
+void Pc_VideoSetScaleMode(int mode) {
+    gPc_ScaleMode = mode;
+}
+
+void Pc_VideoSetSmoothing(int on) {
+    gPc_Smoothing = on ? 1 : 0;
+#ifdef HAVE_SDL2
+    if (sTex != NULL) {
+        SDL_ScaleMode m = gPc_Smoothing ? SDL_ScaleModeLinear : SDL_ScaleModeNearest;
+#if SDL_VERSION_ATLEAST(2, 0, 12)
+        SDL_SetTextureScaleMode(sTex, m);
+#else
+        (void)m; // SDL too old: keep the default (nearest)
+#endif
+    }
+#else
+    (void)on;
+#endif
+}
+
+void Pc_VideoSetLetterbox(int r, int g, int b) {
+    gPc_Letterbox[0] = r;
+    gPc_Letterbox[1] = g;
+    gPc_Letterbox[2] = b;
+}
+
+void Pc_VideoResizeScale(int scale) {
+    if (scale < PC_VIDEO_SCALE_MIN)
+        scale = PC_VIDEO_SCALE_MIN;
+    if (scale > PC_VIDEO_SCALE_MAX)
+        scale = PC_VIDEO_SCALE_MAX;
+    gPc_Scale = scale;
+#ifdef HAVE_SDL2
+    if (sWin != NULL) {
+        // Don't fight a fullscreen session; it shows the desktop size anyway.
+        if (!(SDL_GetWindowFlags(sWin) & SDL_WINDOW_FULLSCREEN_DESKTOP))
+            SDL_SetWindowSize(sWin, PC_W * scale, PC_H * scale);
+    }
+#else
+    (void)scale;
 #endif
 }
 
@@ -478,19 +554,48 @@ void Pc_VideoPresent(void) {
         int winW, winH, scale;
 
         SDL_UpdateTexture(sTex, NULL, gPc_Frame, PC_W * (int)sizeof(gPc_Frame[0]));
-        SDL_SetRenderDrawColor(sRen, 0, 0, 0, 255);
+        SDL_SetRenderDrawColor(sRen, gPc_Letterbox[0], gPc_Letterbox[1],
+                               gPc_Letterbox[2], 255);
         SDL_RenderClear(sRen);
-        // Integer-scaled, aspect-preserving blit of the 240x160 frame. No
-        // SDL logical-size transform: the ImGui overlay draws in window pixels,
-        // so ImGui's mouse/hit-testing stays exactly aligned with its output.
+        // Aspect-preserving blit of the 240x160 frame. No SDL logical-size
+        // transform: the ImGui overlay draws in window pixels, so ImGui's
+        // mouse/hit-testing stays exactly aligned with its output.
         SDL_GetWindowSize(sWin, &winW, &winH);
-        scale = (winW / PC_W < winH / PC_H) ? winW / PC_W : winH / PC_H;
-        if (scale < 1)
-            scale = 1;
-        dst.w = PC_W * scale;
-        dst.h = PC_H * scale;
-        dst.x = (winW - dst.w) / 2;
-        dst.y = (winH - dst.h) / 2;
+        switch (gPc_ScaleMode) {
+        case PC_SCALE_FIT: {
+            // Fractional scale to fit the window, aspect preserved.
+            double sx = (double)winW / PC_W;
+            double sy = (double)winH / PC_H;
+            double s = sx < sy ? sx : sy;
+            if (s < 1.0 / PC_VIDEO_SCALE_MAX) {
+                // Window too small to fill a 1/8th frame; keep it visible.
+                dst.w = PC_W / PC_VIDEO_SCALE_MAX;
+                dst.h = PC_H / PC_VIDEO_SCALE_MAX;
+            } else {
+                dst.w = (int)(PC_W * s);
+                dst.h = (int)(PC_H * s);
+            }
+            dst.x = (winW - dst.w) / 2;
+            dst.y = (winH - dst.h) / 2;
+            break;
+        }
+        case PC_SCALE_STRETCH:
+            dst.x = 0;
+            dst.y = 0;
+            dst.w = winW;
+            dst.h = winH;
+            break;
+        case PC_SCALE_INTEGER:
+        default:
+            scale = (winW / PC_W < winH / PC_H) ? winW / PC_W : winH / PC_H;
+            if (scale < 1)
+                scale = 1;
+            dst.w = PC_W * scale;
+            dst.h = PC_H * scale;
+            dst.x = (winW - dst.w) / 2;
+            dst.y = (winH - dst.h) / 2;
+            break;
+        }
         SDL_RenderCopy(sRen, sTex, NULL, &dst);
         if (Pc_UiIsActive())
             Pc_UiRender(); // window-pixel overlay on top
