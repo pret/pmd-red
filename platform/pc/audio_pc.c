@@ -23,6 +23,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
+#include <math.h>
 
 #include "gba/gba.h"
 #include "gba_shim.h"
@@ -31,8 +32,15 @@
 
 #define PC_AUDIO_RATE 44100
 #define PC_AUDIO_BLOCK_MAX 4096             // largest single render block
-#define PC_MASTER_GAIN 8.0f                 // 8-bit-scale mix -> 16-bit loudness
-#define PC_AUDIO_GBA_RATE 18157
+#define PC_MASTER_GAIN 256.0f               // 8-bit DS buffer -> 16-bit loudness
+#define PC_SATURATE 0.85f                   // soft-knee limiter start (of full scale)
+#define PC_REV_BUF_MAX 8192                 // reverb delay line (host samples)
+#define PC_CGB_DECLICK 256                  // wave-channel fade on note-off
+
+// GBA CGB 4-bit DAC output levels (NR32 semantics). gCgb3Vol (src/m4a_tables.c)
+// maps the m4a envelope index to the register byte; 0x80 is the GBA-only 75%
+// mode (bit 7), not mute.
+extern const u8 gCgb3Vol[];
 
 #ifdef HAVE_SDL2
 #include <SDL2/SDL.h>
@@ -54,23 +62,93 @@ static void Pc_RenderCgb(struct CgbChannel *chan, int ci,
 // ---- per-tick render cursors (renderer-owned; SoundChannel holds the rest)
 static double pcDsPos[MAX_DIRECTSOUND_CHANNELS];
 static int pcDsRemain[MAX_DIRECTSOUND_CHANNELS];
-static double pcCgbPhase[4];
 static double pcCgbLenLeft[4];
-static unsigned int pcNoiseLfsr = 0x7FFF;
-static double pcNoisePhase = 0.0;
 
-// Reverb delay (87 ms like the GBA's 1584-sample buffer at 18157 Hz).
-#define PC_REV_DELAY 3840
-static float pcRevL[PC_REV_DELAY];
-static float pcRevR[PC_REV_DELAY];
+// ---- CGB hardware state (free-running oscillators, envelope, sweep) ----
+static const uint8_t pcCgbDutyPattern[4] = { 0x01, 0x81, 0xE1, 0x7E };
+static uint32_t pcCgbPhase[4];          // square/wave: 2^32/period; noise: Q16 fraction
+static uint32_t pcCgbPhaseInc[4];       // phase increment per output sample
+static uint32_t pcCgbPhaseIncFreq[4];   // frequency the cached increment was built for
+static uint8_t  pcCgbNoiseMode[4];      // cached LFSR period mode (noise)
+static int32_t  pcCgbWaveSum[4];        // sum of the 32 wave nibbles (DC removal)
+static uint32_t pcCgbWaveSumRef[4];     // wave index the cached sum was built for
+static uint32_t pcCgbLastWave[4];       // wave index at the last note start
+static uint8_t  pcCgbEnvStepDir[4];     // low 3 bits step time, bit 3 = direction
+static uint8_t  pcCgbHwEnvVolume[4];
+static uint8_t  pcCgbHwEnvNextStep[4];
+static uint8_t  pcCgbHwEnvDead[4];
+static double   pcCgbHwEnvClockAccum[4];
+static int      pcCgbWasOn[4];
+static int32_t  pcCgbDeclickSample[4];
+static int      pcCgbDeclickRemaining[4];
+
+// Square-1 frequency sweep (NR10).
+static uint16_t pcCgbSweepShadowFreq;
+static uint8_t  pcCgbSweepStep;
+static int      pcCgbSweepEnabled;
+static int      pcCgbSweepMuted;
+static double   pcCgbSweepClockAccum;
+
+// Noise LFSR.
+static unsigned int pcNoiseLfsr = 0x7FFF;
+
+// ---- DirectSound reverb (GBA SoundMainRAM_Reverb: 4-tap feedback comb) ----
+static signed char pcRevL[PC_REV_BUF_MAX];
+static signed char pcRevR[PC_REV_BUF_MAX];
+static int pcRevLen = 0;                // delay line length in host samples
+static int pcRevFrame = 0;              // "other" tap offset (one VBlank frame)
 static unsigned pcRevPos = 0;
+
+// Reset all CGB hardware state and (re)derive the reverb geometry.
+static void Pc_CgbHardwareReset(void)
+{
+    int i;
+    for (i = 0; i < 4; i++)
+    {
+        pcCgbPhase[i] = 0;
+        pcCgbPhaseInc[i] = 0;
+        pcCgbPhaseIncFreq[i] = 0xFFFFFFFFu;
+        pcCgbNoiseMode[i] = 0xFF;
+        pcCgbWaveSum[i] = 0;
+        pcCgbWaveSumRef[i] = 0xFFFFFFFFu;
+        pcCgbLastWave[i] = 0xFFFFFFFFu;
+        pcCgbEnvStepDir[i] = 0;
+        pcCgbHwEnvVolume[i] = 0;
+        pcCgbHwEnvNextStep[i] = 0;
+        pcCgbHwEnvDead[i] = 1;
+        pcCgbHwEnvClockAccum[i] = 0.0;
+        pcCgbWasOn[i] = 0;
+        pcCgbDeclickSample[i] = 0;
+        pcCgbDeclickRemaining[i] = 0;
+    }
+    pcCgbSweepShadowFreq = 0;
+    pcCgbSweepStep = 0;
+    pcCgbSweepEnabled = 0;
+    pcCgbSweepMuted = 0;
+    pcCgbSweepClockAccum = 0.0;
+    pcNoiseLfsr = 0x7FFF;
+    pcRevLen = (int)(1584.0 * (double)sAudioRate / (double)Pc_PcmFreq() + 0.5);
+    if (pcRevLen < 2)
+        pcRevLen = 2;
+    if (pcRevLen > PC_REV_BUF_MAX)
+        pcRevLen = PC_REV_BUF_MAX;
+    pcRevFrame = (int)((double)Pc_SamplesPerVBlank() * (double)sAudioRate
+                       / (double)Pc_PcmFreq() + 0.5);
+    if (pcRevFrame < 1)
+        pcRevFrame = 1;
+    if (pcRevFrame >= pcRevLen)
+        pcRevFrame = pcRevLen - 1;
+    memset(pcRevL, 0, sizeof(pcRevL));
+    memset(pcRevR, 0, sizeof(pcRevR));
+    pcRevPos = 0;
+}
 
 // GBA advance per output sample, scaled from 18157 Hz to the host rate:
 // advance = divFreq * chanFrequency / 2^23 wave samples per GBA sample.
 static double Pc_DsStep(const struct SoundChannel *chan, int rate)
 {
     return (double)Pc_DivFreq() * (double)chan->frequency
-         * ((double)PC_AUDIO_GBA_RATE / (double)rate) / 8388608.0;
+         * ((double)Pc_PcmFreq() / (double)rate) / 8388608.0;
 }
 
 // Render one DirectSound voice into the float mix (n samples).
@@ -109,7 +187,7 @@ static void Pc_RenderDs(struct SoundChannel *chan, int flat,
         return;
     }
     if (chan->type & 8)
-        step = (double)PC_AUDIO_GBA_RATE / (double)rate; // Fix: 1:1 at GBA rate
+        step = (double)Pc_PcmFreq() / (double)rate; // Fix: 1:1 at GBA rate
     else
         step = Pc_DsStep(chan, rate);
     pos = pcDsPos[flat];
@@ -162,156 +240,371 @@ static void Pc_RenderDs(struct SoundChannel *chan, int flat,
     chan->count = remain > 0 ? (u32)remain : 0;
 }
 
-// Square duty cycles by WaveDuty value (12.5/25/50/75%).
-static double Pc_SquareDuty(int duty)
+// ---- CGB hardware helpers ----
+
+// Square-1 NR10 sweep timing: 0 is treated as 8.
+static int Pc_CgbSweepTime(const struct CgbChannel *chan)
 {
-    switch (duty & 3)
+    int t = (chan->sweep >> 4) & 7;
+    return t ? t : 8;
+}
+
+// One sweep calculation (initial = trigger-time overflow check, never writes).
+static int Pc_CgbSweepCalc(struct CgbChannel *chan, int initial)
+{
+    int shift = chan->sweep & 7;
+    if (initial || Pc_CgbSweepTime(chan) != 8)
     {
-    case 0: return 0.125;
-    case 1: return 0.25;
-    case 3: return 0.75;
-    default: return 0.5;
+        int32_t freq = pcCgbSweepShadowFreq;
+        if (chan->sweep & 0x08)
+        {
+            freq -= freq >> shift;
+            if (!initial && freq >= 0)
+            {
+                pcCgbSweepShadowFreq = (uint16_t)freq;
+                chan->frequency = (uint32_t)freq;
+            }
+        }
+        else
+        {
+            freq += freq >> shift;
+            if (freq >= 2048)
+                return 0;
+            if (!initial && shift)
+            {
+                pcCgbSweepShadowFreq = (uint16_t)freq;
+                chan->frequency = (uint32_t)freq;
+                if (!Pc_CgbSweepCalc(chan, 1))
+                    return 0;
+            }
+        }
+    }
+    pcCgbSweepStep = (uint8_t)Pc_CgbSweepTime(chan);
+    return 1;
+}
+
+// NRx4 trigger as seen by the sweep unit (CgbSound writes it on every MO_VOL).
+static void Pc_CgbSweepRetrigger(struct CgbChannel *chan)
+{
+    int time = Pc_CgbSweepTime(chan);
+    int shift = chan->sweep & 7;
+    pcCgbSweepMuted = 0;
+    pcCgbSweepShadowFreq = (uint16_t)(chan->frequency & 0x7FF);
+    pcCgbSweepStep = (uint8_t)time;
+    pcCgbSweepEnabled = (time != 8) || shift != 0;
+    if (shift && !Pc_CgbSweepCalc(chan, 1))
+        pcCgbSweepMuted = 1;
+}
+
+// One 128 Hz sweep clock.
+static void Pc_CgbSweepClock(struct CgbChannel *chan, int rate)
+{
+    if (!pcCgbSweepEnabled || pcCgbSweepMuted)
+        return;
+    pcCgbSweepClockAccum += 128.0 / (double)rate;
+    while (pcCgbSweepClockAccum >= 1.0)
+    {
+        pcCgbSweepClockAccum -= 1.0;
+        if (--pcCgbSweepStep != 0)
+            continue;
+        if (!Pc_CgbSweepCalc(chan, 0))
+            pcCgbSweepMuted = 1;
     }
 }
 
-// Wave-channel volume code (NR32 bits 6-5 via gCgb3Vol).
-static double Pc_WaveVol(int env)
+// CgbSound's MO_VOL register write: reload the hardware envelope unit and
+// reset the noise LFSR (NRx4 trigger). The 64 Hz clock accumulator is left
+// free-running, matching the hardware frame sequencer.
+static void Pc_CgbHwEnvWrite(int ci, struct CgbChannel *chan)
 {
-    switch (env & 15)
+    uint8_t stepDir = pcCgbEnvStepDir[ci];
+    uint8_t stepTime = stepDir & 0x07;
+    int dirInc = (stepDir & 0x08) != 0;
+    pcCgbHwEnvVolume[ci] = chan->envelopeVolume & 0x0F;
+    pcCgbHwEnvNextStep[ci] = stepTime;
+    if (stepTime == 0)
+        pcCgbHwEnvDead[ci] = 1;
+    else if (!dirInc && pcCgbHwEnvVolume[ci] == 0)
+        pcCgbHwEnvDead[ci] = 1;
+    else if (dirInc && pcCgbHwEnvVolume[ci] == 15)
+        pcCgbHwEnvDead[ci] = 1;
+    else
+        pcCgbHwEnvDead[ci] = 0;
+    if ((chan->type & 7) == 4)
+        pcNoiseLfsr = (gPcChanRefA[12 + ci] & 1) ? 0x7F : 0x7FFF;
+}
+
+// Free-running 64 Hz hardware envelope clock.
+static void Pc_CgbHwEnvClock(int ci, int rate)
+{
+    pcCgbHwEnvClockAccum[ci] += 64.0 / (double)rate;
+    while (pcCgbHwEnvClockAccum[ci] >= 1.0)
     {
-    case 2:
-    case 3:
-    case 4:
-    case 5: return 1.0;
-    case 6:
-    case 7:
-    case 8:
-    case 9: return 0.5;
-    case 14:
-    case 15: return 1.0;
-    default: return 0.0;
+        pcCgbHwEnvClockAccum[ci] -= 1.0;
+        if (pcCgbHwEnvDead[ci] || (pcCgbEnvStepDir[ci] & 0x07) == 0)
+            continue;
+        if (--pcCgbHwEnvNextStep[ci] != 0)
+            continue;
+        if (pcCgbEnvStepDir[ci] & 0x08)
+        {
+            if (++pcCgbHwEnvVolume[ci] >= 15)
+            {
+                pcCgbHwEnvVolume[ci] = 15;
+                pcCgbHwEnvDead[ci] = 1;
+            }
+            else
+                pcCgbHwEnvNextStep[ci] = pcCgbEnvStepDir[ci] & 0x07;
+        }
+        else
+        {
+            if (--pcCgbHwEnvVolume[ci] == 0)
+                pcCgbHwEnvDead[ci] = 1;
+            else
+                pcCgbHwEnvNextStep[ci] = pcCgbEnvStepDir[ci] & 0x07;
+        }
     }
 }
 
-// Render one CGB voice into the float mix (n samples).
+// Apply the register writes CgbSound performs at the end of a frame.
+static void Pc_CgbApplyModify(int ci, struct CgbChannel *chan)
+{
+    int type = chan->type & 7;
+    if (chan->modify & CGB_CHANNEL_MO_VOL)
+    {
+        if (type == 1)
+            Pc_CgbSweepRetrigger(chan);
+        if (type != 3)
+            Pc_CgbHwEnvWrite(ci, chan);
+    }
+}
+
+// One square sample (advances the free-running phase first, like hardware).
+static int32_t Pc_CgbSquareSample(int ci, const struct CgbChannel *chan, int rate)
+{
+    uint8_t pattern;
+    int bit;
+    if (pcCgbPhaseIncFreq[ci] != chan->frequency)
+    {
+        uint32_t f = chan->frequency & 0x7FF;
+        double hz = 131072.0 / (2048.0 - (double)f);
+        pcCgbPhaseInc[ci] = (uint32_t)(hz / (double)rate * 4294967296.0);
+        pcCgbPhaseIncFreq[ci] = chan->frequency;
+    }
+    pcCgbPhase[ci] += pcCgbPhaseInc[ci];
+    pattern = pcCgbDutyPattern[gPcChanRefA[12 + ci] & 3];
+    bit = (int)((pcCgbPhase[ci] >> 29) & 7);
+    return (pattern & (1u << bit)) ? 64 : -64;
+}
+
+// One programmable-wave sample. The waveform mean is subtracted to remove the
+// DC offset (hardware has no per-waveform bias).
+static int32_t Pc_CgbWaveSample(int ci, const struct CgbChannel *chan, int rate)
+{
+    const PcGbWave *gb;
+    unsigned int ngb;
+    uint32_t ref = gPcChanRefA[12 + ci];
+    int nr32;
+    int32_t nib;
+    int32_t shifted;
+    int32_t meanShifted;
+    int pos;
+    gb = Pc_GbWaves(&ngb);
+    if (ref >= ngb)
+        return 0;
+    if (pcCgbPhaseIncFreq[ci] != chan->frequency)
+    {
+        uint32_t f = chan->frequency & 0x7FF;
+        double hz = 65536.0 / (2048.0 - (double)f);
+        pcCgbPhaseInc[ci] = (uint32_t)(hz / (double)rate * 4294967296.0);
+        pcCgbPhaseIncFreq[ci] = chan->frequency;
+    }
+    if (pcCgbWaveSumRef[ci] != ref)
+    {
+        int32_t sum = 0;
+        int k;
+        for (k = 0; k < 16; k++)
+        {
+            sum += (gb[ref].data[k] >> 4) & 0x0F;
+            sum += gb[ref].data[k] & 0x0F;
+        }
+        pcCgbWaveSum[ci] = sum;
+        pcCgbWaveSumRef[ci] = ref;
+    }
+    pos = (int)((pcCgbPhase[ci] >> 27) & 0x1F);
+    nib = (pos & 1) ? (gb[ref].data[pos >> 1] & 0x0F)
+                    : ((gb[ref].data[pos >> 1] >> 4) & 0x0F);
+    nr32 = gCgb3Vol[chan->envelopeVolume & 0x0F];
+    if (nr32 == 0)
+    {
+        shifted = 0;
+        meanShifted = 0;
+    }
+    else if (nr32 & 0x80)
+    {
+        // GBA-only 75% mode.
+        shifted = (nib + (nib << 1)) >> 2;
+        meanShifted = (pcCgbWaveSum[ci] * 3) >> 7;
+    }
+    else
+    {
+        int sh = ((nr32 >> 5) & 3) - 1;
+        shifted = nib >> sh;
+        meanShifted = pcCgbWaveSum[ci] >> (5 + sh);
+    }
+    pcCgbPhase[ci] += pcCgbPhaseInc[ci];
+    return (shifted - meanShifted) * 8;
+}
+
+// One noise sample; the LFSR is box-averaged over every clock inside the
+// output sample so the fast hardware clock does not alias to a rigid square.
+static int32_t Pc_CgbNoiseSample(int ci, const struct CgbChannel *chan, int rate)
+{
+    unsigned int nr43 = (chan->frequency & 0xF7)
+                      | ((gPcChanRefA[12 + ci] & 1) << 3);
+    uint8_t divRatio = nr43 & 0x07;
+    uint8_t shiftFreq = (nr43 >> 4) & 0x0F;
+    int shortMode = (nr43 & 0x08) != 0;
+    uint32_t remaining;
+    uint32_t untilClock;
+    int32_t sample;
+    if (pcCgbPhaseIncFreq[ci] != chan->frequency
+        || pcCgbNoiseMode[ci] != (uint8_t)shortMode)
+    {
+        double base = 524288.0;
+        double divisor = (divRatio == 0) ? 0.5 : (double)divRatio;
+        double noiseFreq = base / divisor / (double)(1 << (shiftFreq + 1));
+        pcCgbPhaseInc[ci] = (uint32_t)(noiseFreq / (double)rate * 65536.0);
+        if (pcCgbPhaseInc[ci] == 0)
+            pcCgbPhaseInc[ci] = 1;
+        pcCgbPhaseIncFreq[ci] = chan->frequency;
+        pcCgbNoiseMode[ci] = (uint8_t)shortMode;
+    }
+    remaining = pcCgbPhaseInc[ci];
+    untilClock = 0x10000u - pcCgbPhase[ci];
+    if (remaining < untilClock)
+    {
+        sample = (pcNoiseLfsr & 1) ? 64 : -64;
+        pcCgbPhase[ci] += remaining;
+    }
+    else
+    {
+        int32_t acc = (int32_t)untilClock * ((pcNoiseLfsr & 1) ? 64 : -64);
+        remaining -= untilClock;
+        for (;;)
+        {
+            unsigned int bit = ((pcNoiseLfsr >> 1) ^ pcNoiseLfsr) & 1;
+            if (shortMode)
+                pcNoiseLfsr = (pcNoiseLfsr >> 1) | (bit << 6);
+            else
+                pcNoiseLfsr = (pcNoiseLfsr >> 1) | (bit << 14);
+            if (remaining < 0x10000u)
+                break;
+            acc += (int32_t)(0x10000u * ((pcNoiseLfsr & 1) ? 64 : -64));
+            remaining -= 0x10000u;
+        }
+        acc += (int32_t)remaining * ((pcNoiseLfsr & 1) ? 64 : -64);
+        pcCgbPhase[ci] = remaining;
+        sample = acc / (int32_t)pcCgbPhaseInc[ci];
+    }
+    return sample;
+}
+
+// Render one CGB voice into the float mix (n samples). Samples are produced
+// in the GBA mixing domain (square/noise base +/-64, wave +/-120) so the
+// DirectSound:PSG balance matches hardware.
 static void Pc_RenderCgb(struct CgbChannel *chan, int ci,
                          float *mixL, float *mixR, int n, int rate)
 {
     int type;
-    int env;
     int allowL;
     int allowR;
     int i;
+
     if (!(chan->statusFlags & SOUND_CHANNEL_SF_ON))
+    {
+        // Squares free-run on hardware even while silent.
+        type = chan->type & 7;
+        if (type == 1 || type == 2)
+        {
+            uint32_t f = chan->frequency & 0x7FF;
+            if (pcCgbPhaseIncFreq[ci] != chan->frequency)
+            {
+                double hz = 131072.0 / (2048.0 - (double)f);
+                pcCgbPhaseInc[ci] = (uint32_t)(hz / (double)rate * 4294967296.0);
+                pcCgbPhaseIncFreq[ci] = chan->frequency;
+            }
+            pcCgbPhase[ci] += pcCgbPhaseInc[ci] * (uint32_t)n;
+        }
+        if (type == 3 && pcCgbWasOn[ci] && pcCgbDeclickRemaining[ci] <= 0)
+            pcCgbDeclickRemaining[ci] = PC_CGB_DECLICK;
+        pcCgbWasOn[ci] = 0;
+        if (type == 3 && pcCgbDeclickRemaining[ci] > 0)
+        {
+            allowR = (chan->pan & chan->panMask) & 0x0F;
+            allowL = (chan->pan & chan->panMask) & 0xF0;
+            for (i = 0; i < n && pcCgbDeclickRemaining[ci] > 0; i++)
+            {
+                int32_t faded = (pcCgbDeclickSample[ci]
+                                 * pcCgbDeclickRemaining[ci]) / PC_CGB_DECLICK;
+                pcCgbDeclickRemaining[ci]--;
+                if (allowL)
+                    mixL[i] += (float)faded;
+                if (allowR)
+                    mixR[i] += (float)faded;
+            }
+        }
+        return;
+    }
+    pcCgbWasOn[ci] = 1;
+    pcCgbDeclickRemaining[ci] = 0;
+
+    if (chan->statusFlags & SOUND_CHANNEL_SF_START)
         return;
     type = chan->type & 7;
     if (type < 1 || type > 4)
         return;
-    env = chan->envelopeVolume;
-    if (env < 0)
-        env = 0;
-    if (env > 15)
-        env = 15;
+
     allowR = (chan->pan & chan->panMask) & 0x0F;
     allowL = (chan->pan & chan->panMask) & 0xF0;
-    if (!allowL && !allowR)
-        return;
-    if (type == 1 || type == 2)
+
+    for (i = 0; i < n; i++)
     {
-        double hz = 131072.0 / (2048 - (chan->frequency & 0x7FF));
-        double duty = 0.5;
-        double amp = env / 15.0;
-        if (gPcChanRefKind[12 + ci] == PC_VOICE_DUTY)
-            duty = Pc_SquareDuty(gPcChanRefA[12 + ci]);
-        for (i = 0; i < n; i++)
+        int32_t sample;
+        if (chan->length != 0)
         {
-            double s = 0.0;
-            if (amp > 0.0 && (chan->length == 0 || pcCgbLenLeft[ci] > 0))
-            {
-                pcCgbPhase[ci] += hz / rate;
-                if (pcCgbPhase[ci] >= 1.0)
-                    pcCgbPhase[ci] -= 1.0;
-                s = (pcCgbPhase[ci] < duty) ? amp : -amp;
-            }
-            if (chan->length)
-                pcCgbLenLeft[ci] -= 1.0;
-            if (allowL)
-                mixL[i] += (float)(s * 127);
-            if (allowR)
-                mixR[i] += (float)(s * 127);
+            pcCgbLenLeft[ci] -= 1.0;
+            if (pcCgbLenLeft[ci] <= 0.0)
+                continue;
         }
-    }
-    else if (type == 3)
-    {
-        const PcGbWave *gb;
-        unsigned int ngb;
-        double hz = 65536.0 / (2048 - (chan->frequency & 0x7FF));
-        double amp;
-        gb = Pc_GbWaves(&ngb);
-        amp = Pc_WaveVol(env);
-        for (i = 0; i < n; i++)
+        if (type == 1 || type == 2)
         {
-            double s = 0.0;
-            if (amp > 0.0 && (chan->length == 0 || pcCgbLenLeft[ci] > 0)
-                && gPcChanRefKind[12 + ci] == PC_VOICE_GBWAVE
-                && gPcChanRefA[12 + ci] < ngb)
+            Pc_CgbHwEnvClock(ci, rate);
+            if (type == 1)
             {
-                int idx;
-                int nib;
-                pcCgbPhase[ci] += hz / rate;
-                if (pcCgbPhase[ci] >= 1.0)
-                    pcCgbPhase[ci] -= 1.0;
-                idx = ((int)(pcCgbPhase[ci] * 32)) & 31;
-                nib = gb[gPcChanRefA[12 + ci]].data[idx >> 1];
-                nib = (idx & 1) ? (nib & 0xF) : ((nib >> 4) & 0xF);
-                s = ((nib - 8) / 8.0) * amp;
+                Pc_CgbSweepClock(chan, rate);
+                if (pcCgbSweepMuted)
+                    continue;
             }
-            if (chan->length)
-                pcCgbLenLeft[ci] -= 1.0;
-            if (allowL)
-                mixL[i] += (float)(s * 127);
-            if (allowR)
-                mixR[i] += (float)(s * 127);
+            sample = Pc_CgbSquareSample(ci, chan, rate);
+            sample = (sample * pcCgbHwEnvVolume[ci]) >> 4;
         }
-    }
-    else
-    {
-        unsigned int nr43 = chan->frequency & 0xFF;
-        unsigned int r = nr43 & 7;
-        unsigned int shift = (nr43 >> 4) & 0xF;
-        int seven = (gPcChanRefA[12 + ci] & 1) != 0;
-        double clockHz = 524288.0 / (r ? r * 16 : 8) / (1 << (shift + 1));
-        double amp = env / 15.0;
-        for (i = 0; i < n; i++)
+        else if (type == 3)
         {
-            double s = 0.0;
-            if (amp > 0.0 && (chan->length == 0 || pcCgbLenLeft[ci] > 0))
-            {
-                pcNoisePhase += clockHz / rate;
-                while (pcNoisePhase >= 1.0)
-                {
-                    unsigned int bit;
-                    pcNoisePhase -= 1.0;
-                    if (seven)
-                    {
-                        bit = ((pcNoiseLfsr & 1) ^ ((pcNoiseLfsr >> 1) & 1)) & 1;
-                        pcNoiseLfsr = ((pcNoiseLfsr >> 1) | (bit << 6)) & 0x7F;
-                    }
-                    else
-                    {
-                        bit = ((pcNoiseLfsr & 1) ^ ((pcNoiseLfsr >> 1) & 1)) & 1;
-                        pcNoiseLfsr = ((pcNoiseLfsr >> 1) | (bit << 14)) & 0x7FFF;
-                    }
-                }
-                s = (pcNoiseLfsr & 1) ? amp : -amp;
-            }
-            if (chan->length)
-                pcCgbLenLeft[ci] -= 1.0;
-            if (allowL)
-                mixL[i] += (float)(s * 127);
-            if (allowR)
-                mixR[i] += (float)(s * 127);
+            sample = Pc_CgbWaveSample(ci, chan, rate);
         }
+        else
+        {
+            Pc_CgbHwEnvClock(ci, rate);
+            sample = Pc_CgbNoiseSample(ci, chan, rate);
+            sample = (sample * pcCgbHwEnvVolume[ci]) >> 4;
+        }
+        sample >>= 1;
+        if (type == 3)
+            pcCgbDeclickSample[ci] = sample;
+        if (allowL)
+            mixL[i] += (float)sample;
+        if (allowR)
+            mixR[i] += (float)sample;
     }
 }
 
@@ -345,6 +638,7 @@ void Pc_AudioInit(void)
         return;
     }
     sAudioRate = (int)have.freq;
+    Pc_CgbHardwareReset();
     SDL_PauseAudioDevice(sAudioDev, 0);
 #endif
 }
@@ -395,10 +689,12 @@ void Pc_MixerRenderSamples(int n, int stepEnvelope)
     unsigned int ncgb;
     struct SoundChannel *chans;
     struct CgbChannel *cgbs;
-    float mixL[PC_AUDIO_BLOCK_MAX];
-    float mixR[PC_AUDIO_BLOCK_MAX];
+    float dsL[PC_AUDIO_BLOCK_MAX];
+    float dsR[PC_AUDIO_BLOCK_MAX];
+    float cgbL[PC_AUDIO_BLOCK_MAX];
+    float cgbR[PC_AUDIO_BLOCK_MAX];
     short out[PC_AUDIO_BLOCK_MAX * 2];
-    double revGain;
+    int reverb;
     int i;
     unsigned int ci;
     if (sAudioDev == 0)
@@ -407,8 +703,10 @@ void Pc_MixerRenderSamples(int n, int stepEnvelope)
         return;
     if (n > PC_AUDIO_BLOCK_MAX)
         n = PC_AUDIO_BLOCK_MAX;
+    if (pcRevLen == 0)
+        Pc_CgbHardwareReset();
     for (i = 0; i < n; i++)
-        mixL[i] = mixR[i] = 0.0f;
+        dsL[i] = dsR[i] = cgbL[i] = cgbR[i] = 0.0f;
     if (!Pc_AudioHalted())
     {
         if (stepEnvelope)
@@ -420,43 +718,76 @@ void Pc_MixerRenderSamples(int n, int stepEnvelope)
         }
         chans = Pc_SoundChans(&nchan);
         for (ci = 0; ci < nchan && ci < MAX_DIRECTSOUND_CHANNELS; ci++)
-            Pc_RenderDs(&chans[ci], (int)ci, mixL, mixR, n, sAudioRate);
+            Pc_RenderDs(&chans[ci], (int)ci, dsL, dsR, n, sAudioRate);
         cgbs = Pc_CgbChans(&ncgb);
         for (ci = 0; ci < ncgb && ci < 4; ci++)
-            Pc_RenderCgb(&cgbs[ci], (int)ci, mixL, mixR, n, sAudioRate);
+            Pc_RenderCgb(&cgbs[ci], (int)ci, cgbL, cgbR, n, sAudioRate);
     }
-    // Reverb: feedback comb approximating the GBA's 87 ms buffer echo. Gain
-    // mirrors the GBA mixer (sum * reverb >> 9 = reverb/512; reverb is 7 bits).
-    revGain = Pc_Reverb() / 512.0;
-    if (revGain > 0.8)
-        revGain = 0.8;
+    // Reverb: GBA SoundMainRAM_Reverb. DS-only feedback comb, four taps
+    // (L/R at the current and one-VBlank-ahead positions), mono wet summed
+    // into both channels. The DS mix lives in the GBA's 8-bit buffer domain:
+    // it is clamped to +/-127 (the hardware buffer saturates there), which is
+    // also what keeps the output consistently loud regardless of polyphony.
+    reverb = Pc_Reverb();
     for (i = 0; i < n; i++)
     {
-        float l = mixL[i];
-        float r = mixR[i];
-        if (revGain > 0.0)
+        int il = (int)dsL[i];
+        int ir = (int)dsR[i];
+        if (il > 127) il = 127; else if (il < -128) il = -128;
+        if (ir > 127) ir = 127; else if (ir < -128) ir = -128;
+        if (reverb > 0)
         {
-            l += (float)(revGain * pcRevL[pcRevPos]);
-            r += (float)(revGain * pcRevR[pcRevPos]);
-            pcRevL[pcRevPos] = l;
-            pcRevR[pcRevPos] = r;
+            int other = (int)pcRevPos + pcRevFrame;
+            int sum;
+            int wet;
+            if (other >= pcRevLen)
+                other -= pcRevLen;
+            sum = pcRevL[pcRevPos] + pcRevR[pcRevPos]
+                + pcRevL[other] + pcRevR[other];
+            wet = (sum * reverb) >> 9;
+            il += wet;
+            ir += wet;
+            if (il > 127) il = 127; else if (il < -128) il = -128;
+            if (ir > 127) ir = 127; else if (ir < -128) ir = -128;
+            pcRevL[pcRevPos] = (signed char)il;
+            pcRevR[pcRevPos] = (signed char)ir;
             pcRevPos++;
-            if (pcRevPos >= PC_REV_DELAY)
+            if (pcRevPos >= (unsigned)pcRevLen)
                 pcRevPos = 0;
         }
-        // Bring the GBA 8-bit-scale mix up to a normal 16-bit loudness.
-        l *= (float)PC_MASTER_GAIN;
-        r *= (float)PC_MASTER_GAIN;
-        if (l > 32767.0f)
-            l = 32767.0f;
-        else if (l < -32768.0f)
-            l = -32768.0f;
-        if (r > 32767.0f)
-            r = 32767.0f;
-        else if (r < -32768.0f)
-            r = -32768.0f;
-        out[i * 2] = (short)l;
-        out[i * 2 + 1] = (short)r;
+        // PSG channels are hardware voices added after the PCM buffer, so
+        // they are mixed dry on top of the reverb tail.
+        {
+            float l = (float)il + cgbL[i];
+            float r = (float)ir + cgbR[i];
+            // Bring the GBA 8-bit-scale mix up to a normal 16-bit loudness.
+            l *= (float)PC_MASTER_GAIN;
+            r *= (float)PC_MASTER_GAIN;
+            // Soft knee: keep the top of the range musical instead of hard
+            // clipping when DS saturation + PSG + reverb push past 16 bits.
+            if (l > 32767.0f * PC_SATURATE)
+                l = 32767.0f * PC_SATURATE + (32767.0f - 32767.0f * PC_SATURATE)
+                    * tanhf((l - 32767.0f * PC_SATURATE) / (32767.0f * (1.0f - PC_SATURATE)));
+            else if (l < -32768.0f * PC_SATURATE)
+                l = -32768.0f * PC_SATURATE - (32768.0f - 32768.0f * PC_SATURATE)
+                    * tanhf((-l - 32768.0f * PC_SATURATE) / (32768.0f * (1.0f - PC_SATURATE)));
+            if (r > 32767.0f * PC_SATURATE)
+                r = 32767.0f * PC_SATURATE + (32767.0f - 32767.0f * PC_SATURATE)
+                    * tanhf((r - 32767.0f * PC_SATURATE) / (32767.0f * (1.0f - PC_SATURATE)));
+            else if (r < -32768.0f * PC_SATURATE)
+                r = -32768.0f * PC_SATURATE - (32768.0f - 32768.0f * PC_SATURATE)
+                    * tanhf((-r - 32768.0f * PC_SATURATE) / (32768.0f * (1.0f - PC_SATURATE)));
+            if (l > 32767.0f)
+                l = 32767.0f;
+            else if (l < -32768.0f)
+                l = -32768.0f;
+            if (r > 32767.0f)
+                r = 32767.0f;
+            else if (r < -32768.0f)
+                r = -32768.0f;
+            out[i * 2] = (short)l;
+            out[i * 2 + 1] = (short)r;
+        }
     }
     // Bound queue latency: drop (don't pile up) past ~1 s, e.g. during
     // unpaced boot pumps that run hundreds of frames per second.
@@ -716,21 +1047,38 @@ static void Pc_CgbFrame(void)
         int ch = (int)c + 1;
         int prevC15 = pcCgbC15;
         if (!(chan->statusFlags & SOUND_CHANNEL_SF_ON))
+        {
+            chan->modify = 0;
             continue;
+        }
         if (chan->statusFlags & SOUND_CHANNEL_SF_START)
         {
             if (chan->statusFlags & SOUND_CHANNEL_SF_STOP)
             {
                 chan->statusFlags = 0;
+                chan->modify = 0;
                 continue;
             }
             chan->statusFlags = SOUND_CHANNEL_SF_ENV_ATTACK;
             chan->modify = CGB_CHANNEL_MO_PIT | CGB_CHANNEL_MO_VOL;
             Pc_CgbModVol(chan);
-            // Renderer-side voice start: reset phase; arm the length timer.
-            pcCgbPhase[c] = 0.0;
+            pcCgbEnvStepDir[c] = (u8)((chan->attack & 7) | 0x08);
+            // Renderer-side voice start: squares free-run; the wave restarts
+            // only when its table changes (hardware wave-RAM reload); arm the
+            // length timer. Length loads: square/noise (64 - 6-bit), wave
+            // (256 - 8-bit).
+            if (ch == 3)
+            {
+                if (pcCgbLastWave[c] != gPcChanRefA[12 + c])
+                    pcCgbPhase[c] = 0;
+                else
+                    pcCgbPhase[c] &= 0xF8000000u;
+                pcCgbLastWave[c] = gPcChanRefA[12 + c];
+            }
             if (chan->length)
-                pcCgbLenLeft[c] = (64 - chan->length) * (sAudioRate / 256.0);
+                pcCgbLenLeft[c] = ((ch == 3) ? (double)(256 - (chan->length & 0xFF))
+                                             : (double)(64 - (chan->length & 0x3F)))
+                                * (sAudioRate / 256.0);
             else
                 pcCgbLenLeft[c] = 1e18;
             if (chan->length)
@@ -751,6 +1099,7 @@ static void Pc_CgbFrame(void)
             if ((s8)chan->pseudoEchoLength <= 0)
             {
                 chan->statusFlags = 0;
+                chan->modify = 0;
                 continue;
             }
             goto cgb_frame_done;
@@ -760,6 +1109,7 @@ static void Pc_CgbFrame(void)
         {
             chan->statusFlags &= ~SOUND_CHANNEL_SF_ENV;
             chan->envelopeCounter = chan->release;
+            pcCgbEnvStepDir[c] = (u8)(chan->release & 7);
             if (chan->release & 0xFF)
             {
                 chan->modify |= CGB_CHANNEL_MO_VOL;
@@ -784,6 +1134,7 @@ static void Pc_CgbFrame(void)
             {
                 chan->envelopeVolume = chan->sustainGoal;
                 chan->envelopeCounter = 7;
+                pcCgbEnvStepDir[c] = 0x08;
             }
             else if ((chan->statusFlags & SOUND_CHANNEL_SF_ENV)
                      == SOUND_CHANNEL_SF_ENV_DECAY)
@@ -816,6 +1167,7 @@ static void Pc_CgbFrame(void)
         }
         goto cgb_step_done_default;
     cgb_decay_start:
+        pcCgbEnvStepDir[c] = (u8)(chan->decay & 7);
         chan->statusFlags--;
         chan->envelopeCounter = chan->decay;
         if (chan->envelopeCounter & 0xFF)
@@ -833,11 +1185,13 @@ static void Pc_CgbFrame(void)
             chan->statusFlags--;
             chan->modify |= CGB_CHANNEL_MO_VOL;
     cgb_sustain_set:
+            pcCgbEnvStepDir[c] = 0x08;
             chan->envelopeVolume = chan->sustainGoal;
             chan->envelopeCounter = 7;
         }
         goto cgb_step_done_default;
     cgb_echo_start:
+        pcCgbEnvStepDir[c] = 0x08;
         chan->envelopeVolume =
             ((chan->envelopeGoal * chan->pseudoEchoVolume) + 0xFF) >> 8;
         if (chan->envelopeVolume)
@@ -859,6 +1213,8 @@ static void Pc_CgbFrame(void)
             goto cgb_step_repeat;
         }
     cgb_frame_done:
+        if (chan->statusFlags & SOUND_CHANNEL_SF_ON)
+            Pc_CgbApplyModify(c, chan);
         chan->modify = 0;
     }
 }

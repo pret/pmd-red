@@ -61,10 +61,15 @@ typedef struct PcVoice
     unsigned char release;
 } PcVoice;
 
-// One voice group (bank_xxx or drums_xxx): contiguous voice array.
+// One voice group (bank_xxx or drums_xxx): contiguous voice array. offset is
+// the group's start index in the GBA-ordered global voice table (Pc_GlobalVoices):
+// on the GBA a tone bank is a pointer into ROM, so voice indices past a bank's
+// own count read into the NEXT group (banks/drums are laid out back-to-back in
+// sound/voice_groups.inc order). Pc_GlobalVoice() reproduces that.
 typedef struct PcVoiceGroup
 {
     const char *name; // e.g. "bank_000" (debug only)
+    unsigned int offset; // start index in the global voice table
     unsigned int count;
     const PcVoice *voices;
 } PcVoiceGroup;
@@ -104,5 +109,8 @@ extern const PcGbWave *Pc_GbWaves(unsigned int *countOut);
 extern const PcVoiceGroup *Pc_VoiceGroups(unsigned int *countOut);
 extern const PcKeyMap *Pc_KeyMaps(unsigned int *countOut);
 extern const PcSong *Pc_Songs(unsigned int *countOut);
+// All voices concatenated in sound/voice_groups.inc order (the GBA ROM layout),
+// so out-of-range indices inside a bank read the next group's voices.
+extern const PcVoice *Pc_GlobalVoices(unsigned int *countOut);
 
 #endif // PMDRED_PC_AUDIO_DATA_H

@@ -391,6 +391,7 @@ def main():
 
     groups = {}  # name -> list of voice dicts
     keymaps = {}  # name -> bytes
+    group_order = []  # group names in sound/voice_groups.inc order (GBA ROM layout)
 
     for rel in vg_list:
         af, local = parsed[rel]
@@ -443,6 +444,7 @@ def main():
                 voices = parse_voices(af, ritems, eq, KEY_SPLIT, DRUM_TABLE,
                                       label_file, classify)
                 groups[vname] = voices
+                group_order.append(vname)
             elif cls == 'map':
                 # A map region may start with a trailing bank voice whose
                 # label doubles as the map label (e.g. map_003 in
@@ -534,7 +536,7 @@ def main():
                                          group_index, map_index)
 
     emit_c(args.out, table, songs, groups, group_index, keymaps, map_index,
-           waves, wave_index, gbwaves, gbwave_index)
+           waves, wave_index, gbwaves, gbwave_index, group_order)
 
     # ---- stats ----
     ntracks = sum(len(s['tracks']) for s in songs.values())
@@ -815,7 +817,7 @@ def parse_song(af, hdr_name, eq):
 
 
 def emit_c(path, table, songs, groups, group_index, keymaps, map_index,
-           waves, wave_index, gbwaves, gbwave_index):
+           waves, wave_index, gbwaves, gbwave_index, group_order):
     L = []
 
     def w(s=''):
@@ -881,9 +883,30 @@ def emit_c(path, table, songs, groups, group_index, keymaps, map_index,
               (v['type'], v['key'], v['p2'], v['p3'], rk, ra, rb,
                adsr[0], adsr[1], adsr[2], adsr[3]))
         w('};')
+    # GBA ROM layout: voice groups are laid out back-to-back in
+    # sound/voice_groups.inc order, so an out-of-range index inside one bank
+    # reads the next group's voices (the m4a player has no bounds check).
+    # Emit one concatenated table in that order so Pc_GlobalVoice() can
+    # reproduce the overrun.
+    group_offset = {}
+    off = 0
+    for name in group_order:
+        group_offset[name] = off
+        off += len(groups[name])
+    w('static const PcVoice pcAllVoices[] = {')
+    for name in group_order:
+        for v in groups[name]:
+            rk, ra, rb, adsr = v['ref']
+            w('    { %d, %d, %d, %d, %d, 0, %d, %d, %d, %d, %d, %d },' %
+              (v['type'], v['key'], v['p2'], v['p3'], rk, ra, rb,
+               adsr[0], adsr[1], adsr[2], adsr[3]))
+    w('};')
+    w('const PcVoice *Pc_GlobalVoices(unsigned int *n)'
+      ' { if (n) *n = %d; return pcAllVoices; }' % off)
     w('static const PcVoiceGroup pcVoiceGroups[] = {')
     for name in sorted(groups):
-        w('    { "%s", %d, pcVoices_%s },' % (name, len(groups[name]), name))
+        w('    { "%s", %d, %d, pcVoices_%s },' % (name, group_offset[name],
+                                                  len(groups[name]), name))
     w('};')
     w('const PcVoiceGroup *Pc_VoiceGroups(unsigned int *n)'
       ' { if (n) *n = %d; return pcVoiceGroups; }' % len(groups))

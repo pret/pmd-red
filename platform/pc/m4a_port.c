@@ -565,19 +565,36 @@ void ply_keysh(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *track
 }
 
 // Resolve a VOICE number to a voice definition (NULL when out of range).
+// GBA voice lookup: tone banks are pointers into a contiguous ROM voice array
+// (sound/voice_groups.inc order), so an index past a group's own count reads
+// the next group's voices. Reproduce the overrun via the global table.
+static const PcVoice *Pc_GlobalVoice(unsigned int groupIdx, unsigned int n)
+{
+    unsigned int ngroups;
+    unsigned int total;
+    const PcVoiceGroup *groups = Pc_VoiceGroups(&ngroups);
+    const PcVoice *all = Pc_GlobalVoices(&total);
+    unsigned int pos;
+    if (groups == NULL || all == NULL)
+        return NULL;
+    if (groupIdx >= ngroups)
+        return NULL;
+    pos = groups[groupIdx].offset + n;
+    if (pos >= total)
+        return NULL;
+    return &all[pos];
+}
+
 static const PcVoice *Pc_ResolveVoice(struct MusicPlayerInfo *info, u8 n)
 {
     const PcSong *song = Pc_SongHeader(info->songHeader);
     unsigned int ngroups;
-    const PcVoiceGroup *groups;
     if (song == NULL)
         return NULL;
-    groups = Pc_VoiceGroups(&ngroups);
+    Pc_VoiceGroups(&ngroups);
     if (song->toneBank >= ngroups)
         return NULL;
-    if (n >= groups[song->toneBank].count)
-        return NULL;
-    return &groups[song->toneBank].voices[n];
+    return Pc_GlobalVoice(song->toneBank, n);
 }
 
 // Port of m4a_1.s:ply_voice (copies tone scalars; keeps the PcVoice link).
@@ -867,7 +884,6 @@ void ply_note(u32 note_cmd, struct MusicPlayerInfo *info,
     struct SoundChannel *chan = NULL;
     const PcWave *waves;
     unsigned int nwaves;
-    const PcVoiceGroup *groups;
     unsigned int ngroups;
     const PcKeyMap *maps;
     unsigned int nmaps;
@@ -917,12 +933,12 @@ void ply_note(u32 note_cmd, struct MusicPlayerInfo *info,
         {
             return;
         }
-        groups = Pc_VoiceGroups(&ngroups);
+        Pc_VoiceGroups(&ngroups);
         if (v->refA >= ngroups)
             return;
-        if (keyIdx >= groups[v->refA].count)
+        sub = Pc_GlobalVoice(v->refA, keyIdx);
+        if (sub == NULL)
             return;
-        sub = &groups[v->refA].voices[keyIdx];
         if (sub->type & (TONEDATA_TYPE_RHY | TONEDATA_TYPE_SPL))
             return;
         midiKey = track->key;
@@ -1745,11 +1761,17 @@ void m4aSoundMain(void)
     rate = Pc_AudioRate();
     if (rate < 1)
         rate = 1;
-    spp = rate / 60;
-    if (spp < 1)
-        spp = 1;
-    need = (int)(elapsed * (double)rate);
-    pcTickAcc += elapsed * 60.0;
+    // GBA audio runs at the LCD frame rate (59.7275 Hz): pcmFreq is derived
+    // from pcmSamplesPerVBlank * 59.7275 (m4a.c:SampleFreqSet), so the
+    // frame rate is exactly pcmFreq / pcmSamplesPerVBlank.
+    {
+        double frameRate = (double)Pc_PcmFreq() / (double)Pc_SamplesPerVBlank();
+        spp = (int)((double)rate / frameRate + 0.5);
+        if (spp < 1)
+            spp = 1;
+        need = (int)(elapsed * (double)rate);
+        pcTickAcc += elapsed * frameRate;
+    }
     ticks = 0;
     while (pcTickAcc >= 1.0)
     {
