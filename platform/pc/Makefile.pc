@@ -235,8 +235,8 @@ GAME_LINK_OBJS := $(GAME_OBJS) $(BLOB_OBJS) $(BASEROM_OBJS) $(ROMSLICES_OBJ) $(B
 game-link: tools assets-pc blobs audio-data $(GAME_OBJS) $(BLOB_OBJS) $(BASEROM_OBJS) $(ROMSLICES_OBJ) $(BLOBADDRS_OBJ) $(AUDIO_GEN_OBJ) $(GAME_PC_OBJS)
 	@mkdir -p $(BIN_DIR)
 	@printf '%s\n' $(GAME_LINK_OBJS) | sed 's|^/\([a-zA-Z]\)/|\1:/|' > $(BIN_DIR)/game_link.rsp
-	$(CXX) @$(BIN_DIR)/game_link.rsp -o $(BIN_DIR)/pmd-red-game $(LDFLAGS) $(GAME_LDFLAGS)
-	@echo "linked $(BIN_DIR)/pmd-red-game"
+	$(CXX) @$(BIN_DIR)/game_link.rsp -o $(BIN_DIR)/pmd-red-game.exe $(LDFLAGS) $(GAME_LDFLAGS)
+	@echo "linked $(BIN_DIR)/pmd-red-game.exe"
 
 # ---- Host audio data (chunk 1 of PC audio) ----
 # gen_audio.py parses sound/ (m4a DSL) into $(GEN_DIR)/audio_data.c, which
@@ -324,12 +324,12 @@ run: stage
 
 # ---- Playable game: full-game binary staged into build/ with its DLLs ----
 # The game exe must sit next to SDL2.dll to be runnable standalone on Windows.
-STAGED_GAME := $(BUILD_DIR)/pmd-red-game
+STAGED_GAME := $(BUILD_DIR)/pmd-red-game.exe
 SDL2_DLL := $(shell ls $(dir $(shell command -v sdl2-config))/SDL2.dll 2>/dev/null)
 stage-game: $(STAGED_GAME)
-$(STAGED_GAME): $(BIN_DIR)/pmd-red-game
+$(STAGED_GAME): $(BIN_DIR)/pmd-red-game.exe
 	@mkdir -p $(BUILD_DIR)
-	cp -f $(BIN_DIR)/pmd-red-game $(STAGED_GAME)
+	cp -f $(BIN_DIR)/pmd-red-game.exe $(STAGED_GAME)
 	@if [ -n "$(SDL2_DLL)" ]; then cp -f "$(SDL2_DLL)" $(BUILD_DIR)/; fi
 	@if [ -f $(ROOT)/baserom.gba ]; then cp -f $(ROOT)/baserom.gba $(BUILD_DIR)/; echo "staged $(BUILD_DIR)/baserom.gba"; fi
 	@echo "staged $(STAGED_GAME)"
