@@ -50,6 +50,8 @@ s32 Pc_DivFreq(void);
 // Pitch helpers (adapted from m4a.c).
 u32 Pc_MidiKeyToFreq(const PcWave *wav, u8 key, u8 fineAdjust);
 u32 Pc_MidiKeyToCgbFreq(u8 chanNum, u8 key, u8 fineAdjust);
+// GBA FIX-bit CGB frequency rounding ((freq+1) & 0x7FE for the 65536 Hz PWM).
+u32 Pc_CgbFixFreq(const struct CgbChannel *cch, u32 freq);
 
 // Per-channel voice reference set at note-on (flat 0-11 DS, 12-15 CGB).
 extern u8 gPcChanRefKind[16];

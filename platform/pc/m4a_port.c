@@ -258,6 +258,19 @@ u32 Pc_MidiKeyToCgbFreq(u8 chanNum, u8 key, u8 fineAdjust)
     return val1 + ((fineAdjust * (val2 - val1)) >> 8) + 2048;
 }
 
+// GBA CgbSound rounds the frequency register of FIX-bit voices (ch 1-3, not
+// noise) to the DAC's PWM period: REG_SOUNDBIAS_H is 0x40 (65536 Hz), so the
+// register is rounded to a multiple of 2. The rounding makes the oscillator
+// period an integer number of PWM cycles (suppresses beating) at a cost of a
+// few cents of detune; without it the port plays those notes a few cents flat
+// vs the hardware. Applied at note-on and pitch updates (not the sweep unit).
+u32 Pc_CgbFixFreq(const struct CgbChannel *cch, u32 freq)
+{
+    if (((cch->type & 7) != 4) && (cch->type & TONEDATA_TYPE_FIX))
+        return (freq + 1) & 0x7FE;
+    return freq;
+}
+
 // Adapted from m4a.c:ClearModM (= clear_modM in m4a_1.s).
 static void Pc_ClearModM(struct MusicPlayerTrack *track)
 {
@@ -1098,8 +1111,8 @@ void ply_note(u32 note_cmd, struct MusicPlayerInfo *info,
             cch->sweep = 8;
         if (k < 0)
             k = 0;
-        cch->frequency = Pc_MidiKeyToCgbFreq((u8)(sub->type & 7), (u8)k,
-                                             track->pitM);
+        cch->frequency = Pc_CgbFixFreq(cch, Pc_MidiKeyToCgbFreq((u8)(sub->type & 7),
+                                                                (u8)k, track->pitM));
     }
     else
     {
@@ -1319,8 +1332,8 @@ static void Pc_VolPitPass(struct MusicPlayerInfo *info)
                         if (cgb)
                         {
                             struct CgbChannel *cch = (struct CgbChannel *)chan;
-                            cch->frequency = Pc_MidiKeyToCgbFreq(
-                                chan->type & 7, (u8)k, track->pitM);
+                            cch->frequency = Pc_CgbFixFreq(cch, Pc_MidiKeyToCgbFreq(
+                                chan->type & 7, (u8)k, track->pitM));
                             cch->modify |= CGB_CHANNEL_MO_PIT;
                         }
                         else
