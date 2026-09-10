@@ -36,7 +36,6 @@ file(GLOB IMGUI_SRCS
   ${IMGUI_DIR}/imgui_draw.cpp
   ${IMGUI_DIR}/imgui_tables.cpp
   ${IMGUI_DIR}/imgui_widgets.cpp
-  ${IMGUI_DIR}/imgui_demo.cpp
   ${IMGUI_DIR}/backends/imgui_impl_sdl2.cpp
   ${IMGUI_DIR}/backends/imgui_impl_sdlrenderer2.cpp
 )
@@ -44,6 +43,7 @@ file(GLOB IMGUI_SRCS
 add_executable(pmd-red-pc
   ${GAME_SRCS}
   ${CMAKE_SOURCE_DIR}/platform/pc/cpu_pc.c
+  ${CMAKE_SOURCE_DIR}/platform/pc/config_pc.c
   ${CMAKE_SOURCE_DIR}/platform/pc/main_pc.c
   ${CMAKE_SOURCE_DIR}/platform/pc/ui_pc.cpp
   ${IMGUI_SRCS}

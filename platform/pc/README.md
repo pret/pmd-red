@@ -41,6 +41,15 @@ Game logic keeps writing shadows exactly like hardware; only the commit side
 (`VBlank_CB` → `Pc_VBlankCommit()`, `TransferBGPaletteBuffer`, `CopySpritesToOam`)
 is reimplemented with SDL.
 
+## Settings / config
+
+`Game > Settings` (F1 to toggle the menu bar) opens a tabbed window — Graphics/
+Audio are placeholders, **Controls** rebinds the GBA actions (any number of keys
+and mouse buttons per action, click a bind to remove it, `+` to add), and
+**Boot** mirrors the launch arguments (`--noconsole`, `SkipWarning`, `SkipLogos`,
+`SkipIntro`, `--autoload`, `--fps`). Changes persist to `pmd-red.ini` next to
+the executable; command-line args win over the file at startup.
+
 ## Build (host, GBA tree untouched)
 
 ```sh

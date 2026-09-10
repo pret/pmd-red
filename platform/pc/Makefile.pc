@@ -77,7 +77,6 @@ UI_SRCS := $(IMGUI_DIR)/imgui.cpp \
            $(IMGUI_DIR)/imgui_draw.cpp \
            $(IMGUI_DIR)/imgui_tables.cpp \
            $(IMGUI_DIR)/imgui_widgets.cpp \
-           $(IMGUI_DIR)/imgui_demo.cpp \
            $(IMGUI_DIR)/backends/imgui_impl_sdl2.cpp \
            $(IMGUI_DIR)/backends/imgui_impl_sdlrenderer2.cpp \
            $(ROOT)/platform/pc/ui_pc.cpp
@@ -110,6 +109,7 @@ PC_SRCS := $(ROOT)/platform/pc/cpu_pc.c \
            $(ROOT)/platform/pc/input_pc.c \
            $(ROOT)/platform/pc/audio_pc.c \
            $(ROOT)/platform/pc/save_pc.c \
+           $(ROOT)/platform/pc/config_pc.c \
            $(ROOT)/platform/pc/rom_load.c \
            $(ROOT)/platform/pc/rom_load_stubs.c \
            $(ROOT)/platform/pc/crash_win.c \
@@ -215,8 +215,7 @@ $(OBJ_DIR)/%.o: $(ROOT)/%.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(PC_CPPFLAGS) -c $< -o $@
 
-# ImGui core + backends + the overlay (C++). imgui_demo.cpp feeds
-# Game > Settings (ImGui::ShowDemoWindow).
+# ImGui core + backends + the overlay (C++); the settings UI lives in ui_pc.cpp.
 $(OBJ_DIR)/%.o: $(ROOT)/%.cpp
 	@mkdir -p $(dir $@)
 	$(CXX) $(CXXFLAGS) -c $< -o $@

@@ -1,8 +1,12 @@
 // platform/pc/ui_pc.cpp — Dear ImGui overlay for the PC port.
 //
 // Owns the ImGui context and draws a main menu bar toggled with F1:
-//   Game   -> Restart / Settings (ImGui demo window) / Exit
+//   Game   -> Restart / Settings / Exit
 //   Render -> Placeholder
+//
+// The Settings window is tabbed (Graphics/Audio/Controls/Boot). Controls
+// rebind the actions from pmd-red.ini (see config_pc.c) — every action takes
+// any number of keys and/or mouse buttons. Boot exposes the launch-arg toggles.
 //
 // Uses the SDL_Renderer backend (imgui_impl_sdlrenderer2) to match the renderer
 // already owned by video_pc.c. video_pc.c blits the 240x160 game frame with an
@@ -30,6 +34,8 @@ extern "C" int Pc_RestartRequested(void) {
 #ifdef HAVE_SDL2
 
 #include <SDL2/SDL.h>
+#include <cstdio>
+#include <cstring>
 
 #include "imgui.h"
 #include "backends/imgui_impl_sdl2.h"
@@ -37,7 +43,8 @@ extern "C" int Pc_RestartRequested(void) {
 
 static bool gUiReady = false;
 static bool gMenuVisible = false;
-static bool gShowDemo = false;
+static bool gSettingsOpen = false;
+static int  gCaptureAction = -1; // action awaiting a key press, or -1
 
 extern "C" void Pc_UiInit(void) {
     SDL_Window *win;
@@ -70,26 +77,168 @@ extern "C" void Pc_UiShutdown(void) {
     ImGui::DestroyContext();
     gUiReady = false;
     gMenuVisible = false;
-    gShowDemo = false;
+    gSettingsOpen = false;
+    gCaptureAction = -1;
 }
 
 extern "C" int Pc_UiIsActive(void) {
     return gUiReady ? 1 : 0;
 }
 
+extern "C" int Pc_UiWantsCaptureInput(void) {
+    // Any visible overlay (menu bar, settings window) or an in-progress bind
+    // capture means game input must not reach the GBA shadow.
+    return (gMenuVisible || gSettingsOpen || gCaptureAction >= 0) ? 1 : 0;
+}
+
 extern "C" void Pc_UiProcessEvent(const void *sdlEvent) {
     const SDL_Event *ev = (const SDL_Event *)sdlEvent;
     if (!gUiReady || ev == NULL)
         return;
-    if (ev->type == SDL_KEYDOWN && ev->key.repeat == 0 &&
-        ev->key.keysym.scancode == SDL_SCANCODE_F1) {
-        gMenuVisible = !gMenuVisible;
+
+    if (ev->type == SDL_KEYDOWN) {
+        if (gCaptureAction >= 0) {
+            // A bind is pending: the next non-Esc key becomes it.
+            if (ev->key.keysym.scancode == SDL_SCANCODE_ESCAPE) {
+                gCaptureAction = -1;
+            } else if (ev->key.repeat == 0) {
+                Pc_ConfigAddBind(gCaptureAction, 0, (int)ev->key.keysym.scancode);
+                Pc_ConfigSave();
+                gCaptureAction = -1;
+            }
+        } else if (ev->key.repeat == 0 &&
+                   ev->key.keysym.scancode == SDL_SCANCODE_F1) {
+            gMenuVisible = !gMenuVisible;
+        }
     }
+
     ImGui_ImplSDL2_ProcessEvent(ev);
 }
 
 extern "C" void Pc_UiToggle(void) {
     gMenuVisible = !gMenuVisible;
+}
+
+static void Pc_UiControlsTab(void) {
+    int a;
+
+    if (ImGui::Button("Reset to Defaults")) {
+        Pc_ConfigResetBinds();
+        Pc_ConfigSave();
+    }
+    ImGui::SameLine();
+    ImGui::TextDisabled("Click a bind to remove it; + to add.");
+
+    ImGui::Separator();
+    ImGui::BeginChild("controls_list");
+    for (a = 0; a < PC_ACT_COUNT; a++) {
+        PcActionBinds *ab = &Pc_ConfigBinds()[a];
+        char pid[40];
+        int i;
+
+        ImGui::TextUnformatted(Pc_ActionName(a));
+        ImGui::SameLine();
+
+        for (i = 0; i < ab->count; i++) {
+            char label[80];
+            char id[96];
+            Pc_BindLabel(ab->binds[i].kind, ab->binds[i].code, label, sizeof(label));
+            snprintf(id, sizeof(id), "%s##del_%d_%d", label, a, i);
+            if (ImGui::SmallButton(id)) {
+                Pc_ConfigRemoveBind(a, ab->binds[i].kind, ab->binds[i].code);
+                Pc_ConfigSave();
+            }
+            ImGui::SameLine();
+        }
+
+        snprintf(pid, sizeof(pid), "+##add_%d", a);
+        if (ImGui::SmallButton(pid))
+            ImGui::OpenPopup(pid);
+        if (ImGui::BeginPopup(pid)) {
+            char mitem[64];
+            if (ImGui::MenuItem("Capture next key...")) {
+                gCaptureAction = a;
+                ImGui::CloseCurrentPopup();
+            }
+            snprintf(mitem, sizeof(mitem), "Mouse Left");
+            if (ImGui::MenuItem(mitem)) { Pc_ConfigAddBind(a, 1, 1); Pc_ConfigSave(); }
+            if (ImGui::MenuItem("Mouse Middle")) { Pc_ConfigAddBind(a, 1, 2); Pc_ConfigSave(); }
+            if (ImGui::MenuItem("Mouse Right")) { Pc_ConfigAddBind(a, 1, 3); Pc_ConfigSave(); }
+            if (ImGui::MenuItem("Mouse X1")) { Pc_ConfigAddBind(a, 1, 4); Pc_ConfigSave(); }
+            if (ImGui::MenuItem("Mouse X2")) { Pc_ConfigAddBind(a, 1, 5); Pc_ConfigSave(); }
+            ImGui::EndPopup();
+        }
+
+        ImGui::NewLine();
+    }
+    ImGui::EndChild();
+}
+
+static void Pc_UiBootTab(void) {
+    PcBootPrefs *boot = Pc_ConfigBootPrefs();
+    bool b;
+
+    b = boot->noConsole != 0;
+    if (ImGui::Checkbox("No console (log to client.log only)", &b)) { boot->noConsole = b ? 1 : 0; Pc_ConfigSave(); }
+    b = boot->skipWarning != 0;
+    if (ImGui::Checkbox("Skip health & safety warning", &b)) { boot->skipWarning = b ? 1 : 0; Pc_ConfigSave(); }
+    b = boot->skipLogos != 0;
+    if (ImGui::Checkbox("Skip logos", &b)) { boot->skipLogos = b ? 1 : 0; Pc_ConfigSave(); }
+    b = boot->skipIntro != 0;
+    if (ImGui::Checkbox("Skip intro / opening", &b)) { boot->skipIntro = b ? 1 : 0; Pc_ConfigSave(); }
+    b = boot->autoload != 0;
+    if (ImGui::Checkbox("Auto-load save at launch", &b)) { boot->autoload = b ? 1 : 0; Pc_ConfigSave(); }
+    b = boot->fpsLog != 0;
+    if (ImGui::Checkbox("Log FPS", &b)) { boot->fpsLog = b ? 1 : 0; Pc_ConfigSave(); }
+
+    ImGui::Spacing();
+    ImGui::TextDisabled("These mirror launch arguments (e.g. --noconsole, SkipIntro)\nand take effect the next time the game starts (Game > Restart).");
+}
+
+static void Pc_UiSettingsWindow(void) {
+    ImGui::SetNextWindowSize(ImVec2(560, 420), ImGuiCond_FirstUseEver);
+    if (!ImGui::Begin("Settings", &gSettingsOpen)) {
+        ImGui::End();
+        return;
+    }
+
+    if (ImGui::BeginTabBar("settings_tabs")) {
+        if (ImGui::BeginTabItem("Graphics")) {
+            ImGui::Spacing();
+            ImGui::TextWrapped("Graphics settings (scaling, fullscreen, etc.) are planned but not implemented yet.");
+            ImGui::EndTabItem();
+        }
+        if (ImGui::BeginTabItem("Audio")) {
+            ImGui::Spacing();
+            ImGui::TextWrapped("Audio settings (volume, mute, etc.) are planned but not implemented yet.");
+            ImGui::EndTabItem();
+        }
+        if (ImGui::BeginTabItem("Controls")) {
+            Pc_UiControlsTab();
+            ImGui::EndTabItem();
+        }
+        if (ImGui::BeginTabItem("Boot")) {
+            Pc_UiBootTab();
+            ImGui::EndTabItem();
+        }
+        ImGui::EndTabBar();
+    }
+
+    ImGui::End();
+
+    // Bind-capture modal: shown while a "Capture next key..." is pending.
+    if (gCaptureAction >= 0) {
+        ImGui::OpenPopup("capture_key");
+        if (ImGui::BeginPopupModal("capture_key", NULL, ImGuiWindowFlags_AlwaysAutoResize)) {
+            char msg[96];
+            snprintf(msg, sizeof(msg), "Press a key for %s...", Pc_ActionName(gCaptureAction));
+            ImGui::TextUnformatted(msg);
+            ImGui::TextDisabled("Esc cancels");
+            if (ImGui::IsKeyPressed(ImGuiKey_Escape))
+                gCaptureAction = -1;
+            ImGui::EndPopup();
+        }
+    }
 }
 
 extern "C" void Pc_UiRender(void) {
@@ -105,7 +254,7 @@ extern "C" void Pc_UiRender(void) {
             if (ImGui::Selectable("Restart"))
                 Pc_RequestRestart();
             if (ImGui::Selectable("Settings"))
-                gShowDemo = true;
+                gSettingsOpen = true;
             if (ImGui::Selectable("Exit"))
                 Pc_RequestQuit();
             ImGui::EndMenu();
@@ -117,8 +266,8 @@ extern "C" void Pc_UiRender(void) {
         ImGui::EndMainMenuBar();
     }
 
-    if (gShowDemo)
-        ImGui::ShowDemoWindow(&gShowDemo);
+    if (gSettingsOpen)
+        Pc_UiSettingsWindow();
 
     ImGui::Render();
     ImGui_ImplSDLRenderer2_RenderDrawData(
@@ -130,6 +279,7 @@ extern "C" void Pc_UiRender(void) {
 extern "C" void Pc_UiInit(void) {}
 extern "C" void Pc_UiShutdown(void) {}
 extern "C" int Pc_UiIsActive(void) { return 0; }
+extern "C" int Pc_UiWantsCaptureInput(void) { return 0; }
 extern "C" void Pc_UiProcessEvent(const void *sdlEvent) { (void)sdlEvent; }
 extern "C" void Pc_UiToggle(void) {}
 extern "C" void Pc_UiRender(void) {}

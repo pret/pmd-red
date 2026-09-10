@@ -12,6 +12,8 @@
 
 #ifdef PLATFORM_PC
 
+#include "config_pc.h" // rebindable controls + boot-launch prefs
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -47,7 +49,7 @@ void *Pc_VideoGetSdlRenderer(void); // SDL_Renderer* or NULL (headless / no SDL2
 void Pc_InputInit(void);
 void Pc_InputPump(void); // refresh REG_KEYINPUT shadow (active-low, KEYS_MASK idle)
 void Pc_InputShutdown(void);
-int Pc_QuitRequested(void); // true when window close / Esc / quit requested
+int Pc_QuitRequested(void); // true when window close / quit requested
 void Pc_RequestQuit(void);  // request a clean shutdown (window close / Exit menu)
 void Pc_SetAutopress(int startFrame, int durFrames, u16 keys); // scripted key hold (CI)
 
@@ -57,6 +59,7 @@ void Pc_UiShutdown(void);
 void Pc_UiProcessEvent(const void *sdlEvent); // forward one SDL_Event*; F1 toggles menu
 void Pc_UiRender(void);        // NewFrame + menu/demo + RenderDrawData (draw on top)
 int Pc_UiIsActive(void);       // 1 once the context is live (window/renderer present)
+int Pc_UiWantsCaptureInput(void); // 1 while any overlay is shown (suppress game input)
 void Pc_UiToggle(void);        // show/hide the menu bar
 void Pc_RequestRestart(void);  // relaunch the game (implies quit)
 int Pc_RestartRequested(void); // true once Restart was chosen

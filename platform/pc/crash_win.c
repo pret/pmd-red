@@ -7,7 +7,7 @@
 // main_game.c is used instead.
 //
 // client.log policy: the file is (re)generated next to the executable on every
-// launch so that no matter how the process ends — window close, Esc, a fatal
+// launch so that no matter how the process ends — window close, a fatal
 // signal, or an SEH exception — there is always a log describing the last
 // session. An existing client.log is rotated to client-prev.log first.
 #include <stdio.h>

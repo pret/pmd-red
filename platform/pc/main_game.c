@@ -111,19 +111,28 @@ static void Pc_CheckArchive(const char *label, const FileArchive *arc, const cha
 
 int main(int argc, char **argv) {
     int scale = 3, frames = 0, i, autoStart = -1;
-    int console = 1; // console on by default; --noconsole routes to client.log only
-    int fpsLog = 0;
-    int autoload = 0;
+    int console, fpsLog, autoload;
     const char *dump = NULL;
     const char *autoSpec = NULL;
     const char *logFile = NULL;
     const char *wavPath = NULL;
     int wavSeconds = 0;
     PcBootConfig bootCfg;
+    PcBootPrefs *boot;
     char exeDir[1024 + 1];
-    bootCfg.skipWarning = 0;
-    bootCfg.skipLogos = 0;
-    bootCfg.skipIntro = 0;
+
+    // Load pmd-red.ini first: it seeds the boot-launch prefs and rebindable
+    // controls. Command-line args below override the config.
+    Pc_ExeDir(exeDir, sizeof(exeDir), argv[0]);
+    Pc_ConfigLoad(exeDir);
+    boot = Pc_ConfigBootPrefs();
+    console = boot->noConsole ? 0 : 1;
+    fpsLog = boot->fpsLog;
+    autoload = boot->autoload;
+    bootCfg.skipWarning = boot->skipWarning;
+    bootCfg.skipLogos = boot->skipLogos;
+    bootCfg.skipIntro = boot->skipIntro;
+
     for (i = 1; i < argc; i++) {
         if (strcmp(argv[i], "--scale") == 0 && i + 1 < argc)
             scale = atoi(argv[++i]);
@@ -179,7 +188,6 @@ int main(int argc, char **argv) {
 
     Pc_MemInit();
     Pc_ApplyBootShadows();
-    Pc_ExeDir(exeDir, sizeof(exeDir), argv[0]);
     Pc_LogOpen(exeDir, console, logFile); // stdout/stderr -> client.log (--console dev flag)
     Pc_InstallCrashHandler();
 #ifndef _WIN32
@@ -246,7 +254,7 @@ int main(int argc, char **argv) {
     // ~60Hz pacing and input sampling handled at the VBlankIntrWait boundary
     // (boot-stage script demos above run unpaced so they finish fast).
     // --frames caps total rendered frames (mostly for CI); 0 runs until the
-    // window is closed or Esc is pressed.
+    // window is closed.
     Pc_SetPaced(1);
     Pc_EnableFpsLog(fpsLog);
     printf("boot: entering title/game driver (%s)\n", frames > 0 ? "bounded" : "unbounded");
@@ -265,13 +273,16 @@ int main(int argc, char **argv) {
     Pc_InputShutdown();
     Pc_VideoShutdown();
 
+    // Persist any settings-menu changes (controls/boot prefs).
+    Pc_ConfigSave();
+
     if (Pc_RestartRequested()) {
         Pc_LogClose("restart requested -> re-exec");
         Pc_Relaunch(argv); // returns only if the exec fails
     }
 
     if (Pc_QuitRequested())
-        Pc_LogClose("user quit (window close / Esc)");
+        Pc_LogClose("user quit (window close)");
     else if (frames > 0)
         Pc_LogClose("bounded frames run complete");
     else
