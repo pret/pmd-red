@@ -60,6 +60,17 @@ typedef struct PcBootPrefs
     int fpsLog;      // --fps
 } PcBootPrefs;
 
+// Live audio settings (applied by audio_pc.c every render; saved to [Audio]).
+typedef struct PcAudioPrefs
+{
+    int masterVolume;   // 0-100 output volume
+    int muted;          // 0/1 master mute
+    int reverbMode;     // 0 = off, 1 = follow song (default), 2 = override
+    int reverbOverride; // 0-127 used when reverbMode == 2
+    int lowPass;        // 0/1 GBA analog low-pass filter
+    int lowPassCutoff;  // Hz cutoff (when lowPass != 0)
+} PcAudioPrefs;
+
 // Load pmd-red.ini from the exe directory (trailing sep optional; NULL -> cwd).
 // Resets binds/prefs to defaults first, then applies the file on top.
 void Pc_ConfigLoad(const char *exeDir);
@@ -79,6 +90,9 @@ void Pc_ConfigRemoveBind(int action, int kind, int code);
 
 // Current boot-launch toggles (mutable — call Pc_ConfigSave to persist).
 PcBootPrefs *Pc_ConfigBootPrefs(void);
+
+// Current audio settings (mutable — call Pc_ConfigSave to persist).
+PcAudioPrefs *Pc_ConfigAudioPrefs(void);
 
 // Human-readable labels for the settings UI.
 const char *Pc_ActionName(int action);            // "Move Up", "A", ...

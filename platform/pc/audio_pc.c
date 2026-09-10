@@ -99,6 +99,10 @@ static int pcRevLen = 0;                // delay line length in host samples
 static int pcRevFrame = 0;              // "other" tap offset (one VBlank frame)
 static unsigned pcRevPos = 0;
 
+// User low-pass filter state (one-pole IIR, applied on the final mix).
+static float pcLpL = 0.0f;
+static float pcLpR = 0.0f;
+
 // Reset all CGB hardware state and (re)derive the reverb geometry.
 static void Pc_CgbHardwareReset(void)
 {
@@ -648,6 +652,13 @@ int Pc_AudioRate(void)
     return sAudioRate;
 }
 
+// The reverb amount the current song's m4a sound mode selected (0-127),
+// before any user reverb override. For the settings UI's info line.
+int Pc_AudioSongReverb(void)
+{
+    return Pc_Reverb();
+}
+
 double Pc_TimeNow(void)
 {
 #ifdef HAVE_SDL2
@@ -728,7 +739,34 @@ void Pc_MixerRenderSamples(int n, int stepEnvelope)
     // into both channels. The DS mix lives in the GBA's 8-bit buffer domain:
     // it is clamped to +/-127 (the hardware buffer saturates there), which is
     // also what keeps the output consistently loud regardless of polyphony.
-    reverb = Pc_Reverb();
+    // The user can override the song's reverb or disable it entirely.
+    {
+        PcAudioPrefs *ap = Pc_ConfigAudioPrefs();
+        reverb = 0;
+        if (ap->reverbMode == 2)
+            reverb = ap->reverbOverride & 0x7F;
+        else if (ap->reverbMode != 0)
+            reverb = Pc_Reverb();
+    }
+    {
+        PcAudioPrefs *ap = Pc_ConfigAudioPrefs();
+        float vol = ap->muted ? 0.0f : ((float)ap->masterVolume / 100.0f);
+        float lpA = 0.0f;
+        if (ap->lowPass)
+        {
+            float fc = (float)ap->lowPassCutoff;
+            if (fc < 50.0f)
+                fc = 50.0f;
+            if (fc > (float)sAudioRate * 0.45f)
+                fc = (float)sAudioRate * 0.45f;
+            lpA = 1.0f - expf(-2.0f * 3.14159265358979323846f * fc
+                              / (float)sAudioRate);
+        }
+        if (lpA == 0.0f)
+        {
+            pcLpL = 0.0f;
+            pcLpR = 0.0f;
+        }
     for (i = 0; i < n; i++)
     {
         int il = (int)dsL[i];
@@ -760,9 +798,10 @@ void Pc_MixerRenderSamples(int n, int stepEnvelope)
         {
             float l = (float)il + cgbL[i];
             float r = (float)ir + cgbR[i];
-            // Bring the GBA 8-bit-scale mix up to a normal 16-bit loudness.
-            l *= (float)PC_MASTER_GAIN;
-            r *= (float)PC_MASTER_GAIN;
+            // Bring the GBA 8-bit-scale mix up to a normal 16-bit loudness,
+            // then apply the user master volume.
+            l *= (float)PC_MASTER_GAIN * vol;
+            r *= (float)PC_MASTER_GAIN * vol;
             // Soft knee: keep the top of the range musical instead of hard
             // clipping when DS saturation + PSG + reverb push past 16 bits.
             if (l > 32767.0f * PC_SATURATE)
@@ -777,6 +816,13 @@ void Pc_MixerRenderSamples(int n, int stepEnvelope)
             else if (r < -32768.0f * PC_SATURATE)
                 r = -32768.0f * PC_SATURATE - (32768.0f - 32768.0f * PC_SATURATE)
                     * tanhf((-r - 32768.0f * PC_SATURATE) / (32768.0f * (1.0f - PC_SATURATE)));
+            if (lpA > 0.0f)
+            {
+                l = pcLpL + lpA * (l - pcLpL);
+                pcLpL = l;
+                r = pcLpR + lpA * (r - pcLpR);
+                pcLpR = r;
+            }
             if (l > 32767.0f)
                 l = 32767.0f;
             else if (l < -32768.0f)
@@ -788,6 +834,7 @@ void Pc_MixerRenderSamples(int n, int stepEnvelope)
             out[i * 2] = (short)l;
             out[i * 2 + 1] = (short)r;
         }
+    }
     }
     // Bound queue latency: drop (don't pile up) past ~1 s, e.g. during
     // unpaced boot pumps that run hundreds of frames per second.

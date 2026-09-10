@@ -68,6 +68,8 @@ int Pc_RestartRequested(void); // true once Restart was chosen
 void Pc_AudioInit(void);
 void Pc_AudioFrame(void); // called once per 60Hz tick; noop until sequencer lands
 void Pc_AudioShutdown(void);
+int  Pc_AudioSongReverb(void);             // current song reverb amount (0-127)
+void Pc_AudioWavDump(const char *path, int maxSeconds); // capture mix to WAV
 
 // ---- Save backend (save_pc.c) ----
 void Pc_SaveInit(const char *dir); // host save dir (default: exe dir / cwd)

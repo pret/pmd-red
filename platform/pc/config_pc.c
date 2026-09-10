@@ -24,6 +24,7 @@
 static char sConfigPath[1024 + 1];
 static PcActionBinds sBinds[PC_ACT_COUNT];
 static PcBootPrefs sBoot;
+static PcAudioPrefs sAudio;
 
 static const char *const kActionNames[PC_ACT_COUNT] = {
     "Move Up", "Move Down", "Move Left", "Move Right",
@@ -113,6 +114,20 @@ void Pc_ConfigRemoveBind(int action, int kind, int code)
 PcBootPrefs *Pc_ConfigBootPrefs(void)
 {
     return &sBoot;
+}
+
+static void Pc_ResetAudioDefault(void)
+{
+    memset(&sAudio, 0, sizeof(sAudio));
+    sAudio.masterVolume = 100;
+    sAudio.reverbMode = 1;   // follow the song
+    sAudio.reverbOverride = 60;
+    sAudio.lowPassCutoff = 9000;
+}
+
+PcAudioPrefs *Pc_ConfigAudioPrefs(void)
+{
+    return &sAudio;
 }
 
 const char *Pc_ActionName(int action)
@@ -214,6 +229,7 @@ void Pc_ConfigLoad(const char *exeDir)
 
     Pc_ResetBindsDefault();
     memset(&sBoot, 0, sizeof(sBoot));
+    Pc_ResetAudioDefault();
 
     f = fopen(sConfigPath, "r");
     if (f == NULL)
@@ -264,6 +280,14 @@ void Pc_ConfigLoad(const char *exeDir)
             else if (strcmp(key, "SkipIntro") == 0) sBoot.skipIntro = b;
             else if (strcmp(key, "Autoload") == 0) sBoot.autoload = b;
             else if (strcmp(key, "FpsLog") == 0) sBoot.fpsLog = b;
+        } else if (strcmp(section, "Audio") == 0) {
+            int v = atoi(val);
+            if (strcmp(key, "MasterVolume") == 0) sAudio.masterVolume = v;
+            else if (strcmp(key, "Muted") == 0) sAudio.muted = v;
+            else if (strcmp(key, "ReverbMode") == 0) sAudio.reverbMode = v;
+            else if (strcmp(key, "ReverbOverride") == 0) sAudio.reverbOverride = v;
+            else if (strcmp(key, "LowPass") == 0) sAudio.lowPass = v;
+            else if (strcmp(key, "LowPassCutoff") == 0) sAudio.lowPassCutoff = v;
         }
     }
     fclose(f);
@@ -300,5 +324,12 @@ void Pc_ConfigSave(void)
     fprintf(f, "SkipIntro=%d\n", sBoot.skipIntro);
     fprintf(f, "Autoload=%d\n", sBoot.autoload);
     fprintf(f, "FpsLog=%d\n", sBoot.fpsLog);
+    fprintf(f, "[Audio]\n");
+    fprintf(f, "MasterVolume=%d\n", sAudio.masterVolume);
+    fprintf(f, "Muted=%d\n", sAudio.muted);
+    fprintf(f, "ReverbMode=%d\n", sAudio.reverbMode);
+    fprintf(f, "ReverbOverride=%d\n", sAudio.reverbOverride);
+    fprintf(f, "LowPass=%d\n", sAudio.lowPass);
+    fprintf(f, "LowPassCutoff=%d\n", sAudio.lowPassCutoff);
     fclose(f);
 }

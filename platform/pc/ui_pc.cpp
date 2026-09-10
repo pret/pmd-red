@@ -195,6 +195,86 @@ static void Pc_UiBootTab(void) {
     ImGui::TextDisabled("These mirror launch arguments (e.g. --noconsole, SkipIntro)\nand take effect the next time the game starts (Game > Restart).");
 }
 
+static void Pc_UiAudioTab(void) {
+    PcAudioPrefs *ap = Pc_ConfigAudioPrefs();
+    int v;
+
+    v = ap->masterVolume;
+    if (ImGui::SliderInt("Volume", &v, 0, 100, "%d%%")) {
+        ap->masterVolume = v;
+        Pc_ConfigSave();
+    }
+    ImGui::SameLine();
+    {
+        bool b = ap->muted != 0;
+        if (ImGui::Checkbox("Mute", &b)) {
+            ap->muted = b ? 1 : 0;
+            Pc_ConfigSave();
+        }
+    }
+
+    ImGui::Spacing();
+    ImGui::Separator();
+    ImGui::TextUnformatted("Reverb");
+    {
+        static const char *modes[] = { "Off", "Follow song", "Override" };
+        v = ap->reverbMode;
+        if (v < 0 || v > 2)
+            v = 1;
+        if (ImGui::Combo("##reverb_mode", &v, modes, 3)) {
+            ap->reverbMode = v;
+            Pc_ConfigSave();
+        }
+        ImGui::SameLine();
+        ImGui::TextDisabled("current song: %d", Pc_AudioSongReverb());
+        if (ap->reverbMode == 2) {
+            v = ap->reverbOverride;
+            if (ImGui::SliderInt("Amount", &v, 0, 127)) {
+                ap->reverbOverride = v;
+                Pc_ConfigSave();
+            }
+        }
+    }
+
+    ImGui::Spacing();
+    ImGui::Separator();
+    {
+        bool b = ap->lowPass != 0;
+        if (ImGui::Checkbox("GBA analog low-pass filter", &b)) {
+            ap->lowPass = b ? 1 : 0;
+            Pc_ConfigSave();
+        }
+        v = ap->lowPassCutoff;
+        if (ImGui::SliderInt("Cutoff", &v, 4000, 16000, "%d Hz")) {
+            ap->lowPassCutoff = v;
+            Pc_ConfigSave();
+        }
+        ImGui::TextDisabled("The GBA's output is band-limited; this warms the mix toward the hardware.");
+    }
+
+    ImGui::Spacing();
+    ImGui::Separator();
+    if (ImGui::Button("Reset to Defaults")) {
+        PcAudioPrefs d;
+        memset(&d, 0, sizeof(d));
+        d.masterVolume = 100;
+        d.reverbMode = 1;
+        d.reverbOverride = 60;
+        d.lowPassCutoff = 9000;
+        *ap = d;
+        Pc_ConfigSave();
+    }
+    ImGui::SameLine();
+    if (ImGui::Button("Capture 30s WAV")) {
+        char dir[1024 + 1];
+        char path[1024 + 1];
+        Pc_ExeDir(dir, sizeof(dir), NULL);
+        snprintf(path, sizeof(path), "%spmd-red-audio.wav", dir);
+        Pc_AudioWavDump(path, 30);
+    }
+    ImGui::TextDisabled("Audio is rendered natively (GBA sample math at the host rate).\nChanges apply immediately.");
+}
+
 static void Pc_UiSettingsWindow(void) {
     ImGui::SetNextWindowSize(ImVec2(560, 420), ImGuiCond_FirstUseEver);
     if (!ImGui::Begin("Settings", &gSettingsOpen)) {
@@ -209,8 +289,7 @@ static void Pc_UiSettingsWindow(void) {
             ImGui::EndTabItem();
         }
         if (ImGui::BeginTabItem("Audio")) {
-            ImGui::Spacing();
-            ImGui::TextWrapped("Audio settings (volume, mute, etc.) are planned but not implemented yet.");
+            Pc_UiAudioTab();
             ImGui::EndTabItem();
         }
         if (ImGui::BeginTabItem("Controls")) {
