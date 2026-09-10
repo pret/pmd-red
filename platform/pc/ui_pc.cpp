@@ -215,6 +215,26 @@ static void Pc_UiAudioTab(void) {
 
     ImGui::Spacing();
     ImGui::Separator();
+    ImGui::TextUnformatted("Mix");
+    v = ap->dsVolume;
+    if (ImGui::SliderInt("DirectSound", &v, 0, 200, "%d%%")) {
+        ap->dsVolume = v;
+        Pc_ConfigSave();
+    }
+    v = ap->psgVolume;
+    if (ImGui::SliderInt("PSG (square/wave/noise)", &v, 0, 200, "%d%%")) {
+        ap->psgVolume = v;
+        Pc_ConfigSave();
+    }
+    v = ap->saturate;
+    if (ImGui::SliderInt("Limiter threshold", &v, 50, 100, "%d%%")) {
+        ap->saturate = v;
+        Pc_ConfigSave();
+    }
+    ImGui::TextDisabled("DirectSound = sample voices, PSG = the 4 CGB channels.\nLower the limiter threshold for a softer, compressed sound.");
+
+    ImGui::Spacing();
+    ImGui::Separator();
     ImGui::TextUnformatted("Reverb");
     {
         static const char *modes[] = { "Off", "Follow song", "Override" };
@@ -258,6 +278,9 @@ static void Pc_UiAudioTab(void) {
         PcAudioPrefs d;
         memset(&d, 0, sizeof(d));
         d.masterVolume = 100;
+        d.dsVolume = 100;
+        d.psgVolume = 100;
+        d.saturate = 85;
         d.reverbMode = 1;
         d.reverbOverride = 60;
         d.lowPass = 1;

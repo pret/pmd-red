@@ -65,6 +65,9 @@ typedef struct PcAudioPrefs
 {
     int masterVolume;   // 0-100 output volume
     int muted;          // 0/1 master mute
+    int dsVolume;       // 0-200 DirectSound (sample) level
+    int psgVolume;      // 0-200 PSG (square/wave/noise) level
+    int saturate;       // 50-100 soft-knee limiter threshold (% of full scale)
     int reverbMode;     // 0 = off, 1 = follow song (default), 2 = override
     int reverbOverride; // 0-127 used when reverbMode == 2
     int lowPass;        // 0/1 GBA analog low-pass filter

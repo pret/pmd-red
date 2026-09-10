@@ -773,6 +773,9 @@ void Pc_MixerRenderSamples(int n, int stepEnvelope)
     {
         PcAudioPrefs *ap = Pc_ConfigAudioPrefs();
         float vol = ap->muted ? 0.0f : ((float)ap->masterVolume / 100.0f);
+        float dsScale = (float)ap->dsVolume / 100.0f;
+        float psgScale = (float)ap->psgVolume / 100.0f;
+        float sat = (float)ap->saturate / 100.0f;
         float b0 = 0.0f, b1 = 0.0f, b2 = 0.0f, a1 = 0.0f, a2 = 0.0f;
         if (ap->lowPass)
         {
@@ -800,8 +803,8 @@ void Pc_MixerRenderSamples(int n, int stepEnvelope)
         }
     for (i = 0; i < n; i++)
     {
-        int il = (int)dsL[i];
-        int ir = (int)dsR[i];
+        int il = (int)(dsL[i] * dsScale);
+        int ir = (int)(dsR[i] * dsScale);
         if (il > 127) il = 127; else if (il < -128) il = -128;
         if (ir > 127) ir = 127; else if (ir < -128) ir = -128;
         if (reverb > 0)
@@ -827,26 +830,26 @@ void Pc_MixerRenderSamples(int n, int stepEnvelope)
         // PSG channels are hardware voices added after the PCM buffer, so
         // they are mixed dry on top of the reverb tail.
         {
-            float l = (float)il + cgbL[i];
-            float r = (float)ir + cgbR[i];
+            float l = (float)il + cgbL[i] * psgScale;
+            float r = (float)ir + cgbR[i] * psgScale;
             // Bring the GBA 8-bit-scale mix up to a normal 16-bit loudness,
             // then apply the user master volume.
             l *= (float)PC_MASTER_GAIN * vol;
             r *= (float)PC_MASTER_GAIN * vol;
             // Soft knee: keep the top of the range musical instead of hard
             // clipping when DS saturation + PSG + reverb push past 16 bits.
-            if (l > 32767.0f * PC_SATURATE)
-                l = 32767.0f * PC_SATURATE + (32767.0f - 32767.0f * PC_SATURATE)
-                    * tanhf((l - 32767.0f * PC_SATURATE) / (32767.0f * (1.0f - PC_SATURATE)));
-            else if (l < -32768.0f * PC_SATURATE)
-                l = -32768.0f * PC_SATURATE - (32768.0f - 32768.0f * PC_SATURATE)
-                    * tanhf((-l - 32768.0f * PC_SATURATE) / (32768.0f * (1.0f - PC_SATURATE)));
-            if (r > 32767.0f * PC_SATURATE)
-                r = 32767.0f * PC_SATURATE + (32767.0f - 32767.0f * PC_SATURATE)
-                    * tanhf((r - 32767.0f * PC_SATURATE) / (32767.0f * (1.0f - PC_SATURATE)));
-            else if (r < -32768.0f * PC_SATURATE)
-                r = -32768.0f * PC_SATURATE - (32768.0f - 32768.0f * PC_SATURATE)
-                    * tanhf((-r - 32768.0f * PC_SATURATE) / (32768.0f * (1.0f - PC_SATURATE)));
+            if (l > 32767.0f * sat)
+                l = 32767.0f * sat + (32767.0f - 32767.0f * sat)
+                    * tanhf((l - 32767.0f * sat) / (32767.0f * (1.0f - sat)));
+            else if (l < -32768.0f * sat)
+                l = -32768.0f * sat - (32768.0f - 32768.0f * sat)
+                    * tanhf((-l - 32768.0f * sat) / (32768.0f * (1.0f - sat)));
+            if (r > 32767.0f * sat)
+                r = 32767.0f * sat + (32767.0f - 32767.0f * sat)
+                    * tanhf((r - 32767.0f * sat) / (32767.0f * (1.0f - sat)));
+            else if (r < -32768.0f * sat)
+                r = -32768.0f * sat - (32768.0f - 32768.0f * sat)
+                    * tanhf((-r - 32768.0f * sat) / (32768.0f * (1.0f - sat)));
             if (a1 != 0.0f || b0 != 0.0f)
             {
                 float yl = b0 * l + b1 * pcLpX1L + b2 * pcLpX2L - a1 * pcLpY1L - a2 * pcLpY2L;

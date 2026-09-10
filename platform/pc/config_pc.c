@@ -120,6 +120,9 @@ static void Pc_ResetAudioDefault(void)
 {
     memset(&sAudio, 0, sizeof(sAudio));
     sAudio.masterVolume = 100;
+    sAudio.dsVolume = 100;
+    sAudio.psgVolume = 100;
+    sAudio.saturate = 85;
     sAudio.reverbMode = 1;   // follow the song
     sAudio.reverbOverride = 60;
     // Model the GBA's band-limited analog output: the raw mix is much brighter
@@ -287,6 +290,9 @@ void Pc_ConfigLoad(const char *exeDir)
             int v = atoi(val);
             if (strcmp(key, "MasterVolume") == 0) sAudio.masterVolume = v;
             else if (strcmp(key, "Muted") == 0) sAudio.muted = v;
+            else if (strcmp(key, "DsVolume") == 0) sAudio.dsVolume = v;
+            else if (strcmp(key, "PsgVolume") == 0) sAudio.psgVolume = v;
+            else if (strcmp(key, "Saturate") == 0) sAudio.saturate = v;
             else if (strcmp(key, "ReverbMode") == 0) sAudio.reverbMode = v;
             else if (strcmp(key, "ReverbOverride") == 0) sAudio.reverbOverride = v;
             else if (strcmp(key, "LowPass") == 0) sAudio.lowPass = v;
@@ -330,6 +336,9 @@ void Pc_ConfigSave(void)
     fprintf(f, "[Audio]\n");
     fprintf(f, "MasterVolume=%d\n", sAudio.masterVolume);
     fprintf(f, "Muted=%d\n", sAudio.muted);
+    fprintf(f, "DsVolume=%d\n", sAudio.dsVolume);
+    fprintf(f, "PsgVolume=%d\n", sAudio.psgVolume);
+    fprintf(f, "Saturate=%d\n", sAudio.saturate);
     fprintf(f, "ReverbMode=%d\n", sAudio.reverbMode);
     fprintf(f, "ReverbOverride=%d\n", sAudio.reverbOverride);
     fprintf(f, "LowPass=%d\n", sAudio.lowPass);
