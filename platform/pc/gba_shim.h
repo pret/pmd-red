@@ -70,6 +70,7 @@ void Pc_AudioFrame(void); // called once per 60Hz tick; noop until sequencer lan
 void Pc_AudioShutdown(void);
 int  Pc_AudioSongReverb(void);             // current song reverb amount (0-127)
 void Pc_AudioWavDump(const char *path, int maxSeconds); // capture mix to WAV
+void Pc_AudioTopUp(int targetSamples);     // keep the SDL queue above a cushion
 
 // ---- Save backend (save_pc.c) ----
 void Pc_SaveInit(const char *dir); // host save dir (default: exe dir / cwd)

@@ -30,6 +30,7 @@
 #include "music.h"
 #include "audio_data.h"
 #include "m4a_port.h"
+#include "gba_shim.h"
 
 // Forward declaration (defined below; m4a.h does not declare it).
 void m4aSoundMode(u32 mode);
@@ -1758,10 +1759,8 @@ void m4aSoundMain(void)
     static double pcSoundLast = 0.0;
     static double pcTickAcc = 0.0;
     int rate;
-    int spp; // samples per 60 Hz tick
     int need; // samples owed this call (real elapsed time)
     int ticks;
-    int left;
     now = Pc_TimeNow();
     if (pcSoundLast <= 0.0)
         pcSoundLast = now;
@@ -1779,23 +1778,38 @@ void m4aSoundMain(void)
     // frame rate is exactly pcmFreq / pcmSamplesPerVBlank.
     {
         double frameRate = (double)Pc_PcmFreq() / (double)Pc_SamplesPerVBlank();
-        spp = (int)((double)rate / frameRate + 0.5);
-        if (spp < 1)
-            spp = 1;
         need = (int)(elapsed * (double)rate);
         pcTickAcc += elapsed * frameRate;
     }
-    ticks = 0;
-    while (pcTickAcc >= 1.0)
+    // Render exactly `need` samples (real-time). The scheduler advances once per
+    // whole accumulated tick; the samples owed by those ticks are split evenly
+    // across them so we never render more than real-time (over-rendering when
+    // two ticks land in one frame starves nothing but inflates the queue to the
+    // SDL cap, adding latency and dropping audio -> crackle).
+    ticks = (int)pcTickAcc;
+    pcTickAcc -= (double)ticks;
+    if (ticks > 0)
     {
-        Pc_AudioTick();
-        Pc_MixerRenderSamples(spp, 1);
-        pcTickAcc -= 1.0;
-        ticks++;
+        int per = need / ticks;
+        int extra = need - per * ticks;
+        int t;
+        for (t = 0; t < ticks; t++)
+        {
+            int n = per + (t == ticks - 1 ? extra : 0);
+            if (n < 1)
+                n = 1;
+            Pc_AudioTick();
+            Pc_MixerRenderSamples(n, 1);
+        }
     }
-    left = need - ticks * spp;
-    if (left > 0)
-        Pc_MixerRenderSamples(left, 0);
+    else if (need > 0)
+    {
+        Pc_MixerRenderSamples(need, 0);
+    }
+    // Keep a cushion of audio queued. Feeding the device exactly real-time from
+    // the game thread leaves the queue at zero, so any late frame (render hitch,
+    // SDL_Delay oversleep) underruns -> crackle. ~40 ms of slack absorbs it.
+    Pc_AudioTopUp(rate / 25);
 }
 
 int Pc_AudioHalted(void)

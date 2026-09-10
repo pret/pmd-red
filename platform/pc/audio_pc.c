@@ -659,6 +659,28 @@ int Pc_AudioSongReverb(void)
     return Pc_Reverb();
 }
 
+// Keep a small cushion of rendered samples queued so playback never underruns
+// when a game frame is late (the renderer runs on the game thread, once per
+// frame). Called by m4aSoundMain after the per-frame render.
+void Pc_AudioTopUp(int targetSamples)
+{
+#ifdef HAVE_SDL2
+    int queued;
+    if (sAudioDev == 0 || targetSamples <= 0)
+        return;
+    queued = (int)(SDL_GetQueuedAudioSize(sAudioDev) / 4); // stereo 16-bit
+    if (queued < targetSamples)
+    {
+        int need = targetSamples - queued;
+        if (need > PC_AUDIO_BLOCK_MAX)
+            need = PC_AUDIO_BLOCK_MAX;
+        Pc_MixerRenderSamples(need, 0);
+    }
+#else
+    (void)targetSamples;
+#endif
+}
+
 double Pc_TimeNow(void)
 {
 #ifdef HAVE_SDL2
