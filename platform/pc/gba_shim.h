@@ -12,6 +12,10 @@
 
 #ifdef PLATFORM_PC
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 // ---- Crash diagnostics + client.log (crash_win.c) ----
 void Pc_InstallCrashHandler(void);
 void Pc_ExeDir(char *out, size_t cap, const char *argv0); // dir of running exe, trailing sep
@@ -36,13 +40,26 @@ void Pc_VideoInit(int scale);      // init framebuffer/window (SDL if HAVE_SDL2)
 void Pc_VideoPresent(void);        // composite shadows -> screen, 240x160 scaled
 void Pc_VideoShutdown(void);
 void Pc_VideoDumpPPM(const char *path); // headless framebuffer dump (no SDL needed)
+void *Pc_VideoGetSdlWindow(void);   // SDL_Window* or NULL (headless / no SDL2)
+void *Pc_VideoGetSdlRenderer(void); // SDL_Renderer* or NULL (headless / no SDL2)
 
 // ---- Input backend (input_pc.c) ----
 void Pc_InputInit(void);
 void Pc_InputPump(void); // refresh REG_KEYINPUT shadow (active-low, KEYS_MASK idle)
 void Pc_InputShutdown(void);
 int Pc_QuitRequested(void); // true when window close / Esc / quit requested
+void Pc_RequestQuit(void);  // request a clean shutdown (window close / Exit menu)
 void Pc_SetAutopress(int startFrame, int durFrames, u16 keys); // scripted key hold (CI)
+
+// ---- ImGui overlay backend (ui_pc.cpp) ----
+void Pc_UiInit(void);          // create context + SDL2/SDL_Renderer backends
+void Pc_UiShutdown(void);
+void Pc_UiProcessEvent(const void *sdlEvent); // forward one SDL_Event*; F1 toggles menu
+void Pc_UiRender(void);        // NewFrame + menu/demo + RenderDrawData (draw on top)
+int Pc_UiIsActive(void);       // 1 once the context is live (window/renderer present)
+void Pc_UiToggle(void);        // show/hide the menu bar
+void Pc_RequestRestart(void);  // relaunch the game (implies quit)
+int Pc_RestartRequested(void); // true once Restart was chosen
 
 // ---- Audio backend (audio_pc.c, mute-first) ----
 void Pc_AudioInit(void);
@@ -55,6 +72,10 @@ void Pc_SaveFlush(void);
 int Pc_SaveRead(s32 sector, u8 *dest, s32 size);      // read flash sector range
 int Pc_SaveWrite(s32 sector, u8 *src, s32 size);      // erase+write flash sector range
 int Pc_SaveEraseChip(void);                           // reset image to all-0xFF
+
+#ifdef __cplusplus
+} // extern "C"
+#endif
 
 #endif // PLATFORM_PC
 #endif // PMDRED_PC_GBA_SHIM_H

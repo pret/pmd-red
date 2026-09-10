@@ -42,6 +42,12 @@ CC ?= gcc
 else
 CC ?= clang
 endif
+# ImGui is C++; link the C++ runtime in via the C++ driver.
+ifeq ($(OS),Windows_NT)
+CXX ?= g++
+else
+CXX ?= clang++
+endif
 PYTHON ?= python3
 ASSET_JOBS ?= 1
 CFLAGS := -std=gnu89 -Wall -Wextra -O2 -DPLATFORM_PC -DMODERN=2
@@ -55,6 +61,35 @@ LDFLAGS += $(shell sdl2-config --libs)
 endif
 ifeq ($(OS),Windows_NT)
 LDFLAGS += -lcomdlg32 -Wl,--disable-dynamicbase
+# ImGui is C++ linked via the g++ driver; statically bind the GCC/libstdc++/
+# winpthread runtimes so the exe's only DLL dependency is SDL2.dll. The driver
+# re-adds -lwinpthread after our flags, so force the static archive in with
+# --whole-archive to satisfy the libstdc++ pthread references early.
+LDFLAGS += -static-libgcc -static-libstdc++
+LDFLAGS += -Wl,-Bstatic -Wl,--whole-archive -lwinpthread -Wl,--no-whole-archive -Wl,-Bdynamic
+endif
+
+# Dear ImGui (git submodule platform/pc/imgui, pinned tag v1.92.9b).
+IMGUI_DIR := $(ROOT)/platform/pc/imgui
+ifeq ($(HAVE_SDL),yes)
+ifneq ($(wildcard $(IMGUI_DIR)/imgui.h),)
+UI_SRCS := $(IMGUI_DIR)/imgui.cpp \
+           $(IMGUI_DIR)/imgui_draw.cpp \
+           $(IMGUI_DIR)/imgui_tables.cpp \
+           $(IMGUI_DIR)/imgui_widgets.cpp \
+           $(IMGUI_DIR)/imgui_demo.cpp \
+           $(IMGUI_DIR)/backends/imgui_impl_sdl2.cpp \
+           $(IMGUI_DIR)/backends/imgui_impl_sdlrenderer2.cpp \
+           $(ROOT)/platform/pc/ui_pc.cpp
+CXXFLAGS := -O2 -std=c++17 -DPLATFORM_PC -DMODERN=2 -DHAVE_SDL2 \
+            $(shell sdl2-config --cflags) \
+            -idirafter $(ROOT)/include \
+            -I$(IMGUI_DIR) -I$(IMGUI_DIR)/backends
+else
+$(error platform/pc/imgui is a git submodule; run `git submodule update --init --recursive` first)
+endif
+else
+UI_SRCS :=
 endif
 
 # libpng for the full gbagfx (PNG decode during asset generation). Prefer a
@@ -81,7 +116,9 @@ PC_SRCS := $(ROOT)/platform/pc/cpu_pc.c \
            $(ROOT)/platform/pc/stubs_pc.c \
            $(ROOT)/platform/pc/boot_pc.c \
            $(ROOT)/platform/pc/main_pc.c
-PC_OBJS := $(patsubst $(ROOT)/%.c,$(OBJ_DIR)/%.o,$(PC_SRCS))
+PC_SRCS += $(UI_SRCS)
+PC_OBJS := $(patsubst $(ROOT)/%.c,$(OBJ_DIR)/%.o,$(filter %.c,$(PC_SRCS))) \
+           $(patsubst $(ROOT)/%.cpp,$(OBJ_DIR)/%.o,$(filter %.cpp,$(PC_SRCS)))
 # Game binary swaps the smoke entry for the real-init entry and links the
 # generated rom_slices_all.o/blob_addrs.o instead of the stub tables.
 # m4a_port.o (the real m4a player) is game-link only: the smoke binary has no
@@ -178,9 +215,15 @@ $(OBJ_DIR)/%.o: $(ROOT)/%.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(PC_CPPFLAGS) -c $< -o $@
 
+# ImGui core + backends + the overlay (C++). imgui_demo.cpp feeds
+# Game > Settings (ImGui::ShowDemoWindow).
+$(OBJ_DIR)/%.o: $(ROOT)/%.cpp
+	@mkdir -p $(dir $@)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
 $(BIN): $(PC_OBJS)
 	@mkdir -p $(BIN_DIR)
-	$(CC) $(PC_OBJS) -o $@ $(LDFLAGS)
+	$(CXX) $(PC_OBJS) -o $@ $(LDFLAGS)
 	@echo "built $@ (sdl: $(HAVE_SDL))"
 
 # ---- Full game link: real game objects + generated blobs + PC backends ----
@@ -193,7 +236,7 @@ GAME_LINK_OBJS := $(GAME_OBJS) $(BLOB_OBJS) $(BASEROM_OBJS) $(ROMSLICES_OBJ) $(B
 game-link: tools assets-pc blobs audio-data $(GAME_OBJS) $(BLOB_OBJS) $(BASEROM_OBJS) $(ROMSLICES_OBJ) $(BLOBADDRS_OBJ) $(AUDIO_GEN_OBJ) $(GAME_PC_OBJS)
 	@mkdir -p $(BIN_DIR)
 	@printf '%s\n' $(GAME_LINK_OBJS) | sed 's|^/\([a-zA-Z]\)/|\1:/|' > $(BIN_DIR)/game_link.rsp
-	$(CC) @$(BIN_DIR)/game_link.rsp -o $(BIN_DIR)/pmd-red-game $(LDFLAGS) $(GAME_LDFLAGS)
+	$(CXX) @$(BIN_DIR)/game_link.rsp -o $(BIN_DIR)/pmd-red-game $(LDFLAGS) $(GAME_LDFLAGS)
 	@echo "linked $(BIN_DIR)/pmd-red-game"
 
 # ---- Host audio data (chunk 1 of PC audio) ----

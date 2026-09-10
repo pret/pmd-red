@@ -98,8 +98,26 @@ void Pc_VideoInit(int scale) {
     sWin = SDL_CreateWindow("pmd-red-pc", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
                             PC_W * gPc_Scale, PC_H * gPc_Scale, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
     sRen = SDL_CreateRenderer(sWin, -1, SDL_RENDERER_ACCELERATED);
-    SDL_RenderSetLogicalSize(sRen, PC_W, PC_H);
     sTex = SDL_CreateTexture(sRen, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STREAMING, PC_W, PC_H);
+    Pc_UiInit(); // ImGui overlay needs the live window + renderer
+#endif
+}
+
+// Accessors for the ImGui backend (ui_pc.cpp), which cannot see this file's
+// static SDL handles. NULL when built headless (no HAVE_SDL2).
+void *Pc_VideoGetSdlWindow(void) {
+#ifdef HAVE_SDL2
+    return sWin;
+#else
+    return NULL;
+#endif
+}
+
+void *Pc_VideoGetSdlRenderer(void) {
+#ifdef HAVE_SDL2
+    return sRen;
+#else
+    return NULL;
 #endif
 }
 
@@ -456,9 +474,26 @@ void Pc_VideoPresent(void) {
     gPc_FrameNo++;
 #ifdef HAVE_SDL2
     if (sTex != NULL) {
+        SDL_Rect dst;
+        int winW, winH, scale;
+
         SDL_UpdateTexture(sTex, NULL, gPc_Frame, PC_W * (int)sizeof(gPc_Frame[0]));
+        SDL_SetRenderDrawColor(sRen, 0, 0, 0, 255);
         SDL_RenderClear(sRen);
-        SDL_RenderCopy(sRen, sTex, NULL, NULL);
+        // Integer-scaled, aspect-preserving blit of the 240x160 frame. No
+        // SDL logical-size transform: the ImGui overlay draws in window pixels,
+        // so ImGui's mouse/hit-testing stays exactly aligned with its output.
+        SDL_GetWindowSize(sWin, &winW, &winH);
+        scale = (winW / PC_W < winH / PC_H) ? winW / PC_W : winH / PC_H;
+        if (scale < 1)
+            scale = 1;
+        dst.w = PC_W * scale;
+        dst.h = PC_H * scale;
+        dst.x = (winW - dst.w) / 2;
+        dst.y = (winH - dst.h) / 2;
+        SDL_RenderCopy(sRen, sTex, NULL, &dst);
+        if (Pc_UiIsActive())
+            Pc_UiRender(); // window-pixel overlay on top
         SDL_RenderPresent(sRen);
     }
 #endif
@@ -466,6 +501,7 @@ void Pc_VideoPresent(void) {
 
 void Pc_VideoShutdown(void) {
 #ifdef HAVE_SDL2
+    Pc_UiShutdown(); // destroy ImGui backends before their SDL handles go away
     if (sTex != NULL) SDL_DestroyTexture(sTex);
     if (sRen != NULL) SDL_DestroyRenderer(sRen);
     if (sWin != NULL) SDL_DestroyWindow(sWin);

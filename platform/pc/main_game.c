@@ -13,7 +13,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include <signal.h>
+#include <errno.h>
 #include <unistd.h>
+#ifdef _WIN32
+#include <process.h>
+#endif
 #ifndef _WIN32
 #include <execinfo.h>
 #endif
@@ -65,6 +69,20 @@ static void Pc_CrashAction(int sig, siginfo_t *info, void *ctx)
     _exit(139);
 }
 #endif
+
+// Game > Restart: relaunch the process for a fresh boot. The menus/boot scenes
+// have already unwound via Pc_RequestRestart() setting the quit flag; backends
+// are shut down by the caller before this is reached.
+static void Pc_Relaunch(char **argv)
+{
+#ifdef _WIN32
+    _execv(_pgmptr, (const char *const *)argv);
+    Pc_LogPrintf("restart: _execv failed (%d)\n", errno);
+#else
+    execv(argv[0], argv);
+    Pc_LogPrintf("restart: execv failed (%s)\n", strerror(errno));
+#endif
+}
 
 static void Pc_ApplyBootShadows(void) {
     // Same values as src/main.c:65-78 so game code sees identical state.
@@ -246,6 +264,11 @@ int main(int argc, char **argv) {
     Pc_AudioShutdown();
     Pc_InputShutdown();
     Pc_VideoShutdown();
+
+    if (Pc_RestartRequested()) {
+        Pc_LogClose("restart requested -> re-exec");
+        Pc_Relaunch(argv); // returns only if the exec fails
+    }
 
     if (Pc_QuitRequested())
         Pc_LogClose("user quit (window close / Esc)");

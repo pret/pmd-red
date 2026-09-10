@@ -40,6 +40,10 @@ int Pc_QuitRequested(void) {
     return gPcQuit;
 }
 
+void Pc_RequestQuit(void) {
+    gPcQuit = 1;
+}
+
 void Pc_InputPump(void) {
     // KEYINPUT is active-low: start all-released and clear a bit per held key.
     u16 keys = KEYS_MASK;
@@ -52,6 +56,7 @@ void Pc_InputPump(void) {
 
         // Handle window close / quit requests and keyboard-released events.
         while (SDL_PollEvent(&ev)) {
+            Pc_UiProcessEvent(&ev); // F1 menu toggle + ImGui event feeding
             if (ev.type == SDL_QUIT) {
                 gPcQuit = 1;
             } else if (ev.type == SDL_KEYDOWN && ev.key.keysym.scancode == SDL_SCANCODE_ESCAPE) {

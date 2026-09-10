@@ -44,6 +44,7 @@ is reimplemented with SDL.
 ## Build (host, GBA tree untouched)
 
 ```sh
+git submodule update --init --recursive   # platform/pc/imgui (Dear ImGui, v1.92.9b)
 make -f platform/pc/Makefile.pc pc          # build in build/bin, stage to build/
 make -f platform/pc/Makefile.pc run         # + 60-frame smoke -> build/frame.ppm
 make -f platform/pc/Makefile.pc pc-syntax   # all 544 src/*.c via preproc pipe (now 544/544)
