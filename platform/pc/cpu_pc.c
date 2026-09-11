@@ -64,6 +64,8 @@ void Pc_EnableFpsLog(int on) { gPcFpsLog = on ? 1 : 0; }
 
 double Pc_MeasuredFps(void) { return gPcMeasuredFps; }
 
+double Pc_OverlayTickrate(void) { return gPcMeasuredLogicFps; }
+
 void Pc_MemInit(void) {
     memset(gPc_Vram, 0, sizeof(gPc_Vram));
     memset(gPc_Pltt, 0, sizeof(gPc_Pltt));
@@ -226,12 +228,10 @@ void VBlankIntrWait(void) {
             gPcPresentPeriod = (phz < 0) ? 0.0 : (1.0 / phz);
         }
 
-        // Logic-rate measurement (once per tick).
-        if (gPcFpsLog) {
-            if (gPcLogicWindowStart == 0.0)
-                gPcLogicWindowStart = now;
-            gPcLogicWindowFrames++;
-        }
+        // Logic-rate measurement (once per tick; always-on for the overlay).
+        if (gPcLogicWindowStart == 0.0)
+            gPcLogicWindowStart = now;
+        gPcLogicWindowFrames++;
     }
 #endif
 
@@ -248,6 +248,7 @@ void VBlankIntrWait(void) {
         double now;
         for (;;) {
             Pc_VideoPresentOnly();
+            gPcFpsWindowFrames++; // present rate (may present multiple times/tick)
             now = (double)SDL_GetPerformanceCounter() / (double)gPcPerfFreq;
             if (now >= gPcNextLogicSec)
                 break;
@@ -263,21 +264,23 @@ void VBlankIntrWait(void) {
         // Land exactly on the logic deadline so the 60Hz average stays exact.
         Pc_SleepUntil(gPcNextLogicSec);
 
-        // Rolling ~1s FPS measurement (only active with --fps).
-        if (gPcFpsLog) {
+        // Rolling ~1s measurement (always-on so the in-game FPS/tickrate
+        // overlay has numbers; the printf is gated behind --fps).
+        {
             double nowUs = (double)SDL_GetPerformanceCounter() / (double)gPcPerfFreq;
             if (gPcFpsWindowStart == 0.0)
                 gPcFpsWindowStart = nowUs;
-            gPcFpsWindowFrames++;
             if (nowUs - gPcFpsWindowStart >= 1.0) {
+                double dt = nowUs - gPcFpsWindowStart;
                 if (gPcLogicWindowStart != 0.0) {
                     double ldt = nowUs - gPcLogicWindowStart;
                     if (ldt > 0.0)
                         gPcMeasuredLogicFps = gPcLogicWindowFrames / ldt;
                 }
-                gPcMeasuredFps = gPcFpsWindowFrames / (nowUs - gPcFpsWindowStart);
-                printf("fps: present=%.2f logic=%.2f\n",
-                       gPcMeasuredFps, gPcMeasuredLogicFps);
+                gPcMeasuredFps = gPcFpsWindowFrames / dt;
+                if (gPcFpsLog)
+                    printf("fps: present=%.2f logic=%.2f\n",
+                           gPcMeasuredFps, gPcMeasuredLogicFps);
                 gPcFpsWindowStart = 0.0;
                 gPcFpsWindowFrames = 0;
                 gPcLogicWindowStart = 0.0;
@@ -292,6 +295,22 @@ void VBlankIntrWait(void) {
         gPcNextHeadlessTick = clock();
     gPcNextHeadlessTick += CLOCKS_PER_SEC / 60;
     while (clock() < gPcNextHeadlessTick) {}
+
+    // Headless logic-rate measurement (so PPM dumps show a real tickrate).
+    {
+        static double hStart = 0.0;
+        static unsigned hFrames = 0;
+        double nowC = (double)clock() / (double)CLOCKS_PER_SEC;
+        if (hStart == 0.0)
+            hStart = nowC;
+        hFrames++;
+        if (nowC - hStart >= 1.0) {
+            gPcMeasuredLogicFps = hFrames / (nowC - hStart);
+            gPcMeasuredFps = gPcMeasuredLogicFps;
+            hStart = nowC;
+            hFrames = 0;
+        }
+    }
 #endif
 }
 

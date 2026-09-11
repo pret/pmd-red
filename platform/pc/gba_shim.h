@@ -36,6 +36,7 @@ void Pc_SetPaced(int on);    // enable 60Hz render/pacing inside VBlankIntrWait
 unsigned int Pc_VBlankFrameCount(void); // frames rendered via VBlankIntrWait
 void Pc_EnableFpsLog(int on);           // print a rolling measured FPS (~60Hz)
 double Pc_MeasuredFps(void);            // last measured FPS (0 until first window)
+double Pc_OverlayTickrate(void);        // game logic ticks/sec (0 until first window)
 
 // ---- Video backend (video_pc.c) ----
 void Pc_VideoInit(int scale);      // init framebuffer/window (SDL if HAVE_SDL2)

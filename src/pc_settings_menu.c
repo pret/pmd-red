@@ -32,6 +32,8 @@ static const u8 sTextWindowScale[] = _("Window Scale");
 static const u8 sTextFullscreen[] = _("Fullscreen");
 static const u8 sTextScalingMode[] = _("Scaling Mode");
 static const u8 sTextSmoothing[] = _("Smoothing");
+static const u8 sTextShowFps[] = _("Show FPS");
+static const u8 sTextShowTickrate[] = _("Show Tickrate");
 static const u8 sTextVolume[] = _("Volume");
 static const u8 sTextMute[] = _("Mute");
 static const u8 sTextResetDefaults[] = _("Reset to Defaults");
@@ -64,6 +66,8 @@ enum {
     PC_VIDEO_FULLSCREEN,
     PC_VIDEO_MODE,
     PC_VIDEO_SMOOTHING,
+    PC_VIDEO_SHOW_FPS,
+    PC_VIDEO_SHOW_TICKRATE,
     PC_VIDEO_COUNT
 };
 
@@ -202,6 +206,10 @@ static void PcSettingsRunVideo(void)
             PrintStringOnWindow(144, y[2], sTextInteger, 0, 0);
         PrintStringOnWindow(8, y[3], sTextSmoothing, 0, 0);
         PrintStringOnWindow(144, y[3], vp->smoothing ? sTextYes : sTextNo, 0, 0);
+        PrintStringOnWindow(8, y[4], sTextShowFps, 0, 0);
+        PrintStringOnWindow(144, y[4], vp->showFps ? sTextYes : sTextNo, 0, 0);
+        PrintStringOnWindow(8, y[5], sTextShowTickrate, 0, 0);
+        PrintStringOnWindow(144, y[5], vp->showTickrate ? sTextYes : sTextNo, 0, 0);
         sub_80073E0(0);
 
         while (TRUE) {
@@ -240,6 +248,14 @@ static void PcSettingsRunVideo(void)
                     Pc_VideoSetSmoothing(vp->smoothing);
                     Pc_ConfigSave();
                 }
+                else if (sMenu.menuIndex == PC_VIDEO_SHOW_FPS) {
+                    vp->showFps = !vp->showFps;
+                    Pc_ConfigSave();
+                }
+                else if (sMenu.menuIndex == PC_VIDEO_SHOW_TICKRATE) {
+                    vp->showTickrate = !vp->showTickrate;
+                    Pc_ConfigSave();
+                }
                 dpadMoved = TRUE;
                 break;
             }
@@ -265,6 +281,14 @@ static void PcSettingsRunVideo(void)
                 else if (sMenu.menuIndex == PC_VIDEO_SMOOTHING) {
                     vp->smoothing = !vp->smoothing;
                     Pc_VideoSetSmoothing(vp->smoothing);
+                    Pc_ConfigSave();
+                }
+                else if (sMenu.menuIndex == PC_VIDEO_SHOW_FPS) {
+                    vp->showFps = !vp->showFps;
+                    Pc_ConfigSave();
+                }
+                else if (sMenu.menuIndex == PC_VIDEO_SHOW_TICKRATE) {
+                    vp->showTickrate = !vp->showTickrate;
                     Pc_ConfigSave();
                 }
                 dpadMoved = TRUE;

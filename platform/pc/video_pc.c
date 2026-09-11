@@ -20,12 +20,22 @@
 #include "gba/gba.h"
 #include "gba_shim.h"
 #include "window_buffer.h"
+#include "text_1.h"
+#include "text_2.h"
 
 // The game defines these (EWRAM_DATA in src/window_buffer.c). The backend-only
 // smoke binary links no game objects, so provide weak defaults here; the
 // full-game link overrides them with the real symbols.
 __attribute__((weak)) bool8 gDrawWindow = FALSE;
 __attribute__((weak)) s16 *gWinBufferPtr = NULL;
+
+// Same for the game's font accessors: the overlay reads real glyphs via
+// GetCharacter once the full game is linked; the smoke binary gets the NULL
+// stub and simply draws no overlay text.
+__attribute__((weak)) const unkChar *GetCharacter(s32 chr) { (void)chr; return NULL; }
+__attribute__((weak)) s32 gCurrentCharmap = 0;
+__attribute__((weak)) s32 gCharHeight[2] = {0};
+__attribute__((weak)) CharMapStruct *gCharmaps[2] = { NULL, NULL };
 
 #define PC_W 240
 #define PC_H 160
@@ -64,6 +74,90 @@ static void Pc_EnsureRgbaLut(void) {
 
 static inline unsigned int Bgr555ToRgba(unsigned short c) {
     return gPc_RgbaLut[c & 0x7FFF];
+}
+
+// ---- Top-right FPS / tickrate overlay ----
+//
+// Uses the game's own font (via GetCharacter) so the text matches the game's
+// look exactly. Each glyph row is 8 1-bit pixels packed one per nibble: the
+// low nibble of glyph[0] is the leftmost pixel, the low nibble of glyph[1] is
+// pixel 4. Decodes that straight into the composited frame.
+
+static void Pc_DrawGameFontChar(int x, int y, char c, unsigned color, unsigned shadow)
+{
+    const unkChar *ch;
+    const u16 *g;
+    int rows;
+    int r, p;
+
+    if (c == ' ')
+        return; // skip spaces (no advance handled by the caller)
+    if (gCurrentCharmap < 0 || gCurrentCharmap > 1)
+        return;
+    ch = GetCharacter((u8)c);
+    if (ch == NULL || ch->unk0 == NULL)
+        return;
+    g = ch->unk0;
+    rows = gCharHeight[gCurrentCharmap];
+    if (rows <= 0 || rows > 16)
+        rows = 11;
+
+    for (r = 0; r < rows; r++) {
+        u32 row = ((u32)g[1] << 16) | (u32)g[0];
+        for (p = 0; p < 8; p++) {
+            if (((row >> (p * 4)) & 1) == 0)
+                continue;
+            if (shadow != 0 && x + 1 + p < PC_W && y + 1 + r < PC_H)
+                gPc_Frame[(y + 1 + r) * PC_W + x + 1 + p] = shadow;
+            if (x + p >= 0 && x + p < PC_W && y + r >= 0 && y + r < PC_H)
+                gPc_Frame[(y + r) * PC_W + x + p] = color;
+        }
+        g += 2;
+    }
+}
+
+static int Pc_GameFontAdvance(char c)
+{
+    const unkChar *ch;
+
+    if (c == ' ')
+        return 4; // space: fixed gap
+    if (gCurrentCharmap < 0 || gCurrentCharmap > 1)
+        return 6;
+    ch = GetCharacter((u8)c);
+    if (ch == NULL || ch->width <= 0)
+        return 6;
+    return ch->width;
+}
+
+// FPS / tickrate text, right-aligned in the top-right corner.
+static void Pc_DrawOverlay(void)
+{
+    PcVideoPrefs *vp = Pc_ConfigVideoPrefs();
+    char text[40];
+    int total, px, i;
+
+    if (!vp->showFps && !vp->showTickrate)
+        return;
+    // The game font isn't loaded until LoadCharmaps runs during boot.
+    if (gCurrentCharmap < 0 || gCurrentCharmap > 1 ||
+        gCharmaps[gCurrentCharmap] == NULL)
+        return;
+
+    if (vp->showTickrate)
+        snprintf(text, sizeof(text), "FPS: %d TR: %d",
+                 (int)(Pc_MeasuredFps() + 0.5), (int)(Pc_OverlayTickrate() + 0.5));
+    else
+        snprintf(text, sizeof(text), "FPS: %d", (int)(Pc_MeasuredFps() + 0.5));
+
+    total = 0;
+    for (i = 0; text[i] != '\0'; i++)
+        total += Pc_GameFontAdvance(text[i]);
+    px = PC_W - 2 - total;
+    for (i = 0; text[i] != '\0'; i++) {
+        Pc_DrawGameFontChar(px, 2, text[i], 0xFFFFFFFFu, 0xFF000000u);
+        px += Pc_GameFontAdvance(text[i]);
+    }
 }
 
 // Blended color result, still in RGB555 space.
@@ -550,6 +644,7 @@ static void Pc_RenderFrame(void) {
 // frame clock can present the same uploaded frame at display refresh rate.
 void Pc_VideoRenderAndUpload(void) {
     Pc_RenderFrame();
+    Pc_DrawOverlay();
     gPc_FrameNo++;
 #ifdef HAVE_SDL2
     if (sTex != NULL)

@@ -483,6 +483,21 @@ static void Pc_UiGraphicsTab(void) {
 
     ImGui::Spacing();
     ImGui::Separator();
+    ImGui::TextUnformatted("Overlay");
+    b = vp->showFps != 0;
+    if (ImGui::Checkbox("Show FPS", &b)) {
+        vp->showFps = b ? 1 : 0;
+        Pc_ConfigSave();
+    }
+    b = vp->showTickrate != 0;
+    if (ImGui::Checkbox("Show tickrate", &b)) {
+        vp->showTickrate = b ? 1 : 0;
+        Pc_ConfigSave();
+    }
+    ImGui::TextDisabled("Draws in the top-right corner of the frame.\nFPS = present rate, TR = game logic ticks/s.");
+
+    ImGui::Spacing();
+    ImGui::Separator();
     if (ImGui::Button("Reset to Defaults")) {
         PcVideoPrefs d;
         memset(&d, 0, sizeof(d));

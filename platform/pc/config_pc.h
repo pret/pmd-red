@@ -86,6 +86,8 @@ typedef struct PcVideoPrefs
     int letterboxB;    // 0-255
     int presentHz;     // present rate: 0 = match display, >0 = target Hz, <0 = uncapped
     int interpolate;   // 0/1 interpolate frames between 60Hz logic ticks (Phase 2)
+    int showFps;       // 0/1 draw "FPS: n" in the top-right corner of the frame
+    int showTickrate;  // 0/1 also draw "TR: n" (game logic ticks per second)
 } PcVideoPrefs;
 
 // Number of m4a music players (INDEX_BGM..INDEX_SE6; must match music.h).

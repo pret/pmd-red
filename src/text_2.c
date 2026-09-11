@@ -838,16 +838,7 @@ const unkChar *GetCharacter(s32 chr)
     s32 r2, r4;
     const unkChar *ret;
     const unkChar *strPtr = gCharmaps[gCurrentCharmap]->unk4;
-#ifdef PLATFORM_PC
-    {
-        static int nCalls = 0;
-        if (nCalls < 40)
-            fprintf(stderr, "host text: GetCharacter chr=0x%x map=%d unk0=%d strPtr=%p\n",
-                    (unsigned)chr, (int)gCurrentCharmap,
-                    (int)gCharmaps[gCurrentCharmap]->unk0, (const void *)strPtr);
-        nCalls++;
-    }
-#endif
+
     // TODO: create labels for these
     if (chr > 63487 && chr < 65535)
     {

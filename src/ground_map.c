@@ -540,16 +540,181 @@ void GroundMap_SelectDungeon(s32 mapId_, const DungeonLocation *loc, u32 param_2
 
 // overlay_0000.bin::02154FAC
 // BMA attribute-layer decoder, hand-written ARM asm (~660 lines).
-// TODO(port-video): faithful C port (needed for correct map attributes).
-// Host bypass: the sole call site (ground_bg.c) discards the return value and
-// only needs the unk544 buffer filled; zeros = "no attributes", which boots.
+// The GBA build uses that asm; this C port is for the PC build and is needed so
+// unk544 gets the real tile attributes (bit 0x80 = solid, bit 0x40 = second
+// collision layer). Without it, towns/team base have no collision.
 #ifdef PLATFORM_PC
 static u8 *sub_80A5204(void *a, const u8 *b, BmaHeader *c, s32 d)
 {
-    (void)b; (void)c;
-    if (a != NULL && d > 0)
-        MemoryClear8(a, d * 256);
-    return (u8 *)a;
+    u8 *dest = a;
+    const u8 *src = b;
+    s32 mapWidthTiles = c->mapWidthTiles;
+    s32 mapHeightTiles = c->mapHeightTiles;
+    s32 hasDataLayer = c->hasDataLayer;
+    s32 hasCollision = c->hasCollision;
+    s32 row, pos, count, i;
+
+    // Top border: 4 solid rows of 256 bytes.
+    for (row = 0; row < 4; row++) {
+        for (i = 0; i < 256; i++)
+            *dest++ = 0xFF;
+    }
+
+    if (hasDataLayer > 0) {
+        // Decode the attribute/data layer, one 256-byte row at a time.
+        // Each row is 5 border bytes, mapWidthTiles data bytes, 0xFF padding.
+        for (row = 0; row < mapHeightTiles; row++) {
+            for (i = 0; i < 5; i++)
+                *dest++ = 0xFF;
+
+            pos = 0;
+            while (pos < mapWidthTiles) {
+                u8 cmd = *src++;
+                if (cmd > 0xBF) {
+                    count = cmd - 0xBF;
+                    for (i = 0; i < count; i++)
+                        *dest++ = *src++;
+                    pos += count;
+                }
+                else if (cmd > 0x7F) {
+                    count = cmd - 0x7F;
+                    u8 value = *src++;
+                    for (i = 0; i < count; i++)
+                        *dest++ = value;
+                    pos += count;
+                }
+                else {
+                    count = cmd + 1;
+                    for (i = 0; i < count; i++)
+                        *dest++ = 0;
+                    pos += count;
+                }
+            }
+
+            for (i = 0; i < 0x100 - 5 - mapWidthTiles; i++)
+                *dest++ = 0xFF;
+        }
+    }
+    else {
+        // No data layer: 5 solid bytes, a zeroed tile strip, then padding.
+        for (row = 0; row < mapHeightTiles; row++) {
+            for (i = 0; i < 5; i++)
+                *dest++ = 0xFF;
+            for (i = 0; i < mapWidthTiles; i++)
+                *dest++ = 0;
+            for (i = 0; i < 0x100 - 5 - mapWidthTiles; i++)
+                *dest++ = 0xFF;
+        }
+    }
+
+    // Remaining rows up to the allocated height are solid.
+    for (row = 4 + mapHeightTiles; row < d; row++) {
+        for (i = 0; i < 256; i++)
+            *dest++ = 0xFF;
+    }
+
+    // Collision layer 1: sets bit 0x80. Runs are stored relative to the tile
+    // above (a bit is only written where the previous row does not have it).
+    if (hasCollision > 0) {
+        u8 *dst = (u8 *)a + 0x400;
+        for (row = 0; row < mapHeightTiles; row++) {
+            dst += 5;
+            pos = 0;
+            if (row == 0) {
+                while (pos < mapWidthTiles) {
+                    u8 cmd = *src++;
+                    if (cmd > 0x7F) {
+                        count = cmd - 0x7F;
+                        for (i = 0; i < count; i++)
+                            *dst++ |= 0x80;
+                        pos += count;
+                    }
+                    else {
+                        dst += cmd + 1;
+                        pos += cmd + 1;
+                    }
+                }
+            }
+            else {
+                u8 *prev = dst - 0x100;
+                while (pos < mapWidthTiles) {
+                    u8 cmd = *src++;
+                    if (cmd > 0x7F) {
+                        count = cmd - 0x7F;
+                        for (i = 0; i < count; i++) {
+                            if ((*prev & 0x80) == 0)
+                                *dst |= 0x80;
+                            prev++;
+                            dst++;
+                        }
+                        pos += count;
+                    }
+                    else {
+                        for (i = 0; i <= cmd; i++) {
+                            if (*prev & 0x80)
+                                *dst |= 0x80;
+                            prev++;
+                            dst++;
+                        }
+                        pos += cmd + 1;
+                    }
+                }
+            }
+            dst += 0xFB - mapWidthTiles;
+        }
+    }
+
+    // Collision layer 2: sets bit 0x40, same delta encoding as layer 1.
+    if (hasCollision > 1) {
+        u8 *dst = (u8 *)a + 0x400;
+        for (row = 0; row < mapHeightTiles; row++) {
+            dst += 5;
+            pos = 0;
+            if (row == 0) {
+                while (pos < mapWidthTiles) {
+                    u8 cmd = *src++;
+                    if (cmd > 0x7F) {
+                        count = cmd - 0x7F;
+                        for (i = 0; i < count; i++)
+                            *dst++ |= 0x40;
+                        pos += count;
+                    }
+                    else {
+                        dst += cmd + 1;
+                        pos += cmd + 1;
+                    }
+                }
+            }
+            else {
+                u8 *prev = dst - 0x100;
+                while (pos < mapWidthTiles) {
+                    u8 cmd = *src++;
+                    if (cmd > 0x7F) {
+                        count = cmd - 0x7F;
+                        for (i = 0; i < count; i++) {
+                            if ((*prev & 0x40) == 0)
+                                *dst |= 0x40;
+                            prev++;
+                            dst++;
+                        }
+                        pos += count;
+                    }
+                    else {
+                        for (i = 0; i <= cmd; i++) {
+                            if (*prev & 0x40)
+                                *dst |= 0x40;
+                            prev++;
+                            dst++;
+                        }
+                        pos += cmd + 1;
+                    }
+                }
+            }
+            dst += 0xFB - mapWidthTiles;
+        }
+    }
+
+    return (u8 *)src;
 }
 #else
 NAKED
