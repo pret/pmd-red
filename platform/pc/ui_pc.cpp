@@ -212,6 +212,7 @@ static void Pc_UiAudioPlayerTable(PcAudioPrefs *ap)
         {
             int t = ap->tempoScale[i];
             int p = ap->pitchShift[i];
+            ImGui::PushID(i);
             ImGui::TableNextRow();
             ImGui::TableSetColumnIndex(0);
             ImGui::TextUnformatted(kPlayerNames[i]);
@@ -227,6 +228,7 @@ static void Pc_UiAudioPlayerTable(PcAudioPrefs *ap)
                 ap->pitchShift[i] = p;
                 Pc_ConfigSave();
             }
+            ImGui::PopID();
         }
         ImGui::EndTable();
     }
