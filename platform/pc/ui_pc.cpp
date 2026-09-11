@@ -452,6 +452,35 @@ static void Pc_UiGraphicsTab(void) {
 
     ImGui::Spacing();
     ImGui::Separator();
+    ImGui::TextUnformatted("Frame rate");
+    {
+        static const char *hzLabels[] = {
+            "Match display", "60 Hz", "120 Hz", "144 Hz", "240 Hz", "Uncapped"
+        };
+        static const int hzVals[] = { 0, 60, 120, 144, 240, -1 };
+        int cur = 0;
+        for (v = 0; v < 6; v++) {
+            if (vp->presentHz == hzVals[v]) {
+                cur = v;
+                break;
+            }
+        }
+        if (ImGui::Combo("Present rate", &cur, hzLabels, 6)) {
+            vp->presentHz = hzVals[cur];
+            Pc_ConfigSave();
+        }
+        ImGui::TextDisabled("Game logic stays locked at 60Hz; the frame is presented\nat this rate (or the monitor refresh) in between.");
+    }
+
+    b = vp->interpolate != 0;
+    if (ImGui::Checkbox("Interpolate frames", &b)) {
+        vp->interpolate = b ? 1 : 0;
+        Pc_ConfigSave();
+    }
+    ImGui::TextDisabled("Blend between 60Hz logic frames at high refresh.\n(Reserved - not yet implemented.)");
+
+    ImGui::Spacing();
+    ImGui::Separator();
     if (ImGui::Button("Reset to Defaults")) {
         PcVideoPrefs d;
         memset(&d, 0, sizeof(d));

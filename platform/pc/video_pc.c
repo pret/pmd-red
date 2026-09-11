@@ -545,15 +545,27 @@ static void Pc_RenderFrame(void) {
     }
 }
 
-void Pc_VideoPresent(void) {
+// Composite the current game state into gPc_Frame and upload it to the SDL
+// texture (no blit/present). Decoupled from Pc_VideoPresentOnly so the host
+// frame clock can present the same uploaded frame at display refresh rate.
+void Pc_VideoRenderAndUpload(void) {
     Pc_RenderFrame();
     gPc_FrameNo++;
+#ifdef HAVE_SDL2
+    if (sTex != NULL)
+        SDL_UpdateTexture(sTex, NULL, gPc_Frame, PC_W * (int)sizeof(gPc_Frame[0]));
+#endif
+}
+
+// Blit the uploaded texture to the window (with ImGui overlay) and present.
+// The texture is unchanged, so this can be called repeatedly at high refresh
+// to show the same 60Hz logic frame more than once.
+void Pc_VideoPresentOnly(void) {
 #ifdef HAVE_SDL2
     if (sTex != NULL) {
         SDL_Rect dst;
         int winW, winH, scale;
 
-        SDL_UpdateTexture(sTex, NULL, gPc_Frame, PC_W * (int)sizeof(gPc_Frame[0]));
         SDL_SetRenderDrawColor(sRen, gPc_Letterbox[0], gPc_Letterbox[1],
                                gPc_Letterbox[2], 255);
         SDL_RenderClear(sRen);
@@ -602,6 +614,26 @@ void Pc_VideoPresent(void) {
         SDL_RenderPresent(sRen);
     }
 #endif
+}
+
+void Pc_VideoPresent(void) {
+    Pc_VideoRenderAndUpload();
+    Pc_VideoPresentOnly();
+}
+
+// Current display refresh rate (from the window's display mode). 0 when the
+// window is gone or SDL can't report it (headless build always returns 0).
+int Pc_VideoDisplayHz(void) {
+#ifdef HAVE_SDL2
+    if (sWin != NULL) {
+        SDL_DisplayMode mode;
+        int idx = SDL_GetWindowDisplayIndex(sWin);
+        if (idx >= 0 && SDL_GetCurrentDisplayMode(idx, &mode) == 0 &&
+            mode.refresh_rate > 0)
+            return mode.refresh_rate;
+    }
+#endif
+    return 0;
 }
 
 void Pc_VideoShutdown(void) {

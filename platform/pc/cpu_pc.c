@@ -18,7 +18,10 @@
 #endif
 
 #define PC_TARGET_FPS 60.0
-#define PC_FRAME_MS (Uint32)(1000.0 / PC_TARGET_FPS) // ~16.667 ms per frame
+// Game logic always advances at exactly PC_TARGET_FPS ticks/sec regardless of
+// the display refresh; rendering presents at the display/present rate in
+// between. The logic period is kept as a double so the long-run average is
+// exactly 60 (a 16ms integer period would pace ~62.5fps and stutter).
 
 #include "gba/gba.h"
 #include "gba_shim.h"
@@ -29,20 +32,27 @@ unsigned char gPc_Oam[PC_OAM_SIZE];
 PcGbaRegs gPcRegs;
 volatile int gPcVBlankFlag = 0;
 
-// ~60Hz frame tick state for VBlankIntrWait pacing.
+// Fixed 60Hz logic-clock state for VBlankIntrWait pacing.
 static unsigned gPcFrameTick = 0;
 #ifndef HAVE_SDL2
 static clock_t gPcNextHeadlessTick = 0;
 #else
-static Uint32 gPcNextSdlTick = 0;
+static Uint64 gPcPerfFreq = 0;
+static double gPcNextLogicSec = 0.0;   // absolute deadline of the next logic tick
+static double gPcNextPresentSec = 0.0; // absolute deadline of the next present slot
+static double gPcPresentPeriod = 0.0;  // seconds between presents (0 = uncapped)
 #endif
 
 // Measured frame-rate instrumentation (--fps enables the rolling printf).
 static int gPcFpsLog = 0;
-static Uint32 gPcFpsLastTick = 0;
-static Uint32 gPcFpsWindowStart = 0;
-static unsigned gPcFpsWindowFrames = 0;
 static double gPcMeasuredFps = 0.0;
+#ifdef HAVE_SDL2
+static double gPcFpsWindowStart = 0.0;   // present-rate measurement window
+static unsigned gPcFpsWindowFrames = 0;
+static double gPcLogicWindowStart = 0.0; // logic-rate measurement window
+static unsigned gPcLogicWindowFrames = 0;
+static double gPcMeasuredLogicFps = 0.0;
+#endif
 
 // When set, VBlankIntrWait renders+paces to ~60Hz (interactive game driver).
 // Boot-stage script pumps (pre-title demos) run unpaced so they finish fast.
@@ -155,51 +165,124 @@ void CpuFastSet(const void *src, void *dest, u32 control) {
     memcpy(dest, src, count * 4u);
 }
 
+#ifdef HAVE_SDL2
+// Sleep until an absolute perf-counter deadline: SDL_Delay covers the bulk,
+// then the final sub-millisecond is busy-spun so the long-run rate lands
+// exactly on the deadline (SDL_Delay alone quantizes to ~1ms -> ~59fps).
+static void Pc_SleepUntil(double deadlineSec) {
+    for (;;) {
+        double now = (double)SDL_GetPerformanceCounter() / (double)gPcPerfFreq;
+        double remain = deadlineSec - now;
+        if (remain <= 0.0)
+            return;
+        if (remain > 0.002)
+            SDL_Delay((Uint32)((remain - 0.001) * 1000.0));
+    }
+}
+#endif
+
 void VBlankIntrWait(void) {
     // Host vblank boundary. Any synchronous game pump (title, menu, ground,
     // dungeon) blocks here once per logic frame. While pacing is enabled
-    // (gPcPaced) the host additionally refreshes the key state, composites+
-    // presents the frame the game has rendered, and throttles to ~60Hz so the
-    // game runs interactively. Boot-stage script pumps run unpaced (fast).
+    // (gPcPaced) the host:
+    //   1. refreshes key state,
+    //   2. composites+uploads the frame the game just rendered,
+    //   3. paces the GAME to exactly PC_TARGET_FPS with an absolute deadline
+    //      (never resets per frame, so render/overhead cost is absorbed into
+    //      the wait instead of stretching the game period),
+    //   4. presents that frame repeatedly at the display/present rate during
+    //      the wait window, so the game never runs faster than 60fps but the
+    //      renderer can follow a 120/144/240Hz display.
+    // Boot-stage script pumps run unpaced (fast).
     gPcVBlankFlag = 0;
     if (!gPcPaced)
         return;
 
+#ifdef HAVE_SDL2
+    if (gPcPerfFreq == 0)
+        gPcPerfFreq = SDL_GetPerformanceFrequency();
+    {
+        double now = (double)SDL_GetPerformanceCounter() / (double)gPcPerfFreq;
+        const double period = 1.0 / PC_TARGET_FPS;
+
+        // Absolute logic deadline: resync only after a real stall (load, pause,
+        // breakpoint), never every frame. Being late one frame (e.g. a vsync
+        // present overshooting) shortens the next window, keeping the average
+        // exactly PC_TARGET_FPS.
+        if (gPcNextLogicSec == 0.0 || now - gPcNextLogicSec > 0.25)
+            gPcNextLogicSec = now;
+        gPcNextLogicSec += period;
+
+        // Present rate for this tick's wait window. Reads the live config so a
+        // settings-menu change takes effect immediately. 0 = match display
+        // refresh, <0 = uncapped (benchmark), >0 = target Hz.
+        {
+            const PcVideoPrefs *vp = Pc_ConfigVideoPrefs();
+            int phz = vp->presentHz;
+            if (phz == 0) {
+                int disp = Pc_VideoDisplayHz();
+                phz = disp > 0 ? disp : (int)PC_TARGET_FPS;
+            }
+            gPcPresentPeriod = (phz < 0) ? 0.0 : (1.0 / phz);
+        }
+
+        // Logic-rate measurement (once per tick).
+        if (gPcFpsLog) {
+            if (gPcLogicWindowStart == 0.0)
+                gPcLogicWindowStart = now;
+            gPcLogicWindowFrames++;
+        }
+    }
+#endif
+
     Pc_InputPump();
-    Pc_VideoPresent();
+    Pc_VideoRenderAndUpload();
     gPcFrameTick++;
 
 #ifdef HAVE_SDL2
     {
-        // True 60Hz cadence via a deadline accumulator (~16.667ms per frame).
-        // Render time (Pc_VideoPresent above) is spent before this block and
-        // just fills part of the slot; the delay only sleeps the remainder so
-        // the renderer's cost never stretches the game-logic frame period.
-        // NOTE: SDL_Delay may oversleep by a few ms; a hard deadline keeps us
-        // bounded (never faster than 60Hz) which is the safe direction.
-        Uint32 now = SDL_GetTicks();
-        if (gPcNextSdlTick == 0 || (s32)(now - gPcNextSdlTick) >= 0)
-            gPcNextSdlTick = now;
-        gPcNextSdlTick += PC_FRAME_MS;
-        if ((s32)(gPcNextSdlTick - now) > 0)
-            SDL_Delay(gPcNextSdlTick - now);
-
-        // Rolling 60-frame FPS measurement (only active with --fps).
-        if (gPcFpsLog) {
-            now = SDL_GetTicks();
-            if (gPcFpsWindowStart == 0)
-                gPcFpsWindowStart = now;
-            gPcFpsWindowFrames++;
-            if (gPcFpsWindowFrames >= 60) {
-                Uint32 dt = now - gPcFpsWindowStart;
-                gPcMeasuredFps = dt ? (gPcFpsWindowFrames * 1000.0 / dt) : 0.0;
-                printf("fps: %.2f (%u frames in %ums)\n",
-                       gPcMeasuredFps, gPcFpsWindowFrames, dt);
-                gPcFpsWindowStart = 0;
-                gPcFpsWindowFrames = 0;
+        // Present loop until the next logic deadline. The first present happens
+        // right after upload; with vsync it blocks to the next refresh, without
+        // it we sleep to an absolute present slot. A present that overshoots the
+        // logic deadline simply ends the window (the deadline stays absolute).
+        double now;
+        for (;;) {
+            Pc_VideoPresentOnly();
+            now = (double)SDL_GetPerformanceCounter() / (double)gPcPerfFreq;
+            if (now >= gPcNextLogicSec)
+                break;
+            if (gPcPresentPeriod > 0.0) {
+                if (gPcNextPresentSec == 0.0 || now - gPcNextPresentSec > 0.25)
+                    gPcNextPresentSec = now;
+                gPcNextPresentSec += gPcPresentPeriod;
+                if (gPcNextPresentSec >= gPcNextLogicSec)
+                    break; // next slot would overshoot; window is done
+                Pc_SleepUntil(gPcNextPresentSec);
             }
-        } else if (gPcFpsWindowFrames == 0) {
-            gPcFpsLastTick = now;
+        }
+        // Land exactly on the logic deadline so the 60Hz average stays exact.
+        Pc_SleepUntil(gPcNextLogicSec);
+
+        // Rolling ~1s FPS measurement (only active with --fps).
+        if (gPcFpsLog) {
+            double nowUs = (double)SDL_GetPerformanceCounter() / (double)gPcPerfFreq;
+            if (gPcFpsWindowStart == 0.0)
+                gPcFpsWindowStart = nowUs;
+            gPcFpsWindowFrames++;
+            if (nowUs - gPcFpsWindowStart >= 1.0) {
+                if (gPcLogicWindowStart != 0.0) {
+                    double ldt = nowUs - gPcLogicWindowStart;
+                    if (ldt > 0.0)
+                        gPcMeasuredLogicFps = gPcLogicWindowFrames / ldt;
+                }
+                gPcMeasuredFps = gPcFpsWindowFrames / (nowUs - gPcFpsWindowStart);
+                printf("fps: present=%.2f logic=%.2f\n",
+                       gPcMeasuredFps, gPcMeasuredLogicFps);
+                gPcFpsWindowStart = 0.0;
+                gPcFpsWindowFrames = 0;
+                gPcLogicWindowStart = 0.0;
+                gPcLogicWindowFrames = 0;
+            }
         }
     }
 #else

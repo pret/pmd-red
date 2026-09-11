@@ -40,6 +40,8 @@ double Pc_MeasuredFps(void);            // last measured FPS (0 until first wind
 // ---- Video backend (video_pc.c) ----
 void Pc_VideoInit(int scale);      // init framebuffer/window (SDL if HAVE_SDL2)
 void Pc_VideoPresent(void);        // composite shadows -> screen, 240x160 scaled
+void Pc_VideoRenderAndUpload(void);// composite shadows + upload to texture (no present)
+void Pc_VideoPresentOnly(void);    // blit+present the current texture (no re-render)
 void Pc_VideoShutdown(void);
 void Pc_VideoDumpPPM(const char *path); // headless framebuffer dump (no SDL needed)
 void *Pc_VideoGetSdlWindow(void);   // SDL_Window* or NULL (headless / no SDL2)
@@ -53,6 +55,7 @@ void Pc_VideoSetScaleMode(int mode); // PC_SCALE_INTEGER/FIT/STRETCH
 void Pc_VideoSetSmoothing(int on);  // 0 nearest, 1 bilinear texture scaling
 void Pc_VideoSetLetterbox(int r, int g, int b); // backdrop color (0-255 each)
 void Pc_VideoResizeScale(int scale); // resize the window to 240*scale x 160*scale
+int Pc_VideoDisplayHz(void);         // detected display refresh (0 = unknown/headless)
 
 // ---- Input backend (input_pc.c) ----
 void Pc_InputInit(void);
