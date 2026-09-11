@@ -32,6 +32,10 @@
 #include "text_3.h"
 #include "run_dungeon.h"
 
+#ifdef PLATFORM_PC
+#include "pc_settings_menu.h"
+#endif
+
 static void PrintOthersMenuOptions(void);
 static void ShowGameOptionsMenu(void);
 static void ShowQuickSaveGiveUpMenu(void);
@@ -148,6 +152,7 @@ enum {
     GAME_OPTION_DUNGEON,
     GAME_OPTION_OTHERS,
     GAME_OPTION_DEFAULT,
+    GAME_OPTION_PC_SETTINGS, // PC port only
 };
 
 static void ShowGameOptionsMenu(void)
@@ -196,6 +201,11 @@ static void ShowGameOptionsMenu(void)
         else if (gDungeonMenu.menuIndex == GAME_OPTION_DEFAULT) {
             AskToResetToDefault();
         }
+#ifdef PLATFORM_PC
+        else if (gDungeonMenu.menuIndex == GAME_OPTION_PC_SETTINGS) {
+            ShowPcSettingsMenu_InDungeon();
+        }
+#endif
     }
 
     sub_803EAF0(0, NULL);
@@ -562,7 +572,7 @@ static void PrintQuickSaveMenuOptions(void)
 static void PrintGameOptions(void)
 {
     s32 optionsCount;
-    s32 y[3];
+    s32 y[4];
     WindowHeader header;
     WindowTemplates windows = {
         .id = {
@@ -586,6 +596,9 @@ static void PrintGameOptions(void)
     header.f3 = 0;
     gDungeonMenu.menuIndex = 0;
     optionsCount = 3;
+#ifdef PLATFORM_PC
+    optionsCount = 4;
+#endif
     gDungeonMenu.currPageEntries = optionsCount;
     gDungeonMenu.entriesPerPage = optionsCount;
     gDungeonMenu.currPage = 0;
@@ -607,11 +620,17 @@ static void PrintGameOptions(void)
     y[0] = GetMenuEntryYCoord(&gDungeonMenu, 0);
     y[1] = GetMenuEntryYCoord(&gDungeonMenu, 1);
     y[2] = GetMenuEntryYCoord(&gDungeonMenu, 2);
+#ifdef PLATFORM_PC
+    y[3] = GetMenuEntryYCoord(&gDungeonMenu, 3);
+#endif
     sub_80073B8(0);
     PrintFormattedStringOnWindow(16, 0, gGameOptionsTextPtr, 0, '\0');
     PrintFormattedStringOnWindow(8, y[0], gOptionsDungeonTextPtr, 0, '\0');
     PrintFormattedStringOnWindow(8, y[1], gOptionsOthersTextPtr, 0, '\0');
     PrintFormattedStringOnWindow(8, y[2], gUnknown_80FE748, 0, '\0');
+#ifdef PLATFORM_PC
+    PrintFormattedStringOnWindow(8, y[3], gFieldMenuPcSettingsPtr, 0, '\0');
+#endif
     sub_80073E0(0);
 }
 

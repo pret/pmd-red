@@ -12,6 +12,10 @@
 #include "string_format.h"
 #include "text_1.h"
 
+#ifdef PLATFORM_PC
+#include "pc_settings_menu.h"
+#endif
+
 enum
 {
     MENU_OPTION_DEFAULT = 1,
@@ -282,6 +286,13 @@ static void sub_801E0FC(void)
             else
                 SetOptionsMenuState(OPTIONS_MENU_CONFIRM_NEW_OPTIONS);
             break;
+#ifdef PLATFORM_PC
+        case 4: // "PC Settings" selected on the Game Options screen
+            sub_801E2C4();
+            ShowPcSettingsMenu_Field();
+            SetOptionsMenuState(6);
+            break;
+#endif
         case 0:
         case 1:
             break;

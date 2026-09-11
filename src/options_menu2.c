@@ -11,6 +11,10 @@
 #include "text_2.h"
 #include "text_3.h"
 
+#ifdef PLATFORM_PC
+#include "pc_settings_menu.h"
+#endif
+
 static EWRAM_INIT struct unkStruct_203B260 *sUnknown_203B260 = {NULL};
 
 #include "data/options_menu2.h"
@@ -27,10 +31,19 @@ bool8 sub_801E198(GameOptions *optionsMenu)
     sUnknown_203B260->unk48 = &sUnknown_203B260->unk4C.id[0];
     RestoreSavedWindows(&sUnknown_203B260->unk4C);
     sUnknown_203B260->unk4C.id[sUnknown_203B260->unk44] = sUnknown_80DC03C;
+#ifdef PLATFORM_PC
+    // Two rows: "Windows" plus a trailing "PC Settings" entry.
+    sub_8012D08(sUnknown_203B260->unk48, 2);
+#else
     sub_8012D08(sUnknown_203B260->unk48, 1);
+#endif
     ResetUnusedInputStruct();
     ShowWindows(&sUnknown_203B260->unk4C, TRUE, TRUE);
+#ifdef PLATFORM_PC
+    CreateMenuOnWindow(&sUnknown_203B260->input, 2, 2, sUnknown_203B260->unk44);
+#else
     CreateMenuOnWindow(&sUnknown_203B260->input, 1, 1, sUnknown_203B260->unk44);
+#endif
     nullsub_38();
     CreateOptionsMenu();
     return TRUE;
@@ -48,6 +61,10 @@ u32 sub_801E218(void)
             return 2;
         case INPUT_A_BUTTON:
             PlayMenuSoundEffect(MENU_SFX_ACCEPT);
+#ifdef PLATFORM_PC
+            if (sUnknown_203B260->input.menuIndex == 1)
+                return 4; // "PC Settings" row selected
+#endif
             return 3;
         case INPUT_DPAD_LEFT:
             if (sUnknown_203B260->input.menuIndex == 0) {
@@ -123,6 +140,11 @@ static void CreateOptionsMenu(void)
             AddDoubleUnderScoreHighlight(sUnknown_203B260->unk44, (sUnknown_203B260->optionsMenu->windowColor * 40) + 80, y + 10, length, COLOR_WHITE_2);
             break;
     }
+
+#ifdef PLATFORM_PC
+    y = GetMenuEntryYCoord(&sUnknown_203B260->input, 1);
+    PrintStringOnWindow(8, y, gFieldMenuPcSettingsPtr, sUnknown_203B260->unk44, 0);
+#endif
 
     sub_80073E0(sUnknown_203B260->unk44);
 }

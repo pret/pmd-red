@@ -1,8 +1,11 @@
 // src/pc_settings_menu.c - in-game (GBA UI) PC settings screen.
 //
-// PC-port only. Adds a "PC Settings" entry to the title-screen main menu,
-// opening Video / Audio / Controls sub-screens that edit the same pmd-red.ini
-// prefs the ImGui overlay owns. Boot stays ImGui-only.
+// PC-port only. Adds a "PC Settings" screen (Video / Audio / Controls) that
+// edits the same pmd-red.ini prefs the ImGui overlay owns. Boot stays
+// ImGui-only. Reachable from:
+//   - the title-screen main menu ("PC Settings" entry)
+//   - the field "Others" -> "Game Options" screen
+//   - the dungeon "Others" -> "Game Options" screen
 //
 // The whole file is PLATFORM_PC so the GBA/decomp build is untouched.
 #ifdef PLATFORM_PC
@@ -17,6 +20,9 @@
 #include "string_format.h"
 #include "text_1.h"
 #include "text_3.h"
+#include "dungeon_vram.h"
+
+const u8 *const gFieldMenuPcSettingsPtr = _("PC Settings");
 
 static const u8 sTextPcSettings[] = _("PC Settings");
 static const u8 sTextVideo[] = _("Video");
@@ -37,6 +43,14 @@ static const u8 sTextYes[] = _("Yes");
 static const u8 sTextEscCancels[] = _("Esc cancels");
 
 static MenuInputStruct sMenu;
+
+typedef enum {
+    PC_SETTINGS_CTX_TITLE,
+    PC_SETTINGS_CTX_FIELD,
+    PC_SETTINGS_CTX_DUNGEON,
+} PcSettingsContext;
+
+static PcSettingsContext sContext;
 
 enum {
     PC_SETTINGS_TOP_VIDEO,
@@ -65,7 +79,10 @@ enum {
 
 static void PcSettingsTick(void)
 {
-    Pc_FrameActions();
+    if (sContext == PC_SETTINGS_CTX_DUNGEON)
+        DungeonRunFrameActions(0x24);
+    else
+        Pc_FrameActions();
 }
 
 static void PcSettingsShowWindow(const u8 *headerText, s32 count, s32 width, s32 posX, s32 posY, s32 calcEntryHeight)
@@ -110,7 +127,10 @@ static void PcSettingsShowWindow(const u8 *headerText, s32 count, s32 width, s32
     header.width = 10;
 
     ResetUnusedInputStruct();
-    ShowWindows(&windows, TRUE, TRUE);
+    if (sContext == PC_SETTINGS_CTX_DUNGEON)
+        DungeonShowWindows(&windows, TRUE);
+    else
+        ShowWindows(&windows, TRUE, TRUE);
     sub_80137B0(&sMenu, 0);
     sub_80073B8(0);
     PrintStringOnWindow(16, 0, headerText, 0, 0);
@@ -119,7 +139,10 @@ static void PcSettingsShowWindow(const u8 *headerText, s32 count, s32 width, s32
 static void PcSettingsClearWindows(void)
 {
     ResetUnusedInputStruct();
-    ShowWindows(NULL, TRUE, TRUE);
+    if (sContext == PC_SETTINGS_CTX_DUNGEON)
+        sub_803EAF0(0, NULL);
+    else
+        ShowWindows(NULL, TRUE, TRUE);
 }
 
 // Wait for A (returns menuIndex) or B (returns -1). Handles up/down.
@@ -404,7 +427,10 @@ static void PcSettingsRunKeyCapture(s32 action)
     uPrompt[i] = '\0';
 
     ResetUnusedInputStruct();
-    ShowWindows(&windows, TRUE, TRUE);
+    if (sContext == PC_SETTINGS_CTX_DUNGEON)
+        DungeonShowWindows(&windows, TRUE);
+    else
+        ShowWindows(&windows, TRUE, TRUE);
     sub_80073B8(0);
     PrintStringOnWindow(8, 16, uPrompt, 0, 0);
     PrintStringOnWindow(8, 32, sTextEscCancels, 0, 0);
@@ -500,6 +526,19 @@ static void PcSettingsRun(void)
 
 void ShowPcSettingsMenu_AtTitle(void)
 {
+    sContext = PC_SETTINGS_CTX_TITLE;
+    PcSettingsRun();
+}
+
+void ShowPcSettingsMenu_Field(void)
+{
+    sContext = PC_SETTINGS_CTX_FIELD;
+    PcSettingsRun();
+}
+
+void ShowPcSettingsMenu_InDungeon(void)
+{
+    sContext = PC_SETTINGS_CTX_DUNGEON;
     PcSettingsRun();
 }
 
