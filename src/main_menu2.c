@@ -11,6 +11,10 @@
 #include "save.h"
 #include "text_1.h"
 
+#ifdef PLATFORM_PC
+#include "pc_settings_menu.h"
+#endif
+
 static EWRAM_INIT MainMenu2Work *sUnknown_203B34C = {NULL};
 static EWRAM_INIT u32 sUnknown_203B350 = {MENU_DEBUG};
 static EWRAM_INIT u32 sUnknown_203B354 = {MENU_SEND_ITEMS};
@@ -101,6 +105,16 @@ u32 UpdateMainMenu(void)
                 case MENU_DEBUG:
                     sUnknown_203B350 = nextMenu;
                     break;
+#ifdef PLATFORM_PC
+                case MENU_PC_SETTINGS:
+                    // Run the in-game PC settings here (blocking, it pumps its own
+                    // frames), then re-draw the main menu in place. Returning
+                    // MENU_NO_SCREEN_CHANGE keeps the title state machine untouched.
+                    ShowPcSettingsMenu_AtTitle();
+                    DrawMainMenu();
+                    nextMenu = MENU_NO_SCREEN_CHANGE;
+                    break;
+#endif
             }
             break;
         case 12:
@@ -199,6 +213,11 @@ static bool8 SetMainMenuText(void)
             // It won't be in the release version
             SetMenuItems(sUnknown_203B34C->unk4, &sUnknown_203B34C->unk144, 2, &sUnknown_80E5CB4, sUnknown_80E5D48, FALSE, 0, FALSE);
             break;
+#ifdef PLATFORM_PC
+        case MENU_PC_SETTINGS:
+            SetMenuItems(sUnknown_203B34C->unk4, &sUnknown_203B34C->unk144, 2, &sUnknown_80E5CB4, sPcSettingsDesc, FALSE, 0, FALSE);
+            break;
+#endif
         default:
             break;
     }
@@ -284,7 +303,12 @@ static void SetMainMenuItems(void)
     else {
         // New Game
         // Adventure Log
+        // (PC port adds a third "PC Settings" entry; the taller template fits it.)
+#ifdef PLATFORM_PC
+        SetMenuItems(sUnknown_203B34C->unk4, &sUnknown_203B34C->unk144, 0, &sPcSettingsMenuTplNoSave, sUnknown_80E59F8, TRUE, sUnknown_203B350, TRUE);
+#else
         SetMenuItems(sUnknown_203B34C->unk4, &sUnknown_203B34C->unk144, 0, &sUnknown_80E59E0, sUnknown_80E59F8, TRUE, sUnknown_203B350, TRUE);
+#endif
     }
 }
 

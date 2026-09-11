@@ -16,9 +16,25 @@ static const WindowTemplate sUnknown_80E59E0 = {
     NULL
 };
 
+#ifdef PLATFORM_PC
+// Same as sUnknown_80E59E0 but one tile taller: the no-save menu gains a third
+// entry ("PC Settings"), and 3 entries don't fit in a 3-tile window.
+static const WindowTemplate sPcSettingsMenuTplNoSave = {
+    0,
+    3,
+    2, 2,
+    10, 4,
+    4, 0,
+    NULL
+};
+#endif
+
 static const MenuItem sUnknown_80E59F8[] = {
     {_("New Game"), MENU_NEW_GAME},
     {_("Adventure Log"), MENU_ADVENTURE_LOG},
+#ifdef PLATFORM_PC
+    {_("PC Settings"), MENU_PC_SETTINGS},
+#endif
     {NULL, 0xFFDD},
 };
 
@@ -60,6 +76,9 @@ static const MenuItem sUnknown_80E5A90[] = {
     {_("Adventure Log"), MENU_ADVENTURE_LOG},
     {_("Friend Rescue"), MENU_FRIEND_RESCUE},
     {_("Trade Items"), MENU_TRADE_ITEMS},
+#ifdef PLATFORM_PC
+    {_("PC Settings"), MENU_PC_SETTINGS},
+#endif
     {NULL, 0xFFDD},
 };
 
@@ -70,6 +89,9 @@ static const MenuItem sUnknown_80E5AFC[] = {
     {_("Friend Rescue"), MENU_FRIEND_RESCUE},
     {_("Trade Items"), MENU_TRADE_ITEMS},
     {_("Wonder Mail"), MENU_WONDER_MAIL},
+#ifdef PLATFORM_PC
+    {_("PC Settings"), MENU_PC_SETTINGS},
+#endif
     {NULL, 0xFFDD},
 };
 
@@ -88,6 +110,9 @@ static const MenuItem sUnknown_80E5B4C[] = {
     {_("Adventure Log"), MENU_ADVENTURE_LOG},
     {_("Friend Rescue"), MENU_FRIEND_RESCUE},
     {_("Trade Items"), MENU_TRADE_ITEMS},
+#ifdef PLATFORM_PC
+    {_("PC Settings"), MENU_PC_SETTINGS},
+#endif
     {NULL, 0xFFDD},
 };
 
@@ -98,6 +123,9 @@ static const MenuItem sUnknown_80E5B8C[] = {
     {_("Friend Rescue"), MENU_FRIEND_RESCUE},
     {_("Trade Items"), MENU_TRADE_ITEMS},
     {_("Wonder Mail"), MENU_WONDER_MAIL},
+#ifdef PLATFORM_PC
+    {_("PC Settings"), MENU_PC_SETTINGS},
+#endif
     {NULL, 0xFFDD},
 };
 
@@ -116,6 +144,9 @@ static const MenuItem sUnknown_80E5BDC[] = {
     {_("Adventure Log"), MENU_ADVENTURE_LOG},
     {_("Friend Rescue"), MENU_FRIEND_RESCUE},
     {_("Trade Items"), MENU_TRADE_ITEMS},
+#ifdef PLATFORM_PC
+    {_("PC Settings"), MENU_PC_SETTINGS},
+#endif
     {NULL, 0xFFDD},
 };
 
@@ -126,6 +157,9 @@ static const MenuItem sUnknown_80E5C18[] = {
     {_("Friend Rescue"), MENU_FRIEND_RESCUE},
     {_("Trade Items"), MENU_TRADE_ITEMS},
     {_("Wonder Mail"), MENU_WONDER_MAIL},
+#ifdef PLATFORM_PC
+    {_("PC Settings"), MENU_PC_SETTINGS},
+#endif
     {NULL, 0xFFDD},
 };
 
@@ -225,3 +259,12 @@ static const MenuItem sUnknown_80E6030[] = {
     {_("go on an adventure to unknown worlds."), 0xFFDE},
     {NULL, 0xFFDD}
 };
+
+#ifdef PLATFORM_PC
+// Title-menu description shown when "PC Settings" is highlighted.
+static const MenuItem sPcSettingsDesc[] = {
+    {_("Adjust the PC port's video,"), 0xFFDE},
+    {_("audio and controls."), 0xFFDE},
+    {NULL, 0xFFDD}
+};
+#endif

@@ -26,11 +26,37 @@ static int sAutoStart = -1;
 static int sAutoDur = 0;
 static u16 sAutoKeys = 0;
 
+// Raw key capture for the in-game Controls settings screen.
+static int sKeyCaptureActive = 0;
+static int sKeyCaptureResult = 0; // 0 = waiting, 1 = captured, -1 = cancelled
+static int sKeyCaptured = -1;
+
 void Pc_SetAutopress(int startFrame, int durFrames, u16 keys)
 {
     sAutoStart = startFrame;
     sAutoDur = durFrames < 1 ? 1 : durFrames;
     sAutoKeys = keys;
+}
+
+void Pc_InputStartKeyCapture(void)
+{
+    sKeyCaptureActive = 1;
+    sKeyCaptureResult = 0;
+    sKeyCaptured = -1;
+#ifndef HAVE_SDL2
+    // No host events to wait for; report cancelled so the game never hangs.
+    sKeyCaptureResult = -1;
+#endif
+}
+
+int Pc_InputKeyCaptureResult(void)
+{
+    return sKeyCaptureResult;
+}
+
+int Pc_InputKeyCaptureScancode(void)
+{
+    return sKeyCaptured;
 }
 
 void Pc_InputInit(void) {
@@ -88,6 +114,16 @@ void Pc_InputPump(void) {
             Pc_UiProcessEvent(&ev); // F1 menu toggle + ImGui event feeding
             if (ev.type == SDL_QUIT) {
                 gPcQuit = 1;
+            }
+            // In-game Controls rebind: the next non-Esc keydown is the bind.
+            if (sKeyCaptureActive && ev.type == SDL_KEYDOWN && !ev.key.repeat) {
+                if (ev.key.keysym.scancode == SDL_SCANCODE_ESCAPE) {
+                    sKeyCaptureResult = -1;
+                } else {
+                    sKeyCaptured = (int)ev.key.keysym.scancode;
+                    sKeyCaptureResult = 1;
+                }
+                sKeyCaptureActive = 0;
             }
         }
 

@@ -33,6 +33,7 @@ enum MainMenuScreens
     MENU_DEBUG_FIELD_SCRIPT,
     MENU_DEBUG_DEBUG_MENU,
     MENU_DEBUG_UNKNOWN_1,
+    MENU_PC_SETTINGS = 53, // PC port: in-game Video/Audio/Controls screen
     MENU_NO_SCREEN_CHANGE = 65500 // (s16)-36
 };
 

@@ -65,6 +65,13 @@ int Pc_QuitRequested(void); // true when window close / quit requested
 void Pc_RequestQuit(void);  // request a clean shutdown (window close / Exit menu)
 void Pc_SetAutopress(int startFrame, int durFrames, u16 keys); // scripted key hold (CI)
 
+// Raw key capture for the in-game Controls settings screen. While a capture is
+// pending the next non-Esc keydown is recorded; the game polls the result each
+// frame (the frame tick pumps SDL events via Pc_InputPump).
+void Pc_InputStartKeyCapture(void);
+int  Pc_InputKeyCaptureResult(void);   // 0 = waiting, 1 = captured, -1 = cancelled
+int  Pc_InputKeyCaptureScancode(void); // SDL_Scancode captured (valid when result == 1)
+
 // ---- ImGui overlay backend (ui_pc.cpp) ----
 void Pc_UiInit(void);          // create context + SDL2/SDL_Renderer backends
 void Pc_UiShutdown(void);
