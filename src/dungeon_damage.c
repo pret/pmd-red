@@ -52,7 +52,7 @@
 
 static bool8 HandleDealingDamageInternal_Async(Entity *attacker, Entity *target, struct DamageStruct *r5, bool32 isFalseSwipe, bool32 giveExp, s16 dungeonExitReason_, s32 arg8);
 static bool8 sub_806E100(s48_16 *param_1, Entity *pokemon, Entity *target, u8 type, DamageStruct *dmgStruct);
-static void sub_806F500(void);
+static void ResetDamageCalcWorkingValues(void);
 static void sub_806F63C(Entity *param_1);
 
 static const u32 gUnknown_8106EFC[] = { 0, 0  };
@@ -777,7 +777,7 @@ static bool8 sub_806E100(s48_16 *param_1, Entity *pokemon, Entity *target, u8 ty
       if (F48_16_IsZero(param_1)) break;
       if (((normalOrFightingType) && (targetInfo->types[index] == TYPE_GHOST)) && (targetInfo->exposed == FALSE)) {
             effectiveness = EFFECTIVENESS_IMMUNE;
-            gDungeon->unk134.pokemonExposed = TRUE;
+            gDungeon->damageCalcWorkingValues.pokemonExposed = TRUE;
       }
       else {
             effectiveness = gTypeEffectivenessChart[type][targetInfo->types[index]];
@@ -786,7 +786,7 @@ static bool8 sub_806E100(s48_16 *param_1, Entity *pokemon, Entity *target, u8 ty
         F48_16_SMul(param_1,param_1,local_48[effectiveness]);
       }
       local_38[index] = effectiveness;
-      gDungeon->unk134.unk13C[index] = effectiveness;
+      gDungeon->damageCalcWorkingValues.unk13C[index] = effectiveness;
     }
 
     dmgStruct->typeEffectiveness = gEffectivenessChart[local_38[0]][local_38[1]];
@@ -798,11 +798,11 @@ static bool8 sub_806E100(s48_16 *param_1, Entity *pokemon, Entity *target, u8 ty
     }
 
     if (((type == TYPE_FIRE) || (type == TYPE_ICE)) && (AbilityIsActive(target,ABILITY_THICK_FAT))) {
-      gDungeon->unk134.unk16D = TRUE;
+      gDungeon->damageCalcWorkingValues.unk16D = TRUE;
       F48_16_SMul(param_1,param_1, &gUnknown_8106F1C);
     }
     if ((type == TYPE_FIRE) && (GetFlashFireStatus(target) != FLASH_FIRE_STATUS_NONE)) {
-      gDungeon->unk134.fill16E[0] = TRUE;
+      gDungeon->damageCalcWorkingValues.fill16E[0] = TRUE;
       FP48_16_FromS32(param_1,0);
       dmgStruct->typeEffectiveness = EFFECTIVENESS_IMMUNE;
       dmgStruct->isCrit = 0;
@@ -810,7 +810,7 @@ static bool8 sub_806E100(s48_16 *param_1, Entity *pokemon, Entity *target, u8 ty
       bVar4 = FALSE;
     }
     if ((type == TYPE_GROUND) && (AbilityIsActive(target, ABILITY_LEVITATE))) {
-      gDungeon->unk134.fill16E[1] = TRUE;
+      gDungeon->damageCalcWorkingValues.fill16E[1] = TRUE;
       FP48_16_FromS32(param_1,0);
       dmgStruct->typeEffectiveness = EFFECTIVENESS_IMMUNE;
       dmgStruct->isCrit = 0;
@@ -821,7 +821,7 @@ static bool8 sub_806E100(s48_16 *param_1, Entity *pokemon, Entity *target, u8 ty
       torrentFlag = pokemonInfo->maxHPStat / 4 >= pokemonInfo->HP;
       torrentVisualFlag = SetVisualFlags(pokemonInfo,0x80,torrentFlag);
       if (torrentFlag) {
-        gDungeon->unk134.fill16E[2] = TRUE;
+        gDungeon->damageCalcWorkingValues.fill16E[2] = TRUE;
         F48_16_SMul(param_1,param_1, &gUnknown_8106F0C);
       }
       if (torrentVisualFlag) {
@@ -833,7 +833,7 @@ static bool8 sub_806E100(s48_16 *param_1, Entity *pokemon, Entity *target, u8 ty
       overgrowFlag = pokemonInfo->maxHPStat / 4 >= pokemonInfo->HP;
       overgrowVisualFlag = SetVisualFlags(pokemonInfo,2,overgrowFlag);
       if (overgrowFlag) {
-        gDungeon->unk134.fill16E[3] = TRUE;
+        gDungeon->damageCalcWorkingValues.fill16E[3] = TRUE;
         F48_16_SMul(param_1,param_1, &gUnknown_8106F0C);
       }
       if (overgrowVisualFlag) {
@@ -845,7 +845,7 @@ static bool8 sub_806E100(s48_16 *param_1, Entity *pokemon, Entity *target, u8 ty
       swarmFlag = pokemonInfo->maxHPStat / 4 >= pokemonInfo->HP;
       swarmVisualFlag = SetVisualFlags(pokemonInfo,0x10,swarmFlag);
       if (swarmFlag) {
-        gDungeon->unk134.fill16E[4] = TRUE;
+        gDungeon->damageCalcWorkingValues.fill16E[4] = TRUE;
         F48_16_SMul(param_1,param_1, &gUnknown_8106F0C);
       }
       if (swarmVisualFlag) {
@@ -857,7 +857,7 @@ static bool8 sub_806E100(s48_16 *param_1, Entity *pokemon, Entity *target, u8 ty
       blazeFlag = pokemonInfo->maxHPStat / 4 >= pokemonInfo->HP;
       blazeVisualFlag = SetVisualFlags(pokemonInfo,0x20,blazeFlag);
       if (blazeFlag) {
-        gDungeon->unk134.fill16E[5] = TRUE;
+        gDungeon->damageCalcWorkingValues.fill16E[5] = TRUE;
         F48_16_SMul(param_1,param_1, &gUnknown_8106F0C);
       }
       if (blazeVisualFlag) {
@@ -866,45 +866,45 @@ static bool8 sub_806E100(s48_16 *param_1, Entity *pokemon, Entity *target, u8 ty
       }
     }
     if (!(F48_16_IsZero(param_1)) && (MonsterIsType(pokemon, type))) {
-      gDungeon->unk134.fill16E[6] = TRUE;
+      gDungeon->damageCalcWorkingValues.fill16E[6] = TRUE;
       F48_16_SMul(param_1,param_1, &gUnknown_8106F14);
     }
     weather = GetApparentWeather(pokemon);
     if (weather == WEATHER_SUNNY) {
       if (type == TYPE_FIRE) {
-        gDungeon->unk134.unk16C = TRUE;
+        gDungeon->damageCalcWorkingValues.unk16C = TRUE;
         F48_16_SMul(param_1,param_1, &gUnknown_8106F14);
       }
       else if (type == TYPE_WATER) {
-        gDungeon->unk134.unk16C = TRUE;
+        gDungeon->damageCalcWorkingValues.unk16C = TRUE;
         F48_16_SMul(param_1,param_1, &gUnknown_8106F1C);
       }
     }
     if (weather == WEATHER_RAIN) {
       if (type == TYPE_FIRE) {
-        gDungeon->unk134.unk16B = TRUE;
+        gDungeon->damageCalcWorkingValues.unk16B = TRUE;
         F48_16_SMul(param_1,param_1, &gUnknown_8106F1C);
       }
       else if (type == TYPE_WATER) {
-        gDungeon->unk134.unk16B = TRUE;
+        gDungeon->damageCalcWorkingValues.unk16B = TRUE;
         F48_16_SMul(param_1,param_1, &gUnknown_8106F14);
       }
     }
     if ((weather == WEATHER_CLOUDY) && (type != TYPE_NORMAL)) {
       static const s48_16 gUnknown_8106F64 = {0x0, 0xC000};
       F48_16_SMul(param_1,param_1, &gUnknown_8106F64);
-      gDungeon->unk134.unk16A = TRUE;
+      gDungeon->damageCalcWorkingValues.unk16A = TRUE;
     }
     if (((gDungeon->weather.mudSportTurns != 0) || (weather == WEATHER_FOG)) && (type == TYPE_ELECTRIC)) {
-      gDungeon->unk134.fill16E[7] = TRUE;
+      gDungeon->damageCalcWorkingValues.fill16E[7] = TRUE;
       F48_16_SMul(param_1,param_1, &gUnknown_8106F1C);
     }
     if ((gDungeon->weather.waterSportTurns != 0) && (type == TYPE_FIRE)) {
-      gDungeon->unk134.fill16E[8] = TRUE;
+      gDungeon->damageCalcWorkingValues.fill16E[8] = TRUE;
       F48_16_SMul(param_1,param_1, &gUnknown_8106F1C);
     }
     if ((type == TYPE_ELECTRIC) && (pokemonInfo->bideClassStatus.status == STATUS_CHARGING)) {
-      gDungeon->unk134.fill16E[9] = TRUE;
+      gDungeon->damageCalcWorkingValues.fill16E[9] = TRUE;
       F48_16_SMul(param_1,param_1, &gUnknown_8106F0C);
     }
   }
@@ -942,7 +942,7 @@ s32 WeightWeakTypePicker(Entity *user, Entity *target, u8 moveType)
         u32 typeEffectivenessMultipliers[NUM_EFFECTIVENESS] = {0, 1, 2, 4};
         if (checkExposed && targetData->types[i] == TYPE_GHOST && !targetData->exposed) {
             effectiveness = 0;
-            gDungeon->unk134.pokemonExposed = TRUE;
+            gDungeon->damageCalcWorkingValues.pokemonExposed = TRUE;
         }
         else {
             effectiveness = gTypeEffectivenessChart[moveType][targetData->types[i]];
@@ -1121,7 +1121,7 @@ void CalcDamage(Entity *attacker, Entity *target, u8 moveType, s32 movePower, s3
     EntityInfo *targetInfo = GetEntInfo(target);
     s32 splitIndex = (!IsTypePhysical(moveType)) ? 1 : 0;
 
-    sub_806F500();
+    ResetDamageCalcWorkingValues();
     if (!attackerInfo->isTeamLeader && FixedPointToInt(attackerInfo->belly) == 0) {
         SetDamageOne(dmgStruct, moveType);
     }
@@ -1148,13 +1148,13 @@ void CalcDamage(Entity *attacker, Entity *target, u8 moveType, s32 movePower, s3
         bool8 r5;
 
         dmgStruct->type = moveType;
-        gDungeon->unk134.unk134 = moveType;
-        gDungeon->unk134.unk138 = splitIndex;
+        gDungeon->damageCalcWorkingValues.unk134 = moveType;
+        gDungeon->damageCalcWorkingValues.unk138 = splitIndex;
 
         atkStatStage = attackerInfo->offensiveStages[splitIndex];
         if (arg_10 && moveType == TYPE_FIRE) {
             atkStatStage += attackerInfo->flashFireBoost;
-            gDungeon->unk134.unk140[2] = attackerInfo->flashFireBoost;
+            gDungeon->damageCalcWorkingValues.rawDamageFormulaValues[2] = attackerInfo->flashFireBoost;
         }
         if (attackerInfo->apparentID == MONSTER_DEOXYS_ATTACK) {
             atkStatStage += 2;
@@ -1169,15 +1169,15 @@ void CalcDamage(Entity *attacker, Entity *target, u8 moveType, s32 movePower, s3
         if (atkStatStage < 0) atkStatStage = 0;
         if (atkStatStage > 20) atkStatStage = 20;
 
-        gDungeon->unk134.unk13E[0] = atkStatStage;
-        gDungeon->unk134.unk140[0] = attackerInfo->atk[splitIndex] + movePower;
+        gDungeon->damageCalcWorkingValues.offensiveStages[0] = atkStatStage;
+        gDungeon->damageCalcWorkingValues.rawDamageFormulaValues[0] = attackerInfo->atk[splitIndex] + movePower;
         statCalc = s24_8_mul(IntToF248(attackerInfo->atk[splitIndex] + movePower), gAtkStatStageMultipliers[atkStatStage]);
         statCalc = s24_8_mul(statCalc, attackerInfo->offensiveMultipliers[splitIndex]);
         atkStat = F248ToInt(statCalc);
 
         defStatStage = targetInfo->defensiveStages[splitIndex];
         if (splitIndex == 0 && targetInfo->bideClassStatus.status == STATUS_SKULL_BASH) {
-            gDungeon->unk134.unk17A = 1;
+            gDungeon->damageCalcWorkingValues.unk17A = 1;
             defStatStage++;
         }
         if (targetInfo->apparentID == MONSTER_DEOXYS_ATTACK) {
@@ -1193,8 +1193,8 @@ void CalcDamage(Entity *attacker, Entity *target, u8 moveType, s32 movePower, s3
         if (defStatStage < 0) defStatStage = 0;
         if (defStatStage > 20) defStatStage = 20;
 
-        gDungeon->unk134.unk13E[1] = defStatStage;
-        gDungeon->unk134.unk140[1] = targetInfo->def[splitIndex];
+        gDungeon->damageCalcWorkingValues.offensiveStages[1] = defStatStage;
+        gDungeon->damageCalcWorkingValues.rawDamageFormulaValues[1] = targetInfo->def[splitIndex];
         statCalc = s24_8_mul(IntToF248(targetInfo->def[splitIndex]), gDefStatStageMultipliers[defStatStage]);
         statCalc = s24_8_mul(statCalc, targetInfo->defensiveMultipliers[splitIndex]);
         defStat = F248ToInt(statCalc);
@@ -1203,34 +1203,34 @@ void CalcDamage(Entity *attacker, Entity *target, u8 moveType, s32 movePower, s3
         if (splitIndex == 0) {
             if (HasHeldItem(attacker, ITEM_POWER_BAND)) {
                 atkStat += gPowerBandBoost;
-                gDungeon->unk134.unk160 += gPowerBandBoost;
+                gDungeon->damageCalcWorkingValues.unk160 += gPowerBandBoost;
             }
             if (HasHeldItem(attacker, ITEM_MUNCH_BELT)) {
                 atkStat += gMunchBeltBoost;
-                gDungeon->unk134.unk160 += gMunchBeltBoost;
+                gDungeon->damageCalcWorkingValues.unk160 += gMunchBeltBoost;
             }
             if (arg_10 && HasHeldItem(target, ITEM_DEF_SCARF)) {
                 defStat += gDefScarfBoost;
-                gDungeon->unk134.unk162 += gDefScarfBoost;
+                gDungeon->damageCalcWorkingValues.unk162 += gDefScarfBoost;
             }
         }
         else {
             if (arg_10 && HasHeldItem(target, ITEM_ZINC_BAND)) {
                 defStat += gZincBandBoost;
-                gDungeon->unk134.unk163 += gZincBandBoost;
+                gDungeon->damageCalcWorkingValues.unk163 += gZincBandBoost;
             }
             if (HasHeldItem(attacker, ITEM_SPECIAL_BAND)) {
                 atkStat += gSpecialBandBoost;
-                gDungeon->unk134.unk161 += gSpecialBandBoost;
+                gDungeon->damageCalcWorkingValues.unk161 += gSpecialBandBoost;
             }
             if (HasHeldItem(attacker, ITEM_MUNCH_BELT)) {
                 atkStat += gMunchBeltBoost;
-                gDungeon->unk134.unk161 += gMunchBeltBoost;
+                gDungeon->damageCalcWorkingValues.unk161 += gMunchBeltBoost;
             }
         }
 
-        gDungeon->unk134.unk140[3] = atkStat;
-        gDungeon->unk134.unk140[4] = defStat;
+        gDungeon->damageCalcWorkingValues.rawDamageFormulaValues[3] = atkStat;
+        gDungeon->damageCalcWorkingValues.rawDamageFormulaValues[4] = defStat;
         if (atkStat < 0) atkStat = 0;
         if (atkStat >= 999) atkStat = 999;
 
@@ -1257,8 +1257,8 @@ void CalcDamage(Entity *attacker, Entity *target, u8 moveType, s32 movePower, s3
             r6 = unkAtkStat2 / 3;
         }
         FP48_16_Add(&unkSp4, &unkSp1, &unkSp2);
-        gDungeon->unk134.unk140[5] = r6;
-        gDungeon->unk134.unk140[6] = FP48_16_ToS32(&unkSp4);
+        gDungeon->damageCalcWorkingValues.rawDamageFormulaValues[5] = r6;
+        gDungeon->damageCalcWorkingValues.rawDamageFormulaValues[6] = FP48_16_ToS32(&unkSp4);
         unkSp5 = unkSp4;
         unkSp7 = unkSp4;
         F48_16_SMul(&unkSp5, &unkSp5, &unkSp5);
@@ -1297,12 +1297,12 @@ void CalcDamage(Entity *attacker, Entity *target, u8 moveType, s32 movePower, s3
             if (splitIndex == 0 && targetInfo->reflectClassStatus.status == STATUS_REFLECT) {
                 sub_8041B74(target);
                 F48_16_SMul(&unkSp9, &unkSp9, &gUnknown_8106F1C);
-                gDungeon->unk134.unk166 = 1;
+                gDungeon->damageCalcWorkingValues.unk166 = 1;
             }
             if (splitIndex == 1 && targetInfo->reflectClassStatus.status == STATUS_LIGHT_SCREEN) {
                 sub_8041B5C(target);
                 F48_16_SMul(&unkSp9, &unkSp9, &gUnknown_8106F1C);
-                gDungeon->unk134.unk167 = 1;
+                gDungeon->damageCalcWorkingValues.unk167 = 1;
             }
         }
 
@@ -1319,20 +1319,20 @@ void CalcDamage(Entity *attacker, Entity *target, u8 moveType, s32 movePower, s3
 
             if (attackerInfo->sureShotClassStatus.status == STATUS_FOCUS_ENERGY) {
                 critOdds = 999;
-                gDungeon->unk134.unk168 = 1;
+                gDungeon->damageCalcWorkingValues.unk168 = 1;
             }
             else {
                 if (HasHeldItem(attacker, ITEM_SCOPE_LENS)) {
                     critOdds += gCritOddsScopeLensPatsyBand;
-                    gDungeon->unk134.unk164 = 1;
+                    gDungeon->damageCalcWorkingValues.unk164 = 1;
                 }
                 if (HasHeldItem(target, ITEM_PATSY_BAND)) {
                     critOdds += gCritOddsScopeLensPatsyBand;
-                    gDungeon->unk134.unk165 = 1;
+                    gDungeon->damageCalcWorkingValues.unk165 = 1;
                 }
                 if (r5 && IqSkillIsEnabled(attacker, IQ_TYPE_ADVANTAGE_MASTER)) {
                     critOdds = gCritOddsIqAdvantageMaster;
-                    gDungeon->unk134.unk169 = 1;
+                    gDungeon->damageCalcWorkingValues.unk169 = 1;
                 }
             }
             if (DungeonRandInt(100) < critOdds) {
@@ -1341,7 +1341,7 @@ void CalcDamage(Entity *attacker, Entity *target, u8 moveType, s32 movePower, s3
             }
         }
 
-        gDungeon->unk134.unk154 = FP48_16_ToS32(&unkSp8);
+        gDungeon->damageCalcWorkingValues.unk154 = FP48_16_ToS32(&unkSp8);
         F48_16_SMul(&unkSp8, &unkSp8, &unkSp9);
         {
             // Ugly hack needed to match
@@ -1351,14 +1351,14 @@ void CalcDamage(Entity *attacker, Entity *target, u8 moveType, s32 movePower, s3
             register s24_8 arg8_Match asm("r2");
             #endif // NONMATCHING
 
-            gDungeon->unk134.unk15C = arg8_Match = arg8;
+            gDungeon->damageCalcWorkingValues.unk15C = arg8_Match = arg8;
             FP48_16_FromF248(&unkSp10, arg8_Match);
             F48_16_SMul(&unkSp8, &unkSp8, &unkSp10);
         }
 
         // ALSO needed to match. unk694 chosen randomly and it worked with matching.
         ASM_MATCH_TRICK(gDungeon->unk644.unk50);
-        gDungeon->unk134.unk150 = FP48_16_ToS32(&unkSp8);
+        gDungeon->damageCalcWorkingValues.unk150 = FP48_16_ToS32(&unkSp8);
         {
             s32 rnd = DungeonRandInt(0x4000);
             unkSp9.hi = 0;
@@ -1368,7 +1368,7 @@ void CalcDamage(Entity *attacker, Entity *target, u8 moveType, s32 movePower, s3
         FP48_16_FromS32(&unkSp11, 100);
 
         F48_16_SMul(&unkSp9, &unkSp11, &unkSp9);
-        gDungeon->unk134.unk158 = FP48_16_ToS32(&unkSp9);
+        gDungeon->damageCalcWorkingValues.unk158 = FP48_16_ToS32(&unkSp9);
 
         dmgStruct->dmg = FP48_16_ToS32(&unkSp8);
         dmgStruct->residualDmgType = RESIDUAL_DAMAGE_REGULAR;
@@ -1506,55 +1506,55 @@ u8 sub_806F4A4(Entity *pokemon, u8 type)
     return TRUE;
 }
 
-static void sub_806F500(void)
+static void ResetDamageCalcWorkingValues(void)
 {
-    struct unkStruct_Dungeon134_sub *temp;
+    struct DamageCalcWorkingValues *damageCalcWorkingValues;
 
-    temp = &gDungeon->unk134;
+    damageCalcWorkingValues = &gDungeon->damageCalcWorkingValues;
 
-    temp->unk134 = 0;
-    temp->unk138 = 0;
-    temp->unk13C[0] = 0;
-    temp->unk13C[1] = 0;
-    temp->unk13E[0] = 0xA;
-    temp->unk13E[1] = 0xA;
-    temp->unk140[0] = 1;
-    temp->unk140[1] = 1;
-    temp->unk140[2] = 0;
-    temp->unk140[4] = 0;
-    temp->unk140[3] = 0;
-    temp->unk140[5] = 0;
-    temp->unk140[6] = 0;
-    temp->unk150 = 0;
-    temp->unk158 = 0;
-    temp->unk15C = F248_ZERO;
-    temp->unk160 = 0;
-    temp->unk161 = 0;
-    temp->unk162 = 0;
-    temp->unk163 = 0;
-    temp->unk164 = 0;
-    temp->unk165 = 0;
-    temp->unk166 = 0;
-    temp->unk167 = 0;
-    temp->unk168 = 0;
-    temp->unk169 = 0;
-    temp->unk16A = 0;
-    temp->unk16C = 0;
-    temp->unk16B = 0;
-    temp->unk16D = 0;
-    temp->fill16E[0] = 0;
-    temp->fill16E[1] = 0;
-    temp->fill16E[2] = 0;
-    temp->fill16E[3] = 0;
-    temp->fill16E[4] = 0;
-    temp->fill16E[5] = 0;
-    temp->fill16E[6] = 0;
-    temp->fill16E[7] = 0;
-    temp->fill16E[8] = 0;
-    temp->fill16E[9] = 0;
-    temp->fill16E[10] = 0;
-    temp->pokemonExposed = FALSE;
-    temp->unk17A = 0;
+    damageCalcWorkingValues->unk134 = 0;
+    damageCalcWorkingValues->unk138 = 0;
+    damageCalcWorkingValues->unk13C[0] = 0;
+    damageCalcWorkingValues->unk13C[1] = 0;
+    damageCalcWorkingValues->offensiveStages[0] = 0xA;
+    damageCalcWorkingValues->offensiveStages[1] = 0xA;
+    damageCalcWorkingValues->rawDamageFormulaValues[0] = 1;
+    damageCalcWorkingValues->rawDamageFormulaValues[1] = 1;
+    damageCalcWorkingValues->rawDamageFormulaValues[2] = 0;
+    damageCalcWorkingValues->rawDamageFormulaValues[4] = 0;
+    damageCalcWorkingValues->rawDamageFormulaValues[3] = 0;
+    damageCalcWorkingValues->rawDamageFormulaValues[5] = 0;
+    damageCalcWorkingValues->rawDamageFormulaValues[6] = 0;
+    damageCalcWorkingValues->unk150 = 0;
+    damageCalcWorkingValues->unk158 = 0;
+    damageCalcWorkingValues->unk15C = F248_ZERO;
+    damageCalcWorkingValues->unk160 = 0;
+    damageCalcWorkingValues->unk161 = 0;
+    damageCalcWorkingValues->unk162 = 0;
+    damageCalcWorkingValues->unk163 = 0;
+    damageCalcWorkingValues->unk164 = 0;
+    damageCalcWorkingValues->unk165 = 0;
+    damageCalcWorkingValues->unk166 = 0;
+    damageCalcWorkingValues->unk167 = 0;
+    damageCalcWorkingValues->unk168 = 0;
+    damageCalcWorkingValues->unk169 = 0;
+    damageCalcWorkingValues->unk16A = 0;
+    damageCalcWorkingValues->unk16C = 0;
+    damageCalcWorkingValues->unk16B = 0;
+    damageCalcWorkingValues->unk16D = 0;
+    damageCalcWorkingValues->fill16E[0] = 0;
+    damageCalcWorkingValues->fill16E[1] = 0;
+    damageCalcWorkingValues->fill16E[2] = 0;
+    damageCalcWorkingValues->fill16E[3] = 0;
+    damageCalcWorkingValues->fill16E[4] = 0;
+    damageCalcWorkingValues->fill16E[5] = 0;
+    damageCalcWorkingValues->fill16E[6] = 0;
+    damageCalcWorkingValues->fill16E[7] = 0;
+    damageCalcWorkingValues->fill16E[8] = 0;
+    damageCalcWorkingValues->fill16E[9] = 0;
+    damageCalcWorkingValues->fill16E[10] = 0;
+    damageCalcWorkingValues->pokemonExposed = FALSE;
+    damageCalcWorkingValues->unk17A = 0;
 }
 
 static const s32 gUnknown_8106F7C[] = {0, 0, 0, 1};
