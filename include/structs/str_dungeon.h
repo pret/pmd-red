@@ -164,13 +164,13 @@ typedef struct ItemSpawns
     s16 itemValues[NUMBER_OF_ITEM_IDS];
 } ItemSpawns;
 
-struct unkStruct_Dungeon134_sub
+struct DamageCalcWorkingValues
 {
     u8 unk134;
     u32 unk138;
     u8 unk13C[2];
-    u8 unk13E[2];
-    u16 unk140[7];
+    u8 offensiveStages[2];
+    u16 rawDamageFormulaValues[7];
     u32 unk150;
     u32 unk154;
     u32 unk158;
@@ -404,7 +404,8 @@ typedef struct Dungeon
     Entity *unkB8;
     Entity *unkBC;
     Entity unkC0;
-    struct unkStruct_Dungeon134_sub unk134;
+    // Intermediate values used when calculating damage. Many of these values are assigned but not read anywhere.
+    struct DamageCalcWorkingValues damageCalcWorkingValues;
     /* 0x17C */ RGB_Struct colorRamp[COLOR_RAMP_COUNT];
     /* 0x57C */ unkDungeon57C unk57C;
     /* 0x5C0 */ s32 unk5C0;
