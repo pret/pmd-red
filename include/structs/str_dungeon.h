@@ -175,10 +175,10 @@ struct DamageCalcWorkingValues
     u32 unk154;
     u32 unk158;
     s24_8 unk15C;
-    u8 unk160;
-    u8 unk161;
-    u8 unk162;
-    u8 unk163;
+    u8 atkItemBoost;
+    u8 spAtkItemBoost;
+    u8 defItemBoost;
+    u8 spDefItemBoost;
     u8 unk164;
     u8 unk165;
     u8 unk166;
