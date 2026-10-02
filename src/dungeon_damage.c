@@ -1203,29 +1203,29 @@ void CalcDamage(Entity *attacker, Entity *target, u8 moveType, s32 movePower, s3
         if (splitIndex == 0) {
             if (HasHeldItem(attacker, ITEM_POWER_BAND)) {
                 atkStat += gPowerBandBoost;
-                gDungeon->damageCalcWorkingValues.unk160 += gPowerBandBoost;
+                gDungeon->damageCalcWorkingValues.atkItemBoost += gPowerBandBoost;
             }
             if (HasHeldItem(attacker, ITEM_MUNCH_BELT)) {
                 atkStat += gMunchBeltBoost;
-                gDungeon->damageCalcWorkingValues.unk160 += gMunchBeltBoost;
+                gDungeon->damageCalcWorkingValues.atkItemBoost += gMunchBeltBoost;
             }
             if (arg_10 && HasHeldItem(target, ITEM_DEF_SCARF)) {
                 defStat += gDefScarfBoost;
-                gDungeon->damageCalcWorkingValues.unk162 += gDefScarfBoost;
+                gDungeon->damageCalcWorkingValues.defItemBoost += gDefScarfBoost;
             }
         }
         else {
             if (arg_10 && HasHeldItem(target, ITEM_ZINC_BAND)) {
                 defStat += gZincBandBoost;
-                gDungeon->damageCalcWorkingValues.unk163 += gZincBandBoost;
+                gDungeon->damageCalcWorkingValues.spDefItemBoost += gZincBandBoost;
             }
             if (HasHeldItem(attacker, ITEM_SPECIAL_BAND)) {
                 atkStat += gSpecialBandBoost;
-                gDungeon->damageCalcWorkingValues.unk161 += gSpecialBandBoost;
+                gDungeon->damageCalcWorkingValues.spAtkItemBoost += gSpecialBandBoost;
             }
             if (HasHeldItem(attacker, ITEM_MUNCH_BELT)) {
                 atkStat += gMunchBeltBoost;
-                gDungeon->damageCalcWorkingValues.unk161 += gMunchBeltBoost;
+                gDungeon->damageCalcWorkingValues.spAtkItemBoost += gMunchBeltBoost;
             }
         }
 
@@ -1528,10 +1528,10 @@ static void ResetDamageCalcWorkingValues(void)
     damageCalcWorkingValues->unk150 = 0;
     damageCalcWorkingValues->unk158 = 0;
     damageCalcWorkingValues->unk15C = F248_ZERO;
-    damageCalcWorkingValues->unk160 = 0;
-    damageCalcWorkingValues->unk161 = 0;
-    damageCalcWorkingValues->unk162 = 0;
-    damageCalcWorkingValues->unk163 = 0;
+    damageCalcWorkingValues->atkItemBoost = 0;
+    damageCalcWorkingValues->spAtkItemBoost = 0;
+    damageCalcWorkingValues->defItemBoost = 0;
+    damageCalcWorkingValues->spDefItemBoost = 0;
     damageCalcWorkingValues->unk164 = 0;
     damageCalcWorkingValues->unk165 = 0;
     damageCalcWorkingValues->unk166 = 0;
