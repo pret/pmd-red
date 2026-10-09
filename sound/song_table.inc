@@ -1,945 +1,954 @@
-	.align 2
+	.equiv MUSIC_PLAYER_BGM,0
+	.equiv MUSIC_PLAYER_SE1,1
+	.equiv MUSIC_PLAYER_SE2,2
+	.equiv MUSIC_PLAYER_SE3,3
+	.equiv MUSIC_PLAYER_SE4,4
+	.equiv MUSIC_PLAYER_SE5,5
+	.equiv MUSIC_PLAYER_SE6,6
+
+
+    .align 2
 gSongTable:: @ 9E866BC
-song seq_000,  0,  0
-song seq_001,  0,  0
-song seq_002,  0,  0
-song seq_003,  0,  0
-song seq_004,  0,  0
-song seq_005,  0,  0
-song seq_006,  0,  0
-song seq_007,  0,  0
-song seq_008,  0,  0
-song seq_009,  0,  0
-song seq_010,  0,  0
-song seq_011,  0,  0
-song seq_012,  0,  0
-song seq_013,  0,  0
-song seq_014,  0,  0
-song seq_015,  0,  0
-song seq_016,  0,  0
-song seq_017,  0,  0
-song seq_018,  0,  0
-song seq_019,  0,  0
-song seq_020,  0,  0
-song seq_021,  0,  0
-song seq_022,  0,  0
-song seq_023,  0,  0
-song seq_024,  0,  0
-song seq_025,  0,  0
-song seq_026,  0,  0
-song seq_027,  0,  0
-song seq_028,  0,  0
-song seq_029,  0,  0
-song seq_030,  0,  0
-song seq_031,  0,  0
-song seq_032,  0,  0
-song seq_033,  0,  0
-song seq_034,  0,  0
-song seq_035,  0,  0
-song seq_036,  0,  0
-song seq_037,  0,  0
-song seq_038,  0,  0
-song seq_039,  0,  0
-song seq_040,  0,  0
-song seq_041,  0,  0
-song seq_042,  0,  0
-song seq_043,  0,  0
-song seq_044,  0,  0
-song seq_045,  0,  0
-song seq_046,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song seq_050,  0,  0
-song seq_051,  0,  0
-song seq_052,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song seq_100,  0,  0
-song seq_101,  0,  0
-song seq_102,  0,  0
-song seq_103,  0,  0
-song seq_104,  0,  0
-song seq_105,  0,  0
-song seq_106,  0,  0
-song seq_107,  0,  0
-song seq_108,  0,  0
-song seq_109,  0,  0
-song seq_110,  0,  0
-song seq_111,  0,  0
-song seq_112,  0,  0
-song seq_113,  0,  0
-song seq_114,  0,  0
-song seq_115,  0,  0
-song seq_116,  0,  0
-song seq_117,  0,  0
-song seq_118,  0,  0
-song seq_119,  0,  0
-song seq_120,  0,  0
-song seq_121,  0,  0
-song seq_122,  0,  0
-song seq_123,  0,  0
-song seq_124,  0,  0
-song seq_125,  0,  0
-song seq_126,  0,  0
-song seq_127,  0,  0
-song seq_128,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song seq_200,  1,  1
-song seq_201,  1,  1
-song seq_202,  1,  1
-song seq_203,  1,  1
-song seq_204,  1,  1
-song seq_205,  1,  1
-song seq_206,  1,  1
-song seq_207,  1,  1
-song seq_208,  1,  1
-song empty_song,  0,  0
-song seq_210,  1,  1
-song seq_211,  1,  1
-song seq_212,  1,  1
-song seq_213,  1,  1
-song seq_214,  1,  1
-song seq_215,  1,  1
-song seq_216,  1,  1
-song seq_217,  1,  1
-song seq_218,  1,  1
-song seq_219,  1,  1
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song seq_301,  2,  2
-song seq_302,  2,  2
-song seq_303,  2,  2
-song seq_304,  2,  2
-song seq_305,  4,  4
-song seq_306,  2,  2
-song seq_307,  2,  2
-song seq_308,  2,  2
-song seq_309,  2,  2
-song seq_310,  2,  2
-song seq_311,  2,  2
-song seq_312,  6,  6
-song seq_313,  6,  6
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song seq_330,  2,  2
-song seq_331,  2,  2
-song seq_332,  5,  5
-song seq_333,  3,  3
-song empty_song,  0,  0
-song seq_335,  3,  3
-song seq_336,  3,  3
-song seq_337,  2,  2
-song seq_338,  2,  2
-song seq_339,  2,  2
-song seq_340,  5,  5
-song seq_341,  5,  5
-song seq_342,  2,  2
-song seq_343,  2,  2
-song seq_344,  5,  5
-song seq_345,  3,  3
-song seq_346,  3,  3
-song seq_347,  3,  3
-song seq_348,  3,  3
-song empty_song,  0,  0
-song empty_song,  0,  0
-song seq_351,  2,  2
-song seq_352,  4,  4
-song seq_353,  3,  3
-song seq_354,  2,  2
-song seq_355,  3,  3
-song seq_356,  2,  2
-song seq_357,  3,  3
-song seq_358,  2,  2
-song seq_359,  3,  3
-song seq_360,  3,  3
-song seq_361,  3,  3
-song seq_362,  2,  2
-song seq_363,  3,  3
-song seq_364,  2,  2
-song seq_365,  3,  3
-song seq_366,  3,  3
-song seq_367,  3,  3
-song seq_368,  2,  2
-song seq_369,  3,  3
-song seq_370,  4,  4
-song seq_371,  5,  5
-song seq_372,  5,  5
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song seq_390,  5,  5
-song seq_391,  5,  5
-song seq_392,  5,  5
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song seq_400,  3,  3
-song seq_401,  6,  6
-song seq_402,  5,  5
-song seq_403,  5,  5
-song seq_404,  2,  2
-song seq_405,  2,  2
-song seq_406,  6,  6
-song seq_407,  6,  6
-song seq_408,  6,  6
-song seq_409,  3,  3
-song seq_410,  3,  3
-song seq_411,  6,  6
-song seq_412,  6,  6
-song seq_413,  6,  6
-song seq_414,  6,  6
-song seq_415,  6,  6
-song seq_416,  6,  6
-song seq_417,  6,  6
-song seq_418,  6,  6
-song seq_419,  2,  2
-song seq_420,  3,  3
-song seq_421,  5,  5
-song seq_422,  5,  5
-song seq_423,  5,  5
-song seq_424,  5,  5
-song seq_425,  5,  5
-song seq_426,  5,  5
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song seq_450,  3,  3
-song seq_451,  3,  3
-song seq_452,  3,  3
-song seq_453,  3,  3
-song seq_454,  4,  4
-song seq_455,  2,  2
-song seq_456,  5,  5
-song seq_457,  2,  2
-song seq_458,  2,  2
-song seq_459,  5,  5
-song seq_460,  3,  3
-song seq_461,  5,  5
-song seq_462,  5,  5
-song seq_463,  2,  2
-song seq_464,  5,  5
-song seq_465,  2,  2
-song seq_466,  5,  5
-song seq_467,  5,  5
-song seq_468,  2,  2
-song seq_469,  2,  2
-song seq_470,  2,  2
-song seq_471,  2,  2
-song seq_472,  2,  2
-song seq_473,  5,  5
-song seq_474,  5,  5
-song seq_475,  5,  5
-song seq_476,  5,  5
-song seq_477,  5,  5
-song seq_478,  5,  5
-song seq_479,  5,  5
-song seq_480,  5,  5
-song seq_481,  5,  5
-song seq_482,  5,  5
-song seq_483,  5,  5
-song seq_484,  5,  5
-song seq_485,  5,  5
-song seq_486,  4,  4
-song seq_487,  5,  5
-song seq_488,  5,  5
-song seq_489,  5,  5
-song seq_490,  5,  5
-song seq_491,  5,  5
-song seq_492,  5,  5
-song seq_493,  5,  5
-song seq_494,  5,  5
-song seq_495,  5,  5
-song empty_song,  0,  0
-song seq_497,  3,  3
-song seq_498,  3,  3
-song seq_499,  5,  5
-song seq_500,  5,  5
-song seq_501,  5,  5
-song seq_502,  5,  5
-song seq_503,  5,  5
-song seq_504,  5,  5
-song seq_505,  5,  5
-song seq_506,  5,  5
-song seq_507,  5,  5
-song seq_508,  5,  5
-song seq_509,  5,  5
-song seq_510,  2,  2
-song seq_511,  5,  5
-song seq_512,  3,  3
-song seq_513,  5,  5
-song seq_514,  5,  5
-song seq_515,  3,  3
-song seq_516,  5,  5
-song seq_517,  5,  5
-song seq_518,  5,  5
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song empty_song,  0,  0
-song seq_600,  5,  5
-song seq_601,  5,  5
-song seq_602,  5,  5
-song seq_603,  5,  5
-song seq_604,  5,  5
-song seq_605,  5,  5
-song seq_606,  5,  5
-song seq_607,  3,  3
-song seq_608,  3,  3
-song seq_609,  3,  3
-song seq_610,  3,  3
-song seq_611,  5,  5
-song seq_612,  2,  2
-song seq_613,  2,  2
-song seq_614,  5,  5
-song seq_615,  5,  5
-song seq_616,  5,  5
-song seq_617,  5,  5
-song seq_618,  5,  5
-song seq_619,  5,  5
-song seq_620,  5,  5
-song seq_621,  5,  5
-song seq_622,  5,  5
-song seq_623,  5,  5
-song seq_624,  5,  5
-song seq_625,  5,  5
-song seq_626,  5,  5
-song seq_627,  5,  5
-song seq_628,  5,  5
-song seq_629,  5,  5
-song seq_630,  5,  5
-song seq_631,  5,  5
-song seq_632,  5,  5
-song seq_633,  5,  5
-song seq_634,  5,  5
-song seq_635,  5,  5
-song seq_636,  5,  5
-song seq_637,  5,  5
-song seq_638,  5,  5
-song seq_639,  5,  5
-song seq_640,  5,  5
-song seq_641,  5,  5
-song seq_642,  5,  5
-song seq_643,  5,  5
-song seq_644,  5,  5
-song seq_645,  5,  5
-song seq_646,  5,  5
-song seq_647,  5,  5
-song seq_648,  5,  5
-song seq_649,  5,  5
-song seq_650,  5,  5
-song seq_651,  5,  5
-song seq_652,  5,  5
-song seq_653,  5,  5
-song seq_654,  5,  5
-song seq_655,  5,  5
-song seq_656,  5,  5
-song seq_657,  5,  5
-song seq_658,  5,  5
-song seq_659,  5,  5
-song seq_660,  5,  5
-song seq_661,  5,  5
-song seq_662,  5,  5
-song seq_663,  5,  5
-song seq_664,  5,  5
-song seq_665,  5,  5
-song seq_666,  5,  5
-song seq_667,  5,  5
-song seq_668,  5,  5
-song seq_669,  5,  5
-song seq_670,  5,  5
-song seq_671,  5,  5
-song seq_672,  5,  5
-song seq_673,  5,  5
-song seq_674,  5,  5
-song seq_675,  5,  5
-song seq_676,  5,  5
-song seq_677,  5,  5
-song seq_678,  5,  5
-song seq_679,  5,  5
-song seq_680,  5,  5
-song seq_681,  5,  5
-song seq_682,  5,  5
-song seq_683,  5,  5
-song seq_684,  5,  5
-song seq_685,  5,  5
-song seq_686,  5,  5
-song seq_687,  5,  5
-song seq_688,  5,  5
-song seq_689,  5,  5
-song seq_690,  5,  5
-song seq_691,  5,  5
-song seq_692,  5,  5
-song seq_693,  5,  5
-song seq_694,  5,  5
-song seq_695,  5,  5
-song seq_696,  5,  5
-song seq_697,  5,  5
-song seq_698,  5,  5
-song seq_699,  5,  5
-song seq_700,  5,  5
-song seq_701,  5,  5
-song seq_702,  5,  5
-song seq_703,  5,  5
-song seq_704,  5,  5
-song seq_705,  5,  5
-song seq_706,  5,  5
-song seq_707,  5,  5
-song seq_708,  5,  5
-song seq_709,  5,  5
-song seq_710,  5,  5
-song seq_711,  5,  5
-song seq_712,  5,  5
-song seq_713,  5,  5
-song seq_714,  5,  5
-song seq_715,  5,  5
-song seq_716,  5,  5
-song seq_717,  5,  5
-song seq_718,  5,  5
-song seq_719,  5,  5
-song seq_720,  5,  5
-song seq_721,  5,  5
-song seq_722,  5,  5
-song seq_723,  5,  5
-song seq_724,  5,  5
-song seq_725,  5,  5
-song seq_726,  5,  5
-song seq_727,  5,  5
-song seq_728,  2,  2
-song seq_729,  5,  5
-song seq_730,  5,  5
-song seq_731,  5,  5
-song seq_732,  5,  5
-song seq_733,  5,  5
-song seq_734,  5,  5
-song seq_735,  5,  5
-song seq_736,  5,  5
-song seq_737,  5,  5
-song seq_738,  5,  5
-song seq_739,  5,  5
-song seq_740,  5,  5
-song seq_741,  5,  5
-song seq_742,  5,  5
-song seq_743,  5,  5
-song seq_744,  5,  5
-song seq_745,  5,  5
-song seq_746,  5,  5
-song seq_747,  5,  5
-song seq_748,  5,  5
-song seq_749,  5,  5
-song seq_750,  5,  5
-song seq_751,  5,  5
-song seq_752,  5,  5
-song seq_753,  5,  5
-song seq_754,  5,  5
-song seq_755,  5,  5
-song seq_756,  5,  5
-song seq_757,  5,  5
-song seq_758,  5,  5
-song seq_759,  5,  5
-song seq_760,  5,  5
-song seq_761,  5,  5
-song seq_762,  5,  5
-song seq_763,  5,  5
-song seq_764,  5,  5
-song seq_765,  5,  5
-song seq_766,  5,  5
-song seq_767,  5,  5
-song seq_768,  5,  5
-song seq_769,  2,  2
-song seq_770,  5,  5
-song seq_771,  5,  5
-song seq_772,  5,  5
-song seq_773,  5,  5
-song seq_774,  5,  5
-song seq_775,  5,  5
-song seq_776,  5,  5
-song seq_777,  5,  5
-song seq_778,  5,  5
-song seq_779,  5,  5
-song seq_780,  5,  5
-song seq_781,  5,  5
-song seq_782,  5,  5
-song seq_783,  5,  5
-song seq_784,  5,  5
-song seq_785,  5,  5
-song seq_786,  5,  5
-song seq_787,  5,  5
-song seq_788,  5,  5
-song seq_789,  5,  5
-song seq_790,  5,  5
-song seq_791,  5,  5
-song seq_792,  5,  5
-song seq_793,  5,  5
-song seq_794,  5,  5
-song seq_795,  5,  5
-song seq_796,  5,  5
-song seq_797,  5,  5
-song seq_798,  5,  5
-song seq_799,  5,  5
-song seq_800,  5,  5
-song seq_801,  5,  5
-song seq_802,  5,  5
-song seq_803,  5,  5
-song seq_804,  5,  5
-song seq_805,  5,  5
-song empty_song,  0,  0
-song seq_807,  5,  5
-song seq_808,  5,  5
-song seq_809,  5,  5
-song seq_810,  5,  5
-song seq_811,  5,  5
-song seq_812,  5,  5
-song seq_813,  5,  5
-song seq_814,  5,  5
-song seq_815,  5,  5
-song seq_816,  5,  5
-song seq_817,  5,  5
-song seq_818,  5,  5
-song seq_819,  5,  5
-song seq_820,  5,  5
-song seq_821,  5,  5
-song seq_822,  5,  5
-song seq_823,  5,  5
-song seq_824,  5,  5
-song seq_825,  5,  5
-song seq_826,  5,  5
-song seq_827,  5,  5
-song seq_828,  5,  5
-song seq_829,  5,  5
-song seq_830,  5,  5
-song seq_831,  5,  5
-song seq_832,  5,  5
-song seq_833,  5,  5
-song seq_834,  5,  5
-song seq_835,  5,  5
-song seq_836,  5,  5
-song seq_837,  5,  5
-song seq_838,  5,  5
-song seq_839,  5,  5
-song seq_840,  5,  5
-song seq_841,  5,  5
-song seq_842,  5,  5
-song seq_843,  5,  5
-song seq_844,  5,  5
-song seq_845,  5,  5
-song seq_846,  5,  5
-song seq_847,  5,  5
-song seq_848,  5,  5
-song seq_849,  5,  5
-song seq_850,  5,  5
-song seq_851,  5,  5
-song seq_852,  5,  5
-song seq_853,  5,  5
-song seq_854,  5,  5
-song seq_855,  5,  5
-song seq_856,  5,  5
-song seq_857,  5,  5
-song seq_858,  5,  5
-song seq_859,  5,  5
-song seq_860,  5,  5
-song seq_861,  5,  5
-song seq_862,  5,  5
-song seq_863,  5,  5
-song seq_864,  5,  5
-song seq_865,  5,  5
-song seq_866,  5,  5
-song seq_867,  5,  5
-song seq_868,  5,  5
-song seq_869,  5,  5
-song seq_870,  5,  5
-song seq_871,  5,  5
-song seq_872,  5,  5
-song seq_873,  5,  5
-song seq_874,  5,  5
-song seq_875,  5,  5
-song seq_876,  5,  5
-song seq_877,  5,  5
-song seq_878,  5,  5
-song seq_879,  5,  5
-song seq_880,  5,  5
-song seq_881,  5,  5
-song seq_882,  5,  5
-song seq_883,  5,  5
-song seq_884,  2,  2
-song seq_885,  5,  5
-song seq_886,  5,  5
-song seq_887,  5,  5
-song seq_888,  5,  5
-song seq_889,  5,  5
-song seq_890,  5,  5
-song seq_891,  5,  5
-song seq_892,  5,  5
-song seq_893,  5,  5
-song seq_894,  5,  5
-song seq_895,  5,  5
-song seq_896,  5,  5
-song seq_897,  5,  5
-song seq_898,  5,  5
-song seq_899,  5,  5
-song seq_900,  5,  5
-song seq_901,  2,  2
-song seq_902,  2,  2
-song seq_903,  2,  2
-song seq_904,  2,  2
-song seq_905,  2,  2
-song seq_906,  2,  2
-song seq_907,  3,  3
-song seq_908,  3,  3
-song seq_909,  2,  2
-song seq_910,  2,  2
-song seq_911,  2,  2
-song seq_912,  5,  5
-song seq_913,  5,  5
-song seq_914,  5,  5
-song seq_915,  5,  5
-song seq_916,  5,  5
-song seq_917,  5,  5
-song seq_918,  5,  5
-song seq_919,  5,  5
-song seq_920,  3,  3
-song seq_921,  3,  3
-song seq_922,  5,  5
-song seq_923,  3,  3
-song seq_924,  3,  3
-song seq_925,  5,  5
-song seq_926,  5,  5
-song seq_927,  6,  6
-song seq_928,  6,  6
-song seq_929,  2,  2
-song seq_930,  2,  2
-song seq_931,  2,  2
-song seq_932,  5,  5
-song seq_933,  6,  6
-song seq_934,  2,  2
-song seq_935,  3,  3
-song seq_936,  2,  2
-song seq_937,  2,  2
-song seq_938,  6,  6
-song seq_939,  6,  6
+    song seq_000, MUSIC_PLAYER_BGM,  0
+    song seq_001, MUSIC_PLAYER_BGM,  0
+    song seq_002, MUSIC_PLAYER_BGM,  0
+    song seq_003, MUSIC_PLAYER_BGM,  0
+    song seq_004, MUSIC_PLAYER_BGM,  0
+    song seq_005, MUSIC_PLAYER_BGM,  0
+    song seq_006, MUSIC_PLAYER_BGM,  0
+    song seq_007, MUSIC_PLAYER_BGM,  0
+    song seq_008, MUSIC_PLAYER_BGM,  0
+    song seq_009, MUSIC_PLAYER_BGM,  0
+    song seq_010, MUSIC_PLAYER_BGM,  0
+    song seq_011, MUSIC_PLAYER_BGM,  0
+    song seq_012, MUSIC_PLAYER_BGM,  0
+    song seq_013, MUSIC_PLAYER_BGM,  0
+    song seq_014, MUSIC_PLAYER_BGM,  0
+    song seq_015, MUSIC_PLAYER_BGM,  0
+    song seq_016, MUSIC_PLAYER_BGM,  0
+    song seq_017, MUSIC_PLAYER_BGM,  0
+    song seq_018, MUSIC_PLAYER_BGM,  0
+    song seq_019, MUSIC_PLAYER_BGM,  0
+    song seq_020, MUSIC_PLAYER_BGM,  0
+    song seq_021, MUSIC_PLAYER_BGM,  0
+    song seq_022, MUSIC_PLAYER_BGM,  0
+    song seq_023, MUSIC_PLAYER_BGM,  0
+    song seq_024, MUSIC_PLAYER_BGM,  0
+    song seq_025, MUSIC_PLAYER_BGM,  0
+    song seq_026, MUSIC_PLAYER_BGM,  0
+    song seq_027, MUSIC_PLAYER_BGM,  0
+    song seq_028, MUSIC_PLAYER_BGM,  0
+    song seq_029, MUSIC_PLAYER_BGM,  0
+    song seq_030, MUSIC_PLAYER_BGM,  0
+    song seq_031, MUSIC_PLAYER_BGM,  0
+    song seq_032, MUSIC_PLAYER_BGM,  0
+    song seq_033, MUSIC_PLAYER_BGM,  0
+    song seq_034, MUSIC_PLAYER_BGM,  0
+    song seq_035, MUSIC_PLAYER_BGM,  0
+    song seq_036, MUSIC_PLAYER_BGM,  0
+    song seq_037, MUSIC_PLAYER_BGM,  0
+    song seq_038, MUSIC_PLAYER_BGM,  0
+    song seq_039, MUSIC_PLAYER_BGM,  0
+    song seq_040, MUSIC_PLAYER_BGM,  0
+    song seq_041, MUSIC_PLAYER_BGM,  0
+    song seq_042, MUSIC_PLAYER_BGM,  0
+    song seq_043, MUSIC_PLAYER_BGM,  0
+    song seq_044, MUSIC_PLAYER_BGM,  0
+    song seq_045, MUSIC_PLAYER_BGM,  0
+    song seq_046, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song seq_050, MUSIC_PLAYER_BGM,  0
+    song seq_051, MUSIC_PLAYER_BGM,  0
+    song seq_052, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song seq_100, MUSIC_PLAYER_BGM,  0
+    song seq_101, MUSIC_PLAYER_BGM,  0
+    song seq_102, MUSIC_PLAYER_BGM,  0
+    song seq_103, MUSIC_PLAYER_BGM,  0
+    song seq_104, MUSIC_PLAYER_BGM,  0
+    song seq_105, MUSIC_PLAYER_BGM,  0
+    song seq_106, MUSIC_PLAYER_BGM,  0
+    song seq_107, MUSIC_PLAYER_BGM,  0
+    song seq_108, MUSIC_PLAYER_BGM,  0
+    song seq_109, MUSIC_PLAYER_BGM,  0
+    song seq_110, MUSIC_PLAYER_BGM,  0
+    song seq_111, MUSIC_PLAYER_BGM,  0
+    song seq_112, MUSIC_PLAYER_BGM,  0
+    song seq_113, MUSIC_PLAYER_BGM,  0
+    song seq_114, MUSIC_PLAYER_BGM,  0
+    song seq_115, MUSIC_PLAYER_BGM,  0
+    song seq_116, MUSIC_PLAYER_BGM,  0
+    song seq_117, MUSIC_PLAYER_BGM,  0
+    song seq_118, MUSIC_PLAYER_BGM,  0
+    song seq_119, MUSIC_PLAYER_BGM,  0
+    song seq_120, MUSIC_PLAYER_BGM,  0
+    song seq_121, MUSIC_PLAYER_BGM,  0
+    song seq_122, MUSIC_PLAYER_BGM,  0
+    song seq_123, MUSIC_PLAYER_BGM,  0
+    song seq_124, MUSIC_PLAYER_BGM,  0
+    song seq_125, MUSIC_PLAYER_BGM,  0
+    song seq_126, MUSIC_PLAYER_BGM,  0
+    song seq_127, MUSIC_PLAYER_BGM,  0
+    song seq_128, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song seq_200, MUSIC_PLAYER_SE1,  1
+    song seq_201, MUSIC_PLAYER_SE1,  1
+    song seq_202, MUSIC_PLAYER_SE1,  1
+    song seq_203, MUSIC_PLAYER_SE1,  1
+    song seq_204, MUSIC_PLAYER_SE1,  1
+    song seq_205, MUSIC_PLAYER_SE1,  1
+    song seq_206, MUSIC_PLAYER_SE1,  1
+    song seq_207, MUSIC_PLAYER_SE1,  1
+    song seq_208, MUSIC_PLAYER_SE1,  1
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song seq_210, MUSIC_PLAYER_SE1,  1
+    song seq_211, MUSIC_PLAYER_SE1,  1
+    song seq_212, MUSIC_PLAYER_SE1,  1
+    song seq_213, MUSIC_PLAYER_SE1,  1
+    song seq_214, MUSIC_PLAYER_SE1,  1
+    song seq_215, MUSIC_PLAYER_SE1,  1
+    song seq_216, MUSIC_PLAYER_SE1,  1
+    song seq_217, MUSIC_PLAYER_SE1,  1
+    song seq_218, MUSIC_PLAYER_SE1,  1
+    song seq_219, MUSIC_PLAYER_SE1,  1
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song seq_301, MUSIC_PLAYER_SE2,  2
+    song seq_302, MUSIC_PLAYER_SE2,  2
+    song seq_303, MUSIC_PLAYER_SE2,  2
+    song seq_304, MUSIC_PLAYER_SE2,  2
+    song seq_305, MUSIC_PLAYER_SE4,  4
+    song seq_306, MUSIC_PLAYER_SE2,  2
+    song seq_307, MUSIC_PLAYER_SE2,  2
+    song seq_308, MUSIC_PLAYER_SE2,  2
+    song seq_309, MUSIC_PLAYER_SE2,  2
+    song seq_310, MUSIC_PLAYER_SE2,  2
+    song seq_311, MUSIC_PLAYER_SE2,  2
+    song seq_312, MUSIC_PLAYER_SE6,  6
+    song seq_313, MUSIC_PLAYER_SE6,  6
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song seq_330, MUSIC_PLAYER_SE2,  2
+    song seq_331, MUSIC_PLAYER_SE2,  2
+    song seq_332, MUSIC_PLAYER_SE5,  5
+    song seq_333, MUSIC_PLAYER_SE3,  3
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song seq_335, MUSIC_PLAYER_SE3,  3
+    song seq_336, MUSIC_PLAYER_SE3,  3
+    song seq_337, MUSIC_PLAYER_SE2,  2
+    song seq_338, MUSIC_PLAYER_SE2,  2
+    song seq_339, MUSIC_PLAYER_SE2,  2
+    song seq_340, MUSIC_PLAYER_SE5,  5
+    song seq_341, MUSIC_PLAYER_SE5,  5
+    song seq_342, MUSIC_PLAYER_SE2,  2
+    song seq_343, MUSIC_PLAYER_SE2,  2
+    song seq_344, MUSIC_PLAYER_SE5,  5
+    song seq_345, MUSIC_PLAYER_SE3,  3
+    song seq_346, MUSIC_PLAYER_SE3,  3
+    song seq_347, MUSIC_PLAYER_SE3,  3
+    song seq_348, MUSIC_PLAYER_SE3,  3
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song seq_351, MUSIC_PLAYER_SE2,  2
+    song seq_352, MUSIC_PLAYER_SE4,  4
+    song seq_353, MUSIC_PLAYER_SE3,  3
+    song seq_354, MUSIC_PLAYER_SE2,  2
+    song seq_355, MUSIC_PLAYER_SE3,  3
+    song seq_356, MUSIC_PLAYER_SE2,  2
+    song seq_357, MUSIC_PLAYER_SE3,  3
+    song seq_358, MUSIC_PLAYER_SE2,  2
+    song seq_359, MUSIC_PLAYER_SE3,  3
+    song seq_360, MUSIC_PLAYER_SE3,  3
+    song seq_361, MUSIC_PLAYER_SE3,  3
+    song seq_362, MUSIC_PLAYER_SE2,  2
+    song seq_363, MUSIC_PLAYER_SE3,  3
+    song seq_364, MUSIC_PLAYER_SE2,  2
+    song seq_365, MUSIC_PLAYER_SE3,  3
+    song seq_366, MUSIC_PLAYER_SE3,  3
+    song seq_367, MUSIC_PLAYER_SE3,  3
+    song seq_368, MUSIC_PLAYER_SE2,  2
+    song seq_369, MUSIC_PLAYER_SE3,  3
+    song seq_370, MUSIC_PLAYER_SE4,  4
+    song seq_371, MUSIC_PLAYER_SE5,  5
+    song seq_372, MUSIC_PLAYER_SE5,  5
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song seq_390, MUSIC_PLAYER_SE5,  5
+    song seq_391, MUSIC_PLAYER_SE5,  5
+    song seq_392, MUSIC_PLAYER_SE5,  5
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song seq_400, MUSIC_PLAYER_SE3,  3
+    song seq_401, MUSIC_PLAYER_SE6,  6
+    song seq_402, MUSIC_PLAYER_SE5,  5
+    song seq_403, MUSIC_PLAYER_SE5,  5
+    song seq_404, MUSIC_PLAYER_SE2,  2
+    song seq_405, MUSIC_PLAYER_SE2,  2
+    song seq_406, MUSIC_PLAYER_SE6,  6
+    song seq_407, MUSIC_PLAYER_SE6,  6
+    song seq_408, MUSIC_PLAYER_SE6,  6
+    song seq_409, MUSIC_PLAYER_SE3,  3
+    song seq_410, MUSIC_PLAYER_SE3,  3
+    song seq_411, MUSIC_PLAYER_SE6,  6
+    song seq_412, MUSIC_PLAYER_SE6,  6
+    song seq_413, MUSIC_PLAYER_SE6,  6
+    song seq_414, MUSIC_PLAYER_SE6,  6
+    song seq_415, MUSIC_PLAYER_SE6,  6
+    song seq_416, MUSIC_PLAYER_SE6,  6
+    song seq_417, MUSIC_PLAYER_SE6,  6
+    song seq_418, MUSIC_PLAYER_SE6,  6
+    song seq_419, MUSIC_PLAYER_SE2,  2
+    song seq_420, MUSIC_PLAYER_SE3,  3
+    song seq_421, MUSIC_PLAYER_SE5,  5
+    song seq_422, MUSIC_PLAYER_SE5,  5
+    song seq_423, MUSIC_PLAYER_SE5,  5
+    song seq_424, MUSIC_PLAYER_SE5,  5
+    song seq_425, MUSIC_PLAYER_SE5,  5
+    song seq_426, MUSIC_PLAYER_SE5,  5
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song seq_450, MUSIC_PLAYER_SE3,  3
+    song seq_451, MUSIC_PLAYER_SE3,  3
+    song seq_452, MUSIC_PLAYER_SE3,  3
+    song seq_453, MUSIC_PLAYER_SE3,  3
+    song seq_454, MUSIC_PLAYER_SE4,  4
+    song seq_455, MUSIC_PLAYER_SE2,  2
+    song seq_456, MUSIC_PLAYER_SE5,  5
+    song seq_457, MUSIC_PLAYER_SE2,  2
+    song seq_458, MUSIC_PLAYER_SE2,  2
+    song seq_459, MUSIC_PLAYER_SE5,  5
+    song seq_460, MUSIC_PLAYER_SE3,  3
+    song seq_461, MUSIC_PLAYER_SE5,  5
+    song seq_462, MUSIC_PLAYER_SE5,  5
+    song seq_463, MUSIC_PLAYER_SE2,  2
+    song seq_464, MUSIC_PLAYER_SE5,  5
+    song seq_465, MUSIC_PLAYER_SE2,  2
+    song seq_466, MUSIC_PLAYER_SE5,  5
+    song seq_467, MUSIC_PLAYER_SE5,  5
+    song seq_468, MUSIC_PLAYER_SE2,  2
+    song seq_469, MUSIC_PLAYER_SE2,  2
+    song seq_470, MUSIC_PLAYER_SE2,  2
+    song seq_471, MUSIC_PLAYER_SE2,  2
+    song seq_472, MUSIC_PLAYER_SE2,  2
+    song seq_473, MUSIC_PLAYER_SE5,  5
+    song seq_474, MUSIC_PLAYER_SE5,  5
+    song seq_475, MUSIC_PLAYER_SE5,  5
+    song seq_476, MUSIC_PLAYER_SE5,  5
+    song seq_477, MUSIC_PLAYER_SE5,  5
+    song seq_478, MUSIC_PLAYER_SE5,  5
+    song seq_479, MUSIC_PLAYER_SE5,  5
+    song seq_480, MUSIC_PLAYER_SE5,  5
+    song seq_481, MUSIC_PLAYER_SE5,  5
+    song seq_482, MUSIC_PLAYER_SE5,  5
+    song seq_483, MUSIC_PLAYER_SE5,  5
+    song seq_484, MUSIC_PLAYER_SE5,  5
+    song seq_485, MUSIC_PLAYER_SE5,  5
+    song seq_486, MUSIC_PLAYER_SE4,  4
+    song seq_487, MUSIC_PLAYER_SE5,  5
+    song seq_488, MUSIC_PLAYER_SE5,  5
+    song seq_489, MUSIC_PLAYER_SE5,  5
+    song seq_490, MUSIC_PLAYER_SE5,  5
+    song seq_491, MUSIC_PLAYER_SE5,  5
+    song seq_492, MUSIC_PLAYER_SE5,  5
+    song seq_493, MUSIC_PLAYER_SE5,  5
+    song seq_494, MUSIC_PLAYER_SE5,  5
+    song seq_495, MUSIC_PLAYER_SE5,  5
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song seq_497, MUSIC_PLAYER_SE3,  3
+    song seq_498, MUSIC_PLAYER_SE3,  3
+    song seq_499, MUSIC_PLAYER_SE5,  5
+    song seq_500, MUSIC_PLAYER_SE5,  5
+    song seq_501, MUSIC_PLAYER_SE5,  5
+    song seq_502, MUSIC_PLAYER_SE5,  5
+    song seq_503, MUSIC_PLAYER_SE5,  5
+    song seq_504, MUSIC_PLAYER_SE5,  5
+    song seq_505, MUSIC_PLAYER_SE5,  5
+    song seq_506, MUSIC_PLAYER_SE5,  5
+    song seq_507, MUSIC_PLAYER_SE5,  5
+    song seq_508, MUSIC_PLAYER_SE5,  5
+    song seq_509, MUSIC_PLAYER_SE5,  5
+    song seq_510, MUSIC_PLAYER_SE2,  2
+    song seq_511, MUSIC_PLAYER_SE5,  5
+    song seq_512, MUSIC_PLAYER_SE3,  3
+    song seq_513, MUSIC_PLAYER_SE5,  5
+    song seq_514, MUSIC_PLAYER_SE5,  5
+    song seq_515, MUSIC_PLAYER_SE3,  3
+    song seq_516, MUSIC_PLAYER_SE5,  5
+    song seq_517, MUSIC_PLAYER_SE5,  5
+    song seq_518, MUSIC_PLAYER_SE5,  5
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song seq_600, MUSIC_PLAYER_SE5,  5
+    song seq_601, MUSIC_PLAYER_SE5,  5
+    song seq_602, MUSIC_PLAYER_SE5,  5
+    song seq_603, MUSIC_PLAYER_SE5,  5
+    song seq_604, MUSIC_PLAYER_SE5,  5
+    song seq_605, MUSIC_PLAYER_SE5,  5
+    song seq_606, MUSIC_PLAYER_SE5,  5
+    song seq_607, MUSIC_PLAYER_SE3,  3
+    song seq_608, MUSIC_PLAYER_SE3,  3
+    song seq_609, MUSIC_PLAYER_SE3,  3
+    song seq_610, MUSIC_PLAYER_SE3,  3
+    song seq_611, MUSIC_PLAYER_SE5,  5
+    song seq_612, MUSIC_PLAYER_SE2,  2
+    song seq_613, MUSIC_PLAYER_SE2,  2
+    song seq_614, MUSIC_PLAYER_SE5,  5
+    song seq_615, MUSIC_PLAYER_SE5,  5
+    song seq_616, MUSIC_PLAYER_SE5,  5
+    song seq_617, MUSIC_PLAYER_SE5,  5
+    song seq_618, MUSIC_PLAYER_SE5,  5
+    song seq_619, MUSIC_PLAYER_SE5,  5
+    song seq_620, MUSIC_PLAYER_SE5,  5
+    song seq_621, MUSIC_PLAYER_SE5,  5
+    song seq_622, MUSIC_PLAYER_SE5,  5
+    song seq_623, MUSIC_PLAYER_SE5,  5
+    song seq_624, MUSIC_PLAYER_SE5,  5
+    song seq_625, MUSIC_PLAYER_SE5,  5
+    song seq_626, MUSIC_PLAYER_SE5,  5
+    song seq_627, MUSIC_PLAYER_SE5,  5
+    song seq_628, MUSIC_PLAYER_SE5,  5
+    song seq_629, MUSIC_PLAYER_SE5,  5
+    song seq_630, MUSIC_PLAYER_SE5,  5
+    song seq_631, MUSIC_PLAYER_SE5,  5
+    song seq_632, MUSIC_PLAYER_SE5,  5
+    song seq_633, MUSIC_PLAYER_SE5,  5
+    song seq_634, MUSIC_PLAYER_SE5,  5
+    song seq_635, MUSIC_PLAYER_SE5,  5
+    song seq_636, MUSIC_PLAYER_SE5,  5
+    song seq_637, MUSIC_PLAYER_SE5,  5
+    song seq_638, MUSIC_PLAYER_SE5,  5
+    song seq_639, MUSIC_PLAYER_SE5,  5
+    song seq_640, MUSIC_PLAYER_SE5,  5
+    song seq_641, MUSIC_PLAYER_SE5,  5
+    song seq_642, MUSIC_PLAYER_SE5,  5
+    song seq_643, MUSIC_PLAYER_SE5,  5
+    song seq_644, MUSIC_PLAYER_SE5,  5
+    song seq_645, MUSIC_PLAYER_SE5,  5
+    song seq_646, MUSIC_PLAYER_SE5,  5
+    song seq_647, MUSIC_PLAYER_SE5,  5
+    song seq_648, MUSIC_PLAYER_SE5,  5
+    song seq_649, MUSIC_PLAYER_SE5,  5
+    song seq_650, MUSIC_PLAYER_SE5,  5
+    song seq_651, MUSIC_PLAYER_SE5,  5
+    song seq_652, MUSIC_PLAYER_SE5,  5
+    song seq_653, MUSIC_PLAYER_SE5,  5
+    song seq_654, MUSIC_PLAYER_SE5,  5
+    song seq_655, MUSIC_PLAYER_SE5,  5
+    song seq_656, MUSIC_PLAYER_SE5,  5
+    song seq_657, MUSIC_PLAYER_SE5,  5
+    song seq_658, MUSIC_PLAYER_SE5,  5
+    song seq_659, MUSIC_PLAYER_SE5,  5
+    song seq_660, MUSIC_PLAYER_SE5,  5
+    song seq_661, MUSIC_PLAYER_SE5,  5
+    song seq_662, MUSIC_PLAYER_SE5,  5
+    song seq_663, MUSIC_PLAYER_SE5,  5
+    song seq_664, MUSIC_PLAYER_SE5,  5
+    song seq_665, MUSIC_PLAYER_SE5,  5
+    song seq_666, MUSIC_PLAYER_SE5,  5
+    song seq_667, MUSIC_PLAYER_SE5,  5
+    song seq_668, MUSIC_PLAYER_SE5,  5
+    song seq_669, MUSIC_PLAYER_SE5,  5
+    song seq_670, MUSIC_PLAYER_SE5,  5
+    song seq_671, MUSIC_PLAYER_SE5,  5
+    song seq_672, MUSIC_PLAYER_SE5,  5
+    song seq_673, MUSIC_PLAYER_SE5,  5
+    song seq_674, MUSIC_PLAYER_SE5,  5
+    song seq_675, MUSIC_PLAYER_SE5,  5
+    song seq_676, MUSIC_PLAYER_SE5,  5
+    song seq_677, MUSIC_PLAYER_SE5,  5
+    song seq_678, MUSIC_PLAYER_SE5,  5
+    song seq_679, MUSIC_PLAYER_SE5,  5
+    song seq_680, MUSIC_PLAYER_SE5,  5
+    song seq_681, MUSIC_PLAYER_SE5,  5
+    song seq_682, MUSIC_PLAYER_SE5,  5
+    song seq_683, MUSIC_PLAYER_SE5,  5
+    song seq_684, MUSIC_PLAYER_SE5,  5
+    song seq_685, MUSIC_PLAYER_SE5,  5
+    song seq_686, MUSIC_PLAYER_SE5,  5
+    song seq_687, MUSIC_PLAYER_SE5,  5
+    song seq_688, MUSIC_PLAYER_SE5,  5
+    song seq_689, MUSIC_PLAYER_SE5,  5
+    song seq_690, MUSIC_PLAYER_SE5,  5
+    song seq_691, MUSIC_PLAYER_SE5,  5
+    song seq_692, MUSIC_PLAYER_SE5,  5
+    song seq_693, MUSIC_PLAYER_SE5,  5
+    song seq_694, MUSIC_PLAYER_SE5,  5
+    song seq_695, MUSIC_PLAYER_SE5,  5
+    song seq_696, MUSIC_PLAYER_SE5,  5
+    song seq_697, MUSIC_PLAYER_SE5,  5
+    song seq_698, MUSIC_PLAYER_SE5,  5
+    song seq_699, MUSIC_PLAYER_SE5,  5
+    song seq_700, MUSIC_PLAYER_SE5,  5
+    song seq_701, MUSIC_PLAYER_SE5,  5
+    song seq_702, MUSIC_PLAYER_SE5,  5
+    song seq_703, MUSIC_PLAYER_SE5,  5
+    song seq_704, MUSIC_PLAYER_SE5,  5
+    song seq_705, MUSIC_PLAYER_SE5,  5
+    song seq_706, MUSIC_PLAYER_SE5,  5
+    song seq_707, MUSIC_PLAYER_SE5,  5
+    song seq_708, MUSIC_PLAYER_SE5,  5
+    song seq_709, MUSIC_PLAYER_SE5,  5
+    song seq_710, MUSIC_PLAYER_SE5,  5
+    song seq_711, MUSIC_PLAYER_SE5,  5
+    song seq_712, MUSIC_PLAYER_SE5,  5
+    song seq_713, MUSIC_PLAYER_SE5,  5
+    song seq_714, MUSIC_PLAYER_SE5,  5
+    song seq_715, MUSIC_PLAYER_SE5,  5
+    song seq_716, MUSIC_PLAYER_SE5,  5
+    song seq_717, MUSIC_PLAYER_SE5,  5
+    song seq_718, MUSIC_PLAYER_SE5,  5
+    song seq_719, MUSIC_PLAYER_SE5,  5
+    song seq_720, MUSIC_PLAYER_SE5,  5
+    song seq_721, MUSIC_PLAYER_SE5,  5
+    song seq_722, MUSIC_PLAYER_SE5,  5
+    song seq_723, MUSIC_PLAYER_SE5,  5
+    song seq_724, MUSIC_PLAYER_SE5,  5
+    song seq_725, MUSIC_PLAYER_SE5,  5
+    song seq_726, MUSIC_PLAYER_SE5,  5
+    song seq_727, MUSIC_PLAYER_SE5,  5
+    song seq_728, MUSIC_PLAYER_SE2,  2
+    song seq_729, MUSIC_PLAYER_SE5,  5
+    song seq_730, MUSIC_PLAYER_SE5,  5
+    song seq_731, MUSIC_PLAYER_SE5,  5
+    song seq_732, MUSIC_PLAYER_SE5,  5
+    song seq_733, MUSIC_PLAYER_SE5,  5
+    song seq_734, MUSIC_PLAYER_SE5,  5
+    song seq_735, MUSIC_PLAYER_SE5,  5
+    song seq_736, MUSIC_PLAYER_SE5,  5
+    song seq_737, MUSIC_PLAYER_SE5,  5
+    song seq_738, MUSIC_PLAYER_SE5,  5
+    song seq_739, MUSIC_PLAYER_SE5,  5
+    song seq_740, MUSIC_PLAYER_SE5,  5
+    song seq_741, MUSIC_PLAYER_SE5,  5
+    song seq_742, MUSIC_PLAYER_SE5,  5
+    song seq_743, MUSIC_PLAYER_SE5,  5
+    song seq_744, MUSIC_PLAYER_SE5,  5
+    song seq_745, MUSIC_PLAYER_SE5,  5
+    song seq_746, MUSIC_PLAYER_SE5,  5
+    song seq_747, MUSIC_PLAYER_SE5,  5
+    song seq_748, MUSIC_PLAYER_SE5,  5
+    song seq_749, MUSIC_PLAYER_SE5,  5
+    song seq_750, MUSIC_PLAYER_SE5,  5
+    song seq_751, MUSIC_PLAYER_SE5,  5
+    song seq_752, MUSIC_PLAYER_SE5,  5
+    song seq_753, MUSIC_PLAYER_SE5,  5
+    song seq_754, MUSIC_PLAYER_SE5,  5
+    song seq_755, MUSIC_PLAYER_SE5,  5
+    song seq_756, MUSIC_PLAYER_SE5,  5
+    song seq_757, MUSIC_PLAYER_SE5,  5
+    song seq_758, MUSIC_PLAYER_SE5,  5
+    song seq_759, MUSIC_PLAYER_SE5,  5
+    song seq_760, MUSIC_PLAYER_SE5,  5
+    song seq_761, MUSIC_PLAYER_SE5,  5
+    song seq_762, MUSIC_PLAYER_SE5,  5
+    song seq_763, MUSIC_PLAYER_SE5,  5
+    song seq_764, MUSIC_PLAYER_SE5,  5
+    song seq_765, MUSIC_PLAYER_SE5,  5
+    song seq_766, MUSIC_PLAYER_SE5,  5
+    song seq_767, MUSIC_PLAYER_SE5,  5
+    song seq_768, MUSIC_PLAYER_SE5,  5
+    song seq_769, MUSIC_PLAYER_SE2,  2
+    song seq_770, MUSIC_PLAYER_SE5,  5
+    song seq_771, MUSIC_PLAYER_SE5,  5
+    song seq_772, MUSIC_PLAYER_SE5,  5
+    song seq_773, MUSIC_PLAYER_SE5,  5
+    song seq_774, MUSIC_PLAYER_SE5,  5
+    song seq_775, MUSIC_PLAYER_SE5,  5
+    song seq_776, MUSIC_PLAYER_SE5,  5
+    song seq_777, MUSIC_PLAYER_SE5,  5
+    song seq_778, MUSIC_PLAYER_SE5,  5
+    song seq_779, MUSIC_PLAYER_SE5,  5
+    song seq_780, MUSIC_PLAYER_SE5,  5
+    song seq_781, MUSIC_PLAYER_SE5,  5
+    song seq_782, MUSIC_PLAYER_SE5,  5
+    song seq_783, MUSIC_PLAYER_SE5,  5
+    song seq_784, MUSIC_PLAYER_SE5,  5
+    song seq_785, MUSIC_PLAYER_SE5,  5
+    song seq_786, MUSIC_PLAYER_SE5,  5
+    song seq_787, MUSIC_PLAYER_SE5,  5
+    song seq_788, MUSIC_PLAYER_SE5,  5
+    song seq_789, MUSIC_PLAYER_SE5,  5
+    song seq_790, MUSIC_PLAYER_SE5,  5
+    song seq_791, MUSIC_PLAYER_SE5,  5
+    song seq_792, MUSIC_PLAYER_SE5,  5
+    song seq_793, MUSIC_PLAYER_SE5,  5
+    song seq_794, MUSIC_PLAYER_SE5,  5
+    song seq_795, MUSIC_PLAYER_SE5,  5
+    song seq_796, MUSIC_PLAYER_SE5,  5
+    song seq_797, MUSIC_PLAYER_SE5,  5
+    song seq_798, MUSIC_PLAYER_SE5,  5
+    song seq_799, MUSIC_PLAYER_SE5,  5
+    song seq_800, MUSIC_PLAYER_SE5,  5
+    song seq_801, MUSIC_PLAYER_SE5,  5
+    song seq_802, MUSIC_PLAYER_SE5,  5
+    song seq_803, MUSIC_PLAYER_SE5,  5
+    song seq_804, MUSIC_PLAYER_SE5,  5
+    song seq_805, MUSIC_PLAYER_SE5,  5
+    song empty_song, MUSIC_PLAYER_BGM,  0
+    song seq_807, MUSIC_PLAYER_SE5,  5
+    song seq_808, MUSIC_PLAYER_SE5,  5
+    song seq_809, MUSIC_PLAYER_SE5,  5
+    song seq_810, MUSIC_PLAYER_SE5,  5
+    song seq_811, MUSIC_PLAYER_SE5,  5
+    song seq_812, MUSIC_PLAYER_SE5,  5
+    song seq_813, MUSIC_PLAYER_SE5,  5
+    song seq_814, MUSIC_PLAYER_SE5,  5
+    song seq_815, MUSIC_PLAYER_SE5,  5
+    song seq_816, MUSIC_PLAYER_SE5,  5
+    song seq_817, MUSIC_PLAYER_SE5,  5
+    song seq_818, MUSIC_PLAYER_SE5,  5
+    song seq_819, MUSIC_PLAYER_SE5,  5
+    song seq_820, MUSIC_PLAYER_SE5,  5
+    song seq_821, MUSIC_PLAYER_SE5,  5
+    song seq_822, MUSIC_PLAYER_SE5,  5
+    song seq_823, MUSIC_PLAYER_SE5,  5
+    song seq_824, MUSIC_PLAYER_SE5,  5
+    song seq_825, MUSIC_PLAYER_SE5,  5
+    song seq_826, MUSIC_PLAYER_SE5,  5
+    song seq_827, MUSIC_PLAYER_SE5,  5
+    song seq_828, MUSIC_PLAYER_SE5,  5
+    song seq_829, MUSIC_PLAYER_SE5,  5
+    song seq_830, MUSIC_PLAYER_SE5,  5
+    song seq_831, MUSIC_PLAYER_SE5,  5
+    song seq_832, MUSIC_PLAYER_SE5,  5
+    song seq_833, MUSIC_PLAYER_SE5,  5
+    song seq_834, MUSIC_PLAYER_SE5,  5
+    song seq_835, MUSIC_PLAYER_SE5,  5
+    song seq_836, MUSIC_PLAYER_SE5,  5
+    song seq_837, MUSIC_PLAYER_SE5,  5
+    song seq_838, MUSIC_PLAYER_SE5,  5
+    song seq_839, MUSIC_PLAYER_SE5,  5
+    song seq_840, MUSIC_PLAYER_SE5,  5
+    song seq_841, MUSIC_PLAYER_SE5,  5
+    song seq_842, MUSIC_PLAYER_SE5,  5
+    song seq_843, MUSIC_PLAYER_SE5,  5
+    song seq_844, MUSIC_PLAYER_SE5,  5
+    song seq_845, MUSIC_PLAYER_SE5,  5
+    song seq_846, MUSIC_PLAYER_SE5,  5
+    song seq_847, MUSIC_PLAYER_SE5,  5
+    song seq_848, MUSIC_PLAYER_SE5,  5
+    song seq_849, MUSIC_PLAYER_SE5,  5
+    song seq_850, MUSIC_PLAYER_SE5,  5
+    song seq_851, MUSIC_PLAYER_SE5,  5
+    song seq_852, MUSIC_PLAYER_SE5,  5
+    song seq_853, MUSIC_PLAYER_SE5,  5
+    song seq_854, MUSIC_PLAYER_SE5,  5
+    song seq_855, MUSIC_PLAYER_SE5,  5
+    song seq_856, MUSIC_PLAYER_SE5,  5
+    song seq_857, MUSIC_PLAYER_SE5,  5
+    song seq_858, MUSIC_PLAYER_SE5,  5
+    song seq_859, MUSIC_PLAYER_SE5,  5
+    song seq_860, MUSIC_PLAYER_SE5,  5
+    song seq_861, MUSIC_PLAYER_SE5,  5
+    song seq_862, MUSIC_PLAYER_SE5,  5
+    song seq_863, MUSIC_PLAYER_SE5,  5
+    song seq_864, MUSIC_PLAYER_SE5,  5
+    song seq_865, MUSIC_PLAYER_SE5,  5
+    song seq_866, MUSIC_PLAYER_SE5,  5
+    song seq_867, MUSIC_PLAYER_SE5,  5
+    song seq_868, MUSIC_PLAYER_SE5,  5
+    song seq_869, MUSIC_PLAYER_SE5,  5
+    song seq_870, MUSIC_PLAYER_SE5,  5
+    song seq_871, MUSIC_PLAYER_SE5,  5
+    song seq_872, MUSIC_PLAYER_SE5,  5
+    song seq_873, MUSIC_PLAYER_SE5,  5
+    song seq_874, MUSIC_PLAYER_SE5,  5
+    song seq_875, MUSIC_PLAYER_SE5,  5
+    song seq_876, MUSIC_PLAYER_SE5,  5
+    song seq_877, MUSIC_PLAYER_SE5,  5
+    song seq_878, MUSIC_PLAYER_SE5,  5
+    song seq_879, MUSIC_PLAYER_SE5,  5
+    song seq_880, MUSIC_PLAYER_SE5,  5
+    song seq_881, MUSIC_PLAYER_SE5,  5
+    song seq_882, MUSIC_PLAYER_SE5,  5
+    song seq_883, MUSIC_PLAYER_SE5,  5
+    song seq_884, MUSIC_PLAYER_SE2,  2
+    song seq_885, MUSIC_PLAYER_SE5,  5
+    song seq_886, MUSIC_PLAYER_SE5,  5
+    song seq_887, MUSIC_PLAYER_SE5,  5
+    song seq_888, MUSIC_PLAYER_SE5,  5
+    song seq_889, MUSIC_PLAYER_SE5,  5
+    song seq_890, MUSIC_PLAYER_SE5,  5
+    song seq_891, MUSIC_PLAYER_SE5,  5
+    song seq_892, MUSIC_PLAYER_SE5,  5
+    song seq_893, MUSIC_PLAYER_SE5,  5
+    song seq_894, MUSIC_PLAYER_SE5,  5
+    song seq_895, MUSIC_PLAYER_SE5,  5
+    song seq_896, MUSIC_PLAYER_SE5,  5
+    song seq_897, MUSIC_PLAYER_SE5,  5
+    song seq_898, MUSIC_PLAYER_SE5,  5
+    song seq_899, MUSIC_PLAYER_SE5,  5
+    song seq_900, MUSIC_PLAYER_SE5,  5
+    song seq_901, MUSIC_PLAYER_SE2,  2
+    song seq_902, MUSIC_PLAYER_SE2,  2
+    song seq_903, MUSIC_PLAYER_SE2,  2
+    song seq_904, MUSIC_PLAYER_SE2,  2
+    song seq_905, MUSIC_PLAYER_SE2,  2
+    song seq_906, MUSIC_PLAYER_SE2,  2
+    song seq_907, MUSIC_PLAYER_SE3,  3
+    song seq_908, MUSIC_PLAYER_SE3,  3
+    song seq_909, MUSIC_PLAYER_SE2,  2
+    song seq_910, MUSIC_PLAYER_SE2,  2
+    song seq_911, MUSIC_PLAYER_SE2,  2
+    song seq_912, MUSIC_PLAYER_SE5,  5
+    song seq_913, MUSIC_PLAYER_SE5,  5
+    song seq_914, MUSIC_PLAYER_SE5,  5
+    song seq_915, MUSIC_PLAYER_SE5,  5
+    song seq_916, MUSIC_PLAYER_SE5,  5
+    song seq_917, MUSIC_PLAYER_SE5,  5
+    song seq_918, MUSIC_PLAYER_SE5,  5
+    song seq_919, MUSIC_PLAYER_SE5,  5
+    song seq_920, MUSIC_PLAYER_SE3,  3
+    song seq_921, MUSIC_PLAYER_SE3,  3
+    song seq_922, MUSIC_PLAYER_SE5,  5
+    song seq_923, MUSIC_PLAYER_SE3,  3
+    song seq_924, MUSIC_PLAYER_SE3,  3
+    song seq_925, MUSIC_PLAYER_SE5,  5
+    song seq_926, MUSIC_PLAYER_SE5,  5
+    song seq_927, MUSIC_PLAYER_SE6,  6
+    song seq_928, MUSIC_PLAYER_SE6,  6
+    song seq_929, MUSIC_PLAYER_SE2,  2
+    song seq_930, MUSIC_PLAYER_SE2,  2
+    song seq_931, MUSIC_PLAYER_SE2,  2
+    song seq_932, MUSIC_PLAYER_SE5,  5
+    song seq_933, MUSIC_PLAYER_SE6,  6
+    song seq_934, MUSIC_PLAYER_SE2,  2
+    song seq_935, MUSIC_PLAYER_SE3,  3
+    song seq_936, MUSIC_PLAYER_SE2,  2
+    song seq_937, MUSIC_PLAYER_SE2,  2
+    song seq_938, MUSIC_PLAYER_SE6,  6
+    song seq_939, MUSIC_PLAYER_SE6,  6
 
 .align 2
 empty_song:
