@@ -339,7 +339,7 @@ static void WriteMonster(DataSerializer *seri, Entity *src)
     WriteBool8(seri, info->powerEars);
     WriteBool8(seri, info->scanning);
     WriteBool8(seri, info->stairSpotter);
-    WriteBool8(seri, info->pickup_flag);
+    WriteBool8(seri, info->pickupFlag);
     WriteBool8(seri, info->grudge);
     WriteU8(seri, info->expMultiplier);
     WriteBool8(seri, info->exposed);
@@ -1027,7 +1027,7 @@ static void ReadMonster(DataSerializer *seri, bool8 isTeamMember, s32 index)
     entInfo.powerEars = ReadBool8(seri);
     entInfo.scanning = ReadBool8(seri);
     entInfo.stairSpotter = ReadBool8(seri);
-    entInfo.pickup_flag = ReadBool8(seri);
+    entInfo.pickupFlag = ReadBool8(seri);
     entInfo.grudge = ReadBool8(seri);
     entInfo.expMultiplier = ReadU8(seri);
     entInfo.exposed = ReadBool8(seri);

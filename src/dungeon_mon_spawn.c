@@ -613,7 +613,7 @@ bool8 SpawnTeamMember(s16 _species, s32 x, s32 y, DungeonMon *monPtr, Entity **a
     entityInfo->maxBelly = monPtr->maxBelly;
     entityInfo->teamIndex = monPtr->unkC;
     entityInfo->heldItem = monPtr->itemSlot;
-    entityInfo->pickup_flag = FALSE;
+    entityInfo->pickupFlag = FALSE;
     entityInfo->unk64 = 0;
 
     // Pickup Check
@@ -625,7 +625,7 @@ bool8 SpawnTeamMember(s16 _species, s32 x, s32 y, DungeonMon *monPtr, Entity **a
         u32 pickUpItem = GetRandomFloorItem(0);
         if (pickUpItem != ITEM_POKE) {
             ItemIdToItem(&entityInfo->heldItem, pickUpItem, 0);
-            entityInfo->pickup_flag = TRUE;
+            entityInfo->pickupFlag = TRUE;
         }
     }
 

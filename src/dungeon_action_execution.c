@@ -66,7 +66,7 @@ bool8 ExecuteEntityDungeonAction_Async(Entity *entity)
     gUnknown_203B434 = TRUE;
     info = GetEntInfo(entity);
     info->useHeldItem = FALSE;
-    info->pickup_flag = FALSE;
+    info->pickupFlag = FALSE;
     gDungeon->unkB8 = entity;
     if (gUnknown_80F58F4[(info->action).action][0] != 0) {
         if (info->isTeamLeader) {

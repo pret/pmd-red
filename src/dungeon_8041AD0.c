@@ -1317,8 +1317,8 @@ void sub_80427AC(void)
         entity = gDungeon->activePokemon[i];
         if (EntityIsValid(entity)) {
             enInfo = GetEntInfo(entity);
-            if (enInfo->pickup_flag) {
-                enInfo->pickup_flag = FALSE;
+            if (enInfo->pickupFlag) {
+                enInfo->pickupFlag = FALSE;
                 sub_80429A0(entity);
                 if (!enInfo->isNotTeamMember) {
                     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], entity, 0);
