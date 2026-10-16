@@ -83,9 +83,7 @@ typedef struct BurnClassStatus
 typedef struct FrozenClassStatus
 {
     /* 0x0 */ u8 status;
-    /* 0x4 */ s32 constrictionAnimation; // Controls the animation that plays when taking damage from the constriction status.
-    // For some reason this is initalized to 0x22 (34)? Which is the animation used by
-    // the exclusive item Nether Veil. 
+    /* 0x4 */ s32 constrictionAnimation; // Controls the animation that plays when taking damage from the constriction status. For some reason this is initalized to 0x22 (34)?
     /* 0x8 */ u8 turns;
     /* 0x9 */ u8 damageCountdown;
 } FrozenClassStatus;
@@ -254,7 +252,7 @@ typedef struct EntityInfo
     /* 0xF0 */ bool8 powerEars;
     /* 0xF1 */ bool8 scanning;
     /* 0xF2 */ bool8 stairSpotter;
-    /* 0xF3 */ bool8 pickup_flag; // Set when initally spawning a team member with the ability Pickup. 
+    /* 0xF3 */ bool8 pickupFlag; // Set when initally spawning a team member with the ability Pickup.
     /* 0xF4 */ bool8 grudge;
     /* 0xF5 */ bool8 exposed;
     /* 0xF6 */ bool8 isColorChanged;
