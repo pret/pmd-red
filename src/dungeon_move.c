@@ -96,7 +96,7 @@ void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move *move, 
                 if (GetEntityType(snatchMon) == ENTITY_MONSTER
                     && snatchMon != attacker
                     && GetEntInfo(snatchMon)->dungeonSpriteId == gDungeon->unk17B3C
-                    && targetInfo->unkFF == 0)
+                    && targetInfo->twoTurnMoveInvincible == 0)
                 {
                     TryDisplayDungeonLoggableMessage3_Async(attacker, currTarget, gUnknown_80FCD28); // The move was snatched.
                     currTarget = snatchMon;
@@ -108,7 +108,7 @@ void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move *move, 
                     EntityInfo *lightRodInfo = GetEntInfo(lightRodMon);
                     if (lightRodInfo->dungeonSpriteId == gDungeon->unk17B38
                         && GetTreatmentBetweenMonsters(lightRodMon, attacker, TRUE, FALSE) == 1
-                        && ((targetInfo->unkFF == 0 && lightRodInfo->unkFF == 0) || currTarget == lightRodMon))
+                        && ((targetInfo->twoTurnMoveInvincible == 0 && lightRodInfo->twoTurnMoveInvincible == 0) || currTarget == lightRodMon))
                     {
                         sub_8042930(lightRodMon);
                         TryDisplayDungeonLoggableMessage3_Async(attacker, currTarget, gUnknown_80FCD0C); // A Lightningrod took the move
@@ -121,7 +121,7 @@ void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move *move, 
                 if (!CannotAttack(currTarget, FALSE)
                     && (GetMoveTargetAndRangeForPokemon(attacker, move, FALSE) & 0xF0) == 0
                     && FixedPointToInt(targetInfo->belly) >= gPassScarfBellyDownValue
-                    && targetInfo->unkFF == 0)
+                    && targetInfo->twoTurnMoveInvincible == 0)
                 {
                     s32 direction1 = targetInfo->action.direction;
                     s32 direction2 = targetInfo->action.direction;

@@ -174,7 +174,7 @@ bool8 sub_80701A4(Entity *pokemon)
                     }
                 }
             }
-            sub_8079764(pokemon);
+            EndTwoTurnMove(pokemon);
         }
         return FALSE;
   }

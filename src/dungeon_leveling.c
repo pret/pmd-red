@@ -432,7 +432,7 @@ static bool8 LevelUp(Entity *pokemon, Entity *target, u8 param_3, u8 param_4)
 
 
         LoadIQSkills(target);
-        sub_8079764(target);
+        EndTwoTurnMove(target);
 
         info->atk[0] = sNewAtkStats[0];
         info->atk[1] = sNewAtkStats[1];
@@ -526,7 +526,7 @@ static bool8 sub_80725A4(Entity *pokemon, Entity *target)
 
 
             LoadIQSkills(target);
-            sub_8079764(target);
+            EndTwoTurnMove(target);
 
             info->atk[0] = sNewAtkStats[0];
             info->atk[1] = sNewAtkStats[1];

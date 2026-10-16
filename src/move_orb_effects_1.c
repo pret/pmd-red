@@ -663,7 +663,7 @@ void SqueezedStatusTarget(Entity * pokemon, Entity * target, s32 param_3, bool32
       entityInfo->frozenClassStatus.status = STATUS_CONSTRICTION;
       entityInfo->frozenClassStatus.turns = CalculateStatusTurns(target,gConstrictionTurnRange,TRUE) + 1;
       entityInfo->frozenClassStatus.damageCountdown = 0;
-      entityInfo->frozenClassStatus.unk4 = param_3_s32;
+      entityInfo->frozenClassStatus.constrictionAnimation = param_3_s32;
       nullsub_71(target);
       TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FB628);
       sub_806CE94(target,8);

@@ -196,7 +196,7 @@ static s32 sub_8041550(Entity *entity, s32 a1, u8 a2, u8 a3, s32 a4, u8 a5)
     entInfo = GetEntInfo(entity);
     if (!sub_8042768(entity))
         return -1;
-    if (!a5 && entInfo->unkFF == 2)
+    if (!a5 && entInfo->twoTurnMoveInvincible == 2)
         return -1;
 
     if (a4 != 0) {
@@ -1317,8 +1317,8 @@ void sub_80427AC(void)
         entity = gDungeon->activePokemon[i];
         if (EntityIsValid(entity)) {
             enInfo = GetEntInfo(entity);
-            if (enInfo->unkF3) {
-                enInfo->unkF3 = FALSE;
+            if (enInfo->pickupFlag) {
+                enInfo->pickupFlag = FALSE;
                 sub_80429A0(entity);
                 if (!enInfo->isNotTeamMember) {
                     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], entity, 0);
@@ -1509,11 +1509,11 @@ static void sub_8042A84(s16 param_1, Entity *entity, u32 param_3)
     sub_804151C(entity,param_1_s16,0);
     DungeonWaitFrames_Async(param_3,0x42);
     do {
-      if (entity->unk1C > IntToF248(199.999)) break;
+      if (entity->elevation > IntToF248(199.999)) break;
       DungeonRunFrameActions(0x42);
-      entity->unk1C += + r6;
+      entity->elevation += + r6;
       r6 += IntToF248(1);
-      iVar3 = (entity->pixelPos.y - entity->unk1C) / 256;
+      iVar3 = (entity->pixelPos.y - entity->elevation) / 256;
     } while (-8 <= iVar3 - gDungeon->unk181e8.cameraPixelPos.y);
     entity->isVisible = 0;
     sub_804178C_Async(FALSE);

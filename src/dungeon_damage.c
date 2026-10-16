@@ -215,11 +215,11 @@ void HandleDealingDamage_Async(Entity *attacker, Entity *target, struct DamageSt
     if (r9) {
         EntityInfo *targetInfo = GetEntInfo(target);
         if (targetInfo->leechSeedClassStatus.status == STATUS_DESTINY_BOND) {
-            Entity *destBondTarget = gDungeon->activePokemon[targetInfo->leechSeedClassStatus.unk8];
+            Entity *destBondTarget = gDungeon->activePokemon[targetInfo->leechSeedClassStatus.monsterIndex];
             if (destBondTarget == NULL) {
                 targetInfo->leechSeedClassStatus.status = 0;
             }
-            else if (GetEntInfo(destBondTarget)->dungeonSpriteId != targetInfo->leechSeedClassStatus.unk4) {
+            else if (GetEntInfo(destBondTarget)->dungeonSpriteId != targetInfo->leechSeedClassStatus.applierID) {
                 targetInfo->leechSeedClassStatus.status = 0;
             }
             else {
@@ -679,7 +679,7 @@ static bool8 HandleDealingDamageInternal_Async(Entity *attacker, Entity *target,
             SetMonSeenFlag(targetData->id);
         }
         if (targetData->grudge) {
-            attackerData->unk14B = 1;
+            attackerData->hitGrudgeMonster = TRUE;
         }
 
         if (giveExp == TRUE) {

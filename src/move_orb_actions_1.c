@@ -117,7 +117,7 @@ bool8 DigMoveAction(Entity * pokemon, Entity * target, Move *move, s32 itemId)
     else {
         if (MoveMatchesBideClassStatus(pokemon,move)) {
             HandleDamagingMove(pokemon,target,move,gDigModifier,itemId);
-            sub_8079764(pokemon);
+            EndTwoTurnMove(pokemon);
         }
         else {
             SetChargeStatusTarget(pokemon,pokemon,STATUS_DIGGING,move,gUnknown_80FAD4C); // $m0 burrowed underground!
@@ -640,7 +640,7 @@ bool8 RazorWindMoveAction(Entity * pokemon, Entity * target, Move * move, s32 it
 
   if (MoveMatchesBideClassStatus(pokemon,move)) {
     flag = HandleDamagingMove(pokemon,target,move,gRazorWindModifier,itemId) ? TRUE : FALSE;
-    sub_8079764(pokemon);
+    EndTwoTurnMove(pokemon);
   }
   else {
     SetChargeStatusTarget(pokemon,pokemon,STATUS_RAZOR_WIND,move,gUnknown_80FAC54);
@@ -800,7 +800,7 @@ bool8 FocusPunchMoveAction(Entity * pokemon, Entity * target, Move * move, s32 i
 
   if (MoveMatchesBideClassStatus(pokemon,move)) {
     flag = HandleDamagingMove(pokemon,target,move,gFocusPunchModifier,itemId) ? TRUE : FALSE;
-    sub_8079764(pokemon);
+    EndTwoTurnMove(pokemon);
   }
   else {
     SetChargeStatusTarget(pokemon,pokemon,STATUS_FOCUS_PUNCH,move,gUnknown_80FACA4);

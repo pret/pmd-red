@@ -56,15 +56,15 @@ void SetChargeStatusTarget(Entity *pokemon, Entity *target, u8 newStatus, Move *
             break;
         }
       }
-      entityInfo->unk14A = 1;
+      entityInfo->usingChargedMove = TRUE;
 
       uVar5 = FALSE;
       if (newStatus == STATUS_FLYING || newStatus == STATUS_BOUNCING) {
-        entityInfo->unkFF = 1;
+        entityInfo->twoTurnMoveInvincible = 1;
         uVar5 = TRUE;
       }
       else if (newStatus == STATUS_DIVING || newStatus == STATUS_DIGGING) {
-        entityInfo->unkFF = 2;
+        entityInfo->twoTurnMoveInvincible = 2;
       }
       if (newStatus == STATUS_BIDE) {
         entityInfo->bideClassStatus.turns = CalculateStatusTurns(target,gBideTurnRange, FALSE) + 1;
@@ -80,7 +80,7 @@ void SetChargeStatusTarget(Entity *pokemon, Entity *target, u8 newStatus, Move *
       // TODO: this could probably be cleaner..
       for (index = 0, iVar8 = 0xc7ff; index < 400; index++) {
         bVar2 = TRUE;
-        if (entityInfo->unkFF == 1)
+        if (entityInfo->twoTurnMoveInvincible == 1)
             if(iVar7 = entityInfo->unk174, bVar2 = FALSE, iVar7 > iVar8) // unk174 -> u32 to s32
             {
                 bVar2 = TRUE;
@@ -94,7 +94,7 @@ void SetChargeStatusTarget(Entity *pokemon, Entity *target, u8 newStatus, Move *
   }
 }
 
-void sub_8079764(Entity * pokemon)
+void EndTwoTurnMove(Entity * pokemon)
 {
     EntityInfo *entityInfo;
 
@@ -102,8 +102,8 @@ void sub_8079764(Entity * pokemon)
         entityInfo = GetEntInfo(pokemon);
         if ((entityInfo->bideClassStatus.status != STATUS_BIDE) && (entityInfo->bideClassStatus.status != STATUS_ENRAGED)) {
             entityInfo->bideClassStatus.status = STATUS_NONE;
-            entityInfo->unk14A = 0;
-            entityInfo->unkFF = 0;
+            entityInfo->usingChargedMove = FALSE;
+            entityInfo->twoTurnMoveInvincible = 0;
         }
         UpdateStatusIconFlags(pokemon);
     }

@@ -339,7 +339,7 @@ static void WriteMonster(DataSerializer *seri, Entity *src)
     WriteBool8(seri, info->powerEars);
     WriteBool8(seri, info->scanning);
     WriteBool8(seri, info->stairSpotter);
-    WriteBool8(seri, info->unkF3);
+    WriteBool8(seri, info->pickupFlag);
     WriteBool8(seri, info->grudge);
     WriteU8(seri, info->expMultiplier);
     WriteBool8(seri, info->exposed);
@@ -349,7 +349,7 @@ static void WriteMonster(DataSerializer *seri, Entity *src)
     WriteBool8(seri, info->useHeldItem);
     WriteU8(seri, info->perishSongTurns);
     WriteU8(seri, info->unkFE);
-    WriteMonsterUnkFF(seri, info->unkFF);
+    WriteMonsterUnkFF(seri, info->twoTurnMoveInvincible);
     WriteDecoyAITracker(seri, info->decoyAITracker);
     WriteSpeedStage(seri, info->speedStage);
     WriteSpeedCounters(seri, info->speedUpCounters, NUM_SPEED_COUNTERS);
@@ -366,8 +366,8 @@ static void WriteMonster(DataSerializer *seri, Entity *src)
     WriteBool8(seri, info->bellyEmpty);
     WriteBool8(seri, info->attacking);
     WriteBool8(seri, info->unk149);
-    WriteBool8(seri, info->unk14A);
-    WriteBool8(seri, info->unk14B);
+    WriteBool8(seri, info->usingChargedMove);
+    WriteBool8(seri, info->hitGrudgeMonster);
     WriteBool8(seri, info->unk14C);
     WriteU16(seri, info->visualFlags);
     WriteU16(seri, info->previousVisualFlags);
@@ -584,7 +584,7 @@ static void WriteFrozenClassStatus(DataSerializer *seri, FrozenClassStatus *src)
     WriteBytes(seri, &src->status, 1);
     WriteU8(seri, src->turns);
     WriteU8(seri, src->damageCountdown);
-    WriteU32(seri, src->unk4);
+    WriteU32(seri, src->constrictionAnimation);
 }
 
 static void WriteCringeClassStatus(DataSerializer *seri, CringeClassStatus *src)
@@ -610,7 +610,7 @@ static void WriteCurseClassStatus(DataSerializer *seri, CurseClassStatus *src)
 {
     WriteBytes(seri, &src->status, 1);
     WriteBool8(seri, src->applierNonTeamMemberFlag);
-    WriteBool8(seri, src->unk2);
+    WriteBool8(seri, src->unkDecoyTracker);
     WriteU8(seri, src->turns);
     WriteU8(seri, src->damageCountdown);
 }
@@ -618,8 +618,8 @@ static void WriteCurseClassStatus(DataSerializer *seri, CurseClassStatus *src)
 static void WriteLeechSeedClassStatus(DataSerializer *seri, LeechSeedClassStatus *src)
 {
     WriteBytes(seri, &src->status, 1);
-    WriteU32(seri, src->unk4);
-    WriteU8(seri, src->unk8);
+    WriteU32(seri, src->applierID);
+    WriteU8(seri, src->monsterIndex);
     WriteU8(seri, src->turns);
     WriteU8(seri, src->damageCountdown);
 }
@@ -1027,7 +1027,7 @@ static void ReadMonster(DataSerializer *seri, bool8 isTeamMember, s32 index)
     entInfo.powerEars = ReadBool8(seri);
     entInfo.scanning = ReadBool8(seri);
     entInfo.stairSpotter = ReadBool8(seri);
-    entInfo.unkF3 = ReadBool8(seri);
+    entInfo.pickupFlag = ReadBool8(seri);
     entInfo.grudge = ReadBool8(seri);
     entInfo.expMultiplier = ReadU8(seri);
     entInfo.exposed = ReadBool8(seri);
@@ -1037,7 +1037,7 @@ static void ReadMonster(DataSerializer *seri, bool8 isTeamMember, s32 index)
     entInfo.useHeldItem = ReadBool8(seri);
     entInfo.perishSongTurns = ReadU8(seri);
     entInfo.unkFE = ReadU8(seri);
-    entInfo.unkFF = ReadMonsterUnkFF(seri);
+    entInfo.twoTurnMoveInvincible = ReadMonsterUnkFF(seri);
 
     entInfo.decoyAITracker = ReadDecoyAITracker(seri);
     entInfo.speedStage = ReadSpeedStage(seri);
@@ -1055,8 +1055,8 @@ static void ReadMonster(DataSerializer *seri, bool8 isTeamMember, s32 index)
     entInfo.bellyEmpty = ReadBool8(seri);
     entInfo.attacking = ReadBool8(seri);
     entInfo.unk149 = ReadBool8(seri);
-    entInfo.unk14A = ReadBool8(seri);
-    entInfo.unk14B = ReadBool8(seri);
+    entInfo.usingChargedMove = ReadBool8(seri);
+    entInfo.hitGrudgeMonster = ReadBool8(seri);
     entInfo.unk14C = ReadBool8(seri);
     entInfo.visualFlags = ReadU16(seri);
     entInfo.previousVisualFlags = ReadU16(seri);
@@ -1156,7 +1156,7 @@ static Entity* sub_80828E0(s16 id, s16 apparentID, s32 index)
     entity->axObj.unk45_orientation = 1;
     entity->axObj.unk47 = 1;
 
-    entity->unk1C = IntToF248(0);
+    entity->elevation = IntToF248(0);
     sub_8045ACC();
     entity->axObj.info.monster->unk167 = r4;
     entity->axObj.info.monster->unk168 = apparentBodySize;
@@ -1212,7 +1212,7 @@ Entity* sub_8082A08(s32 _species, s32 _apparentSpecies, s32 index)
     entity->axObj.unk45_orientation = 1;
     entity->axObj.unk47 = 1;
 
-    entity->unk1C = IntToF248(0);
+    entity->elevation = IntToF248(0);
     entity->axObj.info.monster->unk167 = validId;
     entity->axObj.info.monster->unk168 = apparentBodySize;
 
@@ -1380,7 +1380,7 @@ static void ReadFrozenClassStatus(DataSerializer *seri, FrozenClassStatus *dst)
     ReadBytes(seri, &dst->status, 1);
     dst->turns = ReadU8(seri);
     dst->damageCountdown = ReadU8(seri);
-    dst->unk4 = ReadU32(seri);
+    dst->constrictionAnimation = ReadU32(seri);
 }
 
 static void ReadCringeClassStatus(DataSerializer *seri, CringeClassStatus *dst)
@@ -1406,7 +1406,7 @@ static void ReadCurseClassStatus(DataSerializer *seri, CurseClassStatus *dst)
 {
     ReadBytes(seri, &dst->status, 1);
     dst->applierNonTeamMemberFlag = ReadBool8(seri);
-    dst->unk2 = ReadBool8(seri);
+    dst->unkDecoyTracker = ReadBool8(seri);
     dst->turns = ReadU8(seri);
     dst->damageCountdown = ReadU8(seri);
 }
@@ -1414,8 +1414,8 @@ static void ReadCurseClassStatus(DataSerializer *seri, CurseClassStatus *dst)
 static void ReadLeechSeedClassStatus(DataSerializer *seri, LeechSeedClassStatus *dst)
 {
     ReadBytes(seri, &dst->status, 1);
-    dst->unk4 = ReadU32(seri);
-    dst->unk8 = ReadU8(seri);
+    dst->applierID = ReadU32(seri);
+    dst->monsterIndex = ReadU8(seri);
     dst->turns = ReadU8(seri);
     dst->damageCountdown = ReadU8(seri);
 }

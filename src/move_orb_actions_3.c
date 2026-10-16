@@ -107,7 +107,7 @@ bool8 BounceMoveAction(Entity * pokemon,Entity * target,Move * move,s32 itemId)
         TryInflictParalysisStatus(pokemon, target, FALSE);
       }
     }
-    sub_8079764(pokemon);
+    EndTwoTurnMove(pokemon);
   }
   else {
     SetChargeStatusTarget(pokemon, pokemon, STATUS_BOUNCING, move, gUnknown_80FAD10);

@@ -83,7 +83,7 @@ typedef struct BurnClassStatus
 typedef struct FrozenClassStatus
 {
     /* 0x0 */ u8 status;
-    /* 0x4 */ s32 unk4;
+    /* 0x4 */ s32 constrictionAnimation; // Controls the animation that plays when taking damage from the constriction status. For some reason this is initalized to 0x22 (34)?
     /* 0x8 */ u8 turns;
     /* 0x9 */ u8 damageCountdown;
 } FrozenClassStatus;
@@ -115,7 +115,7 @@ typedef struct CurseClassStatus
 {
     /* 0x0 */ u8 status;
     /* 0x1 */ bool8 applierNonTeamMemberFlag; // True if the Pokémon is a decoy and a wild Pokémon (i.e., not an allied Pokémon).
-    /* 0x2 */ bool8 unk2;
+    /* 0x2 */ bool8 unkDecoyTracker; // Set to 1 on a Pokemon when inflicted with the Decoy status.
     /* 0x3 */ u8 turns;
     /* 0x4 */ u8 damageCountdown;
 } CurseClassStatus;
@@ -124,8 +124,8 @@ typedef struct CurseClassStatus
 typedef struct LeechSeedClassStatus
 {
     /* 0x0 */ u8 status;
-    /* 0x4 */ u32 unk4;
-    /* 0x8 */ u8 unk8;
+    /* 0x4 */ u32 applierID; // Used to track the statuses::statuses_unique_id of the relevant monster for statuses like Leech Seed and Destiny Bond. 
+    /* 0x8 */ u8 monsterIndex;
     /* 0x9 */ u8 turns;
     /* 0xA */ u8 damageCountdown;
 } LeechSeedClassStatus;
@@ -252,7 +252,7 @@ typedef struct EntityInfo
     /* 0xF0 */ bool8 powerEars;
     /* 0xF1 */ bool8 scanning;
     /* 0xF2 */ bool8 stairSpotter;
-    /* 0xF3 */ bool8 unkF3;
+    /* 0xF3 */ bool8 pickupFlag; // Set when initally spawning a team member with the ability Pickup.
     /* 0xF4 */ bool8 grudge;
     /* 0xF5 */ bool8 exposed;
     /* 0xF6 */ bool8 isColorChanged;
@@ -266,7 +266,7 @@ typedef struct EntityInfo
     /* 0xFC */ bool8 useHeldItem;
     /* 0xFD */ u8 perishSongTurns; // When this reaches 0, the Pokémon faints from Perish Song. Doubles as a bool for whether the Pokémon is afflicted by Perish Song.
     u8 unkFE;
-    u8 unkFF;
+    u8 twoTurnMoveInvincible;
     /* 0x100 */ u8 decoyAITracker; // If the Pokémon is targeting a decoy, this indicates whether the decoy target is a team or wild Pokémon.
     /* 0x104 */ s32 speedStage;
     // The turn counter for movement speed up/down is split into five timers each. Multiple timers are used if the Pokémon is affected by multiple
@@ -287,8 +287,8 @@ typedef struct EntityInfo
     /* 0x147 */ bool8 waiting; // True if an AI Pokémon decided to do nothing this turn.
     /* 0x148 */ bool8 attacking;
     /* 0x149 */ u8 unk149;
-    /* 0x14A */ u8 unk14A;
-    /* 0x14B */ u8 unk14B;
+    /* 0x14A */ bool8 usingChargedMove; // True if using a charged move. Changed together with bide status
+    /* 0x14B */ bool8 hitGrudgeMonster;
     /* 0x14C */ u8 unk14C;
     /* 0x14E */ u16 visualFlags;
     /* 0x150 */ u16 previousVisualFlags;
@@ -340,7 +340,7 @@ typedef struct Entity
     // X = (posWorld * 24 + 16) * 256, while Y = (posWorld * 24 + 12) * 256.
     /* 0xC */ PixelPos pixelPos;
     /* 0x14 */ PixelPos prevPixelPos;
-    /* 0x1C */ s24_8 unk1C;
+    /* 0x1C */ s24_8 elevation; // Graphical parameter for elevation above the ground.
     /* 0x20 */ bool8 isVisible; // Turned off when a Pokémon faints.
     u8 unk21;
     u8 unk22;
