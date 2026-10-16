@@ -316,7 +316,7 @@ bool8 SkullBashMoveAction(Entity * pokemon, Entity * target, Move * move, s32 it
 
     if (MoveMatchesBideClassStatus(pokemon,move)) {
         flag = HandleDamagingMove(pokemon,target,move,gSkullBashModifier,itemId) != 0 ? 1 : 0;
-        sub_8079764(pokemon);
+        EndTwoTurnMove(pokemon);
     }
     else {
         SetChargeStatusTarget(pokemon,target,STATUS_SKULL_BASH,move,gUnknown_80FAFF0);

@@ -66,7 +66,7 @@ bool8 ExecuteEntityDungeonAction_Async(Entity *entity)
     gUnknown_203B434 = TRUE;
     info = GetEntInfo(entity);
     info->useHeldItem = FALSE;
-    info->unkF3 = FALSE;
+    info->pickup_flag = FALSE;
     gDungeon->unkB8 = entity;
     if (gUnknown_80F58F4[(info->action).action][0] != 0) {
         if (info->isTeamLeader) {
@@ -77,7 +77,7 @@ bool8 ExecuteEntityDungeonAction_Async(Entity *entity)
         }
     }
     if (CannotAttack(entity, FALSE) && IsChargingAnyTwoTurnMove(entity, TRUE)) {
-        sub_8079764(entity);
+        EndTwoTurnMove(entity);
     }
 
     for(index = 0; index < MAX_MON_MOVES; index++)
@@ -109,7 +109,7 @@ bool8 ExecuteEntityDungeonAction_Async(Entity *entity)
         info->attacking = TRUE;
     }
     bVar14 = FALSE;
-    info->unk14A = 0;
+    info->usingChargedMove = FALSE;
     gUnknown_202F221 = 0;
     gUnknown_202F222 = 0;
     switch(info->action.action) {
@@ -264,16 +264,16 @@ bool8 ExecuteEntityDungeonAction_Async(Entity *entity)
     }
     sub_807FD84(entity);
     if (EntityIsValid(entity)) {
-        if (GetEntInfo(entity)->unk14A == 0) {
-            GetEntInfo(entity)->unk14A = 0;
-            sub_8079764(entity);
+        if (!GetEntInfo(entity)->usingChargedMove) {
+            GetEntInfo(entity)->usingChargedMove = FALSE;
+            EndTwoTurnMove(entity);
         }
         sub_8041888(0);
         if (EntityIsValid(entity)) {
             sub_8085140_Async();
-            if (info->unk14B != 0) {
+            if (info->hitGrudgeMonster) {
                 bVar4 = FALSE;
-                info->unk14B = 0;
+                info->hitGrudgeMonster = FALSE;
 
                 for(index = 0; index < MAX_MON_MOVES; index++)
                 {

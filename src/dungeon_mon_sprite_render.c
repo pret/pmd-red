@@ -185,7 +185,7 @@ void UpdateMonsterSprite(Entity *entity)
     entity->prevPixelPos.y = entity->pixelPos.y;
 
     x = (entity->pixelPos.x / 256) - gDungeon->unk181e8.cameraPixelPos.x;
-    y = (((entity->pixelPos.y - entity->unk1C) - entInfo->unk174) / 256) - gDungeon->unk181e8.cameraPixelPos.y;
+    y = (((entity->pixelPos.y - entity->elevation) - entInfo->unk174) / 256) - gDungeon->unk181e8.cameraPixelPos.y;
     y2 = (entity->pixelPos.y / 256) - gDungeon->unk181e8.cameraPixelPos.y;
     y2 /= 2;
     if (entInfo->unk156 == 0) {
@@ -208,7 +208,7 @@ void UpdateMonsterSprite(Entity *entity)
     }
 
     pos1.x = entity->pixelPos.x / 256;
-    pos1.y = ((entity->pixelPos.y - entity->unk1C) - entInfo->unk174) / 256;
+    pos1.y = ((entity->pixelPos.y - entity->elevation) - entInfo->unk174) / 256;
 
     sub_8005700(posArray, &entity->axObj.axdata);
     UpdateDungeonPokemonSprite2(entInfo->dungeonSpriteId, &pos1, posArray, gDungeon->unk181e8.priority);
@@ -218,7 +218,7 @@ void UpdateMonsterSprite(Entity *entity)
 
     sub_8042EC8(entity, y2);
     if (entInfo->unk15C == 0) {
-        if (entInfo->unkFF == 1) {
+        if (entInfo->twoTurnMoveInvincible == 1) {
             if (entInfo->unk174 <= IntToF248(199.999)) {
                 entInfo->unk174 += IntToF248(8);
                 if (entInfo->unk174 > IntToF248(200)) {
@@ -265,7 +265,7 @@ void UpdateMonsterSprite(Entity *entity)
         var_34 = 1;
     }
 
-    if (entInfo->unkFF != 2) {
+    if (entInfo->twoTurnMoveInvincible != 2) {
         s32 overworldPal;
 
         if (entInfo->frozenClassStatus.status == STATUS_PETRIFIED || entInfo->burnClassStatus.status == STATUS_PARALYSIS || entInfo->frozenClassStatus.status == STATUS_SHADOW_HOLD) {

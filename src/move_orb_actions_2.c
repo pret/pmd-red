@@ -50,7 +50,7 @@ bool8 SkyAttackMoveAction(Entity *pokemon, Entity *target, Move *move, s32 itemI
             if(sub_805727C(pokemon, target, gSkyAttackSecondaryChance))
                 TryInflictCringeStatus(pokemon, target, FALSE);
         }
-        sub_8079764(pokemon);
+        EndTwoTurnMove(pokemon);
     }
     else {
        SetChargeStatusTarget(pokemon, pokemon, STATUS_SKY_ATTACK, move, gUnknown_80FACC4);
@@ -605,7 +605,7 @@ bool8 SolarBeamMoveAction(Entity * pokemon,Entity * target,Move * move,s32 itemI
       modifier /= 2;
     }
     weather = HandleDamagingMove(pokemon,target,move,modifier,itemId) != 0 ? TRUE : FALSE;
-    sub_8079764(pokemon);
+    EndTwoTurnMove(pokemon);
   }
   else {
     SetChargeStatusTarget(pokemon,pokemon,STATUS_SOLARBEAM,move,gUnknown_80FACE4);
@@ -631,7 +631,7 @@ bool8 FlyMoveAction(Entity * pokemon, Entity * target, Move * move, s32 itemId)
   flag = FALSE;
   if (MoveMatchesBideClassStatus(pokemon,move)) {
       flag = HandleDamagingMove(pokemon,target,move,gFlyModifier,itemId) != 0 ? TRUE : FALSE;
-      sub_8079764(pokemon);
+      EndTwoTurnMove(pokemon);
   }
   else {
       SetChargeStatusTarget(pokemon,pokemon,STATUS_FLYING,move,gUnknown_80FACFC);
@@ -656,7 +656,7 @@ bool8 DiveMoveAction(Entity * pokemon, Entity * target, Move * move, s32 itemId)
   }
   else if (MoveMatchesBideClassStatus(pokemon,move)) {
       flag = HandleDamagingMove(pokemon,target,move,gDiveModifier,itemId) != 0 ? TRUE : FALSE;
-      sub_8079764(pokemon);
+      EndTwoTurnMove(pokemon);
   }
   else {
       SetChargeStatusTarget(pokemon,pokemon,STATUS_DIVING,move,gUnknown_80FAD2C);

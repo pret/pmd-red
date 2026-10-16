@@ -412,7 +412,7 @@ void EndLeechSeedClassStatus(Entity * pokemon, Entity * target)
             break;
     }
     entityInfo->leechSeedClassStatus.status = STATUS_NONE;
-    entityInfo->leechSeedClassStatus.unk8 = 0xff;
+    entityInfo->leechSeedClassStatus.monsterIndex = 0xff;
     UpdateStatusIconFlags(target);
   }
 }

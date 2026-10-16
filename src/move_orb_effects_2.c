@@ -269,7 +269,7 @@ void HandleLeechSeed(Entity * pokemon, Entity * target, bool8 displayMessage)
                     entityInfo->leechSeedClassStatus.turns = CalculateStatusTurns(target, gLeechSeedTurnRange, TRUE) + 1;
                     entityInfo->leechSeedClassStatus.damageCountdown = 0;
                     nullsub_78(target);
-                    entityInfo->leechSeedClassStatus.unk8 = 0xff;
+                    entityInfo->leechSeedClassStatus.monsterIndex = 0xff;
                     break;
                 case STATUS_LEECH_SEED:
                     TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FAE7C);
@@ -278,9 +278,9 @@ void HandleLeechSeed(Entity * pokemon, Entity * target, bool8 displayMessage)
             for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
             {
                 if (pokemon == gDungeon->activePokemon[index]) {
-                    entityInfo->leechSeedClassStatus.unk8 = index;
+                    entityInfo->leechSeedClassStatus.monsterIndex = index;
                     entityInfo2 = GetEntInfo(pokemon);
-                    entityInfo->leechSeedClassStatus.unk4 = entityInfo2->dungeonSpriteId;
+                    entityInfo->leechSeedClassStatus.applierID = entityInfo2->dungeonSpriteId;
                 }
             }
             TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FAE58);
@@ -305,7 +305,7 @@ void sub_8078084(Entity * pokemon)
             entityInfo2 = GetEntInfo(target);
             if(entityInfo2->leechSeedClassStatus.status == STATUS_LEECH_SEED || entityInfo2->leechSeedClassStatus.status == STATUS_DESTINY_BOND)
             {
-                if(entityInfo2->leechSeedClassStatus.unk4 == entityInfo->dungeonSpriteId)
+                if(entityInfo2->leechSeedClassStatus.applierID == entityInfo->dungeonSpriteId)
                 {
                     entityInfo2->leechSeedClassStatus.status = STATUS_NONE;
                     UpdateStatusIconFlags(target);
@@ -334,7 +334,7 @@ void DestinyBondStatusTarget(Entity * pokemon, Entity * target)
             entityInfo->leechSeedClassStatus.turns = CalculateStatusTurns(target,gDestinyBondTurnRange,TRUE) + 1;
             entityInfo->leechSeedClassStatus.damageCountdown = 0;
             nullsub_74(target);
-            entityInfo->leechSeedClassStatus.unk8 = 0xff;
+            entityInfo->leechSeedClassStatus.monsterIndex = 0xff;
         }
         else
         {
@@ -344,9 +344,9 @@ void DestinyBondStatusTarget(Entity * pokemon, Entity * target)
         for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
         {
             if (target == gDungeon->activePokemon[index]) {
-                entityInfo->leechSeedClassStatus.unk8 = index;
+                entityInfo->leechSeedClassStatus.monsterIndex = index;
                 entityInfo2 = GetEntInfo(target);
-                entityInfo->leechSeedClassStatus.unk4 = entityInfo2->dungeonSpriteId;
+                entityInfo->leechSeedClassStatus.applierID = entityInfo2->dungeonSpriteId;
             }
         }
         TryDisplayDungeonLoggableMessage3_Async(pokemon,target,gUnknown_80FBB4C);
@@ -466,7 +466,7 @@ void sub_80783C4(Entity * pokemon, Entity * target, bool8 param_3)
       }
       targetEntityInfo->curseClassStatus.status = STATUS_DECOY;
       targetEntityInfo->curseClassStatus.applierNonTeamMemberFlag = GetEntInfo(pokemon)->isNotTeamMember;
-      targetEntityInfo->curseClassStatus.unk2 = param_3;
+      targetEntityInfo->curseClassStatus.unkDecoyTracker = param_3;
       targetEntityInfo->curseClassStatus.turns = CalculateStatusTurns(target,gDecoyTurnRange,TRUE) + 1;
       targetEntityInfo->curseClassStatus.damageCountdown = 0;
       sub_806CCB4(target,sub_806CEBC(target));

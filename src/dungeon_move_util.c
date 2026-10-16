@@ -336,7 +336,7 @@ bool8 TryUseChosenMove(struct Entity *attacker, u32 r6, s32 itemId, u32 var_30, 
     BufferMoveName(gFormatBuffer_Items[0], move, NULL);
     if (MoveMatchesBideClassStatus(attacker, move)) {
         msg = gUnknown_80FC72C; // mon loosed move
-        GetEntInfo(attacker)->unkFF = 0;
+        GetEntInfo(attacker)->twoTurnMoveInvincible = 0;
         moveUsable = sub_805744C(attacker, move, TRUE);
     }
     else {
@@ -409,7 +409,7 @@ bool8 TryUseChosenMove(struct Entity *attacker, u32 r6, s32 itemId, u32 var_30, 
             if (CannotAttack(attacker, FALSE))
                 break;
         }
-        entInfo->unk14A = 0;
+        entInfo->usingChargedMove = FALSE;
         if (move->id == MOVE_THRASH) {
             GetEntInfo(attacker)->action.direction = DungeonRandInt(NUM_DIRECTIONS);
             TargetTileInFront(attacker);
@@ -447,9 +447,9 @@ bool8 TryUseChosenMove(struct Entity *attacker, u32 r6, s32 itemId, u32 var_30, 
             break;
 
         sub_806CF18(attacker);
-        if (GetEntInfo(attacker)->unk14A == 0) {
-            GetEntInfo(attacker)->unk14A = 0; // Redundant as it's already 0
-            sub_8079764(attacker);
+        if (!GetEntInfo(attacker)->usingChargedMove) {
+            GetEntInfo(attacker)->usingChargedMove = FALSE; // Redundant as it's already 0
+            EndTwoTurnMove(attacker);
         }
     }
 
@@ -1146,14 +1146,14 @@ bool8 sub_80571F0(Entity * pokemon, Move *move)
 
     entityInfo = GetEntInfo(pokemon);
 
-    if (entityInfo->unkFF == 1) {
+    if (entityInfo->twoTurnMoveInvincible == 1) {
         moveID = move->id;
         if ((moveID == MOVE_SKY_UPPERCUT) || (moveID == MOVE_TWISTER) || (moveID == MOVE_GUST) || (moveID == MOVE_THUNDER))
             return FALSE;
         else
             return TRUE;
     }
-    else if (entityInfo->unkFF == 2) {
+    else if (entityInfo->twoTurnMoveInvincible == 2) {
         if (entityInfo->bideClassStatus.status == STATUS_DIVING) {
             if (move->id == MOVE_WHIRLPOOL || move->id == MOVE_SURF) return FALSE;
         }

@@ -254,7 +254,7 @@ void DoEndOfTurnEffects_Async(Entity *entity)
                 return;
             entityInfo->frozenClassStatus.damageCountdown = gConstrictionDmgCountdown;
             TrySendImmobilizeSleepEndMsg(entity, entity);
-            sub_8041C4C(entity, entityInfo->frozenClassStatus.unk4);
+            sub_8041C4C(entity, entityInfo->frozenClassStatus.constrictionAnimation);
             DealDamageToEntity_Async(entity, gConstrictionDmgValue, RESIDUAL_DAMAGE_CONSTRICT, DUNGEON_EXIT_FAINTED_FROM_CONSTRICTION);
         }
         if (!EntityIsValid(entity) || IsFloorOver())
@@ -302,7 +302,7 @@ void DoEndOfTurnEffects_Async(Entity *entity)
     if (entityInfo->leechSeedClassStatus.status == STATUS_LEECH_SEED) {
         if (entityInfo->leechSeedClassStatus.damageCountdown == 0 || --entityInfo->leechSeedClassStatus.damageCountdown == 0) {
             s32 hp = gLeechSeedHealValue;
-            Entity *target = gDungeon->activePokemon[entityInfo->leechSeedClassStatus.unk8];
+            Entity *target = gDungeon->activePokemon[entityInfo->leechSeedClassStatus.monsterIndex];
 
             entityInfo->leechSeedClassStatus.damageCountdown = gLeechSeedDmgCountdown;
             if (target == NULL) {
@@ -310,7 +310,7 @@ void DoEndOfTurnEffects_Async(Entity *entity)
             }
             else {
                 EntityInfo *targetInfo = GetEntInfo(target);
-                if (targetInfo->dungeonSpriteId != entityInfo->leechSeedClassStatus.unk4) {
+                if (targetInfo->dungeonSpriteId != entityInfo->leechSeedClassStatus.applierID) {
                     entityInfo->leechSeedClassStatus.status = 0;
                 }
                 else {
@@ -383,7 +383,7 @@ void DoEndOfTurnEffects_Async(Entity *entity)
         sub_80838EC(&entityInfo->bideClassStatus.turns);
         if (entityInfo->bideClassStatus.turns == 0) {
             entityInfo->bideClassStatus.status = 0;
-            entityInfo->unk14A = 0;
+            entityInfo->usingChargedMove = FALSE;
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], entity, 0);
             LogMessageByIdWithPopupCheckUser_Async(entity, gUnknown_80FABD8);
         }

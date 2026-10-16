@@ -613,7 +613,7 @@ bool8 SpawnTeamMember(s16 _species, s32 x, s32 y, DungeonMon *monPtr, Entity **a
     entityInfo->maxBelly = monPtr->maxBelly;
     entityInfo->teamIndex = monPtr->unkC;
     entityInfo->heldItem = monPtr->itemSlot;
-    entityInfo->unkF3 = 0;
+    entityInfo->pickup_flag = FALSE;
     entityInfo->unk64 = 0;
 
     // Pickup Check
@@ -625,7 +625,7 @@ bool8 SpawnTeamMember(s16 _species, s32 x, s32 y, DungeonMon *monPtr, Entity **a
         u32 pickUpItem = GetRandomFloorItem(0);
         if (pickUpItem != ITEM_POKE) {
             ItemIdToItem(&entityInfo->heldItem, pickUpItem, 0);
-            entityInfo->unkF3 = TRUE;
+            entityInfo->pickup_flag = TRUE;
         }
     }
 
@@ -674,7 +674,7 @@ void UpdateEntitySpecies(Entity *entity, s32 _species)
     entity->axObj.unk43_animId2 = 0xFF;
     entity->axObj.unk45_orientation = 1;
     entity->axObj.unk47 = 1;
-    entity->unk1C = IntToF248(0);
+    entity->elevation = IntToF248(0);
 
     if (entInfo->frozenClassStatus.status == STATUS_WRAP || entInfo->frozenClassStatus.status == STATUS_WRAPPED) {
         sub_8076CB4(entInfo->unk9C);
@@ -764,7 +764,7 @@ static void InitEntityFromSpawnInfo(bool8 a0, Entity *entity, struct MonSpawnInf
     entInfo->aiTarget.aiTarget = NULL;
     entInfo->aiTarget.unkC = 0;
     entInfo->aiTarget.aiTargetSpawnGenID = 0;
-    entInfo->unkFF = 0;
+    entInfo->twoTurnMoveInvincible = 0;
     entInfo->unk174 = 0;
     entInfo->decoyAITracker = 0;
     ResetMonEntityData(entInfo, TRUE);
@@ -783,8 +783,8 @@ static void InitEntityFromSpawnInfo(bool8 a0, Entity *entity, struct MonSpawnInf
     entInfo->unk149 = FALSE;
     entInfo->abilityEffectFlags = 0;
     entInfo->terrifiedTurns = 0;
-    entInfo->useHeldItem = 0;
-    entInfo->unk14B = 0;
+    entInfo->useHeldItem = FALSE;
+    entInfo->hitGrudgeMonster = FALSE;
     entInfo->unk14C = 1;
     entInfo->visualFlags = 0;
     entInfo->previousVisualFlags = 0;
@@ -830,7 +830,7 @@ void ResetMonEntityData(EntityInfo *entInfo, bool8 setStatsToOne)
     entInfo->frozenClassStatus.status = 0;
     entInfo->frozenClassStatus.turns = 0;
     entInfo->frozenClassStatus.damageCountdown = 0;
-    entInfo->frozenClassStatus.unk4 = 34;
+    entInfo->frozenClassStatus.constrictionAnimation = 34;
     entInfo->cringeClassStatus.status = 0;
     entInfo->cringeClassStatus.turns = 0;
     entInfo->bideClassStatus.status = 0;
@@ -901,7 +901,7 @@ void ResetMonEntityData(EntityInfo *entInfo, bool8 setStatsToOne)
     entInfo->exposed = FALSE;
     entInfo->isColorChanged = 0;
     entInfo->bossFlag = 0;
-    entInfo->unkFF = 0;
+    entInfo->twoTurnMoveInvincible = 0;
 }
 
 void sub_806C1D8(void)

@@ -5,7 +5,7 @@
 #include "structs/str_moves.h"
 
 void SetChargeStatusTarget(Entity *pokemon, Entity *target, u8 newStatus, Move *move, const u8 *message);
-void sub_8079764(Entity * pokemon);
+void EndTwoTurnMove(Entity * pokemon);
 
 #endif
 
