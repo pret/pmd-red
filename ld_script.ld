@@ -965,7 +965,9 @@ SECTIONS {
     dungeon_sbin_section 0x83B0000 :
     ALIGN(4)
     {
-        data/dungeon_sbin.o(.rodata);
+        data/dungeon_sbin1.o(.rodata);
+        src/data/b00canm.o(.rodata);
+        data/dungeon_sbin2.o(.rodata);
     } > ROM =0
 
     monster_sbin_section 0x8510000 :
