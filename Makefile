@@ -203,7 +203,7 @@ ifeq (,$(filter clean,$(MAKECMDGOALS)))
 $(call infoshell, $(MAKE) -f make_tools.mk)
 endif
 
-.PRECIOUS: %.1bpp %.4bpp %.8bpp %.gbapal %.lz %.rl %.pcm %.bin
+.PRECIOUS: %.1bpp %.4bpp %.8bpp %.gbapal %.pmdpal %.lz %.rl %.pcm %.bin
 
 
 # Create build subdirectories
@@ -239,7 +239,7 @@ clean-tools:
 	@$(foreach tooldir,$(TOOLDIRS),$(MAKE) clean -C $(tooldir);)
 
 tidy:
-	$(RM) -f $(ROM) $(ELF) $(MAP) $(SYM)
+	$(RM) -f $(ROM) $(ELF) $(MAP) $(SYM) $(KAO_PMDPAL)
 	$(RM) -r $(BUILD_DIR_NORMAL)
 	$(RM) -r $(BUILD_DIR_MODERN)
 	$(RM) -f $(ITEM_DATA)
@@ -326,7 +326,7 @@ endif
 
 # Elf from object files
 LDFLAGS = -Map ../../$(MAP)
-$(ELF): $(LD_SCRIPT) $(LD_SCRIPT_DEPS) $(ALL_OBJECTS) libagbsyscall
+$(ELF): $(LD_SCRIPT) $(LD_SCRIPT_DEPS) $(ALL_OBJECTS) libagbsyscall kao_pal
 	@cd $(BUILD_DIR) && $(LD) $(LDFLAGS) -T ../../$< --print-memory-usage -o ../../$@ $(OBJS_REL) $(LIB) | cat
 	@echo "cd $(BUILD_DIR) && $(LD) $(LDFLAGS) -T ../../$< --print-memory-usage -o ../../$@ <objs> <libs> | cat"
 	$(GBAFIX) $@ -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
