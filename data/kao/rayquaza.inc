@@ -2,7 +2,7 @@
 gKaoRayquaza:
 kao_siro sPortraitsRayquaza
 sRayquazaNormalPal:
-.incbin "baserom.gba", 0x16BB274, 0x40
+.incbin "graphics/kao/pal/rayquaza_normal.pmdpal"
 sRayquazaNormalGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x16BB2B9, 0x2CB

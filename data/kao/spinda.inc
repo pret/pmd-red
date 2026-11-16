@@ -2,21 +2,21 @@
 gKaoSpinda:
 kao_siro sPortraitsSpinda
 sSpindaNormalPal:
-.incbin "baserom.gba", 0x16B7744, 0x40
+.incbin "graphics/kao/pal/spinda_normal.pmdpal"
 sSpindaNormalGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x16B7789, 0x2D3
 sSpindaSadPal:
-.incbin "baserom.gba", 0x16B7A5C, 0x40
+.incbin "graphics/kao/pal/spinda_sad.pmdpal"
 sSpindaSadGfx:
 .incbin "baserom.gba", 0x16B7A9C, 0x288
 sSpindaNormalFlipPal:
-.incbin "baserom.gba", 0x16B7D24, 0x40
+.incbin "graphics/kao/pal/spinda_normal_flip.pmdpal"
 sSpindaNormalFlipGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x16B7D69, 0x2DB
 sSpindaSadFlipPal:
-.incbin "baserom.gba", 0x16B8044, 0x40
+.incbin "graphics/kao/pal/spinda_sad_flip.pmdpal"
 sSpindaSadFlipGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x16B8089, 0x28B

@@ -2,60 +2,60 @@
 gKaoMachop:
 kao_siro sPortraitsMachop
 sMachopNormalPal:
-.incbin "baserom.gba", 0x16937BC, 0x40
+.incbin "graphics/kao/pal/machop_normal.pmdpal"
 sMachopNormalGfx:
 .incbin "baserom.gba", 0x16937FC, 0x284
 sMachopHappyPal:
-.incbin "baserom.gba", 0x1693A80, 0x40
+.incbin "graphics/kao/pal/machop_happy.pmdpal"
 sMachopHappyGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x1693AC5, 0x25B
 sMachopPainedPal:
-.incbin "baserom.gba", 0x1693D20, 0x40
+.incbin "graphics/kao/pal/machop_pained.pmdpal"
 sMachopPainedGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x1693D65, 0x2B3
 sMachopAngryPal:
-.incbin "baserom.gba", 0x1694018, 0x40
+.incbin "graphics/kao/pal/machop_angry.pmdpal"
 sMachopAngryGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x169405D, 0x2B7
 sMachopWorriedPal:
-.incbin "baserom.gba", 0x1694314, 0x40
+.incbin "graphics/kao/pal/machop_worried.pmdpal"
 sMachopWorriedGfx:
 .incbin "baserom.gba", 0x1694354, 0x2B4
 sMachopSadPal:
-.incbin "baserom.gba", 0x1694608, 0x40
+.incbin "graphics/kao/pal/machop_sad.pmdpal"
 sMachopSadGfx:
 .incbin "baserom.gba", 0x1694648, 0x2A4
 sMachopCryingPal:
-.incbin "baserom.gba", 0x16948EC, 0x40
+.incbin "graphics/kao/pal/machop_crying.pmdpal"
 sMachopCryingGfx:
 .incbin "baserom.gba", 0x169492C, 0x2AC
 sMachopShoutingPal:
-.incbin "baserom.gba", 0x1694BD8, 0x40
+.incbin "graphics/kao/pal/machop_shouting.pmdpal"
 sMachopShoutingGfx:
 .incbin "baserom.gba", 0x1694C18, 0x2B8
 sMachopTearyEyePal:
-.incbin "baserom.gba", 0x1694ED0, 0x40
+.incbin "graphics/kao/pal/machop_teary_eye.pmdpal"
 sMachopTearyEyeGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x1694F15, 0x283
 sMachopDeterminedPal:
-.incbin "baserom.gba", 0x1695198, 0x40
+.incbin "graphics/kao/pal/machop_determined.pmdpal"
 sMachopDeterminedGfx:
 .incbin "baserom.gba", 0x16951D8, 0x274
 sMachopJoyousPal:
-.incbin "baserom.gba", 0x169544C, 0x40
+.incbin "graphics/kao/pal/machop_joyous.pmdpal"
 sMachopJoyousGfx:
 .incbin "baserom.gba", 0x169548C, 0x2D4
 sMachopInspiredPal:
-.incbin "baserom.gba", 0x1695760, 0x40
+.incbin "graphics/kao/pal/machop_inspired.pmdpal"
 sMachopInspiredGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x16957A5, 0x28B
 sMachopSurprisedPal:
-.incbin "baserom.gba", 0x1695A30, 0x40
+.incbin "graphics/kao/pal/machop_surprised.pmdpal"
 sMachopSurprisedGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x1695A75, 0x2D7

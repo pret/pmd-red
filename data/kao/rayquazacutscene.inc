@@ -2,7 +2,7 @@
 gKaoRayquazaCutscene:
 kao_siro sPortraitsRayquazaCutscene
 sRayquazaCutsceneNormalPal:
-.incbin "baserom.gba", 0x16BD0B4, 0x40
+.incbin "graphics/kao/pal/rayquaza_cutscene_normal.pmdpal"
 sRayquazaCutsceneNormalGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x16BD0F9, 0x2CB

@@ -2,59 +2,59 @@
 gKaoPsyduck:
 kao_siro sPortraitsPsyduck
 sPsyduckNormalPal:
-.incbin "baserom.gba", 0x1690234, 0x40
+.incbin "graphics/kao/pal/psyduck_normal.pmdpal"
 sPsyduckNormalGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x1690279, 0x277
 sPsyduckHappyPal:
-.incbin "baserom.gba", 0x16904F0, 0x40
+.incbin "graphics/kao/pal/psyduck_happy.pmdpal"
 sPsyduckHappyGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x1690535, 0x277
 sPsyduckPainedPal:
-.incbin "baserom.gba", 0x16907AC, 0x40
+.incbin "graphics/kao/pal/psyduck_pained.pmdpal"
 sPsyduckPainedGfx:
 .incbin "baserom.gba", 0x16907EC, 0x280
 sPsyduckAngryPal:
-.incbin "baserom.gba", 0x1690A6C, 0x40
+.incbin "graphics/kao/pal/psyduck_angry.pmdpal"
 sPsyduckAngryGfx:
 .incbin "baserom.gba", 0x1690AAC, 0x284
 sPsyduckWorriedPal:
-.incbin "baserom.gba", 0x1690D30, 0x40
+.incbin "graphics/kao/pal/psyduck_worried.pmdpal"
 sPsyduckWorriedGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x1690D75, 0x267
 sPsyduckSadPal:
-.incbin "baserom.gba", 0x1690FDC, 0x40
+.incbin "graphics/kao/pal/psyduck_sad.pmdpal"
 sPsyduckSadGfx:
 .incbin "baserom.gba", 0x169101C, 0x290
 sPsyduckCryingPal:
-.incbin "baserom.gba", 0x16912AC, 0x40
+.incbin "graphics/kao/pal/psyduck_crying.pmdpal"
 sPsyduckCryingGfx:
 .incbin "baserom.gba", 0x16912EC, 0x288
 sPsyduckShoutingPal:
-.incbin "baserom.gba", 0x1691574, 0x40
+.incbin "graphics/kao/pal/psyduck_shouting.pmdpal"
 sPsyduckShoutingGfx:
 .incbin "baserom.gba", 0x16915B4, 0x28C
 sPsyduckTearyEyePal:
-.incbin "baserom.gba", 0x1691840, 0x40
+.incbin "graphics/kao/pal/psyduck_teary_eye.pmdpal"
 sPsyduckTearyEyeGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x1691885, 0x287
 sPsyduckDeterminedPal:
-.incbin "baserom.gba", 0x1691B0C, 0x40
+.incbin "graphics/kao/pal/psyduck_determined.pmdpal"
 sPsyduckDeterminedGfx:
 .incbin "baserom.gba", 0x1691B4C, 0x28C
 sPsyduckJoyousPal:
-.incbin "baserom.gba", 0x1691DD8, 0x40
+.incbin "graphics/kao/pal/psyduck_joyous.pmdpal"
 sPsyduckJoyousGfx:
 .incbin "baserom.gba", 0x1691E18, 0x2CC
 sPsyduckInspiredPal:
-.incbin "baserom.gba", 0x16920E4, 0x40
+.incbin "graphics/kao/pal/psyduck_inspired.pmdpal"
 sPsyduckInspiredGfx:
 .incbin "baserom.gba", 0x1692124, 0x29C
 sPsyduckSurprisedPal:
-.incbin "baserom.gba", 0x16923C0, 0x40
+.incbin "graphics/kao/pal/psyduck_surprised.pmdpal"
 sPsyduckSurprisedGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x1692405, 0x297

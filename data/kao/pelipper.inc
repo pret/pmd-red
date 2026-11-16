@@ -2,7 +2,7 @@
 gKaoPelipper:
 kao_siro sPortraitsPelipper
 sPelipperNormalPal:
-.incbin "baserom.gba", 0x16B2A58, 0x40
+.incbin "graphics/kao/pal/pelipper_normal.pmdpal"
 sPelipperNormalGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x16B2A9D, 0x21F

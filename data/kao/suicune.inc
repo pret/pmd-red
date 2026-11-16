@@ -2,7 +2,7 @@
 gKaoSuicune:
 kao_siro sPortraitsSuicune
 sSuicuneNormalPal:
-.incbin "baserom.gba", 0x16A8564, 0x40
+.incbin "graphics/kao/pal/suicune_normal.pmdpal"
 sSuicuneNormalGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x16A85A9, 0x2F7

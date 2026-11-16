@@ -2,21 +2,21 @@
 gKaoShiftry:
 kao_siro sPortraitsShiftry
 sShiftryNormalPal:
-.incbin "baserom.gba", 0x16B1D64, 0x40
+.incbin "graphics/kao/pal/shiftry_normal.pmdpal"
 sShiftryNormalGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x16B1DA9, 0x2D3
 sShiftrySurprisedPal:
-.incbin "baserom.gba", 0x16B207C, 0x40
+.incbin "graphics/kao/pal/shiftry_surprised.pmdpal"
 sShiftrySurprisedGfx:
 .incbin "baserom.gba", 0x16B20BC, 0x2F4
 sShiftryHappyPal:
-.incbin "baserom.gba", 0x16B23B0, 0x40
+.incbin "graphics/kao/pal/shiftry_happy.pmdpal"
 sShiftryHappyGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x16B23F5, 0x2CB
 sShiftryAngryPal:
-.incbin "baserom.gba", 0x16B26C0, 0x40
+.incbin "graphics/kao/pal/shiftry_angry.pmdpal"
 sShiftryAngryGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x16B2705, 0x2DB

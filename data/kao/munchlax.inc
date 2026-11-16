@@ -2,7 +2,7 @@
 gKaoMunchlax:
 kao_siro sPortraitsMunchlax
 sMunchlaxNormalPal:
-.incbin "baserom.gba", 0x16BBEF8, 0x40
+.incbin "graphics/kao/pal/munchlax_normal.pmdpal"
 sMunchlaxNormalGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x16BBF3D, 0x293
