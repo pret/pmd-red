@@ -2,7 +2,7 @@
 gKaoCaterpie:
 kao_siro sPortraitsCaterpie
 sCaterpieNormalPal:
-.incbin "baserom.gba", 0x1688AB8, 0x40
+.incbin "graphics/kao/pal/caterpie_normal.pmdpal"
 sCaterpieNormalGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x1688AFD, 0x29B
