@@ -2,7 +2,7 @@
 gKaoRaikou:
 kao_siro sPortraitsRaikou
 sRaikouNormalPal:
-.incbin "baserom.gba", 0x16A7E5C, 0x40
+.incbin "graphics/kao/pal/raikou_normal.pmdpal"
 sRaikouNormalGfx:
 .incbin "baserom.gba", 0x16A7E9C, 0x2DC
 sPortraitsRaikou:

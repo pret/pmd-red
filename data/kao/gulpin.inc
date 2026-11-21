@@ -2,7 +2,7 @@
 gKaoGulpin:
 kao_siro sPortraitsGulpin
 sGulpinNormalPal:
-.incbin "baserom.gba", 0x16B7474, 0x40
+.incbin "graphics/kao/pal/gulpin_normal.pmdpal"
 sGulpinNormalGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x16B74B9, 0x213

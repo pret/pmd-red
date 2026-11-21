@@ -2,7 +2,7 @@
 gKaoDugtrio:
 kao_siro sPortraitsDugtrio
 sDugtrioNormalPal:
-.incbin "baserom.gba", 0x168D30C, 0x40
+.incbin "graphics/kao/pal/dugtrio_normal.pmdpal"
 sDugtrioNormalGfx:
 .incbin "baserom.gba", 0x168D34C, 0x270
 sPortraitsDugtrio:

@@ -2,62 +2,62 @@
 gKaoMudkip:
 kao_siro sPortraitsMudkip
 sMudkipNormalPal:
-.incbin "baserom.gba", 0x16AE1D4, 0x40
+.incbin "graphics/kao/pal/mudkip_normal.pmdpal"
 sMudkipNormalGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x16AE219, 0x27B
 sMudkipHappyPal:
-.incbin "baserom.gba", 0x16AE494, 0x40
+.incbin "graphics/kao/pal/mudkip_happy.pmdpal"
 sMudkipHappyGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x16AE4D9, 0x25B
 sMudkipPainedPal:
-.incbin "baserom.gba", 0x16AE734, 0x40
+.incbin "graphics/kao/pal/mudkip_pained.pmdpal"
 sMudkipPainedGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x16AE779, 0x287
 sMudkipAngryPal:
-.incbin "baserom.gba", 0x16AEA00, 0x40
+.incbin "graphics/kao/pal/mudkip_angry.pmdpal"
 sMudkipAngryGfx:
 .incbin "baserom.gba", 0x16AEA40, 0x2B8
 sMudkipWorriedPal:
-.incbin "baserom.gba", 0x16AECF8, 0x40
+.incbin "graphics/kao/pal/mudkip_worried.pmdpal"
 sMudkipWorriedGfx:
 .incbin "baserom.gba", 0x16AED38, 0x2A0
 sMudkipSadPal:
-.incbin "baserom.gba", 0x16AEFD8, 0x40
+.incbin "graphics/kao/pal/mudkip_sad.pmdpal"
 sMudkipSadGfx:
 .incbin "baserom.gba", 0x16AF018, 0x278
 sMudkipCryingPal:
-.incbin "baserom.gba", 0x16AF290, 0x40
+.incbin "graphics/kao/pal/mudkip_crying.pmdpal"
 sMudkipCryingGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x16AF2D5, 0x27B
 sMudkipShoutingPal:
-.incbin "baserom.gba", 0x16AF550, 0x40
+.incbin "graphics/kao/pal/mudkip_shouting.pmdpal"
 sMudkipShoutingGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x16AF595, 0x2BB
 sMudkipTearyEyePal:
-.incbin "baserom.gba", 0x16AF850, 0x40
+.incbin "graphics/kao/pal/mudkip_teary_eye.pmdpal"
 sMudkipTearyEyeGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x16AF895, 0x27F
 sMudkipDeterminedPal:
-.incbin "baserom.gba", 0x16AFB14, 0x40
+.incbin "graphics/kao/pal/mudkip_determined.pmdpal"
 sMudkipDeterminedGfx:
 .incbin "baserom.gba", 0x16AFB54, 0x254
 sMudkipJoyousPal:
-.incbin "baserom.gba", 0x16AFDA8, 0x40
+.incbin "graphics/kao/pal/mudkip_joyous.pmdpal"
 sMudkipJoyousGfx:
 .incbin "baserom.gba", 0x16AFDE8, 0x2C8
 sMudkipInspiredPal:
-.incbin "baserom.gba", 0x16B00B0, 0x40
+.incbin "graphics/kao/pal/mudkip_inspired.pmdpal"
 sMudkipInspiredGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x16B00F5, 0x267
 sMudkipSurprisedPal:
-.incbin "baserom.gba", 0x16B035C, 0x40
+.incbin "graphics/kao/pal/mudkip_surprised.pmdpal"
 sMudkipSurprisedGfx:
 .incbin "baserom.gba", 0x16B039C, 0x2B0
 sPortraitsMudkip:

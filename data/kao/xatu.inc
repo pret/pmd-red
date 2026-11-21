@@ -2,7 +2,7 @@
 gKaoXatu:
 kao_siro sPortraitsXatu
 sXatuNormalPal:
-.incbin "baserom.gba", 0x16A5664, 0x40
+.incbin "graphics/kao/pal/xatu_normal.pmdpal"
 sXatuNormalGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x16A56A9, 0x277

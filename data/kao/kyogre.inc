@@ -2,7 +2,7 @@
 gKaoKyogre:
 kao_siro sPortraitsKyogre
 sKyogreNormalPal:
-.incbin "baserom.gba", 0x16BABB0, 0x40
+.incbin "graphics/kao/pal/kyogre_normal.pmdpal"
 sKyogreNormalGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x16BABF5, 0x257

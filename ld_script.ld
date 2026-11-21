@@ -755,7 +755,10 @@ SECTIONS {
         src/map_files_table.o(.rodata);
         src/ground_map_conversion_table.o(.rodata);
         src/map_script_table.o(.rodata);
+        src/ground_weather_data.o(.rodata);
         data/data_8115F5C_3_.o(.rodata);
+        src/ground_object_data.o(.rodata);
+        src/ground_effect_data.o(.rodata);
         src/ground_event_data.o(.rodata);
         src/friend_area_dialogue.o(.rodata);
         src/ground_data_t00p01_station.o(.rodata);

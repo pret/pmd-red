@@ -2,12 +2,12 @@
 gKaoKangaskhan:
 kao_siro sPortraitsKangaskhan
 sKangaskhanNormalPal:
-.incbin "baserom.gba", 0x169AAC0, 0x40
+.incbin "graphics/kao/pal/kangaskhan_normal.pmdpal"
 sKangaskhanNormalGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x169AB05, 0x2AF
 sKangaskhanHappyPal:
-.incbin "baserom.gba", 0x169ADB4, 0x40
+.incbin "graphics/kao/pal/kangaskhan_happy.pmdpal"
 sKangaskhanHappyGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x169ADF9, 0x2A3

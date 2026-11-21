@@ -2,7 +2,7 @@
 gKaoWynaut:
 kao_siro sPortraitsWynaut
 sWynautNormalPal:
-.incbin "baserom.gba", 0x16B9C8C, 0x40
+.incbin "graphics/kao/pal/wynaut_normal.pmdpal"
 sWynautNormalGfx:
 .incbin "baserom.gba", 0x16B9CCC, 0x2BC
 sPortraitsWynaut:

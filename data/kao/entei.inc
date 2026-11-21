@@ -2,7 +2,7 @@
 gKaoEntei:
 kao_siro sPortraitsEntei
 sEnteiNormalPal:
-.incbin "baserom.gba", 0x16A81F0, 0x40
+.incbin "graphics/kao/pal/entei_normal.pmdpal"
 sEnteiNormalGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x16A8235, 0x2B7
