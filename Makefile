@@ -203,7 +203,7 @@ ifeq (,$(filter clean,$(MAKECMDGOALS)))
 $(call infoshell, $(MAKE) -f make_tools.mk)
 endif
 
-.PRECIOUS: %.1bpp %.4bpp %.8bpp %.gbapal %.lz %.rl %.pcm %.bin
+.PRECIOUS: %.1bpp %.4bpp %.8bpp %.gbapal %.pmdpal %.lz %.rl %.pcm %.bin
 
 
 # Create build subdirectories
@@ -239,7 +239,7 @@ clean-tools:
 	@$(foreach tooldir,$(TOOLDIRS),$(MAKE) clean -C $(tooldir);)
 
 tidy:
-	$(RM) -f $(ROM) $(ELF) $(MAP) $(SYM)
+	$(RM) -f $(ROM) $(ELF) $(MAP) $(SYM) $(KAO_PMDPAL)
 	$(RM) -r $(BUILD_DIR_NORMAL)
 	$(RM) -r $(BUILD_DIR_MODERN)
 	$(RM) -f $(ITEM_DATA)
@@ -272,7 +272,7 @@ $(C_BUILDDIR)/%.o: $(C_SUBDIR)/%.c
 $(C_BUILDDIR)/%.d: $(C_SUBDIR)/%.c
 	@$(call scaninc,$(INCLUDE_PATHS))
 
-$(DATA_ASM_BUILDDIR)/%.o: $(DATA_ASM_SUBDIR)/%.s dungeon_pokemon dungeon_floor dungeon_trap dungeon_item data_monster data_item data_move data_learnset data_learnset_ptrs data_dungeon
+$(DATA_ASM_BUILDDIR)/%.o: $(DATA_ASM_SUBDIR)/%.s dungeon_pokemon dungeon_floor dungeon_trap dungeon_item data_monster data_item data_move data_learnset data_learnset_ptrs data_dungeon kao_pal
 	@$(CPP) -x assembler-with-cpp $(CPPFLAGS) $< -o $(DATA_ASM_BUILDDIR)/$*.i.s
 	@$(PREPROC) $(DATA_ASM_BUILDDIR)/$*.i.s charmap.txt > $(DATA_ASM_BUILDDIR)/$*.s
 	$(AS) $(ASFLAGS) -o $@ $(DATA_ASM_BUILDDIR)/$*.s

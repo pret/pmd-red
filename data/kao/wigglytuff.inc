@@ -2,7 +2,7 @@
 gKaoWigglytuff:
 kao_siro sPortraitsWigglytuff
 sWigglytuffNormalPal:
-.incbin "baserom.gba", 0x168CABC, 0x40
+.incbin "graphics/kao/pal/wigglytuff_normal.pmdpal"
 sWigglytuffNormalGfx:
 .incbin "baserom.gba", 0x168CAFC, 0x2A4
 sPortraitsWigglytuff:

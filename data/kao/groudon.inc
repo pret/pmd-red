@@ -2,7 +2,7 @@
 gKaoGroudon:
 kao_siro sPortraitsGroudon
 sGroudonNormalPal:
-.incbin "baserom.gba", 0x16BAECC, 0x40
+.incbin "graphics/kao/pal/groudon_normal.pmdpal"
 sGroudonNormalGfx:
 .incbin "baserom.gba", 0x16BAF0C, 0x2F0
 sPortraitsGroudon:

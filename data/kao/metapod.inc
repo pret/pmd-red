@@ -2,7 +2,7 @@
 gKaoMetapod:
 kao_siro sPortraitsMetapod
 sMetapodNormalPal:
-.incbin "baserom.gba", 0x16893DC, 0x40
+.incbin "graphics/kao/pal/metapod_normal.pmdpal"
 sMetapodNormalGfx:
 .incbin "baserom.gba", 0x168941C, 0x298
 sPortraitsMetapod:

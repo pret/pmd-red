@@ -2,7 +2,7 @@
 gKaoZapdos:
 kao_siro sPortraitsZapdos
 sZapdosNormalPal:
-.incbin "baserom.gba", 0x169DAC0, 0x40
+.incbin "graphics/kao/pal/zapdos_normal.pmdpal"
 sZapdosNormalGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x169DB05, 0x297

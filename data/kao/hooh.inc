@@ -2,7 +2,7 @@
 gKaoHoOh:
 kao_siro sPortraitsHoOh
 sHoOhNormalPal:
-.incbin "baserom.gba", 0x16A9284, 0x40
+.incbin "graphics/kao/pal/ho_oh_normal.pmdpal"
 sHoOhNormalGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x16A92C9, 0x2D3

@@ -2,7 +2,7 @@
 gKaoLugia:
 kao_siro sPortraitsLugia
 sLugiaNormalPal:
-.incbin "baserom.gba", 0x16A8F44, 0x40
+.incbin "graphics/kao/pal/lugia_normal.pmdpal"
 sLugiaNormalGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x16A8F89, 0x27B

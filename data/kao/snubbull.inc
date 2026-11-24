@@ -2,16 +2,16 @@
 gKaoSnubbull:
 kao_siro sPortraitsSnubbull
 sSnubbullNormalPal:
-.incbin "baserom.gba", 0x16A6570, 0x40
+.incbin "graphics/kao/pal/snubbull_normal.pmdpal"
 sSnubbullNormalGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x16A65B5, 0x2B7
 sSnubbullHappyPal:
-.incbin "baserom.gba", 0x16A686C, 0x40
+.incbin "graphics/kao/pal/snubbull_happy.pmdpal"
 sSnubbullHappyGfx:
 .incbin "baserom.gba", 0x16A68AC, 0x2F8
 sSnubbullPainedPal:
-.incbin "baserom.gba", 0x16A6BA4, 0x40
+.incbin "graphics/kao/pal/snubbull_pained.pmdpal"
 sSnubbullPainedGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x16A6BE9, 0x2B7

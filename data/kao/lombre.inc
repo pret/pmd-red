@@ -2,39 +2,39 @@
 gKaoLombre:
 kao_siro sPortraitsLombre
 sLombreNormalPal:
-.incbin "baserom.gba", 0x16B06C4, 0x40
+.incbin "graphics/kao/pal/lombre_normal.pmdpal"
 sLombreNormalGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x16B0709, 0x297
 sLombreAngryPal:
-.incbin "baserom.gba", 0x16B09A0, 0x40
+.incbin "graphics/kao/pal/lombre_angry.pmdpal"
 sLombreAngryGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x16B09E5, 0x26B
 sLombreOpenMouthPal:
-.incbin "baserom.gba", 0x16B0C50, 0x40
+.incbin "graphics/kao/pal/lombre_open_mouth.pmdpal"
 sLombreOpenMouthGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x16B0C95, 0x29F
 sLombreSadPal:
-.incbin "baserom.gba", 0x16B0F34, 0x40
+.incbin "graphics/kao/pal/lombre_sad.pmdpal"
 sLombreSadGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x16B0F79, 0x26B
 sLombreNormalFlipPal:
-.incbin "baserom.gba", 0x16B11E4, 0x40
+.incbin "graphics/kao/pal/lombre_normal_flip.pmdpal"
 sLombreNormalFlipGfx:
 .incbin "baserom.gba", 0x16B1224, 0x298
 sLombreAngryFlipPal:
-.incbin "baserom.gba", 0x16B14BC, 0x40
+.incbin "graphics/kao/pal/lombre_angry_flip.pmdpal"
 sLombreAngryFlipGfx:
 .incbin "baserom.gba", 0x16B14FC, 0x260
 sLombreOpenMouthFlipPal:
-.incbin "baserom.gba", 0x16B175C, 0x40
+.incbin "graphics/kao/pal/lombre_open_mouth_flip.pmdpal"
 sLombreOpenMouthFlipGfx:
 .incbin "baserom.gba", 0x16B179C, 0x2A4
 sLombreSadFlipPal:
-.incbin "baserom.gba", 0x16B1A40, 0x40
+.incbin "graphics/kao/pal/lombre_sad_flip.pmdpal"
 sLombreSadFlipGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x16B1A85, 0x267

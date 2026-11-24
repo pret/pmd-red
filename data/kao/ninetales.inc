@@ -2,7 +2,7 @@
 gKaoNinetales:
 kao_siro sPortraitsNinetales
 sNinetalesNormalPal:
-.incbin "baserom.gba", 0x168C748, 0x40
+.incbin "graphics/kao/pal/ninetales_normal.pmdpal"
 sNinetalesNormalGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x168C78D, 0x2B7

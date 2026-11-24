@@ -2,34 +2,34 @@
 gKaoGengar:
 kao_siro sPortraitsGengar
 sGengarNormalPal:
-.incbin "baserom.gba", 0x1696D48, 0x40
+.incbin "graphics/kao/pal/gengar_normal.pmdpal"
 sGengarNormalGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x1696D8D, 0x2C3
 sGengarHappyPal:
-.incbin "baserom.gba", 0x1697050, 0x40
+.incbin "graphics/kao/pal/gengar_happy.pmdpal"
 sGengarHappyGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x1697095, 0x2A3
 sGengarAngryPal:
-.incbin "baserom.gba", 0x1697338, 0x40
+.incbin "graphics/kao/pal/gengar_angry.pmdpal"
 sGengarAngryGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x169737D, 0x2BF
 sGengarWorriedPal:
-.incbin "baserom.gba", 0x169763C, 0x40
+.incbin "graphics/kao/pal/gengar_worried.pmdpal"
 sGengarWorriedGfx:
 .incbin "baserom.gba", 0x169767C, 0x29C
 sGengarDejectedPal:
-.incbin "baserom.gba", 0x1697918, 0x40
+.incbin "graphics/kao/pal/gengar_dejected.pmdpal"
 sGengarDejectedGfx:
 .incbin "baserom.gba", 0x1697958, 0x2A4
 sGengarSadPal:
-.incbin "baserom.gba", 0x1697BFC, 0x40
+.incbin "graphics/kao/pal/gengar_sad.pmdpal"
 sGengarSadGfx:
 .incbin "baserom.gba", 0x1697C3C, 0x2B4
 sGengarSurprisedPal:
-.incbin "baserom.gba", 0x1697EF0, 0x40
+.incbin "graphics/kao/pal/gengar_surprised.pmdpal"
 sGengarSurprisedGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x1697F35, 0x2C7

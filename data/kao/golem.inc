@@ -2,7 +2,7 @@
 gKaoGolem:
 kao_siro sPortraitsGolem
 sGolemNormalPal:
-.incbin "baserom.gba", 0x1696374, 0x40
+.incbin "graphics/kao/pal/golem_normal.pmdpal"
 sGolemNormalGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x16963B9, 0x2AB

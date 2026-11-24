@@ -2,17 +2,17 @@
 gKaoEkans:
 kao_siro sPortraitsEkans
 sEkansNormalPal:
-.incbin "baserom.gba", 0x1689AD8, 0x40
+.incbin "graphics/kao/pal/ekans_normal.pmdpal"
 sEkansNormalGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x1689B1D, 0x23B
 sEkansSurprisedPal:
-.incbin "baserom.gba", 0x1689D58, 0x40
+.incbin "graphics/kao/pal/ekans_surprised.pmdpal"
 sEkansSurprisedGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x1689D9D, 0x2A3
 sEkansHappyPal:
-.incbin "baserom.gba", 0x168A040, 0x40
+.incbin "graphics/kao/pal/ekans_happy.pmdpal"
 sEkansHappyGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x168A085, 0x24F

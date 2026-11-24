@@ -2,11 +2,11 @@
 gKaoJirachi:
 kao_siro sPortraitsJirachi
 sJirachiNormalPal:
-.incbin "baserom.gba", 0x16BB5FC, 0x40
+.incbin "graphics/kao/pal/jirachi_normal.pmdpal"
 sJirachiNormalGfx:
 .incbin "baserom.gba", 0x16BB63C, 0x250
 sJirachiHappyPal:
-.incbin "baserom.gba", 0x16BB88C, 0x40
+.incbin "graphics/kao/pal/jirachi_happy.pmdpal"
 sJirachiHappyGfx:
 .incbin "baserom.gba", 0x16BB8CC, 0x280
 sPortraitsJirachi:

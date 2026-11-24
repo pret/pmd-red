@@ -2,62 +2,62 @@
 gKaoCubone:
 kao_siro sPortraitsCubone
 sCuboneNormalPal:
-.incbin "baserom.gba", 0x1698274, 0x40
+.incbin "graphics/kao/pal/cubone_normal.pmdpal"
 sCuboneNormalGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x16982B9, 0x2DB
 sCuboneHappyPal:
-.incbin "baserom.gba", 0x1698594, 0x40
+.incbin "graphics/kao/pal/cubone_happy.pmdpal"
 sCuboneHappyGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x16985D9, 0x2CF
 sCubonePainedPal:
-.incbin "baserom.gba", 0x16988A8, 0x40
+.incbin "graphics/kao/pal/cubone_pained.pmdpal"
 sCubonePainedGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x16988ED, 0x2B7
 sCuboneAngryPal:
-.incbin "baserom.gba", 0x1698BA4, 0x40
+.incbin "graphics/kao/pal/cubone_angry.pmdpal"
 sCuboneAngryGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x1698BE9, 0x2D7
 sCuboneWorriedPal:
-.incbin "baserom.gba", 0x1698EC0, 0x40
+.incbin "graphics/kao/pal/cubone_worried.pmdpal"
 sCuboneWorriedGfx:
 .incbin "baserom.gba", 0x1698F00, 0x2AC
 sCuboneSadPal:
-.incbin "baserom.gba", 0x16991AC, 0x40
+.incbin "graphics/kao/pal/cubone_sad.pmdpal"
 sCuboneSadGfx:
 .incbin "baserom.gba", 0x16991EC, 0x2C4
 sCuboneCryingPal:
-.incbin "baserom.gba", 0x16994B0, 0x40
+.incbin "graphics/kao/pal/cubone_crying.pmdpal"
 sCuboneCryingGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x16994F5, 0x2B7
 sCuboneShoutingPal:
-.incbin "baserom.gba", 0x16997AC, 0x40
+.incbin "graphics/kao/pal/cubone_shouting.pmdpal"
 sCuboneShoutingGfx:
 .incbin "baserom.gba", 0x16997EC, 0x2F4
 sCuboneTearyEyePal:
-.incbin "baserom.gba", 0x1699AE0, 0x40
+.incbin "graphics/kao/pal/cubone_teary_eye.pmdpal"
 sCuboneTearyEyeGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x1699B25, 0x2E3
 sCuboneDeterminedPal:
-.incbin "baserom.gba", 0x1699E08, 0x40
+.incbin "graphics/kao/pal/cubone_determined.pmdpal"
 sCuboneDeterminedGfx:
 .incbin "baserom.gba", 0x1699E48, 0x2B0
 sCuboneJoyousPal:
-.incbin "baserom.gba", 0x169A0F8, 0x40
+.incbin "graphics/kao/pal/cubone_joyous.pmdpal"
 sCuboneJoyousGfx:
 .incbin "baserom.gba", 0x169A138, 0x2C8
 sCuboneInspiredPal:
-.incbin "baserom.gba", 0x169A400, 0x40
+.incbin "graphics/kao/pal/cubone_inspired.pmdpal"
 sCuboneInspiredGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x169A445, 0x2DB
 sCuboneSurprisedPal:
-.incbin "baserom.gba", 0x169A720, 0x40
+.incbin "graphics/kao/pal/cubone_surprised.pmdpal"
 sCuboneSurprisedGfx:
 .string "AT4PX"
 .incbin "baserom.gba", 0x169A765, 0x2E3
